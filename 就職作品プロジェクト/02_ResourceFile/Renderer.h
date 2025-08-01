@@ -1,0 +1,147 @@
+#pragma once
+
+#include	"Transform.h"
+#include	<d3d11.h>
+#include	<io.h>
+#include	<string>
+#include	<vector>
+#include	<wrl/client.h>
+#include	<DirectXMath.h>
+#include	<SimpleMath.h>
+
+using namespace DirectX;
+using namespace SimpleMath;
+using Microsoft::WRL::ComPtr;
+
+//外部ライブラリ
+//#pragma comment(lib,"DirectXTK.lib")
+#pragma comment(lib,"d3d11.lib")
+#pragma comment(lib,"Ole32.lib")
+#pragma comment(lib,"Windowscodecs.lib")
+#pragma comment(lib,"d3dcompiler.lib")
+
+/// @brief 3DゲームのVretex情報
+/// @param position  = 座標情報
+/// @param normal	 = 法線情報
+/// @param color	 = 色情報
+/// @param uv	     = UV座標
+struct VERTEX_3D
+{
+	NVector3 position;
+	NVector3 normal;
+	Color   color;
+	Vector2 uv;
+};
+
+// ブレンドステート
+enum EBlendState {
+	BS_NONE = 0,							// 半透明合成無し
+	BS_ALPHABLEND,							// 半透明合成
+	BS_ADDITIVE,							// 加算合成
+	BS_SUBTRACTION,							// 減算合成
+	MAX_BLENDSTATE
+};
+
+//サブセット
+struct SUBSET {
+
+	std::string MtrlName;			//マテリアル名
+	unsigned int IndexNum    = 0;	//インデックス数
+	unsigned int VertexNum   = 0;	//頂点数
+	unsigned int IndexBase   = 0;	//開始インデックス
+	unsigned int VertexBase  = 0;	//頂点ベース
+	unsigned int MaterialIdx = 0;	//マテリアルの番号
+
+};
+
+//マテリアル
+struct MATERIAL {
+	DirectX::SimpleMath::Color Ambient;		//環境反射
+	DirectX::SimpleMath::Color Diffuse;		//拡散反射
+	DirectX::SimpleMath::Color Specular;	//鏡面反射
+	DirectX::SimpleMath::Color Emission;	//発光
+	float Shiness;							//光沢の滑らかさ
+	BOOL TextureEnable;						//テクスチャを使うか否かのフラグ
+	BOOL Dummy[2]{};
+};
+
+
+class Renderer
+{
+public:
+	//================================
+	//		コンストラクタとデストラクタ
+	//================================
+	
+	// デフォルトコンストラクタ
+	Renderer() = default;		
+	// デストラクタ
+	~Renderer() = default;		
+	//================================
+	//			ループ内の処理
+	//================================
+
+	// レンダラーの初期化
+	static void Initialize();
+	// レンダラーの終了処理
+	static void Finalize();
+	// 描画の開始
+	static void Start();
+	// 描画の終了
+	static void Finish();
+
+	//================================
+	//	 セッターとシングルトンパターンの実装
+	//================================
+	static void SetDepthEnable(bool Enable);
+	static void SetATCEnable(bool Enable);
+
+	static void SetWorldViewProjection2D();
+	static void SetWorldMatrix	   (DirectX::SimpleMath::Matrix* WorldMatrix);
+	static void SetViewMatrix	   (DirectX::SimpleMath::Matrix* ViewMatrix);
+	static void SetProjectionMatrix(DirectX::SimpleMath::Matrix* ProjectionMatrix);
+
+	static void SetMaterial(MATERIAL Material);
+	static void SetUV(float u, float v, float uw, float vh);
+
+	//=============================================================================
+	// ブレンド ステート設定
+	//=============================================================================
+	static void SetBlendState(int nBlendState)
+	{
+		if (nBlendState >= 0 && nBlendState < MAX_BLENDSTATE) {
+			float blendFactor[4] = { 0.0f, 0.0f, 0.0f, 0.0f };
+			m_DeviceContext->OMSetBlendState(m_BlendState[nBlendState], blendFactor, 0xffffffff);
+		}
+	}
+
+	static void CreateVertexShader(ID3D11VertexShader** VertexShader, ID3D11InputLayout** VertexLayout, const char* FileName);
+	static void CreatePixelShader (ID3D11PixelShader** PixelShader, const char* FileName);
+	
+private:
+	static D3D_FEATURE_LEVEL				m_FeatureLevel;			// Direct3Dの機能レベル
+
+	static ID3D11Device*			m_Device			;	// Direct3Dデバイス
+	static ID3D11DeviceContext*		m_DeviceContext		;	// デバイスコンテキスト
+	static IDXGISwapChain*			m_SwapChain			;	// スワップチェーン
+	static ID3D11RenderTargetView*	m_RenderTargetView	;	// レンダーターゲットビュー
+	static ID3D11DepthStencilView*	m_DepthStencilView	;	// 深度ステンシルビュー
+
+	static ID3D11DepthStencilState* m_DepthStateEnable ;	// 深度ステンシルステート（有効）
+	static ID3D11DepthStencilState* m_DepthStateDisable;	// 深度ステンシルステート（無効）
+
+	static ID3D11Buffer* m_WorldBuffer		;				// ワールド行列バッファ
+	static ID3D11Buffer* m_ViewBuffer		;				// ビュー行列バッファ
+	static ID3D11Buffer* m_ProjectionBuffer	;				// プロジェクション行列バッファ
+
+	static ID3D11Buffer* m_MaterialBuffer	;				// マテリアル情報バッファ
+	static ID3D11Buffer* m_TextureBuffer	;				// プロジェクション行列バッファ
+
+	static ID3D11BlendState* m_BlendState[MAX_BLENDSTATE];	// ブレンド ステート;
+	static ID3D11BlendState* m_BlendStateATC			 ;	// ブレンド ステート（加算合成）
+
+public:
+	static ID3D11Device*		GetDevice	    (void)	{ return m_Device; }
+	static ID3D11DeviceContext* GetDeviceContext(void)	{ return m_DeviceContext; }
+
+};

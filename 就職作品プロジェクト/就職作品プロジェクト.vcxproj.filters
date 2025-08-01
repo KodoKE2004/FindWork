@@ -1,0 +1,271 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <ItemGroup>
+    <Filter Include="SourceFile">
+      <UniqueIdentifier>{4FC737F1-C7A5-4376-A066-2A32D752A2FF}</UniqueIdentifier>
+      <Extensions>cpp;c;cc;cxx;c++;cppm;ixx;def;odl;idl;hpj;bat;asm;asmx</Extensions>
+    </Filter>
+    <Filter Include="HLSL">
+      <UniqueIdentifier>{67DA6AB6-F800-4c08-8B7A-83BB121AAD01}</UniqueIdentifier>
+      <Extensions>rc;ico;cur;bmp;dlg;rc2;rct;bin;rgs;gif;jpg;jpeg;jpe;resx;tiff;tif;png;wav;mfcribbon-ms</Extensions>
+    </Filter>
+    <Filter Include="SourceFile\Object">
+      <UniqueIdentifier>{e0898a13-f990-464c-b573-66f9b5ae588e}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="HLSL\PixelShader">
+      <UniqueIdentifier>{ea6325aa-a491-4dfc-9c3f-ff996a69fc6b}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="HLSL\VertexShader">
+      <UniqueIdentifier>{06f8f0ea-d785-42cf-b408-b6e2e37f77a9}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="ImGui">
+      <UniqueIdentifier>{e16f4169-63c7-4898-b22a-7ce8318d462b}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="SourceFile\Debug">
+      <UniqueIdentifier>{838ac1c2-9a1a-4f50-bd88-6ae5d9ed27c3}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="SourceFile\Model">
+      <UniqueIdentifier>{1920c587-1efb-4fda-aa0e-8a209becc733}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="SourceFile\Core">
+      <UniqueIdentifier>{fb355ea0-7008-4008-a20d-8090774b7bd3}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="SourceFile\App">
+      <UniqueIdentifier>{1d887834-6cbe-4901-94f1-e7ae6d8ca009}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="SourceFile\Scene">
+      <UniqueIdentifier>{f78adc59-4616-4046-9b02-cf41e56ab265}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="SourceFile\Shader">
+      <UniqueIdentifier>{24774047-400f-48cc-aeaa-8809b9ebeebc}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="SourceFile\Test">
+      <UniqueIdentifier>{4ad23906-4894-4555-a4fb-65f33d245b5c}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="SourceFile\Model\Subset">
+      <UniqueIdentifier>{141faefb-0bc1-455e-86cf-317d53ef6d27}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="SourceFile\Model\Mesh">
+      <UniqueIdentifier>{09f868cc-4c43-4b19-98b9-e3f913e4aeaf}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="SourceFile\Core\Resouce">
+      <UniqueIdentifier>{8f7c1cff-9adf-412e-afca-63ef1605ed43}</UniqueIdentifier>
+    </Filter>
+  </ItemGroup>
+  <ItemGroup>
+    <ClCompile Include="02_ResourceFile\SceneFile\TitleScene.cpp">
+      <Filter>SourceFile\Scene</Filter>
+    </ClCompile>
+    <ClCompile Include="02_ResourceFile\SceneFile\SelectScene.cpp">
+      <Filter>SourceFile\Scene</Filter>
+    </ClCompile>
+    <ClCompile Include="02_ResourceFile\SceneFile\TransitionManager.cpp">
+      <Filter>SourceFile\Scene</Filter>
+    </ClCompile>
+    <ClCompile Include="02_ResourceFile\Transform.cpp">
+      <Filter>SourceFile\Object</Filter>
+    </ClCompile>
+    <ClCompile Include="02_ResourceFile\Object.cpp">
+      <Filter>SourceFile\Object</Filter>
+    </ClCompile>
+    <ClCompile Include="02_ResourceFile\Camera.cpp">
+      <Filter>SourceFile\Object</Filter>
+    </ClCompile>
+    <ClCompile Include="03_ExternalFile\imgui\imgui.cpp">
+      <Filter>ImGui</Filter>
+    </ClCompile>
+    <ClCompile Include="03_ExternalFile\imgui\imgui_demo.cpp">
+      <Filter>ImGui</Filter>
+    </ClCompile>
+    <ClCompile Include="03_ExternalFile\imgui\imgui_draw.cpp">
+      <Filter>ImGui</Filter>
+    </ClCompile>
+    <ClCompile Include="03_ExternalFile\imgui\imgui_impl_dx11.cpp">
+      <Filter>ImGui</Filter>
+    </ClCompile>
+    <ClCompile Include="03_ExternalFile\imgui\imgui_impl_win32.cpp">
+      <Filter>ImGui</Filter>
+    </ClCompile>
+    <ClCompile Include="03_ExternalFile\imgui\imgui_tables.cpp">
+      <Filter>ImGui</Filter>
+    </ClCompile>
+    <ClCompile Include="03_ExternalFile\imgui\imgui_widgets.cpp">
+      <Filter>ImGui</Filter>
+    </ClCompile>
+    <ClCompile Include="02_ResourceFile\TestFile\TestCube.cpp">
+      <Filter>SourceFile\Test</Filter>
+    </ClCompile>
+    <ClCompile Include="02_ResourceFile\TestFile\TestPlane.cpp">
+      <Filter>SourceFile\Test</Filter>
+    </ClCompile>
+    <ClCompile Include="02_ResourceFile\Texture2D.cpp">
+      <Filter>SourceFile\Core\Resouce</Filter>
+    </ClCompile>
+    <ClCompile Include="02_ResourceFile\DebugUI.cpp">
+      <Filter>SourceFile\Debug</Filter>
+    </ClCompile>
+    <ClCompile Include="02_ResourceFile\AssimpPerse.cpp">
+      <Filter>SourceFile\Model</Filter>
+    </ClCompile>
+    <ClCompile Include="02_ResourceFile\Game.cpp">
+      <Filter>SourceFile\Core</Filter>
+    </ClCompile>
+    <ClCompile Include="02_ResourceFile\input.cpp">
+      <Filter>SourceFile\Core</Filter>
+    </ClCompile>
+    <ClCompile Include="02_ResourceFile\Application.cpp">
+      <Filter>SourceFile\App</Filter>
+    </ClCompile>
+    <ClCompile Include="02_ResourceFile\main.cpp">
+      <Filter>SourceFile\App</Filter>
+    </ClCompile>
+    <ClCompile Include="02_ResourceFile\Dx11helper.cpp">
+      <Filter>SourceFile\App</Filter>
+    </ClCompile>
+    <ClCompile Include="02_ResourceFile\utility.cpp">
+      <Filter>SourceFile\Core</Filter>
+    </ClCompile>
+    <ClCompile Include="02_ResourceFile\Shader.cpp">
+      <Filter>SourceFile\Shader</Filter>
+    </ClCompile>
+    <ClCompile Include="02_ResourceFile\Renderer.cpp">
+      <Filter>SourceFile\Core</Filter>
+    </ClCompile>
+    <ClCompile Include="02_ResourceFile\Model.cpp">
+      <Filter>SourceFile\Model</Filter>
+    </ClCompile>
+    <ClCompile Include="02_ResourceFile\TextureDX.cpp">
+      <Filter>SourceFile\Core\Resouce</Filter>
+    </ClCompile>
+    <ClCompile Include="02_ResourceFile\ModelObject.cpp">
+      <Filter>SourceFile\Object</Filter>
+    </ClCompile>
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="02_ResourceFile\SceneFile\Scene.h">
+      <Filter>SourceFile\Scene</Filter>
+    </ClInclude>
+    <ClInclude Include="02_ResourceFile\SceneFile\SelectScene.h">
+      <Filter>SourceFile\Scene</Filter>
+    </ClInclude>
+    <ClInclude Include="02_ResourceFile\SceneFile\TransitionManager.h">
+      <Filter>SourceFile\Scene</Filter>
+    </ClInclude>
+    <ClInclude Include="02_ResourceFile\SceneFile\TitleScene.h">
+      <Filter>SourceFile\Scene</Filter>
+    </ClInclude>
+    <ClInclude Include="02_ResourceFile\Transform.h">
+      <Filter>SourceFile\Object</Filter>
+    </ClInclude>
+    <ClInclude Include="02_ResourceFile\Object.h">
+      <Filter>SourceFile\Object</Filter>
+    </ClInclude>
+    <ClInclude Include="02_ResourceFile\SceneFile\SceneList.h">
+      <Filter>SourceFile\Scene</Filter>
+    </ClInclude>
+    <ClInclude Include="02_ResourceFile\Camera.h">
+      <Filter>SourceFile\Object</Filter>
+    </ClInclude>
+    <ClInclude Include="02_ResourceFile\VertexBuffer.h">
+      <Filter>SourceFile\Model\Subset</Filter>
+    </ClInclude>
+    <ClInclude Include="02_ResourceFile\IndexBuffer.h">
+      <Filter>SourceFile\Model\Subset</Filter>
+    </ClInclude>
+    <ClInclude Include="03_ExternalFile\imgui\imconfig.h">
+      <Filter>ImGui</Filter>
+    </ClInclude>
+    <ClInclude Include="03_ExternalFile\imgui\imgui.h">
+      <Filter>ImGui</Filter>
+    </ClInclude>
+    <ClInclude Include="03_ExternalFile\imgui\imgui_impl_dx11.h">
+      <Filter>ImGui</Filter>
+    </ClInclude>
+    <ClInclude Include="03_ExternalFile\imgui\imgui_impl_win32.h">
+      <Filter>ImGui</Filter>
+    </ClInclude>
+    <ClInclude Include="03_ExternalFile\imgui\imgui_internal.h">
+      <Filter>ImGui</Filter>
+    </ClInclude>
+    <ClInclude Include="03_ExternalFile\imgui\imstb_rectpack.h">
+      <Filter>ImGui</Filter>
+    </ClInclude>
+    <ClInclude Include="03_ExternalFile\imgui\imstb_textedit.h">
+      <Filter>ImGui</Filter>
+    </ClInclude>
+    <ClInclude Include="03_ExternalFile\imgui\imstb_truetype.h">
+      <Filter>ImGui</Filter>
+    </ClInclude>
+    <ClInclude Include="02_ResourceFile\TestFile\TestCube.h">
+      <Filter>SourceFile\Test</Filter>
+    </ClInclude>
+    <ClInclude Include="02_ResourceFile\TestFile\TestPlane.h">
+      <Filter>SourceFile\Test</Filter>
+    </ClInclude>
+    <ClInclude Include="02_ResourceFile\Texture2D.h">
+      <Filter>SourceFile\Core\Resouce</Filter>
+    </ClInclude>
+    <ClInclude Include="02_ResourceFile\Material.h">
+      <Filter>SourceFile\Core\Resouce</Filter>
+    </ClInclude>
+    <ClInclude Include="02_ResourceFile\DebugUI.h">
+      <Filter>SourceFile\Debug</Filter>
+    </ClInclude>
+    <ClInclude Include="02_ResourceFile\Debug.hpp">
+      <Filter>SourceFile\Debug</Filter>
+    </ClInclude>
+    <ClInclude Include="02_ResourceFile\AssimpPerse.h">
+      <Filter>SourceFile\Model</Filter>
+    </ClInclude>
+    <ClInclude Include="02_ResourceFile\Game.h">
+      <Filter>SourceFile\Core</Filter>
+    </ClInclude>
+    <ClInclude Include="02_ResourceFile\input.h">
+      <Filter>SourceFile\Core</Filter>
+    </ClInclude>
+    <ClInclude Include="02_ResourceFile\Application.h">
+      <Filter>SourceFile\App</Filter>
+    </ClInclude>
+    <ClInclude Include="02_ResourceFile\main.h">
+      <Filter>SourceFile\App</Filter>
+    </ClInclude>
+    <ClInclude Include="02_ResourceFile\Dx11helper.h">
+      <Filter>SourceFile\App</Filter>
+    </ClInclude>
+    <ClInclude Include="02_ResourceFile\utility.h">
+      <Filter>SourceFile\Core</Filter>
+    </ClInclude>
+    <ClInclude Include="02_ResourceFile\Shader.h">
+      <Filter>SourceFile\Shader</Filter>
+    </ClInclude>
+    <ClInclude Include="02_ResourceFile\Renderer.h">
+      <Filter>SourceFile\Core</Filter>
+    </ClInclude>
+    <ClInclude Include="02_ResourceFile\Mesh.h">
+      <Filter>SourceFile\Model\Mesh</Filter>
+    </ClInclude>
+    <ClInclude Include="02_ResourceFile\MeshRenderer.h">
+      <Filter>SourceFile\Model\Mesh</Filter>
+    </ClInclude>
+    <ClInclude Include="02_ResourceFile\Model.h">
+      <Filter>SourceFile\Model</Filter>
+    </ClInclude>
+    <ClInclude Include="02_ResourceFile\TextureDX.h">
+      <Filter>SourceFile\Core\Resouce</Filter>
+    </ClInclude>
+    <ClInclude Include="02_ResourceFile\ModelObject.h">
+      <Filter>SourceFile\Object</Filter>
+    </ClInclude>
+  </ItemGroup>
+  <ItemGroup>
+    <FxCompile Include="02_ResourceFile\ShaderFile\Common.hlsl">
+      <Filter>HLSL</Filter>
+    </FxCompile>
+    <FxCompile Include="02_ResourceFile\ShaderFile\PS_Default.hlsl">
+      <Filter>HLSL\PixelShader</Filter>
+    </FxCompile>
+    <FxCompile Include="02_ResourceFile\ShaderFile\VS_Default.hlsl">
+      <Filter>HLSL\VertexShader</Filter>
+    </FxCompile>
+  </ItemGroup>
+</Project>

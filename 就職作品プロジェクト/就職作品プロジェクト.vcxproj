@@ -1,0 +1,231 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <ItemGroup Label="ProjectConfigurations">
+    <ProjectConfiguration Include="Debug|Win32">
+      <Configuration>Debug</Configuration>
+      <Platform>Win32</Platform>
+    </ProjectConfiguration>
+    <ProjectConfiguration Include="Release|Win32">
+      <Configuration>Release</Configuration>
+      <Platform>Win32</Platform>
+    </ProjectConfiguration>
+    <ProjectConfiguration Include="Debug|x64">
+      <Configuration>Debug</Configuration>
+      <Platform>x64</Platform>
+    </ProjectConfiguration>
+    <ProjectConfiguration Include="Release|x64">
+      <Configuration>Release</Configuration>
+      <Platform>x64</Platform>
+    </ProjectConfiguration>
+  </ItemGroup>
+  <ItemGroup>
+    <ClCompile Include="02_ResourceFile\Application.cpp" />
+    <ClCompile Include="02_ResourceFile\AssimpPerse.cpp" />
+    <ClCompile Include="02_ResourceFile\Camera.cpp" />
+    <ClCompile Include="02_ResourceFile\DebugUI.cpp" />
+    <ClCompile Include="02_ResourceFile\Dx11helper.cpp" />
+    <ClCompile Include="02_ResourceFile\Game.cpp" />
+    <ClCompile Include="02_ResourceFile\input.cpp" />
+    <ClCompile Include="02_ResourceFile\main.cpp" />
+    <ClCompile Include="02_ResourceFile\Model.cpp" />
+    <ClCompile Include="02_ResourceFile\ModelObject.cpp" />
+    <ClCompile Include="02_ResourceFile\Object.cpp" />
+    <ClCompile Include="02_ResourceFile\Renderer.cpp" />
+    <ClCompile Include="02_ResourceFile\SceneFile\SelectScene.cpp" />
+    <ClCompile Include="02_ResourceFile\SceneFile\TitleScene.cpp" />
+    <ClCompile Include="02_ResourceFile\SceneFile\TransitionManager.cpp" />
+    <ClCompile Include="02_ResourceFile\Shader.cpp" />
+    <ClCompile Include="02_ResourceFile\TestFile\TestCube.cpp" />
+    <ClCompile Include="02_ResourceFile\TestFile\TestPlane.cpp" />
+    <ClCompile Include="02_ResourceFile\Texture2D.cpp" />
+    <ClCompile Include="02_ResourceFile\TextureDX.cpp" />
+    <ClCompile Include="02_ResourceFile\Transform.cpp" />
+    <ClCompile Include="02_ResourceFile\utility.cpp" />
+    <ClCompile Include="03_ExternalFile\imgui\imgui.cpp" />
+    <ClCompile Include="03_ExternalFile\imgui\imgui_demo.cpp" />
+    <ClCompile Include="03_ExternalFile\imgui\imgui_draw.cpp" />
+    <ClCompile Include="03_ExternalFile\imgui\imgui_impl_dx11.cpp" />
+    <ClCompile Include="03_ExternalFile\imgui\imgui_impl_win32.cpp" />
+    <ClCompile Include="03_ExternalFile\imgui\imgui_tables.cpp" />
+    <ClCompile Include="03_ExternalFile\imgui\imgui_widgets.cpp" />
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="02_ResourceFile\Application.h" />
+    <ClInclude Include="02_ResourceFile\AssimpPerse.h" />
+    <ClInclude Include="02_ResourceFile\Camera.h" />
+    <ClInclude Include="02_ResourceFile\Debug.hpp" />
+    <ClInclude Include="02_ResourceFile\DebugUI.h" />
+    <ClInclude Include="02_ResourceFile\Dx11helper.h" />
+    <ClInclude Include="02_ResourceFile\Game.h" />
+    <ClInclude Include="02_ResourceFile\IndexBuffer.h" />
+    <ClInclude Include="02_ResourceFile\input.h" />
+    <ClInclude Include="02_ResourceFile\main.h" />
+    <ClInclude Include="02_ResourceFile\Material.h" />
+    <ClInclude Include="02_ResourceFile\Mesh.h" />
+    <ClInclude Include="02_ResourceFile\MeshRenderer.h" />
+    <ClInclude Include="02_ResourceFile\Model.h" />
+    <ClInclude Include="02_ResourceFile\ModelObject.h" />
+    <ClInclude Include="02_ResourceFile\Object.h" />
+    <ClInclude Include="02_ResourceFile\Renderer.h" />
+    <ClInclude Include="02_ResourceFile\SceneFile\Scene.h" />
+    <ClInclude Include="02_ResourceFile\SceneFile\SceneList.h" />
+    <ClInclude Include="02_ResourceFile\SceneFile\SelectScene.h" />
+    <ClInclude Include="02_ResourceFile\SceneFile\TitleScene.h" />
+    <ClInclude Include="02_ResourceFile\SceneFile\TransitionManager.h" />
+    <ClInclude Include="02_ResourceFile\Shader.h" />
+    <ClInclude Include="02_ResourceFile\TestFile\TestCube.h" />
+    <ClInclude Include="02_ResourceFile\TestFile\TestPlane.h" />
+    <ClInclude Include="02_ResourceFile\Texture2D.h" />
+    <ClInclude Include="02_ResourceFile\TextureDX.h" />
+    <ClInclude Include="02_ResourceFile\Transform.h" />
+    <ClInclude Include="02_ResourceFile\utility.h" />
+    <ClInclude Include="02_ResourceFile\VertexBuffer.h" />
+    <ClInclude Include="03_ExternalFile\imgui\imconfig.h" />
+    <ClInclude Include="03_ExternalFile\imgui\imgui.h" />
+    <ClInclude Include="03_ExternalFile\imgui\imgui_impl_dx11.h" />
+    <ClInclude Include="03_ExternalFile\imgui\imgui_impl_win32.h" />
+    <ClInclude Include="03_ExternalFile\imgui\imgui_internal.h" />
+    <ClInclude Include="03_ExternalFile\imgui\imstb_rectpack.h" />
+    <ClInclude Include="03_ExternalFile\imgui\imstb_textedit.h" />
+    <ClInclude Include="03_ExternalFile\imgui\imstb_truetype.h" />
+  </ItemGroup>
+  <ItemGroup>
+    <FxCompile Include="02_ResourceFile\ShaderFile\Common.hlsl">
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">true</ExcludedFromBuild>
+    </FxCompile>
+    <FxCompile Include="02_ResourceFile\ShaderFile\PS_Default.hlsl">
+      <ShaderType Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">Pixel</ShaderType>
+    </FxCompile>
+    <FxCompile Include="02_ResourceFile\ShaderFile\VS_Default.hlsl">
+      <ShaderType Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">Vertex</ShaderType>
+    </FxCompile>
+  </ItemGroup>
+  <PropertyGroup Label="Globals">
+    <VCProjectVersion>17.0</VCProjectVersion>
+    <Keyword>Win32Proj</Keyword>
+    <ProjectGuid>{2ba74b00-be48-4f6a-9d68-68a00bd132a5}</ProjectGuid>
+    <RootNamespace>就職作品プロジェクト</RootNamespace>
+    <WindowsTargetPlatformVersion>10.0</WindowsTargetPlatformVersion>
+    <ProjectName>NishiguchiGame</ProjectName>
+  </PropertyGroup>
+  <Import Project="$(VCTargetsPath)\Microsoft.Cpp.Default.props" />
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'" Label="Configuration">
+    <ConfigurationType>Application</ConfigurationType>
+    <UseDebugLibraries>true</UseDebugLibraries>
+    <PlatformToolset>v143</PlatformToolset>
+    <CharacterSet>Unicode</CharacterSet>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'" Label="Configuration">
+    <ConfigurationType>Application</ConfigurationType>
+    <UseDebugLibraries>false</UseDebugLibraries>
+    <PlatformToolset>v143</PlatformToolset>
+    <WholeProgramOptimization>true</WholeProgramOptimization>
+    <CharacterSet>Unicode</CharacterSet>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'" Label="Configuration">
+    <ConfigurationType>Application</ConfigurationType>
+    <UseDebugLibraries>true</UseDebugLibraries>
+    <PlatformToolset>v143</PlatformToolset>
+    <CharacterSet>MultiByte</CharacterSet>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'" Label="Configuration">
+    <ConfigurationType>Application</ConfigurationType>
+    <UseDebugLibraries>false</UseDebugLibraries>
+    <PlatformToolset>v143</PlatformToolset>
+    <WholeProgramOptimization>true</WholeProgramOptimization>
+    <CharacterSet>Unicode</CharacterSet>
+  </PropertyGroup>
+  <Import Project="$(VCTargetsPath)\Microsoft.Cpp.props" />
+  <ImportGroup Label="ExtensionSettings">
+  </ImportGroup>
+  <ImportGroup Label="Shared">
+  </ImportGroup>
+  <ImportGroup Label="PropertySheets" Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
+    <Import Project="$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props" Condition="exists('$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props')" Label="LocalAppDataPlatform" />
+  </ImportGroup>
+  <ImportGroup Label="PropertySheets" Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
+    <Import Project="$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props" Condition="exists('$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props')" Label="LocalAppDataPlatform" />
+  </ImportGroup>
+  <ImportGroup Label="PropertySheets" Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
+    <Import Project="$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props" Condition="exists('$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props')" Label="LocalAppDataPlatform" />
+  </ImportGroup>
+  <ImportGroup Label="PropertySheets" Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
+    <Import Project="$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props" Condition="exists('$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props')" Label="LocalAppDataPlatform" />
+  </ImportGroup>
+  <PropertyGroup Label="UserMacros" />
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
+    <ClCompile>
+      <WarningLevel>Level3</WarningLevel>
+      <SDLCheck>true</SDLCheck>
+      <PreprocessorDefinitions>WIN32;_DEBUG;_CONSOLE;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <ConformanceMode>true</ConformanceMode>
+    </ClCompile>
+    <Link>
+      <SubSystem>Console</SubSystem>
+      <GenerateDebugInformation>true</GenerateDebugInformation>
+      <AdditionalDependencies>DirectXTK.lib;%(AdditionalDependencies)</AdditionalDependencies>
+    </Link>
+  </ItemDefinitionGroup>
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
+    <ClCompile>
+      <WarningLevel>Level3</WarningLevel>
+      <FunctionLevelLinking>true</FunctionLevelLinking>
+      <IntrinsicFunctions>true</IntrinsicFunctions>
+      <SDLCheck>true</SDLCheck>
+      <PreprocessorDefinitions>WIN32;NDEBUG;_CONSOLE;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <ConformanceMode>true</ConformanceMode>
+    </ClCompile>
+    <Link>
+      <SubSystem>Console</SubSystem>
+      <GenerateDebugInformation>true</GenerateDebugInformation>
+      <AdditionalDependencies>DirectXTK.lib;%(AdditionalDependencies)</AdditionalDependencies>
+    </Link>
+  </ItemDefinitionGroup>
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
+    <ClCompile>
+      <WarningLevel>Level3</WarningLevel>
+      <SDLCheck>true</SDLCheck>
+      <PreprocessorDefinitions>_DEBUG;_CONSOLE;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <ConformanceMode>true</ConformanceMode>
+      <LanguageStandard>stdcpp20</LanguageStandard>
+      <AdditionalIncludeDirectories>$(ProjectDir)03_ExternalFile/assimp/5.2.5/include;$(ProjectDir)03_ExternalFile\DirectXTex\include;$(ProjectDir)03_ExternalFile\DirectXTK\inlucde;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <RuntimeLibrary>MultiThreadedDebugDLL</RuntimeLibrary>
+      <BasicRuntimeChecks>Default</BasicRuntimeChecks>
+    </ClCompile>
+    <Link>
+      <SubSystem>Console</SubSystem>
+      <GenerateDebugInformation>true</GenerateDebugInformation>
+      <AdditionalDependencies>DirectXTK.lib;%(AdditionalDependencies)</AdditionalDependencies>
+      <AdditionalLibraryDirectories>$(ProjectDir)03_ExternalFile/assimp/5.2.5/lib;$(ProjectDir)03_ExternalFile\DirectXTK\lib;$(ProjectDir)03_ExternalFile\DirectXTex\lib;%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
+      <AdditionalDependencies>$(ProjectDir)03_ExternalFile\DirectXTex\lib\DirectXTex.lib;$(ProjectDir)03_ExternalFile\DirectXTK\lib\DirectXTK.lib;%(AdditionalDependencies)</AdditionalDependencies>
+    </Link>
+  </ItemDefinitionGroup>
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
+    <ClCompile>
+      <WarningLevel>Level3</WarningLevel>
+      <FunctionLevelLinking>true</FunctionLevelLinking>
+      <IntrinsicFunctions>true</IntrinsicFunctions>
+      <SDLCheck>true</SDLCheck>
+      <PreprocessorDefinitions>NDEBUG;_CONSOLE;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <ConformanceMode>true</ConformanceMode>
+      <RuntimeLibrary>MultiThreadedDebugDLL</RuntimeLibrary>
+      <AdditionalIncludeDirectories>$(ProjectDir)03_ExternalFile\DirectXTex\include;$(ProjectDir)03_ExternalFile\DirectXTK\include;$(ProjectDir)03_ExternalFile\assimp\5.2.5\include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+    </ClCompile>
+    <Link>
+      <SubSystem>Console</SubSystem>
+      <GenerateDebugInformation>true</GenerateDebugInformation>
+      <AdditionalDependencies>DirectXTK.lib;%(AdditionalDependencies)</AdditionalDependencies>
+      <AdditionalLibraryDirectories>$(ProjectDir)03_ExternalFile\directxtk\lib\x64\Release;$(ProjectDir)03_ExternalFile\DirectXTex\x64\Release;$(ProjectDir)03_ExternalFile\assimp\5.2.5\lib;%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
+    </Link>
+  </ItemDefinitionGroup>
+  <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
+  <ImportGroup Label="ExtensionTargets">
+    <Import Project="packages\directxtex_desktop_win10.2025.7.10.1\build\native\directxtex_desktop_win10.targets" Condition="Exists('packages\directxtex_desktop_win10.2025.7.10.1\build\native\directxtex_desktop_win10.targets')" />
+  </ImportGroup>
+  <Target Name="EnsureNuGetPackageBuildImports" BeforeTargets="PrepareForBuild">
+    <PropertyGroup>
+      <ErrorText>このプロジェクトは、このコンピューター上にない NuGet パッケージを参照しています。それらのパッケージをダウンロードするには、[NuGet パッケージの復元] を使用します。詳細については、http://go.microsoft.com/fwlink/?LinkID=322105 を参照してください。見つからないファイルは {0} です。</ErrorText>
+    </PropertyGroup>
+    <Error Condition="!Exists('packages\directxtex_desktop_win10.2025.7.10.1\build\native\directxtex_desktop_win10.targets')" Text="$([System.String]::Format('$(ErrorText)', 'packages\directxtex_desktop_win10.2025.7.10.1\build\native\directxtex_desktop_win10.targets'))" />
+  </Target>
+</Project>
