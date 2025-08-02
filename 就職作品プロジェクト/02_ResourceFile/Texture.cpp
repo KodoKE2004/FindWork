@@ -3,6 +3,10 @@
 #ifdef _DEBUG
     #include<iostream>
 #endif
+
+#pragma comment(lib,"Windowscodecs.lib")
+
+
 Texture::Texture() = default;
 
 bool Texture::LoadFromFile(const std::string& path)

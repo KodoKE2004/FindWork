@@ -7,9 +7,15 @@
 class MeshManager
 {
 private:
-	
-	std::vector<std::string> m_Names;
-	std::vector<std::shared_ptr<MeshModel>> m_Meshes;	
+	struct MeshInfo
+	{
+		std::string					name;
+		std::shared_ptr<MeshModel>	mesh;
+		std::string					filePath;
+		std::string					texDirectory;
+	};
+
+	std::vector<MeshInfo> m_MeshInfo;
 
 	short findNumber = 0;
 
@@ -38,5 +44,9 @@ public:
 	/// <param name="registName"></param>
 	/// <returns></returns>
 	bool IsNameCheck(std::string registName);
+
+	std::string GetFilePath(std::string modelName);
+	std::string GetTextureDirectory(std::string modelName);
+
 };
 

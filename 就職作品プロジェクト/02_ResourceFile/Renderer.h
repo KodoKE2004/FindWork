@@ -17,7 +17,6 @@ using Microsoft::WRL::ComPtr;
 //#pragma comment(lib,"DirectXTK.lib")
 #pragma comment(lib,"d3d11.lib")
 #pragma comment(lib,"Ole32.lib")
-#pragma comment(lib,"Windowscodecs.lib")
 #pragma comment(lib,"d3dcompiler.lib")
 
 /// @brief 3DƒQ[ƒ€‚ÌVretexî•ñ

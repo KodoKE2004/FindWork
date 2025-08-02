@@ -13,11 +13,12 @@ std::unique_ptr<Game>  Game::m_pInstance    = nullptr; // ゲームのインスタンス初
 
 Game::Game()
 {
+	m_GameMeshes = std::make_shared<MeshManager>();
+	m_GameMeshes->AddMeshModel("RedMan", "Akai.fbx", "Akai");
+
 	m_Input  = std::make_unique<Input>(); //入力処理を作成
 	m_Camera = std::make_unique<Camera>(); //カメラを作成
 	m_SceneCurrent = nullptr; // 現在のシーンを初期化
-	m_GameMeshes = std::make_shared<MeshManager>();
-	m_GameMeshes->AddMeshModel("RedMan", "Akai.fbx", "Akai");
 }
 
 void Game::Initialize()

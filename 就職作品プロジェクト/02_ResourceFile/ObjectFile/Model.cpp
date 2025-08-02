@@ -13,9 +13,9 @@ void Model::Initialize()
 
     //Mesh‚ğ“Ç‚İ‚Ş
     m_MeshModel = std::make_shared<MeshModel>();
-    SetMeshModel("NULL");
+    SetMeshModel("RedMan");
 
-    m_MeshRenderer.Init(*m_MeshModel.get());
+    m_MeshRenderer.Init( *m_MeshModel.get());
 
     m_VertexBuffer.Create(m_MeshModel->GetVertices());
     m_IndexBuffer .Create(m_MeshModel->GetIndices());
@@ -81,5 +81,7 @@ void Model::Finalize()
 
 void Model::SetMeshModel(std::string modelName)
 {
-    m_MeshModel = Game::GetInstance().GetMeshManager()->GetMeshModel(modelName);
+    m_MeshModel     = Game::GetInstance().GetMeshManager()->GetMeshModel(modelName);
+    m_FilePath      = Game::GetInstance().GetMeshManager()->GetFilePath(modelName);
+    m_TexDirectory  = Game::GetInstance().GetMeshManager()->GetTextureDirectory(modelName);
 }

@@ -14,7 +14,8 @@
 class Model : public Object
 {
 private:
-    std::string m_Name;
+    std::string m_FilePath;
+    std::string m_TexDirectory;
 
     std::shared_ptr<MeshModel> m_MeshModel;
     MeshRenderer m_MeshRenderer;
