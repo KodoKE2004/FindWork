@@ -34,6 +34,7 @@ public:
     void Draw()       override;
     void Finalize()   override;
 
+    void SetMeshModel(std::string modelName);
     void GetMeshModel(std::string modelName);
 };
 

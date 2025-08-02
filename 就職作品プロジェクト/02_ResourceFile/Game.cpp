@@ -23,7 +23,7 @@ void Game::Initialize()
 	//		シーンをタイトルシーンに設定
 	Renderer::Initialize();							// レンダラーの初期化
 	DebugUI::Init(Renderer::GetDevice(), Renderer::GetDeviceContext()); 			// デバッグUIの初期化
-	m_pInstance->m_GameMeshes = std::make_unique<MeshManager>();
+	m_pInstance->m_GameMeshes = std::make_shared<MeshManager>();
 	m_pInstance->m_Camera     = std::make_unique<Camera>();							// カメラを作成
 	m_pInstance->m_GameMeshes->AddMeshModel("RedMan", "Akai.fbx", "Akai");
 	m_pInstance->m_GameMeshes->AddMeshModel("Pokemon", "Porygon.fbx","Porygon");

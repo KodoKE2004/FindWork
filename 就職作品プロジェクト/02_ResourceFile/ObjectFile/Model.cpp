@@ -10,6 +10,7 @@ Model::Model(Camera* cam) : Object(cam)
 void Model::Initialize()
 {
     
+
     //MeshÇì«Ç›çûÇﬁ
     m_MeshModel = std::make_shared<MeshModel>();
     GetMeshModel("RedMan");
@@ -76,6 +77,11 @@ void Model::Draw()
 
 void Model::Finalize()
 {
+}
+
+void Model::SetMeshModel(std::string modelName)
+{
+    
 }
 
 void Model::GetMeshModel(std::string modelName)

@@ -32,7 +32,6 @@ void MeshManager::AddMeshModel(std::string modelName, std::string modelPath, std
 		MeshInfo info;
 		
 		info.name = modelName;
-		info.mesh = std::make_shared<MeshModel>();
 		info.mesh = meshModel;
 		info.filePath	  = filePath;
 		info.texDirectory = texPath;
