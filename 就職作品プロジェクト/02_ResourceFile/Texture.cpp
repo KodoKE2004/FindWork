@@ -22,15 +22,23 @@ bool Texture::LoadFromFile(const std::string& path)
         hr = DirectX::LoadFromTGAFile(wpath, &meta, img);
     else
         hr = DirectX::LoadFromWICFile(wpath, DirectX::WIC_FLAGS::WIC_FLAGS_NONE, &meta, img);
-    if (FAILED(hr)) return false;
-
-    hr = CreateShaderResourceView(Renderer::GetDevice(), img.GetImages(), img.GetImageCount(), meta, &m_srv);
-    if (FAILED(hr)) return false;
+    if (FAILED(hr))
+    {
+        std::cout << "テクスチャ読み取り失敗 : LoadFromFile時点 : "<< path << std::endl;
+        return false;
+    }
+    m_srv.Reset();
+    hr = CreateShaderResourceView(Renderer::GetDevice(), img.GetImages(), img.GetImageCount(), meta, m_srv.GetAddressOf());
+    if (FAILED(hr)) 
+    {
+        std::cout << "テクスチャ読み取り失敗 : CreateShaderResourceView時点 : " << path << std::endl;
+        return false;
+    }
 
     m_width = static_cast<UINT>(meta.width);
     m_height = static_cast<UINT>(meta.height);
 
-    std::cout << "テクスチャ読み取り成功" << std::endl;
+    std::cout << "テクスチャ読み取り成功 : " << path << std::endl;
     return true;
 }
 

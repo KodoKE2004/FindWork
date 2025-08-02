@@ -1,16 +1,2 @@
-﻿  Application.cpp
-  Camera.cpp
-  Game.cpp
-  MeshManager.cpp
-  MeshModel.cpp
-  Cube.cpp
-  Model.cpp
-  Renderer.cpp
-  SelectScene.cpp
-  TitleScene.cpp
-  Shader.cpp
-  TestPlane.cpp
-  Texture.cpp
-  Texture2D.cpp
-  コードを生成中...
+﻿  Texture.cpp
   就職作品プロジェクト.vcxproj -> C:\Users\kodokeの世界\Desktop\HAL\VisualSutdio\就職作品\個人製作\FindWork\就職作品プロジェクト\x64\Debug\NishiguchiGame.exe

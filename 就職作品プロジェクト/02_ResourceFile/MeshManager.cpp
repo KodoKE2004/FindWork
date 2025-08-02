@@ -10,8 +10,8 @@ MeshManager::MeshManager()
 	auto meshModel = std::make_shared<MeshModel>();
 	std::string modelName,filePath,texDirectory;
 	modelName    = "NULL";
-	texDirectory = "01_AssetFile/Model/spot/";
-	filePath    = texDirectory + "spot.fbx";
+	texDirectory = "01_AssetFile/Model/spot";
+	filePath    = texDirectory + "/spot.fbx";
 	std::string tmpStr1(reinterpret_cast<const char*>(filePath.c_str()), filePath.size());
 	if (meshModel->Load(filePath, texDirectory))
 	{
