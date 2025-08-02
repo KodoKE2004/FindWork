@@ -1,6 +1,8 @@
 #include "Texture.h"
-#include "../03_ExternalFile/DirectXTex/DirectXTex.h"
-
+#include "DirectXTex.h"
+#ifdef _DEBUG
+    #include<iostream>
+#endif
 Texture::Texture() = default;
 
 bool Texture::LoadFromFile(const std::string& path)
@@ -23,6 +25,8 @@ bool Texture::LoadFromFile(const std::string& path)
 
     m_width = static_cast<UINT>(meta.width);
     m_height = static_cast<UINT>(meta.height);
+
+    std::cout << "テクスチャ読み取り成功" << std::endl;
     return true;
 }
 

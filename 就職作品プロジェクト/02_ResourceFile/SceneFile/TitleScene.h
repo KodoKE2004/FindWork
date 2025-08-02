@@ -1,6 +1,6 @@
 #pragma once
 #include "Scene.h"
-#include "../Object.h"
+#include "../ObjectFile/Object.h"
 #include "../TestFile/TestPlane.h"
 
 class TitleScene : public Scene

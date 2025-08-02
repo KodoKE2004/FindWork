@@ -1,10 +1,9 @@
 #include "Camera.h"
 #include "Renderer.h"
 #include "Application.h"
-#include"Input.h"
-#include"Game.h"
+#include "Input.h"
+#include "Game.h"
 #include "DebugUI.h"
-#include "ModelObject.h"
 
 using namespace DirectX::SimpleMath;
 
@@ -14,7 +13,7 @@ using namespace DirectX::SimpleMath;
 //=======================================
 void Camera::Initialize()
 {
-	m_Position  = Vector3(0.0f, 20.0f, -50.0f);
+	m_Position  = Vector3(0.0f, 20.0f, 250.0f);
 	m_Rotation  = Vector3(0.0f,-20.0f,   0.0f);
 	m_Up        = Vector3(0.0f,  1.0f,   0.0f);
 
@@ -85,7 +84,7 @@ void Camera::SetCamera(CAMERA_MODE mode)
 		float fieldOfView = DirectX::XMConvertToRadians(m_Fov);    // 視野角
 
 		float aspectRatio = static_cast<float>(Application::GetWidth()) / static_cast<float>(Application::GetHeight());	// アスペクト比	
-		float nearPlane   = 1.0f;        // ニアクリップ
+		float nearPlane   = 1.0f;         // ニアクリップ
 		float farPlane    = 1000.0f;      // ファークリップ
 
 		//プロジェクション行列の生成
@@ -172,10 +171,10 @@ void Camera::DebugCameraUI()
 	// マウススクロール（Ctrlなし → Dolly、Ctrlあり → Zoom）
 	if (io.MouseWheel != 0.0f) {
 		if (io.KeyCtrl) {
-			this->Zoom(io.MouseWheel * - 2.0f);
+			this->Zoom(io.MouseWheel * - 5.0f);
 		}
 		else {
-			this->Dolly(io.MouseWheel * 2.0f);
+			this->Dolly(io.MouseWheel * 5.0f);
 		}
 	}
 

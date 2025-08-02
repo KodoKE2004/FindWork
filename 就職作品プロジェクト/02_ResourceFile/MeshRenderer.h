@@ -2,7 +2,7 @@
 #include "VertexBuffer.h"
 #include "IndexBuffer.h"
 #include "Mesh.h"
-#include "Model.h"
+#include "MeshModel.h"
 
 class MeshRenderer {
 protected:
@@ -17,7 +17,7 @@ public:
 		m_IndexNum = static_cast<int>(mesh.GetIndices().size());
 	}
 
-	virtual void Init(Model& model)
+	virtual void Init(MeshModel& model)
 	{
 		m_VertexBuffer.Create(model.GetVertices());
 		m_IndexBuffer.Create(model.GetIndices());

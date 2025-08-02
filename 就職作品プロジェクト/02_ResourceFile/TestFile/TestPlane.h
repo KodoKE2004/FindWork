@@ -3,7 +3,7 @@
 #include "../VertexBuffer.h"
 #include "../IndexBuffer.h"
 #include "../Shader.h"
-#include "../TextureDX.h"
+#include "../Texture.h"
 
 //-----------------------------------------------------------------------------
 //TestPlaneƒNƒ‰ƒX

@@ -1,36 +1,68 @@
-﻿  compilation object save succeeded; see C:\Users\kodokeの世界\Desktop\HAL\VisualSutdio\就職作品\個人製作\FindWork\就職作品プロジェクト\x64\Debug\PS_Default.cso
-  compilation object save succeeded; see C:\Users\kodokeの世界\Desktop\HAL\VisualSutdio\就職作品\個人製作\FindWork\就職作品プロジェクト\x64\Debug\VS_Default.cso
-  Application.cpp
-  AssimpPerse.cpp
-  Camera.cpp
-  DebugUI.cpp
-  Dx11helper.cpp
-  Game.cpp
-  input.cpp
-  main.cpp
-  Model.cpp
-  ModelObject.cpp
-  Object.cpp
-  Renderer.cpp
-  SelectScene.cpp
+﻿  MeshManager.cpp
   TitleScene.cpp
-  TransitionManager.cpp
-  Shader.cpp
-  TestCube.cpp
-  TestPlane.cpp
-  Texture2D.cpp
-  TextureDX.cpp
+C:\Program Files\Microsoft Visual Studio\2022\Community\VC\Tools\MSVC\14.44.35207\include\xmemory(730,14): error C2672: 'std::construct_at': 一致するオーバーロードされた関数が見つかりませんでした。
+  (ソース ファイル '02_ResourceFile/MeshManager.cpp' をコンパイルしています)
+      C:\Program Files\Microsoft Visual Studio\2022\Community\VC\Tools\MSVC\14.44.35207\include\xutility(461,16):
+      '_Ty *std::construct_at(_Ty *const ,_Types ...) noexcept(<expr>)' の可能性があります
+          C:\Program Files\Microsoft Visual Studio\2022\Community\VC\Tools\MSVC\14.44.35207\include\xmemory(730,14):
+          関連する制約が満たされていません
+              C:\Program Files\Microsoft Visual Studio\2022\Community\VC\Tools\MSVC\14.44.35207\include\xutility(459,50):
+              'std::shared_ptr<MeshModel>::shared_ptr': オーバーロードされた関数ですべての引数の型を変換できませんでした
+                  C:\Program Files\Microsoft Visual Studio\2022\Community\VC\Tools\MSVC\14.44.35207\include\memory(1578,5):
+                  'std::shared_ptr<MeshModel>::shared_ptr(std::nullptr_t) noexcept' の可能性があります
+                      C:\Program Files\Microsoft Visual Studio\2022\Community\VC\Tools\MSVC\14.44.35207\include\xutility(459,50):
+                      'std::shared_ptr<MeshModel>::shared_ptr(std::nullptr_t) noexcept': 引数 1 を 'MeshModel' から 'std::nullptr_t' へ変換できません。
+                          C:\Program Files\Microsoft Visual Studio\2022\Community\VC\Tools\MSVC\14.44.35207\include\xutility(459,71):
+                          この変換を実行可能なユーザー定義変換演算子がないか、または演算子を呼び出せません。
+                  C:\Program Files\Microsoft Visual Studio\2022\Community\VC\Tools\MSVC\14.44.35207\include\memory(1673,5):
+                  または 'std::shared_ptr<MeshModel>::shared_ptr(std::unique_ptr<_Ux,_Dx> &&)'
+                  C:\Program Files\Microsoft Visual Studio\2022\Community\VC\Tools\MSVC\14.44.35207\include\memory(1654,5):
+                  または 'std::shared_ptr<MeshModel>::shared_ptr(const std::weak_ptr<_Ty2> &)'
+                  C:\Program Files\Microsoft Visual Studio\2022\Community\VC\Tools\MSVC\14.44.35207\include\memory(1649,5):
+                  または 'std::shared_ptr<MeshModel>::shared_ptr(std::shared_ptr<_Ty2> &&) noexcept'
+                  C:\Program Files\Microsoft Visual Studio\2022\Community\VC\Tools\MSVC\14.44.35207\include\memory(1639,5):
+                  または 'std::shared_ptr<MeshModel>::shared_ptr(const std::shared_ptr<_Ty2> &) noexcept'
+                  C:\Program Files\Microsoft Visual Studio\2022\Community\VC\Tools\MSVC\14.44.35207\include\memory(1629,5):
+                  または 'std::shared_ptr<MeshModel>::shared_ptr(std::shared_ptr<_Ty2> &&,MeshModel *) noexcept'
+                  C:\Program Files\Microsoft Visual Studio\2022\Community\VC\Tools\MSVC\14.44.35207\include\memory(1623,5):
+                  または 'std::shared_ptr<MeshModel>::shared_ptr(const std::shared_ptr<_Ty2> &,MeshModel *) noexcept'
+                  C:\Program Files\Microsoft Visual Studio\2022\Community\VC\Tools\MSVC\14.44.35207\include\memory(1618,5):
+                  または 'std::shared_ptr<MeshModel>::shared_ptr(std::nullptr_t,_Dx,_Alloc)'
+                  C:\Program Files\Microsoft Visual Studio\2022\Community\VC\Tools\MSVC\14.44.35207\include\memory(1612,5):
+                  または 'std::shared_ptr<MeshModel>::shared_ptr(std::nullptr_t,_Dx)'
+                  C:\Program Files\Microsoft Visual Studio\2022\Community\VC\Tools\MSVC\14.44.35207\include\memory(1606,5):
+                  または 'std::shared_ptr<MeshModel>::shared_ptr(_Ux *,_Dx,_Alloc)'
+                  C:\Program Files\Microsoft Visual Studio\2022\Community\VC\Tools\MSVC\14.44.35207\include\memory(1598,5):
+                  または 'std::shared_ptr<MeshModel>::shared_ptr(_Ux *,_Dx)'
+                  C:\Program Files\Microsoft Visual Studio\2022\Community\VC\Tools\MSVC\14.44.35207\include\memory(1584,5):
+                  または 'std::shared_ptr<MeshModel>::shared_ptr(_Ux *)'
+                  C:\Program Files\Microsoft Visual Studio\2022\Community\VC\Tools\MSVC\14.44.35207\include\xutility(459,50):
+                  引数リスト '(MeshModel)' を一致させようとしているとき
+      C:\Program Files\Microsoft Visual Studio\2022\Community\VC\Tools\MSVC\14.44.35207\include\xmemory(730,14):
+      テンプレートインスタンス化コンテキスト (最初に最も古いもの) は
+          C:\Users\kodokeの世界\Desktop\HAL\VisualSutdio\就職作品\個人製作\FindWork\就職作品プロジェクト\02_ResourceFile\MeshManager.cpp(17,12):
+          コンパイル対象の関数 テンプレート インスタンス化 'std::shared_ptr<MeshModel> &std::vector<std::shared_ptr<MeshModel>,std::allocator<std::shared_ptr<MeshModel>>>::emplace_back<MeshModel&>(MeshModel &)' のリファレンスを確認してください
+              C:\Users\kodokeの世界\Desktop\HAL\VisualSutdio\就職作品\個人製作\FindWork\就職作品プロジェクト\02_ResourceFile\MeshManager.cpp(17,24):
+              'MeshManager::MeshManager' の 'std::vector<std::shared_ptr<MeshModel>,std::allocator<std::shared_ptr<MeshModel>>>::emplace_back' への最初の参照を参照してください
+          C:\Program Files\Microsoft Visual Studio\2022\Community\VC\Tools\MSVC\14.44.35207\include\vector(924,24):
+          コンパイル対象の関数 テンプレート インスタンス化 '_Ty &std::vector<_Ty,std::allocator<_Ty>>::_Emplace_one_at_back<MeshModel&>(MeshModel &)' のリファレンスを確認してください
+          with
+          [
+              _Ty=std::shared_ptr<MeshModel>
+          ]
+          C:\Program Files\Microsoft Visual Studio\2022\Community\VC\Tools\MSVC\14.44.35207\include\vector(845,20):
+          コンパイル対象の関数 テンプレート インスタンス化 '_Ty &std::vector<_Ty,std::allocator<_Ty>>::_Emplace_back_with_unused_capacity<MeshModel&>(MeshModel &)' のリファレンスを確認してください
+          with
+          [
+              _Ty=std::shared_ptr<MeshModel>
+          ]
+          C:\Program Files\Microsoft Visual Studio\2022\Community\VC\Tools\MSVC\14.44.35207\include\vector(863,27):
+          コンパイル対象の関数 テンプレート インスタンス化 'void std::_Default_allocator_traits<_Alloc>::construct<_Ty,MeshModel&>(_Alloc &,_Objty *const ,MeshModel &)' のリファレンスを確認してください
+          with
+          [
+              _Alloc=std::allocator<std::shared_ptr<MeshModel>>,
+              _Ty=std::shared_ptr<MeshModel>,
+              _Objty=std::shared_ptr<MeshModel>
+          ]
+  
   コードを生成中...
-  コンパイル中...
-  Transform.cpp
-  utility.cpp
-  imgui.cpp
-  imgui_demo.cpp
-  imgui_draw.cpp
-  imgui_impl_dx11.cpp
-  imgui_impl_win32.cpp
-  imgui_tables.cpp
-  imgui_widgets.cpp
-  コードを生成中...
-  LINK : 前回のインクリメンタル リンクで C:\Users\kodokeの世界\Desktop\HAL\VisualSutdio\就職作品\個人製作\FindWork\就職作品プロジェクト\x64\Debug\NishiguchiGame.exe が見つからなかったか、ビルドされませんでした。フル リンクを行います。
-  就職作品プロジェクト.vcxproj -> C:\Users\kodokeの世界\Desktop\HAL\VisualSutdio\就職作品\個人製作\FindWork\就職作品プロジェクト\x64\Debug\NishiguchiGame.exe

@@ -5,8 +5,9 @@
 
 #include <memory>
 #include "SceneFile/Scene.h"
-#include "Object.h"
+#include "ObjectFile/Object.h"
 #include "input.h"
+#include "MeshManager.h"
 
 class Game
 {
@@ -16,6 +17,8 @@ private:
 	std::unique_ptr<Input>		  m_Input;			// 入力管理
 	std::unique_ptr<Camera>		  m_Camera;			// カメラ
 	std::vector<std::unique_ptr<Object>> m_Objects; // オブジェクト
+	std::shared_ptr<MeshManager>  m_GameMeshes;		// シーンで扱うメッシュ
+
 public:
 	//================================
 	//		コンストラクタとデストラクタ
@@ -50,7 +53,10 @@ public:
 	std::unique_ptr<Camera> GetCamera() {
 		return std::move(m_Camera);
 	}
-
+	
+	std::shared_ptr<MeshManager> GetMeshManager() {
+		return m_GameMeshes;
+	}
 
 	//================================
 	// オブジェクト管理

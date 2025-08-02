@@ -1,8 +1,8 @@
 #pragma once
-#include "Object.h"
+#include "ObjectFile/Object.h"
 #include "VertexBuffer.h"
 #include "IndexBuffer.h"
-#include "TextureDX.h"
+#include "Texture.h"
 #include "Material.h"
 
 //-----------------------------------------------------------------------------

@@ -20,25 +20,25 @@
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="02_ResourceFile\Application.cpp" />
-    <ClCompile Include="02_ResourceFile\AssimpPerse.cpp" />
     <ClCompile Include="02_ResourceFile\Camera.cpp" />
     <ClCompile Include="02_ResourceFile\DebugUI.cpp" />
     <ClCompile Include="02_ResourceFile\Dx11helper.cpp" />
     <ClCompile Include="02_ResourceFile\Game.cpp" />
     <ClCompile Include="02_ResourceFile\input.cpp" />
     <ClCompile Include="02_ResourceFile\main.cpp" />
-    <ClCompile Include="02_ResourceFile\Model.cpp" />
-    <ClCompile Include="02_ResourceFile\ModelObject.cpp" />
-    <ClCompile Include="02_ResourceFile\Object.cpp" />
+    <ClCompile Include="02_ResourceFile\MeshModel.cpp" />
+    <ClCompile Include="02_ResourceFile\MeshManager.cpp" />
+    <ClCompile Include="02_ResourceFile\ObjectFile\Cube.cpp" />
+    <ClCompile Include="02_ResourceFile\ObjectFile\Model.cpp" />
+    <ClCompile Include="02_ResourceFile\ObjectFile\Object.cpp" />
     <ClCompile Include="02_ResourceFile\Renderer.cpp" />
     <ClCompile Include="02_ResourceFile\SceneFile\SelectScene.cpp" />
     <ClCompile Include="02_ResourceFile\SceneFile\TitleScene.cpp" />
     <ClCompile Include="02_ResourceFile\SceneFile\TransitionManager.cpp" />
     <ClCompile Include="02_ResourceFile\Shader.cpp" />
-    <ClCompile Include="02_ResourceFile\TestFile\TestCube.cpp" />
     <ClCompile Include="02_ResourceFile\TestFile\TestPlane.cpp" />
     <ClCompile Include="02_ResourceFile\Texture2D.cpp" />
-    <ClCompile Include="02_ResourceFile\TextureDX.cpp" />
+    <ClCompile Include="02_ResourceFile\Texture.cpp" />
     <ClCompile Include="02_ResourceFile\Transform.cpp" />
     <ClCompile Include="02_ResourceFile\utility.cpp" />
     <ClCompile Include="03_ExternalFile\imgui\imgui.cpp" />
@@ -51,7 +51,6 @@
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="02_ResourceFile\Application.h" />
-    <ClInclude Include="02_ResourceFile\AssimpPerse.h" />
     <ClInclude Include="02_ResourceFile\Camera.h" />
     <ClInclude Include="02_ResourceFile\Debug.hpp" />
     <ClInclude Include="02_ResourceFile\DebugUI.h" />
@@ -63,9 +62,11 @@
     <ClInclude Include="02_ResourceFile\Material.h" />
     <ClInclude Include="02_ResourceFile\Mesh.h" />
     <ClInclude Include="02_ResourceFile\MeshRenderer.h" />
-    <ClInclude Include="02_ResourceFile\Model.h" />
-    <ClInclude Include="02_ResourceFile\ModelObject.h" />
-    <ClInclude Include="02_ResourceFile\Object.h" />
+    <ClInclude Include="02_ResourceFile\MeshModel.h" />
+    <ClInclude Include="02_ResourceFile\MeshManager.h" />
+    <ClInclude Include="02_ResourceFile\ObjectFile\Cube.h" />
+    <ClInclude Include="02_ResourceFile\ObjectFile\Model.h" />
+    <ClInclude Include="02_ResourceFile\ObjectFile\Object.h" />
     <ClInclude Include="02_ResourceFile\Renderer.h" />
     <ClInclude Include="02_ResourceFile\SceneFile\Scene.h" />
     <ClInclude Include="02_ResourceFile\SceneFile\SceneList.h" />
@@ -73,10 +74,9 @@
     <ClInclude Include="02_ResourceFile\SceneFile\TitleScene.h" />
     <ClInclude Include="02_ResourceFile\SceneFile\TransitionManager.h" />
     <ClInclude Include="02_ResourceFile\Shader.h" />
-    <ClInclude Include="02_ResourceFile\TestFile\TestCube.h" />
     <ClInclude Include="02_ResourceFile\TestFile\TestPlane.h" />
     <ClInclude Include="02_ResourceFile\Texture2D.h" />
-    <ClInclude Include="02_ResourceFile\TextureDX.h" />
+    <ClInclude Include="02_ResourceFile\Texture.h" />
     <ClInclude Include="02_ResourceFile\Transform.h" />
     <ClInclude Include="02_ResourceFile\utility.h" />
     <ClInclude Include="02_ResourceFile\VertexBuffer.h" />

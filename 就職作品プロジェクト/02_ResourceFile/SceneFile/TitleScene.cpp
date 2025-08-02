@@ -1,15 +1,16 @@
 #include"SceneList.h"
 #include "../Game.h"
-#include "../TestFile/TestCube.h"
+#include "../ObjectFile/Cube.h"
 #include "../Texture2D.h"
-#include "../ModelObject.h"
+#include "../ObjectFile/Model.h"
 
 void TitleScene::Initialize()
 {
-	TestCube* pt = Game::GetInstance().AddObject<TestCube>();
+	Cube* pt = Game::GetInstance().AddObject<Cube>();
 	m_MySceneObjects.emplace_back(pt);
 
-	ModelObject* pt2 = Game::GetInstance().AddObject<ModelObject>();
+	Model* pt2 = Game::GetInstance().AddObject<Model>();
+	pt2->SetMeshModel("RedMan");
 	pt2->SetPos   ( 0.0f, 0.0f, 0.0f);
 	pt2->SetRotate( 0.0f, 0.0f, 0.0f);
 	pt2->SetScale ( 1.0f, 1.0f, 1.0f);

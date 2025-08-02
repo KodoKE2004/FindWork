@@ -16,6 +16,8 @@ Game::Game()
 	m_Input  = std::make_unique<Input>(); //“ü—Íˆ—‚ğì¬
 	m_Camera = std::make_unique<Camera>(); //ƒJƒƒ‰‚ğì¬
 	m_SceneCurrent = nullptr; // Œ»İ‚ÌƒV[ƒ“‚ğ‰Šú‰»
+	m_GameMeshes = std::make_shared<MeshManager>();
+	m_GameMeshes->AddMeshModel("RedMan", "Akai.fbx", "Akai");
 }
 
 void Game::Initialize()

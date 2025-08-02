@@ -16,6 +16,7 @@ public:
     UINT GetWidth()  const { return m_width; }
     UINT GetHeight() const { return m_height; }
     ID3D11ShaderResourceView* GetSRV() const { return m_srv.Get(); }
+
 private:
     UINT m_width{ 0 };
     UINT m_height{ 0 };

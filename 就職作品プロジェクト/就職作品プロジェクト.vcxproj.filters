@@ -51,6 +51,12 @@
     <Filter Include="SourceFile\Core\Resouce">
       <UniqueIdentifier>{8f7c1cff-9adf-412e-afca-63ef1605ed43}</UniqueIdentifier>
     </Filter>
+    <Filter Include="SourceFile\Object\3D">
+      <UniqueIdentifier>{312704eb-2648-4e1e-bf2c-47ee89932d51}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="SourceFile\Object\2D">
+      <UniqueIdentifier>{4083fcbf-46e2-4cfe-8f4b-aef89210c358}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="02_ResourceFile\SceneFile\TitleScene.cpp">
@@ -63,9 +69,6 @@
       <Filter>SourceFile\Scene</Filter>
     </ClCompile>
     <ClCompile Include="02_ResourceFile\Transform.cpp">
-      <Filter>SourceFile\Object</Filter>
-    </ClCompile>
-    <ClCompile Include="02_ResourceFile\Object.cpp">
       <Filter>SourceFile\Object</Filter>
     </ClCompile>
     <ClCompile Include="02_ResourceFile\Camera.cpp">
@@ -92,20 +95,11 @@
     <ClCompile Include="03_ExternalFile\imgui\imgui_widgets.cpp">
       <Filter>ImGui</Filter>
     </ClCompile>
-    <ClCompile Include="02_ResourceFile\TestFile\TestCube.cpp">
-      <Filter>SourceFile\Test</Filter>
-    </ClCompile>
     <ClCompile Include="02_ResourceFile\TestFile\TestPlane.cpp">
       <Filter>SourceFile\Test</Filter>
     </ClCompile>
-    <ClCompile Include="02_ResourceFile\Texture2D.cpp">
-      <Filter>SourceFile\Core\Resouce</Filter>
-    </ClCompile>
     <ClCompile Include="02_ResourceFile\DebugUI.cpp">
       <Filter>SourceFile\Debug</Filter>
-    </ClCompile>
-    <ClCompile Include="02_ResourceFile\AssimpPerse.cpp">
-      <Filter>SourceFile\Model</Filter>
     </ClCompile>
     <ClCompile Include="02_ResourceFile\Game.cpp">
       <Filter>SourceFile\Core</Filter>
@@ -131,14 +125,26 @@
     <ClCompile Include="02_ResourceFile\Renderer.cpp">
       <Filter>SourceFile\Core</Filter>
     </ClCompile>
-    <ClCompile Include="02_ResourceFile\Model.cpp">
-      <Filter>SourceFile\Model</Filter>
-    </ClCompile>
-    <ClCompile Include="02_ResourceFile\TextureDX.cpp">
+    <ClCompile Include="02_ResourceFile\Texture.cpp">
       <Filter>SourceFile\Core\Resouce</Filter>
     </ClCompile>
-    <ClCompile Include="02_ResourceFile\ModelObject.cpp">
+    <ClCompile Include="02_ResourceFile\ObjectFile\Object.cpp">
       <Filter>SourceFile\Object</Filter>
+    </ClCompile>
+    <ClCompile Include="02_ResourceFile\MeshModel.cpp">
+      <Filter>SourceFile\Model\Mesh</Filter>
+    </ClCompile>
+    <ClCompile Include="02_ResourceFile\ObjectFile\Cube.cpp">
+      <Filter>SourceFile\Object\3D</Filter>
+    </ClCompile>
+    <ClCompile Include="02_ResourceFile\ObjectFile\Model.cpp">
+      <Filter>SourceFile\Object\3D</Filter>
+    </ClCompile>
+    <ClCompile Include="02_ResourceFile\Texture2D.cpp">
+      <Filter>SourceFile\Object\2D</Filter>
+    </ClCompile>
+    <ClCompile Include="02_ResourceFile\MeshManager.cpp">
+      <Filter>SourceFile\Model\Mesh</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -155,9 +161,6 @@
       <Filter>SourceFile\Scene</Filter>
     </ClInclude>
     <ClInclude Include="02_ResourceFile\Transform.h">
-      <Filter>SourceFile\Object</Filter>
-    </ClInclude>
-    <ClInclude Include="02_ResourceFile\Object.h">
       <Filter>SourceFile\Object</Filter>
     </ClInclude>
     <ClInclude Include="02_ResourceFile\SceneFile\SceneList.h">
@@ -196,26 +199,14 @@
     <ClInclude Include="03_ExternalFile\imgui\imstb_truetype.h">
       <Filter>ImGui</Filter>
     </ClInclude>
-    <ClInclude Include="02_ResourceFile\TestFile\TestCube.h">
-      <Filter>SourceFile\Test</Filter>
-    </ClInclude>
     <ClInclude Include="02_ResourceFile\TestFile\TestPlane.h">
       <Filter>SourceFile\Test</Filter>
-    </ClInclude>
-    <ClInclude Include="02_ResourceFile\Texture2D.h">
-      <Filter>SourceFile\Core\Resouce</Filter>
-    </ClInclude>
-    <ClInclude Include="02_ResourceFile\Material.h">
-      <Filter>SourceFile\Core\Resouce</Filter>
     </ClInclude>
     <ClInclude Include="02_ResourceFile\DebugUI.h">
       <Filter>SourceFile\Debug</Filter>
     </ClInclude>
     <ClInclude Include="02_ResourceFile\Debug.hpp">
       <Filter>SourceFile\Debug</Filter>
-    </ClInclude>
-    <ClInclude Include="02_ResourceFile\AssimpPerse.h">
-      <Filter>SourceFile\Model</Filter>
     </ClInclude>
     <ClInclude Include="02_ResourceFile\Game.h">
       <Filter>SourceFile\Core</Filter>
@@ -247,14 +238,29 @@
     <ClInclude Include="02_ResourceFile\MeshRenderer.h">
       <Filter>SourceFile\Model\Mesh</Filter>
     </ClInclude>
-    <ClInclude Include="02_ResourceFile\Model.h">
-      <Filter>SourceFile\Model</Filter>
-    </ClInclude>
-    <ClInclude Include="02_ResourceFile\TextureDX.h">
+    <ClInclude Include="02_ResourceFile\Texture.h">
       <Filter>SourceFile\Core\Resouce</Filter>
     </ClInclude>
-    <ClInclude Include="02_ResourceFile\ModelObject.h">
+    <ClInclude Include="02_ResourceFile\Material.h">
+      <Filter>SourceFile\Core\Resouce</Filter>
+    </ClInclude>
+    <ClInclude Include="02_ResourceFile\ObjectFile\Object.h">
       <Filter>SourceFile\Object</Filter>
+    </ClInclude>
+    <ClInclude Include="02_ResourceFile\MeshModel.h">
+      <Filter>SourceFile\Model\Mesh</Filter>
+    </ClInclude>
+    <ClInclude Include="02_ResourceFile\ObjectFile\Cube.h">
+      <Filter>SourceFile\Object\3D</Filter>
+    </ClInclude>
+    <ClInclude Include="02_ResourceFile\ObjectFile\Model.h">
+      <Filter>SourceFile\Object\3D</Filter>
+    </ClInclude>
+    <ClInclude Include="02_ResourceFile\Texture2D.h">
+      <Filter>SourceFile\Object\2D</Filter>
+    </ClInclude>
+    <ClInclude Include="02_ResourceFile\MeshManager.h">
+      <Filter>SourceFile\Model\Mesh</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
