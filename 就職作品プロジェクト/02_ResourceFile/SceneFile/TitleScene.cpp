@@ -10,10 +10,11 @@ void TitleScene::Initialize()
 	//m_MySceneObjects.emplace_back(pt);
 
 	Model* pt2 = Game::GetInstance().AddObject<Model>();
-	pt2->GetMeshModel("RedMan");
+	pt2->GetMeshModel("Pokemon");
 	pt2->SetPos   ( 0.0f, 0.0f, 0.0f);
 	pt2->SetRotate( 0.0f, 0.0f, 0.0f);
-	pt2->SetScale (1.0f,1.0f,1.0f);
+	pt2->SetScale ( 1.0f, 1.0f, 1.0f);
+
 	m_MySceneObjects.emplace_back(pt2);
 
 	//Texture2D* pt3 = Game::GetInstance().AddObject<Texture2D>();
@@ -37,5 +38,6 @@ void TitleScene::Finalize()
 	for (auto& o : m_MySceneObjects) {
 		Game::GetInstance().DeleteObject(o);
 	}
+	m_MySceneObjects.clear();
 }
 

@@ -3,9 +3,7 @@
 #include "../Renderer.h"
 #include "../Material.h"
 #include <iostream>
-Model::Model(Camera* cam) : Object(cam)
-{
-}
+Model::Model(Camera* cam) : Object(cam){}
 
 void Model::Initialize()
 {
@@ -13,18 +11,10 @@ void Model::Initialize()
 
     //MeshÇì«Ç›çûÇﬁ
     m_MeshModel = std::make_shared<MeshModel>();
-    GetMeshModel("RedMan");
-
-    m_MeshRenderer.Init( *m_MeshModel.get());
-
-    m_VertexBuffer.Create(m_MeshModel->GetVertices());
-    m_IndexBuffer .Create(m_MeshModel->GetIndices());
+    GetMeshModel("NULL");
 
     m_Shader.Create("02_ResourceFile/ShaderFile/VS_Default.hlsl",
                     "02_ResourceFile/ShaderFile/PS_Default.hlsl");
-
-    m_Subsets  = m_MeshModel->GetSubsets();
-    m_Textures = m_MeshModel->GetTextures();
 
     //ÉJÉÅÉâÇÃê›íËÇéwíË
     m_Camera->SetCamera(CAMERA_3D);
@@ -38,8 +28,9 @@ void Model::Initialize()
 
 }
 
-void Model::Update(){
-
+void Model::Update()
+{
+    
 }
 
 void Model::Draw()
@@ -95,7 +86,7 @@ void Model::GetMeshModel(std::string modelName)
     m_VertexBuffer.Create(m_MeshModel->GetVertices());
     m_IndexBuffer.Create(m_MeshModel->GetIndices());
 
-    m_Subsets = m_MeshModel->GetSubsets();
+    m_Subsets  = m_MeshModel->GetSubsets();
     m_Textures = m_MeshModel->GetTextures();
 
     m_Materials.clear();

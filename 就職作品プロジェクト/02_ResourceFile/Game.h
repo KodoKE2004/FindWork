@@ -103,4 +103,6 @@ void ChangeScene(Args&&... args)
 	// 現在のシーンを新しいシーンに変更
 	auto scene = new T (std::forward<Args>(args)...);
 	Game::GetInstance().SetSceneCurrent(scene);
+
+
 }

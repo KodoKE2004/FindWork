@@ -11,7 +11,6 @@
     #include "Debug.hpp"
 #endif
 
-
 bool MeshModel::Load(const std::string& modelFile, const std::string& texDirectory)
 {
     Assimp::Importer importer;

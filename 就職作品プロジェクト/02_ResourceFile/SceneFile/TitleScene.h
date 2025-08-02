@@ -6,7 +6,7 @@
 class TitleScene : public Scene
 {
 private:
-	std::vector<Object*> m_MySceneObjects; // このシーンのオブジェクト
+
 public:
 	//================================
 	// コンストラクタとデストラクタ
@@ -20,7 +20,7 @@ public:
 	//================================
 	
 	// シーンの初期化
-	void Initialize() ;
+	void Initialize() override;
 	// シーンの更新
 	void Update()     override;
 

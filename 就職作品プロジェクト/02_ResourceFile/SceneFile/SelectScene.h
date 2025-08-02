@@ -7,15 +7,15 @@ public:
 	// コンストラクタとデストラクタ
 	//================================
 
-	SelectScene() = default;
-	~SelectScene() = default;
+	SelectScene()   { Initialize();};
+	~SelectScene()  { Finalize();  };
 
 	//================================
 	// 			ループ内の処理
 	//================================
 
 	// シーンの初期化
-	void Initialize() ;
+	void Initialize() override;
 	// シーンの更新
 	void Update()     override;
 

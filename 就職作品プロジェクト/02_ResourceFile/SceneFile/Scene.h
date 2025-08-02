@@ -1,9 +1,11 @@
 #pragma once
-
+#include "../ObjectFile/Object.h"
+#include <vector>
 class Scene
 {
 private:
-
+protected:
+	std::vector<Object*> m_MySceneObjects; // このシーンのオブジェクト
 public:
 	// コンストラクタとデストラクタ
 	Scene()  = default;
@@ -15,6 +17,7 @@ public:
 	//================================
 	
 	// シーンの更新
+	virtual void Initialize() = 0;
 	virtual void Update() = 0;
 
 };
