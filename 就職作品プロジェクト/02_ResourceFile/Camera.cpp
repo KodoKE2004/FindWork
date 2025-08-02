@@ -50,6 +50,7 @@ void Camera::Update()
 	if (Input::GetKeyPress(VK_R)) Roll(1.0f);
 	if (Input::GetKeyPress(VK_F)) Roll(-1.0f);
 
+	SetCamera(m_Mode);
 }
 
 //=======================================
@@ -62,7 +63,8 @@ void Camera::Finalilze()
 
 void Camera::SetCamera(CAMERA_MODE mode)
 {
-
+	m_Mode = mode;
+	
 	//3D
 	if (mode == CAMERA_3D) {
 		m_Eye      = m_Position;									// ÉJÉÅÉâÇÃà íu

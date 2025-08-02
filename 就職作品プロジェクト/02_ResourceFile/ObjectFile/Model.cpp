@@ -10,10 +10,9 @@ Model::Model(Camera* cam) : Object(cam)
 void Model::Initialize()
 {
     
-
     //Mesh‚ğ“Ç‚İ‚Ş
     m_MeshModel = std::make_shared<MeshModel>();
-    GetMeshModel("NULL");
+    GetMeshModel("RedMan");
 
     m_MeshRenderer.Init( *m_MeshModel.get());
 

@@ -14,7 +14,6 @@ std::unique_ptr<Game>  Game::m_pInstance    = nullptr; // ゲームのインスタンス初
 Game::Game()
 {
 	m_Input  = std::make_unique<Input>(); //入力処理を作成
-	m_Camera = std::make_unique<Camera>(); //カメラを作成
 	m_SceneCurrent = nullptr; // 現在のシーンを初期化
 }
 
@@ -23,9 +22,12 @@ void Game::Initialize()
 
 	//		シーンをタイトルシーンに設定
 	Renderer::Initialize();							// レンダラーの初期化
-	DebugUI::Init(Renderer::GetDevice(), Renderer::GetDeviceContext()); 				// デバッグUIの初期化
+	DebugUI::Init(Renderer::GetDevice(), Renderer::GetDeviceContext()); 			// デバッグUIの初期化
 	m_pInstance->m_GameMeshes = std::make_unique<MeshManager>();
+	m_pInstance->m_Camera     = std::make_unique<Camera>();							// カメラを作成
 	m_pInstance->m_GameMeshes->AddMeshModel("RedMan", "Akai.fbx", "Akai");
+	m_pInstance->m_GameMeshes->AddMeshModel("Pokemon", "Porygon.fbx","Porygon");
+
 	m_pInstance->m_Camera->Initialize();			// カメラの初期化
 	m_pInstance->m_SceneCurrent = new TitleScene;	// タイトルシーンのインスタンスを生成
 	

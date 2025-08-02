@@ -35,6 +35,8 @@ private:
 	DirectX::SimpleMath::Matrix	   m_ViewMatrix{};					// ビュー行列
 	DirectX::SimpleMath::Matrix	   m_ProjectionMatrix{};			// プロジェクション行列
 
+	CAMERA_MODE m_Mode = CAMERA_3D;
+
 	float m_CameraDirection = 0.0f;
 
 	float m_Fov       = 45.0f;		// 視野角

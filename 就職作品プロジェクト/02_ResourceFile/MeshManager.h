@@ -1,12 +1,14 @@
 #pragma once
-#include "ObjectFile/Model.h"
+#include "MeshModel.h"
 #include <vector>
 #include <string>
 #include <memory>
 
+
 class MeshManager
 {
 private:
+
 	struct MeshInfo
 	{
 		std::string					name;
@@ -14,7 +16,6 @@ private:
 		std::string					filePath;
 		std::string					texDirectory;
 	};
-
 	std::vector<MeshInfo> m_MeshInfo;
 
 	short findNumber = 0;
