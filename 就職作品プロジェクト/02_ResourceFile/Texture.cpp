@@ -6,8 +6,7 @@
 
 #pragma comment(lib,"Windowscodecs.lib")
 
-
-Texture::Texture() = default;
+Texture::Texture()= default;
 
 bool Texture::LoadFromFile(const std::string& path)
 {
@@ -27,7 +26,6 @@ bool Texture::LoadFromFile(const std::string& path)
         std::cout << "テクスチャ読み取り失敗 : LoadFromFile時点 : "<< path << std::endl;
         return false;
     }
-    m_srv.Reset();
     hr = CreateShaderResourceView(Renderer::GetDevice(), img.GetImages(), img.GetImageCount(), meta, m_srv.GetAddressOf());
     if (FAILED(hr)) 
     {

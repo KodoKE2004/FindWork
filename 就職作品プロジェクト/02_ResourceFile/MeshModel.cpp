@@ -11,6 +11,7 @@
     #include "Debug.hpp"
 #endif
 
+
 bool MeshModel::Load(const std::string& modelFile, const std::string& texDirectory)
 {
     Assimp::Importer importer;
@@ -36,10 +37,9 @@ bool MeshModel::Load(const std::string& modelFile, const std::string& texDirecto
         if (material->GetTexture(aiTextureType_DIFFUSE, 0, &path) == AI_SUCCESS)
         {
             std::filesystem::path file = std::filesystem::path(path.C_Str()).filename();
-            std::filesystem::path texPath = std::filesystem::path(texDirectory) / file;            
-            std::unique_ptr tex = std::make_unique<Texture>();
-            bool flg = tex->LoadFromFile(texPath.string());
-            m_Textures[m]  = std::move(tex);
+            std::filesystem::path texPath = std::filesystem::path(texDirectory) / file;  
+            m_Textures[m] = std::make_unique<Texture>();
+            m_Textures[m]->LoadFromFile(texPath.string());
             m_Materials[m].TextureEnable = TRUE;
         }
         else
