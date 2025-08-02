@@ -2,7 +2,7 @@
 #include "../Game.h"
 #include "../Renderer.h"
 #include "../Material.h"
-
+#include <iostream>
 Model::Model(Camera* cam) : Object(cam)
 {
 }
@@ -13,7 +13,7 @@ void Model::Initialize()
 
     //MeshÇì«Ç›çûÇﬁ
     m_MeshModel = std::make_shared<MeshModel>();
-    SetMeshModel("RedMan");
+    GetMeshModel("NULL");
 
     m_MeshRenderer.Init( *m_MeshModel.get());
 
@@ -79,8 +79,9 @@ void Model::Finalize()
 {
 }
 
-void Model::SetMeshModel(std::string modelName)
+void Model::GetMeshModel(std::string modelName)
 {
+    std::cout << "ModelÇÃéÊìæèàóùäJén : " << modelName << std::endl;
     m_MeshModel     = Game::GetInstance().GetMeshManager()->GetMeshModel(modelName);
     m_FilePath      = Game::GetInstance().GetMeshManager()->GetFilePath(modelName);
     m_TexDirectory  = Game::GetInstance().GetMeshManager()->GetTextureDirectory(modelName);

@@ -7,27 +7,8 @@
 
 MeshManager::MeshManager()
 {
-	auto meshModel = std::make_shared<MeshModel>();
-	std::string modelName,filePath,texDirectory;
-	modelName    = "NULL";
-	texDirectory = "01_AssetFile/Model/spot";
-	filePath    = texDirectory + "/spot.fbx";
-	std::string tmpStr1(reinterpret_cast<const char*>(filePath.c_str()), filePath.size());
-	if (meshModel->Load(filePath, texDirectory))
-	{
-		MeshInfo info;
-		info.name = modelName;
-		info.mesh = std::make_shared<MeshModel>();
-		info.mesh = meshModel;
-		info.filePath     = filePath;
-		info.texDirectory = texDirectory;
-
-		m_MeshInfo.emplace_back(info);	// 追加
-		std::cout << "成功 : モデルNULL登録完了" << std::endl;
-		return;
-	}
-
-
+	std::cout << "コンストラクタ：NULLモデル登録　開始" << std::endl;
+	AddMeshModel("NULL","spot.fbx","spot");
 }
 
 void MeshManager::AddMeshModel(std::string modelName, std::string modelPath, std::string texDirectory)
