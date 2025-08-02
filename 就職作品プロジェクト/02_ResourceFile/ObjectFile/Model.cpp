@@ -79,15 +79,30 @@ void Model::Finalize()
 {
 }
 
-void Model::SetMeshModel(std::string modelName)
-{
-    
-}
+
 
 void Model::GetMeshModel(std::string modelName)
 {
+    if(modelName == m_Name){ return; }
+
     std::cout << "Model‚ÌŽæ“¾ˆ—ŠJŽn : " << modelName << std::endl;
+    m_Name          = modelName;
     m_MeshModel     = Game::GetInstance().GetMeshManager()->GetMeshModel(modelName);
     m_FilePath      = Game::GetInstance().GetMeshManager()->GetFilePath(modelName);
     m_TexDirectory  = Game::GetInstance().GetMeshManager()->GetTextureDirectory(modelName);
+
+    m_MeshRenderer.Init(*m_MeshModel.get());
+    m_VertexBuffer.Create(m_MeshModel->GetVertices());
+    m_IndexBuffer.Create(m_MeshModel->GetIndices());
+
+    m_Subsets = m_MeshModel->GetSubsets();
+    m_Textures = m_MeshModel->GetTextures();
+
+    m_Materials.clear();
+    for (const auto& mtrl : m_MeshModel->GetMaterials())
+    {
+        auto mat = std::make_unique<Material>();
+        mat->Create(mtrl);
+        m_Materials.emplace_back(std::move(mat));
+    }
 }

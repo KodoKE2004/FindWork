@@ -14,6 +14,7 @@
 class Model : public Object
 {
 private:
+    std::string m_Name;
     std::string m_FilePath;
     std::string m_TexDirectory;
 
@@ -34,7 +35,6 @@ public:
     void Draw()       override;
     void Finalize()   override;
 
-    void SetMeshModel(std::string modelName);
     void GetMeshModel(std::string modelName);
 };
 

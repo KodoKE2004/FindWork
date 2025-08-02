@@ -137,14 +137,14 @@
     <ClCompile Include="02_ResourceFile\ObjectFile\Cube.cpp">
       <Filter>SourceFile\Object\3D</Filter>
     </ClCompile>
-    <ClCompile Include="02_ResourceFile\ObjectFile\Model.cpp">
-      <Filter>SourceFile\Object\3D</Filter>
-    </ClCompile>
     <ClCompile Include="02_ResourceFile\Texture2D.cpp">
       <Filter>SourceFile\Object\2D</Filter>
     </ClCompile>
     <ClCompile Include="02_ResourceFile\MeshManager.cpp">
       <Filter>SourceFile\Model\Mesh</Filter>
+    </ClCompile>
+    <ClCompile Include="02_ResourceFile\ObjectFile\Model.cpp">
+      <Filter>SourceFile\Model</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -253,14 +253,14 @@
     <ClInclude Include="02_ResourceFile\ObjectFile\Cube.h">
       <Filter>SourceFile\Object\3D</Filter>
     </ClInclude>
-    <ClInclude Include="02_ResourceFile\ObjectFile\Model.h">
-      <Filter>SourceFile\Object\3D</Filter>
-    </ClInclude>
     <ClInclude Include="02_ResourceFile\Texture2D.h">
       <Filter>SourceFile\Object\2D</Filter>
     </ClInclude>
     <ClInclude Include="02_ResourceFile\MeshManager.h">
       <Filter>SourceFile\Model\Mesh</Filter>
+    </ClInclude>
+    <ClInclude Include="02_ResourceFile\ObjectFile\Model.h">
+      <Filter>SourceFile\Model</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
