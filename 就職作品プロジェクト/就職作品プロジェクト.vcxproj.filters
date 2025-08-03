@@ -149,7 +149,7 @@
     <ClCompile Include="02_ResourceFile\SceneFile\GameScene.cpp">
       <Filter>SourceFile\Scene</Filter>
     </ClCompile>
-    <ClCompile Include="02_ResourceFile\SceneFile\TransitionManager.cpp">
+    <ClCompile Include="02_ResourceFile\SceneFile\Transition.cpp">
       <Filter>SourceFile\Scene\Transition</Filter>
     </ClCompile>
   </ItemGroup>
@@ -268,7 +268,7 @@
     <ClInclude Include="02_ResourceFile\SceneFile\GameScene.h">
       <Filter>SourceFile\Scene</Filter>
     </ClInclude>
-    <ClInclude Include="02_ResourceFile\SceneFile\TransitionManager.h">
+    <ClInclude Include="02_ResourceFile\SceneFile\Transition.h">
       <Filter>SourceFile\Scene\Transition</Filter>
     </ClInclude>
   </ItemGroup>

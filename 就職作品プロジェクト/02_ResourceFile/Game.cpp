@@ -9,11 +9,11 @@
 #include "DebugUI.h"
 
 
-std::unique_ptr<Game>  Game::m_pInstance    = nullptr; // ゲームのインスタンス初期化
+std::unique_ptr<Game>				Game::m_pInstance  = nullptr; // ゲームのインスタンス初期化
 
 Game::Game()
 {
-	m_Input  = std::make_unique<Input>(); //入力処理を作成
+	m_Input		 = std::make_unique<Input>(); //入力処理を作成
 	m_Camera     = std::make_unique<Camera>();							// カメラを作成
 
 	m_SceneCurrent = nullptr; // 現在のシーンを初期化
