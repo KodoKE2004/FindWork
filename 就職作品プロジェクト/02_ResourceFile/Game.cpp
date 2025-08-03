@@ -40,6 +40,8 @@ void Game::Initialize()
 void Game::Update()
 {	
 	// 現在のシーンの更新
+	SceneTrans::Update();
+
 	m_pInstance->m_SceneCurrent->Update();
 	// カメラの更新
 	m_pInstance->m_Camera->Update(); 

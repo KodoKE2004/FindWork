@@ -1,4 +1,5 @@
-#include"SceneList.h"
+#include "SceneList.h"
+#include "SceneTrans.h"
 #include "../Game.h"
 #include "../DebugUI.h"
 #include "../ObjectFile/Cube.h"
@@ -22,10 +23,15 @@ void TitleScene::Initialize()
 
 void TitleScene::Update()
 {
-	if(Input::GetKeyTrigger(VK_RETURN))
-	{
-		ChangeScene<SelectScene>();
-	}
+	if(SceneTrans::IsTransition() != OFF){ return; }
+
+
+
+
+
+
+
+
 }
 
 

@@ -56,20 +56,27 @@ void Application::Run()
 	TermApp();
 }
 
+// Application.cppに追加するdeltaTime管理用変数
+namespace {
+    float g_deltaTime = 0.0f;
+    LARGE_INTEGER g_prevTime;
+    LARGE_INTEGER g_frequency;
+}
+
+// deltaTime取得関数
+float Application::GetDeltaTime()
+{
+    return g_deltaTime;
+}
+
 //==============================
 //		初期化処理
 //==============================
 bool Application::InitApp()
 {
-	// ウィンドウの初期化
-	if(!InitWindow())
-    {
-		// ウィンドウの初期化に失敗した場合は、エラーメッセージを表示して終了
-        return false;
-    }
-
-	// ウィンドウのメッセージループを開始
-	return true;
+    QueryPerformanceFrequency(&g_frequency);
+    QueryPerformanceCounter(&g_prevTime);
+    return InitWindow();
 }
 
 //==============================
@@ -178,59 +185,30 @@ void Application::TermWindow()
 //==============================
 void Application::MainLoop()
 {
-    MSG   msg  = {};
-	Game& game = Game::GetInstance(); // ゲームのインスタンスを取得
-	game.Initialize(); // ゲームの初期化
+    MSG   msg = {};
+    Game& game = Game::GetInstance();
+    game.Initialize();
 
-    // FPS計測用変数
-    int fpsCounter = 0;
-    long long oldTick = GetTickCount64();    // 前回計測時の時間
-    long long nowTick = oldTick;             // 今回計測時の時間
-
-    // FPS固定用変数
-    LARGE_INTEGER liWork;                    // workがつく変数は作業用変数
-    long long frequency;                     // どれくらい細かく時間をカウントできるか
-    QueryPerformanceFrequency(&liWork);      // 
-    frequency = liWork.QuadPart;             // 
-
-    // 時間（単位：カウント）取得
-    QueryPerformanceCounter(&liWork);        //
-    long long oldCount = liWork.QuadPart;    // 前回計測時の時間
-    long long nowCount = oldCount;           // 今回計測時の時間
-
-    // メッセージループ
     while (true) {
-        // 新たにメッセージがあれば
         if (PeekMessage(&msg, NULL, 0, 0, PM_REMOVE))
         {
-            // ウィンドウプロシージャにメッセージを送る
             TranslateMessage(&msg);
             DispatchMessage(&msg);
-
-            // 「WM_QUIT」メッセージを受け取ったらループを抜ける
-            if (msg.message == WM_QUIT) {
-                break;
-            }
+            if (msg.message == WM_QUIT) break;
         }
         else
         {
-            QueryPerformanceCounter(&liWork);// 現在時間を取得
-            nowCount = liWork.QuadPart;
-            // 1/60秒が経過したか？
-            if (nowCount >= oldCount + frequency / 60) {
-				// ここにゲーム処理を記述
-                
-				game.Update(); // ゲームの更新
-				game.Draw();   // ゲームの描画
-                
-                fpsCounter++; // ゲーム処理を実行したら＋１する
-                oldCount = nowCount;
-            }
+            LARGE_INTEGER currentTime;
+            QueryPerformanceCounter(&currentTime);
+            g_deltaTime = static_cast<float>(currentTime.QuadPart - g_prevTime.QuadPart) / static_cast<float>(g_frequency.QuadPart);
+            g_prevTime = currentTime;
+
+            // ゲームの更新
+            game.Update();
+            game.Draw();
         }
-
-	}
-
-	game.Finalize(); // ゲームの終了処理
+    }
+    game.Finalize();
 }
 
 //==============================

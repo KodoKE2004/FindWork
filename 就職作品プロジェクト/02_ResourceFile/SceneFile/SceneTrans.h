@@ -2,6 +2,14 @@
 #include <memory>
 #include <string>
 #include "Scene.h"
+#include "../Renderer.h"
+#include "../Application.h"
+#include "../Shader.h"
+#include "../VertexBuffer.h"
+#include "../IndexBuffer.h"
+#include "../Material.h"
+#include "../Game.h"
+#include <vector>
 
 enum SWITCH
 {
@@ -28,18 +36,28 @@ public:
 
 	// 画面遷移の初期化
 	static void Initialize(TRANS_MODE mode);
+	// 画面遷移の更新
+	static void Update();
 	// 画面遷移の描画
 	static void Draw();
 
+	static void   SetAlpha(float alpha);
+	static void   SetChange(bool isChange);
+	static float  GetAlpha(){ return m_Alpha; }
 	static void	  SetTransition(SWITCH setSwitch);
-	static SWITCH IsFinished();
-	static void   StartTransition(TRANS_MODE mode,float duration);
+	static SWITCH IsTransition();
 
 private:
-	static std::unique_ptr<Scene> m_NextScene;	// 次のシーン
-	static float m_Timer;				// タイマー
-	static float m_Duration;			// 遷移時間
-	static SWITCH		m_Behavior;		// 遷移が完了したかどうか
-	static TRANS_MODE	m_TransMode;	// 遷移の仕方
+	static Scene*		m_NextScene;		// 次のシーン
+	static float		m_Timer;			// タイマー
+	static float		m_Duration;			// 遷移時間
+	static bool			m_isChange;			// 切り替えOK？
+	static SWITCH		m_isTransition;		// 遷移が完了したかどうか
+	static TRANS_MODE	m_TransMode;		// 遷移の仕方
+
+	// 演出の値管理
+	static float m_Alpha;
+	static float m_Delta;
+
 };
 

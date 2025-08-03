@@ -24,6 +24,7 @@ public:
     static HWND GetWindow() {
         return m_hWnd;
     }
+    static float GetDeltaTime();
 
 private:
     static HINSTANCE   m_hInst;     // インスタンスハンドル

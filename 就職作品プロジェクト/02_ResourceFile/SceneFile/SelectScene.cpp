@@ -1,9 +1,10 @@
 #include"SceneList.h"
+#include "SceneTrans.h"
+
 #include "../Game.h"
 #include "../DebugUI.h"
 #include "../Texture2D.h"
 #include "../ObjectFile/Model.h"
-#include "Transition.h"
 
 void SelectScene::Initialize()
 {
