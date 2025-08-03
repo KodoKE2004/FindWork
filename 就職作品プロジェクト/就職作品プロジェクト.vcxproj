@@ -35,7 +35,7 @@
     <ClCompile Include="02_ResourceFile\SceneFile\GameScene.cpp" />
     <ClCompile Include="02_ResourceFile\SceneFile\SelectScene.cpp" />
     <ClCompile Include="02_ResourceFile\SceneFile\TitleScene.cpp" />
-    <ClCompile Include="02_ResourceFile\SceneFile\Transition.cpp" />
+    <ClCompile Include="02_ResourceFile\SceneFile\SceneTrans.cpp" />
     <ClCompile Include="02_ResourceFile\Shader.cpp" />
     <ClCompile Include="02_ResourceFile\TestFile\TestPlane.cpp" />
     <ClCompile Include="02_ResourceFile\Texture2D.cpp" />
@@ -74,7 +74,7 @@
     <ClInclude Include="02_ResourceFile\SceneFile\SceneList.h" />
     <ClInclude Include="02_ResourceFile\SceneFile\SelectScene.h" />
     <ClInclude Include="02_ResourceFile\SceneFile\TitleScene.h" />
-    <ClInclude Include="02_ResourceFile\SceneFile\Transition.h" />
+    <ClInclude Include="02_ResourceFile\SceneFile\SceneTrans.h" />
     <ClInclude Include="02_ResourceFile\Shader.h" />
     <ClInclude Include="02_ResourceFile\TestFile\TestPlane.h" />
     <ClInclude Include="02_ResourceFile\Texture2D.h" />

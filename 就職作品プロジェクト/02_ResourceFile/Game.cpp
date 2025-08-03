@@ -2,6 +2,7 @@
 #include "Debug.hpp"
 #endif 
 
+#include "SceneFile/SceneTrans.h"
 #include "Game.h"
 #include "Renderer.h"
 #include "Application.h"
@@ -61,8 +62,9 @@ void Game::Draw()
 	{
 		o->Draw();
 	}
-	DebugUI::Render();		// デバッグUIの描画
-	Renderer::Finish();		// 描画の終了
+	SceneTrans::Draw();
+	DebugUI::Render();			// デバッグUIの描画
+	Renderer::Finish();			// 描画の終了
 }
 
 void Game::Finalize()

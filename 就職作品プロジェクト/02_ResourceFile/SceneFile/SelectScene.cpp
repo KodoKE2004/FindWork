@@ -3,6 +3,7 @@
 #include "../DebugUI.h"
 #include "../Texture2D.h"
 #include "../ObjectFile/Model.h"
+#include "Transition.h"
 
 void SelectScene::Initialize()
 {
@@ -14,9 +15,10 @@ void SelectScene::Initialize()
 
 void SelectScene::Update()
 {
+	
 	if (Input::GetKeyTrigger(VK_RETURN))
 	{
-		ChangeScene<GameScene>();
+		
 	}
 }
 

@@ -7,6 +7,7 @@ enum SWITCH
 {
 	OFF,
 	START,
+	DOING,
 	FINISH,
 };
 
@@ -25,22 +26,20 @@ public:
 	SceneTrans()  = default;
 	~SceneTrans() = default;
 
-	// ‰æ–Ê‘JˆÚ‚ÌXV
-	static void Update();
+	// ‰æ–Ê‘JˆÚ‚Ì‰Šú‰»
+	static void Initialize(TRANS_MODE mode);
 	// ‰æ–Ê‘JˆÚ‚Ì•`‰æ
-	static void DrawOverlay();
+	static void Draw();
 
-	static void StartTransition(TRANS_MODE mode);
-
-	static void SetTransition(SWITCH setSwitch);
+	static void	  SetTransition(SWITCH setSwitch);
 	static SWITCH IsFinished();
+	static void   StartTransition(TRANS_MODE mode,float duration);
 
 private:
 	static std::unique_ptr<Scene> m_NextScene;	// Ÿ‚ÌƒV[ƒ“
 	static float m_Timer;				// ƒ^ƒCƒ}[
 	static float m_Duration;			// ‘JˆÚŠÔ
-	static SWITCH		m_Behevior;		// ‘JˆÚ‚ªŠ®—¹‚µ‚½‚©‚Ç‚¤‚©
+	static SWITCH		m_Behavior;		// ‘JˆÚ‚ªŠ®—¹‚µ‚½‚©‚Ç‚¤‚©
 	static TRANS_MODE	m_TransMode;	// ‘JˆÚ‚Ìd•û
-	static std::string m_EffectType;	// "Fade", "Wipe" etc...
 };
 
