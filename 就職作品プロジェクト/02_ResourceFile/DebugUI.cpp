@@ -1,7 +1,7 @@
 #include "DebugUI.h"
 
 std::vector<std::function<void(void)>> DebugUI::m_debugfunction;
-
+std::string DebugUI::TEXT_CurrentScene = "TitleScene" ;
 void DebugUI::Init(ID3D11Device* device, ID3D11DeviceContext* context) 
 {
 
@@ -40,7 +40,8 @@ void DebugUI::Render() {
     ImGui::NewFrame();
 
     // ウィンドウとデバッグ情報の描画
-    ImGui::Begin("Debug Information");
+    const char* text = TEXT_CurrentScene.c_str();
+    ImGui::Begin(text);
     ImGuiIO& io = ImGui::GetIO();
     ImGui::Text("Application average %.3f ms/frame (%.1f FPS)", 1000.0f / io.Framerate, io.Framerate);
 

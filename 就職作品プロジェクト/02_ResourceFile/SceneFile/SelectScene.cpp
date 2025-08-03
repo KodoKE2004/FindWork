@@ -1,17 +1,14 @@
 #include"SceneList.h"
 #include "../Game.h"
-#include "../ObjectFile/Cube.h"
+#include "../DebugUI.h"
 #include "../Texture2D.h"
 #include "../ObjectFile/Model.h"
 
 void SelectScene::Initialize()
 {
-	Debug::Log("åªç›ÇÃÉVÅ[Éì : SelectScene");
+	DebugUI::TEXT_CurrentScene = "SelectScene";
 	Model* pt2 = Game::GetInstance().AddObject<Model>();
 	pt2->GetMeshModel("RedMan");
-	pt2->SetPos(0.0f, 0.0f, 0.0f);
-	pt2->SetRotate(0.0f, 0.0f, 0.0f);
-	pt2->SetScale(1.0f, 1.0f, 1.0f);
 	m_MySceneObjects.emplace_back(pt2);
 }
 
@@ -19,7 +16,7 @@ void SelectScene::Update()
 {
 	if (Input::GetKeyTrigger(VK_RETURN))
 	{
-		ChangeScene<TitleScene>();
+		ChangeScene<GameScene>();
 	}
 }
 

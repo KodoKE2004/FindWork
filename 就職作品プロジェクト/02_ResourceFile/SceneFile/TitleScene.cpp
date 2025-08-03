@@ -1,5 +1,6 @@
 #include"SceneList.h"
 #include "../Game.h"
+#include "../DebugUI.h"
 #include "../ObjectFile/Cube.h"
 #include "../Texture2D.h"
 #include "../ObjectFile/Model.h"
@@ -8,13 +9,9 @@ void TitleScene::Initialize()
 {
 	//Cube* pt = Game::GetInstance().AddObject<Cube>();
 	//m_MySceneObjects.emplace_back(pt);
-	Debug::Log("åªç›ÇÃÉVÅ[Éì : TitleScene");
+	DebugUI::TEXT_CurrentScene = "TitleScene";
 	Model* pt2 = Game::GetInstance().AddObject<Model>();
 	pt2->GetMeshModel("Pokemon");
-	pt2->SetPos   ( 0.0f, 0.0f, 0.0f);
-	pt2->SetRotate( 0.0f, 0.0f, 0.0f);
-	pt2->SetScale ( 1.0f, 1.0f, 1.0f);
-
 	m_MySceneObjects.emplace_back(pt2);
 
 	//Texture2D* pt3 = Game::GetInstance().AddObject<Texture2D>();

@@ -45,8 +45,8 @@ private:
 	float m_Speed     = 1.0f;		// ƒJƒƒ‰‚ÌˆÚ“®‘¬“x
 
 	float m_DollySpeed = 20.0f;
-	float m_TrackX = 1.0f;
-	float m_TrackY = 1.0f;
+	float m_TrackX = 0.5f;
+	float m_TrackY = 0.5f;
 	float m_PanYaw   = 0.05f;
 	float m_PanPitch = 0.05f;
 	float m_Roll = 1.0f;

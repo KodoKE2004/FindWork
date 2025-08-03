@@ -57,15 +57,15 @@
     <Filter Include="SourceFile\Object\2D">
       <UniqueIdentifier>{4083fcbf-46e2-4cfe-8f4b-aef89210c358}</UniqueIdentifier>
     </Filter>
+    <Filter Include="SourceFile\Scene\Transition">
+      <UniqueIdentifier>{31598b83-4477-46d0-bc50-878d1d1ffedb}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="02_ResourceFile\SceneFile\TitleScene.cpp">
       <Filter>SourceFile\Scene</Filter>
     </ClCompile>
     <ClCompile Include="02_ResourceFile\SceneFile\SelectScene.cpp">
-      <Filter>SourceFile\Scene</Filter>
-    </ClCompile>
-    <ClCompile Include="02_ResourceFile\SceneFile\TransitionManager.cpp">
       <Filter>SourceFile\Scene</Filter>
     </ClCompile>
     <ClCompile Include="02_ResourceFile\Transform.cpp">
@@ -146,15 +146,18 @@
     <ClCompile Include="02_ResourceFile\ObjectFile\Model.cpp">
       <Filter>SourceFile\Model</Filter>
     </ClCompile>
+    <ClCompile Include="02_ResourceFile\SceneFile\GameScene.cpp">
+      <Filter>SourceFile\Scene</Filter>
+    </ClCompile>
+    <ClCompile Include="02_ResourceFile\SceneFile\TransitionManager.cpp">
+      <Filter>SourceFile\Scene\Transition</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="02_ResourceFile\SceneFile\Scene.h">
       <Filter>SourceFile\Scene</Filter>
     </ClInclude>
     <ClInclude Include="02_ResourceFile\SceneFile\SelectScene.h">
-      <Filter>SourceFile\Scene</Filter>
-    </ClInclude>
-    <ClInclude Include="02_ResourceFile\SceneFile\TransitionManager.h">
       <Filter>SourceFile\Scene</Filter>
     </ClInclude>
     <ClInclude Include="02_ResourceFile\SceneFile\TitleScene.h">
@@ -261,6 +264,12 @@
     </ClInclude>
     <ClInclude Include="02_ResourceFile\ObjectFile\Model.h">
       <Filter>SourceFile\Model</Filter>
+    </ClInclude>
+    <ClInclude Include="02_ResourceFile\SceneFile\GameScene.h">
+      <Filter>SourceFile\Scene</Filter>
+    </ClInclude>
+    <ClInclude Include="02_ResourceFile\SceneFile\TransitionManager.h">
+      <Filter>SourceFile\Scene\Transition</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>

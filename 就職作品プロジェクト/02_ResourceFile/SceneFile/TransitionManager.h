@@ -5,7 +5,7 @@
 /// <summary>
 /// 遷移の管理をするクラス
 /// </summary>
-class TransitionManager 
+class TransitionManager
 {
 public:
 	// コンストラクタとデストラクタ

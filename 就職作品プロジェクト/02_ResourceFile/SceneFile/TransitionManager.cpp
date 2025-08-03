@@ -11,6 +11,7 @@ void TransitionManager::Update()
 
 void TransitionManager::DrawOverlay()
 {
+	
 }
 
 bool TransitionManager::IsFinished()

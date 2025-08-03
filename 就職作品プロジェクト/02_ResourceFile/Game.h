@@ -19,6 +19,7 @@ private:
 	std::vector<std::unique_ptr<Object>> m_Objects; // オブジェクト
 	std::shared_ptr<MeshManager>  m_GameMeshes;		// シーンで扱うメッシュ
 
+	bool isTransition = false;
 public:
 	//================================
 	//		コンストラクタとデストラクタ

@@ -14,7 +14,7 @@ using namespace DirectX::SimpleMath;
 void Camera::Initialize()
 {
 	m_Position  = Vector3(0.0f, 20.0f, 250.0f);
-	m_Rotation  = Vector3(0.0f,-20.0f,   0.0f);
+	m_Rotation  = Vector3(0.0f,  0.0f,   0.0f);
 	m_Up        = Vector3(0.0f,  1.0f,   0.0f);
 
 #ifdef _DEBUG
@@ -34,25 +34,6 @@ void Camera::Initialize()
 //=======================================
 void Camera::Update()
 {
-	// 操作用入力例（必要に応じて修正可）
-	if (Input::GetKeyPress(VK_W)) Dolly(1.0f);
-	if (Input::GetKeyPress(VK_S)) Dolly(-1.0f);
-	if (Input::GetKeyPress(VK_A)) Track(-1.0f, 0);
-	if (Input::GetKeyPress(VK_D)) Track(1.0f, 0);
-	if (Input::GetKeyPress(VK_Q)) Track(0, 1.0f);
-	if (Input::GetKeyPress(VK_E)) Track(0, -1.0f);
-
-	if (Input::GetKeyPress(VK_LEFT))  Pan(-1.0f, 0);
-	if (Input::GetKeyPress(VK_RIGHT)) Pan(1.0f, 0);
-	if (Input::GetKeyPress(VK_UP))    Pan(0, 1.0f);
-	if (Input::GetKeyPress(VK_DOWN))  Pan(0, -1.0f);
-
-	if (Input::GetKeyPress(VK_Z)) Zoom(-1.0f);
-	if (Input::GetKeyPress(VK_X)) Zoom(1.0f);
-
-	if (Input::GetKeyPress(VK_R)) Roll(1.0f);
-	if (Input::GetKeyPress(VK_F)) Roll(-1.0f);
-
 	SetCamera(m_Mode);
 }
 

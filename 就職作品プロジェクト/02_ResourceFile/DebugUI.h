@@ -2,6 +2,7 @@
 
 #include <d3d11.h>
 #include <vector>
+#include <string>
 #include <functional>
 #include "Application.h"
 
@@ -12,7 +13,7 @@
 class DebugUI {
     static std::vector<std::function<void(void)>> m_debugfunction;
 public:
-
+    static std::string TEXT_CurrentScene;
     static void Init(ID3D11Device* device, ID3D11DeviceContext* context);
 
     // デバッグ表示関数の登録

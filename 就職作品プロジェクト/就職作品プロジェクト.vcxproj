@@ -32,6 +32,7 @@
     <ClCompile Include="02_ResourceFile\ObjectFile\Model.cpp" />
     <ClCompile Include="02_ResourceFile\ObjectFile\Object.cpp" />
     <ClCompile Include="02_ResourceFile\Renderer.cpp" />
+    <ClCompile Include="02_ResourceFile\SceneFile\GameScene.cpp" />
     <ClCompile Include="02_ResourceFile\SceneFile\SelectScene.cpp" />
     <ClCompile Include="02_ResourceFile\SceneFile\TitleScene.cpp" />
     <ClCompile Include="02_ResourceFile\SceneFile\TransitionManager.cpp" />
@@ -68,6 +69,7 @@
     <ClInclude Include="02_ResourceFile\ObjectFile\Model.h" />
     <ClInclude Include="02_ResourceFile\ObjectFile\Object.h" />
     <ClInclude Include="02_ResourceFile\Renderer.h" />
+    <ClInclude Include="02_ResourceFile\SceneFile\GameScene.h" />
     <ClInclude Include="02_ResourceFile\SceneFile\Scene.h" />
     <ClInclude Include="02_ResourceFile\SceneFile\SceneList.h" />
     <ClInclude Include="02_ResourceFile\SceneFile\SelectScene.h" />

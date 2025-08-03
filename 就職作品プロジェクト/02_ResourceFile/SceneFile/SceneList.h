@@ -4,4 +4,5 @@
 ///  デバッグで手間をカットするだけ
 #include "TitleScene.h"
 #include "SelectScene.h"
-#include "../Debug.hpp"
+#include "GameScene.h"
+
