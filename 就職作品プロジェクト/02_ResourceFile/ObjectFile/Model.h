@@ -24,7 +24,7 @@ private:
     VertexBuffer<VERTEX_3D> m_VertexBuffer;
     IndexBuffer             m_IndexBuffer;
     std::vector<SUBSET>     m_Subsets;
-    std::vector<std::unique_ptr<Texture>> m_Textures;
+    std::vector<std::shared_ptr<Texture>> m_Textures;
     std::vector<std::unique_ptr<Material>> m_Materials;
 
 public:

@@ -6,6 +6,7 @@
 
 void SelectScene::Initialize()
 {
+	Debug::Log("åªç›ÇÃÉVÅ[Éì : SelectScene");
 	Model* pt2 = Game::GetInstance().AddObject<Model>();
 	pt2->GetMeshModel("RedMan");
 	pt2->SetPos(0.0f, 0.0f, 0.0f);

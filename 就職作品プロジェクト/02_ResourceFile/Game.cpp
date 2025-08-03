@@ -30,6 +30,7 @@ void Game::Initialize()
 	m_pInstance->m_GameMeshes = std::make_shared<MeshManager>();
 	m_pInstance->m_GameMeshes->AddMeshModel("RedMan", "Akai.fbx", "Akai");
 	m_pInstance->m_GameMeshes->AddMeshModel("Pokemon", "Porygon.fbx","Porygon");
+	m_pInstance->m_GameMeshes->AddMeshModel("aaa", "plane.fbx","plane");
 
 	m_pInstance->m_SceneCurrent = new TitleScene;	// タイトルシーンのインスタンスを生成
 	
@@ -119,6 +120,7 @@ void Game::DeleteAllObject()
 		o->Finalize();
 	}
 
-	m_pInstance.get()->m_Objects.clear(); //全て削除
+	m_pInstance.get()->m_Objects.clear();			
+	m_pInstance.get()->m_GameMeshes->Clear();		
 	m_pInstance.get()->m_Objects.shrink_to_fit();
 }

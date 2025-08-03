@@ -22,6 +22,7 @@ private:
 
 public:
 	MeshManager();
+	void Clear();
 
 	/// <summary>
 	/// Mesh‚Ì’Ç‰Á

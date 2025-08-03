@@ -17,9 +17,9 @@ public:
     bool Load(const std::string& modelFile, const std::string& texDirectory);
     const std::vector<SUBSET>&            GetSubsets()   const { return m_Subsets; }
     const std::vector<MATERIAL>&          GetMaterials() const { return m_Materials; }
-    std::vector<std::unique_ptr<Texture>> GetTextures()        { return std::move(m_Textures); }
+    std::vector<std::shared_ptr<Texture>> GetTextures()        { return m_Textures ; }
 private:
     std::vector<SUBSET> m_Subsets;
-    std::vector<std::unique_ptr<Texture>> m_Textures;
+    std::vector<std::shared_ptr<Texture>> m_Textures;
     std::vector<MATERIAL> m_Materials;
 };

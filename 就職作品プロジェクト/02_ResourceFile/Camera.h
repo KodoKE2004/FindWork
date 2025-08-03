@@ -44,13 +44,13 @@ private:
 	float m_FarPlane  = 1000.0f;	// ファークリップ
 	float m_Speed     = 1.0f;		// カメラの移動速度
 
-	float m_DollySpeed = 0.0f;
-	float m_TrackX = 0.0f;
-	float m_TrackY = 0.0f;
-	float m_PanYaw = 0.0f;
-	float m_PanPitch = 0.0f;
-	float m_Roll = 0.0f;
-	float m_Zoom = 0.0f;
+	float m_DollySpeed = 20.0f;
+	float m_TrackX = 1.0f;
+	float m_TrackY = 1.0f;
+	float m_PanYaw   = 0.05f;
+	float m_PanPitch = 0.05f;
+	float m_Roll = 1.0f;
+	float m_Zoom = 1.0f;
 public:
 
 	//===========================================
@@ -76,6 +76,7 @@ public:
 
 #ifdef _DEBUG
 	void DebugCameraUI();
+	void DebugCameraParamUI();
 #endif // _DEBUG
 
 };

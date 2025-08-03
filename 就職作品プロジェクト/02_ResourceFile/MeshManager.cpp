@@ -11,6 +11,11 @@ MeshManager::MeshManager()
 	AddMeshModel("NULL","spot.fbx","spot");
 }
 
+void MeshManager::Clear()
+{
+	m_MeshInfo.clear();
+}
+
 void MeshManager::AddMeshModel(std::string modelName, std::string modelPath, std::string texDirectory)
 {
 	auto meshModel = std::make_shared<MeshModel>();

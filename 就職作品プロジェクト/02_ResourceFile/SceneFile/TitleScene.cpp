@@ -8,7 +8,7 @@ void TitleScene::Initialize()
 {
 	//Cube* pt = Game::GetInstance().AddObject<Cube>();
 	//m_MySceneObjects.emplace_back(pt);
-
+	Debug::Log("åªç›ÇÃÉVÅ[Éì : TitleScene");
 	Model* pt2 = Game::GetInstance().AddObject<Model>();
 	pt2->GetMeshModel("Pokemon");
 	pt2->SetPos   ( 0.0f, 0.0f, 0.0f);

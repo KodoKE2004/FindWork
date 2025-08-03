@@ -19,7 +19,10 @@ void Camera::Initialize()
 
 #ifdef _DEBUG
 	DebugUI::RedistDebugFunction([this]() {
-	DebugCameraUI();
+		DebugCameraUI();
+	});
+	DebugUI::RedistDebugFunction([this]() {
+		DebugCameraParamUI();
 	});
 #endif //DEBUG
 
@@ -95,6 +98,8 @@ void Camera::SetCamera(CAMERA_MODE mode)
 	}
 
 	//2D
+	// ビルボードのような
+	// 平面に張り付かせる
 	else if (mode == CAMERA_2D)
 	{
 		//ビュー変換行列
@@ -167,23 +172,65 @@ void Camera::DebugCameraUI()
 	// マウスドラッグでPan（右クリック押しながら）
 	if (ImGui::IsMouseDown(ImGuiMouseButton_Right) && ImGui::IsMouseDragging(ImGuiMouseButton_Right)) {
 		ImVec2 delta = io.MouseDelta;
-		this->Pan(delta.x * 0.1f, delta.y * - 0.1f);  // スケーリングは調整して
+		this->Pan(delta.x * m_PanPitch, delta.y * - m_PanYaw);  // スケーリングは調整して
 	}
 
 	// マウススクロール（Ctrlなし → Dolly、Ctrlあり → Zoom）
 	if (io.MouseWheel != 0.0f) {
 		if (io.KeyCtrl) {
-			this->Zoom(io.MouseWheel * - 5.0f);
+			this->Zoom(io.MouseWheel * - m_Zoom);
 		}
 		else {
-			this->Dolly(io.MouseWheel * 5.0f);
+			this->Dolly(io.MouseWheel * m_DollySpeed);
 		}
 	}
 
 	// ミドルボタン（スクロールボタン）ドラッグでTrack
 	if (ImGui::IsMouseDown(ImGuiMouseButton_Middle) && ImGui::IsMouseDragging(ImGuiMouseButton_Middle)) {
 		ImVec2 delta = io.MouseDelta;
-		this->Track(delta.x * 0.1f, delta.y * 0.1f);  // X = 横, Y = 上下
+		this->Track(delta.x * m_TrackX, delta.y * m_TrackY);  // X = 横, Y = 上下
 	}
 
+}
+
+void Camera::DebugCameraParamUI()
+{
+	if (ImGui::Begin("Camera Parameters"))
+	{
+		// 位置（XYZ）
+		ImGui::Text("Position");
+		ImGui::DragFloat3("##Pos", &m_Position.x, 0.1f);
+
+		// 回転（XYZ）※度数で表示
+		ImGui::Text("Rotation (Degrees)");
+		ImGui::DragFloat3("##Rot", &m_Rotation.x, 0.5f);
+
+		// FOV（視野角）
+		ImGui::SliderFloat("FOV", &m_Fov, 10.0f, 90.0f);
+
+		// ニア・ファークリップ
+		ImGui::DragFloat("Near Plane", &m_NearPlane, 0.01f, 0.01f, 10.0f);
+		ImGui::DragFloat("Far Plane", &m_FarPlane, 1.0f, 10.0f, 10000.0f);
+
+		// スピード（オプション）
+		ImGui::DragFloat("Speed", &m_Speed, 0.1f, 0.1f, 100.0f);
+
+		// その他パラメータ（DollyやZoom調整用など）
+		ImGui::Separator();
+		ImGui::Text("Adjustment Values");
+		ImGui::DragFloat("Dolly Speed", &m_DollySpeed, 0.1f);
+		ImGui::DragFloat("Track X", &m_TrackX, 0.1f);
+		ImGui::DragFloat("Track Y", &m_TrackY, 0.1f);
+		ImGui::DragFloat("Pan Yaw", &m_PanYaw, 0.001f);
+		ImGui::DragFloat("Pan Pitch", &m_PanPitch, 0.001f);
+		ImGui::DragFloat("Roll", &m_Roll, 0.1f);
+		ImGui::DragFloat("Zoom", &m_Zoom, 0.1f);
+
+		// カメラの再セット（リアルタイム反映用）
+		if (ImGui::Button("Apply Parameters"))
+		{
+			SetCamera(m_Mode); // 現在のモードで再設定（ビュー・プロジェクション更新）
+		}
+	}
+	ImGui::End();
 }

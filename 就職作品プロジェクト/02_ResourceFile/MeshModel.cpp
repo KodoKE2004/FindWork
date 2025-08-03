@@ -37,7 +37,7 @@ bool MeshModel::Load(const std::string& modelFile, const std::string& texDirecto
         {
             std::filesystem::path file = std::filesystem::path(path.C_Str()).filename();
             std::filesystem::path texPath = std::filesystem::path(texDirectory) / file;  
-            m_Textures[m] = std::make_unique<Texture>();
+            m_Textures[m] = std::make_shared<Texture>();
             m_Textures[m]->LoadFromFile(texPath.string());
             m_Materials[m].TextureEnable = TRUE;
         }
