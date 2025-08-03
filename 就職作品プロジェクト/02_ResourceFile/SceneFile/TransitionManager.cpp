@@ -2,10 +2,16 @@
 
 void TransitionManager::Update()
 {
-	if (m_Finished) return;
+
+	switch (m_Behevior)
+	{
+	case OFF:						  return;
+	case FINISH:	m_Behevior = OFF; return;
+	}
+
 	m_Timer += 0.016f; // ‚±‚±‚Å‚Í‰¼‚É1ƒtƒŒ[ƒ€‚ð16ms‚Æ‚·‚é
 	if (m_Timer >= m_Duration) {
-		m_Finished = true;
+		m_Behevior = FINISH;
 	}
 }
 
@@ -14,7 +20,12 @@ void TransitionManager::DrawOverlay()
 	
 }
 
-bool TransitionManager::IsFinished()
+void TransitionManager::SetTransition(SWITCH setSwitch)
 {
-	return m_Finished;
+	m_Behevior = setSwitch;
+}
+
+SWITCH TransitionManager::IsFinished()
+{
+	return m_Behevior;
 }
