@@ -39,10 +39,13 @@ void Game::Initialize()
 
 void Game::Update()
 {	
-	// 現在のシーンの更新
+	// 遷移演出の更新　OFFの時は動かない
 	SceneTrans::Update();
 
-	m_pInstance->m_SceneCurrent->Update();
+	if (SceneTrans::IsTransition() == SWITCH::OFF) {
+		// 現在のシーンの更新
+		m_pInstance->m_SceneCurrent->Update();
+	}
 	// カメラの更新
 	m_pInstance->m_Camera->Update(); 
 	// 入力の更新

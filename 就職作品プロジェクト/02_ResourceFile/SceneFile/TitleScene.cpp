@@ -23,7 +23,6 @@ void TitleScene::Initialize()
 
 void TitleScene::Update()
 {
-	if(SceneTrans::IsTransition() != OFF){ return; }
 
 
 
