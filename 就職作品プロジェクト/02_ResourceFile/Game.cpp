@@ -82,7 +82,6 @@ void Game::Finalize()
 void Game::SetSceneCurrent(Scene* newScene)
 {
 	if (m_pInstance->m_SceneCurrent != nullptr) {
-		m_pInstance->m_SceneCurrent->Finalize();
 		delete m_pInstance->m_SceneCurrent; // Œ»İ‚ÌƒV[ƒ“‚ğI—¹
 	}
 

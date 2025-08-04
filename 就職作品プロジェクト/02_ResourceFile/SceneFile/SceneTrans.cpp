@@ -15,7 +15,7 @@ void SceneTrans::Initialize(TRANS_MODE mode)
 {
 	m_Timer = 0.0f;
 	m_TransMode = mode;
-	m_Texture = new Texture2D(Game::GetInstance().GetCamera().get());
+	m_Texture = new Texture2D(Game::GetInstance().GetCamera());
 	m_Texture->Initialize();
 	m_Texture->SetTexture("01_AssetFile/Texture/Plane.png");
 }
@@ -35,7 +35,7 @@ void SceneTrans::Update()
 		}
 		else if (IsTransition() == DOING)
 		{
-			if (!m_isChange) 
+			if (m_isChange) 
 			{
 				FadeIN();
 			}
@@ -54,7 +54,7 @@ void SceneTrans::Update()
 	}
 	if (IsTransition() == FINISH)
 	{
-		m_isTransition = OFF;
+		SetTransition(OFF);
 		Game::SetSceneCurrent(m_NextScene);
 	}
 
@@ -62,7 +62,7 @@ void SceneTrans::Update()
 
 void SceneTrans::Draw()
 {
-	if (m_isTransition == OFF)  { return; }
+	if (IsTransition() == OFF) { return; }
 	m_Texture->Draw();
 
 }

@@ -56,16 +56,16 @@ public:
 	// Œ»İ‚ÌƒV[ƒ“‚ğæ“¾
 	Scene* GetCurrentScene() const; 
 
-	std::unique_ptr<Camera> GetCamera() {
-		return std::move(m_Camera);
+	Camera* GetCamera() {
+		return m_Camera.get();
 	}
 	
 	std::shared_ptr<MeshManager> GetMeshManager() {
 		return m_GameMeshes;
 	}
 
-	std::unique_ptr<SceneTrans> GetSceneTrans()	{
-		return std::move(m_SceneTrans);
+	SceneTrans* GetSceneTrans()	{
+		return m_SceneTrans.get();
 	}
 	
 	//================================
