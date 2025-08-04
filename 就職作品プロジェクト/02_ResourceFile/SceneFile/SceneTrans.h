@@ -52,7 +52,7 @@ private:
 	static bool			m_isChange;			// 切り替えOK？
 	static SWITCH		m_isTransition;		// 遷移が完了したかどうか
 	static TRANS_MODE	m_TransMode;		// 遷移の仕方
-	static Texture2D	m_Texture;
+	static Texture2D*	m_Texture;
 
 	// 演出の値管理
 	static float m_Alpha;

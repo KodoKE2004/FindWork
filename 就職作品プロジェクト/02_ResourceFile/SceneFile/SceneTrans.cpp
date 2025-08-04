@@ -19,7 +19,8 @@ float		SceneTrans::m_Timer			= 0.0f	 ;	// タイマー
 float		SceneTrans::m_Duration		= 1.0f	 ;	// 遷移時間
 SWITCH		SceneTrans::m_isTransition  = OFF	 ;	// 遷移処理が完了したかどうか
 TRANS_MODE	SceneTrans::m_TransMode		= FADE	 ;	// 遷移のパターン
-Texture2D	SceneTrans::m_Texture(Game::GetInstance().GetCamera().get());
+
+Texture2D*	SceneTrans::m_Texture;
 
 // シーン遷移演出の値を表す変数
 float SceneTrans::m_Alpha = 0.0f;
@@ -77,8 +78,9 @@ void SceneTrans::Initialize(TRANS_MODE mode)
 {
 	m_Timer = 0.0f;
 	m_TransMode = mode;
-	m_Texture.Initialize();
-	m_Texture.SetTexture("01_AssetFile/Texture/Plane.png");
+	m_Texture = new Texture2D(Game::GetInstance().GetCamera().get());
+	m_Texture->Initialize();
+	m_Texture->SetTexture("01_AssetFile/Texture/Plane.png");
 }
 
 void SceneTrans::Update()
@@ -104,7 +106,7 @@ void SceneTrans::Update()
 			{
 				TRANS::FADE_OUT();
 			}
-			m_Texture.SetColor(0.0f,0.0f,0.0f,m_Alpha);
+			m_Texture->SetColor(0.0f,0.0f,0.0f,m_Alpha);
 		}
 		
 		
@@ -124,7 +126,7 @@ void SceneTrans::Update()
 void SceneTrans::Draw()
 {
 	if (m_isTransition == OFF)  { return; }
-	m_Texture.Draw();
+	m_Texture->Draw();
 
 }
 void SceneTrans::SetAlpha(float alpha)
