@@ -5,6 +5,7 @@
 
 #include <memory>
 #include "SceneFile/Scene.h"
+#include "SceneFile/SceneTrans.h"
 
 #include "ObjectFile/Object.h"
 
@@ -20,7 +21,7 @@ private:
 	std::unique_ptr<Camera>		  m_Camera;			// カメラ
 	std::vector<std::unique_ptr<Object>> m_Objects; // オブジェクト
 	std::shared_ptr<MeshManager>  m_GameMeshes;		// シーンで扱うメッシュ
-
+	std::unique_ptr<SceneTrans>	  m_SceneTrans;
 	bool isTransition = false;
 public:
 	//================================
@@ -61,6 +62,10 @@ public:
 		return m_GameMeshes;
 	}
 
+	std::unique_ptr<SceneTrans> GetSceneTrans()	{
+		return std::move(m_SceneTrans);
+	}
+	
 	//================================
 	// オブジェクト管理
 	//================================

@@ -2,7 +2,6 @@
 #include "Debug.hpp"
 #endif 
 
-#include "SceneFile/SceneTrans.h"
 #include "Game.h"
 #include "Renderer.h"
 #include "Application.h"
@@ -14,7 +13,9 @@ std::unique_ptr<Game>				Game::m_pInstance  = nullptr; // ゲームのインスタンス初
 
 Game::Game()
 {
-	m_Input		 = std::make_unique<Input>(); //入力処理を作成
+	m_Input		 = std::make_unique<Input>();		//入力処理を作成
+	m_Camera	 = std::make_unique<Camera>();		// カメラ作成
+	m_SceneTrans = std::make_unique<SceneTrans>();	// 遷移演出作成
 
 	m_SceneCurrent = nullptr; // 現在のシーンを初期化
 }
@@ -25,10 +26,13 @@ void Game::Initialize()
 	//		シーンをタイトルシーンに設定
 	Renderer::Initialize();							// レンダラーの初期化
 	DebugUI::Init(Renderer::GetDevice(), Renderer::GetDeviceContext()); 			// デバッグUIの初期化
-
 	m_pInstance->m_Camera = std::make_unique<Camera>();							// カメラを作成
 	m_pInstance->m_Camera->Initialize();										// カメラの初期化
+	
+	m_pInstance->m_SceneTrans->Initialize(FADE);
+
 	m_pInstance->m_GameMeshes = std::make_shared<MeshManager>();
+	
 	m_pInstance->m_GameMeshes->AddMeshModel("RedMan", "Akai.fbx", "Akai");
 	m_pInstance->m_GameMeshes->AddMeshModel("Pokemon", "Porygon.fbx","Porygon");
 	m_pInstance->m_GameMeshes->AddMeshModel("aaa", "plane.fbx","plane");
@@ -40,9 +44,9 @@ void Game::Initialize()
 void Game::Update()
 {	
 	// 遷移演出の更新　OFFの時は動かない
-	SceneTrans::Update();
+	m_pInstance->m_SceneTrans->Update();
 
-	if (SceneTrans::IsTransition() == SWITCH::OFF) {
+	if (m_pInstance->m_SceneTrans->IsTransition() == SWITCH::OFF) {
 		// 現在のシーンの更新
 		m_pInstance->m_SceneCurrent->Update();
 	}
@@ -67,7 +71,7 @@ void Game::Draw()
 	{
 		o->Draw();
 	}
-	SceneTrans::Draw();
+	m_pInstance->m_SceneTrans->Draw();
 	DebugUI::Render();			// デバッグUIの描画
 	Renderer::Finish();			// 描画の終了
 }

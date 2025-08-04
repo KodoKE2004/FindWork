@@ -26,8 +26,8 @@ void TitleScene::Update()
 
 
 	if (Input::GetKeyTrigger(VK_RETURN))
-	{
-		SceneTrans::StartTransition(FADE,new SelectScene,2.0f);
+	{	
+		Game::GetInstance().GetSceneTrans()->StartTransition(FADE,new SelectScene,2.0f);
 	}
 
 

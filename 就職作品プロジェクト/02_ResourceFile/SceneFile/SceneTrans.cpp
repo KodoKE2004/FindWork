@@ -11,69 +11,6 @@
 
 using namespace DirectX::SimpleMath;
 
-
-// シーン遷移の状態を表す変数
-Scene*		SceneTrans::m_NextScene		= nullptr;	// 次のシーン
-bool		SceneTrans::m_isChange		= false  ;	//
-float		SceneTrans::m_Timer			= 0.0f	 ;	// タイマー
-float		SceneTrans::m_Duration		= 1.0f	 ;	// 遷移時間
-SWITCH		SceneTrans::m_isTransition  = OFF	 ;	// 遷移処理が完了したかどうか
-TRANS_MODE	SceneTrans::m_TransMode		= FADE	 ;	// 遷移のパターン
-
-Texture2D*	SceneTrans::m_Texture;
-
-// シーン遷移演出の値を表す変数
-float SceneTrans::m_Alpha = 0.0f;
-float SceneTrans::m_Delta = 0.0f;
-
-
-namespace TRANS
-{
-	float m_Timer;
-	float m_Duration;
-	float m_Alpha = 0.0f;
-	std::vector<VERTEX_3D> vertices(4);
-
-	// フェード処理初期化
-	void FADE_INIT(float duration)
-	{
-		m_Timer = 0.0f;
-		m_Duration = duration;
-		m_Alpha = 0.0f;
-		SceneTrans::SetAlpha(m_Alpha);
-	}
-
-	// フェードイン処理
-	void FADE_IN()
-	{
-		m_Timer += Application::GetDeltaTime();
-		float alpha = std::clamp(m_Timer / m_Duration, 0.0f, 1.0f);
-
-		SceneTrans::SetAlpha(alpha);
-
-		if (SceneTrans::GetAlpha() >= 1.0f)
-		{
-			SceneTrans::SetAlpha(1.0f);
-			SceneTrans::SetChange(true);
-			m_Timer = 0.0f;
-		}
-	}
-
-	// フェードアウト処理
-	void FADE_OUT()
-	{
-		m_Timer += Application::GetDeltaTime();
-		float alpha = std::clamp(1.0f - (m_Timer / m_Duration), 0.0f, 1.0f);
-		SceneTrans::SetAlpha(alpha);
-
-		if (SceneTrans::GetAlpha() <= 0.0f)
-		{
-			SceneTrans::SetAlpha(0.0f);
-			SceneTrans::SetTransition(FINISH);
-		}
-	}
-}
-
 void SceneTrans::Initialize(TRANS_MODE mode)
 {
 	m_Timer = 0.0f;
@@ -94,17 +31,17 @@ void SceneTrans::Update()
 	{
 		if (IsTransition() == START)
 		{
-			TRANS::FADE_INIT(m_Duration);
+			FadeInit();
 		}
 		else if (IsTransition() == DOING)
 		{
 			if (!m_isChange) 
 			{
-				TRANS::FADE_IN();
+				FadeIN();
 			}
 			else
 			{
-				TRANS::FADE_OUT();
+				FadeOUT();
 			}
 			m_Texture->SetColor(0.0f,0.0f,0.0f,m_Alpha);
 		}
@@ -115,7 +52,7 @@ void SceneTrans::Update()
 
 
 	}
-	if (m_TransMode == FINISH)
+	if (IsTransition() == FINISH)
 	{
 		m_isTransition = OFF;
 		Game::SetSceneCurrent(m_NextScene);
@@ -153,6 +90,38 @@ void SceneTrans::StartTransition(TRANS_MODE mode, Scene* nextScene, float durati
 	m_NextScene = nextScene;
 	m_Duration = duration;
 	m_Timer = 0.0f;
+	m_isChange = false;
 	m_isTransition = START;
+}
+
+void SceneTrans::FadeInit()
+{
+	m_Alpha = 0.0f;
+	m_isTransition = DOING;
+}
+
+void SceneTrans::FadeIN()
+{
+	m_Timer += Application::GetDeltaTime();
+	m_Alpha = std::clamp(m_Timer / m_Duration, 0.0f, 1.0f);
+
+	if (m_Alpha >= 1.0f)
+	{
+		m_Alpha = 1.0f;
+		m_isChange = true;
+		m_Timer = 0.0f;
+	}
+}
+
+void SceneTrans::FadeOUT()
+{
+	m_Timer += Application::GetDeltaTime();
+	m_Alpha = std::clamp(1.0f - (m_Timer / m_Duration), 0.0f, 1.0f);
+
+	if (m_Alpha <= 0.0f)
+	{
+		m_Alpha = 0.0f;
+		m_isTransition = FINISH;
+	}
 }
 
