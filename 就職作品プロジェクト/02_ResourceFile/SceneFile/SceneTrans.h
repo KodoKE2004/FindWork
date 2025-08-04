@@ -55,6 +55,11 @@ private:
 	static SWITCH		m_isTransition;		// ‘JˆÚ‚ªŠ®—¹‚µ‚½‚©‚Ç‚¤‚©
 	static TRANS_MODE	m_TransMode;		// ‘JˆÚ‚Ìd•û
 
+	static VertexBuffer<VERTEX_3D> s_Vertex;
+	static IndexBuffer  s_Index;
+	static Shader       s_Shader;
+	static std::unique_ptr<Material> s_Material;
+
 	// ‰‰o‚Ì’lŠÇ—
 	static float m_Alpha;
 	static float m_Delta;

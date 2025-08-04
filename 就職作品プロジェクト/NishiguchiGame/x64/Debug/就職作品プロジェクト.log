@@ -1,50 +1,69 @@
 ﻿  Application.cpp
   Camera.cpp
   DebugUI.cpp
-  Game.cpp
+  Dx11helper.cpp
+  input.cpp
   main.cpp
+  MeshManager.cpp
+  Cube.cpp
+  Model.cpp
+  Object.cpp
   Renderer.cpp
   GameScene.cpp
   SelectScene.cpp
   TitleScene.cpp
   SceneTrans.cpp
-C:\Users\kodokeの世界\Desktop\HAL\VisualSutdio\就職作品\個人製作\FindWork\就職作品プロジェクト\02_ResourceFile\SceneFile\SceneTrans.cpp(16,15): error C2641: 'VertexBuffer' のテンプレート引数を推測できません
-C:\Users\kodokeの世界\Desktop\HAL\VisualSutdio\就職作品\個人製作\FindWork\就職作品プロジェクト\02_ResourceFile\SceneFile\SceneTrans.cpp(16,15): error C2783: 'VertexBuffer<T> VertexBuffer(void)': 'T' の テンプレート 引数を推測できませんでした
-      C:\Users\kodokeの世界\Desktop\HAL\VisualSutdio\就職作品\個人製作\FindWork\就職作品プロジェクト\02_ResourceFile\VertexBuffer.h(15,2):
+C:\Users\dorae\OneDrive\デスクトップ\FindWork\就職作品プロジェクト\02_ResourceFile\SceneFile\SceneTrans.cpp(16,15): error C2641: 'VertexBuffer' のテンプレート引数を推測できません
+C:\Users\dorae\OneDrive\デスクトップ\FindWork\就職作品プロジェクト\02_ResourceFile\SceneFile\SceneTrans.cpp(16,15): error C2783: 'VertexBuffer<T> VertexBuffer(void)': 'T' の テンプレート 引数を推測できませんでした
+      C:\Users\dorae\OneDrive\デスクトップ\FindWork\就職作品プロジェクト\02_ResourceFile\VertexBuffer.h(15,2):
       'VertexBuffer' の宣言を確認してください
   
-C:\Users\kodokeの世界\Desktop\HAL\VisualSutdio\就職作品\個人製作\FindWork\就職作品プロジェクト\02_ResourceFile\SceneFile\SceneTrans.cpp(16,15): error C2780: 'VertexBuffer<T> VertexBuffer(VertexBuffer<T>)': 1 引数が必要です - 0 が指定されました
-      C:\Users\kodokeの世界\Desktop\HAL\VisualSutdio\就職作品\個人製作\FindWork\就職作品プロジェクト\02_ResourceFile\VertexBuffer.h(10,7):
+C:\Users\dorae\OneDrive\デスクトップ\FindWork\就職作品プロジェクト\02_ResourceFile\SceneFile\SceneTrans.cpp(16,15): error C2780: 'VertexBuffer<T> VertexBuffer(VertexBuffer<T>)': 1 引数が必要です - 0 が指定されました
+      C:\Users\dorae\OneDrive\デスクトップ\FindWork\就職作品プロジェクト\02_ResourceFile\VertexBuffer.h(10,7):
       'VertexBuffer' の宣言を確認してください
   
-C:\Users\kodokeの世界\Desktop\HAL\VisualSutdio\就職作品\個人製作\FindWork\就職作品プロジェクト\02_ResourceFile\SceneFile\SceneTrans.cpp(95,11): error C2662: 'void VertexBuffer<T>::Create(const std::vector<T,std::allocator<_Ty>> &)': 'VertexBuffer' から 'VertexBuffer<T> &' へ 'this' ポインターを変換できません。
-      C:\Users\kodokeの世界\Desktop\HAL\VisualSutdio\就職作品\個人製作\FindWork\就職作品プロジェクト\02_ResourceFile\SceneFile\SceneTrans.cpp(95,2):
+C:\Users\dorae\OneDrive\デスクトップ\FindWork\就職作品プロジェクト\02_ResourceFile\SceneFile\SceneTrans.cpp(95,11): error C2662: 'void VertexBuffer<T>::Create(const std::vector<T,std::allocator<_Ty>> &)': 'VertexBuffer' から 'VertexBuffer<T> &' へ 'this' ポインターを変換できません。
+      C:\Users\dorae\OneDrive\デスクトップ\FindWork\就職作品プロジェクト\02_ResourceFile\SceneFile\SceneTrans.cpp(95,2):
       理由: 'VertexBuffer' から 'VertexBuffer<T>' へは変換できません。
-      C:\Users\kodokeの世界\Desktop\HAL\VisualSutdio\就職作品\個人製作\FindWork\就職作品プロジェクト\02_ResourceFile\SceneFile\SceneTrans.cpp(95,2):
+      C:\Users\dorae\OneDrive\デスクトップ\FindWork\就職作品プロジェクト\02_ResourceFile\SceneFile\SceneTrans.cpp(95,2):
       変換には 2 番目のユーザー定義変換演算子またはコンストラクターが必要です。
-      C:\Users\kodokeの世界\Desktop\HAL\VisualSutdio\就職作品\個人製作\FindWork\就職作品プロジェクト\02_ResourceFile\VertexBuffer.h(21,7):
+      C:\Users\dorae\OneDrive\デスクトップ\FindWork\就職作品プロジェクト\02_ResourceFile\VertexBuffer.h(21,7):
       'VertexBuffer<T>::Create' の宣言を確認してください
-      C:\Users\kodokeの世界\Desktop\HAL\VisualSutdio\就職作品\個人製作\FindWork\就職作品プロジェクト\02_ResourceFile\SceneFile\SceneTrans.cpp(95,11):
+      C:\Users\dorae\OneDrive\デスクトップ\FindWork\就職作品プロジェクト\02_ResourceFile\SceneFile\SceneTrans.cpp(95,11):
       引数リスト '(std::vector<VERTEX_3D,std::allocator<VERTEX_3D>>)' を一致させようとしているとき
   
-C:\Users\kodokeの世界\Desktop\HAL\VisualSutdio\就職作品\個人製作\FindWork\就職作品プロジェクト\02_ResourceFile\SceneFile\SceneTrans.cpp(175,11): error C2662: 'void VertexBuffer<T>::Create(const std::vector<T,std::allocator<_Ty>> &)': 'VertexBuffer' から 'VertexBuffer<T> &' へ 'this' ポインターを変換できません。
-      C:\Users\kodokeの世界\Desktop\HAL\VisualSutdio\就職作品\個人製作\FindWork\就職作品プロジェクト\02_ResourceFile\SceneFile\SceneTrans.cpp(175,2):
+C:\Users\dorae\OneDrive\デスクトップ\FindWork\就職作品プロジェクト\02_ResourceFile\SceneFile\SceneTrans.cpp(175,11): error C2662: 'void VertexBuffer<T>::Create(const std::vector<T,std::allocator<_Ty>> &)': 'VertexBuffer' から 'VertexBuffer<T> &' へ 'this' ポインターを変換できません。
+      C:\Users\dorae\OneDrive\デスクトップ\FindWork\就職作品プロジェクト\02_ResourceFile\SceneFile\SceneTrans.cpp(175,2):
       理由: 'VertexBuffer' から 'VertexBuffer<T>' へは変換できません。
-      C:\Users\kodokeの世界\Desktop\HAL\VisualSutdio\就職作品\個人製作\FindWork\就職作品プロジェクト\02_ResourceFile\SceneFile\SceneTrans.cpp(175,2):
+      C:\Users\dorae\OneDrive\デスクトップ\FindWork\就職作品プロジェクト\02_ResourceFile\SceneFile\SceneTrans.cpp(175,2):
       変換には 2 番目のユーザー定義変換演算子またはコンストラクターが必要です。
-      C:\Users\kodokeの世界\Desktop\HAL\VisualSutdio\就職作品\個人製作\FindWork\就職作品プロジェクト\02_ResourceFile\VertexBuffer.h(21,7):
+      C:\Users\dorae\OneDrive\デスクトップ\FindWork\就職作品プロジェクト\02_ResourceFile\VertexBuffer.h(21,7):
       'VertexBuffer<T>::Create' の宣言を確認してください
-      C:\Users\kodokeの世界\Desktop\HAL\VisualSutdio\就職作品\個人製作\FindWork\就職作品プロジェクト\02_ResourceFile\SceneFile\SceneTrans.cpp(175,11):
+      C:\Users\dorae\OneDrive\デスクトップ\FindWork\就職作品プロジェクト\02_ResourceFile\SceneFile\SceneTrans.cpp(175,11):
       引数リスト '(std::vector<VERTEX_3D,std::allocator<VERTEX_3D>>)' を一致させようとしているとき
   
-C:\Users\kodokeの世界\Desktop\HAL\VisualSutdio\就職作品\個人製作\FindWork\就職作品プロジェクト\02_ResourceFile\SceneFile\SceneTrans.cpp(200,11): error C2662: 'void VertexBuffer<T>::SetGPU(void)': 'VertexBuffer' から 'VertexBuffer<T> &' へ 'this' ポインターを変換できません。
-      C:\Users\kodokeの世界\Desktop\HAL\VisualSutdio\就職作品\個人製作\FindWork\就職作品プロジェクト\02_ResourceFile\SceneFile\SceneTrans.cpp(200,2):
+C:\Users\dorae\OneDrive\デスクトップ\FindWork\就職作品プロジェクト\02_ResourceFile\SceneFile\SceneTrans.cpp(200,11): error C2662: 'void VertexBuffer<T>::SetGPU(void)': 'VertexBuffer' から 'VertexBuffer<T> &' へ 'this' ポインターを変換できません。
+      C:\Users\dorae\OneDrive\デスクトップ\FindWork\就職作品プロジェクト\02_ResourceFile\SceneFile\SceneTrans.cpp(200,2):
       理由: 'VertexBuffer' から 'VertexBuffer<T>' へは変換できません。
-      C:\Users\kodokeの世界\Desktop\HAL\VisualSutdio\就職作品\個人製作\FindWork\就職作品プロジェクト\02_ResourceFile\SceneFile\SceneTrans.cpp(200,2):
+      C:\Users\dorae\OneDrive\デスクトップ\FindWork\就職作品プロジェクト\02_ResourceFile\SceneFile\SceneTrans.cpp(200,2):
       変換には 2 番目のユーザー定義変換演算子またはコンストラクターが必要です。
-      C:\Users\kodokeの世界\Desktop\HAL\VisualSutdio\就職作品\個人製作\FindWork\就職作品プロジェクト\02_ResourceFile\VertexBuffer.h(46,7):
+      C:\Users\dorae\OneDrive\デスクトップ\FindWork\就職作品プロジェクト\02_ResourceFile\VertexBuffer.h(46,7):
       'VertexBuffer<T>::SetGPU' の宣言を確認してください
-      C:\Users\kodokeの世界\Desktop\HAL\VisualSutdio\就職作品\個人製作\FindWork\就職作品プロジェクト\02_ResourceFile\SceneFile\SceneTrans.cpp(200,11):
+      C:\Users\dorae\OneDrive\デスクトップ\FindWork\就職作品プロジェクト\02_ResourceFile\SceneFile\SceneTrans.cpp(200,11):
       引数リスト '()' を一致させようとしているとき
   
+  Shader.cpp
+  TestPlane.cpp
+  Texture2D.cpp
+  Texture.cpp
+  Transform.cpp
+  コードを生成中...
+  コンパイル中...
+  imgui.cpp
+  imgui_demo.cpp
+  imgui_draw.cpp
+  imgui_impl_dx11.cpp
+  imgui_impl_win32.cpp
+  imgui_tables.cpp
+  imgui_widgets.cpp
   コードを生成中...
