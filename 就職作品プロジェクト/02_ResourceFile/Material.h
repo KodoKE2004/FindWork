@@ -39,11 +39,11 @@ public:
 			return false;
 		}
 
-		//m_Material.Ambient = mtrl.Ambient;
-		//m_Material.Diffuse = mtrl.Diffuse;
-		//m_Material.Specular = mtrl.Specular;
-		//m_Material.Emission = mtrl.Emission;
-		//m_Material.Shiness = mtrl.Shiness;
+		m_Material.Ambient = mtrl.Ambient;
+		m_Material.Diffuse = mtrl.Diffuse;
+		m_Material.Specular = mtrl.Specular;
+		m_Material.Emission = mtrl.Emission;
+		m_Material.Shiness = mtrl.Shiness;
 		m_Material.TextureEnable = mtrl.TextureEnable;
 
 		Update();

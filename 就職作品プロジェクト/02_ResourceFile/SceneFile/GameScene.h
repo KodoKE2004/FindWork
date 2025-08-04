@@ -21,6 +21,6 @@ public:
 	void Update()     override;
 
 	// ƒV[ƒ“‚ÌI—¹ˆ—
-	void Finalize();
+	void Finalize()   override;
 };
 

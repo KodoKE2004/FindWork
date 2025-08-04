@@ -61,7 +61,7 @@ void Texture2D::Initialize()
 	// マテリアル情報取得
 	m_Materiale = std::make_unique<Material>();
 	MATERIAL mtrl;
-	mtrl.Diffuse = Color(1, 1, 1, 1);
+	mtrl.Diffuse = Color(1.0f, 1.0f, 1.0f, 1.0f);
 	mtrl.Shiness = 1;
 	mtrl.TextureEnable = true; // テクスチャを使うか否かのフラグ
 	m_Materiale->Create(mtrl);

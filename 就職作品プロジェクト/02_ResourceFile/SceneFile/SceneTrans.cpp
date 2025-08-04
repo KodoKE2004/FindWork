@@ -11,13 +11,6 @@
 
 using namespace DirectX::SimpleMath;
 
-namespace {
-	bool s_IsInit = false;
-	VertexBuffer s_Vertex;
-	IndexBuffer  s_Index;
-	Shader       s_Shader;
-	std::unique_ptr<Material> s_Material;
-}
 
 // シーン遷移の状態を表す変数
 Scene*		SceneTrans::m_NextScene		= nullptr;	// 次のシーン
@@ -26,10 +19,12 @@ float		SceneTrans::m_Timer			= 0.0f	 ;	// タイマー
 float		SceneTrans::m_Duration		= 1.0f	 ;	// 遷移時間
 SWITCH		SceneTrans::m_isTransition  = OFF	 ;	// 遷移処理が完了したかどうか
 TRANS_MODE	SceneTrans::m_TransMode		= FADE	 ;	// 遷移のパターン
+Texture2D	SceneTrans::m_Texture(Game::GetInstance().GetCamera().get());
 
 // シーン遷移演出の値を表す変数
 float SceneTrans::m_Alpha = 0.0f;
 float SceneTrans::m_Delta = 0.0f;
+
 
 namespace TRANS
 {
@@ -78,46 +73,12 @@ namespace TRANS
 	}
 }
 
-static void CreateResources()
-{
-	if (s_IsInit) return;
-
-	std::vector<VERTEX_3D> vertices(4);
-	vertices[0].position = NVector3(-0.5f, 0.5f, 0.0f);
-	vertices[1].position = NVector3(0.5f, 0.5f, 0.0f);
-	vertices[2].position = NVector3(-0.5f, -0.5f, 0.0f);
-	vertices[3].position = NVector3(0.5f, -0.5f, 0.0f);
-	vertices[0].color = vertices[1].color = vertices[2].color = vertices[3].color = Color(1, 1, 1, 1);
-	vertices[0].uv = Vector2(0, 0);
-	vertices[1].uv = Vector2(1, 0);
-	vertices[2].uv = Vector2(0, 1);
-	vertices[3].uv = Vector2(1, 1);
-	s_Vertex.Create(vertices);
-
-	std::vector<unsigned int> indices = { 0,1,2,3 };
-	s_Index.Create(indices);
-
-	s_Shader.Create("02_ResourceFile/ShaderFile/VS_Default.hlsl",
-					"02_ResourceFile/ShaderFile/PS_Default.hlsl");
-
-	MATERIAL mtrl{};
-	mtrl.Diffuse = Color(0, 0, 0, 1);
-	mtrl.Ambient = Color(0, 0, 0, 1);
-	mtrl.Specular = Color(0, 0, 0, 1);
-	mtrl.Emission = Color(0, 0, 0, 1);
-	mtrl.Shiness = 1.0f;
-	mtrl.TextureEnable = FALSE;
-	s_Material = std::make_unique<Material>();
-	s_Material->Create(mtrl);
-
-	s_IsInit = true;
-}
-
-
 void SceneTrans::Initialize(TRANS_MODE mode)
 {
 	m_Timer = 0.0f;
-
+	m_TransMode = mode;
+	m_Texture.Initialize();
+	m_Texture.SetTexture("01_AssetFile/Texture/Plane.png");
 }
 
 void SceneTrans::Update()
@@ -143,66 +104,27 @@ void SceneTrans::Update()
 			{
 				TRANS::FADE_OUT();
 			}
+			m_Texture.SetColor(0.0f,0.0f,0.0f,m_Alpha);
 		}
+		
 		
 	}
 	break;
 
 
 	}
-
-	if (IsTransition() == FINISH)
+	if (m_TransMode == FINISH)
 	{
+		m_isTransition = OFF;
 		Game::SetSceneCurrent(m_NextScene);
 	}
+
 }
 
 void SceneTrans::Draw()
 {
 	if (m_isTransition == OFF)  { return; }
-
-	// 描画命令
-	std::vector<VERTEX_3D> vertices(4);
-	vertices[0].position = NVector3(-0.5f, 0.5f, 0.0f);
-	vertices[1].position = NVector3(0.5f, 0.5f, 0.0f);
-	vertices[2].position = NVector3(-0.5f, -0.5f, 0.0f);
-	vertices[3].position = NVector3(0.5f, -0.5f, 0.0f);
-	vertices[0].color = vertices[1].color = vertices[2].color = vertices[3].color = Color(1, 1, 1, 1);
-	vertices[0].uv = Vector2(0, 0);
-	vertices[1].uv = Vector2(1, 0);
-	vertices[2].uv = Vector2(0, 1);
-	vertices[3].uv = Vector2(1, 1);
-	s_Vertex.Create(vertices);
-
-	std::vector<unsigned int> indices = { 0,1,2,3 };
-	s_Index.Create(indices);
-
-	s_Shader.Create("02_ResourceFile/ShaderFile/VS_Default.hlsl",
-					"02_ResourceFile/ShaderFile/PS_Default.hlsl");
-
-	MATERIAL mtrl{};
-	mtrl.Diffuse  = Color(0, 0, 0, m_Alpha);
-	mtrl.Ambient  = Color(0, 0, 0, m_Alpha);
-	mtrl.Specular = Color(0, 0, 0, m_Alpha);
-	mtrl.Emission = Color(0, 0, 0, m_Alpha);
-	mtrl.Shiness  = 1.0f;
-	mtrl.TextureEnable = FALSE;
-	s_Material->SetMaterial(mtrl);
-
-	Matrix s = Matrix::CreateScale((float)Application::GetWidth(), (float)Application::GetHeight(), 1.0f);
-	Matrix t = Matrix::CreateTranslation((float)Application::GetWidth() * 0.5f, (float)Application::GetHeight() * 0.5f, 0.0f);
-	Matrix world = s * t;
-	Renderer::SetWorldMatrix(&world);
-
-	ID3D11DeviceContext* dc = Renderer::GetDeviceContext();
-	dc->IASetPrimitiveTopology(D3D11_PRIMITIVE_TOPOLOGY_TRIANGLESTRIP);
-	s_Shader.SetGPU();
-	s_Vertex.SetGPU();
-	s_Index.SetGPU();
-	s_Material->SetGPU();
-	Renderer::SetUV(0.0f, 0.0f, 1.0f, 1.0f);
-	dc->DrawIndexed(4, 0, 0);
-
+	m_Texture.Draw();
 
 }
 void SceneTrans::SetAlpha(float alpha)
@@ -221,5 +143,14 @@ void SceneTrans::SetTransition(SWITCH setSwitch)
 SWITCH SceneTrans::IsTransition()
 {
 	return m_isTransition;
+}
+
+void SceneTrans::StartTransition(TRANS_MODE mode, Scene* nextScene, float duration)
+{
+	m_TransMode = mode;
+	m_NextScene = nextScene;
+	m_Duration = duration;
+	m_Timer = 0.0f;
+	m_isTransition = START;
 }
 

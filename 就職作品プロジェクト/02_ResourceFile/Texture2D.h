@@ -24,7 +24,6 @@ private:
 	float m_NumV = 1;
 	float m_SplitX = 1;
 	float m_SplitY = 1;
-
 public:
 
 	Texture2D(Camera* cam); // コンストラクタ
@@ -40,5 +39,6 @@ public:
 
 	// UV座標を指定
 	void SetUV(const float& nu, const float& nv, const float& sx, const float& sy);
+
 };
 

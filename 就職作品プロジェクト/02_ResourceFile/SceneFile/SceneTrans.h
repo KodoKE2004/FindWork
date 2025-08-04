@@ -4,10 +4,7 @@
 #include "Scene.h"
 #include "../Renderer.h"
 #include "../Application.h"
-#include "../Shader.h"
-#include "../VertexBuffer.h"
-#include "../IndexBuffer.h"
-#include "../Material.h"
+#include "../Texture2D.h"
 #include "../Game.h"
 #include <vector>
 
@@ -40,12 +37,13 @@ public:
 	static void Update();
 	// ‰æ–Ê‘JˆÚ‚Ì•`‰æ
 	static void Draw();
-
 	static void   SetAlpha(float alpha);
 	static void   SetChange(bool isChange);
 	static float  GetAlpha(){ return m_Alpha; }
 	static void	  SetTransition(SWITCH setSwitch);
 	static SWITCH IsTransition();
+
+	static void StartTransition(TRANS_MODE mode, Scene* nextScene, float duration);
 
 private:
 	static Scene*		m_NextScene;		// Ÿ‚ÌƒV[ƒ“
@@ -54,15 +52,12 @@ private:
 	static bool			m_isChange;			// Ø‚è‘Ö‚¦OKH
 	static SWITCH		m_isTransition;		// ‘JˆÚ‚ªŠ®—¹‚µ‚½‚©‚Ç‚¤‚©
 	static TRANS_MODE	m_TransMode;		// ‘JˆÚ‚Ìd•û
-
-	static VertexBuffer<VERTEX_3D> s_Vertex;
-	static IndexBuffer  s_Index;
-	static Shader       s_Shader;
-	static std::unique_ptr<Material> s_Material;
+	static Texture2D	m_Texture;
 
 	// ‰‰o‚Ì’lŠÇ—
 	static float m_Alpha;
 	static float m_Delta;
+
 
 };
 
