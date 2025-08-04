@@ -13,9 +13,9 @@ std::unique_ptr<Game> Game::m_pInstance  = nullptr; // ƒQ[ƒ€‚ÌƒCƒ“ƒXƒ^ƒ“ƒX‰Šú‰
 
 Game::Game()
 {
-	m_pInstance->m_Input	  = std::make_unique<Input>();
-	m_pInstance->m_Camera	  = std::make_unique<Camera>();		// ƒJƒƒ‰ì¬
-	m_pInstance->m_SceneTrans = std::make_unique<SceneTrans>();	// ‘JˆÚ‰‰oì¬
+	m_Input		 = std::make_unique<Input>();
+	m_Camera	 = std::make_unique<Camera>();		// ƒJƒƒ‰ì¬
+	m_SceneTrans = std::make_unique<SceneTrans>();	// ‘JˆÚ‰‰oì¬
 }
 
 void Game::Initialize()
@@ -24,8 +24,8 @@ void Game::Initialize()
 	//		ƒV[ƒ“‚ğƒ^ƒCƒgƒ‹ƒV[ƒ“‚Éİ’è
 	Renderer::Initialize();							// ƒŒƒ“ƒ_ƒ‰[‚Ì‰Šú‰»
 	DebugUI::Init(Renderer::GetDevice(), Renderer::GetDeviceContext()); 			// ƒfƒoƒbƒOUI‚Ì‰Šú‰»
-	m_pInstance->m_Camera->Initialize();										// ƒJƒƒ‰‚Ì‰Šú‰»
-	m_pInstance->m_SceneTrans->Initialize(FADE);
+	m_pInstance->GetCamera()->Initialize();										// ƒJƒƒ‰‚Ì‰Šú‰»
+	m_pInstance->GetSceneTrans()->Initialize(FADE);
 
 	m_pInstance->m_GameMeshes = std::make_shared<MeshManager>();
 	
