@@ -9,29 +9,26 @@
 #include "DebugUI.h"
 
 
-std::unique_ptr<Game>				Game::m_pInstance  = nullptr; // ゲームのインスタンス初期化
+std::unique_ptr<Game> Game::m_pInstance  = nullptr; // ゲームのインスタンス初期化
 
 Game::Game()
 {
-	m_Input		 = std::make_unique<Input>();		//入力処理を作成
-	m_Camera	 = std::make_unique<Camera>();		// カメラ作成
-	m_SceneTrans = std::make_unique<SceneTrans>();	// 遷移演出作成
-
-	m_SceneCurrent = nullptr; // 現在のシーンを初期化
+	m_pInstance->m_Input	  = std::make_unique<Input>();
+	m_pInstance->m_Camera	  = std::make_unique<Camera>();		// カメラ作成
+	m_pInstance->m_SceneTrans = std::make_unique<SceneTrans>();	// 遷移演出作成
 }
 
 void Game::Initialize()
 {
-
+	m_pInstance = std::make_unique<Game>();
 	//		シーンをタイトルシーンに設定
 	Renderer::Initialize();							// レンダラーの初期化
 	DebugUI::Init(Renderer::GetDevice(), Renderer::GetDeviceContext()); 			// デバッグUIの初期化
-	m_pInstance->m_Camera = std::make_unique<Camera>();							// カメラを作成
 	m_pInstance->m_Camera->Initialize();										// カメラの初期化
-	
 	m_pInstance->m_SceneTrans->Initialize(FADE);
 
 	m_pInstance->m_GameMeshes = std::make_shared<MeshManager>();
+	
 	
 	m_pInstance->m_GameMeshes->AddMeshModel("RedMan", "Akai.fbx", "Akai");
 	m_pInstance->m_GameMeshes->AddMeshModel("Pokemon", "Porygon.fbx","Porygon");
@@ -132,7 +129,7 @@ void Game::DeleteAllObject()
 		o->Finalize();
 	}
 
-	m_pInstance.get()->m_Objects.clear();			
-	m_pInstance.get()->m_GameMeshes->Clear();		
-	m_pInstance.get()->m_Objects.shrink_to_fit();
+	m_pInstance->m_Objects.clear();			
+	m_pInstance->m_GameMeshes->Clear();		
+	m_pInstance->m_Objects.shrink_to_fit();
 }

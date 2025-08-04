@@ -1,9 +1,9 @@
 #pragma once
+#include <memory>
 #ifdef _DEBUG
 #include "Debug.hpp"
 #endif
 
-#include <memory>
 #include "SceneFile/Scene.h"
 #include "SceneFile/SceneTrans.h"
 
@@ -12,10 +12,12 @@
 #include "input.h"
 #include "MeshManager.h"
 
+class SceneTrans;
+
 class Game
 {
 private:
-	static std::unique_ptr<Game>  m_pInstance;				// ゲームのインスタンス
+	static std::unique_ptr<Game> m_pInstance;						// ゲームのインスタンス
 	Scene*						  m_SceneCurrent;	// 現在のシーン
 	std::unique_ptr<Input>		  m_Input;			// 入力管理
 	std::unique_ptr<Camera>		  m_Camera;			// カメラ
