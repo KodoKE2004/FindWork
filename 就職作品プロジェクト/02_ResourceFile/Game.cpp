@@ -20,7 +20,6 @@ Game::Game()
 
 void Game::Initialize()
 {
-	m_pInstance = std::make_unique<Game>();
 	//		シーンをタイトルシーンに設定
 	Renderer::Initialize();							// レンダラーの初期化
 	DebugUI::Init(Renderer::GetDevice(), Renderer::GetDeviceContext()); 			// デバッグUIの初期化
@@ -40,9 +39,9 @@ void Game::Initialize()
 
 void Game::Update()
 {	
-	// 遷移演出の更新　OFFの時は動かない
 	m_pInstance->m_SceneTrans->Update();
 
+	// 遷移演出の更新　OFFの時は動かない
 	if (m_pInstance->m_SceneTrans->IsTransition() == SWITCH::OFF) {
 		// 現在のシーンの更新
 		m_pInstance->m_SceneCurrent->Update();

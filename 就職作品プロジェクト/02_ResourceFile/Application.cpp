@@ -186,8 +186,8 @@ void Application::TermWindow()
 void Application::MainLoop()
 {
     MSG   msg = {};
-    Game* game = new Game;
-    game->Initialize();
+    Game& game = Game::GetInstance();
+    game.Initialize();
 
     while (true) {
         if (PeekMessage(&msg, NULL, 0, 0, PM_REMOVE))
@@ -204,11 +204,11 @@ void Application::MainLoop()
             g_prevTime = currentTime;
 
             // ƒQ[ƒ€‚ÌXV
-            game->Update();
-            game->Draw();
+            game.Update();
+            game.Draw();
         }
     }
-    game->Finalize();
+    game.Finalize();
 }
 
 //==============================
