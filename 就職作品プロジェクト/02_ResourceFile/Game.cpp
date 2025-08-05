@@ -1,7 +1,3 @@
-#ifdef _DEBUG
-#include "Debug.hpp"
-#endif 
-
 #include "Game.h"
 #include "Renderer.h"
 #include "Application.h"
@@ -13,45 +9,45 @@ std::unique_ptr<Game> Game::m_pInstance  = nullptr; // ƒQ[ƒ€‚ÌƒCƒ“ƒXƒ^ƒ“ƒX‰Šú‰
 
 Game::Game()
 {
-	m_Input		 = std::make_unique<Input>();
-	m_Camera	 = std::make_unique<Camera>();		// ƒJƒƒ‰ì¬
-	m_SceneTrans = std::make_unique<SceneTrans>();	// ‘JˆÚ‰‰oì¬
+	
 }
 
 void Game::Initialize()
-{
+{	
+	auto& instance = GetInstance();
+
+	instance.m_Input	   = std::make_unique<Input> ();
+	instance.m_Camera	   = std::make_unique<Camera>();	// ƒJƒƒ‰ì¬
+	
 	//		ƒV[ƒ“‚ğƒ^ƒCƒgƒ‹ƒV[ƒ“‚Éİ’è
 	Renderer::Initialize();							// ƒŒƒ“ƒ_ƒ‰[‚Ì‰Šú‰»
 	DebugUI::Init(Renderer::GetDevice(), Renderer::GetDeviceContext()); 			// ƒfƒoƒbƒOUI‚Ì‰Šú‰»
-	m_pInstance->GetCamera()->Initialize();										// ƒJƒƒ‰‚Ì‰Šú‰»
-	m_pInstance->GetSceneTrans()->Initialize(FADE);
+	instance.GetCamera()->Initialize();											// ƒJƒƒ‰‚Ì‰Šú‰»
 
-	m_pInstance->m_GameMeshes = std::make_shared<MeshManager>();
+	instance.m_GameMeshes = std::make_shared<MeshManager>();
+	instance.m_Textures   = std::make_shared<TextureManager>();
 	
-	
-	m_pInstance->m_GameMeshes->AddMeshModel("RedMan", "Akai.fbx", "Akai");
-	m_pInstance->m_GameMeshes->AddMeshModel("Pokemon", "Porygon.fbx","Porygon");
-	m_pInstance->m_GameMeshes->AddMeshModel("aaa", "plane.fbx","plane");
+	instance.m_GameMeshes->AddMeshModel("RedMan", "Akai.fbx", "Akai");
+	instance.m_GameMeshes->AddMeshModel("Pokemon", "Porygon.fbx", "Porygon");
+	instance.m_GameMeshes->AddMeshModel("aaa"    , "plane.fbx"  , "plane"  );
 
-	m_pInstance->m_SceneCurrent = new TitleScene;	// ƒ^ƒCƒgƒ‹ƒV[ƒ“‚ÌƒCƒ“ƒXƒ^ƒ“ƒX‚ğ¶¬
-	
+	instance.m_SceneCurrent = new TitleScene;				// ƒ^ƒCƒgƒ‹ƒV[ƒ“‚ÌƒCƒ“ƒXƒ^ƒ“ƒX‚ğ¶¬
+	instance.m_SceneCurrent->Initialize();
 }
 
 void Game::Update()
 {	
-	m_pInstance->m_SceneTrans->Update();
+	auto& instance = GetInstance();
+	instance.m_Input->Update();
 
-	// ‘JˆÚ‰‰o‚ÌXV@OFF‚Ì‚Í“®‚©‚È‚¢
-	if (m_pInstance->m_SceneTrans->IsTransition() == SWITCH::OFF) {
-		// Œ»İ‚ÌƒV[ƒ“‚ÌXV
-		m_pInstance->m_SceneCurrent->Update();
-	}
+	// Œ»İ‚ÌƒV[ƒ“‚ÌXV
+	instance.m_SceneCurrent->Update();
+
 	// ƒJƒƒ‰‚ÌXV
-	m_pInstance->m_Camera->Update(); 
+	instance.m_Camera->Update();
 	// “ü—Í‚ÌXV
-	m_pInstance->m_Input->Update(); 
 	// ƒIƒuƒWƒFƒNƒg‚ÌXV
-	for (auto& o : m_pInstance->m_Objects)
+	for (auto& o : instance.m_Objects)
 	{
 		if(o == nullptr){ continue; }
 		o->Update(); // ƒIƒuƒWƒFƒNƒg‚ÌXV
@@ -60,32 +56,31 @@ void Game::Update()
 
 void Game::Draw()
 {
+	auto& instance = GetInstance();
 	Renderer::Start();		// •`‰æ‚ÌŠJn
 
 	// ƒIƒuƒWƒFƒNƒg•`‰æ
-	for (auto& o : m_pInstance->m_Objects)
+	for (auto& o : instance.m_Objects)
 	{
 		o->Draw();
 	}
-	m_pInstance->m_SceneTrans->Draw();
+
 	DebugUI::Render();			// ƒfƒoƒbƒOUI‚Ì•`‰æ
 	Renderer::Finish();			// •`‰æ‚ÌI—¹
 }
 
 void Game::Finalize()
 {
+	auto& instance = GetInstance();
 	DebugUI::DisposeUI();		// ƒfƒoƒbƒOUI‚ÌI—¹ˆ—
-	m_pInstance->DeleteAllObject();	//ƒIƒuƒWƒFƒNƒg‚ğ‘S‚Äíœ
+	instance.DeleteAllObject();	//ƒIƒuƒWƒFƒNƒg‚ğ‘S‚Äíœ
 	Renderer::Finalize();			// ƒŒƒ“ƒ_ƒ‰[‚ÌI—¹ˆ—
 }
 
 void Game::SetSceneCurrent(Scene* newScene)
 {
-	if (m_pInstance->m_SceneCurrent != nullptr) {
-		delete m_pInstance->m_SceneCurrent; // Œ»İ‚ÌƒV[ƒ“‚ğI—¹
-	}
-
-	m_pInstance->m_SceneCurrent = newScene;	// V‚µ‚¢ƒV[ƒ“‚ğİ’è
+	auto& instance = GetInstance();
+	instance.m_SceneCurrent = newScene;	// V‚µ‚¢ƒV[ƒ“‚ğİ’è
 
 }
 
@@ -105,29 +100,32 @@ Scene* Game::GetCurrentScene() const
 
 void Game::DeleteObject(Object* pt)
 {
+	auto& instance = GetInstance();
 	if (pt == NULL) return;
 
 	pt->Finalize(); // I—¹ˆ—
 
 	// —v‘f‚ğíœ
-	m_pInstance->m_Objects.erase(
+	instance.m_Objects.erase(
 		std::remove_if(
-			m_pInstance->m_Objects.begin(),
-			m_pInstance->m_Objects.end(),
+			instance.m_Objects.begin(),
+			instance.m_Objects.end(),
 			[pt](const std::unique_ptr<Object>& element) {return element.get() == pt; }),
-		m_pInstance->m_Objects.end());
-	m_pInstance->m_Objects.shrink_to_fit();
+			instance.m_Objects.end());
+
+	instance.m_Objects.shrink_to_fit();
 }
 
 void Game::DeleteAllObject()
 {
+	auto& instance = GetInstance();
 	// ƒIƒuƒWƒFƒNƒgI—¹ˆ—
 	for (auto& o : m_pInstance->m_Objects)
 	{
 		o->Finalize();
 	}
 
-	m_pInstance->m_Objects.clear();			
-	m_pInstance->m_GameMeshes->Clear();		
-	m_pInstance->m_Objects.shrink_to_fit();
+	instance.m_Objects.clear();
+	instance.m_GameMeshes->Clear();
+	instance.m_Objects.shrink_to_fit();
 }

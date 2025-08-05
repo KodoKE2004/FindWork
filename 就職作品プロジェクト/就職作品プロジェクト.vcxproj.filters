@@ -57,8 +57,8 @@
     <Filter Include="SourceFile\Object\2D">
       <UniqueIdentifier>{4083fcbf-46e2-4cfe-8f4b-aef89210c358}</UniqueIdentifier>
     </Filter>
-    <Filter Include="SourceFile\Scene\Transition">
-      <UniqueIdentifier>{31598b83-4477-46d0-bc50-878d1d1ffedb}</UniqueIdentifier>
+    <Filter Include="SourceFile\Core\Manager">
+      <UniqueIdentifier>{4e737cfb-490c-409d-809b-cddb0af0f435}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
   <ItemGroup>
@@ -140,17 +140,20 @@
     <ClCompile Include="02_ResourceFile\Texture2D.cpp">
       <Filter>SourceFile\Object\2D</Filter>
     </ClCompile>
-    <ClCompile Include="02_ResourceFile\MeshManager.cpp">
-      <Filter>SourceFile\Model\Mesh</Filter>
-    </ClCompile>
     <ClCompile Include="02_ResourceFile\ObjectFile\Model.cpp">
       <Filter>SourceFile\Model</Filter>
     </ClCompile>
     <ClCompile Include="02_ResourceFile\SceneFile\GameScene.cpp">
       <Filter>SourceFile\Scene</Filter>
     </ClCompile>
-    <ClCompile Include="02_ResourceFile\SceneFile\SceneTrans.cpp">
-      <Filter>SourceFile\Scene\Transition</Filter>
+    <ClCompile Include="02_ResourceFile\SceneFile\TransScene.cpp">
+      <Filter>SourceFile\Scene</Filter>
+    </ClCompile>
+    <ClCompile Include="02_ResourceFile\MeshManager.cpp">
+      <Filter>SourceFile\Core\Manager</Filter>
+    </ClCompile>
+    <ClCompile Include="02_ResourceFile\TextureManager.cpp">
+      <Filter>SourceFile\Core\Manager</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -259,17 +262,20 @@
     <ClInclude Include="02_ResourceFile\Texture2D.h">
       <Filter>SourceFile\Object\2D</Filter>
     </ClInclude>
-    <ClInclude Include="02_ResourceFile\MeshManager.h">
-      <Filter>SourceFile\Model\Mesh</Filter>
-    </ClInclude>
     <ClInclude Include="02_ResourceFile\ObjectFile\Model.h">
       <Filter>SourceFile\Model</Filter>
     </ClInclude>
     <ClInclude Include="02_ResourceFile\SceneFile\GameScene.h">
       <Filter>SourceFile\Scene</Filter>
     </ClInclude>
-    <ClInclude Include="02_ResourceFile\SceneFile\SceneTrans.h">
-      <Filter>SourceFile\Scene\Transition</Filter>
+    <ClInclude Include="02_ResourceFile\SceneFile\TransScene.h">
+      <Filter>SourceFile\Scene</Filter>
+    </ClInclude>
+    <ClInclude Include="02_ResourceFile\MeshManager.h">
+      <Filter>SourceFile\Core\Manager</Filter>
+    </ClInclude>
+    <ClInclude Include="02_ResourceFile\TextureManager.h">
+      <Filter>SourceFile\Core\Manager</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>

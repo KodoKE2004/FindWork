@@ -7,8 +7,8 @@ public:
 	// コンストラクタとデストラクタ
 	//================================
 
-	SelectScene()   { Initialize();};
-	~SelectScene()  { Finalize();  };
+	SelectScene()  = default;
+	~SelectScene() = default;
 
 	//================================
 	// 			ループ内の処理

@@ -1,4 +1,5 @@
 #include	"Cube.h"
+#include	"../Game.h"
 #include	<SimpleMath.h>
 
 using namespace DirectX::SimpleMath;
@@ -184,8 +185,7 @@ void Cube::Initialize()
 	m_Shader.Create("02_ResourceFile/ShaderFile/VS_Default.hlsl", "02_ResourceFile/ShaderFile/PS_Default.hlsl");
 
 	//テクスチャロード
-	bool sts = m_Texture.LoadFromFile("01_AssetFile/Texture/dice.png");
-	assert(sts == true);
+	m_Texture = *Game::GetInstance().GetTextures()->GetTexture("dice.png");
 
 	m_Camera->SetCamera(CAMERA_3D);
 }

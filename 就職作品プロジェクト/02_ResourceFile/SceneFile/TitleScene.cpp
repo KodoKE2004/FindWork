@@ -1,5 +1,4 @@
 #include "SceneList.h"
-#include "SceneTrans.h"
 #include "../Game.h"
 #include "../DebugUI.h"
 #include "../ObjectFile/Cube.h"
@@ -24,12 +23,10 @@ void TitleScene::Initialize()
 void TitleScene::Update()
 {
 
-
 	if (Input::GetKeyTrigger(VK_RETURN))
-	{	
-		Game::GetInstance().GetSceneTrans()->StartTransition(FADE,new SelectScene,2.0f);
+	{
+		ChangeScene<SelectScene>(FADE,4.0f);
 	}
-
 
 
 

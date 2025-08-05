@@ -11,6 +11,7 @@ namespace Debug
         std::string_view message,
         const std::source_location& loc = std::source_location::current())
     {
+    #ifdef _DEBUG
         if (!expression)
         {
             std::filesystem::path fullPath = loc.file_name();
@@ -28,6 +29,7 @@ namespace Debug
 
             std::terminate();
         }
+    #endif
     }
 
     inline static void Assert(
@@ -35,6 +37,7 @@ namespace Debug
         std::wstring_view message,
         const std::source_location& loc = std::source_location::current())
     {
+    #ifdef _DEBUG
         if (!expression)
         {
             namespace fs = std::filesystem;
@@ -54,16 +57,21 @@ namespace Debug
 
             std::terminate();
         }
+    #endif
     }
 
     static void Log(std::string_view message)
     {
+    #ifdef _DEBUG
         std::cout << message << std::endl;
+    #endif
     }
 
     template<typename... Args>
     static void Log(std::format_string<Args...> format, Args&&... args)
     {
+    #ifdef _DEBUG
         Log(std::string(std::format(format, std::forward<Args>(args)...)));
+    #endif
     }
 };

@@ -1,13 +1,11 @@
 #include "MeshManager.h"
 #include <memory>
-#ifdef _DEBUG
 #include <iostream>
-#endif
-
+#include "Debug.hpp"
 
 MeshManager::MeshManager()
 {
-	std::cout << "ƒRƒ“ƒXƒgƒ‰ƒNƒ^FNULLƒ‚ƒfƒ‹“o˜^@ŠJŽn" << std::endl;
+	Debug::Log ("ƒRƒ“ƒXƒgƒ‰ƒNƒ^FNULLƒ‚ƒfƒ‹“o˜^@ŠJŽn");
 	AddMeshModel("NULL","spot.fbx","spot");
 }
 
@@ -26,7 +24,7 @@ void MeshManager::AddMeshModel(std::string modelName, std::string modelPath, std
 	// –¼‘Oƒ`ƒFƒbƒN
 	if (IsNameCheck(modelName) == true) 
 	{
-		std::cout << "Ž¸”s : modelName”í‚è" << modelName  << std::endl;
+		Debug::Log ("Ž¸”s : modelName”í‚è " + modelName);
 		return;
 	}
 
@@ -43,11 +41,11 @@ void MeshManager::AddMeshModel(std::string modelName, std::string modelPath, std
 		
 		m_MeshInfo.emplace_back(info);
 
-		std::cout << "¬Œ÷ : ƒ‚ƒfƒ‹“o˜^ " << modelName<< std::endl; 
+		Debug::Log("¬Œ÷ : ƒ‚ƒfƒ‹“o˜^ " + modelName);
 		return;
 	}
 
-	std::cout << "Ž¸”s : ƒ‚ƒfƒ‹“o˜^" << modelName << std::endl;
+	Debug::Log("Ž¸”s : ƒ‚ƒfƒ‹“o˜^" + modelName);
 	return;
 }
 
@@ -55,11 +53,11 @@ std::shared_ptr<MeshModel> MeshManager::GetMeshModel(std::string modelName)
 {
 	
 	if (IsNameCheck(modelName) == true) {
-		std::cout << "¬Œ÷ : MeshModelŽæ“¾" << modelName << std::endl;
+		Debug::Log("¬Œ÷ : MeshModelŽæ“¾" + modelName);
 		return m_MeshInfo[findNumber].mesh;
 	}
 	
-	std::cout << "Ž¸”s : GetMeshModel : " << modelName << std::endl;
+	Debug::Log("Ž¸”s : GetMeshModel : " + modelName);
 	return m_MeshInfo[0].mesh;
 }
 
@@ -74,7 +72,7 @@ bool MeshManager::IsNameCheck(std::string registName)
 		}
 		++roop;
 	}
-	std::cout << "–¼‘O”í‚è‚È‚µ : " << registName << std::endl;
+	Debug::Log("–¼‘O”í‚è‚È‚µ : " + registName);
 
 	findNumber = 0;
 	return false;
@@ -83,11 +81,11 @@ bool MeshManager::IsNameCheck(std::string registName)
 std::string MeshManager::GetFilePath(std::string modelName)
 {
 	if (IsNameCheck(modelName) == true) {
-		std::cout << "¬Œ÷ : FilePathŽæ“¾" << modelName << std::endl;
+		Debug::Log("¬Œ÷ : FilePathŽæ“¾" + modelName);
 		return m_MeshInfo[findNumber].filePath;
 	}
 
-	std::cout << "Ž¸”s : FilePathŽæ“¾ : " << modelName << std::endl;
+	Debug::Log("Ž¸”s : FilePathŽæ“¾ : " + modelName);
 	return m_MeshInfo[0].filePath;
 
 }
@@ -95,11 +93,11 @@ std::string MeshManager::GetFilePath(std::string modelName)
 std::string MeshManager::GetTextureDirectory(std::string modelName)
 {
 	if (IsNameCheck(modelName) == true) {
-		std::cout << "¬Œ÷ : TextureDirectoryŽæ“¾" << modelName << std::endl;
+		Debug::Log("¬Œ÷ : TextureDirectoryŽæ“¾" + modelName);
 		return m_MeshInfo[findNumber].texDirectory;
 	}
 
-	std::cout << "Ž¸”s : TextureDirectoryŽæ“¾ : " << modelName << std::endl;
+	Debug::Log("Ž¸”s : TextureDirectoryŽæ“¾ : " + modelName);
 	return m_MeshInfo[0].texDirectory;
 
 }

@@ -11,8 +11,8 @@ public:
 	// コンストラクタとデストラクタ
 	//================================
 
-	TitleScene()  { Initialize();}
-	~TitleScene() { Finalize();  }
+	TitleScene()  = default;
+	~TitleScene() = default;
 
 	//================================
 	// 			ループ内の処理

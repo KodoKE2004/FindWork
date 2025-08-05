@@ -100,7 +100,10 @@ void Texture2D::Draw()
 	m_VertexBuffer.SetGPU();
 	m_IndexBuffer.SetGPU();
 
-	m_Texture.SetGPU();
+	m_Texture->SetGPU();
+
+	m_Materiale->SetDiffuse(DirectX::XMFLOAT4(m_Color.x, m_Color.y, m_Color.z, m_Color.w));
+	m_Materiale->Update();
 	m_Materiale->SetGPU();
 
 	// UVの設定を指定
@@ -110,7 +113,7 @@ void Texture2D::Draw()
 	float vh = 1 / m_SplitY;
 
 	Renderer::SetUV(u, v, uw, vh);
-
+	CAMERA_MODE prevMode = m_Camera->GetMode();
 	// カメラの設定を指定
 	m_Camera->SetCamera(CAMERA_2D);
 
@@ -118,6 +121,8 @@ void Texture2D::Draw()
 		4, // 描画するインデックス数（四角形なんで４）
 		0, // 最初のインデックスバッファの位置
 		0);
+
+	m_Camera->SetCamera(prevMode);
 }
 
 //=======================================
@@ -132,8 +137,13 @@ void Texture2D::Finalize()
 void Texture2D::SetTexture(const char* imgname)
 {
 	// テクスチャロード
-	bool sts = m_Texture.LoadFromFile(imgname);
-	assert(sts == true);
+	bool sts = m_Texture->LoadFromFile(imgname);
+	assert(sts != true);
+}
+
+void Texture2D::SetTexture(Texture* texture)
+{
+	m_Texture = texture;
 }
 
 // UV座標を指定

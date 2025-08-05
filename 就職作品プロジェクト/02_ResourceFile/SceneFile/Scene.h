@@ -21,6 +21,10 @@ public:
 	virtual void Update() = 0;
 	virtual void Finalize() = 0;
 
+	// そのシーンのオブジェクトを定義
+	std::vector<Object*> GetSceneObjects() {
+		return m_MySceneObjects;
+	}
 };
 
 

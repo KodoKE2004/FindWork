@@ -35,11 +35,12 @@
     <ClCompile Include="02_ResourceFile\SceneFile\GameScene.cpp" />
     <ClCompile Include="02_ResourceFile\SceneFile\SelectScene.cpp" />
     <ClCompile Include="02_ResourceFile\SceneFile\TitleScene.cpp" />
-    <ClCompile Include="02_ResourceFile\SceneFile\SceneTrans.cpp" />
+    <ClCompile Include="02_ResourceFile\SceneFile\TransScene.cpp" />
     <ClCompile Include="02_ResourceFile\Shader.cpp" />
     <ClCompile Include="02_ResourceFile\TestFile\TestPlane.cpp" />
     <ClCompile Include="02_ResourceFile\Texture2D.cpp" />
     <ClCompile Include="02_ResourceFile\Texture.cpp" />
+    <ClCompile Include="02_ResourceFile\TextureManager.cpp" />
     <ClCompile Include="02_ResourceFile\Transform.cpp" />
     <ClCompile Include="02_ResourceFile\utility.cpp" />
     <ClCompile Include="03_ExternalFile\imgui\imgui.cpp" />
@@ -74,11 +75,12 @@
     <ClInclude Include="02_ResourceFile\SceneFile\SceneList.h" />
     <ClInclude Include="02_ResourceFile\SceneFile\SelectScene.h" />
     <ClInclude Include="02_ResourceFile\SceneFile\TitleScene.h" />
-    <ClInclude Include="02_ResourceFile\SceneFile\SceneTrans.h" />
+    <ClInclude Include="02_ResourceFile\SceneFile\TransScene.h" />
     <ClInclude Include="02_ResourceFile\Shader.h" />
     <ClInclude Include="02_ResourceFile\TestFile\TestPlane.h" />
     <ClInclude Include="02_ResourceFile\Texture2D.h" />
     <ClInclude Include="02_ResourceFile\Texture.h" />
+    <ClInclude Include="02_ResourceFile\TextureManager.h" />
     <ClInclude Include="02_ResourceFile\Transform.h" />
     <ClInclude Include="02_ResourceFile\utility.h" />
     <ClInclude Include="02_ResourceFile\VertexBuffer.h" />

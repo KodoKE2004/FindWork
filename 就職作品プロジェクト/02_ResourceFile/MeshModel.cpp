@@ -6,10 +6,7 @@
 
 #pragma comment(lib, "assimp-vc143-mtd.lib")
 
-#ifdef _DEBUG
-    #include <iostream>
-    #include "Debug.hpp"
-#endif
+#include "Debug.hpp"
 
 bool MeshModel::Load(const std::string& modelFile, const std::string& texDirectory)
 {
@@ -104,6 +101,6 @@ bool MeshModel::Load(const std::string& modelFile, const std::string& texDirecto
         }
     }
 
-    std::cout << "ƒ‚ƒfƒ‹“Ç‚Ýž‚ÝŠ®—¹" << std::endl;
+    Debug::Log("ƒ‚ƒfƒ‹“Ç‚Ýž‚ÝŠ®—¹ : " + modelFile);
     return true;
 }

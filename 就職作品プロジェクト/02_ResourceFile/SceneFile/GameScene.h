@@ -8,8 +8,8 @@ public:
 	// コンストラクタとデストラクタ
 	//================================
 
-	GameScene() { Initialize(); }
-	~GameScene() { Finalize(); }
+	GameScene()  = default;
+	~GameScene() = default;
 
 	//================================
 	// 			ループ内の処理

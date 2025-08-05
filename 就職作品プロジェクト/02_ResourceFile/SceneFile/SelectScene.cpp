@@ -1,5 +1,4 @@
 #include"SceneList.h"
-#include "SceneTrans.h"
 
 #include "../Game.h"
 #include "../DebugUI.h"
@@ -19,7 +18,7 @@ void SelectScene::Update()
 	
 	if (Input::GetKeyTrigger(VK_RETURN))
 	{
-		
+		ChangeScene<GameScene>(FADE, 4.0f);
 	}
 }
 

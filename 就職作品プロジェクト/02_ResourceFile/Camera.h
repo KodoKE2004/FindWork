@@ -64,6 +64,7 @@ public:
 	//				  ƒJƒƒ‰İ’è
 	//============================================
 	void SetCamera(CAMERA_MODE mode);	
+	CAMERA_MODE GetMode() const { return m_Mode; }
 
 	//===========================================
 	//				   ‘€ìˆ—

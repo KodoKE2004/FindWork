@@ -16,6 +16,7 @@ private:
 		std::string					filePath;
 		std::string					texDirectory;
 	};
+
 	std::vector<MeshInfo> m_MeshInfo;
 
 	short findNumber = 0;

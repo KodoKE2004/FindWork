@@ -1,14 +1,10 @@
 #pragma once
 #include <memory>
-#ifdef _DEBUG
 #include "Debug.hpp"
-#endif
-
 #include "SceneFile/Scene.h"
-#include "SceneFile/SceneTrans.h"
-
+#include "SceneFile/TransScene.h"
+#include "TextureManager.h"
 #include "ObjectFile/Object.h"
-
 #include "input.h"
 #include "MeshManager.h"
 
@@ -17,14 +13,14 @@ class SceneTrans;
 class Game
 {
 private:
-	static std::unique_ptr<Game> m_pInstance;						// ゲームのインスタンス
-	Scene*						  m_SceneCurrent;	// 現在のシーン
-	std::unique_ptr<Input>		  m_Input;			// 入力管理
-	std::unique_ptr<Camera>		  m_Camera;			// カメラ
-	std::vector<std::unique_ptr<Object>> m_Objects; // オブジェクト
-	std::shared_ptr<MeshManager>  m_GameMeshes;		// シーンで扱うメッシュ
-	std::unique_ptr<SceneTrans>	  m_SceneTrans;
-	bool isTransition = false;
+	static std::unique_ptr<Game>		 m_pInstance;		// ゲームのインスタンス
+	Scene*								 m_SceneCurrent;	// 現在のシーン
+	std::unique_ptr<Input>				 m_Input;			// 入力管理
+	std::unique_ptr<Camera>				 m_Camera;			// カメラ
+	std::vector<std::unique_ptr<Object>> m_Objects;			// オブジェクト
+	std::shared_ptr<MeshManager>		 m_GameMeshes;		// シーンで扱うメッシュ
+	std::shared_ptr<TextureManager>		 m_Textures;		// ゲームで扱う画像
+
 public:
 	//================================
 	//		コンストラクタとデストラクタ
@@ -64,10 +60,11 @@ public:
 		return m_GameMeshes;
 	}
 
-	SceneTrans* GetSceneTrans()	{
-		return m_SceneTrans.get();
+	std::shared_ptr<TextureManager> GetTextures() {
+		return m_Textures;
 	}
-	
+
+
 	//================================
 	// オブジェクト管理
 	//================================
@@ -106,11 +103,19 @@ public:
 
 // シーンを生成するテンプレート関数
 template<typename T, typename... Args>
-void ChangeScene(Args&&... args)
+void ChangeScene(TRANS_MODE mode,float duration)
 {
 	static_assert(std::is_base_of_v<Scene, T>, "T は 基底クラスが Scene ではありません");
 
-	// 現在のシーンを新しいシーンに変更
-	auto scene = new T (std::forward<Args>(args)...);
+	TransScene* scene = new TransScene;
+	auto sceneNext = new T;
+
+	scene->SetOldScene(Game::GetInstance().GetCurrentScene());
+	scene->SetNextScene(sceneNext);
+	scene->SetStep(START);
+	scene->SetTransMode(mode);
+	scene->Initialize();
+
 	Game::GetInstance().SetSceneCurrent(scene);
+
 }

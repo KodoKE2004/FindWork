@@ -16,7 +16,7 @@ private:
 	VertexBuffer<VERTEX_3D> m_VertexBuffer; // 頂点バッファ
 
 	// 描画の為の情報（見た目に関わる部分）
-	Texture m_Texture; // テクスチャ
+	Texture* m_Texture; // テクスチャ
 	std::unique_ptr<Material> m_Materiale; //マテリアル
 
 	// UV座標の情報
@@ -36,7 +36,7 @@ public:
 
 	// テクスチャを指定
 	void SetTexture(const char* imgname);
-
+	void SetTexture(Texture* texture);
 	// UV座標を指定
 	void SetUV(const float& nu, const float& nv, const float& sx, const float& sy);
 

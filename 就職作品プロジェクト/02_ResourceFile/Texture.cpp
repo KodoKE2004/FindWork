@@ -1,8 +1,6 @@
 #include "Texture.h"
 #include "DirectXTex.h"
-#ifdef _DEBUG
-    #include<iostream>
-#endif
+#include "Debug.hpp"
 
 #pragma comment(lib,"Windowscodecs.lib")
 
@@ -15,7 +13,7 @@ bool Texture::LoadFromFile(const std::string& path)
 
     wchar_t wpath[MAX_PATH];
     MultiByteToWideChar(0, 0, path.c_str(), -1, wpath, MAX_PATH);
-
+    
     HRESULT hr = S_OK;
     if (path.find(".tga") != std::string::npos)
         hr = DirectX::LoadFromTGAFile(wpath, &meta, img);
@@ -23,20 +21,20 @@ bool Texture::LoadFromFile(const std::string& path)
         hr = DirectX::LoadFromWICFile(wpath, DirectX::WIC_FLAGS::WIC_FLAGS_NONE, &meta, img);
     if (FAILED(hr))
     {
-        std::cout << "テクスチャ読み取り失敗 : LoadFromFile時点 : "<< path << std::endl;
+        Debug::Log("テクスチャ読み取り失敗 : LoadFromFile時点 : " + path);
         return false;
     }
     hr = CreateShaderResourceView(Renderer::GetDevice(), img.GetImages(), img.GetImageCount(), meta, m_srv.GetAddressOf());
     if (FAILED(hr)) 
     {
-        std::cout << "テクスチャ読み取り失敗 : CreateShaderResourceView時点 : " << path << std::endl;
+        Debug::Log("テクスチャ読み取り失敗 : CreateShaderResourceView時点 : " + path);
         return false;
     }
 
     m_width = static_cast<UINT>(meta.width);
     m_height = static_cast<UINT>(meta.height);
 
-    std::cout << "テクスチャ読み取り成功 : " << path << std::endl;
+    Debug::Log("テクスチャ読み取り成功 : " + path);
     return true;
 }
 

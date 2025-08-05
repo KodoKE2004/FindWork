@@ -1,8 +1,6 @@
 #include "Renderer.h"
 #include "Application.h"
-#ifdef _DEBUG
 #include "Debug.hpp"
-#endif // _DEBUG
 
 
 
