@@ -17,12 +17,12 @@ void TransScene::Initialize()
 
 		// フェード用の画像追加
 		m_Texture = Game::GetInstance().AddObject<Texture2D>();
+
 		m_Texture->Initialize();
-		Texture* tex = Game::GetInstance().GetTextures()->GetTexture("Black.png");
-		m_Texture->SetTexture(tex);
-		NVector3 scale = NVector3(SCREEN_WIDTH, SCREEN_HEIGHT, 1.0f);
-		m_Texture->SetScale(scale);
+		m_Texture->SetScale(SCREEN_WIDTH,SCREEN_HEIGHT,1.0f);
 		m_Texture->SetColor(0.0f, 0.0f, 0.0f, m_Alpha);
+		m_Texture->SetTexture(Game::GetInstance().GetTextures()->GetTexture("Black.png"));
+
 		m_MySceneObjects.emplace_back(m_Texture);
 	}
 	break;
@@ -103,7 +103,7 @@ bool TransScene::isOverClock()
 
 void TransScene::FADE_IN()
 {
-	m_Alpha += m_AlphaValue;
+	m_Alpha -= m_AlphaValue * m_Counter;
 
 	if (isOverClock())
 	{
@@ -116,7 +116,7 @@ void TransScene::FADE_IN()
 
 void TransScene::FADE_OUT()
 {
-	m_Alpha += m_AlphaValue;
+	m_Alpha += m_AlphaValue * m_Counter;
 
 	if (isOverClock())
 	{

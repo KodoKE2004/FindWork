@@ -106,7 +106,7 @@ void Renderer::Initialize()
 	m_DeviceContext->RSSetState(rs);
 
 	// ブレンド ステート生成
-	D3D11_BLEND_DESC BlendDesc;
+	D3D11_BLEND_DESC BlendDesc = {};
 	ZeroMemory(&BlendDesc, sizeof(BlendDesc));                       // BlendDesc構造体をゼロで初期化し、メモリをクリア
 	BlendDesc.AlphaToCoverageEnable = FALSE;                         // アルファ・トゥ・カバレッジを無効化（透明度をカバレッジとして利用しない）
 	BlendDesc.IndependentBlendEnable = TRUE;                         // 各レンダーターゲットに対して個別のブレンド設定を有効化

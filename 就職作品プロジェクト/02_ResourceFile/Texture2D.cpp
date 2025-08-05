@@ -80,6 +80,8 @@ void Texture2D::Update()
 //=======================================
 void Texture2D::Draw()
 {
+	Renderer::SetBlendState(BS_ALPHABLEND);
+
 	// SRT情報作成
 	Matrix r = Matrix::CreateFromYawPitchRoll(m_Rotation.x, m_Rotation.y, m_Rotation.z);
 	Matrix t = Matrix::CreateTranslation(m_Position.x, m_Position.y, m_Position.z);
@@ -92,6 +94,7 @@ void Texture2D::Draw()
 	// 描画の処理
 	ID3D11DeviceContext* devicecontext;
 	devicecontext = Renderer::GetDeviceContext();
+
 
 	// トポロジーをセット（プリミティブタイプ）
 	devicecontext->IASetPrimitiveTopology(D3D11_PRIMITIVE_TOPOLOGY_TRIANGLESTRIP);

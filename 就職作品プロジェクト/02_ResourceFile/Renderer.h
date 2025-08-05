@@ -108,10 +108,11 @@ public:
 	//=============================================================================
 	static void SetBlendState(int nBlendState)
 	{
-		if (nBlendState >= 0 && nBlendState < MAX_BLENDSTATE) {
-			float blendFactor[4] = { 0.0f, 0.0f, 0.0f, 0.0f };
-			m_DeviceContext->OMSetBlendState(m_BlendState[nBlendState], blendFactor, 0xffffffff);
-		}
+		if (nBlendState >= 0 || nBlendState < MAX_BLENDSTATE) return;
+		
+		float blendFactor[4] = { 0.0f, 0.0f, 0.0f, 0.0f };
+		m_DeviceContext->OMSetBlendState(m_BlendState[nBlendState], blendFactor, 0xffffffff);
+		
 	}
 
 	static void CreateVertexShader(ID3D11VertexShader** VertexShader, ID3D11InputLayout** VertexLayout, const char* FileName);

@@ -102,15 +102,16 @@ public:
 //================================
 
 // シーンを生成するテンプレート関数
-template<typename T, typename... Args>
+template<typename T>
 void ChangeScene(TRANS_MODE mode,float duration)
 {
 	static_assert(std::is_base_of_v<Scene, T>, "T は 基底クラスが Scene ではありません");
 
-	TransScene* scene = new TransScene;
+	auto scene = new TransScene;
 	auto sceneNext = new T;
 
 	scene->SetOldScene(Game::GetInstance().GetCurrentScene());
+	scene->SetDuration(duration);
 	scene->SetNextScene(sceneNext);
 	scene->SetStep(START);
 	scene->SetTransMode(mode);

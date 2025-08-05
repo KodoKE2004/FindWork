@@ -25,7 +25,7 @@ void TitleScene::Update()
 
 	if (Input::GetKeyTrigger(VK_RETURN))
 	{
-		ChangeScene<SelectScene>(FADE,4.0f);
+		ChangeScene<SelectScene>(FADE,2.0f);
 	}
 
 

@@ -1,2 +1,21 @@
-﻿  TextureManager.cpp
+﻿  Application.cpp
+  Camera.cpp
+  Game.cpp
+  MeshManager.cpp
+  MeshModel.cpp
+  Cube.cpp
+  Model.cpp
+  Renderer.cpp
+  GameScene.cpp
+  SelectScene.cpp
+  TitleScene.cpp
+  TransScene.cpp
+  Shader.cpp
+  TestPlane.cpp
+  Texture.cpp
+  Texture2D.cpp
+  TextureManager.cpp
+  コードを生成中...
+DirectXTK.lib(SimpleMath.obj) : warning LNK4099: PDB 'DirectXTK.pdb' が 'DirectXTK.lib(SimpleMath.obj)' で、または 'C:\Users\dorae\OneDrive\デスクトップ\FindWork\就職作品プロジェクト\x64\Debug\DirectXTK.pdb' に見つかりません。デバッグ情報がないものとして、オブジェクトにリンクします。
+DirectXTK.lib(pch.obj) : warning LNK4099: PDB 'DirectXTK.pdb' が 'DirectXTK.lib(pch.obj)' で、または 'C:\Users\dorae\OneDrive\デスクトップ\FindWork\就職作品プロジェクト\x64\Debug\DirectXTK.pdb' に見つかりません。デバッグ情報がないものとして、オブジェクトにリンクします。
   就職作品プロジェクト.vcxproj -> C:\Users\dorae\OneDrive\デスクトップ\FindWork\就職作品プロジェクト\x64\Debug\NishiguchiGame.exe
