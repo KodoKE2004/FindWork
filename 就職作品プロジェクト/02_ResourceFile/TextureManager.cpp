@@ -2,13 +2,15 @@
 #include "Game.h"
 #include "Debug.hpp"
 
-bool TextureManager::CheckTexturePath(std::string chackPath)
+bool TextureManager::CheckTexturePath(std::string checkPath)
 {
     m_RegistNumber = 0;
     for (auto registedPath : m_TexturePath)
     {
-        return true;
-        
+        if (checkPath == registedPath)
+        {
+            return true;
+        }
         m_RegistNumber++;
     }
     return false;

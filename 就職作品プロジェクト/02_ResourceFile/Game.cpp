@@ -25,7 +25,7 @@ void Game::Initialize()
 	instance.GetCamera()->Initialize();											// ƒJƒƒ‰‚Ì‰Šú‰»
 
 	instance.m_GameMeshes = std::make_shared<MeshManager>();
-	instance.m_Textures   = std::make_shared<TextureManager>();
+	instance.m_TextureManager   = std::make_shared<TextureManager>();
 	
 	instance.m_GameMeshes->AddMeshModel("RedMan", "Akai.fbx", "Akai");
 	instance.m_GameMeshes->AddMeshModel("Pokemon", "Porygon.fbx", "Porygon");

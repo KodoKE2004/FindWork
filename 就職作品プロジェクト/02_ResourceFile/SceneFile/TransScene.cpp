@@ -17,6 +17,7 @@ void TransScene::Initialize()
 
 		// フェード用の画像追加
 		m_Texture = Game::GetInstance().AddObject<Texture2D>();
+		m_Texture->Initialize();
 		Texture* tex = Game::GetInstance().GetTextures()->GetTexture("Black.png");
 		m_Texture->SetTexture(tex);
 		NVector3 scale = NVector3(SCREEN_WIDTH, SCREEN_HEIGHT, 1.0f);

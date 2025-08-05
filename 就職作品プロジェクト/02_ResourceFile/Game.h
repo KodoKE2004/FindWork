@@ -19,7 +19,7 @@ private:
 	std::unique_ptr<Camera>				 m_Camera;			// カメラ
 	std::vector<std::unique_ptr<Object>> m_Objects;			// オブジェクト
 	std::shared_ptr<MeshManager>		 m_GameMeshes;		// シーンで扱うメッシュ
-	std::shared_ptr<TextureManager>		 m_Textures;		// ゲームで扱う画像
+	std::shared_ptr<TextureManager>		 m_TextureManager;	// ゲームで扱う画像
 
 public:
 	//================================
@@ -61,7 +61,7 @@ public:
 	}
 
 	std::shared_ptr<TextureManager> GetTextures() {
-		return m_Textures;
+		return m_TextureManager;
 	}
 
 
