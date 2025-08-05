@@ -2,6 +2,7 @@
 #include "Scene.h"
 #include "../Texture2D.h"
 #include "../Application.h"
+#include "Transition/Fade.h"
 enum STEP
 {
 	OFF,
@@ -18,7 +19,7 @@ enum TRANS_MODE
 
 class TransScene : public Scene
 {
-private:
+protected:
 	Scene* m_SceneOld;
 	Scene* m_SceneNext;
 
@@ -34,7 +35,7 @@ private:
 	STEP m_Step;
 	TRANS_MODE m_TransMode;
 
-	Texture2D* m_Texture;
+	Fade* m_Fade;
 
 public:
 	void Initialize()	override;

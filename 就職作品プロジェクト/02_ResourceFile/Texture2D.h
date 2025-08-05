@@ -10,7 +10,7 @@
 //-----------------------------------------------------------------------------
 class Texture2D : public Object
 {
-private:
+protected:
 	// 描画の為の情報（メッシュに関わる情報）
 	IndexBuffer m_IndexBuffer; // インデックスバッファ
 	VertexBuffer<VERTEX_3D> m_VertexBuffer; // 頂点バッファ

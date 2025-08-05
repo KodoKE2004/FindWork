@@ -14,16 +14,9 @@ void TransScene::Initialize()
 	case TRANS_MODE::FADE:
 	{
 		m_AlphaValue = 1.0f / m_Duration;
-
-		// フェード用の画像追加
-		m_Texture = Game::GetInstance().AddObject<Texture2D>();
-
-		m_Texture->Initialize();
-		m_Texture->SetScale(SCREEN_WIDTH,SCREEN_HEIGHT,1.0f);
-		m_Texture->SetColor(0.0f, 0.0f, 0.0f, m_Alpha);
-		m_Texture->SetTexture(Game::GetInstance().GetTextures()->GetTexture("Black.png"));
-
-		m_MySceneObjects.emplace_back(m_Texture);
+		m_Fade = Game::GetInstance().AddObject<Fade>();
+		m_Fade->Initialize();
+		m_MySceneObjects.emplace_back(m_Fade);
 	}
 	break;
 	}
@@ -110,8 +103,9 @@ void TransScene::FADE_IN()
 		m_Alpha = 0.0f;
 		m_Step = FINISH;
 	}
+	auto fade = Game::GetInstance().GetObjects<Fade>();
+	fade[0]->SetColor(0.0f, 0.0f, 0.0f, m_Alpha);
 	
-	m_Texture->SetColor(0.0f, 0.0f, 0.0f, m_Alpha);
 }
 
 void TransScene::FADE_OUT()
@@ -123,6 +117,7 @@ void TransScene::FADE_OUT()
 		m_Alpha = 1.0f;
 		m_isChange = true;
 	}
-	
-	m_Texture->SetColor(0.0f, 0.0f, 0.0f, m_Alpha);
+
+	auto fade = Game::GetInstance().GetObjects<Fade>();
+	fade[0]->SetColor(0.0f, 0.0f, 0.0f, m_Alpha);
 }

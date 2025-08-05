@@ -60,6 +60,9 @@
     <Filter Include="SourceFile\Core\Manager">
       <UniqueIdentifier>{4e737cfb-490c-409d-809b-cddb0af0f435}</UniqueIdentifier>
     </Filter>
+    <Filter Include="SourceFile\Scene\Transition">
+      <UniqueIdentifier>{552df999-efdd-4f0e-a91a-0e6d5bae89d1}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="02_ResourceFile\SceneFile\TitleScene.cpp">
@@ -146,14 +149,17 @@
     <ClCompile Include="02_ResourceFile\SceneFile\GameScene.cpp">
       <Filter>SourceFile\Scene</Filter>
     </ClCompile>
-    <ClCompile Include="02_ResourceFile\SceneFile\TransScene.cpp">
-      <Filter>SourceFile\Scene</Filter>
-    </ClCompile>
     <ClCompile Include="02_ResourceFile\MeshManager.cpp">
       <Filter>SourceFile\Core\Manager</Filter>
     </ClCompile>
     <ClCompile Include="02_ResourceFile\TextureManager.cpp">
       <Filter>SourceFile\Core\Manager</Filter>
+    </ClCompile>
+    <ClCompile Include="02_ResourceFile\SceneFile\TransScene.cpp">
+      <Filter>SourceFile\Scene\Transition</Filter>
+    </ClCompile>
+    <ClCompile Include="02_ResourceFile\SceneFile\Transition\Fade.cpp">
+      <Filter>SourceFile\Scene\Transition</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -268,14 +274,17 @@
     <ClInclude Include="02_ResourceFile\SceneFile\GameScene.h">
       <Filter>SourceFile\Scene</Filter>
     </ClInclude>
-    <ClInclude Include="02_ResourceFile\SceneFile\TransScene.h">
-      <Filter>SourceFile\Scene</Filter>
-    </ClInclude>
     <ClInclude Include="02_ResourceFile\MeshManager.h">
       <Filter>SourceFile\Core\Manager</Filter>
     </ClInclude>
     <ClInclude Include="02_ResourceFile\TextureManager.h">
       <Filter>SourceFile\Core\Manager</Filter>
+    </ClInclude>
+    <ClInclude Include="02_ResourceFile\SceneFile\TransScene.h">
+      <Filter>SourceFile\Scene\Transition</Filter>
+    </ClInclude>
+    <ClInclude Include="02_ResourceFile\SceneFile\Transition\Fade.h">
+      <Filter>SourceFile\Scene\Transition</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>

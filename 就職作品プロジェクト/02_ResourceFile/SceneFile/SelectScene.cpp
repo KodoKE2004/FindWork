@@ -18,7 +18,7 @@ void SelectScene::Update()
 	
 	if (Input::GetKeyTrigger(VK_RETURN))
 	{
-		ChangeScene<GameScene>(FADE, 4.0f);
+		ChangeScene<GameScene>(FADE, 0.5f);
 	}
 }
 
