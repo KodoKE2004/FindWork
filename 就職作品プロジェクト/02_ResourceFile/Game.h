@@ -3,10 +3,11 @@
 #include "Debug.hpp"
 #include "SceneFile/Scene.h"
 #include "SceneFile/TransScene.h"
-#include "TextureManager.h"
 #include "ObjectFile/Object.h"
 #include "input.h"
 #include "MeshManager.h"
+#include "TextureManager.h"
+#include "ShaderManager.h"
 
 class SceneTrans;
 
@@ -24,6 +25,7 @@ private:
 	//================================
 	std::shared_ptr<MeshManager>		 m_GameMeshes;		// シーンで扱うメッシュ
 	std::shared_ptr<TextureManager>		 m_TextureManager;	// ゲームで扱う画像
+	std::shared_ptr<ShaderManager>		 m_ShaderManager;	// シェーダーをまとめたもの
 
 public:
 	//================================
@@ -64,10 +66,13 @@ public:
 		return m_GameMeshes;
 	}
 
-	std::shared_ptr<TextureManager> GetTextures() {
+	std::shared_ptr<TextureManager> GetTextureManager() {
 		return m_TextureManager;
 	}
 
+	std::shared_ptr<ShaderManager> GetShaderManager() {
+		return m_ShaderManager;
+	}
 
 	//================================
 	// オブジェクト管理

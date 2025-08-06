@@ -11,6 +11,8 @@ using Microsoft::WRL::ComPtr;
 class Shader {
 public:
 	void Create(std::string vs, std::string ps);
+	void CreateVS(std::string vs);
+	void CreatePS(std::string  ps);
 	void SetGPU();
 private:
 	ID3D11VertexShader* m_pVertexShader;		// 頂点シェーダー

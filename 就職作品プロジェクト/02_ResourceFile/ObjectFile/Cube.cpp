@@ -185,7 +185,7 @@ void Cube::Initialize()
 	m_Shader.Create("02_ResourceFile/ShaderFile/VS_Default.hlsl", "02_ResourceFile/ShaderFile/PS_Default.hlsl");
 
 	//テクスチャロード
-	m_Texture = *Game::GetInstance().GetTextures()->GetTexture("dice.png");
+	m_Texture = *Game::GetInstance().GetTextureManager()->GetTexture("dice.png");
 
 	m_Camera->SetCamera(CAMERA_3D);
 }

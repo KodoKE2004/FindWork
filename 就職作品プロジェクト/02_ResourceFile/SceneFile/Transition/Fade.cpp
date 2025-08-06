@@ -10,7 +10,7 @@ Fade::Fade(Camera* cam) : Texture2D(cam)
 void Fade::Initialize()
 {
 	// フェード用の画像追加
-	m_Texture = Game::GetInstance().GetTextures()->GetTexture("Black.png");
+	m_Texture = Game::GetInstance().GetTextureManager()->GetTexture("Black.png");
 	SetScale(SCREEN_WIDTH, SCREEN_HEIGHT, 1.0f);
 	SetColor(0.0f, 0.0f, 0.0f, 0.0f);
 
