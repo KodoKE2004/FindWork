@@ -8,17 +8,21 @@
 #include <memory>
 #include <vector>
 
+
+struct MeshInfo {
+    std::shared_ptr<MeshModel> mesh;
+    std::string filePath;
+    std::string texDirectory;
+};
+
 /// <summary>
 /// オブジェクトモデル基底クラス
 /// </summary>
 class Model : public Object
 {
 private:
-    std::string m_Name;
-    std::string m_FilePath;
-    std::string m_TexDirectory;
-
-    std::shared_ptr<MeshModel> m_MeshModel;
+    std::string  m_MeshName;
+    MeshInfo     m_MeshModel;
     MeshRenderer m_MeshRenderer;
 
     VertexBuffer<VERTEX_3D> m_VertexBuffer;

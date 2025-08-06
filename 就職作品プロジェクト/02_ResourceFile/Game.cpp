@@ -25,9 +25,9 @@ void Game::Initialize()
 	instance.GetCamera()->Initialize();											// カメラの初期化
 
 	instance.m_GameMeshes = std::make_shared<MeshManager>();
-	instance.m_TextureManager   = std::make_shared<TextureManager>();
+	instance.m_TextureManager   = std::make_shared<TextureManager>("01_AssetFile/Texture/");
 	
-	instance.m_GameMeshes->AddMeshModel("RedMan", "Akai.fbx", "Akai");
+	instance.m_GameMeshes->AddMeshModel("RedMan" , "Akai.fbx", "Akai");
 	instance.m_GameMeshes->AddMeshModel("Pokemon", "Porygon.fbx", "Porygon");
 	instance.m_GameMeshes->AddMeshModel("aaa"    , "plane.fbx"  , "plane"  );
 
@@ -47,7 +47,7 @@ void Game::Update()
 	instance.m_Camera->Update();
 	// 入力の更新
 	// オブジェクトの更新
-	for (auto& o : instance.m_Objects)
+	for (auto& o : instance.m_GameObjects)
 	{
 		if(o == nullptr){ continue; }
 		o->Update(); // オブジェクトの更新
@@ -60,7 +60,7 @@ void Game::Draw()
 	Renderer::Start();		// 描画の開始
 
 	// オブジェクト描画
-	for (auto& o : instance.m_Objects)
+	for (auto& o : instance.m_GameObjects)
 	{
 		o->Draw();
 	}
@@ -106,26 +106,26 @@ void Game::DeleteObject(Object* pt)
 	pt->Finalize(); // 終了処理
 
 	// 要素を削除
-	instance.m_Objects.erase(
+	instance.m_GameObjects.erase(
 		std::remove_if(
-			instance.m_Objects.begin(),
-			instance.m_Objects.end(),
+			instance.m_GameObjects.begin(),
+			instance.m_GameObjects.end(),
 			[pt](const std::unique_ptr<Object>& element) {return element.get() == pt; }),
-			instance.m_Objects.end());
+			instance.m_GameObjects.end());
 
-	instance.m_Objects.shrink_to_fit();
+	instance.m_GameObjects.shrink_to_fit();
 }
 
 void Game::DeleteAllObject()
 {
 	auto& instance = GetInstance();
 	// オブジェクト終了処理
-	for (auto& o : m_pInstance->m_Objects)
+	for (auto& o : m_pInstance->m_GameObjects)
 	{
 		o->Finalize();
 	}
 
-	instance.m_Objects.clear();
+	instance.m_GameObjects.clear();
 	instance.m_GameMeshes->Clear();
-	instance.m_Objects.shrink_to_fit();
+	instance.m_GameObjects.shrink_to_fit();
 }

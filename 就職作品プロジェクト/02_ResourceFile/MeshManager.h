@@ -1,55 +1,49 @@
 #pragma once
 #include "MeshModel.h"
+#include "ObjectFile/Model.h"
 #include <vector>
 #include <string>
 #include <memory>
-
+#include <unordered_map>
 
 class MeshManager
 {
 private:
 
-	struct MeshInfo
-	{
-		std::string					name;
-		std::shared_ptr<MeshModel>	mesh;
-		std::string					filePath;
-		std::string					texDirectory;
-	};
+	
 
-	std::vector<MeshInfo> m_MeshInfo;
+	/// 登録名 → MeshInfo のマップ
+	std::unordered_map<std::string, MeshInfo> m_MeshMap;
 
-	short findNumber = 0;
+	/// デフォルト（NULL）モデルの登録名 ("NULL")
+	static constexpr const char* kDefaultName = "NULL";
 
 public:
-	MeshManager();
-	void Clear();
+    MeshManager();
+    ~MeshManager() = default;
 
-	/// <summary>
-	/// Meshの追加
-	/// 
-	/// モデルのファイル構成
-	/// ・fbxとテクスチャが同じフォルダ内に存在している前提
-	/// ・texDirectryの中にfbxが存在しないと成り立たない
-	/// </summary>
-	/// <param name="modelName"></param>名前を登録してモデルを取得
-	/// <param name="modelPath"></param>fbxで指定してよいようにする
-	/// <param name="texDirectory"></param>パス名は直前まででよい　
-	void AddMeshModel(std::string modelName,std::string modelPath,std::string texDirectory);
+    /// @brief キャッシュをクリア
+    void Clear();
 
-	std::shared_ptr<MeshModel> GetMeshModel(std::string modelName);
+    /// @brief MeshModel を追加してキャッシュ
+    /// @param modelName 登録名
+    /// @param modelPath  fbx ファイル名（ベースディレクトリは内部で構築）
+    /// @param texDirectory テクスチャフォルダ名（ベースディレクトリは内部で構築）
+    /// @return 追加成功なら true（未登録かつロード成功）、重複／失敗なら false
+    bool AddMeshModel(const std::string& modelName,
+        const std::string& modelPath,
+        const std::string& texDirectory);
 
-	/// <summary>
-	/// 名前のチェック　
-	/// 引数の文字列と同じ名前があるか調べる
-	/// true = 同名なし false = 同名あり
-	/// </summary>
-	/// <param name="registName"></param>
-	/// <returns></returns>
-	bool IsNameCheck(std::string registName);
+    /// @brief 登録済みの MeshModel を取得
+    /// @param modelName 登録名
+    /// @return 成功時は shared_ptr、失敗時はデフォルト登録（NULL）の MeshModel
+    std::shared_ptr<MeshModel> GetMeshModel(const std::string& modelName);
 
-	std::string GetFilePath(std::string modelName);
-	std::string GetTextureDirectory(std::string modelName);
+    /// @brief ファイルパスを取得
+    std::string GetFilePath(const std::string& modelName);
+
+    /// @brief テクスチャディレクトリを取得
+    std::string GetTextureDirectory(const std::string& modelName);
 
 };
 

@@ -1,49 +1,47 @@
 #include "TextureManager.h"
-#include "Game.h"
+#include "Texture.h"
 #include "Debug.hpp"
 
-bool TextureManager::CheckTexturePath(std::string checkPath)
+TextureManager::TextureManager(const std::string& basePath)
+    : m_FilePath(basePath)
 {
-    m_RegistNumber = 0;
-    for (auto registedPath : m_TexturePath)
-    {
-        if (checkPath == registedPath)
-        {
-            return true;
-        }
-        m_RegistNumber++;
-    }
-    return false;
 }
 
-void TextureManager::AddTexture(std::string addPath)
-{
-    if (CheckTexturePath(addPath)) { 
-        Debug::Log("取得済み : " + addPath);
-        return;
-    }
-    
-    Texture* registTex = new Texture;
-    std::string texDirectory = m_filePath + addPath;
-    
-    if (registTex->LoadFromFile(texDirectory))
-    {
-        m_TexturePath.emplace_back(addPath);
-        m_Textures   .emplace_back(registTex);
-        Debug::Log("成功 Texture登録 : " + addPath);
-        return;
-    }
+TextureManager::~TextureManager() = default;
 
-    Debug::Log("失敗 Texture登録 : " + addPath);
-    return;
+bool TextureManager::HasTexture(const std::string& relativePath) const {
+    return m_TextureList.find(relativePath) != m_TextureList.end();
 }
 
-Texture* TextureManager::GetTexture(std::string texturePath)
-{
-    if (CheckTexturePath(texturePath)) {
-        return m_Textures[m_RegistNumber].get();
+bool TextureManager::AddTexture(const std::string& relativePath) {
+    if (HasTexture(relativePath)) {
+        Debug::Log("ロード済みのテクスチャ: " + relativePath);
+        return false;
     }
 
-    AddTexture(texturePath);
-    return m_Textures[m_Textures.size() - 1].get();
+    std::string fullPath = m_FilePath + relativePath;
+    auto tex = std::make_unique<Texture>();
+    if (!tex->LoadFromFile(fullPath)) {
+        Debug::Log("ロードに失敗しました : " + relativePath);
+        return false;
+    }
+
+    Debug::Log("ロード成功 リストに追加します: " + relativePath);
+    m_TextureList.emplace(relativePath, std::move(tex));
+    return true;
+}
+
+Texture* TextureManager::GetTexture(const std::string& relativePath) {
+    auto it = m_TextureList.find(relativePath);
+    if (it != m_TextureList.end()) {
+        Debug::Log("テクスチャを取得しました : " + relativePath);
+        return it->second.get();
+    }
+
+    // 未ロードなら AddTexture に委譲
+    if (AddTexture(relativePath)) {
+        return m_TextureList[relativePath].get();
+    }
+    // ロード失敗
+    return nullptr;
 }

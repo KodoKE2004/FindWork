@@ -38,6 +38,7 @@
     <ClCompile Include="02_ResourceFile\SceneFile\Transition\Fade.cpp" />
     <ClCompile Include="02_ResourceFile\SceneFile\TransScene.cpp" />
     <ClCompile Include="02_ResourceFile\Shader.cpp" />
+    <ClCompile Include="02_ResourceFile\ShaderManager.cpp" />
     <ClCompile Include="02_ResourceFile\TestFile\TestPlane.cpp" />
     <ClCompile Include="02_ResourceFile\Texture2D.cpp" />
     <ClCompile Include="02_ResourceFile\Texture.cpp" />
@@ -79,6 +80,7 @@
     <ClInclude Include="02_ResourceFile\SceneFile\Transition\Fade.h" />
     <ClInclude Include="02_ResourceFile\SceneFile\TransScene.h" />
     <ClInclude Include="02_ResourceFile\Shader.h" />
+    <ClInclude Include="02_ResourceFile\ShaderManager.h" />
     <ClInclude Include="02_ResourceFile\TestFile\TestPlane.h" />
     <ClInclude Include="02_ResourceFile\Texture2D.h" />
     <ClInclude Include="02_ResourceFile\Texture.h" />

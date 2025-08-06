@@ -15,7 +15,6 @@ void TransScene::Initialize()
 	{
 		m_AlphaValue = 1.0f / m_Duration;
 		m_Fade = Game::GetInstance().AddObject<Fade>();
-		m_Fade->Initialize();
 		m_MySceneObjects.emplace_back(m_Fade);
 	}
 	break;

@@ -1,27 +1,35 @@
 #pragma once
 #include "Texture.h"
-#include <vector>
+#include <unordered_map>
 #include <memory>
 #include <string>
 
 class TextureManager
 {
 private:
-	std::vector<std::string>			  m_TexturePath;
-	std::vector<std::shared_ptr<Texture>> m_Textures;
+	std::unordered_map<std::string, std::unique_ptr<Texture>> m_TextureList;	
 	short m_RegistNumber = 0;
 
-	const char* m_filePath = "01_AssetFile/Texture/" ;
+	std::string m_FilePath;
 
 public:
-	bool	 CheckTexturePath(std::string chackPath);
-	void	 AddTexture		 (std::string addPath);
+    /// @param basePath テクスチャファイルのベースディレクトリ
+    explicit TextureManager(const std::string& basePath);
+    ~TextureManager();
 
-	/// @brief TextureをGame::GetTexturesから探す
-	///	       なかった場合はその場で追加する
-	/// @param texturePath 
-	/// @return 
-	Texture* GetTexture		 (std::string texturePath);
+    /// @brief 指定パスのテクスチャを取得（未ロードならロードしてキャッシュ）
+    /// @param relativePath ベースパスからの相対パス
+    /// @return 読み込み成功なら Texture*、失敗なら nullptr
+    Texture* GetTexture(const std::string& relativePath);
 
+    /// @brief 明示的にテクスチャをロードしてキャッシュに追加
+    /// @param relativePath ベースパスからの相対パス
+    /// @return 追加成功なら true（未ロードかつロード成功）、既にロード済み／失敗なら false
+    bool AddTexture(const std::string& relativePath);
+
+    /// @brief テクスチャがキャッシュ済みかをチェック
+    /// @param relativePath ベースパスからの相対パス
+    /// @return ロード済みなら true
+    bool HasTexture(const std::string& relativePath) const;
 };
 

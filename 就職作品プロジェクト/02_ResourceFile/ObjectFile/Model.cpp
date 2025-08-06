@@ -10,7 +10,7 @@ void Model::Initialize()
     
 
     //Meshを読み込む
-    m_MeshModel = std::make_shared<MeshModel>();
+    m_MeshModel.mesh = std::make_shared<MeshModel>();
     GetMeshModel("NULL");
 
     m_Shader.Create("02_ResourceFile/ShaderFile/VS_Default.hlsl",
@@ -18,7 +18,7 @@ void Model::Initialize()
 
     //カメラの設定を指定
     m_Camera->SetCamera(CAMERA_3D);
-    for (const auto& mtrl : m_MeshModel->GetMaterials())
+    for (const auto& mtrl : m_MeshModel.mesh->GetMaterials())
     {
         auto mat = std::make_unique<Material>();
         mat->Create(mtrl);
@@ -74,23 +74,25 @@ void Model::Finalize()
 
 void Model::GetMeshModel(std::string modelName)
 {
-    if(modelName == m_Name){ return; }
+    if (m_MeshName == modelName)
+    {
+        Debug::Log("現在所持しているモデルです : " + modelName);
+        return;
+    }
 
     std::cout << "Modelの取得処理開始 : " << modelName << std::endl;
-    m_Name          = modelName;
-    m_MeshModel     = Game::GetInstance().GetMeshManager()->GetMeshModel(modelName);
-    m_FilePath      = Game::GetInstance().GetMeshManager()->GetFilePath(modelName);
-    m_TexDirectory  = Game::GetInstance().GetMeshManager()->GetTextureDirectory(modelName);
 
-    m_MeshRenderer.Init(*m_MeshModel.get());
-    m_VertexBuffer.Create(m_MeshModel->GetVertices());
-    m_IndexBuffer.Create(m_MeshModel->GetIndices());
+    m_MeshModel.mesh = Game::GetInstance().GetMeshManager()->GetMeshModel(modelName);
 
-    m_Subsets  = m_MeshModel->GetSubsets();
-    m_Textures = m_MeshModel->GetTextures();
+    m_MeshRenderer.Init(*m_MeshModel.mesh.get());
+    m_VertexBuffer.Create(m_MeshModel.mesh->GetVertices());
+    m_IndexBuffer.Create (m_MeshModel.mesh->GetIndices());
+
+    m_Subsets  = m_MeshModel.mesh->GetSubsets();
+    m_Textures = m_MeshModel.mesh->GetTextures();
 
     m_Materials.clear();
-    for (const auto& mtrl : m_MeshModel->GetMaterials())
+    for (const auto& mtrl : m_MeshModel.mesh->GetMaterials())
     {
         auto mat = std::make_unique<Material>();
         mat->Create(mtrl);
