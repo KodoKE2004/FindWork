@@ -224,10 +224,20 @@ bool CreatePixelShader(ID3D11Device* device,
 	return true;
 }
 
+bool CreateGeometryShader(ID3D11Device* device, const char* hlslPath, const char* entry, const char* profile, ID3D11GeometryShader** outShader)
+{
+	return false;
+}
 
-/*----------------------------
-コンスタントバッファを作成
-------------------------------*/
+bool CreateComputeShader(ID3D11Device* device, const char* hlslPath, const char* entry, const char* profile, ID3D11ComputeShader** outShader)
+{
+	return false;
+}
+
+
+//======================================
+//			コンスタントバッファを作成
+//======================================
 bool CreateConstantBuffer(
 	ID3D11Device* device,					// デバイスオブジェクト
 	unsigned int bytesize,					// コンスタントバッファサイズ
@@ -252,9 +262,9 @@ bool CreateConstantBuffer(
 	return true;
 }
 
-/*----------------------------
-コンスタントバッファを作成(MAPで書き換え可能)
-------------------------------*/
+//======================================
+//	コンスタントバッファを作成(MAPで書き換え可能)
+//======================================
 bool CreateConstantBufferWrite(
 	ID3D11Device* device,					// デバイスオブジェクト
 	unsigned int bytesize,					// コンスタントバッファサイズ
@@ -572,4 +582,52 @@ bool CreateUnOrderAccessView(
 	}
 
 	return true;
+}
+
+bool CreateGeometryShader(
+	ID3D11Device* device,
+	const char* hlslPath, const char* entry, const char* profile,
+	ID3D11GeometryShader** outShader)
+{
+	HRESULT hr;
+	ID3DBlob* pBlob = nullptr;
+
+	void* shaderObject = nullptr;
+	size_t shaderObjSize = 0;
+
+	// .cso / .hlsl を拡張子に合わせてコンパイル or 読み込み
+	hr = CompileShader(hlslPath, entry, profile, &shaderObject, shaderObjSize, &pBlob);
+	if (FAILED(hr)) {
+		if (pBlob) pBlob->Release();
+		return false;
+	}
+
+	// ジオメトリシェーダー生成
+	hr = device->CreateGeometryShader(shaderObject, shaderObjSize, nullptr, outShader);
+	if (pBlob) pBlob->Release();
+	return SUCCEEDED(hr);
+}
+
+bool CreateComputeShader(
+	ID3D11Device* device,
+	const char* hlslPath, const char* entry, const char* profile,
+	ID3D11ComputeShader** outShader)
+{
+	HRESULT hr;
+	ID3DBlob* pBlob = nullptr;
+
+	void* shaderObject = nullptr;
+	size_t shaderObjSize = 0;
+
+	// .cso / .hlsl を拡張子に合わせてコンパイル or 読み込み
+	hr = CompileShader(hlslPath, entry, profile, &shaderObject, shaderObjSize, &pBlob);
+	if (FAILED(hr)) {
+		if (pBlob) pBlob->Release();
+		return false;
+	}
+
+	// コンピュートシェーダー生成
+	hr = device->CreateComputeShader(shaderObject, shaderObjSize, nullptr, outShader);
+	if (pBlob) pBlob->Release();
+	return SUCCEEDED(hr);
 }

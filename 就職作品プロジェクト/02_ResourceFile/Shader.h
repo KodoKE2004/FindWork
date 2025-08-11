@@ -5,17 +5,85 @@
 
 using Microsoft::WRL::ComPtr;
 
-//-----------------------------------------------------------------------------
-//Shaderクラス
-//-----------------------------------------------------------------------------
-class Shader {
+enum class ShaderStage {
+	VS,
+	PS,
+	GS,
+	CS
+};
+
+
+//======================================
+//				Shaderクラス
+//======================================
+class BaseShader {
+protected:
+	std::string m_HlslName;
+	ShaderStage m_ShaderStage;
 public:
-	void Create(std::string vs, std::string ps);
-	void CreateVS(std::string vs);
-	void CreatePS(std::string  ps);
-	void SetGPU();
+	BaseShader() = default;
+	BaseShader(std::string hlslName, ShaderStage stage) : m_HlslName(hlslName), m_ShaderStage(stage) {}
+	BaseShader* TryCreateShaderFromName();
+
+	// シェーダーの名前とステージを設定
+	void SetHlslName(std::string hlslName) { m_HlslName = std::move(hlslName); }
+	void SetShaderStage(ShaderStage stage) { m_ShaderStage = stage; }
+
+	// シェーダーの名前とステージを取得
+	std::string GetHlslName()	 const { return m_HlslName; }
+	ShaderStage GetShaderStage() const { return m_ShaderStage; }
+
+	virtual ~BaseShader() = 0;
+	virtual void Create(std::string hlslName) = 0;
+	virtual void SetGPU() = 0;
+};
+
+//======================================
+//			VertexShaderクラス
+//======================================
+class VertexShader : public BaseShader 
+{
 private:
-	ID3D11VertexShader* m_pVertexShader;		// 頂点シェーダー
-	ID3D11PixelShader*  m_pPixelShader;			// ピクセルシェーダー
-	ID3D11InputLayout*  m_pVertexLayout;		// 頂点レイアウト
+	ComPtr<ID3D11VertexShader> m_VertexShader;
+	ComPtr<ID3D11InputLayout> m_InputLayout;
+public:
+	void Create(std::string hlslName) override;
+	void SetGPU();
+};
+
+//======================================
+//			PixelShaderクラス
+//======================================
+class PixelShader : public BaseShader 
+{
+private:
+	ComPtr<ID3D11PixelShader> m_PixelShader;
+
+public:
+	void Create(std::string hlslName) override;
+	void SetGPU();
+};
+
+//======================================
+//			ComputeShaderクラス
+//======================================
+class ComputeShader : public BaseShader 
+{
+private:
+	ComPtr<ID3D11ComputeShader> m_ComputeShader;
+public:
+	void Create(std::string hlslName) override;
+	void SetGPU();
+};
+
+//======================================
+//			GeometoryShaderクラス
+//======================================
+class GeometryShader : public BaseShader 
+{
+private:
+	ComPtr<ID3D11GeometryShader> m_GeometryShader;
+public:
+	void Create(std::string hlslName) override;
+	void SetGPU();
 };
