@@ -28,7 +28,8 @@ void Game::Initialize()
 	instance.m_TextureManager	= std::make_shared<TextureManager>("01_AssetFile/Texture/");
 	instance.m_ShaderManager    = std::make_shared<ShaderManager>("02_ResourceFile/ShaderFile/");
 	
-	instance.m_ShaderManager->Load("Default");
+	instance.m_ShaderManager->AddShader("VS_Default",ShaderStage::VS);
+	instance.m_ShaderManager->AddShader("PS_Default",ShaderStage::PS);
 
 	instance.m_GameMeshes->AddMeshModel("RedMan" , "Akai.fbx", "Akai");
 	instance.m_GameMeshes->AddMeshModel("Pokemon", "Porygon.fbx", "Porygon");

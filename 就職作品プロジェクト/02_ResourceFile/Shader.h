@@ -34,7 +34,7 @@ public:
 	ShaderStage GetShaderStage() const { return m_ShaderStage; }
 
 	virtual ~BaseShader() = 0;
-	virtual void Create(std::string hlslName) = 0;
+	virtual bool Create(std::string hlslName) = 0;
 	virtual void SetGPU() = 0;
 };
 
@@ -47,7 +47,7 @@ private:
 	ComPtr<ID3D11VertexShader> m_VertexShader;
 	ComPtr<ID3D11InputLayout> m_InputLayout;
 public:
-	void Create(std::string hlslName) override;
+	bool Create(std::string hlslName) override;
 	void SetGPU();
 };
 
@@ -60,7 +60,7 @@ private:
 	ComPtr<ID3D11PixelShader> m_PixelShader;
 
 public:
-	void Create(std::string hlslName) override;
+	bool Create(std::string hlslName) override;
 	void SetGPU();
 };
 
@@ -72,7 +72,7 @@ class ComputeShader : public BaseShader
 private:
 	ComPtr<ID3D11ComputeShader> m_ComputeShader;
 public:
-	void Create(std::string hlslName) override;
+	bool Create(std::string hlslName) override;
 	void SetGPU();
 };
 
@@ -84,6 +84,6 @@ class GeometryShader : public BaseShader
 private:
 	ComPtr<ID3D11GeometryShader> m_GeometryShader;
 public:
-	void Create(std::string hlslName) override;
+	bool Create(std::string hlslName) override;
 	void SetGPU();
 };

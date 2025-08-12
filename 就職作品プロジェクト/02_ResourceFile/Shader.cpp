@@ -128,10 +128,11 @@ BaseShader* BaseShader::TryCreateShaderFromName()
     }
 }
 
-    //======================================
+//======================================
 //			VertexShaderクラス
 //======================================
-void VertexShader::Create(std::string hlslName)
+bool
+VertexShader::Create(std::string hlslName)
 {
     m_HlslName = std::move(hlslName);
     m_ShaderStage = ShaderStage::VS;
@@ -168,7 +169,8 @@ void VertexShader::SetGPU()
 //======================================
 //			PixelShaderクラス
 //======================================
-void PixelShader::Create(std::string hlslName)
+bool
+PixelShader::Create(std::string hlslName)
 {
     m_HlslName = std::move(hlslName);
     m_ShaderStage = ShaderStage::PS;
@@ -194,7 +196,8 @@ void PixelShader::SetGPU()
 //======================================
 //			ComputeShaderクラス
 //======================================
-void GeometryShader::Create(std::string hlslName)
+bool
+GeometryShader::Create(std::string hlslName)
 {
     m_HlslName = std::move(hlslName);
     m_ShaderStage = ShaderStage::GS;
@@ -219,7 +222,7 @@ void GeometryShader::SetGPU()
 //======================================
 //			GeometoryShaderクラス
 //======================================
-void ComputeShader::Create(std::string hlslName)
+bool ComputeShader::Create(std::string hlslName)
 {
     m_HlslName = std::move(hlslName);
     m_ShaderStage = ShaderStage::CS;
