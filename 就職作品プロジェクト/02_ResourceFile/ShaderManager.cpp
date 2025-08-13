@@ -3,6 +3,12 @@
 
 ShaderManager::ShaderManager(std::string entryPoint) : m_EntryPoint(std::move(entryPoint))
 {
+    if (!m_EntryPoint.empty()) {
+        char back = m_EntryPoint.back();
+        if (back != '/' && back != '\\') {
+            m_EntryPoint.push_back('/');
+        }
+    }
 }
 void ShaderManager::AddShader(const std::string& name, ShaderStage stage)
 {
@@ -40,18 +46,18 @@ void ShaderManager::AddShader(const std::string& name, ShaderStage stage)
     }
 
     // ƒvƒƒpƒeƒBÝ’è ¨ Create ŽÀs
-    shader->SetHlslName(name + "hlsl");
+    shader->SetHlslName(m_EntryPoint + name + ".hlsl");
     shader->SetShaderStage(s);
 
     if (!shader->Create(shader->GetHlslName())) {
         delete shader; // Ž¸”sŽž‚Í‰ð•ú
-        Debug::Log("ShaderManager: Failed to create shader object for name '" + name + "'.");
+        Debug::Log("ShaderManager: “o˜^Ž¸”s '" + name + "'.");
         return;
     }
 
     // “o˜^
     m_ShaderList[name] = shader;
-    Debug::Log("ShaderManager: Registered shader '" + name + "'.");
+    Debug::Log("ShaderManager: “o˜^Š®—¹ '" + name + "'.");
 }
 
 bool ShaderManager::HasShader(const std::string& shaderName) const
