@@ -113,6 +113,8 @@
 //	devicecontext->IASetInputLayout(m_pVertexLayout);				// 頂点レイアウトセット
 //}
 
+BaseShader::~BaseShader() = default;
+
 BaseShader* BaseShader::TryCreateShaderFromName()
 {
 
@@ -131,8 +133,7 @@ BaseShader* BaseShader::TryCreateShaderFromName()
 //======================================
 //			VertexShaderクラス
 //======================================
-bool
-VertexShader::Create(std::string hlslName)
+bool VertexShader::Create(std::string hlslName)
 {
     m_HlslName = std::move(hlslName);
     m_ShaderStage = ShaderStage::VS;
@@ -145,7 +146,7 @@ VertexShader::Create(std::string hlslName)
     };
 
     auto* device = Renderer::GetDevice();
-    CreateVertexShader(
+    bool res = CreateVertexShader(
         device,
         m_HlslName.c_str(),
         "main",
@@ -155,6 +156,8 @@ VertexShader::Create(std::string hlslName)
         m_VertexShader.GetAddressOf(),
         m_InputLayout.GetAddressOf()
     );
+
+    return res;
 }
 
 void VertexShader::SetGPU()
@@ -176,13 +179,15 @@ PixelShader::Create(std::string hlslName)
     m_ShaderStage = ShaderStage::PS;
 
     auto* device = Renderer::GetDevice();
-    CreatePixelShader(
+    bool res = CreatePixelShader(
         device,
         m_HlslName.c_str(),
         "main",
         "ps_5_0",
         m_PixelShader.GetAddressOf()
     );
+
+    return res;
 }
 
 void PixelShader::SetGPU()
@@ -196,20 +201,20 @@ void PixelShader::SetGPU()
 //======================================
 //			ComputeShaderクラス
 //======================================
-bool
-GeometryShader::Create(std::string hlslName)
+bool GeometryShader::Create(std::string hlslName)
 {
     m_HlslName = std::move(hlslName);
     m_ShaderStage = ShaderStage::GS;
 
     auto* device = Renderer::GetDevice();
-    CreateGeometryShader(
+    bool res =  CreateGeometryShader(
         device,
         m_HlslName.c_str(),
         "main",
         "gs_5_0",
         m_GeometryShader.GetAddressOf()
     );
+    return res;
 }
 
 void GeometryShader::SetGPU()
@@ -228,13 +233,15 @@ bool ComputeShader::Create(std::string hlslName)
     m_ShaderStage = ShaderStage::CS;
 
     auto* device = Renderer::GetDevice();
-    CreateComputeShader(
+    bool res = CreateComputeShader(
         device,
         m_HlslName.c_str(),
         "main",
         "cs_5_0",
         m_ComputeShader.GetAddressOf()
     );
+
+    return res;
 }
 
 void ComputeShader::SetGPU()

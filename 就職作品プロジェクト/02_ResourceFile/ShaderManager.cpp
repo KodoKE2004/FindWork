@@ -6,29 +6,52 @@ ShaderManager::ShaderManager(std::string entryPoint) : m_EntryPoint(std::move(en
 }
 void ShaderManager::AddShader(const std::string& name, ShaderStage stage)
 {
-	if (HasShader(name)) {
-		Debug::Log("ShaderManager: 登録済み '" + name + "' already exists.");
-		return;
-	}
-	
-	// ここでBaseShaderのポインタを生成
-	BaseShader* shader;
-	shader->SetHlslName(name);		
-	shader->SetShaderStage(stage);	
-	shader = shader->TryCreateShaderFromName();
+    if (HasShader(name)) {
+        Debug::Log("ShaderManager: 登録済み '" + name + "' already exists.");
+        return;
+    }
 
-	if(!shader) {
-		Debug::Log("ShaderManager: Failed to create shader for name '" + name + "'.");
-		return;
-	}
+    // ステージが不明なら名前接頭辞から推定（例: VS_, PS_, GS_, CS_）
+    ShaderStage s = stage;
+    switch (s) {
+    case ShaderStage::VS:
+    case ShaderStage::PS:
+    case ShaderStage::GS:
+    case ShaderStage::CS:
+        break; // 既に明示されている
+    default:
+        if (!InferStageFromName(name, s)) {
+            Debug::Log("ShaderManager: could not infer stage from '" + name + "'.");
+            return;
+        }
+        break;
+    }
 
-	if (shader->Create(name) == false) {
-		delete shader; // 失敗した場合はメモリを解放
-		Debug::Log("ShaderManager: Failed to create shader object for name '" + name + "'.");
-		return;
-	}
-	m_ShaderList[name] = shader;
-	Debug::Log("ShaderManager: Registered shader '" + name + "'.");
+    // ステージに応じて派生クラスを生成
+    BaseShader* shader = nullptr;
+    switch (s) {
+    case ShaderStage::VS: shader = new VertexShader();  break;
+    case ShaderStage::PS: shader = new PixelShader();   break;
+    case ShaderStage::GS: shader = new GeometryShader(); break;
+    case ShaderStage::CS: shader = new ComputeShader(); break;
+    default:
+        Debug::Log("ShaderManager: unsupported stage for '" + name + "'.");
+        return;
+    }
+
+    // プロパティ設定 → Create 実行
+    shader->SetHlslName(name + "hlsl");
+    shader->SetShaderStage(s);
+
+    if (!shader->Create(shader->GetHlslName())) {
+        delete shader; // 失敗時は解放
+        Debug::Log("ShaderManager: Failed to create shader object for name '" + name + "'.");
+        return;
+    }
+
+    // 登録
+    m_ShaderList[name] = shader;
+    Debug::Log("ShaderManager: Registered shader '" + name + "'.");
 }
 
 bool ShaderManager::HasShader(const std::string& shaderName) const

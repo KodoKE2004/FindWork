@@ -1,4 +1,5 @@
 #include	"TestPlane.h"
+#include	"../Game.h"
 #include	"../input.h"
 using namespace DirectX::SimpleMath;
 
@@ -43,8 +44,9 @@ void TestPlane::Init()
 	m_IndexBuffer.Create(indices);
 
 	// シェーダオブジェクト生成
-	m_Shader.Create("02_ResourceFile/ShaderFile/VS_Default.hlsl","02_ResourceFile/ShaderFile/PS_Default.hlsl");
-
+	auto shaderMgr = Game::GetInstance().GetShaderManager();
+	m_Shaders.emplace_back(shaderMgr->GetShader("VS_Default"));
+	m_Shaders.emplace_back(shaderMgr->GetShader("PS_Default"));
 	//テクスチャロード
 	bool sts = m_Texture.LoadFromFile("01_AssetFile/Texture/background1.png");
 	assert(sts == true);
@@ -99,7 +101,7 @@ void TestPlane::Draw()
 	// トポロジーをセット（プリミティブタイプ）
 	devicecontext->IASetPrimitiveTopology(D3D11_PRIMITIVE_TOPOLOGY_TRIANGLESTRIP);
 
-	m_Shader.SetGPU();
+	for(auto shader :m_Shaders) shader->SetGPU();
 	m_VertexBuffer.SetGPU();
 	m_IndexBuffer.SetGPU();
 

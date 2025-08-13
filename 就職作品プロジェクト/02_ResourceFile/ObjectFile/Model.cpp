@@ -13,9 +13,11 @@ void Model::Initialize()
     m_MeshModel.mesh = std::make_shared<MeshModel>();
     GetMeshModel("NULL");
 
-    m_Shader.Create("02_ResourceFile/ShaderFile/VS_Default.hlsl",
-                    "02_ResourceFile/ShaderFile/PS_Default.hlsl");
-
+    auto shaderManager = Game::GetInstance().GetShaderManager();
+    m_Shaders = {
+        shaderManager->GetShader("VS_Default"),
+        shaderManager->GetShader("PS_Default"),
+    };
     //カメラの設定を指定
     m_Camera->SetCamera(CAMERA_3D);
     for (const auto& mtrl : m_MeshModel.mesh->GetMaterials())
@@ -43,8 +45,11 @@ void Model::Draw()
     Matrix world = s * r * t;
     Renderer::SetWorldMatrix(&world);
 
-    m_Shader.SetGPU();
-
+    for (auto* shader : m_Shaders) {
+        if (shader) {
+            shader->SetGPU();
+        }
+    }
     // インデックスバッファ・頂点バッファをセット
     m_MeshRenderer.BeforeDraw();
 

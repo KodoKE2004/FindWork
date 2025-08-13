@@ -1,4 +1,5 @@
 #include "Texture2D.h"
+#include "Game.h"
 
 using namespace std;
 using namespace DirectX::SimpleMath;
@@ -25,10 +26,10 @@ void Texture2D::Initialize()
 
 	vertices.resize(4);
 
-	vertices[0].position = NVector3(-0.5f,  0.5f, 0.0f);
-	vertices[1].position = NVector3( 0.5f,  0.5f, 0.0f);
+	vertices[0].position = NVector3(-0.5f, 0.5f, 0.0f);
+	vertices[1].position = NVector3(0.5f, 0.5f, 0.0f);
 	vertices[2].position = NVector3(-0.5f, -0.5f, 0.0f);
-	vertices[3].position = NVector3( 0.5f, -0.5f, 0.0f);
+	vertices[3].position = NVector3(0.5f, -0.5f, 0.0f);
 
 	vertices[0].color = Color(1.0f, 1.0f, 1.0f, 1.0f);
 	vertices[1].color = Color(1.0f, 1.0f, 1.0f, 1.0f);
@@ -40,10 +41,8 @@ void Texture2D::Initialize()
 	vertices[2].uv = Vector2(0.0f, 1.0f);
 	vertices[3].uv = Vector2(1.0f, 1.0f);
 
-	// 頂点バッファ生成
 	m_VertexBuffer.Create(vertices);
 
-	// インデックスバッファ生成
 	std::vector<unsigned int> indices;
 	indices.resize(4);
 
@@ -52,18 +51,17 @@ void Texture2D::Initialize()
 	indices[2] = 2;
 	indices[3] = 3;
 
-	// インデックスバッファ生成
 	m_IndexBuffer.Create(indices);
 
-	// シェーダオブジェクト生成
-	m_Shader.Create("02_ResourceFile/ShaderFile/VS_Default.hlsl", "02_ResourceFile/ShaderFile/PS_Default.hlsl");
+	auto sm = Game::GetInstance().GetShaderManager();
+	m_Shaders.push_back(sm->GetShader("VS_Default"));
+	m_Shaders.push_back(sm->GetShader("PS_Default"));
 
-	// マテリアル情報取得
 	m_Materiale = std::make_unique<Material>();
 	MATERIAL mtrl;
 	mtrl.Diffuse = Color(1.0f, 1.0f, 1.0f, 1.0f);
 	mtrl.Shiness = 1;
-	mtrl.TextureEnable = true; // テクスチャを使うか否かのフラグ
+	mtrl.TextureEnable = true;
 	m_Materiale->Create(mtrl);
 }
 
@@ -99,7 +97,7 @@ void Texture2D::Draw()
 	// トポロジーをセット（プリミティブタイプ）
 	devicecontext->IASetPrimitiveTopology(D3D11_PRIMITIVE_TOPOLOGY_TRIANGLESTRIP);
 
-	m_Shader.SetGPU();
+	for (auto* shader : m_Shaders) shader->SetGPU();
 	m_VertexBuffer.SetGPU();
 	m_IndexBuffer.SetGPU();
 

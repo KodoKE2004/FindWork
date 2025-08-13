@@ -50,7 +50,9 @@ void Fade::Initialize()
 	m_IndexBuffer.Create(indices);
 
 	// シェーダオブジェクト生成
-	m_Shader.Create("02_ResourceFile/ShaderFile/VS_Default.hlsl", "02_ResourceFile/ShaderFile/PS_Default.hlsl");
+	auto shaderMgr = Game::GetInstance().GetShaderManager();
+	m_Shaders.emplace_back(shaderMgr->GetShader("VS_Default"));
+	m_Shaders.emplace_back(shaderMgr->GetShader("PS_Default"));
 
 	// マテリアル情報取得
 	m_Materiale = std::make_unique<Material>();

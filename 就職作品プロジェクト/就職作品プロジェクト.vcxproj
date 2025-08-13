@@ -39,7 +39,9 @@
     <ClCompile Include="02_ResourceFile\SceneFile\TransScene.cpp" />
     <ClCompile Include="02_ResourceFile\Shader.cpp" />
     <ClCompile Include="02_ResourceFile\ShaderManager.cpp" />
-    <ClCompile Include="02_ResourceFile\TestFile\TestPlane.cpp" />
+    <ClCompile Include="02_ResourceFile\TestFile\TestPlane.cpp">
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">true</ExcludedFromBuild>
+    </ClCompile>
     <ClCompile Include="02_ResourceFile\Texture2D.cpp" />
     <ClCompile Include="02_ResourceFile\Texture.cpp" />
     <ClCompile Include="02_ResourceFile\TextureManager.cpp" />
@@ -81,7 +83,9 @@
     <ClInclude Include="02_ResourceFile\SceneFile\TransScene.h" />
     <ClInclude Include="02_ResourceFile\Shader.h" />
     <ClInclude Include="02_ResourceFile\ShaderManager.h" />
-    <ClInclude Include="02_ResourceFile\TestFile\TestPlane.h" />
+    <ClInclude Include="02_ResourceFile\TestFile\TestPlane.h">
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">true</ExcludedFromBuild>
+    </ClInclude>
     <ClInclude Include="02_ResourceFile\Texture2D.h" />
     <ClInclude Include="02_ResourceFile\Texture.h" />
     <ClInclude Include="02_ResourceFile\TextureManager.h" />

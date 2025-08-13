@@ -2,7 +2,6 @@
 
 #include "../VertexBuffer.h"
 #include "../IndexBuffer.h"
-#include "../Shader.h"
 #include "../Texture.h"
 #include "../Camera.h"
 #include "Object.h"
@@ -22,7 +21,6 @@ class Cube : public Object
 	VertexBuffer<VERTEX_3D>	m_VertexBuffer; // 頂点バッファ
 
 	// 描画の為の情報（見た目に関わる部分）
-	Shader  m_Shader;		// シェーダー
 	Texture m_Texture;		// 画像
 
 public:

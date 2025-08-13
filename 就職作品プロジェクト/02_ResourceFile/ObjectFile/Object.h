@@ -10,7 +10,7 @@ class Object : public Transform
 protected:
 	// 描画の為の情報（見た目に関わる部分）
 	Color   m_Color;
-	Shader  m_Shader; // シェーダー
+	std::vector<BaseShader*> m_Shaders; // シェーダー
 	Camera* m_Camera;
 public:
 

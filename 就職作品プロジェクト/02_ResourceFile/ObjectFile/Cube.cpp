@@ -182,7 +182,9 @@ void Cube::Initialize()
 	m_IndexBuffer.Create(indices);
 
 	// シェーダオブジェクト生成
-	m_Shader.Create("02_ResourceFile/ShaderFile/VS_Default.hlsl", "02_ResourceFile/ShaderFile/PS_Default.hlsl");
+	auto shaderMgr = Game::GetInstance().GetShaderManager();
+	m_Shaders.emplace_back(shaderMgr->GetShader("VS_Default"));
+	m_Shaders.emplace_back(shaderMgr->GetShader("PS_Default"));
 
 	//テクスチャロード
 	m_Texture = *Game::GetInstance().GetTextureManager()->GetTexture("dice.png");
@@ -229,7 +231,11 @@ void Cube::Draw()
 	// トポロジーをセット（プリミティブタイプ）
 	devicecontext->IASetPrimitiveTopology(D3D11_PRIMITIVE_TOPOLOGY_TRIANGLELIST);
 
-	m_Shader.SetGPU();
+	for (auto shader : m_Shaders)
+	{
+		shader->SetGPU();
+	}
+
 	m_VertexBuffer.SetGPU();
 	m_IndexBuffer.SetGPU();
 	m_Texture.SetGPU();
