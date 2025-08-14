@@ -20,7 +20,7 @@ struct MeshInfo {
 /// </summary>
 class Model : public Object
 {
-private:
+protected:
     std::string  m_MeshName;
     MeshInfo     m_MeshModel;
     MeshRenderer m_MeshRenderer;

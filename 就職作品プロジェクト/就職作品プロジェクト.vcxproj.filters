@@ -297,5 +297,14 @@
     <FxCompile Include="02_ResourceFile\ShaderFile\VS_Default.hlsl">
       <Filter>SourceFile\Shader\HLSL</Filter>
     </FxCompile>
+    <FxCompile Include="02_ResourceFile\ShaderFile\PS_Phong.hlsl">
+      <Filter>SourceFile\Shader\HLSL</Filter>
+    </FxCompile>
+    <FxCompile Include="02_ResourceFile\ShaderFile\PS_Unlit.hlsl">
+      <Filter>SourceFile\Shader\HLSL</Filter>
+    </FxCompile>
+    <FxCompile Include="02_ResourceFile\ShaderFile\VS_Unlit.hlsl">
+      <Filter>SourceFile\Shader\HLSL</Filter>
+    </FxCompile>
   </ItemGroup>
 </Project>

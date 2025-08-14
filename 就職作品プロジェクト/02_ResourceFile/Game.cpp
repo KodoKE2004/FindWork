@@ -16,13 +16,13 @@ void Game::Initialize()
 {	
 	auto& instance = GetInstance();
 
-	instance.m_Input	   = std::make_unique<Input> ();
+	instance.m_Input	   = std::make_unique<Input>();		// 入力の初期化
 	instance.m_Camera	   = std::make_unique<Camera>();	// カメラ作成
 	
 	//		シーンをタイトルシーンに設定
-	Renderer::Initialize();							// レンダラーの初期化
-	DebugUI::Init(Renderer::GetDevice(), Renderer::GetDeviceContext()); 		// デバッグUIの初期化
-	instance.GetCamera()->Initialize();											// カメラの初期化
+	Renderer::Initialize();													// レンダラーの初期化
+	DebugUI::Init(Renderer::GetDevice(), Renderer::GetDeviceContext());		// デバッグUIの初期化
+	instance.GetCamera()->Initialize();										// カメラの初期化
 
 	instance.m_GameMeshes	  = std::make_shared<MeshManager>();
 	instance.m_TextureManager = std::make_shared<TextureManager>("01_AssetFile/Texture/");

@@ -22,7 +22,9 @@ public:
 	virtual void Draw()       = 0;
 	virtual void Finalize()   = 0;
 
+	void SetShader(std::string hlslName);
 	void SetColor(const Color color);
 	void SetColor(const float r, const float g, const float b, const float a);
+	
 
 };
