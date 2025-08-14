@@ -21,17 +21,17 @@ void Game::Initialize()
 	
 	//		シーンをタイトルシーンに設定
 	Renderer::Initialize();							// レンダラーの初期化
-	DebugUI::Init(Renderer::GetDevice(), Renderer::GetDeviceContext()); 			// デバッグUIの初期化
+	DebugUI::Init(Renderer::GetDevice(), Renderer::GetDeviceContext()); 		// デバッグUIの初期化
 	instance.GetCamera()->Initialize();											// カメラの初期化
 
-	instance.m_GameMeshes = std::make_shared<MeshManager>();
-	instance.m_TextureManager	= std::make_shared<TextureManager>("01_AssetFile/Texture/");
-	instance.m_ShaderManager    = std::make_shared<ShaderManager>("02_ResourceFile/ShaderFile/");
+	instance.m_GameMeshes	  = std::make_shared<MeshManager>();
+	instance.m_TextureManager = std::make_shared<TextureManager>("01_AssetFile/Texture/");
+	instance.m_ShaderManager  = std::make_shared<ShaderManager> ("02_ResourceFile/ShaderFile/");
 	
 	instance.m_ShaderManager->AddShader("VS_Default",ShaderStage::VS);
 	instance.m_ShaderManager->AddShader("PS_Default",ShaderStage::PS);
 
-	instance.m_GameMeshes->AddMeshModel("RedMan" , "Akai.fbx", "Akai");
+	instance.m_GameMeshes->AddMeshModel("RedMan" , "Akai.fbx"   , "Akai");
 	instance.m_GameMeshes->AddMeshModel("Pokemon", "Porygon.fbx", "Porygon");
 	instance.m_GameMeshes->AddMeshModel("aaa"    , "plane.fbx"  , "plane"  );
 

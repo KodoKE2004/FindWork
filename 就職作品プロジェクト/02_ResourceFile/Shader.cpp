@@ -155,7 +155,7 @@ bool VertexShader::Create(std::string hlslName)
         static_cast<UINT>(std::size(layout)),
         m_VertexShader.GetAddressOf(),
         m_InputLayout.GetAddressOf()
-    );
+    );  
 
     return res;
 }
