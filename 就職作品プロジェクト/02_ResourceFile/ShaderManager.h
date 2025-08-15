@@ -112,7 +112,7 @@ class ShaderManager
 private:
 	// シェーダーの名前とポインタを紐づけるためのマップ
 	std::unordered_map<std::string, BaseShader*> m_ShaderList;
-	std::string m_EntryPoint; // エントリーポイント名
+	std::string m_FilePath; // エントリーポイント名
 
 
 public:
@@ -133,7 +133,7 @@ public:
 	bool InferStageFromName(const std::string& name, ShaderStage& stage) const;
 
 
-	void SetEntryPoint(std::string entryPoint) { m_EntryPoint = std::move(entryPoint); }
+	void SetEntryPoint(std::string entryPoint) { m_FilePath = std::move(entryPoint); }
 
 	// リストにあるシェーダーの名前を検索して取得
 	BaseShader* GetShader(const std::string& name) const;

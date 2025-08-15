@@ -158,6 +158,9 @@
     <ClCompile Include="02_ResourceFile\ShaderManager.cpp">
       <Filter>SourceFile\Core\Manager</Filter>
     </ClCompile>
+    <ClCompile Include="02_ResourceFile\ObjectFile\Light.cpp">
+      <Filter>SourceFile</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="02_ResourceFile\SceneFile\Scene.h">
@@ -286,6 +289,7 @@
     <ClInclude Include="02_ResourceFile\ShaderManager.h">
       <Filter>SourceFile\Core\Manager</Filter>
     </ClInclude>
+    <ClInclude Include="02_ResourceFile\ObjectFile\Light.h" />
   </ItemGroup>
   <ItemGroup>
     <FxCompile Include="02_ResourceFile\ShaderFile\Common.hlsl">

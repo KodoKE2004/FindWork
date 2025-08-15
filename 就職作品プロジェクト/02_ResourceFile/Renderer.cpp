@@ -21,6 +21,7 @@ ID3D11Buffer*					Renderer::m_ProjectionBuffer;	// プロジェクション行列バッファ
 
 ID3D11Buffer*					Renderer::m_MaterialBuffer;		// マテリアル設定
 ID3D11Buffer*					Renderer::m_TextureBuffer;		// テクスチャ設定
+ID3D11Buffer*					Renderer::m_LightBuffer;		// ライト設定
 
 ID3D11BlendState*				Renderer::m_BlendState[MAX_BLENDSTATE];		// ブレンド ステート
 ID3D11BlendState*				Renderer::m_BlendStateATC;
@@ -206,6 +207,29 @@ void Renderer::Initialize()
 	m_DeviceContext->PSSetConstantBuffers(4, 1, &m_MaterialBuffer);
 	if (FAILED(hr)) return;
 
+	bufferDesc.ByteWidth = sizeof(LightBuffer);
+	bufferDesc.Usage = D3D11_USAGE_DEFAULT;
+	bufferDesc.BindFlags = D3D11_BIND_CONSTANT_BUFFER;
+	bufferDesc.CPUAccessFlags = 0;
+	bufferDesc.MiscFlags = 0;
+	bufferDesc.StructureByteStride = sizeof(float);
+
+	hr = m_Device->CreateBuffer(&bufferDesc, nullptr, &m_LightBuffer);
+	if (FAILED(hr)) return;
+
+	// 既定値（下向き白色の平行光）
+	LightBuffer lightbuffer{};
+	lightbuffer.LightDirection = DirectX::SimpleMath::Vector4(0, -1, 0, 0); // w=0: 方向ベクトル
+	lightbuffer.LightColor = DirectX::SimpleMath::Color(1, 1, 1, 1);
+	lightbuffer.AmbientIntensity = 0.1f;
+	lightbuffer.DiffuseIntensity = 1.0f;
+	lightbuffer.SpecularIntensity = 0.5f;
+
+	m_DeviceContext->UpdateSubresource(m_LightBuffer, 0, NULL, &lightbuffer, 0, 0);
+
+	// ピクセルシェーダにバインド（b3）
+	m_DeviceContext->PSSetConstantBuffers(3, 1, &m_LightBuffer);
+
 	//マテリアル初期化
 	MATERIAL material{};
 	material.Diffuse = Color(1.0f, 1.0f, 1.0f, 1.0f);
@@ -224,6 +248,7 @@ void Renderer::Finalize()
 
 	m_MaterialBuffer->Release();
 	m_TextureBuffer->Release();
+	m_LightBuffer->Release(); m_LightBuffer = nullptr; 
 
 	m_DeviceContext->ClearState();
 	m_RenderTargetView->Release();
@@ -343,6 +368,13 @@ void Renderer::SetMaterial(MATERIAL Material)
 	m_DeviceContext->UpdateSubresource(m_MaterialBuffer, 0, NULL, &Material, 0, 0);
 }
 
+void Renderer::SetLightBuffer(LightBuffer* LightBuffer)
+{
+	// ライトバッファをGPU側へ送る
+	m_DeviceContext->UpdateSubresource(m_LightBuffer, 0, NULL, LightBuffer, 0, 0);
+	m_DeviceContext->PSSetConstantBuffers(3, 1, &m_LightBuffer);
+}
+
 void Renderer::SetUV(float u, float v, float uw, float vh)
 {
 	//UV行列作成
@@ -350,6 +382,15 @@ void Renderer::SetUV(float u, float v, float uw, float vh)
 	mat *= Matrix::CreateTranslation(u, v, 0.0f).Transpose();
 
 	m_DeviceContext->UpdateSubresource(m_TextureBuffer, 0, NULL, &mat, 0, 0);
+
+}
+
+void Renderer::SetBlendState(int nBlendState)
+{
+	if (nBlendState >= 0 || nBlendState < MAX_BLENDSTATE) return;
+
+	float blendFactor[4] = { 0.0f, 0.0f, 0.0f, 0.0f };
+	m_DeviceContext->OMSetBlendState(m_BlendState[nBlendState], blendFactor, 0xffffffff);
 
 }
 

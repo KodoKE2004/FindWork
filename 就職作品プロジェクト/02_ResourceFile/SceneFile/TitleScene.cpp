@@ -2,6 +2,7 @@
 #include "../Game.h"
 #include "../DebugUI.h"
 #include "../ObjectFile/Cube.h"
+#include "../ObjectFile/Light.h"
 #include "../Texture2D.h"
 #include "../ObjectFile/Model.h"
 
@@ -10,11 +11,9 @@ void TitleScene::Initialize()
 	Cube* pt = Game::GetInstance().AddObject<Cube>();
 	m_MySceneObjects.emplace_back(pt);
 
-	DebugUI::TEXT_CurrentScene = "TitleScene";
-	Model* pt2 = Game::GetInstance().AddObject<Model>();
-	pt2->GetMeshModel("Pokemon");
-	m_MySceneObjects.emplace_back(pt2);
-
+	Light* light = Game::GetInstance().AddObject<Light>();
+	light->SetPos(0.0f, 10.0f, 0.0f);
+	m_MySceneObjects.emplace_back(light);
 	//Texture2D* pt3 = Game::GetInstance().AddObject<Texture2D>();
 	//pt3->SetTexture("01_AssetFile/Texture/background1.png");
 	//pt3->SetScale ( 100.0f, 100.0f, 100.0f);
@@ -25,7 +24,7 @@ void TitleScene::Update()
 
 	if (Input::GetKeyTrigger(VK_RETURN))
 	{
-		ChangeScene<SelectScene>(FADE,0.5f);
+		// ChangeScene<SelectScene>(FADE,0.5f);
 	}
 
 

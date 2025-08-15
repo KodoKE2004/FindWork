@@ -24,13 +24,21 @@ void Game::Initialize()
 	DebugUI::Init(Renderer::GetDevice(), Renderer::GetDeviceContext());		// デバッグUIの初期化
 	instance.GetCamera()->Initialize();										// カメラの初期化
 
+
+	// マネージャーの初期化
+	// モデル・テクスチャのパスを設定
 	instance.m_GameMeshes	  = std::make_shared<MeshManager>();
 	instance.m_TextureManager = std::make_shared<TextureManager>("01_AssetFile/Texture/");
 	instance.m_ShaderManager  = std::make_shared<ShaderManager> ("02_ResourceFile/ShaderFile/");
 	
+	// シェーダー登録
 	instance.m_ShaderManager->AddShader("VS_Default",ShaderStage::VS);
 	instance.m_ShaderManager->AddShader("PS_Default",ShaderStage::PS);
 
+	instance.m_ShaderManager->AddShader("VS_Unlit",ShaderStage::VS);
+	instance.m_ShaderManager->AddShader("PS_Unlit",ShaderStage::PS);
+
+	//　モデル登録
 	instance.m_GameMeshes->AddMeshModel("RedMan" , "Akai.fbx"   , "Akai");
 	instance.m_GameMeshes->AddMeshModel("Pokemon", "Porygon.fbx", "Porygon");
 	instance.m_GameMeshes->AddMeshModel("aaa"    , "plane.fbx"  , "plane"  );

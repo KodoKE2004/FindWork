@@ -183,8 +183,8 @@ void Cube::Initialize()
 
 	// シェーダオブジェクト生成
 	auto shaderMgr = Game::GetInstance().GetShaderManager();
-	m_Shaders.emplace_back(shaderMgr->GetShader("VS_Default"));
-	m_Shaders.emplace_back(shaderMgr->GetShader("PS_Default"));
+	m_Shaders.emplace_back(shaderMgr->GetShader("VS_Unlit"));
+	m_Shaders.emplace_back(shaderMgr->GetShader("PS_Unlit"));
 
 	//テクスチャロード
 	m_Texture = *Game::GetInstance().GetTextureManager()->GetTexture("dice.png");

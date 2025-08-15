@@ -64,6 +64,15 @@ struct MATERIAL {
 	BOOL Dummy[2]{};
 };
 
+struct LightBuffer
+{
+	DirectX::SimpleMath::Vector4 LightDirection;	// ライトの方向
+	DirectX::SimpleMath::Color LightColor;			// ライトの色
+	float AmbientIntensity;							// 環境光の強さ
+	float DiffuseIntensity;							// 拡散光の強さ
+	float SpecularIntensity;						// 鏡面光の強さ
+	float Padding;									// パディング（アライメント調整用）
+};
 
 class Renderer
 {
@@ -101,19 +110,14 @@ public:
 	static void SetProjectionMatrix(DirectX::SimpleMath::Matrix* ProjectionMatrix);
 
 	static void SetMaterial(MATERIAL Material);
+	static void SetLightBuffer(LightBuffer* LightBuffer);
 	static void SetUV(float u, float v, float uw, float vh);
 
 	//=============================================================================
 	// ブレンド ステート設定
 	//=============================================================================
-	static void SetBlendState(int nBlendState)
-	{
-		if (nBlendState >= 0 || nBlendState < MAX_BLENDSTATE) return;
-		
-		float blendFactor[4] = { 0.0f, 0.0f, 0.0f, 0.0f };
-		m_DeviceContext->OMSetBlendState(m_BlendState[nBlendState], blendFactor, 0xffffffff);
-		
-	}
+	static void SetBlendState(int nBlendState);
+
 
 	static void CreateVertexShader(ID3D11VertexShader** VertexShader, ID3D11InputLayout** VertexLayout, const char* FileName);
 	static void CreatePixelShader (ID3D11PixelShader** PixelShader, const char* FileName);
@@ -136,6 +140,7 @@ private:
 
 	static ID3D11Buffer* m_MaterialBuffer	;				// マテリアル情報バッファ
 	static ID3D11Buffer* m_TextureBuffer	;				// プロジェクション行列バッファ
+	static ID3D11Buffer* m_LightBuffer;						// ライト情報バッファ
 
 	static ID3D11BlendState* m_BlendState[MAX_BLENDSTATE];	// ブレンド ステート;
 	static ID3D11BlendState* m_BlendStateATC			 ;	// ブレンド ステート（加算合成）

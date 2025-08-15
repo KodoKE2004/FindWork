@@ -1,12 +1,12 @@
 #include "ShaderManager.h"
 #include "Debug.hpp"
 
-ShaderManager::ShaderManager(std::string entryPoint) : m_EntryPoint(std::move(entryPoint))
+ShaderManager::ShaderManager(std::string entryPoint) : m_FilePath(std::move(entryPoint))
 {
-    if (!m_EntryPoint.empty()) {
-        char back = m_EntryPoint.back();
+    if (!m_FilePath.empty()) {
+        char back = m_FilePath.back();
         if (back != '/' && back != '\\') {
-            m_EntryPoint.push_back('/');
+            m_FilePath.push_back('/');
         }
     }
 }
@@ -46,7 +46,7 @@ void ShaderManager::AddShader(const std::string& name, ShaderStage stage)
     }
 
     // プロパティ設定 → Create 実行
-    shader->SetHlslName(m_EntryPoint + name + ".hlsl");
+    shader->SetHlslName(m_FilePath + name + ".hlsl");
     shader->SetShaderStage(s);
 
     if (!shader->Create(shader->GetHlslName())) {
