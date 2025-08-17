@@ -6,6 +6,7 @@
 
 class Light : public Cube
 {
+
 private:
 	LightBuffer m_LightBuffer; // ライトバッファ
 public:
@@ -16,7 +17,7 @@ public:
 	void Update() override ;
 	void Draw() override ;
 
-	void SetLightDirection(const DirectX::SimpleMath::Vector4& direction) { m_LightBuffer.LightDirection = DirectX::SimpleMath::Vector4(direction); }
+	void SetDirection(const DirectX::SimpleMath::Vector4& direction) { m_LightBuffer.LightDirection = DirectX::SimpleMath::Vector4(direction); }
 	void SetLightColor(const DirectX::SimpleMath::Color& color) { m_LightBuffer.LightColor = color; }
 	void SetAmbient(float intensity) { m_LightBuffer.AmbientIntensity = intensity; }
 	void SetDiffuse(float intensity) { m_LightBuffer.DiffuseIntensity = intensity; }

@@ -27,9 +27,9 @@ void Game::Initialize()
 
 	// マネージャーの初期化
 	// モデル・テクスチャのパスを設定
-	instance.m_GameMeshes	  = std::make_shared<MeshManager>();
-	instance.m_TextureManager = std::make_shared<TextureManager>("01_AssetFile/Texture/");
-	instance.m_ShaderManager  = std::make_shared<ShaderManager> ("02_ResourceFile/ShaderFile/");
+	instance.m_GameMeshes	  = std::make_shared<MeshManager>	("AssetFile/Model/");
+	instance.m_TextureManager = std::make_shared<TextureManager>("AssetFile/Texture/");
+	instance.m_ShaderManager  = std::make_shared<ShaderManager> ("ShaderFile/");
 	
 	// シェーダー登録
 	instance.m_ShaderManager->AddShader("VS_Default",ShaderStage::VS);

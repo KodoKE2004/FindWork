@@ -11,6 +11,7 @@
 //-----------------------------------------------------------------------------
 class Cube : public Object
 {
+protected:
 	// SRT情報（姿勢情報）
 	NVector3 m_Position = NVector3(0.0f, 0.0f, 0.0f);
 	NVector3 m_Rotation = NVector3(0.0f, 0.0f, 0.0f);
@@ -21,7 +22,7 @@ class Cube : public Object
 	VertexBuffer<VERTEX_3D>	m_VertexBuffer; // 頂点バッファ
 
 	// 描画の為の情報（見た目に関わる部分）
-	Texture m_Texture;		// 画像
+	Texture* m_Texture;		// 画像
 
 public:
 	Cube(Camera* cam);  // コンストラクタ

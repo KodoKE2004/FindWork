@@ -9,6 +9,15 @@ MeshManager::MeshManager() {
     AddMeshModel(kDefaultName, "spot.fbx", "spot");
 }
 
+MeshManager::MeshManager(std::string filePath)
+{
+	m_FilePath = std::move(filePath);
+    Debug::Log("MeshManager: コンストラクタ - NULLモデル登録開始");
+    // "NULL" モデルを最初に登録しておく
+    AddMeshModel(kDefaultName, "spot.fbx", "spot");
+
+}
+
 void MeshManager::Clear() {
     m_MeshMap.clear();
 }
@@ -23,7 +32,7 @@ bool MeshManager::AddMeshModel(const std::string& modelName,
     }
 
     // パス構築
-    std::string texPath = "01_AssetFile/Model/" + texDirectory;
+    std::string texPath = m_FilePath + texDirectory;
     std::string filePath = texPath + "/" + modelPath;
 
     // ロード

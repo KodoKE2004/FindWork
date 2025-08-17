@@ -54,8 +54,7 @@
       <UniqueIdentifier>{552df999-efdd-4f0e-a91a-0e6d5bae89d1}</UniqueIdentifier>
     </Filter>
     <Filter Include="SourceFile\Shader\HLSL">
-      <UniqueIdentifier>{67DA6AB6-F800-4c08-8B7A-83BB121AAD01}</UniqueIdentifier>
-      <Extensions>rc;ico;cur;bmp;dlg;rc2;rct;bin;rgs;gif;jpg;jpeg;jpe;resx;tiff;tif;png;wav;mfcribbon-ms</Extensions>
+      <UniqueIdentifier>{aa63484b-4a3a-4f3c-8eb8-43883440aeb1}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
   <ItemGroup>
@@ -159,7 +158,7 @@
       <Filter>SourceFile\Core\Manager</Filter>
     </ClCompile>
     <ClCompile Include="02_ResourceFile\ObjectFile\Light.cpp">
-      <Filter>SourceFile</Filter>
+      <Filter>SourceFile\Object</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -289,25 +288,27 @@
     <ClInclude Include="02_ResourceFile\ShaderManager.h">
       <Filter>SourceFile\Core\Manager</Filter>
     </ClInclude>
-    <ClInclude Include="02_ResourceFile\ObjectFile\Light.h" />
+    <ClInclude Include="02_ResourceFile\ObjectFile\Light.h">
+      <Filter>SourceFile\Object</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
-    <FxCompile Include="02_ResourceFile\ShaderFile\Common.hlsl">
+    <FxCompile Include="ShaderFile\Common.hlsl">
       <Filter>SourceFile\Shader\HLSL</Filter>
     </FxCompile>
-    <FxCompile Include="02_ResourceFile\ShaderFile\PS_Default.hlsl">
+    <FxCompile Include="ShaderFile\PS_Default.hlsl">
       <Filter>SourceFile\Shader\HLSL</Filter>
     </FxCompile>
-    <FxCompile Include="02_ResourceFile\ShaderFile\VS_Default.hlsl">
+    <FxCompile Include="ShaderFile\PS_Phong.hlsl">
       <Filter>SourceFile\Shader\HLSL</Filter>
     </FxCompile>
-    <FxCompile Include="02_ResourceFile\ShaderFile\PS_Phong.hlsl">
+    <FxCompile Include="ShaderFile\PS_Unlit.hlsl">
       <Filter>SourceFile\Shader\HLSL</Filter>
     </FxCompile>
-    <FxCompile Include="02_ResourceFile\ShaderFile\PS_Unlit.hlsl">
+    <FxCompile Include="ShaderFile\VS_Default.hlsl">
       <Filter>SourceFile\Shader\HLSL</Filter>
     </FxCompile>
-    <FxCompile Include="02_ResourceFile\ShaderFile\VS_Unlit.hlsl">
+    <FxCompile Include="ShaderFile\VS_Unlit.hlsl">
       <Filter>SourceFile\Shader\HLSL</Filter>
     </FxCompile>
   </ItemGroup>
