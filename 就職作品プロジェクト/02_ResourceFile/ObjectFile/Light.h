@@ -8,7 +8,7 @@ class Light : public Cube
 {
 
 private:
-	LightBuffer m_LightBuffer; // ライトバッファ
+	Material m_LightBuffer; // ライトバッファ
 public:
 	Light(Camera* cam);
 	~Light() = default;

@@ -66,7 +66,7 @@ struct MATERIAL {
 
 struct LightBuffer
 {
-	DirectX::SimpleMath::Vector4 LightDirection;	// ライトの方向
+	DirectX::SimpleMath::Vector4 Direction;	// ライトの方向
 	DirectX::SimpleMath::Color LightColor;			// ライトの色
 	float AmbientIntensity;							// 環境光の強さ
 	float DiffuseIntensity;							// 拡散光の強さ
@@ -110,7 +110,6 @@ public:
 	static void SetProjectionMatrix(DirectX::SimpleMath::Matrix* ProjectionMatrix);
 
 	static void SetMaterial(MATERIAL Material);
-	static void SetLightBuffer(LightBuffer* LightBuffer);
 	static void SetUV(float u, float v, float uw, float vh);
 
 	//=============================================================================

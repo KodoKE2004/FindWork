@@ -219,7 +219,7 @@ void Renderer::Initialize()
 
 	// 既定値（下向き白色の平行光）
 	LightBuffer lightbuffer{};
-	lightbuffer.LightDirection = DirectX::SimpleMath::Vector4(0, -1, 0, 0); // w=0: 方向ベクトル
+	lightbuffer.Direction = DirectX::SimpleMath::Vector4(0, -1, 0, 0); // w=0: 方向ベクトル
 	lightbuffer.LightColor = DirectX::SimpleMath::Color(1, 1, 1, 1);
 	lightbuffer.AmbientIntensity = 0.1f;
 	lightbuffer.DiffuseIntensity = 1.0f;
@@ -368,12 +368,6 @@ void Renderer::SetMaterial(MATERIAL Material)
 	m_DeviceContext->UpdateSubresource(m_MaterialBuffer, 0, NULL, &Material, 0, 0);
 }
 
-void Renderer::SetLightBuffer(LightBuffer* LightBuffer)
-{
-	// ライトバッファをGPU側へ送る
-	m_DeviceContext->UpdateSubresource(m_LightBuffer, 0, NULL, LightBuffer, 0, 0);
-	m_DeviceContext->PSSetConstantBuffers(3, 1, &m_LightBuffer);
-}
 
 void Renderer::SetUV(float u, float v, float uw, float vh)
 {
