@@ -33,10 +33,12 @@
     <ClCompile Include="02_ResourceFile\ObjectFile\Model.cpp" />
     <ClCompile Include="02_ResourceFile\ObjectFile\Object.cpp" />
     <ClCompile Include="02_ResourceFile\Renderer.cpp" />
+    <ClCompile Include="02_ResourceFile\RenderTarget.cpp" />
     <ClCompile Include="02_ResourceFile\SceneFile\GameScene.cpp" />
     <ClCompile Include="02_ResourceFile\SceneFile\SelectScene.cpp" />
     <ClCompile Include="02_ResourceFile\SceneFile\TitleScene.cpp" />
     <ClCompile Include="02_ResourceFile\SceneFile\Transition\Fade.cpp" />
+    <ClCompile Include="02_ResourceFile\SceneFile\Transition\SnapshotOverlay.cpp" />
     <ClCompile Include="02_ResourceFile\SceneFile\TransScene.cpp" />
     <ClCompile Include="02_ResourceFile\Shader.cpp" />
     <ClCompile Include="02_ResourceFile\ShaderManager.cpp" />
@@ -76,12 +78,14 @@
     <ClInclude Include="02_ResourceFile\ObjectFile\Model.h" />
     <ClInclude Include="02_ResourceFile\ObjectFile\Object.h" />
     <ClInclude Include="02_ResourceFile\Renderer.h" />
+    <ClInclude Include="02_ResourceFile\RenderTarget.h" />
     <ClInclude Include="02_ResourceFile\SceneFile\GameScene.h" />
     <ClInclude Include="02_ResourceFile\SceneFile\Scene.h" />
     <ClInclude Include="02_ResourceFile\SceneFile\SceneList.h" />
     <ClInclude Include="02_ResourceFile\SceneFile\SelectScene.h" />
     <ClInclude Include="02_ResourceFile\SceneFile\TitleScene.h" />
     <ClInclude Include="02_ResourceFile\SceneFile\Transition\Fade.h" />
+    <ClInclude Include="02_ResourceFile\SceneFile\Transition\SnapshotOverlay.h" />
     <ClInclude Include="02_ResourceFile\SceneFile\TransScene.h" />
     <ClInclude Include="02_ResourceFile\Shader.h" />
     <ClInclude Include="02_ResourceFile\ShaderManager.h" />
@@ -107,6 +111,12 @@
     <FxCompile Include="ShaderFile\Common.hlsl">
       <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">true</ExcludedFromBuild>
     </FxCompile>
+    <FxCompile Include="ShaderFile\PS_Alpha.hlsl">
+      <ShaderType Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">Pixel</ShaderType>
+      <ShaderType Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">Pixel</ShaderType>
+      <ShaderType Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">Pixel</ShaderType>
+      <ShaderType Condition="'$(Configuration)|$(Platform)'=='Release|x64'">Pixel</ShaderType>
+    </FxCompile>
     <FxCompile Include="ShaderFile\PS_Default.hlsl">
       <ShaderType Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">Pixel</ShaderType>
     </FxCompile>
@@ -115,6 +125,12 @@
     </FxCompile>
     <FxCompile Include="ShaderFile\PS_Unlit.hlsl">
       <ShaderType Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">Pixel</ShaderType>
+    </FxCompile>
+    <FxCompile Include="ShaderFile\VS_Alpha.hlsl">
+      <ShaderType Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">Vertex</ShaderType>
+      <ShaderType Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">Vertex</ShaderType>
+      <ShaderType Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">Vertex</ShaderType>
+      <ShaderType Condition="'$(Configuration)|$(Platform)'=='Release|x64'">Vertex</ShaderType>
     </FxCompile>
     <FxCompile Include="ShaderFile\VS_Default.hlsl">
       <ShaderType Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">Vertex</ShaderType>

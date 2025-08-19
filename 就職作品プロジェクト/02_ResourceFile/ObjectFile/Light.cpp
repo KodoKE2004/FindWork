@@ -68,6 +68,7 @@ void Light::Draw()
 	// トポロジーをセット（プリミティブタイプ）
 	devicecontext->IASetPrimitiveTopology(D3D11_PRIMITIVE_TOPOLOGY_TRIANGLELIST);
 
+	Renderer::SetLightBuffer(&m_LightBuffer); // ライトバッファをセット
 	for (auto shader : m_Shaders)
 	{
 		shader->SetGPU();
@@ -78,7 +79,6 @@ void Light::Draw()
 	if (m_Texture != nullptr) { m_Texture->SetGPU(); }
 	m_Camera->SetCamera(CAMERA_3D);
 
-	Renderer::SetLightBuffer(&m_LightBuffer); // ライトバッファをセット
 	devicecontext->DrawIndexed(
 		36,							// 描画するインデックス数（四角形なんで４）
 		0,							// 最初のインデックスバッファの位置

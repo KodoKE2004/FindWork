@@ -8,7 +8,7 @@ class Light : public Cube
 {
 
 private:
-	Material m_LightBuffer; // ライトバッファ
+	LightBuffer m_LightBuffer; // ライトバッファ
 public:
 	Light(Camera* cam);
 	~Light() = default;
@@ -17,7 +17,7 @@ public:
 	void Update() override ;
 	void Draw() override ;
 
-	void SetDirection(const DirectX::SimpleMath::Vector4& direction) { m_LightBuffer.LightDirection = DirectX::SimpleMath::Vector4(direction); }
+	void SetDirection(const DirectX::SimpleMath::Vector4& direction) { m_LightBuffer.Direction = DirectX::SimpleMath::Vector4(direction); }
 	void SetLightColor(const DirectX::SimpleMath::Color& color) { m_LightBuffer.LightColor = color; }
 	void SetAmbient(float intensity) { m_LightBuffer.AmbientIntensity = intensity; }
 	void SetDiffuse(float intensity) { m_LightBuffer.DiffuseIntensity = intensity; }

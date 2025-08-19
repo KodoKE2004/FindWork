@@ -51,8 +51,9 @@ void Fade::Initialize()
 
 	// シェーダオブジェクト生成
 	auto shaderMgr = Game::GetInstance().GetShaderManager();
-	m_Shaders.emplace_back(shaderMgr->GetShader("VS_Default"));
-	m_Shaders.emplace_back(shaderMgr->GetShader("PS_Default"));
+	m_Shaders.clear();
+	m_Shaders.emplace_back(shaderMgr->GetShader("VS_Alpha"));
+	m_Shaders.emplace_back(shaderMgr->GetShader("PS_Alpha"));
 
 	// マテリアル情報取得
 	m_Materiale = std::make_unique<Material>();

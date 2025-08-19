@@ -56,6 +56,12 @@
     <Filter Include="SourceFile\Shader\HLSL">
       <UniqueIdentifier>{aa63484b-4a3a-4f3c-8eb8-43883440aeb1}</UniqueIdentifier>
     </Filter>
+    <Filter Include="SourceFile\Shader\HLSL\PixelShader">
+      <UniqueIdentifier>{17b6b3d6-4eab-48e5-a82b-6ef24442d079}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="SourceFile\Shader\HLSL\VertexShader">
+      <UniqueIdentifier>{4c01850f-ddde-49c1-8d65-e7a80dd5794e}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="02_ResourceFile\SceneFile\TitleScene.cpp">
@@ -159,6 +165,12 @@
     </ClCompile>
     <ClCompile Include="02_ResourceFile\ObjectFile\Light.cpp">
       <Filter>SourceFile\Object</Filter>
+    </ClCompile>
+    <ClCompile Include="02_ResourceFile\RenderTarget.cpp">
+      <Filter>SourceFile\Core</Filter>
+    </ClCompile>
+    <ClCompile Include="02_ResourceFile\SceneFile\Transition\SnapshotOverlay.cpp">
+      <Filter>SourceFile\Core</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -291,25 +303,37 @@
     <ClInclude Include="02_ResourceFile\ObjectFile\Light.h">
       <Filter>SourceFile\Object</Filter>
     </ClInclude>
+    <ClInclude Include="02_ResourceFile\RenderTarget.h">
+      <Filter>SourceFile\Core</Filter>
+    </ClInclude>
+    <ClInclude Include="02_ResourceFile\SceneFile\Transition\SnapshotOverlay.h">
+      <Filter>SourceFile\Core</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <FxCompile Include="ShaderFile\Common.hlsl">
       <Filter>SourceFile\Shader\HLSL</Filter>
     </FxCompile>
+    <FxCompile Include="ShaderFile\PS_Alpha.hlsl">
+      <Filter>SourceFile\Shader\HLSL\PixelShader</Filter>
+    </FxCompile>
     <FxCompile Include="ShaderFile\PS_Default.hlsl">
-      <Filter>SourceFile\Shader\HLSL</Filter>
+      <Filter>SourceFile\Shader\HLSL\PixelShader</Filter>
     </FxCompile>
     <FxCompile Include="ShaderFile\PS_Phong.hlsl">
-      <Filter>SourceFile\Shader\HLSL</Filter>
+      <Filter>SourceFile\Shader\HLSL\PixelShader</Filter>
     </FxCompile>
     <FxCompile Include="ShaderFile\PS_Unlit.hlsl">
-      <Filter>SourceFile\Shader\HLSL</Filter>
+      <Filter>SourceFile\Shader\HLSL\PixelShader</Filter>
+    </FxCompile>
+    <FxCompile Include="ShaderFile\VS_Alpha.hlsl">
+      <Filter>SourceFile\Shader\HLSL\VertexShader</Filter>
     </FxCompile>
     <FxCompile Include="ShaderFile\VS_Default.hlsl">
-      <Filter>SourceFile\Shader\HLSL</Filter>
+      <Filter>SourceFile\Shader\HLSL\VertexShader</Filter>
     </FxCompile>
     <FxCompile Include="ShaderFile\VS_Unlit.hlsl">
-      <Filter>SourceFile\Shader\HLSL</Filter>
+      <Filter>SourceFile\Shader\HLSL\VertexShader</Filter>
     </FxCompile>
   </ItemGroup>
 </Project>

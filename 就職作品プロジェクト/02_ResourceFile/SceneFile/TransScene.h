@@ -2,7 +2,10 @@
 #include "Scene.h"
 #include "../Texture2D.h"
 #include "../Application.h"
+#include "../RenderTarget.h"
 #include "Transition/Fade.h"
+#include "Transition/SnapshotOverlay.h"
+
 enum STEP
 {
 	OFF,
@@ -20,8 +23,14 @@ enum TRANS_MODE
 class TransScene : public Scene
 {
 protected:
+	// シーンの前後 
 	Scene* m_SceneOld;
 	Scene* m_SceneNext;
+
+	// オフスクリーン用
+	std::unique_ptr<RenderTarget> m_RenderTarget;
+	Microsoft::WRL::ComPtr<ID3D11ShaderResourceView> m_NextSceneSRV;
+	SnapshotOverlay* m_Overlay = nullptr;
 
 	const float m_Counter = Application::GetDeltaTime();
 	float m_Timer	 = 0.0f;
@@ -42,19 +51,17 @@ public:
 	void Update()		override;
 	void Finalize()		override;
 
-	void SetDuration(float duration) { m_Duration = duration; }
-	void SetOldScene(Scene* sceneOld) {
-		m_SceneOld = sceneOld;
-	}
-	void SetNextScene(Scene* sceneNext) {
-		m_SceneNext = sceneNext;
-	}
-	void SetTransMode(TRANS_MODE mode) {
-		m_TransMode = mode;
-	}
-	void SetStep(STEP step) {
-		m_Step = step;
-	}
+	/// <summary>
+	/// 次のシーンの一フレーム目を描画する
+	/// </summary>
+	void DrawNextScene();
+
+
+	void SetDuration(float duration)    { m_Duration = duration;	}
+	void SetOldScene(Scene* sceneOld)   { m_SceneOld = sceneOld;	}
+	void SetNextScene(Scene* sceneNext) { m_SceneNext = sceneNext;	}
+	void SetTransMode(TRANS_MODE mode)  { m_TransMode = mode;		}
+	void SetStep(STEP step)				{m_Step = step;				}
 
 	bool isOverClock();
 	

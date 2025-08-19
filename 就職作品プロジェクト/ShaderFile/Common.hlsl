@@ -12,6 +12,7 @@ struct PS_IN
     float4 pos : SV_POSITION;
     float4 col : COLOR0;
     float2 tex : TEXCOORD0;
+	float3 nrm : NORMAL0;
 };
 
 struct MATERIAL
@@ -47,6 +48,11 @@ cbuffer ViewBuffer : register(b1)
 cbuffer ProjectionBuffer : register(b2)
 {
     matrix Projection;
+};
+
+cbuffer LightBuffer : register(b3)
+{
+	LightBuffer gLight;
 };
 
 cbuffer MeterialBuffer : register(b4)

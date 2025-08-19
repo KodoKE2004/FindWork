@@ -38,6 +38,9 @@ void Game::Initialize()
 	instance.m_ShaderManager->AddShader("VS_Unlit",ShaderStage::VS);
 	instance.m_ShaderManager->AddShader("PS_Unlit",ShaderStage::PS);
 
+	instance.m_ShaderManager->AddShader("VS_Alpha",ShaderStage::VS);
+	instance.m_ShaderManager->AddShader("PS_Alpha",ShaderStage::PS);
+
 	//@ƒ‚ƒfƒ‹“o˜^
 	instance.m_GameMeshes->AddMeshModel("RedMan" , "Akai.fbx"   , "Akai");
 	instance.m_GameMeshes->AddMeshModel("Pokemon", "Porygon.fbx", "Porygon");

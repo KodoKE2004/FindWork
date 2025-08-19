@@ -110,13 +110,16 @@ public:
 	static void SetProjectionMatrix(DirectX::SimpleMath::Matrix* ProjectionMatrix);
 
 	static void SetMaterial(MATERIAL Material);
+	static void SetLightBuffer(LightBuffer* LightBuffer);
 	static void SetUV(float u, float v, float uw, float vh);
+	static void SetBlendState(int nBlendState);		// ブレンド ステート設定
 
-	//=============================================================================
-	// ブレンド ステート設定
-	//=============================================================================
-	static void SetBlendState(int nBlendState);
-
+	// ゲッター
+	static D3D11_VIEWPORT		   GetRenderTargetView(void);
+	static D3D11_VIEWPORT		   GetViewport();
+	static ID3D11RenderTargetView* GetBackBufferRTV();
+	
+	static void BlitSRVToBackbuffer(ID3D11ShaderResourceView* srv, float alpha = 1.0f);
 
 	static void CreateVertexShader(ID3D11VertexShader** VertexShader, ID3D11InputLayout** VertexLayout, const char* FileName);
 	static void CreatePixelShader (ID3D11PixelShader** PixelShader, const char* FileName);

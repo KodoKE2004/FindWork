@@ -1,7 +1,8 @@
 #include "Renderer.h"
 #include "Application.h"
 #include "Debug.hpp"
-
+#include <d3dcompiler.h>
+#pragma comment(lib, "d3dcompiler.lib")
 
 
 D3D_FEATURE_LEVEL Renderer::m_FeatureLevel = D3D_FEATURE_LEVEL_11_0; // Direct3Dの機能レベル（DirectX 11.0）
@@ -50,10 +51,13 @@ void Renderer::Initialize()
 	if (FAILED(hr)) return;
 
 	// レンダーターゲットビュー作成
-	ID3D11Texture2D* renderTarget{};
-	hr = m_SwapChain->GetBuffer(0, __uuidof(ID3D11Texture2D), (LPVOID*)&renderTarget);
-	if (renderTarget != nullptr)m_Device->CreateRenderTargetView(renderTarget, NULL, &m_RenderTargetView);
-	renderTarget->Release();
+	ID3D11Texture2D* rt = nullptr;
+	hr = m_SwapChain->GetBuffer(0, __uuidof(ID3D11Texture2D), (void**)&rt);
+	if (SUCCEEDED(hr) && rt) {
+		hr = m_Device->CreateRenderTargetView(rt, nullptr, &m_RenderTargetView);
+	}
+	if (rt) rt->Release();
+	if (FAILED(hr)) return;
 
 	// デプスステンシルバッファ作成
 	ID3D11Texture2D* depthStencile{};
@@ -219,10 +223,10 @@ void Renderer::Initialize()
 
 	// 既定値（下向き白色の平行光）
 	LightBuffer lightbuffer{};
-	lightbuffer.Direction = DirectX::SimpleMath::Vector4(0, -1, 0, 0); // w=0: 方向ベクトル
-	lightbuffer.LightColor = DirectX::SimpleMath::Color(1, 1, 1, 1);
-	lightbuffer.AmbientIntensity = 0.1f;
-	lightbuffer.DiffuseIntensity = 1.0f;
+	lightbuffer.Direction = DirectX::SimpleMath::Vector4(0.0f, 0.0f, -1.0f, 0.0f); // w=0: 方向ベクトル
+	lightbuffer.LightColor = DirectX::SimpleMath::Color( 1.0f, 1.0f,  1.0f, 1.0f);
+	lightbuffer.AmbientIntensity = 0.5f;
+	lightbuffer.DiffuseIntensity = 0.5f;
 	lightbuffer.SpecularIntensity = 0.5f;
 
 	m_DeviceContext->UpdateSubresource(m_LightBuffer, 0, NULL, &lightbuffer, 0, 0);
@@ -242,6 +246,13 @@ void Renderer::Initialize()
 
 void Renderer::Finalize()
 {
+	for (auto& bs : m_BlendState) { if (bs) { bs->Release(); bs = nullptr; } }
+	if (m_BlendStateATC) { m_BlendStateATC->Release(); m_BlendStateATC = nullptr; }
+
+	if (m_DepthStencilView)  { m_DepthStencilView ->Release(); m_DepthStencilView  = nullptr; }
+	if (m_DepthStateEnable)  { m_DepthStateEnable ->Release(); m_DepthStateEnable  = nullptr; }
+	if (m_DepthStateDisable) { m_DepthStateDisable->Release(); m_DepthStateDisable = nullptr; }
+
 	m_WorldBuffer->Release();
 	m_ViewBuffer->Release();
 	m_ProjectionBuffer->Release();
@@ -251,6 +262,7 @@ void Renderer::Finalize()
 	m_LightBuffer->Release(); m_LightBuffer = nullptr; 
 
 	m_DeviceContext->ClearState();
+
 	m_RenderTargetView->Release();
 	m_SwapChain->Release();
 	m_DeviceContext->Release();
@@ -368,6 +380,15 @@ void Renderer::SetMaterial(MATERIAL Material)
 	m_DeviceContext->UpdateSubresource(m_MaterialBuffer, 0, NULL, &Material, 0, 0);
 }
 
+void Renderer::SetLightBuffer(LightBuffer* LightBuffer)
+{
+	if (LightBuffer == nullptr) return;
+	// ライトバッファをGPU側へ送る
+	m_DeviceContext->UpdateSubresource(m_LightBuffer, 0, NULL, LightBuffer, 0, 0);
+	// ピクセルシェーダにバインド
+	m_DeviceContext->PSSetConstantBuffers(3, 1, &m_LightBuffer);
+}
+
 
 void Renderer::SetUV(float u, float v, float uw, float vh)
 {
@@ -381,12 +402,135 @@ void Renderer::SetUV(float u, float v, float uw, float vh)
 
 void Renderer::SetBlendState(int nBlendState)
 {
-	if (nBlendState >= 0 || nBlendState < MAX_BLENDSTATE) return;
+	if (nBlendState < 0 || nBlendState >= MAX_BLENDSTATE) return;
 
 	float blendFactor[4] = { 0.0f, 0.0f, 0.0f, 0.0f };
 	m_DeviceContext->OMSetBlendState(m_BlendState[nBlendState], blendFactor, 0xffffffff);
 
 }
+
+D3D11_VIEWPORT Renderer::GetRenderTargetView(void)
+{
+	D3D11_VIEWPORT viewport{};
+	UINT count = 1;
+	// ビューポートの情報を取得
+	m_DeviceContext->RSGetViewports(&count, &viewport);
+
+	// まだ設定されていない等で取得できなかった場合は、デフォルトのビューポートを設定
+	if (count == 0) {
+		viewport.TopLeftX = 0.0f;
+		viewport.TopLeftY = 0.0f;
+		viewport.Width = static_cast<FLOAT>(Application::GetWidth());
+		viewport.Height = static_cast<FLOAT>(Application::GetHeight());
+		viewport.MinDepth = 0.0f;
+		viewport.MaxDepth = 1.0f;
+	}
+
+	return viewport;
+}
+
+// ===== 追加実装: オフスクリーン連携ヘルパ =====
+D3D11_VIEWPORT Renderer::GetViewport()
+{
+	D3D11_VIEWPORT vp{};
+	UINT count = 1;
+	m_DeviceContext->RSGetViewports(&count, &vp);
+	if (count == 0) {
+		vp.TopLeftX = 0.0f; vp.TopLeftY = 0.0f;
+		vp.Width = (FLOAT)Application::GetWidth();
+		vp.Height = (FLOAT)Application::GetHeight();
+		vp.MinDepth = 0.0f; vp.MaxDepth = 1.0f;
+	}
+	return vp;
+}
+
+ID3D11RenderTargetView* Renderer::GetBackBufferRTV()
+{
+	return m_RenderTargetView;
+}
+
+static void CompileShaderFromSource(const char* src, const char* entry, const char* target, ID3DBlob** blobOut)
+{
+	UINT flags = D3DCOMPILE_ENABLE_STRICTNESS;
+#ifdef _DEBUG
+	flags |= D3DCOMPILE_DEBUG | D3DCOMPILE_SKIP_OPTIMIZATION;
+#endif
+	ID3DBlob* errorBlob = nullptr;
+	HRESULT hr = D3DCompile(src, strlen(src), nullptr, nullptr, nullptr, entry, target, flags, 0, blobOut, &errorBlob);
+	if (FAILED(hr) && errorBlob) { OutputDebugStringA((const char*)errorBlob->GetBufferPointer()); }
+	if (errorBlob) errorBlob->Release();
+}
+
+// SRV をバックバッファへフルスクリーン合成（αブレンドON/深度OFF）
+void Renderer::BlitSRVToBackbuffer(ID3D11ShaderResourceView* srv, float alpha)
+{
+	if (!srv) return;
+
+	static Microsoft::WRL::ComPtr<ID3D11VertexShader> sVS;
+	static Microsoft::WRL::ComPtr<ID3D11PixelShader>  sPS;
+	static Microsoft::WRL::ComPtr<ID3D11Buffer>       sCB; // alpha
+	static bool sReady = false;
+
+	if (!sReady)
+	{
+		const char* vsSrc = R"(
+struct VSOut { float4 pos:SV_POSITION; float2 uv:TEXCOORD0; };
+VSOut main(uint id:SV_VertexID){
+    float2 v[3] = { float2(-1,-1), float2(-1,3), float2(3,-1) };
+    VSOut o; o.pos=float4(v[id],0,1); o.uv=0.5f*(v[id]+float2(1,1)); return o;
+})";
+
+		const char* psSrc = R"(
+Texture2D    gTex : register(t0);
+SamplerState gSmp : register(s0);
+cbuffer CB : register(b7){ float gAlpha; float3 pad; };
+float4 main(float4 pos:SV_POSITION, float2 uv:TEXCOORD0) : SV_Target {
+    float4 c = gTex.Sample(gSmp, uv);
+    c.a = saturate(gAlpha);
+    return c;
+})";
+		Microsoft::WRL::ComPtr<ID3DBlob> vsBlob, psBlob;
+		CompileShaderFromSource(vsSrc, "main", "vs_5_0", vsBlob.GetAddressOf());
+		CompileShaderFromSource(psSrc, "main", "ps_5_0", psBlob.GetAddressOf());
+		if (vsBlob) m_Device->CreateVertexShader(vsBlob->GetBufferPointer(), vsBlob->GetBufferSize(), nullptr, sVS.GetAddressOf());
+		if (psBlob) m_Device->CreatePixelShader(psBlob->GetBufferPointer(), psBlob->GetBufferSize(), nullptr, sPS.GetAddressOf());
+
+		D3D11_BUFFER_DESC cbd{}; cbd.ByteWidth = 16; cbd.Usage = D3D11_USAGE_DEFAULT; cbd.BindFlags = D3D11_BIND_CONSTANT_BUFFER;
+		m_Device->CreateBuffer(&cbd, nullptr, sCB.GetAddressOf());
+
+		sReady = true;
+	}
+
+	// OM backbuffer
+	ID3D11RenderTargetView* rtvs[] = { m_RenderTargetView };
+	m_DeviceContext->OMSetRenderTargets(1, rtvs, nullptr);
+
+	// viewport
+	auto vp = GetViewport();
+	m_DeviceContext->RSSetViewports(1, &vp);
+
+	// alpha blend ON / depth OFF
+	SetBlendState(BS_ALPHABLEND);
+	SetDepthEnable(false);
+
+	// bind shaders & SRV
+	m_DeviceContext->VSSetShader(sVS.Get(), nullptr, 0);
+	m_DeviceContext->PSSetShader(sPS.Get(), nullptr, 0);
+	m_DeviceContext->PSSetShaderResources(0, 1, &srv);
+
+	float data[4] = { alpha, 0, 0, 0 };
+	m_DeviceContext->UpdateSubresource(sCB.Get(), 0, nullptr, data, 0, 0);
+	m_DeviceContext->VSSetConstantBuffers(7, 1, sCB.GetAddressOf());
+	m_DeviceContext->PSSetConstantBuffers(7, 1, sCB.GetAddressOf());
+
+	m_DeviceContext->IASetPrimitiveTopology(D3D11_PRIMITIVE_TOPOLOGY_TRIANGLELIST);
+	m_DeviceContext->Draw(3, 0);
+
+	// unbind SRV（ハザード回避）
+	ID3D11ShaderResourceView* nullSRV[1] = { nullptr };
+	m_DeviceContext->PSSetShaderResources(0, 1, nullSRV);
+}
+
 
 void Renderer::CreateVertexShader(ID3D11VertexShader** VertexShader, ID3D11InputLayout** VertexLayout, const char* FileName)
 {

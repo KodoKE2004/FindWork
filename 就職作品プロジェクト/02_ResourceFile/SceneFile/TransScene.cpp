@@ -4,10 +4,10 @@
 
 void TransScene::Initialize()
 {
-	m_Timer		= 0.0f;
-	m_Alpha		= 0.0f;
-	m_isChange	= false;
-	m_Step		= STEP::DOING;
+	m_Timer = 0.0f;
+	m_Alpha = 0.0f;
+	m_isChange = false;
+	m_Step = STEP::DOING;
 
 	switch (m_TransMode)
 	{
@@ -19,7 +19,6 @@ void TransScene::Initialize()
 	}
 	break;
 	}
-
 }
 
 void TransScene::Update()
@@ -45,6 +44,13 @@ void TransScene::Update()
 			if (m_isChange) {
 				m_SceneOld->Finalize();
 				m_SceneNext->Initialize();
+				DrawNextScene();			 // 次シーンをオフスクリーンに描画
+				// フェードを配列の最後尾にしたいので配置をリセット
+				auto fade = Game::GetInstance().GetObjects<Fade>();
+
+				auto backFade = fade[0];
+				m_MySceneObjects.pop_back(); // 既存のフェードを削除
+				m_MySceneObjects.emplace_back(backFade); // 新しいフェードを追加
 			}
 		}
 		// INの処理
@@ -80,6 +86,40 @@ void TransScene::Finalize()
 		Game::GetInstance().DeleteObject(obj);
 	}
 	m_MySceneObjects.clear();
+
+	m_Overlay = nullptr;
+	m_Fade    = nullptr;
+}
+
+void TransScene::DrawNextScene()
+{
+
+	// ★ 次シーンを一度だけオフスクリーンへ描画して SRV を確保
+	auto* device = Renderer::GetDevice();
+	auto* context = Renderer::GetDeviceContext();
+	auto  vp = Renderer::GetViewport();
+
+	m_RenderTarget = std::make_unique<RenderTarget>();
+	// sRGB 運用なら: m_RenderTarget->SetFormat(DXGI_FORMAT_R8G8B8A8_UNORM_SRGB);
+	m_RenderTarget->Create(device, (UINT)vp.Width, (UINT)vp.Height, /*withDepth=*/true);
+
+	const float clear[4]{ 0,0,0,0 };
+	m_RenderTarget->Begin(context, clear);
+	{
+		// Update は走らせず、次シーンのオブジェクトをそのまま 1 回描く
+		for (auto* obj : m_SceneNext->GetSceneObjects()) {
+			if (obj) obj->Draw();
+		}
+	}
+	RenderTarget::End(context, Renderer::GetBackBufferRTV(), vp);
+
+	m_NextSceneSRV = m_RenderTarget->GetSRV();
+
+	// ★ 遷移オーバーレイを現シーンに追加（最後にα合成）
+	m_Overlay = Game::GetInstance().AddObject<SnapshotOverlay>();
+	m_Overlay->SetSRV(m_NextSceneSRV.Get());
+	m_Overlay->SetAlpha(0.0f);
+	m_MySceneObjects.emplace_back(m_Overlay); // 管理用（Finalizeで掃除）
 }
 
 bool TransScene::isOverClock()
@@ -93,6 +133,7 @@ bool TransScene::isOverClock()
 	return false;
 }
 
+// フェードイン
 void TransScene::FADE_IN()
 {
 	m_Alpha -= m_AlphaValue * m_Counter;
@@ -107,6 +148,7 @@ void TransScene::FADE_IN()
 	
 }
 
+// フェードアウト
 void TransScene::FADE_OUT()
 {
 	m_Alpha += m_AlphaValue * m_Counter;
