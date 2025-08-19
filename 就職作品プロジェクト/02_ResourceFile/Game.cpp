@@ -4,6 +4,8 @@
 #include "SceneFile/SceneList.h"
 #include "DebugUI.h"
 
+#include "SceneFile/Transition/Fade.h"   // フェード型の識別に必要
+#include <algorithm>           // 使わないなら不要（2パス版は不要）
 
 std::unique_ptr<Game> Game::m_pInstance  = nullptr; // ゲームのインスタンス初期化
 
@@ -72,16 +74,28 @@ void Game::Update()
 void Game::Draw()
 {
 	auto& instance = GetInstance();
-	Renderer::Start();		// 描画の開始
+	Renderer::Start();  // 描画の開始
 
-	// オブジェクト描画
+	// フェード以外を描く
 	for (auto& o : instance.m_GameObjects)
 	{
+		if (!o) continue;
+		if (dynamic_cast<Fade*>(o.get())) continue;  // フェードは後で
 		o->Draw();
 	}
 
-	DebugUI::Render();			// デバッグUIの描画
-	Renderer::Finish();			// 描画の終了
+	// フェードを最後に描く（必ず最前面になる）
+	for (auto& o : instance.m_GameObjects)
+	{
+		if (!o) continue;
+		if (auto* f = dynamic_cast<Fade*>(o.get()))
+		{
+			f->Draw();
+		}
+	}
+
+	DebugUI::Render();   // デバッグUIの描画
+	Renderer::Finish();  // 描画の終了
 }
 
 void Game::Finalize()

@@ -68,6 +68,13 @@ void Fade::Update()
 {
 
 }
+void Fade::Draw()
+{
+	Renderer::SetDepthEnable(false);
+	Renderer::SetBlendState(BS_ALPHABLEND);
+	Texture2D::Draw();
+	Renderer::SetDepthEnable(true);  // •`‰æŒã‚ÉŒ³‚Ö–ß‚·
+}
 void Fade::Finalize()
 {
 

@@ -10,6 +10,7 @@ public:
 
 	void Initialize();
 	void Update();
+	void Draw() override;
 	void Finalize();
 };
 

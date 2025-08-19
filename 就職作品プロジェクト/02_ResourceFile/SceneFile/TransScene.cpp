@@ -45,12 +45,6 @@ void TransScene::Update()
 				m_SceneOld->Finalize();
 				m_SceneNext->Initialize();
 				DrawNextScene();			 // 次シーンをオフスクリーンに描画
-				// フェードを配列の最後尾にしたいので配置をリセット
-				auto fade = Game::GetInstance().GetObjects<Fade>();
-
-				auto backFade = fade[0];
-				m_MySceneObjects.pop_back(); // 既存のフェードを削除
-				m_MySceneObjects.emplace_back(backFade); // 新しいフェードを追加
 			}
 		}
 		// INの処理
