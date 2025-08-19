@@ -62,8 +62,8 @@ void TransScene::Update()
 	break;
 	case FINISH:
 	{
-		Finalize();
 		Game::GetInstance().SetSceneCurrent(m_SceneNext);
+		Finalize();
 	}
 	break;
 
@@ -83,6 +83,15 @@ void TransScene::Finalize()
 
 	m_Overlay = nullptr;
 	m_Fade    = nullptr;
+
+	m_NextSceneSRV.Reset();
+	m_RenderTarget.reset();
+
+	if (this != nullptr)
+	{
+		delete this;
+	}
+
 }
 
 void TransScene::DrawNextScene()
