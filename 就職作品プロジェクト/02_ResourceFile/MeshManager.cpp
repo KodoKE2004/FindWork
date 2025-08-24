@@ -6,7 +6,7 @@
 MeshManager::MeshManager() {
     Debug::Log("MeshManager: コンストラクタ - NULLモデル登録開始");
     // "NULL" モデルを最初に登録しておく
-    AddMeshModel(kDefaultName, "spot.fbx", "spot");
+    AddMeshModel(m_DefaultName, "spot.fbx", "spot");
 }
 
 MeshManager::MeshManager(std::string filePath)
@@ -14,7 +14,7 @@ MeshManager::MeshManager(std::string filePath)
 	m_FilePath = std::move(filePath);
     Debug::Log("MeshManager: コンストラクタ - NULLモデル登録開始");
     // "NULL" モデルを最初に登録しておく
-    AddMeshModel(kDefaultName, "spot.fbx", "spot");
+    AddMeshModel(m_DefaultName, "spot.fbx", "spot");
 
 }
 
@@ -61,7 +61,7 @@ std::shared_ptr<MeshModel> MeshManager::GetMeshModel(const std::string& modelNam
     }
     Debug::Log("警告 : GetMeshModel に失敗, デフォルトを返却 " + modelName);
     // デフォルト ("NULL") を返す
-    return m_MeshMap[kDefaultName].mesh;
+    return m_MeshMap[m_DefaultName].mesh;
 }
 
 std::string MeshManager::GetFilePath(const std::string& modelName) {
@@ -71,7 +71,7 @@ std::string MeshManager::GetFilePath(const std::string& modelName) {
         return it->second.filePath;
     }
     Debug::Log("警告 : FilePath取得に失敗, デフォルトを返却 " + modelName);
-    return m_MeshMap[kDefaultName].filePath;
+    return m_MeshMap[m_DefaultName].filePath;
 }
 
 std::string MeshManager::GetTextureDirectory(const std::string& modelName) {
@@ -81,5 +81,5 @@ std::string MeshManager::GetTextureDirectory(const std::string& modelName) {
         return it->second.texDirectory;
     }
     Debug::Log("警告 : TextureDirectory取得に失敗, デフォルトを返却 " + modelName);
-    return m_MeshMap[kDefaultName].texDirectory;
+    return m_MeshMap[m_DefaultName].texDirectory;
 }

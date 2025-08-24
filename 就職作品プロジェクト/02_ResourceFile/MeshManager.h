@@ -10,13 +10,14 @@ class MeshManager
 {
 private:
 
-	
-
-	/// 登録名 → MeshInfo のマップ
+	// 登録名 → MeshInfo のマップ
 	std::unordered_map<std::string, MeshInfo> m_MeshMap;
-	std::string m_FilePath; // ベースディレクトリ
+    
+    // ベースディレクトリ
+	std::string m_FilePath;
+
 	/// デフォルト（NULL）モデルの登録名 ("NULL")
-	static constexpr const char* kDefaultName = "NULL";
+	static constexpr const char* m_DefaultName = "NULL";
 
 public:
     MeshManager();

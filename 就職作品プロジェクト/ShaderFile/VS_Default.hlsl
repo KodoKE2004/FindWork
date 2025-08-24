@@ -2,7 +2,7 @@
 
 PS_IN main(in VS_IN input)
 {
-    PS_IN output;
+	PS_IN output = (PS_IN) 0;
 	
 	// À•W•ÏŠ·
     matrix wvp;

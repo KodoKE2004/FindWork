@@ -26,6 +26,7 @@ public:
 
 	// シェーダーの追加
 	void SetShader(std::string hlslName);
+	void SetShader(std::string vsName,std::string csName);
 
 	void SetColor(const Color color);
 	void SetColor(const float r, const float g, const float b, const float a);

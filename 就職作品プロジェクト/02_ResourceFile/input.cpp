@@ -41,7 +41,7 @@ void Input::Update()
 		if (VibrationTime == 0) { //振動継続時間が経った時に振動を止める
 			XINPUT_VIBRATION vibration;
 			ZeroMemory(&vibration, sizeof(XINPUT_VIBRATION));
-			vibration.wLeftMotorSpeed = 0;
+			vibration.wLeftMotorSpeed  = 0;
 			vibration.wRightMotorSpeed = 0;
 			XInputSetState(0, &vibration);
 		}
@@ -73,6 +73,7 @@ DirectX::SimpleMath::Vector2 Input::GetLeftAnalogStick(void)
 	res.y = y / 32767.0f; //-1～1
 	return res;
 }
+
 //右アナログスティック
 DirectX::SimpleMath::Vector2 Input::GetRightAnalogStick(void)
 {
@@ -91,6 +92,7 @@ float Input::GetLeftTrigger(void)
 	BYTE t = controllerState.Gamepad.bLeftTrigger; // 0～255
 	return t / 255.0f;
 }
+
 //右トリガー
 float Input::GetRightTrigger(void)
 {
@@ -127,4 +129,3 @@ void Input::SetVibration(int frame, float powor)
 	//振動継続時間を代入
 	VibrationTime = frame;
 }
-

@@ -8,12 +8,9 @@
 
 void TitleScene::Initialize()
 {
-	Cube* pt = Game::GetInstance().AddObject<Cube>();
-	pt->ClearShader();
-	pt->SetShader("VS_Unlit");
-	pt->SetShader("PS_Unlit");
-
-	m_MySceneObjects.emplace_back(pt);
+	//Cube* pt = Game::GetInstance().AddObject<Cube>();
+	//pt->SetShader("VS_Unlit", "PS_Unlit");
+	//m_MySceneObjects.emplace_back(pt);
 
 	// Light* light = Game::GetInstance().AddObject<Light>();
 	// light->ClearShader();
@@ -23,20 +20,17 @@ void TitleScene::Initialize()
 	// m_MySceneObjects.emplace_back(light);
 
 	auto* pt2 = Game::GetInstance().AddObject<Model>();
-	pt2->GetMeshModel("Pokemon");
-	pt2->ClearShader();
-	pt2->SetShader("VS_Unlit");
-	pt2->SetShader("PS_Unlit");
+	// pt2->GetMeshModel("Pokemon");
+	pt2->SetShader( "VS_Unlit", "PS_Unlit");
 	pt2->SetScale ( 1.0f, 1.0f, 1.0f);
 	m_MySceneObjects.emplace_back(pt2);
 }
 
 void TitleScene::Update()
 {
-
 	if (Input::GetKeyTrigger(VK_RETURN))
 	{
-		ChangeScene<SelectScene>(FADE,3.0f);
+		ChangeScene<SelectScene>(FADE, 1.0f);
 	}
 
 

@@ -2,7 +2,7 @@
 
 PS_IN main(in VS_IN input)
 {
-    PS_IN output;
+	PS_IN output = (PS_IN) 0;
 	
 	// 座標変換
     matrix wvp;
@@ -10,10 +10,9 @@ PS_IN main(in VS_IN input)
     wvp = mul(wvp, Projection); // ビュー　 ⇒ プロジェクション
     output.pos = mul(input.pos, wvp); // 最終的にoutput.posに代入しラスタライザに渡される
 
-    float4 uv;
+	float4 uv = (float4) 0;
     uv.xy = input.tex;
-    uv.z = 0.0f;
-    uv.w = input.tex;
+	uv.w  = input.tex.y; // テクスチャ座標のyをwに代入
     uv = mul(uv, matrixTex);
 
     output.tex = uv.xy;

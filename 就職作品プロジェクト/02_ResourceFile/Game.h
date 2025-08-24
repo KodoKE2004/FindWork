@@ -8,6 +8,7 @@
 #include "MeshManager.h"
 #include "TextureManager.h"
 #include "ShaderManager.h"
+#include "AudioManager.h"
 
 class SceneTrans;
 
@@ -23,9 +24,10 @@ private:
 	//================================
 	//	   ゲームを支えるマネージャー達
 	//================================
-	std::shared_ptr<MeshManager>		 m_GameMeshes;		// シーンで扱うメッシュ
+	std::shared_ptr<MeshManager>		 m_MeshManager;		// シーンで扱うメッシュ
 	std::shared_ptr<TextureManager>		 m_TextureManager;	// ゲームで扱う画像
 	std::shared_ptr<ShaderManager>		 m_ShaderManager;	// シェーダーをまとめたもの
+	std::shared_ptr<AudioManager>		 m_AudioManager;	// オーディオマネージャー
 
 public:
 	//================================
@@ -63,7 +65,7 @@ public:
 	}
 	
 	std::shared_ptr<MeshManager> GetMeshManager() {
-		return m_GameMeshes;
+		return m_MeshManager;
 	}
 
 	std::shared_ptr<TextureManager> GetTextureManager() {

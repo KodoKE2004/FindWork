@@ -77,7 +77,7 @@ public:
 	void Update(); //更新
 
 	//キー入力
-	static bool GetKeyPress(int key);   //プレス(押している間ずっと)
+	static bool GetKeyPress  (int key); //プレス(押している間ずっと)
 	static bool GetKeyTrigger(int key); //トリガー(押し始めた時)
 	static bool GetKeyRelease(int key); //リリース(押し終わった時)
 

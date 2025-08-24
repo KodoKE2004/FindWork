@@ -127,7 +127,7 @@ HRESULT CompileShaderFromFile(const char* szFileName, LPCSTR szEntryPoint, LPCST
 	{
 		if (pErrorBlob != nullptr){
 			MessageBox(NULL,
-				(char*)pErrorBlob->GetBufferPointer(), "Error", MB_OK);
+				(wchar_t*)pErrorBlob->GetBufferPointer(), L"Error", MB_OK);
 		}
 		if (pErrorBlob) pErrorBlob->Release();
 		return hr;
@@ -181,7 +181,7 @@ bool CreateVertexShader(
 		ShaderObjectSize,
 		ppVertexLayout);
 	if (FAILED(hr)) {
-		MessageBox(nullptr, "CreateInputLayout error", "error", MB_OK);
+		MessageBox(nullptr, L"CreateInputLayout error", L"error", MB_OK);
 		pBlob->Release();
 		return false;
 	}
@@ -294,7 +294,7 @@ bool CreateConstantBuffer(
 
 	HRESULT hr = device->CreateBuffer(&bd, nullptr, pConstantBuffer);
 	if (FAILED(hr)){
-		MessageBox(nullptr, "CreateBuffer(constant buffer) error", "Error", MB_OK);
+		MessageBox(nullptr, L"CreateBuffer(constant buffer) error", L"Error", MB_OK);
 		return false;
 	}
 
@@ -321,7 +321,7 @@ bool CreateConstantBufferWrite(
 
 	HRESULT hr = device->CreateBuffer(&bd, nullptr, pConstantBuffer);
 	if (FAILED(hr)) {
-		MessageBox(nullptr, "CreateBuffer(constant buffer) error", "Error", MB_OK);
+		MessageBox(nullptr, L"CreateBuffer(constant buffer) error", L"Error", MB_OK);
 		return false;
 	}
 
@@ -352,7 +352,7 @@ bool CreateIndexBuffer(
 
 	HRESULT hr = device->CreateBuffer(&bd, &InitData, pIndexBuffer);
 	if (FAILED(hr)){
-		MessageBox(nullptr, "CreateBuffer(index buffer) error", "Error", MB_OK);
+		MessageBox(nullptr, L"CreateBuffer(index buffer) error", L"Error", MB_OK);
 		return false;
 	}
 
@@ -387,7 +387,7 @@ bool CreateVertexBuffer(
 
 	hr = device->CreateBuffer(&bd, &InitData, pVertexBuffer);		// バッファ生成
 	if (FAILED(hr)){
-		MessageBox(nullptr, "CreateBuffer(vertex buffer) error", "Error", MB_OK);
+		MessageBox(nullptr, L"CreateBuffer(vertex buffer) error", L"Error", MB_OK);
 		return false;
 	}
 
@@ -422,7 +422,7 @@ bool CreateVertexBufferWrite(
 
 	hr = device->CreateBuffer(&bd, &InitData, pVertexBuffer);		// バッファ生成
 	if (FAILED(hr)) {
-		MessageBox(nullptr, "CreateBuffer(vertex buffer) error", "Error", MB_OK);
+		MessageBox(nullptr, L"CreateBuffer(vertex buffer) error", L"Error", MB_OK);
 		return false;
 	}
 
@@ -460,7 +460,7 @@ bool CreateVertexBufferUAV(
 
 	hr = device->CreateBuffer(&bd, &InitData, pVertexBuffer);		// バッファ生成
 	if (FAILED(hr)){
-		MessageBox(nullptr, "CreateBuffer(vertex buffer) error", "Error", MB_OK);
+		MessageBox(nullptr, L"CreateBuffer(vertex buffer) error", L"Error", MB_OK);
 		return false;
 	}
 
@@ -503,7 +503,7 @@ bool CreateStructuredBuffer(
 		hr = device->CreateBuffer(&bd, nullptr, pStructuredBuffer);		// バッファ生成
 	}
 	if (FAILED(hr)){
-		MessageBox(nullptr, "CreateBuffer(StructuredBuffer) error", "Error", MB_OK);
+		MessageBox(nullptr, L"CreateBuffer(StructuredBuffer) error", L"Error", MB_OK);
 		return false;
 	}
 
@@ -575,7 +575,7 @@ bool CreateShaderResourceView(
 	HRESULT hr;
 	hr = device->CreateShaderResourceView(pBuffer, &srvDesc, ppSRV);
 	if (FAILED(hr)){
-		MessageBox(nullptr, "CreateShaderResourceView error", "Error", MB_OK);
+		MessageBox(nullptr, L"CreateShaderResourceView error", L"Error", MB_OK);
 		return false;
 	}
 
@@ -616,7 +616,7 @@ bool CreateUnOrderAccessView(
 	HRESULT hr;
 	hr = device->CreateUnorderedAccessView(pBuffer, &uavDesc, ppUAV);
 	if (FAILED(hr)){
-		MessageBox(nullptr, "CreateUnorderedAccessView error", "Error", MB_OK);
+		MessageBox(nullptr, L"CreateUnorderedAccessView error", L"Error", MB_OK);
 		return false;
 	}
 

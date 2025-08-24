@@ -115,9 +115,6 @@
     <ClCompile Include="02_ResourceFile\main.cpp">
       <Filter>SourceFile\App</Filter>
     </ClCompile>
-    <ClCompile Include="02_ResourceFile\Dx11helper.cpp">
-      <Filter>SourceFile\App</Filter>
-    </ClCompile>
     <ClCompile Include="02_ResourceFile\utility.cpp">
       <Filter>SourceFile\Core</Filter>
     </ClCompile>
@@ -171,6 +168,15 @@
     </ClCompile>
     <ClCompile Include="02_ResourceFile\SceneFile\Transition\SnapshotOverlay.cpp">
       <Filter>SourceFile\Core</Filter>
+    </ClCompile>
+    <ClCompile Include="02_ResourceFile\Dx11helper.cpp">
+      <Filter>SourceFile\Core</Filter>
+    </ClCompile>
+    <ClCompile Include="02_ResourceFile\Audio.cpp">
+      <Filter>SourceFile\Core</Filter>
+    </ClCompile>
+    <ClCompile Include="02_ResourceFile\AudioManager.cpp">
+      <Filter>SourceFile\Core\Manager</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -243,9 +249,6 @@
     <ClInclude Include="02_ResourceFile\main.h">
       <Filter>SourceFile\App</Filter>
     </ClInclude>
-    <ClInclude Include="02_ResourceFile\Dx11helper.h">
-      <Filter>SourceFile\App</Filter>
-    </ClInclude>
     <ClInclude Include="02_ResourceFile\utility.h">
       <Filter>SourceFile\Core</Filter>
     </ClInclude>
@@ -308,6 +311,15 @@
     </ClInclude>
     <ClInclude Include="02_ResourceFile\SceneFile\Transition\SnapshotOverlay.h">
       <Filter>SourceFile\Core</Filter>
+    </ClInclude>
+    <ClInclude Include="02_ResourceFile\Dx11helper.h">
+      <Filter>SourceFile\Core</Filter>
+    </ClInclude>
+    <ClInclude Include="02_ResourceFile\Audio.h">
+      <Filter>SourceFile\Core</Filter>
+    </ClInclude>
+    <ClInclude Include="02_ResourceFile\AudioManager.h">
+      <Filter>SourceFile\Core\Manager</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
