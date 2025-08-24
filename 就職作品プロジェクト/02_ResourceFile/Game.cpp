@@ -33,7 +33,8 @@ void Game::Initialize()
 	instance.m_TextureManager = std::make_shared<TextureManager>("AssetFile/Texture/");
 	instance.m_ShaderManager  = std::make_shared<ShaderManager> ("ShaderFile/");
 	instance.m_AudioManager   = std::make_shared<AudioManager>	(L"AssetFile/Sound/");
-	
+	instance.m_AudioManager->Init();
+
 	// シェーダー登録
 	instance.m_ShaderManager->AddShader("VS_Default",ShaderStage::VS);
 	instance.m_ShaderManager->AddShader("PS_Default",ShaderStage::PS);
@@ -70,6 +71,8 @@ void Game::Update()
 		if(o == nullptr){ continue; }
 		o->Update(); // オブジェクトの更新
 	}
+	// オーディオマネージャーの更新
+	instance.m_AudioManager->Update();
 }
 
 void Game::Draw()

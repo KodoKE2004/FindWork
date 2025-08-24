@@ -76,6 +76,9 @@ public:
 		return m_ShaderManager;
 	}
 
+	std::shared_ptr<AudioManager> GetAudioManager() {
+		return m_AudioManager;
+	}
 	//================================
 	// オブジェクト管理
 	//================================

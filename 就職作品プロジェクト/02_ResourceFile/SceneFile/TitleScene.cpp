@@ -24,13 +24,16 @@ void TitleScene::Initialize()
 	pt2->SetShader( "VS_Unlit", "PS_Unlit");
 	pt2->SetScale ( 1.0f, 1.0f, 1.0f);
 	m_MySceneObjects.emplace_back(pt2);
+
+	Game::GetInstance().GetAudioManager()->Add("enter", L"SE/Enter.wav");
 }
 
 void TitleScene::Update()
 {
 	if (Input::GetKeyTrigger(VK_RETURN))
 	{
-		ChangeScene<SelectScene>(FADE, 1.0f);
+		Game::GetInstance().GetAudioManager()->Play("enter");
+		// ChangeScene<SelectScene>(FADE, 1.0f);
 	}
 
 
