@@ -34,6 +34,7 @@
     <ClCompile Include="02_ResourceFile\ObjectFile\Light.cpp" />
     <ClCompile Include="02_ResourceFile\ObjectFile\Model.cpp" />
     <ClCompile Include="02_ResourceFile\ObjectFile\Object.cpp" />
+    <ClCompile Include="02_ResourceFile\ObjectFile\Sphere.cpp" />
     <ClCompile Include="02_ResourceFile\Renderer.cpp" />
     <ClCompile Include="02_ResourceFile\RenderTarget.cpp" />
     <ClCompile Include="02_ResourceFile\SceneFile\GameScene.cpp" />
@@ -81,6 +82,7 @@
     <ClInclude Include="02_ResourceFile\ObjectFile\Light.h" />
     <ClInclude Include="02_ResourceFile\ObjectFile\Model.h" />
     <ClInclude Include="02_ResourceFile\ObjectFile\Object.h" />
+    <ClInclude Include="02_ResourceFile\ObjectFile\Sphere.h" />
     <ClInclude Include="02_ResourceFile\Renderer.h" />
     <ClInclude Include="02_ResourceFile\RenderTarget.h" />
     <ClInclude Include="02_ResourceFile\SceneFile\GameScene.h" />

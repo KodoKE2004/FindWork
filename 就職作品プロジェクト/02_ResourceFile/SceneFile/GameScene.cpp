@@ -11,6 +11,7 @@ void GameScene::Initialize()
 	DebugUI::TEXT_CurrentScene = "GameScene";
 	auto* pt2 = Game::GetInstance().AddObject<Model>();
 	pt2->GetMeshModel("Pokemon");
+	pt2->SetShader("VS_Unlit", "PS_Unlit");
 	m_MySceneObjects.emplace_back(pt2);}
 
 void GameScene::Update()

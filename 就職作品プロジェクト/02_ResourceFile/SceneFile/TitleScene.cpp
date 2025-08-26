@@ -32,8 +32,8 @@ void TitleScene::Update()
 {
 	if (Input::GetKeyTrigger(VK_RETURN))
 	{
-		Game::GetInstance().GetAudioManager()->Play("enter");
-		// ChangeScene<SelectScene>(FADE, 1.0f);
+		// Game::GetInstance().GetAudioManager()->Play("enter");
+		ChangeScene<SelectScene>(FADE, 1.0f);
 	}
 
 
