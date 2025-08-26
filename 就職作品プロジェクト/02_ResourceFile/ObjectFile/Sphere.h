@@ -2,7 +2,7 @@
 #include "Object.h"
 class Sphere : public Object
 {
-private:
+protected:
 
 public:
 	Sphere(Camera* cam);

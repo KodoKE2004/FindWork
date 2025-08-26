@@ -4,9 +4,13 @@ PS_IN main(in VS_IN input)
 {	
 	PS_IN output = (PS_IN) 0;
 	float4 worldPos = mul(input.pos, World);
+	
 	output.pos = mul(worldPos, mul(View, Projection));
 	output.tex = input.tex;
 	output.col = input.col;
-	output.nrm = mul(input.nrm, World); // ワールド空間に変換して渡す
+    float4 n = input.nrm;
+    n.w = 0.0f;
+    output.nrm = normalize( mul( n, World).xyz); // ワールド空間に変換して渡す
 	return output;
+	
 }
