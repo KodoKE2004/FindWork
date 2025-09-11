@@ -20,7 +20,7 @@ void TitleScene::Initialize()
 	// m_MySceneObjects.emplace_back(light);
 
 	auto* pt2 = Game::GetInstance().AddObject<Model>();
-	// pt2->GetMeshModel("Pokemon");
+	pt2->GetMeshModel("Pokemon");
 	pt2->SetShader( "VS_Unlit", "PS_Unlit");
 	pt2->SetScale ( 1.0f, 1.0f, 1.0f);
 	m_MySceneObjects.emplace_back(pt2);

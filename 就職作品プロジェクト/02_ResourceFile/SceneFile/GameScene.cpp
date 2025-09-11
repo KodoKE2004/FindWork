@@ -4,15 +4,22 @@
 #include "../DebugUI.h"
 #include "../Game.h"
 #include "../ObjectFile/Model.h"
-
+#include "../ObjectFile/Sphere.h"
 
 void GameScene::Initialize()
 {
 	DebugUI::TEXT_CurrentScene = "GameScene";
-	auto* pt2 = Game::GetInstance().AddObject<Model>();
+	/*auto* pt2 = Game::GetInstance().AddObject<Model>();
 	pt2->GetMeshModel("Pokemon");
 	pt2->SetShader("VS_Unlit", "PS_Unlit");
-	m_MySceneObjects.emplace_back(pt2);}
+	m_MySceneObjects.emplace_back(pt2);*/
+	
+	auto pt3 = Game::GetInstance().AddObject<Sphere>();
+	pt3->SetScale(4.0f,4.0f,4.0f);
+	m_MySceneObjects.emplace_back(pt3);
+
+}
+
 
 void GameScene::Update()
 {
