@@ -110,6 +110,13 @@ public:
 
 };
 
+#define GAME_INSTANCE	Game::GetInstance()
+#define GAME_MANAGER_MESH	 GAME_INSTANCE.GetMeshManager()
+#define GAME_MANAGER_TEXTURE GAME_INSTANCE.GetTextureManager()
+#define GAME_MANAGER_SHADER  GAME_INSTANCE.GetShaderManager()
+#define GAME_MANGAER_AUDIO	 GAME_INSTANCE.GetAudioManager()
+
+
 //================================
 //			グローバル関数
 // 　　　インスタンスの取得を簡易化

@@ -12,14 +12,14 @@ Object::~Object()
 
 void Object::SetShader(std::string hlslName)
 {
-	m_Shaders.push_back(Game::GetInstance().GetShaderManager()->GetShader(hlslName));
+	m_Shaders.push_back(GAME_MANAGER_SHADER->GetShader(hlslName));
 }
 
 void Object::SetShader(std::string vsName, std::string psName)
 {
 	m_Shaders.clear(); // 既存のシェーダーをクリア
-	m_Shaders.push_back(Game::GetInstance().GetShaderManager()->GetShader(vsName));
-	m_Shaders.push_back(Game::GetInstance().GetShaderManager()->GetShader(psName));
+	m_Shaders.push_back(GAME_MANAGER_SHADER->GetShader(vsName));
+	m_Shaders.push_back(GAME_MANAGER_SHADER->GetShader(psName));
 }
 
 void Object::SetColor(const Color color)

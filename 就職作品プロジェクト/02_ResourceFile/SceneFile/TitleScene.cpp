@@ -8,9 +8,9 @@
 
 void TitleScene::Initialize()
 {
-	//Cube* pt = Game::GetInstance().AddObject<Cube>();
-	//pt->SetShader("VS_Unlit", "PS_Unlit");
-	//m_MySceneObjects.emplace_back(pt);
+	Cube* pt = Game::GetInstance().AddObject<Cube>();
+	pt->SetShader("VS_Unlit", "PS_Unlit");
+	m_MySceneObjects.emplace_back(pt);
 
 	// Light* light = Game::GetInstance().AddObject<Light>();
 	// light->ClearShader();
