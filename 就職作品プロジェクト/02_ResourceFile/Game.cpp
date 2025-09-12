@@ -50,7 +50,7 @@ void Game::Initialize()
 	instance.m_MeshManager->AddMeshModel("Pokemon", "Porygon.fbx", "Porygon");
 	instance.m_MeshManager->AddMeshModel("aaa"    , "plane.fbx"  , "plane"  );
 
-	instance.m_SceneCurrent = new TitleScene;				// タイトルシーンのインスタンスを生成
+	instance.m_SceneCurrent = new GameScene;				// タイトルシーンのインスタンスを生成
 	instance.m_SceneCurrent->Initialize();
 }
 

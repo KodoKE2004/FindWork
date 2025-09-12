@@ -68,15 +68,18 @@ void Sphere::Initialize()
     auto shaderMgr = GAME_MANAGER_SHADER;
     m_Shaders.emplace_back(shaderMgr->GetShader("VS_Default"));
     m_Shaders.emplace_back(shaderMgr->GetShader("PS_Default"));
-
-    m_Texture = Game::GetInstance().GetTextureManager()->GetTexture("dice.png");
+    
+    if (m_Texture != nullptr)
+    {
+        m_Texture = Game::GetInstance().GetTextureManager()->GetTexture("space.png");
+    }
 
     m_Camera->SetCamera(CAMERA_3D);
 }
 
 void Sphere::Update()
 {
-    m_Rotation.y += 0.01f;
+    
 }
 
 void Sphere::Draw()
