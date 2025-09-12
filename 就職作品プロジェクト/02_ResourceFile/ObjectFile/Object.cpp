@@ -32,3 +32,8 @@ void Object::SetColor(const float r, const float g, const float b, const float a
 	Color color = Color(r, g, b, a);
 	m_Color = color;
 }
+
+void Object::SetTexture(Texture* setTexture)
+{
+	m_Texture = setTexture;
+}

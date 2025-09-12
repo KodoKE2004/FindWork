@@ -3,6 +3,7 @@
 #include "../Shader.h"
 #include "../input.h"
 #include "../Camera.h"
+#include "../Texture.h"
 
 
 class Object : public Transform
@@ -11,7 +12,8 @@ protected:
 	// 描画の為の情報（見た目に関わる部分）
 	Color   m_Color;
 	std::vector<BaseShader*> m_Shaders; // シェーダー
-	Camera* m_Camera;
+	Camera*  m_Camera;
+	Texture* m_Texture;
 public:
 
 	Object(Camera* cam);
@@ -31,5 +33,5 @@ public:
 	void SetColor(const Color color);
 	void SetColor(const float r, const float g, const float b, const float a);
 	
-
+	void SetTexture(Texture* setTexture);
 };

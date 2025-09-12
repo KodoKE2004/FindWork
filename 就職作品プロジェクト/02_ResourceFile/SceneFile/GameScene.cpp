@@ -15,8 +15,8 @@ void GameScene::Initialize()
 	m_MySceneObjects.emplace_back(pt2);*/
 	
 	auto pt3 = Game::GetInstance().AddObject<Sphere>();
-	pt3->SetScale(4.0f,4.0f,4.0f);
-	pt3->SetSkyDomeMode(true);
+	pt3->SetScale(500.0f,500.0f,500.0f);
+	pt3->SetTexture(GAME_MANAGER_TEXTURE->GetTexture("space.png"));
 	m_MySceneObjects.emplace_back(pt3);
 
 }

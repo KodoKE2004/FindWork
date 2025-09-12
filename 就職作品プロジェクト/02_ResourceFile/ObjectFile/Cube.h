@@ -21,8 +21,6 @@ protected:
 	IndexBuffer	 m_IndexBuffer; // インデックスバッファ
 	VertexBuffer<VERTEX_3D>	m_VertexBuffer; // 頂点バッファ
 
-	// 描画の為の情報（見た目に関わる部分）
-	Texture* m_Texture;		// 画像
 
 public:
 	Cube(Camera* cam);  // コンストラクタ
