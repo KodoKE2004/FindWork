@@ -46,6 +46,8 @@ public:
 	void Draw()		  override;
 	void Finalize()	  override;
 
+	void SetSkyDomeMode(bool flg) { m_IsSky = flg ;}
+
 	void EnableSkyDome(const std::string& texPath, float radius = 500.0f, bool useSRGB = true);
 	void DisableSkyDome();
 

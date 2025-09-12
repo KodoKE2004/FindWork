@@ -81,31 +81,14 @@ void Sphere::Update()
 
 void Sphere::Draw()
 {
-
-
-    Matrix r = Matrix::CreateFromYawPitchRoll(m_Rotation.y, m_Rotation.x, m_Rotation.z);
-    Matrix t = Matrix::CreateTranslation(m_Position.x, m_Position.y, m_Position.z);
-    Matrix s = Matrix::CreateScale(m_Scale.x, m_Scale.y, m_Scale.z);
-    Matrix world = s * r * t;
-    Renderer::SetWorldMatrix(&world);
-
-    ID3D11DeviceContext* devicecontext = Renderer::GetDeviceContext();
-    devicecontext->IASetPrimitiveTopology(D3D11_PRIMITIVE_TOPOLOGY_TRIANGLELIST);
-
-    for (auto shader : m_Shaders)
+    if (m_IsSky)
     {
-        shader->SetGPU();
+        DrawAsSky();
     }
-
-    m_VertexBuffer.SetGPU();
-    m_IndexBuffer.SetGPU();
-    if (m_Texture != nullptr)
+    else
     {
-        m_Texture->SetGPU();
+        DrawAsMesh();
     }
-    m_Camera->SetCamera(CAMERA_3D);
-
-    devicecontext->DrawIndexed(m_IndexCount, 0, 0);
 }
 
 void Sphere::Finalize()
@@ -149,12 +132,73 @@ void Sphere::CreateSkyStates()
 
 void Sphere::DrawAsSky()
 {
-    
+    ID3D11DeviceContext* devicecontext = Renderer::GetDeviceContext();
+    ID3D11RasterizerState* prevRS = nullptr;
+    devicecontext->RSGetState(&prevRS);
+    ID3D11DepthStencilState* prevDSS = nullptr;
+    UINT prevRef = 0;
+    devicecontext->OMGetDepthStencilState(&prevDSS, &prevRef);
+
+    // Set sky-specific states
+    devicecontext->RSSetState(m_RS_CullFront.Get());
+    devicecontext->OMSetDepthStencilState(m_DSS_NoWrite_Lequal.Get(), 0);
+
+    // Build world matrix centered on camera
+    auto camPos = m_Camera->GetPosition();
+    Matrix s = Matrix::CreateScale(m_SkyRadius);
+    Matrix t = Matrix::CreateTranslation(camPos.x, camPos.y, camPos.z);
+    Matrix world = s * t;
+    Renderer::SetWorldMatrix(&world);
+
+    devicecontext->IASetPrimitiveTopology(D3D11_PRIMITIVE_TOPOLOGY_TRIANGLELIST);
+
+    for (auto shader : m_Shaders)
+    {
+        shader->SetGPU();
+    }
+
+    m_VertexBuffer.SetGPU();
+    m_IndexBuffer.SetGPU();
+    if (m_Texture != nullptr)
+    {
+        m_Texture->SetGPU();
+    }
+    m_Camera->SetCamera(CAMERA_3D);
+
+    devicecontext->DrawIndexed(m_IndexCount, 0, 0);
+
+    // Restore previous states
+    devicecontext->RSSetState(prevRS);
+    devicecontext->OMSetDepthStencilState(prevDSS, prevRef);
+    if (prevRS) prevRS->Release();
+    if (prevDSS) prevDSS->Release();
 }
 
 void Sphere::DrawAsMesh()
 {
-    
+    Matrix r = Matrix::CreateFromYawPitchRoll(m_Rotation.y, m_Rotation.x, m_Rotation.z);
+    Matrix t = Matrix::CreateTranslation(m_Position.x, m_Position.y, m_Position.z);
+    Matrix s = Matrix::CreateScale(m_Scale.x, m_Scale.y, m_Scale.z);
+    Matrix world = s * r * t;
+    Renderer::SetWorldMatrix(&world);
+
+    ID3D11DeviceContext* devicecontext = Renderer::GetDeviceContext();
+    devicecontext->IASetPrimitiveTopology(D3D11_PRIMITIVE_TOPOLOGY_TRIANGLELIST);
+
+    for (auto shader : m_Shaders)
+    {
+        shader->SetGPU();
+    }
+
+    m_VertexBuffer.SetGPU();
+    m_IndexBuffer.SetGPU();
+    if (m_Texture != nullptr)
+    {
+        m_Texture->SetGPU();
+    }
+    m_Camera->SetCamera(CAMERA_3D);
+
+    devicecontext->DrawIndexed(m_IndexCount, 0, 0);
 }
 
 

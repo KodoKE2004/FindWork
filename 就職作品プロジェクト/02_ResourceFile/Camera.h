@@ -65,6 +65,7 @@ public:
 	//============================================
 	void SetCamera(CAMERA_MODE mode);	
 	CAMERA_MODE GetMode() const { return m_Mode; }
+	Vector3 GetPosition() const { return m_Position; }
 
 	//===========================================
 	//				   ‘€ìˆ—

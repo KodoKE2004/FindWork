@@ -16,6 +16,7 @@ void GameScene::Initialize()
 	
 	auto pt3 = Game::GetInstance().AddObject<Sphere>();
 	pt3->SetScale(4.0f,4.0f,4.0f);
+	pt3->SetSkyDomeMode(true);
 	m_MySceneObjects.emplace_back(pt3);
 
 }
