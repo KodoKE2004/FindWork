@@ -21,7 +21,7 @@ void TransScene::Initialize()
 	}
 }
 
-void TransScene::Update()
+void TransScene::Update(float tick)
 {
 	switch (m_Step)
 	{
@@ -32,7 +32,7 @@ void TransScene::Update()
 	break;
 	case DOING:
 	{
-		m_Timer += m_Counter;
+		m_Timer += tick;
 
 		// OUTの処理
 		if (!m_isChange) {
@@ -139,7 +139,7 @@ bool TransScene::isOverClock()
 // フェードイン
 void TransScene::FADE_IN()
 {
-	m_Alpha -= m_AlphaValue * m_Counter;
+	m_Alpha -= m_AlphaValue * Application::GetDeltaTime();
 
 	if (isOverClock())
 	{
@@ -154,7 +154,7 @@ void TransScene::FADE_IN()
 // フェードアウト
 void TransScene::FADE_OUT()
 {
-	m_Alpha += m_AlphaValue * m_Counter;
+	m_Alpha += m_AlphaValue * Application::GetDeltaTime();
 
 	if (isOverClock())
 	{

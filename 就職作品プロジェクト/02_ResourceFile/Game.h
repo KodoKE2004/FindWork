@@ -43,7 +43,7 @@ public:
 	// ゲームの初期化
 	static void Initialize();	
 	// ゲームの更新
-	static void Update();		
+	static void Update(float tick);		
 	// ゲームの描画
 	static void Draw();		
 	// ゲームの終了処理

@@ -21,7 +21,7 @@ public:
 	// シーンの初期化
 	void Initialize() override;
 	// シーンの更新
-	void Update()     override;
+	void Update(float tick)     override;
 
 	// シーンの終了処理
 	void Finalize()   override;

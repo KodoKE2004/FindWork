@@ -11,31 +11,22 @@ void TitleScene::Initialize()
 {
     DebugUI::TEXT_CurrentScene = "TitleScene";
 
-	Cube* pt = Game::GetInstance().AddObject<Cube>();
-	pt->SetShader("VS_Unlit", "PS_Unlit");
-	m_MySceneObjects.emplace_back(pt);
-
-	// Light* light = Game::GetInstance().AddObject<Light>();
-	// light->ClearShader();
-	// light->SetShader("VS_Unlit");
-	// light->SetShader("PS_Unlit");
-	// light->SetPos(0.0f, 10.0f, 0.0f);
-	// m_MySceneObjects.emplace_back(light);
-
-	auto* pt2 = Game::GetInstance().AddObject<Model>();
-	pt2->GetMeshModel("Pokemon");
-	pt2->SetShader( "VS_Unlit", "PS_Unlit");
-	pt2->SetScale ( 1.0f, 1.0f, 1.0f);
-	m_MySceneObjects.emplace_back(pt2);
+    auto titleTexture = GAME_INSTANCE.AddObject<Texture2D>();
+    titleTexture->SetTexture(GAME_MANAGER_TEXTURE->GetTexture("Title.png"));
+	titleTexture->SetShader("VS_Default", "PS_Default");
+	titleTexture->SetPos(0.0f, 0.0f, 0.0f);
+	titleTexture->SetScale(800.0f, 600.0f, 1.0f);
+	titleTexture->SetUV(1.0f, 1.0f, 1.0f, 1.0f);
+    m_MySceneObjects.emplace_back(titleTexture);
 
 	Game::GetInstance().GetAudioManager()->Add("enter", L"SE/Enter.wav");
 }
 
-void TitleScene::Update()
+void TitleScene::Update(float tick)
 {
 	if (Input::GetKeyTrigger(VK_RETURN))
 	{
-		// Game::GetInstance().GetAudioManager()->Play("enter");
+		Game::GetInstance().GetAudioManager()->Play("enter");
 		ChangeScene<SelectScene>(FADE, 1.0f);
 	}
 

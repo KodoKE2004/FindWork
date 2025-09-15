@@ -13,13 +13,31 @@ void SelectScene::Initialize()
 	m_MySceneObjects.emplace_back(pt2);
 }
 
-void SelectScene::Update()
+void SelectScene::Update(float tick)
 {
-	
-	if (Input::GetKeyTrigger(VK_RETURN))
+	if (isEnd)
 	{
 		ChangeScene<GameScene>(FADE, 0.5f);
+		return;
+    }
+	if (isStart)
+	{
+        m_Time += tick;
+		if (m_Time >= m_ChangeTime)
+		{
+            isEnd = true;
+		}
 	}
+	else
+	{
+        m_ReadyTime -= tick;
+		if (m_ReadyTime <= 0.0f)
+		{
+            isStart = true;
+		}
+	}
+	
+
 }
 
 void SelectScene::Finalize()

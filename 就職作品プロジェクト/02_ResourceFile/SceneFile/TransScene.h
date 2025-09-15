@@ -32,7 +32,6 @@ protected:
 	Microsoft::WRL::ComPtr<ID3D11ShaderResourceView> m_NextSceneSRV;
 	SnapshotOverlay* m_Overlay = nullptr;
 
-	const float m_Counter = Application::GetDeltaTime();
 	float m_Timer	 = 0.0f;
 	float m_Duration = 0.0f;
 
@@ -48,7 +47,7 @@ protected:
 
 public:
 	void Initialize()	override;
-	void Update()		override;
+	void Update(float tick)	override;
 	void Finalize()		override;
 
 	/// <summary>

@@ -51,17 +51,17 @@ void Game::Initialize()
 	instance.m_MeshManager->AddMeshModel("aaa"    , "plane.fbx"  , "plane"  );
     instance.m_MeshManager->AddMeshModel("space"  , "space.fbx"  , "Space"  );
 
-	instance.m_SceneCurrent = new GameScene;				// タイトルシーンのインスタンスを生成
+	instance.m_SceneCurrent = new TitleScene;				// タイトルシーンのインスタンスを生成
 	instance.m_SceneCurrent->Initialize();
 }
 
-void Game::Update()
+void Game::Update(float tick)
 {	
 	auto& instance = GetInstance();
 	instance.m_Input->Update();
 
 	// 現在のシーンの更新
-	instance.m_SceneCurrent->Update();
+	instance.m_SceneCurrent->Update(tick);
 
 	// カメラの更新
 	instance.m_Camera->Update();

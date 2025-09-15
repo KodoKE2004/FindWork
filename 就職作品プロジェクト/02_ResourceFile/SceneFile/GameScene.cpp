@@ -9,15 +9,18 @@
 void GameScene::Initialize()
 {
     DebugUI::TEXT_CurrentScene = "GameScene";
-    // Create skydome that automatically renders as background sky
+
+
+
+
     auto* sky = Game::GetInstance().AddObject<Model>();
     sky->GetMeshModel("space");
-    sky->EnableSkyDome(500.0f);
+    sky->SetScale(50.0f);
     sky->SetTexture(GAME_MANAGER_TEXTURE->GetTexture("space.png"));
     m_MySceneObjects.emplace_back(sky);
 }
 
-void GameScene::Update()
+void GameScene::Update(float tick)
 {
     if (Input::GetKeyTrigger(VK_RETURN)) {
         ChangeScene<TitleScene>(FADE, 0.5f);

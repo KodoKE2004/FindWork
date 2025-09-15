@@ -1,3 +1,5 @@
+#include <chrono>
+#include <thread>
 #include "Application.h"
 #include "Game.h"
 #include "../03_ExternalFile/imgui/imgui_impl_win32.h"
@@ -204,7 +206,7 @@ void Application::MainLoop()
             g_prevTime = currentTime;
 
             // ÉQÅ[ÉÄÇÃçXêV
-            game.Update();
+            game.Update(Application::GetDeltaTime());
             game.Draw();
         }
     }
