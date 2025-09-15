@@ -46,9 +46,10 @@ void Game::Initialize()
 	instance.m_ShaderManager->AddShader("PS_Alpha"  ,ShaderStage::PS);
 
 	//　モデル登録
-	instance.m_MeshManager->AddMeshModel("RedMan" , "Akai.fbx"   , "Akai");
+	instance.m_MeshManager->AddMeshModel("RedMan" , "Akai.fbx"   , "Akai"   );
 	instance.m_MeshManager->AddMeshModel("Pokemon", "Porygon.fbx", "Porygon");
 	instance.m_MeshManager->AddMeshModel("aaa"    , "plane.fbx"  , "plane"  );
+    instance.m_MeshManager->AddMeshModel("space"  , "space.fbx"  , "Space"  );
 
 	instance.m_SceneCurrent = new GameScene;				// タイトルシーンのインスタンスを生成
 	instance.m_SceneCurrent->Initialize();
