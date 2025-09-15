@@ -7,7 +7,8 @@
 #include "../Material.h"
 #include <memory>
 #include <vector>
-
+#include <d3d11.h>
+#include <wrl/client.h>
 
 struct MeshInfo {
     std::shared_ptr<MeshModel> mesh;
@@ -15,9 +16,6 @@ struct MeshInfo {
     std::string texDirectory;
 };
 
-/// <summary>
-/// オブジェクトモデル基底クラス
-/// </summary>
 class Model : public Object
 {
 protected:
@@ -30,6 +28,10 @@ protected:
     std::vector<SUBSET>     m_Subsets;
     std::vector<std::shared_ptr<Texture>> m_Textures;
     std::vector<std::unique_ptr<Material>> m_Materials;
+    bool m_IsSky = false;
+    float m_SkyRadius = 1.0f;
+    Microsoft::WRL::ComPtr<ID3D11RasterizerState> m_RS_CullFront;
+    Microsoft::WRL::ComPtr<ID3D11DepthStencilState> m_DSS_NoWrite_Lequal;
 
 public:
     Model(Camera* cam);
@@ -40,5 +42,10 @@ public:
     void Finalize()   override;
 
     void GetMeshModel(std::string modelName);
-};
+    void EnableSkyDome(float radius);
+    void DisableSkyDome();
 
+private:
+    void CreateSkyStates();
+    void DrawSky();
+};
