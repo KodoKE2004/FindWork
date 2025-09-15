@@ -94,6 +94,7 @@ public:
 		return pt;
 	}
 
+
 	// オブジェクトを取得する
 	template<class T> std::vector<T*> GetObjects()
 	{

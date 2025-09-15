@@ -12,7 +12,6 @@ void GameScene::Initialize()
 
 
 
-
     auto* sky = Game::GetInstance().AddObject<Model>();
     sky->GetMeshModel("space");
     sky->SetScale(50.0f);

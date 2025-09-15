@@ -184,6 +184,9 @@
     <ClCompile Include="02_ResourceFile\ObjectFile\Skydome.cpp">
       <Filter>SourceFile\Object\3D</Filter>
     </ClCompile>
+    <ClCompile Include="02_ResourceFile\ObjectFile\Bullet.cpp">
+      <Filter>SourceFile\Object\3D</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="02_ResourceFile\SceneFile\Scene.h">
@@ -331,6 +334,9 @@
       <Filter>SourceFile\Object\3D</Filter>
     </ClInclude>
     <ClInclude Include="02_ResourceFile\ObjectFile\Skydome.h">
+      <Filter>SourceFile\Object\3D</Filter>
+    </ClInclude>
+    <ClInclude Include="02_ResourceFile\ObjectFile\Bullet.h">
       <Filter>SourceFile\Object\3D</Filter>
     </ClInclude>
   </ItemGroup>

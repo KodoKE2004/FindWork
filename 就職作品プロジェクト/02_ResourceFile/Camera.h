@@ -41,7 +41,7 @@ private:
 
 	float m_Fov       = 45.0f;		// 視野角
 	float m_NearPlane = 0.1f;		// ニアクリップ
-	float m_FarPlane  = 1000.0f;	// ファークリップ
+	float m_FarPlane  = 10000.0f;	// ファークリップ
 	float m_Speed     = 1.0f;		// カメラの移動速度
 
 	float m_DollySpeed = 20.0f;
@@ -66,6 +66,7 @@ public:
 	void SetCamera(CAMERA_MODE mode);	
 	CAMERA_MODE GetMode() const { return m_Mode; }
 	Vector3 GetPosition() const { return m_Position; }
+	Vector3 GetForward () const { return m_Forward; }
 
 	//===========================================
 	//				   操作処理

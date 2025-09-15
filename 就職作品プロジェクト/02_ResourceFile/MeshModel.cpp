@@ -11,9 +11,13 @@
 bool MeshModel::Load(const std::string& modelFile, const std::string& texDirectory)
 {
     Assimp::Importer importer;
-    const aiScene* scene = importer.ReadFile(modelFile,
+    const aiScene* scene = importer.ReadFile(
+        modelFile,
         aiProcess_Triangulate |
-        aiProcess_ConvertToLeftHanded);
+        aiProcess_ConvertToLeftHanded |
+        aiProcess_PreTransformVertices |
+        aiProcess_JoinIdenticalVertices
+    );
     if (!scene) return false;
 
     m_Vertices.clear();

@@ -30,6 +30,7 @@
     <ClCompile Include="02_ResourceFile\main.cpp" />
     <ClCompile Include="02_ResourceFile\MeshModel.cpp" />
     <ClCompile Include="02_ResourceFile\MeshManager.cpp" />
+    <ClCompile Include="02_ResourceFile\ObjectFile\Bullet.cpp" />
     <ClCompile Include="02_ResourceFile\ObjectFile\Cube.cpp" />
     <ClCompile Include="02_ResourceFile\ObjectFile\Light.cpp" />
     <ClCompile Include="02_ResourceFile\ObjectFile\Model.cpp" />
@@ -79,6 +80,7 @@
     <ClInclude Include="02_ResourceFile\MeshRenderer.h" />
     <ClInclude Include="02_ResourceFile\MeshModel.h" />
     <ClInclude Include="02_ResourceFile\MeshManager.h" />
+    <ClInclude Include="02_ResourceFile\ObjectFile\Bullet.h" />
     <ClInclude Include="02_ResourceFile\ObjectFile\Cube.h" />
     <ClInclude Include="02_ResourceFile\ObjectFile\Light.h" />
     <ClInclude Include="02_ResourceFile\ObjectFile\Model.h" />
