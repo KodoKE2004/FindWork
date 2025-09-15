@@ -233,7 +233,7 @@
       <PreprocessorDefinitions>_DEBUG;_CONSOLE;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <ConformanceMode>true</ConformanceMode>
       <LanguageStandard>stdcpp20</LanguageStandard>
-      <AdditionalIncludeDirectories>$(ProjectDir)03_ExternalFile/assimp/5.2.5/include;$(ProjectDir)03_ExternalFile/DirectXTex/include;$(ProjectDir)03_ExternalFile/DirectXTK/include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>$(ProjectDir)03_ExternalFile/assimp/5.2.5/include;$(ProjectDir)03_ExternalFile\DirectXTex\include;$(ProjectDir)03_ExternalFile\DirectXTK\include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
       <RuntimeLibrary>MultiThreadedDebugDLL</RuntimeLibrary>
       <BasicRuntimeChecks>Default</BasicRuntimeChecks>
     </ClCompile>

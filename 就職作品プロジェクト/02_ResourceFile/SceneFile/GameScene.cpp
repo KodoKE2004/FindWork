@@ -11,7 +11,8 @@ void GameScene::Initialize()
 	DebugUI::TEXT_CurrentScene = "GameScene";
 	auto* pt2 = Game::GetInstance().AddObject<Model>();
 	pt2->GetMeshModel("space");
-	pt2->SetShader("VS_Default", "PS_Default");
+	pt2->SetShader("VS_Unlit", "PS_Unlit");
+    pt2->SetScale(1000.0f, 1000.0f, 1000.0f);
 	m_MySceneObjects.emplace_back(pt2);
 	
 	auto pt3 = Game::GetInstance().AddObject<Sphere>();

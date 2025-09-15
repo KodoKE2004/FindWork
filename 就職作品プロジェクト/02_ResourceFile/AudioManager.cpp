@@ -1,5 +1,6 @@
 #include "AudioManager.h"
 #include <fstream>
+#include <filesystem>
 #include <algorithm>
 #include <cstring>
 #include <cmath>
@@ -52,10 +53,13 @@ struct ChunkHeader { char id[4]; uint32_t size; };
 #pragma pack(pop)
 
 static bool readAllFile(const std::wstring& path, std::vector<uint8_t>& out) {
-    std::ifstream ifs(path, std::ios::binary);
-    if (!ifs) return false;
+    std::filesystem::path p(path);
+    if (!std::filesystem::exists(p)) {
+        return false;
+    }
+    std::ifstream ifs(p, std::ios::binary);    if (!ifs) return false;
     ifs.seekg(0, std::ios::end);
-    size_t sz = (size_t)ifs.tellg();
+    size_t sz = static_cast<size_t>(ifs.tellg());
     ifs.seekg(0);
     out.resize(sz);
     ifs.read(reinterpret_cast<char*>(out.data()), sz);
