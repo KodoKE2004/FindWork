@@ -359,5 +359,11 @@
     <FxCompile Include="ShaderFile\VS_Unlit.hlsl">
       <Filter>SourceFile\Shader\HLSL\VertexShader</Filter>
     </FxCompile>
+    <FxCompile Include="ShaderFile\VS_Skydome.hlsl">
+      <Filter>SourceFile\Shader\HLSL\VertexShader</Filter>
+    </FxCompile>
+    <FxCompile Include="ShaderFile\PS_Skydome.hlsl">
+      <Filter>SourceFile\Shader\HLSL\PixelShader</Filter>
+    </FxCompile>
   </ItemGroup>
 </Project>

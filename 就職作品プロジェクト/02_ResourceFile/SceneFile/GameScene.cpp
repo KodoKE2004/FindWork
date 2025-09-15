@@ -3,13 +3,17 @@
 #include "../input.h"
 #include "../DebugUI.h"
 #include "../Game.h"
+#include "../ObjectFile/Model.h"
 #include "../ObjectFile/Skydome.h"
 
 void GameScene::Initialize()
 {
     DebugUI::TEXT_CurrentScene = "GameScene";
     // Create skydome that automatically renders as background sky
-    auto* sky = Game::GetInstance().AddObject<Skydome>();
+    auto* sky = Game::GetInstance().AddObject<Model>();
+    sky->GetMeshModel("space");
+    sky->EnableSkyDome(500.0f);
+    sky->SetTexture(GAME_MANAGER_TEXTURE->GetTexture("space.png"));
     m_MySceneObjects.emplace_back(sky);
 }
 

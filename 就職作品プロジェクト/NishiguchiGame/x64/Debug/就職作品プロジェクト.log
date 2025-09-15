@@ -1,2 +1,5 @@
 ﻿  Skydome.cpp
-  就職作品プロジェクト.vcxproj -> C:\Users\kodokeの世界\Desktop\HAL\VisualSutdio\就職作品\個人製作\FindWork\就職作品プロジェクト\x64\Debug\NishiguchiGame.exe
+  GameScene.cpp
+  コードを生成中...
+GameScene.obj : error LNK2019: 未解決の外部シンボル "public: void __cdecl Model::EnableSkyDome(float)" (?EnableSkyDome@Model@@QEAAXM@Z) が関数 "public: virtual void __cdecl GameScene::Initialize(void)" (?Initialize@GameScene@@UEAAXXZ) で参照されました
+C:\Users\kodokeの世界\Desktop\HAL\VisualSutdio\就職作品\個人製作\FindWork\就職作品プロジェクト\x64\Debug\NishiguchiGame.exe : fatal error LNK1120: 1 件の未解決の外部参照

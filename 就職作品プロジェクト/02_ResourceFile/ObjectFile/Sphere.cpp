@@ -69,7 +69,7 @@ void Sphere::Initialize()
     m_Shaders.emplace_back(shaderMgr->GetShader("VS_Default"));
     m_Shaders.emplace_back(shaderMgr->GetShader("PS_Default"));
     
-    if (m_Texture != nullptr)
+    if (m_Texture == nullptr)
     {
         m_Texture = Game::GetInstance().GetTextureManager()->GetTexture("space.png");
     }
@@ -101,36 +101,10 @@ void Sphere::Finalize()
     m_Shaders.clear();
 }
 
-void Sphere::EnableSkyDome(const std::string& texPath, float radius, bool useSRGB)
-{
-    m_IsSky = true;
-    m_SkyRadius = radius;
-
-    m_Texture = GAME_MANAGER_TEXTURE->GetTexture(texPath);
-    CreateSkyStates();
-}
 
 void Sphere::DisableSkyDome()
 {
     m_IsSky = false;
-}
-
-void Sphere::CreateSkyStates()
-{
-    auto dev = Renderer::GetDevice();
-
-    D3D11_RASTERIZER_DESC rs{};
-    rs.FillMode             = D3D11_FILL_SOLID;
-    rs.CullMode             = D3D11_CULL_FRONT;
-    rs.DepthClipEnable      = TRUE;
-    dev->CreateRasterizerState(&rs, m_RS_CullFront.GetAddressOf());
-
-    D3D11_DEPTH_STENCIL_DESC dss{};
-    dss.DepthEnable          = TRUE;
-    dss.DepthWriteMask       = D3D11_DEPTH_WRITE_MASK_ZERO;
-    dss.DepthFunc            = D3D11_COMPARISON_LESS_EQUAL;
-    dss.StencilEnable        = FALSE;
-    dev->CreateDepthStencilState(&dss, m_DSS_NoWrite_Lequal.GetAddressOf());
 }
 
 void Sphere::DrawAsSky()

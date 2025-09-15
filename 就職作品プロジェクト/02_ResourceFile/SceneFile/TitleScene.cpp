@@ -6,8 +6,11 @@
 #include "../Texture2D.h"
 #include "../ObjectFile/Model.h"
 
+
 void TitleScene::Initialize()
 {
+    DebugUI::TEXT_CurrentScene = "TitleScene";
+
 	Cube* pt = Game::GetInstance().AddObject<Cube>();
 	pt->SetShader("VS_Unlit", "PS_Unlit");
 	m_MySceneObjects.emplace_back(pt);

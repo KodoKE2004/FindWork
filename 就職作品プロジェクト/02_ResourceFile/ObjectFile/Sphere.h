@@ -27,7 +27,6 @@ protected:
 	Microsoft::WRL::ComPtr<ID3D11RasterizerState>   m_RS_CullFront; // 内側を見る
 	Microsoft::WRL::ComPtr<ID3D11DepthStencilState> m_DSS_NoWrite_Lequal; // 深度書き込みなし
 
-	void CreateSkyStates();   // RS/DSS の生成
 	void DrawAsSky();         // スカイドーム描画パス
 	void DrawAsMesh();        // 通常メッシュ描画パス（既存）
 
@@ -48,7 +47,6 @@ public:
 
 	void SetSkyDomeMode(bool flg) { m_IsSky = flg ;}
 
-	void EnableSkyDome(const std::string& texPath, float radius = 500.0f, bool useSRGB = true);
 	void DisableSkyDome();
 
 };
