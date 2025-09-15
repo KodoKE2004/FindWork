@@ -3,16 +3,15 @@
 #include "../input.h"
 #include "../DebugUI.h"
 #include "../Game.h"
-#include "../ObjectFile/Model.h"
+#include "../ObjectFile/Sphere.h"
 
 void GameScene::Initialize()
 {
     DebugUI::TEXT_CurrentScene = "GameScene";
-    auto* pt2 = Game::GetInstance().AddObject<Model>();
-    pt2->GetMeshModel("space");
-    pt2->SetShader("VS_Unlit", "PS_Unlit");
-    pt2->EnableSkyDome(1000.0f);
-    m_MySceneObjects.emplace_back(pt2);
+    auto* sky = Game::GetInstance().AddObject<Sphere>();
+    sky->SetShader("VS_Unlit", "PS_Unlit");
+    sky->EnableSkyDome("space.png", 1000.0f);
+    m_MySceneObjects.emplace_back(sky);
 }
 
 void GameScene::Update()
