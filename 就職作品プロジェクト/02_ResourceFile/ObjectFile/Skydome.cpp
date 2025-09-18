@@ -10,8 +10,6 @@ void Skydome::Initialize() {
 
     Sphere::Initialize();
 
-    auto shaderMgr = GAME_MANAGER_SHADER;
-    m_Shaders.clear();
-    m_Shaders.emplace_back(shaderMgr->GetShader("VS_Unlit"));
-    m_Shaders.emplace_back(shaderMgr->GetShader("PS_Unlit"));
+    SetShader("VS_Unlit","PS_Unlit");
+
 }

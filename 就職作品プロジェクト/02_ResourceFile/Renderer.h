@@ -120,9 +120,11 @@ public:
 	static ID3D11RenderTargetView* GetBackBufferRTV();
 	
 	static void BlitSRVToBackbuffer(ID3D11ShaderResourceView* srv, float alpha = 1.0f);
-
 	static void CreateVertexShader(ID3D11VertexShader** VertexShader, ID3D11InputLayout** VertexLayout, const char* FileName);
 	static void CreatePixelShader (ID3D11PixelShader** PixelShader, const char* FileName);
+	
+	// •`‰æİ’è‘‚«‚İ
+	static void SetDrawState();
 	
 private:
 	static D3D_FEATURE_LEVEL				m_FeatureLevel;			// Direct3D‚Ì‹@”\ƒŒƒxƒ‹

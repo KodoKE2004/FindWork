@@ -589,3 +589,7 @@ void Renderer::CreatePixelShader(ID3D11PixelShader** PixelShader, const char* Fi
 
 	delete[] buffer; // バッファのメモリを解放
 }
+
+void Renderer::SetDrawState()
+{
+}

@@ -53,9 +53,7 @@ void Texture2D::Initialize()
 
 	m_IndexBuffer.Create(indices);
 
-	auto sm = Game::GetInstance().GetShaderManager();
-	m_Shaders.push_back(sm->GetShader("VS_Default"));
-	m_Shaders.push_back(sm->GetShader("PS_Default"));
+	SetShader("VS_Default", "PS_Default");
 
 	m_Materiale = std::make_unique<Material>();
 	MATERIAL mtrl;
@@ -97,7 +95,8 @@ void Texture2D::Draw()
 	// トポロジーをセット（プリミティブタイプ）
 	devicecontext->IASetPrimitiveTopology(D3D11_PRIMITIVE_TOPOLOGY_TRIANGLESTRIP);
 
-	for (auto* shader : m_Shaders) shader->SetGPU();
+	SetGPU();
+
 	m_VertexBuffer.SetGPU();
 	m_IndexBuffer.SetGPU();
 

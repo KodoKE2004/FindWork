@@ -4,7 +4,7 @@ std::vector<std::function<void(void)>> DebugUI::m_debugfunction;
 std::string DebugUI::TEXT_CurrentScene = "TitleScene" ;
 void DebugUI::Init(ID3D11Device* device, ID3D11DeviceContext* context) 
 {
-
+#ifdef _DEBUG
     IMGUI_CHECKVERSION();
     ImGui::CreateContext();
     ImGuiIO& io = ImGui::GetIO();
@@ -19,21 +19,32 @@ void DebugUI::Init(ID3D11Device* device, ID3D11DeviceContext* context)
     // Setup Platform/Renderer backends
     ImGui_ImplWin32_Init(Application::GetWindow());
     ImGui_ImplDX11_Init(device, context);
+#endif 
 }
 
 void DebugUI::DisposeUI() {
+#ifdef _DEBUG
+
     // Cleanup
     ImGui_ImplDX11_Shutdown();
     ImGui_ImplWin32_Shutdown();
     ImGui::DestroyContext();
+
+#endif // _DEBUG
 }
 
 // デバッグ表示関数の登録
 void DebugUI::RedistDebugFunction(std::function<void(void)> f) {
+#ifdef _DEBUG
+
     m_debugfunction.push_back(std::move(f));
+
+#endif // _DEBUG
 }
 
 void DebugUI::Render() {
+#ifdef _DEBUG
+
     // ImGuiの新しいフレームを開始
     ImGui_ImplDX11_NewFrame();
     ImGui_ImplWin32_NewFrame();
@@ -56,4 +67,5 @@ void DebugUI::Render() {
     // フレームのレンダリングを完了
     ImGui::Render();
     ImGui_ImplDX11_RenderDrawData(ImGui::GetDrawData());
+#endif // _DEBUG
 }

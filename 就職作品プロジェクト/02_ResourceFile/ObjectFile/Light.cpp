@@ -69,10 +69,8 @@ void Light::Draw()
 	devicecontext->IASetPrimitiveTopology(D3D11_PRIMITIVE_TOPOLOGY_TRIANGLELIST);
 
 	Renderer::SetLightBuffer(&m_LightBuffer); // ライトバッファをセット
-	for (auto shader : m_Shaders)
-	{
-		shader->SetGPU();
-	}
+	
+	SetGPU();
 
 	m_VertexBuffer.SetGPU();
 	m_IndexBuffer.SetGPU();

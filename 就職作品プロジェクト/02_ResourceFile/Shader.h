@@ -12,6 +12,11 @@ enum class ShaderStage {
 	CS
 };
 
+class BaseShader	 ;
+class VertexShader   ;
+class PixelShader    ;
+class ComputeShader  ;
+class GeometoryShader;
 
 //======================================
 //				ShaderƒNƒ‰ƒX

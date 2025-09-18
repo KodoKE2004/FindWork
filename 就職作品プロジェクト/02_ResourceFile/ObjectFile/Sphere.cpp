@@ -66,8 +66,8 @@ void Sphere::Initialize()
     m_IndexBuffer.Create(indices);
 
     auto shaderMgr = GAME_MANAGER_SHADER;
-    m_Shaders.emplace_back(shaderMgr->GetShader("VS_Default"));
-    m_Shaders.emplace_back(shaderMgr->GetShader("PS_Default"));
+
+    SetShader("VS_Default", "PS_Default");
     
     if (m_Texture == nullptr)
     {
@@ -105,7 +105,7 @@ void Sphere::Finalize()
 {
     m_Texture = nullptr;
     m_IndexCount = 0;
-    m_Shaders.clear();
+
 }
 
 
@@ -136,10 +136,7 @@ void Sphere::DrawAsSky()
 
     devicecontext->IASetPrimitiveTopology(D3D11_PRIMITIVE_TOPOLOGY_TRIANGLELIST);
 
-    for (auto shader : m_Shaders)
-    {
-        shader->SetGPU();
-    }
+    SetGPU();
 
     m_VertexBuffer.SetGPU();
     m_IndexBuffer.SetGPU();
@@ -169,10 +166,7 @@ void Sphere::DrawAsMesh()
     ID3D11DeviceContext* devicecontext = Renderer::GetDeviceContext();
     devicecontext->IASetPrimitiveTopology(D3D11_PRIMITIVE_TOPOLOGY_TRIANGLELIST);
 
-    for (auto shader : m_Shaders)
-    {
-        shader->SetGPU();
-    }
+    SetGPU();
 
     m_VertexBuffer.SetGPU();
     m_IndexBuffer.SetGPU();

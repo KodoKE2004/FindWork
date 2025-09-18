@@ -23,6 +23,7 @@
     <ClCompile Include="02_ResourceFile\Audio.cpp" />
     <ClCompile Include="02_ResourceFile\AudioManager.cpp" />
     <ClCompile Include="02_ResourceFile\Camera.cpp" />
+    <ClCompile Include="02_ResourceFile\DebugGridLine.cpp" />
     <ClCompile Include="02_ResourceFile\DebugUI.cpp" />
     <ClCompile Include="02_ResourceFile\Dx11helper.cpp" />
     <ClCompile Include="02_ResourceFile\Game.cpp" />
@@ -69,6 +70,7 @@
     <ClInclude Include="02_ResourceFile\AudioManager.h" />
     <ClInclude Include="02_ResourceFile\Camera.h" />
     <ClInclude Include="02_ResourceFile\Debug.hpp" />
+    <ClInclude Include="02_ResourceFile\DebugGridLine.h" />
     <ClInclude Include="02_ResourceFile\DebugUI.h" />
     <ClInclude Include="02_ResourceFile\Dx11helper.h" />
     <ClInclude Include="02_ResourceFile\Game.h" />

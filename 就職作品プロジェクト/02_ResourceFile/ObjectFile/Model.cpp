@@ -12,11 +12,7 @@ void Model::Initialize()
     m_MeshModel.mesh = std::make_shared<MeshModel>();
     GetMeshModel("NULL");
 
-    auto shaderManager = Game::GetInstance().GetShaderManager();
-    m_Shaders = {
-        shaderManager->GetShader("VS_Default"),
-        shaderManager->GetShader("PS_Default"),
-    };
+    SetShader("VS_Default","PS_Default"),
 
     m_Camera->SetCamera(CAMERA_3D);
 
@@ -47,11 +43,8 @@ void Model::Draw()
     Matrix world = s * r * t;
     Renderer::SetWorldMatrix(&world);
 
-    for (auto* shader : m_Shaders) {
-        if (shader) {
-            shader->SetGPU();
-        }
-    }
+    SetGPU();
+
     m_MeshRenderer.BeforeDraw();
 
     for (int i = 0; i < m_Subsets.size(); i++)
@@ -152,9 +145,8 @@ void Model::DrawSky()
     Matrix world = s * t;
     Renderer::SetWorldMatrix(&world);
 
-    for (auto* shader : m_Shaders) {
-        if (shader) { shader->SetGPU(); }
-    }
+    SetGPU(); 
+    
 
     m_MeshRenderer.BeforeDraw();
 

@@ -185,7 +185,10 @@
       <Filter>SourceFile\Object\3D</Filter>
     </ClCompile>
     <ClCompile Include="02_ResourceFile\ObjectFile\Bullet.cpp">
-      <Filter>SourceFile\Object\3D</Filter>
+      <Filter>SourceFile\Object\2D</Filter>
+    </ClCompile>
+    <ClCompile Include="02_ResourceFile\DebugGridLine.cpp">
+      <Filter>SourceFile</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -337,8 +340,9 @@
       <Filter>SourceFile\Object\3D</Filter>
     </ClInclude>
     <ClInclude Include="02_ResourceFile\ObjectFile\Bullet.h">
-      <Filter>SourceFile\Object\3D</Filter>
+      <Filter>SourceFile\Object\2D</Filter>
     </ClInclude>
+    <ClInclude Include="02_ResourceFile\DebugGridLine.h" />
   </ItemGroup>
   <ItemGroup>
     <FxCompile Include="ShaderFile\Common.hlsl">

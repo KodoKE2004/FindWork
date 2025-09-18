@@ -10,8 +10,6 @@ void GameScene::Initialize()
 {
     DebugUI::TEXT_CurrentScene = "GameScene";
 
-
-
     auto* sky = Game::GetInstance().AddObject<Model>();
     sky->GetMeshModel("space");
     sky->SetScale(50.0f);
