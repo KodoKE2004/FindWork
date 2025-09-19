@@ -78,7 +78,7 @@ void Renderer::Initialize()
 
 	// デプスステンシルビュー作成
 	D3D11_DEPTH_STENCIL_VIEW_DESC depthStencilViewDesc{};
-	depthStencilViewDesc.Format = textureDesc.Format; // デプスステンシルバッファのフォーマットを設定
+	depthStencilViewDesc.Format = textureDesc.Format;					// デプスステンシルバッファのフォーマットを設定
 	depthStencilViewDesc.ViewDimension = D3D11_DSV_DIMENSION_TEXTURE2D; // ビューの次元を2Dテクスチャとして設定（2Dテクスチャ用のデプスステンシルビュー）
 	depthStencilViewDesc.Flags = 0; // 特別なフラグは設定しない（デフォルトの動作）
 	if (depthStencile != nullptr)m_Device->CreateDepthStencilView(depthStencile, &depthStencilViewDesc, &m_DepthStencilView);
@@ -220,6 +220,11 @@ void Renderer::Initialize()
 
 	hr = m_Device->CreateBuffer(&bufferDesc, nullptr, &m_LightBuffer);
 	if (FAILED(hr)) return;
+
+	bufferDesc.ByteWidth = sizeof(InstancePaked);
+	bufferDesc.Usage = D3D11_USAGE_DEFAULT;
+	bufferDesc.BindFlags = D3D11_BIND_VERTEX_BUFFER;
+
 
 	// 既定値（下向き白色の平行光）
 	LightBuffer lightbuffer{};

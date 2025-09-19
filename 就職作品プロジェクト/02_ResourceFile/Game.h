@@ -1,6 +1,9 @@
 #pragma once
 #include <memory>
+#ifdef _DEBUG
 #include "Debug.hpp"
+#include "DebugGridLine.h"
+#endif // _DEBUG
 #include "SceneFile/Scene.h"
 #include "SceneFile/TransScene.h"
 #include "ObjectFile/Object.h"
@@ -9,7 +12,6 @@
 #include "TextureManager.h"
 #include "ShaderManager.h"
 #include "AudioManager.h"
-
 class SceneTrans;
 
 class Game
@@ -28,6 +30,12 @@ private:
 	std::shared_ptr<TextureManager>		 m_TextureManager;	// ゲームで扱う画像
 	std::shared_ptr<ShaderManager>		 m_ShaderManager;	// シェーダーをまとめたもの
 	std::shared_ptr<AudioManager>		 m_AudioManager;	// オーディオマネージャー
+
+
+	// Debug関連
+#ifdef _DEBUG
+	DebugGridLine m_Grid;
+#endif // _DEBUG
 
 public:
 	//================================
@@ -111,7 +119,7 @@ public:
 
 };
 
-#define GAME_INSTANCE	Game::GetInstance()
+#define GAME_INSTANCE		 Game::GetInstance()
 #define GAME_MANAGER_MESH	 GAME_INSTANCE.GetMeshManager()
 #define GAME_MANAGER_TEXTURE GAME_INSTANCE.GetTextureManager()
 #define GAME_MANAGER_SHADER  GAME_INSTANCE.GetShaderManager()

@@ -74,6 +74,14 @@ struct LightBuffer
 	float Padding;									// パディング（アライメント調整用）
 };
 
+struct InstancePaked
+{
+	UINT instanceID;
+	UINT pad0;
+	UINT pad1;
+	BOOL isEnable;
+};
+
 class Renderer
 {
 public:
@@ -113,6 +121,11 @@ public:
 	static void SetLightBuffer(LightBuffer* LightBuffer);
 	static void SetUV(float u, float v, float uw, float vh);
 	static void SetBlendState(int nBlendState);		// ブレンド ステート設定
+	// インスタンシング描画テンプレート
+	template<class T> static void SetInstanceID(T* method,InstancePaked iPaked)
+	{
+		
+	}
 
 	// ゲッター
 	static D3D11_VIEWPORT		   GetRenderTargetView(void);
@@ -148,9 +161,67 @@ private:
 
 	static ID3D11BlendState* m_BlendState[MAX_BLENDSTATE];	// ブレンド ステート;
 	static ID3D11BlendState* m_BlendStateATC			 ;	// ブレンド ステート（加算合成）
+	
+	inline std::vector<UINT> MakeInstanceIDs(UINT count);
+	inline HRESULT CreateInstanceIDBuffer(const std::vector<UINT>& ids,
+										  ID3D11Buffer** outVB,
+										  D3D11_USAGE usage = D3D11_USAGE_IMMUTABLE,
+										  UINT cpuAccess = 0);
+	inline void BindInstanceIDs(ID3D11Buffer* vb, UINT slot = 1);
+	inline D3D11_INPUT_ELEMENT_DESC MakeInstancneIDElement(UINT semanticIndex = 1,
+														  UINT slot = 1,
+														  UINT alignedByteOffset = 0,
+														  UINT stepRate = 1);
 
 public:
 	static ID3D11Device*		GetDevice	    (void)	{ return m_Device; }
 	static ID3D11DeviceContext* GetDeviceContext(void)	{ return m_DeviceContext; }
-
 };
+
+inline std::vector<UINT> Renderer::MakeInstanceIDs(UINT count)
+{
+	std::vector<UINT> v(count);
+	for (UINT i = 0; i < count; ++i) v[i] = i;
+	return v;
+}
+
+inline HRESULT Renderer::CreateInstanceIDBuffer(const std::vector<UINT>& ids,
+	ID3D11Buffer** outVB,
+	D3D11_USAGE usage,
+	UINT cpuAccess)
+{
+	if (!m_Device || !outVB) return E_FAIL;
+
+	D3D11_BUFFER_DESC bd{};
+	bd.ByteWidth = static_cast<UINT>(ids.size() * sizeof(UINT));
+	bd.Usage = usage;
+	bd.BindFlags = D3D11_BIND_VERTEX_BUFFER;
+	bd.CPUAccessFlags = cpuAccess;
+
+	D3D11_SUBRESOURCE_DATA init{};
+	init.pSysMem = ids.empty() ? nullptr : ids.data();
+
+	return m_Device->CreateBuffer(&bd, ids.empty() ? nullptr : &init, outVB);
+}
+
+inline void Renderer::BindInstanceIDs(ID3D11Buffer* vb, UINT slot)
+{
+	UINT stride = sizeof(UINT);
+	UINT offset = 0;
+	m_DeviceContext->IASetVertexBuffers(slot, 1, &vb, &stride, &offset);
+}
+
+inline D3D11_INPUT_ELEMENT_DESC Renderer::MakeInstancneIDElement(UINT semanticIndex, UINT slot, UINT alignedByteOffset, UINT stepRate)
+{
+	D3D11_INPUT_ELEMENT_DESC e{};
+	e.SemanticName = "TEXCOORD";
+	e.SemanticIndex = semanticIndex;					// 既定: TEXCOORD1
+	e.Format = DXGI_FORMAT_R32_UINT;					// UINT 1個
+	e.InputSlot = slot;									// 既定: slot1
+	e.AlignedByteOffset = alignedByteOffset;            // 既定: 0
+	e.InputSlotClass = D3D11_INPUT_PER_INSTANCE_DATA;
+	e.InstanceDataStepRate = stepRate;                  // 既定: 1
+	return e;
+}
+
+

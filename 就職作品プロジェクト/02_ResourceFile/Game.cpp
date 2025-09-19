@@ -45,6 +45,13 @@ void Game::Initialize()
 	instance.m_ShaderManager->AddShader("VS_Alpha"  ,ShaderStage::VS);
 	instance.m_ShaderManager->AddShader("PS_Alpha"  ,ShaderStage::PS);
 
+#ifdef _DEBUG
+
+	instance.m_ShaderManager->AddShader("VS_DebugGrid" , ShaderStage::VS);
+	instance.m_Grid.Initialize(*instance.m_ShaderManager);
+
+#endif // _DEBUG
+
 	//　モデル登録
 	instance.m_MeshManager->AddMeshModel("RedMan" , "Akai.fbx"   , "Akai"   );
 	instance.m_MeshManager->AddMeshModel("Pokemon", "Porygon.fbx", "Porygon");
@@ -74,6 +81,7 @@ void Game::Update(float tick)
 	}
 	// オーディオマネージャーの更新
 	instance.m_AudioManager->Update();
+	instance.Update(tick);
 }
 
 void Game::Draw()
@@ -81,6 +89,7 @@ void Game::Draw()
 	auto& instance = GetInstance();
 	Renderer::Start();  // 描画の開始
 
+	instance.Draw();
 	// フェード以外を描く
 	for (auto& o : instance.m_GameObjects)
 	{
@@ -106,6 +115,7 @@ void Game::Draw()
 void Game::Finalize()
 {
 	auto& instance = GetInstance();
+	instance.Finalize();
 	DebugUI::DisposeUI();		// デバッグUIの終了処理
 	instance.DeleteAllObject();	//オブジェクトを全て削除
 	Renderer::Finalize();			// レンダラーの終了処理

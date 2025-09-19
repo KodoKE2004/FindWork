@@ -1,2 +1,3 @@
-﻿  DebugUI.cpp
-  就職作品プロジェクト.vcxproj -> C:\Users\dorae\Desktop\HAL\class3\FindWork\就職作品プロジェクト\x64\Debug\NishiguchiGame.exe
+﻿C:\Users\dorae\Desktop\HAL\class3\FindWork\�A�E��i�v���W�F�N�`EShaderFile\VS_DebugGrid.hlsl(11,40-54): error X4016: SV_InstanceID semantic cannot be used with 10Level9 targets
+  
+  compilation failed; no code produced
