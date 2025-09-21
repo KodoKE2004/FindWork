@@ -1,6 +1,6 @@
 #include "Common.hlsl"
 
-cbuffer GridParam : register(b6)
+cbuffer GridParams : register(b6)
 {
 	float GridStart;
 	float GridSpacing;
@@ -8,28 +8,28 @@ cbuffer GridParam : register(b6)
 	float GridPadding;
 };
 
-PS_IN main( VS_IN vin, uint instanceID : SV_InstanceID)
+PS_IN main(VS_IN input, uint instanceId : SV_InstanceID)
 {
-	PS_IN output = (PS_IN)0;
-	
-	float offset = GridStart + GridSpacing * instanceID;
-	
-	float4 vertex = vin.pos;
+	PS_IN output = (PS_IN) 0;
+
+	float offset = GridStart + GridSpacing * instanceId;
+
+	float4 vertex = input.pos;
 	if (GridAxis < 0.5f)
 	{
-		vertex.z = offset;
+		vertex.z += offset;
 	}
 	else
 	{
 		vertex.x += offset;
 	}
-	
+
 	float4 worldPos = mul(vertex, World);
 	float4 viewPos = mul(worldPos, View);
 	output.pos = mul(viewPos, Projection);
-	output.tex = vin.tex;
+	output.tex = input.tex;
 
-	float3 baseColor = vin.col.rgb;
+	float3 baseColor = input.col.rgb;
 	if (abs(offset) < 1.0e-4f)
 	{
 		baseColor = (GridAxis < 0.5f) ? float3(0.25f, 0.45f, 1.0f) : float3(1.0f, 0.25f, 0.25f);
@@ -45,9 +45,9 @@ PS_IN main( VS_IN vin, uint instanceID : SV_InstanceID)
 		}
 	}
 
-	output.col = float4(saturate(baseColor), vin.col.a);
+	output.col = float4(saturate(baseColor), input.col.a);
 
-	float4 n = vin.nrm;
+	float4 n = input.nrm;
 	n.w = 0.0f;
 	output.nrm = normalize(mul(n, World).xyz);
 

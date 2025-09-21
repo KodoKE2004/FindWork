@@ -81,7 +81,6 @@ void Game::Update(float tick)
 	}
 	// オーディオマネージャーの更新
 	instance.m_AudioManager->Update();
-	instance.Update(tick);
 }
 
 void Game::Draw()
@@ -89,7 +88,7 @@ void Game::Draw()
 	auto& instance = GetInstance();
 	Renderer::Start();  // 描画の開始
 
-	instance.Draw();
+	instance.m_Grid.Draw();
 	// フェード以外を描く
 	for (auto& o : instance.m_GameObjects)
 	{
@@ -115,7 +114,7 @@ void Game::Draw()
 void Game::Finalize()
 {
 	auto& instance = GetInstance();
-	instance.Finalize();
+	instance.m_Grid.Finalize();
 	DebugUI::DisposeUI();		// デバッグUIの終了処理
 	instance.DeleteAllObject();	//オブジェクトを全て削除
 	Renderer::Finalize();			// レンダラーの終了処理

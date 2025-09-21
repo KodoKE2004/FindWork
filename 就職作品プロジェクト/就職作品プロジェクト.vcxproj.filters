@@ -371,10 +371,10 @@
     <FxCompile Include="ShaderFile\PS_Skydome.hlsl">
       <Filter>HLSL\PixelShader</Filter>
     </FxCompile>
-    <FxCompile Include="ShaderFile\VS_DebugGrid.hlsl">
+    <FxCompile Include="ShaderFile\VS_Unlit.hlsl">
       <Filter>HLSL\VertexShader</Filter>
     </FxCompile>
-    <FxCompile Include="ShaderFile\VS_Unlit.hlsl">
+    <FxCompile Include="ShaderFile\VS_DebugGrid.hlsl">
       <Filter>HLSL\VertexShader</Filter>
     </FxCompile>
   </ItemGroup>
