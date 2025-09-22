@@ -10,7 +10,9 @@ template <typename T>
 class VertexBuffer
 {
 private:
-	ComPtr<ID3D11Buffer> m_VertexBuffer;  // 頂点バッファ
+	UINT m_Stride;
+	UINT m_Count;
+	ComPtr<ID3D11Buffer> m_Buffer;  // 頂点バッファ
 public:
 	VertexBuffer() = default;
 	~VertexBuffer() = default;
@@ -32,7 +34,7 @@ public:
 			stride,
 			vertexnum,
 			(void*)vertices.data(),
-			m_VertexBuffer.ReleaseAndGetAddressOf())) 
+			m_Buffer.ReleaseAndGetAddressOf())) 
 			{
 				MessageBox(nullptr, L"CreateVertexBuffer error", L"error", MB_OK);
 				return;
@@ -51,7 +53,7 @@ public:
 		// 頂点バッファをセット
 		unsigned int stride = sizeof(T);  // １頂点当たりのバイト数
 		unsigned int offset = 0;          // オフセットは0
-		deveiceContext->IASetVertexBuffers(0, 1, m_VertexBuffer.GetAddressOf(), &stride, &offset);
+		deveiceContext->IASetVertexBuffers(0, 1, m_Buffer.GetAddressOf(), &stride, &offset);
 	}
 
 	//=========================
@@ -62,14 +64,16 @@ public:
 		// 頂点データの書き換え
 		D3D11_MAPPED_SUBRESOURCE mappedResource;
 		HRESULT hr = Renderer::GetDeviceContext()->Map(
-			m_VertexBuffer.Get(),
+			m_Buffer.Get(),
 			0, D3D11_MAP_WRITE_DISCARD,
 			0, &mappedResource);
 
 		if(SUCCEEDED(hr)) {
 			memcpy(mappedResource.pData, vertices.data(), vertices.size() * sizeof(T));
-			Renderer::GetDeviceContext()->Unmap(m_VertexBuffer.Get(), 0);
+			Renderer::GetDeviceContext()->Unmap(m_Buffer.Get(), 0);
 		}
 	}
+
+    ID3D11Buffer* GetBuffer() const { return m_Buffer.Get(); }
 };
 

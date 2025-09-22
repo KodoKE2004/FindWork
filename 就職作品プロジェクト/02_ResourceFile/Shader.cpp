@@ -3,116 +3,6 @@
 #include "Renderer.h"
 #include <d3d11.h>
 
-////=======================================
-////Shader作成
-////=======================================
-//void Shader::Create(std::string vs, std::string ps)
-//{
-//	// 頂点データの定義
-//	D3D11_INPUT_ELEMENT_DESC layout[] =
-//	{
-//		{ "POSITION", 0, DXGI_FORMAT_R32G32B32_FLOAT,		0,	D3D11_APPEND_ALIGNED_ELEMENT,	D3D11_INPUT_PER_VERTEX_DATA, 0 },
-//		{ "NORMAL",   0, DXGI_FORMAT_R32G32B32_FLOAT,		0,	D3D11_APPEND_ALIGNED_ELEMENT,	D3D11_INPUT_PER_VERTEX_DATA, 0 },
-//		{ "COLOR",    0, DXGI_FORMAT_R32G32B32A32_FLOAT,	0,	D3D11_APPEND_ALIGNED_ELEMENT,	D3D11_INPUT_PER_VERTEX_DATA, 0 },
-//		{ "TEXCOORD", 0, DXGI_FORMAT_R32G32_FLOAT,			0,	D3D11_APPEND_ALIGNED_ELEMENT,   D3D11_INPUT_PER_VERTEX_DATA, 0 }
-//	};
-//
-//	unsigned int numElements = ARRAYSIZE(layout);
-//
-//	ID3D11Device* device = Renderer::GetDevice();
-//
-//	// 頂点シェーダーオブジェクトを生成、同時に頂点レイアウトも生成
-//	bool sts = CreateVertexShader(device,
-//		vs.c_str(),
-//		"main",
-//		"vs_5_0",
-//		layout,
-//		numElements,
-//		&m_pVertexShader,
-//		&m_pVertexLayout);
-//
-//	if (!sts) {
-//		MessageBox(nullptr, "CreateVertexShader error", "error", MB_OK);
-//		return;
-//	}
-//
-//	// ピクセルシェーダーを生成
-//	sts = CreatePixelShader(			// ピクセルシェーダーオブジェクトを生成
-//		device,							// デバイスオブジェクト
-//		ps.c_str(),
-//		"main",
-//		"ps_5_0",
-//		&m_pPixelShader);
-//
-//	if (!sts) {
-//		MessageBox(nullptr, "CreatePixelShader error", "error", MB_OK);
-//		return;
-//	}
-//
-//	return;
-//}
-//
-//void Shader::CreateVS(std::string vs)
-//{
-//	// 頂点データの定義
-//	D3D11_INPUT_ELEMENT_DESC layout[] =
-//	{
-//		{ "POSITION", 0, DXGI_FORMAT_R32G32B32_FLOAT,		0,	D3D11_APPEND_ALIGNED_ELEMENT,	D3D11_INPUT_PER_VERTEX_DATA, 0 },
-//		{ "NORMAL",   0, DXGI_FORMAT_R32G32B32_FLOAT,		0,	D3D11_APPEND_ALIGNED_ELEMENT,	D3D11_INPUT_PER_VERTEX_DATA, 0 },
-//		{ "COLOR",    0, DXGI_FORMAT_R32G32B32A32_FLOAT,	0,	D3D11_APPEND_ALIGNED_ELEMENT,	D3D11_INPUT_PER_VERTEX_DATA, 0 },
-//		{ "TEXCOORD", 0, DXGI_FORMAT_R32G32_FLOAT,			0,	D3D11_APPEND_ALIGNED_ELEMENT,   D3D11_INPUT_PER_VERTEX_DATA, 0 }
-//	};
-//
-//	unsigned int numElements = ARRAYSIZE(layout);
-//
-//	ID3D11Device* device = Renderer::GetDevice();
-//
-//	// 頂点シェーダーオブジェクトを生成、同時に頂点レイアウトも生成
-//	bool sts = CreateVertexShader(device,
-//		vs.c_str(),
-//		"main",
-//		"vs_5_0",
-//		layout,
-//		numElements,
-//		&m_pVertexShader,
-//		&m_pVertexLayout);
-//
-//	if (!sts) {
-//		MessageBox(nullptr, "CreateVertexShader error", "error", MB_OK);
-//		return;
-//	}
-//}
-//
-//void Shader::CreatePS(std::string ps)
-//{
-//	auto device = Renderer::GetDevice();
-//
-//	// ピクセルシェーダーを生成
-//	bool sts = CreatePixelShader(			// ピクセルシェーダーオブジェクトを生成
-//		device,							// デバイスオブジェクト
-//		ps.c_str(),
-//		"main",
-//		"ps_5_0",
-//		&m_pPixelShader);
-//
-//	if (!sts) {
-//		MessageBox(nullptr, "CreatePixelShader error", "error", MB_OK);
-//		return;
-//	}
-//}
-//
-////=======================================
-////GPUにデータを送る
-////=======================================
-//void Shader::SetGPU()
-//{
-//	ID3D11DeviceContext* devicecontext = Renderer::GetDeviceContext();
-//
-//	devicecontext->VSSetShader(m_pVertexShader, nullptr, 0);		// 頂点シェーダーをセット
-//	devicecontext->PSSetShader(m_pPixelShader, nullptr, 0);		// ピクセルシェーダーをセット
-//	devicecontext->IASetInputLayout(m_pVertexLayout);				// 頂点レイアウトセット
-//}
-
 BaseShader::~BaseShader() = default;
 
 BaseShader* BaseShader::TryCreateShaderFromName()
@@ -150,18 +40,42 @@ bool VertexShader::Create(std::string hlslName)
     };
 
     auto* device = Renderer::GetDevice();
-    bool res = CreateVertexShader(
-        device,
-        m_HlslName.c_str(),
-        "main",
-        "vs_5_0",
+    ComPtr<ID3DBlob> vsBlob, err;
+
+    // Blob作成
+    HRESULT hr = D3DCompileFromFile(
+        std::wstring(m_HlslName.begin(), m_HlslName.end()).c_str(),
+        nullptr, D3D_COMPILE_STANDARD_FILE_INCLUDE,
+        "main" , "vs_5_0",
+        D3DCOMPILE_DEBUG | D3DCOMPILE_SKIP_OPTIMIZATION,
+        0,
+        vsBlob.GetAddressOf(),
+        err.GetAddressOf());
+    if (FAILED(hr) || !m_Bytecode ||
+        m_Bytecode->GetBufferSize() == 0) {
+        return false;
+    }
+    
+    // 頂点シェーダー生成
+    hr = device->CreateVertexShader(
+        vsBlob->GetBufferPointer(),
+        vsBlob->GetBufferSize(),
+        nullptr,
+        m_VertexShader.GetAddressOf());
+    if(FAILED(hr))  return false;
+
+    // 入力レイアウト生成
+    hr = device->CreateInputLayout(
         layout,
         static_cast<UINT>(std::size(layout)),
-        m_VertexShader.GetAddressOf(),
-        m_InputLayout.GetAddressOf()
-    );  
+        vsBlob->GetBufferPointer(),
+        vsBlob->GetBufferSize(),
+        m_InputLayout.GetAddressOf());
+    if(FAILED(hr))  return false;
 
-    return res;
+    m_Bytecode = vsBlob;
+    return true;
+
 }
 
 void VertexShader::SetGPU()

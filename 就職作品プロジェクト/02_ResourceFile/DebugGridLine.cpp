@@ -34,8 +34,8 @@ void DebugGridLine::Initialize(ShaderManager& shaderManager)
     constexpr Color kBaseColor(0.35f, 0.35f, 0.35f, 1.0f);
     NVector3 kNormal = {0.0f, 1.0f, 0.0f};
 
-    const float min = -m_HalfExtent;
-    const float max = m_HalfExtent;
+    const float min = - m_HalfExtent;
+    const float max =   m_HalfExtent;
 
     std::array<VERTEX_3D, 2> lineX = {
         VERTEX_3D{ NVector3(min, 0.0f, 0.0f), kNormal, kBaseColor, Vector2::Zero },
@@ -83,9 +83,9 @@ void DebugGridLine::Initialize(ShaderManager& shaderManager)
 
     Renderer::GetDevice()->CreateInputLayout(
         elems.data(), (UINT)elems.size(),
-        vsBlob->GetBufferPointer(), vsBlob->GetBufferSize(),
-        m_GridInputLayout.GetAddressOf()
-    );
+        vsBlob->GetBufferPointer(),
+        vsBlob->GetBufferSize(),
+        m_GridInputLayout.GetAddressOf());
 
     m_Initialized = true;
 }
@@ -117,6 +117,12 @@ void DebugGridLine::DrawAxis(VertexBuffer<VERTEX_3D>& buffer, float axisFlag)
 {
     UpdateGridParams(axisFlag);
     buffer.SetGPU();
+
+    // 追加：インスタンス(slot1)も必ずセット
+    ID3D11Buffer* vbs[2] = { buffer.GetBuffer(),m_InstanceIDVB.Get() };
+    UINT vbStrides[2] = { sizeof(VERTEX_3D), sizeof(UINT) };
+    UINT offsets  [2] = { 0,0 };
+    Renderer::GetDeviceContext()->IASetVertexBuffers(0, 2, vbs, vbStrides, offsets);
     Renderer::GetDeviceContext()->DrawInstanced(2, m_InstanceCount, 0, 0);
 }
 
