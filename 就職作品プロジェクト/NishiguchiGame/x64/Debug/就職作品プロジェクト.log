@@ -1,2 +1,23 @@
-﻿  Shader.cpp
-  就職作品プロジェクト.vcxproj -> C:\Users\kodokeの世界\Desktop\HAL\VisualSutdio\就職作品\個人製作\FindWork\就職作品プロジェクト\x64\Debug\NishiguchiGame.exe
+﻿  Application.cpp
+  DebugGridLine.cpp
+  DebugUI.cpp
+C:\Users\dorae\Desktop\HAL\class3\FindWork\就職作品プロジェクト\02_ResourceFile\DebugGridLine.cpp(85,9): error C2065: 'vsBlob': 定義されていない識別子です。
+C:\Users\dorae\Desktop\HAL\class3\FindWork\就職作品プロジェクト\02_ResourceFile\DebugGridLine.cpp(85,37): error C2065: 'vsBlob': 定義されていない識別子です。
+C:\Users\dorae\Desktop\HAL\class3\FindWork\就職作品プロジェクト\02_ResourceFile\DebugGridLine.cpp(83,28): error C2660: 'ID3D11Device::CreateInputLayout': 関数に 3 個の引数を指定できません。
+      C:\Program Files (x86)\Windows Kits\10\Include\10.0.26100.0\um\d3d11.h(14211,43):
+      'ID3D11Device::CreateInputLayout' の宣言を確認してください
+      C:\Users\dorae\Desktop\HAL\class3\FindWork\就職作品プロジェクト\02_ResourceFile\DebugGridLine.cpp(83,28):
+      引数リスト '(_Ty *, UINT, T **)' を一致させようとしているとき
+          with
+          [
+              _Ty=D3D11_INPUT_ELEMENT_DESC
+          ]
+          and
+          [
+              T=ID3D11InputLayout
+          ]
+  
+  GameScene.cpp
+  SelectScene.cpp
+  imgui_tables.cpp
+  コードを生成中...

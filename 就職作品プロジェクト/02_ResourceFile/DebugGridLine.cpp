@@ -79,6 +79,7 @@ void DebugGridLine::Initialize(ShaderManager& shaderManager)
         { "TEXCOORD", 0, DXGI_FORMAT_R32G32_FLOAT,         0, 40, D3D11_INPUT_PER_VERTEX_DATA,   0 },
         { "TEXCOORD", 1, DXGI_FORMAT_R32_UINT,             1,  0, D3D11_INPUT_PER_INSTANCE_DATA, 1 },
     };
+    auto* vsBlob = m_VertexShader->GetBytecode();
 
     Renderer::GetDevice()->CreateInputLayout(
         elems.data(), (UINT)elems.size(),

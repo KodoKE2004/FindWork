@@ -25,6 +25,7 @@ class BaseShader {
 protected:
 	std::string m_HlslName;
 	ShaderStage m_ShaderStage;
+	ComPtr<ID3DBlob> m_Bytecode;
 public:
 	BaseShader() = default;
 	BaseShader(std::string hlslName, ShaderStage stage) : m_HlslName(hlslName), m_ShaderStage(stage) {}
@@ -35,8 +36,9 @@ public:
 	void SetShaderStage(ShaderStage stage) { m_ShaderStage = stage; }
 
 	// シェーダーの名前とステージを取得
-	std::string GetHlslName()	 const { return m_HlslName; }
-	ShaderStage GetShaderStage() const { return m_ShaderStage; }
+	std::string GetHlslName()	 const { return m_HlslName;			}
+	ShaderStage GetShaderStage() const { return m_ShaderStage;		}
+	ID3DBlob* GetBytecode()		 const { return m_Bytecode.Get();	}
 
 	virtual ~BaseShader() = 0;
 	virtual bool Create(std::string hlslName) = 0;
