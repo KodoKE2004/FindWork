@@ -9,6 +9,7 @@
 void GameScene::Initialize()
 {
     DebugUI::TEXT_CurrentScene = "GameScene";
+    GAME_INSTANCE.m_Grid.Initialize(*GAME_INSTANCE.GetShaderManager());
 
     auto* sky = Game::GetInstance().AddObject<Model>();
     sky->GetMeshModel("space");

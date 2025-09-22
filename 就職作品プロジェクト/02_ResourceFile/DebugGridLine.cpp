@@ -61,8 +61,9 @@ void DebugGridLine::Initialize(ShaderManager& shaderManager)
     m_InstanceCount = max(1u, static_cast<unsigned int>(std::floor(steps)) + 1u);
 
     std::vector<UINT> ids(m_InstanceCount);
-    for (UINT i = 0; i < m_InstanceCount; ++i)
+    for (UINT i = 0; i < m_InstanceCount; ++i) {
         ids[i] = i;
+    }
 
     D3D11_BUFFER_DESC bd{};
     bd.ByteWidth    = static_cast<UINT> (ids.size() * sizeof(UINT));
@@ -102,6 +103,8 @@ void DebugGridLine::Finalize()
 
 void DebugGridLine::UpdateGridParams(float axisFlag)
 {
+    if (!m_Initialized){ return; }
+
     GridParams params{};
     params.start = m_Start;
     params.spacing = m_Spacing;
@@ -115,6 +118,8 @@ void DebugGridLine::UpdateGridParams(float axisFlag)
 
 void DebugGridLine::DrawAxis(VertexBuffer<VERTEX_3D>& buffer, float axisFlag)
 {
+    if (!m_Initialized) { return; }
+
     UpdateGridParams(axisFlag);
     buffer.SetGPU();
 
@@ -128,10 +133,8 @@ void DebugGridLine::DrawAxis(VertexBuffer<VERTEX_3D>& buffer, float axisFlag)
 
 void DebugGridLine::Draw()
 {
-    if (!m_Initialized || !m_Enabled)
-    {
-        return;
-    }
+    if (!m_Initialized) { return; }
+
 
     auto* context = Renderer::GetDeviceContext();
 

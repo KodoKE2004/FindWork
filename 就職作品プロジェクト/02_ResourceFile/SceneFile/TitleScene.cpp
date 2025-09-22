@@ -10,6 +10,7 @@
 void TitleScene::Initialize()
 {
     DebugUI::TEXT_CurrentScene = "TitleScene";
+	GAME_INSTANCE.m_Grid.Initialize(*GAME_INSTANCE.GetShaderManager());
 
 	auto* m_SkyDome = GAME_INSTANCE.AddObject<Sphere>();
 	m_SkyDome->SetSkyDomeMode(true);

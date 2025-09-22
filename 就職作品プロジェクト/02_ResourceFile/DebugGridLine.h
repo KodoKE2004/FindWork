@@ -14,8 +14,10 @@ public:
     void Finalize();
     void Draw();
 
-    void SetEnabled(bool enable) { m_Enabled = enable;}
-    bool IsEnabled() const {return m_Enabled; }
+    void SetEnabled(bool enable) { m_Enabled = enable;    }
+    bool IsEnabled()     const   { return m_Enabled;      }
+    void DeInitialized()         { m_Initialized = false; }
+    bool IsInitialized() const   { return m_Initialized;  }
 private:
     struct GridParams
     {
@@ -39,9 +41,9 @@ private:
     bool m_Initialized = false;
     bool m_Enabled = true;
 
-    float m_Spacing = 1.0f;
-    float m_Start = -100.0f;
-    float m_HalfExtent = 100.0f;
+    float m_Spacing    = 10.0f;
+    float m_Start      = - 10000.0f;
+    float m_HalfExtent =   10000.0f;
     unsigned int m_InstanceCount = 0;
     
 };

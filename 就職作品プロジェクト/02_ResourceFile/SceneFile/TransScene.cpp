@@ -87,7 +87,8 @@ void TransScene::Finalize()
 
 	m_NextSceneSRV.Reset();
 	m_RenderTarget.reset();
-
+	
+	GAME_INSTANCE.m_Grid.DeInitialized();
 	if (this != nullptr)
 	{
 		delete this;

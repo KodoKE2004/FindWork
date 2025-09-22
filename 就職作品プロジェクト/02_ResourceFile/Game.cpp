@@ -65,6 +65,7 @@ void Game::Initialize()
 void Game::Update(float tick)
 {	
 	auto& instance = GetInstance();
+
 	instance.m_Input->Update();
 
 	// 現在のシーンの更新

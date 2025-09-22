@@ -32,10 +32,6 @@ private:
 	std::shared_ptr<AudioManager>		 m_AudioManager;	// オーディオマネージャー
 
 
-	// Debug関連
-#ifdef _DEBUG
-	DebugGridLine m_Grid;
-#endif // _DEBUG
 
 public:
 	//================================
@@ -87,6 +83,11 @@ public:
 	std::shared_ptr<AudioManager> GetAudioManager() {
 		return m_AudioManager;
 	}
+	// Debug関連
+#ifdef _DEBUG
+	DebugGridLine m_Grid;
+#endif // _DEBUG
+
 	//================================
 	// オブジェクト管理
 	//================================
@@ -140,13 +141,13 @@ void ChangeScene(TRANS_MODE mode,float duration)
 	auto scene = new TransScene;
 	auto sceneNext = new T;
 
-	scene->SetOldScene(Game::GetInstance().GetCurrentScene());
+	scene->SetOldScene(GAME_INSTANCE.GetCurrentScene());
 	scene->SetDuration(duration);
 	scene->SetNextScene(sceneNext);
 	scene->SetStep(START);
 	scene->SetTransMode(mode);
 	scene->Initialize();
 
-	Game::GetInstance().SetSceneCurrent(scene);
+	GAME_INSTANCE.SetSceneCurrent(scene);
 
 }

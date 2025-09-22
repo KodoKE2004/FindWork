@@ -37,6 +37,8 @@ bool VertexShader::Create(std::string hlslName)
         D3D11_APPEND_ALIGNED_ELEMENT, D3D11_INPUT_PER_VERTEX_DATA, 0 },
         { "TEXCOORD",    0, DXGI_FORMAT_R32G32_FLOAT,        0,
         D3D11_APPEND_ALIGNED_ELEMENT, D3D11_INPUT_PER_VERTEX_DATA, 0 },
+        { "TEXCOORD",    1, DXGI_FORMAT_R32_UINT,            1,
+        0,                          D3D11_INPUT_PER_INSTANCE_DATA, 1 },
     };
 
     auto* device = Renderer::GetDevice();
@@ -51,8 +53,7 @@ bool VertexShader::Create(std::string hlslName)
         0,
         vsBlob.GetAddressOf(),
         err.GetAddressOf());
-    if (FAILED(hr) || !m_Bytecode ||
-        m_Bytecode->GetBufferSize() == 0) {
+    if (FAILED(hr)) {
         return false;
     }
     
