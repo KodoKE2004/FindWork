@@ -9,8 +9,6 @@
 using namespace DirectX;
 using namespace DirectX::SimpleMath;
 
-
-
 void DebugGridLine::Initialize(ShaderManager& shaderManager)
 {
     if (!shaderManager.HasShader("VS_DebugGrid"))
@@ -143,9 +141,12 @@ void DebugGridLine::Draw()
         return;
     }
 
+    context->IASetInputLayout(m_GridInputLayout.Get());
+
     m_VertexShader->SetGPU();
     m_PixelShader->SetGPU();
 
+   
     Matrix identity = Matrix::Identity;
     Renderer::SetWorldMatrix(&identity);
 

@@ -414,6 +414,11 @@ void Renderer::SetBlendState(int nBlendState)
 
 }
 
+void Renderer::SetDefaultInputLayout()
+{
+	
+}
+
 D3D11_VIEWPORT Renderer::GetRenderTargetView(void)
 {
 	D3D11_VIEWPORT viewport{};

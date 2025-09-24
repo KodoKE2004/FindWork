@@ -121,6 +121,8 @@ public:
 	static void SetLightBuffer(LightBuffer* LightBuffer);
 	static void SetUV(float u, float v, float uw, float vh);
 	static void SetBlendState(int nBlendState);		// ブレンド ステート設定
+    static void SetDefaultInputLayout();			// デフォルトの入力レイアウト設定
+
 	// インスタンシング描画テンプレート
 	template<class T> static void SetInstanceID(T* method,InstancePaked iPaked)
 	{
