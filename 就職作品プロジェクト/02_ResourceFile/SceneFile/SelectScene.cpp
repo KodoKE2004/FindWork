@@ -8,6 +8,11 @@
 #include "../Camera.h"
 void SelectScene::Initialize()
 {
+
+#ifdef _DEBUG
+	GAME_INSTANCE.m_Grid.SetEnabled(true);
+#endif
+
 	DebugUI::TEXT_CurrentScene = "SelectScene";
 	m_Camera = GAME_INSTANCE.GetCamera();
     auto* m_SkyDome = GAME_INSTANCE.AddObject<Sphere>();
@@ -15,8 +20,6 @@ void SelectScene::Initialize()
     m_SkyDome->SetTexture(GAME_MANAGER_TEXTURE->GetTexture("Plane.png"));
 	m_SkyDome->SetRadius(500.0f);
 	m_MySceneObjects.emplace_back(m_SkyDome);
-
-    GAME_INSTANCE.m_Grid.Initialize(*GAME_INSTANCE.GetShaderManager());
 
 }
 
@@ -71,6 +74,9 @@ void SelectScene::Update(float tick)
 
 void SelectScene::Finalize()
 {
+#ifdef _DEBUG
+	GAME_INSTANCE.m_Grid.SetEnabled(false);
+#endif
 	// このシーンのオブジェクトを削除する
 	for (auto& o : m_MySceneObjects) {
 		Game::GetInstance().DeleteObject(o);

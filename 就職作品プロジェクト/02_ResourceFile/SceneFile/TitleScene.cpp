@@ -10,8 +10,9 @@
 void TitleScene::Initialize()
 {
     DebugUI::TEXT_CurrentScene = "TitleScene";
-	GAME_INSTANCE.m_Grid.Initialize(*GAME_INSTANCE.GetShaderManager());
-
+#ifdef _DEBUG
+	GAME_INSTANCE.m_Grid.SetEnabled(true);
+#endif
 	auto* m_SkyDome = GAME_INSTANCE.AddObject<Sphere>();
 	m_SkyDome->SetSkyDomeMode(true);
 	m_SkyDome->SetTexture(GAME_MANAGER_TEXTURE->GetTexture("Plane.png"));
@@ -53,6 +54,10 @@ void TitleScene::Update(float tick)
 
 void TitleScene::Finalize()
 {
+
+#ifdef _DEBUG
+	GAME_INSTANCE.m_Grid.SetEnabled(false);
+#endif
 	// このシーンのオブジェクトを削除する
 	for (auto& o : m_MySceneObjects) {
 		Game::GetInstance().DeleteObject(o);

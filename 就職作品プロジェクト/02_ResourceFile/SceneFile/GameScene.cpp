@@ -9,8 +9,9 @@
 void GameScene::Initialize()
 {
     DebugUI::TEXT_CurrentScene = "GameScene";
-    GAME_INSTANCE.m_Grid.Initialize(*GAME_INSTANCE.GetShaderManager());
-
+#ifdef _DEBUG
+    GAME_INSTANCE.m_Grid.SetEnabled(true);
+#endif
     auto* sky = Game::GetInstance().AddObject<Model>();
     sky->GetMeshModel("space");
     sky->SetScale(50.0f);
@@ -27,6 +28,9 @@ void GameScene::Update(float tick)
 
 void GameScene::Finalize()
 {
+#ifdef _DEBUG
+    GAME_INSTANCE.m_Grid.SetEnabled(false);
+#endif
     for (auto& o : m_MySceneObjects) {
         Game::GetInstance().DeleteObject(o);
     }

@@ -89,8 +89,17 @@ void Game::Draw()
 	auto& instance = GetInstance();
 	Renderer::Start();  // 描画の開始
 
-	instance.m_Grid.Draw();
-	// フェード以外を描く
+#ifdef _DEBUG
+	if (!instance.m_Grid.IsInitialized())
+	{
+		instance.m_Grid.Initialize(*instance.m_ShaderManager);
+	}
+	if (instance.m_Grid.IsEnabled())
+	{
+		instance.m_Grid.Draw();
+	}
+#endif	// フェード以外を描く
+
 	for (auto& o : instance.m_GameObjects)
 	{
 		if (!o) continue;

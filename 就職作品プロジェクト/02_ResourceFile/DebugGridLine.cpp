@@ -31,7 +31,7 @@ void DebugGridLine::Initialize(ShaderManager& shaderManager)
         return;
     }
 
-    constexpr Color kBaseColor(0.35f, 0.35f, 0.35f, 1.0f);
+    constexpr Color kBaseColor(1.0f, 1.0f, 1.0f, 1.0f);
     NVector3 kNormal = {0.0f, 1.0f, 0.0f};
 
     const float min = - m_HalfExtent;
@@ -103,7 +103,7 @@ void DebugGridLine::Finalize()
 
 void DebugGridLine::UpdateGridParams(float axisFlag)
 {
-    if (!m_Initialized){ return; }
+    if (!m_Initialized || !m_Enabled){ return; }
 
     GridParams params{};
     params.start = m_Start;
@@ -118,7 +118,7 @@ void DebugGridLine::UpdateGridParams(float axisFlag)
 
 void DebugGridLine::DrawAxis(VertexBuffer<VERTEX_3D>& buffer, float axisFlag)
 {
-    if (!m_Initialized) { return; }
+    if (!m_Initialized || !m_Enabled) { return; }
 
     UpdateGridParams(axisFlag);
     buffer.SetGPU();
@@ -133,7 +133,7 @@ void DebugGridLine::DrawAxis(VertexBuffer<VERTEX_3D>& buffer, float axisFlag)
 
 void DebugGridLine::Draw()
 {
-    if (!m_Initialized) { return; }
+    if (!m_Initialized || !m_Enabled) { return; }
 
 
     auto* context = Renderer::GetDeviceContext();
