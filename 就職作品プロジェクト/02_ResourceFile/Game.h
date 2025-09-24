@@ -84,9 +84,7 @@ public:
 		return m_AudioManager;
 	}
 	// Debug関連
-#ifdef _DEBUG
 	DebugGridLine m_Grid;
-#endif // _DEBUG
 
 	//================================
 	// オブジェクト管理

@@ -124,7 +124,7 @@
     <ClCompile Include="02_ResourceFile\ObjectFile\Object.cpp">
       <Filter>SourceFile\Object</Filter>
     </ClCompile>
-    <ClCompile Include="02_ResourceFile\MeshModel.cpp">
+    <ClCompile Include="02_ResourceFile\StaticMesh.cpp">
       <Filter>SourceFile\Model\Mesh</Filter>
     </ClCompile>
     <ClCompile Include="02_ResourceFile\ObjectFile\Cube.cpp">
@@ -185,6 +185,9 @@
       <Filter>SourceFile\Debug</Filter>
     </ClCompile>
     <ClCompile Include="02_ResourceFile\Shader.cpp">
+      <Filter>SourceFile\Core</Filter>
+    </ClCompile>
+    <ClCompile Include="02_ResourceFile\CSVLoader.cpp">
       <Filter>SourceFile\Core</Filter>
     </ClCompile>
   </ItemGroup>
@@ -279,7 +282,7 @@
     <ClInclude Include="02_ResourceFile\ObjectFile\Object.h">
       <Filter>SourceFile\Object</Filter>
     </ClInclude>
-    <ClInclude Include="02_ResourceFile\MeshModel.h">
+    <ClInclude Include="02_ResourceFile\StaticMesh.h">
       <Filter>SourceFile\Model\Mesh</Filter>
     </ClInclude>
     <ClInclude Include="02_ResourceFile\ObjectFile\Cube.h">
@@ -340,6 +343,9 @@
       <Filter>SourceFile\Debug</Filter>
     </ClInclude>
     <ClInclude Include="02_ResourceFile\Shader.h">
+      <Filter>SourceFile\Core</Filter>
+    </ClInclude>
+    <ClInclude Include="02_ResourceFile\CSVLoader.h">
       <Filter>SourceFile\Core</Filter>
     </ClInclude>
   </ItemGroup>

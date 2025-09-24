@@ -34,7 +34,6 @@ private:
     const float m_ChangeTime = 30.0f; // ƒV[ƒ“•ÏX‚Ü‚Å‚ÌŠÔ
 
     std::vector<Bullet*> m_Bullet;
-    Camera* m_Camera = nullptr;
     std::unique_ptr<Sphere> m_SkyDome ;
     int m_ShotCount = 0;
 

@@ -23,13 +23,14 @@
     <ClCompile Include="02_ResourceFile\Audio.cpp" />
     <ClCompile Include="02_ResourceFile\AudioManager.cpp" />
     <ClCompile Include="02_ResourceFile\Camera.cpp" />
+    <ClCompile Include="02_ResourceFile\CSVLoader.cpp" />
     <ClCompile Include="02_ResourceFile\DebugGridLine.cpp" />
     <ClCompile Include="02_ResourceFile\DebugUI.cpp" />
     <ClCompile Include="02_ResourceFile\Dx11helper.cpp" />
     <ClCompile Include="02_ResourceFile\Game.cpp" />
     <ClCompile Include="02_ResourceFile\input.cpp" />
     <ClCompile Include="02_ResourceFile\main.cpp" />
-    <ClCompile Include="02_ResourceFile\MeshModel.cpp" />
+    <ClCompile Include="02_ResourceFile\StaticMesh.cpp" />
     <ClCompile Include="02_ResourceFile\MeshManager.cpp" />
     <ClCompile Include="02_ResourceFile\ObjectFile\Bullet.cpp" />
     <ClCompile Include="02_ResourceFile\ObjectFile\Cube.cpp" />
@@ -69,6 +70,7 @@
     <ClInclude Include="02_ResourceFile\Audio.h" />
     <ClInclude Include="02_ResourceFile\AudioManager.h" />
     <ClInclude Include="02_ResourceFile\Camera.h" />
+    <ClInclude Include="02_ResourceFile\CSVLoader.h" />
     <ClInclude Include="02_ResourceFile\Debug.hpp" />
     <ClInclude Include="02_ResourceFile\DebugGridLine.h" />
     <ClInclude Include="02_ResourceFile\DebugUI.h" />
@@ -80,7 +82,7 @@
     <ClInclude Include="02_ResourceFile\Material.h" />
     <ClInclude Include="02_ResourceFile\Mesh.h" />
     <ClInclude Include="02_ResourceFile\MeshRenderer.h" />
-    <ClInclude Include="02_ResourceFile\MeshModel.h" />
+    <ClInclude Include="02_ResourceFile\StaticMesh.h" />
     <ClInclude Include="02_ResourceFile\MeshManager.h" />
     <ClInclude Include="02_ResourceFile\ObjectFile\Bullet.h" />
     <ClInclude Include="02_ResourceFile\ObjectFile\Cube.h" />
@@ -122,6 +124,8 @@
   <ItemGroup>
     <FxCompile Include="ShaderFile\Common.hlsl">
       <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">true</ExcludedFromBuild>
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Release|x64'">true</ExcludedFromBuild>
+      <ShaderModel Condition="'$(Configuration)|$(Platform)'=='Release|x64'">5.0</ShaderModel>
     </FxCompile>
     <FxCompile Include="ShaderFile\PS_Alpha.hlsl">
       <ShaderType Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">Pixel</ShaderType>
@@ -276,9 +280,12 @@
       <SubSystem>Console</SubSystem>
       <GenerateDebugInformation>true</GenerateDebugInformation>
       <AdditionalDependencies>DirectXTK.lib;%(AdditionalDependencies)</AdditionalDependencies>
-      <AdditionalLibraryDirectories>$(ProjectDir)03_ExternalFile/assimp/5.2.5/lib;$(ProjectDir)03_ExternalFile\DirectXTK\lib;$(ProjectDir)03_ExternalFile\DirectXTex\lib;%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
+      <AdditionalLibraryDirectories>$(ProjectDir)03_ExternalFile/assimp/5.2.5/lib;$(ProjectDir)03_ExternalFile\DirectXTK\lib;$(ProjectDir)03_ExternalFile\DirectXTex\lib\Debug;%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
       <AdditionalDependencies>$(ProjectDir)03_ExternalFile\DirectXTex\lib\DirectXTex.lib;$(ProjectDir)03_ExternalFile\DirectXTK\lib\DirectXTK.lib;%(AdditionalDependencies)</AdditionalDependencies>
     </Link>
+    <FxCompile>
+      <ShaderModel>5.0</ShaderModel>
+    </FxCompile>
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
     <ClCompile>
@@ -288,15 +295,19 @@
       <SDLCheck>true</SDLCheck>
       <PreprocessorDefinitions>NDEBUG;_CONSOLE;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <ConformanceMode>true</ConformanceMode>
-      <RuntimeLibrary>MultiThreadedDebugDLL</RuntimeLibrary>
+      <RuntimeLibrary>MultiThreadedDLL</RuntimeLibrary>
       <AdditionalIncludeDirectories>$(ProjectDir)03_ExternalFile\DirectXTex\include;$(ProjectDir)03_ExternalFile\DirectXTK\include;$(ProjectDir)03_ExternalFile\assimp\5.2.5\include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <LanguageStandard>stdcpp20</LanguageStandard>
     </ClCompile>
     <Link>
       <SubSystem>Console</SubSystem>
       <GenerateDebugInformation>true</GenerateDebugInformation>
       <AdditionalDependencies>DirectXTK.lib;%(AdditionalDependencies)</AdditionalDependencies>
-      <AdditionalLibraryDirectories>$(ProjectDir)03_ExternalFile\directxtk\lib\x64\Release;$(ProjectDir)03_ExternalFile\DirectXTex\x64\Release;$(ProjectDir)03_ExternalFile\assimp\5.2.5\lib;%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
+      <AdditionalLibraryDirectories>$(ProjectDir)03_ExternalFile\directxtk\lib\x64\Release;$(ProjectDir)03_ExternalFile\DirectXTex\x64\Release;$(ProjectDir)03_ExternalFile\assimp\5.2.5\lib;$(ProjectDir)03_ExternalFile\DirectXTK\lib\Release;%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
     </Link>
+    <FxCompile>
+      <ShaderModel>5.0</ShaderModel>
+    </FxCompile>
   </ItemDefinitionGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

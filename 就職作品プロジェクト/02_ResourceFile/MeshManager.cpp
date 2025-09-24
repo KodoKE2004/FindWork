@@ -1,12 +1,12 @@
 
 #include "MeshManager.h"
-#include "MeshModel.h"
+#include "StaticMesh.h"
 #include "Debug.hpp"
 
 MeshManager::MeshManager() {
     Debug::Log("MeshManager: コンストラクタ - NULLモデル登録開始");
     // "NULL" モデルを最初に登録しておく
-    AddMeshModel(m_DefaultName, "spot.fbx", "spot");
+    AddStaticMesh(m_DefaultName, "spot.fbx", "spot");
 }
 
 MeshManager::MeshManager(std::string filePath)
@@ -14,7 +14,7 @@ MeshManager::MeshManager(std::string filePath)
 	m_FilePath = std::move(filePath);
     Debug::Log("MeshManager: コンストラクタ - NULLモデル登録開始");
     // "NULL" モデルを最初に登録しておく
-    AddMeshModel(m_DefaultName, "spot.fbx", "spot");
+    AddStaticMesh(m_DefaultName, "spot.fbx", "spot");
 
 }
 
@@ -22,7 +22,7 @@ void MeshManager::Clear() {
     m_MeshMap.clear();
 }
 
-bool MeshManager::AddMeshModel(const std::string& modelName,
+bool MeshManager::AddStaticMesh(const std::string& modelName,
     const std::string& modelPath,
     const std::string& texDirectory) {
     // 重複チェック
@@ -53,7 +53,7 @@ bool MeshManager::AddMeshModel(const std::string& modelName,
     return true;
 }
 
-std::shared_ptr<MeshModel> MeshManager::GetMeshModel(const std::string& modelName) {
+std::shared_ptr<MeshModel> MeshManager::GetStaticMesh(const std::string& modelName) {
     auto it = m_MeshMap.find(modelName);
     if (it != m_MeshMap.end()) {
         Debug::Log("成功 : MeshModel取得 " + modelName);

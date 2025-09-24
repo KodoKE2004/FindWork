@@ -29,9 +29,9 @@ void Game::Initialize()
 
 	// マネージャーの初期化
 	// モデル・テクスチャのパスを設定
+	instance.m_ShaderManager  = std::make_shared<ShaderManager> ("ShaderFile/");
 	instance.m_MeshManager	  = std::make_shared<MeshManager>	("AssetFile/Model/");
 	instance.m_TextureManager = std::make_shared<TextureManager>("AssetFile/Texture/");
-	instance.m_ShaderManager  = std::make_shared<ShaderManager> ("ShaderFile/");
 	instance.m_AudioManager   = std::make_shared<AudioManager>	(L"AssetFile/Sound/");
 	instance.m_AudioManager->Init();
 
@@ -48,15 +48,15 @@ void Game::Initialize()
 #ifdef _DEBUG
 
 	instance.m_ShaderManager->AddShader("VS_DebugGrid" , ShaderStage::VS);
-	instance.m_Grid.Initialize(*instance.m_ShaderManager);
+	instance.m_Grid.Initialize();
 
 #endif // _DEBUG
 
 	//　モデル登録
-	instance.m_MeshManager->AddMeshModel("RedMan" , "Akai.fbx"   , "Akai"   );
-	instance.m_MeshManager->AddMeshModel("Pokemon", "Porygon.fbx", "Porygon");
-	instance.m_MeshManager->AddMeshModel("aaa"    , "plane.fbx"  , "plane"  );
-    instance.m_MeshManager->AddMeshModel("space"  , "space.fbx"  , "Space"  );
+	instance.m_MeshManager->AddStaticMesh("RedMan" , "Akai.fbx"   , "Akai"   );
+	instance.m_MeshManager->AddStaticMesh("Pokemon", "Porygon.fbx", "Porygon");
+	instance.m_MeshManager->AddStaticMesh("aaa"    , "plane.fbx"  , "plane"  );
+    instance.m_MeshManager->AddStaticMesh("space"  , "space.fbx"  , "Space"  );
 
 	instance.m_SceneCurrent = new TitleScene;				// タイトルシーンのインスタンスを生成
 	instance.m_SceneCurrent->Initialize();
@@ -92,7 +92,7 @@ void Game::Draw()
 #ifdef _DEBUG
 	if (!instance.m_Grid.IsInitialized())
 	{
-		instance.m_Grid.Initialize(*instance.m_ShaderManager);
+		instance.m_Grid.Initialize();
 	}
 	if (instance.m_Grid.IsEnabled())
 	{

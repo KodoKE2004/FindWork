@@ -52,7 +52,7 @@ class VertexShader : public BaseShader
 {
 private:
 	ComPtr<ID3D11VertexShader> m_VertexShader;
-	ComPtr<ID3D11InputLayout> m_InputLayout;
+	ComPtr<ID3D11InputLayout>  m_InputLayout;
 public:
 	bool Create(std::string hlslName) override;
 	void SetGPU();

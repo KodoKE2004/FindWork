@@ -10,7 +10,7 @@ public:
     DebugGridLine()  = default ;
     ~DebugGridLine() = default ;
         
-    void Initialize(ShaderManager& shaderManager);
+    void Initialize();
     void Finalize();
     void Draw();
 

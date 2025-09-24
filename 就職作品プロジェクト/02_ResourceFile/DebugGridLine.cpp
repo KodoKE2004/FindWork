@@ -1,5 +1,6 @@
 #include "DebugGridLine.h"
 #include "Debug.hpp"
+#include "Game.h"
 
 #include <algorithm>
 #include <array>
@@ -9,19 +10,19 @@
 using namespace DirectX;
 using namespace DirectX::SimpleMath;
 
-void DebugGridLine::Initialize(ShaderManager& shaderManager)
+void DebugGridLine::Initialize()
 {
-    if (!shaderManager.HasShader("VS_DebugGrid"))
+    if (!GAME_MANAGER_SHADER->HasShader("VS_DebugGrid"))
     {
-        shaderManager.AddShader("VS_DebugGrid", ShaderStage::VS);
+        GAME_MANAGER_SHADER->AddShader("VS_DebugGrid", ShaderStage::VS);
     }
-    if (!shaderManager.HasShader("PS_Unlit"))
+    if (!GAME_MANAGER_SHADER->HasShader("PS_Unlit"))
     {
-        shaderManager.AddShader("PS_Unlit", ShaderStage::PS);
+        GAME_MANAGER_SHADER->AddShader("PS_Unlit", ShaderStage::PS);
     }
 
-    m_VertexShader = dynamic_cast<VertexShader*>(shaderManager.GetShader("VS_DebugGrid"));
-    m_PixelShader = dynamic_cast<PixelShader*>(shaderManager.GetShader("PS_Unlit"));
+    m_VertexShader = dynamic_cast<VertexShader*>(GAME_MANAGER_SHADER->GetShader("VS_DebugGrid"));
+    m_PixelShader  = dynamic_cast<PixelShader*>(GAME_MANAGER_SHADER->GetShader("PS_Unlit"));
 
     if (!m_VertexShader || !m_PixelShader)
     {

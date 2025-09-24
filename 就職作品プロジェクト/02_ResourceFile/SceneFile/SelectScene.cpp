@@ -6,15 +6,15 @@
 #include "../ObjectFile/Model.h"
 #include "../ObjectFile/Bullet.h"
 #include "../Camera.h"
+
 void SelectScene::Initialize()
 {
+	DebugUI::TEXT_CurrentScene = "SelectScene";
 
 #ifdef _DEBUG
 	GAME_INSTANCE.m_Grid.SetEnabled(true);
 #endif
 
-	DebugUI::TEXT_CurrentScene = "SelectScene";
-	m_Camera = GAME_INSTANCE.GetCamera();
     auto* m_SkyDome = GAME_INSTANCE.AddObject<Sphere>();
 	m_SkyDome->SetSkyDomeMode(true);
     m_SkyDome->SetTexture(GAME_MANAGER_TEXTURE->GetTexture("Plane.png"));
@@ -41,15 +41,15 @@ void SelectScene::Update(float tick)
 		const float move = 5.0f;
 
         //m_Time += tick;
-		if (Input::GetKeyPress(VK_W)) m_Camera->Dolly(move);
-		if (Input::GetKeyPress(VK_S)) m_Camera->Dolly(-move);
-		if (Input::GetKeyPress(VK_A)) m_Camera->Track(-move, 0.0f);
-		if (Input::GetKeyPress(VK_D)) m_Camera->Track(move, 0.0f);
+		if (Input::GetKeyPress(VK_W)) GAME_INSTANCE.GetCamera()->Dolly(move);
+		if (Input::GetKeyPress(VK_S)) GAME_INSTANCE.GetCamera()->Dolly(-move);
+		if (Input::GetKeyPress(VK_A)) GAME_INSTANCE.GetCamera()->Track(-move, 0.0f);
+		if (Input::GetKeyPress(VK_D)) GAME_INSTANCE.GetCamera()->Track(move, 0.0f);
 
 		if (Input::GetKeyTrigger(VK_L) || Input::GetKeyTrigger(VK_J))
 		{
-			auto pos = m_Camera->GetPosition();
-			auto dir = m_Camera->GetForward();
+			auto pos = GAME_INSTANCE.GetCamera()->GetPosition();
+			auto dir = GAME_INSTANCE.GetCamera()->GetForward();
             auto* m_Bullet = GAME_INSTANCE.AddObject<Bullet>();
 			m_Bullet->Shoot(pos, dir);
             m_MySceneObjects.emplace_back(m_Bullet);

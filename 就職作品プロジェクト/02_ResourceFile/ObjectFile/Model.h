@@ -1,6 +1,6 @@
 #pragma once
 #include "Object.h"
-#include "../MeshModel.h"
+#include "../StaticMesh.h"
 #include "../MeshRenderer.h"
 #include "../VertexBuffer.h"
 #include "../IndexBuffer.h"

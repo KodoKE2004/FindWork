@@ -77,7 +77,7 @@ void Model::GetMeshModel(std::string modelName)
 
     std::cout << "Model load start : " << modelName << std::endl;
 
-    m_MeshModel.mesh = Game::GetInstance().GetMeshManager()->GetMeshModel(modelName);
+    m_MeshModel.mesh = Game::GetInstance().GetMeshManager()->GetStaticMesh(modelName);
 
     m_MeshRenderer.Init(*m_MeshModel.mesh.get());
     m_VertexBuffer.Create(m_MeshModel.mesh->GetVertices());

@@ -146,6 +146,7 @@ void Camera::Roll(float rollDelta)
 	m_Rotation.z += rollDelta;
 }
 
+#ifdef _DEBUG
 void Camera::DebugCameraUI()
 {
 	ImGuiIO& io = ImGui::GetIO();
@@ -215,3 +216,4 @@ void Camera::DebugCameraParamUI()
 	}
 	ImGui::End();
 }
+#endif

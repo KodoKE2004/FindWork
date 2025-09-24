@@ -1,0 +1,63 @@
+﻿  compilation object save succeeded; see C:\Users\dorae\Desktop\HAL\class3\FindWork\就職作品プロジェクト\x64\Release\PS_Alpha.cso
+  compilation object save succeeded; see C:\Users\dorae\Desktop\HAL\class3\FindWork\就職作品プロジェクト\x64\Release\PS_Default.cso
+  compilation object save succeeded; see C:\Users\dorae\Desktop\HAL\class3\FindWork\就職作品プロジェクト\x64\Release\PS_Phong.cso
+  compilation object save succeeded; see C:\Users\dorae\Desktop\HAL\class3\FindWork\就職作品プロジェクト\x64\Release\PS_Skydome.cso
+  compilation object save succeeded; see C:\Users\dorae\Desktop\HAL\class3\FindWork\就職作品プロジェクト\x64\Release\PS_Unlit.cso
+  compilation object save succeeded; see C:\Users\dorae\Desktop\HAL\class3\FindWork\就職作品プロジェクト\x64\Release\VS_Alpha.cso
+  compilation object save succeeded; see C:\Users\dorae\Desktop\HAL\class3\FindWork\就職作品プロジェクト\x64\Release\VS_DebugGrid.cso
+  compilation object save succeeded; see C:\Users\dorae\Desktop\HAL\class3\FindWork\就職作品プロジェクト\x64\Release\VS_Default.cso
+  compilation object save succeeded; see C:\Users\dorae\Desktop\HAL\class3\FindWork\就職作品プロジェクト\x64\Release\VS_Skydome.cso
+  compilation object save succeeded; see C:\Users\dorae\Desktop\HAL\class3\FindWork\就職作品プロジェクト\x64\Release\VS_Unlit.cso
+  Application.cpp
+  Audio.cpp
+  AudioManager.cpp
+  Camera.cpp
+  CSVLoader.cpp
+  DebugGridLine.cpp
+  DebugUI.cpp
+  Dx11helper.cpp
+  Game.cpp
+  input.cpp
+C:\Users\dorae\Desktop\HAL\class3\FindWork\就職作品プロジェクト\02_ResourceFile\Game.cpp(127,11): error C2039: 'm_Grid': 'Game' のメンバーではありません
+      C:\Users\dorae\Desktop\HAL\class3\FindWork\就職作品プロジェクト\02_ResourceFile\Game.h(17,7):
+      'Game' の宣言を確認してください
+  
+  main.cpp
+  StaticMesh.cpp
+  MeshManager.cpp
+  Bullet.cpp
+  Cube.cpp
+  Light.cpp
+  Model.cpp
+  Object.cpp
+  Sphere.cpp
+  Skydome.cpp
+  コンパイル中...
+  Renderer.cpp
+  RenderTarget.cpp
+  GameScene.cpp
+  SelectScene.cpp
+  TitleScene.cpp
+  Fade.cpp
+  SnapshotOverlay.cpp
+  TransScene.cpp
+C:\Users\dorae\Desktop\HAL\class3\FindWork\就職作品プロジェクト\02_ResourceFile\SceneFile\TransScene.cpp(91,16): error C2039: 'm_Grid': 'Game' のメンバーではありません
+      C:\Users\dorae\Desktop\HAL\class3\FindWork\就職作品プロジェクト\02_ResourceFile\Game.h(17,7):
+      'Game' の宣言を確認してください
+  
+  Shader.cpp
+  ShaderManager.cpp
+  TestPlane.cpp
+  Texture2D.cpp
+  Texture.cpp
+  TextureManager.cpp
+  Transform.cpp
+  utility.cpp
+  imgui.cpp
+  imgui_demo.cpp
+  imgui_draw.cpp
+  imgui_impl_dx11.cpp
+  コンパイル中...
+  imgui_impl_win32.cpp
+  imgui_tables.cpp
+  imgui_widgets.cpp
