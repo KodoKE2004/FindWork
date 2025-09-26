@@ -154,7 +154,7 @@ bool Application::InitWindow()
     }
 
     // ウィンドウを表示.
-    ShowWindow(m_hWnd, SW_MAXIMIZE);  //第２引数
+    ShowWindow(m_hWnd, SW_NORMAL);  //第２引数
 
     // ウィンドウを更新.
     UpdateWindow(m_hWnd);             //再描画するウィンドウ

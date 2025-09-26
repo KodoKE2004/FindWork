@@ -42,7 +42,7 @@ void TitleScene::Update(float tick)
 	if (Input::GetKeyTrigger(VK_RETURN))
 	{
 		Game::GetInstance().GetAudioManager()->Play("enter");
-		ChangeScene<SelectScene>(FADE, 1.0f);
+		ChangeScene<GameScene>(FADE, 1.0f);
 	}
 
 

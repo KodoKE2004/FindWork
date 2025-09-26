@@ -124,7 +124,9 @@ void Game::Draw()
 void Game::Finalize()
 {
 	auto& instance = GetInstance();
+#ifdef _DEBUG
 	instance.m_Grid.Finalize();
+#endif //_DEBUG
 	DebugUI::DisposeUI();		// デバッグUIの終了処理
 	instance.DeleteAllObject();	//オブジェクトを全て削除
 	Renderer::Finalize();			// レンダラーの終了処理

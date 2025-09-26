@@ -187,9 +187,6 @@
     <ClCompile Include="02_ResourceFile\Shader.cpp">
       <Filter>SourceFile\Core</Filter>
     </ClCompile>
-    <ClCompile Include="02_ResourceFile\CSVLoader.cpp">
-      <Filter>SourceFile\Core</Filter>
-    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="02_ResourceFile\SceneFile\Scene.h">
@@ -345,7 +342,7 @@
     <ClInclude Include="02_ResourceFile\Shader.h">
       <Filter>SourceFile\Core</Filter>
     </ClInclude>
-    <ClInclude Include="02_ResourceFile\CSVLoader.h">
+    <ClInclude Include="02_ResourceFile\CSVLoader.hpp">
       <Filter>SourceFile\Core</Filter>
     </ClInclude>
   </ItemGroup>

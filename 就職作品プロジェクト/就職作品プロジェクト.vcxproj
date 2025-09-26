@@ -23,7 +23,6 @@
     <ClCompile Include="02_ResourceFile\Audio.cpp" />
     <ClCompile Include="02_ResourceFile\AudioManager.cpp" />
     <ClCompile Include="02_ResourceFile\Camera.cpp" />
-    <ClCompile Include="02_ResourceFile\CSVLoader.cpp" />
     <ClCompile Include="02_ResourceFile\DebugGridLine.cpp" />
     <ClCompile Include="02_ResourceFile\DebugUI.cpp" />
     <ClCompile Include="02_ResourceFile\Dx11helper.cpp" />
@@ -70,7 +69,7 @@
     <ClInclude Include="02_ResourceFile\Audio.h" />
     <ClInclude Include="02_ResourceFile\AudioManager.h" />
     <ClInclude Include="02_ResourceFile\Camera.h" />
-    <ClInclude Include="02_ResourceFile\CSVLoader.h" />
+    <ClInclude Include="02_ResourceFile\CSVLoader.hpp" />
     <ClInclude Include="02_ResourceFile\Debug.hpp" />
     <ClInclude Include="02_ResourceFile\DebugGridLine.h" />
     <ClInclude Include="02_ResourceFile\DebugUI.h" />
@@ -280,8 +279,8 @@
       <SubSystem>Console</SubSystem>
       <GenerateDebugInformation>true</GenerateDebugInformation>
       <AdditionalDependencies>DirectXTK.lib;%(AdditionalDependencies)</AdditionalDependencies>
-      <AdditionalLibraryDirectories>$(ProjectDir)03_ExternalFile/assimp/5.2.5/lib;$(ProjectDir)03_ExternalFile\DirectXTK\lib;$(ProjectDir)03_ExternalFile\DirectXTex\lib\Debug;%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
-      <AdditionalDependencies>$(ProjectDir)03_ExternalFile\DirectXTex\lib\DirectXTex.lib;$(ProjectDir)03_ExternalFile\DirectXTK\lib\DirectXTK.lib;%(AdditionalDependencies)</AdditionalDependencies>
+      <AdditionalLibraryDirectories>$(ProjectDir)03_ExternalFile/assimp/5.2.5/lib;$(ProjectDir)03_ExternalFile\DirectXTK\lib\Debug;$(ProjectDir)03_ExternalFile\DirectXTex\lib;%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
+      <AdditionalDependencies>$(ProjectDir)03_ExternalFile\DirectXTex\lib\DirectXTex.lib;$(ProjectDir)03_ExternalFile\DirectXTK\lib\Debug\DirectXTK.lib;%(AdditionalDependencies)</AdditionalDependencies>
     </Link>
     <FxCompile>
       <ShaderModel>5.0</ShaderModel>
