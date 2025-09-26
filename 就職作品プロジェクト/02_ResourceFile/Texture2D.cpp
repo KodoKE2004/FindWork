@@ -113,16 +113,12 @@ void Texture2D::Draw()
 	float vh = 1 / m_SplitY;
 
 	Renderer::SetUV(u, v, uw, vh);
-	CAMERA_MODE prevMode = m_Camera->GetMode();
-	// カメラの設定を指定
-	m_Camera->SetCamera(CAMERA_2D);
+	Camera::ScopedMode scepedMode(m_Camera, CAMERA_2D);
 
 	devicecontext->DrawIndexed(
 		4, // 描画するインデックス数（四角形なんで４）
 		0, // 最初のインデックスバッファの位置
 		0);
-
-	m_Camera->SetCamera(prevMode);
 }
 
 //=======================================

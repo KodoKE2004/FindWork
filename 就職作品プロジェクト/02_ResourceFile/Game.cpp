@@ -106,7 +106,7 @@ void Game::Draw()
 		if (dynamic_cast<Fade*>(o.get())) continue;  // フェードは後で
 		o->Draw();
 	}
-
+	
 	// フェードを最後に描く（必ず最前面になる）
 	for (auto& o : instance.m_GameObjects)
 	{

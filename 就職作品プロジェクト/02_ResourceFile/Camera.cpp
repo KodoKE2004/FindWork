@@ -217,3 +217,29 @@ void Camera::DebugCameraParamUI()
 	ImGui::End();
 }
 #endif
+
+Camera::ScopedMode::ScopedMode(Camera* camera, CAMERA_MODE mode) : m_Camera(camera)
+{
+	if(m_Camera == nullptr) return;
+
+	m_PreviousMode = m_Camera->GetMode();
+	if (m_PreviousMode != mode)
+	{
+		m_Camera->SetCamera(mode);
+		m_ShouldRestore = true;
+	}
+}
+
+Camera::ScopedMode::~ScopedMode()
+{
+	Restore();
+}
+
+void Camera::ScopedMode::Restore()
+{
+	if (m_Camera && m_ShouldRestore)
+	{
+		m_Camera->SetCamera(m_PreviousMode);
+		m_ShouldRestore = false;
+	}
+}

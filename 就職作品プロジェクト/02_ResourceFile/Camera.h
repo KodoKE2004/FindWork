@@ -53,6 +53,20 @@ private:
 	float m_Zoom = 1.0f;
 public:
 
+	class ScopedMode
+	{
+	public:
+		ScopedMode(Camera* camera, CAMERA_MODE mode);
+		~ScopedMode();
+
+		void Restore();
+
+	private:
+		Camera* m_Camera = nullptr;
+		CAMERA_MODE m_PreviousMode = CAMERA_3D;
+		bool        m_ShouldRestore = false;
+	};
+
 	//===========================================
 	//				ƒƒCƒ“ƒ‹[ƒvˆ—
 	//===========================================
