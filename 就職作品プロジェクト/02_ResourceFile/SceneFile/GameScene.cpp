@@ -12,13 +12,6 @@ void GameScene::Initialize()
 #ifdef _DEBUG
     GAME_INSTANCE.m_Grid.SetEnabled(true);
 #endif
-    auto pressTexture = GAME_INSTANCE.AddObject<Texture2D>();
-    pressTexture->SetTexture(GAME_MANAGER_TEXTURE->GetTexture("PressToSpace.png"));
-    pressTexture->SetPos(0.0f, -250.0f, -1.0f);
-    pressTexture->SetScale(400.0f, 300.0f, 1.0f);
-    pressTexture->SetUV(1.0f, 1.0f, 1.0f, 1.0f);
-    m_MySceneObjects.emplace_back(pressTexture);
-
 
 }
 

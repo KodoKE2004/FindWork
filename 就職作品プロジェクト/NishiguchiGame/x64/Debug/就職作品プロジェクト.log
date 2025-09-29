@@ -1,21 +1,5 @@
-﻿  Application.cpp
-  Camera.cpp
-  DebugGridLine.cpp
-  Game.cpp
+﻿  Game.cpp
   MeshManager.cpp
-  Bullet.cpp
-  Cube.cpp
-  Light.cpp
-  Model.cpp
-  Object.cpp
-  Skydome.cpp
-  Sphere.cpp
-  GameScene.cpp
-  SelectScene.cpp
-  TitleScene.cpp
-  TransScene.cpp
-  Fade.cpp
-  SnapshotOverlay.cpp
   Texture2D.cpp
   コードを生成中...
   就職作品プロジェクト.vcxproj -> C:\Users\dorae\Desktop\HAL\class3\FindWork\就職作品プロジェクト\x64\Debug\NishiguchiGame.exe

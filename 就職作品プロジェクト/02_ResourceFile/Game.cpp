@@ -55,7 +55,8 @@ void Game::Initialize()
 	//　モデル登録
 	instance.m_MeshManager->AddStaticMesh("RedMan" , "Akai.fbx"   , "Akai"   );
 	instance.m_MeshManager->AddStaticMesh("Pokemon", "Porygon.fbx", "Porygon");
-	instance.m_MeshManager->AddStaticMesh("aaa"    , "plane.fbx"  , "plane"  );
+	instance.m_MeshManager->AddStaticMesh("null"    , "plane.fbx"  , "plane"  );
+
     instance.m_MeshManager->AddStaticMesh("space"  , "space.fbx"  , "Space"  );
 
 	instance.m_SceneCurrent = new TitleScene;				// タイトルシーンのインスタンスを生成

@@ -17,6 +17,7 @@ enum STEP
 enum TRANS_MODE
 {
 	FADE,
+	NUM
 };
 
 

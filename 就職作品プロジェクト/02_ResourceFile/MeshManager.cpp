@@ -36,7 +36,7 @@ bool MeshManager::AddStaticMesh(const std::string& modelName,
     std::string filePath = texPath + "/" + modelPath;
 
     // ƒ[ƒh
-    auto meshModel = std::make_shared<MeshModel>();
+    auto meshModel = std::make_shared<StaticMesh>();
     if (!meshModel->Load(filePath, texPath)) {
         Debug::Log("¸”s : ƒ‚ƒfƒ‹“o˜^ " + modelName);
         return false;
@@ -53,7 +53,7 @@ bool MeshManager::AddStaticMesh(const std::string& modelName,
     return true;
 }
 
-std::shared_ptr<MeshModel> MeshManager::GetStaticMesh(const std::string& modelName) {
+std::shared_ptr<StaticMesh> MeshManager::GetStaticMesh(const std::string& modelName) {
     auto it = m_MeshMap.find(modelName);
     if (it != m_MeshMap.end()) {
         Debug::Log("¬Œ÷ : MeshModelæ“¾ " + modelName);

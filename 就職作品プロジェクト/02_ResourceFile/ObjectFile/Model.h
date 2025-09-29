@@ -11,7 +11,7 @@
 #include <wrl/client.h>
 
 struct MeshInfo {
-    std::shared_ptr<MeshModel> mesh;
+    std::shared_ptr<StaticMesh> mesh;
     std::string filePath;
     std::string texDirectory;
 };

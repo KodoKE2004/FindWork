@@ -10,10 +10,10 @@
 #include    "Mesh.h"
 #include    "Material.h"
 
-class MeshModel : public Mesh
+class StaticMesh : public Mesh
 {
 public:
-    MeshModel() = default;
+    StaticMesh() = default;
     bool Load(const std::string& modelFile, const std::string& texDirectory);
     const std::vector<SUBSET>&            GetSubsets()   const { return m_Subsets; }
     const std::vector<MATERIAL>&          GetMaterials() const { return m_Materials; }

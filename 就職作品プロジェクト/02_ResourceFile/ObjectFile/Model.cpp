@@ -9,7 +9,7 @@ Model::Model(Camera* cam) : Object(cam) {}
 
 void Model::Initialize()
 {
-    m_MeshModel.mesh = std::make_shared<MeshModel>();
+    m_MeshModel.mesh = std::make_shared<StaticMesh>();
     GetMeshModel("NULL");
 
     SetShader("VS_Default","PS_Default"),

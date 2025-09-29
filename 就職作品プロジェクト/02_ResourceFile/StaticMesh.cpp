@@ -8,7 +8,7 @@
 
 #include "Debug.hpp"
 
-bool MeshModel::Load(const std::string& modelFile, const std::string& texDirectory)
+bool StaticMesh::Load(const std::string& modelFile, const std::string& texDirectory)
 {
     Assimp::Importer importer;
     const aiScene* scene = importer.ReadFile(

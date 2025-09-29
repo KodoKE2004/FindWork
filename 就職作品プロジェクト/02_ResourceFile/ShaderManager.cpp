@@ -67,17 +67,20 @@ bool ShaderManager::HasShader(const std::string& shaderName) const
 
 bool ShaderManager::InferStageFromName(const std::string& name, ShaderStage& stage) const
 {
-	if (name.rfind("VS_", 0) == 0) { stage = ShaderStage::VS; return true; }
-	if (name.rfind("PS_", 0) == 0) { stage = ShaderStage::PS; return true; }
-	if (name.rfind("GS_", 0) == 0) { stage = ShaderStage::GS; return true; }
-	if (name.rfind("CS_", 0) == 0) { stage = ShaderStage::CS; return true; }
+	if (name.rfind("VS_", 0 && stage == ShaderStage::VS) == 0) { return true; }
+	if (name.rfind("PS_", 0 && stage == ShaderStage::PS) == 0) { return true; }
+	if (name.rfind("GS_", 0 && stage == ShaderStage::GS) == 0) { return true; }
+	if (name.rfind("CS_", 0 && stage == ShaderStage::CS) == 0) { return true; }
 	return false;
 }
 
 BaseShader* ShaderManager::GetShader(const std::string& name) const
 {
-	if (auto it = m_ShaderList.find(name); it != m_ShaderList.end()) return it->second;
-	return nullptr;
+	if (auto it = m_ShaderList.find(name); it != m_ShaderList.end())
+    {
+        return it->second;
+	}
+    return nullptr;
 }
 
 BaseShader* ShaderManager::GetOrCreateShader(const std::string& name)

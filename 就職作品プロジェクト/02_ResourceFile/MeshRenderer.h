@@ -17,7 +17,7 @@ public:
 		m_IndexNum = static_cast<int>(mesh.GetIndices().size());
 	}
 
-	virtual void Init(MeshModel& model)
+	virtual void Init(StaticMesh& model)
 	{
 		m_VertexBuffer.Create(model.GetVertices());
 		m_IndexBuffer.Create(model.GetIndices());

@@ -39,7 +39,7 @@ public:
     /// @brief 登録済みの MeshModel を取得
     /// @param modelName 登録名
     /// @return 成功時は shared_ptr、失敗時はデフォルト登録（NULL）の MeshModel
-    std::shared_ptr<MeshModel> GetStaticMesh(const std::string& modelName);
+    std::shared_ptr<StaticMesh> GetStaticMesh(const std::string& modelName);
 
     /// @brief ファイルパスを取得
     std::string GetFilePath(const std::string& modelName);
