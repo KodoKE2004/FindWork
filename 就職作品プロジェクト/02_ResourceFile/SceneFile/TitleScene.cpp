@@ -19,7 +19,9 @@ void TitleScene::Initialize()
 	m_SkyDome->SetRadius(500.0f);
 	m_MySceneObjects.emplace_back(m_SkyDome);
 
-
+	m_AudioList = 
+		{"bgm"  ,{L"TitleBGM.wav",true, 0.2f }};
+		
 }
 
 void TitleScene::Update(float tick)

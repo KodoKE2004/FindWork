@@ -6,6 +6,7 @@ Audio::Audio(IXAudio2* xa, IXAudio2MasteringVoice* master,
 	: m_xa(xa), m_master(master), m_clip(std::move(clip)), m_id(id)
 {
 	m_cb.finished = &m_finished;
+    // ソースボイスの作成 XAUDIO2_DEFAULT_FREQ_RATIO = 1.0f +-1.0fの範囲でピッチ変更可能
 	HRESULT hr = m_xa->CreateSourceVoice(&m_voice, m_clip->wfex, 0, XAUDIO2_DEFAULT_FREQ_RATIO, &m_cb);
 	if (FAILED(hr)) throw std::runtime_error("CreateSourceVoice failed");
 }
@@ -39,11 +40,11 @@ void Audio::submitBuffer(const LoopConfig& loop) {
 void Audio::Play(const PlayParams& params) {
 	m_autoRelease = params.autoRelease;
 	m_voice->Stop(0);
-	m_voice->FlushSourceBuffers();
-	submitBuffer(params.loop);
-	SetVolume(params.volume);
-	SetPitch(params.pitch);
-	SetPan(params.pan);
+    m_voice->FlushSourceBuffers();	// 念のため
+    submitBuffer(params.loop);		// ループ設定もここで
+    SetVolume(params.volume);		// 0.0f 以上
+    SetPitch(params.pitch);			// 未実装
+    SetPan(params.pan);				// -1.0f .. +1.0f
 	m_finished.store(false, std::memory_order_release);
 	m_voice->Start(0);
 }

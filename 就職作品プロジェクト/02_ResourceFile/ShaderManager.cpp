@@ -10,7 +10,7 @@ ShaderManager::ShaderManager(std::string entryPoint) : m_FilePath(std::move(entr
         }
     }
 }
-void ShaderManager::AddShader(const std::string& name, ShaderStage stage)
+void ShaderManager::Add(const std::string& name, ShaderStage stage)
 {
     if (HasShader(name)) {
         Debug::Log("ShaderManager: “o˜^Ï‚İ '" + name + "' already exists.");

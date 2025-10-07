@@ -5,6 +5,7 @@
 class TitleScene : public Scene
 {
 private:
+	std::unordered_map<std::string,PlayParams> m_AudioList;
 
 public:
 	//================================

@@ -36,18 +36,18 @@ void Game::Initialize()
 	instance.m_AudioManager->Init();
 
 	// ƒVƒF[ƒ_[“o˜^
-	instance.m_ShaderManager->AddShader("VS_Default",ShaderStage::VS);
-	instance.m_ShaderManager->AddShader("PS_Default",ShaderStage::PS);
+	instance.m_ShaderManager->Add("VS_Default",ShaderStage::VS);
+	instance.m_ShaderManager->Add("PS_Default",ShaderStage::PS);
 
-	instance.m_ShaderManager->AddShader("VS_Unlit"  ,ShaderStage::VS);
-	instance.m_ShaderManager->AddShader("PS_Unlit"  ,ShaderStage::PS);
+	instance.m_ShaderManager->Add("VS_Unlit"  ,ShaderStage::VS);
+	instance.m_ShaderManager->Add("PS_Unlit"  ,ShaderStage::PS);
 
-	instance.m_ShaderManager->AddShader("VS_Alpha"  ,ShaderStage::VS);
-	instance.m_ShaderManager->AddShader("PS_Alpha"  ,ShaderStage::PS);
+	instance.m_ShaderManager->Add("VS_Alpha"  ,ShaderStage::VS);
+	instance.m_ShaderManager->Add("PS_Alpha"  ,ShaderStage::PS);
 
 #ifdef _DEBUG
 
-	instance.m_ShaderManager->AddShader("VS_DebugGrid" , ShaderStage::VS);
+	instance.m_ShaderManager->Add("VS_DebugGrid" , ShaderStage::VS);
 	instance.m_Grid.Initialize();
 
 #endif // _DEBUG
@@ -55,7 +55,7 @@ void Game::Initialize()
 	//@ƒ‚ƒfƒ‹“o˜^
 	instance.m_MeshManager->AddStaticMesh("RedMan" , "Akai.fbx"   , "Akai"   );
 	instance.m_MeshManager->AddStaticMesh("Pokemon", "Porygon.fbx", "Porygon");
-	instance.m_MeshManager->AddStaticMesh("null"    , "plane.fbx"  , "plane"  );
+	instance.m_MeshManager->AddStaticMesh("null"   , "plane.fbx"  , "plane"  );
 
     instance.m_MeshManager->AddStaticMesh("space"  , "space.fbx"  , "Space"  );
 

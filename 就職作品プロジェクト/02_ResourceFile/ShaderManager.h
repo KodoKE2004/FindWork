@@ -128,7 +128,7 @@ public:
 		m_ShaderList.clear();
 	}
 
-	void AddShader(const std::string& name, ShaderStage stage);	// シェーダーを登録
+	void Add(const std::string& name, ShaderStage stage);	// シェーダーを登録
 	bool HasShader(const std::string& shaderName) const;				// 登録済みの名前検索
 	bool InferStageFromName(const std::string& name, ShaderStage& stage) const;
 

@@ -14,11 +14,11 @@ void DebugGridLine::Initialize()
 {
     if (!GAME_MANAGER_SHADER->HasShader("VS_DebugGrid"))
     {
-        GAME_MANAGER_SHADER->AddShader("VS_DebugGrid", ShaderStage::VS);
+        GAME_MANAGER_SHADER->Add("VS_DebugGrid", ShaderStage::VS);
     }
     if (!GAME_MANAGER_SHADER->HasShader("PS_Unlit"))
     {
-        GAME_MANAGER_SHADER->AddShader("PS_Unlit", ShaderStage::PS);
+        GAME_MANAGER_SHADER->Add("PS_Unlit", ShaderStage::PS);
     }
 
     m_VertexShader = dynamic_cast<VertexShader*>(GAME_MANAGER_SHADER->GetShader("VS_DebugGrid"));
