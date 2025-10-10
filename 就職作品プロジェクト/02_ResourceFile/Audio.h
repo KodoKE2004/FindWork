@@ -7,6 +7,7 @@
 #include <atomic>
 #include <memory>
 #include <cstdint>
+#include "DirectXMath.h"
 
 // ------------------- WAV clip -------------------
 struct AudioClip {
@@ -44,6 +45,37 @@ struct AudioConfig
 	bool autoPlay = false;
 };
 
+// Audio補完用構造体
+
+// フレーム単位で渡す「傾き」
+struct SlopePerSec {
+    float volDbPerSec		= 0.0f;		// volume
+    float pitchSemiPerSec	= 0.0f;		// pitch
+    float panPerSec			= 0.0f;		// pan
+};
+
+// 再生ランタイム状態（フレーム間で持ち越す）
+struct VoiceState {
+	double Fs	 = 48000.0;
+	double phase = 0.0;           // 発振や再サンプリングの位相など
+	double sampleRemainder = 0.0; // Nが非整数の端数を持ち越し
+
+	// 補間は「耳に近い軸」で持つ
+	float volDb = 0.0f;  // いまの音量[dB]
+	float pitchSemi = 0.0f;  // いまのピッチ[半音]
+	float pan = 0.0f;  // いまのパン[-1..+1]
+};
+
+// 変換ヘルパ関数
+inline float DbToLin	(float db)    { return std::pow(10.0f, db  / 20.0f) ; }
+inline float SemiToRatio(float semi)  { return std::pow(2.0f, semi / 12.0f) ; }
+inline float LinToDb	(float lin)   { return 20.0f * std::log10(max(lin  , 1e-6f)); }
+inline float RatioToSemi(float ratio) { return 12.0f * std::log2 (max(ratio, 1e-6f)); }
+inline float SlopeToHitInFrames(float current, float target, int framesAt60)
+{
+    if(framesAt60 <= 0) return 0.0f;
+    return 60.0f * (target - current) / (float)framesAt60;
+}
 
 //=====================================
 //	    	  コールバック
@@ -67,6 +99,10 @@ struct VoiceCallback : public IXAudio2VoiceCallback {
 	void OnLoopEnd(void*) noexcept override {}
 };
 
+
+//=====================================
+//				Audioクラス
+//=====================================
 class Audio
 {
 private:
@@ -113,3 +149,57 @@ public:
     // 再生終了後に自動回収
 	void SetAutoRelease(bool b) { m_autoRelease = b; }
 };
+
+
+//=====================================
+//			AudioManagerクラス
+//=====================================
+void RenderFrameSlope(
+    VoiceState& st,
+    const SlopePerSec& slope,   // このフレームでの傾き（毎秒）
+    double dtFrame,             // 1/60 など
+    std::vector<float>& outL,
+    std::vector<float>& outR,
+    double baseFreqHz)          // 基準周波数（ピッチ比で変化）
+{
+    // このフレームで必要なサンプル数
+    double exact = dtFrame * st.Fs + st.sampleRemainder;
+    int    N = (int)std::floor(exact);
+    st.sampleRemainder = exact - N;
+    if (N <= 0) return;
+
+    size_t base = outL.size();
+    outL.resize(base + N);
+    outR.resize(base + N);
+
+    // サンプルあたりの増分（傾き/秒 ÷ Fs）
+    const float dVolDb      = slope.volDbPerSec     / (float)st.Fs ;
+    const float dPitchSemi  = slope.pitchSemiPerSec / (float)st.Fs ;
+    const float dPan        = slope.panPerSec       / (float)st.Fs ;
+
+    for (int n = 0; n < N; ++n) {
+        // 積分（Integrate）
+        st.volDb += dVolDb;
+        st.pitchSemi += dPitchSemi;
+        st.pan = std::clamp(st.pan + dPan, -1.0f, 1.0f);
+
+        const float amp = DbToLin(st.volDb);
+        const float ratio = SemiToRatio(st.pitchSemi);
+        const double f = baseFreqHz * ratio;
+
+        // 位相更新
+        const double dphi = 2.0 * DirectX::XM_PI * f / st.Fs;
+        st.phase += dphi;
+        if (st.phase >= 2.0 * DirectX::XM_PI) st.phase -= 2.0 * DirectX::XM_PI;
+
+        const float s = (float)std::sin(st.phase) * amp;
+
+        // パン（定電力）: pan -1..+1 → 0..1
+        const float p = (st.pan * 0.5f + 0.5f);
+        const float gL = std::cos(p * float(DirectX::XM_PI) * 0.5f);
+        const float gR = std::sin(p * float(DirectX::XM_PI) * 0.5f);
+
+        outL[base + n] = s * gL;
+        outR[base + n] = s * gR;
+    }
+}

@@ -19,7 +19,6 @@ void TitleScene::Initialize()
 	m_SkyDome->SetRadius(500.0f);
 	m_MySceneObjects.emplace_back(m_SkyDome);
 
-
     // オーディオの登録
 	m_AudioList.clear();
 	PlayParams bgmParam;
