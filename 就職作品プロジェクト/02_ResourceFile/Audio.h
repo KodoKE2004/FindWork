@@ -7,6 +7,7 @@
 #include <atomic>
 #include <memory>
 #include <cstdint>
+#include <algorithm>
 #include "DirectXMath.h"
 
 // ------------------- WAV clip -------------------
@@ -67,10 +68,10 @@ struct VoiceState {
 };
 
 // 変換ヘルパ関数
-inline float DbToLin	(float db)    { return std::pow(10.0f, db  / 20.0f) ; }
-inline float SemiToRatio(float semi)  { return std::pow(2.0f, semi / 12.0f) ; }
-inline float LinToDb	(float lin)   { return 20.0f * std::log10(max(lin  , 1e-6f)); }
-inline float RatioToSemi(float ratio) { return 12.0f * std::log2 (max(ratio, 1e-6f)); }
+inline float DbToLin	(float db)    { return powf(10.0f, db  / 20.0f) ; }
+inline float SemiToRatio(float semi)  { return powf(2.0f, semi / 12.0f) ; }
+inline float LinToDb	(float lin)   { return 20.0f * log10f(max(lin  , 1e-6f)); }
+inline float RatioToSemi(float ratio) { return 12.0f * log2f (max(ratio, 1e-6f)); }
 inline float SlopeToHitInFrames(float current, float target, int framesAt60)
 {
     if(framesAt60 <= 0) return 0.0f;
@@ -164,7 +165,7 @@ void RenderFrameSlope(
 {
     // このフレームで必要なサンプル数
     double exact = dtFrame * st.Fs + st.sampleRemainder;
-    int    N = (int)std::floor(exact);
+    int    N = (int)floor(exact);
     st.sampleRemainder = exact - N;
     if (N <= 0) return;
 
@@ -192,12 +193,12 @@ void RenderFrameSlope(
         st.phase += dphi;
         if (st.phase >= 2.0 * DirectX::XM_PI) st.phase -= 2.0 * DirectX::XM_PI;
 
-        const float s = (float)std::sin(st.phase) * amp;
+        const float s = sinf((float)st.phase) * amp;
 
         // パン（定電力）: pan -1..+1 → 0..1
         const float p = (st.pan * 0.5f + 0.5f);
-        const float gL = std::cos(p * float(DirectX::XM_PI) * 0.5f);
-        const float gR = std::sin(p * float(DirectX::XM_PI) * 0.5f);
+        const float gL = cosf(p * float(DirectX::XM_PI) * 0.5f);
+        const float gR = sinf(p * float(DirectX::XM_PI) * 0.5f);
 
         outL[base + n] = s * gL;
         outR[base + n] = s * gR;
