@@ -1,11 +1,11 @@
 #pragma once
+
 #include "Scene.h"
 #include "../ObjectFile/Object.h"
 
 class TitleScene : public Scene
 {
 private:
-	std::unordered_map<std::string,PlayParams> m_AudioList;
 
 public:
 	//================================

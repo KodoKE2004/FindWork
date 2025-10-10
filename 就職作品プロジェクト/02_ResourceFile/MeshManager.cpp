@@ -6,7 +6,7 @@
 MeshManager::MeshManager() {
     Debug::Log("MeshManager: コンストラクタ - NULLモデル登録開始");
     // "NULL" モデルを最初に登録しておく
-    AddStaticMesh(m_DefaultName, "spot.fbx", "spot");
+    Add(m_DefaultName, "spot.fbx", "spot");
 }
 
 MeshManager::MeshManager(std::string filePath)
@@ -14,7 +14,7 @@ MeshManager::MeshManager(std::string filePath)
 	m_FilePath = std::move(filePath);
     Debug::Log("MeshManager: コンストラクタ - NULLモデル登録開始");
     // "NULL" モデルを最初に登録しておく
-    AddStaticMesh(m_DefaultName, "spot.fbx", "spot");
+    Add(m_DefaultName, "spot.fbx", "spot");
 
 }
 
@@ -22,7 +22,7 @@ void MeshManager::Clear() {
     m_MeshMap.clear();
 }
 
-bool MeshManager::AddStaticMesh(const std::string& modelName,
+bool MeshManager::Add(const std::string& modelName,
     const std::string& modelPath,
     const std::string& texDirectory) {
     // 重複チェック

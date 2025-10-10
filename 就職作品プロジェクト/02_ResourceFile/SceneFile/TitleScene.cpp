@@ -19,16 +19,60 @@ void TitleScene::Initialize()
 	m_SkyDome->SetRadius(500.0f);
 	m_MySceneObjects.emplace_back(m_SkyDome);
 
-	m_AudioList = 
-		{"bgm"  ,{L"TitleBGM.wav",true, 0.2f }};
-		
+
+    // オーディオの登録
+	m_AudioList.clear();
+	PlayParams bgmParam;
+    bgmParam.volume = 0.2f;
+    m_AudioList.emplace("bgm",AudioConfig(L"BGM/FaintRain.wav", bgmParam, true, true));
+
+    PlayParams enterParam{};
+    m_AudioList.emplace("enter", AudioConfig(L"SE/Enter.wav", enterParam, false, false));
+
+	if (auto audioManager = Game::GetInstance().GetAudioManager())
+	{
+		for (const auto& [key, config] : m_AudioList)
+		{
+			if (!audioManager->Add(key, config.filePath)) {
+				continue;
+			}
+
+			if (config.autoPlay)
+			{
+				auto params = config.params;
+				// ループが有効なら設定して最初から再生する
+				if (config.loop)
+				{
+					params.loop.loopCount = XAUDIO2_LOOP_INFINITE;
+				}
+				audioManager->Play(key, params);
+			}
+		}
+	}
 }
 
 void TitleScene::Update(float tick)
 {
 	if (Input::GetKeyTrigger(VK_RETURN))
 	{
-		Game::GetInstance().GetAudioManager()->Play("enter");
+		if (auto audioManager = Game::GetInstance().GetAudioManager())
+		{
+			if (auto it = m_AudioList.find("enter"); it != m_AudioList.end())
+			{
+				auto params = it->second.params;
+				if (it->second.loop)
+				{
+					params.loop.loopCount = XAUDIO2_LOOP_INFINITE;
+				}
+				audioManager->Play("enter", params);
+			}
+			else
+			{
+				audioManager->Play("enter");
+			}
+
+			audioManager->StopAllByName("bgm", false);
+		}
 
 		ChangeScene<GameScene>(FADE, 1.0f);
 	}
@@ -51,5 +95,13 @@ void TitleScene::Finalize()
 		Game::GetInstance().DeleteObject(o);
 	}
 	m_MySceneObjects.clear();
+    // オーディオの停止
+    if (auto audioManager = Game::GetInstance().GetAudioManager())
+	{
+		for (const auto& [key, config] : m_AudioList)
+		{
+			audioManager->StopAllByName(key);
+		}
+    }
 }
 

@@ -1,11 +1,16 @@
 #pragma once
 #include "../ObjectFile/Object.h"
+#include "../Audio.h"
+
+#include <unordered_map>
 #include <vector>
 class Scene
 {
 private:
 protected:
 	std::vector<Object*> m_MySceneObjects; // このシーンのオブジェクト
+	std::unordered_map<std::string, AudioConfig> m_AudioList;
+
 public:
 	// コンストラクタとデストラクタ
 	Scene()  = default;

@@ -1,6 +1,8 @@
 #pragma once
 #include <xaudio2.h>
 #pragma comment(lib, "xaudio2.lib")
+
+#include <string>
 #include <vector>
 #include <atomic>
 #include <memory>
@@ -33,6 +35,15 @@ struct PlayParams {
 	LoopConfig loop{};
 	bool autoRelease = true; // 再生終了後に自動回収
 };
+
+struct AudioConfig
+{
+	std::wstring filePath;
+	PlayParams params;
+	bool loop = false;
+	bool autoPlay = false;
+};
+
 
 //=====================================
 //	    	  コールバック

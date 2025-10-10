@@ -345,6 +345,9 @@
     <ClInclude Include="02_ResourceFile\CSVLoader.hpp">
       <Filter>SourceFile\Core</Filter>
     </ClInclude>
+    <ClInclude Include="02_ResourceFile\ManagerSystem.hpp">
+      <Filter>SourceFile\Core\Manager</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <FxCompile Include="ShaderFile\Common.hlsl">

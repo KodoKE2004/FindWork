@@ -78,6 +78,7 @@
     <ClInclude Include="02_ResourceFile\IndexBuffer.h" />
     <ClInclude Include="02_ResourceFile\input.h" />
     <ClInclude Include="02_ResourceFile\main.h" />
+    <ClInclude Include="02_ResourceFile\ManagerSystem.hpp" />
     <ClInclude Include="02_ResourceFile\Material.h" />
     <ClInclude Include="02_ResourceFile\Mesh.h" />
     <ClInclude Include="02_ResourceFile\MeshRenderer.h" />
@@ -279,8 +280,8 @@
       <SubSystem>Console</SubSystem>
       <GenerateDebugInformation>true</GenerateDebugInformation>
       <AdditionalDependencies>DirectXTK.lib;%(AdditionalDependencies)</AdditionalDependencies>
-      <AdditionalLibraryDirectories>$(ProjectDir)03_ExternalFile/assimp/5.2.5/lib;$(ProjectDir)03_ExternalFile\DirectXTK\lib\Debug;$(ProjectDir)03_ExternalFile\DirectXTex\lib;%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
-      <AdditionalDependencies>$(ProjectDir)03_ExternalFile\DirectXTex\lib\DirectXTex.lib;$(ProjectDir)03_ExternalFile\DirectXTK\lib\Debug\DirectXTK.lib;%(AdditionalDependencies)</AdditionalDependencies>
+      <AdditionalLibraryDirectories>$(ProjectDir)03_ExternalFile/assimp/5.2.5/lib;$(ProjectDir)03_ExternalFile\DirectXTK\lib;$(ProjectDir)03_ExternalFile\DirectXTex\lib;%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
+      <AdditionalDependencies>$(ProjectDir)03_ExternalFile\DirectXTex\lib\DirectXTex.lib;$(ProjectDir)03_ExternalFile\DirectXTK\lib\DirectXTK.lib;%(AdditionalDependencies)</AdditionalDependencies>
     </Link>
     <FxCompile>
       <ShaderModel>5.0</ShaderModel>

@@ -32,7 +32,7 @@ public:
     /// @param modelPath  fbx ファイル名（ベースディレクトリは内部で構築）
     /// @param texDirectory テクスチャフォルダ名（ベースディレクトリは内部で構築）
     /// @return 追加成功なら true（未登録かつロード成功）、重複／失敗なら false
-    bool AddStaticMesh(const std::string& modelName,
+    bool Add(const std::string& modelName,
         const std::string& modelPath,
         const std::string& texDirectory);
 
