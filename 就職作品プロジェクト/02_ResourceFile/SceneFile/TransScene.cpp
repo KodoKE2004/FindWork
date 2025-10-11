@@ -128,6 +128,7 @@ void TransScene::DrawNextScene()
 	m_Overlay->SetSRV(m_NextSceneSRV.Get());
 	m_Overlay->SetAlpha(0.0f);
 	m_MySceneObjects.emplace_back(m_Overlay); // ŠÇ——piFinalize‚Å‘|œj
+
 }
 
 bool TransScene::isOverClock()

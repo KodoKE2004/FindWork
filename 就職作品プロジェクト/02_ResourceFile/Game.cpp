@@ -132,6 +132,7 @@ void Game::Draw()
 void Game::Finalize()
 {
 	auto& instance = GetInstance();
+
 #ifdef _DEBUG
 	instance.m_Grid.Finalize();
 #endif //_DEBUG

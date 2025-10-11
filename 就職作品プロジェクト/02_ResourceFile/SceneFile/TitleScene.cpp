@@ -9,11 +9,13 @@
 
 void TitleScene::Initialize()
 {
+	auto& instance = GAME_INSTANCE;
     DebugUI::TEXT_CurrentScene = "TitleScene";
+
 #ifdef _DEBUG
-	GAME_INSTANCE.m_Grid.SetEnabled(true);
+	instance.m_Grid.SetEnabled(true);
 #endif
-	auto* m_SkyDome = GAME_INSTANCE.AddObject<Sphere>();
+	auto* m_SkyDome = instance.AddObject<Sphere>();
 	m_SkyDome->SetSkyDomeMode(true);
 	m_SkyDome->SetTexture(GAME_MANAGER_TEXTURE->GetTexture("Plane.png"));
 	m_SkyDome->SetRadius(500.0f);

@@ -12,7 +12,7 @@
 #include "TextureManager.h"
 #include "ShaderManager.h"
 #include "AudioManager.h"
-class SceneTrans;
+
 
 class Game
 {
@@ -64,22 +64,27 @@ public:
 	// 現在のシーンを取得
 	Scene* GetCurrentScene() const; 
 
+	// インスタンスのカメラ
 	Camera* GetCamera() {
 		return m_Camera.get();
 	}
 	
+	// メッシュマネージャー
 	std::shared_ptr<MeshManager> GetMeshManager() {
 		return m_MeshManager;
 	}
 
+	// テクスチャマネージャー
 	std::shared_ptr<TextureManager> GetTextureManager() {
 		return m_TextureManager;
 	}
 
+	// シェーダーマネージャー
 	std::shared_ptr<ShaderManager> GetShaderManager() {
 		return m_ShaderManager;
 	}
 
+	// オーディオマネージャー
 	std::shared_ptr<AudioManager> GetAudioManager() {
 		return m_AudioManager;
 	}
@@ -119,6 +124,7 @@ public:
 
 };
 
+// GetInstance・Managerのマクロ化
 #define GAME_INSTANCE		 Game::GetInstance()
 #define GAME_MANAGER_MESH	 GAME_INSTANCE.GetMeshManager()
 #define GAME_MANAGER_TEXTURE GAME_INSTANCE.GetTextureManager()
@@ -131,10 +137,12 @@ public:
 // 　　　インスタンスの取得を簡易化
 //================================
 
-// シーンを生成するテンプレート関数
+// シーンを遷移するテンプレート関数
 template<typename T>
 void ChangeScene(TRANS_MODE mode,float duration)
 {
+	// テンプレートなので
+	// 既定がSceneでなければエラー
 	static_assert(std::is_base_of_v<Scene, T>, "T は 基底クラスが Scene ではありません");
 
 	auto scene = new TransScene;
