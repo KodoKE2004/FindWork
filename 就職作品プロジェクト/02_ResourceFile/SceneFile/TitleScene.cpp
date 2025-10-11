@@ -75,7 +75,7 @@ void TitleScene::Update(float tick)
 			audioManager->StopAllByName("bgm", false);
 		}
 
-		ChangeScene<GameScene>(FADE, 1.0f);
+		ChangeScene<GameScene>(TRANS_MODE::FADE, 1.0f);
 	}
 
 

@@ -206,9 +206,9 @@ void Renderer::Initialize()
 
 
 	bufferDesc.ByteWidth = sizeof(MATERIAL);
-	hr = m_Device->CreateBuffer(&bufferDesc, NULL, &m_MaterialBuffer);
-	m_DeviceContext->VSSetConstantBuffers(4, 1, &m_MaterialBuffer);
-	m_DeviceContext->PSSetConstantBuffers(4, 1, &m_MaterialBuffer);
+	hr = m_Device->CreateBuffer(&bufferDesc, NULL,  &m_MaterialBuffer);
+	m_DeviceContext->VSSetConstantBuffers(4, 1,		&m_MaterialBuffer);
+	m_DeviceContext->PSSetConstantBuffers(4, 1,		&m_MaterialBuffer);
 	if (FAILED(hr)) return;
 
 	bufferDesc.ByteWidth = sizeof(LightBuffer);

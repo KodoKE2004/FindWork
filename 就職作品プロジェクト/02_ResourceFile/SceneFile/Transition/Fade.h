@@ -8,9 +8,9 @@ class Fade : public Texture2D
 public:
 	Fade(Camera* cam);
 
-	void Initialize();
-	void Update();
-	void Draw() override;
-	void Finalize();
+	void Initialize()	override;
+	void Update()		override;
+	void Draw()			override;
+	void Finalize()		override;
 };
 

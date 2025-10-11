@@ -6,7 +6,7 @@
 #include "Transition/Fade.h"
 #include "Transition/SnapshotOverlay.h"
 
-enum STEP
+enum class STEP
 {
 	OFF,
 	START,
@@ -14,7 +14,7 @@ enum STEP
 	FINISH,
 };
 
-enum TRANS_MODE
+enum class TRANS_MODE
 {
 	FADE,
 	NUM
@@ -23,7 +23,7 @@ enum TRANS_MODE
 
 class TransScene : public Scene
 {
-protected:
+private:
 	// シーンの前後 
 	Scene* m_SceneOld;
 	Scene* m_SceneNext;
@@ -33,18 +33,19 @@ protected:
 	Microsoft::WRL::ComPtr<ID3D11ShaderResourceView> m_NextSceneSRV;
 	SnapshotOverlay* m_Overlay = nullptr;
 
+    // タイマー関連
 	float m_Timer	 = 0.0f;
 	float m_Duration = 0.0f;
 
+    // トランジション関連
 	float m_Alpha = 0.0f;
 	float m_AlphaValue = 0.0f;
 
 	bool m_isChange = false;
-
 	STEP m_Step;
 	TRANS_MODE m_TransMode;
 
-	Fade* m_Fade;
+	std::shared_ptr<Texture2D> m_TransitionTexture;
 
 public:
 	void Initialize()	override;

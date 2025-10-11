@@ -65,7 +65,7 @@ void Fade::Initialize()
 }
 void Fade::Update()
 {
-
+	
 }
 void Fade::Draw()
 {
@@ -76,5 +76,5 @@ void Fade::Draw()
 }
 void Fade::Finalize()
 {
-
+	Texture2D::Finalize();
 }

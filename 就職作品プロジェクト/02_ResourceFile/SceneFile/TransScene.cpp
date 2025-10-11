@@ -4,6 +4,11 @@
 
 void TransScene::Initialize()
 {
+    auto& instance = Game::GetInstance();
+	if (m_TransitionTexture == nullptr) {
+		m_TransitionTexture = std::make_shared<Texture2D>(instance.GetCamera());
+	}
+
 	m_Timer = 0.0f;
 	m_Alpha = 0.0f;
 	m_isChange = false;
@@ -14,9 +19,11 @@ void TransScene::Initialize()
 	case TRANS_MODE::FADE:
 	{
 		m_AlphaValue = 1.0f / m_Duration;
-		m_Fade = Game::GetInstance().AddObject<Fade>();
-        m_Fade->SetPos(0.0f, 0.0f, -2.0f);
-		m_MySceneObjects.emplace_back(m_Fade);
+        std::unique_ptr<Fade> fade = std::make_unique<Fade>(instance.GetCamera());
+        fade->SetPos(0.0f, 0.0f, -2.0f);
+		
+		m_TransitionTexture = std::move(fade);
+        instance.SetTransitionTexture(m_TransitionTexture);
 	}
 	break;
 	}
@@ -26,12 +33,12 @@ void TransScene::Update(float tick)
 {
 	switch (m_Step)
 	{
-	case START:
+	case STEP::START:
 	{
 		Initialize();
 	}
 	break;
-	case DOING:
+	case STEP::DOING:
 	{
 		m_Timer += tick;
 
@@ -39,7 +46,7 @@ void TransScene::Update(float tick)
 		if (!m_isChange) {
 			switch (m_TransMode) 
 			{
-			case FADE:	FADE_OUT();		break;
+			case TRANS_MODE::FADE:	FADE_OUT();		break;
 
 			}
 			if (m_isChange) {
@@ -53,7 +60,7 @@ void TransScene::Update(float tick)
 		{
 			switch (m_TransMode)
 			{
-			case FADE:	FADE_IN();		break;
+			case TRANS_MODE::FADE:	 FADE_IN();		break;
 
 			}
 		}
@@ -61,7 +68,7 @@ void TransScene::Update(float tick)
 
 	}
 	break;
-	case FINISH:
+	case STEP::FINISH:
 	{
 		Game::GetInstance().SetSceneCurrent(m_SceneNext);
 		Finalize();
@@ -75,7 +82,7 @@ void TransScene::Update(float tick)
 
 void TransScene::Finalize()
 {
-	m_Step = OFF;
+	m_Step = STEP::OFF;
 	for (auto obj : m_MySceneObjects)
 	{
 		Game::GetInstance().DeleteObject(obj);
@@ -83,7 +90,7 @@ void TransScene::Finalize()
 	m_MySceneObjects.clear();
 
 	m_Overlay = nullptr;
-	m_Fade    = nullptr;
+	m_TransitionTexture    = nullptr;
 
 	m_NextSceneSRV.Reset();
 	m_RenderTarget.reset();
@@ -103,15 +110,15 @@ void TransScene::DrawNextScene()
 {
 
 	// ★ 次シーンを一度だけオフスクリーンへ描画して SRV を確保
-	auto* device = Renderer::GetDevice();
+	auto* device  = Renderer::GetDevice();
 	auto* context = Renderer::GetDeviceContext();
-	auto  vp = Renderer::GetViewport();
+	auto  vp	  = Renderer::GetViewport();
 
 	m_RenderTarget = std::make_unique<RenderTarget>();
 	// sRGB 運用なら: m_RenderTarget->SetFormat(DXGI_FORMAT_R8G8B8A8_UNORM_SRGB);
-	m_RenderTarget->Create(device, (UINT)vp.Width, (UINT)vp.Height, /*withDepth=*/true);
+	m_RenderTarget->Create(device, (UINT)vp.Width, (UINT)vp.Height, true);
 
-	const float clear[4]{ 0,0,0,0 };
+	const float clear[4]{ 0, 0, 0, 0 };
 	m_RenderTarget->Begin(context, clear);
 	{
 		// Update は走らせず、次シーンのオブジェクトをそのまま 1 回描く
@@ -150,8 +157,9 @@ void TransScene::FADE_IN()
 	if (isOverClock())
 	{
 		m_Alpha = 0.0f;
-		m_Step = FINISH;
+		m_Step = STEP::FINISH;
 	}
+
 	auto fade = Game::GetInstance().GetObjects<Fade>();
 	fade[0]->SetColor(0.0f, 0.0f, 0.0f, m_Alpha);
 	

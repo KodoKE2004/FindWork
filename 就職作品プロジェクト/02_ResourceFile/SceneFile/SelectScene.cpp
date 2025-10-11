@@ -28,12 +28,12 @@ void SelectScene::Update(float tick)
 	if (Input::GetKeyTrigger(VK_RETURN))
 	{
 		Game::GetInstance().GetAudioManager()->Play("enter");
-		ChangeScene<GameScene>(FADE, 1.0f);
+		ChangeScene<GameScene>(TRANS_MODE::FADE, 1.0f);
 	}
 
 	if (isEnd)
 	{
-		ChangeScene<GameScene>(FADE, 0.5f);
+		ChangeScene<GameScene>(TRANS_MODE::FADE, 0.5f);
 		return;
     }
 	if (isStart)

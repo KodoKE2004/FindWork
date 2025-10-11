@@ -17,11 +17,13 @@
 class Game
 {
 private:
-	static std::unique_ptr<Game>		 m_pInstance;		// ゲームのインスタンス
-	Scene*								 m_SceneCurrent;	// 現在のシーン
-	std::unique_ptr<Input>				 m_Input;			// 入力管理
-	std::unique_ptr<Camera>				 m_Camera;			// カメラ
-	std::vector<std::unique_ptr<Object>> m_GameObjects;		// オブジェクト
+	static std::unique_ptr<Game>		 m_pInstance;		  // ゲームのインスタンス
+	Scene*								 m_SceneCurrent;	  // 現在のシーン
+	std::unique_ptr<Input>				 m_Input;			  // 入力管理
+	std::unique_ptr<Camera>				 m_Camera;			  // カメラ
+	std::vector<std::unique_ptr<Object>> m_GameObjects;		  // オブジェクト
+
+    std::shared_ptr<Texture2D>			 m_TransitionTexture; // トランジション用テクスチャ
 
 	//================================
 	//	   ゲームを支えるマネージャー達
@@ -88,6 +90,13 @@ public:
 	std::shared_ptr<AudioManager> GetAudioManager() {
 		return m_AudioManager;
 	}
+
+    // TranstionTextureをTransSceneと連携させる
+	void SetTransitionTexture(std::shared_ptr<Texture2D> tex) {
+		m_TransitionTexture = std::move(tex);
+    }
+
+
 	// Debug関連
 #ifdef _DEBUG
 	DebugGridLine m_Grid;
@@ -151,7 +160,7 @@ void ChangeScene(TRANS_MODE mode,float duration)
 	scene->SetOldScene(GAME_INSTANCE.GetCurrentScene());
 	scene->SetDuration(duration);
 	scene->SetNextScene(sceneNext);
-	scene->SetStep(START);
+	scene->SetStep(STEP::START);
 	scene->SetTransMode(mode);
 	scene->Initialize();
 

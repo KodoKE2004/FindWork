@@ -19,9 +19,10 @@ void Game::Initialize()
 {	
 	auto& instance = GetInstance();
 
-	instance.m_Input	   = std::make_unique<Input>();		// 入力の初期化
-	instance.m_Camera	   = std::make_unique<Camera>();	// カメラ作成
-	
+	instance.m_Input			 = std::make_unique<Input>();							// 入力の初期化
+	instance.m_Camera			 = std::make_unique<Camera>();							// カメラ作成
+    instance.m_TransitionTexture = nullptr;												// トランジション用テクスチャ初期化
+
 	//		シーンをタイトルシーンに設定
 	Renderer::Initialize();													// レンダラーの初期化
 	DebugUI::Init(Renderer::GetDevice(), Renderer::GetDeviceContext());		// デバッグUIの初期化
@@ -95,7 +96,8 @@ void Game::Update(float tick)
 void Game::Draw()
 {
 	auto& instance = GetInstance();
-	Renderer::Start();  // 描画の開始
+
+	Renderer::Start();
 
 #ifdef _DEBUG
 	if (!instance.m_Grid.IsInitialized())
@@ -106,27 +108,23 @@ void Game::Draw()
 	{
 		instance.m_Grid.Draw();
 	}
-#endif	// フェード以外を描く
+#endif	
 
 	for (auto& o : instance.m_GameObjects)
 	{
 		if (!o) continue;
-		if (dynamic_cast<Fade*>(o.get())) continue;  // フェードは後で
+
 		o->Draw();
 	}
 	
-	// フェードを最後に描く（必ず最前面になる）
-	for (auto& o : instance.m_GameObjects)
-	{
-		if (!o) continue;
-		if (auto* f = dynamic_cast<Fade*>(o.get()))
-		{
-			f->Draw();
-		}
+	// TransitionTextureを最後に描く（必ず最前面になる）
+    auto transTex = instance.m_TransitionTexture;
+	if (transTex != nullptr) {
+        transTex->Draw();
 	}
 
-	DebugUI::Render();   // デバッグUIの描画
-	Renderer::Finish();  // 描画の終了
+	DebugUI::Render();
+	Renderer::Finish();
 }
 
 void Game::Finalize()

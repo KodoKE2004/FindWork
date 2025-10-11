@@ -29,10 +29,12 @@ public:
 	Texture2D(Camera* cam); // コンストラクタ
 	~Texture2D(); // デストラクタ
 
-	void Initialize();
-	void Update();
-	void Draw();
-	void Finalize();
+	// 純粋仮想関数化
+    // このクラス内にも関数を記述している
+	virtual void Initialize() = 0;
+	virtual void Update()	  = 0;
+	virtual void Draw()		  = 0;
+	virtual void Finalize()	  = 0;
 
 	// テクスチャを指定
 	void SetTexture(const char* imgname);
