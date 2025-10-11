@@ -280,8 +280,8 @@
       <SubSystem>Console</SubSystem>
       <GenerateDebugInformation>true</GenerateDebugInformation>
       <AdditionalDependencies>DirectXTK.lib;%(AdditionalDependencies)</AdditionalDependencies>
-      <AdditionalLibraryDirectories>$(ProjectDir)03_ExternalFile/assimp/5.2.5/lib;$(ProjectDir)03_ExternalFile\DirectXTK\lib;$(ProjectDir)03_ExternalFile\DirectXTex\lib;%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
-      <AdditionalDependencies>$(ProjectDir)03_ExternalFile\DirectXTex\lib\DirectXTex.lib;$(ProjectDir)03_ExternalFile\DirectXTK\lib\DirectXTK.lib;%(AdditionalDependencies)</AdditionalDependencies>
+      <AdditionalLibraryDirectories>$(ProjectDir)03_ExternalFile/assimp/5.2.5/lib;$(ProjectDir)03_ExternalFile\DirectXTK\lib\Debug;$(ProjectDir)03_ExternalFile\DirectXTex\lib;%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
+      <AdditionalDependencies>$(ProjectDir)03_ExternalFile\DirectXTex\lib\DirectXTex.lib;$(ProjectDir)03_ExternalFile\DirectXTK\lib\Debug\DirectXTK.lib;%(AdditionalDependencies)</AdditionalDependencies>
     </Link>
     <FxCompile>
       <ShaderModel>5.0</ShaderModel>

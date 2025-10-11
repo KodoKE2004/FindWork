@@ -8,7 +8,13 @@
 #include <memory>
 #include <cstdint>
 #include <algorithm>
+#include <cmath>
 #include "DirectXMath.h"
+
+#ifdef _DEBUG
+#include "../03_ExternalFile/imgui/imgui.h"
+#include "DebugUI.h"
+#endif
 
 // ------------------- WAV clip -------------------
 struct AudioClip {
@@ -153,9 +159,9 @@ public:
 
 
 //=====================================
-//			AudioManagerクラス
+//			傾きを求める
 //=====================================
-void RenderFrameSlope(
+static void RenderFrameSlope(
     VoiceState& st,
     const SlopePerSec& slope,   // このフレームでの傾き（毎秒）
     double dtFrame,             // 1/60 など
@@ -204,3 +210,85 @@ void RenderFrameSlope(
         outR[base + n] = s * gR;
     }
 }
+
+#ifdef _DEBUG
+namespace
+{
+	class AudioHelperTickDebugger
+	{
+	public:
+		AudioHelperTickDebugger()
+		{
+			m_state.Fs = 48000.0;
+			m_state.volDb = LinToDb(0.2f);
+			m_state.pan = 0.0f;
+			m_state.pitchSemi = 0.0f;
+		}
+
+		void Tick(float dt)
+		{
+			if (dt <= 0.0f) { return; }
+
+			m_elapsed += dt;
+
+			const float targetVolDb		= sinf(m_elapsed * 0.5f) * -6.0f;
+			const float targetPitchSem	= sinf(m_elapsed * 0.25f) * 2.0f;
+			const float targetPan		= sinf(m_elapsed * 0.15f);
+
+			m_slope.volDbPerSec		= SlopeToHitInFrames(m_state.volDb, targetVolDb, 45);
+			m_slope.pitchSemiPerSec = SlopeToHitInFrames(m_state.pitchSemi, targetPitchSem, 45);
+			m_slope.panPerSec		= SlopeToHitInFrames(m_state.pan, targetPan, 45);
+
+			m_waveL.clear();
+			m_waveR.clear();
+			RenderFrameSlope(m_state, m_slope, dt, m_waveL, m_waveR, 440.0);
+		}
+
+		void DrawUI()
+		{
+			if (ImGui::Begin("Audio Helper Debug"))
+			{
+				ImGui::Text("Elapsed : %.3f s", m_elapsed);
+				ImGui::Text("Volume  : %.2f dB", m_state.volDb);
+				ImGui::Text("Pitch   : %.2f semi", m_state.pitchSemi);
+				ImGui::Text("Pan     : %.2f", m_state.pan);
+
+				if (!m_waveL.empty())
+				{
+					ImGui::Separator();
+					ImGui::Text("Left Channel");
+					ImGui::PlotLines("", m_waveL.data(), static_cast<int>(m_waveL.size()), 0, nullptr, -1.0f, 1.0f, ImVec2(0, 80));
+				}
+				if (!m_waveR.empty())
+				{
+					ImGui::Separator();
+					ImGui::Text("Right Channel");
+					ImGui::PlotLines(" ", m_waveR.data(), static_cast<int>(m_waveR.size()), 0, nullptr, -1.0f, 1.0f, ImVec2(0, 80));
+				}
+			}
+			ImGui::End();
+		}
+
+	private:
+		VoiceState m_state{};
+		SlopePerSec m_slope{};
+		float m_elapsed = 0.0f;
+		std::vector<float> m_waveL;
+		std::vector<float> m_waveR;
+	};
+
+	AudioHelperTickDebugger& GetAudioHelperTickDebugger()
+	{
+		static AudioHelperTickDebugger instance;
+		return instance;
+	}
+
+	void RegisterAudioHelperDebugUI()
+	{
+		static bool registered = false;
+		if (registered) { return; }
+		registered = true;
+		DebugUI::RedistDebugFunction([]() { GetAudioHelperTickDebugger().DrawUI(); });
+	}
+}
+#endif // _DEBUG
