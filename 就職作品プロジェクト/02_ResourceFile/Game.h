@@ -92,8 +92,8 @@ public:
 	}
 
     // TranstionTexture‚ðTransScene‚Æ˜AŒg‚³‚¹‚é
-	void SetTransitionTexture(std::shared_ptr<Texture2D> tex) {
-		m_TransitionTexture = std::move(tex);
+	static void SetTransitionTexture(std::shared_ptr<Texture2D> tex) {
+		GetInstance().m_TransitionTexture = std::move(tex);
     }
 
 

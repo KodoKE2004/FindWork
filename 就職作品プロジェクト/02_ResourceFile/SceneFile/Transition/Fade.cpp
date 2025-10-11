@@ -10,7 +10,8 @@ Fade::Fade(Camera* cam) : Texture2D(cam)
 void Fade::Initialize()
 {
 	// フェード用の画像追加
-	m_Texture = Game::GetInstance().GetTextureManager()->GetTexture("Black.png");
+    auto textureMgr = Game::GetInstance().GetTextureManager();
+	m_Texture = textureMgr->GetTexture("Black.png");
 	SetScale(SCREEN_WIDTH, SCREEN_HEIGHT, 1.0f);
 	SetColor(0.0f, 0.0f, 0.0f, 0.0f);
 
@@ -50,8 +51,6 @@ void Fade::Initialize()
 	m_IndexBuffer.Create(indices);
 
 	// シェーダオブジェクト生成
-	auto shaderMgr = Game::GetInstance().GetShaderManager();
-
 	SetShader("VS_Alpha", "PS_Alpha");
 
 	// マテリアル情報取得
@@ -69,10 +68,10 @@ void Fade::Update()
 }
 void Fade::Draw()
 {
-	Renderer::SetDepthEnable(false);
-	Renderer::SetBlendState(BS_ALPHABLEND);
+	Renderer ::SetDepthEnable(false);
+	Renderer ::SetBlendState(BS_ALPHABLEND);
 	Texture2D::Draw();
-	Renderer::SetDepthEnable(true);  // 描画後に元へ戻す
+	Renderer ::SetDepthEnable(true);  // 描画後に元へ戻す
 }
 void Fade::Finalize()
 {

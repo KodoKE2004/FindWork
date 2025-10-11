@@ -5,6 +5,8 @@
 #include "../Camera.h"
 #include "../Texture.h"
 
+#include <memory>
+
 class Object : public Transform
 {
 protected:
@@ -17,7 +19,7 @@ protected:
 	BaseShader* m_GeometoryShader = nullptr;
 
 	Camera*  m_Camera;
-	Texture* m_Texture;
+	std::shared_ptr<Texture> m_Texture = nullptr;
 public:
 
 	Object(Camera* cam);
@@ -39,5 +41,5 @@ public:
 	void SetColor(const Color color);
 	void SetColor(const float r, const float g, const float b, const float a);
 	
-	void SetTexture(Texture* setTexture);
+	void SetTexture(std::shared_ptr<Texture> setTexture);
 };

@@ -7,7 +7,7 @@
 class TextureManager
 {
 private:
-	std::unordered_map<std::string, std::unique_ptr<Texture>> m_TextureList;	
+	std::unordered_map<std::string, std::shared_ptr<Texture>> m_TextureList;	
 	short m_RegistNumber = 0;
 
 	std::string m_FilePath;
@@ -20,7 +20,7 @@ public:
     /// @brief 指定パスのテクスチャを取得（未ロードならロードしてキャッシュ）
     /// @param relativePath ベースパスからの相対パス
     /// @return 読み込み成功なら Texture*、失敗なら nullptr
-    Texture* GetTexture(const std::string& relativePath);
+    std::shared_ptr<Texture> GetTexture(const std::string& relativePath);
 
     /// @brief 明示的にテクスチャをロードしてキャッシュに追加
     /// @param relativePath ベースパスからの相対パス

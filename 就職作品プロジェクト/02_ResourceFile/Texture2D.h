@@ -16,8 +16,8 @@ protected:
 	VertexBuffer<VERTEX_3D> m_VertexBuffer; // 頂点バッファ
 
 	// 描画の為の情報（見た目に関わる部分）
-	Texture* m_Texture; // テクスチャ
-	std::unique_ptr<Material> m_Materiale; //マテリアル
+	std::shared_ptr<Texture>  m_Texture;	// テクスチャ
+	std::unique_ptr<Material> m_Materiale;	//マテリアル
 
 	// UV座標の情報
 	float m_NumU = 1;
@@ -31,14 +31,14 @@ public:
 
 	// 純粋仮想関数化
     // このクラス内にも関数を記述している
-	virtual void Initialize() = 0;
-	virtual void Update()	  = 0;
-	virtual void Draw()		  = 0;
-	virtual void Finalize()	  = 0;
+	virtual void Initialize() ;
+	virtual void Update()	  ;
+	virtual void Draw()		  ;
+	virtual void Finalize()	  ;
 
 	// テクスチャを指定
 	void SetTexture(const char* imgname);
-	void SetTexture(Texture* texture);
+	void SetTexture(std::shared_ptr<Texture> texture);
 	// UV座標を指定
 	void SetUV(const float& nu, const float& nv, const float& sx, const float& sy);
 

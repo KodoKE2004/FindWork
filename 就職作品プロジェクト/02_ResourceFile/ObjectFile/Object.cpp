@@ -13,10 +13,14 @@ Object::~Object()
 
 void Object::SetShader(std::string hlslName)
 {
-	if (hlslName.rfind("VS_", 0) == 0) { m_VertexShader    = GAME_MANAGER_SHADER->GetShader(hlslName);}
-	if (hlslName.rfind("PS_", 0) == 0) { m_PixelShader     = GAME_MANAGER_SHADER->GetShader(hlslName);}
-	if (hlslName.rfind("GS_", 0) == 0) { m_GeometoryShader = GAME_MANAGER_SHADER->GetShader(hlslName);}
-	if (hlslName.rfind("CS_", 0) == 0) { m_ComputeShader   = GAME_MANAGER_SHADER->GetShader(hlslName);}
+    auto shaderMgr = GAME_MANAGER_SHADER;
+
+    // シェーダーの名前からステージを推測して取得
+	if (hlslName.rfind("VS_", 0) == 0) { m_VertexShader    = shaderMgr->GetShader(hlslName);}
+	if (hlslName.rfind("PS_", 0) == 0) { m_PixelShader     = shaderMgr->GetShader(hlslName);}
+	if (hlslName.rfind("GS_", 0) == 0) { m_GeometoryShader = shaderMgr->GetShader(hlslName);}
+	if (hlslName.rfind("CS_", 0) == 0) { m_ComputeShader   = shaderMgr->GetShader(hlslName);}
+
 }
 
 void Object::SetShader(std::string hlslName1, std::string hlslName2)
@@ -59,7 +63,7 @@ void Object::SetColor(const float r, const float g, const float b, const float a
 	m_Color = color;
 }
 
-void Object::SetTexture(Texture* setTexture)
+void Object::SetTexture(std::shared_ptr<Texture> setTexture)
 {
 	m_Texture = setTexture;
 }

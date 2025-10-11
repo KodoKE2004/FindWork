@@ -186,7 +186,8 @@ void Cube::Initialize()
 	SetShader("VS_Default", "PS_Default");
 
 	//テクスチャロード
-	m_Texture = Game::GetInstance().GetTextureManager()->GetTexture("dice.png");
+    auto textureMgr = Game::GetInstance().GetTextureManager();
+	m_Texture = textureMgr->GetTexture("dice.png");
 
 	m_Camera->SetCamera(CAMERA_3D);
 }

@@ -137,7 +137,7 @@ void Texture2D::SetTexture(const char* imgname)
 	assert(sts != true);
 }
 
-void Texture2D::SetTexture(Texture* texture)
+void Texture2D::SetTexture(std::shared_ptr<Texture> texture)
 {
 	m_Texture = texture;
 }

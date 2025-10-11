@@ -10,14 +10,15 @@
 void SelectScene::Initialize()
 {
 	DebugUI::TEXT_CurrentScene = "SelectScene";
+    auto textureMgr = GAME_INSTANCE.GetTextureManager();
 
 #ifdef _DEBUG
 	GAME_INSTANCE.m_Grid.SetEnabled(true);
 #endif
-
+	
     auto* m_SkyDome = GAME_INSTANCE.AddObject<Sphere>();
 	m_SkyDome->SetSkyDomeMode(true);
-    m_SkyDome->SetTexture(GAME_MANAGER_TEXTURE->GetTexture("Plane.png"));
+    m_SkyDome->SetTexture(textureMgr->GetTexture("Plane.png"));
 	m_SkyDome->SetRadius(500.0f);
 	m_MySceneObjects.emplace_back(m_SkyDome);
 

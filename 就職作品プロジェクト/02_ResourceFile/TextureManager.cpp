@@ -9,7 +9,8 @@ TextureManager::TextureManager(const std::string& basePath)
 
 TextureManager::~TextureManager() = default;
 
-bool TextureManager::HasTexture(const std::string& relativePath) const {
+bool TextureManager::HasTexture(const std::string& relativePath) const 
+{
     return m_TextureList.find(relativePath) != m_TextureList.end();
 }
 
@@ -31,16 +32,17 @@ bool TextureManager::AddTexture(const std::string& relativePath) {
     return true;
 }
 
-Texture* TextureManager::GetTexture(const std::string& relativePath) {
+std::shared_ptr<Texture> TextureManager::GetTexture(const std::string& relativePath) {
+
     auto it = m_TextureList.find(relativePath);
     if (it != m_TextureList.end()) {
         Debug::Log("テクスチャを取得しました : " + relativePath);
-        return it->second.get();
+        return it->second;
     }
 
     // 未ロードなら AddTexture に委譲
     if (AddTexture(relativePath)) {
-        return m_TextureList[relativePath].get();
+        return m_TextureList[relativePath];
     }
     // ロード失敗
     return nullptr;
