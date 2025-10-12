@@ -22,6 +22,7 @@ Texture2D::~Texture2D()
 //=======================================
 void Texture2D::Initialize()
 {
+
 	// 頂点データ
 	std::vector<VERTEX_3D> vertices;
 
@@ -62,6 +63,7 @@ void Texture2D::Initialize()
 	mtrl.Shiness = 1;
 	mtrl.TextureEnable = true;
 	m_Materiale->Create(mtrl);
+
 }
 
 //=======================================
@@ -69,7 +71,7 @@ void Texture2D::Initialize()
 //=======================================
 void Texture2D::Update()
 {
-
+	
 }
 
 //=======================================

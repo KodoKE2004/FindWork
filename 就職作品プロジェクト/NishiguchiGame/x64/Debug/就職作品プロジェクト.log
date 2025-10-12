@@ -1,2 +1,22 @@
-﻿  Texture2D.cpp
-  就職作品プロジェクト.vcxproj -> C:\Users\kodokeの世界\Desktop\HAL\VisualSutdio\就職作品\個人製作\FindWork\就職作品プロジェクト\x64\Debug\NishiguchiGame.exe
+﻿  Application.cpp
+  Camera.cpp
+  DebugGridLine.cpp
+  Game.cpp
+  TransitionBase.cpp
+  Bullet.cpp
+  Cube.cpp
+  Model.cpp
+  Object.cpp
+  Sphere.cpp
+  Skydome.cpp
+  GameScene.cpp
+  SelectScene.cpp
+  TitleScene.cpp
+  Fade.cpp
+  TransScene.cpp
+  Texture2D.cpp
+C:\Users\kodokeの世界\Desktop\HAL\VisualSutdio\就職作品\個人製作\FindWork\就職作品プロジェクト\02_ResourceFile\SceneFile\TransScene.cpp(22,25): error C2440: '=': 'Object *' から 'Texture2D *' に変換できません。
+      C:\Users\kodokeの世界\Desktop\HAL\VisualSutdio\就職作品\個人製作\FindWork\就職作品プロジェクト\02_ResourceFile\SceneFile\TransScene.cpp(22,25):
+      base から derived へのキャストには、dynamic_cast または static_cast が必要です。
+  
+  コードを生成中...

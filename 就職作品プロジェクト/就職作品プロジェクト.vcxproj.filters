@@ -187,6 +187,9 @@
     <ClCompile Include="02_ResourceFile\Shader.cpp">
       <Filter>SourceFile\Core</Filter>
     </ClCompile>
+    <ClCompile Include="02_ResourceFile\SceneFile\Transition\TransitionBase.cpp">
+      <Filter>SourceFile\Scene\Transition</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="02_ResourceFile\SceneFile\Scene.h">
@@ -345,8 +348,8 @@
     <ClInclude Include="02_ResourceFile\CSVLoader.hpp">
       <Filter>SourceFile\Core</Filter>
     </ClInclude>
-    <ClInclude Include="02_ResourceFile\ManagerSystem.hpp">
-      <Filter>SourceFile\Core\Manager</Filter>
+    <ClInclude Include="02_ResourceFile\SceneFile\Transition\TransitionBase.h">
+      <Filter>SourceFile\Scene\Transition</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>

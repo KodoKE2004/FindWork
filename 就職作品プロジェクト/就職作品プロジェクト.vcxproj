@@ -29,6 +29,7 @@
     <ClCompile Include="02_ResourceFile\Game.cpp" />
     <ClCompile Include="02_ResourceFile\input.cpp" />
     <ClCompile Include="02_ResourceFile\main.cpp" />
+    <ClCompile Include="02_ResourceFile\SceneFile\Transition\TransitionBase.cpp" />
     <ClCompile Include="02_ResourceFile\StaticMesh.cpp" />
     <ClCompile Include="02_ResourceFile\MeshManager.cpp" />
     <ClCompile Include="02_ResourceFile\ObjectFile\Bullet.cpp" />
@@ -78,10 +79,10 @@
     <ClInclude Include="02_ResourceFile\IndexBuffer.h" />
     <ClInclude Include="02_ResourceFile\input.h" />
     <ClInclude Include="02_ResourceFile\main.h" />
-    <ClInclude Include="02_ResourceFile\ManagerSystem.hpp" />
     <ClInclude Include="02_ResourceFile\Material.h" />
     <ClInclude Include="02_ResourceFile\Mesh.h" />
     <ClInclude Include="02_ResourceFile\MeshRenderer.h" />
+    <ClInclude Include="02_ResourceFile\SceneFile\Transition\TransitionBase.h" />
     <ClInclude Include="02_ResourceFile\StaticMesh.h" />
     <ClInclude Include="02_ResourceFile\MeshManager.h" />
     <ClInclude Include="02_ResourceFile\ObjectFile\Bullet.h" />
@@ -296,7 +297,7 @@
       <PreprocessorDefinitions>NDEBUG;_CONSOLE;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <ConformanceMode>true</ConformanceMode>
       <RuntimeLibrary>MultiThreadedDLL</RuntimeLibrary>
-      <AdditionalIncludeDirectories>$(ProjectDir)03_ExternalFile\DirectXTex\include;$(ProjectDir)03_ExternalFile\DirectXTK\include;$(ProjectDir)03_ExternalFile\assimp\5.2.5\include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>$(ProjectDir)03_ExternalFile\DirectXTex\include;$(ProjectDir)03_ExternalFile\DirectXTK\include;$(ProjectDir)03_ExternalFile\assimp\5.2.5\include;$(ProjectDir);%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
       <LanguageStandard>stdcpp20</LanguageStandard>
     </ClCompile>
     <Link>

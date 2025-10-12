@@ -1,10 +1,15 @@
 #pragma once
-#include "../../Texture2D.h"
+#include "TransitionBase.h"
+#include "../../ObjectFile/Object.h"
 
 // フェード用の画像を使用してシーン遷移を行うクラス
 // このクラスは、フェードイン・フェードアウトの効果を持つテクスチャを管理します。
-class Fade : public Texture2D
+class Fade : public TransitionBase
 {
+private:
+
+
+
 public:
 	Fade(Camera* cam);
 
@@ -12,5 +17,6 @@ public:
 	void Update()		override;
 	void Draw()			override;
 	void Finalize()		override;
+
 };
 

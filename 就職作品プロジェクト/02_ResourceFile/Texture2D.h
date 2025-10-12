@@ -31,10 +31,10 @@ public:
 
 	// 純粋仮想関数化
     // このクラス内にも関数を記述している
-	virtual void Initialize() ;
-	virtual void Update()	  ;
-	virtual void Draw()		  ;
-	virtual void Finalize()	  ;
+	void Initialize() ;
+	void Update()	  ;
+	void Draw()		  ;
+	void Finalize()	  ;
 
 	// テクスチャを指定
 	void SetTexture(const char* imgname);
