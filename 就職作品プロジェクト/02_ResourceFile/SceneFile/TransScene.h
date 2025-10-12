@@ -41,6 +41,7 @@ private:
 	float m_Alpha = 0.0f;
 	float m_AlphaValue = 0.0f;
 
+
 	bool m_isChange = false;
 	STEP m_Step;
 	TRANS_MODE m_TransMode;

@@ -12,18 +12,22 @@ Bullet::Bullet(Camera* cam) : Texture2D(cam), m_Direction(Vector3::Zero), m_Spee
 void Bullet::Initialize() {
     auto instance = GAME_MANAGER_TEXTURE;
     Texture2D::Initialize();
-    // use existing texture as placeholder
-    std::shared_ptr<Texture> placeholder = std::make_unique<Texture>();
-    placeholder = std::move(instance->GetTexture("DestroyBullet.png"));
-    SetTexture(placeholder);
+    
+    auto placeHolder = instance->GetTexture("placeholder.png");
+    if(placeHolder){
+        SetTexture(placeHolder);
+    }
+
     m_Scale = NVector3(100.0f, 100.0f, 100.0f);
 }
+
 void Bullet::Shoot(const Vector3& pos, const Vector3& dir) {
     m_Position = NVector3(pos.x, pos.y, pos.z);
     m_Direction = dir;
     m_Direction.Normalize();
     m_IsAlive = true;
 }
+
 void Bullet::Update() {
     if (!m_IsAlive) return;
 

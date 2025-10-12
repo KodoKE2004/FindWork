@@ -21,14 +21,14 @@ bool TextureManager::AddTexture(const std::string& relativePath) {
     }
 
     std::string fullPath = m_FilePath + relativePath;
-    auto tex = std::make_unique<Texture>();
+    auto tex = std::make_shared<Texture>();
     if (!tex->LoadFromFile(fullPath)) {
         Debug::Log("ロードに失敗しました : " + relativePath);
         return false;
     }
 
     Debug::Log("ロード成功 リストに追加します: " + relativePath);
-    m_TextureList.emplace(relativePath, std::move(tex));
+    m_TextureList.emplace(relativePath, tex);
     return true;
 }
 

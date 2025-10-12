@@ -1,5 +1,6 @@
 #include "Texture2D.h"
 #include "Game.h"
+#include <memory>
 
 using namespace std;
 using namespace DirectX::SimpleMath;
@@ -7,7 +8,7 @@ using namespace DirectX::SimpleMath;
 // コンストラクタ
 Texture2D::Texture2D(Camera* cam) :Object(cam)
 {
-
+    m_Texture = std::make_shared<Texture>();
 }
 
 // デストラクタ
@@ -132,7 +133,11 @@ void Texture2D::Finalize()
 // テクスチャを指定
 void Texture2D::SetTexture(const char* imgname)
 {
-	// テクスチャロード
+	if (!m_Texture)
+	{
+        m_Texture = std::make_shared<Texture>();
+	}
+
 	bool sts = m_Texture->LoadFromFile(imgname);
 	assert(sts != true);
 }

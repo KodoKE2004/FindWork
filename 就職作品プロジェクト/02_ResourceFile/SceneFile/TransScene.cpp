@@ -29,6 +29,8 @@ void TransScene::Initialize()
 
 void TransScene::Update(float tick)
 {
+    auto& instance = GAME_INSTANCE;
+
 	switch (m_Step)
 	{
 	case STEP::START:
@@ -53,6 +55,7 @@ void TransScene::Update(float tick)
 				DrawNextScene();			 // 次シーンをオフスクリーンに描画
 			}
 		}
+
 		// INの処理
 		else
 		{
@@ -68,14 +71,13 @@ void TransScene::Update(float tick)
 	break;
 	case STEP::FINISH:
 	{
-		Game::GetInstance().SetSceneCurrent(m_SceneNext);
+		instance.SetSceneCurrent(m_SceneNext);
 		Finalize();
 	}
 	break;
 
 	}
-
-
+	
 }
 
 void TransScene::Finalize()
