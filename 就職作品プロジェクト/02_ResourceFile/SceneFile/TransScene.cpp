@@ -4,13 +4,7 @@
 
 void TransScene::Initialize()
 {
-    auto& instance = Game::GetInstance();
-
-    m_TransitionTexture = instance.GetTransitionTexture();
-	if (m_TransitionTexture == nullptr) {
-		m_TransitionTexture = new Fade(instance.GetCamera());
-        instance.SetTransitionTexture(m_TransitionTexture);
-	}
+    auto& instance = GAME_INSTANCE;
 
 	m_Timer = 0.0f;
 	m_Alpha = 0.0f;
@@ -22,11 +16,12 @@ void TransScene::Initialize()
 	case TRANS_MODE::FADE:
 	{
 		m_AlphaValue = 1.0f / m_Duration;
-        auto fade = new Fade(instance.GetCamera());
+        auto* fade = instance.GetTransitionTexture();
         fade->Initialize();
         fade->SetPos(0.0f, 0.0f, -2.0f);
 		m_TransitionTexture = fade;
         instance.SetTransitionTexture(m_TransitionTexture);
+        m_MySceneObjects.emplace_back(fade);
 	}
 	break;
 	}
@@ -164,8 +159,7 @@ void TransScene::FADE_IN()
 		m_Step = STEP::FINISH;
 	}
 
-	auto fade = Game::GetInstance().GetObjects<Fade>();
-	fade[0]->SetColor(0.0f, 0.0f, 0.0f, m_Alpha);
+	m_TransitionTexture->SetColor(0.0f, 0.0f, 0.0f, m_Alpha);
 	
 }
 
@@ -180,6 +174,5 @@ void TransScene::FADE_OUT()
 		m_isChange = true;
 	}
 
-	auto fade = Game::GetInstance().GetObjects<Fade>();
-	fade[0]->SetColor(0.0f, 0.0f, 0.0f, m_Alpha);
+	m_TransitionTexture->SetColor(0.0f, 0.0f, 0.0f, m_Alpha);
 }

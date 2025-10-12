@@ -97,6 +97,10 @@ public:
     }
 
 	Texture2D* GetTransitionTexture() {
+		if (m_TransitionTexture == nullptr) {
+            m_TransitionTexture = new Texture2D(m_Camera.get());
+		}
+
 		return m_TransitionTexture;
     }
 
