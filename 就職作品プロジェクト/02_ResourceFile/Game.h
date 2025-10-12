@@ -6,8 +6,11 @@
 #endif // _DEBUG
 #include "SceneFile/Scene.h"
 #include "SceneFile/TransScene.h"
+#include "SceneFile/Transition/TransitionBase.h"
 #include "ObjectFile/Object.h"
+
 #include "input.h"
+
 #include "MeshManager.h"
 #include "TextureManager.h"
 #include "ShaderManager.h"
@@ -23,7 +26,7 @@ private:
 	std::unique_ptr<Camera>				 m_Camera;			  // カメラ
 	std::vector<std::unique_ptr<Object>> m_GameObjects;		  // オブジェクト
 
-    Object*								m_TransitionTexture; // トランジション用テクスチャ
+    std::shared_ptr<TransitionBase>		 m_TransitionTexture; // トランジション用テクスチャ
 
 	//================================
 	//	   ゲームを支えるマネージャー達
@@ -92,13 +95,13 @@ public:
 	}
 
     // TranstionTextureをTransSceneと連携させる
-	void SetTransitionTexture(Object* tex) {
+	void SetTransitionTexture(std::shared_ptr<TransitionBase> tex) {
 		m_TransitionTexture = tex;
     }
 
-	Object* GetTransitionTexture() {
+	std::shared_ptr<TransitionBase> GetTransitionTexture() {
 		if (m_TransitionTexture == nullptr) {
-            m_TransitionTexture = new Texture2D(m_Camera.get());
+            m_TransitionTexture = std::make_shared<TransitionBase>(m_Camera.get());
 		}
 
 		return m_TransitionTexture;

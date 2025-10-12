@@ -16,7 +16,7 @@ void TransScene::Initialize()
 	case TRANS_MODE::FADE:
 	{
 		m_AlphaValue = 1.0f / m_Duration;
-        auto* fade = instance.GetTransitionTexture();
+        auto fade = std::make_shared<Fade>(instance.GetCamera());
         fade->Initialize();
         fade->SetPos(0.0f, 0.0f, -2.0f);
 		m_TransitionTexture = fade;

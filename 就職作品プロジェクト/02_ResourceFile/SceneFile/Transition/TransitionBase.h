@@ -1,4 +1,5 @@
 #pragma once
+#include <memory>
 #include "../../ObjectFile/Object.h"
 #include "../../Camera.h"
 #include "../../VertexBuffer.h"
@@ -10,7 +11,7 @@ class TransitionBase : public Object
 {
 protected:
     // 描画の為の情報（メッシュに関わる情報）
-    IndexBuffer m_IndexBuffer; // インデックスバッファ
+    IndexBuffer             m_IndexBuffer ; // インデックスバッファ
     VertexBuffer<VERTEX_3D> m_VertexBuffer; // 頂点バッファ
 
     // 描画の為の情報（見た目に関わる部分）
@@ -25,12 +26,13 @@ protected:
 
 public:
     
+    TransitionBase() = default;
     TransitionBase(Camera* cam);
     virtual ~TransitionBase() = default;
-    virtual void Initialize() = 0;
-    virtual void Update()     = 0;
-    virtual void Draw()       = 0;
-    virtual void Finalize()   = 0;
+    void Initialize() = 0;
+    void Update()     = 0;
+    void Draw()       = 0;
+    void Finalize()   = 0;
     
     // テクスチャを指定
     void SetTexture(const char* imgname);

@@ -4,6 +4,7 @@
 #include "../Application.h"
 #include "../RenderTarget.h"
 #include "Transition/Fade.h"
+#include "Transition/TransitionBase.h"
 #include "Transition/SnapshotOverlay.h"
 
 enum class STEP
@@ -46,7 +47,7 @@ private:
 	STEP m_Step;
 	TRANS_MODE m_TransMode;
 
-	Texture2D* m_TransitionTexture;
+	TransitionBase* m_TransitionTexture;
 
 public:
 	void Initialize()	override;
@@ -57,7 +58,6 @@ public:
 	/// 次のシーンの一フレーム目を描画する
 	/// </summary>
 	void DrawNextScene();
-
 
 	void SetDuration(float duration)    { m_Duration = duration;	}
 	void SetOldScene(Scene* sceneOld)   { m_SceneOld = sceneOld;	}

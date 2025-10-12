@@ -1,8 +1,9 @@
 #include "TransitionBase.h"
+#include <cassert>
 
 TransitionBase::TransitionBase(Camera* cam) : Object(cam)
 {
-
+    m_Texture = std::make_shared<Texture>();
 }
 
 // テクスチャを指定
