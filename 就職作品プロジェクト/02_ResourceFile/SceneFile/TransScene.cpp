@@ -5,8 +5,11 @@
 void TransScene::Initialize()
 {
     auto& instance = Game::GetInstance();
+
+    m_TransitionTexture = instance.GetTransitionTexture();
 	if (m_TransitionTexture == nullptr) {
-		m_TransitionTexture = std::make_shared<Texture2D>(instance.GetCamera());
+		m_TransitionTexture = new Fade(instance.GetCamera());
+        instance.SetTransitionTexture(m_TransitionTexture);
 	}
 
 	m_Timer = 0.0f;
@@ -19,10 +22,11 @@ void TransScene::Initialize()
 	case TRANS_MODE::FADE:
 	{
 		m_AlphaValue = 1.0f / m_Duration;
-        std::shared_ptr<Fade> fade = std::make_shared<Fade>(instance.GetCamera());
+        auto fade = new Fade(instance.GetCamera());
         fade->Initialize();
         fade->SetPos(0.0f, 0.0f, -2.0f);
-		instance.SetTransitionTexture(fade);
+		m_TransitionTexture = fade;
+        instance.SetTransitionTexture(m_TransitionTexture);
 	}
 	break;
 	}
@@ -49,7 +53,7 @@ void TransScene::Update(float tick)
 
 			}
 			if (m_isChange) {
-				m_SceneOld->Finalize();
+				m_SceneOld ->Finalize()  ;
 				m_SceneNext->Initialize();
 				DrawNextScene();			 // 次シーンをオフスクリーンに描画
 			}
@@ -81,6 +85,7 @@ void TransScene::Update(float tick)
 
 void TransScene::Finalize()
 {
+    auto& instance = Game::GetInstance();
 	m_Step = STEP::OFF;
 	for (auto obj : m_MySceneObjects)
 	{
@@ -89,8 +94,8 @@ void TransScene::Finalize()
 	m_MySceneObjects.clear();
 
 	m_Overlay = nullptr;
-	m_TransitionTexture    = nullptr;
-
+	m_TransitionTexture = nullptr ;
+	instance.SetTransitionTexture(nullptr);
 	m_NextSceneSRV.Reset();
 	m_RenderTarget.reset();
 

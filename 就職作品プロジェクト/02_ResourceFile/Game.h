@@ -23,7 +23,7 @@ private:
 	std::unique_ptr<Camera>				 m_Camera;			  // カメラ
 	std::vector<std::unique_ptr<Object>> m_GameObjects;		  // オブジェクト
 
-    std::shared_ptr<Texture2D>			 m_TransitionTexture; // トランジション用テクスチャ
+    Texture2D*							 m_TransitionTexture; // トランジション用テクスチャ
 
 	//================================
 	//	   ゲームを支えるマネージャー達
@@ -92,10 +92,13 @@ public:
 	}
 
     // TranstionTextureをTransSceneと連携させる
-	static void SetTransitionTexture(std::shared_ptr<Texture2D> tex) {
-		GetInstance().m_TransitionTexture = std::move(tex);
+	void SetTransitionTexture(Texture2D* tex) {
+		m_TransitionTexture = tex;
     }
 
+	Texture2D* GetTransitionTexture() {
+		return m_TransitionTexture;
+    }
 
 	// Debug関連
 #ifdef _DEBUG
