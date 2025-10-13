@@ -21,7 +21,7 @@ void TransScene::Initialize()
         fade->SetPos(0.0f, 0.0f, -2.0f);
 		m_TransitionTexture = fade;
         instance.SetTransitionTexture(m_TransitionTexture);
-        m_MySceneObjects.emplace_back(fade);
+
 	}
 	break;
 	}

@@ -99,11 +99,7 @@ public:
 		m_TransitionTexture = tex;
     }
 
-	std::shared_ptr<TransitionBase> GetTransitionTexture() {
-		if (m_TransitionTexture == nullptr) {
-            m_TransitionTexture = std::make_shared<TransitionBase>(m_Camera.get());
-		}
-
+	std::shared_ptr<TransitionBase> GetTransitionTexture() const {
 		return m_TransitionTexture;
     }
 

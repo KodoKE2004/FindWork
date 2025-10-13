@@ -1,6 +1,7 @@
 #include "TransitionBase.h"
 #include <cassert>
 
+
 TransitionBase::TransitionBase(Camera* cam) : Object(cam)
 {
     m_Texture = std::make_shared<Texture>();
@@ -15,7 +16,7 @@ void TransitionBase::SetTexture(const char* imgname)
 	}
 
 	bool sts = m_Texture->LoadFromFile(imgname);
-	assert(sts != true);
+	assert(sts == true);
 }
 
 void TransitionBase::SetTexture(std::shared_ptr<Texture> texture)

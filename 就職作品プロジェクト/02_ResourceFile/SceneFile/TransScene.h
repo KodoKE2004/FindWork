@@ -47,7 +47,7 @@ private:
 	STEP m_Step;
 	TRANS_MODE m_TransMode;
 
-	TransitionBase* m_TransitionTexture;
+	std::shared_ptr<TransitionBase> m_TransitionTexture;
 
 public:
 	void Initialize()	override;

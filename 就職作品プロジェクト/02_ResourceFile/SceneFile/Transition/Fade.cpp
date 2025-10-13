@@ -1,6 +1,7 @@
 #include "Fade.h"
 #include "../../Game.h"
 #include "../../main.h"
+#include <vector>
 
 Fade::Fade(Camera* cam) : TransitionBase(cam)
 {

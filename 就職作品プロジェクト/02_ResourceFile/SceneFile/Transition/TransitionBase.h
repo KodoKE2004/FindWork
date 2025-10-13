@@ -3,7 +3,7 @@
 #include "../../ObjectFile/Object.h"
 #include "../../Camera.h"
 #include "../../VertexBuffer.h"
-#include "../../IndexBuffer.h "
+#include "../../IndexBuffer.h"
 #include "../../Texture.h"
 #include "../../Material.h"
 
@@ -29,10 +29,10 @@ public:
     TransitionBase() = default;
     TransitionBase(Camera* cam);
     virtual ~TransitionBase() = default;
-    void Initialize() = 0;
-    void Update()     = 0;
-    void Draw()       = 0;
-    void Finalize()   = 0;
+    virtual void Initialize() = 0;
+    virtual void Update()     = 0;
+    virtual void Draw()       = 0;
+    virtual void Finalize()   = 0;
     
     // テクスチャを指定
     void SetTexture(const char* imgname);
