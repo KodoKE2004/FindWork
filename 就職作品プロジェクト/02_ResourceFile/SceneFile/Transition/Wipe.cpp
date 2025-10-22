@@ -1,5 +1,8 @@
-#include "Application.h"
 #include "Wipe.h"
+
+#include "Application.h"
+#include "main.h"
+#include "Game.h"
 
 
 Wipe::Wipe(Camera* cam) : TransitionBase(cam), m_Overlay(cam)
