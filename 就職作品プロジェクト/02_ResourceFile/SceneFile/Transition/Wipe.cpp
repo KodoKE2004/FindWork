@@ -1,6 +1,6 @@
 #include "Wipe.h"
 
-Wipe::Wipe(Camera* cam) : TransitionBase(cam)
+Wipe::Wipe(Camera* cam) : TransitionBase(cam), m_Overlay(cam)
 {
 
 }
@@ -36,10 +36,13 @@ void Wipe::Initialize()
 
     desc.ScissorEnable = TRUE;
     device->CreateRasterizerState(&desc, m_RSScissor.ReleaseAndGetAddressOf());
+
+    m_Overlay.Initialize();
 }
 
 void Wipe::Update()
 {
+    m_Overlay.Update();
 }
 
 void Wipe::Draw()
@@ -90,7 +93,7 @@ void Wipe::Draw()
     ctx->RSSetScissorRects(1, &rc);
 
     // この呼び出しは「全画面ブリット」。シザーで必要領域だけ描かれる
-    SnapshotOverlay::Draw(); // ← m_SRV を使って alpha合成（あなたの既存の動作）:contentReference[oaicite:1]{index=1}
+    m_Overlay.Draw(); // ← m_SRV を使って alpha合成（あなたの既存の動作）:contentReference[oaicite:1]{index=1}
 
     // 復帰
     ctx->RSSetScissorRects(0, nullptr);
@@ -99,6 +102,7 @@ void Wipe::Draw()
 
 void Wipe::Finalize()
 {
+    m_Overlay.Finalize(); 
 }
 
 void Wipe::GetViewportSize(ID3D11DeviceContext* ctx, UINT& w, UINT& h)
