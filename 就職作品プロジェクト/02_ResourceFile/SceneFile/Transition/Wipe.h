@@ -1,6 +1,5 @@
 #pragma once
 #include "TransitionBase.h"
-#include "SnapshotOverlay.h"
 #include <wrl/client.h>
 #include <d3d11.h>
 #include <algorithm>
@@ -24,12 +23,19 @@ public:
 
 private:
 
-    Microsoft::WRL::ComPtr<ID3D11RasterizerState> m_RSBackup;   // Œ³‚ÌRS
-    Microsoft::WRL::ComPtr<ID3D11RasterizerState> m_RSScissor;  // Scissor—LŒøRS
     DIRECTION m_Dir = DIRECTION::LEFT_TO_RIGHT;
     float     m_Progress = 0.0f; // 0..1
     bool      m_Invert = false;
-    SnapshotOverlay m_Overlay; // ƒI[ƒo[ƒŒƒC•`‰æ—piSRV‚ÆAlphaŠÇ—j
+    NVector3  m_BaseScale{};
+    NVector3  m_BasePos{};
+    bool      m_BaseInitialized = false;
+    float     m_UOffset = 0.0f;
+    float     m_VOffset = 0.0f;
+    float     m_UScale  = 1.0f;
+    float     m_VScale  = 1.0f;
+    Microsoft::WRL::ComPtr<ID3D11ShaderResourceView> m_SnapshotSRV; // ÌƒV[SRV
+
+    void UpdateLayout();
 
 public:
     Wipe(Camera* cam);
@@ -39,12 +45,11 @@ public:
     void Draw()       override;
     void Finalize()   override;
 
-    void SetDirection(DIRECTION d) { m_Dir = d; }
-    void SetProgress (float p) { m_Progress = std::clamp(p, 0.0f, 1.0f); }
-    void SetInvert   (bool inv) { m_Invert = inv; }
-    void SetPhase    (PHASE) { /* •K—v‚È‚ç•ÛB¡‰ñ‚Í m_Progress ‚ÌŒü‚«‚¾‚¯‚Å‘«‚è‚é */ }
-    void SetSRV      (ID3D11ShaderResourceView* srv) { m_Overlay.SetSRV(srv); }  // © Overlay‚Ö“]‘—
-    void SetAlpha(float a) { m_Overlay.SetAlpha(a); } // Šù‘¶ SnapshotOverlay API ‚ğˆÏ÷
+    void SetDirection(DIRECTION d) { m_Dir = d; UpdateLayout(); }
+    void SetProgress (float p);
+    void SetInvert   (bool inv) { m_Invert = inv; UpdateLayout(); }
+    void SetSnapshot (ID3D11ShaderResourceView* srv);
+    void SetAlpha(float a) { m_Overlay.SetAlpha(a); } // æ—¢å­˜ SnapshotOverlay API ã‚’å§”è­²
 
     static void GetViewportSize(ID3D11DeviceContext* ctx, UINT& w, UINT& h);
 };

@@ -1,6 +1,7 @@
 #include "TransScene.h"
 #include "../main.h"
 #include "../Game.h"
+#include <memory>
 
 void TransScene::Initialize()
 {
@@ -29,6 +30,7 @@ void TransScene::Initialize()
 		auto wipe = std::make_shared<Wipe>(instance.GetCamera());
 		wipe->Initialize();
         wipe->SetPos(0.0f, 0.0f, -2.0f);
+        wipe->SetProgress(0.0f);
         m_TransitionTexture = wipe;
         instance.SetTransitionTexture(m_TransitionTexture);
 	}
@@ -51,7 +53,13 @@ void TransScene::Update(float tick)
 	{
 		m_Timer += tick;
 
-		// OUT‚Ìˆ—
+					DrawNextScene();
+					if (auto wipe = std::dynamic_pointer_cast<Wipe>(m_TransitionTexture)) {
+						wipe->SetSnapshot(m_NextSceneSRV.Get());
+						wipe->SetProgress(0.0f);
+					}
+				}
+			case TRANS_MODE::WIPE:	 WIPE_IN();		break;
 		if (!m_isChange) 
 		{
 			switch (m_TransMode) 
@@ -62,7 +70,7 @@ void TransScene::Update(float tick)
 				if (m_isChange) {
 					m_SceneOld ->Finalize()  ;
 					m_SceneNext->Initialize();
-					DrawNextScene();			 // ŸƒV[ƒ“‚ğƒIƒtƒXƒNƒŠ[ƒ“‚É•`‰æ
+					DrawNextScene();			 // æ¬¡ã‚·ãƒ¼ãƒ³ã‚’ã‚ªãƒ•ã‚¹ã‚¯ãƒªãƒ¼ãƒ³ã«æç”»
 				}
 			}
 			break;
@@ -78,7 +86,7 @@ void TransScene::Update(float tick)
 			}
 		}
 
-		// IN‚Ìˆ—
+		// INã®å‡¦ç†
 		else
 		{
 			switch (m_TransMode)
@@ -132,19 +140,19 @@ void TransScene::Finalize()
 void TransScene::DrawNextScene()
 {
 
-	// š ŸƒV[ƒ“‚ğˆê“x‚¾‚¯ƒIƒtƒXƒNƒŠ[ƒ“‚Ö•`‰æ‚µ‚Ä SRV ‚ğŠm•Û
+	// â˜… æ¬¡ã‚·ãƒ¼ãƒ³ã‚’ä¸€åº¦ã ã‘ã‚ªãƒ•ã‚¹ã‚¯ãƒªãƒ¼ãƒ³ã¸æç”»ã—ã¦ SRV ã‚’ç¢ºä¿
 	auto* device  = Renderer::GetDevice();
 	auto* context = Renderer::GetDeviceContext();
 	auto  vp	  = Renderer::GetViewport();
 
 	m_RenderTarget = std::make_unique<RenderTarget>();
-	// sRGB ‰^—p‚È‚ç: m_RenderTarget->SetFormat(DXGI_FORMAT_R8G8B8A8_UNORM_SRGB);
+	// sRGB é‹ç”¨ãªã‚‰: m_RenderTarget->SetFormat(DXGI_FORMAT_R8G8B8A8_UNORM_SRGB);
 	m_RenderTarget->Create(device, (UINT)vp.Width, (UINT)vp.Height, true);
 
 	const float clear[4]{ 0, 0, 0, 0 };
 	m_RenderTarget->Begin(context, clear);
 	{
-		// Update ‚Í‘–‚ç‚¹‚¸AŸƒV[ƒ“‚ÌƒIƒuƒWƒFƒNƒg‚ğ‚»‚Ì‚Ü‚Ü 1 ‰ñ•`‚­
+		// Update ã¯èµ°ã‚‰ã›ãšã€æ¬¡ã‚·ãƒ¼ãƒ³ã®ã‚ªãƒ–ã‚¸ã‚§ã‚¯ãƒˆã‚’ãã®ã¾ã¾ 1 å›æã
 		for (auto* obj : m_SceneNext->GetSceneObjects()) {
 			if (obj) obj->Draw();
 		}
@@ -153,11 +161,11 @@ void TransScene::DrawNextScene()
 
 	m_NextSceneSRV = m_RenderTarget->GetSRV();
 
-	// š ‘JˆÚƒI[ƒo[ƒŒƒC‚ğŒ»ƒV[ƒ“‚É’Ç‰ÁiÅŒã‚Éƒ¿‡¬j
+	// â˜… é·ç§»ã‚ªãƒ¼ãƒãƒ¼ãƒ¬ã‚¤ã‚’ç¾ã‚·ãƒ¼ãƒ³ã«è¿½åŠ ï¼ˆæœ€å¾Œã«Î±åˆæˆï¼‰
 	m_Overlay = Game::GetInstance().AddObject<SnapshotOverlay>();
 	m_Overlay->SetSRV(m_NextSceneSRV.Get());
 	m_Overlay->SetAlpha(0.0f);
-	m_MySceneObjects.emplace_back(m_Overlay); // ŠÇ——piFinalize‚Å‘|œj
+	m_MySceneObjects.emplace_back(m_Overlay); // ç®¡ç†ç”¨ï¼ˆFinalizeã§æƒé™¤ï¼‰
 
 }
 
@@ -172,7 +180,7 @@ bool TransScene::isOverClock()
 	return false;
 }
 
-// ƒtƒF[ƒhƒCƒ“
+// ãƒ•ã‚§ãƒ¼ãƒ‰ã‚¤ãƒ³
 void TransScene::FADE_IN()
 {
 	m_Alpha -= m_AlphaValue * Application::GetDeltaTime();
@@ -187,7 +195,55 @@ void TransScene::FADE_IN()
 	
 }
 
-// ƒtƒF[ƒhƒAƒEƒg
+        m_Alpha -= m_AlphaValue * Application::GetDeltaTime();
+
+        if (m_Alpha < 0.0f)
+        {
+                m_Alpha = 0.0f;
+        }
+
+        float progress = 1.0f - m_Alpha;
+
+        if (auto wipe = std::dynamic_pointer_cast<Wipe>(m_TransitionTexture))
+        {
+                wipe->SetProgress(progress);
+        }
+
+        if (isOverClock())
+        {
+                m_Alpha = 0.0f;
+                if (auto wipe = std::dynamic_pointer_cast<Wipe>(m_TransitionTexture))
+                {
+                        wipe->SetProgress(1.0f);
+                }
+                if (m_Overlay)
+                {
+                        m_Overlay->SetAlpha(0.0f);
+                }
+                m_Step = STEP::FINISH;
+        }
+        m_Alpha += m_AlphaValue * Application::GetDeltaTime();
+
+        if (m_Alpha > 1.0f)
+        {
+                m_Alpha = 1.0f;
+        }
+
+        if (auto wipe = std::dynamic_pointer_cast<Wipe>(m_TransitionTexture))
+        {
+                wipe->SetProgress(m_Alpha);
+        }
+
+        if (isOverClock())
+        {
+                m_Alpha = 1.0f;
+                if (auto wipe = std::dynamic_pointer_cast<Wipe>(m_TransitionTexture))
+                {
+                        wipe->SetProgress(m_Alpha);
+                }
+                m_isChange = true;
+        }
+// ãƒ•ã‚§ãƒ¼ãƒ‰ã‚¢ã‚¦ãƒˆ
 void TransScene::FADE_OUT()
 {
 	m_Alpha += m_AlphaValue * Application::GetDeltaTime();
