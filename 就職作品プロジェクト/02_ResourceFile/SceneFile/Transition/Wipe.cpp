@@ -1,4 +1,6 @@
+#include "Application.h"
 #include "Wipe.h"
+
 
 Wipe::Wipe(Camera* cam) : TransitionBase(cam), m_Overlay(cam)
 {
@@ -7,37 +9,57 @@ Wipe::Wipe(Camera* cam) : TransitionBase(cam), m_Overlay(cam)
 
 void Wipe::Initialize()
 {
-    ID3D11Device*        device = Renderer::GetDevice();            // 環境に合わせて
-    ID3D11DeviceContext* ctx    = Renderer::GetDeviceContext();     // 環境に合わせて
+    // フェード用の画像追加
+    auto textureMgr = Game::GetInstance().GetTextureManager();
+    m_Texture = textureMgr->GetTexture("Black.png");
+    SetScale(SCREEN_WIDTH, SCREEN_HEIGHT, 1.0f);
+    SetColor(0.0f, 0.0f, 0.0f, 0.0f);
 
-    // いまのRSを保存
-    ctx->RSGetState(m_RSBackup.ReleaseAndGetAddressOf());
+    // 頂点データ
+    std::vector<VERTEX_3D> vertices;
 
-    // バックアップのDescをベースに Scissor を有効にしたRSを作る
-    D3D11_RASTERIZER_DESC desc{};
-    if (m_RSBackup)
-    {
-        m_RSBackup->GetDesc(&desc);
-    }
-    else
-    {
-        // もしRSがnullなら、一般的な既定値から作る
-        desc.FillMode = D3D11_FILL_SOLID;
-        desc.CullMode = D3D11_CULL_BACK;
-        desc.FrontCounterClockwise = FALSE;
-        desc.DepthBias = 0;
-        desc.DepthBiasClamp = 0.0f;
-        desc.SlopeScaledDepthBias = 0.0f;
-        desc.DepthClipEnable = TRUE;
-        desc.ScissorEnable = FALSE; // ここは後でTRUEに
-        desc.MultisampleEnable = FALSE;
-        desc.AntialiasedLineEnable = FALSE;
-    }
+    vertices.resize(4);
 
-    desc.ScissorEnable = TRUE;
-    device->CreateRasterizerState(&desc, m_RSScissor.ReleaseAndGetAddressOf());
+    vertices[0].position = NVector3(-0.5f, 0.5f, 0.0f);
+    vertices[1].position = NVector3(0.5f, 0.5f, 0.0f);
+    vertices[2].position = NVector3(-0.5f, -0.5f, 0.0f);
+    vertices[3].position = NVector3(0.5f, -0.5f, 0.0f);
 
-    m_Overlay.Initialize();
+    vertices[0].color = Color(1.0f, 1.0f, 1.0f, 1.0f);
+    vertices[1].color = Color(1.0f, 1.0f, 1.0f, 1.0f);
+    vertices[2].color = Color(1.0f, 1.0f, 1.0f, 1.0f);
+    vertices[3].color = Color(1.0f, 1.0f, 1.0f, 1.0f);
+
+    vertices[0].uv = Vector2(0.0f, 0.0f);
+    vertices[1].uv = Vector2(1.0f, 0.0f);
+    vertices[2].uv = Vector2(0.0f, 1.0f);
+    vertices[3].uv = Vector2(1.0f, 1.0f);
+
+    // 頂点バッファ生成
+    m_VertexBuffer.Create(vertices);
+
+    // インデックスバッファ生成
+    std::vector<unsigned int> indices;
+    indices.resize(4);
+
+    indices[0] = 0;
+    indices[1] = 1;
+    indices[2] = 2;
+    indices[3] = 3;
+
+    // インデックスバッファ生成
+    m_IndexBuffer.Create(indices);
+
+    // シェーダオブジェクト生成
+    SetShader("VS_Alpha", "PS_Alpha");
+
+    // マテリアル情報取得
+    m_Materiale = std::make_unique<Material>();
+    MATERIAL mtrl;
+    mtrl.Diffuse = Color(1.0f, 1.0f, 1.0f, 1.0f);
+    mtrl.Shiness = 1;
+    mtrl.TextureEnable = true; // テクスチャを使うか否かのフラグ
+    m_Materiale->Create(mtrl);
 }
 
 void Wipe::Update()
