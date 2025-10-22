@@ -75,3 +75,9 @@ namespace Debug
     #endif
     }
 };
+
+#ifdef _DEBUG                
+    #define ifDefDebugMacro(code) code
+#else 
+    #define ifDefDebugMacro(code)
+#endif 

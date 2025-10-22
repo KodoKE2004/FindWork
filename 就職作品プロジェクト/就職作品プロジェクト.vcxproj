@@ -30,6 +30,7 @@
     <ClCompile Include="02_ResourceFile\input.cpp" />
     <ClCompile Include="02_ResourceFile\main.cpp" />
     <ClCompile Include="02_ResourceFile\SceneFile\Transition\TransitionBase.cpp" />
+    <ClCompile Include="02_ResourceFile\SceneFile\Transition\Wipe.cpp" />
     <ClCompile Include="02_ResourceFile\StaticMesh.cpp" />
     <ClCompile Include="02_ResourceFile\MeshManager.cpp" />
     <ClCompile Include="02_ResourceFile\ObjectFile\Bullet.cpp" />
@@ -70,7 +71,7 @@
     <ClInclude Include="02_ResourceFile\Audio.h" />
     <ClInclude Include="02_ResourceFile\AudioManager.h" />
     <ClInclude Include="02_ResourceFile\Camera.h" />
-    <ClInclude Include="02_ResourceFile\CSVLoader.hpp" />
+    <ClInclude Include="02_ResourceFile\CSVLoader.h" />
     <ClInclude Include="02_ResourceFile\Debug.hpp" />
     <ClInclude Include="02_ResourceFile\DebugGridLine.h" />
     <ClInclude Include="02_ResourceFile\DebugUI.h" />
@@ -83,6 +84,7 @@
     <ClInclude Include="02_ResourceFile\Mesh.h" />
     <ClInclude Include="02_ResourceFile\MeshRenderer.h" />
     <ClInclude Include="02_ResourceFile\SceneFile\Transition\TransitionBase.h" />
+    <ClInclude Include="02_ResourceFile\SceneFile\Transition\Wipe.h" />
     <ClInclude Include="02_ResourceFile\StaticMesh.h" />
     <ClInclude Include="02_ResourceFile\MeshManager.h" />
     <ClInclude Include="02_ResourceFile\ObjectFile\Bullet.h" />

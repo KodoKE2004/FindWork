@@ -21,7 +21,16 @@ void TransScene::Initialize()
         fade->SetPos(0.0f, 0.0f, -2.0f);
 		m_TransitionTexture = fade;
         instance.SetTransitionTexture(m_TransitionTexture);
-
+	}
+	break;
+	case TRANS_MODE::WIPE:
+	{
+        m_AlphaValue = 1.0f / m_Duration;
+		auto wipe = std::make_shared<Wipe>(instance.GetCamera());
+		wipe->Initialize();
+        wipe->SetPos(0.0f, 0.0f, -2.0f);
+        m_TransitionTexture = wipe;
+        instance.SetTransitionTexture(m_TransitionTexture);
 	}
 	break;
 	}
@@ -43,16 +52,29 @@ void TransScene::Update(float tick)
 		m_Timer += tick;
 
 		// OUTの処理
-		if (!m_isChange) {
+		if (!m_isChange) 
+		{
 			switch (m_TransMode) 
 			{
-			case TRANS_MODE::FADE:	FADE_OUT();		break;
-
+			case TRANS_MODE::FADE:
+			{
+				FADE_OUT();		
+				if (m_isChange) {
+					m_SceneOld ->Finalize()  ;
+					m_SceneNext->Initialize();
+					DrawNextScene();			 // 次シーンをオフスクリーンに描画
+				}
 			}
-			if (m_isChange) {
-				m_SceneOld ->Finalize()  ;
-				m_SceneNext->Initialize();
-				DrawNextScene();			 // 次シーンをオフスクリーンに描画
+			break;
+			case TRANS_MODE::WIPE:
+			{
+				WIPE_OUT();
+				if (m_isChange) {
+					m_SceneOld->Finalize();
+					m_SceneNext->Initialize();
+                }
+			}
+
 			}
 		}
 
@@ -177,4 +199,12 @@ void TransScene::FADE_OUT()
 	}
 
 	m_TransitionTexture->SetColor(0.0f, 0.0f, 0.0f, m_Alpha);
+}
+
+void TransScene::WIPE_IN()
+{
+}
+
+void TransScene::WIPE_OUT()
+{
 }

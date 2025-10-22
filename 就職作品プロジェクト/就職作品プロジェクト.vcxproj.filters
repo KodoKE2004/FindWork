@@ -145,9 +145,6 @@
     <ClCompile Include="02_ResourceFile\TextureManager.cpp">
       <Filter>SourceFile\Core\Manager</Filter>
     </ClCompile>
-    <ClCompile Include="02_ResourceFile\SceneFile\TransScene.cpp">
-      <Filter>SourceFile\Scene\Transition</Filter>
-    </ClCompile>
     <ClCompile Include="02_ResourceFile\SceneFile\Transition\Fade.cpp">
       <Filter>SourceFile\Scene\Transition</Filter>
     </ClCompile>
@@ -158,9 +155,6 @@
       <Filter>SourceFile\Object</Filter>
     </ClCompile>
     <ClCompile Include="02_ResourceFile\RenderTarget.cpp">
-      <Filter>SourceFile\Core</Filter>
-    </ClCompile>
-    <ClCompile Include="02_ResourceFile\SceneFile\Transition\SnapshotOverlay.cpp">
       <Filter>SourceFile\Core</Filter>
     </ClCompile>
     <ClCompile Include="02_ResourceFile\Dx11helper.cpp">
@@ -188,6 +182,15 @@
       <Filter>SourceFile\Core</Filter>
     </ClCompile>
     <ClCompile Include="02_ResourceFile\SceneFile\Transition\TransitionBase.cpp">
+      <Filter>SourceFile\Scene\Transition</Filter>
+    </ClCompile>
+    <ClCompile Include="02_ResourceFile\SceneFile\TransScene.cpp">
+      <Filter>SourceFile\Scene</Filter>
+    </ClCompile>
+    <ClCompile Include="02_ResourceFile\SceneFile\Transition\Wipe.cpp">
+      <Filter>SourceFile\Scene\Transition</Filter>
+    </ClCompile>
+    <ClCompile Include="02_ResourceFile\SceneFile\Transition\SnapshotOverlay.cpp">
       <Filter>SourceFile\Scene\Transition</Filter>
     </ClCompile>
   </ItemGroup>
@@ -303,9 +306,6 @@
     <ClInclude Include="02_ResourceFile\TextureManager.h">
       <Filter>SourceFile\Core\Manager</Filter>
     </ClInclude>
-    <ClInclude Include="02_ResourceFile\SceneFile\TransScene.h">
-      <Filter>SourceFile\Scene\Transition</Filter>
-    </ClInclude>
     <ClInclude Include="02_ResourceFile\SceneFile\Transition\Fade.h">
       <Filter>SourceFile\Scene\Transition</Filter>
     </ClInclude>
@@ -316,9 +316,6 @@
       <Filter>SourceFile\Object</Filter>
     </ClInclude>
     <ClInclude Include="02_ResourceFile\RenderTarget.h">
-      <Filter>SourceFile\Core</Filter>
-    </ClInclude>
-    <ClInclude Include="02_ResourceFile\SceneFile\Transition\SnapshotOverlay.h">
       <Filter>SourceFile\Core</Filter>
     </ClInclude>
     <ClInclude Include="02_ResourceFile\Dx11helper.h">
@@ -345,10 +342,19 @@
     <ClInclude Include="02_ResourceFile\Shader.h">
       <Filter>SourceFile\Core</Filter>
     </ClInclude>
-    <ClInclude Include="02_ResourceFile\CSVLoader.hpp">
+    <ClInclude Include="02_ResourceFile\CSVLoader.h">
       <Filter>SourceFile\Core</Filter>
     </ClInclude>
     <ClInclude Include="02_ResourceFile\SceneFile\Transition\TransitionBase.h">
+      <Filter>SourceFile\Scene\Transition</Filter>
+    </ClInclude>
+    <ClInclude Include="02_ResourceFile\SceneFile\TransScene.h">
+      <Filter>SourceFile\Scene</Filter>
+    </ClInclude>
+    <ClInclude Include="02_ResourceFile\SceneFile\Transition\Wipe.h">
+      <Filter>SourceFile\Scene\Transition</Filter>
+    </ClInclude>
+    <ClInclude Include="02_ResourceFile\SceneFile\Transition\SnapshotOverlay.h">
       <Filter>SourceFile\Scene\Transition</Filter>
     </ClInclude>
   </ItemGroup>

@@ -27,6 +27,7 @@ private:
 	std::vector<std::unique_ptr<Object>> m_GameObjects;		  // オブジェクト
 
     std::shared_ptr<TransitionBase>		 m_TransitionTexture; // トランジション用テクスチャ
+    std::vector<std::unique_ptr<Scene>>	 m_SceneStack;		  // シーンスタック
 
 	//================================
 	//	   ゲームを支えるマネージャー達
@@ -59,6 +60,24 @@ public:
 	static void Finalize();
 	// 現在のシーンを設定
 	static void  SetSceneCurrent(Scene* newScene);
+
+    // TranstionTextureをTransSceneと連携させる
+	void SetTransitionTexture(std::shared_ptr<TransitionBase> tex) {
+		m_TransitionTexture = tex;
+    }
+
+	std::shared_ptr<TransitionBase> GetTransitionTexture() const {
+		return m_TransitionTexture;
+    }
+    //===============================
+	//		シーンのスタック管理
+	//===============================
+    
+	void ScenePush(Scene* newScene);
+	Scene* ScenePop();
+	size_t GetSceneStackSize() const {
+		return m_SceneStack.size();
+    }
 
 	//===============================
 	// ゲッターとシングルトンパターンの実装
@@ -94,14 +113,6 @@ public:
 		return m_AudioManager;
 	}
 
-    // TranstionTextureをTransSceneと連携させる
-	void SetTransitionTexture(std::shared_ptr<TransitionBase> tex) {
-		m_TransitionTexture = tex;
-    }
-
-	std::shared_ptr<TransitionBase> GetTransitionTexture() const {
-		return m_TransitionTexture;
-    }
 
 	// Debug関連
 #ifdef _DEBUG
@@ -152,10 +163,14 @@ public:
 // 　　　インスタンスの取得を簡易化
 //================================
 
-// シーンを遷移するテンプレート関数
+//================================
+//	  シーンを遷移するテンプレート関数
+//================================
 template<typename T>
-void ChangeScene(TRANS_MODE mode,float duration)
+void ChangeScenePush(TRANS_MODE mode,float duration)
 {
+    auto& instance = GAME_INSTANCE;
+
 	// テンプレートなので
 	// 既定がSceneでなければエラー
 	static_assert(std::is_base_of_v<Scene, T>, "T は 基底クラスが Scene ではありません");
@@ -163,13 +178,56 @@ void ChangeScene(TRANS_MODE mode,float duration)
 	auto scene = new TransScene;
 	auto sceneNext = new T;
 
-	scene->SetOldScene(GAME_INSTANCE.GetCurrentScene());
-	scene->SetDuration(duration);
+	scene->SetOldScene(instance.GetCurrentScene());
+    instance.ScenePush(instance.GetCurrentScene());
+
+	scene->SetTransitionTick(duration);
 	scene->SetNextScene(sceneNext);
 	scene->SetStep(STEP::START);
+    scene->SetStackOp(STACK_OP::PUSH);
 	scene->SetTransMode(mode);
 	scene->Initialize();
 
-	GAME_INSTANCE.SetSceneCurrent(scene);
+	instance.SetSceneCurrent(scene);
 
 }
+
+// 一つ前のシーンに戻る
+inline void ChangeScenePop(TRANS_MODE mode, float dutation)
+{
+    auto& instance = GAME_INSTANCE;
+
+	if (instance.GetSceneStackSize() == 0) {
+		ifDefDebugMacro(Debug::Log("シーンスタックが空です");)
+			
+		return ;
+	}
+
+    // 現在のシーン
+    auto scene = new TransScene;
+    Scene* sceneNext = instance.ScenePop();
+    scene->SetNextScene(sceneNext);
+	scene->SetStep(STEP::START);
+	scene->SetStackOp(STACK_OP::PUSH);
+	scene->SetTransMode(mode);
+	scene->Initialize();
+
+    instance.SetSceneCurrent(scene);
+}
+
+inline void Game::ScenePush(Scene* newScene)
+{
+    // 遷移前のシーンをスタックに保存
+    if (newScene) m_SceneStack.push_back(std::unique_ptr<Scene>(newScene));
+}
+
+inline Scene* Game::ScenePop()
+{
+	if(m_SceneStack.empty())	return nullptr;
+
+    Scene* scene = m_SceneStack.back().get();
+    m_SceneStack.pop_back();
+
+	return scene;
+}
+

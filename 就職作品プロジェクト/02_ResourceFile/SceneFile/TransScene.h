@@ -4,6 +4,7 @@
 #include "../Application.h"
 #include "../RenderTarget.h"
 #include "Transition/Fade.h"
+#include "Transition/Wipe.h"
 #include "Transition/TransitionBase.h"
 #include "Transition/SnapshotOverlay.h"
 
@@ -13,11 +14,21 @@ enum class STEP
 	START,
 	DOING,
 	FINISH,
+	NUM
 };
 
 enum class TRANS_MODE
 {
 	FADE,
+	WIPE,
+	NUM
+};
+
+enum class STACK_OP
+{
+	NONE,
+	PUSH,
+	POP,
 	NUM
 };
 
@@ -41,35 +52,48 @@ private:
     // トランジション関連
 	float m_Alpha = 0.0f;
 	float m_AlphaValue = 0.0f;
+	
 
-
-	bool m_isChange = false;
+	bool m_isChange		    = false;
+	bool m_IsSceneStackPop  = false;
+    bool m_IsSceneStackPush = false;
 	STEP m_Step;
 	TRANS_MODE m_TransMode;
+    STACK_OP   m_StackOp;
 
 	std::shared_ptr<TransitionBase> m_TransitionTexture;
 
 public:
-	void Initialize()	override;
+	void Initialize()		override;
 	void Update(float tick)	override;
-	void Finalize()		override;
+	void Finalize()			override;
 
 	/// <summary>
 	/// 次のシーンの一フレーム目を描画する
 	/// </summary>
 	void DrawNextScene();
 
-	void SetDuration(float duration)    { m_Duration = duration;	}
-	void SetOldScene(Scene* sceneOld)   { m_SceneOld = sceneOld;	}
-	void SetNextScene(Scene* sceneNext) { m_SceneNext = sceneNext;	}
-	void SetTransMode(TRANS_MODE mode)  { m_TransMode = mode;		}
-	void SetStep(STEP step)				{m_Step = step;				}
+	void SetTransitionTick(float duration) { m_Duration  = duration;  }
+	void SetOldScene(Scene* sceneOld)      { m_SceneOld  = sceneOld;  }
+	void SetNextScene(Scene* sceneNext)    { m_SceneNext = sceneNext; }
+	void SetTransMode(TRANS_MODE mode)     { m_TransMode = mode;	  }
+	void SetStep(STEP step)				   { m_Step		 = step;	  }
+    void SetStackOp(STACK_OP op)		   { m_StackOp   = op;		  }
 
 	bool isOverClock();
 	
-public:	//		フェード
+public:	
+    //================================
+	//			  フェード
+    //================================
 	void FADE_IN();
 	void FADE_OUT();
+
+    //================================
+    //			  ワイプ
+    //================================
+    void WIPE_IN();
+    void WIPE_OUT();
 
 };
 

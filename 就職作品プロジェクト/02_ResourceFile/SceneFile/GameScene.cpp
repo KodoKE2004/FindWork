@@ -18,7 +18,7 @@ void GameScene::Initialize()
 void GameScene::Update(float tick)
 {
     if (Input::GetKeyTrigger(VK_RETURN)) {
-        ChangeScene<TitleScene>(TRANS_MODE::FADE, 0.5f);
+        ChangeScenePush<TitleScene>(TRANS_MODE::FADE, 0.5f);
     }
 }
 

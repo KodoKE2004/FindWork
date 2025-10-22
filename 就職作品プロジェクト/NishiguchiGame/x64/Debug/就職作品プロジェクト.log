@@ -1,2 +1,70 @@
-﻿  TransScene.cpp
-  就職作品プロジェクト.vcxproj -> C:\Users\kodokeの世界\Desktop\HAL\VisualSutdio\就職作品\個人製作\FindWork\就職作品プロジェクト\x64\Debug\NishiguchiGame.exe
+﻿  compilation object save succeeded; see C:\Users\kodokeの世界\Desktop\HAL\VisualSutdio\就職作品\個人製作\FindWork\就職作品プロジェクト\x64\Debug\PS_Alpha.cso
+  compilation object save succeeded; see C:\Users\kodokeの世界\Desktop\HAL\VisualSutdio\就職作品\個人製作\FindWork\就職作品プロジェクト\x64\Debug\PS_Default.cso
+  compilation object save succeeded; see C:\Users\kodokeの世界\Desktop\HAL\VisualSutdio\就職作品\個人製作\FindWork\就職作品プロジェクト\x64\Debug\PS_Phong.cso
+  compilation object save succeeded; see C:\Users\kodokeの世界\Desktop\HAL\VisualSutdio\就職作品\個人製作\FindWork\就職作品プロジェクト\x64\Debug\PS_Skydome.cso
+  compilation object save succeeded; see C:\Users\kodokeの世界\Desktop\HAL\VisualSutdio\就職作品\個人製作\FindWork\就職作品プロジェクト\x64\Debug\PS_Unlit.cso
+  compilation object save succeeded; see C:\Users\kodokeの世界\Desktop\HAL\VisualSutdio\就職作品\個人製作\FindWork\就職作品プロジェクト\x64\Debug\VS_Alpha.cso
+  compilation object save succeeded; see C:\Users\kodokeの世界\Desktop\HAL\VisualSutdio\就職作品\個人製作\FindWork\就職作品プロジェクト\x64\Debug\VS_DebugGrid.cso
+  compilation object save succeeded; see C:\Users\kodokeの世界\Desktop\HAL\VisualSutdio\就職作品\個人製作\FindWork\就職作品プロジェクト\x64\Debug\VS_Default.cso
+  compilation object save succeeded; see C:\Users\kodokeの世界\Desktop\HAL\VisualSutdio\就職作品\個人製作\FindWork\就職作品プロジェクト\x64\Debug\VS_Skydome.cso
+  compilation object save succeeded; see C:\Users\kodokeの世界\Desktop\HAL\VisualSutdio\就職作品\個人製作\FindWork\就職作品プロジェクト\x64\Debug\VS_Unlit.cso
+  Application.cpp
+  Audio.cpp
+  AudioManager.cpp
+  Camera.cpp
+  DebugGridLine.cpp
+  DebugUI.cpp
+  Dx11helper.cpp
+  Game.cpp
+  input.cpp
+  main.cpp
+  TransitionBase.cpp
+  Wipe.cpp
+C:\Users\kodokeの世界\Desktop\HAL\VisualSutdio\就職作品\個人製作\FindWork\就職作品プロジェクト\02_ResourceFile\SceneFile\Transition\Wipe.cpp(4,1): error C2280: 'SnapshotOverlay::SnapshotOverlay(void)': 削除された関数を参照しようとしています
+      C:\Users\kodokeの世界\Desktop\HAL\VisualSutdio\就職作品\個人製作\FindWork\就職作品プロジェクト\02_ResourceFile\SceneFile\Transition\SnapshotOverlay.h(15,5):
+      'SnapshotOverlay::SnapshotOverlay' の宣言を確認してください
+      C:\Users\kodokeの世界\Desktop\HAL\VisualSutdio\就職作品\個人製作\FindWork\就職作品プロジェクト\02_ResourceFile\SceneFile\Transition\SnapshotOverlay.h(15,5):
+      'SnapshotOverlay::SnapshotOverlay(void)': 関数は、基底クラス 'Object' に適切な 既定のコンストラクター がないか、オーバーロードの解決があいまいなため、暗黙的に削除されました
+      C:\Users\kodokeの世界\Desktop\HAL\VisualSutdio\就職作品\個人製作\FindWork\就職作品プロジェクト\02_ResourceFile\ObjectFile\Object.h(10,7):
+      'Object' の宣言を確認してください
+  
+C:\Users\kodokeの世界\Desktop\HAL\VisualSutdio\就職作品\個人製作\FindWork\就職作品プロジェクト\02_ResourceFile\SceneFile\Transition\Wipe.cpp(92,22): error C2352: 'SnapshotOverlay::Draw': 非静的メンバー関数の呼び出しにはオブジェクトが必要です
+      C:\Users\kodokeの世界\Desktop\HAL\VisualSutdio\就職作品\個人製作\FindWork\就職作品プロジェクト\02_ResourceFile\SceneFile\Transition\SnapshotOverlay.h(21,10):
+      'SnapshotOverlay::Draw' の宣言を確認してください
+  
+  StaticMesh.cpp
+  MeshManager.cpp
+  Bullet.cpp
+  Cube.cpp
+  Light.cpp
+  Model.cpp
+  Object.cpp
+  Sphere.cpp
+  コードを生成中...
+  コンパイル中...
+  Skydome.cpp
+  Renderer.cpp
+  RenderTarget.cpp
+  GameScene.cpp
+  SelectScene.cpp
+  TitleScene.cpp
+  Fade.cpp
+  SnapshotOverlay.cpp
+  TransScene.cpp
+  Shader.cpp
+  ShaderManager.cpp
+  Texture2D.cpp
+  Texture.cpp
+  TextureManager.cpp
+  Transform.cpp
+  utility.cpp
+  imgui.cpp
+  imgui_demo.cpp
+  imgui_draw.cpp
+  imgui_impl_dx11.cpp
+  コードを生成中...
+  コンパイル中...
+  imgui_impl_win32.cpp
+  imgui_tables.cpp
+  imgui_widgets.cpp
+  コードを生成中...
