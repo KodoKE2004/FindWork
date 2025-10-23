@@ -6,7 +6,7 @@
 #include "Renderer.h"
 #include <vector>
 
-Wipe::Wipe(Camera* cam) : TransitionBase(cam)
+Wipe::Wipe(Camera* cam) : TransitionBase(cam),m_Overlay(cam)
 {
 
 }

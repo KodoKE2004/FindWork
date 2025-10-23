@@ -34,7 +34,7 @@ private:
     float     m_UScale  = 1.0f;
     float     m_VScale  = 1.0f;
     Microsoft::WRL::ComPtr<ID3D11ShaderResourceView> m_SnapshotSRV; // ̃V[SRV
-
+    SnapshotOverlay m_Overlay;
     void UpdateLayout();
 
 public:
