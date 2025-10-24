@@ -3,6 +3,12 @@
 #include "../Game.h"
 #include <memory>
 
+TransScene::TransScene(bool isPush, bool isPop)
+{
+	m_IsSceneStackPush = isPush;
+    m_IsSceneStackPop  = isPop;
+}
+
 void TransScene::Initialize()
 {
     auto& instance = GAME_INSTANCE;
@@ -30,7 +36,6 @@ void TransScene::Initialize()
 		auto wipe = std::make_shared<Wipe>(instance.GetCamera());
 		wipe->Initialize();
         wipe->SetPos(0.0f, 0.0f, -2.0f);
-        wipe->SetProgress(0.0f);
         m_TransitionTexture = wipe;
         instance.SetTransitionTexture(m_TransitionTexture);
 	}
@@ -53,61 +58,57 @@ void TransScene::Update(float tick)
 	{
 		m_Timer += tick;
 
-					DrawNextScene();
-					if (auto wipe = std::dynamic_pointer_cast<Wipe>(m_TransitionTexture)) {
-						wipe->SetSnapshot(m_NextSceneSRV.Get());
-						wipe->SetProgress(0.0f);
+		switch(m_TransMode)
+		{ 
+		//=========================================
+		// OUTの処理
+		//=========================================
+			if (!m_isChange) 
+			{
+				switch (m_TransMode) 
+				{
+				 case TRANS_MODE::FADE:
+				 {
+					FADE_OUT();		
+					if (m_isChange) 
+					{
+						m_SceneOld ->Finalize()  ;
+						m_SceneNext->Initialize();
+						DrawNextScene();			 // 次シーンをオフスクリーンに描画
 					}
+				 }
+				 break;
+				 case TRANS_MODE::WIPE:
+				 {
+					WIPE_OUT();
+					if (m_isChange) 
+					{
+						m_SceneOld->Finalize();
+						m_SceneNext->Initialize();
+			        }
+				 }
+                 break;
 				}
-			case TRANS_MODE::WIPE:	 WIPE_IN();		break;
-		if (!m_isChange) 
-		{
-			switch (m_TransMode) 
+			} // if (!m_isChange) true OUTの処理 終わり
+			  // INの処理
+			else
 			{
-			case TRANS_MODE::FADE:
-			{
-				FADE_OUT();		
-				if (m_isChange) {
-					m_SceneOld ->Finalize()  ;
-					m_SceneNext->Initialize();
-					DrawNextScene();			 // 次シーンをオフスクリーンに描画
+				switch (m_TransMode)
+				{
+				 case TRANS_MODE::FADE:	 FADE_IN();		break;
+
 				}
-			}
-			break;
-			case TRANS_MODE::WIPE:
-			{
-				WIPE_OUT();
-				if (m_isChange) {
-					m_SceneOld->Finalize();
-					m_SceneNext->Initialize();
-                }
-			}
-
-			}
-		}
-
-		// INの処理
-		else
-		{
-			switch (m_TransMode)
-			{
-			case TRANS_MODE::FADE:	 FADE_IN();		break;
-
-			}
-		}
-
-
+            } // if (!m_isChange) else INの処理 終わり
+        }	  // switch (m_Step) case : DOING 終わり
+	 break;
+	 case STEP::FINISH:
+	 {
+	 	instance.SetSceneCurrent(m_SceneNext);
+	 	Finalize();
+	 }
+	 break;
 	}
-	break;
-	case STEP::FINISH:
-	{
-		instance.SetSceneCurrent(m_SceneNext);
-		Finalize();
-	}
-	break;
-
-	}
-	
+	}	// Switch(m_Step) 終わり
 }
 
 void TransScene::Finalize()
@@ -195,54 +196,6 @@ void TransScene::FADE_IN()
 	
 }
 
-        m_Alpha -= m_AlphaValue * Application::GetDeltaTime();
-
-        if (m_Alpha < 0.0f)
-        {
-                m_Alpha = 0.0f;
-        }
-
-        float progress = 1.0f - m_Alpha;
-
-        if (auto wipe = std::dynamic_pointer_cast<Wipe>(m_TransitionTexture))
-        {
-                wipe->SetProgress(progress);
-        }
-
-        if (isOverClock())
-        {
-                m_Alpha = 0.0f;
-                if (auto wipe = std::dynamic_pointer_cast<Wipe>(m_TransitionTexture))
-                {
-                        wipe->SetProgress(1.0f);
-                }
-                if (m_Overlay)
-                {
-                        m_Overlay->SetAlpha(0.0f);
-                }
-                m_Step = STEP::FINISH;
-        }
-        m_Alpha += m_AlphaValue * Application::GetDeltaTime();
-
-        if (m_Alpha > 1.0f)
-        {
-                m_Alpha = 1.0f;
-        }
-
-        if (auto wipe = std::dynamic_pointer_cast<Wipe>(m_TransitionTexture))
-        {
-                wipe->SetProgress(m_Alpha);
-        }
-
-        if (isOverClock())
-        {
-                m_Alpha = 1.0f;
-                if (auto wipe = std::dynamic_pointer_cast<Wipe>(m_TransitionTexture))
-                {
-                        wipe->SetProgress(m_Alpha);
-                }
-                m_isChange = true;
-        }
 // フェードアウト
 void TransScene::FADE_OUT()
 {

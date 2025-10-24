@@ -52,18 +52,30 @@ private:
     // トランジション関連
 	float m_Alpha = 0.0f;
 	float m_AlphaValue = 0.0f;
-	
 
 	bool m_isChange		    = false;
 	bool m_IsSceneStackPop  = false;
     bool m_IsSceneStackPush = false;
 	STEP m_Step;
+
 	TRANS_MODE m_TransMode;
     STACK_OP   m_StackOp;
 
 	std::shared_ptr<TransitionBase> m_TransitionTexture;
 
 public:
+    // コンストラクタとデストラクタ
+	TransScene() = default;
+
+	/// <summary>
+    /// PushかPopを指定するコンストラクタ
+	/// </summary>
+	/// <param name="isPush"></param>
+	/// <param name="isPop"></param>
+	TransScene(bool isPush, bool isPop);
+
+    ~TransScene()			override = default;
+
 	void Initialize()		override;
 	void Update(float tick)	override;
 	void Finalize()			override;
@@ -86,8 +98,7 @@ public:
     //================================
 	//			  フェード
     //================================
-	void FADE_IN();
-	void FADE_OUT();
+	
 
     //================================
     //			  ワイプ

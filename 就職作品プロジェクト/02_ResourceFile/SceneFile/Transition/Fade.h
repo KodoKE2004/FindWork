@@ -8,6 +8,8 @@ class Fade : public TransitionBase
 {
 private:
 
+    float m_Alpha = 0.0f;      // 現在のアルファ値
+    float m_AlphaValue = 0.0f; // アルファ値の変化量
 
 
 public:
@@ -17,6 +19,9 @@ public:
 	void Update()		override;
 	void Draw()			override;
 	void Finalize()		override;
+
+	void FADE_IN();
+	void FADE_OUT();
 
 };
 

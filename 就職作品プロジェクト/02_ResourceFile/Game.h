@@ -175,7 +175,7 @@ void ChangeScenePush(TRANS_MODE mode,float duration)
 	// 既定がSceneでなければエラー
 	static_assert(std::is_base_of_v<Scene, T>, "T は 基底クラスが Scene ではありません");
 
-	auto scene = new TransScene;
+	auto scene = new TransScene(true, false);
 	auto sceneNext = new T;
 
 	scene->SetOldScene(instance.GetCurrentScene());
@@ -199,12 +199,11 @@ inline void ChangeScenePop(TRANS_MODE mode, float dutation)
 
 	if (instance.GetSceneStackSize() == 0) {
 		ifDefDebugMacro(Debug::Log("シーンスタックが空です");)
-			
 		return ;
 	}
 
     // 現在のシーン
-    auto scene = new TransScene;
+    auto scene = new TransScene(false, true);
     Scene* sceneNext = instance.ScenePop();
     scene->SetNextScene(sceneNext);
 	scene->SetStep(STEP::START);
@@ -213,6 +212,28 @@ inline void ChangeScenePop(TRANS_MODE mode, float dutation)
 	scene->Initialize();
 
     instance.SetSceneCurrent(scene);
+}
+
+// ゲームシーンの
+inline void ChangeScenePop(TRANS_MODE transMode, float duration, int stageNo, int score)
+{
+	auto& instance = GAME_INSTANCE;
+    if (instance.GetSceneStackSize() == 0) 
+	{
+        ifDefDebugMacro(Debug::Log("シーンスタックが空です");)
+		return ;
+	}
+
+	// 現在のシーン
+	auto scene = new TransScene(false, true);
+	Scene* sceneNext = instance.ScenePop();
+	scene->SetNextScene(sceneNext);
+	scene->SetStep(STEP::START);
+	scene->SetStackOp(STACK_OP::PUSH);
+	scene->SetTransMode(transMode);
+	scene->Initialize();
+
+	instance.SetSceneCurrent(scene);
 }
 
 inline void Game::ScenePush(Scene* newScene)

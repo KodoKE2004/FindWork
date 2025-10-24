@@ -11,6 +11,9 @@ protected:
 	std::vector<Object*> m_MySceneObjects; // このシーンのオブジェクト
 	std::unordered_map<std::string, AudioConfig> m_AudioList;
 
+	int score = 0;
+    int stageNo = 0;
+	int stageCountMax = 5;
 public:
 	// コンストラクタとデストラクタ
 	Scene()  = default;
