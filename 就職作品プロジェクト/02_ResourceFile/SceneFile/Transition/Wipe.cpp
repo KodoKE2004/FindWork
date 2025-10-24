@@ -1,235 +1,115 @@
+// SceneFile/Transition/Wipe.cpp
 #include "Wipe.h"
-
-#include "Application.h"
-#include "main.h"
-#include "Game.h"
-#include "Renderer.h"
+#include "../../Renderer.h"
+#include "../../main.h"  // SCREEN_WIDTH/HEIGHT 等があるなら
 #include <vector>
+#include <algorithm>
 
-Wipe::Wipe(Camera* cam) : TransitionBase(cam),m_Overlay(cam)
-{
-
-}
+using Microsoft::WRL::ComPtr;
 
 void Wipe::Initialize()
 {
-    auto textureMgr = Game::GetInstance().GetTextureManager();
-    m_Texture = textureMgr->GetTexture("Black.png");
-    SetScale(SCREEN_WIDTH, SCREEN_HEIGHT, 1.0f);
-    SetColor(0.0f, 0.0f, 0.0f, 1.0f);
-
-    std::vector<VERTEX_3D> vertices;
-    vertices.resize(4);
-
+    // Fade と同様に全画面四角の頂点を用意（汎用 Quad）
+    std::vector<VERTEX_3D> vertices(4);
     vertices[0].position = NVector3(-0.5f, 0.5f, 0.0f);
     vertices[1].position = NVector3(0.5f, 0.5f, 0.0f);
     vertices[2].position = NVector3(-0.5f, -0.5f, 0.0f);
     vertices[3].position = NVector3(0.5f, -0.5f, 0.0f);
-
-    vertices[0].color = Color(1.0f, 1.0f, 1.0f, 1.0f);
-    vertices[1].color = Color(1.0f, 1.0f, 1.0f, 1.0f);
-    vertices[2].color = Color(1.0f, 1.0f, 1.0f, 1.0f);
-    vertices[3].color = Color(1.0f, 1.0f, 1.0f, 1.0f);
-
-    vertices[0].uv = Vector2(0.0f, 0.0f);
-    vertices[1].uv = Vector2(1.0f, 0.0f);
-    vertices[2].uv = Vector2(0.0f, 1.0f);
-    vertices[3].uv = Vector2(1.0f, 1.0f);
-
+    for (auto& v : vertices) {
+        v.color = Color(1, 1, 1, 1);
+    }
+    vertices[0].uv = Vector2(0, 0);
+    vertices[1].uv = Vector2(1, 0);
+    vertices[2].uv = Vector2(0, 1);
+    vertices[3].uv = Vector2(1, 1);
     m_VertexBuffer.Create(vertices);
 
-    std::vector<unsigned int> indices(4);
-    indices[0] = 0;
-    indices[1] = 1;
-    indices[2] = 2;
-    indices[3] = 3;
+    std::vector<unsigned> indices{ 0,1,2,3 };
     m_IndexBuffer.Create(indices);
 
-    SetShader("VS_Alpha", "PS_Alpha");
+    // 専用シェーダに差し替え（Game::Initialize で登録しておく）
+    SetShader("VS_Wipe", "PS_Wipe");
 
+    // マテリアルは色だけ使う（テクスチャは SRV 直バインド）
     m_Materiale = std::make_unique<Material>();
-    MATERIAL mtrl;
-    mtrl.Diffuse = Color(1.0f, 1.0f, 1.0f, 1.0f);
+    MATERIAL mtrl{};
+    mtrl.Diffuse = Color(1, 1, 1, 1);
     mtrl.Shiness = 1;
-    mtrl.TextureEnable = true;
+    mtrl.TextureEnable = false;
     m_Materiale->Create(mtrl);
 
-    m_BaseInitialized = false;
-}
+    // 定数バッファ（b1 を使用）
+    D3D11_BUFFER_DESC bd{};
+    bd.BindFlags = D3D11_BIND_CONSTANT_BUFFER;
+    bd.ByteWidth = sizeof(WipeCB);
+    bd.Usage = D3D11_USAGE_DYNAMIC;
+    bd.CPUAccessFlags = D3D11_CPU_ACCESS_WRITE;
 
-void Wipe::Update()
-{
+    auto* dev = Renderer::GetDevice();
+    dev->CreateBuffer(&bd, nullptr, m_CB.ReleaseAndGetAddressOf());
+
+    // 画面アスペクトの初期値
+    auto vp = Renderer::GetViewport();
+    m_Aspect = (vp.Height > 0) ? (vp.Width / vp.Height) : 16.0f / 9.0f;
+
+    // スクリーン全体にフィット
+    SetScale(SCREEN_WIDTH, SCREEN_HEIGHT, 1.0f);
+    SetColor(1, 1, 1, 1);
 }
 
 void Wipe::Draw()
 {
+    if (!m_Snapshot) return;
+
+    // 1) 状態
     Renderer::SetDepthEnable(false);
     Renderer::SetBlendState(BS_ALPHABLEND);
 
+    // 2) 行列（スクリーン直貼り）
     Matrix r = Matrix::CreateFromYawPitchRoll(m_Rotation.x, m_Rotation.y, m_Rotation.z);
     Matrix t = Matrix::CreateTranslation(m_Position.x, m_Position.y, m_Position.z);
     Matrix s = Matrix::CreateScale(m_Scale.x, m_Scale.y, m_Scale.z);
     Matrix world = s * r * t;
     Renderer::SetWorldMatrix(&world);
 
-    ID3D11DeviceContext* context = Renderer::GetDeviceContext();
-    context->IASetPrimitiveTopology(D3D11_PRIMITIVE_TOPOLOGY_TRIANGLESTRIP);
-
+    // 3) GPU セット
     SetGPU();
     m_VertexBuffer.SetGPU();
     m_IndexBuffer.SetGPU();
-
-    if (m_SnapshotSRV)
-    {
-        ID3D11ShaderResourceView* srv = m_SnapshotSRV.Get();
-        context->PSSetShaderResources(0, 1, &srv);
-    }
-    else if (m_Texture)
-    {
-        m_Texture->SetGPU();
-    }
-
     m_Materiale->SetDiffuse(DirectX::XMFLOAT4(m_Color.x, m_Color.y, m_Color.z, m_Color.w));
     m_Materiale->Update();
     m_Materiale->SetGPU();
 
-    Renderer::SetUV(m_UOffset, m_VOffset, m_UScale, m_VScale);
+    // 4) 定数バッファ更新（円半径は Progress から算出）
+    auto* ctx = Renderer::GetDeviceContext();
 
-    Camera::ScopedMode scopedMode(m_Camera, CAMERA_2D);
-    context->DrawIndexed(4, 0, 0);
+    // 画面端まで届く最大半径（アスペクト補正込み）
+    const float cx = m_CenterX, cy = m_CenterY, asp = m_Aspect;
+    const float dx = max(cx, 1.0f - cx);
+    const float dy = max(cy, 1.0f - cy);
+    const float rMax = std::sqrt((dx * asp) * (dx * asp) + dy * dy);
 
-    if (m_SnapshotSRV)
-    {
-        ID3D11ShaderResourceView* nullSrv[1] = { nullptr };
-        context->PSSetShaderResources(0, 1, nullSrv);
-    }
+    WipeCB cb{};
+    cb.CenterX = cx;
+    cb.CenterY = cy;
+    cb.Radius = (m_Invert ? (1.0f - m_Progress) : m_Progress) * rMax;
+    cb.Feather = m_Feather;
+    cb.Aspect = asp;
+    cb.Zoom = std::lerp(m_ZoomFrom, m_ZoomTo, m_Progress);
+    cb.Invert = m_Invert ? 1.0f : 0.0f;
+
+    D3D11_MAPPED_SUBRESOURCE map{};
+    ctx->Map(m_CB.Get(), 0, D3D11_MAP_WRITE_DISCARD, 0, &map);
+    std::memcpy(map.pData, &cb, sizeof(cb));
+    ctx->Unmap(m_CB.Get(), 0);
+
+    ctx->PSSetConstantBuffers(1, 1, m_CB.GetAddressOf());
+    ctx->PSSetShaderResources(0, 1, m_Snapshot.GetAddressOf()); // t0
+
+    // 5) 描画
+    ctx->IASetPrimitiveTopology(D3D11_PRIMITIVE_TOPOLOGY_TRIANGLESTRIP);
+    Camera::ScopedMode scoped(m_Camera, CAMERA_2D);
+    ctx->DrawIndexed(4, 0, 0);
 
     Renderer::SetDepthEnable(true);
-}
-
-void Wipe::Finalize()
-{
-    m_SnapshotSRV.Reset();
-}
-
-void Wipe::SetProgress(float p)
-{
-    m_Progress = std::clamp(p, 0.0f, 1.0f);
-    UpdateLayout();
-}
-
-void Wipe::SetSnapshot(ID3D11ShaderResourceView* srv)
-{
-    m_SnapshotSRV = srv;
-}
-
-void Wipe::UpdateLayout()
-{
-    if (!m_BaseInitialized)
-    {
-        m_BaseScale = GetScale();
-        m_BasePos   = GetPos();
-        m_BaseInitialized = true;
-    }
-
-    const float coverage = std::clamp(m_Progress, 0.0f, 1.0f);
-
-    float width  = m_BaseScale.x;
-    float height = m_BaseScale.y;
-    float depth  = m_BaseScale.z;
-
-    NVector3 pos   = m_BasePos;
-    NVector3 scale = m_BaseScale;
-
-    float uOffset = 0.0f;
-    float vOffset = 0.0f;
-    float uScale  = 1.0f;
-    float vScale  = 1.0f;
-
-    const float halfWidth  = width * 0.5f;
-    const float halfHeight = height * 0.5f;
-
-    switch (m_Dir)
-    {
-    case DIRECTION::LEFT_TO_RIGHT:
-        scale.x = width * coverage;
-        scale.y = m_BaseScale.y;
-        if (!m_Invert)
-        {
-            pos.x = m_BasePos.x - halfWidth + scale.x * 0.5f;
-            uOffset = 0.0f;
-        }
-        else
-        {
-            pos.x = m_BasePos.x + halfWidth - scale.x * 0.5f;
-            uOffset = 1.0f - coverage;
-        }
-        uScale = coverage;
-        break;
-
-    case DIRECTION::RIGHT_TO_LEFT:
-        scale.x = width * coverage;
-        scale.y = m_BaseScale.y;
-        if (!m_Invert)
-        {
-            pos.x = m_BasePos.x + halfWidth - scale.x * 0.5f;
-            uOffset = 1.0f - coverage;
-        }
-        else
-        {
-            pos.x = m_BasePos.x - halfWidth + scale.x * 0.5f;
-            uOffset = 0.0f;
-        }
-        uScale = coverage;
-        break;
-
-    case DIRECTION::TOP_TO_BOTTOM:
-        scale.x = m_BaseScale.x;
-        scale.y = height * coverage;
-        if (!m_Invert)
-        {
-            pos.y = m_BasePos.y + halfHeight - scale.y * 0.5f;
-            vOffset = 0.0f;
-        }
-        else
-        {
-            pos.y = m_BasePos.y - halfHeight + scale.y * 0.5f;
-            vOffset = 1.0f - coverage;
-        }
-        vScale = coverage;
-        break;
-
-    case DIRECTION::BOTTOM_TO_TOP:
-        scale.x = m_BaseScale.x;
-        scale.y = height * coverage;
-        if (!m_Invert)
-        {
-            pos.y = m_BasePos.y - halfHeight + scale.y * 0.5f;
-            vOffset = 1.0f - coverage;
-        }
-        else
-        {
-            pos.y = m_BasePos.y + halfHeight - scale.y * 0.5f;
-            vOffset = 0.0f;
-        }
-        vScale = coverage;
-        break;
-    }
-
-    SetScale(scale.x, scale.y, depth);
-    SetPos(pos.x, pos.y, pos.z);
-
-    m_UOffset = uOffset;
-    m_VOffset = vOffset;
-    m_UScale  = (m_Dir == DIRECTION::LEFT_TO_RIGHT || m_Dir == DIRECTION::RIGHT_TO_LEFT) ? coverage : 1.0f;
-    m_VScale  = (m_Dir == DIRECTION::TOP_TO_BOTTOM || m_Dir == DIRECTION::BOTTOM_TO_TOP) ? coverage : 1.0f;
-}
-
-void Wipe::GetViewportSize(ID3D11DeviceContext* ctx, UINT& w, UINT& h)
-{
-    D3D11_VIEWPORT vp{};
-    UINT count = 1;
-    ctx->RSGetViewports(&count, &vp);
-    w = static_cast<UINT>(vp.Width);
-    h = static_cast<UINT>(vp.Height);
 }
