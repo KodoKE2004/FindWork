@@ -35,6 +35,11 @@ void TransScene::Initialize()
         m_AlphaValue = 1.0f / m_Duration;
 		auto wipe = std::make_shared<Wipe>(instance.GetCamera());
 		wipe->Initialize();
+		// 次のシーンの１フレーム目を作成と取得
+		m_SceneNext->Initialize();
+		DrawNextScene();
+		wipe->SetTextureSRV(m_NextSceneSRV.Get());
+
         wipe->SetPos(0.0f, 0.0f, -2.0f);
         m_TransitionTexture = wipe;
         instance.SetTransitionTexture(m_TransitionTexture);
@@ -69,7 +74,7 @@ void TransScene::Update(float tick)
 				{
 				 case TRANS_MODE::FADE:
 				 {
-					FADE_OUT();		
+					//FADE_OUT();		
 					if (m_isChange) 
 					{
 						m_SceneOld ->Finalize()  ;
@@ -90,16 +95,17 @@ void TransScene::Update(float tick)
                  break;
 				}
 			} // if (!m_isChange) true OUTの処理 終わり
-			  // INの処理
+			 
+			// INの処理
 			else
 			{
 				switch (m_TransMode)
 				{
-				 case TRANS_MODE::FADE:	 FADE_IN();		break;
+				 case TRANS_MODE::FADE:	 ;//FADE_IN();		break;
 
 				}
             } // if (!m_isChange) else INの処理 終わり
-        }	  // switch (m_Step) case : DOING 終わり
+        }// switch (m_Step) case : DOING 終わり
 	 break;
 	 case STEP::FINISH:
 	 {
@@ -182,33 +188,33 @@ bool TransScene::isOverClock()
 }
 
 // フェードイン
-void TransScene::FADE_IN()
-{
-	m_Alpha -= m_AlphaValue * Application::GetDeltaTime();
-
-	if (isOverClock())
-	{
-		m_Alpha = 0.0f;
-		m_Step = STEP::FINISH;
-	}
-
-	m_TransitionTexture->SetColor(0.0f, 0.0f, 0.0f, m_Alpha);
-	
-}
+//void TransScene::FADE_IN()
+//{
+//	m_Alpha -= m_AlphaValue * Application::GetDeltaTime();
+//
+//	if (isOverClock())
+//	{
+//		m_Alpha = 0.0f;
+//		m_Step = STEP::FINISH;
+//	}
+//
+//	m_TransitionTexture->SetColor(0.0f, 0.0f, 0.0f, m_Alpha);
+//	
+//}
 
 // フェードアウト
-void TransScene::FADE_OUT()
-{
-	m_Alpha += m_AlphaValue * Application::GetDeltaTime();
-
-	if (isOverClock())
-	{
-		m_Alpha = 1.0f;
-		m_isChange = true;
-	}
-
-	m_TransitionTexture->SetColor(0.0f, 0.0f, 0.0f, m_Alpha);
-}
+//void TransScene::FADE_OUT()
+//{
+//	m_Alpha += m_AlphaValue * Application::GetDeltaTime();
+//
+//	if (isOverClock())
+//	{
+//		m_Alpha = 1.0f;
+//		m_isChange = true;
+//	}
+//
+//	m_TransitionTexture->SetColor(0.0f, 0.0f, 0.0f, m_Alpha);
+//}
 
 void TransScene::WIPE_IN()
 {

@@ -11,7 +11,7 @@ Fade::Fade(Camera* cam) : TransitionBase(cam)
 void Fade::Initialize()
 {
 	// フェード用の画像追加
-    auto textureMgr = Game::GetInstance().GetTextureManager();
+    auto textureMgr = GAME_MANAGER_TEXTURE;
 	m_Texture = textureMgr->GetTexture("Black.png");
 	SetScale(SCREEN_WIDTH, SCREEN_HEIGHT, 1.0f);
 	SetColor(0.0f, 0.0f, 0.0f, 0.0f);
@@ -120,4 +120,12 @@ void Fade::Draw()
 void Fade::Finalize()
 {
 	
+}
+
+void Fade::FADE_IN()
+{
+}
+
+void Fade::FADE_OUT()
+{
 }

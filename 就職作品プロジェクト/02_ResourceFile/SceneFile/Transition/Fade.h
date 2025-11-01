@@ -8,20 +8,19 @@ class Fade : public TransitionBase
 {
 private:
 
-    float m_Alpha = 0.0f;      // 現在のアルファ値
-    float m_AlphaValue = 0.0f; // アルファ値の変化量
+    float m_Alpha = 0.0f;			// 現在のアルファ値
+    float m_AlphaValue = 0.0f;		// アルファ値の変化量
 
 
 public:
 	Fade(Camera* cam);
 
 	void Initialize()	override;
-	void Update()		override;
+	void Update(){}				;	// Updateは使わない
 	void Draw()			override;
 	void Finalize()		override;
 
 	void FADE_IN();
 	void FADE_OUT();
-
 };
 

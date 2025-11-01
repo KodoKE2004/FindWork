@@ -8,7 +8,7 @@ class Scene
 {
 private:
 protected:
-	std::vector<Object*> m_MySceneObjects; // このシーンのオブジェクト
+	std::vector<Object*> m_MySceneObjects;
 	std::unordered_map<std::string, AudioConfig> m_AudioList;
 
 	int score = 0;

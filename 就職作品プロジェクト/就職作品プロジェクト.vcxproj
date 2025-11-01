@@ -278,6 +278,7 @@
       <AdditionalIncludeDirectories>$(ProjectDir)03_ExternalFile/assimp/5.2.5/include;$(ProjectDir)03_ExternalFile\DirectXTex\include;$(ProjectDir)03_ExternalFile\DirectXTK\include;$(ProjectDir)02_ResourceFile;$(ProjectDir)02_ResourceFile\ObjectFile;$(ProjectDir)02_ResourceFile\SceneFile;$(ProjectDir)02_ResourceFile\SceneFile\Transition;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
       <RuntimeLibrary>MultiThreadedDebugDLL</RuntimeLibrary>
       <BasicRuntimeChecks>Default</BasicRuntimeChecks>
+      <MultiProcessorCompilation>true</MultiProcessorCompilation>
     </ClCompile>
     <Link>
       <SubSystem>Console</SubSystem>
@@ -301,6 +302,7 @@
       <RuntimeLibrary>MultiThreadedDLL</RuntimeLibrary>
       <AdditionalIncludeDirectories>$(ProjectDir)03_ExternalFile\DirectXTex\include;$(ProjectDir)03_ExternalFile\DirectXTK\include;$(ProjectDir)03_ExternalFile\assimp\5.2.5\include;$(ProjectDir)02_ResourceFile;$(ProjectDir)02_ResourceFile\ObjectFile;$(ProjectDir)02_ResourceFile\SceneFile;$(ProjectDir)02_ResourceFile\SceneFile\Transition;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
       <LanguageStandard>stdcpp20</LanguageStandard>
+      <MultiProcessorCompilation>true</MultiProcessorCompilation>
     </ClCompile>
     <Link>
       <SubSystem>Console</SubSystem>

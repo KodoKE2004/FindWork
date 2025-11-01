@@ -1,8 +1,8 @@
 #pragma once
 // 次シーンのスナップショット（SRV）を最後にアルファ合成で全画面描画するだけのオブジェクト
 
-#include "../../ObjectFile/Object.h" 
-#include "../../Renderer.h"
+#include "ObjectFile/Object.h" 
+#include "Renderer.h"
 #include <wrl/client.h>
 #include <d3d11.h>
 
@@ -28,5 +28,7 @@ public:
 
     void SetSRV(ID3D11ShaderResourceView* srv) { m_SRV = srv; }
     void SetAlpha(float a) { m_Alpha = a; }
+
+    ID3D11ShaderResourceView* GetSRV() const {return m_SRV.Get(); }
     float GetAlpha() const { return m_Alpha; }
 };

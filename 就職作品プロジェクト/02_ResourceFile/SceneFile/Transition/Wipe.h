@@ -20,8 +20,10 @@ public:
     using TransitionBase::TransitionBase; // Camera* を親から
 
     void Initialize() override;
-    void Update()     override; // ロジックは TransScene 側で進める
+    void Update(){}           ;
     void Draw()       override;
     void Finalize()   override;
 
+    void WIPE_IN() ;
+    void WIPE_OUT();
 };
