@@ -2,21 +2,28 @@
 #include "TransitionBase.h"
 
 
-// ƒtƒF[ƒh—p‚Ì‰æ‘œ‚ğg—p‚µ‚ÄƒV[ƒ“‘JˆÚ‚ğs‚¤ƒNƒ‰ƒX
-// ‚±‚ÌƒNƒ‰ƒX‚ÍAƒtƒF[ƒhƒCƒ“EƒtƒF[ƒhƒAƒEƒg‚ÌŒø‰Ê‚ğ‚ÂƒeƒNƒXƒ`ƒƒ‚ğŠÇ—‚µ‚Ü‚·B
-class Fade : public TransitionBase
-{
-private:
-
-    float m_Alpha = 0.0f;			// Œ»İ‚ÌƒAƒ‹ƒtƒ@’l
-    float m_AlphaValue = 0.0f;		// ƒAƒ‹ƒtƒ@’l‚Ì•Ï‰»—Ê
-
-
+    enum class FADE_PHASE
+    {
+        OUT,
+        IN,
+        FINISH,
+    };
+    float      m_Alpha      = 0.0f; // İ‚ÌƒAt@l
+    float      m_AlphaValue = 0.0f; // At@lÌ•Ï‰
+    FADE_PHASE m_Phase      = FADE_PHASE::OUT;
+    void ApplyAlpha();
+        Fade(Camera* cam);
+        void Initialize()       override;
+        void Update()           override;       // UpdateÅƒtF[Yis
+        void Draw()                     override;
+        void Finalize()         override;
+        void FADE_IN();
+        void FADE_OUT();
 public:
 	Fade(Camera* cam);
 
 	void Initialize()	override;
-	void Update(){}				;	// Update‚Íg‚í‚È‚¢
+	void Update(){}				;	// Updateã¯ä½¿ã‚ãªã„
 	void Draw()			override;
 	void Finalize()		override;
 

@@ -1,117 +1,223 @@
 // SceneFile/Transition/Wipe.cpp
 #include "Wipe.h"
 #include "Renderer.h"
-#include "main.h"  // SCREEN_WIDTH/HEIGHT “™‚ª‚ ‚é‚È‚ç
-#include "Game.h"
-#include <vector>
-#include <algorithm>
+#include "../../Application.h"
+        // CvpÌ‰æ‘œÇ‰
+        auto textureMgr = GAME_MANAGER_TEXTURE;
+        m_Texture = textureMgr->GetTexture("Black.png");
+        SetScale(SCREEN_WIDTH, SCREEN_HEIGHT, 1.0f);
+        SetColor(0.0f, 0.0f, 0.0f, 0.0f);
+        m_Phase = WIPE_PHASE::OUT;
+        m_Rate  = 0.0f;
+        m_Timer = 0.0f;
+        if (m_Duration <= 0.0f)
+        {
+                m_Duration = 1.0f;
+        }
+        SetTimerInfo(0.0f, m_Duration, m_Duration);
 
-using Microsoft::WRL::ComPtr;
+        // _f[^
+        std::vector<VERTEX_3D> vertices;
 
-void Wipe::Initialize()
-{
-	// ƒƒCƒv—p‚Ì‰æ‘œ’Ç‰Á
-	auto textureMgr = GAME_MANAGER_TEXTURE;
-	m_Texture = textureMgr->GetTexture("Black.png");
-	SetScale(SCREEN_WIDTH, SCREEN_HEIGHT, 1.0f);
-	SetColor(0.0f, 0.0f, 0.0f, 0.0f);
+        vertices.resize(4);
 
-	// ’¸“_ƒf[ƒ^
-	std::vector<VERTEX_3D> vertices;
+        vertices[0].position = NVector3(-0.5f, 0.5f, 0.0f);
+        vertices[1].position = NVector3(0.5f, 0.5f, 0.0f);
+        vertices[2].position = NVector3(-0.5f, -0.5f, 0.0f);
+        vertices[3].position = NVector3(0.5f, -0.5f, 0.0f);
 
-	vertices.resize(4);
+        vertices[0].color = Color(1.0f, 1.0f, 1.0f, 1.0f);
+        vertices[1].color = Color(1.0f, 1.0f, 1.0f, 1.0f);
+        vertices[2].color = Color(1.0f, 1.0f, 1.0f, 1.0f);
+        vertices[3].color = Color(1.0f, 1.0f, 1.0f, 1.0f);
 
-	vertices[0].position = NVector3(-0.5f, 0.5f, 0.0f);
-	vertices[1].position = NVector3(0.5f, 0.5f, 0.0f);
-	vertices[2].position = NVector3(-0.5f, -0.5f, 0.0f);
-	vertices[3].position = NVector3(0.5f, -0.5f, 0.0f);
+        vertices[0].uv = Vector2(0.0f, 0.0f);
+        vertices[1].uv = Vector2(1.0f, 0.0f);
+        vertices[2].uv = Vector2(0.0f, 1.0f);
+        vertices[3].uv = Vector2(1.0f, 1.0f);
 
-	vertices[0].color = Color(1.0f, 1.0f, 1.0f, 1.0f);
-	vertices[1].color = Color(1.0f, 1.0f, 1.0f, 1.0f);
-	vertices[2].color = Color(1.0f, 1.0f, 1.0f, 1.0f);
-	vertices[3].color = Color(1.0f, 1.0f, 1.0f, 1.0f);
+        // _obt@
+        m_VertexBuffer.Create(vertices);
 
-	vertices[0].uv = Vector2(0.0f, 0.0f);
-	vertices[1].uv = Vector2(1.0f, 0.0f);
-	vertices[2].uv = Vector2(0.0f, 1.0f);
-	vertices[3].uv = Vector2(1.0f, 1.0f);
+        // CfbNXobt@
+        std::vector<unsigned int> indices;
+        indices.resize(4);
 
-	// ’¸“_ƒoƒbƒtƒ@¶¬
-	m_VertexBuffer.Create(vertices);
+        indices[0] = 0;
+        indices[1] = 1;
+        indices[2] = 2;
+        indices[3] = 3;
 
-	// ƒCƒ“ƒfƒbƒNƒXƒoƒbƒtƒ@¶¬
-	std::vector<unsigned int> indices;
-	indices.resize(4);
+        // CfbNXobt@
+        m_IndexBuffer.Create(indices);
 
-	indices[0] = 0;
-	indices[1] = 1;
-	indices[2] = 2;
-	indices[3] = 3;
+        // VF[_IuWFNg
+        SetShader("VS_Alpha", "PS_Alpha");
 
-	// ƒCƒ“ƒfƒbƒNƒXƒoƒbƒtƒ@¶¬
-	m_IndexBuffer.Create(indices);
+        // }eAæ“¾
+        m_Materiale = std::make_unique<Material>();
+        MATERIAL mtrl;
+        mtrl.Diffuse = Color(1.0f, 1.0f, 1.0f, 1.0f);
+        mtrl.Shiness = 1;
+        mtrl.TextureEnable = true; // eNX`gÛ‚ÌƒtO
+        m_Materiale->Create(mtrl);
+        switch (m_Phase)
+        {
+        case WIPE_PHASE::OUT:
+                WIPE_OUT();
+                break;
+        case WIPE_PHASE::IN:
+                WIPE_IN();
+                break;
+        default:
+                break;
+        }
+        // SRVZbgÄ‚È‚Ã~ğ’¼ÚƒubgiJÚIÉgpj
+        if (auto* srv = GetTextureSRV())
+        {
+                if (m_Phase == WIPE_PHASE::FINISH)
+                {
+                        Renderer::SetDepthEnable(false);
+                        Renderer::SetBlendState(BS_ALPHABLEND);
+                        Renderer::BlitSRVToBackbuffer(srv, 1.0f);
+                        Renderer::SetDepthEnable(true);
+                        return;
+                }
+        }
 
-	// ƒVƒF[ƒ_ƒIƒuƒWƒFƒNƒg¶¬
-	SetShader("VS_Alpha", "PS_Alpha");
+        Renderer::SetDepthEnable(false);
+        Renderer::SetBlendState(BS_ALPHABLEND);
+        Renderer::SetBlendState(BS_ALPHABLEND);
 
-	// ƒ}ƒeƒŠƒAƒ‹î•ñæ“¾
-	m_Materiale = std::make_unique<Material>();
-	MATERIAL mtrl;
-	mtrl.Diffuse = Color(1.0f, 1.0f, 1.0f, 1.0f);
-	mtrl.Shiness = 1;
-	mtrl.TextureEnable = true; // ƒeƒNƒXƒ`ƒƒ‚ğg‚¤‚©”Û‚©‚Ìƒtƒ‰ƒO
-	m_Materiale->Create(mtrl);
+        // SRTì¬
+        Matrix r = Matrix::CreateFromYawPitchRoll(m_Rotation.x, m_Rotation.y, m_Rotation.z);
+        Matrix t = Matrix::CreateTranslation(m_Position.x, m_Position.y, m_Position.z);
+        Matrix s = Matrix::CreateScale(m_Scale.x, m_Scale.y, m_Scale.z);
+
+        Matrix worldmtx;
+        worldmtx = s * r * t;
+        Renderer::SetWorldMatrix(&worldmtx); // GPUÉƒZbg
+
+        // `Ì
+        ID3D11DeviceContext* devicecontext;
+        devicecontext = Renderer::GetDeviceContext();
+
+
+        // g|W[Zbgiv~eBu^Cvj
+        devicecontext->IASetPrimitiveTopology(D3D11_PRIMITIVE_TOPOLOGY_TRIANGLESTRIP);
+
+        SetGPU();
+
+        m_VertexBuffer.SetGPU();
+        m_IndexBuffer.SetGPU();
+
+        m_Texture->SetGPU();
+
+        m_Materiale->SetDiffuse(DirectX::XMFLOAT4(m_Color.x, m_Color.y, m_Color.z, m_Color.w));
+        m_Materiale->Update();
+        m_Materiale->SetGPU();
+
+        // UVÌİ’w
+        float u = m_NumU - 1;
+        float v = m_NumV - 1;
+        float uw = 1 / m_SplitX;
+        float vh = 1 / m_SplitY;
+
+        Renderer::SetUV(u, v, uw, vh);
+        Camera::ScopedMode scepedMode(m_Camera, CAMERA_2D);
+
+        devicecontext->DrawIndexed(
+                4, // `æ‚·CfbNXilp`È‚Å‚Sj
+                0, // ÅÌƒCfbNXobt@ÌˆÊ’u
+                0);
+
+        Renderer::SetDepthEnable(true);  // `ÉŒÖ–ß‚
 }
 
-void Wipe::Update()
+void Wipe::Finalize()
 {
 }
-
-void Wipe::Draw()
+void Wipe::ApplyWipeAmount(float amount)
 {
-	// SRV‚ªƒZƒbƒg‚³‚ê‚Ä‚¢‚é‚È‚çÃ~‰æ‚ğ’¼ÚƒuƒŠƒbƒg‚µ‚ÄI—¹
-	if (auto* srv = GetTextureSRV()) 
-	{
-		Renderer::SetDepthEnable(false);
-		Renderer::SetBlendState(BS_ALPHABLEND);
-		Renderer::BlitSRVToBackbuffer(srv, 1.0f);
-		Renderer::SetDepthEnable(true);
-		return ;
-	}
+        amount = std::clamp(amount, 0.0f, 1.0f);
+        m_Rate  = amount;
 
-	Renderer::SetDepthEnable(false);
-	Renderer::SetBlendState(BS_ALPHABLEND);
-	Renderer::SetBlendState(BS_ALPHABLEND);
+        float width  = SCREEN_WIDTH;
+        float height = SCREEN_HEIGHT;
+        float posX   = 0.0f;
+        float posY   = 0.0f;
+        const float depth = GetPos().z;
 
-	// SRTî•ñì¬
-	Matrix r = Matrix::CreateFromYawPitchRoll(m_Rotation.x, m_Rotation.y, m_Rotation.z);
-	Matrix t = Matrix::CreateTranslation(m_Position.x, m_Position.y, m_Position.z);
-	Matrix s = Matrix::CreateScale(m_Scale.x, m_Scale.y, m_Scale.z);
+        switch (m_Mode)
+        {
+        case WIPE_MODE::LEFT_TO_RIGHT:
+                width = SCREEN_WIDTH * amount;
+                posX  = (width - SCREEN_WIDTH) * 0.5f;
+                break;
+        case WIPE_MODE::RIGHT_TO_LEFT:
+                width = SCREEN_WIDTH * amount;
+                posX  = (SCREEN_WIDTH - width) * 0.5f;
+                break;
+        case WIPE_MODE::TOP_TO_BOTTOM:
+                height = SCREEN_HEIGHT * amount;
+                posY   = (height - SCREEN_HEIGHT) * 0.5f;
+                break;
+        case WIPE_MODE::BOTTOM_TO_TOP:
+                height = SCREEN_HEIGHT * amount;
+                posY   = (SCREEN_HEIGHT - height) * 0.5f;
+                break;
+        default:
+                break;
+        }
 
-	Matrix worldmtx;
-	worldmtx = s * r * t;
-	Renderer::SetWorldMatrix(&worldmtx); // GPU‚ÉƒZƒbƒg
+        // EÉ’[ÉÈ‚È‚æ‚¤É‰İ‚
+        width  = std::max(width, 0.0f);
+        height = std::max(height, 0.0f);
 
-	// •`‰æ‚Ìˆ—
-	ID3D11DeviceContext* devicecontext;
-	devicecontext = Renderer::GetDeviceContext();
+        SetScale(width, height, 1.0f);
+        SetPos(posX, posY, depth);
+        SetColor(0.0f, 0.0f, 0.0f, amount > 0.0f ? 1.0f : 0.0f);
+}
 
+void Wipe::WIPE_IN()
+{
+        if (m_Phase != WIPE_PHASE::IN)
+        {
+                return;
+        }
 
-	// ƒgƒ|ƒƒW[‚ğƒZƒbƒgiƒvƒŠƒ~ƒeƒBƒuƒ^ƒCƒvj
-	devicecontext->IASetPrimitiveTopology(D3D11_PRIMITIVE_TOPOLOGY_TRIANGLESTRIP);
+        float delta = Application::GetDeltaTime();
+        CountTimer(delta);
+        float progress = 1.0f - std::clamp(m_Timer / std::max(m_Duration, 0.0001f), 0.0f, 1.0f);
+        ApplyWipeAmount(progress);
 
-	SetGPU();
+        if (progress <= 0.0f)
+        {
+                m_Phase = WIPE_PHASE::FINISH;
+                SetScale(SCREEN_WIDTH, SCREEN_HEIGHT, 1.0f);
+                SetPos(0.0f, 0.0f, GetPos().z);
+                SetColor(0.0f, 0.0f, 0.0f, 0.0f);
+        }
+void Wipe::WIPE_OUT()
+        if (m_Phase != WIPE_PHASE::OUT)
+        {
+                return;
+        }
 
-	m_VertexBuffer.SetGPU();
-	m_IndexBuffer.SetGPU();
+        float delta = Application::GetDeltaTime();
+        CountTimer(delta);
+        float progress = std::clamp(m_Timer / std::max(m_Duration, 0.0001f), 0.0f, 1.0f);
+        ApplyWipeAmount(progress);
 
-	m_Texture->SetGPU();
+        if (progress >= 1.0f)
+        {
+                m_Phase = WIPE_PHASE::IN;
+                ResetTimer();
+        }
 
-	m_Materiale->SetDiffuse(DirectX::XMFLOAT4(m_Color.x, m_Color.y, m_Color.z, m_Color.w));
-	m_Materiale->Update();
 	m_Materiale->SetGPU();
 
-	// UV‚Ìİ’è‚ğw’è
+	// UVã®è¨­å®šã‚’æŒ‡å®š
 	float u = m_NumU - 1;
 	float v = m_NumV - 1;
 	float uw = 1 / m_SplitX;
@@ -121,11 +227,11 @@ void Wipe::Draw()
 	Camera::ScopedMode scepedMode(m_Camera, CAMERA_2D);
 
 	devicecontext->DrawIndexed(
-		4, // •`‰æ‚·‚éƒCƒ“ƒfƒbƒNƒX”ilŠpŒ`‚È‚ñ‚Å‚Sj
-		0, // Å‰‚ÌƒCƒ“ƒfƒbƒNƒXƒoƒbƒtƒ@‚ÌˆÊ’u
+		4, // æç”»ã™ã‚‹ã‚¤ãƒ³ãƒ‡ãƒƒã‚¯ã‚¹æ•°ï¼ˆå››è§’å½¢ãªã‚“ã§ï¼”ï¼‰
+		0, // æœ€åˆã®ã‚¤ãƒ³ãƒ‡ãƒƒã‚¯ã‚¹ãƒãƒƒãƒ•ã‚¡ã®ä½ç½®
 		0);
 
-	Renderer::SetDepthEnable(true);  // •`‰æŒã‚ÉŒ³‚Ö–ß‚·
+	Renderer::SetDepthEnable(true);  // æç”»å¾Œã«å…ƒã¸æˆ»ã™
 }
 
 void Wipe::Finalize()
