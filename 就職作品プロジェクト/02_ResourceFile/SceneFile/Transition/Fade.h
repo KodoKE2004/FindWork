@@ -2,32 +2,33 @@
 #include "TransitionBase.h"
 
 
-    enum class FADE_PHASE
-    {
-        OUT,
-        IN,
-        FINISH,
+class Fade : public TransitionBase
+{
+private:
+    // フェードの段階: 画面を黒で覆う(OUT) → 黒から戻す(IN) → 完了
+    enum class FADE_PHASE 
+    { 
+        TRANS_OUT,
+        TRANS_IN,
+        FINISH
     };
-    float      m_Alpha      = 0.0f; // ݂̃At@l
-    float      m_AlphaValue = 0.0f; // At@l̕ω
-    FADE_PHASE m_Phase      = FADE_PHASE::OUT;
-    void ApplyAlpha();
-        Fade(Camera* cam);
-        void Initialize()       override;
-        void Update()           override;       // UpdateŃtF[Yis
-        void Draw()                     override;
-        void Finalize()         override;
-        void FADE_IN();
-        void FADE_OUT();
+
+    float m_Alpha = 0.0f; // 現在アルファ
+    float m_AlphaValue = 0.0f; // 秒あたり増減量（1 / duration）
+    FADE_PHASE m_Phase = FADE_PHASE::TRANS_OUT;
+
 public:
-	Fade(Camera* cam);
+    explicit Fade(Camera* cam);
+    void Initialize() override;     // リソース初期化、パラメータ初期化
+    void Update() override;         // フェーズに応じて進行
+    void Draw() override;           // フルスクリーンの黒板を描画
+    void Finalize() override;       // 今は何もしない
 
-	void Initialize()	override;
-	void Update(){}				;	// Updateは使わない
-	void Draw()			override;
-	void Finalize()		override;
+    // 1フレーム分の処理: 黒→表示（IN）、表示→黒（OUT）
+    void FADE_IN();
+    void FADE_OUT();
 
-	void FADE_IN();
-	void FADE_OUT();
+
+    // m_Alpha を [0,1] にクランプして色へ反映
+    void ApplyAlpha();
 };
-
