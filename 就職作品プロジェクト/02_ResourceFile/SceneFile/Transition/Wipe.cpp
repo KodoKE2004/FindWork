@@ -26,7 +26,7 @@ void Wipe::Initialize()
 
 
     if (m_Duration <= 0.0f) m_Duration = 1.0f;
-    SetTimerInfo(0.0f, m_Duration, m_Duration);
+    SetTimerInfo(0.0f, m_Duration);
 
 
     // フルスクリーン矩形

@@ -26,7 +26,7 @@ void Fade::Initialize()
         m_Duration = 1.0f;
     }
 
-    SetTimerInfo(0.0f, m_Duration, m_Duration);
+    SetTimerInfo(0.0f, m_Duration);
 
     // 秒あたりのアルファ変化量
     m_AlphaValue = 1.0f / max(m_Duration, 0.0001f);

@@ -82,11 +82,9 @@ public:
     // 上記３つの値をまとめて指定  
     /// @brief タイマー情報をまとめて設定する
     /// @param timer    現在のタイマー値
-    /// @param limit    タイマーの上限値
     /// @param duration フェードの持続時間
-    void SetTimerInfo(const float& timer, const float& limit, const float& duration) {
+    void SetTimerInfo(const float& timer, const float& duration) {
         m_Timer    = timer;
-        m_Limit    = limit;
         m_Duration = duration;
     }
 

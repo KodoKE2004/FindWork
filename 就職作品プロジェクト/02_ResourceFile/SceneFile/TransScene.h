@@ -50,7 +50,7 @@ private:
 	float m_Duration = 0.0f;
 
     // トランジション関連
-	float m_Alpha = 0.0f;
+	float m_Alpha	   = 0.0f;
 	float m_AlphaValue = 0.0f;
 
 	bool m_isChange		    = false;
@@ -91,20 +91,11 @@ public:
 	void SetTransMode(TRANS_MODE mode)     { m_TransMode = mode;	  }
 	void SetStep(STEP step)				   { m_Step		 = step;	  }
     void SetStackOp(STACK_OP op)		   { m_StackOp   = op;		  }
+	void SetTimer(float timer)			   { m_Timer	 = timer;	  }
 
-	bool isOverClock();
-	
-public:	
-    //================================
-	//			  フェード
-    //================================
-	
-
-    //================================
-    //			  ワイプ
-    //================================
-    void WIPE_IN();
-    void WIPE_OUT();
+	// 設定した時間に到達したかどうか
+	bool isOverClock();  
+	void OldToNextScene();
 
 };
 
