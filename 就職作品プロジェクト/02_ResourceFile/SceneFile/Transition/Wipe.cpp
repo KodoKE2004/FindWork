@@ -1,4 +1,3 @@
-#include "Wipe.h"
 #include "Game.h"
 #include "main.h"
 #include "Renderer.h"

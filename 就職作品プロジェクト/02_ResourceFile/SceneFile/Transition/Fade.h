@@ -1,7 +1,6 @@
 #pragma once
 #include "TransitionBase.h"
 
-
 class Fade : public TransitionBase
 {
 private:
