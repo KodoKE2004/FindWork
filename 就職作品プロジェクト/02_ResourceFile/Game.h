@@ -178,8 +178,8 @@ void ChangeScenePush(TRANS_MODE mode,float duration)
 	auto scene = new TransScene(true, false);
 	auto sceneNext = new T;
 
-	scene->SetOldScene(instance.GetCurrentScene());
     instance.ScenePush(instance.GetCurrentScene());
+	scene->SetOldScene(instance.GetCurrentScene());
 
 	scene->SetTransitionTick(duration);
 	scene->SetNextScene(sceneNext);

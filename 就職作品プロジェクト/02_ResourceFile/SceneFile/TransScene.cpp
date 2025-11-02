@@ -44,51 +44,50 @@ void TransScene::Initialize()
 		m_TransitionTexture->SetPos(0.0f, 0.0f, -2.0f);
 		instance.SetTransitionTexture	 (m_TransitionTexture);
 	}
-    m_TransitionTexture->SetPhase	 (PHASE::TRANS_IN);
-	m_TransitionTexture->SetTimerInfo(m_Timer,m_Duration);
 	break;
 	}
+
+    m_TransitionTexture->SetPhase	 (PHASE::TRANS_IN);
+	m_TransitionTexture->SetTimerInfo(0.0f, m_Duration);
 
 }
 
 void TransScene::Update(float tick)
 {
     auto& instance = GAME_INSTANCE;
+
 	//===========================
 	//			演出処理 
 	//===========================
-	float timer = 0.0f;
+	if (m_TransitionTexture == nullptr) {
+		return;
+	}
 
 	m_TransitionTexture->Update();
 
-	// タイマー処理の更新
-	SetTimer(m_TransitionTexture->GetTimer());
 	// 次シーンに移れるか
-	if (isOverClock())
+	if (!m_isChange && m_TransitionTexture->GetPhase() == PHASE::TRANS_IN)
 	{
-		m_SceneOld ->Finalize();
-		m_SceneNext->Initialize();
-		m_Step = STEP::FINISH;
-
-		switch (m_TransMode)
-		{
-		case TRANS_MODE::FADE:
+		if (m_SceneOld){
+			m_SceneOld->Finalize();
+		}
+		if (m_SceneNext) {
+			m_SceneNext->Initialize();
+		}
+		if (m_TransMode == TRANS_MODE::FADE)
 		{
 			DrawNextScene();
 		}
-		break;
-		case TRANS_MODE::WIPE:
-		{
-			
-		}
-		break;
-		}
+		m_isChange = true;
 	}
-	
+	if (m_TransitionTexture->GetPhase() == PHASE::FINISH)
+	{
+		m_Step = STEP::FINISH;
+	}
 	if (m_Step == STEP::FINISH)
 	{
-		instance.SetSceneCurrent(m_SceneNext);
 		Finalize();
+		instance.SetSceneCurrent(m_SceneNext);
 	}
 }
 

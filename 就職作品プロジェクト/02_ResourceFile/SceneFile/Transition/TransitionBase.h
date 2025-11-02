@@ -49,8 +49,7 @@ protected:
     float m_Duration = 1.0f;    // フェードの持続時間
 
 public:
-    
-    //
+
     TransitionBase() = default ;
     TransitionBase(Camera* cam);
     virtual ~TransitionBase() = default;
@@ -59,11 +58,11 @@ public:
     virtual void Draw()       = 0;
     virtual void Finalize()   = 0;
     
-
     void ResetTimer() { m_Timer = 0.0f; }
     void CountTimer(const float& delta) { m_Timer += delta; }
 
-    bool isFinish() { return m_Timer >= m_Limit; }              // 終了判定
+    // 終了判定
+    bool isFinish() { return m_Timer >= m_Limit; }
 
     
     // SRVを直接セット
@@ -79,16 +78,18 @@ public:
     // UV座標を指定
     void SetUV(const float& nu, const float& nv, const float& sx, const float& sy);
 
-    // 
-    // タイマー関連のセッター・ゲッター
-    // 
+    //===============================
+    //         セッター・ゲッター
+    //===============================
+     
+    // タイマー関連
     void SetTimer(const float& timer) { m_Timer = timer; }
     void SetLimit(const float& limit) { m_Limit = limit; }
     void SetDuration(const float& duration) { m_Duration = duration; }
 
     float GetTimer() const { return m_Timer; }
 
-    // 上記３つの値をまとめて指定  
+    /// 上記３つの値をまとめて指定  
     /// @brief タイマー情報をまとめて設定する
     /// @param timer    現在のタイマー値
     /// @param duration フェードの持続時間
@@ -97,6 +98,8 @@ public:
         m_Duration = duration;
     }
 
+    // 遷移状況の変数
     void SetPhase(PHASE phase) { m_Phase = phase; }
+    PHASE GetPhase()           { return m_Phase; }
 };
 
