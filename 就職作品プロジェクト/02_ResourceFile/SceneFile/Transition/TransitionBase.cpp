@@ -1,5 +1,5 @@
-#include "TransitionBase.h"
 #include <cassert>
+#include "TransitionBase.h"
 
 
 TransitionBase::TransitionBase(Camera* cam) : Object(cam)

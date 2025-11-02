@@ -1,7 +1,7 @@
 #include "Fade.h"
-#include "../../Game.h"
-#include "../../main.h"
-#include "../../Application.h"
+#include "Game.h"
+#include "main.h"
+#include "Application.h"
 #include <vector>
 #include <algorithm>
 

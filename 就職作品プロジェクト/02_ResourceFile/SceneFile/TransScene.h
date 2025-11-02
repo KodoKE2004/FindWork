@@ -56,10 +56,12 @@ private:
 	bool m_isChange		    = false;
 	bool m_IsSceneStackPop  = false;
     bool m_IsSceneStackPush = false;
+	bool m_HasInitializedNextScene = false;
+
 	STEP m_Step;
 
 	TRANS_MODE m_TransMode;
-    STACK_OP   m_StackOp;
+    STACK_OP   m_StackOp = STACK_OP::NONE;
 
 	std::shared_ptr<TransitionBase> m_TransitionTexture;
 

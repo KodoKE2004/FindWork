@@ -16,6 +16,10 @@ void TransScene::Initialize()
 	m_Timer = 0.0f;
 	m_Alpha = 0.0f;
 	m_isChange = false;
+	m_HasInitializedNextScene = false;
+	if (m_Duration <= 0.0f) {
+		m_Duration = 0.0f;
+	}
 	m_Step = STEP::DOING;
 	
 	//================================
@@ -37,9 +41,15 @@ void TransScene::Initialize()
         m_AlphaValue = 1.0f / m_Duration;
 		m_TransitionTexture = std::make_shared<Wipe>(instance.GetCamera());
 		m_TransitionTexture->Initialize();
+		if (m_StackOp != STACK_OP::POP && m_SceneNext) {
+			m_SceneNext->Initialize();
+			m_HasInitializedNextScene = true;
+		}
 		// 次のシーンの１フレーム目を作成と取得
-		m_SceneNext->Initialize();
-		DrawNextScene();
+		if (m_SceneNext) {
+			DrawNextScene();
+		}
+
 		m_TransitionTexture->SetTextureSRV(m_NextSceneSRV.Get());
 		m_TransitionTexture->SetPos(0.0f, 0.0f, -2.0f);
 		instance.SetTransitionTexture	 (m_TransitionTexture);
@@ -66,28 +76,33 @@ void TransScene::Update(float tick)
 	m_TransitionTexture->Update();
 
 	// 次シーンに移れるか
-	if (!m_isChange && m_TransitionTexture->GetPhase() == PHASE::TRANS_IN)
+	const auto phase = m_TransitionTexture->GetPhase();
+	if (!m_isChange && phase == PHASE::TRANS_IN)
 	{
-		if (m_SceneOld){
+		if (m_SceneOld && m_StackOp != STACK_OP::PUSH) {
 			m_SceneOld->Finalize();
 		}
 		if (m_SceneNext) {
-			m_SceneNext->Initialize();
+			if (m_StackOp != STACK_OP::POP && !m_HasInitializedNextScene) {
+				m_SceneNext->Initialize();
+				m_HasInitializedNextScene = true;
+			}
 		}
-		if (m_TransMode == TRANS_MODE::FADE)
+		if (m_TransMode == TRANS_MODE::FADE && m_SceneNext)
 		{
 			DrawNextScene();
 		}
 		m_isChange = true;
 	}
-	if (m_TransitionTexture->GetPhase() == PHASE::FINISH)
+	if (phase == PHASE::FINISH)
 	{
 		m_Step = STEP::FINISH;
 	}
+
 	if (m_Step == STEP::FINISH)
 	{
-		Finalize();
 		instance.SetSceneCurrent(m_SceneNext);
+		Finalize();
 	}
 }
 
@@ -110,12 +125,8 @@ void TransScene::Finalize()
 #ifdef _DEBUG
 	GAME_INSTANCE.m_Grid.DeInitialized();
 #endif // _DEBUG
-
-	if (this != nullptr)
-	{
-		delete this;
-	}
-
+	delete this;
+	
 }
 
 void TransScene::DrawNextScene()

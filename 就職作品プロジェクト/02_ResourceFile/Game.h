@@ -174,6 +174,8 @@ void ChangeScenePush(TRANS_MODE mode,float duration)
 	// 既定がSceneでなければエラー
 	static_assert(std::is_base_of_v<Scene, T>, "T は 基底クラスが Scene ではありません");
 
+	MyDebugLog(std::cout << "ChangeScenePushの読み込み検出\n" );
+
 	auto scene = new TransScene(true, false);
 	auto sceneNext = new T;
 
@@ -192,7 +194,7 @@ void ChangeScenePush(TRANS_MODE mode,float duration)
 }
 
 // 一つ前のシーンに戻る
-inline void ChangeScenePop(TRANS_MODE mode, float dutation)
+inline void ChangeScenePop(TRANS_MODE mode, float duration)
 {
     auto& instance = GAME_INSTANCE;
 
@@ -204,9 +206,15 @@ inline void ChangeScenePop(TRANS_MODE mode, float dutation)
     // 現在のシーン
     auto scene = new TransScene(false, true);
     Scene* sceneNext = instance.ScenePop();
+	if (sceneNext == nullptr) {
+		delete scene;
+		return;
+	}
+	scene->SetOldScene(instance.GetCurrentScene());
     scene->SetNextScene(sceneNext);
+	scene->SetTransitionTick(duration);
 	scene->SetStep(STEP::START);
-	scene->SetStackOp(STACK_OP::PUSH);
+	scene->SetStackOp(STACK_OP::POP);
 	scene->SetTransMode(mode);
 	scene->Initialize();
 
@@ -226,9 +234,15 @@ inline void ChangeScenePop(TRANS_MODE transMode, float duration, int stageNo, in
 	// 現在のシーン
 	auto scene = new TransScene(false, true);
 	Scene* sceneNext = instance.ScenePop();
+	if (sceneNext == nullptr) {
+		delete scene;
+		return;
+	}
+	scene->SetOldScene(instance.GetCurrentScene());
 	scene->SetNextScene(sceneNext);
+	scene->SetTransitionTick(duration);
 	scene->SetStep(STEP::START);
-	scene->SetStackOp(STACK_OP::PUSH);
+	scene->SetStackOp(STACK_OP::POP);
 	scene->SetTransMode(transMode);
 	scene->Initialize();
 

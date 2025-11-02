@@ -109,7 +109,6 @@ void Game::Draw()
 		instance.m_Grid.Draw();
 	}
 #endif	
-
 	for (auto& o : instance.m_GameObjects)
 	{
 		if (!o) continue;
@@ -130,7 +129,6 @@ void Game::Draw()
 void Game::Finalize()
 {
 	auto& instance = GetInstance();
-
 #ifdef _DEBUG
 	instance.m_Grid.Finalize();
 #endif //_DEBUG
@@ -143,7 +141,6 @@ void Game::SetSceneCurrent(Scene* newScene)
 {
 	auto& instance = GetInstance();
 	instance.m_SceneCurrent = newScene;	// 新しいシーンを設定
-
 }
 
 Game& Game::GetInstance()
@@ -166,7 +163,6 @@ void Game::DeleteObject(Object* pt)
 	if (pt == NULL) return;
 
 	pt->Finalize(); // 終了処理
-
 	// 要素を削除
 	instance.m_GameObjects.erase(
 		std::remove_if(

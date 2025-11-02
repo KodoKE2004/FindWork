@@ -1,4 +1,3 @@
-// SceneFile/Transition/Wipe.cpp
 #include "Wipe.h"
 #include "Game.h"
 #include "main.h"
