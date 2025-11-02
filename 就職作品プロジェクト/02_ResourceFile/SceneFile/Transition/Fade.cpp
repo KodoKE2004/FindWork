@@ -8,7 +8,7 @@
 
 Fade::Fade(Camera* cam) : TransitionBase(cam)
 {
-    m_Phase = FADE_PHASE::TRANS_OUT;
+    m_Phase = PHASE::TRANS_OUT;
 }
 
 
@@ -66,8 +66,8 @@ void Fade::Update()
 {
     switch (m_Phase)
     {
-    case FADE_PHASE::TRANS_OUT: FADE_OUT(); break;
-    case FADE_PHASE::TRANS_IN: FADE_IN(); break;
+    case PHASE::TRANS_OUT: FADE_OUT(); break;
+    case PHASE::TRANS_IN: FADE_IN(); break;
     default: break;
     }
 }
@@ -117,7 +117,7 @@ void Fade::ApplyAlpha()
 
 void Fade::FADE_IN()
 {
-    if (m_Phase != FADE_PHASE::TRANS_IN) return;
+    if (m_Phase != PHASE::TRANS_IN) return;
 
     float delta = Application::GetDeltaTime();
     CountTimer(delta);
@@ -129,14 +129,14 @@ void Fade::FADE_IN()
     {
         m_Alpha = 0.0f;
         ApplyAlpha();
-        m_Phase = FADE_PHASE::FINISH;
+        m_Phase = PHASE::FINISH;
     }
 }
 
 
 void Fade::FADE_OUT()
 {
-    if (m_Phase != FADE_PHASE::TRANS_OUT) return;
+    if (m_Phase != PHASE::TRANS_OUT) return;
 
     float delta = Application::GetDeltaTime();
     CountTimer(delta);
@@ -148,7 +148,7 @@ void Fade::FADE_OUT()
     {
         m_Alpha = 1.0f;
         ApplyAlpha();
-        m_Phase = FADE_PHASE::TRANS_IN;
+        m_Phase = PHASE::TRANS_IN;
         ResetTimer();
     }
 }

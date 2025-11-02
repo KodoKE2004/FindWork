@@ -16,21 +16,12 @@ private:
         NUM 
      };
 
-    enum class WIPE_PHASE 
-    {
-        WIPE_OUT,
-        WIPE_IN,
-        FINISH
-    };
-
     WIPE_MODE m_Mode = WIPE_MODE::LEFT_TO_RIGHT;
-    WIPE_PHASE m_Phase = WIPE_PHASE::WIPE_OUT;
     float m_Rate = 0.0f; // 0Å®1 ÇÃêiçsìx
-
     void ApplyWipeAmount(float amount);
 
 public:
-    Wipe(Camera* cam);
+    explicit Wipe(Camera* cam);
 
     void Initialize() override;
     void Update()     override;

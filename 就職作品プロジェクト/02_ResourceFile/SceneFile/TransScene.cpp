@@ -29,6 +29,7 @@ void TransScene::Initialize()
         m_TransitionTexture = std::make_shared<Fade>(instance.GetCamera());
 		m_TransitionTexture->Initialize();
 		m_TransitionTexture->SetPos(0.0f, 0.0f, -2.0f);
+		instance.SetTransitionTexture(m_TransitionTexture);
 	}
 	break;
 	case TRANS_MODE::WIPE:
@@ -41,44 +42,39 @@ void TransScene::Initialize()
 		DrawNextScene();
 		m_TransitionTexture->SetTextureSRV(m_NextSceneSRV.Get());
 		m_TransitionTexture->SetPos(0.0f, 0.0f, -2.0f);
+		instance.SetTransitionTexture	 (m_TransitionTexture);
 	}
+    m_TransitionTexture->SetPhase	 (PHASE::TRANS_IN);
+	m_TransitionTexture->SetTimerInfo(m_Timer,m_Duration);
 	break;
 	}
-    
-	m_TransitionTexture->SetTimerInfo(m_Timer,m_Duration);
-	instance.SetTransitionTexture(m_TransitionTexture);
+
 }
 
 void TransScene::Update(float tick)
 {
     auto& instance = GAME_INSTANCE;
 	//===========================
-	//		遷移前   IN処理 
+	//			演出処理 
 	//===========================
-	if (m_isChange == false)
+	float timer = 0.0f;
+
+	m_TransitionTexture->Update();
+
+	// タイマー処理の更新
+	SetTimer(m_TransitionTexture->GetTimer());
+	// 次シーンに移れるか
+	if (isOverClock())
 	{
-		float timer = 0.0f;
+		m_SceneOld ->Finalize();
+		m_SceneNext->Initialize();
+		m_Step = STEP::FINISH;
 
-		m_TransitionTexture->Update();
-
-		// タイマー処理の更新
-		SetTimer(m_TransitionTexture->GetTimer());
-		// 次シーンに移れるか
-		if (isOverClock())
-		{
-
-		}
-	}
-	//===========================
-	//		遷移後	 OUT処理
-	//===========================
-	else
-	{
 		switch (m_TransMode)
 		{
 		case TRANS_MODE::FADE:
 		{
-			
+			DrawNextScene();
 		}
 		break;
 		case TRANS_MODE::WIPE:
@@ -87,6 +83,12 @@ void TransScene::Update(float tick)
 		}
 		break;
 		}
+	}
+	
+	if (m_Step == STEP::FINISH)
+	{
+		instance.SetSceneCurrent(m_SceneNext);
+		Finalize();
 	}
 }
 
@@ -193,11 +195,3 @@ void TransScene::OldToNextScene()
 //
 //	m_TransitionTexture->SetColor(0.0f, 0.0f, 0.0f, m_Alpha);
 //}
-
-void TransScene::WIPE_IN()
-{
-}
-
-void TransScene::WIPE_OUT()
-{
-}

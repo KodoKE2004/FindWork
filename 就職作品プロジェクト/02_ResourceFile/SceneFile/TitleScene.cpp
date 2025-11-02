@@ -87,6 +87,7 @@ void TitleScene::Finalize()
 #ifdef _DEBUG
 	GAME_INSTANCE.m_Grid.SetEnabled(false);
 #endif
+
 	// このシーンのオブジェクトを削除する
 	for (auto& o : m_MySceneObjects) {
 		Game::GetInstance().DeleteObject(o);

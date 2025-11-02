@@ -77,7 +77,7 @@ namespace Debug
 };
 
 #ifdef _DEBUG                
-    #define ifDefDebugMacro(code) code
+    #define MyDebugLog(code) code
 #else 
-    #define ifDefDebugMacro(code)
+    #define MyDebugLog(code)
 #endif 

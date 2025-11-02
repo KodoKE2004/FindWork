@@ -15,19 +15,15 @@ void Wipe::Initialize()
     auto textureMgr = GAME_MANAGER_TEXTURE;
     m_Texture = textureMgr->GetTexture("Black.png");
 
-
     SetScale(SCREEN_WIDTH, SCREEN_HEIGHT, 1.0f);
     SetColor(0, 0, 0, 0);
 
-
-    m_Phase = WIPE_PHASE::WIPE_OUT;
+    m_Phase = PHASE::TRANS_OUT;
     m_Rate = 0.0f;
     m_Timer = 0.0f;
 
-
     if (m_Duration <= 0.0f) m_Duration = 1.0f;
     SetTimerInfo(0.0f, m_Duration);
-
 
     // フルスクリーン矩形
     std::vector<VERTEX_3D> vertices(4);
@@ -41,14 +37,11 @@ void Wipe::Initialize()
     vertices[2].uv = Vector2(0, 1);
     vertices[3].uv = Vector2(1, 1);
 
-
     m_VertexBuffer.Create(vertices);
     std::vector<unsigned int> indices{ 0,1,2,3 };
     m_IndexBuffer.Create(indices);
 
-
     SetShader("VS_Alpha", "PS_Alpha");
-
 
     // マテリアル
     m_Materiale = std::make_unique<Material>();
@@ -64,8 +57,8 @@ void Wipe::Update()
 {
     switch (m_Phase)
     {
-    case WIPE_PHASE::WIPE_OUT: WIPE_OUT(); break;
-    case WIPE_PHASE::WIPE_IN: WIPE_IN(); break;
+    case PHASE::TRANS_OUT: WIPE_OUT(); break;
+    case PHASE::TRANS_IN : WIPE_IN(); break;
     default: break;
     }
 }
@@ -76,7 +69,7 @@ void Wipe::Draw()
     // 次シーンSRVがあって遷移完了ならそれをそのままブリット
     if (auto* srv = GetTextureSRV())
     {
-        if (m_Phase == WIPE_PHASE::FINISH)
+        if (m_Phase == PHASE::FINISH)
         {
             Renderer::SetDepthEnable(false);
             Renderer::SetBlendState(BS_ALPHABLEND);
@@ -86,10 +79,8 @@ void Wipe::Draw()
         }
     }
 
-
     Renderer::SetDepthEnable(false);
     Renderer::SetBlendState(BS_ALPHABLEND);
-
 
     // SRT
     Matrix r = Matrix::CreateFromYawPitchRoll(m_Rotation.x, m_Rotation.y, m_Rotation.z);
@@ -147,7 +138,7 @@ void Wipe::ApplyWipeAmount(float amount)
 
 void Wipe::WIPE_IN()
 {
-    if (m_Phase != WIPE_PHASE::WIPE_IN) return;
+    if (m_Phase != PHASE::TRANS_IN) return;
 
     float delta = Application::GetDeltaTime();
     CountTimer(delta);
@@ -157,17 +148,16 @@ void Wipe::WIPE_IN()
 
     if (progress <= 0.0f)
     {
-        m_Phase = WIPE_PHASE::FINISH;
+        m_Phase = PHASE::FINISH;
         SetScale(SCREEN_WIDTH, SCREEN_HEIGHT, 1.0f);
         SetPos(0.0f, 0.0f, GetPos().z);
         SetColor(0.0f, 0.0f, 0.0f, 0.0f);
     }
 }
 
-
 void Wipe::WIPE_OUT()
 {
-    if (m_Phase != WIPE_PHASE::WIPE_OUT) return;
+    if (m_Phase != PHASE::TRANS_OUT) return;
 
     float delta = Application::GetDeltaTime();
     CountTimer(delta);
@@ -177,7 +167,7 @@ void Wipe::WIPE_OUT()
 
     if (progress >= 1.0f)
     {
-        m_Phase = WIPE_PHASE::WIPE_IN;
+        m_Phase = PHASE::TRANS_IN;
         ResetTimer();
     }
 }

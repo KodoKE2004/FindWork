@@ -10,6 +10,13 @@
 #include "Texture.h"
 #include "Material.h"
 
+enum class PHASE
+{
+    TRANS_IN,
+    TRANS_OUT,
+    FINISH
+};
+
 /// @brief トランジションの基底クラス
 /// @param トランジションエフェクトを実装するための基底クラスです。
 /// @param このクラスは、描画に必要なメッシュ情報、テクスチャ、マテリアル、UV座標、タイマー情報を管理します。
@@ -19,6 +26,7 @@
 class TransitionBase : public Object
 {
 protected:
+
     // 描画の為の情報（メッシュに関わる情報）
     IndexBuffer             m_IndexBuffer ; // インデックスバッファ
     VertexBuffer<VERTEX_3D> m_VertexBuffer; // 頂点バッファ
@@ -27,7 +35,8 @@ protected:
     std::shared_ptr<Texture>  m_Texture;	// テクスチャ
     std::unique_ptr<Material> m_Materiale;	//マテリアル
 
-    Microsoft::WRL::ComPtr<ID3D11ShaderResourceView> m_InputSRV;    
+    Microsoft::WRL::ComPtr<ID3D11ShaderResourceView> m_InputSRV;
+    PHASE m_Phase;
 
     // UV座標の情報
     float m_NumU   = 1.0f;
@@ -88,5 +97,6 @@ public:
         m_Duration = duration;
     }
 
+    void SetPhase(PHASE phase) { m_Phase = phase; }
 };
 

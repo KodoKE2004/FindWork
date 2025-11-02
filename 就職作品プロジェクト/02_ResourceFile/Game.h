@@ -198,7 +198,7 @@ inline void ChangeScenePop(TRANS_MODE mode, float dutation)
     auto& instance = GAME_INSTANCE;
 
 	if (instance.GetSceneStackSize() == 0) {
-		ifDefDebugMacro(Debug::Log("シーンスタックが空です");)
+		MyDebugLog(Debug::Log("シーンスタックが空です");)
 		return ;
 	}
 
@@ -214,13 +214,13 @@ inline void ChangeScenePop(TRANS_MODE mode, float dutation)
     instance.SetSceneCurrent(scene);
 }
 
-// ゲームシーンの
+// ゲームシーンの切り替えポップ
 inline void ChangeScenePop(TRANS_MODE transMode, float duration, int stageNo, int score)
 {
 	auto& instance = GAME_INSTANCE;
     if (instance.GetSceneStackSize() == 0) 
 	{
-        ifDefDebugMacro(Debug::Log("シーンスタックが空です");)
+        MyDebugLog(Debug::Log("シーンスタックが空です");)
 		return ;
 	}
 
@@ -245,7 +245,7 @@ inline void Game::ScenePush(Scene* newScene)
 inline Scene* Game::ScenePop()
 {
 	if(m_SceneStack.empty())	return nullptr;
-
+	
     Scene* scene = m_SceneStack.back().get();
     m_SceneStack.pop_back();
 
