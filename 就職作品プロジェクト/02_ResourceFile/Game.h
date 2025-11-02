@@ -157,7 +157,6 @@ public:
 #define GAME_MANAGER_SHADER  GAME_INSTANCE.GetShaderManager()
 #define GAME_MANGAER_AUDIO	 GAME_INSTANCE.GetAudioManager()
 
-
 //================================
 //			グローバル関数
 // 　　　インスタンスの取得を簡易化
@@ -166,7 +165,7 @@ public:
 //================================
 //	  シーンを遷移するテンプレート関数
 //================================
-template<typename T>
+template<class T>
 void ChangeScenePush(TRANS_MODE mode,float duration)
 {
     auto& instance = GAME_INSTANCE;
@@ -246,7 +245,7 @@ inline Scene* Game::ScenePop()
 {
 	if(m_SceneStack.empty())	return nullptr;
 	
-    Scene* scene = m_SceneStack.back().get();
+    Scene* scene = m_SceneStack.back().release();
     m_SceneStack.pop_back();
 
 	return scene;
