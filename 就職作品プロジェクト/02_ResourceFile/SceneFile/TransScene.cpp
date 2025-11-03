@@ -75,9 +75,11 @@ void TransScene::Update(float tick)
 	}
 
 	m_TransitionTexture->Update();
-
-	// 次シーンに移れるか
+	// OUTの処理が終わったか
 	const auto phase = m_TransitionTexture->GetPhase();
+	if(!m_isChange && phase == PHASE::TRANS_OUT)
+
+	// 遷移演出が終わったか
 	if (!m_isChange && phase == PHASE::TRANS_IN)
 	{
 		

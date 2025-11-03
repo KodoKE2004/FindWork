@@ -29,7 +29,9 @@ void Wipe::Initialize()
     vertices[1].position = NVector3( 0.5f,  0.5f, 0.0f);
     vertices[2].position = NVector3(-0.5f, -0.5f, 0.0f);
     vertices[3].position = NVector3( 0.5f, -0.5f, 0.0f);
+
     for (auto& v : vertices) v.color = Color(1, 1, 1, 1);
+    
     vertices[0].uv = Vector2(0, 0);
     vertices[1].uv = Vector2(1, 0);
     vertices[2].uv = Vector2(0, 1);
