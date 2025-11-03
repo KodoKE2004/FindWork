@@ -18,12 +18,12 @@ void TransScene::Initialize()
 	m_isChange = false;
 	m_HasInitializedNextScene = false;
 	if (m_Duration <= 0.0f) {
-		m_Duration = 0.0f;
+		m_Duration = 1.0f;
 	}
 	m_Step = STEP::DOING;
 	
 	//================================
-	//	  TransitionTextureの初期化
+	//	   TransitionTextureの初期化
 	//================================
 	switch (m_TransMode)
 	{
@@ -57,7 +57,7 @@ void TransScene::Initialize()
 	break;
 	}
 
-    m_TransitionTexture->SetPhase	 (PHASE::TRANS_IN);
+    m_TransitionTexture->SetPhase	 (PHASE::TRANS_OUT);
 	m_TransitionTexture->SetTimerInfo(0.0f, m_Duration);
 
 }
@@ -79,19 +79,12 @@ void TransScene::Update(float tick)
 	const auto phase = m_TransitionTexture->GetPhase();
 	if (!m_isChange && phase == PHASE::TRANS_IN)
 	{
-		if (m_SceneOld && m_StackOp != STACK_OP::PUSH) {
-			m_SceneOld->Finalize();
-		}
-		if (m_SceneNext) {
-			if (m_StackOp != STACK_OP::POP && !m_HasInitializedNextScene) {
-				m_SceneNext->Initialize();
-				m_HasInitializedNextScene = true;
-			}
-		}
-		if (m_TransMode == TRANS_MODE::FADE && m_SceneNext)
-		{
-			DrawNextScene();
-		}
+		
+		m_SceneOld->Finalize();
+		m_SceneNext->Initialize();
+		m_HasInitializedNextScene = true;
+		DrawNextScene();
+		
 		m_isChange = true;
 	}
 	if (phase == PHASE::FINISH)

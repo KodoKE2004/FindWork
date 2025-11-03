@@ -64,7 +64,7 @@ void Game::Initialize()
 
     instance.m_MeshManager->Add("space"  , "space.fbx"  , "Space"  );
 
-	instance.m_SceneCurrent = new TitleScene;				// タイトルシーンのインスタンスを生成
+	instance.m_SceneCurrent = new GameScene;				// タイトルシーンのインスタンスを生成
 	instance.m_SceneCurrent->Initialize();
 }
 
