@@ -25,10 +25,10 @@ void Wipe::Initialize()
 
     // フルスクリーン矩形
     std::vector<VERTEX_3D> vertices(4);
-    vertices[0].position = NVector3(-0.5f, 0.5f, 0.0f);
-    vertices[1].position = NVector3(0.5f, 0.5f, 0.0f);
+    vertices[0].position = NVector3(-0.5f,  0.5f, 0.0f);
+    vertices[1].position = NVector3( 0.5f,  0.5f, 0.0f);
     vertices[2].position = NVector3(-0.5f, -0.5f, 0.0f);
-    vertices[3].position = NVector3(0.5f, -0.5f, 0.0f);
+    vertices[3].position = NVector3( 0.5f, -0.5f, 0.0f);
     for (auto& v : vertices) v.color = Color(1, 1, 1, 1);
     vertices[0].uv = Vector2(0, 0);
     vertices[1].uv = Vector2(1, 0);
@@ -56,7 +56,7 @@ void Wipe::Update()
     switch (m_Phase)
     {
     case PHASE::TRANS_OUT: WIPE_OUT(); break;
-    case PHASE::TRANS_IN : WIPE_IN(); break;
+    case PHASE::TRANS_IN : WIPE_IN (); break;
     default: break;
     }
 }
@@ -86,6 +86,34 @@ void Wipe::Draw()
     Matrix s = Matrix::CreateScale(m_Scale.x, m_Scale.y, m_Scale.z);
     Matrix world = s * r * t;
     Renderer::SetWorldMatrix(&world);
+
+    ID3D11DeviceContext* dc = Renderer::GetDeviceContext();
+    dc->IASetPrimitiveTopology(D3D11_PRIMITIVE_TOPOLOGY_TRIANGLESTRIP);
+
+    SetGPU();
+    m_VertexBuffer.SetGPU();
+    m_IndexBuffer.SetGPU();
+    if (m_Texture)
+    {
+        m_Texture->SetGPU();
+    }
+
+    if (m_Materiale)
+    {
+        m_Materiale->SetDiffuse(DirectX::XMFLOAT4(m_Color.x, m_Color.y, m_Color.z, m_Color.w));
+        m_Materiale->Update();
+        m_Materiale->SetGPU();
+    }
+
+    float u = m_NumU - 1;
+    float v = m_NumV - 1;
+    float uw = 1.0f / m_SplitX;
+    float vh = 1.0f / m_SplitY;
+    Renderer::SetUV(u, v, uw, vh);
+
+    Camera::ScopedMode scoped(m_Camera, CAMERA_2D);
+    dc->DrawIndexed(4, 0, 0);
+    Renderer::SetDepthEnable(true);
 }
 void Wipe::Finalize() {}
 

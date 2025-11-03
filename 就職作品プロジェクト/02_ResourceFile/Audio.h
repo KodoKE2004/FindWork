@@ -37,9 +37,9 @@ struct LoopConfig {
 //			 再生パラメータ
 //======================================
 struct PlayParams {
-	float volume = 1.0f; // 0..1+
-	float pitch = 1.0f; // frequency ratio
-	float pan = 0.0f; // -1..+1 (stereo only)
+	float volume = 1.0f;	// 0..1+
+	float pitch = 1.0f;		// frequency ratio
+	float pan = 0.0f;		// -1..+1 (stereo only)
 	LoopConfig loop{};
 	bool autoRelease = true; // 再生終了後に自動回収
 };
@@ -51,8 +51,6 @@ struct AudioConfig
 	bool loop = false;
 	bool autoPlay = false;
 };
-
-// Audio補完用構造体
 
 // フレーム単位で渡す「傾き」
 struct SlopePerSec {

@@ -45,6 +45,7 @@ void TransScene::Initialize()
 			m_SceneNext->Initialize();
 			m_HasInitializedNextScene = true;
 		}
+
 		// 次のシーンの１フレーム目を作成と取得
 		if (m_SceneNext) {
 			DrawNextScene();
