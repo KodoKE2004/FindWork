@@ -13,7 +13,7 @@ Fade::Fade(Camera* cam) : TransitionBase(cam)
 
 void Fade::Initialize()
 {
-    // テクスチャ（真っ黒）
+
     auto textureMgr = GAME_MANAGER_TEXTURE;
     m_Texture = textureMgr->GetTexture("Black.png");
 
@@ -27,11 +27,9 @@ void Fade::Initialize()
 
     SetTimerInfo(0.0f, m_Duration);
 
-    // 秒あたりのアルファ変化量
     m_AlphaValue = 1.0f / max(m_Duration, 0.0001f);
     ApplyAlpha();
 
-    // フルスクリーン矩形
     std::vector<VERTEX_3D> vertices(4);
     vertices[0].position = NVector3(-0.5f, 0.5f, 0.0f);
     vertices[1].position = NVector3(0.5f, 0.5f, 0.0f);
@@ -52,7 +50,6 @@ void Fade::Initialize()
 
     SetShader("VS_Alpha", "PS_Alpha");
 
-    // マテリアル
     m_Materiale = std::make_unique<Material>();
     MATERIAL mtrl{};
     mtrl.Diffuse = Color(1, 1, 1, 1);
@@ -76,7 +73,6 @@ void Fade::Draw()
     Renderer::SetBlendState(BS_ALPHABLEND);
 
 
-    // SRT
     Matrix r = Matrix::CreateFromYawPitchRoll(m_Rotation.x, m_Rotation.y, m_Rotation.z);
     Matrix t = Matrix::CreateTranslation(m_Position.x, m_Position.y, m_Position.z);
     Matrix s = Matrix::CreateScale(m_Scale.x, m_Scale.y, m_Scale.z);
@@ -95,7 +91,6 @@ void Fade::Draw()
     m_Materiale->Update();
     m_Materiale->SetGPU();
 
-    // UV 設定
     float u = m_NumU - 1;
     float v = m_NumV - 1;
     float uw = 1.0f / m_SplitX;

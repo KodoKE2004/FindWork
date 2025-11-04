@@ -1,6 +1,7 @@
 #pragma once
-#include "GameScene.h"
-class GameSceneWait : public GameScene
+#include "Scene.h"
+
+class GameSceneWait : public Scene
 {
 private:
 

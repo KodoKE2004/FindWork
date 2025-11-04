@@ -136,7 +136,7 @@
     <ClCompile Include="02_ResourceFile\ObjectFile\Model.cpp">
       <Filter>SourceFile\Model</Filter>
     </ClCompile>
-    <ClCompile Include="02_ResourceFile\SceneFile\GameScene.cpp">
+    <ClCompile Include="02_ResourceFile\SceneFile\GameSceneExe.cpp">
       <Filter>SourceFile\Scene</Filter>
     </ClCompile>
     <ClCompile Include="02_ResourceFile\MeshManager.cpp">
@@ -300,7 +300,7 @@
     <ClInclude Include="02_ResourceFile\ObjectFile\Model.h">
       <Filter>SourceFile\Model</Filter>
     </ClInclude>
-    <ClInclude Include="02_ResourceFile\SceneFile\GameScene.h">
+    <ClInclude Include="02_ResourceFile\SceneFile\GameSceneExe.h">
       <Filter>SourceFile\Scene</Filter>
     </ClInclude>
     <ClInclude Include="02_ResourceFile\MeshManager.h">

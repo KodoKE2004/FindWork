@@ -1,18 +1,24 @@
 #pragma once
-#include "../ObjectFile/Object.h"
+#include "ObjectFile/Object.h"
 #include "../Audio.h"
 
 #include <unordered_map>
 #include <vector>
+
+struct SceneRelationData
+{
+	bool isClear = false;
+	int score    = 0;
+	int stageNo  = 0;
+};
+
 class Scene
 {
-private:
 protected:
 	std::vector<Object*> m_MySceneObjects;
 	std::unordered_map<std::string, AudioConfig> m_AudioList;
 
-	int score = 0;
-    int stageNo = 0;
+	SceneRelationData m_RelationData;
 	int stageCountMax = 5;
 public:
 	// コンストラクタとデストラクタ
@@ -29,10 +35,16 @@ public:
 	virtual void Update(float tick) = 0;
 	virtual void Finalize() = 0;
 
+
+
 	// そのシーンのオブジェクトを定義
 	std::vector<Object*> GetSceneObjects() {
 		return m_MySceneObjects;
 	}
+
+	// シーン間の受け渡しの値をする関数（それぞれのゲッター・セッター）
+	void SetRelationData(SceneRelationData relationData) { m_RelationData = relationData; }
+	SceneRelationData GetRelationData(){ return m_RelationData; }
 };
 
 

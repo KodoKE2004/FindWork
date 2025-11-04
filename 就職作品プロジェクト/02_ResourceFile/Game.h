@@ -10,7 +10,7 @@
 #include "Object.h"
 
 #include "input.h"
-#include "GameScene.h"
+#include "GameSceneExe.h"
 
 #include "MeshManager.h"
 #include "TextureManager.h"
@@ -177,7 +177,7 @@ void ChangeScenePush(TRANS_MODE mode,float duration)
 
 	MyDebugLog(std::cout << "ChangeScenePushの読み込み検出\n");
 
-	auto scene = new TransScene(true, false);
+	auto scene = new TransScene;
 	auto sceneNext = new T;
 
     instance.ScenePush(instance.GetCurrentScene());
@@ -205,7 +205,7 @@ inline void ChangeScenePop(TRANS_MODE mode, float duration)
 	}
 
     // 現在のシーン
-    auto scene = new TransScene(false, true);
+    auto scene = new TransScene();
     Scene* sceneNext = instance.ScenePop();
 	if (sceneNext == nullptr) {
 		delete scene;
@@ -233,7 +233,7 @@ inline void ChangeScenePop(TRANS_MODE transMode, float duration, int stageNo, in
 	}
 
 	// 現在のシーン
-	auto scene = new TransScene(false, true);
+	auto scene = new TransScene();
 	Scene* sceneNext = instance.ScenePop();
 	if (sceneNext == nullptr) {
 		delete scene;

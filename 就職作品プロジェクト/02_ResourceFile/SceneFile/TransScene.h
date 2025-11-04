@@ -55,8 +55,6 @@ private:
 	float m_AlphaValue = 0.0f;
 
 	bool m_isChange		    = false;
-	bool m_IsSceneStackPop  = false;
-    bool m_isSceneStackPush = false;
 	bool m_isTransOutToIn   = false;
 	bool m_hasInitializedNextScene = false;
 
@@ -70,13 +68,6 @@ private:
 public:
     // コンストラクタとデストラクタ
 	TransScene() = default;
-
-	/// <summary>
-    /// PushかPopを指定するコンストラクタ
-	/// </summary>
-	/// <param name="isPush"></param>
-	/// <param name="isPop"></param>
-	TransScene(bool isPush, bool isPop);
 
     ~TransScene()			override = default;
 
@@ -102,13 +93,3 @@ public:
 	void OldToNextScene();
 
 };
-
-template<class T>
-static bool IsSceneType(const Scene* scene) {
-	return dynamic_cast<T>(scene) != nullptr;
-}
-
-template <class T>
-static T* AsScene(Scene* scene) {
-	return dynamic_cast<T*>(scene);
-}

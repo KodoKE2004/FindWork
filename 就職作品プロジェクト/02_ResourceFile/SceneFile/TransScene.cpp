@@ -1,17 +1,9 @@
 #include "TransScene.h"
-#include "GameScene.h"
+#include "SceneList.h"
 #include "main.h"
 #include "Game.h"
 #include <memory>
 
-
-
-
-TransScene::TransScene(bool isPush, bool isPop)
-{
-	m_isSceneStackPush = isPush;
-    m_IsSceneStackPop  = isPop;
-}
 
 void TransScene::Initialize()
 {
@@ -26,9 +18,6 @@ void TransScene::Initialize()
 	}
 	m_Step = STEP::DOING;
 	
-	//================================
-	//	   TransitionTextureの初期化
-	//================================
 	switch (m_TransMode)
 	{
 	case TRANS_MODE::FADE:
@@ -50,7 +39,6 @@ void TransScene::Initialize()
 			m_hasInitializedNextScene = true;
 		}
 
-		// 次のシーンの１フレーム目を作成と取得
 		if (m_SceneNext) {
 			DrawNextScene();
 		}
@@ -71,25 +59,19 @@ void TransScene::Update(float tick)
 {
     auto& instance = GAME_INSTANCE;
 
-	//===========================
-	//			演出処理 
-	//===========================
 	if (m_TransitionTexture == nullptr) {
 		return;
 	}
 
 	m_TransitionTexture->Update();
-	// OUTの遷移演出処理が終わったか
+
 	const auto phase = m_TransitionTexture->GetPhase();
 	if (!m_isTransOutToIn && phase == PHASE::TRANS_IN)
 	{
-		// 切り替えがゲームシーンの実行の場合はお題提示の処理
-		if (IsSceneType<GameScene*>(m_SceneNext)){
-			
-		}
+		
 		m_isTransOutToIn = true;
 	}
-	// 遷移演出全体が終わったか
+
 	if (!m_isChange && phase == PHASE::TRANS_IN)
 	{
 		
@@ -138,19 +120,19 @@ void TransScene::Finalize()
 void TransScene::DrawNextScene()
 {
 
-	// ★ 次シーンを一度だけオフスクリーンへ描画して SRV を確保
+
 	auto* device  = Renderer::GetDevice();
 	auto* context = Renderer::GetDeviceContext();
 	auto  vp	  = Renderer::GetViewport();
 
 	m_RenderTarget = std::make_unique<RenderTarget>();
-	// sRGB 運用なら: m_RenderTarget->SetFormat(DXGI_FORMAT_R8G8B8A8_UNORM_SRGB);
+
 	m_RenderTarget->Create(device, (UINT)vp.Width, (UINT)vp.Height, true);
 
 	const float clear[4]{ 0, 0, 0, 0 };
 	m_RenderTarget->Begin(context, clear);
 	{
-		// Update は走らせず、次シーンのオブジェクトをそのまま 1 回描く
+
 		for (auto* obj : m_SceneNext->GetSceneObjects()) {
 			if (obj) obj->Draw();
 		}
@@ -159,11 +141,11 @@ void TransScene::DrawNextScene()
 
 	m_NextSceneSRV = m_RenderTarget->GetSRV();
 
-	// ★ 遷移オーバーレイを現シーンに追加（最後にα合成）
+
 	m_Overlay = Game::GetInstance().AddObject<SnapshotOverlay>();
 	m_Overlay->SetSRV(m_NextSceneSRV.Get());
 	m_Overlay->SetAlpha(0.0f);
-	m_MySceneObjects.emplace_back(m_Overlay); // 管理用（Finalizeで掃除）
+	m_MySceneObjects.emplace_back(m_Overlay);
 
 }
 
@@ -182,32 +164,3 @@ void TransScene::OldToNextScene()
 {
 	
 }
-
-// フェードイン
-//void TransScene::FADE_IN()
-//{
-//	m_Alpha -= m_AlphaValue * Application::GetDeltaTime();
-//
-//	if (isOverClock())
-//	{
-//		m_Alpha = 0.0f;
-//		m_Step = STEP::FINISH;
-//	}
-//
-//	m_TransitionTexture->SetColor(0.0f, 0.0f, 0.0f, m_Alpha);
-//	
-//}
-
-// フェードアウト
-//void TransScene::FADE_OUT()
-//{
-//	m_Alpha += m_AlphaValue * Application::GetDeltaTime();
-//
-//	if (isOverClock())
-//	{
-//		m_Alpha = 1.0f;
-//		m_isChange = true;
-//	}
-//
-//	m_TransitionTexture->SetColor(0.0f, 0.0f, 0.0f, m_Alpha);
-//}
