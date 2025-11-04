@@ -193,6 +193,9 @@
     <ClCompile Include="02_ResourceFile\SceneFile\Transition\SnapshotOverlay.cpp">
       <Filter>SourceFile\Scene\Transition</Filter>
     </ClCompile>
+    <ClCompile Include="02_ResourceFile\SceneFile\GameSceneWait.cpp">
+      <Filter>SourceFile\Scene</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="02_ResourceFile\SceneFile\Scene.h">
@@ -356,6 +359,9 @@
     </ClInclude>
     <ClInclude Include="02_ResourceFile\SceneFile\Transition\SnapshotOverlay.h">
       <Filter>SourceFile\Scene\Transition</Filter>
+    </ClInclude>
+    <ClInclude Include="02_ResourceFile\SceneFile\GameSceneWait.h">
+      <Filter>SourceFile\Scene</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>

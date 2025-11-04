@@ -1,10 +1,10 @@
 #include "SceneList.h"
-#include "../Game.h"
-#include "../DebugUI.h"
-#include "../ObjectFile/Cube.h"
-#include "../ObjectFile/Sphere.h"
-#include "../Texture2D.h"
-#include "../ObjectFile/Model.h"
+#include "Game.h"
+#include "DebugUI.h"
+#include "Cube.h"
+#include "Sphere.h"
+#include "Texture2D.h"
+#include "Model.h"
 
 
 void TitleScene::Initialize()
@@ -75,7 +75,7 @@ void TitleScene::Update(float tick)
 			audioManager->StopAllByName("bgm", false);
 		}
 
-		ChangeScenePush<GameScene>(TRANS_MODE::WIPE, 1.0f);
+		ChangeScenePush<GameSceneWait>(TRANS_MODE::WIPE, 1.0f);
 	}
 }
 

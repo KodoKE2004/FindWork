@@ -1,12 +1,13 @@
 #pragma once
 #include "Scene.h"
-#include "../Texture2D.h"
-#include "../Application.h"
-#include "../RenderTarget.h"
-#include "Transition/Fade.h"
-#include "Transition/Wipe.h"
-#include "Transition/TransitionBase.h"
-#include "Transition/SnapshotOverlay.h"
+#include "Texture2D.h"
+#include "Application.h"
+
+#include "RenderTarget.h"
+#include "Fade.h"
+#include "Wipe.h"
+#include "TransitionBase.h"
+#include "SnapshotOverlay.h"
 
 enum class STEP
 {
@@ -55,8 +56,9 @@ private:
 
 	bool m_isChange		    = false;
 	bool m_IsSceneStackPop  = false;
-    bool m_IsSceneStackPush = false;
-	bool m_HasInitializedNextScene = false;
+    bool m_isSceneStackPush = false;
+	bool m_isTransOutToIn   = false;
+	bool m_hasInitializedNextScene = false;
 
 	STEP m_Step;
 
@@ -101,3 +103,12 @@ public:
 
 };
 
+template<class T>
+static bool IsSceneType(const Scene* scene) {
+	return dynamic_cast<T>(scene) != nullptr;
+}
+
+template <class T>
+static T* AsScene(Scene* scene) {
+	return dynamic_cast<T*>(scene);
+}

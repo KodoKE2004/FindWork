@@ -1,6 +1,6 @@
 #pragma once
 #include "Scene.h"
-#include "../Texture2D.h"
+#include "Texture2D.h"
 
 class GameScene : public Scene
 {
@@ -8,9 +8,8 @@ class GameScene : public Scene
 protected:
 
     float m_Tick = 0.0f;				// 経過時間
-    float m_SceneChangeTime = 10.0f;	// シーン変更までの時間
+    const float m_SceneChangeTime = 5.0f;	// シーン変更までの時間
 
-private:
 	//================================
 	// 	このシーンで使うオブジェクト
     //================================
@@ -31,11 +30,11 @@ public:
 	//================================
 
 	// シーンの初期化
-	void Initialize()		override;
+	virtual void Initialize()		= 0;
 	// シーンの更新
-	void Update(float tick) override;
+	virtual void Update(float tick) = 0;
 	// シーンの終了処理
-	void Finalize()			override;
+	virtual void Finalize()			= 0;
 
     void TickCount(const float tick) { m_Tick += tick; }
     bool IsTimeUp() const			 { return m_Tick >= m_SceneChangeTime; }

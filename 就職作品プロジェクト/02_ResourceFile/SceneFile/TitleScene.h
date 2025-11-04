@@ -20,12 +20,12 @@ public:
 	//================================
 	
 	// シーンの初期化
-	void Initialize() override;
+	void Initialize()		override;
 	// シーンの更新
-	void Update(float tick)     override;
+	void Update(float tick) override;
 
 	// シーンの終了処理
-	void Finalize()   override;
+	void Finalize()			override;
 
 };
 

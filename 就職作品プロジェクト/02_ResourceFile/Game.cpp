@@ -19,9 +19,9 @@ void Game::Initialize()
 {	
 	auto& instance = GetInstance();
 
-	instance.m_Input			 = std::make_unique<Input>();							// 入力の初期化
-	instance.m_Camera			 = std::make_unique<Camera>();							// カメラ作成
-    instance.m_TransitionTexture = nullptr;												// トランジション用テクスチャ初期化
+	instance.m_Input			 = std::make_unique<Input>();				// 入力の初期化
+	instance.m_Camera			 = std::make_unique<Camera>();				// カメラ作成
+    instance.m_TransitionTexture = nullptr;									// トランジション用テクスチャ初期化
 
 	//		シーンをタイトルシーンに設定
 	Renderer::Initialize();													// レンダラーの初期化
@@ -64,7 +64,7 @@ void Game::Initialize()
 
     instance.m_MeshManager->Add("space"  , "space.fbx"  , "Space"  );
 
-	instance.m_SceneCurrent = new GameScene;				// タイトルシーンのインスタンスを生成
+	instance.m_SceneCurrent = new TitleScene;				// タイトルシーンのインスタンスを生成
 	instance.m_SceneCurrent->Initialize();
 }
 

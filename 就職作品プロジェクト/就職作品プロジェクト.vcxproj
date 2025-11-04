@@ -29,6 +29,7 @@
     <ClCompile Include="02_ResourceFile\Game.cpp" />
     <ClCompile Include="02_ResourceFile\input.cpp" />
     <ClCompile Include="02_ResourceFile\main.cpp" />
+    <ClCompile Include="02_ResourceFile\SceneFile\GameSceneWait.cpp" />
     <ClCompile Include="02_ResourceFile\SceneFile\Transition\TransitionBase.cpp" />
     <ClCompile Include="02_ResourceFile\SceneFile\Transition\Wipe.cpp" />
     <ClCompile Include="02_ResourceFile\StaticMesh.cpp" />
@@ -83,6 +84,7 @@
     <ClInclude Include="02_ResourceFile\Material.h" />
     <ClInclude Include="02_ResourceFile\Mesh.h" />
     <ClInclude Include="02_ResourceFile\MeshRenderer.h" />
+    <ClInclude Include="02_ResourceFile\SceneFile\GameSceneWait.h" />
     <ClInclude Include="02_ResourceFile\SceneFile\Transition\TransitionBase.h" />
     <ClInclude Include="02_ResourceFile\SceneFile\Transition\Wipe.h" />
     <ClInclude Include="02_ResourceFile\StaticMesh.h" />

@@ -1,11 +1,11 @@
 #include"SceneList.h"
 
-#include "../Game.h"
-#include "../DebugUI.h"
-#include "../Texture2D.h"
-#include "../ObjectFile/Model.h"
-#include "../ObjectFile/Bullet.h"
-#include "../Camera.h"
+#include "Game.h"
+#include "DebugUI.h"
+#include "Texture2D.h"
+#include "ObjectFile/Model.h"
+#include "ObjectFile/Bullet.h"
+#include "Camera.h"
 
 void SelectScene::Initialize()
 {
@@ -29,12 +29,12 @@ void SelectScene::Update(float tick)
 	if (Input::GetKeyTrigger(VK_RETURN))
 	{
 		Game::GetInstance().GetAudioManager()->Play("enter");
-		ChangeScenePush<GameScene>(TRANS_MODE::FADE, 1.0f);
+		ChangeScenePush<GameSceneWait>(TRANS_MODE::FADE, 1.0f);
 	}
 
 	if (isEnd)
 	{
-		ChangeScenePush<GameScene>(TRANS_MODE::FADE, 0.5f);
+		ChangeScenePush<GameSceneWait>(TRANS_MODE::FADE, 0.5f);
 		return;
     }
 	if (isStart)

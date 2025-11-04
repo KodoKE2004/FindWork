@@ -4,12 +4,13 @@
 #include "Debug.hpp"
 #include "DebugGridLine.h"
 #endif // _DEBUG
-#include "SceneFile/Scene.h"
-#include "SceneFile/TransScene.h"
-#include "SceneFile/Transition/TransitionBase.h"
-#include "ObjectFile/Object.h"
+#include "Scene.h"
+#include "TransScene.h"
+#include "Transition/TransitionBase.h"
+#include "Object.h"
 
 #include "input.h"
+#include "GameScene.h"
 
 #include "MeshManager.h"
 #include "TextureManager.h"
@@ -172,9 +173,9 @@ void ChangeScenePush(TRANS_MODE mode,float duration)
 
 	// テンプレートなので
 	// 既定がSceneでなければエラー
-	static_assert(std::is_base_of_v<Scene, T>, "T は 基底クラスが Scene ではありません");
+	static_assert(!std::is_abstract_v<T>, "T は 基底クラスが Scene ではありません");
 
-	MyDebugLog(std::cout << "ChangeScenePushの読み込み検出\n" );
+	MyDebugLog(std::cout << "ChangeScenePushの読み込み検出\n");
 
 	auto scene = new TransScene(true, false);
 	auto sceneNext = new T;

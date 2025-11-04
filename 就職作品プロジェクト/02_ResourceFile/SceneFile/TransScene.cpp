@@ -1,11 +1,15 @@
 #include "TransScene.h"
-#include "../main.h"
-#include "../Game.h"
+#include "GameScene.h"
+#include "main.h"
+#include "Game.h"
 #include <memory>
+
+
+
 
 TransScene::TransScene(bool isPush, bool isPop)
 {
-	m_IsSceneStackPush = isPush;
+	m_isSceneStackPush = isPush;
     m_IsSceneStackPop  = isPop;
 }
 
@@ -16,7 +20,7 @@ void TransScene::Initialize()
 	m_Timer = 0.0f;
 	m_Alpha = 0.0f;
 	m_isChange = false;
-	m_HasInitializedNextScene = false;
+	m_hasInitializedNextScene = false;
 	if (m_Duration <= 0.0f) {
 		m_Duration = 1.0f;
 	}
@@ -43,7 +47,7 @@ void TransScene::Initialize()
 		m_TransitionTexture->Initialize();
 		if (m_StackOp != STACK_OP::POP && m_SceneNext) {
 			m_SceneNext->Initialize();
-			m_HasInitializedNextScene = true;
+			m_hasInitializedNextScene = true;
 		}
 
 		// 次のシーンの１フレーム目を作成と取得
@@ -75,17 +79,23 @@ void TransScene::Update(float tick)
 	}
 
 	m_TransitionTexture->Update();
-	// OUTの処理が終わったか
+	// OUTの遷移演出処理が終わったか
 	const auto phase = m_TransitionTexture->GetPhase();
-	if(!m_isChange && phase == PHASE::TRANS_OUT)
-
-	// 遷移演出が終わったか
+	if (!m_isTransOutToIn && phase == PHASE::TRANS_IN)
+	{
+		// 切り替えがゲームシーンの実行の場合はお題提示の処理
+		if (IsSceneType<GameScene*>(m_SceneNext)){
+			
+		}
+		m_isTransOutToIn = true;
+	}
+	// 遷移演出全体が終わったか
 	if (!m_isChange && phase == PHASE::TRANS_IN)
 	{
 		
 		m_SceneOld->Finalize();
 		m_SceneNext->Initialize();
-		m_HasInitializedNextScene = true;
+		m_hasInitializedNextScene = true;
 		DrawNextScene();
 		
 		m_isChange = true;
