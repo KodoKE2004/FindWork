@@ -5,11 +5,25 @@
 #include <unordered_map>
 #include <vector>
 
+enum class SceneNo
+{
+	NONE = -1,
+	TITLE,
+	SELECT,
+	GAME_WAIT,
+	GAME_EXE,
+	TRANSITION,
+	NUM
+};
+
 struct SceneRelationData
 {
 	bool isClear = false;
-	int score    = 0;
-	int stageNo  = 0;
+	int  score = 0;
+	int  stageNo = 0;
+	bool requestRetry = false;
+	SceneNo previousScene = SceneNo::NONE;
+	SceneNo nextScene     = SceneNo::NONE;
 };
 
 class Scene
@@ -42,9 +56,15 @@ public:
 		return m_MySceneObjects;
 	}
 
+	virtual SceneNo GetSceneNo() const = 0;
+
 	// シーン間の受け渡しの値をする関数（それぞれのゲッター・セッター）
-	void SetRelationData(SceneRelationData relationData) { m_RelationData = relationData; }
-	SceneRelationData GetRelationData(){ return m_RelationData; }
+	void SetRelationData(const SceneRelationData relationData) {
+		m_RelationData = relationData; 
+	}
+	SceneRelationData& AccessRelationData()			 { return m_RelationData; }
+	const SceneRelationData& GetRelationData() const { return m_RelationData; }
+
 };
 
 

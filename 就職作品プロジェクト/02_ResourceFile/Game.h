@@ -51,14 +51,11 @@ public:
 	//			ループ内の処理
 	//================================
 	
-	// ゲームの初期化
-	static void Initialize();	
-	// ゲームの更新
-	static void Update(float tick);		
-	// ゲームの描画
-	static void Draw();		
-	// ゲームの終了処理
-	static void Finalize();
+	static void Initialize();		// ゲームの初期化
+	static void Update(float tick);	// ゲームの更新
+	static void Draw();				// ゲームの描画
+	static void Finalize();			// ゲームの終了処理
+
 	// 現在のシーンを設定
 	static void  SetSceneCurrent(Scene* newScene);
 
@@ -180,6 +177,15 @@ void ChangeScenePush(TRANS_MODE mode,float duration)
 	auto scene = new TransScene;
 	auto sceneNext = new T;
 
+	SceneRelationData relationData{};
+	if (auto currentScene = instance.GetCurrentScene())
+	{
+		relationData = currentScene->GetRelationData();
+		relationData.stageNo = currentSceneNo();
+	}
+
+	relationData.nextScene
+
     instance.ScenePush(instance.GetCurrentScene());
 	scene->SetOldScene(instance.GetCurrentScene());
 
@@ -205,7 +211,7 @@ inline void ChangeScenePop(TRANS_MODE mode, float duration)
 	}
 
     // 現在のシーン
-    auto scene = new TransScene();
+    auto scene = new TransScene;
     Scene* sceneNext = instance.ScenePop();
 	if (sceneNext == nullptr) {
 		delete scene;

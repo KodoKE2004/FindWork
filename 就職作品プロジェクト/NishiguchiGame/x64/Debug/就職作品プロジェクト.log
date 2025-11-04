@@ -1,2 +1,545 @@
-﻿  TransScene.cpp
-  就職作品プロジェクト.vcxproj -> C:\Users\dorae\Desktop\HAL\class3\FindWork\就職作品プロジェクト\x64\Debug\NishiguchiGame.exe
+﻿  Application.cpp
+  Camera.cpp
+  DebugGridLine.cpp
+  Game.cpp
+  Wipe.cpp
+  Bullet.cpp
+  Cube.cpp
+  Model.cpp
+  Object.cpp
+  Sphere.cpp
+  Skydome.cpp
+  GameSceneExe.cpp
+  SelectScene.cpp
+  TitleScene.cpp
+  Fade.cpp
+  TransScene.cpp
+C:\Users\kodokeの世界\Desktop\HAL\VisualSutdio\就職作品\個人製作\FindWork\就職作品プロジェクト\02_ResourceFile\SceneFile\Transition\Wipe.cpp(1,1): warning C4819: ファイルは、現在のコード ページ (932) で表示できない文字を含んでいます。データの損失を防ぐために、ファイルを Unicode 形式で保存してください。
+C:\Users\kodokeの世界\Desktop\HAL\VisualSutdio\就職作品\個人製作\FindWork\就職作品プロジェクト\02_ResourceFile\Game.h(189,5): error C3878: 構文エラー: 'expression' の後に予期しないトークン 'instance' があります
+  (ソース ファイル '02_ResourceFile/Camera.cpp' をコンパイルしています)
+  
+C:\Users\kodokeの世界\Desktop\HAL\VisualSutdio\就職作品\個人製作\FindWork\就職作品プロジェクト\02_ResourceFile\Game.h(189,49): error C2760: 構文エラー: ')' は予期しないエラーでした。';' が必要です
+  (ソース ファイル '02_ResourceFile/Camera.cpp' をコンパイルしています)
+  
+C:\Users\kodokeの世界\Desktop\HAL\VisualSutdio\就職作品\個人製作\FindWork\就職作品プロジェクト\02_ResourceFile\Game.h(189,49): error C3878: 構文エラー: 'expression-statement' の後に予期しないトークン ')' があります
+  (ソース ファイル '02_ResourceFile/Camera.cpp' をコンパイルしています)
+  
+C:\Users\kodokeの世界\Desktop\HAL\VisualSutdio\就職作品\個人製作\FindWork\就職作品プロジェクト\02_ResourceFile\Game.h(214,22): error C2259: 'TransScene': 抽象クラスをインスタンス化できません。
+  (ソース ファイル '02_ResourceFile/Camera.cpp' をコンパイルしています)
+      C:\Users\kodokeの世界\Desktop\HAL\VisualSutdio\就職作品\個人製作\FindWork\就職作品プロジェクト\02_ResourceFile\SceneFile\TransScene.h(37,7):
+      'TransScene' の宣言を確認してください
+      C:\Users\kodokeの世界\Desktop\HAL\VisualSutdio\就職作品\個人製作\FindWork\就職作品プロジェクト\02_ResourceFile\Game.h(214,22):
+      次のメンバーが原因です:
+      C:\Users\kodokeの世界\Desktop\HAL\VisualSutdio\就職作品\個人製作\FindWork\就職作品プロジェクト\02_ResourceFile\Game.h(214,22):
+      'SceneNo Scene::GetSceneNo(void) const': は抽象型です
+      C:\Users\kodokeの世界\Desktop\HAL\VisualSutdio\就職作品\個人製作\FindWork\就職作品プロジェクト\02_ResourceFile\SceneFile\Scene.h(59,18):
+      'Scene::GetSceneNo' の宣言を確認してください
+  
+C:\Users\kodokeの世界\Desktop\HAL\VisualSutdio\就職作品\個人製作\FindWork\就職作品プロジェクト\02_ResourceFile\Game.h(242,19): error C2259: 'TransScene': 抽象クラスをインスタンス化できません。
+  (ソース ファイル '02_ResourceFile/Camera.cpp' をコンパイルしています)
+      C:\Users\kodokeの世界\Desktop\HAL\VisualSutdio\就職作品\個人製作\FindWork\就職作品プロジェクト\02_ResourceFile\SceneFile\TransScene.h(37,7):
+      'TransScene' の宣言を確認してください
+      C:\Users\kodokeの世界\Desktop\HAL\VisualSutdio\就職作品\個人製作\FindWork\就職作品プロジェクト\02_ResourceFile\Game.h(242,19):
+      次のメンバーが原因です:
+      C:\Users\kodokeの世界\Desktop\HAL\VisualSutdio\就職作品\個人製作\FindWork\就職作品プロジェクト\02_ResourceFile\Game.h(242,19):
+      'SceneNo Scene::GetSceneNo(void) const': は抽象型です
+      C:\Users\kodokeの世界\Desktop\HAL\VisualSutdio\就職作品\個人製作\FindWork\就職作品プロジェクト\02_ResourceFile\SceneFile\Scene.h(59,18):
+      'Scene::GetSceneNo' の宣言を確認してください
+  
+  Texture2D.cpp
+C:\Users\kodokeの世界\Desktop\HAL\VisualSutdio\就職作品\個人製作\FindWork\就職作品プロジェクト\02_ResourceFile\Game.h(189,5): error C3878: 構文エラー: 'expression' の後に予期しないトークン 'instance' があります
+  (ソース ファイル '02_ResourceFile/ObjectFile/Bullet.cpp' をコンパイルしています)
+  
+C:\Users\kodokeの世界\Desktop\HAL\VisualSutdio\就職作品\個人製作\FindWork\就職作品プロジェクト\02_ResourceFile\Game.h(189,49): error C2760: 構文エラー: ')' は予期しないエラーでした。';' が必要です
+  (ソース ファイル '02_ResourceFile/ObjectFile/Bullet.cpp' をコンパイルしています)
+  
+C:\Users\kodokeの世界\Desktop\HAL\VisualSutdio\就職作品\個人製作\FindWork\就職作品プロジェクト\02_ResourceFile\Game.h(189,49): error C3878: 構文エラー: 'expression-statement' の後に予期しないトークン ')' があります
+  (ソース ファイル '02_ResourceFile/ObjectFile/Bullet.cpp' をコンパイルしています)
+  
+C:\Users\kodokeの世界\Desktop\HAL\VisualSutdio\就職作品\個人製作\FindWork\就職作品プロジェクト\02_ResourceFile\Game.h(214,22): error C2259: 'TransScene': 抽象クラスをインスタンス化できません。
+  (ソース ファイル '02_ResourceFile/ObjectFile/Bullet.cpp' をコンパイルしています)
+      C:\Users\kodokeの世界\Desktop\HAL\VisualSutdio\就職作品\個人製作\FindWork\就職作品プロジェクト\02_ResourceFile\SceneFile\TransScene.h(37,7):
+      'TransScene' の宣言を確認してください
+      C:\Users\kodokeの世界\Desktop\HAL\VisualSutdio\就職作品\個人製作\FindWork\就職作品プロジェクト\02_ResourceFile\Game.h(214,22):
+      次のメンバーが原因です:
+      C:\Users\kodokeの世界\Desktop\HAL\VisualSutdio\就職作品\個人製作\FindWork\就職作品プロジェクト\02_ResourceFile\Game.h(214,22):
+      'SceneNo Scene::GetSceneNo(void) const': は抽象型です
+      C:\Users\kodokeの世界\Desktop\HAL\VisualSutdio\就職作品\個人製作\FindWork\就職作品プロジェクト\02_ResourceFile\SceneFile\Scene.h(59,18):
+      'Scene::GetSceneNo' の宣言を確認してください
+  
+C:\Users\kodokeの世界\Desktop\HAL\VisualSutdio\就職作品\個人製作\FindWork\就職作品プロジェクト\02_ResourceFile\Game.h(242,19): error C2259: 'TransScene': 抽象クラスをインスタンス化できません。
+  (ソース ファイル '02_ResourceFile/ObjectFile/Bullet.cpp' をコンパイルしています)
+      C:\Users\kodokeの世界\Desktop\HAL\VisualSutdio\就職作品\個人製作\FindWork\就職作品プロジェクト\02_ResourceFile\SceneFile\TransScene.h(37,7):
+      'TransScene' の宣言を確認してください
+      C:\Users\kodokeの世界\Desktop\HAL\VisualSutdio\就職作品\個人製作\FindWork\就職作品プロジェクト\02_ResourceFile\Game.h(242,19):
+      次のメンバーが原因です:
+      C:\Users\kodokeの世界\Desktop\HAL\VisualSutdio\就職作品\個人製作\FindWork\就職作品プロジェクト\02_ResourceFile\Game.h(242,19):
+      'SceneNo Scene::GetSceneNo(void) const': は抽象型です
+      C:\Users\kodokeの世界\Desktop\HAL\VisualSutdio\就職作品\個人製作\FindWork\就職作品プロジェクト\02_ResourceFile\SceneFile\Scene.h(59,18):
+      'Scene::GetSceneNo' の宣言を確認してください
+  
+C:\Users\kodokeの世界\Desktop\HAL\VisualSutdio\就職作品\個人製作\FindWork\就職作品プロジェクト\02_ResourceFile\Game.h(189,5): error C3878: 構文エラー: 'expression' の後に予期しないトークン 'instance' があります
+  (ソース ファイル '02_ResourceFile/ObjectFile/Skydome.cpp' をコンパイルしています)
+  
+C:\Users\kodokeの世界\Desktop\HAL\VisualSutdio\就職作品\個人製作\FindWork\就職作品プロジェクト\02_ResourceFile\Game.h(189,49): error C2760: 構文エラー: ')' は予期しないエラーでした。';' が必要です
+  (ソース ファイル '02_ResourceFile/ObjectFile/Skydome.cpp' をコンパイルしています)
+  
+C:\Users\kodokeの世界\Desktop\HAL\VisualSutdio\就職作品\個人製作\FindWork\就職作品プロジェクト\02_ResourceFile\Game.h(189,49): error C3878: 構文エラー: 'expression-statement' の後に予期しないトークン ')' があります
+  (ソース ファイル '02_ResourceFile/ObjectFile/Skydome.cpp' をコンパイルしています)
+  
+C:\Users\kodokeの世界\Desktop\HAL\VisualSutdio\就職作品\個人製作\FindWork\就職作品プロジェクト\02_ResourceFile\Game.h(214,22): error C2259: 'TransScene': 抽象クラスをインスタンス化できません。
+  (ソース ファイル '02_ResourceFile/ObjectFile/Skydome.cpp' をコンパイルしています)
+      C:\Users\kodokeの世界\Desktop\HAL\VisualSutdio\就職作品\個人製作\FindWork\就職作品プロジェクト\02_ResourceFile\SceneFile\TransScene.h(37,7):
+      'TransScene' の宣言を確認してください
+      C:\Users\kodokeの世界\Desktop\HAL\VisualSutdio\就職作品\個人製作\FindWork\就職作品プロジェクト\02_ResourceFile\Game.h(214,22):
+      次のメンバーが原因です:
+      C:\Users\kodokeの世界\Desktop\HAL\VisualSutdio\就職作品\個人製作\FindWork\就職作品プロジェクト\02_ResourceFile\Game.h(214,22):
+      'SceneNo Scene::GetSceneNo(void) const': は抽象型です
+      C:\Users\kodokeの世界\Desktop\HAL\VisualSutdio\就職作品\個人製作\FindWork\就職作品プロジェクト\02_ResourceFile\SceneFile\Scene.h(59,18):
+      'Scene::GetSceneNo' の宣言を確認してください
+  
+C:\Users\kodokeの世界\Desktop\HAL\VisualSutdio\就職作品\個人製作\FindWork\就職作品プロジェクト\02_ResourceFile\Game.h(242,19): error C2259: 'TransScene': 抽象クラスをインスタンス化できません。
+  (ソース ファイル '02_ResourceFile/ObjectFile/Skydome.cpp' をコンパイルしています)
+      C:\Users\kodokeの世界\Desktop\HAL\VisualSutdio\就職作品\個人製作\FindWork\就職作品プロジェクト\02_ResourceFile\SceneFile\TransScene.h(37,7):
+      'TransScene' の宣言を確認してください
+      C:\Users\kodokeの世界\Desktop\HAL\VisualSutdio\就職作品\個人製作\FindWork\就職作品プロジェクト\02_ResourceFile\Game.h(242,19):
+      次のメンバーが原因です:
+      C:\Users\kodokeの世界\Desktop\HAL\VisualSutdio\就職作品\個人製作\FindWork\就職作品プロジェクト\02_ResourceFile\Game.h(242,19):
+      'SceneNo Scene::GetSceneNo(void) const': は抽象型です
+      C:\Users\kodokeの世界\Desktop\HAL\VisualSutdio\就職作品\個人製作\FindWork\就職作品プロジェクト\02_ResourceFile\SceneFile\Scene.h(59,18):
+      'Scene::GetSceneNo' の宣言を確認してください
+  
+C:\Users\kodokeの世界\Desktop\HAL\VisualSutdio\就職作品\個人製作\FindWork\就職作品プロジェクト\02_ResourceFile\Game.h(189,5): error C3878: 構文エラー: 'expression' の後に予期しないトークン 'instance' があります
+  (ソース ファイル '02_ResourceFile/ObjectFile/Sphere.cpp' をコンパイルしています)
+  
+C:\Users\kodokeの世界\Desktop\HAL\VisualSutdio\就職作品\個人製作\FindWork\就職作品プロジェクト\02_ResourceFile\Game.h(189,49): error C2760: 構文エラー: ')' は予期しないエラーでした。';' が必要です
+  (ソース ファイル '02_ResourceFile/ObjectFile/Sphere.cpp' をコンパイルしています)
+  
+C:\Users\kodokeの世界\Desktop\HAL\VisualSutdio\就職作品\個人製作\FindWork\就職作品プロジェクト\02_ResourceFile\Game.h(189,49): error C3878: 構文エラー: 'expression-statement' の後に予期しないトークン ')' があります
+  (ソース ファイル '02_ResourceFile/ObjectFile/Sphere.cpp' をコンパイルしています)
+  
+C:\Users\kodokeの世界\Desktop\HAL\VisualSutdio\就職作品\個人製作\FindWork\就職作品プロジェクト\02_ResourceFile\Game.h(214,22): error C2259: 'TransScene': 抽象クラスをインスタンス化できません。
+  (ソース ファイル '02_ResourceFile/ObjectFile/Sphere.cpp' をコンパイルしています)
+      C:\Users\kodokeの世界\Desktop\HAL\VisualSutdio\就職作品\個人製作\FindWork\就職作品プロジェクト\02_ResourceFile\SceneFile\TransScene.h(37,7):
+      'TransScene' の宣言を確認してください
+      C:\Users\kodokeの世界\Desktop\HAL\VisualSutdio\就職作品\個人製作\FindWork\就職作品プロジェクト\02_ResourceFile\Game.h(214,22):
+      次のメンバーが原因です:
+      C:\Users\kodokeの世界\Desktop\HAL\VisualSutdio\就職作品\個人製作\FindWork\就職作品プロジェクト\02_ResourceFile\Game.h(214,22):
+      'SceneNo Scene::GetSceneNo(void) const': は抽象型です
+      C:\Users\kodokeの世界\Desktop\HAL\VisualSutdio\就職作品\個人製作\FindWork\就職作品プロジェクト\02_ResourceFile\SceneFile\Scene.h(59,18):
+      'Scene::GetSceneNo' の宣言を確認してください
+  
+C:\Users\kodokeの世界\Desktop\HAL\VisualSutdio\就職作品\個人製作\FindWork\就職作品プロジェクト\02_ResourceFile\Game.h(242,19): error C2259: 'TransScene': 抽象クラスをインスタンス化できません。
+  (ソース ファイル '02_ResourceFile/ObjectFile/Sphere.cpp' をコンパイルしています)
+      C:\Users\kodokeの世界\Desktop\HAL\VisualSutdio\就職作品\個人製作\FindWork\就職作品プロジェクト\02_ResourceFile\SceneFile\TransScene.h(37,7):
+      'TransScene' の宣言を確認してください
+      C:\Users\kodokeの世界\Desktop\HAL\VisualSutdio\就職作品\個人製作\FindWork\就職作品プロジェクト\02_ResourceFile\Game.h(242,19):
+      次のメンバーが原因です:
+      C:\Users\kodokeの世界\Desktop\HAL\VisualSutdio\就職作品\個人製作\FindWork\就職作品プロジェクト\02_ResourceFile\Game.h(242,19):
+      'SceneNo Scene::GetSceneNo(void) const': は抽象型です
+      C:\Users\kodokeの世界\Desktop\HAL\VisualSutdio\就職作品\個人製作\FindWork\就職作品プロジェクト\02_ResourceFile\SceneFile\Scene.h(59,18):
+      'Scene::GetSceneNo' の宣言を確認してください
+  
+C:\Users\kodokeの世界\Desktop\HAL\VisualSutdio\就職作品\個人製作\FindWork\就職作品プロジェクト\02_ResourceFile\Game.h(189,5): error C3878: 構文エラー: 'expression' の後に予期しないトークン 'instance' があります
+  (ソース ファイル '02_ResourceFile/SceneFile/GameSceneExe.cpp' をコンパイルしています)
+  
+C:\Users\kodokeの世界\Desktop\HAL\VisualSutdio\就職作品\個人製作\FindWork\就職作品プロジェクト\02_ResourceFile\Game.h(189,49): error C2760: 構文エラー: ')' は予期しないエラーでした。';' が必要です
+  (ソース ファイル '02_ResourceFile/SceneFile/GameSceneExe.cpp' をコンパイルしています)
+  
+C:\Users\kodokeの世界\Desktop\HAL\VisualSutdio\就職作品\個人製作\FindWork\就職作品プロジェクト\02_ResourceFile\Game.h(189,49): error C3878: 構文エラー: 'expression-statement' の後に予期しないトークン ')' があります
+  (ソース ファイル '02_ResourceFile/SceneFile/GameSceneExe.cpp' をコンパイルしています)
+  
+C:\Users\kodokeの世界\Desktop\HAL\VisualSutdio\就職作品\個人製作\FindWork\就職作品プロジェクト\02_ResourceFile\Game.h(189,5): error C3878: 構文エラー: 'expression' の後に予期しないトークン 'instance' があります
+  (ソース ファイル '02_ResourceFile/ObjectFile/Cube.cpp' をコンパイルしています)
+  
+C:\Users\kodokeの世界\Desktop\HAL\VisualSutdio\就職作品\個人製作\FindWork\就職作品プロジェクト\02_ResourceFile\Game.h(189,49): error C2760: 構文エラー: ')' は予期しないエラーでした。';' が必要です
+  (ソース ファイル '02_ResourceFile/ObjectFile/Cube.cpp' をコンパイルしています)
+  
+C:\Users\kodokeの世界\Desktop\HAL\VisualSutdio\就職作品\個人製作\FindWork\就職作品プロジェクト\02_ResourceFile\Game.h(214,22): error C2259: 'TransScene': 抽象クラスをインスタンス化できません。
+  (ソース ファイル '02_ResourceFile/SceneFile/GameSceneExe.cpp' をコンパイルしています)
+      C:\Users\kodokeの世界\Desktop\HAL\VisualSutdio\就職作品\個人製作\FindWork\就職作品プロジェクト\02_ResourceFile\SceneFile\TransScene.h(37,7):
+      'TransScene' の宣言を確認してください
+      C:\Users\kodokeの世界\Desktop\HAL\VisualSutdio\就職作品\個人製作\FindWork\就職作品プロジェクト\02_ResourceFile\Game.h(214,22):
+      次のメンバーが原因です:
+      C:\Users\kodokeの世界\Desktop\HAL\VisualSutdio\就職作品\個人製作\FindWork\就職作品プロジェクト\02_ResourceFile\Game.h(214,22):
+      'SceneNo Scene::GetSceneNo(void) const': は抽象型です
+      C:\Users\kodokeの世界\Desktop\HAL\VisualSutdio\就職作品\個人製作\FindWork\就職作品プロジェクト\02_ResourceFile\SceneFile\Scene.h(59,18):
+      'Scene::GetSceneNo' の宣言を確認してください
+  
+C:\Users\kodokeの世界\Desktop\HAL\VisualSutdio\就職作品\個人製作\FindWork\就職作品プロジェクト\02_ResourceFile\Game.h(189,49): error C3878: 構文エラー: 'expression-statement' の後に予期しないトークン ')' があります
+  (ソース ファイル '02_ResourceFile/ObjectFile/Cube.cpp' をコンパイルしています)
+  
+C:\Users\kodokeの世界\Desktop\HAL\VisualSutdio\就職作品\個人製作\FindWork\就職作品プロジェクト\02_ResourceFile\Game.h(242,19): error C2259: 'TransScene': 抽象クラスをインスタンス化できません。
+  (ソース ファイル '02_ResourceFile/SceneFile/GameSceneExe.cpp' をコンパイルしています)
+      C:\Users\kodokeの世界\Desktop\HAL\VisualSutdio\就職作品\個人製作\FindWork\就職作品プロジェクト\02_ResourceFile\SceneFile\TransScene.h(37,7):
+      'TransScene' の宣言を確認してください
+      C:\Users\kodokeの世界\Desktop\HAL\VisualSutdio\就職作品\個人製作\FindWork\就職作品プロジェクト\02_ResourceFile\Game.h(242,19):
+      次のメンバーが原因です:
+      C:\Users\kodokeの世界\Desktop\HAL\VisualSutdio\就職作品\個人製作\FindWork\就職作品プロジェクト\02_ResourceFile\Game.h(242,19):
+      'SceneNo Scene::GetSceneNo(void) const': は抽象型です
+      C:\Users\kodokeの世界\Desktop\HAL\VisualSutdio\就職作品\個人製作\FindWork\就職作品プロジェクト\02_ResourceFile\SceneFile\Scene.h(59,18):
+      'Scene::GetSceneNo' の宣言を確認してください
+  
+C:\Users\kodokeの世界\Desktop\HAL\VisualSutdio\就職作品\個人製作\FindWork\就職作品プロジェクト\02_ResourceFile\Game.h(214,22): error C2259: 'TransScene': 抽象クラスをインスタンス化できません。
+  (ソース ファイル '02_ResourceFile/ObjectFile/Cube.cpp' をコンパイルしています)
+      C:\Users\kodokeの世界\Desktop\HAL\VisualSutdio\就職作品\個人製作\FindWork\就職作品プロジェクト\02_ResourceFile\SceneFile\TransScene.h(37,7):
+      'TransScene' の宣言を確認してください
+      C:\Users\kodokeの世界\Desktop\HAL\VisualSutdio\就職作品\個人製作\FindWork\就職作品プロジェクト\02_ResourceFile\Game.h(214,22):
+      次のメンバーが原因です:
+      C:\Users\kodokeの世界\Desktop\HAL\VisualSutdio\就職作品\個人製作\FindWork\就職作品プロジェクト\02_ResourceFile\Game.h(214,22):
+      'SceneNo Scene::GetSceneNo(void) const': は抽象型です
+      C:\Users\kodokeの世界\Desktop\HAL\VisualSutdio\就職作品\個人製作\FindWork\就職作品プロジェクト\02_ResourceFile\SceneFile\Scene.h(59,18):
+      'Scene::GetSceneNo' の宣言を確認してください
+  
+C:\Users\kodokeの世界\Desktop\HAL\VisualSutdio\就職作品\個人製作\FindWork\就職作品プロジェクト\02_ResourceFile\Game.h(242,19): error C2259: 'TransScene': 抽象クラスをインスタンス化できません。
+  (ソース ファイル '02_ResourceFile/ObjectFile/Cube.cpp' をコンパイルしています)
+      C:\Users\kodokeの世界\Desktop\HAL\VisualSutdio\就職作品\個人製作\FindWork\就職作品プロジェクト\02_ResourceFile\SceneFile\TransScene.h(37,7):
+      'TransScene' の宣言を確認してください
+      C:\Users\kodokeの世界\Desktop\HAL\VisualSutdio\就職作品\個人製作\FindWork\就職作品プロジェクト\02_ResourceFile\Game.h(242,19):
+      次のメンバーが原因です:
+      C:\Users\kodokeの世界\Desktop\HAL\VisualSutdio\就職作品\個人製作\FindWork\就職作品プロジェクト\02_ResourceFile\Game.h(242,19):
+      'SceneNo Scene::GetSceneNo(void) const': は抽象型です
+      C:\Users\kodokeの世界\Desktop\HAL\VisualSutdio\就職作品\個人製作\FindWork\就職作品プロジェクト\02_ResourceFile\SceneFile\Scene.h(59,18):
+      'Scene::GetSceneNo' の宣言を確認してください
+  
+C:\Users\kodokeの世界\Desktop\HAL\VisualSutdio\就職作品\個人製作\FindWork\就職作品プロジェクト\02_ResourceFile\Game.h(189,5): error C3878: 構文エラー: 'expression' の後に予期しないトークン 'instance' があります
+  (ソース ファイル '02_ResourceFile/ObjectFile/Object.cpp' をコンパイルしています)
+  
+C:\Users\kodokeの世界\Desktop\HAL\VisualSutdio\就職作品\個人製作\FindWork\就職作品プロジェクト\02_ResourceFile\Game.h(189,49): error C2760: 構文エラー: ')' は予期しないエラーでした。';' が必要です
+  (ソース ファイル '02_ResourceFile/ObjectFile/Object.cpp' をコンパイルしています)
+  
+C:\Users\kodokeの世界\Desktop\HAL\VisualSutdio\就職作品\個人製作\FindWork\就職作品プロジェクト\02_ResourceFile\Game.h(189,49): error C3878: 構文エラー: 'expression-statement' の後に予期しないトークン ')' があります
+  (ソース ファイル '02_ResourceFile/ObjectFile/Object.cpp' をコンパイルしています)
+  
+C:\Users\kodokeの世界\Desktop\HAL\VisualSutdio\就職作品\個人製作\FindWork\就職作品プロジェクト\02_ResourceFile\Game.h(214,22): error C2259: 'TransScene': 抽象クラスをインスタンス化できません。
+  (ソース ファイル '02_ResourceFile/ObjectFile/Object.cpp' をコンパイルしています)
+      C:\Users\kodokeの世界\Desktop\HAL\VisualSutdio\就職作品\個人製作\FindWork\就職作品プロジェクト\02_ResourceFile\SceneFile\TransScene.h(37,7):
+      'TransScene' の宣言を確認してください
+      C:\Users\kodokeの世界\Desktop\HAL\VisualSutdio\就職作品\個人製作\FindWork\就職作品プロジェクト\02_ResourceFile\Game.h(214,22):
+      次のメンバーが原因です:
+      C:\Users\kodokeの世界\Desktop\HAL\VisualSutdio\就職作品\個人製作\FindWork\就職作品プロジェクト\02_ResourceFile\Game.h(214,22):
+      'SceneNo Scene::GetSceneNo(void) const': は抽象型です
+      C:\Users\kodokeの世界\Desktop\HAL\VisualSutdio\就職作品\個人製作\FindWork\就職作品プロジェクト\02_ResourceFile\SceneFile\Scene.h(59,18):
+      'Scene::GetSceneNo' の宣言を確認してください
+  
+C:\Users\kodokeの世界\Desktop\HAL\VisualSutdio\就職作品\個人製作\FindWork\就職作品プロジェクト\02_ResourceFile\Game.h(242,19): error C2259: 'TransScene': 抽象クラスをインスタンス化できません。
+  (ソース ファイル '02_ResourceFile/ObjectFile/Object.cpp' をコンパイルしています)
+      C:\Users\kodokeの世界\Desktop\HAL\VisualSutdio\就職作品\個人製作\FindWork\就職作品プロジェクト\02_ResourceFile\SceneFile\TransScene.h(37,7):
+      'TransScene' の宣言を確認してください
+      C:\Users\kodokeの世界\Desktop\HAL\VisualSutdio\就職作品\個人製作\FindWork\就職作品プロジェクト\02_ResourceFile\Game.h(242,19):
+      次のメンバーが原因です:
+      C:\Users\kodokeの世界\Desktop\HAL\VisualSutdio\就職作品\個人製作\FindWork\就職作品プロジェクト\02_ResourceFile\Game.h(242,19):
+      'SceneNo Scene::GetSceneNo(void) const': は抽象型です
+      C:\Users\kodokeの世界\Desktop\HAL\VisualSutdio\就職作品\個人製作\FindWork\就職作品プロジェクト\02_ResourceFile\SceneFile\Scene.h(59,18):
+      'Scene::GetSceneNo' の宣言を確認してください
+  
+C:\Users\kodokeの世界\Desktop\HAL\VisualSutdio\就職作品\個人製作\FindWork\就職作品プロジェクト\02_ResourceFile\Game.h(189,5): error C3878: 構文エラー: 'expression' の後に予期しないトークン 'instance' があります
+  (ソース ファイル '02_ResourceFile/SceneFile/SelectScene.cpp' をコンパイルしています)
+  
+C:\Users\kodokeの世界\Desktop\HAL\VisualSutdio\就職作品\個人製作\FindWork\就職作品プロジェクト\02_ResourceFile\Game.h(189,49): error C2760: 構文エラー: ')' は予期しないエラーでした。';' が必要です
+  (ソース ファイル '02_ResourceFile/SceneFile/SelectScene.cpp' をコンパイルしています)
+  
+C:\Users\kodokeの世界\Desktop\HAL\VisualSutdio\就職作品\個人製作\FindWork\就職作品プロジェクト\02_ResourceFile\Game.h(189,49): error C3878: 構文エラー: 'expression-statement' の後に予期しないトークン ')' があります
+  (ソース ファイル '02_ResourceFile/SceneFile/SelectScene.cpp' をコンパイルしています)
+  
+C:\Users\kodokeの世界\Desktop\HAL\VisualSutdio\就職作品\個人製作\FindWork\就職作品プロジェクト\02_ResourceFile\Game.h(214,22): error C2259: 'TransScene': 抽象クラスをインスタンス化できません。
+  (ソース ファイル '02_ResourceFile/SceneFile/SelectScene.cpp' をコンパイルしています)
+      C:\Users\kodokeの世界\Desktop\HAL\VisualSutdio\就職作品\個人製作\FindWork\就職作品プロジェクト\02_ResourceFile\SceneFile\TransScene.h(37,7):
+      'TransScene' の宣言を確認してください
+      C:\Users\kodokeの世界\Desktop\HAL\VisualSutdio\就職作品\個人製作\FindWork\就職作品プロジェクト\02_ResourceFile\Game.h(214,22):
+      次のメンバーが原因です:
+      C:\Users\kodokeの世界\Desktop\HAL\VisualSutdio\就職作品\個人製作\FindWork\就職作品プロジェクト\02_ResourceFile\Game.h(214,22):
+      'SceneNo Scene::GetSceneNo(void) const': は抽象型です
+      C:\Users\kodokeの世界\Desktop\HAL\VisualSutdio\就職作品\個人製作\FindWork\就職作品プロジェクト\02_ResourceFile\SceneFile\Scene.h(59,18):
+      'Scene::GetSceneNo' の宣言を確認してください
+  
+C:\Users\kodokeの世界\Desktop\HAL\VisualSutdio\就職作品\個人製作\FindWork\就職作品プロジェクト\02_ResourceFile\Game.h(242,19): error C2259: 'TransScene': 抽象クラスをインスタンス化できません。
+  (ソース ファイル '02_ResourceFile/SceneFile/SelectScene.cpp' をコンパイルしています)
+      C:\Users\kodokeの世界\Desktop\HAL\VisualSutdio\就職作品\個人製作\FindWork\就職作品プロジェクト\02_ResourceFile\SceneFile\TransScene.h(37,7):
+      'TransScene' の宣言を確認してください
+      C:\Users\kodokeの世界\Desktop\HAL\VisualSutdio\就職作品\個人製作\FindWork\就職作品プロジェクト\02_ResourceFile\Game.h(242,19):
+      次のメンバーが原因です:
+      C:\Users\kodokeの世界\Desktop\HAL\VisualSutdio\就職作品\個人製作\FindWork\就職作品プロジェクト\02_ResourceFile\Game.h(242,19):
+      'SceneNo Scene::GetSceneNo(void) const': は抽象型です
+      C:\Users\kodokeの世界\Desktop\HAL\VisualSutdio\就職作品\個人製作\FindWork\就職作品プロジェクト\02_ResourceFile\SceneFile\Scene.h(59,18):
+      'Scene::GetSceneNo' の宣言を確認してください
+  
+C:\Users\kodokeの世界\Desktop\HAL\VisualSutdio\就職作品\個人製作\FindWork\就職作品プロジェクト\02_ResourceFile\Game.h(189,5): error C3878: 構文エラー: 'expression' の後に予期しないトークン 'instance' があります
+  (ソース ファイル '02_ResourceFile/SceneFile/TransScene.cpp' をコンパイルしています)
+  
+C:\Users\kodokeの世界\Desktop\HAL\VisualSutdio\就職作品\個人製作\FindWork\就職作品プロジェクト\02_ResourceFile\Game.h(189,49): error C2760: 構文エラー: ')' は予期しないエラーでした。';' が必要です
+  (ソース ファイル '02_ResourceFile/SceneFile/TransScene.cpp' をコンパイルしています)
+  
+C:\Users\kodokeの世界\Desktop\HAL\VisualSutdio\就職作品\個人製作\FindWork\就職作品プロジェクト\02_ResourceFile\Game.h(189,49): error C3878: 構文エラー: 'expression-statement' の後に予期しないトークン ')' があります
+  (ソース ファイル '02_ResourceFile/SceneFile/TransScene.cpp' をコンパイルしています)
+  
+C:\Users\kodokeの世界\Desktop\HAL\VisualSutdio\就職作品\個人製作\FindWork\就職作品プロジェクト\02_ResourceFile\Game.h(214,22): error C2259: 'TransScene': 抽象クラスをインスタンス化できません。
+  (ソース ファイル '02_ResourceFile/SceneFile/TransScene.cpp' をコンパイルしています)
+      C:\Users\kodokeの世界\Desktop\HAL\VisualSutdio\就職作品\個人製作\FindWork\就職作品プロジェクト\02_ResourceFile\SceneFile\TransScene.h(37,7):
+      'TransScene' の宣言を確認してください
+      C:\Users\kodokeの世界\Desktop\HAL\VisualSutdio\就職作品\個人製作\FindWork\就職作品プロジェクト\02_ResourceFile\Game.h(214,22):
+      次のメンバーが原因です:
+      C:\Users\kodokeの世界\Desktop\HAL\VisualSutdio\就職作品\個人製作\FindWork\就職作品プロジェクト\02_ResourceFile\Game.h(214,22):
+      'SceneNo Scene::GetSceneNo(void) const': は抽象型です
+      C:\Users\kodokeの世界\Desktop\HAL\VisualSutdio\就職作品\個人製作\FindWork\就職作品プロジェクト\02_ResourceFile\SceneFile\Scene.h(59,18):
+      'Scene::GetSceneNo' の宣言を確認してください
+  
+C:\Users\kodokeの世界\Desktop\HAL\VisualSutdio\就職作品\個人製作\FindWork\就職作品プロジェクト\02_ResourceFile\Game.h(242,19): error C2259: 'TransScene': 抽象クラスをインスタンス化できません。
+  (ソース ファイル '02_ResourceFile/SceneFile/TransScene.cpp' をコンパイルしています)
+      C:\Users\kodokeの世界\Desktop\HAL\VisualSutdio\就職作品\個人製作\FindWork\就職作品プロジェクト\02_ResourceFile\SceneFile\TransScene.h(37,7):
+      'TransScene' の宣言を確認してください
+      C:\Users\kodokeの世界\Desktop\HAL\VisualSutdio\就職作品\個人製作\FindWork\就職作品プロジェクト\02_ResourceFile\Game.h(242,19):
+      次のメンバーが原因です:
+      C:\Users\kodokeの世界\Desktop\HAL\VisualSutdio\就職作品\個人製作\FindWork\就職作品プロジェクト\02_ResourceFile\Game.h(242,19):
+      'SceneNo Scene::GetSceneNo(void) const': は抽象型です
+      C:\Users\kodokeの世界\Desktop\HAL\VisualSutdio\就職作品\個人製作\FindWork\就職作品プロジェクト\02_ResourceFile\SceneFile\Scene.h(59,18):
+      'Scene::GetSceneNo' の宣言を確認してください
+  
+C:\Users\kodokeの世界\Desktop\HAL\VisualSutdio\就職作品\個人製作\FindWork\就職作品プロジェクト\02_ResourceFile\Game.h(189,5): error C3878: 構文エラー: 'expression' の後に予期しないトークン 'instance' があります
+  (ソース ファイル '02_ResourceFile/SceneFile/Transition/Fade.cpp' をコンパイルしています)
+  
+C:\Users\kodokeの世界\Desktop\HAL\VisualSutdio\就職作品\個人製作\FindWork\就職作品プロジェクト\02_ResourceFile\Game.h(189,49): error C2760: 構文エラー: ')' は予期しないエラーでした。';' が必要です
+  (ソース ファイル '02_ResourceFile/SceneFile/Transition/Fade.cpp' をコンパイルしています)
+  
+C:\Users\kodokeの世界\Desktop\HAL\VisualSutdio\就職作品\個人製作\FindWork\就職作品プロジェクト\02_ResourceFile\Game.h(189,49): error C3878: 構文エラー: 'expression-statement' の後に予期しないトークン ')' があります
+  (ソース ファイル '02_ResourceFile/SceneFile/Transition/Fade.cpp' をコンパイルしています)
+  
+C:\Users\kodokeの世界\Desktop\HAL\VisualSutdio\就職作品\個人製作\FindWork\就職作品プロジェクト\02_ResourceFile\Game.h(214,22): error C2259: 'TransScene': 抽象クラスをインスタンス化できません。
+  (ソース ファイル '02_ResourceFile/SceneFile/Transition/Fade.cpp' をコンパイルしています)
+      C:\Users\kodokeの世界\Desktop\HAL\VisualSutdio\就職作品\個人製作\FindWork\就職作品プロジェクト\02_ResourceFile\SceneFile\TransScene.h(37,7):
+      'TransScene' の宣言を確認してください
+      C:\Users\kodokeの世界\Desktop\HAL\VisualSutdio\就職作品\個人製作\FindWork\就職作品プロジェクト\02_ResourceFile\Game.h(214,22):
+      次のメンバーが原因です:
+      C:\Users\kodokeの世界\Desktop\HAL\VisualSutdio\就職作品\個人製作\FindWork\就職作品プロジェクト\02_ResourceFile\Game.h(214,22):
+      'SceneNo Scene::GetSceneNo(void) const': は抽象型です
+      C:\Users\kodokeの世界\Desktop\HAL\VisualSutdio\就職作品\個人製作\FindWork\就職作品プロジェクト\02_ResourceFile\SceneFile\Scene.h(59,18):
+      'Scene::GetSceneNo' の宣言を確認してください
+  
+C:\Users\kodokeの世界\Desktop\HAL\VisualSutdio\就職作品\個人製作\FindWork\就職作品プロジェクト\02_ResourceFile\Game.h(242,19): error C2259: 'TransScene': 抽象クラスをインスタンス化できません。
+  (ソース ファイル '02_ResourceFile/SceneFile/Transition/Fade.cpp' をコンパイルしています)
+      C:\Users\kodokeの世界\Desktop\HAL\VisualSutdio\就職作品\個人製作\FindWork\就職作品プロジェクト\02_ResourceFile\SceneFile\TransScene.h(37,7):
+      'TransScene' の宣言を確認してください
+      C:\Users\kodokeの世界\Desktop\HAL\VisualSutdio\就職作品\個人製作\FindWork\就職作品プロジェクト\02_ResourceFile\Game.h(242,19):
+      次のメンバーが原因です:
+      C:\Users\kodokeの世界\Desktop\HAL\VisualSutdio\就職作品\個人製作\FindWork\就職作品プロジェクト\02_ResourceFile\Game.h(242,19):
+      'SceneNo Scene::GetSceneNo(void) const': は抽象型です
+      C:\Users\kodokeの世界\Desktop\HAL\VisualSutdio\就職作品\個人製作\FindWork\就職作品プロジェクト\02_ResourceFile\SceneFile\Scene.h(59,18):
+      'Scene::GetSceneNo' の宣言を確認してください
+  
+C:\Users\kodokeの世界\Desktop\HAL\VisualSutdio\就職作品\個人製作\FindWork\就職作品プロジェクト\02_ResourceFile\Game.h(189,5): error C3878: 構文エラー: 'expression' の後に予期しないトークン 'instance' があります
+  (ソース ファイル '02_ResourceFile/Game.cpp' をコンパイルしています)
+  
+C:\Users\kodokeの世界\Desktop\HAL\VisualSutdio\就職作品\個人製作\FindWork\就職作品プロジェクト\02_ResourceFile\Game.h(189,49): error C2760: 構文エラー: ')' は予期しないエラーでした。';' が必要です
+  (ソース ファイル '02_ResourceFile/Game.cpp' をコンパイルしています)
+  
+C:\Users\kodokeの世界\Desktop\HAL\VisualSutdio\就職作品\個人製作\FindWork\就職作品プロジェクト\02_ResourceFile\Game.h(189,49): error C3878: 構文エラー: 'expression-statement' の後に予期しないトークン ')' があります
+  (ソース ファイル '02_ResourceFile/Game.cpp' をコンパイルしています)
+  
+C:\Users\kodokeの世界\Desktop\HAL\VisualSutdio\就職作品\個人製作\FindWork\就職作品プロジェクト\02_ResourceFile\Game.h(214,22): error C2259: 'TransScene': 抽象クラスをインスタンス化できません。
+  (ソース ファイル '02_ResourceFile/Game.cpp' をコンパイルしています)
+      C:\Users\kodokeの世界\Desktop\HAL\VisualSutdio\就職作品\個人製作\FindWork\就職作品プロジェクト\02_ResourceFile\SceneFile\TransScene.h(37,7):
+      'TransScene' の宣言を確認してください
+      C:\Users\kodokeの世界\Desktop\HAL\VisualSutdio\就職作品\個人製作\FindWork\就職作品プロジェクト\02_ResourceFile\Game.h(214,22):
+      次のメンバーが原因です:
+      C:\Users\kodokeの世界\Desktop\HAL\VisualSutdio\就職作品\個人製作\FindWork\就職作品プロジェクト\02_ResourceFile\Game.h(214,22):
+      'SceneNo Scene::GetSceneNo(void) const': は抽象型です
+      C:\Users\kodokeの世界\Desktop\HAL\VisualSutdio\就職作品\個人製作\FindWork\就職作品プロジェクト\02_ResourceFile\SceneFile\Scene.h(59,18):
+      'Scene::GetSceneNo' の宣言を確認してください
+  
+C:\Users\kodokeの世界\Desktop\HAL\VisualSutdio\就職作品\個人製作\FindWork\就職作品プロジェクト\02_ResourceFile\Game.h(242,19): error C2259: 'TransScene': 抽象クラスをインスタンス化できません。
+  (ソース ファイル '02_ResourceFile/Game.cpp' をコンパイルしています)
+      C:\Users\kodokeの世界\Desktop\HAL\VisualSutdio\就職作品\個人製作\FindWork\就職作品プロジェクト\02_ResourceFile\SceneFile\TransScene.h(37,7):
+      'TransScene' の宣言を確認してください
+      C:\Users\kodokeの世界\Desktop\HAL\VisualSutdio\就職作品\個人製作\FindWork\就職作品プロジェクト\02_ResourceFile\Game.h(242,19):
+      次のメンバーが原因です:
+      C:\Users\kodokeの世界\Desktop\HAL\VisualSutdio\就職作品\個人製作\FindWork\就職作品プロジェクト\02_ResourceFile\Game.h(242,19):
+      'SceneNo Scene::GetSceneNo(void) const': は抽象型です
+      C:\Users\kodokeの世界\Desktop\HAL\VisualSutdio\就職作品\個人製作\FindWork\就職作品プロジェクト\02_ResourceFile\SceneFile\Scene.h(59,18):
+      'Scene::GetSceneNo' の宣言を確認してください
+  
+C:\Users\kodokeの世界\Desktop\HAL\VisualSutdio\就職作品\個人製作\FindWork\就職作品プロジェクト\02_ResourceFile\Game.h(189,5): error C3878: 構文エラー: 'expression' の後に予期しないトークン 'instance' があります
+  (ソース ファイル '02_ResourceFile/SceneFile/TitleScene.cpp' をコンパイルしています)
+  
+C:\Users\kodokeの世界\Desktop\HAL\VisualSutdio\就職作品\個人製作\FindWork\就職作品プロジェクト\02_ResourceFile\Game.h(189,49): error C2760: 構文エラー: ')' は予期しないエラーでした。';' が必要です
+  (ソース ファイル '02_ResourceFile/SceneFile/TitleScene.cpp' をコンパイルしています)
+  
+C:\Users\kodokeの世界\Desktop\HAL\VisualSutdio\就職作品\個人製作\FindWork\就職作品プロジェクト\02_ResourceFile\Game.h(189,49): error C3878: 構文エラー: 'expression-statement' の後に予期しないトークン ')' があります
+  (ソース ファイル '02_ResourceFile/SceneFile/TitleScene.cpp' をコンパイルしています)
+  
+C:\Users\kodokeの世界\Desktop\HAL\VisualSutdio\就職作品\個人製作\FindWork\就職作品プロジェクト\02_ResourceFile\Game.h(214,22): error C2259: 'TransScene': 抽象クラスをインスタンス化できません。
+  (ソース ファイル '02_ResourceFile/SceneFile/TitleScene.cpp' をコンパイルしています)
+      C:\Users\kodokeの世界\Desktop\HAL\VisualSutdio\就職作品\個人製作\FindWork\就職作品プロジェクト\02_ResourceFile\SceneFile\TransScene.h(37,7):
+      'TransScene' の宣言を確認してください
+      C:\Users\kodokeの世界\Desktop\HAL\VisualSutdio\就職作品\個人製作\FindWork\就職作品プロジェクト\02_ResourceFile\Game.h(214,22):
+      次のメンバーが原因です:
+      C:\Users\kodokeの世界\Desktop\HAL\VisualSutdio\就職作品\個人製作\FindWork\就職作品プロジェクト\02_ResourceFile\Game.h(214,22):
+      'SceneNo Scene::GetSceneNo(void) const': は抽象型です
+      C:\Users\kodokeの世界\Desktop\HAL\VisualSutdio\就職作品\個人製作\FindWork\就職作品プロジェクト\02_ResourceFile\SceneFile\Scene.h(59,18):
+      'Scene::GetSceneNo' の宣言を確認してください
+  
+C:\Users\kodokeの世界\Desktop\HAL\VisualSutdio\就職作品\個人製作\FindWork\就職作品プロジェクト\02_ResourceFile\Game.h(242,19): error C2259: 'TransScene': 抽象クラスをインスタンス化できません。
+  (ソース ファイル '02_ResourceFile/SceneFile/TitleScene.cpp' をコンパイルしています)
+      C:\Users\kodokeの世界\Desktop\HAL\VisualSutdio\就職作品\個人製作\FindWork\就職作品プロジェクト\02_ResourceFile\SceneFile\TransScene.h(37,7):
+      'TransScene' の宣言を確認してください
+      C:\Users\kodokeの世界\Desktop\HAL\VisualSutdio\就職作品\個人製作\FindWork\就職作品プロジェクト\02_ResourceFile\Game.h(242,19):
+      次のメンバーが原因です:
+      C:\Users\kodokeの世界\Desktop\HAL\VisualSutdio\就職作品\個人製作\FindWork\就職作品プロジェクト\02_ResourceFile\Game.h(242,19):
+      'SceneNo Scene::GetSceneNo(void) const': は抽象型です
+      C:\Users\kodokeの世界\Desktop\HAL\VisualSutdio\就職作品\個人製作\FindWork\就職作品プロジェクト\02_ResourceFile\SceneFile\Scene.h(59,18):
+      'Scene::GetSceneNo' の宣言を確認してください
+  
+C:\Users\kodokeの世界\Desktop\HAL\VisualSutdio\就職作品\個人製作\FindWork\就職作品プロジェクト\02_ResourceFile\Game.h(189,5): error C3878: 構文エラー: 'expression' の後に予期しないトークン 'instance' があります
+  (ソース ファイル '02_ResourceFile/SceneFile/Transition/Wipe.cpp' をコンパイルしています)
+  
+C:\Users\kodokeの世界\Desktop\HAL\VisualSutdio\就職作品\個人製作\FindWork\就職作品プロジェクト\02_ResourceFile\Game.h(189,49): error C2760: 構文エラー: ')' は予期しないエラーでした。';' が必要です
+  (ソース ファイル '02_ResourceFile/SceneFile/Transition/Wipe.cpp' をコンパイルしています)
+  
+C:\Users\kodokeの世界\Desktop\HAL\VisualSutdio\就職作品\個人製作\FindWork\就職作品プロジェクト\02_ResourceFile\Game.h(189,49): error C3878: 構文エラー: 'expression-statement' の後に予期しないトークン ')' があります
+  (ソース ファイル '02_ResourceFile/SceneFile/Transition/Wipe.cpp' をコンパイルしています)
+  
+C:\Users\kodokeの世界\Desktop\HAL\VisualSutdio\就職作品\個人製作\FindWork\就職作品プロジェクト\02_ResourceFile\Game.h(214,22): error C2259: 'TransScene': 抽象クラスをインスタンス化できません。
+  (ソース ファイル '02_ResourceFile/SceneFile/Transition/Wipe.cpp' をコンパイルしています)
+      C:\Users\kodokeの世界\Desktop\HAL\VisualSutdio\就職作品\個人製作\FindWork\就職作品プロジェクト\02_ResourceFile\SceneFile\TransScene.h(37,7):
+      'TransScene' の宣言を確認してください
+      C:\Users\kodokeの世界\Desktop\HAL\VisualSutdio\就職作品\個人製作\FindWork\就職作品プロジェクト\02_ResourceFile\Game.h(214,22):
+      次のメンバーが原因です:
+      C:\Users\kodokeの世界\Desktop\HAL\VisualSutdio\就職作品\個人製作\FindWork\就職作品プロジェクト\02_ResourceFile\Game.h(214,22):
+      'SceneNo Scene::GetSceneNo(void) const': は抽象型です
+      C:\Users\kodokeの世界\Desktop\HAL\VisualSutdio\就職作品\個人製作\FindWork\就職作品プロジェクト\02_ResourceFile\SceneFile\Scene.h(59,18):
+      'Scene::GetSceneNo' の宣言を確認してください
+  
+C:\Users\kodokeの世界\Desktop\HAL\VisualSutdio\就職作品\個人製作\FindWork\就職作品プロジェクト\02_ResourceFile\Game.h(242,19): error C2259: 'TransScene': 抽象クラスをインスタンス化できません。
+  (ソース ファイル '02_ResourceFile/SceneFile/Transition/Wipe.cpp' をコンパイルしています)
+      C:\Users\kodokeの世界\Desktop\HAL\VisualSutdio\就職作品\個人製作\FindWork\就職作品プロジェクト\02_ResourceFile\SceneFile\TransScene.h(37,7):
+      'TransScene' の宣言を確認してください
+      C:\Users\kodokeの世界\Desktop\HAL\VisualSutdio\就職作品\個人製作\FindWork\就職作品プロジェクト\02_ResourceFile\Game.h(242,19):
+      次のメンバーが原因です:
+      C:\Users\kodokeの世界\Desktop\HAL\VisualSutdio\就職作品\個人製作\FindWork\就職作品プロジェクト\02_ResourceFile\Game.h(242,19):
+      'SceneNo Scene::GetSceneNo(void) const': は抽象型です
+      C:\Users\kodokeの世界\Desktop\HAL\VisualSutdio\就職作品\個人製作\FindWork\就職作品プロジェクト\02_ResourceFile\SceneFile\Scene.h(59,18):
+      'Scene::GetSceneNo' の宣言を確認してください
+  
+C:\Users\kodokeの世界\Desktop\HAL\VisualSutdio\就職作品\個人製作\FindWork\就職作品プロジェクト\02_ResourceFile\Game.h(189,5): error C3878: 構文エラー: 'expression' の後に予期しないトークン 'instance' があります
+  (ソース ファイル '02_ResourceFile/DebugGridLine.cpp' をコンパイルしています)
+  
+C:\Users\kodokeの世界\Desktop\HAL\VisualSutdio\就職作品\個人製作\FindWork\就職作品プロジェクト\02_ResourceFile\Game.h(189,49): error C2760: 構文エラー: ')' は予期しないエラーでした。';' が必要です
+  (ソース ファイル '02_ResourceFile/DebugGridLine.cpp' をコンパイルしています)
+  
+C:\Users\kodokeの世界\Desktop\HAL\VisualSutdio\就職作品\個人製作\FindWork\就職作品プロジェクト\02_ResourceFile\Game.h(189,49): error C3878: 構文エラー: 'expression-statement' の後に予期しないトークン ')' があります
+  (ソース ファイル '02_ResourceFile/DebugGridLine.cpp' をコンパイルしています)
+  
+C:\Users\kodokeの世界\Desktop\HAL\VisualSutdio\就職作品\個人製作\FindWork\就職作品プロジェクト\02_ResourceFile\Game.h(214,22): error C2259: 'TransScene': 抽象クラスをインスタンス化できません。
+  (ソース ファイル '02_ResourceFile/DebugGridLine.cpp' をコンパイルしています)
+      C:\Users\kodokeの世界\Desktop\HAL\VisualSutdio\就職作品\個人製作\FindWork\就職作品プロジェクト\02_ResourceFile\SceneFile\TransScene.h(37,7):
+      'TransScene' の宣言を確認してください
+      C:\Users\kodokeの世界\Desktop\HAL\VisualSutdio\就職作品\個人製作\FindWork\就職作品プロジェクト\02_ResourceFile\Game.h(214,22):
+      次のメンバーが原因です:
+      C:\Users\kodokeの世界\Desktop\HAL\VisualSutdio\就職作品\個人製作\FindWork\就職作品プロジェクト\02_ResourceFile\Game.h(214,22):
+      'SceneNo Scene::GetSceneNo(void) const': は抽象型です
+      C:\Users\kodokeの世界\Desktop\HAL\VisualSutdio\就職作品\個人製作\FindWork\就職作品プロジェクト\02_ResourceFile\SceneFile\Scene.h(59,18):
+      'Scene::GetSceneNo' の宣言を確認してください
+  
+C:\Users\kodokeの世界\Desktop\HAL\VisualSutdio\就職作品\個人製作\FindWork\就職作品プロジェクト\02_ResourceFile\Game.h(242,19): error C2259: 'TransScene': 抽象クラスをインスタンス化できません。
+  (ソース ファイル '02_ResourceFile/DebugGridLine.cpp' をコンパイルしています)
+      C:\Users\kodokeの世界\Desktop\HAL\VisualSutdio\就職作品\個人製作\FindWork\就職作品プロジェクト\02_ResourceFile\SceneFile\TransScene.h(37,7):
+      'TransScene' の宣言を確認してください
+      C:\Users\kodokeの世界\Desktop\HAL\VisualSutdio\就職作品\個人製作\FindWork\就職作品プロジェクト\02_ResourceFile\Game.h(242,19):
+      次のメンバーが原因です:
+      C:\Users\kodokeの世界\Desktop\HAL\VisualSutdio\就職作品\個人製作\FindWork\就職作品プロジェクト\02_ResourceFile\Game.h(242,19):
+      'SceneNo Scene::GetSceneNo(void) const': は抽象型です
+      C:\Users\kodokeの世界\Desktop\HAL\VisualSutdio\就職作品\個人製作\FindWork\就職作品プロジェクト\02_ResourceFile\SceneFile\Scene.h(59,18):
+      'Scene::GetSceneNo' の宣言を確認してください
+  
+C:\Users\kodokeの世界\Desktop\HAL\VisualSutdio\就職作品\個人製作\FindWork\就職作品プロジェクト\02_ResourceFile\Game.h(189,5): error C3878: 構文エラー: 'expression' の後に予期しないトークン 'instance' があります
+  (ソース ファイル '02_ResourceFile/ObjectFile/Model.cpp' をコンパイルしています)
+  
+C:\Users\kodokeの世界\Desktop\HAL\VisualSutdio\就職作品\個人製作\FindWork\就職作品プロジェクト\02_ResourceFile\Game.h(189,49): error C2760: 構文エラー: ')' は予期しないエラーでした。';' が必要です
+  (ソース ファイル '02_ResourceFile/ObjectFile/Model.cpp' をコンパイルしています)
+  
+C:\Users\kodokeの世界\Desktop\HAL\VisualSutdio\就職作品\個人製作\FindWork\就職作品プロジェクト\02_ResourceFile\Game.h(189,49): error C3878: 構文エラー: 'expression-statement' の後に予期しないトークン ')' があります
+  (ソース ファイル '02_ResourceFile/ObjectFile/Model.cpp' をコンパイルしています)
+  
+C:\Users\kodokeの世界\Desktop\HAL\VisualSutdio\就職作品\個人製作\FindWork\就職作品プロジェクト\02_ResourceFile\Game.h(189,5): error C3878: 構文エラー: 'expression' の後に予期しないトークン 'instance' があります
+  (ソース ファイル '02_ResourceFile/Application.cpp' をコンパイルしています)
+  
+C:\Users\kodokeの世界\Desktop\HAL\VisualSutdio\就職作品\個人製作\FindWork\就職作品プロジェクト\02_ResourceFile\Game.h(214,22): error C2259: 'TransScene': 抽象クラスをインスタンス化できません。
+  (ソース ファイル '02_ResourceFile/ObjectFile/Model.cpp' をコンパイルしています)
+      C:\Users\kodokeの世界\Desktop\HAL\VisualSutdio\就職作品\個人製作\FindWork\就職作品プロジェクト\02_ResourceFile\SceneFile\TransScene.h(37,7):
+      'TransScene' の宣言を確認してください
+      C:\Users\kodokeの世界\Desktop\HAL\VisualSutdio\就職作品\個人製作\FindWork\就職作品プロジェクト\02_ResourceFile\Game.h(214,22):
+      次のメンバーが原因です:
+      C:\Users\kodokeの世界\Desktop\HAL\VisualSutdio\就職作品\個人製作\FindWork\就職作品プロジェクト\02_ResourceFile\Game.h(214,22):
+      'SceneNo Scene::GetSceneNo(void) const': は抽象型です
+      C:\Users\kodokeの世界\Desktop\HAL\VisualSutdio\就職作品\個人製作\FindWork\就職作品プロジェクト\02_ResourceFile\SceneFile\Scene.h(59,18):
+      'Scene::GetSceneNo' の宣言を確認してください
+  
+C:\Users\kodokeの世界\Desktop\HAL\VisualSutdio\就職作品\個人製作\FindWork\就職作品プロジェクト\02_ResourceFile\Game.h(189,49): error C2760: 構文エラー: ')' は予期しないエラーでした。';' が必要です
+  (ソース ファイル '02_ResourceFile/Application.cpp' をコンパイルしています)
+  
+C:\Users\kodokeの世界\Desktop\HAL\VisualSutdio\就職作品\個人製作\FindWork\就職作品プロジェクト\02_ResourceFile\Game.h(189,49): error C3878: 構文エラー: 'expression-statement' の後に予期しないトークン ')' があります
+  (ソース ファイル '02_ResourceFile/Application.cpp' をコンパイルしています)
+  
+C:\Users\kodokeの世界\Desktop\HAL\VisualSutdio\就職作品\個人製作\FindWork\就職作品プロジェクト\02_ResourceFile\Game.h(242,19): error C2259: 'TransScene': 抽象クラスをインスタンス化できません。
+  (ソース ファイル '02_ResourceFile/ObjectFile/Model.cpp' をコンパイルしています)
+      C:\Users\kodokeの世界\Desktop\HAL\VisualSutdio\就職作品\個人製作\FindWork\就職作品プロジェクト\02_ResourceFile\SceneFile\TransScene.h(37,7):
+      'TransScene' の宣言を確認してください
+      C:\Users\kodokeの世界\Desktop\HAL\VisualSutdio\就職作品\個人製作\FindWork\就職作品プロジェクト\02_ResourceFile\Game.h(242,19):
+      次のメンバーが原因です:
+      C:\Users\kodokeの世界\Desktop\HAL\VisualSutdio\就職作品\個人製作\FindWork\就職作品プロジェクト\02_ResourceFile\Game.h(242,19):
+      'SceneNo Scene::GetSceneNo(void) const': は抽象型です
+      C:\Users\kodokeの世界\Desktop\HAL\VisualSutdio\就職作品\個人製作\FindWork\就職作品プロジェクト\02_ResourceFile\SceneFile\Scene.h(59,18):
+      'Scene::GetSceneNo' の宣言を確認してください
+  
+C:\Users\kodokeの世界\Desktop\HAL\VisualSutdio\就職作品\個人製作\FindWork\就職作品プロジェクト\02_ResourceFile\Game.h(214,22): error C2259: 'TransScene': 抽象クラスをインスタンス化できません。
+  (ソース ファイル '02_ResourceFile/Application.cpp' をコンパイルしています)
+      C:\Users\kodokeの世界\Desktop\HAL\VisualSutdio\就職作品\個人製作\FindWork\就職作品プロジェクト\02_ResourceFile\SceneFile\TransScene.h(37,7):
+      'TransScene' の宣言を確認してください
+      C:\Users\kodokeの世界\Desktop\HAL\VisualSutdio\就職作品\個人製作\FindWork\就職作品プロジェクト\02_ResourceFile\Game.h(214,22):
+      次のメンバーが原因です:
+      C:\Users\kodokeの世界\Desktop\HAL\VisualSutdio\就職作品\個人製作\FindWork\就職作品プロジェクト\02_ResourceFile\Game.h(214,22):
+      'SceneNo Scene::GetSceneNo(void) const': は抽象型です
+      C:\Users\kodokeの世界\Desktop\HAL\VisualSutdio\就職作品\個人製作\FindWork\就職作品プロジェクト\02_ResourceFile\SceneFile\Scene.h(59,18):
+      'Scene::GetSceneNo' の宣言を確認してください
+  
+C:\Users\kodokeの世界\Desktop\HAL\VisualSutdio\就職作品\個人製作\FindWork\就職作品プロジェクト\02_ResourceFile\Game.h(242,19): error C2259: 'TransScene': 抽象クラスをインスタンス化できません。
+  (ソース ファイル '02_ResourceFile/Application.cpp' をコンパイルしています)
+      C:\Users\kodokeの世界\Desktop\HAL\VisualSutdio\就職作品\個人製作\FindWork\就職作品プロジェクト\02_ResourceFile\SceneFile\TransScene.h(37,7):
+      'TransScene' の宣言を確認してください
+      C:\Users\kodokeの世界\Desktop\HAL\VisualSutdio\就職作品\個人製作\FindWork\就職作品プロジェクト\02_ResourceFile\Game.h(242,19):
+      次のメンバーが原因です:
+      C:\Users\kodokeの世界\Desktop\HAL\VisualSutdio\就職作品\個人製作\FindWork\就職作品プロジェクト\02_ResourceFile\Game.h(242,19):
+      'SceneNo Scene::GetSceneNo(void) const': は抽象型です
+      C:\Users\kodokeの世界\Desktop\HAL\VisualSutdio\就職作品\個人製作\FindWork\就職作品プロジェクト\02_ResourceFile\SceneFile\Scene.h(59,18):
+      'Scene::GetSceneNo' の宣言を確認してください
+  
+C:\Users\kodokeの世界\Desktop\HAL\VisualSutdio\就職作品\個人製作\FindWork\就職作品プロジェクト\02_ResourceFile\Game.h(189,5): error C3878: 構文エラー: 'expression' の後に予期しないトークン 'instance' があります
+  (ソース ファイル '02_ResourceFile/Texture2D.cpp' をコンパイルしています)
+  
+C:\Users\kodokeの世界\Desktop\HAL\VisualSutdio\就職作品\個人製作\FindWork\就職作品プロジェクト\02_ResourceFile\Game.h(189,49): error C2760: 構文エラー: ')' は予期しないエラーでした。';' が必要です
+  (ソース ファイル '02_ResourceFile/Texture2D.cpp' をコンパイルしています)
+  
+C:\Users\kodokeの世界\Desktop\HAL\VisualSutdio\就職作品\個人製作\FindWork\就職作品プロジェクト\02_ResourceFile\Game.h(189,49): error C3878: 構文エラー: 'expression-statement' の後に予期しないトークン ')' があります
+  (ソース ファイル '02_ResourceFile/Texture2D.cpp' をコンパイルしています)
+  
+C:\Users\kodokeの世界\Desktop\HAL\VisualSutdio\就職作品\個人製作\FindWork\就職作品プロジェクト\02_ResourceFile\Game.h(214,22): error C2259: 'TransScene': 抽象クラスをインスタンス化できません。
+  (ソース ファイル '02_ResourceFile/Texture2D.cpp' をコンパイルしています)
+      C:\Users\kodokeの世界\Desktop\HAL\VisualSutdio\就職作品\個人製作\FindWork\就職作品プロジェクト\02_ResourceFile\SceneFile\TransScene.h(37,7):
+      'TransScene' の宣言を確認してください
+      C:\Users\kodokeの世界\Desktop\HAL\VisualSutdio\就職作品\個人製作\FindWork\就職作品プロジェクト\02_ResourceFile\Game.h(214,22):
+      次のメンバーが原因です:
+      C:\Users\kodokeの世界\Desktop\HAL\VisualSutdio\就職作品\個人製作\FindWork\就職作品プロジェクト\02_ResourceFile\Game.h(214,22):
+      'SceneNo Scene::GetSceneNo(void) const': は抽象型です
+      C:\Users\kodokeの世界\Desktop\HAL\VisualSutdio\就職作品\個人製作\FindWork\就職作品プロジェクト\02_ResourceFile\SceneFile\Scene.h(59,18):
+      'Scene::GetSceneNo' の宣言を確認してください
+  
+C:\Users\kodokeの世界\Desktop\HAL\VisualSutdio\就職作品\個人製作\FindWork\就職作品プロジェクト\02_ResourceFile\Game.h(242,19): error C2259: 'TransScene': 抽象クラスをインスタンス化できません。
+  (ソース ファイル '02_ResourceFile/Texture2D.cpp' をコンパイルしています)
+      C:\Users\kodokeの世界\Desktop\HAL\VisualSutdio\就職作品\個人製作\FindWork\就職作品プロジェクト\02_ResourceFile\SceneFile\TransScene.h(37,7):
+      'TransScene' の宣言を確認してください
+      C:\Users\kodokeの世界\Desktop\HAL\VisualSutdio\就職作品\個人製作\FindWork\就職作品プロジェクト\02_ResourceFile\Game.h(242,19):
+      次のメンバーが原因です:
+      C:\Users\kodokeの世界\Desktop\HAL\VisualSutdio\就職作品\個人製作\FindWork\就職作品プロジェクト\02_ResourceFile\Game.h(242,19):
+      'SceneNo Scene::GetSceneNo(void) const': は抽象型です
+      C:\Users\kodokeの世界\Desktop\HAL\VisualSutdio\就職作品\個人製作\FindWork\就職作品プロジェクト\02_ResourceFile\SceneFile\Scene.h(59,18):
+      'Scene::GetSceneNo' の宣言を確認してください
+  

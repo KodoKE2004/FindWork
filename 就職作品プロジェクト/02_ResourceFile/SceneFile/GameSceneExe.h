@@ -23,6 +23,11 @@ public:
 	//================================
 
 	GameScene()  = default;
+
+	SceneNo GetSceneNo() const override {
+		return SceneNo::GAME_EXE;
+	}
+
 	~GameScene() = default;
 
 	//================================
