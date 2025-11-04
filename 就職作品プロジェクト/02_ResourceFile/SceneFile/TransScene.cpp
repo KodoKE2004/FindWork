@@ -4,6 +4,12 @@
 #include "Game.h"
 #include <memory>
 
+TransScene::TransScene() : m_SceneOld(nullptr)
+						 , m_SceneNext(nullptr)
+						 , m_Step(STEP::OFF)
+						 , m_TransMode(TRANS_MODE::FADE)
+{
+}
 
 void TransScene::Initialize()
 {

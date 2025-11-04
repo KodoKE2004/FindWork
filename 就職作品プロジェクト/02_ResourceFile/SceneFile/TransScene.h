@@ -38,8 +38,8 @@ class TransScene : public Scene
 {
 private:
 	// シーンの前後 
-	Scene* m_SceneOld;
-	Scene* m_SceneNext;
+	Scene* m_SceneOld  = nullptr;
+	Scene* m_SceneNext = nullptr;
 
 	// オフスクリーン用
 	std::unique_ptr<RenderTarget> m_RenderTarget;
@@ -67,7 +67,7 @@ private:
 
 public:
     // コンストラクタとデストラクタ
-	TransScene() = default;
+	TransScene();
 
     ~TransScene()			override = default;
 
