@@ -29,7 +29,7 @@ struct SceneRelationData
 class Scene
 {
 protected:
-	std::vector<Object*> m_MySceneObjects;
+	std::vector<std::shared_ptr<Object>> m_MySceneObjects;
 	std::unordered_map<std::string, AudioConfig> m_AudioList;
 
 	SceneRelationData m_RelationData;
@@ -52,7 +52,7 @@ public:
 
 
 	// そのシーンのオブジェクトを定義
-	std::vector<Object*> GetSceneObjects() {
+	std::vector<std::shared_ptr<Object>> GetSceneObjects() {
 		return m_MySceneObjects;
 	}
 

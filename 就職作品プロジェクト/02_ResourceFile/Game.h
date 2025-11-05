@@ -1,5 +1,7 @@
 #pragma once
 #include <memory>
+#include <vector>
+#include <type_traits>
 #ifdef _DEBUG
 #include "Debug.hpp"
 #include "DebugGridLine.h"
@@ -119,7 +121,7 @@ public:
 	//================================
 	// オブジェクト管理
 	//================================
-	void DeleteObject(std::shared_ptr<Object> pt); // オブジェクトを削除する
+	void DeleteObject(Object* pt); // オブジェクトを削除する
 	void DeleteAllObject(); // オブジェクトをすべて削除する
 
 	// オブジェクトを追加する
@@ -138,7 +140,7 @@ public:
 		std::vector<std::shared_ptr<T>> res;
 		for (auto o : m_pInstance->m_GameObjects) {
 			// dynamic_castで型をチェック
-			if (std::shared_ptr<T> derivedObjll = dynamic_cast<std::shared_ptr<T>>(o)) {
+			if (std::shared_ptr<T> derivedObj = dynamic_cast<std::shared_ptr<T>>(o)) {
 				res.emplace_back(derivedObj);
 			}
 		}
@@ -181,10 +183,11 @@ void ChangeScenePush(TRANS_MODE mode,float duration)
 	if (auto currentScene = instance.GetCurrentScene())
 	{
 		relationData = currentScene->GetRelationData();
-		relationData.stageNo = currentSceneNo();
+		relationData.previousScene = currentScene->GetSceneNo();
 	}
-
-	relationData.nextScene
+	relationData.nextScene = sceneNext->GetSceneNo();
+	sceneNext->SetRelationData(relationData);
+	scene->SetRelationData(relationData);
 
     instance.ScenePush(instance.GetCurrentScene());
 	scene->SetOldScene(instance.GetCurrentScene());

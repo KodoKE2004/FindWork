@@ -44,7 +44,7 @@ private:
 	// オフスクリーン用
 	std::unique_ptr<RenderTarget> m_RenderTarget;
 	Microsoft::WRL::ComPtr<ID3D11ShaderResourceView> m_NextSceneSRV;
-	SnapshotOverlay* m_Overlay = nullptr;
+	std::shared_ptr<SnapshotOverlay> m_Overlay = nullptr;
 
     // タイマー関連
 	float m_Timer	 = 0.0f;
@@ -76,6 +76,7 @@ public:
 	void Update(float tick)	override;
 	void Finalize()			override;
 
+	SceneNo GetSceneNo() const override { return SceneNo::TRANSITION; }
 	/// <summary>
 	/// 次のシーンの一フレーム目を描画する
 	/// </summary>

@@ -16,7 +16,7 @@ void SelectScene::Initialize()
 	GAME_INSTANCE.m_Grid.SetEnabled(true);
 #endif
 	
-    auto* m_SkyDome = GAME_INSTANCE.AddObject<Sphere>();
+    auto m_SkyDome = GAME_INSTANCE.AddObject<Sphere>();
 	m_SkyDome->SetSkyDomeMode(true);
     m_SkyDome->SetTexture(textureMgr->GetTexture("Plane.png"));
 	m_SkyDome->SetRadius(500.0f);
@@ -51,7 +51,7 @@ void SelectScene::Update(float tick)
 		{
 			auto pos = GAME_INSTANCE.GetCamera()->GetPosition();
 			auto dir = GAME_INSTANCE.GetCamera()->GetForward();
-            auto* m_Bullet = GAME_INSTANCE.AddObject<Bullet>();
+            auto m_Bullet = GAME_INSTANCE.AddObject<Bullet>();
 			m_Bullet->Shoot(pos, dir);
             m_MySceneObjects.emplace_back(m_Bullet);
             m_ShotCount++;
@@ -79,8 +79,8 @@ void SelectScene::Finalize()
 	GAME_INSTANCE.m_Grid.SetEnabled(false);
 #endif
 	// このシーンのオブジェクトを削除する
-	for (auto& o : m_MySceneObjects) {
-		Game::GetInstance().DeleteObject(o);
+	for (auto obj : m_MySceneObjects) {
+		Game::GetInstance().DeleteObject(obj.get());
 	}
 	m_MySceneObjects.clear();
 }

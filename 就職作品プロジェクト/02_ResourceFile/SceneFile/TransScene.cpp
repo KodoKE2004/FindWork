@@ -4,10 +4,11 @@
 #include "Game.h"
 #include <memory>
 
-TransScene::TransScene() : m_SceneOld(nullptr)
-						 , m_SceneNext(nullptr)
-						 , m_Step(STEP::OFF)
-						 , m_TransMode(TRANS_MODE::FADE)
+TransScene::TransScene()
+	: m_SceneOld (nullptr)
+	, m_SceneNext(nullptr)
+	, m_Step(STEP::OFF)
+	, m_TransMode(TRANS_MODE::FADE)
 {
 }
 
@@ -106,7 +107,7 @@ void TransScene::Finalize()
 	m_Step = STEP::OFF;
 	for (auto obj : m_MySceneObjects)
 	{
-		Game::GetInstance().DeleteObject(obj);
+		Game::GetInstance().DeleteObject(obj.get());
 	}
 	m_MySceneObjects.clear();
 
@@ -125,7 +126,7 @@ void TransScene::Finalize()
 
 void TransScene::DrawNextScene()
 {
-
+	auto& instance = GAME_INSTANCE;
 
 	auto* device  = Renderer::GetDevice();
 	auto* context = Renderer::GetDeviceContext();
@@ -139,7 +140,7 @@ void TransScene::DrawNextScene()
 	m_RenderTarget->Begin(context, clear);
 	{
 
-		for (auto* obj : m_SceneNext->GetSceneObjects()) {
+		for (auto obj : m_SceneNext->GetSceneObjects()) {
 			if (obj) obj->Draw();
 		}
 	}
@@ -148,7 +149,7 @@ void TransScene::DrawNextScene()
 	m_NextSceneSRV = m_RenderTarget->GetSRV();
 
 
-	m_Overlay = Game::GetInstance().AddObject<SnapshotOverlay>();
+	m_Overlay = instance.AddObject<SnapshotOverlay>();
 	m_Overlay->SetSRV(m_NextSceneSRV.Get());
 	m_Overlay->SetAlpha(0.0f);
 	m_MySceneObjects.emplace_back(m_Overlay);

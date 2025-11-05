@@ -15,7 +15,7 @@ void TitleScene::Initialize()
 #ifdef _DEBUG
 	instance.m_Grid.SetEnabled(true);
 #endif
-	auto* m_SkyDome = instance.AddObject<Sphere>();
+	auto m_SkyDome = instance.AddObject<Sphere>();
 	m_SkyDome->SetSkyDomeMode(true);
 	m_SkyDome->SetTexture(GAME_MANAGER_TEXTURE->GetTexture("Plane.png"));
 	m_SkyDome->SetRadius(500.0f);
@@ -89,8 +89,8 @@ void TitleScene::Finalize()
 #endif
 
 	// このシーンのオブジェクトを削除する
-	for (auto& o : m_MySceneObjects) {
-		Game::GetInstance().DeleteObject(o);
+	for (auto o : m_MySceneObjects) {
+		Game::GetInstance().DeleteObject(o.get());
 	}
 	m_MySceneObjects.clear();
     // オーディオの停止
