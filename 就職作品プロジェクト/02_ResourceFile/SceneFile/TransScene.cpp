@@ -105,9 +105,9 @@ void TransScene::Finalize()
 {
     auto& instance = Game::GetInstance();
 	m_Step = STEP::OFF;
-	for (auto obj : m_MySceneObjects)
+	for (auto* obj : m_MySceneObjects)
 	{
-		Game::GetInstance().DeleteObject(obj.get());
+		instance.DeleteObject(obj);
 	}
 	m_MySceneObjects.clear();
 
@@ -120,7 +120,6 @@ void TransScene::Finalize()
 #ifdef _DEBUG
 	GAME_INSTANCE.m_Grid.DeInitialized();
 #endif // _DEBUG
-	delete this;
 	
 }
 

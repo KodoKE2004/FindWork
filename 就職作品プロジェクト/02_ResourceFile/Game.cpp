@@ -162,7 +162,9 @@ void Game::DeleteObject(Object* pt)
 	auto& instance = GetInstance();
 	if (pt == NULL) return;
 
-	pt->Finalize(); // I—¹ˆ—
+	// I—¹ˆ—
+	pt->Finalize(); 
+
 	// —v‘f‚ğíœ
 	instance.m_GameObjects.erase(
 		std::remove_if(

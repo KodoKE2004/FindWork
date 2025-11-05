@@ -27,7 +27,7 @@ private:
 	Scene*								 m_SceneCurrent;	  // 現在のシーン
 	std::unique_ptr<Input>				 m_Input;			  // 入力管理
 	std::unique_ptr<Camera>				 m_Camera;			  // カメラ
-	std::vector<std::shared_ptr<Object>> m_GameObjects;		  // オブジェクト
+	std::vector<std::unique_ptr<Object>> m_GameObjects;		  // オブジェクト
 
     std::shared_ptr<TransitionBase>		 m_TransitionTexture; // トランジション用テクスチャ
     std::vector<std::unique_ptr<Scene>>	 m_SceneStack;		  // シーンスタック
@@ -135,12 +135,12 @@ public:
 
 
 	// オブジェクトを取得する
-	template<class T> std::vector<std::shared_ptr<T>> GetObjects()
+	template<class T> std::vector<T*> GetObjects()
 	{
-		std::vector<std::shared_ptr<T>> res;
+		std::vector<T*> res;
 		for (auto o : m_pInstance->m_GameObjects) {
 			// dynamic_castで型をチェック
-			if (std::shared_ptr<T> derivedObj = dynamic_cast<std::shared_ptr<T>>(o)) {
+			if (T* derivedObj = dynamic_cast<T>>(o)) {
 				res.emplace_back(derivedObj);
 			}
 		}
