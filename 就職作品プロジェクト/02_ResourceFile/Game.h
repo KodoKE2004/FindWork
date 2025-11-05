@@ -25,7 +25,7 @@ private:
 	Scene*								 m_SceneCurrent;	  // 現在のシーン
 	std::unique_ptr<Input>				 m_Input;			  // 入力管理
 	std::unique_ptr<Camera>				 m_Camera;			  // カメラ
-	std::vector<std::unique_ptr<Object>> m_GameObjects;		  // オブジェクト
+	std::vector<std::shared_ptr<Object>> m_GameObjects;		  // オブジェクト
 
     std::shared_ptr<TransitionBase>		 m_TransitionTexture; // トランジション用テクスチャ
     std::vector<std::unique_ptr<Scene>>	 m_SceneStack;		  // シーンスタック
@@ -119,26 +119,26 @@ public:
 	//================================
 	// オブジェクト管理
 	//================================
-	void DeleteObject(Object* pt); // オブジェクトを削除する
+	void DeleteObject(std::shared_ptr<Object> pt); // オブジェクトを削除する
 	void DeleteAllObject(); // オブジェクトをすべて削除する
 
 	// オブジェクトを追加する
-	template<class T> T* AddObject()
+	template<class T> std::shared_ptr<T> AddObject()
 	{
-		T* pt = new T(m_Camera.get());
-		m_pInstance->m_GameObjects.emplace_back(pt);
+		std::shared_ptr<T> pt = std::make_shared<T>(m_Camera.get());
+		m_pInstance->m_GameObjects.emplace_back(pt.get());
 		pt->Initialize(); // 初期化
 		return pt;
 	}
 
 
 	// オブジェクトを取得する
-	template<class T> std::vector<T*> GetObjects()
+	template<class T> std::vector<std::shared_ptr<T>> GetObjects()
 	{
-		std::vector<T*> res;
-		for (auto& o : m_pInstance->m_GameObjects) {
+		std::vector<std::shared_ptr<T>> res;
+		for (auto o : m_pInstance->m_GameObjects) {
 			// dynamic_castで型をチェック
-			if (T* derivedObj = dynamic_cast<T*>(o.get())) {
+			if (std::shared_ptr<T> derivedObjll = dynamic_cast<std::shared_ptr<T>>(o)) {
 				res.emplace_back(derivedObj);
 			}
 		}

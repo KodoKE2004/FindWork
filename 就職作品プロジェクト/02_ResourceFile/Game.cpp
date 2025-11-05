@@ -157,7 +157,7 @@ Scene* Game::GetCurrentScene() const
 	return m_SceneCurrent;
 }
 
-void Game::DeleteObject(Object* pt)
+void Game::DeleteObject(std::shared_ptr<Object> pt)
 {
 	auto& instance = GetInstance();
 	if (pt == NULL) return;
@@ -168,7 +168,7 @@ void Game::DeleteObject(Object* pt)
 		std::remove_if(
 			instance.m_GameObjects.begin(),
 			instance.m_GameObjects.end(),
-			[pt](const std::unique_ptr<Object>& element) {return element.get() == pt; }),
+			[pt](const std::unique_ptr<std::shared_ptr<Object>> element) {return element.get() == pt.get(); }),
 			instance.m_GameObjects.end());
 
 	instance.m_GameObjects.shrink_to_fit();

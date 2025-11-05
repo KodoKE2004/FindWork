@@ -67,6 +67,7 @@ private:
 
 public:
     // コンストラクタとデストラクタ
+
 	TransScene();
 
     ~TransScene()			override = default;
