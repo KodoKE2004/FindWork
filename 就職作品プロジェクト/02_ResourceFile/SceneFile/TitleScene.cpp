@@ -90,7 +90,7 @@ void TitleScene::Finalize()
 
 	// このシーンのオブジェクトを削除する
 	for (auto o : m_MySceneObjects) {
-		Game::GetInstance().DeleteObject(o.get());
+		Game::GetInstance().DeleteObject(o);
 	}
 	m_MySceneObjects.clear();
     // オーディオの停止

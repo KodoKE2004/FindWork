@@ -125,10 +125,10 @@ public:
 	void DeleteAllObject(); // オブジェクトをすべて削除する
 
 	// オブジェクトを追加する
-	template<class T> std::shared_ptr<T> AddObject()
+	template<class T> T* AddObject()
 	{
-		std::shared_ptr<T> pt = std::make_shared<T>(m_Camera.get());
-		m_pInstance->m_GameObjects.emplace_back(pt.get());
+		T* pt = new T(m_Camera.get());
+		m_pInstance->m_GameObjects.emplace_back(pt);
 		pt->Initialize(); // 初期化
 		return pt;
 	}
@@ -140,7 +140,7 @@ public:
 		std::vector<T*> res;
 		for (auto o : m_pInstance->m_GameObjects) {
 			// dynamic_castで型をチェック
-			if (T* derivedObj = dynamic_cast<T>>(o)) {
+			if (T* derivedObj = dynamic_cast<T*>(o)) {
 				res.emplace_back(derivedObj);
 			}
 		}

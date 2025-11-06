@@ -138,7 +138,6 @@ void TransScene::DrawNextScene()
 	const float clear[4]{ 0, 0, 0, 0 };
 	m_RenderTarget->Begin(context, clear);
 	{
-
 		for (auto obj : m_SceneNext->GetSceneObjects()) {
 			if (obj) obj->Draw();
 		}

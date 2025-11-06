@@ -166,12 +166,8 @@ void Game::DeleteObject(Object* pt)
 	pt->Finalize(); 
 
 	// —v‘f‚ğíœ
-	instance.m_GameObjects.erase(
-		std::remove_if(
-			instance.m_GameObjects.begin(),
-			instance.m_GameObjects.end(),
-			[pt](const std::shared_ptr<Object> element) {return element.get() == pt; }),
-			instance.m_GameObjects.end());
+	auto& objs = instance.m_GameObjects;
+
 
 	instance.m_GameObjects.shrink_to_fit();
 }

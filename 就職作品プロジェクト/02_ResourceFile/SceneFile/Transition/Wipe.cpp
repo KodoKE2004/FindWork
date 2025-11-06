@@ -23,7 +23,6 @@ void Wipe::Initialize()
     if (m_Duration <= 0.0f) m_Duration = 1.0f;
     SetTimerInfo(0.0f, m_Duration);
 
-    // フルスクリーン矩形
     std::vector<VERTEX_3D> vertices(4);
     vertices[0].position = NVector3(-0.5f,  0.5f, 0.0f);
     vertices[1].position = NVector3( 0.5f,  0.5f, 0.0f);
@@ -43,7 +42,6 @@ void Wipe::Initialize()
 
     SetShader("VS_Alpha", "PS_Alpha");
 
-    // マテリアル
     m_Materiale = std::make_unique<Material>();
     MATERIAL mtrl{};
     mtrl.Diffuse = Color(1, 1, 1, 1);
@@ -66,7 +64,7 @@ void Wipe::Update()
 
 void Wipe::Draw()
 {
-    // 次シーンSRVがあって遷移完了ならそれをそのままブリット
+
     if (auto* srv = GetTextureSRV())
     {
         if (m_Phase == PHASE::FINISH)
@@ -82,7 +80,7 @@ void Wipe::Draw()
     Renderer::SetDepthEnable(false);
     Renderer::SetBlendState(BS_ALPHABLEND);
 
-    // SRT
+
     Matrix r = Matrix::CreateFromYawPitchRoll(m_Rotation.x, m_Rotation.y, m_Rotation.z);
     Matrix t = Matrix::CreateTranslation(m_Position.x, m_Position.y, m_Position.z);
     Matrix s = Matrix::CreateScale(m_Scale.x, m_Scale.y, m_Scale.z);
