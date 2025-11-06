@@ -7,7 +7,7 @@
 class TitleScene : public Scene
 {
 private:
-	std::shared_ptr<Sphere> m_SkyDome;
+	Sphere* m_SkyDome;
 public:
 	//================================
 	// コンストラクタとデストラクタ

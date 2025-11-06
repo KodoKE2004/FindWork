@@ -15,16 +15,13 @@ void TitleScene::Initialize()
 #ifdef _DEBUG
 	instance.m_Grid.SetEnabled(true);
 #endif
-	auto* skyDome = instance.AddObject<Sphere>();
-
-	m_SkyDome = std::make_shared<Sphere>(instance.GetCamera());
+	m_SkyDome = instance.AddObject<Sphere>();
 	m_SkyDome->Initialize();
 	m_SkyDome->SetSkyDomeMode(true);
 	m_SkyDome->SetTexture(GAME_MANAGER_TEXTURE->GetTexture("Plane.png"));
 	m_SkyDome->SetRadius(500.0f);
 
-	skyDome = m_SkyDome.get();
-	m_MySceneObjects.emplace_back(skyDome);
+	m_MySceneObjects.emplace_back(m_SkyDome);
 
     // ƒI[ƒfƒBƒI‚Ì“o˜^
 	m_AudioList.clear();
@@ -86,9 +83,9 @@ void TitleScene::Update(float tick)
 
 	// skyDome‰ñ“]
 	auto skyDomeRotate = m_SkyDome->GetRotate();
-	m_SkyDome->SetRotate(skyDomeRotate.x ,
-						 skyDomeRotate.y + 4.0f,
-						 skyDomeRotate.z );
+	m_SkyDome->SetPos(skyDomeRotate.x + 10.0f,
+					  skyDomeRotate.y + 10.0f,
+					  skyDomeRotate.z + 10.0f);
 
 
 }
