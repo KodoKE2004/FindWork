@@ -15,13 +15,16 @@ void TitleScene::Initialize()
 #ifdef _DEBUG
 	instance.m_Grid.SetEnabled(true);
 #endif
+	auto* skyDome = instance.AddObject<Sphere>();
+
 	m_SkyDome = std::make_shared<Sphere>(instance.GetCamera());
 	m_SkyDome->Initialize();
 	m_SkyDome->SetSkyDomeMode(true);
 	m_SkyDome->SetTexture(GAME_MANAGER_TEXTURE->GetTexture("Plane.png"));
 	m_SkyDome->SetRadius(500.0f);
-	auto* skyDome = instance.AddObject<Sphere>();
+
 	skyDome = m_SkyDome.get();
+	m_MySceneObjects.emplace_back(skyDome);
 
     // オーディオの登録
 	m_AudioList.clear();
