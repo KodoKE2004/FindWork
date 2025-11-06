@@ -83,10 +83,9 @@ void TitleScene::Update(float tick)
 
 	// skyDome‰ñ“]
 	auto skyDomeRotate = m_SkyDome->GetRotate();
-	m_SkyDome->SetPos(skyDomeRotate.x + 10.0f,
-					  skyDomeRotate.y + 10.0f,
-					  skyDomeRotate.z + 10.0f);
-
+	m_SkyDome->SetPos(skyDomeRotate.x,
+					  skyDomeRotate.y,
+					  skyDomeRotate.z);
 
 }
 

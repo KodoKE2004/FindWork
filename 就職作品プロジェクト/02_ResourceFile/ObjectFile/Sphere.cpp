@@ -130,6 +130,7 @@ void Sphere::DrawAsSky()
     // Build world matrix centered on camera
     auto camPos = m_Camera->GetPosition();
     Matrix s = Matrix::CreateScale(m_SkyRadius);
+    
     Matrix t = Matrix::CreateTranslation(camPos.x, camPos.y, camPos.z);
     Matrix world = s * t;
     Renderer::SetWorldMatrix(&world);

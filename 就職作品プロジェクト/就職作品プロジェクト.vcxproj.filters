@@ -59,6 +59,9 @@
     <Filter Include="HLSL\VertexShader">
       <UniqueIdentifier>{4c01850f-ddde-49c1-8d65-e7a80dd5794e}</UniqueIdentifier>
     </Filter>
+    <Filter Include="SourceFile\Scene\GameScene">
+      <UniqueIdentifier>{ee46045f-f61f-4173-98a7-81fce1c52fab}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="02_ResourceFile\SceneFile\TitleScene.cpp">
@@ -136,9 +139,6 @@
     <ClCompile Include="02_ResourceFile\ObjectFile\Model.cpp">
       <Filter>SourceFile\Model</Filter>
     </ClCompile>
-    <ClCompile Include="02_ResourceFile\SceneFile\GameSceneExe.cpp">
-      <Filter>SourceFile\Scene</Filter>
-    </ClCompile>
     <ClCompile Include="02_ResourceFile\MeshManager.cpp">
       <Filter>SourceFile\Core\Manager</Filter>
     </ClCompile>
@@ -193,8 +193,11 @@
     <ClCompile Include="02_ResourceFile\SceneFile\Transition\SnapshotOverlay.cpp">
       <Filter>SourceFile\Scene\Transition</Filter>
     </ClCompile>
+    <ClCompile Include="02_ResourceFile\SceneFile\GameSceneExe.cpp">
+      <Filter>SourceFile\Scene\GameScene</Filter>
+    </ClCompile>
     <ClCompile Include="02_ResourceFile\SceneFile\GameSceneWait.cpp">
-      <Filter>SourceFile\Scene</Filter>
+      <Filter>SourceFile\Scene\GameScene</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -300,9 +303,6 @@
     <ClInclude Include="02_ResourceFile\ObjectFile\Model.h">
       <Filter>SourceFile\Model</Filter>
     </ClInclude>
-    <ClInclude Include="02_ResourceFile\SceneFile\GameSceneExe.h">
-      <Filter>SourceFile\Scene</Filter>
-    </ClInclude>
     <ClInclude Include="02_ResourceFile\MeshManager.h">
       <Filter>SourceFile\Core\Manager</Filter>
     </ClInclude>
@@ -360,8 +360,11 @@
     <ClInclude Include="02_ResourceFile\SceneFile\Transition\SnapshotOverlay.h">
       <Filter>SourceFile\Scene\Transition</Filter>
     </ClInclude>
+    <ClInclude Include="02_ResourceFile\SceneFile\GameSceneExe.h">
+      <Filter>SourceFile\Scene\GameScene</Filter>
+    </ClInclude>
     <ClInclude Include="02_ResourceFile\SceneFile\GameSceneWait.h">
-      <Filter>SourceFile\Scene</Filter>
+      <Filter>SourceFile\Scene\GameScene</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>

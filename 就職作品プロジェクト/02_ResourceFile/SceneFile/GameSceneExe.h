@@ -2,7 +2,7 @@
 #include "Scene.h"
 #include "Texture2D.h"
 
-class GameScene : public Scene
+class GameSceneExe : public Scene
 {
 // inゲーム基底クラス
 protected:
@@ -22,13 +22,13 @@ public:
 	// コンストラクタとデストラクタ
 	//================================
 
-	GameScene()  = default;
+	GameSceneExe()  = default;
 
 	SceneNo GetSceneNo() const override {
 		return SceneNo::GAME_EXE;
 	}
 
-	~GameScene() = default;
+	~GameSceneExe() = default;
 
 	//================================
 	// 			ループ内の処理

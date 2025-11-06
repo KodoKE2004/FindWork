@@ -7,7 +7,8 @@
 class TitleScene : public Scene
 {
 private:
-	Sphere* m_SkyDome;
+	Sphere* m_SkyDome = nullptr;
+
 public:
 	//================================
 	// コンストラクタとデストラクタ
