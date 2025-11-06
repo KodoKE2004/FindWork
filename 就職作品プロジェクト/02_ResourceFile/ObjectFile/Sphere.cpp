@@ -84,7 +84,7 @@ void Sphere::Update()
         // Sky dome follows camera position
         auto camPos = m_Camera->GetPosition();
         m_Position = NVector3(camPos.x, camPos.y, camPos.z);
-        m_Rotation = NVector3(GetRotation().x + 2.0f, GetRotation().y, GetRotation().z);
+        m_Rotation = NVector3(GetRotate().x + 2.0f, GetRotate().y, GetRotate().z);
     }
  
 }

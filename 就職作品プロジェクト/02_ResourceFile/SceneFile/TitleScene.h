@@ -1,12 +1,13 @@
 #pragma once
 
 #include "Scene.h"
-#include "../ObjectFile/Object.h"
+#include "Object.h"
+#include "Sphere.h"
 
 class TitleScene : public Scene
 {
 private:
-
+	std::shared_ptr<Sphere> m_SkyDome;
 public:
 	//================================
 	// コンストラクタとデストラクタ

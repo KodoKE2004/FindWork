@@ -3,7 +3,7 @@
 void Transform::SetTransform(const Transform _Transform)
 {
     SetPos   (_Transform.GetPos());
-    SetRotate(_Transform.GetRotation());
+    SetRotate(_Transform.GetRotate());
     SetScale (_Transform.GetScale());
 }
 
@@ -76,7 +76,7 @@ Transform Transform::GetTransform() const
     Transform result;
 
     result.SetPos(GetPos());
-    result.SetRotate(GetRotation());
+    result.SetRotate(GetRotate());
     result.SetScale(GetScale());
 
     return result;

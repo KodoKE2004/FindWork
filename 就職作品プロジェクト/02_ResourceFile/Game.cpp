@@ -168,7 +168,6 @@ void Game::DeleteObject(Object* pt)
 	// —v‘f‚ğíœ
 	auto& objs = instance.m_GameObjects;
 
-
 	instance.m_GameObjects.shrink_to_fit();
 }
 
