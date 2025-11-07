@@ -81,10 +81,8 @@ void Sphere::Update()
 {
     if (m_IsSky)
     {
-        // Sky dome follows camera position
-        auto camPos = m_Camera->GetPosition();
-        m_Position = NVector3(camPos.x, camPos.y, camPos.z);
-        m_Rotation = NVector3(GetRotate().x + 2.0f, GetRotate().y, GetRotate().z);
+        
+        
     }
  
 }
@@ -112,6 +110,7 @@ void Sphere::Finalize()
 void Sphere::DisableSkyDome()
 {
     m_IsSky = false;
+    m_SkyRotationSpeed = NVector3(0.0f,0.0f,0.0f);
 }
 
 void Sphere::DrawAsSky()
@@ -130,9 +129,9 @@ void Sphere::DrawAsSky()
     // Build world matrix centered on camera
     auto camPos = m_Camera->GetPosition();
     Matrix s = Matrix::CreateScale(m_SkyRadius);
-    
+    Matrix r = Matrix::CreateFromYawPitchRoll(m_Rotation.y,m_Rotation.x,m_Rotation.z);
     Matrix t = Matrix::CreateTranslation(camPos.x, camPos.y, camPos.z);
-    Matrix world = s * t;
+    Matrix world = s * r * t;
     Renderer::SetWorldMatrix(&world);
 
     devicecontext->IASetPrimitiveTopology(D3D11_PRIMITIVE_TOPOLOGY_TRIANGLELIST);
@@ -152,7 +151,7 @@ void Sphere::DrawAsSky()
     // Restore previous states
     devicecontext->RSSetState(prevRS);
     devicecontext->OMSetDepthStencilState(prevDSS, prevRef);
-    if (prevRS) prevRS->Release();
+    if (prevRS)  prevRS ->Release();
     if (prevDSS) prevDSS->Release();
 }
 

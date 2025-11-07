@@ -2,48 +2,54 @@
 #include "Game.h"
 #include "DebugUI.h"
 #include "Cube.h"
-#include "Sphere.h"
+#include "Skydome.h"
 #include "Texture2D.h"
 #include "Model.h"
 
 
 void TitleScene::Initialize()
 {
-	auto& instance = GAME_INSTANCE;
+	auto& instance    = GAME_INSTANCE;
+	auto  textureList = GAME_MANAGER_TEXTURE;
     DebugUI::TEXT_CurrentScene = "TitleScene";
 
 #ifdef _DEBUG
 	instance.m_Grid.SetEnabled(true);
 #endif
-	m_SkyDome = instance.AddObject<Sphere>();
-	m_SkyDome->Initialize();
-	m_SkyDome->SetSkyDomeMode(true);
-	m_SkyDome->SetTexture(GAME_MANAGER_TEXTURE->GetTexture("Plane.png"));
-	m_SkyDome->SetRadius(500.0f);
+	
+	// Skydome初期化 
+	m_Skydome = instance.AddObject<Skydome>();
+	m_Skydome->SetSkyDomeMode(true);
+	m_Skydome->SetTexture(GAME_MANAGER_TEXTURE->GetTexture("Plane.png"));
+	m_Skydome->SetRadius(500.0f);
+	
+	m_TitleLogo = instance.AddObject<Texture2D>();
+	m_TitleLogo->SetTexture(textureList->GetTexture("TitleLogo.png"));
+	m_TitleLogo->SetScale(800.0f,800.0f,1.0f);
+	m_TitleLogo->SetShader("VS_Default","PS_Default");
 
-	m_MySceneObjects.emplace_back(m_SkyDome);
-
-    // オーディオの登録
+	m_MySceneObjects.emplace_back(m_Skydome);
+	m_MySceneObjects.emplace_back(m_TitleLogo);
+    
+	// オーディオの登録
 	m_AudioList.clear();
-	PlayParams bgmParam;
+	PlayParams bgmParam{};
     bgmParam.volume = 0.2f;
     m_AudioList.emplace("bgm",AudioConfig(L"BGM/FaintRain.wav", bgmParam, true, true));
 
     PlayParams enterParam{};
     m_AudioList.emplace("enter", AudioConfig(L"SE/Enter.wav", enterParam, false, false));
 
-	if (auto audioManager = Game::GetInstance().GetAudioManager())
+	if (auto audioManager = GAME_MANAGER_AUDIO)
 	{
 		for (const auto& [key, config] : m_AudioList)
 		{
 			if (!audioManager->Add(key, config.filePath)) {
 				continue;
 			}
-
 			if (config.autoPlay)
 			{
 				auto params = config.params;
-				// ループが有効なら設定して最初から再生する
 				if (config.loop)
 				{
 					params.loop.loopCount = XAUDIO2_LOOP_INFINITE;
@@ -59,7 +65,8 @@ void TitleScene::Update(float tick)
 	// Enterの処理
 	if (Input::GetKeyTrigger(VK_RETURN))
 	{
-		if (auto audioManager = Game::GetInstance().GetAudioManager())
+		// SEの再生
+		if (auto audioManager = GAME_MANAGER_AUDIO)
 		{
 			if (auto it = m_AudioList.find("enter"); it != m_AudioList.end())
 			{
@@ -77,34 +84,29 @@ void TitleScene::Update(float tick)
 
 			audioManager->StopAllByName("bgm", false);
 		}
-
 		ChangeScenePush<GameSceneWait>(TRANS_MODE::WIPE, 1.0f);
 	}
 
-	// skyDome回転
-	auto skyDomeRotate = m_SkyDome->GetRotate();
-	m_SkyDome->SetPos(skyDomeRotate.x,
-					  skyDomeRotate.y,
-					  skyDomeRotate.z);
-
+	// Skydomeの回転
+	m_Skydome->Spin(0.0f,1.0f,0.0f);
 }
 
 
 
 void TitleScene::Finalize()
 {
-
+	auto& instance = GAME_INSTANCE;
 #ifdef _DEBUG
-	GAME_INSTANCE.m_Grid.SetEnabled(false);
+	instance.m_Grid.SetEnabled(false);
 #endif
 
 	// このシーンのオブジェクトを削除する
 	for (auto o : m_MySceneObjects) {
-		Game::GetInstance().DeleteObject(o);
+		instance.DeleteObject(o);
 	}
 	m_MySceneObjects.clear();
     // オーディオの停止
-    if (auto audioManager = Game::GetInstance().GetAudioManager())
+    if (auto audioManager = GAME_MANAGER_AUDIO)
 	{
 		for (const auto& [key, config] : m_AudioList)
 		{

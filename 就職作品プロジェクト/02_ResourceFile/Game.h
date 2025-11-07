@@ -125,10 +125,23 @@ public:
 	void DeleteAllObject(); // オブジェクトをすべて削除する
 
 	// オブジェクトを追加する
-	template<class T> T* AddObject()
+	template<class T, class... Args>
+	T* AddObject(Args&&... args)
 	{
-		T* pt = new T(m_Camera.get());
-		m_pInstance->m_GameObjects.emplace_back(pt);
+		static_assert(std::is_base_of_v<Object, T>, "TがObjectを継承していない");
+		static_assert(!std::is_abstract_v<T>	  , "Tが抽象クラスだった");
+
+		// コンストラクタ引数を完全転送して unique_ptrを作成
+		std::unique_ptr<T> up;
+		if constexpr (sizeof...(Args) == 0) {
+			up = std::make_unique<T>(m_Camera.get());
+		}
+		else {
+			up = std::make_unique<T>(std::forward<Args>(args)...);
+		}
+		T* pt = up.get();
+
+		m_pInstance->m_GameObjects.emplace_back(std::move(up));
 		pt->Initialize(); // 初期化
 		return pt;
 	}
@@ -155,7 +168,7 @@ public:
 #define GAME_MANAGER_MESH	 GAME_INSTANCE.GetMeshManager()
 #define GAME_MANAGER_TEXTURE GAME_INSTANCE.GetTextureManager()
 #define GAME_MANAGER_SHADER  GAME_INSTANCE.GetShaderManager()
-#define GAME_MANGAER_AUDIO	 GAME_INSTANCE.GetAudioManager()
+#define GAME_MANAGER_AUDIO	 GAME_INSTANCE.GetAudioManager()
 
 //================================
 //			グローバル関数

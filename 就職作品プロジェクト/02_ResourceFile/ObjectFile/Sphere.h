@@ -1,9 +1,9 @@
 #pragma once
 #include "Object.h"
 
-#include "../VertexBuffer.h"
-#include "../IndexBuffer.h"
-#include "../Texture.h"
+#include "VertexBuffer.h"
+#include "IndexBuffer.h"
+#include "Texture.h"
 
 class Sphere : public Object
 {
@@ -22,6 +22,7 @@ protected:
 
 	bool m_IsSky = false;
 	float m_SkyRadius = 800.0f;
+	NVector3 m_SkyRotationSpeed{ 0.0f, 0.0f, 0.0f };
 
 	// 一時的に切り替えるためのレンダーステート
 	Microsoft::WRL::ComPtr<ID3D11RasterizerState>   m_RS_CullFront; // 内側を見る
@@ -45,7 +46,9 @@ public:
 	void Draw()		  override;
 	void Finalize()	  override;
 
-	void SetSkyDomeMode(bool flg) { m_IsSky = flg ;}
+	void SetSkyDomeMode(bool flg) { m_IsSky = flg; }
+	void SetSkyRotationSpeed(const NVector3& speed) { m_SkyRotationSpeed = speed; }
+	void SetSkyRotationSpeed(float x, float y, float z) { m_SkyRotationSpeed = NVector3(x, y, z); }
 
 	void DisableSkyDome();
 

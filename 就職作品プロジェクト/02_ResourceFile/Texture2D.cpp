@@ -28,10 +28,10 @@ void Texture2D::Initialize()
 
 	vertices.resize(4);
 
-	vertices[0].position = NVector3(-0.5f, 0.5f, 0.0f);
-	vertices[1].position = NVector3(0.5f, 0.5f, 0.0f);
+	vertices[0].position = NVector3(-0.5f,  0.5f, 0.0f);
+	vertices[1].position = NVector3( 0.5f,  0.5f, 0.0f);
 	vertices[2].position = NVector3(-0.5f, -0.5f, 0.0f);
-	vertices[3].position = NVector3(0.5f, -0.5f, 0.0f);
+	vertices[3].position = NVector3( 0.5f, -0.5f, 0.0f);
 
 	vertices[0].color = Color(1.0f, 1.0f, 1.0f, 1.0f);
 	vertices[1].color = Color(1.0f, 1.0f, 1.0f, 1.0f);
@@ -93,7 +93,6 @@ void Texture2D::Draw()
 	// 描画の処理
 	ID3D11DeviceContext* devicecontext;
 	devicecontext = Renderer::GetDeviceContext();
-
 
 	// トポロジーをセット（プリミティブタイプ）
 	devicecontext->IASetPrimitiveTopology(D3D11_PRIMITIVE_TOPOLOGY_TRIANGLESTRIP);
