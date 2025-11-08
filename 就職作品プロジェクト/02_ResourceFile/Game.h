@@ -117,6 +117,9 @@ public:
 	// Debug関連
 #ifdef _DEBUG
 	DebugGridLine m_Grid;
+	static void RegistDebugObject();
+#else
+	static void RegistDebugFunction(){}
 #endif // _DEBUG
 	//================================
 	// オブジェクト管理
@@ -151,9 +154,9 @@ public:
 	template<class T> std::vector<T*> GetObjects()
 	{
 		std::vector<T*> res;
-		for (auto o : m_pInstance->m_GameObjects) {
+		for (const auto& o : m_pInstance->m_GameObjects) {
 			// dynamic_castで型をチェック
-			if (T* derivedObj = dynamic_cast<T*>(o)) {
+			if (T* derivedObj = dynamic_cast<T*>(o.get())) {
 				res.emplace_back(derivedObj);
 			}
 		}

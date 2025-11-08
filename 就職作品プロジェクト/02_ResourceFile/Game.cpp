@@ -7,6 +7,10 @@
 #include "SceneFile/Transition/Fade.h"   // フェード型の識別に必要
 #include <algorithm>           // 使わないなら不要（2パス版は不要）
 #include <cmath>
+#include <cstdint>
+#include <string>
+#include <typeinfo>
+
 
 std::unique_ptr<Game> Game::m_pInstance  = nullptr; // ゲームのインスタンス初期化
 
@@ -27,7 +31,9 @@ void Game::Initialize()
 	Renderer::Initialize();													// レンダラーの初期化
 	DebugUI::Init(Renderer::GetDevice(), Renderer::GetDeviceContext());		// デバッグUIの初期化
 #ifdef _DEBUG
-	RegisterAudioHelperDebugUI();
+
+	RegistDebugObject();
+	
 #endif
 	instance.GetCamera()->Initialize();										// カメラの初期化
 
@@ -112,7 +118,6 @@ void Game::Draw()
 	for (auto& o : instance.m_GameObjects)
 	{
 		if (!o) continue;
-
 		o->Draw();
 	}
 	
@@ -157,18 +162,93 @@ Scene* Game::GetCurrentScene() const
 	return m_SceneCurrent;
 }
 
+void Game::RegistDebugObject()
+{
+	// ImGui 描画処理を登録
+	DebugUI::RedistDebugFunction([]()
+		{
+			auto& instance = Game::GetInstance();
+
+			ImGui::Begin("Game Objects");
+
+			ImGui::Text("Object Count: %zu", instance.m_GameObjects.size());
+			ImGui::Separator();
+
+			static int selectedIndex = -1;
+
+			ImGui::BeginChild("ObjList", ImVec2(220, 0), true);
+			for (int i = 0; i < (int)instance.m_GameObjects.size(); ++i)
+			{
+				auto& up = instance.m_GameObjects[i];
+				std::string label = up ? up->GetName() : std::string("null");
+				if (label.empty()) label = std::string("Object ") + std::to_string(i);
+				if (ImGui::Selectable(label.c_str(), selectedIndex == i))
+				{
+					selectedIndex = i;
+				}
+			}
+			ImGui::EndChild();
+
+			ImGui::SameLine();
+
+			ImGui::BeginGroup();
+			if (selectedIndex >= 0 && selectedIndex < (int)instance.m_GameObjects.size() && instance.m_GameObjects[selectedIndex])
+			{
+				Object* obj = instance.m_GameObjects[selectedIndex].get();
+				ImGui::Text("Name: %s", obj->GetName().c_str());
+
+				// Position
+				NVector3 pos = obj->GetPos();
+				float posf[3] = { pos.x, pos.y, pos.z };
+				if (ImGui::InputFloat3("Position", posf))
+				{
+					obj->SetPos(posf[0], posf[1], posf[2]);
+				}
+
+				// Rotation
+				NVector3 rot = obj->GetRotate();
+				float rotf[3] = { rot.x, rot.y, rot.z };
+				if (ImGui::InputFloat3("Rotation", rotf))
+				{
+					obj->SetRotate(rotf[0], rotf[1], rotf[2]);
+				}
+
+				// Scale
+				NVector3 scl = obj->GetScale();
+				float sclf[3] = { scl.x, scl.y, scl.z };
+				if (ImGui::InputFloat3("Scale", sclf))
+				{
+					obj->SetScale(sclf[0], sclf[1], sclf[2]);
+				}
+			}
+			else
+			{
+				ImGui::Text("No selection");
+			}
+			ImGui::EndGroup();
+
+			ImGui::End();
+		});
+}
+
 void Game::DeleteObject(Object* pt)
 {
 	auto& instance = GetInstance();
-	if (pt == NULL) return;
+	if (pt == nullptr) return;
 
-	// 終了処理
-	pt->Finalize(); 
-
-	// 要素を削除
 	auto& objs = instance.m_GameObjects;
+	auto it = std::find_if(objs.begin(), objs.end(),
+		[pt](const std::unique_ptr<Object>&up) {
+			return up.get() == pt;
+		});
 
-	instance.m_GameObjects.shrink_to_fit();
+	if (it != objs.end())
+	{
+		(*it)->Finalize();
+		objs.erase(it);
+		objs.shrink_to_fit();	
+	}
+
 }
 
 void Game::DeleteAllObject()

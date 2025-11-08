@@ -4,14 +4,14 @@
 
 using namespace DirectX::SimpleMath;
 
-Bullet::Bullet(Camera* cam) : Texture2D(cam), m_Direction(Vector3::Zero), m_Speed(10.0f), m_IsAlive(false) 
+Bullet::Bullet(Camera* cam) : Square(cam), m_Direction(Vector3::Zero), m_Speed(10.0f), m_IsAlive(false) 
 {
 
 }
 
 void Bullet::Initialize() {
     auto instance = GAME_MANAGER_TEXTURE;
-    Texture2D::Initialize();
+    Square::Initialize();
     
     auto placeHolder = instance->GetTexture("placeholder.png");
     if(placeHolder){
@@ -48,8 +48,8 @@ void Bullet::Update() {
 }
 void Bullet::Draw() {
     if (!m_IsAlive) return;
-    Texture2D::Draw();
+    Square::Draw();
 }
 void Bullet::Finalize() {
-    Texture2D::Finalize();
+    Square::Finalize();
 }

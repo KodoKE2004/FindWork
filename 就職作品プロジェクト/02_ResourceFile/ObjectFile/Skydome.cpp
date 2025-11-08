@@ -17,7 +17,7 @@ void Skydome::Initialize() {
 
 void Skydome::Spin(float spinX, float spinY, float spinZ)
 {
-    // デフォルトの値が低いのであえて倍率調整で直感的に
+    // 意図してるデフォルトの値が低いので倍率調整で直感的に
     spinX *= 0.0001f;
     spinY *= 0.0001f;
     spinZ *= 0.0001f;
@@ -28,7 +28,6 @@ void Skydome::Spin(float spinX, float spinY, float spinZ)
     m_Rotation = NVector3(GetRotate().x + spinX, GetRotate().y + spinY, GetRotate().z + spinZ);
 
     float dt = Application::GetDeltaTime();
-
     // 回転をデルタタイム依存で滑らかに
     m_Rotation.x += m_SkyRotationSpeed.x * dt;
     m_Rotation.y += m_SkyRotationSpeed.y * dt;

@@ -2,7 +2,7 @@
 
 #include "Game.h"
 #include "DebugUI.h"
-#include "Texture2D.h"
+#include "Square.h"
 #include "ObjectFile/Model.h"
 #include "ObjectFile/Bullet.h"
 #include "Camera.h"

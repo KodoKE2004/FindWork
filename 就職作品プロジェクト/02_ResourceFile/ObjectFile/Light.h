@@ -1,8 +1,8 @@
 #pragma once
 #include "Cube.h"
-#include "../Renderer.h"
-#include	<DirectXMath.h>
-#include	<SimpleMath.h>
+#include "Renderer.h"
+#include <DirectXMath.h>
+#include <SimpleMath.h>
 
 class Light : public Cube
 {

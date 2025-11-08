@@ -1,6 +1,6 @@
 #include "Object.h"
-#include "../Game.h"
-#include "../ShaderManager.h"
+#include "Game.h"
+#include "ShaderManager.h"
 
 Object::Object(Camera* cam) : m_Camera(cam)
 {
@@ -50,6 +50,11 @@ void Object::SetGPU()
 	if(m_PixelShader     != nullptr) { m_PixelShader    ->SetGPU(); }
 	if(m_ComputeShader   != nullptr) { m_ComputeShader  ->SetGPU(); }
 	if(m_GeometoryShader != nullptr) { m_GeometoryShader->SetGPU(); }
+}
+
+void Object::SetName(std::string name)
+{
+	m_Name = name;
 }
 
 void Object::SetColor(const Color color)

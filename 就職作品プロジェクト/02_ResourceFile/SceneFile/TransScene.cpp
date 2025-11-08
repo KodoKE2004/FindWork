@@ -107,6 +107,7 @@ void TransScene::Finalize()
 	m_Step = STEP::OFF;
 	for (auto* obj : m_MySceneObjects)
 	{
+		obj->SetTexture(nullptr);
 		instance.DeleteObject(obj);
 	}
 	m_MySceneObjects.clear();

@@ -1,6 +1,6 @@
 #pragma once
 #include "Scene.h"
-#include "Texture2D.h"
+#include "Square.h"
 
 class GameSceneExe : public Scene
 {
@@ -13,7 +13,7 @@ protected:
 	//================================
 	// 	このシーンで使うオブジェクト
     //================================
-    Texture2D* m_Background = nullptr;
+    Square* m_Background = nullptr;
 
 
 
@@ -35,11 +35,11 @@ public:
 	//================================
 
 	// シーンの初期化
-	virtual void Initialize()		= 0;
+	virtual void Initialize()		override;
 	// シーンの更新
-	virtual void Update(float tick) = 0;
+	virtual void Update(float tick) override;
 	// シーンの終了処理
-	virtual void Finalize()			= 0;
+	virtual void Finalize()			override;
 
     void TickCount(const float tick) { m_Tick += tick; }
     bool IsTimeUp() const			 { return m_Tick >= m_SceneChangeTime; }

@@ -23,12 +23,14 @@
     <ClCompile Include="02_ResourceFile\Audio.cpp" />
     <ClCompile Include="02_ResourceFile\AudioManager.cpp" />
     <ClCompile Include="02_ResourceFile\Camera.cpp" />
+    <ClCompile Include="02_ResourceFile\Collider.cpp" />
     <ClCompile Include="02_ResourceFile\DebugGridLine.cpp" />
     <ClCompile Include="02_ResourceFile\DebugUI.cpp" />
     <ClCompile Include="02_ResourceFile\Dx11helper.cpp" />
     <ClCompile Include="02_ResourceFile\Game.cpp" />
     <ClCompile Include="02_ResourceFile\input.cpp" />
     <ClCompile Include="02_ResourceFile\main.cpp" />
+    <ClCompile Include="02_ResourceFile\ObjectFile\Circle.cpp" />
     <ClCompile Include="02_ResourceFile\SceneFile\GameSceneWait.cpp" />
     <ClCompile Include="02_ResourceFile\SceneFile\Transition\TransitionBase.cpp" />
     <ClCompile Include="02_ResourceFile\SceneFile\Transition\Wipe.cpp" />
@@ -54,7 +56,7 @@
     <ClCompile Include="02_ResourceFile\TestFile\TestPlane.cpp">
       <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">true</ExcludedFromBuild>
     </ClCompile>
-    <ClCompile Include="02_ResourceFile\Texture2D.cpp" />
+    <ClCompile Include="02_ResourceFile\Square.cpp" />
     <ClCompile Include="02_ResourceFile\Texture.cpp" />
     <ClCompile Include="02_ResourceFile\TextureManager.cpp" />
     <ClCompile Include="02_ResourceFile\Transform.cpp" />
@@ -72,6 +74,7 @@
     <ClInclude Include="02_ResourceFile\Audio.h" />
     <ClInclude Include="02_ResourceFile\AudioManager.h" />
     <ClInclude Include="02_ResourceFile\Camera.h" />
+    <ClInclude Include="02_ResourceFile\Collider.h" />
     <ClInclude Include="02_ResourceFile\CSVLoader.h" />
     <ClInclude Include="02_ResourceFile\Debug.hpp" />
     <ClInclude Include="02_ResourceFile\DebugGridLine.h" />
@@ -84,6 +87,7 @@
     <ClInclude Include="02_ResourceFile\Material.h" />
     <ClInclude Include="02_ResourceFile\Mesh.h" />
     <ClInclude Include="02_ResourceFile\MeshRenderer.h" />
+    <ClInclude Include="02_ResourceFile\ObjectFile\Circle.h" />
     <ClInclude Include="02_ResourceFile\SceneFile\GameSceneWait.h" />
     <ClInclude Include="02_ResourceFile\SceneFile\Transition\TransitionBase.h" />
     <ClInclude Include="02_ResourceFile\SceneFile\Transition\Wipe.h" />
@@ -111,7 +115,7 @@
     <ClInclude Include="02_ResourceFile\TestFile\TestPlane.h">
       <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">true</ExcludedFromBuild>
     </ClInclude>
-    <ClInclude Include="02_ResourceFile\Texture2D.h" />
+    <ClInclude Include="02_ResourceFile\Square.h" />
     <ClInclude Include="02_ResourceFile\Texture.h" />
     <ClInclude Include="02_ResourceFile\TextureManager.h" />
     <ClInclude Include="02_ResourceFile\Transform.h" />

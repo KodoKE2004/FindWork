@@ -1,6 +1,6 @@
 #pragma once
 #include "Scene.h"
-#include "Texture2D.h"
+#include "Square.h"
 #include "Application.h"
 
 #include "RenderTarget.h"

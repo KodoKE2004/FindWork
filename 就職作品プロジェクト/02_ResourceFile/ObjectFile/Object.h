@@ -1,15 +1,16 @@
 #pragma once
-#include "../Transform.h"
-#include "../Shader.h"
-#include "../input.h"
-#include "../Camera.h"
-#include "../Texture.h"
+#include "Transform.h"
+#include "Shader.h"
+#include "input.h"
+#include "Camera.h"
+#include "Texture.h"
 
 #include <memory>
 
 class Object : public Transform
 {
 protected:
+	std::string m_Name;
 	// •`‰æ‚Ìˆ×‚Ìî•ñiŒ©‚½–Ú‚ÉŠÖ‚í‚é•”•ªj
 	Color   m_Color;
 
@@ -38,8 +39,17 @@ public:
 
 	void SetGPU();
 
+	void SetName(std::string name);
+	std::string GetName() {
+		return m_Name;
+	}
+
 	void SetColor(const Color color);
 	void SetColor(const float r, const float g, const float b, const float a);
+	
+	Color GetColor() {
+		return m_Color;
+	}
 	
 	void SetTexture(std::shared_ptr<Texture> setTexture);
 };

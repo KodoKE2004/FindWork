@@ -1,7 +1,7 @@
 #pragma once
-#include "../Texture2D.h"
+#include "Square.h"
 
-class Bullet : public Texture2D
+class Bullet : public Square
 {
 public:
     Bullet(Camera* cam);

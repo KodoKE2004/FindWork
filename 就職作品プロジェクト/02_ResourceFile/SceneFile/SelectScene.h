@@ -1,9 +1,9 @@
 #pragma once
 #include "Scene.h"
-#include "../ObjectFile/Bullet.h"
-#include "../ObjectFile/Sphere.h"
+#include "ObjectFile/Bullet.h"
+#include "ObjectFile/Sphere.h"
 
-#include "../Game.h"
+#include "Game.h"
 #include <vector>
 #include <memory>
 class SelectScene : public Scene

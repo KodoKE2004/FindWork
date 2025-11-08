@@ -4,13 +4,13 @@
 #include "Object.h"
 #include "Sphere.h"
 #include "Skydome.h"
-#include "Texture2D.h"
+#include "Square.h"
 
 class TitleScene : public Scene
 {
 private:
 	Skydome*   m_Skydome   = nullptr;
-	Texture2D* m_TitleLogo = nullptr;
+	Square* m_TitleLogo = nullptr;
 public:
 	//================================
 	// コンストラクタとデストラクタ

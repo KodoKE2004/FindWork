@@ -10,8 +10,8 @@ template <typename T>
 class VertexBuffer
 {
 private:
-	UINT m_Stride;
-	UINT m_Count;
+	UINT m_Stride = 0;
+	UINT m_Count  = 0;
 	ComPtr<ID3D11Buffer> m_Buffer;  // 頂点バッファ
 public:
 	VertexBuffer() = default;
