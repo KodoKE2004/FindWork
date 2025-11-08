@@ -65,13 +65,13 @@ void Sphere::Initialize()
     m_VertexBuffer.Create(vertices);
     m_IndexBuffer.Create(indices);
 
-    auto shaderMgr = GAME_MANAGER_SHADER;
-
+    auto shaderMgr  = GAME_MANAGER_SHADER;
+    auto textureMgr = GAME_MANAGER_TEXTURE;
     SetShader("VS_Default", "PS_Default");
-    
+        
     if (m_Texture == nullptr)
     {
-        m_Texture = Game::GetInstance().GetTextureManager()->GetTexture("space.png");
+        m_Texture = textureMgr->GetTexture("Plane.png");
     }
 
     m_Camera->SetCamera(CAMERA_3D);

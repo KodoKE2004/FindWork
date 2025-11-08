@@ -21,7 +21,7 @@ namespace Collider
         /// <param name="objectA"></param>
         /// <param name="objectB"></param>
         /// <returns></returns>
-        bool ColliderMore(NVector3& vecA,NVector3& vecB);
+        bool ColliderMore(Transform vecA, Transform vecB);
 
         /// <summary>
         /// 四つ角の頂点の位置をワールド座標の値で返す
@@ -29,6 +29,8 @@ namespace Collider
         /// <param name="object"></param> Transform
         /// <returns></returns>
         std::array<NVector3, 4> SettingVertex(Transform transform);
+
+        float CreateDiagonalLength(Transform traA);
     }
 };
 

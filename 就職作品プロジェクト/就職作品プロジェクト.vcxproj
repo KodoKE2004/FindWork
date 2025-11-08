@@ -31,6 +31,7 @@
     <ClCompile Include="02_ResourceFile\input.cpp" />
     <ClCompile Include="02_ResourceFile\main.cpp" />
     <ClCompile Include="02_ResourceFile\ObjectFile\Circle.cpp" />
+    <ClCompile Include="02_ResourceFile\ObjectFile\Sord.cpp" />
     <ClCompile Include="02_ResourceFile\SceneFile\GameSceneHit.cpp" />
     <ClCompile Include="02_ResourceFile\SceneFile\GameScenePush.cpp" />
     <ClCompile Include="02_ResourceFile\SceneFile\GameSceneSlice.cpp" />
@@ -91,6 +92,7 @@
     <ClInclude Include="02_ResourceFile\Mesh.h" />
     <ClInclude Include="02_ResourceFile\MeshRenderer.h" />
     <ClInclude Include="02_ResourceFile\ObjectFile\Circle.h" />
+    <ClInclude Include="02_ResourceFile\ObjectFile\Sord.h" />
     <ClInclude Include="02_ResourceFile\SceneFile\GameSceneHit.h" />
     <ClInclude Include="02_ResourceFile\SceneFile\GameScenePush.h" />
     <ClInclude Include="02_ResourceFile\SceneFile\GameSceneSlice.h" />

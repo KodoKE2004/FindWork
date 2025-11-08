@@ -9,13 +9,6 @@ enum class DIFFICULT
 	NUM
 };
 
-enum class STAGE
-{
-	STAGE_1,
-	STAGE_2,
-	STAGE_3,
-	NUM
-};
 
 class GameSceneExe : public Scene
 {
@@ -60,6 +53,5 @@ public:
 		return SceneNo::GAME_EXE;
 	}
 
-	virtual STAGE GetStage() const = 0;
 };
 

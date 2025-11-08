@@ -136,7 +136,7 @@ public:
 	///                    ÉQÉbÉ^Å[
 	/// =================================================
 	Transform GetTransform() const;
-	NVector3   GetPos()  const { return m_Position; }
+	NVector3   GetPos()		const { return m_Position; }
 	NVector3   GetRotate()  const { return m_Rotation; }
-	NVector3   GetScale()     const { return m_Scale   ; }
+	NVector3   GetScale()   const { return m_Scale   ; }
 };

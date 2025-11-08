@@ -214,6 +214,9 @@
     <ClCompile Include="02_ResourceFile\SceneFile\GameScenePush.cpp">
       <Filter>SourceFile\Scene\GameScene</Filter>
     </ClCompile>
+    <ClCompile Include="02_ResourceFile\ObjectFile\Sord.cpp">
+      <Filter>SourceFile\Object\2D</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="02_ResourceFile\SceneFile\Scene.h">
@@ -395,6 +398,9 @@
     </ClInclude>
     <ClInclude Include="02_ResourceFile\SceneFile\GameScenePush.h">
       <Filter>SourceFile\Scene\GameScene</Filter>
+    </ClInclude>
+    <ClInclude Include="02_ResourceFile\ObjectFile\Sord.h">
+      <Filter>SourceFile\Object\2D</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>

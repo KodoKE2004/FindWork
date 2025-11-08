@@ -21,7 +21,7 @@ void TitleScene::Initialize()
 	m_Skydome = instance.AddObject<Skydome>();
 	m_Skydome->SetName("m_Skydome");
 	m_Skydome->SetSkyDomeMode(true);
-	m_Skydome->SetTexture(GAME_MANAGER_TEXTURE->GetTexture("Plane.png"));
+	m_Skydome->SetTexture(GAME_MANAGER_TEXTURE->GetTexture("SkydomeSpace.png"));
 	m_Skydome->SetRadius(500.0f);
 	
 	m_TitleLogo = instance.AddObject<Square>();
@@ -86,8 +86,9 @@ void TitleScene::Update(float tick)
 
 			audioManager->StopAllByName("bgm", false);
 		}
-		ChangeScenePush<GameSceneWait>(TRANS_MODE::WIPE, 1.0f);
+		ChangeScenePush<GameSceneSlice>(TRANS_MODE::WIPE, 1.0f);
 	}
+
 
 	// Skydome‚Ì‰ñ“]
 	m_Skydome->Spin(0.0f,- 5.0f,0.0f);

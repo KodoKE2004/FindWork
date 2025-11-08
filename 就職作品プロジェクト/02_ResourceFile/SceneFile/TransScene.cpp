@@ -42,7 +42,6 @@ void TransScene::Initialize()
 		m_TransitionTexture = std::make_shared<Wipe>(instance.GetCamera());
 		m_TransitionTexture->Initialize();
 		if (m_StackOp != STACK_OP::POP && m_SceneNext) {
-			m_SceneNext->Initialize();
 			m_hasInitializedNextScene = true;
 		}
 

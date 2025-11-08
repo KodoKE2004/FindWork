@@ -188,7 +188,9 @@ void ChangeScenePush(TRANS_MODE mode,float duration)
 
 	// テンプレートなので
 	// 既定がSceneでなければエラー
-	static_assert(!std::is_abstract_v<T>, "T は 基底クラスが Scene ではありません");
+	// T が Scene を継承していること、かつ抽象クラスでないことをチェック
+	static_assert(std::is_base_of_v<Scene, T>, "T は Scene を継承している必要があります");
+	static_assert(!std::is_abstract_v<T>, "T は抽象クラスではいけません");
 
 	MyDebugLog(std::cout << "ChangeScenePushの読み込み検出\n");
 

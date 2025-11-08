@@ -2,7 +2,10 @@
 
 bool Collider::Collider2D::isHitSquareCircle(Square& square, Circle& circle)
 {
-    
+    if ( !ColliderMore(square.GetTransform(), circle.GetTransform())){
+        return false;
+    }
+
     std::array<NVector3, 4> squareVertex = SettingVertex(square.GetTransform());
     std::array<NVector3, 4> circleVertex = SettingVertex(circle.GetTransform()); 
 
@@ -11,6 +14,10 @@ bool Collider::Collider2D::isHitSquareCircle(Square& square, Circle& circle)
 
 bool Collider::Collider2D::isHitCircleCircle(Circle& circleA, Circle& circleB)
 {
+    if (!ColliderMore(circleA.GetTransform(), circleA.GetTransform())) {
+        return false;
+    }
+
     std::array<NVector3, 4> circleAVertex = SettingVertex(circleA.GetTransform()); 
     std::array<NVector3, 4> circleBVertex = SettingVertex(circleB.GetTransform()); 
 
@@ -18,10 +25,25 @@ bool Collider::Collider2D::isHitCircleCircle(Circle& circleA, Circle& circleB)
     return false;
 }
 
-bool Collider::Collider2D::ColliderMore(NVector3& vecA, NVector3& vecB)
+bool Collider::Collider2D::ColliderMore(Transform traA, Transform traB)
 {
-    // // ‘ÎŠpü‚Ì’è‹`
-    // NVector3 diagonalA =  
+    // ‘ÎŠpü‚Ì’·‚³‚ğì¬
+    float diagonalA = CreateDiagonalLength(traA);
+    float diagonalB = CreateDiagonalLength(traB);
+    
+    // ‘ÎŠpü‚Ì‡Œv = ƒqƒbƒg‚ÌÅ‘å‹——£
+    float distanceMax = diagonalA + diagonalB;
+    
+    NVector3 distanceVec =( traA.GetPos().x - traB.GetPos().x,
+                            traA.GetPos().y - traB.GetPos().y,
+                            0.0f);
+
+    float distance = distanceVec.Length();
+    
+    if (distance < distanceMax) {
+        return true;
+    }
+
     return false;
 }
 
@@ -64,4 +86,13 @@ std::array<NVector3, 4> Collider::Collider2D::SettingVertex(Transform transform)
     }
 
     return resVertex;
+}
+
+float Collider::Collider2D::CreateDiagonalLength(Transform traA)
+{
+    float halfWidthA  = traA.GetScale().x / 2.0f;
+    float halfHeightA = traA.GetScale().y / 2.0f;
+    float diagonalA = sqrtf(halfWidthA * halfWidthA + halfHeightA * halfHeightA);
+
+    return diagonalA;
 }

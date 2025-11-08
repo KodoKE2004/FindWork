@@ -6,3 +6,7 @@
 #include "SelectScene.h"
 #include "GameSceneExe.h"
 #include "GameSceneWait.h"
+#include "GameSceneSlice.h"
+#include "GameSceneHit.h"
+#include "GameScenePush.h"
+

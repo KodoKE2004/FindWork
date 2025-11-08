@@ -11,7 +11,6 @@ protected:
 	VertexBuffer<VERTEX_3D>  m_VertexBuffer;
 	IndexBuffer				 m_IndexBuffer;
 	IndexBuffer				 m_IndexBufferInside;
-	std::shared_ptr<Texture> m_Texture;
 
 	unsigned int m_IndexCount = 0;
 	unsigned int m_InsideIndexCount = 0;
