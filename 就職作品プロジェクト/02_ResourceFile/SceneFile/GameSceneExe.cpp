@@ -8,10 +8,21 @@
 
 void GameSceneExe::Initialize()
 {
+    // スピード依存でチェンジタイムの変更
+    m_ChangeSceneTime *= (1.0f / m_GameSpeedMass);
+
+
 }
 
 void GameSceneExe::Update(float tick)
 {
+    TickCount(tick);
+    if (IsTimeUp()) {
+        m_isChange = true;
+    }
+    if (IsChange()) {
+        ChangeScenePop(TRANS_MODE::WIPE, 0.5f);
+    }
 }
 
 void GameSceneExe::Finalize()

@@ -12,6 +12,10 @@ enum class SceneNo
 	SELECT,
 	GAME_WAIT,
 	GAME_EXE,
+    GAME_SLICE,
+	GAME_PUSH,
+	GAME_HIT,
+    GAME_RESULT,
 	TRANSITION,
 	NUM
 };

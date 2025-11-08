@@ -2,20 +2,32 @@
 
 bool Collider::Collider2D::isHitSquareCircle(Square& square, Circle& circle)
 {
-    std::array<Vector3, 4> squareVertex = SettingVertex(square.GetTransform());
-    std::array<Vector3, 4> circleVertex = SettingVertex(circle.GetTransform()); // 未実装
+    
+    std::array<NVector3, 4> squareVertex = SettingVertex(square.GetTransform());
+    std::array<NVector3, 4> circleVertex = SettingVertex(circle.GetTransform()); 
 
     return false;
 }
 
-bool Collider::Collider2D::isHitCircleCircle(Circle circleA, Circle circleB)
+bool Collider::Collider2D::isHitCircleCircle(Circle& circleA, Circle& circleB)
 {
+    std::array<NVector3, 4> circleAVertex = SettingVertex(circleA.GetTransform()); 
+    std::array<NVector3, 4> circleBVertex = SettingVertex(circleB.GetTransform()); 
+
+
     return false;
 }
 
-std::array<Vector3, 4> Collider::Collider2D::SettingVertex(Transform& transform)
+bool Collider::Collider2D::ColliderMore(NVector3& vecA, NVector3& vecB)
 {
-    std::array<Vector3, 4> resVertex;
+    // // 対角線の定義
+    // NVector3 diagonalA =  
+    return false;
+}
+
+std::array<NVector3, 4> Collider::Collider2D::SettingVertex(Transform transform)
+{
+    std::array<NVector3, 4> resVertex;
 
 
     NVector3 position = transform.GetPos();
@@ -44,7 +56,7 @@ std::array<Vector3, 4> Collider::Collider2D::SettingVertex(Transform& transform)
         float rotatedY = localVertices[i].x * sinR + localVertices[i].y * cosR;
 
         // ワールド座標への変換
-        resVertex[i] = Vector3(
+        resVertex[i] = NVector3(
             position.x + rotatedX,
             position.y + rotatedY,
             position.z

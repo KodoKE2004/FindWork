@@ -16,12 +16,8 @@ public:
 	// コンストラクタとデストラクタ
 	//================================
 	TitleScene()  = default;
-
-	SceneNo GetSceneNo() const override {
-		return SceneNo::TITLE;
-	}
-
 	~TitleScene() = default;
+
 
 	//================================
 	// 			ループ内の処理
@@ -30,6 +26,10 @@ public:
 	void Initialize()		override;	// シーンの初期化
 	void Update(float tick) override;	// シーンの更新
 	void Finalize()			override;	// シーンの終了処理
+
+	SceneNo GetSceneNo() const override {
+		return SceneNo::TITLE;
+	}
 
 
 };

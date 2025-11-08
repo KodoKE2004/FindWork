@@ -90,7 +90,7 @@ void TitleScene::Update(float tick)
 	}
 
 	// Skydome‚Ì‰ñ“]
-	m_Skydome->Spin(0.0f,1.0f,0.0f);
+	m_Skydome->Spin(0.0f,- 5.0f,0.0f);
 }
 
 
