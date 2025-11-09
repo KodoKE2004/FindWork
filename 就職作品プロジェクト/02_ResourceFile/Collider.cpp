@@ -1,4 +1,7 @@
 #include "Collider.h"
+#include <cmath>
+#include <DirectXMath.h>
+#include <SimpleMath.h>
 
 bool Collider::Collider2D::isHitSquareCircle(Square& square, Circle& circle)
 {
@@ -25,6 +28,35 @@ bool Collider::Collider2D::isHitCircleCircle(Circle& circleA, Circle& circleB)
     return false;
 }
 
+bool Collider::Collider2D::isHitSquareSquare(Square& squareA, Square& squareB)
+{
+    if (!ColliderMore(squareA.GetTransform(), squareB.GetTransform())) {
+        return false;
+    }
+
+    bool result = false;
+
+    std::array<NVector3, 4> squareVertexA = SettingVertex(squareA.GetTransform());
+    std::array<NVector3, 4> squareVertexB = SettingVertex(squareB.GetTransform());
+
+    
+
+    // í∏ì_Ç™ì‡ë§Ç…ë∂ç›Ç∑ÇÈÇ©îªíË
+    for (int i = 0; i < squareVertexA.size(); ++i)
+    {
+        
+    }
+    
+
+    if (result == true) {
+        return true;
+    }
+
+
+
+    return false;
+}
+
 bool Collider::Collider2D::ColliderMore(Transform traA, Transform traB)
 {
     // ëŒäpê¸ÇÃí∑Ç≥ÇçÏê¨
@@ -34,9 +66,9 @@ bool Collider::Collider2D::ColliderMore(Transform traA, Transform traB)
     // ëŒäpê¸ÇÃçáåv = ÉqÉbÉgéûÇÃç≈ëÂãóó£
     float distanceMax = diagonalA + diagonalB;
     
-    NVector3 distanceVec =( traA.GetPos().x - traB.GetPos().x,
-                            traA.GetPos().y - traB.GetPos().y,
-                            0.0f);
+    NVector3 distanceVec( traA.GetPos().x - traB.GetPos().x,
+                          traA.GetPos().y - traB.GetPos().y,
+                          0.0f);
 
     float distance = distanceVec.Length();
     
@@ -70,7 +102,7 @@ std::array<NVector3, 4> Collider::Collider2D::SettingVertex(Transform transform)
     // âÒì]çsóÒÇÃåvéZ
     float cosR = cosf(rotation.z);
     float sinR = sinf(rotation.z);
-    
+
     for (size_t i = 0; i < localVertices.size(); ++i)
     {
         // âÒì]ÇÃìKóp

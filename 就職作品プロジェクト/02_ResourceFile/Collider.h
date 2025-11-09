@@ -13,7 +13,7 @@ namespace Collider
     {
         bool isHitSquareCircle(Square& square , Circle& circle);
         bool isHitCircleCircle(Circle& circleA, Circle& circleB);
-        
+        bool isHitSquareSquare(Square& squareA, Square& squareB);
         /// <summary>
         /// ‹——£‚ªhalfsize‚æ‚è‘å‚«‚¯‚ê‚Îfalse‚ğ•Ô‚·
         /// Šî€‚Í‘ÎŠpü‚Ì”¼•ª‚Ì’·‚³

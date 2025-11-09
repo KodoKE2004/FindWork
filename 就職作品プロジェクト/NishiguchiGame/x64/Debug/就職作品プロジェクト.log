@@ -1,3 +1,62 @@
-﻿  GameSceneExe.cpp
+﻿  compilation object save succeeded; see C:\Users\dorae\Desktop\HAL\class3\FindWork\就職作品プロジェクト\x64\Debug\PS_Alpha.cso
+  compilation object save succeeded; see C:\Users\dorae\Desktop\HAL\class3\FindWork\就職作品プロジェクト\x64\Debug\PS_Default.cso
+  compilation object save succeeded; see C:\Users\dorae\Desktop\HAL\class3\FindWork\就職作品プロジェクト\x64\Debug\PS_Phong.cso
+  compilation object save succeeded; see C:\Users\dorae\Desktop\HAL\class3\FindWork\就職作品プロジェクト\x64\Debug\PS_Skydome.cso
+  compilation object save succeeded; see C:\Users\dorae\Desktop\HAL\class3\FindWork\就職作品プロジェクト\x64\Debug\PS_Unlit.cso
+  compilation object save succeeded; see C:\Users\dorae\Desktop\HAL\class3\FindWork\就職作品プロジェクト\x64\Debug\VS_Alpha.cso
+  compilation object save succeeded; see C:\Users\dorae\Desktop\HAL\class3\FindWork\就職作品プロジェクト\x64\Debug\VS_DebugGrid.cso
+  compilation object save succeeded; see C:\Users\dorae\Desktop\HAL\class3\FindWork\就職作品プロジェクト\x64\Debug\VS_Default.cso
+  compilation object save succeeded; see C:\Users\dorae\Desktop\HAL\class3\FindWork\就職作品プロジェクト\x64\Debug\VS_Skydome.cso
+  compilation object save succeeded; see C:\Users\dorae\Desktop\HAL\class3\FindWork\就職作品プロジェクト\x64\Debug\VS_Unlit.cso
+  Application.cpp
+  Audio.cpp
+  AudioManager.cpp
+  Camera.cpp
+  Collider.cpp
+  DebugGridLine.cpp
+  DebugUI.cpp
+  Dx11helper.cpp
+  Game.cpp
+  input.cpp
+  main.cpp
+  Circle.cpp
+  Sord.cpp
+  GameSceneHit.cpp
+  GameScenePush.cpp
+  GameSceneSlice.cpp
+  GameSceneWait.cpp
+  TransitionBase.cpp
+  Wipe.cpp
+  StaticMesh.cpp
+  MeshManager.cpp
+  Bullet.cpp
+  Cube.cpp
+  Light.cpp
+  Model.cpp
+  Object.cpp
+  Sphere.cpp
+  Skydome.cpp
+  Renderer.cpp
+  RenderTarget.cpp
+  GameSceneExe.cpp
+  SelectScene.cpp
+  TitleScene.cpp
+  Fade.cpp
+  SnapshotOverlay.cpp
   TransScene.cpp
-  就職作品プロジェクト.vcxproj -> C:\Users\kodokeの世界\Desktop\HAL\VisualSutdio\就職作品\個人製作\FindWork\就職作品プロジェクト\x64\Debug\NishiguchiGame.exe
+  Shader.cpp
+  ShaderManager.cpp
+  Square.cpp
+  Texture.cpp
+  TextureManager.cpp
+  Transform.cpp
+  utility.cpp
+  imgui.cpp
+  imgui_demo.cpp
+  imgui_draw.cpp
+  imgui_impl_dx11.cpp
+  imgui_impl_win32.cpp
+  imgui_tables.cpp
+  imgui_widgets.cpp
+  LINK : 前回のインクリメンタル リンクで C:\Users\dorae\Desktop\HAL\class3\FindWork\就職作品プロジェクト\x64\Debug\NishiguchiGame.exe が見つからなかったか、ビルドされませんでした。フル リンクを行います。
+  就職作品プロジェクト.vcxproj -> C:\Users\dorae\Desktop\HAL\class3\FindWork\就職作品プロジェクト\x64\Debug\NishiguchiGame.exe
