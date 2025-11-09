@@ -58,6 +58,7 @@ struct NVector3
 	{
 		return sqrtf(x * x + y * y + z * z);
 	}
+
 	// ê≥ãKâª
 	NVector3 Normalize()
 	{

@@ -2,35 +2,42 @@
 #include <cmath>
 #include <SimpleMath.h>
 #include <array>
-#include <vector>
+
 #include "Transform.h"
 #include "Circle.h"
 #include "Square.h"
 
-namespace Collider
+
+namespace Math
 {
+    struct SquareInfo
+    {
+        NVector3 pos;       // 頂点情報
+        NVector3 axisX;     // 大きさ情報
+        NVector3 axisY;     // 回転情報
+        float halfW;        // 半分の幅
+        float halfH;        // 半分の高さ
+    };
+
     namespace Collider2D
     {
-        bool isHitSquareCircle(Square& square , Circle& circle);
+        static bool OverlapOnAxis(NVector3 & axis, std::array<NVector3,4>& vertsA, std::array<NVector3,4>& vertsB);
+        static bool IsHitPoint(NVector3& pt, SquareInfo sq);
+        bool isHitSquareCircle(Square& square , Circle& circle );
         bool isHitCircleCircle(Circle& circleA, Circle& circleB);
         bool isHitSquareSquare(Square& squareA, Square& squareB);
-        /// <summary>
-        /// 距離がhalfsizeより大きければfalseを返す
-        /// 基準は対角線の半分の長さ
-        /// </summary>
-        /// <param name="objectA"></param>
-        /// <param name="objectB"></param>
-        /// <returns></returns>
-        bool ColliderMore(Transform vecA, Transform vecB);
 
-        /// <summary>
-        /// 四つ角の頂点の位置をワールド座標の値で返す
-        /// </summary>
-        /// <param name="object"></param> Transform
-        /// <returns></returns>
+        // Tranformから当たり判定用の情報を取得
+        SquareInfo SettingVertexInfo(Transform transform);
+
+        // 対角線の長さを取得
+        float CreateDiagonalLength(Transform tra);
+
+        // 大きいかどうかを判定
+        bool  ColliderMore(Transform traA, Transform traB);
+
+        // 四隅のワールド座標を取得
         std::array<NVector3, 4> SettingVertex(Transform transform);
-
-        float CreateDiagonalLength(Transform traA);
     }
 };
 
