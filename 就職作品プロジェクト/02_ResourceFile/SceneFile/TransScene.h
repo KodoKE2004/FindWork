@@ -76,7 +76,7 @@ public:
 	void Update(float tick)	override;
 	void Finalize()			override;
 
-	SceneNo GetSceneNo() const override { return SceneNo::TRANSITION; }
+	SCENE_NO GetSceneNo() const override { return SCENE_NO::TRANSITION; }
 	/// <summary>
 	/// 次のシーンの一フレーム目を描画する
 	/// </summary>

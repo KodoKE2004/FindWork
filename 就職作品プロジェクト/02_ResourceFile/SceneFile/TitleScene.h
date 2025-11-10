@@ -27,8 +27,8 @@ public:
 	void Update(float tick) override;	// シーンの更新
 	void Finalize()			override;	// シーンの終了処理
 
-	SceneNo GetSceneNo() const override {
-		return SceneNo::TITLE;
+	SCENE_NO GetSceneNo() const override {
+		return SCENE_NO::TITLE;
 	}
 
 

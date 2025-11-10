@@ -49,8 +49,8 @@ public:
     bool IsTimeUp() const			 { return m_Tick >= m_ChangeSceneTime; }
 	bool IsChange() const			 { return m_isChange; }
 
-	SceneNo GetSceneNo() const override {
-		return SceneNo::GAME_EXE;
+	SCENE_NO GetSceneNo() const override {
+		return SCENE_NO::GAME_EXE;
 	}
 
 };

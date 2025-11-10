@@ -12,8 +12,8 @@ public:
     void Update(float tick) override;
     void Finalize()         override;
 
-    SceneNo GetSceneNo(){
-        return SceneNo::GAME_PUSH;
+    SCENE_NO GetSceneNo(){
+        return SCENE_NO::GAME_PUSH;
     }
 };
 

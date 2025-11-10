@@ -26,8 +26,8 @@ public:
 	void Update(float tick) override;	// シーンの更新
 	void Finalize()         override;	// シーンの終了処理
 
-	SceneNo GetSceneNo() const override {
-		return SceneNo::GAME_WAIT;
+	SCENE_NO GetSceneNo() const override {
+		return SCENE_NO::GAME_WAIT;
 	}
 };
 

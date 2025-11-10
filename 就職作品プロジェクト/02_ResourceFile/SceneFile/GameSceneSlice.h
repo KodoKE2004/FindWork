@@ -1,6 +1,7 @@
 #pragma once
 #include "GameSceneExe.h"
 #include "Square.h"
+#include "Player.h"
 #include "Skydome.h"
 
 class GameSceneSlice : public GameSceneExe
@@ -12,10 +13,7 @@ private:
     const int m_MaxSlices = 5;    // ç≈ëÂÉXÉâÉCÉXêî
 
     Skydome* m_Skydome         = nullptr;
-    Square*  m_WoodBefore      = nullptr;
-    Square*  m_WoodAfterTop    = nullptr;
-    Square*  m_WoodAfterBottom = nullptr;
-    Square*  m_Sord            = nullptr;
+    Player*  m_Sord            = nullptr;
              
 public:
     GameSceneSlice() = default;
@@ -24,8 +22,8 @@ public:
     void Update(float tick) override ;
     void Finalize()         override ;
 
-    SceneNo GetSceneNo() const override {
-        return SceneNo::GAME_SLICE;
+    SCENE_NO GetSceneNo() const override {
+        return SCENE_NO::GAME_SLICE;
     }
 };
 

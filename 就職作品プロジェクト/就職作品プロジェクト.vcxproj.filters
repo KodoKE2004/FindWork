@@ -217,6 +217,12 @@
     <ClCompile Include="02_ResourceFile\ObjectFile\Sord.cpp">
       <Filter>SourceFile\Object\2D</Filter>
     </ClCompile>
+    <ClCompile Include="02_ResourceFile\ObjectFile\Player.cpp">
+      <Filter>SourceFile\Object</Filter>
+    </ClCompile>
+    <ClCompile Include="02_ResourceFile\ObjectFile\Wood.cpp">
+      <Filter>SourceFile</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="02_ResourceFile\SceneFile\Scene.h">
@@ -402,6 +408,10 @@
     <ClInclude Include="02_ResourceFile\ObjectFile\Sord.h">
       <Filter>SourceFile\Object\2D</Filter>
     </ClInclude>
+    <ClInclude Include="02_ResourceFile\ObjectFile\Player.h">
+      <Filter>SourceFile\Object</Filter>
+    </ClInclude>
+    <ClInclude Include="02_ResourceFile\ObjectFile\Wood.h" />
   </ItemGroup>
   <ItemGroup>
     <FxCompile Include="ShaderFile\Common.hlsl">

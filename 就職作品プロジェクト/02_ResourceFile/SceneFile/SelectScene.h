@@ -22,8 +22,8 @@ public:
 
 	SelectScene()  = default;
 
-	SceneNo GetSceneNo() const override {
-		return SceneNo::SELECT;
+	SCENE_NO GetSceneNo() const override {
+		return SCENE_NO::SELECT;
 	}
 
 	~SelectScene() = default;

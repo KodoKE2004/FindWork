@@ -12,8 +12,8 @@ public:
     void Update(float tick) override ;
     void Finalize()         override ;
 
-    SceneNo GetSceneNo() const override {
-        return SceneNo::GAME_HIT;
+    SCENE_NO GetSceneNo() const override {
+        return SCENE_NO::GAME_HIT;
     }
 
 };

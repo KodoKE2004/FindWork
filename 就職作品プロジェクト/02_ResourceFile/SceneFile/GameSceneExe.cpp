@@ -27,4 +27,22 @@ void GameSceneExe::Update(float tick)
 
 void GameSceneExe::Finalize()
 {
+    auto& instance = GAME_INSTANCE;
+#ifdef _DEBUG
+    instance.m_Grid.SetEnabled(false);
+#endif
+
+    // このシーンのオブジェクトを削除する
+    for (auto o : m_MySceneObjects) {
+        instance.DeleteObject(o);
+    }
+    m_MySceneObjects.clear();
+    // オーディオの停止
+    if (auto audioManager = GAME_MANAGER_AUDIO)
+    {
+        for (const auto& [key, config] : m_AudioList)
+        {
+            audioManager->StopAllByName(key);
+        }
+    }
 }

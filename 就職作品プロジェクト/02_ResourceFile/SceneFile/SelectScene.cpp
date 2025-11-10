@@ -6,6 +6,7 @@
 #include "ObjectFile/Model.h"
 #include "ObjectFile/Bullet.h"
 #include "Camera.h"
+#include "input.h"
 
 void SelectScene::Initialize()
 {
@@ -43,20 +44,28 @@ void SelectScene::Initialize()
     m_Corsor->SetName("m_Corsor");
     m_Corsor->SetPos(m_ButtonGamePlay->GetPos());
     m_Corsor->SetScale(450.0f, 100.0f, 1.0f);
+    m_Corsor->SetShader("VS_Alpha", "PS_Alpha");
     m_Corsor->SetTexture(textureMgr->GetTexture("Black.png"));
-	m_Corsor->SetColor(0.0f, 0.0f, 0.0f, 0.1f);
+	m_Corsor->SetColor(0.0f, 0.0f, 0.0f, 0.3f);
     m_MySceneObjects.emplace_back(m_Corsor);
 
 }
 
 void SelectScene::Update(float tick)
 {
-	if      (m_Corsor->GetPos().y == m_ButtonGamePlay->GetPos().y) {
-		
+	if (Input::GetKeyTrigger(VK_W)) {
+        m_Corsor->SetPos(m_ButtonGamePlay->GetPos());
 	}
-	else if (m_Corsor->GetPos().y == m_ButtonPractice->GetPos().y) {
+	if (Input::GetKeyTrigger(VK_S)) {
+        m_Corsor->SetPos(m_ButtonPractice->GetPos());
+	}
 
+	if (Input::GetKeyTrigger(VK_RETURN)) 
+	{
+		ChangeScenePush<GameSceneSlice>(TRANS_MODE::FADE,0.01f);
 	}
+
+	
 
 	
 	

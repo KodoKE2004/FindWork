@@ -5,7 +5,7 @@
 #include <unordered_map>
 #include <vector>
 
-enum class SceneNo
+enum class SCENE_NO
 {
 	NONE = -1,
 	TITLE,
@@ -23,11 +23,10 @@ enum class SceneNo
 struct SceneRelationData
 {
 	bool isClear = false;
-	int  score = 0;
-	int  stageNo = 0;
+	int  score   = 0;
 	bool requestRetry = false;
-	SceneNo previousScene = SceneNo::NONE;
-	SceneNo nextScene     = SceneNo::NONE;
+	SCENE_NO previousScene = SCENE_NO::NONE;
+	SCENE_NO nextScene     = SCENE_NO::NONE;
 };
 
 class Scene
@@ -60,7 +59,7 @@ public:
 		return m_MySceneObjects;
 	}
 
-	virtual SceneNo GetSceneNo() const = 0;
+	virtual SCENE_NO GetSceneNo() const = 0;
 
 	// シーン間の受け渡しの値をする関数（それぞれのゲッター・セッター）
 	void SetRelationData(const SceneRelationData relationData) {
