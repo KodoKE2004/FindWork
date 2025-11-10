@@ -86,22 +86,24 @@ namespace Math
 
         bool isHitCircleCircle(Circle& circleA, Circle& circleB)
         {
-            const Transform ta = circleA.GetTransform();
-            const Transform tb = circleB.GetTransform();
+            const Transform traA = circleA.GetTransform();
+            const Transform traB = circleB.GetTransform();
 
-            const NVector3 pa = ta.GetPos();
-            const NVector3 pb = tb.GetPos();
+            const NVector3 posA = traA.GetPos();
+            const NVector3 posB = traB.GetPos();
 
-            const float dx = pa.x - pb.x;
-            const float dy = pa.y - pb.y;
-            const float distSq = dx * dx + dy * dy;
+            const float dx = posA.x - posB.x;
+            const float dy = posA.y - posB.y;
+            const float disttance = dx * dx + dy * dy;
 
             // 半径は scale.x の半分を利用（必要なら Circle 側の Getter に変更）
-            const float ra = ta.GetScale().x * 0.5f;
-            const float rb = tb.GetScale().x * 0.5f;
-            const float rSum = ra + rb;
+            const float radiusA = traA.GetScale().x * 0.5f;
+            const float radiusB = traB.GetScale().x * 0.5f;
 
-            return distSq <= (rSum * rSum);
+            // 衝突判定用の距離
+            const float distanceMax = radiusA + radiusB;
+
+            return disttance <= (distanceMax * distanceMax);
         }
 
         bool isHitSquareSquare(Square& squareA, Square& squareB)
@@ -175,7 +177,7 @@ namespace Math
             const float s = std::sin(rot.z);
         
             // 回転四角形のローカル軸
-            info.axisX = NVector3(c, s, 0.0f);      // 右
+            info.axisX = NVector3( c, s, 0.0f);      // 右
             info.axisY = NVector3(-s, c, 0.0f);     // 上
         
             return info;

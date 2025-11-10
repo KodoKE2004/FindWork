@@ -86,7 +86,7 @@ void TitleScene::Update(float tick)
 
 			audioManager->StopAllByName("bgm", false);
 		}
-		ChangeScenePush<GameSceneSlice>(TRANS_MODE::WIPE, 1.0f);
+		ChangeScenePush<SelectScene>(TRANS_MODE::WIPE, 1.0f);
 	}
 
 

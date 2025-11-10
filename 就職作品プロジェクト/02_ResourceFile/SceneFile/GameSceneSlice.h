@@ -11,10 +11,11 @@ private:
     int   m_SliceCount   = 0;     // スライスカウント
     const int m_MaxSlices = 5;    // 最大スライス数
 
-    Skydome* m_Skydome          = nullptr;
-    Square*  m_SliceBefore      = nullptr;
-    Square*  m_SliceAfterTop    = nullptr;
-    Square*  m_SliceAfterBottom = nullptr;
+    Skydome* m_Skydome         = nullptr;
+    Square*  m_WoodBefore      = nullptr;
+    Square*  m_WoodAfterTop    = nullptr;
+    Square*  m_WoodAfterBottom = nullptr;
+    Square*  m_Sord            = nullptr;
              
 public:
     GameSceneSlice() = default;

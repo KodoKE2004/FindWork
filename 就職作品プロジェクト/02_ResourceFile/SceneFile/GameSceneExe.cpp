@@ -21,7 +21,7 @@ void GameSceneExe::Update(float tick)
         m_isChange = true;
     }
     if (IsChange()) {
-        ChangeScenePop(TRANS_MODE::FADE, 0.5f);
+        ChangeScenePop(TRANS_MODE::FADE, 0.2f);
     }
 }
 
