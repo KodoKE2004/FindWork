@@ -220,8 +220,11 @@
     <ClCompile Include="02_ResourceFile\ObjectFile\Player.cpp">
       <Filter>SourceFile\Object</Filter>
     </ClCompile>
-    <ClCompile Include="02_ResourceFile\ObjectFile\Wood.cpp">
-      <Filter>SourceFile</Filter>
+    <ClCompile Include="02_ResourceFile\ObjectFile\Enemy.cpp">
+      <Filter>SourceFile\Object\2D</Filter>
+    </ClCompile>
+    <ClCompile Include="02_ResourceFile\ObjectFile\Hammer.cpp">
+      <Filter>SourceFile\Object\2D</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -411,7 +414,12 @@
     <ClInclude Include="02_ResourceFile\ObjectFile\Player.h">
       <Filter>SourceFile\Object</Filter>
     </ClInclude>
-    <ClInclude Include="02_ResourceFile\ObjectFile\Wood.h" />
+    <ClInclude Include="02_ResourceFile\ObjectFile\Enemy.h">
+      <Filter>SourceFile\Object\2D</Filter>
+    </ClInclude>
+    <ClInclude Include="02_ResourceFile\ObjectFile\Hammer.h">
+      <Filter>SourceFile\Object\2D</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <FxCompile Include="ShaderFile\Common.hlsl">

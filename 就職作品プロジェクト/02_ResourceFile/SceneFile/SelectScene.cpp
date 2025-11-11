@@ -19,12 +19,12 @@ void SelectScene::Initialize()
 	instance.m_Grid.SetEnabled(true);
 #endif
 	
-    m_SkyDome = instance.AddObject<Sphere>();
-    m_SkyDome->SetName("m_SkyDome");
-	m_SkyDome->SetSkyDomeMode(true);
-    m_SkyDome->SetTexture(textureMgr->GetTexture("SkydomeSpace.png"));
-	m_SkyDome->SetRadius(500.0f);
-	m_MySceneObjects.emplace_back(m_SkyDome);
+    m_Skydome = instance.AddObject<Skydome>();
+    m_Skydome->SetName("m_SkyDome");
+	m_Skydome->SetSkyDomeMode(true);
+    m_Skydome->SetTexture(textureMgr->GetTexture("SkydomeSpace.png"));
+	m_Skydome->SetRadius(500.0f);
+	m_MySceneObjects.emplace_back(m_Skydome);
 
 	m_ButtonGamePlay = instance.AddObject<Square>();
     m_ButtonGamePlay->SetName("m_ButtonGamePlay");

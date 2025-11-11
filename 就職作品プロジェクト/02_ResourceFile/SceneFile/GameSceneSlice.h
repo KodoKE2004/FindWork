@@ -1,8 +1,9 @@
 #pragma once
 #include "GameSceneExe.h"
 #include "Square.h"
-#include "Player.h"
+#include "Sord.h"
 #include "Skydome.h"
+#include "Enemy.h"
 
 class GameSceneSlice : public GameSceneExe
 {
@@ -12,12 +13,13 @@ private:
     int   m_SliceCount   = 0;     // スライスカウント
     const int m_MaxSlices = 5;    // 最大スライス数
 
-    Skydome* m_Skydome         = nullptr;
-    Player*  m_Sord            = nullptr;
-             
+    Sord*  m_Sord    = nullptr;
+    Enemy* m_Enemy   = nullptr;
+
 public:
     GameSceneSlice() = default;
     ~GameSceneSlice()       override = default;
+
     void Initialize()       override ;
     void Update(float tick) override ;
     void Finalize()         override ;

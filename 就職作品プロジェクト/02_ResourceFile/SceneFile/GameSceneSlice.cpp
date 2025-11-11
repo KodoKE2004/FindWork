@@ -5,6 +5,7 @@
 
 void GameSceneSlice::Initialize()
 {
+    GameSceneExe::Initialize();
     auto& instance = GAME_INSTANCE;
     auto textureMgr = GAME_MANAGER_TEXTURE;
 
@@ -15,53 +16,58 @@ void GameSceneSlice::Initialize()
     m_Skydome->SetRadius(500.0f);
     m_MySceneObjects.emplace_back(m_Skydome);
 
-    m_Sord = instance.AddObject<Player>();
+    m_Sord = instance.AddObject<Sord>();
     m_Sord->SetName("m_Sord");
     m_Sord->SetTexture(textureMgr->GetTexture("Sord.png"));
-    m_Sord->SetScale  ( 100.0f, 100.0f, 100.0f);
+    m_Sord->SetScale  ( 100.0f, 100.0f, 1.0f);
     m_MySceneObjects.emplace_back(m_Sord);
 
-
+    
+    int difficult = m_RelationData.stageCount % 4;
+    for (int i = 0; i < difficult + 1; ++i)
+    {
+        auto enemy = instance.AddObject<Enemy>();
+        enemy->SetName("m_Enemy");
+        enemy->SetTexture(textureMgr->GetTexture("Battle_EnemyNormal.png"));
+        enemy->SetPos(0.0f, -100.0f, 0.0f);
+        enemy->SetScale(100.0f, 100.0f, 1.0f);
+        m_MySceneObjects.emplace_back(enemy);
+    }
 }
 
 void GameSceneSlice::Update(float tick)
 {
+    auto& instance = GAME_INSTANCE;
+    
     using namespace Math::Collider2D;
-    m_Sord->m_HitResult.SetHitResult(false
-        // isHitSquareSquare(*m_Sord, *m_WoodBefore)
-    );
 
-    if (m_Sord->m_HitResult.isTriggered()){
-        MyDebugLog(Debug::Log("当たった");)
+    auto enemys = instance.GetObjects<Enemy>();
+    if (enemys.size() == 0) {
+        // SceneExeで早めにクリアをした場合も想定
+        m_isFastChange = true;
+    }
+    else
+    {
+        for(auto it : enemys)
+        { 
+            m_Sord->m_HitResult.SetHitResult(
+                isHitSquareSquare(*m_Sord, *it)
+            );
+
+            if (m_Sord->m_HitResult.isTriggered() && !it->IsDeath()) 
+            {
+                MyDebugLog(Debug::Log("当たった");)
+                it->Death();
+                m_RelationData.isClear = true;
+                m_RelationData.stageCount += 2;
+            }
+        }
     }
 
-    m_Sord->Update();
     GameSceneExe::Update(tick);
 }
 
 void GameSceneSlice::Finalize()
 {
-    auto& instance = GAME_INSTANCE;
-#ifdef _DEBUG
-    instance.m_Grid.SetEnabled(false);
-#endif
-
-    // このシーンのオブジェクトを削除する
-    for (auto o : m_MySceneObjects) {
-        instance.DeleteObject(o);
-    }
-    m_MySceneObjects.clear();
-    // オーディオの停止
-    if (auto audioManager = GAME_MANAGER_AUDIO)
-    {
-        for (const auto& [key, config] : m_AudioList)
-        {
-            audioManager->StopAllByName(key);
-        }
-    }
-}
-
-void GameSceneSlice::WoodChange()
-{
-    
+    GameSceneExe::Finalize();
 }

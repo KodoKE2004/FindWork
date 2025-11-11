@@ -86,9 +86,8 @@ void TitleScene::Update(float tick)
 
 			audioManager->StopAllByName("bgm", false);
 		}
-		ChangeScenePush<SelectScene>(TRANS_MODE::WIPE, 1.0f);
+		ChangeScenePush<GameSceneSlice>(TRANS_MODE::WIPE, 1.0f);
 	}
-
 
 	// Skydome‚Ì‰ñ“]
 	m_Skydome->Spin(0.0f,- 5.0f,0.0f);

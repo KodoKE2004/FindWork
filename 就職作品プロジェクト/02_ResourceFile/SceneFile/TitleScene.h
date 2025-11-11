@@ -9,7 +9,6 @@
 class TitleScene : public Scene
 {
 private:
-	Skydome* m_Skydome   = nullptr;
 	Square*	 m_TitleLogo = nullptr;
 public:
 	//================================

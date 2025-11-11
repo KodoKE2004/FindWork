@@ -9,7 +9,6 @@
 class SelectScene : public Scene
 {
 private:
-    Sphere* m_SkyDome = nullptr;
 
 	Square* m_ButtonGamePlay = nullptr;
 	Square* m_ButtonPractice = nullptr;

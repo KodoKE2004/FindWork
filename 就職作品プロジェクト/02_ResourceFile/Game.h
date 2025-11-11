@@ -197,6 +197,7 @@ void ChangeScenePush(TRANS_MODE mode,float duration)
 	auto scene = new TransScene;
 	auto sceneNext = new T;
 
+    // シーン間の受け渡しデータを設定
 	SceneRelationData relationData{};
 	if (auto currentScene = instance.GetCurrentScene())
 	{
@@ -204,6 +205,7 @@ void ChangeScenePush(TRANS_MODE mode,float duration)
 		relationData.previousScene = currentScene->GetSceneNo();
 	}
 	relationData.nextScene = sceneNext->GetSceneNo();
+
 	sceneNext->SetRelationData(relationData);
 	scene->SetRelationData(relationData);
 
@@ -238,6 +240,17 @@ inline void ChangeScenePop(TRANS_MODE mode, float duration)
 		delete scene;
 		return;
 	}
+
+	// シーン間の受け渡しデータを設定
+	SceneRelationData relationData{};
+	if (auto currentScene = instance.GetCurrentScene())
+	{
+		relationData = currentScene->GetRelationData();
+		relationData.previousScene = currentScene->GetSceneNo();
+	}
+	relationData.nextScene = sceneNext->GetSceneNo();
+
+
 	scene->SetOldScene(instance.GetCurrentScene());
     scene->SetNextScene(sceneNext);
 	scene->SetTransitionTick(duration);

@@ -8,8 +8,17 @@
 
 void GameSceneExe::Initialize()
 {
-    // スピード依存でチェンジタイムの変更
+    m_RelationData = {
+        false,
+        m_RelationData.stageCount++,
+        false,
+        m_RelationData.previousScene,
+        m_RelationData.nextScene
+    };
+
+    // ゲームの難易度 : スピード依存でチェンジタイムの変更
     m_ChangeSceneTime *= (1.0f / m_GameSpeedMass);
+    m_ChangeFastTime = 2.0f;
 
 
 }
@@ -17,7 +26,14 @@ void GameSceneExe::Initialize()
 void GameSceneExe::Update(float tick)
 {
     TickCount(tick);
-    if (IsTimeUp()) {
+    if (m_isFastChange) {
+        TimeCountFast(tick);
+
+        if (IsFastTimeUp()) {
+            m_isChange = true;
+        }
+    }
+    if (IsTimeUp() && !m_isChange) {
         m_isChange = true;
     }
     if (IsChange()) {
@@ -45,4 +61,10 @@ void GameSceneExe::Finalize()
             audioManager->StopAllByName(key);
         }
     }
+}
+
+void GameSceneExe::FastChangeScene(float time)
+{
+    m_ChangeFastTime = time;
+    m_ChangeFastTimer = 0.0f;
 }

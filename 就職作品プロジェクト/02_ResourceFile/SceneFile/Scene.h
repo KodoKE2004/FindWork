@@ -1,5 +1,6 @@
 #pragma once
-#include "ObjectFile/Object.h"
+#include "Object.h"
+#include "Skydome.h"
 #include "../Audio.h"
 
 #include <unordered_map>
@@ -20,10 +21,11 @@ enum class SCENE_NO
 	NUM
 };
 
-struct SceneRelationData
+class SceneRelationData
 {
+public:
 	bool isClear = false;
-	int  score   = 0;
+	int  stageCount   = 0;
 	bool requestRetry = false;
 	SCENE_NO previousScene = SCENE_NO::NONE;
 	SCENE_NO nextScene     = SCENE_NO::NONE;
@@ -34,6 +36,8 @@ class Scene
 protected:
 	std::vector<Object*> m_MySceneObjects;
 	std::unordered_map<std::string, AudioConfig> m_AudioList;
+	
+	Skydome* m_Skydome = nullptr;
 
 	SceneRelationData m_RelationData;
 	int stageCountMax = 5;
@@ -65,8 +69,8 @@ public:
 	void SetRelationData(const SceneRelationData relationData) {
 		m_RelationData = relationData; 
 	}
-	SceneRelationData& AccessRelationData()			 { return m_RelationData; }
-	const SceneRelationData& GetRelationData() const { return m_RelationData; }
+
+	const SceneRelationData GetRelationData() { return m_RelationData; }
 
 };
 
