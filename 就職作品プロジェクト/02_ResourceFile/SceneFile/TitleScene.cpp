@@ -23,15 +23,15 @@ void TitleScene::Initialize()
 	m_Skydome->SetSkyDomeMode(true);
 	m_Skydome->SetTexture(GAME_MANAGER_TEXTURE->GetTexture("SkydomeSpace.png"));
 	m_Skydome->SetRadius(500.0f);
+	m_MySceneObjects.emplace_back(m_Skydome);
 	
 	m_TitleLogo = instance.AddObject<Square>();
 	m_TitleLogo->SetName("m_TitleLogo");
 	m_TitleLogo->SetTexture(textureList->GetTexture("TitleLogo.png"));
 	m_TitleLogo->SetScale(800.0f,800.0f,1.0f);
 	m_TitleLogo->SetShader("VS_Default","PS_Default");
-
-	m_MySceneObjects.emplace_back(m_Skydome);
 	m_MySceneObjects.emplace_back(m_TitleLogo);
+
     
 	// ƒI[ƒfƒBƒI‚Ì“o˜^
 	m_AudioList.clear();
@@ -86,7 +86,7 @@ void TitleScene::Update(float tick)
 
 			audioManager->StopAllByName("bgm", false);
 		}
-		ChangeScenePush<GameSceneSlice>(TRANS_MODE::WIPE, 1.0f);
+		ChangeScenePush<GameSceneHit>(TRANS_MODE::WIPE, 1.0f);
 	}
 
 	// Skydome‚Ì‰ñ“]

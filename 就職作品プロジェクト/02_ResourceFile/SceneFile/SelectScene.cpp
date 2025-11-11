@@ -62,7 +62,7 @@ void SelectScene::Update(float tick)
 
 	if (Input::GetKeyTrigger(VK_RETURN)) 
 	{
-		ChangeScenePush<GameSceneSlice>(TRANS_MODE::FADE,0.01f);
+		ChangeScenePush<GameSceneHit>(TRANS_MODE::FADE,0.01f);
 	}
 
 	

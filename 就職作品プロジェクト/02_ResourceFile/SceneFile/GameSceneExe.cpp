@@ -15,7 +15,7 @@ void GameSceneExe::Initialize()
         m_RelationData.previousScene,
         m_RelationData.nextScene
     };
-
+    
     // ゲームの難易度 : スピード依存でチェンジタイムの変更
     m_ChangeSceneTime *= (1.0f / m_GameSpeedMass);
     m_ChangeFastTime = 2.0f;
