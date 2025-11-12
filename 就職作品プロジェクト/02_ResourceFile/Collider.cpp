@@ -243,3 +243,42 @@ namespace Math
         }
     };
 };
+
+float Math::Easing::EaseInBounce(float p)
+{
+    return 1.0f - Math::Easing::EaseOutBounce(1.0f - p);
+}
+
+/// <summary>
+/// バウンドのように跳ねるイージング（開始値から終了値へ）
+/// </summary>
+/// <param name="t"></param> 最大時間
+/// <param name="d"></param> 経過時間
+/// <param name="s"></param> 開始値
+/// <param name="f"></param> 終了値
+/// <returns></returns>
+float Math::Easing::EaseOutBounce(float p)
+{
+    // 最大・最小値の制限
+    if (p < 0.0f) p = 0.0f;
+    if (p > 1.0f) p = 1.0f;
+
+    const float n1 = 7.5625f;
+    const float d1 = 2.75f;
+
+    if (p < 1.0f / d1) {
+        return n1 * p * p; 
+    }
+    else if (p < 2.0f / d1) {
+        p -= 1.5f / d1;
+        return n1 * p * p + 0.75f;
+    }
+    else if (p < 2.5f / d1) {
+        p -= 2.25f / d1;
+        return n1 * p * p + 0.9375f;
+    }
+    else {
+        p -= 2.625f / d1;
+        return n1 * p * p + 0.984375f;
+    }
+}

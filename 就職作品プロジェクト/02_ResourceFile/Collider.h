@@ -42,10 +42,11 @@ namespace Math
 
     namespace Easing
     {
-        float EaseInQuad(float t, float b, float c, float d);
-        float EaseOutQuad(float t, float b, float c, float d);
-        float EaseInOutQuad(float t, float b, float c, float d);
-
+        float EaseInQuad   (float p);
+        float EaseOutQuad  (float p);
+        float EaseInOutQuad(float p);
+        float EaseInBounce (float p);
+        float EaseOutBounce(float p);
 
     };
 };

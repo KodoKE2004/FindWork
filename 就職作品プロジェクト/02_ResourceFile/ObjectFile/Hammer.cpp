@@ -1,5 +1,6 @@
 #include "Hammer.h"
 #include "Application.h"
+#include "Collider.h"
 
 Hammer::Hammer(Camera* cam) : Square(cam)
 {
@@ -8,17 +9,20 @@ Hammer::Hammer(Camera* cam) : Square(cam)
 void Hammer::Initialize()
 {
     Square::Initialize();
-
+    m_MoveValue = m_AttackPosY - m_DefaultPosY;
 }
 
 void Hammer::Update()
 {
+    // UŒ‚’†‚©‚Ç‚¤‚©
     if (m_isAttack) {
         // UŒ‚’†‚ÌƒAƒjƒ[ƒVƒ‡ƒ“ˆ—
         m_Duration += Application::GetDeltaTime();
-
+        float progress = m_Duration / m_AttackTime;
+        
         return;
-    }
+    }   
+    // UŒ‚‚µ‚Ä‚È‚¢‚Æ‚Ìê‡
     else 
     {
         if (Input::GetKeyTrigger(VK_RETURN)) { 
@@ -48,8 +52,15 @@ void Hammer::Finalize()
 
 void Hammer::Attack(float tick)
 {   
-    m_AttackTime     *= (1.0f - m_SpeedMass);
-    m_AttackCoolTime *= (1.0f - m_SpeedMass);
+    float mass = 1.0f - m_SpeedMass;
+    if (mass < 0.3f) {
+        mass = 0.3f;
+    }
+
+    m_AttackTime     *= (1.0f - mass);
+    m_AttackCoolTime *= (1.0f - mass);
+
+
 
     m_Duration = 0.0f;
     m_isAttack = true;

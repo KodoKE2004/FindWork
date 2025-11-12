@@ -13,7 +13,7 @@ private:
 
     const float m_DefaultPosY =  100.0f; // ハンマーの初期化位置Y座標
     const float m_AttackPosY = - 200.0f; // ハンマーの攻撃位置Y座標
-    
+    float m_MoveValue = 0.0f;            // ハンマーの移動量
 public:
     Hammer(Camera* cam);
     ~Hammer() override = default ;
