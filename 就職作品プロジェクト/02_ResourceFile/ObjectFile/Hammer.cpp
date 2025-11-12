@@ -1,6 +1,7 @@
 #include "Hammer.h"
 #include "Application.h"
 #include "Collider.h"
+#include <algorithm>
 
 Hammer::Hammer(Camera* cam) : Square(cam)
 {
@@ -15,11 +16,42 @@ void Hammer::Initialize()
 void Hammer::Update()
 {
     // 攻撃中かどうか
-    if (m_isAttack) {
+    if (m_isAttack) 
+    {
         // 攻撃中のアニメーション処理
         m_Duration += Application::GetDeltaTime();
-        float progress = m_Duration / m_AttackTime;
-        
+        float p ,w ;
+        if (!m_isAttacked) 
+        {
+            // 攻撃アニメーション処理
+            p = (m_AttackTime <= 0.0f) ? 1.0f : std::clamp( m_Duration / m_AttackTime, 0.0f, 1.0f);
+            w = Math::Easing::EaseOutBounce(p);
+            m_Position.y = m_DefaultPosY + m_MoveValue * w;
+        }
+        else
+        {
+            // キャンセルアニメーション処理
+            p = (m_AttackTime <= 0.0f) ? 1.0f : std::clamp(m_Duration / m_AttackCoolTime, 0.0f, 1.0f);
+            w = Math::Easing::EaseOutBounce(p);
+            m_Position.y = m_AttackPosY  + ( - m_MoveValue ) * w;
+        }
+
+        if (p >= 1.0f)
+        {
+            m_Duration = 0.0f;
+            
+            if (!m_isAttacked) {
+                m_isAttacked = true;
+                m_Position.y = m_AttackPosY;
+            }
+            else
+            {
+                m_isAttacked = false;
+                m_isAttack   = false;
+                m_Position.y = m_DefaultPosY;
+            }
+        }
+                
         return;
     }   
     // 攻撃してないとの場合

@@ -42,11 +42,36 @@ namespace Math
 
     namespace Easing
     {
-        float EaseInQuad   (float p);
-        float EaseOutQuad  (float p);
+        float EaseInSine(float p);
+        float EaseOutSine(float p);
+        float EaseInOutSine(float p);
+        float EaseInQuad(float p);
+        float EaseOutQuad(float p);
         float EaseInOutQuad(float p);
-        float EaseInBounce (float p);
+        float EaseInCubic(float p);
+        float EaseOutCubic(float p);
+        float EaseInOutCubic(float p);
+        float EaseInQuart(float p);
+        float EaseOutQuart(float p);
+        float EaseInOutQuart(float p);
+        float EaseInQuint(float p);
+        float EaseOutQuint(float p);
+        float EaseInOutQuint(float p);
+        float EaseInExpo(float p);
+        float EaseOutExpo(float p);
+        float EaseInOutExpo(float p);
+        float EaseInCirc(float p);
+        float EaseOutCirc(float p);
+        float EaseInOutCirc(float p);
+        float EaseInBack(float p);
+        float EaseOutBack(float p);
+        float EaseInOutBack(float p);
+        float EaseInElastic(float p);
+        float EaseOutElastic(float p);
+        float EaseInOutElastic(float p);
+        float EaseInBounce(float p);
         float EaseOutBounce(float p);
+        float EaseInOutBounce(float p);
 
     };
 };

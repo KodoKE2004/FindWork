@@ -41,6 +41,7 @@ protected:
 
 	SceneRelationData m_RelationData;
 	int stageCountMax = 5;
+
 public:
 	// コンストラクタとデストラクタ
 	Scene()  = default;

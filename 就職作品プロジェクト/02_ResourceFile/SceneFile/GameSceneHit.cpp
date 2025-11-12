@@ -19,13 +19,13 @@ void GameSceneHit::Initialize()
     m_Hammer = instance.AddObject<Hammer>();
     m_Hammer->SetName("m_Hammer");
     m_Hammer->SetScale(100.0f, 100.0f, 1.0f);
-    m_Hammer->SetPos(0.0f,200.0f,0.0f);
+    m_Hammer->SetPos(0.0f, 200.0f, 0.0f);
     m_Hammer->SetTexture(textureMgr->GetTexture("Plane.png"));
     m_Hammer->SetSpeedMass(m_GameSpeedMass);
     m_MySceneObjects.emplace_back(m_Hammer);
     
     int difficult = m_RelationData.stageCount % 4;
-    for (int i = 0; i <= difficult; ++i)
+    for (int i = 0; i < difficult; ++i)
     {
         auto enemy = instance.AddObject<Enemy>();
         enemy->SetName("m_Enemy");
@@ -55,7 +55,7 @@ void GameSceneHit::Update(float tick)
             if (m_Hammer->m_HitResult.isTriggered() && !it->IsDeath())
             {
                 MyDebugLog(Debug::Log("“–‚½‚Á‚½");)
-                    it->Death();
+                it->Death();
                 m_RelationData.isClear = true;
                 m_RelationData.stageCount += 2;
             }
