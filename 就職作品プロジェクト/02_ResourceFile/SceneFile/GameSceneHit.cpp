@@ -6,8 +6,8 @@ using namespace Math::Collider2D;
 void GameSceneHit::Initialize()
 {
     GameSceneExe::Initialize();
-    auto& instance  = GAME_INSTANCE;
-    auto textureMgr = GAME_MANAGER_TEXTURE;
+    auto& instance  = Game::GetInstance();
+    TextureManager* textureMgr = instance;
     
     m_Skydome = instance.AddObject<Skydome>();
     m_Skydome->SetName("m_Skydome");
@@ -21,6 +21,7 @@ void GameSceneHit::Initialize()
     m_Hammer->SetScale(100.0f, 100.0f, 1.0f);
     m_Hammer->SetPos(0.0f,200.0f,0.0f);
     m_Hammer->SetTexture(textureMgr->GetTexture("Plane.png"));
+    m_Hammer->SetSpeedMass(m_GameSpeedMass);
     m_MySceneObjects.emplace_back(m_Hammer);
     
     int difficult = m_RelationData.stageCount % 4;
@@ -37,7 +38,7 @@ void GameSceneHit::Initialize()
 
 void GameSceneHit::Update(float tick)
 {
-    auto& instance = GAME_INSTANCE;
+    auto& instance = Game::GetInstance();
     auto enemys = instance.GetObjects<Enemy>();
     if (enemys.size() == 0) {
         // SceneExeÇ≈ëÅÇﬂÇ…ÉNÉäÉAÇÇµÇΩèÍçáÇ‡ëzíË

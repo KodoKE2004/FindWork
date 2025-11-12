@@ -10,10 +10,10 @@
 
 void SelectScene::Initialize()
 {
-    auto& instance = GAME_INSTANCE;
+    auto& instance = Game::GetInstance();
 
 	DebugUI::TEXT_CurrentScene = "SelectScene";
-    auto textureMgr = GAME_MANAGER_TEXTURE;
+    TextureManager* textureMgr = instance;
 
 #ifdef _DEBUG
 	instance.m_Grid.SetEnabled(true);
@@ -74,12 +74,13 @@ void SelectScene::Update(float tick)
 
 void SelectScene::Finalize()
 {
+    auto& instance = Game::GetInstance();
 #ifdef _DEBUG
-	GAME_INSTANCE.m_Grid.SetEnabled(false);
+	instance.m_Grid.SetEnabled(false);
 #endif
 	// このシーンのオブジェクトを削除する
 	for (auto obj : m_MySceneObjects) {
-		Game::GetInstance().DeleteObject(obj);
+		instance.DeleteObject(obj);
 	}
 	m_MySceneObjects.clear();
 }

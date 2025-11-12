@@ -14,7 +14,7 @@ Fade::Fade(Camera* cam) : TransitionBase(cam)
 void Fade::Initialize()
 {
 
-    auto textureMgr = GAME_MANAGER_TEXTURE;
+    TextureManager* textureMgr = Game::GetInstance();
     m_Texture = textureMgr->GetTexture("Black.png");
 
     SetScale(SCREEN_WIDTH, SCREEN_HEIGHT, 1.0f);

@@ -188,8 +188,8 @@ void Application::TermWindow()
 void Application::MainLoop()
 {
     MSG   msg = {};
-    Game& game = Game::GetInstance();
-    game.Initialize();
+    auto& instance = Game::GetInstance();
+    instance.Initialize();
 
     while (true) {
         if (PeekMessage(&msg, NULL, 0, 0, PM_REMOVE))
@@ -206,11 +206,11 @@ void Application::MainLoop()
             g_prevTime = currentTime;
 
             // ÉQÅ[ÉÄÇÃçXêV
-            game.Update(Application::GetDeltaTime());
-            game.Draw();
+            instance.Update(Application::GetDeltaTime());
+            instance.Draw();
         }
     }
-    game.Finalize();
+    instance.Finalize();
 }
 
 //==============================

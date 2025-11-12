@@ -39,5 +39,14 @@ namespace Math
         // 四隅のワールド座標を取得
         std::array<NVector3, 4> SettingVertex(Transform transform);
     }
+
+    namespace Easing
+    {
+        float EaseInQuad(float t, float b, float c, float d);
+        float EaseOutQuad(float t, float b, float c, float d);
+        float EaseInOutQuad(float t, float b, float c, float d);
+
+
+    };
 };
 

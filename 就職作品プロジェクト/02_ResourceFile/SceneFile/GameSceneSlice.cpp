@@ -6,8 +6,8 @@
 void GameSceneSlice::Initialize()
 {
     GameSceneExe::Initialize();
-    auto& instance = GAME_INSTANCE;
-    auto textureMgr = GAME_MANAGER_TEXTURE;
+    auto& instance = Game::GetInstance();
+    TextureManager* textureMgr = instance;
 
     m_Skydome = instance.AddObject<Skydome>();
     m_Skydome->SetName("m_Skydome");
@@ -37,7 +37,7 @@ void GameSceneSlice::Initialize()
 
 void GameSceneSlice::Update(float tick)
 {
-    auto& instance = GAME_INSTANCE;
+    auto& instance = Game::GetInstance();
     
     using namespace Math::Collider2D;
 

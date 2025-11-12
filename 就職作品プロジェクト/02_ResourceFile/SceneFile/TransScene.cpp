@@ -14,7 +14,7 @@ TransScene::TransScene()
 
 void TransScene::Initialize()
 {
-    auto& instance = GAME_INSTANCE;
+    auto& instance = Game::GetInstance();
 
 	m_Timer = 0.0f;
 	m_Alpha = 0.0f;
@@ -65,7 +65,7 @@ void TransScene::Initialize()
 
 void TransScene::Update(float tick)
 {
-    auto& instance = GAME_INSTANCE;
+    auto& instance = Game::GetInstance();
 
 	if (m_TransitionTexture == nullptr) {
 		return;
@@ -120,14 +120,14 @@ void TransScene::Finalize()
 	m_RenderTarget.reset();
 
 #ifdef _DEBUG
-	GAME_INSTANCE.m_Grid.DeInitialized();
+	instance.m_Grid.DeInitialized();
 #endif // _DEBUG
 	
 }
 
 void TransScene::DrawNextScene()
 {
-	auto& instance = GAME_INSTANCE;
+	auto& instance = Game::GetInstance();
 
 	auto* device  = Renderer::GetDevice();
 	auto* context = Renderer::GetDeviceContext();

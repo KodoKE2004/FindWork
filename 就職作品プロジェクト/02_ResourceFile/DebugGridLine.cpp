@@ -12,17 +12,18 @@ using namespace DirectX::SimpleMath;
 
 void DebugGridLine::Initialize()
 {
-    if (!GAME_MANAGER_SHADER->HasShader("VS_DebugGrid"))
+    ShaderManager* shaderMgr = Game::GetInstance();
+    if (!shaderMgr->HasShader("VS_DebugGrid"))
     {
-        GAME_MANAGER_SHADER->Add("VS_DebugGrid", ShaderStage::VS);
+        shaderMgr->Add("VS_DebugGrid", ShaderStage::VS);
     }
-    if (!GAME_MANAGER_SHADER->HasShader("PS_Unlit"))
+    if (!shaderMgr->HasShader("PS_Unlit"))
     {
-        GAME_MANAGER_SHADER->Add("PS_Unlit", ShaderStage::PS);
+        shaderMgr->Add("PS_Unlit", ShaderStage::PS);
     }
 
-    m_VertexShader = dynamic_cast<VertexShader*>(GAME_MANAGER_SHADER->GetShader("VS_DebugGrid"));
-    m_PixelShader  = dynamic_cast<PixelShader*>(GAME_MANAGER_SHADER->GetShader("PS_Unlit"));
+    m_VertexShader = dynamic_cast<VertexShader*>(shaderMgr->GetShader("VS_DebugGrid"));
+    m_PixelShader  = dynamic_cast<PixelShader*>(shaderMgr->GetShader("PS_Unlit"));
 
     if (!m_VertexShader || !m_PixelShader)
     {

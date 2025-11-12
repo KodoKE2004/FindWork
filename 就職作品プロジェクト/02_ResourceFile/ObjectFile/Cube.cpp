@@ -182,11 +182,11 @@ void Cube::Initialize()
 	m_IndexBuffer.Create(indices);
 
 	// シェーダオブジェクト生成
-	auto shaderMgr = Game::GetInstance().GetShaderManager();
+	ShaderManager* shaderMgr = Game::GetInstance();
 	SetShader("VS_Default", "PS_Default");
 
 	//テクスチャロード
-    auto textureMgr = Game::GetInstance().GetTextureManager();
+    TextureManager* textureMgr = Game::GetInstance();
 	m_Texture = textureMgr->GetTexture("dice.png");
 
 	m_Camera->SetCamera(CAMERA_3D);

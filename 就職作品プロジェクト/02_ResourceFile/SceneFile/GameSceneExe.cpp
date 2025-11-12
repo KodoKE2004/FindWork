@@ -10,14 +10,25 @@ void GameSceneExe::Initialize()
 {
     m_RelationData = {
         false,
-        m_RelationData.stageCount++,
+        m_RelationData.stageCount,
         false,
         m_RelationData.previousScene,
         m_RelationData.nextScene
     };
+    m_RelationData.stageCount++;
     
-    // ゲームの難易度 : スピード依存でチェンジタイムの変更
-    m_ChangeSceneTime *= (1.0f / m_GameSpeedMass);
+    // ゲームスピード倍率設
+    // 難易度アップ　定数用意からステージごとに難易度アップ
+    // !(n % 8) == 0 && n && 4 ならスピードアップ
+    if (m_RelationData.stageCount % 8 == 0) {
+        int difficulty = m_RelationData.stageCount / 8;
+        m_DifficultLevel = difficulty + 1;
+    }
+    else if(m_RelationData.stageCount % 4 == 0){
+        float speedMass = ((float)m_RelationData.stageCount / 8.0f) + 1.0f;
+        m_GameSpeedMass = 1.0f + (speedMass * 0.2f);
+    }
+    m_ChangeSceneTime *= (1.0f * m_GameSpeedMass);
     m_ChangeFastTime = 2.0f;
 
 
@@ -43,7 +54,7 @@ void GameSceneExe::Update(float tick)
 
 void GameSceneExe::Finalize()
 {
-    auto& instance = GAME_INSTANCE;
+    auto& instance = Game::GetInstance();
 #ifdef _DEBUG
     instance.m_Grid.SetEnabled(false);
 #endif
@@ -54,7 +65,7 @@ void GameSceneExe::Finalize()
     }
     m_MySceneObjects.clear();
     // オーディオの停止
-    if (auto audioManager = GAME_MANAGER_AUDIO)
+    if (AudioManager* audioManager = instance)
     {
         for (const auto& [key, config] : m_AudioList)
         {

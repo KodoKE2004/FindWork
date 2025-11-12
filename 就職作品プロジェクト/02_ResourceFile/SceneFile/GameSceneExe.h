@@ -2,13 +2,13 @@
 #include "Scene.h"
 #include "Square.h"
 
-enum class DIFFICULT
+enum class GAME_MODE
 {
 	NORMAL,
 	ENDLESS,
+	PRACTICE,
 	NUM
 };
-
 
 class GameSceneExe : public Scene
 {
@@ -18,6 +18,7 @@ protected:
     float m_Tick = 0.0f;					// 経過時間
     float m_ChangeSceneTime = 5.0f;			// シーン変更までの時間
     float m_GameSpeedMass = 1.0f;			// ゲームスピード倍率
+    int   m_DifficultLevel = 1;				// 難易度レベル
     bool  m_isChange = false;				// シーン変更フラグ
 
     float m_ChangeFastTime = 0.0f;			// 速攻でシーン変更する時間

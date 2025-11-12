@@ -13,7 +13,7 @@ Object::~Object()
 
 void Object::SetShader(std::string hlslName)
 {
-    auto shaderMgr = GAME_MANAGER_SHADER;
+    ShaderManager* shaderMgr = Game::GetInstance();
 
     // シェーダーの名前からステージを推測して取得
 	if (hlslName.rfind("VS_", 0) == 0) { m_VertexShader    = shaderMgr->GetShader(hlslName);}

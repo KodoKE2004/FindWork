@@ -65,8 +65,9 @@ void Sphere::Initialize()
     m_VertexBuffer.Create(vertices);
     m_IndexBuffer.Create(indices);
 
-    auto shaderMgr  = GAME_MANAGER_SHADER;
-    auto textureMgr = GAME_MANAGER_TEXTURE;
+    ShaderManager*  shaderMgr  = Game::GetInstance();
+    TextureManager* textureMgr = Game::GetInstance();
+
     SetShader("VS_Default", "PS_Default");
         
     if (m_Texture == nullptr)

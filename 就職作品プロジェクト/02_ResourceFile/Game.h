@@ -94,24 +94,10 @@ public:
 	}
 	
 	// メッシュマネージャー
-	std::shared_ptr<MeshManager> GetMeshManager() {
-		return m_MeshManager;
-	}
-
-	// テクスチャマネージャー
-	std::shared_ptr<TextureManager> GetTextureManager() {
-		return m_TextureManager;
-	}
-
-	// シェーダーマネージャー
-	std::shared_ptr<ShaderManager> GetShaderManager() {
-		return m_ShaderManager;
-	}
-
-	// オーディオマネージャー
-	std::shared_ptr<AudioManager> GetAudioManager() {
-		return m_AudioManager;
-	}
+	[[nodiscard]] operator MeshManager*   () const { return m_MeshManager.get(); }
+	[[nodiscard]] operator TextureManager*() const { return m_TextureManager.get(); }
+	[[nodiscard]] operator ShaderManager* () const { return m_ShaderManager.get(); }
+	[[nodiscard]] operator AudioManager*  () const { return m_AudioManager.get(); }
 
 
 	// Debug関連
@@ -166,13 +152,6 @@ public:
 
 };
 
-// GetInstance・Managerのマクロ化
-#define GAME_INSTANCE		 Game::GetInstance()
-#define GAME_MANAGER_MESH	 GAME_INSTANCE.GetMeshManager()
-#define GAME_MANAGER_TEXTURE GAME_INSTANCE.GetTextureManager()
-#define GAME_MANAGER_SHADER  GAME_INSTANCE.GetShaderManager()
-#define GAME_MANAGER_AUDIO	 GAME_INSTANCE.GetAudioManager()
-
 //================================
 //			グローバル関数
 // 　　　インスタンスの取得を簡易化
@@ -184,7 +163,7 @@ public:
 template<class T>
 void ChangeScenePush(TRANS_MODE mode,float duration)
 {
-    auto& instance = GAME_INSTANCE;
+    auto& instance = Game::GetInstance();
 
 	// テンプレートなので
 	// 既定がSceneでなければエラー
@@ -226,7 +205,7 @@ void ChangeScenePush(TRANS_MODE mode,float duration)
 // 一つ前のシーンに戻る
 inline void ChangeScenePop(TRANS_MODE mode, float duration)
 {
-    auto& instance = GAME_INSTANCE;
+    auto& instance = Game::GetInstance();
 
 	if (instance.GetSceneStackSize() == 0) {
 		MyDebugLog(Debug::Log("シーンスタックが空です");)
@@ -265,7 +244,7 @@ inline void ChangeScenePop(TRANS_MODE mode, float duration)
 // ゲームシーンの切り替えポップ
 inline void ChangeScenePop(TRANS_MODE transMode, float duration, int stageNo, int score)
 {
-	auto& instance = GAME_INSTANCE;
+	auto& instance = Game::GetInstance();
     if (instance.GetSceneStackSize() == 0) 
 	{
         MyDebugLog(Debug::Log("シーンスタックが空です");)

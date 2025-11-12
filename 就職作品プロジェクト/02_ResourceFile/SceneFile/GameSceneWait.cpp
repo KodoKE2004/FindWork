@@ -34,7 +34,7 @@ void GameSceneWait::Update(float tick)
 
 void GameSceneWait::Finalize()
 {
-    auto& instance = GAME_INSTANCE;
+    auto& instance = Game::GetInstance();
 #ifdef _DEBUG
     instance.m_Grid.SetEnabled(false);
 #endif
@@ -45,7 +45,7 @@ void GameSceneWait::Finalize()
     }
     m_MySceneObjects.clear();
     // オーディオの停止
-    if (auto audioManager = GAME_MANAGER_AUDIO)
+    if (AudioManager* audioManager = instance)
     {
         for (const auto& [key, config] : m_AudioList)
         {

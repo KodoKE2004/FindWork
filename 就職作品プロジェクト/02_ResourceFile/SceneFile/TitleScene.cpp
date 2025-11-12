@@ -9,8 +9,8 @@
 
 void TitleScene::Initialize()
 {
-	auto& instance    = GAME_INSTANCE;
-	auto  textureList = GAME_MANAGER_TEXTURE;
+	auto& instance    = Game::GetInstance();
+	TextureManager* textureMgr = instance;
     DebugUI::TEXT_CurrentScene = "TitleScene";
 
 #ifdef _DEBUG
@@ -21,13 +21,13 @@ void TitleScene::Initialize()
 	m_Skydome = instance.AddObject<Skydome>();
 	m_Skydome->SetName("m_Skydome");
 	m_Skydome->SetSkyDomeMode(true);
-	m_Skydome->SetTexture(GAME_MANAGER_TEXTURE->GetTexture("SkydomeSpace.png"));
+	m_Skydome->SetTexture(textureMgr->GetTexture("SkydomeSpace.png"));
 	m_Skydome->SetRadius(500.0f);
 	m_MySceneObjects.emplace_back(m_Skydome);
 	
 	m_TitleLogo = instance.AddObject<Square>();
 	m_TitleLogo->SetName("m_TitleLogo");
-	m_TitleLogo->SetTexture(textureList->GetTexture("TitleLogo.png"));
+	m_TitleLogo->SetTexture(textureMgr->GetTexture("TitleLogo.png"));
 	m_TitleLogo->SetScale(800.0f,800.0f,1.0f);
 	m_TitleLogo->SetShader("VS_Default","PS_Default");
 	m_MySceneObjects.emplace_back(m_TitleLogo);
@@ -42,11 +42,11 @@ void TitleScene::Initialize()
     PlayParams enterParam{};
     m_AudioList.emplace("enter", AudioConfig(L"SE/Enter.wav", enterParam, false, false));
 
-	if (auto audioManager = GAME_MANAGER_AUDIO)
+	if (AudioManager* audioMgr = instance)
 	{
 		for (const auto& [key, config] : m_AudioList)
 		{
-			if (!audioManager->Add(key, config.filePath)) {
+			if (!audioMgr->Add(key, config.filePath)) {
 				continue;
 			}
 			if (config.autoPlay)
@@ -56,7 +56,7 @@ void TitleScene::Initialize()
 				{
 					params.loop.loopCount = XAUDIO2_LOOP_INFINITE;
 				}
-				audioManager->Play(key, params);
+				audioMgr->Play(key, params);
 			}
 		}
 	}
@@ -68,7 +68,7 @@ void TitleScene::Update(float tick)
 	if (Input::GetKeyTrigger(VK_RETURN))
 	{
 		// SEの再生
-		if (auto audioManager = GAME_MANAGER_AUDIO)
+		if (AudioManager* audioMgr = Game::GetInstance())
 		{
 			if (auto it = m_AudioList.find("enter"); it != m_AudioList.end())
 			{
@@ -77,14 +77,14 @@ void TitleScene::Update(float tick)
 				{
 					params.loop.loopCount = XAUDIO2_LOOP_INFINITE;
 				}
-				audioManager->Play("enter", params);
+				audioMgr->Play("enter", params);
 			}
 			else
 			{
-				audioManager->Play("enter");
+				audioMgr->Play("enter");
 			}
 
-			audioManager->StopAllByName("bgm", false);
+			audioMgr->StopAllByName("bgm", false);
 		}
 		ChangeScenePush<GameSceneHit>(TRANS_MODE::WIPE, 1.0f);
 	}
@@ -97,7 +97,7 @@ void TitleScene::Update(float tick)
 
 void TitleScene::Finalize()
 {
-	auto& instance = GAME_INSTANCE;
+	auto& instance = Game::GetInstance();
 #ifdef _DEBUG
 	instance.m_Grid.SetEnabled(false);
 #endif
@@ -108,11 +108,11 @@ void TitleScene::Finalize()
 	}
 	m_MySceneObjects.clear();
     // オーディオの停止
-    if (auto audioManager = GAME_MANAGER_AUDIO)
+    if (AudioManager* audioMgr = instance)
 	{
 		for (const auto& [key, config] : m_AudioList)
 		{
-			audioManager->StopAllByName(key);
+			audioMgr->StopAllByName(key);
 		}
     }
 }

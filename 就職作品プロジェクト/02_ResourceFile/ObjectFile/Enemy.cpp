@@ -26,7 +26,7 @@ void Enemy::Finalize()
 
 void Enemy::Death()
 {
-    auto textureMgr = GAME_MANAGER_TEXTURE;
+    TextureManager* textureMgr = Game::GetInstance();
     SetTexture(textureMgr->GetTexture("Battle_EnemyDeath.png"));
     m_isDeath = true;
 }
