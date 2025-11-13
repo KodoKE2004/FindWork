@@ -226,6 +226,9 @@
     <ClCompile Include="02_ResourceFile\ObjectFile\Hammer.cpp">
       <Filter>SourceFile\Object\2D</Filter>
     </ClCompile>
+    <ClCompile Include="02_ResourceFile\ObjectFile\Car.cpp">
+      <Filter>SourceFile</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="02_ResourceFile\SceneFile\Scene.h">
@@ -420,6 +423,7 @@
     <ClInclude Include="02_ResourceFile\ObjectFile\Hammer.h">
       <Filter>SourceFile\Object\2D</Filter>
     </ClInclude>
+    <ClInclude Include="02_ResourceFile\ObjectFile\Car.h" />
   </ItemGroup>
   <ItemGroup>
     <FxCompile Include="ShaderFile\Common.hlsl">

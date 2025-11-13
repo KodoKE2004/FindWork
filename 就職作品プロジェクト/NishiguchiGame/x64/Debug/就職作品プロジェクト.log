@@ -1,2 +1,72 @@
-﻿  Hammer.cpp
-  就職作品プロジェクト.vcxproj -> C:\Users\kodokeの世界\Desktop\HAL\VisualSutdio\就職作品\個人製作\FindWork\就職作品プロジェクト\x64\Debug\NishiguchiGame.exe
+﻿  compilation object save succeeded; see C:\Users\kodokeの世界\Desktop\HAL\VisualSutdio\就職作品\個人製作\FindWork\就職作品プロジェクト\x64\Debug\PS_Alpha.cso
+  compilation object save succeeded; see C:\Users\kodokeの世界\Desktop\HAL\VisualSutdio\就職作品\個人製作\FindWork\就職作品プロジェクト\x64\Debug\PS_Default.cso
+  compilation object save succeeded; see C:\Users\kodokeの世界\Desktop\HAL\VisualSutdio\就職作品\個人製作\FindWork\就職作品プロジェクト\x64\Debug\PS_Phong.cso
+  compilation object save succeeded; see C:\Users\kodokeの世界\Desktop\HAL\VisualSutdio\就職作品\個人製作\FindWork\就職作品プロジェクト\x64\Debug\PS_Skydome.cso
+  compilation object save succeeded; see C:\Users\kodokeの世界\Desktop\HAL\VisualSutdio\就職作品\個人製作\FindWork\就職作品プロジェクト\x64\Debug\PS_Unlit.cso
+  compilation object save succeeded; see C:\Users\kodokeの世界\Desktop\HAL\VisualSutdio\就職作品\個人製作\FindWork\就職作品プロジェクト\x64\Debug\VS_Alpha.cso
+  compilation object save succeeded; see C:\Users\kodokeの世界\Desktop\HAL\VisualSutdio\就職作品\個人製作\FindWork\就職作品プロジェクト\x64\Debug\VS_DebugGrid.cso
+  compilation object save succeeded; see C:\Users\kodokeの世界\Desktop\HAL\VisualSutdio\就職作品\個人製作\FindWork\就職作品プロジェクト\x64\Debug\VS_Default.cso
+  compilation object save succeeded; see C:\Users\kodokeの世界\Desktop\HAL\VisualSutdio\就職作品\個人製作\FindWork\就職作品プロジェクト\x64\Debug\VS_Skydome.cso
+  compilation object save succeeded; see C:\Users\kodokeの世界\Desktop\HAL\VisualSutdio\就職作品\個人製作\FindWork\就職作品プロジェクト\x64\Debug\VS_Unlit.cso
+  Application.cpp
+  Audio.cpp
+  AudioManager.cpp
+  Camera.cpp
+  Collider.cpp
+  DebugGridLine.cpp
+  DebugUI.cpp
+  Dx11helper.cpp
+  Game.cpp
+  input.cpp
+  main.cpp
+  Car.cpp
+  Circle.cpp
+  Hammer.cpp
+  Player.cpp
+  Sord.cpp
+  Enemy.cpp
+  GameSceneHit.cpp
+  GameScenePush.cpp
+  GameSceneSlice.cpp
+C:\Users\kodokeの世界\Desktop\HAL\VisualSutdio\就職作品\個人製作\FindWork\就職作品プロジェクト\02_ResourceFile\ObjectFile\Car.cpp(3,17): error C2556: 'float MoveInfo::Reset(void)': オーバーロード関数は、'void MoveInfo::Reset(void)' と戻り値の型のみが異なります。
+      C:\Users\kodokeの世界\Desktop\HAL\VisualSutdio\就職作品\個人製作\FindWork\就職作品プロジェクト\02_ResourceFile\ObjectFile\Car.h(32,11):
+      'MoveInfo::Reset' の宣言を確認してください
+  
+C:\Users\kodokeの世界\Desktop\HAL\VisualSutdio\就職作品\個人製作\FindWork\就職作品プロジェクト\02_ResourceFile\ObjectFile\Car.cpp(3,17): error C2371: 'MoveInfo::Reset': 再定義されています。異なる基本型です。
+      C:\Users\kodokeの世界\Desktop\HAL\VisualSutdio\就職作品\個人製作\FindWork\就職作品プロジェクト\02_ResourceFile\ObjectFile\Car.h(32,11):
+      'MoveInfo::Reset' の宣言を確認してください
+  
+  GameSceneWait.cpp
+  TransitionBase.cpp
+  Wipe.cpp
+  StaticMesh.cpp
+  MeshManager.cpp
+  Bullet.cpp
+  Cube.cpp
+  Light.cpp
+  Model.cpp
+  Object.cpp
+  Sphere.cpp
+  Skydome.cpp
+  Renderer.cpp
+  RenderTarget.cpp
+  GameSceneExe.cpp
+  SelectScene.cpp
+  TitleScene.cpp
+  Fade.cpp
+  SnapshotOverlay.cpp
+  TransScene.cpp
+  Shader.cpp
+  ShaderManager.cpp
+  Square.cpp
+  Texture.cpp
+  TextureManager.cpp
+  Transform.cpp
+  utility.cpp
+  imgui.cpp
+  imgui_demo.cpp
+  imgui_draw.cpp
+  imgui_impl_dx11.cpp
+  imgui_impl_win32.cpp
+  imgui_tables.cpp
+  imgui_widgets.cpp
