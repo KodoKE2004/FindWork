@@ -5,10 +5,13 @@ using namespace Math::Collider2D;
 
 void GameSceneHit::Initialize()
 {
-    GameSceneExe::Initialize();
     auto& instance  = Game::GetInstance();
     TextureManager* textureMgr = instance;
     
+    m_RelationData.previousScene = SCENE_NO::GAME_HIT;
+    m_RelationData.nextScene     = SCENE_NO::GAME_WAIT;
+
+
     m_Skydome = instance.AddObject<Skydome>();
     m_Skydome->SetName("m_Skydome");
     m_Skydome->SetSkyDomeMode(true);
@@ -43,6 +46,7 @@ void GameSceneHit::Update(float tick)
     if (enemys.size() == 0) {
         // SceneExeÇ≈ëÅÇﬂÇ…ÉNÉäÉAÇÇµÇΩèÍçáÇ‡ëzíË
         m_isFastChange = true;
+        m_RelationData.isClear = true;
     }
     else
     {

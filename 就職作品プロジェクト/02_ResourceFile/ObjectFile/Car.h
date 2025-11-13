@@ -38,8 +38,42 @@ public:
 
 };
 
-class Car : public Square
+enum class CarDirection
 {
+    Left,
+    Right,
+};
+
+class Cart : public Square
+{
+private:
+    const float START_POSITION      = -700.0f;
+    const float FIFNISHING_POSITION =  700.0f;
+
+    float m_Distance = 1.0f; 
+    bool  m_isActive = false;
+    CarDirection m_Direction = CarDirection::Right;
+    MoveInfo m_MoveInfo;
+
+    void UpdateTargetFromConfig();
+
 public:
-    using Square::Square;
+    Cart(Camera* cam);
+
+    void Initialize() override;
+    void Update()     override;
+    void Draw()       override;
+    void Finalize()   override;
+
+    void Start();
+    void Stop();
+    void Reset();
+
+    void SetStartPosition(const NVector3& start);
+    void SetDirection(CarDirection direction);
+    void SetMoveDistance(float distance);
+    void SetDuration(float duration);
+    void SetSpeedFactor(float factor);
+    void SetEasing(CarEasingType type);
+    void SetLoop(bool loopEnabled);
 };

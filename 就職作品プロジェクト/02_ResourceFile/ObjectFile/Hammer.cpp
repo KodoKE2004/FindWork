@@ -32,7 +32,7 @@ void Hammer::Update()
         {
             // キャンセルアニメーション処理
             p = (m_AttackTime <= 0.0f) ? 1.0f : std::clamp(m_Duration / m_AttackCoolTime, 0.0f, 1.0f);
-            w = Math::Easing::EaseOutBounce(p);
+            w = Math::Easing::EaseOutQuart(p);
             m_Position.y = m_AttackPosY  + ( - m_MoveValue ) * w;
         }
 
@@ -89,10 +89,8 @@ void Hammer::Attack(float tick)
         mass = 0.3f;
     }
 
-    m_AttackTime     *= (1.0f - mass);
-    m_AttackCoolTime *= (1.0f - mass);
-
-
+    m_AttackTime     = 0.9f * (1.0f - mass);
+    m_AttackCoolTime = 0.6f * (1.0f - mass);
 
     m_Duration = 0.0f;
     m_isAttack = true;

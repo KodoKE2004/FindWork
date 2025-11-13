@@ -1,9 +1,13 @@
 #pragma once
 #include "GameSceneExe.h"
+#include "Player.h"
+#include "Car.h"
+
 class GameScenePush : public GameSceneExe
 {
 private:
-
+    Cart*    m_Cart     = nullptr;
+    Player* m_Player  = nullptr;
 public:
     GameScenePush()  = default;
     ~GameScenePush() = default;

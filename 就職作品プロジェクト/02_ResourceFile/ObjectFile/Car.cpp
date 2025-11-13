@@ -1,4 +1,5 @@
 #include "Car.h"
+#include "Application.h"
 
 void MoveInfo::Reset()
 {
@@ -51,4 +52,116 @@ float MoveInfo::ApplyEasing(CarEasingType type, float t)
     case CarEasingType::EaseInOutCubic: return Math::Easing::EaseInOutCubic(t);
     default:                            return t;
     }
+}
+
+Cart::Cart(Camera* cam) : Square(cam)
+{
+}
+
+void Cart::Initialize()
+{
+    Square::Initialize();
+    m_MoveInfo.startPos = m_Position;
+    UpdateTargetFromConfig();
+    Start();
+}
+
+void Cart::Update()
+{
+    if (!m_isActive)
+    {
+        return;
+    }
+
+    const float progress = m_MoveInfo.Advance(Application::GetDeltaTime());
+    m_Position = m_MoveInfo.Evaluate(progress);
+
+    if (!m_MoveInfo.loop && progress >= 1.0f)
+    {
+        m_isActive = false;
+        m_Position = m_MoveInfo.targetPos;
+    }
+}
+
+void Cart::Draw()
+{
+    Square::Draw();
+}
+
+void Cart::Finalize()
+{
+    Square::Finalize();
+}
+
+void Cart::Start()
+{
+    m_MoveInfo.Reset();
+    m_isActive = true;
+    m_Position = m_MoveInfo.startPos;
+}
+
+void Cart::Stop()
+{
+    m_isActive = false;
+}
+
+void Cart::Reset()
+{
+    m_MoveInfo.Reset();
+    m_isActive = false;
+    m_Position = m_MoveInfo.startPos;
+}
+
+void Cart::SetStartPosition(const NVector3& start)
+{
+    m_MoveInfo.startPos = start;
+    m_Position = start;
+    UpdateTargetFromConfig();
+    m_MoveInfo.Reset();
+}
+
+void Cart::SetDirection(CarDirection direction)
+{
+    if (m_Direction == direction)
+    {
+        return;
+    }
+
+    m_Direction = direction;
+    UpdateTargetFromConfig();
+    m_MoveInfo.Reset();
+}
+
+void Cart::SetMoveDistance(float distance)
+{
+    m_Distance = max(distance, 0.0f);
+    UpdateTargetFromConfig();
+    m_MoveInfo.Reset();
+}
+
+void Cart::SetDuration(float duration)
+{
+    m_MoveInfo.duration = max(duration, 0.0f);
+    m_MoveInfo.Reset();
+}
+
+void Cart::SetSpeedFactor(float factor)
+{
+    m_MoveInfo.speedFactor = max(factor, 0.0f);
+}
+
+void Cart::SetEasing(CarEasingType type)
+{
+    m_MoveInfo.easingType = type;
+}
+
+void Cart::SetLoop(bool loopEnabled)
+{
+    m_MoveInfo.loop = loopEnabled;
+}
+
+void Cart::UpdateTargetFromConfig()
+{
+    const float sign = (m_Direction == CarDirection::Right) ? 1.0f : -1.0f;
+    m_MoveInfo.targetPos = m_MoveInfo.startPos + NVector3(sign * m_Distance, 0.0f, 0.0f);
 }
