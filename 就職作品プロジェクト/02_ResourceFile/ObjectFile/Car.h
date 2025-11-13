@@ -47,8 +47,8 @@ enum class CarDirection
 class Cart : public Square
 { 
 private:
-    const float START_POSITION      = -700.0f;
-    const float FIFNISHING_POSITION =  700.0f;
+    const float StartPosX  = -700.0f;
+    const float FinishPosZ =  700.0f;
 
     float m_Distance = 1.0f; 
     bool  m_isActive = false;

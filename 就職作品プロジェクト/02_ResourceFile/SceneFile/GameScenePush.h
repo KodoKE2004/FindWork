@@ -6,8 +6,8 @@
 class GameScenePush : public GameSceneExe
 {
 private:
-    Cart*    m_Cart     = nullptr;
-    Player* m_Player  = nullptr;
+    Cart*   m_Cart   = nullptr;
+    Player* m_Player = nullptr;
 public:
     GameScenePush()  = default;
     ~GameScenePush() = default;

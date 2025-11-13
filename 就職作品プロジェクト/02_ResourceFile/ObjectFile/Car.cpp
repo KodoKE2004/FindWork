@@ -62,6 +62,7 @@ void Cart::Initialize()
 {
     Square::Initialize();
     m_MoveInfo.startPos = m_Position;
+    SetPos(StartPosX, -100.0f, 0.0f);
     UpdateTargetFromConfig();
     Start();
 }
