@@ -20,14 +20,58 @@ void GameScenePush::Initialize()
     m_Cart = instance.AddObject<Cart>(instance.GetCamera());
     m_Cart->SetTexture(textureMgr->GetTexture("Plane.png"));
     m_MySceneObjects.emplace_back(m_Cart);
+
+    if (m_Player)
+    {
+        m_Player->SetPos(0.0f, m_PlayerGroundHeight, 0.0f);
+        const float jumpOffset = m_Player->GetScale().y * PlayerJumpHeightScale;
+        m_PlayerJumpApexHeight = m_PlayerGroundHeight + jumpOffset;
+    }
+
+    m_CartStartPatterns = {
+        CarStartPattern::GroundLeftToRight,
+        CarStartPattern::GroundRightToLeft,
+        CarStartPattern::JumpLeftToRight,
+        CarStartPattern::JumpRightToLeft,
+    };
+
+    ApplyCartPattern(m_CurrentCartPatternIndex);
 }
 
 void GameScenePush::Update(float tick)
 {
+    if (m_Cart && !m_Cart->IsActive())
+    {
+        AdvanceCartPattern();
+    }
+
     GameSceneExe::Update(tick);
 }
 
 void GameScenePush::Finalize()
 {
     GameSceneExe::Finalize();
+}
+
+void GameScenePush::ApplyCartPattern(size_t index)
+{
+    if (!m_Cart || m_CartStartPatterns.empty())
+    {
+        return;
+    }
+
+    const size_t patternIndex = index % m_CartStartPatterns.size();
+    m_CurrentCartPatternIndex = patternIndex;
+    m_Cart->ConfigureStartPattern(m_CartStartPatterns[patternIndex], m_PlayerGroundHeight, m_PlayerJumpApexHeight);
+}
+
+void GameScenePush::AdvanceCartPattern()
+{
+    if (m_CartStartPatterns.empty())
+    {
+        return;
+    }
+
+    const size_t nextIndex = (m_CurrentCartPatternIndex + 1) % m_CartStartPatterns.size();
+    ApplyCartPattern(nextIndex);
 }

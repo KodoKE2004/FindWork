@@ -1,6 +1,8 @@
 #include "Car.h"
 #include "Application.h"
 
+#include <cmath>
+
 void MoveInfo::Reset()
 {
     elapsed = 0.0f;
@@ -62,9 +64,9 @@ void Cart::Initialize()
 {
     Square::Initialize();
     m_MoveInfo.startPos = m_Position;
-    SetPos(StartPosX, -100.0f, 0.0f);
-    UpdateTargetFromConfig();
-    Start();
+
+    const float defaultJumpApex = DefaultGroundHeight + DefaultJumpOffset;
+    ConfigureStartPattern(m_StartPattern, DefaultGroundHeight, defaultJumpApex);
 }
 
 void Cart::Update()
@@ -119,6 +121,28 @@ void Cart::SetStartPosition(const NVector3& start)
     m_Position = start;
     UpdateTargetFromConfig();
     m_MoveInfo.Reset();
+}
+
+void Cart::ConfigureStartPattern(CarStartPattern pattern, float groundHeight, float jumpApexHeight)
+{
+    m_StartPattern = pattern;
+
+    const bool startFromLeft =
+        (pattern == CarStartPattern::GroundLeftToRight) ||
+        (pattern == CarStartPattern::JumpLeftToRight);
+
+    const bool useJumpHeight =
+        (pattern == CarStartPattern::JumpLeftToRight) ||
+        (pattern == CarStartPattern::JumpRightToLeft);
+
+    const float startX = startFromLeft ? LeftStartX : RightStartX;
+    const float startY = useJumpHeight ? jumpApexHeight : groundHeight;
+    const CarDirection direction = startFromLeft ? CarDirection::Right : CarDirection::Left;
+
+    m_Direction = direction;
+    m_Distance = std::abs(RightStartX - LeftStartX);
+    SetStartPosition(NVector3(startX, startY, StartPosZ));
+    Start();
 }
 
 void Cart::SetDirection(CarDirection direction)
