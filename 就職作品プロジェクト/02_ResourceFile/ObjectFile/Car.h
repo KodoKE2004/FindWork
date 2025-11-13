@@ -45,7 +45,7 @@ enum class CarDirection
 };
 
 class Cart : public Square
-{
+{ 
 private:
     const float START_POSITION      = -700.0f;
     const float FIFNISHING_POSITION =  700.0f;

@@ -64,6 +64,9 @@ void Square::Initialize()
 	mtrl.TextureEnable = true;
 	m_Materiale->Create(mtrl);
 
+	SetPos(0.0f,0.0f,0.0f);
+    SetScale(100.0f, 100.0f, 1.0f);
+
 }
 
 //=======================================

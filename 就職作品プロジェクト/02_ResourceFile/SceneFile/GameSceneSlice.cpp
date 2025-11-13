@@ -19,7 +19,6 @@ void GameSceneSlice::Initialize()
     m_Sord = instance.AddObject<Sord>();
     m_Sord->SetName("m_Sord");
     m_Sord->SetTexture(textureMgr->GetTexture("Sord.png"));
-    m_Sord->SetScale  ( 100.0f, 100.0f, 1.0f);
     m_MySceneObjects.emplace_back(m_Sord);
 
     
