@@ -49,7 +49,7 @@ enum class CarStartPattern
     GroundLeftToRight,
     GroundRightToLeft,
     JumpLeftToRight,
-    JumpRightToLeft,
+    JumpRightToLeft
 };
 
 class Cart : public Square

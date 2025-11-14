@@ -17,19 +17,31 @@ void GameSceneExe::Initialize()
     };
     m_RelationData.stageCount++;
     
-    // ゲームスピード倍率設
-    // 難易度アップ　定数用意からステージごとに難易度アップ
-    // !(n % 8) == 0 && n && 4 ならスピードアップ
+    //===============================
+    //   ゲームスピード倍率設
+    //   n && 8 == 0 なら難易度アップ 
+    //   n && 4 == 0 ならスピードアップ
+    //===============================
+    
+    // 初期化
+    m_GameSpeedMass = 1.0f;
+    m_DifficultLevel = 1;
+
+    // 難易度
     if (m_RelationData.stageCount % 8 == 0) {
         int difficulty = m_RelationData.stageCount / 8;
-        m_DifficultLevel = difficulty + 1;
+        m_DifficultLevel += difficulty;
     }
+
+    // スピード
     else if(m_RelationData.stageCount % 4 == 0){
         float speedMass = ((float)m_RelationData.stageCount / 8.0f) + 1.0f;
         m_GameSpeedMass = 1.0f + (speedMass * 0.2f);
     }
+
+    // 値の反映
     m_ChangeSceneTime *= (1.0f * m_GameSpeedMass);
-    m_ChangeFastTime = 2.0f;
+    m_ChangeFastTime   = 2.0f * (1 - m_GameSpeedMass);
 
 
 }

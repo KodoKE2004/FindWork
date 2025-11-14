@@ -205,9 +205,6 @@
     <ClCompile Include="02_ResourceFile\ObjectFile\Circle.cpp">
       <Filter>SourceFile\Object\2D</Filter>
     </ClCompile>
-    <ClCompile Include="02_ResourceFile\SceneFile\GameSceneSlice.cpp">
-      <Filter>SourceFile\Scene\GameScene</Filter>
-    </ClCompile>
     <ClCompile Include="02_ResourceFile\SceneFile\GameSceneHit.cpp">
       <Filter>SourceFile\Scene\GameScene</Filter>
     </ClCompile>
@@ -228,6 +225,9 @@
     </ClCompile>
     <ClCompile Include="02_ResourceFile\ObjectFile\Car.cpp">
       <Filter>SourceFile\Object\2D</Filter>
+    </ClCompile>
+    <ClCompile Include="02_ResourceFile\SceneFile\GameSceneSlice.cpp">
+      <Filter>SourceFile\Scene\GameScene</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
