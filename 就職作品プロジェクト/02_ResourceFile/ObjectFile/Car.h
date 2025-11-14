@@ -5,7 +5,9 @@
 #include "Square.h"
 #include "Collider.h"
 
-
+/// <summary>
+/// フェイントの挙動タイプ
+/// </summary>
 enum class CarEasingType
 {
     EaseInSine,
@@ -40,8 +42,21 @@ public:
 
 enum class CarDirection
 {
-    Left,
-    Right,
+    LeftTop,
+    LeftBottom,
+    RightTop,
+    RightBottom,
+    NUM,
+};
+
+enum CarFaint
+{
+    None,
+    Jumping,
+    Landing,
+    Fainting,
+    Fainted,
+    Recovering
 };
 
 enum class CarStartPattern
@@ -55,15 +70,28 @@ enum class CarStartPattern
 class Cart : public Square
 {
 private:
-    static constexpr float LeftStartX   = -700.0f;
-    static constexpr float RightStartX  =  700.0f;
-    static constexpr float StartPosZ    =    0.0f;
+    static constexpr float LeftStartPosX   = -700.0f;
+    static constexpr float RightStartPosX  =  700.0f;
+    static constexpr float TopStartPosY    =  200.0f;
+    static constexpr float BottomStartPosY = -200.0f;
+    static constexpr float StartPosZ       =  0.0f;
     static constexpr float DefaultGroundHeight = -100.0f;
     static constexpr float DefaultJumpOffset   =  300.0f;
+    
+    // 実際に移動する方向
+    float m_MoveDirection = 1.0f;
 
+    // 必要な移動量
+    inline static constexpr Vector2 MoveValue {1400.0f, 400.0f};
+
+    // 移動にかかる時間
+    // ジャンプの場合でも上昇と下降で両方に同じ時間がかかるようにする
+    // またゲームスピードに依存して変わるので定数として扱わない
+    float m_MoveDuration = 1.5f;
+    
     float m_Distance = 1.0f;
     bool  m_isActive = false;
-    CarDirection m_Direction = CarDirection::Right;
+    CarDirection m_Direction = CarDirection::RightBottom;
     CarStartPattern m_StartPattern = CarStartPattern::GroundLeftToRight;
     MoveInfo m_MoveInfo;
 
@@ -81,14 +109,14 @@ public:
     void Stop();
     void Reset();
 
-    void SetStartPosition(const NVector3& start);
-    void ConfigureStartPattern(CarStartPattern pattern, float groundHeight, float jumpApexHeight);
-    void SetDirection(CarDirection direction);
-    void SetMoveDistance(float distance);
-    void SetDuration(float duration);
-    void SetSpeedFactor(float factor);
-    void SetEasing(CarEasingType type);
-    void SetLoop(bool loopEnabled);
+    /// <summary>
+    /// 難易度依存のパターン設定
+    /// </summary>
+    /// <param name="difficulty"></param> ゲームシーン側で求めた難易度
+    void CreateStartPattern(int difficulty);
+
+    void SetStartPattern(CarDirection carDirection);
+    void Faint(float duration);
 
     bool IsActive() const { return m_isActive; }
     CarStartPattern GetStartPattern() const { return m_StartPattern; }

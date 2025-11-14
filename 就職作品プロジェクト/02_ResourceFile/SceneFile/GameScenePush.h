@@ -18,8 +18,6 @@ private:
     std::array<CarStartPattern, 4> m_CartStartPatterns{};
     size_t m_CurrentCartPatternIndex = 0;
 
-    void ApplyCartPattern(size_t index);
-    void AdvanceCartPattern();
 public:
     GameScenePush()  = default;
     ~GameScenePush() = default;

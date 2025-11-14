@@ -15,7 +15,6 @@ void GameSceneExe::Initialize()
         m_RelationData.previousScene,
         m_RelationData.nextScene
     };
-    m_RelationData.stageCount++;
     
     //===============================
     //   ゲームスピード倍率設
@@ -25,12 +24,12 @@ void GameSceneExe::Initialize()
     
     // 初期化
     m_GameSpeedMass = 1.0f;
-    m_DifficultLevel = 1;
+    m_Difficulty = 0;
 
-    // 難易度
+    // 難易度 0 ~
     if (m_RelationData.stageCount % 8 == 0) {
         int difficulty = m_RelationData.stageCount / 8;
-        m_DifficultLevel += difficulty;
+        m_Difficulty += difficulty;
     }
 
     // スピード

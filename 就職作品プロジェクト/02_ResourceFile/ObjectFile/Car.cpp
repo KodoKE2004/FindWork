@@ -1,7 +1,12 @@
 #include "Car.h"
 #include "Application.h"
 
-#include <cmath>
+#include <algorithm>
+#include <random>
+
+// óêêîê∂ê¨äÌÇÃèâä˙âª
+std::random_device rd;
+std::mt19937       gen(rd());
 
 void MoveInfo::Reset()
 {
@@ -63,10 +68,6 @@ Cart::Cart(Camera* cam) : Square(cam)
 void Cart::Initialize()
 {
     Square::Initialize();
-    m_MoveInfo.startPos = m_Position;
-
-    const float defaultJumpApex = DefaultGroundHeight + DefaultJumpOffset;
-    ConfigureStartPattern(m_StartPattern, DefaultGroundHeight, defaultJumpApex);
 }
 
 void Cart::Update()
@@ -115,78 +116,70 @@ void Cart::Reset()
     m_Position = m_MoveInfo.startPos;
 }
 
-void Cart::SetStartPosition(const NVector3& start)
+void Cart::CreateStartPattern(int difficulty)
 {
-    m_MoveInfo.startPos = start;
-    m_Position = start;
-    UpdateTargetFromConfig();
-    m_MoveInfo.Reset();
-}
-
-void Cart::ConfigureStartPattern(CarStartPattern pattern, float groundHeight, float jumpApexHeight)
-{
-    m_StartPattern = pattern;
-
-    const bool startFromLeft =
-        (pattern == CarStartPattern::GroundLeftToRight) ||
-        (pattern == CarStartPattern::JumpLeftToRight);
-
-    const bool useJumpHeight =
-        (pattern == CarStartPattern::JumpLeftToRight) ||
-        (pattern == CarStartPattern::JumpRightToLeft);
-
-    const float startX = startFromLeft ? LeftStartX : RightStartX;
-    const float startY = useJumpHeight ? jumpApexHeight : groundHeight;
-    const CarDirection direction = startFromLeft ? CarDirection::Right : CarDirection::Left;
-
-    m_Direction = direction;
-    m_Distance = std::abs(RightStartX - LeftStartX);
-    SetStartPosition(NVector3(startX, startY, StartPosZ));
-    Start();
-}
-
-void Cart::SetDirection(CarDirection direction)
-{
-    if (m_Direction == direction)
+    int diff = 0;
+    
+    if(difficulty >= 4)
     {
-        return;
+        static std::mt19937 engine{ std::random_device{}()};
+        std::uniform_int_distribution<int> dist(0, 3);
+        diff = dist(engine);
+    }
+    else if(difficulty > 1 && difficulty < 4)
+    {
+        static std::mt19937 engine{ std::random_device{}() };
+        std::uniform_int_distribution<int> dist(0, difficulty);
+        diff = dist(engine);
+    }
+    else
+    {
+        diff = 0;
+    }
+    switch (diff)
+    {
+    case 0: m_Direction = CarDirection::LeftTop;        break;
+    case 1: m_Direction = CarDirection::LeftBottom;     break;
+    case 2: m_Direction = CarDirection::RightTop;       break;
+    case 3: m_Direction = CarDirection::RightBottom;    break;
+    }
+}
+
+void Cart::SetStartPattern(CarDirection carDirection)
+{
+    // äJénà íuê›íË
+    float startPosY = TopStartPosY;
+    if (carDirection == CarDirection::LeftBottom ||
+        carDirection == CarDirection::LeftTop)
+    {
+        if (carDirection == CarDirection::LeftBottom) {
+            startPosY = BottomStartPosY;
+        }
+        m_Direction = carDirection;
+        m_Rotation.y = 0.0f;
+        m_MoveInfo.startPos = NVector3(LeftStartPosX, startPosY, StartPosZ);
+
+    }
+    else if(carDirection == CarDirection::RightBottom ||
+            carDirection == CarDirection::RightTop)
+    {
+        if (carDirection == CarDirection::RightBottom) {
+            startPosY = BottomStartPosY;
+        }
+        m_Direction = carDirection;
+        m_Rotation.y = 180.0f;
+        m_MoveInfo.startPos = NVector3(RightStartPosX, startPosY, StartPosZ);
     }
 
-    m_Direction = direction;
-    UpdateTargetFromConfig();
-    m_MoveInfo.Reset();
+
 }
 
-void Cart::SetMoveDistance(float distance)
+void Cart::Faint(float duration)
 {
-    m_Distance = max(distance, 0.0f);
-    UpdateTargetFromConfig();
-    m_MoveInfo.Reset();
-}
-
-void Cart::SetDuration(float duration)
-{
-    m_MoveInfo.duration = max(duration, 0.0f);
-    m_MoveInfo.Reset();
-}
-
-void Cart::SetSpeedFactor(float factor)
-{
-    m_MoveInfo.speedFactor = max(factor, 0.0f);
-}
-
-void Cart::SetEasing(CarEasingType type)
-{
-    m_MoveInfo.easingType = type;
-}
-
-void Cart::SetLoop(bool loopEnabled)
-{
-    m_MoveInfo.loop = loopEnabled;
 }
 
 void Cart::UpdateTargetFromConfig()
 {
-    const float sign = (m_Direction == CarDirection::Right) ? 1.0f : -1.0f;
+    const float sign = (m_Direction == CarDirection::RightBottom) ? 1.0f : -1.0f;
     m_MoveInfo.targetPos = m_MoveInfo.startPos + NVector3(sign * m_Distance, 0.0f, 0.0f);
 }

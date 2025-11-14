@@ -19,26 +19,26 @@ void Hammer::Update()
     if (m_isAttack) 
     {
         // 攻撃中のアニメーション処理
-        m_Duration += Application::GetDeltaTime();
+        m_Elapsed += Application::GetDeltaTime();
         float p ,w ;
         if (!m_isAttacked) 
         {
             // 攻撃アニメーション処理
-            p = (m_AttackTime <= 0.0f) ? 1.0f : std::clamp( m_Duration / m_AttackTime, 0.0f, 1.0f);
+            p = (m_AttackDuration <= 0.0f) ? 1.0f : std::clamp( m_Elapsed / m_AttackDuration, 0.0f, 1.0f);
             w = Math::Easing::EaseOutBounce(p);
             m_Position.y = m_DefaultPosY + m_MoveValue * w;
         }
         else
         {
             // キャンセルアニメーション処理
-            p = (m_AttackTime <= 0.0f) ? 1.0f : std::clamp(m_Duration / m_AttackCoolTime, 0.0f, 1.0f);
+            p = (m_AttackDuration <= 0.0f) ? 1.0f : std::clamp(m_Elapsed / m_CoolDuration, 0.0f, 1.0f);
             w = Math::Easing::EaseOutQuart(p);
             m_Position.y = m_AttackPosY  + ( - m_MoveValue ) * w;
         }
 
         if (p >= 1.0f)
         {
-            m_Duration = 0.0f;
+            m_Elapsed = 0.0f;
             
             if (!m_isAttacked) {
                 m_isAttacked = true;
@@ -89,9 +89,9 @@ void Hammer::Attack(float tick)
         mass = 0.3f;
     }
 
-    m_AttackTime     = 0.9f * (1.0f - mass);
-    m_AttackCoolTime = 0.6f * (1.0f - mass);
+    m_AttackDuration     = 0.9f * (1.0f - mass);
+    m_CoolDuration = 0.6f * (1.0f - mass);
 
-    m_Duration = 0.0f;
+    m_Elapsed = 0.0f;
     m_isAttack = true;
 }

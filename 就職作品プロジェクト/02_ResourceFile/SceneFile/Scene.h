@@ -21,6 +21,9 @@ enum class SCENE_NO
 	NUM
 };
 
+/// <summary>
+/// Sceneクラス間の受け渡しデータ
+/// </summary>
 class SceneRelationData
 {
 public:

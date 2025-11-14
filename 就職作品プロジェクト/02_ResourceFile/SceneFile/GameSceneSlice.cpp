@@ -23,7 +23,7 @@ void GameSceneSlice::Initialize()
 
     
     int difficult = m_RelationData.stageCount % 4;
-    for (int i = 0; i < difficult + 1; ++i)
+    for (int i = 0; i <= difficult; ++i)
     {
         auto enemy = instance.AddObject<Enemy>();
         enemy->SetName("m_Enemy");

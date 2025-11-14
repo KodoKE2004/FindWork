@@ -45,15 +45,21 @@ void GameScenePush::Initialize()
     // 乱数を用いる
     // 難易度によってパターンを制限する
     // 難易度アップごとに１パターン増加
-    
-    m_DifficultLevel = max(1, m_RelationData.stageCount / 4);
+    // デフォルトの値が１なのでその時は乱数を仕様しない
+    // 最大値は４パターンまで
+    if (m_Difficulty == 1)
+    {
+        m_Difficulty = 1;   // m_Difficult < 1の場合は１に固定
+
+    }
+    m_Difficulty = max(1, 4);
 }
 
 void GameScenePush::Update(float tick)
 {
     if (m_Cart && !m_Cart->IsActive())
     {
-        AdvanceCartPattern();
+
     }
 
     GameSceneExe::Update(tick);
@@ -64,25 +70,3 @@ void GameScenePush::Finalize()
     GameSceneExe::Finalize();
 }
 
-void GameScenePush::ApplyCartPattern(size_t index)
-{
-    if (!m_Cart || m_CartStartPatterns.empty())
-    {
-        return;
-    }
-
-    const size_t patternIndex = index % m_CartStartPatterns.size();
-    m_CurrentCartPatternIndex = patternIndex;
-    m_Cart->ConfigureStartPattern(m_CartStartPatterns[patternIndex], m_PlayerGroundHeight, m_PlayerJumpApexHeight);
-}
-
-void GameScenePush::AdvanceCartPattern()
-{
-    if (m_CartStartPatterns.empty())
-    {
-        return;
-    }
-
-    const size_t nextIndex = (m_CurrentCartPatternIndex + 1) % m_CartStartPatterns.size();
-    ApplyCartPattern(nextIndex);
-}
