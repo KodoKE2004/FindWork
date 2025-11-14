@@ -29,7 +29,7 @@ void GameSceneExe::Initialize()
     // 難易度 0 ~
     if (m_RelationData.stageCount % 8 == 0) {
         int difficulty = m_RelationData.stageCount / 8;
-        m_Difficulty += difficulty;
+        m_Difficulty = difficulty;
     }
 
     // スピード

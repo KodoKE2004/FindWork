@@ -22,25 +22,15 @@ float MoveInfo::Advance(float deltaTime)
     }
 
     elapsed += deltaTime * speedFactor;
-    if (loop)
-    {
-        while (elapsed > duration)
-        {
-            elapsed -= duration;
-        }
-    }
-    else if (elapsed > duration)
-    {
-        elapsed = duration;
-    }
+   
 
     return std::clamp(elapsed / duration, 0.0f, 1.0f);
 }
 
-NVector3 MoveInfo::Evaluate(float progress) const
+NVector3 MoveInfo::Evaluate(float tick) const
 {
-    progress = std::clamp(progress, 0.0f, 1.0f);
-    const float eased = ApplyEasing(easingType, progress);
+    tick = std::clamp(tick, 0.0f, 1.0f);
+    const float eased = ApplyEasing(easingType, tick);
     return startPos + (targetPos - startPos) * eased;
 }
 
@@ -68,6 +58,14 @@ Cart::Cart(Camera* cam) : Square(cam)
 void Cart::Initialize()
 {
     Square::Initialize();
+    m_MoveInfo = {
+        NVector3( StartPosX,  StartPosY, StartPosZ), // startPos
+        NVector3( StartPosX,  StartPosY, StartPosZ), // targetPos
+        1.5f,                                        // duration
+        0.0f,                                        // elapsed
+        1.0f,                                        // speedFactor
+        CarEasingType::EaseInOutSine                 // easingType
+    };
 }
 
 void Cart::Update()
@@ -76,15 +74,9 @@ void Cart::Update()
     {
         return;
     }
-
     const float progress = m_MoveInfo.Advance(Application::GetDeltaTime());
     m_Position = m_MoveInfo.Evaluate(progress);
 
-    if (!m_MoveInfo.loop && progress >= 1.0f)
-    {
-        m_isActive = false;
-        m_Position = m_MoveInfo.targetPos;
-    }
 }
 
 void Cart::Draw()
@@ -116,17 +108,19 @@ void Cart::Reset()
     m_Position = m_MoveInfo.startPos;
 }
 
+
 void Cart::CreateStartPattern(int difficulty)
 {
     int diff = 0;
     
-    if(difficulty >= 4)
+    if(difficulty >= 3)
     {
         static std::mt19937 engine{ std::random_device{}()};
         std::uniform_int_distribution<int> dist(0, 3);
         diff = dist(engine);
     }
-    else if(difficulty > 1 && difficulty < 4)
+
+    else if(difficulty > 1 && difficulty < 3)
     {
         static std::mt19937 engine{ std::random_device{}() };
         std::uniform_int_distribution<int> dist(0, difficulty);
@@ -145,37 +139,73 @@ void Cart::CreateStartPattern(int difficulty)
     }
 }
 
-void Cart::SetStartPattern(CarDirection carDirection)
+void Cart::SetStartPattern()
 {
     // 開始位置設定
-    float startPosY = TopStartPosY;
-    if (carDirection == CarDirection::LeftBottom ||
-        carDirection == CarDirection::LeftTop)
-    {
-        if (carDirection == CarDirection::LeftBottom) {
-            startPosY = BottomStartPosY;
-        }
-        m_Direction = carDirection;
-        m_Rotation.y = 0.0f;
-        m_MoveInfo.startPos = NVector3(LeftStartPosX, startPosY, StartPosZ);
+    Vector2 directionMass{1.0f, 1.0f};
 
-    }
-    else if(carDirection == CarDirection::RightBottom ||
-            carDirection == CarDirection::RightTop)
+    // 左右の識別
+    if (m_Direction == CarDirection::RightTop ||
+        m_Direction == CarDirection::RightBottom)
     {
-        if (carDirection == CarDirection::RightBottom) {
-            startPosY = BottomStartPosY;
-        }
-        m_Direction = carDirection;
-        m_Rotation.y = 180.0f;
-        m_MoveInfo.startPos = NVector3(RightStartPosX, startPosY, StartPosZ);
+        // 左から右の場合
+        directionMass.x *= - 1.0f;
+        m_MoveValue.x *= -directionMass.x;
     }
+    // 上下の識別
+    if (m_Direction % 2 == 0)
+    {
+        // 上から下の場合
+        directionMass.y *= -1.0f;
+        m_MoveValue.y *= directionMass.y;
+    }
+
+    // 開始位置の設定
+    m_MoveInfo.startPos = NVector3(
+        StartPosX * directionMass.x,
+        StartPosY * directionMass.y,
+        StartPosZ
+    );
+
+    // 目標位置の設定
+    m_MoveInfo.targetPos = NVector3(
+        StartPosX * ( - directionMass.x),
+        StartPosY * ( - directionMass.y),
+        StartPosZ
+    );
+
+    // 必要な移動量の設定
+    m_MoveValue = {
+        m_MoveValue.x * (- directionMass.x),
+        m_MoveValue.y * (  directionMass.y)
+    };
+
+    // 移動にかかる時間の設定
+    m_MoveDuration = { 3.0f * (1.0f - m_SpeedFactor),
+                       0.5f * (1.0f - m_SpeedFactor)};
+
+    // 移動速度の設定
+    m_MoveSpeed = {
+        m_MoveValue.x / m_MoveDuration.x,
+        m_MoveValue.y / m_MoveDuration.y 
+    };
 
 
 }
 
+void Cart::SetSpeedFactor(float factor)
+{
+    m_SpeedFactor = factor;
+}
+
+void Cart::SetFaint()
+{
+    
+}
+
 void Cart::Faint(float duration)
 {
+
 }
 
 void Cart::UpdateTargetFromConfig()

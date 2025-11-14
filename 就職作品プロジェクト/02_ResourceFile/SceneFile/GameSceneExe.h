@@ -18,7 +18,7 @@ protected:
     float m_Tick = 0.0f;					// 経過時間
     float m_ChangeSceneTime = 5.0f;			// シーン変更までの時間
     float m_GameSpeedMass = 1.0f;			// ゲームスピード倍率
-    int   m_Difficulty = 1;				// 難易度
+    int   m_Difficulty = 1;					// 難易度 範囲 0 ～ 3 
     bool  m_isChange = false;				// シーン変更フラグ
 
     float m_ChangeFastTime = 0.0f;			// 速攻でシーン変更する時間
