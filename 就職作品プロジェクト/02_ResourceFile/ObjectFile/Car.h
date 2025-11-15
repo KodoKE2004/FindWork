@@ -133,4 +133,6 @@ public:
 
     bool IsActive() const { return m_isActive; }
 
+    const NVector3& GetStartPos() const { return m_MoveInfo.startPos; }
+    CarDirection GetDirection() const { return m_Direction; }
 };
