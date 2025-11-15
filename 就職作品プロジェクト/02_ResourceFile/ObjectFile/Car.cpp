@@ -66,16 +66,15 @@ void Cart::Initialize()
         1.0f,                                        // speedFactor
         CarEasingType::EaseInOutSine                 // easingType
     };
+    m_Position = m_MoveInfo.startPos;
+
 }
 
 void Cart::Update()
 {
-    if (!m_isActive)
-    {
-        return;
-    }
-    const float progress = m_MoveInfo.Advance(Application::GetDeltaTime());
-    m_Position = m_MoveInfo.Evaluate(progress);
+    if (!m_isActive) { return; }
+
+    m_Position.x += m_MoveSpeed.x;
 
 }
 

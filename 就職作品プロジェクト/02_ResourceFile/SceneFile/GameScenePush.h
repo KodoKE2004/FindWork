@@ -15,8 +15,13 @@ private:
     float m_PlayerJumpApexHeight  =   200.0f;
     static constexpr float PlayerJumpHeightScale = 2.5f;
 
+
+    float m_CartAcitvationTimer = 0.0f;
+    float m_CartActivationDelay = 0.0f;
+
     size_t m_CurrentCartPatternIndex = 0;
 
+    float GenerateActivationDelay();
 public:
     GameScenePush()  = default;
     ~GameScenePush() = default;
@@ -24,6 +29,7 @@ public:
     void Initialize()       override;
     void Update(float tick) override;
     void Finalize()         override;
+
 
     SCENE_NO GetSceneNo(){
         return SCENE_NO::GAME_PUSH;

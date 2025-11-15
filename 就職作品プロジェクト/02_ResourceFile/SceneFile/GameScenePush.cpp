@@ -1,5 +1,14 @@
 #include "GameScenePush.h"
 #include "Game.h"
+#include <random>
+
+float GameScenePush::GenerateActivationDelay()
+{
+    static std::mt19937 engine{ std::random_device{}() };
+    std::uniform_real_distribution<float> dist(1.0f, 2.0f);
+
+    return dist(engine);
+}
 
 void GameScenePush::Initialize()
 {
@@ -39,14 +48,21 @@ void GameScenePush::Initialize()
     m_Cart->CreateStartPattern(m_Difficulty);
     m_Cart->SetSpeedFactor(m_GameSpeedMass);
     m_Cart->SetStartPattern();
-
+    m_CartActivationDelay = GenerateActivationDelay();
 }
 
 void GameScenePush::Update(float tick)
 {
-    if (m_Cart && !m_Cart->IsActive())
+    if (m_CartAcitvationTimer > m_CartActivationDelay)
     {
-
+        if (m_Cart && !m_Cart->IsActive())
+        {
+            m_Cart->Start();
+        }
+    }
+    else 
+    {
+        m_CartAcitvationTimer = m_Tick;
     }
 
     GameSceneExe::Update(tick);
