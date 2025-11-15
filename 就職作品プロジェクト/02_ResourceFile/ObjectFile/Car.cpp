@@ -74,8 +74,36 @@ void Cart::Update()
 {
     if (!m_isActive) { return; }
 
-    m_Position.x += m_MoveSpeed.x;
+    const float deltaTime = Application::GetDeltaTime();
+    auto advanceAxis = [&](float& position, float& target, float& timer, float& duration, float& speed)
+    {
+        if (duration <= 0.0f)
+        {
+            position = target;
+            timer = duration;
+            return;
+        }
 
+        const float remainingTime = duration - target;
+        const float appliedDelta = min(deltaTime, remainingTime);
+
+        if (appliedDelta <= 0.0f)
+        {
+            position = target;
+            timer    = duration;
+            return;
+        }
+
+        position += speed * appliedDelta;
+        timer    += appliedDelta;
+        if (timer >= duration)
+        {
+            position = target;
+            timer = duration;
+        }
+    };
+
+    advanceAxis(m_Position.x, m_MoveInfo.targetPos.x, m_MoveTimer.x, m_MoveDuration.x, m_MoveSpeed.x);
 }
 
 void Cart::Draw()
@@ -93,6 +121,7 @@ void Cart::Start()
     m_MoveInfo.Reset();
     m_isActive = true;
     m_Position = m_MoveInfo.startPos;
+    m_MoveTimer = { 0.0f, 0.0f };
 }
 
 void Cart::Stop()
@@ -105,6 +134,7 @@ void Cart::Reset()
     m_MoveInfo.Reset();
     m_isActive = false;
     m_Position = m_MoveInfo.startPos;
+    m_MoveTimer = { 0.0f, 0.0f };
 }
 
 
