@@ -42,6 +42,12 @@ void GameScenePush::Initialize()
     m_Cart = instance.AddObject<Cart>(instance.GetCamera());
     m_Cart->SetTexture(textureMgr->GetTexture("Plane.png"));
     m_MySceneObjects.emplace_back(m_Cart);
+    // カートの開始パターン設定
+    // パターンを登録
+    m_Cart->CreateStartPattern(m_Difficulty);
+    m_Cart->SetSpeedFactor(m_GameSpeedMass);
+    m_Cart->SetStartPattern();
+    m_CartActivationDelay = GenerateActivationDelay();
 
     // カート警告の生成
     m_CartWarning = instance.AddObject<CartWarning>(instance.GetCamera());
@@ -56,12 +62,6 @@ void GameScenePush::Initialize()
     m_CartWarningTimer = 0.0f;
     m_HasSpawnedCartWarning = false;
 
-    // カートの開始パターン設定
-    // パターンを登録
-    m_Cart->CreateStartPattern(m_Difficulty);
-    m_Cart->SetSpeedFactor(m_GameSpeedMass);
-    m_Cart->SetStartPattern();
-    m_CartActivationDelay = GenerateActivationDelay();
 }
 
 void GameScenePush::Update(float tick)

@@ -25,13 +25,14 @@ void GameSceneExe::Initialize()
     // 初期化
     m_GameSpeedMass = 1.0f;
     m_Difficulty = 0;
+    m_Tick = 0.0f;
+    m_ChangeSceneTime = 5.0f;
 
     // 難易度 0 ~
     if (m_RelationData.stageCount % 8 == 0) {
         int difficulty = m_RelationData.stageCount / 8;
         m_Difficulty = difficulty;
     }
-
     // スピード
     else if(m_RelationData.stageCount % 4 == 0){
         float speedMass = ((float)m_RelationData.stageCount / 8.0f) + 1.0f;
@@ -39,7 +40,7 @@ void GameSceneExe::Initialize()
     }
 
     // 値の反映
-    m_ChangeSceneTime *= (1.0f * m_GameSpeedMass);
+    m_ChangeSceneTime /= m_GameSpeedMass;
     m_ChangeFastTime   = 2.0f * (1 - m_GameSpeedMass);
 
 
