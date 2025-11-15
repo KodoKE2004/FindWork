@@ -61,7 +61,7 @@ void Cart::Initialize()
     m_MoveInfo = {
         NVector3( StartPosX,  StartPosY, StartPosZ), // startPos
         NVector3( StartPosX,  StartPosY, StartPosZ), // targetPos
-        1.5f,                                        // duration
+        MoveInfoBaseDuration,                        // duration
         0.0f,                                        // elapsed
         1.0f,                                        // speedFactor
         CarEasingType::EaseInOutSine                 // easingType
@@ -179,16 +179,20 @@ void Cart::SetStartPattern()
         m_MoveValue.y * (  directionMass.y)
     };
 
-    // à⁄ìÆÇ…Ç©Ç©ÇÈéûä‘ÇÃê›íË
-    m_MoveDuration = { 3.0f * (1.0f - m_SpeedFactor),
-                       0.5f * (1.0f - m_SpeedFactor)};
+    const float speedFactor = (m_SpeedFactor > 0.0f) ? m_SpeedFactor : 1.0f;
+    
+    m_MoveDuration = {
+        HorizontalDurationBase / m_SpeedFactor,
+        VerticalDurationBase   / m_SpeedFactor
+    };
 
     // à⁄ìÆë¨ìxÇÃê›íË
     m_MoveSpeed = {
         m_MoveValue.x / m_MoveDuration.x,
-        m_MoveValue.y / m_MoveDuration.y 
+        m_MoveValue.y / m_MoveDuration.y
     };
 
+    m_MoveInfo.duration = MoveInfoBaseDuration / speedFactor;
 
 }
 

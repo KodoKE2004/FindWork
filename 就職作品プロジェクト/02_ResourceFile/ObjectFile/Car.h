@@ -64,7 +64,10 @@ private:
     static constexpr float StartPosX = 700.0f;
     static constexpr float StartPosY = 200.0f;
     static constexpr float StartPosZ = 0.0f;
-    
+    static constexpr float MoveInfoBaseDuration   = 1.5f;
+    static constexpr float HorizontalDurationBase = 3.0f;
+    static constexpr float VerticalDurationBase   = 0.5f;
+
     // 実際に移動する方向
     float m_MoveDirection = 1.0f;
 
@@ -78,7 +81,7 @@ private:
     float m_SpeedFactor = 1.0f;
     // ジャンプの場合でも上昇と下降で両方に同じ時間がかかるようにする
     // またゲームスピードに依存して変わるので定数として扱わない
-    Vector2 m_MoveDuration{ 3.0f, 0.5f };
+    Vector2 m_MoveDuration{ HorizontalDurationBase, VerticalDurationBase };
     Vector2 m_MoveTimer   { 0.0f, 0.0f };
     Vector2 m_MoveSpeed   { 0.0f, 0.0f };
 
