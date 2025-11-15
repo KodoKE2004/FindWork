@@ -43,6 +43,19 @@ void GameScenePush::Initialize()
     m_Cart->SetTexture(textureMgr->GetTexture("Plane.png"));
     m_MySceneObjects.emplace_back(m_Cart);
 
+    // カート警告の生成
+    m_CartWarning = instance.AddObject<CartWarning>(instance.GetCamera());
+    m_CartWarning->SetTexture(textureMgr->GetTexture("Plane.png"));
+    m_CartWarning->SetColor(1.0f, 0.25f, 0.25f, 0.85f);
+    m_CartWarning->SetBaseScale(NVector3(200.0f, 200.0f, 1.0f));
+    m_CartWarning->SetTowardsCenterOffset(200.0f);
+    m_CartWarning->SetAdditionalOffset(NVector3(0.0f, 80.0f, 0.0f));
+    m_CartWarning->Deactivate();
+    m_MySceneObjects.emplace_back(m_CartWarning);
+
+    m_CartWarningTimer = 0.0f;
+    m_HasSpawnedCartWarning = false;
+
     // カートの開始パターン設定
     // パターンを登録
     m_Cart->CreateStartPattern(m_Difficulty);
@@ -53,6 +66,27 @@ void GameScenePush::Initialize()
 
 void GameScenePush::Update(float tick)
 {
+    if (m_CartWarning)
+    {
+        m_CartWarningTimer += tick;
+        if (!m_HasSpawnedCartWarning &&
+             m_CartWarningTimer >= m_CartWarningDelay)
+        {
+            if (m_Cart)
+            {
+                m_CartWarning->Activate(m_Cart->GetStartPos());
+                m_HasSpawnedCartWarning = true;
+            }
+        }
+        if (m_HasSpawnedCartWarning &&
+            m_Cart                  &&
+            m_Cart->IsActive()      &&
+            m_CartWarning->IsVisible())
+        {
+            m_CartWarning->Deactivate();
+        }
+    }
+
     if (m_CartAcitvationTimer > m_CartActivationDelay)
     {
         if (m_Cart && !m_Cart->IsActive())

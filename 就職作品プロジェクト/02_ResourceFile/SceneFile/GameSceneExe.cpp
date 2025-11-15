@@ -10,7 +10,7 @@ void GameSceneExe::Initialize()
 {
     m_RelationData = {
         false,
-        m_RelationData.stageCount,
+        m_RelationData.stageCount++,
         false,
         m_RelationData.previousScene,
         m_RelationData.nextScene

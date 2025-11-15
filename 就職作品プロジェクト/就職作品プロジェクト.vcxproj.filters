@@ -230,7 +230,7 @@
       <Filter>SourceFile\Scene\GameScene</Filter>
     </ClCompile>
     <ClCompile Include="02_ResourceFile\ObjectFile\CartWarning.cpp">
-      <Filter>SourceFile</Filter>
+      <Filter>SourceFile\Object\2D</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -429,7 +429,9 @@
     <ClInclude Include="02_ResourceFile\ObjectFile\Car.h">
       <Filter>SourceFile\Object\2D</Filter>
     </ClInclude>
-    <ClInclude Include="02_ResourceFile\ObjectFile\CartWarning.h" />
+    <ClInclude Include="02_ResourceFile\ObjectFile\CartWarning.h">
+      <Filter>SourceFile\Object\2D</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <FxCompile Include="ShaderFile\Common.hlsl">
