@@ -3,12 +3,42 @@
 #include "Application.h"
 
 #include <cmath>
+#include <algorithm>
+
+namespace
+{
+    float CalculateJumpInitialVelocity(float gravity, float jumpHeight)
+    {
+        const float safeGravity = max(gravity   , 0.0f);
+        const float safeHeight  = max(jumpHeight, 0.0f);
+        if (safeGravity <= 0.0f || safeHeight <= 0.0f)
+        {
+            return 0.0f;
+        }
+
+        return std::sqrt(2.0f * safeGravity * safeHeight);
+    }
+
+    PlayerTuningState CalculateDefaultTuningParameters()
+    {
+        PlayerTuningState params{};
+        params.jumpHeight         = 400.0f;
+        params.gravity            = 1800.0f;
+        params.jumpInitialVelocity = CalculateJumpInitialVelocity(params.gravity, params.jumpHeight);
+        params.groundMoveSpeed     = 12.0f;
+        params.airControl.acceleration = 3600.0f;
+        params.airControl.maxSpeed     = 700.0f;
+        params.airControl.airFriction  = 3200.0f;
+        return params;
+    }
+}
 
 Player::Player(Camera* cam) : Square(cam)
 {
-    m_VerticalMotion.gravity = 980.0f;
-    m_VerticalMotion.weight  = 1.2f;
-    m_VerticalMotion.terminalVelocity = -3000.0f;
+    m_TuningParameters = CalculateDefaultTuningParameters();
+    m_MoveSpeed  = m_TuningParameters.groundMoveSpeed;
+    m_AirControl = m_TuningParameters.airControl;
+    ApplyJumpState();
     ApplyAirControlState();
 }
 
@@ -40,7 +70,7 @@ void Player::Update()
     const bool jumpTriggered = m_IsGround && Input::GetKeyTrigger(VK_SPACE);
     if (jumpTriggered)
     {
-        m_VerticalMotion.velocity = JumpValue;
+        m_VerticalMotion.velocity = m_JumpInitialVelocity;
         m_IsGround = false;
         Math::Physics::InitializeHorizontalVelocity(
             m_HorizontalMotion,
@@ -83,6 +113,7 @@ void Player::Finalize()
 void Player::SetAirControlState(const PlayerAieControlState& state)
 {
     m_AirControl = state;
+    m_TuningParameters.airControl = state;
     ApplyAirControlState();
 }
 
@@ -91,5 +122,20 @@ void Player::ApplyAirControlState()
     m_HorizontalMotion.acceleration = m_AirControl.acceleration;
     m_HorizontalMotion.maxSpeed     = m_AirControl.maxSpeed;
     m_HorizontalMotion.airFriction  = m_AirControl.airFriction;
+}
+
+void Player::ApplyJumpState()
+{
+    m_JumpInitialVelocity = m_TuningParameters.jumpInitialVelocity;
+    if (m_JumpInitialVelocity <= 0.0f)
+    {
+        m_JumpInitialVelocity = CalculateJumpInitialVelocity(
+            m_TuningParameters.gravity,
+            m_TuningParameters.jumpHeight);
+    }
+
+    m_VerticalMotion.gravity = m_TuningParameters.gravity;
+    m_VerticalMotion.weight  = 1.0f;
+    m_VerticalMotion.terminalVelocity = - max(m_TuningParameters.gravity, 0.0f) * 5.0f;
 }
 
