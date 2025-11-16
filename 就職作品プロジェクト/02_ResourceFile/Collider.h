@@ -87,6 +87,17 @@ namespace Math
         };
 
         float UpdateVerticalPosition(VerticalMotionState& state, float currentPosY, float deltaTime);
+
+        struct HorizontalMotionState
+        {
+            float velocity = 0.0f;
+            float acceleration = 0.0f;
+            float maxSpeed = 1000.0f;
+            float airFriction = 0.0f;
+        };
+
+        void InitializeHorizontalVelocity(HorizontalMotionState& state, int inputDir, float moveSpeedPerFrame, float deltaTime);
+        float UpdateHorizontalPosition   (HorizontalMotionState& state, float currentPosX, float deltaTime, int inputDir);
     };
 
 };

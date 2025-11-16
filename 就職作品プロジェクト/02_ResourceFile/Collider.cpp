@@ -269,6 +269,48 @@ namespace Math
 
             return nextPosition;
         }
+        void InitializeHorizontalVelocity(HorizontalMotionState& state, int inputDir, float moveSpeedPerFrame, float deltaTime)
+        {
+            if (deltaTime <= 0.0f)
+            {
+                state.velocity = 0.0f;
+                return;
+            }
+
+            if (inputDir == 0)
+            {
+                state.velocity = 0.0f;
+                return;
+            }
+
+            const float perSecondSpeed = moveSpeedPerFrame / deltaTime;
+            state.velocity = static_cast<float>(inputDir) * perSecondSpeed;  
+        }
+        float UpdateHorizontalPosition(HorizontalMotionState& state, float currentPosX, float deltaTime, int inputDir)
+        {
+            if (deltaTime <= 0.0f)
+            {
+                return currentPosX;
+            }
+            if (inputDir != 0)
+            {
+                state.velocity += static_cast<float>(inputDir) * state.acceleration * deltaTime;
+            }
+            else if (state.velocity != 0.0f)
+            {
+                const float friction = state.airFriction * deltaTime;
+                if (state.velocity > 0.0f)
+                {
+                    state.velocity = max(0.0f, state.velocity - friction);
+                }
+                else
+                {
+                    state.velocity = min(0.0f, state.velocity + friction);
+                }
+            }
+            state.velocity = std::clamp(state.velocity, -state.maxSpeed, state.maxSpeed);
+            return currentPosX + state.velocity * deltaTime;
+        }
     }
 
 

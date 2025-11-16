@@ -6,7 +6,9 @@
 class Player : public Square
 {
 private:
-    Math::Physics::VerticalMotionState m_VerticalMotion;
+    Math::Physics::VerticalMotionState   m_VerticalMotion;
+    Math::Physics::HorizontalMotionState m_HorizontalMotion;
+
     const float JumpValue = 850.0f;
     float m_MoveSpeed = 1.0f;
     bool m_IsGround = true;
