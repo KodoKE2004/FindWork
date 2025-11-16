@@ -1,5 +1,6 @@
 #include "GameScenePush.h"
 #include "Game.h"
+#include "Collider.h"
 #include <random>
 
 float GameScenePush::GenerateActivationDelay()
@@ -61,11 +62,22 @@ void GameScenePush::Initialize()
 
     m_CartWarningTimer = 0.0f;
     m_HasSpawnedCartWarning = false;
-
+    m_RelationData.isClear = true;
 }
 
 void GameScenePush::Update(float tick)
 {
+    m_Player->m_HitResult.SetHitResult(
+        Math::Collider2D::isHitSquareSquare(*m_Player, *m_Cart)
+    );
+
+    if (m_Player->m_HitResult.isTriggered())
+    {
+        MyDebugLog(Debug::Log("“–‚½‚Á‚½");)
+        m_RelationData.isClear = false;
+        m_RelationData.stageCount += 2;
+    }
+
     if (m_CartWarning)
     {
         m_CartWarningTimer += tick;
@@ -86,7 +98,6 @@ void GameScenePush::Update(float tick)
             m_CartWarning->Deactivate();
         }
     }
-
     if (m_CartAcitvationTimer > m_CartActivationDelay)
     {
         if (m_Cart && !m_Cart->IsActive())

@@ -199,8 +199,8 @@ void Cart::SetStartPattern()
 
     // –Ú•WˆÊ’u‚Ìİ’è
     m_MoveInfo.targetPos = NVector3(
-        StartPosX * ( - directionMass.x),
-        StartPosY * ( - directionMass.y),
+        - m_MoveInfo.startPos.x,
+          m_MoveInfo.startPos.y,
         StartPosZ
     );
 
