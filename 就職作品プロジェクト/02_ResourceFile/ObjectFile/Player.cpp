@@ -25,17 +25,14 @@ void Player::Update()
     int horizontalInput = 0;
     if (Input::GetKeyPress(VK_A)) {
         horizontalInput -= 1;
-        if (m_IsGround)
-        {
-            m_Position.x -= m_MoveSpeed;
-        }
     }
     if (Input::GetKeyPress(VK_D)) {
         horizontalInput += 1;
-        if (m_IsGround)
-        {
-            m_Position.x += m_MoveSpeed;
-        }
+    }
+    
+    if (m_IsGround && horizontalInput != 0)
+    {
+        m_Position.x += static_cast<float>(horizontalInput) * m_MoveSpeed;
     }
 
     const bool jumpTriggered = m_IsGround && Input::GetKeyTrigger(VK_SPACE);
@@ -43,18 +40,18 @@ void Player::Update()
     {
         m_VerticalMotion.velocity = JumpValue;
         m_IsGround = false;
-        Math::Physics::InitializeHorizontalVelocity(m_HorizontalMotion, m_Position.x, m_MoveSpeed, deltaTime);
+        Math::Physics::InitializeHorizontalVelocity(m_HorizontalMotion, horizontalInput, m_MoveSpeed, deltaTime);
     }
 
     if (!m_IsGround)
     {
-        m_Position.x = Math::Physics::UpdateHorizontalPosition(
+        const Math::Physics::HorizontalMotionResult horizontalMotion = Math::Physics::UpdateHorizontalPosition(
             m_HorizontalMotion,
             m_Position.x,
             deltaTime,
             horizontalInput
         );
-
+        m_Position.x = horizontalMotion.positionX;
     }
 
     const float updatedY = Math::Physics::UpdateVerticalPosition(m_VerticalMotion, m_Position.y, deltaTime);

@@ -91,13 +91,19 @@ namespace Math
         struct HorizontalMotionState
         {
             float velocity = 0.0f;
-            float acceleration = 0.0f;
-            float maxSpeed = 1000.0f;
-            float airFriction = 0.0f;
+            float acceleration = 4200.0f;
+            float maxSpeed     = 650.0f;
+            float airFriction  = 2200.0f;
+        };
+
+        struct HorizontalMotionResult
+        {
+            float velocity = 0.0f;
+            float positionX = 0.0f;
         };
 
         void InitializeHorizontalVelocity(HorizontalMotionState& state, int inputDir, float moveSpeedPerFrame, float deltaTime);
-        float UpdateHorizontalPosition   (HorizontalMotionState& state, float currentPosX, float deltaTime, int inputDir);
+        HorizontalMotionResult UpdateHorizontalPosition(HorizontalMotionState& state, float currentPosX, float deltaTime, int inputDir);
     };
 
 };

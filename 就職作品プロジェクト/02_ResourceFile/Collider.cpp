@@ -286,30 +286,40 @@ namespace Math
             const float perSecondSpeed = moveSpeedPerFrame / deltaTime;
             state.velocity = static_cast<float>(inputDir) * perSecondSpeed;  
         }
-        float UpdateHorizontalPosition(HorizontalMotionState& state, float currentPosX, float deltaTime, int inputDir)
+        HorizontalMotionResult UpdateHorizontalPosition(HorizontalMotionState& state, float currentPosX, float deltaTime, int inputDir)
         {
+            HorizontalMotionResult result{};
+            result.velocity = state.velocity;
+            result.positionX = currentPosX;
             if (deltaTime <= 0.0f)
             {
-                return currentPosX;
+                return result;
             }
+            float updateVelocity = state.velocity;
             if (inputDir != 0)
             {
-                state.velocity += static_cast<float>(inputDir) * state.acceleration * deltaTime;
+                updateVelocity += static_cast<float>(inputDir) * state.acceleration * deltaTime;
             }
-            else if (state.velocity != 0.0f)
+            else if (updateVelocity != 0.0f)
             {
                 const float friction = state.airFriction * deltaTime;
-                if (state.velocity > 0.0f)
+                if (updateVelocity > 0.0f)
                 {
-                    state.velocity = max(0.0f, state.velocity - friction);
+                    updateVelocity = max(0.0f, updateVelocity - friction);
                 }
                 else
                 {
-                    state.velocity = min(0.0f, state.velocity + friction);
+                    updateVelocity = min(0.0f, updateVelocity + friction);
                 }
             }
-            state.velocity = std::clamp(state.velocity, -state.maxSpeed, state.maxSpeed);
-            return currentPosX + state.velocity * deltaTime;
+            updateVelocity = std::clamp(state.velocity, -state.maxSpeed, state.maxSpeed);
+            
+            result.velocity = updateVelocity;
+            result.positionX = currentPosX + updateVelocity * deltaTime;
+
+            state.velocity = updateVelocity;
+
+            return result;
         }
     }
 
