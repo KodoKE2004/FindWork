@@ -312,7 +312,7 @@ namespace Math
                     updateVelocity = min(0.0f, updateVelocity + friction);
                 }
             }
-            updateVelocity = std::clamp(state.velocity, -state.maxSpeed, state.maxSpeed);
+            updateVelocity = std::clamp(updateVelocity, -state.maxSpeed, state.maxSpeed);
             
             result.velocity = updateVelocity;
             result.positionX = currentPosX + updateVelocity * deltaTime;
