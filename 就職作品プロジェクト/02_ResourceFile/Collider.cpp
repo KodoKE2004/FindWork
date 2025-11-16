@@ -2,6 +2,7 @@
 #include <cmath>
 #include <DirectXMath.h>
 #include <SimpleMath.h>
+#include <algorithm>
 
 namespace Math
 {
@@ -242,6 +243,34 @@ namespace Math
             return res;
         }
     };
+
+    namespace Physics
+    {
+        float UpdateVerticalPosition(VerticalMotionState& state, float currentPosY, float deltaTime)
+        {
+            if (deltaTime <= 0.0f)
+            {
+                return currentPosY;
+            }
+
+            const float gravityForce = state.gravity * state.weight * deltaTime;
+            state.velocity -= gravityForce;
+
+            state.terminalVelocity = - abs(state.terminalVelocity);
+            const float minVelocity = state.terminalVelocity;
+            state.velocity = max(state.velocity, minVelocity);
+
+            float nextPosition = currentPosY + state.velocity * deltaTime;
+            if (nextPosition < state.groundY)
+            {
+                nextPosition = state.groundY;
+                state.velocity = 0.0f;
+            }
+
+            return nextPosition;
+        }
+    }
+
 
     namespace Easing
     {

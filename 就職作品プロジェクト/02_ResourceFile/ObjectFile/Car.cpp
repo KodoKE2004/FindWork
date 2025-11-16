@@ -170,24 +170,36 @@ void Cart::CreateStartPattern(int difficulty)
 
 void Cart::SetStartPattern()
 {
+    m_MoveValue = { 1400.0f, 400.0f };
+
     // 開始位置設定
     Vector2 directionMass{1.0f, 1.0f};
+    const bool startFromRight = 
+            (m_Direction == CarDirection::RightTop ||
+             m_Direction == CarDirection::RightBottom);
 
-    // 左右の識別
-    if (m_Direction == CarDirection::RightTop ||
-        m_Direction == CarDirection::RightBottom)
+    const bool startFromTop = 
+            (m_Direction == CarDirection::LeftTop ||
+             m_Direction == CarDirection::RightTop);
+
+    // 右にいる場合
+    if (startFromRight)
     {
         // 左から右の場合
         directionMass.x *= - 1.0f;
         m_MoveValue.x *= -directionMass.x;
     }
-    // 上下の識別
-    if (m_Direction % 2 == 0)
+    // 上にいる場合
+    if (startFromTop)
     {
         // 上から下の場合
-        directionMass.y *= -1.0f;
+        // ジャンプをするときの力が下の向きになるようにする。
+        directionMass.y *= -1.0f;   
         m_MoveValue.y *= directionMass.y;
     }
+
+    const float startSignX = (startFromRight) ?  1.0f : -1.0f;
+    const float startSighY = (startFromTop)   ? -1.0f : -1.0f;
 
     // 開始位置の設定
     m_MoveInfo.startPos = NVector3(
