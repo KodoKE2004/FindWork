@@ -198,9 +198,6 @@ void Cart::SetStartPattern()
         m_MoveValue.y *= directionMass.y;
     }
 
-    const float startSignX = (startFromRight) ?  1.0f : -1.0f;
-    const float startSighY = (startFromTop)   ? -1.0f : -1.0f;
-
     // ŠJnˆÊ’u‚Ìİ’è
     m_MoveInfo.startPos = NVector3(
         StartPosX * directionMass.x,
