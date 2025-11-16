@@ -36,7 +36,6 @@ namespace
 Player::Player(Camera* cam) : Square(cam)
 {
     m_TuningParameters = CalculateDefaultTuningParameters();
-    m_MoveSpeed  = m_TuningParameters.groundMoveSpeed;
     m_AirControl = m_TuningParameters.airControl;
     ApplyJumpState();
     ApplyAirControlState();
@@ -56,10 +55,16 @@ void Player::Update()
     const float deltaTime = Application::GetDeltaTime();
     int horizontalInput = 0;
     if (Input::GetKeyPress(VK_A)) {
-        horizontalInput -= 1.0f;
+        if (m_IsGround) 
+            m_Position.x -= m_MoveSpeed;
+        else
+            horizontalInput -= 1.0f;
     }
     if (Input::GetKeyPress(VK_D)) {
-        horizontalInput += 1.0f;
+        if (m_IsGround)
+            m_Position.x += m_MoveSpeed;
+        else
+            horizontalInput += 1.0f;
     }
     
     if (m_IsGround && horizontalInput != 0)
@@ -72,22 +77,6 @@ void Player::Update()
     {
         m_VerticalMotion.velocity = m_JumpInitialVelocity;
         m_IsGround = false;
-        Math::Physics::InitializeHorizontalVelocity(
-            m_HorizontalMotion,
-            horizontalInput,
-            m_MoveSpeed,
-            deltaTime);
-    }
-
-    if (!m_IsGround)
-    {
-        const Math::Physics::HorizontalMotionResult horizontalMotion = Math::Physics::UpdateHorizontalPosition(
-            m_HorizontalMotion,
-            m_Position.x,
-            deltaTime,
-            horizontalInput
-        );
-        m_Position.x = horizontalMotion.positionX;
     }
 
     const float updatedY = Math::Physics::UpdateVerticalPosition(m_VerticalMotion, m_Position.y, deltaTime);

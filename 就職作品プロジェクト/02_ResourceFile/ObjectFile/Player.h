@@ -7,7 +7,7 @@ struct PlayerAieControlState
 {
     float acceleration = 4200.0f;   //
     float maxSpeed     = 650.0f ;   //
-    float airFriction  = 2200.0f;   //
+    float airFriction  = 100.0f;   //
 };
 
 struct PlayerTuningState

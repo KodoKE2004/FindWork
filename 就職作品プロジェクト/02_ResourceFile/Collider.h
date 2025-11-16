@@ -102,8 +102,6 @@ namespace Math
             float positionX = 0.0f;
         };
 
-        void InitializeHorizontalVelocity(HorizontalMotionState& state, int inputDir, float moveSpeedPerFrame, float deltaTime);
-        HorizontalMotionResult UpdateHorizontalPosition(HorizontalMotionState& state, float currentPosX, float deltaTime, int inputDir);
     };
 
 };

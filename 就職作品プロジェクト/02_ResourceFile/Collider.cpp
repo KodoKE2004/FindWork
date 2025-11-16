@@ -269,58 +269,6 @@ namespace Math
 
             return nextPosition;
         }
-        void InitializeHorizontalVelocity(HorizontalMotionState& state, int inputDir, float moveSpeedPerFrame, float deltaTime)
-        {
-            if (deltaTime <= 0.0f)
-            {
-                state.velocity = 0.0f;
-                return;
-            }
-
-            if (inputDir == 0)
-            {
-                state.velocity = 0.0f;
-                return;
-            }
-
-            const float perSecondSpeed = moveSpeedPerFrame / deltaTime;
-            state.velocity = static_cast<float>(inputDir) * perSecondSpeed;  
-        }
-        HorizontalMotionResult UpdateHorizontalPosition(HorizontalMotionState& state, float currentPosX, float deltaTime, int inputDir)
-        {
-            HorizontalMotionResult result{};
-            result.velocity = state.velocity;
-            result.positionX = currentPosX;
-            if (deltaTime <= 0.0f)
-            {
-                return result;
-            }
-            float updateVelocity = state.velocity;
-            if (inputDir != 0)
-            {
-                updateVelocity += static_cast<float>(inputDir) * state.acceleration * deltaTime;
-            }
-            else if (updateVelocity != 0.0f)
-            {
-                const float friction = state.airFriction * deltaTime;
-                if (updateVelocity > 0.0f)
-                {
-                    updateVelocity = max(0.0f, updateVelocity - friction);
-                }
-                else
-                {
-                    updateVelocity = min(0.0f, updateVelocity + friction);
-                }
-            }
-            updateVelocity = std::clamp(updateVelocity, -state.maxSpeed, state.maxSpeed);
-            
-            result.velocity = updateVelocity;
-            result.positionX = currentPosX + updateVelocity * deltaTime;
-
-            state.velocity = updateVelocity;
-
-            return result;
-        }
     }
 
 
