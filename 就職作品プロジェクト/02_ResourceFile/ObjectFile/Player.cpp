@@ -9,6 +9,7 @@ Player::Player(Camera* cam) : Square(cam)
     m_VerticalMotion.gravity = 980.0f;
     m_VerticalMotion.weight  = 1.2f;
     m_VerticalMotion.terminalVelocity = -3000.0f;
+    ApplyAirControlState();
 }
 
 void Player::Initialize()
@@ -17,6 +18,7 @@ void Player::Initialize()
     SetPos(0.0f, -200.0f, 0.0f);
     m_VerticalMotion.groundY = m_Position.y;
     m_VerticalMotion.velocity = 0.0f;
+    m_HorizontalMotion.velocity = 0.0f;
 }
 
 void Player::Update()
@@ -24,10 +26,10 @@ void Player::Update()
     const float deltaTime = Application::GetDeltaTime();
     int horizontalInput = 0;
     if (Input::GetKeyPress(VK_A)) {
-        horizontalInput -= 1;
+        horizontalInput -= 1.0f;
     }
     if (Input::GetKeyPress(VK_D)) {
-        horizontalInput += 1;
+        horizontalInput += 1.0f;
     }
     
     if (m_IsGround && horizontalInput != 0)
@@ -40,7 +42,11 @@ void Player::Update()
     {
         m_VerticalMotion.velocity = JumpValue;
         m_IsGround = false;
-        Math::Physics::InitializeHorizontalVelocity(m_HorizontalMotion, horizontalInput, m_MoveSpeed, deltaTime);
+        Math::Physics::InitializeHorizontalVelocity(
+            m_HorizontalMotion,
+            horizontalInput,
+            m_MoveSpeed,
+            deltaTime);
     }
 
     if (!m_IsGround)
@@ -74,4 +80,16 @@ void Player::Finalize()
     Square::Finalize();
 }
 
+void Player::SetAirControlState(const PlayerAieControlState& state)
+{
+    m_AirControl = state;
+    ApplyAirControlState();
+}
+
+void Player::ApplyAirControlState()
+{
+    m_HorizontalMotion.acceleration = m_AirControl.acceleration;
+    m_HorizontalMotion.maxSpeed     = m_AirControl.maxSpeed;
+    m_HorizontalMotion.airFriction  = m_AirControl.airFriction;
+}
 
