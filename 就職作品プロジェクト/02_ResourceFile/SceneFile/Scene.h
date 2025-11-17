@@ -29,6 +29,7 @@ class SceneRelationData
 public:
 	bool isClear = false;
 	int  stageCount   = 0;
+    int  lastStageIndex = -1;
 	bool requestRetry = false;
 	SCENE_NO previousScene = SCENE_NO::NONE;
 	SCENE_NO nextScene     = SCENE_NO::NONE;

@@ -20,7 +20,7 @@ protected:
     float m_GameSpeedMass = 1.0f;			// ゲームスピード倍率
     int   m_Difficulty = 1;					// 難易度 範囲 0 ～ 3 
     bool  m_isChange = false;				// シーン変更フラグ
-
+    bool  m_HasCountedStageClear = false;	// ステージクリアをカウントしたかどうか
     float m_ChangeFastTime = 0.0f;			// 速攻でシーン変更する時間
     float m_ChangeFastTimer = 0.0f;			// 速攻でシーン変更するタイマー
     bool  m_isFastChange = false;			// 速攻シーン変更フラグ

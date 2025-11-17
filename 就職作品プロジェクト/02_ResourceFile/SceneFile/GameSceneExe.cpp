@@ -8,13 +8,11 @@
 
 void GameSceneExe::Initialize()
 {
-    m_RelationData = {
-        false,
-        m_RelationData.stageCount++,
-        false,
-        m_RelationData.previousScene,
-        m_RelationData.nextScene
-    };
+    m_RelationData.isClear = false;
+    m_isChange = false;
+    m_isFastChange = false;
+    m_ChangeFastTimer = 0.0f;
+    m_HasCountedStageClear = false;
     
     //===============================
     //   ゲームスピード倍率設
@@ -49,6 +47,14 @@ void GameSceneExe::Initialize()
 void GameSceneExe::Update(float tick)
 {
     TickCount(tick);
+    if (!m_HasCountedStageClear &&
+         m_RelationData.isClear &&
+        (m_isFastChange || IsTimeUp()))
+    {
+        ++m_RelationData.stageCount;
+        m_HasCountedStageClear = true;
+    }
+
     if (m_isFastChange) {
         TimeCountFast(tick);
 

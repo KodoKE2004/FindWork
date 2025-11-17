@@ -7,13 +7,6 @@ void ResultScene::Initialize()
     auto& instance = Game::GetInstance();
     DebugUI::TEXT_CurrentScene = "ResultScene";
 
-    m_RelationData = {
-        m_RelationData.isClear,
-        m_RelationData.stageCount,
-        m_RelationData.requestRetry,
-        m_RelationData.previousScene,
-        m_RelationData.nextScene
-    };
 
 }
 

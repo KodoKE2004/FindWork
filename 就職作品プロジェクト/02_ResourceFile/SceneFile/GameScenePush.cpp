@@ -79,7 +79,6 @@ void GameScenePush::Update(float tick)
     {
         MyDebugLog(Debug::Log("“–‚½‚Á‚½");)
         m_RelationData.isClear = false;
-        m_RelationData.stageCount += 2;
     }
 
     if (m_CartWarning)

@@ -60,7 +60,6 @@ void GameSceneHit::Update(float tick)
                 MyDebugLog(Debug::Log("“–‚½‚Á‚½");)
                 it->Death();
                 m_RelationData.isClear = true;
-                m_RelationData.stageCount += 2;
             }
         }
     }

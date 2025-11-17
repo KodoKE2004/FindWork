@@ -4,7 +4,11 @@
 class GameSceneWait : public Scene
 {
 private:
-    uint32_t m_MyLife = 4;			// 自分のライフ
+    uint32_t m_MyLife = 4;					   // 自分のライフ
+    SCENE_NO m_SelectedScene = SCENE_NO::NONE; // 選択されたシーン
+	bool m_ShouldTransitionToStage = false;
+
+    void PrepareNextStage();
 
 public:
 	//================================
