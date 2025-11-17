@@ -22,12 +22,12 @@ namespace
     PlayerTuningState CalculateDefaultTuningParameters()
     {
         PlayerTuningState params{};
-        params.jumpHeight         = 400.0f;
+        params.jumpHeight         =  400.0f;
         params.gravity            = 1800.0f;
         params.jumpInitialVelocity = CalculateJumpInitialVelocity(params.gravity, params.jumpHeight);
-        params.groundMoveSpeed     = 12.0f;
+        params.groundMoveSpeed         = 12.0f;
         params.airControl.acceleration = 3600.0f;
-        params.airControl.maxSpeed     = 700.0f;
+        params.airControl.maxSpeed     =  700.0f;
         params.airControl.airFriction  = 3200.0f;
         return params;
     }
