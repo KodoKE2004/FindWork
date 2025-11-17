@@ -11,12 +11,12 @@ enum class SCENE_NO
 	NONE = -1,
 	TITLE,
 	SELECT,
+	RESULT,
 	GAME_WAIT,
 	GAME_EXE,
     GAME_SLICE,
 	GAME_PUSH,
 	GAME_HIT,
-    GAME_RESULT,
 	TRANSITION,
 	NUM
 };
@@ -43,7 +43,7 @@ protected:
 	Skydome* m_Skydome = nullptr;
 
 	SceneRelationData m_RelationData;
-	int stageCountMax = 5;
+	const int stageCountMax = 5;
 
 public:
 	// コンストラクタとデストラクタ

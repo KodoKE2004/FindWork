@@ -1,14 +1,10 @@
 #pragma once
 #include "Scene.h"
 
-// プライベート定数動的ゲームシーンの遷移用
-constexpr int SCENE_SLICE = 0;
-constexpr int SCENE_PUSH  = 1;
-constexpr int SCENE_HIT   = 2;
-
 class GameSceneWait : public Scene
 {
 private:
+    uint32_t m_MyLife = 4;			// 自分のライフ
 
 public:
 	//================================

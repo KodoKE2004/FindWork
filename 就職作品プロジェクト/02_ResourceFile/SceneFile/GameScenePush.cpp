@@ -1,10 +1,12 @@
 #include "GameScenePush.h"
 #include "Game.h"
 #include "Collider.h"
+#include "DebugUI.h"
 #include <random>
 
 float GameScenePush::GenerateActivationDelay()
 {
+
     static std::mt19937 engine{ std::random_device{}() };
     std::uniform_real_distribution<float> dist(1.0f, 2.0f);
 
@@ -13,6 +15,8 @@ float GameScenePush::GenerateActivationDelay()
 
 void GameScenePush::Initialize()
 {
+    DebugUI::TEXT_CurrentScene = "GameScenePush";
+
     // Šî’êƒNƒ‰ƒX‚Ì‰Šú‰»
     GameSceneExe::Initialize();
     auto& instance = Game::GetInstance();

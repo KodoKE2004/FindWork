@@ -5,6 +5,8 @@ using namespace Math::Collider2D;
 
 void GameSceneHit::Initialize()
 {
+    DebugUI::TEXT_CurrentScene = "GameSceneHit";
+
     auto& instance  = Game::GetInstance();
     TextureManager* textureMgr = instance;
     

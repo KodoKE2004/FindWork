@@ -259,6 +259,7 @@ inline void ChangeScenePop(TRANS_MODE transMode, float duration, int stageNo, in
 		return;
 	}
 	scene->SetOldScene(instance.GetCurrentScene());
+	sceneNext->SetRelationData(instance.GetCurrentScene()->GetRelationData());
 	scene->SetNextScene(sceneNext);
 	scene->SetTransitionTick(duration);
 	scene->SetStep(STEP::START);

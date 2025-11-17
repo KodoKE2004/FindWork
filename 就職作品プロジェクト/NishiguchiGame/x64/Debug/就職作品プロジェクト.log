@@ -1,15 +1,6 @@
-﻿  Collider.cpp
-  Game.cpp
-  Car.cpp
-  Hammer.cpp
-  Player.cpp
-  GameSceneExe.cpp
-  GameSceneHit.cpp
+﻿  GameSceneHit.cpp
   GameScenePush.cpp
   GameSceneSlice.cpp
-  SelectScene.cpp
-  TitleScene.cpp
-  TransScene.cpp
-C:\Users\kodokeの世界\Desktop\HAL\VisualSutdio\就職作品\個人製作\FindWork\就職作品プロジェクト\02_ResourceFile\ObjectFile\Player.cpp(61,32): warning C4244: '-=': 'float' から 'int' への変換です。データが失われる可能性があります。
-C:\Users\kodokeの世界\Desktop\HAL\VisualSutdio\就職作品\個人製作\FindWork\就職作品プロジェクト\02_ResourceFile\ObjectFile\Player.cpp(67,32): warning C4244: '+=': 'float' から 'int' への変換です。データが失われる可能性があります。
+  GameSceneWait.cpp
+  ResultScene.cpp
   就職作品プロジェクト.vcxproj -> C:\Users\kodokeの世界\Desktop\HAL\VisualSutdio\就職作品\個人製作\FindWork\就職作品プロジェクト\x64\Debug\NishiguchiGame.exe

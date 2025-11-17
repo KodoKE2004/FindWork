@@ -41,6 +41,7 @@
     <ClCompile Include="02_ResourceFile\SceneFile\GameScenePush.cpp" />
     <ClCompile Include="02_ResourceFile\SceneFile\GameSceneSlice.cpp" />
     <ClCompile Include="02_ResourceFile\SceneFile\GameSceneWait.cpp" />
+    <ClCompile Include="02_ResourceFile\SceneFile\ResultScene.cpp" />
     <ClCompile Include="02_ResourceFile\SceneFile\Transition\TransitionBase.cpp" />
     <ClCompile Include="02_ResourceFile\SceneFile\Transition\Wipe.cpp" />
     <ClCompile Include="02_ResourceFile\StaticMesh.cpp" />
@@ -107,6 +108,7 @@
     <ClInclude Include="02_ResourceFile\SceneFile\GameScenePush.h" />
     <ClInclude Include="02_ResourceFile\SceneFile\GameSceneSlice.h" />
     <ClInclude Include="02_ResourceFile\SceneFile\GameSceneWait.h" />
+    <ClInclude Include="02_ResourceFile\SceneFile\ResultScene.h" />
     <ClInclude Include="02_ResourceFile\SceneFile\Transition\TransitionBase.h" />
     <ClInclude Include="02_ResourceFile\SceneFile\Transition\Wipe.h" />
     <ClInclude Include="02_ResourceFile\StaticMesh.h" />

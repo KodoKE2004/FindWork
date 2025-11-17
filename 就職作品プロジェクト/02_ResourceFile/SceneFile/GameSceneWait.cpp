@@ -1,28 +1,43 @@
 #include "GameSceneWait.h"
 #include "Game.h"
+#include "DebugUI.h"
 
 void GameSceneWait::Initialize()
 {
+    auto& instance = Game::GetInstance();
+    DebugUI::TEXT_CurrentScene = "GameSceneWait";
+    SCENE_NO nextScene[3];
+
+    // 初期化の段階で次のシーンを決定しておく
+    // 二回目以降のシーンの呼び出しではシーンが連続しないようにする
+    // 一回目の判断はstageCountで行う
+    if (m_RelationData.stageCount == 0)
+    {
+        
+    }
 }
 
 void GameSceneWait::Update(float tick)
 {
     // 乱数生成、ステージを厳選・二回連続で同じステージは踏まない
-    int randStageNo = 0;
 
-    switch(randStageNo)
+
+
+
+
+    switch(m_RelationData.nextScene)
     {
-    case SCENE_SLICE:   
+    case SCENE_NO::GAME_SLICE:   
     {
         
     }
     break;
-    case SCENE_PUSH :   
+    case SCENE_NO::GAME_PUSH:
     {
         
     }
     break;
-    case SCENE_HIT  :   
+    case SCENE_NO::GAME_HIT :   
     {
         
     }

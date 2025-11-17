@@ -5,6 +5,7 @@
 
 void GameSceneSlice::Initialize()
 {
+    DebugUI::TEXT_CurrentScene = "GameSceneSlice";
     GameSceneExe::Initialize();
     auto& instance = Game::GetInstance();
     TextureManager* textureMgr = instance;
