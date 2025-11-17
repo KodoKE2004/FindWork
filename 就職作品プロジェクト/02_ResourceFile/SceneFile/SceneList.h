@@ -9,4 +9,5 @@
 #include "GameSceneSlice.h"
 #include "GameSceneHit.h"
 #include "GameScenePush.h"
+#include "ResultScene.h"
 

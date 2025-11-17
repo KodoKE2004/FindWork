@@ -1,7 +1,7 @@
 #include "GameSceneWait.h"
 #include "Game.h"
 #include "DebugUI.h"
-#include "SceneList.h"]
+#include "SceneList.h"
 
 #include <array>
 #include <random>

@@ -58,13 +58,13 @@ void Player::Update()
         if (m_IsGround) 
             m_Position.x -= m_MoveSpeed;
         else
-            horizontalInput -= 1.0f;
+            horizontalInput -= 1;
     }
     if (Input::GetKeyPress(VK_D)) {
         if (m_IsGround)
             m_Position.x += m_MoveSpeed;
         else
-            horizontalInput += 1.0f;
+            horizontalInput += 1;
     }
     
     if (m_IsGround && horizontalInput != 0)
