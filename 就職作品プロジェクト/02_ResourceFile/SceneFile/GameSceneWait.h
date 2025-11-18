@@ -7,6 +7,8 @@
 class GameSceneWait : public Scene
 {
 private:
+    static bool s_HasFirstGameSceneWaitInitialized;
+	
     uint32_t m_LifeCount = 4;					// 自分のライフ
 	std::vector<Square*> m_LifeGame;			// 自身の全ライフ
 
@@ -14,7 +16,7 @@ private:
 	bool m_ShouldTransitionToStage = false;
 	float m_Tick = 0.0f;
     std::mt19937_64 m_RandomEngine{ std::random_device{}() };
-
+    bool m_IsFirstInitialized = false;
     void PrepareNextStage();
 
 public:
@@ -32,6 +34,10 @@ public:
 	void Initialize()		override;	// シーンの初期化
 	void Update(float tick) override;	// シーンの更新
 	void Finalize()         override;	// シーンの終了処理
+
+	bool IsFirstInitialized() const {
+		return m_IsFirstInitialized;
+    }
 
 	SCENE_NO GetSceneNo() const override {
 		return SCENE_NO::GAME_WAIT;

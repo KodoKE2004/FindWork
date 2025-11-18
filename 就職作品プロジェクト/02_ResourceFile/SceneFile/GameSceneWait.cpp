@@ -17,6 +17,8 @@ namespace
     constexpr float kStageTransitionDelay = 1.0f;
 }
 
+bool GameSceneWait::s_HasFirstGameSceneWaitInitialized = false;
+
 void GameSceneWait::PrepareNextStage()
 {
     std::uniform_int_distribution<int> dist(0, static_cast<int>(kStaegeCandidates.size() - 1));
@@ -44,6 +46,10 @@ void GameSceneWait::Initialize()
 {
     DebugUI::TEXT_CurrentScene = "GameSceneWait";
     m_SelectedScene = SCENE_NO::NONE;
+    
+    m_IsFirstInitialized = !s_HasFirstGameSceneWaitInitialized;
+    s_HasFirstGameSceneWaitInitialized = true;
+
     m_ShouldTransitionToStage = false;
     m_Tick = 0.0f;
 
