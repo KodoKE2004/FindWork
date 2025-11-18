@@ -98,16 +98,17 @@ void Game::Draw()
 
 	Renderer::Start();
 
-#ifdef _DEBUG
-	if (!instance.m_Grid.IsInitialized())
-	{
-		instance.m_Grid.Initialize();
-	}
-	if (instance.m_Grid.IsEnabled())
-	{
-		instance.m_Grid.Draw();
-	}
-#endif	
+//#ifdef _DEBUG
+//	if (!instance.m_Grid.IsInitialized())
+//	{
+//		instance.m_Grid.Initialize();
+//	}
+//	if (instance.m_Grid.IsEnabled())
+//	{
+//		instance.m_Grid.Draw();
+//	}
+//#endif	
+
 	for (auto& o : instance.m_GameObjects)
 	{
 		if (!o) continue;

@@ -152,7 +152,7 @@ void TitleScene::Update(float tick)
 
 	Color colorFadeMask = m_FadeMask->GetColor();
 	float fadeSpeed = 1.0f / m_FadeTimer;
-	colorFadeMask.w -= fadeSpeed;
+	colorFadeMask.w -= (fadeSpeed * tick);
 
 	if (colorFadeMask.w <= 0.0f)
 	{
