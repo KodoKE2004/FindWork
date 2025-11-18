@@ -63,10 +63,10 @@ void Hammer::Update()
         }
         // m_isAttack‚ªture‚È‚çƒL[“ü—Í‚ğó‚¯•t‚¯‚È‚¢
         if (Input::GetKeyPress(VK_A)) {
-            m_Position.x -= 1.0f * m_SpeedMass;
+            m_Position.x -= MoveValue * m_SpeedMass;
         }
         if (Input::GetKeyPress(VK_D)) {
-            m_Position.x += 1.0f * m_SpeedMass;
+            m_Position.x += MoveValue * m_SpeedMass;
         }
     }
 }
@@ -89,8 +89,8 @@ void Hammer::Attack(float tick)
         mass = 0.3f;
     }
 
-    m_AttackDuration     = 0.9f * (1.0f - mass);
-    m_CoolDuration = 0.6f * (1.0f - mass);
+    m_AttackDuration = 0.9f * (1.0f - mass);
+    m_CoolDuration   = 0.6f * (1.0f - mass);
 
     m_Elapsed = 0.0f;
     m_isAttack = true;

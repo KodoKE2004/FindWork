@@ -17,7 +17,8 @@ void Skydome::Initialize() {
 
 void Skydome::Spin(float spinX, float spinY, float spinZ)
 {
-    // 意図してるデフォルトの値が低いので倍率調整で直感的に
+    // 意図してるデフォルトの値が低いので倍率調整
+    // あくまで引数では直感的に
     spinX *= 0.0001f;
     spinY *= 0.0001f;
     spinZ *= 0.0001f;

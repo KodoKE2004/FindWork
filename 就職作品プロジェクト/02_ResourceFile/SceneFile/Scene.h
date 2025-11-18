@@ -38,6 +38,7 @@ public:
 class Scene
 {
 protected:
+	
 	std::vector<Object*> m_MySceneObjects;
 	std::unordered_map<std::string, AudioConfig> m_AudioList;
 	

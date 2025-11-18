@@ -73,9 +73,8 @@ public:
 	void SetGPU();
 
 	void SetName(std::string name);
-	std::string GetName() {
-		return m_Name;
-	}
+
+	void SetTexture(std::shared_ptr<Texture> setTexture);
 
 	void SetColor(const Color color);
 	void SetColor(const float r, const float g, const float b, const float a);
@@ -83,6 +82,8 @@ public:
 	Color GetColor() {
 		return m_Color;
 	}
-	
-	void SetTexture(std::shared_ptr<Texture> setTexture);
+	std::string GetName() {
+		return m_Name;
+	}
+
 };

@@ -47,7 +47,8 @@ void Bullet::Update() {
     }
 }
 void Bullet::Draw() {
-    if (!m_IsAlive) return;
+    if (this == nullptr) return;
+    if (!m_IsAlive)      return;
     Square::Draw();
 }
 void Bullet::Finalize() {

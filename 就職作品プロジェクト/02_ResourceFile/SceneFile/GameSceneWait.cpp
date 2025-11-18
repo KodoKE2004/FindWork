@@ -13,13 +13,14 @@ namespace
         SCENE_NO::GAME_PUSH,
         SCENE_NO::GAME_HIT
     };
+
+    constexpr float kStageTransitionDelay = 1.0f;
 }
 
 void GameSceneWait::PrepareNextStage()
 {
-    static std::mt19937 engine{ std::random_device{}() };
     std::uniform_int_distribution<int> dist(0, static_cast<int>(kStaegeCandidates.size() - 1));
-    int selectedIndex = dist(engine);
+    int selectedIndex = dist(m_RandomEngine);
     const bool hasPreviousScene = 
         (m_RelationData.stageCount > 0)      &&
         (0 <= m_RelationData.lastStageIndex) &&
@@ -29,7 +30,7 @@ void GameSceneWait::PrepareNextStage()
     {
         while (selectedIndex == m_RelationData.lastStageIndex)
         {
-            selectedIndex = dist(engine);
+            selectedIndex = dist(m_RandomEngine);
         }
     }
 
@@ -44,17 +45,46 @@ void GameSceneWait::Initialize()
     DebugUI::TEXT_CurrentScene = "GameSceneWait";
     m_SelectedScene = SCENE_NO::NONE;
     m_ShouldTransitionToStage = false;
+    m_Tick = 0.0f;
+
+    auto& instance = Game::GetInstance();
+
+    // ライフの作成
+    TextureManager* textureMgr = instance.GetInstance();
+
+    // ライフの数だけハートの生成
+    const float lifePosX = - 200.0f;
+    const float lifePosY = - 100.0f;
+
+    m_LifeCount = 4;
+    for(uint32_t i = 0; i < m_LifeCount; ++i)
+    {
+        Square* life = instance.AddObject<Square>(instance.GetCamera());
+        life->SetTexture(textureMgr->GetTexture("DestroyBullet.png"));
+        life->SetPos(lifePosX + ( i * 130.0f ), lifePosY, 1.0f);
+        life->SetScale(100.0f, 100.0f, 1.0f);
+        life->SetShader("VS_Alpha","PS_Alpha");
+        life->SetColor(1.0f, 1.0f, 1.0f, 1.0f);
+
+        m_MySceneObjects.emplace_back(life);
+        m_LifeGame.emplace_back(life);
+    }
+
+
+
 }
 
 void GameSceneWait::Update(float tick)
 {
     // 乱数生成、ステージを厳選・二回連続で同じステージは踏まない
-    (void)tick;
+    m_Tick += tick;
     if (!m_ShouldTransitionToStage)
     {
         PrepareNextStage();
+        m_Tick = 0.0f;
     }
-    if (m_SelectedScene == SCENE_NO::NONE)
+    if (m_SelectedScene == SCENE_NO::NONE || 
+        m_Tick < kStageTransitionDelay)
     {
         return;
     }

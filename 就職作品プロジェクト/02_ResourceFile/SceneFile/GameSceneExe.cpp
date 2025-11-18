@@ -8,11 +8,15 @@
 
 void GameSceneExe::Initialize()
 {
+    // 初期化
+    m_Difficulty = 0;
+    m_Duration = 0.0f;
+    m_GameSpeedMass   = 1.0f;
+    m_ChangeSceneTime = 5.0f;
     m_RelationData.isClear = false;
-    m_isChange = false;
+    m_isChange     = false;
     m_isFastChange = false;
     m_ChangeFastTimer = 0.0f;
-    m_HasCountedStageClear = false;
     
     //===============================
     //   ゲームスピード倍率設
@@ -20,11 +24,6 @@ void GameSceneExe::Initialize()
     //   n && 4 == 0 ならスピードアップ
     //===============================
     
-    // 初期化
-    m_GameSpeedMass = 1.0f;
-    m_Difficulty = 0;
-    m_Tick = 0.0f;
-    m_ChangeSceneTime = 5.0f;
 
     // 難易度 0 ~
     if (m_RelationData.stageCount % 8 == 0) {
@@ -47,13 +46,8 @@ void GameSceneExe::Initialize()
 void GameSceneExe::Update(float tick)
 {
     TickCount(tick);
-    if (!m_HasCountedStageClear &&
-         m_RelationData.isClear &&
-        (m_isFastChange || IsTimeUp()))
-    {
-        ++m_RelationData.stageCount;
-        m_HasCountedStageClear = true;
-    }
+    bool clearConect =  m_RelationData.isClear &&
+                       (m_isFastChange || IsTimeUp());
 
     if (m_isFastChange) {
         TimeCountFast(tick);
@@ -68,6 +62,8 @@ void GameSceneExe::Update(float tick)
     if (IsChange()) {
         ChangeScenePop(TRANS_MODE::FADE, 0.2f);
     }
+
+
 }
 
 void GameSceneExe::Finalize()

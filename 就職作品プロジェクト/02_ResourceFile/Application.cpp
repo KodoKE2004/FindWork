@@ -191,6 +191,8 @@ void Application::MainLoop()
     auto& instance = Game::GetInstance();
     instance.Initialize();
 
+    const double targetFrameSec = 1.0 / 60.0;
+
     while (true) {
         if (PeekMessage(&msg, NULL, 0, 0, PM_REMOVE))
         {
@@ -202,7 +204,25 @@ void Application::MainLoop()
         {
             LARGE_INTEGER currentTime;
             QueryPerformanceCounter(&currentTime);
-            g_deltaTime = static_cast<float>(currentTime.QuadPart - g_prevTime.QuadPart) / static_cast<float>(g_frequency.QuadPart);
+
+            double dt = static_cast<double>(currentTime.QuadPart - g_prevTime.QuadPart)
+                      / static_cast<double>(g_frequency.QuadPart);
+
+            if (dt < targetFrameSec)
+            {
+                double remain = targetFrameSec - dt;
+                DWORD sleepMs = static_cast<DWORD>(remain * 1000.0);
+
+                if (sleepMs > 0) {
+                    Sleep(sleepMs);
+                }
+
+                QueryPerformanceCounter(&currentTime);
+                dt = static_cast<double>(currentTime.QuadPart - g_prevTime.QuadPart)
+                    / static_cast<double>(g_frequency.QuadPart);
+            }
+
+            g_deltaTime = static_cast<float>(dt);
             g_prevTime = currentTime;
 
             // ÉQÅ[ÉÄÇÃçXêV

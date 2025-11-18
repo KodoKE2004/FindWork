@@ -110,7 +110,7 @@ void GameScenePush::Update(float tick)
     }
     else 
     {
-        m_CartAcitvationTimer = m_Tick;
+        m_CartAcitvationTimer = m_Duration;
     }
 
     GameSceneExe::Update(tick);

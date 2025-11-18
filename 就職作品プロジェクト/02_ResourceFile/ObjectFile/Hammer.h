@@ -11,6 +11,7 @@ private:
     float m_CoolDuration   = 0.6f;      // 攻撃後に戻るアニメーション時間 (倍率x 1.0fの場合)
     float m_Elapsed        = 0.0f;      // 経過時間
     float m_SpeedMass      = 1.0f;      // スピード倍率
+    const float MoveValue = 2.0f;
 
     const float m_DefaultPosY =  200.0f; // ハンマーの初期化位置Y座標
     const float m_AttackPosY = - 200.0f; // ハンマーの攻撃位置Y座標
