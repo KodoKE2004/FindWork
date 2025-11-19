@@ -6,6 +6,18 @@
 #include <array>
 #include <random>
 
+template<class T>
+T RandomChoose(const T& a, const T& b)
+{
+    static std::mt19937 mt{std::random_device{}() };
+    unsigned int bit = mt() & 1u;
+
+    // bit が 0 のとき a を、1 のとき b を返す
+    return (bit == 0) ? a : b;
+
+}
+
+
 namespace
 {
     constexpr std::array<SCENE_NO, 3> kStaegeCandidates = {
@@ -21,32 +33,75 @@ bool GameSceneWait::s_HasFirstGameSceneWaitInitialized = false;
 
 void GameSceneWait::PrepareNextStage()
 {
-    std::uniform_int_distribution<int> dist(0, static_cast<int>(kStaegeCandidates.size() - 1));
-    int selectedIndex = dist(m_RandomEngine);
-    const bool hasPreviousScene = 
-        (m_RelationData.stageCount > 0)      &&
-        (0 <= m_RelationData.lastStageIndex) &&
-        (m_RelationData.lastStageIndex < static_cast<int>(kStaegeCandidates.size()));
+    // ステージのインデックスを格納
+    SCENE_NO _NextScene = SCENE_NO::NONE;
 
-    if (hasPreviousScene)
+    // 乱数の作成
+    // 初回初期化時は前回の連続するので要素の削除
+    // 全3ステージからランダム選択
+    if (m_IsFirstInitialized)
     {
-        while (selectedIndex == m_RelationData.lastStageIndex)
+        _NextScene = StageSelectAllRandom();
+    }
+    // oldを見てから2パターンの選択
+    else
+    {   
+        switch (m_RelationData.oldScene)
         {
-            selectedIndex = dist(m_RandomEngine);
+        case SCENE_NO::GAME_SLICE:
+            _NextScene = RandomChoose<SCENE_NO>(SCENE_NO::GAME_PUSH,
+                                               SCENE_NO::GAME_HIT);
+        break;
+        case SCENE_NO::GAME_PUSH:
+            _NextScene = RandomChoose<SCENE_NO>(SCENE_NO::GAME_SLICE,
+                                               SCENE_NO::GAME_HIT);
+        break;
+        case SCENE_NO::GAME_HIT:
+            _NextScene = RandomChoose<SCENE_NO>(SCENE_NO::GAME_PUSH,
+                                               SCENE_NO::GAME_SLICE);
+        break;
+        default:
+            _NextScene = StageSelectAllRandom();
+        break;
         }
     }
 
-    m_SelectedScene = kStaegeCandidates[selectedIndex];
-    m_RelationData.nextScene = m_SelectedScene;
-    m_RelationData.lastStageIndex = selectedIndex;
+    // 次のシーンRelationDataに格納
+    m_RelationData.nextScene = _NextScene;
+    // 次シーンの選択完了
     m_ShouldTransitionToStage = true;
+}
+
+SCENE_NO GameSceneWait::StageSelectAllRandom()
+{
+    SCENE_NO stageKinds[3] = {
+            SCENE_NO::GAME_SLICE,
+            SCENE_NO::GAME_HIT,
+            SCENE_NO::GAME_PUSH
+    };
+
+    // 最初の一回だけ作成する乱数は３パターンの中から選択
+    std::uniform_int_distribution<int> dist(0, 2);
+    int selectedIdx = dist(m_RandomEngine);
+    return stageKinds[selectedIdx];
 }
 
 void GameSceneWait::Initialize()
 {
     DebugUI::TEXT_CurrentScene = "GameSceneWait";
-    m_SelectedScene = SCENE_NO::NONE;
-    
+
+    // 引き渡しデータのシーンの整理
+    m_RelationData.oldScene = m_RelationData.previousScene;
+    m_RelationData.previousScene = SCENE_NO::GAME_WAIT;
+
+    if (m_RelationData.isClear) {
+        MyDebugLog(std::cout << "=====  成功  =====" << std::endl;)
+    }
+    else {
+        MyDebugLog(std::cout << "=====  失敗  =====" << std::endl;)
+    }
+
+    // 最初の一度だけ or 指定したタイミングのみフラグを立てる
     m_IsFirstInitialized = !s_HasFirstGameSceneWaitInitialized;
     s_HasFirstGameSceneWaitInitialized = true;
 
@@ -89,13 +144,8 @@ void GameSceneWait::Update(float tick)
         PrepareNextStage();
         m_Tick = 0.0f;
     }
-    if (m_SelectedScene == SCENE_NO::NONE || 
-        m_Tick < kStageTransitionDelay)
-    {
-        return;
-    }
 
-    switch (m_SelectedScene)
+    switch (m_RelationData.nextScene)
     {
     case SCENE_NO::GAME_SLICE:
         ChangeScenePush<GameSceneSlice>(TRANS_MODE::FADE, 0.3f);
@@ -111,7 +161,6 @@ void GameSceneWait::Update(float tick)
     }
 
     m_ShouldTransitionToStage = false;
-    m_SelectedScene = SCENE_NO::NONE;
 }
 
 void GameSceneWait::Finalize()

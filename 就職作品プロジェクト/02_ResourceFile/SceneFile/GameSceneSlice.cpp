@@ -7,6 +7,12 @@ void GameSceneSlice::Initialize()
 {
     DebugUI::TEXT_CurrentScene = "GameSceneSlice";
     GameSceneExe::Initialize();
+
+    // シーンに繋ぐ情報は基底初期化後の一番最初に設定
+    m_RelationData.previousScene = SCENE_NO::GAME_SLICE;
+    m_RelationData.oldScene = SCENE_NO::GAME_WAIT;
+
+
     auto& instance = Game::GetInstance();
     TextureManager* textureMgr = instance;
 
@@ -45,6 +51,7 @@ void GameSceneSlice::Update(float tick)
     if (enemys.size() == 0) {
         // SceneExeで早めにクリアをした場合も想定
         m_isFastChange = true;
+        m_RelationData.isClear = true;
     }
     else
     {
@@ -58,7 +65,6 @@ void GameSceneSlice::Update(float tick)
             {
                 MyDebugLog(Debug::Log("当たった");)
                 it->Death();
-                m_RelationData.isClear = true;
             }
         }
     }

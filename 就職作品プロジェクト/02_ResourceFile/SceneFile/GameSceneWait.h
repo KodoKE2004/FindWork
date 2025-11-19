@@ -7,18 +7,23 @@
 class GameSceneWait : public Scene
 {
 private:
-    static bool s_HasFirstGameSceneWaitInitialized;
+	// 初期化済みかどうかのフラグ
+    // また、乱数選択のリセット用にstaticで持つ
+    static bool s_HasFirstGameSceneWaitInitialized;	
 	
-    uint32_t m_LifeCount = 4;					// 自分のライフ
-	std::vector<Square*> m_LifeGame;			// 自身の全ライフ
+    uint32_t m_LifeCount = 4;					// 自分のライフ数
+    std::vector<Square*> m_LifeGame;			// ライフのオブジェクト格納用
 
-    SCENE_NO m_SelectedScene = SCENE_NO::NONE; // 選択されたシーン
-	bool m_ShouldTransitionToStage = false;
+	bool m_ShouldTransitionToStage = false;		// 次のステージを設定できたか判断するフラグ
 	float m_Tick = 0.0f;
     std::mt19937_64 m_RandomEngine{ std::random_device{}() };
     bool m_IsFirstInitialized = false;
-    void PrepareNextStage();
 
+	// Exeシーンの乱数選択を行う。
+	// 二回連続で同じステージが来るようにならないようにする 
+	// 要素の削除の仕方は考える。
+	void PrepareNextStage();
+	SCENE_NO StageSelectAllRandom();
 public:
 	//================================
 	//		コンストラクタとデストラクタ
@@ -41,6 +46,10 @@ public:
 
 	SCENE_NO GetSceneNo() const override {
 		return SCENE_NO::GAME_WAIT;
+	}
+	void RequestFullStageRandom()
+	{
+		s_HasFirstGameSceneWaitInitialized = false;
 	}
 };
 

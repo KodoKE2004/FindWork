@@ -32,6 +32,7 @@ public:
     int  lastStageIndex = -1;
 	bool requestRetry = false;
 	SCENE_NO previousScene = SCENE_NO::NONE;
+    SCENE_NO oldScene	   = SCENE_NO::NONE;
 	SCENE_NO nextScene     = SCENE_NO::NONE;
 };
 

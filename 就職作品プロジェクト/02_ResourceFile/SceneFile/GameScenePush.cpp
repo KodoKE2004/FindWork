@@ -19,6 +19,11 @@ void GameScenePush::Initialize()
 
     // 基底クラスの初期化
     GameSceneExe::Initialize();
+    // シーンに繋ぐ情報は基底初期化後の一番最初に設定
+    m_RelationData.previousScene = SCENE_NO::GAME_PUSH;
+    m_RelationData.oldScene = SCENE_NO::GAME_WAIT;
+
+
     auto& instance = Game::GetInstance();
     TextureManager* textureMgr = instance;
 

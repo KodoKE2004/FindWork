@@ -7,12 +7,14 @@ void GameSceneHit::Initialize()
 {
     DebugUI::TEXT_CurrentScene = "GameSceneHit";
 
+    // 基底クラスの初期化
+    GameSceneExe::Initialize();
+    // シーンに繋ぐ情報は基底初期化後の一番最初に設定
+    m_RelationData.previousScene = SCENE_NO::GAME_HIT;
+    m_RelationData.oldScene      = SCENE_NO::GAME_WAIT;
+
     auto& instance  = Game::GetInstance();
     TextureManager* textureMgr = instance;
-    
-    m_RelationData.previousScene = SCENE_NO::GAME_HIT;
-    m_RelationData.nextScene     = SCENE_NO::GAME_WAIT;
-
 
     m_Skydome = instance.AddObject<Skydome>();
     m_Skydome->SetName("m_Skydome");
