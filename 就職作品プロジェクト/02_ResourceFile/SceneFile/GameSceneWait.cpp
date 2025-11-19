@@ -72,6 +72,8 @@ void GameSceneWait::PrepareNextStage()
     m_ShouldTransitionToStage = true;
 }
 
+// 全ステージから選ぶ時の乱数を取得する関数
+
 SCENE_NO GameSceneWait::StageSelectAllRandom()
 {
     SCENE_NO stageKinds[3] = {

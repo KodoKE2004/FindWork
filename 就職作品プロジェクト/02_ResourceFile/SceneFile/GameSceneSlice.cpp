@@ -25,6 +25,7 @@ void GameSceneSlice::Initialize()
 
     m_Sord = instance.AddObject<Sord>();
     m_Sord->SetName("m_Sord");
+    m_Sord->SetPos(-200.0f, 0.0f, 1.0f);
     m_Sord->SetTexture(textureMgr->GetTexture("Sord.png"));
     m_MySceneObjects.emplace_back(m_Sord);
 
@@ -35,7 +36,7 @@ void GameSceneSlice::Initialize()
         auto enemy = instance.AddObject<Enemy>();
         enemy->SetName("m_Enemy");
         enemy->SetTexture(textureMgr->GetTexture("Battle_EnemyNormal.png"));
-        enemy->SetPos(0.0f, -100.0f, 0.0f);
+        enemy->SetPos(200.0f, -100.0f, 0.0f);
         enemy->SetScale(100.0f, 100.0f, 1.0f);
         m_MySceneObjects.emplace_back(enemy);
     }
