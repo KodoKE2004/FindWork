@@ -72,7 +72,7 @@ void Player::Update()
         m_Position.x += static_cast<float>(horizontalInput) * m_MoveSpeed;
     }
 
-    const bool jumpTriggered = m_IsGround && Input::GetKeyTrigger(VK_SPACE);
+    const bool jumpTriggered = m_IsGround && Input::GetKeyTrigger(VK_RETURN);
     if (jumpTriggered)
     {
         m_VerticalMotion.velocity = m_JumpInitialVelocity;

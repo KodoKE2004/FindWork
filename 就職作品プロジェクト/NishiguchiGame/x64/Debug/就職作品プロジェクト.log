@@ -1,25 +1,2 @@
-﻿  Application.cpp
-  Camera.cpp
-  DebugGridLine.cpp
-  Game.cpp
-  Enemy.cpp
-  GameSceneHit.cpp
-  GameScenePush.cpp
-  GameSceneSlice.cpp
-  GameSceneWait.cpp
-  ResultScene.cpp
-  Scene.cpp
-  Wipe.cpp
-  Bullet.cpp
-  Cube.cpp
-  Model.cpp
-  Object.cpp
-  Sphere.cpp
-  Skydome.cpp
-  GameSceneExe.cpp
-  SelectScene.cpp
-  TitleScene.cpp
-  Fade.cpp
-  TransScene.cpp
-  Square.cpp
+﻿  Player.cpp
   就職作品プロジェクト.vcxproj -> C:\Users\dorae\Desktop\HAL\class3\FindWork\就職作品プロジェクト\x64\Debug\NishiguchiGame.exe

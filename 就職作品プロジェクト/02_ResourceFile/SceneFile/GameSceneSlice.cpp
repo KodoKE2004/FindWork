@@ -51,7 +51,7 @@ void GameSceneSlice::Update(float tick)
     if (IsAllDeathEnemy(enemys)) {
         // SceneExe‚Å‘‚ß‚ÉƒNƒŠƒA‚ğ‚µ‚½ê‡‚à‘z’è
         m_isFastChange = true;
-        m_RelationData.isClear = true;
+         m_RelationData.isClear = true;
     }
     else
     {

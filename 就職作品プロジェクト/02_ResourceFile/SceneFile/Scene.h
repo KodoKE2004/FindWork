@@ -21,15 +21,19 @@ enum class SCENE_NO
 	NUM
 };
 
-/// <summary>
-/// Sceneクラス間の受け渡しデータ
-/// </summary>
+// Sceneクラス間の受け渡しデータ
+// isClear       : ミニゲームをクリアしたかのフラグ
+// requestRetry  : ゲームをもう一度するかのフラグ
+// stageCount    : 何ステージクリアしているか
+// previousScene : 現在のシーン
+// oldScene      : 一つ前のシーン
+// nextScen      : 次のシーン
 class SceneRelationData
 {
 public:
 	bool isClear = false;
-	int  stageCount   = 0;
 	bool requestRetry = false;
+	int  stageCount   = 0;
 	SCENE_NO previousScene = SCENE_NO::NONE;
     SCENE_NO oldScene	   = SCENE_NO::NONE;
 	SCENE_NO nextScene     = SCENE_NO::NONE;
@@ -45,6 +49,7 @@ protected:
 	Skydome* m_Skydome = nullptr;
 
 	static SceneRelationData m_RelationData;
+
 	const int stageCountMax = 5;
 
 public:
