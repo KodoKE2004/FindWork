@@ -12,6 +12,7 @@ void GameSceneHit::Initialize()
     // シーンに繋ぐ情報は基底初期化後の一番最初に設定
     m_RelationData.previousScene = SCENE_NO::GAME_HIT;
     m_RelationData.oldScene      = SCENE_NO::GAME_WAIT;
+    m_RelationData.isClear = false;
 
     auto& instance  = Game::GetInstance();
     TextureManager* textureMgr = instance;
@@ -45,7 +46,7 @@ void GameSceneHit::Update(float tick)
 {
     auto& instance = Game::GetInstance();
     auto enemys = instance.GetObjects<Enemy>();
-    if (enemys.size() == 0) {
+    if (IsAllDeathEnemy(enemys)) {
         // SceneExeで早めにクリアをした場合も想定
         m_isFastChange = true;
         m_RelationData.isClear = true;
@@ -62,13 +63,15 @@ void GameSceneHit::Update(float tick)
             {
                 MyDebugLog(Debug::Log("当たった");)
                 it->Death();
-                m_RelationData.isClear = true;
             }
         }
     }
 
 
     GameSceneExe::Update(tick);
+    if (IsChange()) {
+        ChangeScenePop(TRANS_MODE::FADE, 0.2f);
+    }
 }
 
 void GameSceneHit::Finalize()

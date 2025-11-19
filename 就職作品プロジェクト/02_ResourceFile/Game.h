@@ -137,7 +137,8 @@ public:
 
 
 	// オブジェクトを取得する
-	template<class T> std::vector<T*> GetObjects()
+	template<class T> 
+	std::vector<T*> GetObjects()
 	{
 		std::vector<T*> res;
 		for (const auto& o : m_pInstance->m_GameObjects) {
@@ -220,17 +221,8 @@ inline void ChangeScenePop(TRANS_MODE mode, float duration)
 		return;
 	}
 
-	// シーン間の受け渡しデータを設定
-	SceneRelationData relationData{};
-	if (auto currentScene = instance.GetCurrentScene())
-	{
-		relationData = currentScene->GetRelationData();
-		relationData.previousScene = currentScene->GetSceneNo();
-	}
-	relationData.nextScene = sceneNext->GetSceneNo();
-
-
 	scene->SetOldScene(instance.GetCurrentScene());
+    scene->SetRelationData(instance.GetCurrentScene()->GetRelationData());
     scene->SetNextScene(sceneNext);
 	scene->SetTransitionTick(duration);
 	scene->SetStep(STEP::START);
@@ -259,7 +251,7 @@ inline void ChangeScenePop(TRANS_MODE transMode, float duration, int stageNo, in
 		return;
 	}
 	scene->SetOldScene(instance.GetCurrentScene());
-	sceneNext->SetRelationData(instance.GetCurrentScene()->GetRelationData());
+	scene->SetRelationData(instance.GetCurrentScene()->GetRelationData());
 	scene->SetNextScene(sceneNext);
 	scene->SetTransitionTick(duration);
 	scene->SetStep(STEP::START);

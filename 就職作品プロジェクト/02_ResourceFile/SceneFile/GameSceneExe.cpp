@@ -13,7 +13,6 @@ void GameSceneExe::Initialize()
     m_Duration = 0.0f;
     m_GameSpeedMass   = 1.0f;
     m_ChangeSceneTime = 5.0f;
-    m_RelationData.isClear = false;
     m_isChange     = false;
     m_isFastChange = false;
     m_ChangeFastTimer = 0.0f;
@@ -59,9 +58,7 @@ void GameSceneExe::Update(float tick)
     if (IsTimeUp() && !m_isChange) {
         m_isChange = true;
     }
-    if (IsChange()) {
-        ChangeScenePop(TRANS_MODE::FADE, 0.2f);
-    }
+    
 
 
 }

@@ -22,7 +22,7 @@ void GameScenePush::Initialize()
     // ƒV[ƒ“‚ÉŒq‚®î•ñ‚ÍŠî’ê‰Šú‰»Œã‚Ìˆê”ÔÅ‰‚Éİ’è
     m_RelationData.previousScene = SCENE_NO::GAME_PUSH;
     m_RelationData.oldScene = SCENE_NO::GAME_WAIT;
-
+    m_RelationData.isClear = true;
 
     auto& instance = Game::GetInstance();
     TextureManager* textureMgr = instance;
@@ -71,7 +71,6 @@ void GameScenePush::Initialize()
 
     m_CartWarningTimer = 0.0f;
     m_HasSpawnedCartWarning = false;
-    m_RelationData.isClear = true;
 }
 
 void GameScenePush::Update(float tick)
@@ -119,6 +118,9 @@ void GameScenePush::Update(float tick)
     }
 
     GameSceneExe::Update(tick);
+    if (IsChange()) {
+        ChangeScenePop(TRANS_MODE::FADE, 0.2f);
+    }
 }
 
 void GameScenePush::Finalize()

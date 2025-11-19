@@ -17,6 +17,15 @@ void TitleScene::Initialize()
 	TextureManager* textureMgr = instance;
     DebugUI::TEXT_CurrentScene = "TitleScene";
 
+	// シーンを取りつなぐデータの作成
+	// 失敗判定でWiatシーンに失敗処理をさせないためにtrue
+	m_RelationData.stageCount = 0;
+	m_RelationData.isClear = true;
+	m_RelationData.nextScene = SCENE_NO::GAME_WAIT;
+	m_RelationData.oldScene  = SCENE_NO::NONE;
+	m_RelationData.previousScene = SCENE_NO::TITLE;
+
+
 #ifdef _DEBUG
 	instance.m_Grid.SetEnabled(true);
 #endif

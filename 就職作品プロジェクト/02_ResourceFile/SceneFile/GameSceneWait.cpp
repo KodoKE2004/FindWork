@@ -6,6 +6,7 @@
 #include <array>
 #include <random>
 
+// a か b のどちらかをランダムに返すテンプレート関数
 template<class T>
 T RandomChoose(const T& a, const T& b)
 {
@@ -14,7 +15,6 @@ T RandomChoose(const T& a, const T& b)
 
     // bit が 0 のとき a を、1 のとき b を返す
     return (bit == 0) ? a : b;
-
 }
 
 
@@ -50,11 +50,11 @@ void GameSceneWait::PrepareNextStage()
         {
         case SCENE_NO::GAME_SLICE:
             _NextScene = RandomChoose<SCENE_NO>(SCENE_NO::GAME_PUSH,
-                                               SCENE_NO::GAME_HIT);
+                                                SCENE_NO::GAME_HIT);
         break;
         case SCENE_NO::GAME_PUSH:
             _NextScene = RandomChoose<SCENE_NO>(SCENE_NO::GAME_SLICE,
-                                               SCENE_NO::GAME_HIT);
+                                                SCENE_NO::GAME_HIT);
         break;
         case SCENE_NO::GAME_HIT:
             _NextScene = RandomChoose<SCENE_NO>(SCENE_NO::GAME_PUSH,

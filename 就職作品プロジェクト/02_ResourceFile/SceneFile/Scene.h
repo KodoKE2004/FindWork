@@ -29,7 +29,6 @@ class SceneRelationData
 public:
 	bool isClear = false;
 	int  stageCount   = 0;
-    int  lastStageIndex = -1;
 	bool requestRetry = false;
 	SCENE_NO previousScene = SCENE_NO::NONE;
     SCENE_NO oldScene	   = SCENE_NO::NONE;
@@ -45,7 +44,7 @@ protected:
 	
 	Skydome* m_Skydome = nullptr;
 
-	SceneRelationData m_RelationData;
+	static SceneRelationData m_RelationData;
 	const int stageCountMax = 5;
 
 public:
@@ -72,7 +71,7 @@ public:
 
 	virtual SCENE_NO GetSceneNo() const = 0;
 
-	// シーン間の受け渡しの値をする関数（それぞれのゲッター・セッター）
+	// シーン間の受け渡しの値をする関数
 	void SetRelationData(const SceneRelationData relationData) {
 		m_RelationData = relationData; 
 	}

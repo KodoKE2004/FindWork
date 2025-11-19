@@ -11,7 +11,7 @@ void GameSceneSlice::Initialize()
     // シーンに繋ぐ情報は基底初期化後の一番最初に設定
     m_RelationData.previousScene = SCENE_NO::GAME_SLICE;
     m_RelationData.oldScene = SCENE_NO::GAME_WAIT;
-
+    m_RelationData.isClear = false;
 
     auto& instance = Game::GetInstance();
     TextureManager* textureMgr = instance;
@@ -47,8 +47,8 @@ void GameSceneSlice::Update(float tick)
     
     using namespace Math::Collider2D;
 
-    auto enemys = instance.GetObjects<Enemy>();
-    if (enemys.size() == 0) {
+    std::vector<Enemy*> enemys = instance.GetObjects<Enemy>();
+    if (IsAllDeathEnemy(enemys)) {
         // SceneExeで早めにクリアをした場合も想定
         m_isFastChange = true;
         m_RelationData.isClear = true;
@@ -70,6 +70,9 @@ void GameSceneSlice::Update(float tick)
     }
 
     GameSceneExe::Update(tick);
+    if (IsChange()) {
+        ChangeScenePop(TRANS_MODE::FADE, 0.2f);
+    }
 }
 
 void GameSceneSlice::Finalize()

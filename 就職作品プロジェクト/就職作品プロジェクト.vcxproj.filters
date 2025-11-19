@@ -235,6 +235,9 @@
     <ClCompile Include="02_ResourceFile\SceneFile\ResultScene.cpp">
       <Filter>SourceFile\Scene</Filter>
     </ClCompile>
+    <ClCompile Include="02_ResourceFile\SceneFile\Scene.cpp">
+      <Filter>SourceFile\Scene</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="02_ResourceFile\SceneFile\Scene.h">

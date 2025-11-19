@@ -1,5 +1,6 @@
 #pragma once
 #include "Square.h"
+#include <vector>
 class Enemy : public Square
 {
 private:
@@ -18,3 +19,4 @@ public:
     }
 };
 
+bool IsAllDeathEnemy(std::vector<Enemy*> enemys);
