@@ -7,6 +7,18 @@
 
 #include <memory>
 
+// タイマー用の構造体
+class TimerData
+{
+public:
+	float timer = 0.0f;
+	float limit = 0.0f;
+
+	bool IsTimeUp() const {
+		return timer >= limit;
+	}
+};
+
 // 当たり判定の結果を受け取るクラス
 class isHitResult
 {
@@ -85,5 +97,6 @@ public:
 	std::string GetName() {
 		return m_Name;
 	}
+	
 
 };

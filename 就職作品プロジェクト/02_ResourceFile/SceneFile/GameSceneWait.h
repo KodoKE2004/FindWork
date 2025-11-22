@@ -7,17 +7,34 @@
 class GameSceneWait : public Scene
 {
 private:
-	// 初期化済みかどうかのフラグ
-    // また、乱数選択のリセット用にstaticで持つ
-    static bool s_HasFirstGameSceneWaitInitialized;	
 	
     uint32_t m_LifeCount = 4;					// 自分のライフ数
     std::vector<Square*> m_LifeGame;			// ライフのオブジェクト格納用
 
-	bool m_ShouldTransitionToStage = false;		// 次のステージを設定できたか判断するフラグ
+    // 経過時間管理用変数
 	float m_Tick = 0.0f;
-    std::mt19937_64 m_RandomEngine{ std::random_device{}() };
-    bool m_IsFirstInitialized = false;
+    
+	std::mt19937_64 m_RandomEngine{ std::random_device{}() };
+
+	//================================
+    // 	  シーン内で使う時間関連変数
+	//	  (スピード倍率によって変化)
+	//================================
+    TimerData m_DecrementLife = { 0.0f,0.5f };	// ライフが減るまでのタイマー管理用構造体
+    TimerData m_ChangeStage   = { 0.0f,2.0f };	// ステージ遷移までのタイマー管理用構造体
+
+    //================================
+    //		 ステージ遷移用フラグ
+    //================================ 
+	// 初期化済みかどうかのフラグ
+    // また、乱数選択のリセット用にstaticで持つ
+    static bool s_HasFirstGameSceneWaitInitialized;	
+
+	bool m_ShouldTransitionToStage = false;		// 次のステージを設定できたか判断するフラグ
+    bool m_IsFirstInitialized	   = false;		// シーンが最初に初期化されたかどうかのフラグ
+    bool m_isStageCleared          = false;		// ステージクリアしたかどうかのフラグ
+    bool m_wasDecrementLife		   = false;		// ライフが減ったかどうかのフラグ
+
 
 	// Exeシーンの乱数選択を行う。
 	// 二回連続で同じステージが来るようにならないようにする 
@@ -47,9 +64,12 @@ public:
 	SCENE_NO GetSceneNo() const override {
 		return SCENE_NO::GAME_WAIT;
 	}
+
 	void RequestFullStageRandom()
 	{
 		s_HasFirstGameSceneWaitInitialized = false;
 	}
+
+	void DecrementLife();
 };
 

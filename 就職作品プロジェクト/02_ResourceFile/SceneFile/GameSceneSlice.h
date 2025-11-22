@@ -8,11 +8,6 @@
 class GameSceneSlice : public GameSceneExe
 {
 private:
-    float m_SliceInterval = 1.0f; // スライスの間隔
-    float m_SliceTimer = 0.0f;    // スライスタイマー
-    int   m_SliceCount   = 0;     // スライスカウント
-    const int m_MaxSlices = 5;    // 最大スライス数
-
     Sord*  m_Sord    = nullptr;
     Enemy* m_Enemy   = nullptr;
 

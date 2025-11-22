@@ -27,7 +27,7 @@ private:
     static float ApplyEasing(CarEasingType type, float t);
 public:
     NVector3      startPos = NVector3();                    
-    NVector3      targetPos = NVector3();                   
+    NVector3      targetPos = NVector3();
     float         duration = 1.0f;                          
     float         elapsed = 0.0f;                           
     float         speedFactor = 1.0f;                       
@@ -82,7 +82,6 @@ private:
     // ジャンプの場合でも上昇と下降で両方に同じ時間がかかるようにする
     // またゲームスピードに依存して変わるので定数として扱わない
     Vector2 m_MoveDuration{ HorizontalDurationBase, VerticalDurationBase };
-    Vector2 m_MoveTimer   { 0.0f, 0.0f };
     Vector2 m_MoveSpeed   { 0.0f, 0.0f };
 
     float m_Distance = 1.0f;
@@ -93,6 +92,7 @@ private:
     void UpdateTargetFromConfig();
 
 public:
+    Vector2 m_MoveTimer   { 0.0f, 0.0f };
     Cart(Camera* cam);
 
     void Initialize() override;
@@ -130,8 +130,9 @@ public:
     void SetFaint();
 
     void Faint(float duration);
-
     bool IsActive() const { return m_isActive; }
+
+
 
     const NVector3& GetStartPos() const { return m_MoveInfo.startPos; }
     CarDirection GetDirection() const { return m_Direction; }

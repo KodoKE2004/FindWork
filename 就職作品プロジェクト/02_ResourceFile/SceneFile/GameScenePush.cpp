@@ -19,6 +19,7 @@ void GameScenePush::Initialize()
 
     // 基底クラスの初期化
     GameSceneExe::Initialize();
+
     // シーンに繋ぐ情報は基底初期化後の一番最初に設定
     m_RelationData.previousScene = SCENE_NO::GAME_PUSH;
     m_RelationData.oldScene = SCENE_NO::GAME_WAIT;
@@ -57,7 +58,7 @@ void GameScenePush::Initialize()
     m_Cart->CreateStartPattern(m_Difficulty);
     m_Cart->SetSpeedFactor(m_GameSpeedMass);
     m_Cart->SetStartPattern();
-    m_CartActivationDelay = GenerateActivationDelay();
+    m_TimeCartActivetion.limit = GenerateActivationDelay();
 
     // カート警告の生成
     m_CartWarning = instance.AddObject<CartWarning>(instance.GetCamera());
@@ -69,7 +70,11 @@ void GameScenePush::Initialize()
     m_CartWarning->Deactivate();
     m_MySceneObjects.emplace_back(m_CartWarning);
 
-    m_CartWarningTimer = 0.0f;
+    SetTimer(&m_TimeCartActivetion.timer);
+    SetTimer(&m_TimeCartWarning.timer);
+    SetTimer(&m_Cart->m_MoveTimer.x);
+    SetTimer(&m_Cart->m_MoveTimer.y);
+
     m_HasSpawnedCartWarning = false;
 }
 
@@ -87,9 +92,8 @@ void GameScenePush::Update(float tick)
 
     if (m_CartWarning)
     {
-        m_CartWarningTimer += tick;
         if (!m_HasSpawnedCartWarning &&
-             m_CartWarningTimer >= m_CartWarningDelay)
+             m_TimeCartWarning.IsTimeUp())
         {
             if (m_Cart)
             {
@@ -105,7 +109,7 @@ void GameScenePush::Update(float tick)
             m_CartWarning->Deactivate();
         }
     }
-    if (m_CartAcitvationTimer > m_CartActivationDelay)
+    if (m_TimeCartActivetion.IsTimeUp())
     {
         if (m_Cart && !m_Cart->IsActive())
         {
@@ -114,13 +118,15 @@ void GameScenePush::Update(float tick)
     }
     else 
     {
-        m_CartAcitvationTimer = m_Duration;
+        m_TimeCartActivetion.timer = m_TimerGameExe;
     }
 
     GameSceneExe::Update(tick);
     if (IsChange()) {
         ChangeScenePop(TRANS_MODE::FADE, 0.2f);
     }
+
+
 }
 
 void GameScenePush::Finalize()

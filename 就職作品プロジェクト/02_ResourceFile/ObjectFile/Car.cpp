@@ -95,7 +95,6 @@ void Cart::Update()
         }
 
         position += speed * appliedDelta;
-        timer    += appliedDelta;
         if (timer >= duration)
         {
             position = target;

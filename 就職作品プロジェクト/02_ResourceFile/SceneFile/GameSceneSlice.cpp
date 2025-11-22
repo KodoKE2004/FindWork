@@ -40,13 +40,16 @@ void GameSceneSlice::Initialize()
         enemy->SetScale(100.0f, 100.0f, 1.0f);
         m_MySceneObjects.emplace_back(enemy);
     }
+
+   
+    
 }
 
 void GameSceneSlice::Update(float tick)
 {
+    using namespace Math::Collider2D; 
+
     auto& instance = Game::GetInstance();
-    
-    using namespace Math::Collider2D;
 
     std::vector<Enemy*> enemys = instance.GetObjects<Enemy>();
     if (IsAllDeathEnemy(enemys)) {
@@ -56,12 +59,13 @@ void GameSceneSlice::Update(float tick)
     }
     else
     {
+        // UŒ‚”»’è
         for(auto it : enemys)
         { 
             m_Sord->m_HitResult.SetHitResult(
                 isHitSquareSquare(*m_Sord, *it)
             );
-
+            
             if (m_Sord->m_HitResult.isTriggered() && !it->IsDeath()) 
             {
                 MyDebugLog(Debug::Log("“–‚½‚Á‚½");)
@@ -71,9 +75,11 @@ void GameSceneSlice::Update(float tick)
     }
 
     GameSceneExe::Update(tick);
+
     if (IsChange()) {
         ChangeScenePop(TRANS_MODE::FADE, 0.2f);
     }
+
 }
 
 void GameSceneSlice::Finalize()

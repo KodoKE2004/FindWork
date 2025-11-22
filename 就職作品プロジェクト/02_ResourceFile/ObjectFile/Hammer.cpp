@@ -1,6 +1,7 @@
 #include "Hammer.h"
 #include "Application.h"
 #include "Collider.h"
+#include "Scene.h"
 #include <algorithm>
 
 Hammer::Hammer(Camera* cam) : Square(cam)
@@ -19,30 +20,33 @@ void Hammer::Update()
     if (m_isAttack) 
     {
         // 攻撃中のアニメーション処理
-        m_Elapsed += Application::GetDeltaTime();
         float p ,w ;
         if (!m_isAttacked) 
         {
             // 攻撃アニメーション処理
-            p = (m_AttackDuration <= 0.0f) ? 1.0f : std::clamp( m_Elapsed / m_AttackDuration, 0.0f, 1.0f);
+            p = (m_TimeAttack.timer <= 0.0f) ?
+            1.0f :                                                           // true
+            std::clamp(m_TimeAttack.timer / m_TimeAttack.limit, 0.0f, 1.0f); // false
             w = Math::Easing::EaseOutBounce(p);
             m_Position.y = m_DefaultPosY + m_MoveValue * w;
         }
         else
         {
             // キャンセルアニメーション処理
-            p = (m_AttackDuration <= 0.0f) ? 1.0f : std::clamp(m_Elapsed / m_CoolDuration, 0.0f, 1.0f);
+            p = (m_TimeCool.timer <= 0.0f) ? 
+            1.0f : std::clamp(m_TimeCool.timer / m_TimeCool.limit, 0.0f, 1.0f);
             w = Math::Easing::EaseOutQuart(p);
             m_Position.y = m_AttackPosY  + ( - m_MoveValue ) * w;
         }
 
         if (p >= 1.0f)
         {
-            m_Elapsed = 0.0f;
+            m_TimeAttack.timer = 0.0f;
             
             if (!m_isAttacked) {
                 m_isAttacked = true;
                 m_Position.y = m_AttackPosY;
+                m_TimeCool.timer = 0.0f;
             }
             else
             {
@@ -54,7 +58,7 @@ void Hammer::Update()
                 
         return;
     }   
-    // 攻撃してないとの場合
+    // 攻撃してない場合
     else 
     {
         if (Input::GetKeyTrigger(VK_RETURN)) { 
@@ -89,9 +93,9 @@ void Hammer::Attack(float tick)
         mass = 0.3f;
     }
 
-    m_AttackDuration = 0.9f * (1.0f - mass);
-    m_CoolDuration   = 0.6f * (1.0f - mass);
+    m_TimeAttack.limit = 0.9f * (1.0f - mass);
+    m_TimeCool.limit   = 0.6f * (1.0f - mass);
 
-    m_Elapsed = 0.0f;
+    m_TimeAttack.timer = 0.0f;
     m_isAttack = true;
 }

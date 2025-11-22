@@ -9,10 +9,9 @@
 void GameSceneExe::Initialize()
 {
     // 初期化
-    m_Difficulty = 0;
-    m_Duration = 0.0f;
-    m_GameSpeedMass   = 1.0f;
-    m_ChangeSceneTime = 5.0f;
+    m_Difficulty    = 0;
+    m_GameSpeedMass = 1.0f;
+    m_TimeChangeScene.timer = 5.0f;
     m_isChange     = false;
     m_isFastChange = false;
     m_ChangeFastTimer = 0.0f;
@@ -23,7 +22,6 @@ void GameSceneExe::Initialize()
     //   n && 4 == 0 ならスピードアップ
     //===============================
     
-
     // 難易度 0 ~
     if (m_RelationData.stageCount % 8 == 0) {
         int difficulty = m_RelationData.stageCount / 8;
@@ -36,17 +34,17 @@ void GameSceneExe::Initialize()
     }
 
     // 値の反映
-    m_ChangeSceneTime /= m_GameSpeedMass;
+    m_TimeChangeScene.limit /= m_GameSpeedMass;
     m_ChangeFastTime   = 2.0f * (1 - m_GameSpeedMass);
-
+    m_TimerList.clear();
+    SetTimer(&m_TimeChangeScene.timer);
 
 }
 
 void GameSceneExe::Update(float tick)
 {
-    TickCount(tick);
     bool clearConect =  m_RelationData.isClear &&
-                       (m_isFastChange || IsTimeUp());
+                       (m_isFastChange || m_TimeChangeScene.IsTimeUp());
 
     if (m_isFastChange) {
         TimeCountFast(tick);
@@ -55,12 +53,13 @@ void GameSceneExe::Update(float tick)
             m_isChange = true;
         }
     }
-    if (IsTimeUp() && !m_isChange) {
+    if (m_TimeChangeScene.IsTimeUp() &&
+        !m_isChange) {
         m_isChange = true;
     }
     
 
-
+    CountTimer(tick);
 }
 
 void GameSceneExe::Finalize()

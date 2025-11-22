@@ -40,6 +40,10 @@ void GameSceneHit::Initialize()
         enemy->SetPos  (   0.0f, - 200.0f, 1.0f);
         m_MySceneObjects.emplace_back(enemy);
     }
+
+    SetTimer(m_Hammer->GetTimeAttack());
+    SetTimer(m_Hammer->GetTimeCool());
+
 }
 
 void GameSceneHit::Update(float tick)

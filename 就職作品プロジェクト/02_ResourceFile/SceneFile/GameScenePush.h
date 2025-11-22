@@ -18,11 +18,9 @@ private:
     float m_PlayerJumpApexHeight  =   200.0f;
     static constexpr float PlayerJumpHeightScale = 2.5f;
 
-    float m_CartAcitvationTimer = 0.0f;
-    float m_CartActivationDelay = 0.0f;
+    TimerData m_TimeCartActivetion = { 0.0f, 0.0f };
+    TimerData m_TimeCartWarning    = { 0.0f, 0.5f };
 
-    float m_CartWarningTimer = 0.0f;
-    float m_CartWarningDelay = 0.5f;
     bool  m_HasSpawnedCartWarning = false;
 
     size_t m_CurrentCartPatternIndex = 0;
