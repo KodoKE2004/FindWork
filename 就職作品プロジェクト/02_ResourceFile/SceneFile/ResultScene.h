@@ -1,8 +1,19 @@
 #pragma once
 #include "Scene.h"
+#include "Square.h"
+
 class ResultScene : public Scene
 {
 private:
+
+    Square* m_ButtonToTitle = nullptr; 
+    Square* m_ButtonRetry   = nullptr;
+
+    bool m_isCorsorButtonToTitle = true;
+
+    static constexpr float AlphaChangeTimer = 0.5f; 
+    float m_DurationCuror = 0.0f;
+
 
 public:
     //================================

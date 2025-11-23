@@ -209,6 +209,8 @@ static void RenderFrameSlope(
     }
 }
 
+
+
 #ifdef _DEBUG
 namespace
 {

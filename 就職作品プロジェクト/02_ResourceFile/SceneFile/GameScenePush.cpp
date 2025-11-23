@@ -114,13 +114,10 @@ void GameScenePush::Update(float tick)
         if (m_Cart && !m_Cart->IsActive())
         {
             m_Cart->Start();
+            m_TimeCartActivetion.timer = 0.0f;
         }
     }
-    else 
-    {
-        m_TimeCartActivetion.timer = m_TimerGameExe;
-    }
-
+   
     GameSceneExe::Update(tick);
     if (IsChange()) {
         ChangeScenePop(TRANS_MODE::FADE, 0.2f);

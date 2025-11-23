@@ -54,23 +54,8 @@ void Player::Update()
 {
     const float deltaTime = Application::GetDeltaTime();
     int horizontalInput = 0;
-    if (Input::GetKeyPress(VK_A)) {
-        if (m_IsGround) 
-            m_Position.x -= m_MoveSpeed;
-        else
-            horizontalInput -= 1;
-    }
-    if (Input::GetKeyPress(VK_D)) {
-        if (m_IsGround)
-            m_Position.x += m_MoveSpeed;
-        else
-            horizontalInput += 1;
-    }
     
-    if (m_IsGround && horizontalInput != 0)
-    {
-        m_Position.x += static_cast<float>(horizontalInput) * m_MoveSpeed;
-    }
+    
 
     const bool jumpTriggered = m_IsGround && Input::GetKeyTrigger(VK_RETURN);
     if (jumpTriggered)

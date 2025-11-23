@@ -87,7 +87,7 @@ void GameSceneWait::Initialize()
 void GameSceneWait::Update(float tick)
 {   
     auto& instance = Game::GetInstance();
-    #pragma region ステージ遷移処理
+    #pragma region ゲームステージ遷移処理
     // 一定時間経過後に次のステージ選択処理へ
     if (m_ChangeStage.IsTimeUp())
     {
@@ -124,6 +124,13 @@ void GameSceneWait::Update(float tick)
         m_RelationData.gameLife -= 1u;
         DecrementLife();
         m_wasDecrementLife = true;
+    }
+    #pragma endregion
+    #pragma region リザルトシーン遷移処理
+    if (m_RelationData.gameLife == 0u)
+    {
+        // ライフが0になったらリザルトシーンへ
+        ChangeScenePush<ResultScene>(TRANS_MODE::FADE,0.5f);
     }
     #pragma endregion
     // タイマー更新処理

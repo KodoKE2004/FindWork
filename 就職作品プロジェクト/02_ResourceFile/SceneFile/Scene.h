@@ -111,6 +111,10 @@ public:
 		return time >= limit; 
 	}
 
+    // Œø‰Ê‰¹Ä¶ŠÖ”
+    // seName : AudioConfig‚É“o˜^‚µ‚½–¼‘O
+    // Game.h‚ÌAudioManager‚ğ’Ê‚¶‚ÄÄ¶‚·‚é
+	void PlaySE(std::string seName);
 };
 
 

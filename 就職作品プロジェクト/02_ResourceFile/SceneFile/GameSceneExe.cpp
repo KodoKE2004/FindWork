@@ -22,6 +22,7 @@ void GameSceneExe::Initialize()
     //   n && 4 == 0 ならスピードアップ
     //===============================
     
+    ++m_RelationData.stageCount;
     // 難易度 0 ~
     if (m_RelationData.stageCount % 8 == 0) {
         int difficulty = m_RelationData.stageCount / 8;
