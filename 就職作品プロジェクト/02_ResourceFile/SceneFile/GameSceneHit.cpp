@@ -31,7 +31,8 @@ void GameSceneHit::Initialize()
     m_Hammer->SetSpeedMass(m_GameSpeedMass);
     m_MySceneObjects.emplace_back(m_Hammer);
     
-    int difficult = m_RelationData.stageCount % 4;
+    int difficult = m_RelationData.stageCount / 4;
+    if (difficult >= 4){ difficult = 4; }
     for (int i = 0; i <= difficult; ++i)
     {
         auto enemy = instance.AddObject<Enemy>();
