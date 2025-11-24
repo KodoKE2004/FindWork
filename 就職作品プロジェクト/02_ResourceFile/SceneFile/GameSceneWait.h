@@ -35,6 +35,7 @@ private:
     bool m_isStageCleared          = false;		// ステージクリアしたかどうかのフラグ
     bool m_wasDecrementLife		   = false;		// ライフが減ったかどうかのフラグ
 
+    bool m_WasPlayBGM = false;				// BGMを再生したかどうかのフラグ
 
 	// Exeシーンの乱数選択を行う。
 	// 二回連続で同じステージが来るようにならないようにする 

@@ -63,7 +63,7 @@ void Game::Initialize()
 
 #endif // _DEBUG
 
-	instance.m_SceneCurrent = new TitleScene(false);				// タイトルシーンのインスタンスを生成
+	instance.m_SceneCurrent = new GameSceneWait;				// タイトルシーンのインスタンスを生成
 	instance.m_SceneCurrent->Initialize();
 }
 

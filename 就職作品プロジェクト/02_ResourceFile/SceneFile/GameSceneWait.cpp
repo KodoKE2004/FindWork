@@ -114,6 +114,11 @@ void GameSceneWait::Update(float tick)
         }
     }
     #pragma endregion
+
+    // リズムを取る
+    // ライフをリズムに合わせて廻す
+
+
     #pragma region ライフ減少処理
     // ライフ減少処理
     if ( m_DecrementLife.IsTimeUp() &&
@@ -126,6 +131,12 @@ void GameSceneWait::Update(float tick)
         m_wasDecrementLife = true;
     }
     #pragma endregion
+
+    // タイマー更新処理
+    CountTimer(tick);
+
+    // デバッグ用　終わったら消す予定のreturn
+    return ;
     #pragma region リザルトシーン遷移処理
     if (m_RelationData.gameLife == 0u)
     {
@@ -133,8 +144,6 @@ void GameSceneWait::Update(float tick)
         ChangeScenePush<ResultScene>(TRANS_MODE::FADE,0.5f);
     }
     #pragma endregion
-    // タイマー更新処理
-    CountTimer(tick);
 }
 
 void GameSceneWait::Finalize()
