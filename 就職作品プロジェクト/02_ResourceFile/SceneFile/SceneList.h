@@ -7,7 +7,7 @@
 #include "GameSceneExe.h"
 #include "GameSceneWait.h"
 #include "GameSceneSlice.h"
-#include "GameSceneHit.h"
-#include "GameScenePush.h"
+#include "GameSceneCrush.h"
+#include "GameSceneJump.h"
 #include "ResultScene.h"
 

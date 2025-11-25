@@ -15,8 +15,8 @@ enum class SCENE_NO
 	GAME_WAIT,
 	GAME_EXE,
     GAME_SLICE,
-	GAME_PUSH,
-	GAME_HIT,
+	GAME_JUMP,
+	GAME_CRUSH,
 	TRANSITION,
 	NUM
 };
@@ -33,7 +33,7 @@ enum class SCENE_NO
 class SceneRelationData
 {
 public:
-	bool isClear      = false;
+	bool isClear      = true;
 	uint32_t gameLife = 4;
 	int  stageCount   = 0;
 	SCENE_NO previousScene = SCENE_NO::NONE;

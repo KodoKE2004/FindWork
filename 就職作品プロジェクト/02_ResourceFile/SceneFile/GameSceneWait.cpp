@@ -22,8 +22,8 @@ namespace
 {
     constexpr std::array<SCENE_NO, 3> kStaegeCandidates = {
         SCENE_NO::GAME_SLICE,
-        SCENE_NO::GAME_PUSH,
-        SCENE_NO::GAME_HIT
+        SCENE_NO::GAME_JUMP,
+        SCENE_NO::GAME_CRUSH
     };
 
     constexpr float kStageTransitionDelay = 1.0f;
@@ -103,11 +103,11 @@ void GameSceneWait::Update(float tick)
         case SCENE_NO::GAME_SLICE:
             ChangeScenePush<GameSceneSlice>(TRANS_MODE::FADE, 0.3f);
             break;
-        case SCENE_NO::GAME_PUSH:
-            ChangeScenePush<GameScenePush>(TRANS_MODE::FADE, 0.3f);
+        case SCENE_NO::GAME_JUMP:
+            ChangeScenePush<GameSceneJump>(TRANS_MODE::FADE, 0.3f);
             break;
-        case SCENE_NO::GAME_HIT:
-            ChangeScenePush<GameSceneHit>(TRANS_MODE::FADE, 0.3f);
+        case SCENE_NO::GAME_CRUSH:
+            ChangeScenePush<GameSceneCrush>(TRANS_MODE::FADE, 0.3f);
             break;
         default:
             return;
@@ -197,15 +197,15 @@ void GameSceneWait::PrepareNextStage()
         switch (m_RelationData.oldScene)
         {
         case SCENE_NO::GAME_SLICE:
-            _NextScene = RandomChoose<SCENE_NO>(SCENE_NO::GAME_PUSH,
-                SCENE_NO::GAME_HIT);
+            _NextScene = RandomChoose<SCENE_NO>(SCENE_NO::GAME_JUMP,
+                SCENE_NO::GAME_CRUSH);
             break;
-        case SCENE_NO::GAME_PUSH:
+        case SCENE_NO::GAME_JUMP:
             _NextScene = RandomChoose<SCENE_NO>(SCENE_NO::GAME_SLICE,
-                SCENE_NO::GAME_HIT);
+                SCENE_NO::GAME_CRUSH);
             break;
-        case SCENE_NO::GAME_HIT:
-            _NextScene = RandomChoose<SCENE_NO>(SCENE_NO::GAME_PUSH,
+        case SCENE_NO::GAME_CRUSH:
+            _NextScene = RandomChoose<SCENE_NO>(SCENE_NO::GAME_JUMP,
                 SCENE_NO::GAME_SLICE);
             break;
         default:
@@ -226,8 +226,8 @@ SCENE_NO GameSceneWait::StageSelectAllRandom()
 {
     SCENE_NO stageKinds[3] = {
             SCENE_NO::GAME_SLICE,
-            SCENE_NO::GAME_HIT,
-            SCENE_NO::GAME_PUSH
+            SCENE_NO::GAME_CRUSH,
+            SCENE_NO::GAME_JUMP
     };
 
     // 最初の一回だけ作成する乱数は３パターンの中から選択

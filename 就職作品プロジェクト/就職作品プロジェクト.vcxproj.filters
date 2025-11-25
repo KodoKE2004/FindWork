@@ -205,10 +205,10 @@
     <ClCompile Include="02_ResourceFile\ObjectFile\Circle.cpp">
       <Filter>SourceFile\Object\2D</Filter>
     </ClCompile>
-    <ClCompile Include="02_ResourceFile\SceneFile\GameSceneHit.cpp">
+    <ClCompile Include="02_ResourceFile\SceneFile\GameSceneCrush.cpp">
       <Filter>SourceFile\Scene\GameScene</Filter>
     </ClCompile>
-    <ClCompile Include="02_ResourceFile\SceneFile\GameScenePush.cpp">
+    <ClCompile Include="02_ResourceFile\SceneFile\GameSceneJump.cpp">
       <Filter>SourceFile\Scene\GameScene</Filter>
     </ClCompile>
     <ClCompile Include="02_ResourceFile\ObjectFile\Sord.cpp">
@@ -417,10 +417,10 @@
     <ClInclude Include="02_ResourceFile\SceneFile\GameSceneSlice.h">
       <Filter>SourceFile\Scene\GameScene</Filter>
     </ClInclude>
-    <ClInclude Include="02_ResourceFile\SceneFile\GameSceneHit.h">
+    <ClInclude Include="02_ResourceFile\SceneFile\GameSceneCrush.h">
       <Filter>SourceFile\Scene\GameScene</Filter>
     </ClInclude>
-    <ClInclude Include="02_ResourceFile\SceneFile\GameScenePush.h">
+    <ClInclude Include="02_ResourceFile\SceneFile\GameSceneJump.h">
       <Filter>SourceFile\Scene\GameScene</Filter>
     </ClInclude>
     <ClInclude Include="02_ResourceFile\ObjectFile\Sord.h">

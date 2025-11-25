@@ -30,7 +30,7 @@ void GameSceneSlice::Initialize()
     m_MySceneObjects.emplace_back(m_Sord);
 
     
-    int difficult = m_RelationData.stageCount % 4;
+    int difficult = m_RelationData.stageCount / 4;
     for (int i = 0; i <= difficult; ++i)
     {
         auto enemy = instance.AddObject<Enemy>();
