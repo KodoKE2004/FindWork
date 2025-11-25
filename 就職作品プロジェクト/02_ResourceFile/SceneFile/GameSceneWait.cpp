@@ -29,8 +29,6 @@ namespace
     constexpr float kStageTransitionDelay = 1.0f;
 }
 
-
-
 void GameSceneWait::Initialize()
 {
     DebugUI::TEXT_CurrentScene = "GameSceneWait";
@@ -77,16 +75,18 @@ void GameSceneWait::Initialize()
 
     for(uint32_t i = 0; i < m_RelationData.gameLife; ++i)
     {
+        const float distance = 130.0f;
+
         Square* life = instance.AddObject<Square>(instance.GetCamera());
         life->SetTexture(textureMgr->GetTexture("DestroyBullet.png"));
-        life->SetPos(lifePosX + ( i * 130.0f ), lifePosY, 1.0f);
+        life->SetPos(lifePosX + ( i * distance), lifePosY, 1.0f);
         life->SetScale(100.0f, 100.0f, 1.0f);
         life->SetShader("VS_Alpha","PS_Alpha");
-        life->SetColor(1.0f, 1.0f, 1.0f, 1.0f);
 
         m_MySceneObjects.emplace_back(life);
         m_LifeGame.emplace_back(life);
     }
+
 
     const float initialTilt = m_IsLifeTiltPositive ? 30.0f : -30.0f;
     for (auto* life : m_LifeGame)
@@ -118,7 +118,7 @@ void GameSceneWait::Update(float tick)
             ChangeScenePush<GameSceneSlice>(TRANS_MODE::FADE, 0.3f);
             break;
         case SCENE_NO::GAME_JUMP:
-            ChangeScenePush<GameSceneJump>(TRANS_MODE::FADE, 0.3f);
+            ChangeScenePush<GameSceneJump>(TRANS_MODE::FADE,  0.3f);
             break;
         case SCENE_NO::GAME_CRUSH:
             ChangeScenePush<GameSceneCrush>(TRANS_MODE::FADE, 0.3f);
