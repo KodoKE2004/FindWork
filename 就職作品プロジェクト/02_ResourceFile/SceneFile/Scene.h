@@ -2,6 +2,7 @@
 #include "Object.h"
 #include "Skydome.h"
 #include "../Audio.h"
+#include "RhythmBeat.h"
 
 #include <unordered_map>
 #include <vector>
@@ -43,6 +44,9 @@ public:
 
 class Scene
 {
+protected:
+    static constexpr float DEFAULT_VALUME = 0.2f; // PressEnterの点滅タイマー間隔
+	static constexpr Color DEFAULT_COLOR = Color(1.0f, 1.0f, 1.0f, 1.0f);
 protected:
 	
 	std::vector<Object*> m_MySceneObjects;

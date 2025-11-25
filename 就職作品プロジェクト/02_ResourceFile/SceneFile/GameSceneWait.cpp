@@ -57,6 +57,11 @@ void GameSceneWait::Initialize()
     SetTimer(&m_ChangeStage.timer);
     SetTimer(&m_DecrementLife.timer);
 
+    RhythmBeatConst beatConfig{};
+    beatConfig.Setup(120.0f, 4, 1); // 120 BPM, 4/4 拍子
+    m_RhythmBeat.Initialize(beatConfig);
+    m_IsFirstInitialized = true;
+
     auto& instance = Game::GetInstance();
 
     // ライフの作成
@@ -82,6 +87,15 @@ void GameSceneWait::Initialize()
         m_MySceneObjects.emplace_back(life);
         m_LifeGame.emplace_back(life);
     }
+
+    const float initialTilt = m_IsLifeTiltPositive ? 30.0f : -30.0f;
+    for (auto* life : m_LifeGame)
+    {
+        if (life)
+        {
+            life->SetRotate(0.0f, 0.0f, initialTilt);
+        }
+    }
 }
 
 void GameSceneWait::Update(float tick)
@@ -91,7 +105,7 @@ void GameSceneWait::Update(float tick)
     // 一定時間経過後に次のステージ選択処理へ
     if (m_ChangeStage.IsTimeUp())
     {
-        m_ShouldTransitionToStage = true;
+         m_ShouldTransitionToStage = true;
     }
     if (m_ShouldTransitionToStage)
     {
@@ -117,7 +131,23 @@ void GameSceneWait::Update(float tick)
 
     // リズムを取る
     // ライフをリズムに合わせて廻す
+    int advancedTicks = m_RhythmBeat.Update(tick);
+    if (advancedTicks > 0)
+    {
+        for (int i = 0; i < advancedTicks; ++i)
+        {
+            m_IsLifeTiltPositive = !m_IsLifeTiltPositive;
+        }
 
+        const float tiltAngle = m_IsLifeTiltPositive ? 30.0f : -30.0f;
+        for (auto* life : m_LifeGame)
+        {
+            if (life)
+            {
+                life->SetRotate(0.0f, 0.0f, tiltAngle);
+            }
+        }
+    }
 
     #pragma region ライフ減少処理
     // ライフ減少処理
@@ -136,7 +166,7 @@ void GameSceneWait::Update(float tick)
     CountTimer(tick);
 
     // デバッグ用　終わったら消す予定のreturn
-    return ;
+    // return ;
     #pragma region リザルトシーン遷移処理
     if (m_RelationData.gameLife == 0u)
     {

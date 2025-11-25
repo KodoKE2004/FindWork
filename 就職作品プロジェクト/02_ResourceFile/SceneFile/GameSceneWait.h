@@ -37,6 +37,9 @@ private:
 
     bool m_WasPlayBGM = false;				// BGMを再生したかどうかのフラグ
 
+    RhythmBeat m_RhythmBeat;			// リズムビート管理用変数
+    bool m_IsLifeTiltPositive = true;	// ライフの傾きが正かどうかのフラグ
+
 	// Exeシーンの乱数選択を行う。
 	// 二回連続で同じステージが来るようにならないようにする 
 	// 要素の削除の仕方は考える。

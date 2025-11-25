@@ -56,7 +56,7 @@ protected:
 	std::string m_Name;
 	// •`‰æ‚Ìˆ×‚Ìî•ñiŒ©‚½–Ú‚ÉŠÖ‚í‚é•”•ªj
 	Camera*  m_Camera;
-	Color   m_Color;
+	Color    m_Color;
 
 	BaseShader* m_VertexShader    = nullptr;
 	BaseShader* m_PixelShader     = nullptr;

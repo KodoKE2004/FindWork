@@ -20,20 +20,25 @@ void ResultScene::Initialize()
     m_ButtonToTitle = instance.AddObject<Square>();
     m_ButtonToTitle->SetName("m_ButtonToTitle");
     m_ButtonToTitle->SetTexture(textureMgr->GetTexture("ButtonToTitle.png"));
-    m_ButtonToTitle->SetPos(0.0f, -100.0f, 0.0f);
-    m_ButtonToTitle->SetScale(940.0f, 100.0f, 1.0f);
+    m_ButtonToTitle->SetTransform(TRANSFORM_TO_TITLE);
+
     m_ButtonToTitle->SetShader("VS_Alpha", "PS_Alpha");
-    m_ButtonToTitle->SetColor(1.0f, 1.0f, 1.0f, 1.0f);
+    m_ButtonToTitle->SetColor(DEFAULT_COLOR);
     m_MySceneObjects.emplace_back(m_ButtonToTitle);
 
     m_ButtonRetry = instance.AddObject<Square>();
     m_ButtonRetry->SetName("m_ButtonToRetry");
     m_ButtonRetry->SetTexture(textureMgr->GetTexture("ButtonRetry.png"));
-    m_ButtonRetry->SetPos(0.0f, -200.0f, 0.0f);
-    m_ButtonRetry->SetScale(940.0f, 100.0f, 1.0f);
+    m_ButtonRetry->SetTransform(TRANSFORM_RETRY);
     m_ButtonRetry->SetShader("VS_Alpha", "PS_Alpha");
-    m_ButtonRetry->SetColor(1.0f, 1.0f, 1.0f, 1.0f);
+    m_ButtonRetry->SetColor(DEFAULT_COLOR);
     m_MySceneObjects.emplace_back(m_ButtonRetry);
+
+    PlayParams corsorParam{};
+    corsorParam.volume = DEFAULT_VALUME;
+    m_AudioList.emplace("moveCorsor", AudioConfig(L"SE/MoveCorsor.wav", corsorParam, false, false));
+
+
 
     MyDebugLog(std::cout << "クリアステージ数" << m_RelationData.stageCount << std::endl;)
 }
@@ -45,6 +50,23 @@ void ResultScene::Update(float tick)
     if (Input::GetKeyTrigger(VK_UP) || Input::GetKeyTrigger(VK_DOWN) ||
         Input::GetKeyTrigger(VK_W)  || Input::GetKeyTrigger(VK_S)){
         m_isCorsorButtonToTitle ^= true;
+        // SEの再生
+        if (AudioManager* audioMgr = Game::GetInstance())
+        {
+            if (auto it = m_AudioList.find("moveCorsor"); it != m_AudioList.end())
+            {
+                auto params = it->second.params;
+                if (it->second.loop)
+                {
+                    params.loop.loopCount = XAUDIO2_LOOP_INFINITE;
+                }
+                audioMgr->Play("moveCorsor", params);
+            }
+            else
+            {
+                audioMgr->Play("moveCorsor");
+            }
+        }
     }
     
     // PressEnterをチカチカさせる
@@ -103,7 +125,7 @@ void ResultScene::Update(float tick)
             m_RelationData.nextScene     = SCENE_NO::GAME_WAIT;
             m_RelationData.isClear = true;
             m_RelationData.stageCount = 0;
-            m_RelationData.gameLife = 4;
+            m_RelationData.gameLife   = 4;
             ChangeScenePop(TRANS_MODE::FADE,0.3f);
         }
 

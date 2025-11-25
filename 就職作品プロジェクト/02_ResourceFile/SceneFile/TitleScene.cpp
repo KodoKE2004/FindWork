@@ -72,7 +72,7 @@ void TitleScene::Initialize()
 	m_AudioList.clear();
 	PlayParams bgmParam{};
     bgmParam.volume = 0.2f;
-    m_AudioList.emplace("bgm",AudioConfig(L"BGM/FaintRain.wav", bgmParam, true, true));
+    m_AudioList.emplace("bgm",AudioConfig(L"BGM/TitleScene.wav", bgmParam, true, true));
 
     PlayParams enterParam{};
     m_AudioList.emplace("enter", AudioConfig(L"SE/Enter.wav", enterParam, false, false));
