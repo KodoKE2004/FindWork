@@ -51,7 +51,7 @@ void GameSceneJump::Initialize()
 
     // カートの生成
     m_Cart = instance.AddObject<Cart>(instance.GetCamera());
-    m_Cart->SetTexture(textureMgr->GetTexture("Plane.png"));
+    m_Cart->SetTexture(textureMgr->GetTexture("Car.png"));
     m_MySceneObjects.emplace_back(m_Cart);
     // カートの開始パターン設定
     // パターンを登録

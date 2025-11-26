@@ -16,20 +16,22 @@ void TransScene::Initialize()
 {
     auto& instance = Game::GetInstance();
 
+	// èâä˙âª
 	m_Timer = 0.0f;
 	m_Alpha = 0.0f;
 	m_isChange = false;
 	m_hasInitializedNextScene = false;
-	if (m_Duration <= 0.0f) {
+
+	if (m_Duration < 0.0f) {
 		m_Duration = 1.0f;
 	}
 	m_Step = STEP::DOING;
+	m_AlphaValue = 1.0f / m_Duration;
 	
 	switch (m_TransMode)
 	{
 	case TRANS_MODE::FADE:
 	{
-		m_AlphaValue = 1.0f / m_Duration;
         m_TransitionTexture = std::make_shared<Fade>(instance.GetCamera());
 		m_TransitionTexture->Initialize();
 		m_TransitionTexture->SetPos(0.0f, 0.0f, -2.0f);
@@ -38,7 +40,6 @@ void TransScene::Initialize()
 	break;
 	case TRANS_MODE::WIPE:
 	{
-        m_AlphaValue = 1.0f / m_Duration;
 		m_TransitionTexture = std::make_shared<Wipe>(instance.GetCamera());
 		m_TransitionTexture->Initialize();
 		if (m_StackOp != STACK_OP::POP && m_SceneNext) {
@@ -53,7 +54,7 @@ void TransScene::Initialize()
 		m_TransitionTexture->SetPos(0.0f, 0.0f, -2.0f);
         m_TransitionTexture->SetDuration(m_Duration);
 		m_TransitionTexture->SetTimer(0.0f);
-		instance.SetTransitionTexture	 (m_TransitionTexture);
+		instance.SetTransitionTexture(m_TransitionTexture);
 	}
 	break;
 	}
@@ -113,7 +114,7 @@ void TransScene::Finalize()
 	}
 	m_MySceneObjects.clear();
 
-	m_Overlay = nullptr;
+	m_OverlayNext = nullptr;
 	m_TransitionTexture = nullptr ;
 	instance.SetTransitionTexture(nullptr);
 	m_NextSceneSRV.Reset();
@@ -149,10 +150,10 @@ void TransScene::DrawNextScene()
 	m_NextSceneSRV = m_RenderTarget->GetSRV();
 
 
-	m_Overlay = instance.AddObject<SnapshotOverlay>();
-	m_Overlay->SetSRV(m_NextSceneSRV.Get());
-	m_Overlay->SetAlpha(0.0f);
-	m_MySceneObjects.emplace_back(m_Overlay);
+	m_OverlayNext = instance.AddObject<SnapshotOverlay>();
+	m_OverlayNext->SetSRV(m_NextSceneSRV.Get());
+	m_OverlayNext->SetAlpha(0.0f);
+	m_MySceneObjects.emplace_back(m_OverlayNext);
 
 }
 
@@ -165,9 +166,4 @@ bool TransScene::isOverClock()
 	}
 
 	return false;
-}
-
-void TransScene::OldToNextScene()
-{
-	
 }

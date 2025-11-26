@@ -44,7 +44,9 @@ private:
 	// オフスクリーン用
 	std::unique_ptr<RenderTarget> m_RenderTarget;
 	Microsoft::WRL::ComPtr<ID3D11ShaderResourceView> m_NextSceneSRV;
-	SnapshotOverlay* m_Overlay = nullptr;
+
+	SnapshotOverlay* m_OverlayOld  = nullptr;
+	SnapshotOverlay* m_OverlayNext = nullptr;
 
     // タイマー関連
 	float m_Timer	 = 0.0f;
@@ -92,6 +94,5 @@ public:
 
 	// 設定した時間に到達したかどうか
 	bool isOverClock();  
-	void OldToNextScene();
 
 };

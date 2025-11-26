@@ -34,7 +34,7 @@ void GameSceneWait::Initialize()
     DebugUI::TEXT_CurrentScene = "GameSceneWait";
 
     // 引き渡しデータのシーンの整理
-    m_RelationData.oldScene = m_RelationData.previousScene;
+    m_RelationData.oldScene      = m_RelationData.previousScene;
     m_RelationData.previousScene = SCENE_NO::GAME_WAIT;
 
     if (m_RelationData.isClear) {
@@ -50,20 +50,28 @@ void GameSceneWait::Initialize()
     // 次のステージ選択フラグをflase
     m_ShouldTransitionToStage = false;
 
+    RhythmBeatConst beatConfig{};
     m_TimerList.clear();
     SetTimer(&m_Tick);
     SetTimer(&m_ChangeStage.timer);
     SetTimer(&m_DecrementLife.timer);
 
-    RhythmBeatConst beatConfig{};
     beatConfig.Setup(120.0f, 4, 1); // 120 BPM, 4/4 拍子
     m_RhythmBeat.Initialize(beatConfig);
     m_IsFirstInitialized = true;
 
     auto& instance = Game::GetInstance();
-
-    // ライフの作成
     TextureManager* textureMgr = instance.GetInstance();
+
+    // スカイドーム初期化
+        // Skydome初期化 
+    m_Skydome = instance.AddObject<Skydome>();
+    m_Skydome->SetName("m_Skydome");
+    m_Skydome->SetSkyDomeMode(true);
+    m_Skydome->SetTexture(textureMgr->GetTexture("SkydomeSpace.png"));
+    m_Skydome->SetRadius(500.0f);
+    m_MySceneObjects.emplace_back(m_Skydome);
+
 
     // ライフの数だけハートの生成
     const float lifePosX = - 200.0f;
@@ -73,6 +81,7 @@ void GameSceneWait::Initialize()
     m_isStageCleared          = false;
     m_wasDecrementLife        = false;
 
+    // ライフオブジェクトの生成
     for(uint32_t i = 0; i < m_RelationData.gameLife; ++i)
     {
         const float distance = 130.0f;
@@ -82,20 +91,21 @@ void GameSceneWait::Initialize()
         life->SetPos(lifePosX + ( i * distance), lifePosY, 1.0f);
         life->SetScale(100.0f, 100.0f, 1.0f);
         life->SetShader("VS_Alpha","PS_Alpha");
+        life->SetColor(1.0f, 1.0f, 1.0f, 1.0f);
 
         m_MySceneObjects.emplace_back(life);
         m_LifeGame.emplace_back(life);
     }
-
 
     const float initialTilt = m_IsLifeTiltPositive ? 30.0f : -30.0f;
     for (auto* life : m_LifeGame)
     {
         if (life)
         {
-            life->SetRotate(0.0f, 0.0f, initialTilt);
+            life->SetRotate(life->GetRotate().x, life->GetRotate().y, initialTilt);
         }
     }
+
 }
 
 void GameSceneWait::Update(float tick)

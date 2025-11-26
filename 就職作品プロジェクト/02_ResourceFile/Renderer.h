@@ -131,6 +131,8 @@ public:
 
 	// ゲッター
 	static D3D11_VIEWPORT		   GetRenderTargetView(void);
+
+	// 追加実装: オフスクリーン連携ヘルパ =====
 	static D3D11_VIEWPORT		   GetViewport();
 	static ID3D11RenderTargetView* GetBackBufferRTV();
 	

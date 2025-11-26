@@ -145,7 +145,7 @@ void TitleScene::Update(float tick)
 
 			audioMgr->StopAllByName("bgm", false);
 		}
-		ChangeScenePush<GameSceneWait>(TRANS_MODE::WIPE, 1.0f);
+		ChangeScenePush<GameSceneWait>(TRANS_MODE::FADE, 0.1f);
 	}
 
 	// Skydome‚Ì‰ñ“]

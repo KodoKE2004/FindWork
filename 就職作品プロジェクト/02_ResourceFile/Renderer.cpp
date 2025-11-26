@@ -439,7 +439,6 @@ D3D11_VIEWPORT Renderer::GetRenderTargetView(void)
 	return viewport;
 }
 
-// ===== 追加実装: オフスクリーン連携ヘルパ =====
 D3D11_VIEWPORT Renderer::GetViewport()
 {
 	D3D11_VIEWPORT vp{};
