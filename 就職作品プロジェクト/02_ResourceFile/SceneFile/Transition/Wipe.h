@@ -18,7 +18,9 @@ private:
 
     WIPE_MODE m_Mode = WIPE_MODE::LEFT_TO_RIGHT;
 
-    float m_Rate = 0.0f; // 0→1 の進行度
+    float m_Rate = 0.0f;    // 0→1 の進行度
+    float m_Elapsed = 0.0f; // 経過時間
+
     void ApplyWipeAmount(float amount);
 
 public:

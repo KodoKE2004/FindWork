@@ -2,6 +2,7 @@
 #include "main.h"
 #include "Renderer.h"
 #include "Application.h"
+#include "Collider.h"
 #include <algorithm>
 
 Wipe::Wipe(Camera* cam) : TransitionBase(cam)
@@ -18,6 +19,7 @@ void Wipe::Initialize()
 
     m_Phase = PHASE::TRANS_OUT;
     m_Rate = 0.0f;
+    m_Elapsed = 0.0f;
 
     if (m_Duration <= 0.0f) m_Duration = 1.0f;
 
@@ -161,13 +163,16 @@ void Wipe::WIPE_IN(float tick)
 {
     if (m_Phase != PHASE::TRANS_IN) return;
 
-    float elapsed = m_Rate / 1.0f;
-    const float progress = 1.0f - std::clamp(elapsed / max(m_Duration, 0.0001f), 0.0f, 1.0f);
-    ApplyWipeAmount(progress);
+    m_Elapsed += tick;
+    const float t = std::clamp(m_Elapsed / max(m_Duration, 0.0001f), 0.0f, 1.0f);
+    const float eased = Math::Easing::EaseInOutBack(t);    
 
-    if (progress <= 0.0f)
+    ApplyWipeAmount(1.0f - eased);
+
+    if (t >= 1.0f)
     {
         m_Phase = PHASE::FINISH;
+        m_Elapsed = 0.0f;
         SetScale(SCREEN_WIDTH, SCREEN_HEIGHT, 1.0f);
         SetPos(0.0f, 0.0f, GetPos().z);
         SetColor(0.0f, 0.0f, 0.0f, 0.0f);
@@ -178,12 +183,15 @@ void Wipe::WIPE_OUT(float tick)
 {
     if (m_Phase != PHASE::TRANS_OUT) return;
 
-    float elapsed = m_Rate / 1.0f;
-    const float progress = std::clamp(elapsed / max(m_Duration, 0.0001f), 0.0f, 1.0f);
-    ApplyWipeAmount(progress);
+    m_Elapsed += tick;
+    const float t = std::clamp(m_Elapsed / (m_Duration, 0.0001f), 0.0f, 1.0f);
+    const float eased = Math::Easing::EaseInOutSine(t);
 
-    if (progress >= 1.0f)
+    ApplyWipeAmount(eased);
+
+    if (t >= 1.0f)
     {
         m_Phase = PHASE::TRANS_IN;
+        m_Elapsed = 0.0f;
     }
 }

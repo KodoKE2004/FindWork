@@ -1,6 +1,7 @@
 #include "Game.h"
 #include "main.h"
 #include "Application.h"
+#include "Collider.h"
 #include <vector>
 #include <algorithm>
 
@@ -21,14 +22,14 @@ void Fade::Initialize()
 
     // 初期カラーを透明に設定
     m_Alpha = 0.0f;
-    
+    m_Elapsed = 0.0f;
+
     // Durationのケア
     if (m_Duration <= 0.0f) {
         m_Duration = 1.0f;
     }
 
     // アルファ値の計算と適用
-    m_AlphaValue = 1.0f / m_Duration;
     ApplyAlpha();
 
     // フェードアウトから開始
@@ -115,18 +116,18 @@ void Fade::ApplyAlpha()
     SetColor(1.0f, 1.0f, 1.0f, m_Alpha);
 }
 
-void Fade::ClacAlphaValue()
-{
-    m_AlphaValue = 1.0f / m_Duration;
-}
 
 void Fade::FADE_IN(float tick)
 {
     if (m_Phase != PHASE::TRANS_IN) return;
 
-    m_Alpha -= m_AlphaValue * tick;
+    m_Elapsed += tick;
+    const float t = std::clamp(m_Elapsed /max(m_Duration, 0.0001f), 0.0f, 1.0f);
+    const float eased = Math::Easing::EaseInOutQuint(t);
 
-    if (m_Alpha <= 0.0f)
+    m_Alpha = 1.0f - eased;
+
+    if (t > 1.0f)
     {
         m_Alpha = 0.0f;
         m_Phase = PHASE::FINISH;
@@ -140,12 +141,16 @@ void Fade::FADE_OUT(float tick)
 {
     if (m_Phase != PHASE::TRANS_OUT) return;
 
-    m_Alpha += m_AlphaValue * tick;
+    m_Elapsed += tick;
+    const float t = std::clamp(m_Elapsed / max(m_Duration, 0.0001f), 0.0f, 1.0f);
+    const float eased = Math::Easing::EaseInQuint(t);
 
+    m_Alpha = eased;
     if (m_Alpha >= 1.0f)
     {
         m_Alpha = 1.0f;
         m_Phase = PHASE::TRANS_IN;
+        m_Elapsed = 0.0f;
     }
     ApplyAlpha();
 }

@@ -64,7 +64,7 @@ void GameSceneWait::Initialize()
     TextureManager* textureMgr = instance.GetInstance();
 
     // スカイドーム初期化
-        // Skydome初期化 
+    // Skydome初期化 
     m_Skydome = instance.AddObject<Skydome>();
     m_Skydome->SetName("m_Skydome");
     m_Skydome->SetSkyDomeMode(true);
