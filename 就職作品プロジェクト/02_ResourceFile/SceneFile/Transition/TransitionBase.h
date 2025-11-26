@@ -44,9 +44,7 @@ protected:
     float m_SplitX = 1.0f;
     float m_SplitY = 1.0f;
 
-    float m_Timer    = 0.0f;    // タイマー
-    float m_Limit    = 1.0f;    // タイマーの上限値
-    float m_Duration = 1.0f;    // フェードの持続時間
+    float m_Duration = 1.0f;    // 遷移の所要時間
 
 public:
 
@@ -54,17 +52,11 @@ public:
     TransitionBase(Camera* cam);
     virtual ~TransitionBase() = default;
     virtual void Initialize() = 0;
-    virtual void Update()     = 0;
+    void Update(){};
+    virtual void Update(float tick) = 0;
     virtual void Draw()       = 0;
     virtual void Finalize()   = 0;
-    
-    void ResetTimer() { m_Timer = 0.0f; }
-    void CountTimer(const float& delta) { m_Timer += delta; }
 
-    // 終了判定
-    bool isFinish() { return m_Timer >= m_Limit; }
-
-    
     // SRVを直接セット
     // Textureを触らずに、派生がSRVをそのまま使える
     void SetTextureSRV(ID3D11ShaderResourceView* srv){ m_InputSRV = srv; }
@@ -83,20 +75,7 @@ public:
     //===============================
      
     // タイマー関連
-    void SetTimer(const float& timer) { m_Timer = timer; }
-    void SetLimit(const float& limit) { m_Limit = limit; }
     void SetDuration(const float& duration) { m_Duration = duration; }
-
-    float GetTimer() const { return m_Timer; }
-
-    /// 上記３つの値をまとめて指定  
-    /// @brief タイマー情報をまとめて設定する
-    /// @param timer    現在のタイマー値
-    /// @param duration フェードの持続時間
-    void SetTimerInfo(const float& timer, const float& duration) {
-        m_Timer    = timer;
-        m_Duration = duration;
-    }
 
     // 遷移状況の変数
     void SetPhase(PHASE phase) { m_Phase = phase; }

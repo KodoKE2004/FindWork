@@ -17,19 +17,20 @@ private:
      };
 
     WIPE_MODE m_Mode = WIPE_MODE::LEFT_TO_RIGHT;
+
     float m_Rate = 0.0f; // 0→1 の進行度
     void ApplyWipeAmount(float amount);
 
 public:
     explicit Wipe(Camera* cam);
 
-    void Initialize() override;
-    void Update()     override;
-    void Draw()       override;
-    void Finalize()   override;
+    void Initialize()       override;
+    void Update(float tick) override;
+    void Draw()             override;
+    void Finalize()         override;
 
-    void WIPE_IN();
-    void WIPE_OUT();
+    void WIPE_IN(float tick);
+    void WIPE_OUT(float tick);
 
     // --- 方向指定の簡易Setter（外部から安全に設定） ---
     void SetLeftToRight() { m_Mode = WIPE_MODE::LEFT_TO_RIGHT; }

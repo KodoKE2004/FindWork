@@ -7,34 +7,38 @@
 
 Fade::Fade(Camera* cam) : TransitionBase(cam)
 {
-    m_Phase = PHASE::TRANS_OUT;
 }
 
 
 void Fade::Initialize()
 {
-
+    // テクスチャの取得
     TextureManager* textureMgr = Game::GetInstance();
     m_Texture = textureMgr->GetTexture("Black.png");
 
+    // フルスクリーンに設定
     SetScale(SCREEN_WIDTH, SCREEN_HEIGHT, 1.0f);
-    m_Alpha = 0.0f;
-    m_Timer = 0.0f;
 
+    // 初期カラーを透明に設定
+    m_Alpha = 0.0f;
+    
+    // Durationのケア
     if (m_Duration <= 0.0f) {
         m_Duration = 1.0f;
     }
 
-    SetTimerInfo(0.0f, m_Duration);
-
-    m_AlphaValue = 1.0f / max(m_Duration, 0.0001f);
+    // アルファ値の計算と適用
+    m_AlphaValue = 1.0f / m_Duration;
     ApplyAlpha();
 
+    // フェードアウトから開始
+    m_Phase = PHASE::TRANS_OUT;
+
     std::vector<VERTEX_3D> vertices(4);
-    vertices[0].position = NVector3(-0.5f, 0.5f, 0.0f);
-    vertices[1].position = NVector3(0.5f, 0.5f, 0.0f);
+    vertices[0].position = NVector3(-0.5f,  0.5f, 0.0f);
+    vertices[1].position = NVector3( 0.5f,  0.5f, 0.0f);
     vertices[2].position = NVector3(-0.5f, -0.5f, 0.0f);
-    vertices[3].position = NVector3(0.5f, -0.5f, 0.0f);
+    vertices[3].position = NVector3( 0.5f, -0.5f, 0.0f);
 
     for (auto& v : vertices) v.color = Color(1, 1, 1, 1);
 
@@ -58,12 +62,12 @@ void Fade::Initialize()
     m_Materiale->Create(mtrl);
 }
 
-void Fade::Update()
+void Fade::Update(float tick)
 {
     switch (m_Phase)
     {
-    case PHASE::TRANS_OUT: FADE_OUT(); break;
-    case PHASE::TRANS_IN: FADE_IN(); break;
+    case PHASE::TRANS_OUT: FADE_OUT(tick); break;
+    case PHASE::TRANS_IN : FADE_IN (tick); break;
     default: break;
     }
 }
@@ -101,48 +105,47 @@ void Fade::Draw()
     Renderer::SetDepthEnable(true);
 }
 
-void Fade::Finalize() {}
+void Fade::Finalize() 
+{
+}
 
 void Fade::ApplyAlpha()
 {
     m_Alpha = std::clamp(m_Alpha, 0.0f, 1.0f);
-    SetColor(0.0f, 0.0f, 0.0f, m_Alpha);
+    SetColor(1.0f, 1.0f, 1.0f, m_Alpha);
 }
 
-void Fade::FADE_IN()
+void Fade::ClacAlphaValue()
+{
+    m_AlphaValue = 1.0f / m_Duration;
+}
+
+void Fade::FADE_IN(float tick)
 {
     if (m_Phase != PHASE::TRANS_IN) return;
 
-    float delta = Application::GetDeltaTime();
-    CountTimer(delta);
-
-    m_Alpha -= m_AlphaValue * delta;
-    ApplyAlpha();
+    m_Alpha -= m_AlphaValue * tick;
 
     if (m_Alpha <= 0.0f)
     {
         m_Alpha = 0.0f;
-        ApplyAlpha();
         m_Phase = PHASE::FINISH;
     }
+
+    ApplyAlpha();
 }
 
 
-void Fade::FADE_OUT()
+void Fade::FADE_OUT(float tick)
 {
     if (m_Phase != PHASE::TRANS_OUT) return;
 
-    float delta = Application::GetDeltaTime();
-    CountTimer(delta);
-
-    m_Alpha += m_AlphaValue * delta;
-    ApplyAlpha();
+    m_Alpha += m_AlphaValue * tick;
 
     if (m_Alpha >= 1.0f)
     {
         m_Alpha = 1.0f;
-        ApplyAlpha();
         m_Phase = PHASE::TRANS_IN;
-        ResetTimer();
     }
+    ApplyAlpha();
 }

@@ -58,7 +58,6 @@ private:
 
 	bool m_isChange		    = false;
 	bool m_isTransOutToIn   = false;
-	bool m_hasInitializedNextScene = false;
 
 	STEP m_Step;
 

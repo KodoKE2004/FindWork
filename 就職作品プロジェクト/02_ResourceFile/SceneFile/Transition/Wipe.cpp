@@ -14,14 +14,12 @@ void Wipe::Initialize()
     m_Texture = textureMgr->GetTexture("Black.png");
 
     SetScale(SCREEN_WIDTH, SCREEN_HEIGHT, 1.0f);
-    SetColor(0, 0, 0, 0);
+    SetColor(0.0f, 0.0f, 0.0f, 0.0f);
 
     m_Phase = PHASE::TRANS_OUT;
     m_Rate = 0.0f;
-    m_Timer = 0.0f;
 
     if (m_Duration <= 0.0f) m_Duration = 1.0f;
-    SetTimerInfo(0.0f, m_Duration);
 
     std::vector<VERTEX_3D> vertices(4);
     vertices[0].position = NVector3(-0.5f,  0.5f, 0.0f);
@@ -51,12 +49,12 @@ void Wipe::Initialize()
 }
 
 
-void Wipe::Update()
+void Wipe::Update(float tick)
 {
     switch (m_Phase)
     {
-    case PHASE::TRANS_OUT: WIPE_OUT(); break;
-    case PHASE::TRANS_IN : WIPE_IN (); break;
+    case PHASE::TRANS_OUT: WIPE_OUT(tick); break;
+    case PHASE::TRANS_IN : WIPE_IN (tick); break;
     default: break;
     }
 }
@@ -79,7 +77,6 @@ void Wipe::Draw()
 
     Renderer::SetDepthEnable(false);
     Renderer::SetBlendState(BS_ALPHABLEND);
-
 
     Matrix r = Matrix::CreateFromYawPitchRoll(m_Rotation.x, m_Rotation.y, m_Rotation.z);
     Matrix t = Matrix::CreateTranslation(m_Position.x, m_Position.y, m_Position.z);
@@ -123,13 +120,11 @@ void Wipe::ApplyWipeAmount(float amount)
     amount = std::clamp(amount, 0.0f, 1.0f);
     m_Rate = amount;
 
-
     float width = SCREEN_WIDTH;
     float height = SCREEN_HEIGHT;
     float posX = 0.0f;
     float posY = 0.0f;
     const float depth = GetPos().z;
-
 
     switch (m_Mode)
     {
@@ -162,14 +157,12 @@ void Wipe::ApplyWipeAmount(float amount)
 }
 
 
-void Wipe::WIPE_IN()
+void Wipe::WIPE_IN(float tick)
 {
     if (m_Phase != PHASE::TRANS_IN) return;
 
-    float delta = Application::GetDeltaTime();
-    CountTimer(delta);
-
-    const float progress = 1.0f - std::clamp(m_Timer / max(m_Duration, 0.0001f), 0.0f, 1.0f);
+    float elapsed = m_Rate / 1.0f;
+    const float progress = 1.0f - std::clamp(elapsed / max(m_Duration, 0.0001f), 0.0f, 1.0f);
     ApplyWipeAmount(progress);
 
     if (progress <= 0.0f)
@@ -181,19 +174,16 @@ void Wipe::WIPE_IN()
     }
 }
 
-void Wipe::WIPE_OUT()
+void Wipe::WIPE_OUT(float tick)
 {
     if (m_Phase != PHASE::TRANS_OUT) return;
 
-    float delta = Application::GetDeltaTime();
-    CountTimer(delta);
-
-    const float progress = std::clamp(m_Timer / max(m_Duration, 0.0001f), 0.0f, 1.0f);
+    float elapsed = m_Rate / 1.0f;
+    const float progress = std::clamp(elapsed / max(m_Duration, 0.0001f), 0.0f, 1.0f);
     ApplyWipeAmount(progress);
 
     if (progress >= 1.0f)
     {
         m_Phase = PHASE::TRANS_IN;
-        ResetTimer();
     }
 }

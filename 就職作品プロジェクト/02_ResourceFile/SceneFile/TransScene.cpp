@@ -20,7 +20,6 @@ void TransScene::Initialize()
 	m_Timer = 0.0f;
 	m_Alpha = 0.0f;
 	m_isChange = false;
-	m_hasInitializedNextScene = false;
 
 	if (m_Duration < 0.0f) {
 		m_Duration = 1.0f;
@@ -33,18 +32,18 @@ void TransScene::Initialize()
 	case TRANS_MODE::FADE:
 	{
         m_TransitionTexture = std::make_shared<Fade>(instance.GetCamera());
+        m_TransitionTexture->SetDuration(m_Duration);
 		m_TransitionTexture->Initialize();
 		m_TransitionTexture->SetPos(0.0f, 0.0f, -2.0f);
+		
 		instance.SetTransitionTexture(m_TransitionTexture);
 	}
 	break;
 	case TRANS_MODE::WIPE:
 	{
 		m_TransitionTexture = std::make_shared<Wipe>(instance.GetCamera());
+        m_TransitionTexture->SetDuration(m_Duration);
 		m_TransitionTexture->Initialize();
-		if (m_StackOp != STACK_OP::POP && m_SceneNext) {
-			m_hasInitializedNextScene = true;
-		}
 
 		if (m_SceneNext) {
 			DrawNextScene();
@@ -52,15 +51,12 @@ void TransScene::Initialize()
 
 		m_TransitionTexture->SetTextureSRV(m_NextSceneSRV.Get());
 		m_TransitionTexture->SetPos(0.0f, 0.0f, -2.0f);
-        m_TransitionTexture->SetDuration(m_Duration);
-		m_TransitionTexture->SetTimer(0.0f);
 		instance.SetTransitionTexture(m_TransitionTexture);
 	}
 	break;
 	}
 
     m_TransitionTexture->SetPhase	 (PHASE::TRANS_OUT);
-	m_TransitionTexture->SetTimerInfo(0.0f, m_Duration);
 
 }
 
@@ -72,7 +68,7 @@ void TransScene::Update(float tick)
 		return;
 	}
 
-	m_TransitionTexture->Update();
+	m_TransitionTexture->Update(tick);
 
 	const auto phase = m_TransitionTexture->GetPhase();
 	if (!m_isTransOutToIn && phase == PHASE::TRANS_IN)
@@ -86,7 +82,6 @@ void TransScene::Update(float tick)
 		
 		m_SceneOld->Finalize();
 		m_SceneNext->Initialize();
-		m_hasInitializedNextScene = true;
 		DrawNextScene();
 		
 		m_isChange = true;

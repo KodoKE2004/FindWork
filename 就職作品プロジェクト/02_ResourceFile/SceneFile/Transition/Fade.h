@@ -10,13 +10,14 @@ private:
 
 public:
     explicit Fade(Camera* cam);
-    void Initialize() override;  
-    void Update() override;      
-    void Draw() override;        
-    void Finalize() override;    
+    void Initialize()       override;  
+    void Update(float tick) override;      
+    void Draw()             override;        
+    void Finalize()         override;    
 
-    void FADE_IN();
-    void FADE_OUT();
+    void FADE_IN(float tick);
+    void FADE_OUT(float tick);
 
     void ApplyAlpha();
+    void ClacAlphaValue();
 };
