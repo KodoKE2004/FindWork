@@ -32,12 +32,11 @@ void GameSceneCrush::Initialize()
     m_MySceneObjects.emplace_back(m_Hammer);
     
     int difficult = m_RelationData.stageCount / 4;
-    if (difficult >= 4){ difficult = 4; }
+    if (difficult >= 4){ difficult = 3; }
     for (int i = 0; i <= difficult; ++i)
     {
         auto enemy = instance.AddObject<Enemy>();
         enemy->SetName("m_Enemy");
-        enemy->SetTexture(textureMgr->GetTexture("Battle_EnemyNormal.png"));
         enemy->SetPos  ( 0.0f, - 200.0f, 1.0f);
         m_MySceneObjects.emplace_back(enemy);
     }
@@ -56,22 +55,6 @@ void GameSceneCrush::Update(float tick)
         m_isFastChange = true;
         m_RelationData.isClear = true;
     }
-    else
-    {
-        for (auto it : enemys)
-        {
-            m_Hammer->m_HitResult.SetHitResult(
-                isHitSquareSquare(*m_Hammer, *it)
-            );
-
-            if (m_Hammer->m_HitResult.isTriggered() && !it->IsDeath())
-            {
-                MyDebugLog(Debug::Log("“–‚½‚Á‚½");)
-                it->Death();
-            }
-        }
-    }
-
 
     GameSceneExe::Update(tick);
     if (IsChange()) {

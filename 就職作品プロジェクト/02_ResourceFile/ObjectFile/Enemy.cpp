@@ -1,5 +1,10 @@
 #include "Enemy.h"
 #include "Game.h"
+#include "Collider.h"
+#include "Player.h"
+#include "Sord.h"
+#include "Hammer.h"
+#include "Scene.h"
 
 Enemy::Enemy(Camera* cam) : Square(cam)
 {
@@ -7,12 +12,48 @@ Enemy::Enemy(Camera* cam) : Square(cam)
 
 void Enemy::Initialize()
 {   
+    TextureManager* textureMgr = Game::GetInstance();
     Square::Initialize();
+    SetTexture(textureMgr->GetTexture("Battle_EnemyNormal.png"));
+
     m_isDeath = false;
 }
 
 void Enemy::Update()
 {
+    auto& instance = Game::GetInstance();
+    
+    #pragma region ìñÇΩÇËîªíËèàóù
+    switch (Scene::m_RelationData.previousScene)
+    {
+    case SCENE_NO::GAME_CRUSH:
+    {
+        auto hammer = instance.GetObjects<Hammer>();
+        if (!hammer.empty())
+        {
+            bool isHit = Math::Collider2D::isHitSquareSquare(*hammer[0], *this);
+            if (isHit && hammer[0]->IsAttack())
+            {
+                Death();                 
+            }
+        }
+    }
+    break;
+    case SCENE_NO::GAME_SLICE:
+    {
+        auto sord = instance.GetObjects<Sord>();
+        if (!sord.empty())
+        {
+            bool isHit = Math::Collider2D::isHitSquareSquare(*sord[0], *this);
+            if (isHit)
+            {
+                Death();                 
+            }
+        }
+    }
+    break;
+    }
+    #pragma endregion
 }
 
 void Enemy::Draw()
@@ -36,7 +77,7 @@ bool IsAllDeathEnemy(std::vector<Enemy*> enemys)
 {
     for (Enemy* it : enemys)
     {
-        if (it->IsDeath() == false) {
+        if (!it->IsDeath()) {
             return false;
         }
     }

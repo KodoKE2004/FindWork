@@ -52,12 +52,12 @@ void GameSceneJump::Initialize()
     // カートの生成
     m_Cart = instance.AddObject<Cart>(instance.GetCamera());
     m_Cart->SetTexture(textureMgr->GetTexture("Car.png"));
-    m_MySceneObjects.emplace_back(m_Cart);
-    // カートの開始パターン設定
-    // パターンを登録
-    m_Cart->CreateStartPattern(m_Difficulty);
+    m_Cart->CreateStartPattern(m_Difficulty);   // パターンを登録
     m_Cart->SetSpeedFactor(m_GameSpeedMass);
-    m_Cart->SetStartPattern();
+    m_Cart->SetStartPattern();                  // カートの開始パターン設定
+
+    m_MySceneObjects.emplace_back(m_Cart);
+
     m_TimeCartActivetion.limit = GenerateActivationDelay();
 
     // カート警告の生成
@@ -80,9 +80,7 @@ void GameSceneJump::Initialize()
 
 void GameSceneJump::Update(float tick)
 {
-    m_Player->m_HitResult.SetHitResult(
-        Math::Collider2D::isHitSquareSquare(*m_Player, *m_Cart)
-    );
+ 
 
     if (m_Player->m_HitResult.isTriggered())
     {

@@ -9,6 +9,9 @@ using namespace DirectX::SimpleMath;
 Square::Square(Camera* cam) :Object(cam)
 {
     m_Texture = std::make_shared<Texture>();
+	m_HitResult.m_Now = false;
+	m_HitResult.m_Old = false;
+
 }
 
 // デストラクタ

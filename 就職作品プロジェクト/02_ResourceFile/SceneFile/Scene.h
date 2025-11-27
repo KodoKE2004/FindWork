@@ -54,7 +54,6 @@ protected:
 	
 	Skydome* m_Skydome = nullptr;
 
-	static SceneRelationData m_RelationData;
 
 	const int stageCountMax = 5;
 
@@ -63,6 +62,7 @@ protected:
     std::vector<float*>	m_TimerList;	// タイマー格納用
 
 public:
+	static SceneRelationData m_RelationData;
 	// コンストラクタとデストラクタ
 	Scene()  = default;
 	virtual ~Scene() = default;

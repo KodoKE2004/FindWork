@@ -127,7 +127,7 @@ void Fade::FADE_IN(float tick)
 
     m_Alpha = 1.0f - eased;
 
-    if (t > 1.0f)
+    if (t >= 1.0f)
     {
         m_Alpha = 0.0f;
         m_Phase = PHASE::FINISH;

@@ -12,6 +12,7 @@ void Hammer::Initialize()
 {
     Square::Initialize();
     m_MoveValue = m_AttackPosY - m_DefaultPosY;
+    m_HitResult.SetHitResult(false);
 }
 
 void Hammer::Update()

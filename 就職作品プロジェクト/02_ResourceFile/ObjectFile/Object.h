@@ -19,37 +19,6 @@ public:
 	}
 };
 
-// “–‚½‚è”»’è‚ÌŒ‹‰Ê‚ðŽó‚¯Žæ‚éƒNƒ‰ƒX
-class isHitResult
-{
-private: 
-	bool m_Old = false;
-	bool m_Now = false;
-public:
-	
-	bool isTriggered() {
-		return (!m_Old && m_Now);
-    }
-	bool isReleased() {
-		return (m_Old && !m_Now);
-    }
-	bool isHold() {
-		return m_Now;
-    }
-
-    void SetHitResult(const bool hit) 
-	{
-		m_Old = m_Now;
-		m_Now = hit;
-    }
-
-	void Update()
-	{
-		m_Old = m_Now;
-    }
-};
-
-
 class Object : public Transform
 {
 protected:
@@ -66,7 +35,6 @@ protected:
 	std::shared_ptr<Texture> m_Texture = nullptr;
 
 public:
-    isHitResult m_HitResult;
 
 	Object(Camera* cam);
 	virtual ~Object();

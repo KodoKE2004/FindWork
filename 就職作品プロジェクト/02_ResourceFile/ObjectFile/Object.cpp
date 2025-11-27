@@ -4,7 +4,7 @@
 
 Object::Object(Camera* cam) : m_Camera(cam)
 {
-
+    m_Color = Color(1.0f, 1.0f, 1.0f, 1.0f);
 }
 
 Object::~Object()

@@ -5,8 +5,40 @@
 #include "Texture.h"
 #include "Material.h"
 
+//----------------------------------------
+//		2D	当たり判定の結果を受け取るクラス
+//----------------------------------------
+struct isHitResult
+{
+
+	bool m_Old = false;
+	bool m_Now = false;
+
+	bool isTriggered() {
+		return (!m_Old && m_Now);
+	}
+	bool isReleased() {
+		return (m_Old && !m_Now);
+	}
+	bool isHold() {
+		return m_Now;
+	}
+
+	void SetHitResult(const bool hit)
+	{
+		m_Old = m_Now;
+		m_Now = hit;
+	}
+
+	void Update()
+	{
+		m_Old = m_Now;
+	}
+};
+
+
 //-----------------------------------------------------------------------------
-// Texture2Dクラス
+// 2DのSquareクラス
 //-----------------------------------------------------------------------------
 class Square : public Object
 {
@@ -24,7 +56,9 @@ protected:
 	float m_NumV = 1;
 	float m_SplitX = 1;
 	float m_SplitY = 1;
+
 public:
+	isHitResult m_HitResult;
 
 	Square(Camera* cam); // コンストラクタ
 	~Square(); // デストラクタ

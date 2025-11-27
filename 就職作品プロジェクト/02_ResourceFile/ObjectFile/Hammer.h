@@ -30,5 +30,7 @@ public:
 
     float* GetTimeAttack() { return &m_TimeAttack.timer; }
     float* GetTimeCool()   { return &m_TimeCool.timer; }
+
+    bool IsAttack() const { return m_isAttack; }
 };
 
