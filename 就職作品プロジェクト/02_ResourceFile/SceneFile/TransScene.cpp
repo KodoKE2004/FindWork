@@ -39,11 +39,16 @@ void TransScene::Initialize()
 		instance.SetTransitionTexture(m_TransitionTexture);
 	}
 	break;
-	case TRANS_MODE::WIPE:
+	case TRANS_MODE::WIPE_BOTTOM_TO_TOP:
+	case TRANS_MODE::WIPE_LEFT_TO_RIGHT:
+	case TRANS_MODE::WIPE_RIGHT_TO_LEFT:
+	case TRANS_MODE::WIPE_TOP_TO_BOTTOM:
 	{
+
 		m_TransitionTexture = std::make_shared<Wipe>(instance.GetCamera());
         m_TransitionTexture->SetDuration(m_Duration);
 		m_TransitionTexture->Initialize();
+        m_TransitionTexture->SetTransMode(m_TransMode);
 
 		if (m_SceneNext) {
 			DrawNextScene();

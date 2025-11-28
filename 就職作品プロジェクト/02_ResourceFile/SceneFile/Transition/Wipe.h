@@ -41,4 +41,5 @@ public:
     void SetBottomToTop() { m_Mode = WIPE_MODE::BOTTOM_TO_TOP; }
 
     float GetRate() const { return m_Rate; }
+    void SetTransMode(TRANS_MODE transMode) override;
 };

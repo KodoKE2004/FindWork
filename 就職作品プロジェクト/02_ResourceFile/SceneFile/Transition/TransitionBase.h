@@ -10,11 +10,23 @@
 #include "Texture.h"
 #include "Material.h"
 
+// トランジションのフェーズ
 enum class PHASE
 {
     TRANS_IN,
     TRANS_OUT,
     FINISH
+};
+
+// トランジションのモード
+enum class TRANS_MODE
+{
+    FADE,
+    WIPE_LEFT_TO_RIGHT,
+    WIPE_RIGHT_TO_LEFT,
+    WIPE_TOP_TO_BOTTOM,
+    WIPE_BOTTOM_TO_TOP,
+    NUM
 };
 
 /// @brief トランジションの基底クラス
@@ -37,6 +49,7 @@ protected:
 
     Microsoft::WRL::ComPtr<ID3D11ShaderResourceView> m_InputSRV;
     PHASE m_Phase;
+    TRANS_MODE m_TransMode;
 
     // UV座標の情報
     float m_NumU   = 1.0f;
@@ -76,9 +89,12 @@ public:
      
     // タイマー関連
     void SetDuration(const float& duration) { m_Duration = duration; }
-
+    
+    virtual void SetTransMode(TRANS_MODE transMode) = 0;
+    virtual TRANS_MODE GetTransMode() = 0;
+    
     // 遷移状況の変数
-    void SetPhase(PHASE phase) { m_Phase = phase; }
+    void  SetPhase(PHASE phase) { m_Phase = phase; }
     PHASE GetPhase()           { return m_Phase; }
 };
 

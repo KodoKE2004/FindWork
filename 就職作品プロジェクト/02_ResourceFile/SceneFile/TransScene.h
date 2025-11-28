@@ -18,22 +18,6 @@ enum class STEP
 	NUM
 };
 
-enum class TRANS_MODE
-{
-	FADE,
-	WIPE,
-	NUM
-};
-
-enum class STACK_OP
-{
-	NONE,
-	PUSH,
-	POP,
-	NUM
-};
-
-
 class TransScene : public Scene
 {
 private:
@@ -62,7 +46,6 @@ private:
 	STEP m_Step;
 
 	TRANS_MODE m_TransMode;
-    STACK_OP   m_StackOp = STACK_OP::NONE;
 
 	std::shared_ptr<TransitionBase> m_TransitionTexture;
 

@@ -195,3 +195,24 @@ void Wipe::WIPE_OUT(float tick)
         m_Elapsed = 0.0f;
     }
 }
+
+void Wipe::SetTransMode(TRANS_MODE transMode)
+{
+    m_TransMode = transMode;
+    switch (m_TransMode)
+    {
+    default:
+    case TRANS_MODE::WIPE_LEFT_TO_RIGHT:
+        SetLeftToRight();
+    break;
+    case TRANS_MODE::WIPE_RIGHT_TO_LEFT:
+        SetRightToLeft();
+    break;
+    case TRANS_MODE::WIPE_TOP_TO_BOTTOM:
+        SetTopToBottom();
+    break;
+    case TRANS_MODE::WIPE_BOTTOM_TO_TOP:
+        SetBottomToTop();
+    break;
+    }
+}
