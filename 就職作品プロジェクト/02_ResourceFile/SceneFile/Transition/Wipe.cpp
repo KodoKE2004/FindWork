@@ -143,6 +143,20 @@ void Wipe::ApplyWipeAmount(float amount)
 
 }
 
+float Wipe::CalculateWipeEasing(float t)
+{
+    switch (m_TransMode)
+    {
+    default:
+    case TRANS_MODE::WIPE_LEFT_TO_RIGHT: return Math::Easing::EaseInQuint(t); break;
+    case TRANS_MODE::WIPE_RIGHT_TO_LEFT: return Math::Easing::EaseInQuint(t); break;
+    case TRANS_MODE::WIPE_TOP_TO_BOTTOM: return Math::Easing::EaseOutBounce(t); break;
+    case TRANS_MODE::WIPE_BOTTOM_TO_TOP: return t; break;   // “™‘¬
+    }
+
+    return 0.0f;
+}
+
 
 void Wipe::WIPE_IN(float tick)
 {
@@ -150,7 +164,7 @@ void Wipe::WIPE_IN(float tick)
 
     m_Elapsed += tick;
     const float t = std::clamp(m_Elapsed / max(m_Duration * 0.5f, 0.0001f), 0.0f, 1.0f);
-    const float eased = Math::Easing::EaseInOutBack(t);
+    float eased = CalculateWipeEasing(t);
 
     ApplyWipeAmount(eased);
 
@@ -168,7 +182,7 @@ void Wipe::WIPE_OUT(float tick)
 
     m_Elapsed += tick;
     const float t = std::clamp(m_Elapsed / max(m_Duration * 0.5f , 0.0001f), 0.0f, 1.0f);
-    const float eased = Math::Easing::EaseInOutSine(t);
+    const float eased = CalculateWipeEasing(t);
 
     ApplyWipeAmount(eased);
 

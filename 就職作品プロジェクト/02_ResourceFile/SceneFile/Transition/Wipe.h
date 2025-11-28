@@ -26,6 +26,8 @@ private:
 
     // 進行度毎にワイプ画像の座標を適用
     void ApplyWipeAmount(float amount);
+    // 方向ごとにイージングを分岐させる
+    float CalculateWipeEasing(float t);
 public:
     explicit Wipe(Camera* cam);
 
