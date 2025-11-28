@@ -18,12 +18,14 @@ private:
 
     WIPE_MODE m_Mode = WIPE_MODE::LEFT_TO_RIGHT;
 
-    float m_Rate = 0.0f;    // 0→1 の進行度
     float m_Elapsed = 0.0f; // 経過時間
+
+    NVector3 m_StartPos;
+    NVector3 m_EndPos;
+
 
     // 進行度毎にワイプ画像の座標を適用
     void ApplyWipeAmount(float amount);
-
 public:
     explicit Wipe(Camera* cam);
 
@@ -41,6 +43,8 @@ public:
     void SetTopToBottom() { m_Mode = WIPE_MODE::TOP_TO_BOTTOM; }
     void SetBottomToTop() { m_Mode = WIPE_MODE::BOTTOM_TO_TOP; }
 
-    float GetRate() const { return m_Rate; }
     void  SetTransMode(TRANS_MODE transMode) override;
+
+    // ワイプの開始点と終着点の設定
+    void CheckPointSetting();
 };

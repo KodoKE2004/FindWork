@@ -275,258 +275,287 @@ namespace Math
     namespace Easing
     {
         float EaseInSine(float p)
-    {
-        constexpr float PI = 3.14159265358979323846f;
-        return 1.0f - std::cos((p * PI) * 0.5f);
-    }
+        {
+            constexpr float PI = 3.14159265358979323846f;
+            return 1.0f - std::cosf((p * PI) * 0.5f);
+        }
+
         float EaseOutSine(float p)
-    {
-        constexpr float PI = 3.14159265358979323846f;
-        return std::sin((p * PI) * 0.5f);
-    }
+        {
+            constexpr float PI = 3.14159265358979323846f;
+            return std::sinf((p * PI) * 0.5f);
+        }
+
         float EaseInOutSine(float p)
-    {
-        constexpr float PI = 3.14159265358979323846f;
-        return -0.5f * (std::cos(PI * p) - 1.0f);
-    }
+        {
+            constexpr float PI = 3.14159265358979323846f;
+            return -0.5f * (std::cosf(PI * p) - 1.0f);
+        }
+
         float EaseInQuad(float p)
-    {
-        return p * p;
-    }
+        {
+            return p * p;
+        }
+
         float EaseOutQuad(float p)
-    {
-        const float inv = 1.0f - p;
-        return 1.0f - inv * inv;
-    }
+        {
+            const float inv = 1.0f - p;
+            return 1.0f - inv * inv;
+        }
+
         float EaseInOutQuad(float p)
-    {
-        if (p < 0.5f)
         {
-            return 2.0f * p * p;
+            if (p < 0.5f)
+            {
+                return 2.0f * p * p;
+            }
+            const float inv = -2.0f * p + 2.0f;
+            return 1.0f - (inv * inv) * 0.5f;
         }
-        const float inv = -2.0f * p + 2.0f;
-        return 1.0f - (inv * inv) * 0.5f;
-    }
+
         float EaseInCubic(float p)
-    {
-        return p * p * p;
-    }
+        {
+            return p * p * p;
+        }
+
         float EaseOutCubic(float p)
-    {
-        const float inv = 1.0f - p;
-        return 1.0f - inv * inv * inv;
-    }
+        {
+            const float inv = 1.0f - p;
+            return 1.0f - inv * inv * inv;
+        }
+
         float EaseInOutCubic(float p)
-    {
-        if (p < 0.5f)
         {
-            return 4.0f * p * p * p;
+            if (p < 0.5f)
+            {
+                return 4.0f * p * p * p;
+            }
+            const float inv = -2.0f * p + 2.0f;
+            return 1.0f - (inv * inv * inv) * 0.5f;
         }
-        const float inv = -2.0f * p + 2.0f;
-        return 1.0f - (inv * inv * inv) * 0.5f;
-    }
+
         float EaseInQuart(float p)
-    {
-        const float p2 = p * p;
-        return p2 * p2;
-    }
+        {
+            const float p2 = p * p;
+            return p2 * p2;
+        }
+
         float EaseOutQuart(float p)
-    {
-        const float inv = 1.0f - p;
-        const float inv2 = inv * inv;
-        return 1.0f - inv2 * inv2;
-    }
+        {
+            const float inv = 1.0f - p;
+            const float inv2 = inv * inv;
+            return 1.0f - inv2 * inv2;
+        }
+
         float EaseInOutQuart(float p)
-    {
-        if (p < 0.5f)
         {
-            const float p2 = p * p;
-            return 8.0f * p2 * p2;
+            if (p < 0.5f)
+            {
+                const float p2 = p * p;
+                return 8.0f * p2 * p2;
+            }
+            const float inv = -2.0f * p + 2.0f;
+            const float inv2 = inv * inv;
+            return 1.0f - (inv2 * inv2) * 0.5f;
         }
-        const float inv = -2.0f * p + 2.0f;
-        const float inv2 = inv * inv;
-        return 1.0f - (inv2 * inv2) * 0.5f;
-    }
+
         float EaseInQuint(float p)
-    {
-        const float p2 = p * p;
-        return p2 * p2 * p;
-    }
-        float EaseOutQuint(float p)
-    {
-        const float inv = 1.0f - p;
-        const float inv2 = inv * inv;
-        return 1.0f - inv2 * inv2 * inv;
-    }
-        float EaseInOutQuint(float p)
-    {
-        if (p < 0.5f)
         {
             const float p2 = p * p;
-            return 16.0f * p2 * p2 * p;
+            return p2 * p2 * p;
         }
-        const float inv = -2.0f * p + 2.0f;
-        const float inv2 = inv * inv;
-        return 1.0f - (inv2 * inv2 * inv) * 0.5f;
-    }
+
+        float EaseOutQuint(float p)
+        {
+            const float inv = 1.0f - p;
+            const float inv2 = inv * inv;
+            return 1.0f - inv2 * inv2 * inv;
+        }
+
+        float EaseInOutQuint(float p)
+        {
+            if (p < 0.5f)
+            {
+                const float p2 = p * p;
+                return 16.0f * p2 * p2 * p;
+            }
+            const float inv = -2.0f * p + 2.0f;
+            const float inv2 = inv * inv;
+            return 1.0f - (inv2 * inv2 * inv) * 0.5f;
+        }
+
         float EaseInExpo(float p)
-    {
-        if (p <= 0.0f)
         {
-            return 0.0f;
+            if (p <= 0.0f)
+            {
+                return 0.0f;
+            }
+            return std::powf(2.0f, 10.0f * p - 10.0f);
         }
-        return std::pow(2.0f, 10.0f * p - 10.0f);
-    }
+
         float EaseOutExpo(float p)
-    {
-        if (p >= 1.0f)
         {
-            return 1.0f;
+            if (p >= 1.0f)
+            {
+                return 1.0f;
+            }
+            return 1.0f - std::powf(2.0f, -10.0f * p);
         }
-        return 1.0f - std::pow(2.0f, -10.0f * p);
-    }
+
         float EaseInOutExpo(float p)
-    {
-        if (p <= 0.0f)
         {
-            return 0.0f;
+            if (p <= 0.0f)
+            {
+                return 0.0f;
+            }
+            if (p >= 1.0f)
+            {
+                return 1.0f;
+            }
+            if (p < 0.5f)
+            {
+                return 0.5f * std::powf(2.0f, 20.0f * p - 10.0f);
+            }
+            return 1.0f - 0.5f * std::powf(2.0f, -20.0f * p + 10.0f);
         }
-        if (p >= 1.0f)
-        {
-            return 1.0f;
-        }
-        if (p < 0.5f)
-        {
-            return 0.5f * std::pow(2.0f, 20.0f * p - 10.0f);
-        }
-        return 1.0f - 0.5f * std::pow(2.0f, -20.0f * p + 10.0f);
-    }
+
         float EaseInCirc(float p)
-    {
-        return 1.0f - std::sqrt(1.0f - p * p);
-    }
+        {
+            return 1.0f - std::sqrtf(1.0f - p * p);
+        }
+
         float EaseOutCirc(float p)
-    {
-        const float inv = p - 1.0f;
-        return std::sqrt(1.0f - inv * inv);
-    }
+        {
+            const float inv = p - 1.0f;
+            return std::sqrtf(1.0f - inv * inv);
+        }
+
         float EaseInOutCirc(float p)
-    {
-        if (p < 0.5f)
         {
-            const float t = 2.0f * p;
-            return 0.5f * (1.0f - std::sqrt(1.0f - t * t));
+            if (p < 0.5f)
+            {
+                const float t = 2.0f * p;
+                return 0.5f * (1.0f - std::sqrt(1.0f - t * t));
+            }
+            const float t = -2.0f * p + 2.0f;
+            return 0.5f * (std::sqrtf(1.0f - t * t) + 1.0f);
         }
-        const float t = -2.0f * p + 2.0f;
-        return 0.5f * (std::sqrt(1.0f - t * t) + 1.0f);
-    }
+
         float EaseInBack(float p)
-    {
-        const float c1 = 1.70158f;
-        const float c3 = c1 + 1.0f;
-        return c3 * p * p * p - c1 * p * p;
-    }
+        {
+            const float c1 = 1.70158f;
+            const float c3 = c1 + 1.0f;
+            return c3 * p * p * p - c1 * p * p;
+        }
+
         float EaseOutBack(float p)
-    {
-        const float c1 = 1.70158f;
-        const float c3 = c1 + 1.0f;
-        const float t = p - 1.0f;
-        return 1.0f + c3 * t * t * t + c1 * t * t;
-    }
+        {
+            const float c1 = 1.70158f;
+            const float c3 = c1 + 1.0f;
+            const float t = p - 1.0f;
+            return 1.0f + c3 * t * t * t + c1 * t * t;
+        }
+
         float EaseInOutBack(float p)
-    {
-        const float c1 = 1.70158f;
-        const float c2 = c1 * 1.525f;
-        if (p < 0.5f)
         {
-            const float t = 2.0f * p;
-            return 0.5f * (t * t * ((c2 + 1.0f) * t - c2));
+            const float c1 = 1.70158f;
+            const float c2 = c1 * 1.525f;
+            if (p < 0.5f)
+            {
+                const float t = 2.0f * p;
+                return 0.5f * (t * t * ((c2 + 1.0f) * t - c2));
+            }
+            const float t = 2.0f * p - 2.0f;
+            return 0.5f * (t * t * ((c2 + 1.0f) * t + c2) + 2.0f);
         }
-        const float t = 2.0f * p - 2.0f;
-        return 0.5f * (t * t * ((c2 + 1.0f) * t + c2) + 2.0f);
-    }
+
         float EaseInElastic(float p)
-    {
-        constexpr float PI = 3.14159265358979323846f;
-        if (p <= 0.0f)
         {
-            return 0.0f;
+            constexpr float PI = 3.14159265358979323846f;
+            if (p <= 0.0f)
+            {
+                return 0.0f;
+            }
+            if (p >= 1.0f)
+            {
+                return 1.0f;
+            }
+            const float c4 = (2.0f * PI) / 3.0f;
+            return -std::powf(2.0f, 10.0f * p - 10.0f) * std::sinf((p * 10.0f - 10.75f) * c4);
         }
-        if (p >= 1.0f)
-        {
-            return 1.0f;
-        }
-        const float c4 = (2.0f * PI) / 3.0f;
-        return -std::pow(2.0f, 10.0f * p - 10.0f) * std::sin((p * 10.0f - 10.75f) * c4);
-    }
+
         float EaseOutElastic(float p)
-    {
-        constexpr float PI = 3.14159265358979323846f;
-        if (p <= 0.0f)
         {
-            return 0.0f;
+            constexpr float PI = 3.14159265358979323846f;
+            if (p <= 0.0f)
+            {
+                return 0.0f;
+            }
+            if (p >= 1.0f)
+            {
+                return 1.0f;
+            }
+            const float c4 = (2.0f * PI) / 3.0f;
+            return std::powf(2.0f, -10.0f * p) * std::sinf((p * 10.0f - 0.75f) * c4) + 1.0f;
         }
-        if (p >= 1.0f)
-        {
-            return 1.0f;
-        }
-        const float c4 = (2.0f * PI) / 3.0f;
-        return std::pow(2.0f, -10.0f * p) * std::sin((p * 10.0f - 0.75f) * c4) + 1.0f;
-    }
+
         float EaseInOutElastic(float p)
-    {
-        constexpr float PI = 3.14159265358979323846f;
-        if (p <= 0.0f)
         {
-            return 0.0f;
+            constexpr float PI = 3.14159265358979323846f;
+            if (p <= 0.0f)
+            {
+                return 0.0f;
+            }
+            if (p >= 1.0f)
+            {
+                return 1.0f;
+            }
+            const float c5 = (2.0f * PI) / 4.5f;
+            if (p < 0.5f)
+            {
+                return -0.5f * std::powf(2.0f, 20.0f * p - 10.0f) * std::sinf((p * 20.0f - 11.125f) * c5);
+            }
+            return std::powf(2.0f, -20.0f * p + 10.0f) * std::sinf((p * 20.0f - 11.125f) * c5) * 0.5f + 1.0f;
         }
-        if (p >= 1.0f)
-        {
-            return 1.0f;
-        }
-        const float c5 = (2.0f * PI) / 4.5f;
-        if (p < 0.5f)
-        {
-            return -0.5f * std::pow(2.0f, 20.0f * p - 10.0f) * std::sin((p * 20.0f - 11.125f) * c5);
-        }
-        return std::pow(2.0f, -20.0f * p + 10.0f) * std::sin((p * 20.0f - 11.125f) * c5) * 0.5f + 1.0f;
-    }
+
         float EaseInBounce(float p)
-    {
-        return 1.0f - EaseOutBounce(1.0f - p);
-    }
+        {
+            return 1.0f - EaseOutBounce(1.0f - p);
+        }
+
         float EaseOutBounce(float p)
-    {
-        const float n1 = 7.5625f;
-        const float d1 = 2.75f;
-        if (p < 1.0f / d1)
         {
-            return n1 * p * p;
+            const float n1 = 7.5625f;
+            const float d1 = 2.75f;
+            if (p < 1.0f / d1)
+            {
+                return n1 * p * p;
+            }
+            else if (p < 2.0f / d1)
+            {
+                const float t = p - 1.5f / d1;
+                return n1 * t * t + 0.75f;
+            }
+            else if (p < 2.5f / d1)
+            {
+                const float t = p - 2.25f / d1;
+                return n1 * t * t + 0.9375f;
+            }
+            else
+            {
+                const float t = p - 2.625f / d1;
+                return n1 * t * t + 0.984375f;
+            }
         }
-        else if (p < 2.0f / d1)
-        {
-            const float t = p - 1.5f / d1;
-            return n1 * t * t + 0.75f;
-        }
-        else if (p < 2.5f / d1)
-        {
-            const float t = p - 2.25f / d1;
-            return n1 * t * t + 0.9375f;
-        }
-        else
-        {
-            const float t = p - 2.625f / d1;
-            return n1 * t * t + 0.984375f;
-        }
-    }
+
         float EaseInOutBounce(float p)
-    {
-        if (p < 0.5f)
         {
-            return (1.0f - EaseOutBounce(1.0f - 2.0f * p)) * 0.5f;
+            if (p < 0.5f)
+            {
+                return (1.0f - EaseOutBounce(1.0f - 2.0f * p)) * 0.5f;
+            }
+            return (1.0f + EaseOutBounce(2.0f * p - 1.0f)) * 0.5f;
         }
-        return (1.0f + EaseOutBounce(2.0f * p - 1.0f)) * 0.5f;
-    }
     }
 
 };

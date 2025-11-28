@@ -19,4 +19,6 @@ public:
     void FADE_OUT(float tick);
 
     void ApplyAlpha();
+
+    void SetTransMode(TRANS_MODE transMode) override;
 };

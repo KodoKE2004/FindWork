@@ -11,6 +11,7 @@
 #include "Material.h"
 
 // トランジションのフェーズ
+// 遷移の進行状況を示す列挙型
 enum class PHASE
 {
     TRANS_IN,
@@ -19,6 +20,7 @@ enum class PHASE
 };
 
 // トランジションのモード
+// トランジションエフェクトの種類を示す列挙型
 enum class TRANS_MODE
 {
     FADE,
@@ -90,8 +92,12 @@ public:
     // タイマー関連
     void SetDuration(const float& duration) { m_Duration = duration; }
     
+    // トランジションモードのセット
+    // 派生クラスで実装
     virtual void SetTransMode(TRANS_MODE transMode) = 0;
-    virtual TRANS_MODE GetTransMode() = 0;
+    TRANS_MODE GetTransMode() {
+        return m_TransMode;
+    }
     
     // 遷移状況の変数
     void  SetPhase(PHASE phase) { m_Phase = phase; }

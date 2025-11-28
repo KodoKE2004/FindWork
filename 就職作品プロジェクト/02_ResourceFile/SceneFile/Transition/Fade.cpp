@@ -116,6 +116,11 @@ void Fade::ApplyAlpha()
     SetColor(1.0f, 1.0f, 1.0f, m_Alpha);
 }
 
+void Fade::SetTransMode(TRANS_MODE transMode)
+{
+    m_TransMode = transMode;
+}
+
 
 void Fade::FADE_IN(float tick)
 {

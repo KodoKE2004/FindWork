@@ -35,7 +35,8 @@ void TransScene::Initialize()
         m_TransitionTexture->SetDuration(m_Duration);
 		m_TransitionTexture->Initialize();
 		m_TransitionTexture->SetPos(0.0f, 0.0f, -2.0f);
-		
+		m_TransitionTexture->SetTransMode(m_TransMode);
+
 		instance.SetTransitionTexture(m_TransitionTexture);
 	}
 	break;
@@ -73,18 +74,14 @@ void TransScene::Update(float tick)
 		return;
 	}
 
+	// 遷移演出の更新
 	m_TransitionTexture->Update(tick);
 
+	#pragma region 遷移演出更新後の処理
 	const auto phase = m_TransitionTexture->GetPhase();
-	if (!m_isTransOutToIn && phase == PHASE::TRANS_IN)
-	{
-		
-		m_isTransOutToIn = true;
-	}
-
+    // 演出がINからOUTに変わった瞬間を検出
 	if (!m_isChange && phase == PHASE::TRANS_IN)
 	{
-		
 		m_SceneOld->Finalize();
 		m_SceneNext->Initialize();
 		DrawNextScene();

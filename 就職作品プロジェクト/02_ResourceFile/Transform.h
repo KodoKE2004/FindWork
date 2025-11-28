@@ -5,7 +5,7 @@
 using namespace DirectX;
 using namespace SimpleMath;
 
-/// @brief Nは西口の略 DirectXMathの型Vector3が被るのを避ける
+/// @brief DirectXMathの型Vector3が被るのを避ける
 /// @brief Vector3は3次元ベクトルを表すクラス
 struct NVector3
 {

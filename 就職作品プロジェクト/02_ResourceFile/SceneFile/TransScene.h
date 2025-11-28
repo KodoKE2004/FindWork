@@ -9,6 +9,11 @@
 #include "TransitionBase.h"
 #include "SnapshotOverlay.h"
 
+// 列挙型PHASEの進行状況の監視
+// OFF    : トランジション処理を行わない
+// START  : トランジション処理を開始する
+// DOING  : トランジション処理中
+// FINISH : トランジション処理が終了した
 enum class STEP
 {
 	OFF,
@@ -41,7 +46,6 @@ private:
 	float m_AlphaValue = 0.0f;
 
 	bool m_isChange		    = false;
-	bool m_isTransOutToIn   = false;
 
 	STEP m_Step;
 
@@ -53,7 +57,6 @@ public:
     // コンストラクタとデストラクタ
 
 	TransScene();
-
     ~TransScene()			override = default;
 
 	void Initialize()		override;
@@ -71,7 +74,6 @@ public:
 	void SetNextScene(Scene* sceneNext)    { m_SceneNext = sceneNext; }
 	void SetTransMode(TRANS_MODE mode)     { m_TransMode = mode;	  }
 	void SetStep(STEP step)				   { m_Step		 = step;	  }
-    void SetStackOp(STACK_OP op)		   { m_StackOp   = op;		  }
 	void SetTimer(float timer)			   { m_Timer	 = timer;	  }
 
 	// 設定した時間に到達したかどうか

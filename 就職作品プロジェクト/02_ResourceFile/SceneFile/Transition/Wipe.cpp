@@ -18,7 +18,6 @@ void Wipe::Initialize()
     SetColor(0.0f, 0.0f, 0.0f, 0.0f);
 
     m_Phase = PHASE::TRANS_OUT;
-    m_Rate = 0.0f;
     m_Elapsed = 0.0f;
 
     if (m_Duration <= 0.0f) m_Duration = 1.0f;
@@ -60,7 +59,6 @@ void Wipe::Update(float tick)
     default: break;
     }
 }
-
 
 void Wipe::Draw()
 {
@@ -121,7 +119,6 @@ void Wipe::ApplyWipeAmount(float amount)
 {
     // 進行状態のケア
     amount = std::clamp(amount, 0.0f, 1.0f);
-    m_Rate = amount;
 
     // 初期状態は全画面表示
     float width = SCREEN_WIDTH;
@@ -168,7 +165,7 @@ void Wipe::WIPE_IN(float tick)
     if (m_Phase != PHASE::TRANS_IN) return;
 
     m_Elapsed += tick;
-    const float t = std::clamp(m_Elapsed / max(m_Duration, 0.0001f), 0.0f, 1.0f);
+    const float t = std::clamp(m_Elapsed / max(m_Duration * 0.5f, 0.0001f), 0.0f, 1.0f);
     const float eased = Math::Easing::EaseInOutBack(t);
 
     ApplyWipeAmount(1.0f - eased);
@@ -188,7 +185,7 @@ void Wipe::WIPE_OUT(float tick)
     if (m_Phase != PHASE::TRANS_OUT) return;
 
     m_Elapsed += tick;
-    const float t = std::clamp(m_Elapsed / (m_Duration, 0.0001f), 0.0f, 1.0f);
+    const float t = std::clamp(m_Elapsed / max(m_Duration * 0.5f , 0.0001f), 0.0f, 1.0f);
     const float eased = Math::Easing::EaseInOutSine(t);
 
     ApplyWipeAmount(eased);
@@ -219,4 +216,27 @@ void Wipe::SetTransMode(TRANS_MODE transMode)
         SetBottomToTop();
     break;
     }
+    
+    CheckPointSetting();
+}
+
+void Wipe::CheckPointSetting()
+{
+
+    float posX,posY;
+    float SizeX, SizeY;
+    posX = posY = 0.0f;
+    SizeX = Application::GetWidth() ;
+    SizeY = Application::GetHeight();
+
+    switch (m_TransMode)
+    {
+    case TRANS_MODE::WIPE_LEFT_TO_RIGHT: posX = - SizeX; break;
+    case TRANS_MODE::WIPE_RIGHT_TO_LEFT: posX =   SizeX; break;
+    case TRANS_MODE::WIPE_TOP_TO_BOTTOM: posY =   SizeY; break;
+    case TRANS_MODE::WIPE_BOTTOM_TO_TOP: posY = - SizeY; break;
+    }
+    m_StartPos = NVector3(  posX,   posY, GetPos().z);
+    m_EndPos   = NVector3(- posX, - posY, GetPos().z);
+
 }

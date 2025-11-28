@@ -162,7 +162,7 @@ public:
 //	  シーンを遷移するテンプレート関数
 //================================
 template<class T>
-void ChangeScenePush(TRANS_MODE mode,float duration)
+void ChangeScenePush(TRANS_MODE modeIN, float duration)
 {
     auto& instance = Game::GetInstance();
 
@@ -195,8 +195,7 @@ void ChangeScenePush(TRANS_MODE mode,float duration)
 	scene->SetTransitionTick(duration);
 	scene->SetNextScene(sceneNext);
 	scene->SetStep(STEP::START);
-    scene->SetStackOp(STACK_OP::PUSH);
-	scene->SetTransMode(mode);
+	scene->SetTransMode(modeIN);
 	scene->Initialize();
 
 	instance.SetSceneCurrent(scene);
@@ -204,7 +203,7 @@ void ChangeScenePush(TRANS_MODE mode,float duration)
 }
 
 // 一つ前のシーンに戻る
-inline void ChangeScenePop(TRANS_MODE mode, float duration)
+inline void ChangeScenePop(TRANS_MODE modeIN,float duration)
 {
     auto& instance = Game::GetInstance();
 
@@ -226,8 +225,7 @@ inline void ChangeScenePop(TRANS_MODE mode, float duration)
     scene->SetNextScene(sceneNext);
 	scene->SetTransitionTick(duration);
 	scene->SetStep(STEP::START);
-	scene->SetStackOp(STACK_OP::POP);
-	scene->SetTransMode(mode);
+	scene->SetTransMode(modeIN);
 	scene->Initialize();
 
     instance.SetSceneCurrent(scene);
@@ -255,7 +253,6 @@ inline void ChangeScenePop(TRANS_MODE transMode, float duration, int stageNo, in
 	scene->SetNextScene(sceneNext);
 	scene->SetTransitionTick(duration);
 	scene->SetStep(STEP::START);
-	scene->SetStackOp(STACK_OP::POP);
 	scene->SetTransMode(transMode);
 	scene->Initialize();
 
