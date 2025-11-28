@@ -21,6 +21,7 @@ private:
     float m_Rate = 0.0f;    // 0→1 の進行度
     float m_Elapsed = 0.0f; // 経過時間
 
+    // 進行度毎にワイプ画像の座標を適用
     void ApplyWipeAmount(float amount);
 
 public:
@@ -41,5 +42,5 @@ public:
     void SetBottomToTop() { m_Mode = WIPE_MODE::BOTTOM_TO_TOP; }
 
     float GetRate() const { return m_Rate; }
-    void SetTransMode(TRANS_MODE transMode) override;
+    void  SetTransMode(TRANS_MODE transMode) override;
 };

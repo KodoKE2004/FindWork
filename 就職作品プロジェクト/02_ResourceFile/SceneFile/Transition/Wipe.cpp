@@ -119,15 +119,18 @@ void Wipe::Finalize() {}
 
 void Wipe::ApplyWipeAmount(float amount)
 {
+    // 進行状態のケア
     amount = std::clamp(amount, 0.0f, 1.0f);
     m_Rate = amount;
 
+    // 初期状態は全画面表示
     float width = SCREEN_WIDTH;
     float height = SCREEN_HEIGHT;
     float posX = 0.0f;
     float posY = 0.0f;
     const float depth = GetPos().z;
 
+    // 方向ごとに処理
     switch (m_Mode)
     {
     case WIPE_MODE::LEFT_TO_RIGHT:
@@ -150,6 +153,7 @@ void Wipe::ApplyWipeAmount(float amount)
         break;
     }
 
+    // 負の値にならないようにケア
     width  = max(width, 0.0f);
     height = max(height, 0.0f);
 
@@ -165,7 +169,7 @@ void Wipe::WIPE_IN(float tick)
 
     m_Elapsed += tick;
     const float t = std::clamp(m_Elapsed / max(m_Duration, 0.0001f), 0.0f, 1.0f);
-    const float eased = Math::Easing::EaseInOutBack(t);    
+    const float eased = Math::Easing::EaseInOutBack(t);
 
     ApplyWipeAmount(1.0f - eased);
 
