@@ -155,6 +155,7 @@ void Fade::FADE_OUT(float tick)
     {
         m_Alpha = 1.0f;
         m_Phase = PHASE::TRANS_IN;
+        m_isChange = true;
         m_Elapsed = 0.0f;
     }
     ApplyAlpha();

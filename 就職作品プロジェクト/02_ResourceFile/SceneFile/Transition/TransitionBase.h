@@ -53,6 +53,8 @@ protected:
     PHASE m_Phase;
     TRANS_MODE m_TransMode;
 
+    bool m_isChange = false;
+
     // UVÀ•W‚Ìî•ñ
     float m_NumU   = 1.0f;
     float m_NumV   = 1.0f;
@@ -101,6 +103,8 @@ public:
     
     // ‘JˆÚó‹µ‚Ì•Ï”
     void  SetPhase(PHASE phase) { m_Phase = phase; }
-    PHASE GetPhase()           { return m_Phase; }
+    PHASE GetPhase()            { return m_Phase; }
+    bool IsChange()             { return m_isChange; }
+
 };
 

@@ -76,7 +76,7 @@ void TransScene::Update(float tick)
 	#pragma region 遷移演出更新後の処理
 	const auto phase = m_TransitionTexture->GetPhase();
     // 演出がINからOUTに変わった瞬間を検出
-	if (!m_isChange && phase == PHASE::TRANS_IN)
+	if (!m_isChange && m_TransitionTexture->IsChange() )
 	{
 		m_SceneOld->Finalize();
 		m_SceneNext->Initialize();

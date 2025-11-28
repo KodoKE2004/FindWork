@@ -157,6 +157,7 @@ void Wipe::WIPE_IN(float tick)
     if (t >= 1.0f)
     {
         m_Phase = PHASE::TRANS_OUT;
+        m_isChange = true;
         m_Elapsed = 0.0f;
     }
 }
