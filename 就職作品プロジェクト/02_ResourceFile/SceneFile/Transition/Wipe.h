@@ -22,7 +22,7 @@ private:
 
     NVector3 m_StartPos;
     NVector3 m_EndPos;
-
+    const NVector3 CheckPoint = NVector3(0.0f,0.0f,0.0f);
 
     // 進行度毎にワイプ画像の座標を適用
     void ApplyWipeAmount(float amount);

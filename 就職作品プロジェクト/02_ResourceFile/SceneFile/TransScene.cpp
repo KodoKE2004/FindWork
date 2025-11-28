@@ -34,7 +34,6 @@ void TransScene::Initialize()
         m_TransitionTexture = std::make_shared<Fade>(instance.GetCamera());
         m_TransitionTexture->SetDuration(m_Duration);
 		m_TransitionTexture->Initialize();
-		m_TransitionTexture->SetPos(0.0f, 0.0f, -2.0f);
 		m_TransitionTexture->SetTransMode(m_TransMode);
 
 		instance.SetTransitionTexture(m_TransitionTexture);
@@ -56,13 +55,10 @@ void TransScene::Initialize()
 		}
 
 		m_TransitionTexture->SetTextureSRV(m_NextSceneSRV.Get());
-		m_TransitionTexture->SetPos(0.0f, 0.0f, -2.0f);
 		instance.SetTransitionTexture(m_TransitionTexture);
 	}
 	break;
 	}
-
-    m_TransitionTexture->SetPhase	 (PHASE::TRANS_OUT);
 
 }
 
