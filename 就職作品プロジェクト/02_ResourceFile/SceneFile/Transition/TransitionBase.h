@@ -28,6 +28,8 @@ enum class TRANS_MODE
     WIPE_RIGHT_TO_LEFT,
     WIPE_TOP_TO_BOTTOM,
     WIPE_BOTTOM_TO_TOP,
+    ZOOM_IN,
+    ZOOM_OUT,
     NUM
 };
 

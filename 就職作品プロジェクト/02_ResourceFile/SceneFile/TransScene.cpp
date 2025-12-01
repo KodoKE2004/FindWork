@@ -58,6 +58,12 @@ void TransScene::Initialize()
 		instance.SetTransitionTexture(m_TransitionTexture);
 	}
 	break;
+    case TRANS_MODE::ZOOM_IN:
+	case TRANS_MODE::ZOOM_OUT:
+	{
+
+	}
+	break;
 	}
 
 }

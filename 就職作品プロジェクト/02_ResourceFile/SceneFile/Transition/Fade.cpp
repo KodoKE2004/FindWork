@@ -13,12 +13,7 @@ Fade::Fade(Camera* cam) : TransitionBase(cam)
 
 void Fade::Initialize()
 {
-    // テクスチャの取得
-    TextureManager* textureMgr = Game::GetInstance();
-    m_Texture = textureMgr->GetTexture("Black.png");
 
-    // フルスクリーンに設定
-    SetScale(SCREEN_WIDTH, SCREEN_HEIGHT, 1.0f);
 
     // 初期カラーを透明に設定
     m_Alpha = 0.0f;
@@ -34,6 +29,13 @@ void Fade::Initialize()
 
     // フェードアウトから開始
     m_Phase = PHASE::TRANS_OUT;
+
+    // テクスチャの取得
+    TextureManager* textureMgr = Game::GetInstance();
+    m_Texture = textureMgr->GetTexture("Black.png");
+
+    // フルスクリーンに設定
+    SetScale(SCREEN_WIDTH, SCREEN_HEIGHT, 1.0f);
 
     std::vector<VERTEX_3D> vertices(4);
     vertices[0].position = NVector3(-0.5f,  0.5f, 0.0f);

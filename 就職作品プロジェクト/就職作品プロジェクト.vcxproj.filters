@@ -241,6 +241,9 @@
     <ClCompile Include="02_ResourceFile\RhythmBeat.cpp">
       <Filter>SourceFile\Core</Filter>
     </ClCompile>
+    <ClCompile Include="02_ResourceFile\SceneFile\Transition\Zoom.cpp">
+      <Filter>SourceFile</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="02_ResourceFile\SceneFile\Scene.h">
@@ -447,6 +450,7 @@
     <ClInclude Include="02_ResourceFile\RhythmBeat.h">
       <Filter>SourceFile\Core</Filter>
     </ClInclude>
+    <ClInclude Include="02_ResourceFile\SceneFile\Transition\Zoom.h" />
   </ItemGroup>
   <ItemGroup>
     <FxCompile Include="ShaderFile\Common.hlsl">

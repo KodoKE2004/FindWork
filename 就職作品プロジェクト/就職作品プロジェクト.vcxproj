@@ -46,6 +46,7 @@
     <ClCompile Include="02_ResourceFile\SceneFile\Scene.cpp" />
     <ClCompile Include="02_ResourceFile\SceneFile\Transition\TransitionBase.cpp" />
     <ClCompile Include="02_ResourceFile\SceneFile\Transition\Wipe.cpp" />
+    <ClCompile Include="02_ResourceFile\SceneFile\Transition\Zoom.cpp" />
     <ClCompile Include="02_ResourceFile\StaticMesh.cpp" />
     <ClCompile Include="02_ResourceFile\MeshManager.cpp" />
     <ClCompile Include="02_ResourceFile\ObjectFile\Bullet.cpp" />
@@ -114,6 +115,7 @@
     <ClInclude Include="02_ResourceFile\SceneFile\ResultScene.h" />
     <ClInclude Include="02_ResourceFile\SceneFile\Transition\TransitionBase.h" />
     <ClInclude Include="02_ResourceFile\SceneFile\Transition\Wipe.h" />
+    <ClInclude Include="02_ResourceFile\SceneFile\Transition\Zoom.h" />
     <ClInclude Include="02_ResourceFile\StaticMesh.h" />
     <ClInclude Include="02_ResourceFile\MeshManager.h" />
     <ClInclude Include="02_ResourceFile\ObjectFile\Bullet.h" />
