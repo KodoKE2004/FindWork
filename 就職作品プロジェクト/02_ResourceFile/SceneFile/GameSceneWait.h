@@ -11,11 +11,8 @@ enum class GAME_PHASE
     START = 0,			// ゲーム開始演出 初期化時に使用	
     FINISH,				// ゲーム終了演出 ResulyScene 遷移時に使用
     DO,					// ゲーム中 GameSceneExe 遷移時に使用	
-	DO_TRUE,			// リザルトの分岐演出
-	DO_FALSE,			// リザルトの分岐演出
 	DO_UP_SPEED,		// スピードアップ演出
     DO_UP_DIFFICULTY,	// レベルアップ演出
-	DO_GAMEOVER,		// ゲームオーバー演出
 	NUM
 };
 
@@ -45,18 +42,16 @@ private:
 	// 初期化済みかどうかのフラグ
     // また、乱数選択のリセット用にstaticで持つ
     static bool s_HasFirstGameSceneWaitInitialized;	
+	static GAME_PHASE s_CurrentGamePhase;	// 現在のゲームフェーズを管理する変数
 
 	bool m_ShouldTransitionToStage = false;		// 次のステージを設定できたか判断するフラグ
     bool m_IsFirstInitialized	   = false;		// シーンが最初に初期化されたかどうかのフラグ
-    bool m_isStageCleared          = false;		// ステージクリアしたかどうかのフラグ
     bool m_wasDecrementLife		   = false;		// ライフが減ったかどうかのフラグ
 
     bool m_WasPlayBGM = false;				// BGMを再生したかどうかのフラグ
 
     RhythmBeat m_RhythmBeat;			// リズムビート管理用変数
     bool m_IsLifeTiltPositive = true;	// ライフの傾きが正かどうかのフラグ
-public:
-    static GAME_PHASE s_CurrentGamePhase;	// 現在のゲームフェーズを管理する変数
 
 private:
 	// Exeシーンの乱数選択を行う。
@@ -88,10 +83,18 @@ public:
 		return SCENE_NO::GAME_WAIT;
 	}
 
+
+    //--------------------------------
+    //	  ステージ乱数選択リセット要求関数
+    //--------------------------------
+
 	void RequestFullStageRandom()
 	{
 		s_HasFirstGameSceneWaitInitialized = false;
 	}
+
+	// 選択されたランダムなシーンへ遷移
+	void StartNextStageTransition();
 
 	void DecrementLife();
 };

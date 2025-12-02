@@ -6,6 +6,7 @@
 #include <array>
 #include <random>
 
+bool GameSceneWait::s_HasFirstGameSceneWaitInitialized = false;
 GAME_PHASE GameSceneWait::s_CurrentGamePhase = GAME_PHASE::START;
 
 // a か b のどちらかをランダムに返すテンプレート関数
@@ -80,7 +81,6 @@ void GameSceneWait::Initialize()
     const float lifePosY = - 100.0f;
 
     m_ShouldTransitionToStage = false;
-    m_isStageCleared          = false;
     m_wasDecrementLife        = false;
 
     // ライフオブジェクトの生成
@@ -108,38 +108,24 @@ void GameSceneWait::Initialize()
         }
     }
 
+    // ステージ乱数選択処理   
+    PrepareNextStage();
 }
 
 void GameSceneWait::Update(float tick)
 {   
     auto& instance = Game::GetInstance();
-    #pragma region ゲームステージ遷移処理
+
     // 一定時間経過後に次のステージ選択処理へ
     if (m_ChangeStage.IsTimeUp())
     {
-         m_ShouldTransitionToStage = true;
+        m_ShouldTransitionToStage = true;
     }
     if (m_ShouldTransitionToStage)
     {
-        // ステージ乱数選択処理   
-        PrepareNextStage();
-        // シーン遷移処理
-        switch (m_RelationData.nextScene)
-        {
-        case SCENE_NO::GAME_SLICE:
-            ChangeScenePush<GameSceneSlice>(TRANS_MODE::FADE, 0.3f);
-            break;
-        case SCENE_NO::GAME_JUMP:
-            ChangeScenePush<GameSceneJump>(TRANS_MODE::FADE,  0.3f);
-            break;
-        case SCENE_NO::GAME_CRUSH:
-            ChangeScenePush<GameSceneCrush>(TRANS_MODE::FADE, 0.3f);
-            break;
-        default:
-            return;
-        }
+        StartNextStageTransition();
     }
-    #pragma endregion
+
 
     // リズムを取る
     // ライフをリズムに合わせて廻す
@@ -210,6 +196,26 @@ void GameSceneWait::Finalize()
     }
 }
 
+// 次のステージ選択とシーン遷移処理
+void GameSceneWait::StartNextStageTransition()
+{
+    // シーン遷移処理
+    switch (m_RelationData.nextScene)
+    {
+    case SCENE_NO::GAME_SLICE:
+        ChangeScenePush<GameSceneSlice>(TRANS_MODE::FADE, 0.3f);
+        break;
+    case SCENE_NO::GAME_JUMP:
+        ChangeScenePush<GameSceneJump>(TRANS_MODE::FADE, 0.3f);
+        break;
+    case SCENE_NO::GAME_CRUSH:
+        ChangeScenePush<GameSceneCrush>(TRANS_MODE::FADE, 0.3f);
+        break;
+    default:
+        return;
+    }
+}
+
 void GameSceneWait::DecrementLife()
 {
     auto& instance = Game::GetInstance();
@@ -219,7 +225,6 @@ void GameSceneWait::DecrementLife()
     --m_LifeCount;
 }
 
-bool GameSceneWait::s_HasFirstGameSceneWaitInitialized = false;
 
 void GameSceneWait::PrepareNextStage()
 {
