@@ -24,18 +24,18 @@ struct AudioClip {
 };
 
 
-//======================================
+//-------------------------------=====
 // 			  ループ設定
-//======================================
+//-------------------------------=====
 struct LoopConfig {
 	uint32_t loopBegin = 0;  // samples
 	uint32_t loopLength = 0; // 0=to end
 	uint32_t loopCount = 0;  // 0=no loop / XAUDIO2_LOOP_INFINITE
 };
 
-//======================================
+//-------------------------------=====
 //			 再生パラメータ
-//======================================
+//-------------------------------=====
 struct PlayParams {
 	float volume = 1.0f;	// 0..1+
 	float pitch = 1.0f;		// frequency ratio
@@ -82,9 +82,9 @@ inline float SlopeToHitInFrames(float current, float target, int framesAt60)
     return 60.0f * (target - current) / (float)framesAt60;
 }
 
-//=====================================
+//-------------------------------====
 //	    	  コールバック
-//=====================================
+//-------------------------------====
 struct VoiceCallback : public IXAudio2VoiceCallback {
     // 再生終了を検知するために利用
 	std::atomic<bool>* finished = nullptr;
@@ -105,9 +105,9 @@ struct VoiceCallback : public IXAudio2VoiceCallback {
 };
 
 
-//=====================================
+//-------------------------------====
 //				Audioクラス
-//=====================================
+//-------------------------------====
 class Audio
 {
 private:
@@ -156,9 +156,9 @@ public:
 };
 
 
-//=====================================
+//-------------------------------====
 //			傾きを求める
-//=====================================
+//-------------------------------====
 static void RenderFrameSlope(
     VoiceState& st,
     const SlopePerSec& slope,   // このフレームでの傾き（毎秒）

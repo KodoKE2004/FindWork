@@ -1,5 +1,6 @@
 #pragma once
 #include "Object.h"
+#include "TransitionBase.h"
 #include "Skydome.h"
 #include "../Audio.h"
 #include "RhythmBeat.h"
@@ -45,7 +46,8 @@ public:
 class Scene
 {
 protected:
-    static constexpr float DEFAULT_VALUME = 0.2f; // PressEnterの点滅タイマー間隔
+	// PressEnterの点滅タイマー間隔
+    static constexpr float DEFAULT_VALUME = 0.2f; 
 	static constexpr Color DEFAULT_COLOR = Color(1.0f, 1.0f, 1.0f, 1.0f);
 protected:
 	
@@ -54,8 +56,9 @@ protected:
 	
 	Skydome* m_Skydome = nullptr;
 
-
 	const int stageCountMax = 5;
+
+	TransitionBase* m_TransitionTexture = nullptr;
 
 	// ExeSceneで使う変数
 	float m_TimerGameExe = 0.0f;			// 経過時間
@@ -67,11 +70,11 @@ public:
 	Scene()  = default;
 	virtual ~Scene() = default;
 
-	//================================
+	//---------------------------------
 	// 			ループ内の処理
 	//		 純粋仮想関数として定義
-	//================================
-	
+	//---------------------------------
+
 	virtual void Initialize()		= 0;	// 初期化処理
 	virtual void Update(float tick) = 0;	// 更新処理
 	virtual void Finalize()			= 0;	// 解放処理
@@ -83,13 +86,19 @@ public:
 
 	virtual SCENE_NO GetSceneNo() const = 0;
 
-	// シーン間の受け渡しの値をする関数
+    //--------------------------------
+	//	  シーン間の受け渡しの値をする関数
+    //--------------------------------
 	void SetRelationData(const SceneRelationData relationData) {
 		m_RelationData = relationData; 
 	}
+	const SceneRelationData GetRelationData() {
+		return m_RelationData;
+	}
 
-	const SceneRelationData GetRelationData() { return m_RelationData; }
-
+    //--------------------------------
+    // タイマー関連の関数群
+    //--------------------------------
 	void SetTimer(float* timer) 
 	{
 		*timer = 0.0f;
@@ -105,9 +114,7 @@ public:
 		}
     }
 
-	//
     // 時間制限を超えたか判定する関数群
-	//
 	bool IsTimeUp(const float limit) const {
 		return m_TimerGameExe >= limit; 
 	}

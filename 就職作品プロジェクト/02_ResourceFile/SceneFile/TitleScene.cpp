@@ -38,7 +38,7 @@ void TitleScene::Initialize()
 	m_Skydome->SetName("m_Skydome");
 	m_Skydome->SetSkyDomeMode(true);
 	m_Skydome->SetTexture(textureMgr->GetTexture("SkydomeSpace.png"));
-	m_Skydome->SetRadius(500.0f);
+	m_Skydome->SetRadius(5.0f);
 	m_MySceneObjects.emplace_back(m_Skydome);
 	
 	m_TitleLogo = instance.AddObject<Square>();

@@ -49,18 +49,16 @@ cbuffer ProjectionBuffer : register(b2)
 {
     matrix Projection;
 };
-
 cbuffer LightBuffer : register(b3)
 {
 	LightBuffer gLight;
 };
-
 cbuffer MeterialBuffer : register(b4)
 {
     MATERIAL Material;
 };
-
 cbuffer TextureBuffer : register(b5)
 {
     float4x4 matrixTex;
 };
+

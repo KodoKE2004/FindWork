@@ -3,7 +3,7 @@
 #include <wrl/client.h>
 #include <d3d11.h>
 
-#include "ObjectFile/Object.h"
+#include "Object.h"
 #include "Camera.h"
 #include "VertexBuffer.h"
 #include "IndexBuffer.h"

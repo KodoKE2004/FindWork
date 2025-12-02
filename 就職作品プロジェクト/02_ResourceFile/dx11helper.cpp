@@ -274,9 +274,10 @@ bool CreateComputeShader(
 
 
 
-//======================================
+//
+// =====
 //			コンスタントバッファを作成
-//======================================
+//=====
 bool CreateConstantBuffer(
 	ID3D11Device* device,					// デバイスオブジェクト
 	unsigned int bytesize,					// コンスタントバッファサイズ
@@ -301,9 +302,9 @@ bool CreateConstantBuffer(
 	return true;
 }
 
-//======================================
+//=====
 //	コンスタントバッファを作成(MAPで書き換え可能)
-//======================================
+//=====
 bool CreateConstantBufferWrite(
 	ID3D11Device* device,					// デバイスオブジェクト
 	unsigned int bytesize,					// コンスタントバッファサイズ

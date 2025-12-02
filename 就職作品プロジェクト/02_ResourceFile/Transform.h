@@ -16,9 +16,9 @@ struct NVector3
 	// コンストラクタ
 	NVector3(float x = 0.0f, float y = 0.0f, float z = 0.0f) : x(x), y(y), z(z) {}
 	
-	//====================================
+	//===
 	//			演算子オーバーロード
-	//====================================
+	//===
 	
 	// float 一括代入
 	NVector3& operator=(float value)
@@ -107,9 +107,9 @@ protected:
 
 public:
 
-	/// =================================================
+	/// ================
 	///                  コンストラクタ
-	/// =================================================
+	/// ================
 	Transform() : m_Position(0.0f, 0.0f, 0.0f),
 				  m_Rotation(0.0f, 0.0f, 0.0f),
 				  m_Scale   (1.0f, 1.0f, 1.0f) {};
@@ -119,9 +119,9 @@ public:
 				  m_Rotation(0.0f, 0.0f, 0.0f),
 				  m_Scale   (1.0f, 1.0f, 1.0f) {};
 
-	/// =================================================
+	/// ================
 	///                    セッター
-	/// =================================================
+	/// ================
 	void SetTransform(const Transform _Transform);
 	void SetTransform(const NVector3 _Pos, const NVector3 _Rotate, const NVector3 _Scale);
 
@@ -137,9 +137,9 @@ public:
 	void SetScale(const float _ScaleX, const float _ScaleY, const float _ScaleZ);
 	void SetScale(const float _Scale);
 
-	/// =================================================
+	/// ================
 	///                    ゲッター
-	/// =================================================
+	/// ================
 	Transform GetTransform() const;
 	NVector3   GetPos()		const { return m_Position; }
 	NVector3   GetRotate()  const { return m_Rotation; }

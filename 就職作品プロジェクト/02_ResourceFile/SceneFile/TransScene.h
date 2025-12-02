@@ -4,8 +4,6 @@
 #include "Application.h"
 
 #include "RenderTarget.h"
-#include "Fade.h"
-#include "Wipe.h"
 #include "TransitionBase.h"
 #include "SnapshotOverlay.h"
 

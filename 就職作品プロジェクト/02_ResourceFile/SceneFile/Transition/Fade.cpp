@@ -1,3 +1,4 @@
+#include "Fade.h"
 #include "Game.h"
 #include "main.h"
 #include "Application.h"
@@ -13,8 +14,6 @@ Fade::Fade(Camera* cam) : TransitionBase(cam)
 
 void Fade::Initialize()
 {
-
-
     // ‰ŠúƒJƒ‰[‚ğ“§–¾‚Éİ’è
     m_Alpha = 0.0f;
     m_Elapsed = 0.0f;
@@ -78,7 +77,6 @@ void Fade::Draw()
 {
     Renderer::SetDepthEnable(false);
     Renderer::SetBlendState(BS_ALPHABLEND);
-
 
     Matrix r = Matrix::CreateFromYawPitchRoll(m_Rotation.x, m_Rotation.y, m_Rotation.z);
     Matrix t = Matrix::CreateTranslation(m_Position.x, m_Position.y, m_Position.z);

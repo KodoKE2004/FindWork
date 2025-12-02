@@ -8,7 +8,7 @@
 #endif // _DEBUG
 #include "Scene.h"
 #include "TransScene.h"
-#include "Transition/TransitionBase.h"
+#include "TransitionBase.h"
 #include "Object.h"
 
 #include "input.h"

@@ -242,7 +242,7 @@
       <Filter>SourceFile\Core</Filter>
     </ClCompile>
     <ClCompile Include="02_ResourceFile\SceneFile\Transition\Zoom.cpp">
-      <Filter>SourceFile</Filter>
+      <Filter>SourceFile\Scene\Transition</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -450,7 +450,9 @@
     <ClInclude Include="02_ResourceFile\RhythmBeat.h">
       <Filter>SourceFile\Core</Filter>
     </ClInclude>
-    <ClInclude Include="02_ResourceFile\SceneFile\Transition\Zoom.h" />
+    <ClInclude Include="02_ResourceFile\SceneFile\Transition\Zoom.h">
+      <Filter>SourceFile\Scene\Transition</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <FxCompile Include="ShaderFile\Common.hlsl">
@@ -460,9 +462,6 @@
       <Filter>HLSL\PixelShader</Filter>
     </FxCompile>
     <FxCompile Include="ShaderFile\PS_Default.hlsl">
-      <Filter>HLSL\PixelShader</Filter>
-    </FxCompile>
-    <FxCompile Include="ShaderFile\PS_Phong.hlsl">
       <Filter>HLSL\PixelShader</Filter>
     </FxCompile>
     <FxCompile Include="ShaderFile\PS_Unlit.hlsl">
@@ -485,6 +484,9 @@
     </FxCompile>
     <FxCompile Include="ShaderFile\VS_DebugGrid.hlsl">
       <Filter>HLSL\VertexShader</Filter>
+    </FxCompile>
+    <FxCompile Include="ShaderFile\PS_CenterFade.hlsl">
+      <Filter>HLSL\PixelShader</Filter>
     </FxCompile>
   </ItemGroup>
 </Project>

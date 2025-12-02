@@ -1,8 +1,15 @@
 #include "TransScene.h"
+
+#include <memory>
+
 #include "SceneList.h"
 #include "main.h"
 #include "Game.h"
-#include <memory>
+
+#include "Fade.h"
+#include "Wipe.h"
+#include "Zoom.h"
+
 
 TransScene::TransScene()
 	: m_SceneOld (nullptr)
@@ -61,7 +68,17 @@ void TransScene::Initialize()
     case TRANS_MODE::ZOOM_IN:
 	case TRANS_MODE::ZOOM_OUT:
 	{
+		m_TransitionTexture = std::make_shared<Zoom>(instance.GetCamera());
+		m_TransitionTexture->SetDuration(m_Duration);
+		m_TransitionTexture->Initialize();
+		m_TransitionTexture->SetTransMode(m_TransMode);
 
+		if (m_SceneNext) {
+			DrawNextScene();
+		}
+
+		m_TransitionTexture->SetTextureSRV(m_NextSceneSRV.Get());
+		instance.SetTransitionTexture(m_TransitionTexture);
 	}
 	break;
 	}
