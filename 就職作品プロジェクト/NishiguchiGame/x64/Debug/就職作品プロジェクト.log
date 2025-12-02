@@ -1,4 +1,11 @@
-﻿  TransScene.cpp
-  Fade.cpp
-  Zoom.cpp
+﻿  Game.cpp
+  Car.cpp
+  Player.cpp
+  GameSceneJump.cpp
+  GameSceneWait.cpp
+  ResultScene.cpp
+  GameSceneExe.cpp
+  SelectScene.cpp
+  TitleScene.cpp
+  TransScene.cpp
   就職作品プロジェクト.vcxproj -> C:\Users\dorae\Desktop\HAL\class3\FindWork\就職作品プロジェクト\x64\Debug\NishiguchiGame.exe

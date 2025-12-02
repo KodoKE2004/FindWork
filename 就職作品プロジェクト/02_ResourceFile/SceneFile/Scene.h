@@ -62,7 +62,7 @@ protected:
 
 	// ExeSceneで使う変数
 	float m_TimerGameExe = 0.0f;			// 経過時間
-    std::vector<float*>	m_TimerList;	// タイマー格納用
+    static std::vector<float*>	m_TimerList;	// タイマー格納用
 
 public:
 	static SceneRelationData m_RelationData;
@@ -99,10 +99,10 @@ public:
     //--------------------------------
     // タイマー関連の関数群
     //--------------------------------
-	void SetTimer(float* timer) 
+	static void SetTimer(float* timer) 
 	{
 		*timer = 0.0f;
-        m_TimerList.emplace_back(timer);
+		m_TimerList.emplace_back(timer);
 	}
 
 	// それぞれが作成したTimer変数をカウント

@@ -6,6 +6,8 @@
 #include <array>
 #include <random>
 
+GAME_PHASE GameSceneWait::s_CurrentGamePhase = GAME_PHASE::START;
+
 // a か b のどちらかをランダムに返すテンプレート関数
 template<class T>
 T RandomChoose(const T& a, const T& b)

@@ -52,6 +52,7 @@ void Zoom::Initialize()
 
 void Zoom::Update(float tick)
 {
+    
 }
 
 void Zoom::Draw()

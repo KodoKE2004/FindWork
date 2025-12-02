@@ -2,6 +2,7 @@
 #include "Game.h"
 
 SceneRelationData Scene::m_RelationData;
+std::vector<float*> Scene::m_TimerList;
 
 void Scene::PlaySE(std::string seName)
 {

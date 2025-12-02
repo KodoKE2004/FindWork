@@ -4,6 +4,22 @@
 #include <vector>
 #include <random>
 
+// ゲームのフェーズ管理用列挙型
+// 演出も含める
+enum class GAME_PHASE
+{
+    START = 0,			// ゲーム開始演出 初期化時に使用	
+    FINISH,				// ゲーム終了演出 ResulyScene 遷移時に使用
+    DO,					// ゲーム中 GameSceneExe 遷移時に使用	
+	DO_TRUE,			// リザルトの分岐演出
+	DO_FALSE,			// リザルトの分岐演出
+	DO_UP_SPEED,		// スピードアップ演出
+    DO_UP_DIFFICULTY,	// レベルアップ演出
+	DO_GAMEOVER,		// ゲームオーバー演出
+	NUM
+};
+
+
 class GameSceneWait : public Scene
 {
 private:
@@ -39,7 +55,10 @@ private:
 
     RhythmBeat m_RhythmBeat;			// リズムビート管理用変数
     bool m_IsLifeTiltPositive = true;	// ライフの傾きが正かどうかのフラグ
+public:
+    static GAME_PHASE s_CurrentGamePhase;	// 現在のゲームフェーズを管理する変数
 
+private:
 	// Exeシーンの乱数選択を行う。
 	// 二回連続で同じステージが来るようにならないようにする 
 	// 要素の削除の仕方は考える。

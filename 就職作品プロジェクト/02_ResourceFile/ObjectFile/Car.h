@@ -39,7 +39,7 @@ public:
 
 };
 
-enum CarDirection
+enum class CarDirection
 {
     LeftTop   = 0,
     LeftBottom,
@@ -48,7 +48,7 @@ enum CarDirection
     NUM,
 };
 
-enum CarFaint
+enum class CarFaint
 {
     None,
     Jumping,
