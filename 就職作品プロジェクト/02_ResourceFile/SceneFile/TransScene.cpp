@@ -28,9 +28,8 @@ void TransScene::Initialize()
 	m_Alpha = 0.0f;
 	m_isChange = false;
 
-	if (m_Duration < 0.0f) {
-		m_Duration = 1.0f;
-	}
+	m_Duration = max(m_OutParam.duration, 0.0001f);
+	m_TransMode = m_OutParam.mode;
 	m_Step = STEP::DOING;
 	m_AlphaValue = 1.0f / m_Duration;
 	
@@ -39,9 +38,8 @@ void TransScene::Initialize()
 	case TRANS_MODE::FADE:
 	{
         m_TransitionTexture = std::make_shared<Fade>(instance.GetCamera());
-        m_TransitionTexture->SetDuration(m_Duration);
+        m_TransitionTexture->SetTransitionParams(m_InParam, m_OutParam);
 		m_TransitionTexture->Initialize();
-		m_TransitionTexture->SetTransMode(m_TransMode);
 
 		instance.SetTransitionTexture(m_TransitionTexture);
 	}
@@ -53,9 +51,8 @@ void TransScene::Initialize()
 	{
 
 		m_TransitionTexture = std::make_shared<Wipe>(instance.GetCamera());
-        m_TransitionTexture->SetDuration(m_Duration);
+		m_TransitionTexture->SetTransitionParams(m_InParam, m_OutParam);
 		m_TransitionTexture->Initialize();
-        m_TransitionTexture->SetTransMode(m_TransMode);
 
 		if (m_SceneNext) {
 			DrawNextScene();
@@ -96,7 +93,6 @@ void TransScene::Update(float tick)
 	// 遷移演出の更新
 	m_TransitionTexture->Update(tick);
 
-	#pragma region 遷移演出更新後の処理
 	const auto phase = m_TransitionTexture->GetPhase();
     // 演出がINからOUTに変わった瞬間を検出
 	if (!m_isChange && m_TransitionTexture->IsChange() )

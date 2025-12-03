@@ -162,7 +162,7 @@ public:
 //	  シーンを遷移するテンプレート関数
 //================================
 template<class T>
-void ChangeScenePush(TRANS_MODE modeIN, float duration)
+void ChangeScenePush(SceneTransitionParam& inParam, SceneTransitionParam& outParam)
 {
     auto& instance = Game::GetInstance();
 
@@ -192,10 +192,9 @@ void ChangeScenePush(TRANS_MODE modeIN, float duration)
     instance.ScenePush(instance.GetCurrentScene());
 	scene->SetOldScene(instance.GetCurrentScene());
 
-	scene->SetTransitionParam(inParam, _プレースホルダー_);
+	scene->SetTransitionParam(inParam, outParam);
 	scene->SetNextScene(sceneNext);
 	scene->SetStep(STEP::START);
-	scene->SetTransMode(modeIN);
 	scene->Initialize();
 
 	instance.SetSceneCurrent(scene);
@@ -203,7 +202,7 @@ void ChangeScenePush(TRANS_MODE modeIN, float duration)
 }
 
 // 一つ前のシーンに戻る
-inline void ChangeScenePop(TRANS_MODE modeIN,float duration)
+inline void ChangeScenePop(const SceneTransitionParam& inParam,const SceneTransitionParam& outParam)
 {
     auto& instance = Game::GetInstance();
 
@@ -223,40 +222,11 @@ inline void ChangeScenePop(TRANS_MODE modeIN,float duration)
 	scene->SetOldScene(instance.GetCurrentScene());
     scene->SetRelationData(instance.GetCurrentScene()->GetRelationData());
     scene->SetNextScene(sceneNext);
-	scene->SetTransitionParam(inParam, _プレースホルダー_);
+	scene->SetTransitionParam(inParam, outParam);
 	scene->SetStep(STEP::START);
-	scene->SetTransMode(modeIN);
 	scene->Initialize();
 
     instance.SetSceneCurrent(scene);
-}
-
-// ゲームシーンの切り替えポップ
-inline void ChangeScenePop(TRANS_MODE transMode, float duration, int stageNo, int score)
-{
-	auto& instance = Game::GetInstance();
-    if (instance.GetSceneStackSize() == 0) 
-	{
-        MyDebugLog(Debug::Log("シーンスタックが空です");)
-		return ;
-	}
-
-	// 現在のシーン
-	auto scene = new TransScene();
-	Scene* sceneNext = instance.ScenePop();
-	if (sceneNext == nullptr) {
-		delete scene;
-		return;
-	}
-	scene->SetOldScene(instance.GetCurrentScene());
-	scene->SetRelationData(instance.GetCurrentScene()->GetRelationData());
-	scene->SetNextScene(sceneNext);
-	scene->SetTransitionParam(inParam, _プレースホルダー_);
-	scene->SetStep(STEP::START);
-	scene->SetTransMode(transMode);
-	scene->Initialize();
-
-	instance.SetSceneCurrent(scene);
 }
 
 inline void Game::ScenePush(Scene* newScene)

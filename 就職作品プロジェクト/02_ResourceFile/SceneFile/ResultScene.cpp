@@ -115,7 +115,8 @@ void ResultScene::Update(float tick)
             // ƒ^ƒCƒgƒ‹‚Ö–ß‚é
             m_RelationData.previousScene = SCENE_NO::RESULT;
             m_RelationData.nextScene     = SCENE_NO::TITLE;
-            ChangeScenePush<TitleScene>(TRANS_MODE::FADE, 0.3f);
+            SceneTransitionParam transition{ TRANS_MODE::FADE, 0.3f, EASING_TYPE::NONE };
+            ChangeScenePush<TitleScene>(transition, transition);
         }
         else
         {
@@ -126,7 +127,8 @@ void ResultScene::Update(float tick)
             m_RelationData.isClear = true;
             m_RelationData.stageCount = 0;
             m_RelationData.gameLife   = 4;
-            ChangeScenePop(TRANS_MODE::FADE,0.3f);
+            SceneTransitionParam transition{ TRANS_MODE::FADE, 0.3f, EASING_TYPE::NONE };
+            ChangeScenePop(transition, transition);
         }
 
 

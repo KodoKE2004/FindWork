@@ -118,7 +118,8 @@ void GameSceneJump::Update(float tick)
    
     GameSceneExe::Update(tick);
     if (IsChange()) {
-        ChangeScenePop(TRANS_MODE::FADE, 0.2f);
+        SceneTransitionParam transition{ TRANS_MODE::FADE, 0.2f, EASING_TYPE::NONE };
+        ChangeScenePop(transition, transition);
     }
 
 

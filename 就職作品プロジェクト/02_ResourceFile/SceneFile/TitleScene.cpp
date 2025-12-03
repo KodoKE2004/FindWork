@@ -142,7 +142,9 @@ void TitleScene::Update(float tick)
 
 			audioMgr->StopAllByName("bgm", false);
 		}
-		ChangeScenePush<GameSceneWait>(TRANS_MODE::WIPE_LEFT_TO_RIGHT, 1.0f);
+
+		SceneTransitionParam transition{ TRANS_MODE::WIPE_LEFT_TO_RIGHT, 3.0f, EASING_TYPE::NONE };
+		ChangeScenePush<GameSceneWait>(transition, transition);
 	}
 
 	// Skydome‚Ì‰ñ“]

@@ -62,7 +62,8 @@ void SelectScene::Update(float tick)
 
 	if (Input::GetKeyTrigger(VK_RETURN)) 
 	{
-		ChangeScenePush<GameSceneCrush>(TRANS_MODE::FADE,0.01f);
+		SceneTransitionParam transition{ TRANS_MODE::FADE, 1.0f, EASING_TYPE::NONE };
+		ChangeScenePush<GameSceneWait>(transition, transition);
 	}
 
 	
