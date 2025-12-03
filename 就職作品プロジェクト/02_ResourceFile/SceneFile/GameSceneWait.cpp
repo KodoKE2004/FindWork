@@ -20,7 +20,6 @@ T RandomChoose(const T& a, const T& b)
     return (bit == 0) ? a : b;
 }
 
-
 namespace
 {
     constexpr std::array<SCENE_NO, 3> kStaegeCandidates = {
@@ -50,8 +49,6 @@ void GameSceneWait::Initialize()
     // 最初の一度だけ or 指定したタイミングのみフラグを立てる
     m_IsFirstInitialized = !s_HasFirstGameSceneWaitInitialized;
     s_HasFirstGameSceneWaitInitialized = true;
-    // 次のステージ選択フラグをflase
-    m_ShouldTransitionToStage = false;
 
     RhythmBeatConst beatConfig{};
     m_TimerList.clear();
@@ -128,7 +125,7 @@ void GameSceneWait::Update(float tick)
 
 
     // リズムを取る
-    // ライフをリズムに合わせて廻す
+    // ライフをリズムに合わせて回転させる
     int advancedTicks = m_RhythmBeat.Update(tick);
     if (advancedTicks > 0)
     {
@@ -202,17 +199,10 @@ void GameSceneWait::StartNextStageTransition()
     // シーン遷移処理
     switch (m_RelationData.nextScene)
     {
-    case SCENE_NO::GAME_SLICE:
-        ChangeScenePush<GameSceneSlice>(TRANS_MODE::FADE, 0.3f);
-        break;
-    case SCENE_NO::GAME_JUMP:
-        ChangeScenePush<GameSceneJump>(TRANS_MODE::FADE, 0.3f);
-        break;
-    case SCENE_NO::GAME_CRUSH:
-        ChangeScenePush<GameSceneCrush>(TRANS_MODE::FADE, 0.3f);
-        break;
-    default:
-        return;
+    case SCENE_NO::GAME_SLICE:ChangeScenePush<GameSceneSlice>(TRANS_MODE::FADE, 0.3f);  break;
+    case SCENE_NO::GAME_JUMP :ChangeScenePush<GameSceneJump> (TRANS_MODE::FADE, 0.3f);  break;
+    case SCENE_NO::GAME_CRUSH:ChangeScenePush<GameSceneCrush>(TRANS_MODE::FADE, 0.3f);  break;
+    default: return;
     }
 }
 
@@ -255,16 +245,13 @@ void GameSceneWait::PrepareNextStage()
             _NextScene = RandomChoose<SCENE_NO>(SCENE_NO::GAME_JUMP,
                 SCENE_NO::GAME_SLICE);
             break;
-        default:
-            _NextScene = StageSelectAllRandom();
+        default: _NextScene = StageSelectAllRandom();
             break;
         }
     }
 
     // 次のシーンRelationDataに格納
     m_RelationData.nextScene = _NextScene;
-    // 次シーンの選択完了
-    m_ShouldTransitionToStage = true;
 }
 
 // 全ステージから選ぶ時の乱数を取得する関数

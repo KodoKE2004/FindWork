@@ -121,8 +121,6 @@ void TitleScene::Update(float tick)
 		m_DurationPressEnter = 0.0f;
 	}
 
-
-
 	// Enter‚Ìˆ—
 	if (Input::GetKeyTrigger(VK_RETURN))
 	{
@@ -145,7 +143,7 @@ void TitleScene::Update(float tick)
 
 			audioMgr->StopAllByName("bgm", false);
 		}
-		ChangeScenePush<GameSceneWait>(TRANS_MODE::WIPE_LEFT_TO_RIGHT, 4.0f);
+		ChangeScenePush<GameSceneWait>(TRANS_MODE::WIPE_LEFT_TO_RIGHT, 1.0f);
 	}
 
 	// Skydome‚Ì‰ñ“]
@@ -169,13 +167,9 @@ void TitleScene::Update(float tick)
 		colorFadeMask.w = 0.0f;
 		m_EntryFlg = false;
 	}
-
 	m_FadeMask->SetColor(colorFadeMask);
 
-
 }
-
-
 
 void TitleScene::Finalize()
 {
