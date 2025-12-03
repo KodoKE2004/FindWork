@@ -4,8 +4,8 @@
 #include "SceneFile/SceneList.h"
 #include "DebugUI.h"
 #include "Audio.h" 
-#include "SceneFile/Transition/Fade.h"   // フェード型の識別に必要
-#include <algorithm>           // 使わないなら不要（2パス版は不要）
+#include "SceneFile/Transition/Fade.h"
+#include <algorithm>
 #include <cmath>
 #include <cstdint>
 #include <string>
@@ -99,17 +99,6 @@ void Game::Draw()
 	auto& instance = GetInstance();
 
 	Renderer::Start();
-
-//#ifdef _DEBUG
-//	if (!instance.m_Grid.IsInitialized())
-//	{
-//		instance.m_Grid.Initialize();
-//	}
-//	if (instance.m_Grid.IsEnabled())
-//	{
-//		instance.m_Grid.Draw();
-//	}
-//#endif	
 
 	for (auto& o : instance.m_GameObjects)
 	{

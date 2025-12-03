@@ -144,15 +144,13 @@ void Wipe::ApplyWipeAmount(float amount)
 
 }
 
-float Wipe::CalculateWipeEasing(float t)
+float Wipe::CalculateWipeEasing(const SceneTransitionParam& param, float t)
 {
-    switch (m_TransMode)
-    {
-    default:
-    case TRANS_MODE::WIPE_LEFT_TO_RIGHT: return Math::Easing::EaseInQuint(t); break;
-    case TRANS_MODE::WIPE_RIGHT_TO_LEFT: return Math::Easing::EaseInQuint(t); break;
-    case TRANS_MODE::WIPE_TOP_TO_BOTTOM: return Math::Easing::EaseOutBounce(t); break;
-    case TRANS_MODE::WIPE_BOTTOM_TO_TOP: return t; break;   // “™‘¬
+    if (param.easing != EASING_TYPE::NONE) {
+        return EvaluateEasing(param, t);
+    }
+    else {
+        return t;
     }
 
     return 0.0f;
@@ -164,14 +162,17 @@ void Wipe::WIPE_IN(float tick)
     if (m_Phase != PHASE::TRANS_IN) return;
 
     m_Elapsed += tick;
-    const float t = std::clamp(m_Elapsed / max(m_Duration * 0.5f, 0.0001f), 0.0f, 1.0f);
-    float eased = CalculateWipeEasing(t);
+
+    const auto& param = GetParamForPhase(m_Phase);
+    const float duration = param.duration;
+    const float t = std::clamp(m_Elapsed / max(duration * 0.5f, 0.0001f), 0.0f, 1.0f);
+    float eased = CalculateWipeEasing(param, t);
 
     ApplyWipeAmount(eased);
 
     if (t >= 1.0f)
     {
-        m_Phase = PHASE::TRANS_OUT;
+        ApplyPhaseSetting(PHASE::TRANS_IN);
         m_isChange = true;
         m_Elapsed = 0.0f;
     }
@@ -182,8 +183,11 @@ void Wipe::WIPE_OUT(float tick)
     if (m_Phase != PHASE::TRANS_OUT) return;
 
     m_Elapsed += tick;
-    const float t = std::clamp(m_Elapsed / max(m_Duration * 0.5f , 0.0001f), 0.0f, 1.0f);
-    const float eased = CalculateWipeEasing(t);
+
+    const auto& param = GetParamForPhase(m_Phase);
+    const float duration = param.duration;
+    const float t = std::clamp(m_Elapsed / max(duration * 0.5f, 0.0001f), 0.0f, 1.0f);
+    float eased = CalculateWipeEasing(param, t);
 
     ApplyWipeAmount(eased);
 

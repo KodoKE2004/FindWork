@@ -27,7 +27,7 @@ void Fade::Initialize()
     ApplyAlpha();
 
     // フェードアウトから開始
-    m_Phase = PHASE::TRANS_OUT;
+    ApplyPhaseSetting(PHASE::TRANS_OUT);
 
     // テクスチャの取得
     TextureManager* textureMgr = Game::GetInstance();
@@ -69,7 +69,7 @@ void Fade::Update(float tick)
     switch (m_Phase)
     {
     case PHASE::TRANS_OUT: FADE_OUT(tick); break;
-    case PHASE::TRANS_IN : FADE_IN (tick); break;
+    case PHASE::TRANS_IN:  FADE_IN(tick); break;
     default: break;
     }
 }
@@ -127,8 +127,10 @@ void Fade::FADE_IN(float tick)
     if (m_Phase != PHASE::TRANS_IN) return;
 
     m_Elapsed += tick;
-    const float t = std::clamp(m_Elapsed /max(m_Duration, 0.0001f), 0.0f, 1.0f);
-    const float eased = Math::Easing::EaseInOutQuint(t);
+    const auto& param = GetParamForPhase(m_Phase);
+    const float duration = param.duration;
+    const float t = std::clamp(m_Elapsed /max(duration, 0.0001f), 0.0f, 1.0f);
+    const float eased = EvaluateEasing(param, t);
 
     m_Alpha = 1.0f - eased;
 
@@ -147,14 +149,16 @@ void Fade::FADE_OUT(float tick)
     if (m_Phase != PHASE::TRANS_OUT) return;
 
     m_Elapsed += tick;
-    const float t = std::clamp(m_Elapsed / max(m_Duration, 0.0001f), 0.0f, 1.0f);
-    const float eased = Math::Easing::EaseInQuint(t);
+    const auto& param = GetParamForPhase(m_Phase);
+    const float duration = param.duration;
+    const float t = std::clamp(m_Elapsed / max(duration, 0.0001f), 0.0f, 1.0f);
+    const float eased = EvaluateEasing(param, t);
 
     m_Alpha = eased;
-    if (m_Alpha >= 1.0f)
+    if (t >= 1.0f)
     {
         m_Alpha = 1.0f;
-        m_Phase = PHASE::TRANS_IN;
+        ApplyPhaseSetting(PHASE::TRANS_IN);
         m_isChange = true;
         m_Elapsed = 0.0f;
     }

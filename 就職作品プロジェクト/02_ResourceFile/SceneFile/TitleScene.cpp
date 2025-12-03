@@ -4,7 +4,7 @@
 #include "Cube.h"
 #include "Skydome.h"
 #include "Square.h"
-#include "Model.h"
+#include "ObjectFile/Model.h"
 
 TitleScene::TitleScene(bool entryFlg)
 {
@@ -25,7 +25,6 @@ void TitleScene::Initialize()
 	m_RelationData.oldScene  = SCENE_NO::NONE;
 	m_RelationData.previousScene = SCENE_NO::TITLE;
     m_RelationData.gameLife = 4;
-
 
 #ifdef _DEBUG
 	instance.m_Grid.SetEnabled(true);

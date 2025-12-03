@@ -33,6 +33,52 @@ enum class TRANS_MODE
     NUM
 };
 
+enum class EASING_TYPE
+{
+    NONE,
+    IN_SINE,
+    IN_QUAD,
+    IN_CUBIC,
+    IN_QUINT,
+    IN_QUART,
+    IN_EXPO,
+    IN_CIRC,
+    IN_BACK,
+    IN_BOUNCE,
+    IN_ELASTIC,
+    OUT_SINE,
+    OUT_QUAD,
+    OUT_CUBIC,
+    OUT_QUINT,
+    OUT_QUART,
+    OUT_CIRC,
+    OUT_BACK,
+    OUT_ElASTIC,
+    OUT_BOUNCE,
+    OUT_EXPO,
+    IN_OUT_SINE,
+    IN_OUT_QUAD,
+    IN_OUT_CUBIC,
+    IN_OUT_QUINT,
+    IN_OUT_QUART,
+    IN_OUT_CIRC,
+    IN_OUT_BACK,
+    IN_OUT_ELASTIC,
+    IN_OUT_BOUNCE,
+    IN_OUT_EXPO,
+    NUM
+};
+
+struct SceneTransitionParam
+{
+    TRANS_MODE  mode     = TRANS_MODE::FADE;
+    float       duration = 1.0f;
+    EASING_TYPE easing   = EASING_TYPE::NONE;
+
+    int ModeAsIndex()   const { return static_cast<int>(mode);   }
+    int EasingAsIndex() const { return static_cast<int>(easing); }
+};
+
 /// @brief トランジションの基底クラス
 /// @param トランジションエフェクトを実装するための基底クラスです。
 /// @param このクラスは、描画に必要なメッシュ情報、テクスチャ、マテリアル、UV座標、タイマー情報を管理します。
@@ -54,6 +100,10 @@ protected:
     Microsoft::WRL::ComPtr<ID3D11ShaderResourceView> m_InputSRV;
     PHASE m_Phase;
     TRANS_MODE m_TransMode;
+
+    // 遷移演出のパラメータ
+    SceneTransitionParam m_InParam{};
+    SceneTransitionParam m_OutParam{};
 
     bool m_isChange = false;
 
@@ -82,23 +132,47 @@ public:
     ID3D11ShaderResourceView* GetTextureSRV() const { return m_InputSRV.Get(); }
     void ClearTextureSRV() { m_InputSRV.Reset(); }
 
-    // テクスチャを指定
-    void SetTexture(const char* imgname);
-    void SetTexture(std::shared_ptr<Texture> texture);
 
-    // UV座標を指定
-    void SetUV(const float& nu, const float& nv, const float& sx, const float& sy);
+    //--------------------------------
+    //          遷移パラメータ群
+    //--------------------------------
+    float EvaluateEasing(const SceneTransitionParam& param, float t);
+    void  ApplyPhaseSetting(PHASE phase);
 
     //===============================
     //         セッター・ゲッター
     //===============================
+    
+    // テクスチャ
+    void SetTexture(const char* imgname);
+    void SetTexture(std::shared_ptr<Texture> texture);
+
+    // UV座標
+    void SetUV(const float& nu, const float& nv, const float& sx, const float& sy);
      
     // タイマー関連
     void SetDuration(const float& duration) { m_Duration = duration; }
     
-    // トランジションモードのセット
-    // 派生クラスで実装
-    virtual void SetTransMode(TRANS_MODE transMode) = 0;
+    void SetTransitionParams(const SceneTransitionParam& inParam, const SceneTransitionParam& outParam)
+    {
+        m_InParam = inParam;
+        m_OutParam = outParam;
+    }
+
+    // フェーズによってIN・OUTのパラメータを返す
+    const SceneTransitionParam& GetParamForPhase(PHASE phase) const
+    {
+        return phase == PHASE::TRANS_IN ? m_InParam : m_OutParam;
+    }
+
+    float GetDurationForPhase(PHASE phase) const
+    {
+        return max(GetParamForPhase(phase).duration, 0.0001f);
+    }
+    
+    
+    // トランジションモード
+    virtual void SetTransMode(TRANS_MODE transMode) = 0;    // 純粋仮想関数
     TRANS_MODE GetTransMode() {
         return m_TransMode;
     }

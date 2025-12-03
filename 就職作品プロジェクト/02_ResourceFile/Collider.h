@@ -7,7 +7,6 @@
 #include "Circle.h"
 #include "Square.h"
 
-
 namespace Math
 {
     struct SquareInfo

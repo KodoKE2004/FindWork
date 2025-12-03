@@ -1,10 +1,10 @@
 #pragma once
 #include "Object.h"
-#include "../StaticMesh.h"
-#include "../MeshRenderer.h"
-#include "../VertexBuffer.h"
-#include "../IndexBuffer.h"
-#include "../Material.h"
+#include "StaticMesh.h"
+#include "MeshRenderer.h"
+#include "VertexBuffer.h"
+#include "IndexBuffer.h"
+#include "Material.h"
 #include <memory>
 #include <vector>
 #include <d3d11.h>

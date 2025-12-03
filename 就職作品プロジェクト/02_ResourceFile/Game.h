@@ -192,7 +192,7 @@ void ChangeScenePush(TRANS_MODE modeIN, float duration)
     instance.ScenePush(instance.GetCurrentScene());
 	scene->SetOldScene(instance.GetCurrentScene());
 
-	scene->SetTransitionTick(duration);
+	scene->SetTransitionParam(inParam, _プレースホルダー_);
 	scene->SetNextScene(sceneNext);
 	scene->SetStep(STEP::START);
 	scene->SetTransMode(modeIN);
@@ -223,7 +223,7 @@ inline void ChangeScenePop(TRANS_MODE modeIN,float duration)
 	scene->SetOldScene(instance.GetCurrentScene());
     scene->SetRelationData(instance.GetCurrentScene()->GetRelationData());
     scene->SetNextScene(sceneNext);
-	scene->SetTransitionTick(duration);
+	scene->SetTransitionParam(inParam, _プレースホルダー_);
 	scene->SetStep(STEP::START);
 	scene->SetTransMode(modeIN);
 	scene->Initialize();
@@ -251,7 +251,7 @@ inline void ChangeScenePop(TRANS_MODE transMode, float duration, int stageNo, in
 	scene->SetOldScene(instance.GetCurrentScene());
 	scene->SetRelationData(instance.GetCurrentScene()->GetRelationData());
 	scene->SetNextScene(sceneNext);
-	scene->SetTransitionTick(duration);
+	scene->SetTransitionParam(inParam, _プレースホルダー_);
 	scene->SetStep(STEP::START);
 	scene->SetTransMode(transMode);
 	scene->Initialize();

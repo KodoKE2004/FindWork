@@ -5,7 +5,7 @@ class Fade : public TransitionBase
 {
 private:
 
-    float m_Alpha = 0.0f;       
+    float m_Alpha = 0.0f;     
     float m_Elapsed = 0.0f;  
 
 public:
@@ -15,7 +15,7 @@ public:
     void Draw()             override;        
     void Finalize()         override;    
 
-    void FADE_IN(float tick);
+    void FADE_IN (float tick);
     void FADE_OUT(float tick);
 
     void ApplyAlpha();

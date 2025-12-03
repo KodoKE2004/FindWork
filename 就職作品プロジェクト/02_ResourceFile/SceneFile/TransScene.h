@@ -39,6 +39,10 @@ private:
 	float m_Timer	 = 0.0f;
 	float m_Duration = 0.0f;
 
+	// 遷移演出のパラメータ
+	SceneTransitionParam m_InParam{};
+	SceneTransitionParam m_OutParam{};
+
     // トランジション関連
 	float m_Alpha	   = 0.0f;
 	float m_AlphaValue = 0.0f;
@@ -67,7 +71,12 @@ public:
 	/// </summary>
 	void DrawNextScene();
 
-	void SetTransitionTick(float duration) { m_Duration  = duration;  }
+	void SetTransitionParam(const SceneTransitionParam& inParam,
+							const SceneTransitionParam& outParam) 
+	{	
+		m_InParam = inParam;  
+        m_OutParam = outParam;
+	}
 	void SetOldScene(Scene* sceneOld)      { m_SceneOld  = sceneOld;  }
 	void SetNextScene(Scene* sceneNext)    { m_SceneNext = sceneNext; }
 	void SetTransMode(TRANS_MODE mode)     { m_TransMode = mode;	  }
