@@ -143,7 +143,11 @@ void TitleScene::Update(float tick)
 			audioMgr->StopAllByName("bgm", false);
 		}
 
-		SceneTransitionParam transition{ TRANS_MODE::WIPE_LEFT_TO_RIGHT, 3.0f, EASING_TYPE::NONE };
+		SceneTransitionParam transition{ 
+			TRANS_MODE::WIPE_LEFT_TO_RIGHT,
+			3.0f, EASING_TYPE::IN_QUINT 
+		};
+
 		ChangeScenePush<GameSceneWait>(transition, transition);
 	}
 
