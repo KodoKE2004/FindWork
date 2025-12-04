@@ -23,8 +23,6 @@ enum class SCENE_NO
 	NUM
 };
 
-
-
 // Sceneクラス間の受け渡しデータ
 // isClear       : ミニゲームをクリアしたかのフラグ
 // requestRetry  : ゲームをもう一度するかのフラグ

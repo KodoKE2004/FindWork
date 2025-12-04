@@ -3,7 +3,6 @@
 #include "TransitionBase.h"
 #include "Collider.h"
 
-
 TransitionBase::TransitionBase(Camera* cam) : Object(cam)
 {
     m_Texture = std::make_shared<Texture>();

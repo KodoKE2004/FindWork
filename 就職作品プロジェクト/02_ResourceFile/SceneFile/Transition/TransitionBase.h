@@ -79,6 +79,17 @@ struct SceneTransitionParam
     int EasingAsIndex() const { return static_cast<int>(easing); }
 };
 
+struct TransitionState
+{
+    SceneTransitionParam inParam;
+    SceneTransitionParam outParam;
+};
+
+static TransitionState TitleToWait;
+static TransitionState WaitToGame;
+static TransitionState WaitToResult;
+static TransitionState ResultToTitle;
+
 /// @brief トランジションの基底クラス
 /// @param トランジションエフェクトを実装するための基底クラスです。
 /// @param このクラスは、描画に必要なメッシュ情報、テクスチャ、マテリアル、UV座標、タイマー情報を管理します。
