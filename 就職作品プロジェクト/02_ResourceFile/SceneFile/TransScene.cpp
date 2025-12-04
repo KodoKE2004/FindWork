@@ -28,8 +28,8 @@ void TransScene::Initialize()
 	m_Alpha = 0.0f;
 	m_isChange = false;
 
-	m_Duration = max(m_OutParam.duration, 0.0001f);
-	m_TransMode = m_OutParam.mode;
+	m_Duration = max(m_OutParam->duration, 0.0001f);
+	m_TransMode = m_OutParam->mode;
 	m_Step = STEP::DOING;
 	m_AlphaValue = 1.0f / m_Duration;
 

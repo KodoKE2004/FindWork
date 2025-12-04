@@ -81,16 +81,16 @@ struct SceneTransitionParam
 
 struct TransitionState
 {
-    SceneTransitionParam inParam;
-    SceneTransitionParam outParam;
+    SceneTransitionParam* inParam;
+    SceneTransitionParam* outParam;
 };
 
-static TransitionState TitleToWait;
-static TransitionState WaitToGame;
-static TransitionState GameToWait;
-static TransitionState WaitToResult;
-static TransitionState ResultToTitle;
-static TransitionState ResultToGame;
+extern TransitionState TitleToWait;
+extern TransitionState WaitToGame;
+extern TransitionState GameToWait;
+extern TransitionState WaitToResult;
+extern TransitionState ResultToTitle;
+extern TransitionState ResultToGame;
 
 void DrawTransitionStateGUI();
 
@@ -168,10 +168,10 @@ public:
     // タイマー関連
     void SetDuration(const float& duration) { m_Duration = duration; }
     
-    void SetTransitionParams(const SceneTransitionParam& inParam, const SceneTransitionParam& outParam)
+    void SetTransitionParams(SceneTransitionParam* inParam, SceneTransitionParam* outParam)
     {
-        m_InParam = inParam;
-        m_OutParam = outParam;
+        m_InParam  = *inParam;
+        m_OutParam = *outParam;
     }
 
     // フェーズによってIN・OUTのパラメータを返す
