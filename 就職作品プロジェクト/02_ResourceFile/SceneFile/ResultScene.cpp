@@ -20,18 +20,19 @@ void ResultScene::Initialize()
     m_ButtonToTitle = instance.AddObject<Square>();
     m_ButtonToTitle->SetName("m_ButtonToTitle");
     m_ButtonToTitle->SetTexture(textureMgr->GetTexture("ButtonToTitle.png"));
-    m_ButtonToTitle->SetTransform(TRANSFORM_TO_TITLE);
-
+    m_ButtonToTitle->SetPos(0.0f, -100.0f, 0.0f);
+    m_ButtonToTitle->SetScale(940.0f, 100.0f, 1.0f);
     m_ButtonToTitle->SetShader("VS_Alpha", "PS_Alpha");
-    m_ButtonToTitle->SetColor(DEFAULT_COLOR);
+    m_ButtonToTitle->SetColor(0.0f, 0.0f, 0.0f, 1.0f);
     m_MySceneObjects.emplace_back(m_ButtonToTitle);
 
     m_ButtonRetry = instance.AddObject<Square>();
     m_ButtonRetry->SetName("m_ButtonToRetry");
     m_ButtonRetry->SetTexture(textureMgr->GetTexture("ButtonRetry.png"));
-    m_ButtonRetry->SetTransform(TRANSFORM_RETRY);
+    m_ButtonRetry->SetPos(0.0f, -200.0f, 0.0f);
+    m_ButtonRetry->SetScale(940.0f, 100.0f, 1.0f);
     m_ButtonRetry->SetShader("VS_Alpha", "PS_Alpha");
-    m_ButtonRetry->SetColor(DEFAULT_COLOR);
+    m_ButtonRetry->SetColor(0.0f, 0.0f, 0.0f, 1.0f);
     m_MySceneObjects.emplace_back(m_ButtonRetry);
 
     PlayParams corsorParam{};

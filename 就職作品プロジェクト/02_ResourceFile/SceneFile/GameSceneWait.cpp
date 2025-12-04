@@ -72,7 +72,6 @@ void GameSceneWait::Initialize()
     m_Skydome->SetRadius(500.0f);
     m_MySceneObjects.emplace_back(m_Skydome);
 
-
     // ライフの数だけハートの生成
     const float lifePosX = - 200.0f;
     const float lifePosY = - 100.0f;

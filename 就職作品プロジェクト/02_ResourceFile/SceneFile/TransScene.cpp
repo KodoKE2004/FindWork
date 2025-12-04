@@ -52,6 +52,7 @@ void TransScene::Initialize()
 
 		m_TransitionTexture = std::make_shared<Wipe>(instance.GetCamera());
 		m_TransitionTexture->Initialize();
+        m_TransitionTexture->SetTransMode(m_TransMode);
 		m_TransitionTexture->SetTransitionParams(m_InParam, m_OutParam);
 
 		if (m_SceneNext) {

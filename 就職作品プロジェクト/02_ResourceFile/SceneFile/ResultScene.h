@@ -4,18 +4,6 @@
 
 class ResultScene : public Scene
 {
-// íËêîÇÃêÈåæ
-private:
-    const Transform TRANSFORM_TO_TITLE = Transform(
-        NVector3(  0.0f,-100.0f, 0.0f),
-        NVector3(  0.0f,   0.0f, 0.0f),
-        NVector3(940.0f, 100.0f, 1.0f)
-    );
-    const Transform TRANSFORM_RETRY = Transform(
-        NVector3(  0.0f, -200.0f, 0.0f),
-        NVector3(  0.0f,    0.0f, 0.0f),
-        NVector3(940.0f,  100.0f, 1.0f)
-    );
 private:
 
     Square* m_ButtonToTitle = nullptr; 

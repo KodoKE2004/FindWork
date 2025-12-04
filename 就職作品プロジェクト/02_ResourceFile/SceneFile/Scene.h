@@ -48,7 +48,6 @@ class Scene
 protected:
 	// PressEnterの点滅タイマー間隔
     static constexpr float DEFAULT_VALUME = 0.2f; 
-	static constexpr Color DEFAULT_COLOR = Color(1.0f, 1.0f, 1.0f, 1.0f);
 protected:
 	
 	std::vector<Object*> m_MySceneObjects;

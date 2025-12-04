@@ -74,7 +74,7 @@ public:
 	void SetTransitionParam(const SceneTransitionParam& inParam,
 							const SceneTransitionParam& outParam) 
 	{	
-		m_InParam = inParam;  
+		m_InParam  = inParam;  
         m_OutParam = outParam;
 	}
 	void SetOldScene(Scene* sceneOld)      { m_SceneOld  = sceneOld;  }
