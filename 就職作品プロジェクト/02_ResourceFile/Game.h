@@ -162,7 +162,7 @@ public:
 //	  シーンを遷移するテンプレート関数
 //================================
 template<class T>
-void ChangeScenePush(SceneTransitionParam& inParam, SceneTransitionParam& outParam)
+void ChangeScenePush(const TransitionState& state)
 {
     auto& instance = Game::GetInstance();
 
@@ -192,7 +192,7 @@ void ChangeScenePush(SceneTransitionParam& inParam, SceneTransitionParam& outPar
     instance.ScenePush(instance.GetCurrentScene());
 	scene->SetOldScene(instance.GetCurrentScene());
 
-	scene->SetTransitionParam(inParam, outParam);
+	scene->SetTransitionParam(state);
 	scene->SetNextScene(sceneNext);
 	scene->SetStep(STEP::START);
 	scene->Initialize();
@@ -202,7 +202,7 @@ void ChangeScenePush(SceneTransitionParam& inParam, SceneTransitionParam& outPar
 }
 
 // 一つ前のシーンに戻る
-inline void ChangeScenePop(const SceneTransitionParam& inParam,const SceneTransitionParam& outParam)
+inline void ChangeScenePop(const TransitionState& state)
 {
     auto& instance = Game::GetInstance();
 
@@ -222,7 +222,7 @@ inline void ChangeScenePop(const SceneTransitionParam& inParam,const SceneTransi
 	scene->SetOldScene(instance.GetCurrentScene());
     scene->SetRelationData(instance.GetCurrentScene()->GetRelationData());
     scene->SetNextScene(sceneNext);
-	scene->SetTransitionParam(inParam, outParam);
+	scene->SetTransitionParam(state);
 	scene->SetStep(STEP::START);
 	scene->Initialize();
 

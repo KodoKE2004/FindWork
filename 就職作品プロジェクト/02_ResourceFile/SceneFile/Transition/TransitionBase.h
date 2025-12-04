@@ -2,7 +2,7 @@
 #include <memory>
 #include <wrl/client.h>
 #include <d3d11.h>
-
+#include "imgui.h"
 #include "Object.h"
 #include "Camera.h"
 #include "VertexBuffer.h"
@@ -87,8 +87,12 @@ struct TransitionState
 
 static TransitionState TitleToWait;
 static TransitionState WaitToGame;
+static TransitionState GameToWait;
 static TransitionState WaitToResult;
 static TransitionState ResultToTitle;
+static TransitionState ResultToGame;
+
+void DrawTransitionStateGUI();
 
 /// @brief トランジションの基底クラス
 /// @param トランジションエフェクトを実装するための基底クラスです。

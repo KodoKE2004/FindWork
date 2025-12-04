@@ -33,7 +33,10 @@ void Game::Initialize()
 #ifdef _DEBUG
 
 	RegistDebugObject();
-	
+	DebugUI::RedistDebugFunction([]() {
+		DrawTransitionStateGUI();
+	});
+
 #endif
 	instance.GetCamera()->Initialize();									// ƒJƒƒ‰‚Ì‰Šú‰»
 

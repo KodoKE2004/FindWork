@@ -58,8 +58,7 @@ void GameSceneCrush::Update(float tick)
 
     GameSceneExe::Update(tick);
     if (IsChange()) {
-        SceneTransitionParam transition{ TRANS_MODE::FADE, 0.2f, EASING_TYPE::NONE };
-        ChangeScenePop(transition, transition);
+        ChangeScenePop(GameToWait);
     }
 }
 

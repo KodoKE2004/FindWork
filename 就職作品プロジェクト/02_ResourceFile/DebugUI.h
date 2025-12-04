@@ -6,9 +6,9 @@
 #include <functional>
 #include "Application.h"
 
-#include "../03_ExternalFile/imGui/imgui.h"
-#include "../03_ExternalFile/imgui/imgui_impl_dx11.h"
-#include "../03_ExternalFile/imgui/imgui_impl_win32.h"
+#include "imgui.h"
+#include "imgui_impl_dx11.h"
+#include "imgui_impl_win32.h"
 
 class DebugUI {
     static std::vector<std::function<void(void)>> m_debugfunction;

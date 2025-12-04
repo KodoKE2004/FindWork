@@ -165,8 +165,7 @@ void GameSceneWait::Update(float tick)
     if (m_RelationData.gameLife == 0u)
     {
         // ライフが0になったらリザルトシーンへ
-        SceneTransitionParam transitionResult{ TRANS_MODE::FADE, 0.5f, EASING_TYPE::NONE };
-        ChangeScenePush<ResultScene>(transitionResult, transitionResult);
+        ChangeScenePush<ResultScene>(WaitToResult);
     }
     #pragma endregion
 }
@@ -200,18 +199,15 @@ void GameSceneWait::StartNextStageTransition()
     switch (m_RelationData.nextScene)
     {
     case SCENE_NO::GAME_SLICE: {
-        SceneTransitionParam transition{ TRANS_MODE::FADE, 0.3f, EASING_TYPE::NONE };
-        ChangeScenePush<GameSceneSlice>(transition, transition); 
+        ChangeScenePush<GameSceneSlice>(WaitToGame); 
     }  
     break;
     case SCENE_NO::GAME_JUMP:  {
-        SceneTransitionParam transition{ TRANS_MODE::FADE, 0.3f, EASING_TYPE::NONE };
-        ChangeScenePush<GameSceneJump>(transition, transition);  
+        ChangeScenePush<GameSceneJump>(WaitToGame);
     }  
     break;
     case SCENE_NO::GAME_CRUSH: {
-        SceneTransitionParam transition{ TRANS_MODE::FADE, 0.3f, EASING_TYPE::NONE };
-        ChangeScenePush<GameSceneCrush>(transition, transition); 
+        ChangeScenePush<GameSceneCrush>(WaitToGame);
     }  
     break;
     default: return;

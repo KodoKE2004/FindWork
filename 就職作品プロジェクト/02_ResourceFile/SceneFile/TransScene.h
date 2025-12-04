@@ -77,6 +77,13 @@ public:
 		m_InParam  = inParam;  
         m_OutParam = outParam;
 	}
+
+	void SetTransitionParam(const TransitionState& state)
+	{
+		m_InParam  = state.inParam;
+		m_OutParam = state.outParam;
+	}
+
 	void SetOldScene(Scene* sceneOld)      { m_SceneOld  = sceneOld;  }
 	void SetNextScene(Scene* sceneNext)    { m_SceneNext = sceneNext; }
 	void SetTransMode(TRANS_MODE mode)     { m_TransMode = mode;	  }

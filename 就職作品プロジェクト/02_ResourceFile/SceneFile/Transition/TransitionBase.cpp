@@ -1,7 +1,95 @@
 #include <cassert>
 #include <cmath>
+#include <imgui.h>
 #include "TransitionBase.h"
 #include "Collider.h"
+
+namespace TransGui
+{
+	constexpr int kTransModeCount   = static_cast<int>(TRANS_MODE::NUM);
+	constexpr int kEaseingTypeCount = static_cast<int>(EASING_TYPE::NUM);
+
+	const char* kTransModeLabels[kTransModeCount] =
+	{
+		"Fade",
+		"Wipe Left -> Right",
+		"Wipe Right -> Left",
+		"Wipe Top -> Bottom",
+		"Wipe Bottom -> Top",
+		"Zoom In",
+		"Zoom Out",
+	};
+
+	const char* kEasingLabels[kEaseingTypeCount] =
+	{
+		"None",
+		"In Sine",
+		"In Quad",
+		"In Cubic",
+		"In Quint",
+		"In Quart",
+		"In Expo",
+		"In Circ",
+		"In Back",
+		"In Bounce",
+		"In Elastic",
+		"Out Sine",
+		"Out Quad",
+		"Out Cubic",
+		"Out Quint",
+		"Out Quart",
+		"Out Circ",
+		"Out Back",
+		"Out Elastic",
+		"Out Bounce",
+		"Out Expo",
+		"InOut Sine",
+		"InOut Quad",
+		"InOut Cubic",
+		"InOut Quint",
+		"InOut Quart",
+		"InOut Circ",
+		"InOut Back",
+		"InOut Elastic",
+		"InOut Bounce",
+		"InOut Expo",
+	};
+
+	void DrawTransitionParamUI(const char* label, SceneTransitionParam& param)
+	{
+		ImGui::PushID(label);
+		if (ImGui::TreeNode(label))
+		{
+			int modeIndex = param.ModeAsIndex();
+			if (ImGui::Combo("Mode", &modeIndex, kTransModeLabels, kTransModeCount))
+			{
+				param.mode = static_cast<TRANS_MODE>(modeIndex);
+			}
+
+			ImGui::DragFloat("Duration", &param.duration, 0.01f, 0.0f,30.0f, "%.2f sec");
+
+			int easingIndex = param.EasingAsIndex();
+			if (ImGui::Combo("Easing", &easingIndex, kEasingLabels, kEaseingTypeCount))
+			{
+				param.easing = static_cast<EASING_TYPE>(easingIndex);
+			}
+			ImGui::TreePop();
+		}
+		ImGui::PopID();
+	}
+
+	void DrawTransitionStateUI(const char* label, TransitionState& state)
+	{
+		if (ImGui::CollapsingHeader(label, ImGuiTreeNodeFlags_DefaultOpen))
+		{
+			DrawTransitionParamUI("In", state.inParam);
+			DrawTransitionParamUI("Out", state.outParam);
+		}
+	}
+
+}
+
+
 
 TransitionBase::TransitionBase(Camera* cam) : Object(cam)
 {
@@ -79,4 +167,18 @@ void TransitionBase::ApplyPhaseSetting(PHASE phase)
 	m_Duration = max(param.duration, 0.0001f);
 	SetTransMode(param.mode);
 	m_Phase = phase;
+}
+
+void DrawTransitionStateGUI()
+{
+	if (ImGui::Begin("Scene Transition Settings"))
+	{
+		TransGui::DrawTransitionStateUI("Title  -> Wait"  , TitleToWait);
+		TransGui::DrawTransitionStateUI("Wait   -> Game"  , WaitToGame);
+		TransGui::DrawTransitionStateUI("Game   -> Wait"  , GameToWait);
+		TransGui::DrawTransitionStateUI("Wait   -> Result", WaitToResult);
+		TransGui::DrawTransitionStateUI("Result -> Title" , ResultToTitle);
+		TransGui::DrawTransitionStateUI("Result -> Game"  , ResultToGame);
+	}
+	ImGui::End();
 }
