@@ -32,6 +32,10 @@ void TransScene::Initialize()
 	m_TransMode = m_OutParam.mode;
 	m_Step = STEP::DOING;
 	m_AlphaValue = 1.0f / m_Duration;
+
+	if (m_SceneNext) {
+		DrawNextScene();
+	}
 	
 	switch (m_TransMode)
 	{
@@ -51,15 +55,11 @@ void TransScene::Initialize()
 	{
 
 		m_TransitionTexture = std::make_shared<Wipe>(instance.GetCamera());
+		m_TransitionTexture->SetTransitionParams(m_InParam, m_OutParam);
 		m_TransitionTexture->Initialize();
         m_TransitionTexture->SetTransMode(m_TransMode);
-		m_TransitionTexture->SetTransitionParams(m_InParam, m_OutParam);
-
-		if (m_SceneNext) {
-			DrawNextScene();
-		}
-
-		m_TransitionTexture->SetTextureSRV(m_NextSceneSRV.Get());
+		
+        m_TransitionTexture->SetTextureSRV(m_NextSceneSRV.Get());
 		instance.SetTransitionTexture(m_TransitionTexture);
 	}
 	break;
@@ -70,10 +70,6 @@ void TransScene::Initialize()
 		m_TransitionTexture->SetDuration(m_Duration);
 		m_TransitionTexture->Initialize();
 		m_TransitionTexture->SetTransMode(m_TransMode);
-
-		if (m_SceneNext) {
-			DrawNextScene();
-		}
 
 		m_TransitionTexture->SetTextureSRV(m_NextSceneSRV.Get());
 		instance.SetTransitionTexture(m_TransitionTexture);
@@ -100,7 +96,6 @@ void TransScene::Update(float tick)
 	{
 		m_SceneOld->Finalize();
 		m_SceneNext->Initialize();
-		DrawNextScene();
 		
 		m_isChange = true;
 	}

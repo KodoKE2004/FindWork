@@ -173,6 +173,7 @@ void Wipe::WIPE_IN(float tick)
     if (t >= 1.0f)
     {
         ApplyPhaseSetting(PHASE::TRANS_OUT);
+        SetPos(0.0f,0.0f,0.0f);
         m_isChange = true;
         m_Elapsed = 0.0f;
     }
@@ -203,19 +204,11 @@ void Wipe::SetTransMode(TRANS_MODE transMode)
     m_TransMode = transMode;
     switch (m_TransMode)
     {
-    default:
-    case TRANS_MODE::WIPE_LEFT_TO_RIGHT:
-        SetLeftToRight();
-    break;
-    case TRANS_MODE::WIPE_RIGHT_TO_LEFT:
-        SetRightToLeft();
-    break;
-    case TRANS_MODE::WIPE_TOP_TO_BOTTOM:
-        SetTopToBottom();
-    break;
-    case TRANS_MODE::WIPE_BOTTOM_TO_TOP:
-        SetBottomToTop();
-    break;
+    default: 
+    case TRANS_MODE::WIPE_LEFT_TO_RIGHT: SetLeftToRight(); break;
+    case TRANS_MODE::WIPE_RIGHT_TO_LEFT: SetRightToLeft(); break;
+    case TRANS_MODE::WIPE_TOP_TO_BOTTOM: SetTopToBottom(); break;
+    case TRANS_MODE::WIPE_BOTTOM_TO_TOP: SetBottomToTop(); break;
     }
     
     CheckPointSetting();
