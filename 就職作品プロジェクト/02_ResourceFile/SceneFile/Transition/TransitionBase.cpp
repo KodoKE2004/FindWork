@@ -62,36 +62,36 @@ namespace TransGui
 		"InOut Expo",
 	};
 
-	void DrawTransitionParamUI(const char* label, SceneTransitionParam* param)
+	void DrawTransitionParamUI(const char* label, SceneTransitionParam& param)
 	{
 		ImGui::PushID(label);
 		if (ImGui::TreeNode(label))
 		{
-			int modeIndex = param->ModeAsIndex();
+			int modeIndex = param.ModeAsIndex();
 			if (ImGui::Combo("Mode", &modeIndex, kTransModeLabels, kTransModeCount))
 			{
-				param->mode = static_cast<TRANS_MODE>(modeIndex);
+				param.mode = static_cast<TRANS_MODE>(modeIndex);
 			}
 
-			ImGui::DragFloat("Duration", &param->duration, 0.01f, 0.0f,30.0f, "%.2f sec");
+			ImGui::DragFloat("Duration", &param.duration, 0.01f, 0.0f,30.0f, "%.2f sec");
 
-			int easingIndex = param->EasingAsIndex();
+			int easingIndex = param.EasingAsIndex();
 			if (ImGui::Combo("Easing", &easingIndex, kEasingLabels, kEaseingTypeCount))
 			{
-				param->easing = static_cast<EASING_TYPE>(easingIndex);
+				param.easing = static_cast<EASING_TYPE>(easingIndex);
 			}
 			ImGui::TreePop();
 		}
 		ImGui::PopID();
 	}
 
-	void DrawTransitionStateUI(const char* label, TransitionState* state)
+	void DrawTransitionStateUI(const char* label, TransitionState& state)
 	{
 		if (ImGui::CollapsingHeader(label, ImGuiTreeNodeFlags_DefaultOpen))
 		{
-			DrawTransitionParamUI("In",  state->inParam);
-			DrawTransitionParamUI("Out", state->outParam);
-		}
+			DrawTransitionParamUI("In",  state.inParam);
+			DrawTransitionParamUI("Out", state.outParam);
+		}								 
 	}
 
 }
@@ -101,6 +101,8 @@ namespace TransGui
 TransitionBase::TransitionBase(Camera* cam) : Object(cam)
 {
     m_Texture = std::make_shared<Texture>();
+	m_TransMode = TRANS_MODE::NUM;
+    m_Phase = PHASE::FINISH;
 }
 
 // テクスチャを指定
@@ -180,12 +182,12 @@ void DrawTransitionStateGUI()
 {
 	if (ImGui::Begin("Scene Transition Settings"))
 	{
-		TransGui::DrawTransitionStateUI("Title  -> Wait"  , &TitleToWait);
-		TransGui::DrawTransitionStateUI("Wait   -> Game"  , &WaitToGame);
-		TransGui::DrawTransitionStateUI("Game   -> Wait"  , &GameToWait);
-		TransGui::DrawTransitionStateUI("Wait   -> Result", &WaitToResult);
-		TransGui::DrawTransitionStateUI("Result -> Title" , &ResultToTitle);
-		TransGui::DrawTransitionStateUI("Result -> Game"  , &ResultToGame);
+		TransGui::DrawTransitionStateUI("Title  -> Wait"  , TitleToWait);
+		TransGui::DrawTransitionStateUI("Wait   -> Game"  , WaitToGame);
+		TransGui::DrawTransitionStateUI("Game   -> Wait"  , GameToWait);
+		TransGui::DrawTransitionStateUI("Wait   -> Result", WaitToResult);
+		TransGui::DrawTransitionStateUI("Result -> Title" , ResultToTitle);
+		TransGui::DrawTransitionStateUI("Result -> Game"  , ResultToGame);
 	}
 	ImGui::End();
 }

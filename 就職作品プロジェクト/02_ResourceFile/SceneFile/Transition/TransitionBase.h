@@ -81,8 +81,8 @@ struct SceneTransitionParam
 
 struct TransitionState
 {
-    SceneTransitionParam* inParam;
-    SceneTransitionParam* outParam;
+    SceneTransitionParam inParam;
+    SceneTransitionParam outParam;
 };
 
 extern TransitionState TitleToWait;
@@ -168,10 +168,10 @@ public:
     // タイマー関連
     void SetDuration(const float& duration) { m_Duration = duration; }
     
-    void SetTransitionParams(SceneTransitionParam* inParam, SceneTransitionParam* outParam)
+    void SetTransitionParams(SceneTransitionParam inParam, SceneTransitionParam outParam)
     {
-        m_InParam  = *inParam;
-        m_OutParam = *outParam;
+        m_InParam  = inParam;
+        m_OutParam = outParam;
     }
 
     // フェーズによってIN・OUTのパラメータを返す

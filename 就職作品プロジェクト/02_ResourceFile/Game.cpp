@@ -16,7 +16,7 @@ std::unique_ptr<Game> Game::m_pInstance  = nullptr; // ƒQ[ƒ€‚ÌƒCƒ“ƒXƒ^ƒ“ƒX‰Šú‰
 
 Game::Game()
 {
-	
+    m_SceneCurrent = nullptr; // Œ»İ‚ÌƒV[ƒ“‰Šú‰»
 }
 
 void Game::Initialize()
@@ -33,6 +33,20 @@ void Game::Initialize()
 #ifdef _DEBUG
 
 	RegistDebugObject();
+
+	SceneTransitionParam initParam = {
+        TRANS_MODE::FADE,
+		1.0f,
+        EASING_TYPE::IN_OUT_SINE
+    };
+
+	TitleToWait   = TransitionState{ SceneTransitionParam(initParam), SceneTransitionParam(initParam)};
+	WaitToGame    = TransitionState{ SceneTransitionParam(initParam), SceneTransitionParam(initParam)};
+	GameToWait    = TransitionState{ SceneTransitionParam(initParam), SceneTransitionParam(initParam)};
+	WaitToResult  = TransitionState{ SceneTransitionParam(initParam), SceneTransitionParam(initParam)};
+	ResultToTitle = TransitionState{ SceneTransitionParam(initParam), SceneTransitionParam(initParam)};
+	ResultToGame  = TransitionState{ SceneTransitionParam(initParam), SceneTransitionParam(initParam)};
+
 	DebugUI::RedistDebugFunction([]() {
 		DrawTransitionStateGUI();
 	});
@@ -128,6 +142,8 @@ void Game::Finalize()
 	DebugUI::DisposeUI();		// ƒfƒoƒbƒOUI‚ÌI—¹ˆ—
 	instance.DeleteAllObject();	//ƒIƒuƒWƒFƒNƒg‚ğ‘S‚Äíœ
 	Renderer::Finalize();			// ƒŒƒ“ƒ_ƒ‰[‚ÌI—¹ˆ—
+
+
 }
 
 void Game::SetSceneCurrent(Scene* newScene)

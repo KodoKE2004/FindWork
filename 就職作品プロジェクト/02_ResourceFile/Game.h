@@ -162,7 +162,7 @@ public:
 //	  シーンを遷移するテンプレート関数
 //================================
 template<class T>
-void ChangeScenePush(TransitionState state)
+void ChangeScenePush(TransitionState& state)
 {
     auto& instance = Game::GetInstance();
 
@@ -202,7 +202,7 @@ void ChangeScenePush(TransitionState state)
 }
 
 // 一つ前のシーンに戻る
-inline void ChangeScenePop(TransitionState state)
+inline void ChangeScenePop(TransitionState& state)
 {
     auto& instance = Game::GetInstance();
 
