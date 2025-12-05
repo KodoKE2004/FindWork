@@ -69,7 +69,7 @@ void Camera::SetCamera(CAMERA_MODE mode)
 		//プロジェクション行列の生成
 		float fieldOfView = DirectX::XMConvertToRadians(m_Fov);    // 視野角
 
-		float aspectRatio = static_cast<float>(Application::GetWidth()) / static_cast<float>(Application::GetHeight());	// アスペクト比	
+		float aspectRatio = static_cast<float>(Application::GetGameWidth()) / static_cast<float>(Application::GetGameHeight());	// アスペクト比	
 		float nearPlane   = 1.0f;         // ニアクリップ
 		float farPlane    = 1000.0f;      // ファークリップ
 
@@ -95,8 +95,8 @@ void Camera::SetCamera(CAMERA_MODE mode)
 		float farPlane = 1000.0f;
 
 		m_ProjectionMatrix = DirectX::XMMatrixOrthographicLH(
-			static_cast<float>(Application::GetWidth()),
-			static_cast<float>(Application::GetHeight()),
+			static_cast<float>(Application::GetGameWidth()),
+			static_cast<float>(Application::GetGameHeight()),
 			nearPlane, farPlane);
 
 		m_ProjectionMatrix = DirectX::XMMatrixTranspose(m_ProjectionMatrix);

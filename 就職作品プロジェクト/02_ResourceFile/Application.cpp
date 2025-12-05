@@ -1,5 +1,6 @@
 #include <chrono>
 #include <thread>
+#include <algorithm>
 #include "Application.h"
 #include "Game.h"
 #include "../03_ExternalFile/imgui/imgui_impl_win32.h"
@@ -11,6 +12,8 @@ HINSTANCE  Application::m_hInst;        // インスタンスハンドル
 HWND       Application::m_hWnd;         // ウィンドウハンドル
 uint32_t   Application::m_Width;        // ウィンドウの横幅
 uint32_t   Application::m_Height;       // ウィンドウの縦幅
+uint32_t   Application::m_GameWidth;    // ゲーム画面の横幅
+uint32_t   Application::m_GameHeight;   // ゲーム画面の縦幅
 
 // ImGuiのWin32プロシージャハンドラ(マウス対応)
 extern IMGUI_IMPL_API LRESULT ImGui_ImplWin32_WndProcHandler(HWND hWnd, UINT msg, WPARAM wParam, LPARAM lParam);
@@ -22,7 +25,16 @@ extern IMGUI_IMPL_API LRESULT ImGui_ImplWin32_WndProcHandler(HWND hWnd, UINT msg
 Application::Application(uint32_t width, uint32_t height)
 {
     m_Height = height;
-    m_Width = width;
+    m_Width  = width;
+    m_GameWidth  = width;
+    m_GameHeight = height;
+
+//#ifdef _DEBUG
+//    constexpr uint32_t kDebugGameWidth  = 11u * 200u;
+//    constexpr uint32_t kDebugGameHeight = 9u  * 200u;
+//    m_GameWidth  = std::min(m_GameWidth,  kDebugGameWidth);
+//    m_GameHeight = std::min(m_GameHeight, kDebugGameHeight);
+//#endif
 
     timeBeginPeriod(1);
 }

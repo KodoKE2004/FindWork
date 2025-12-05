@@ -168,6 +168,7 @@ Scene* Game::GetCurrentScene() const
 
 void Game::RegistDebugObject()
 {
+#ifdef _DEBUG
 	// ImGui •`‰æˆ—‚ğ“o˜^
 	DebugUI::RedistDebugFunction([]()
 		{
@@ -233,6 +234,7 @@ void Game::RegistDebugObject()
 
 			ImGui::End();
 		});
+#endif // _DEBUG
 }
 
 void Game::DeleteObject(Object* pt)

@@ -2,10 +2,9 @@
 #include <memory>
 #include <vector>
 #include <type_traits>
-#ifdef _DEBUG
-#include "Debug.hpp"
+#include <Debug.hpp>
 #include "DebugGridLine.h"
-#endif // _DEBUG
+
 #include "Scene.h"
 #include "TransScene.h"
 #include "TransitionBase.h"

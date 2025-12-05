@@ -5,7 +5,10 @@
 
 void GameSceneSlice::Initialize()
 {
+#ifdef _DEBUG
     DebugUI::TEXT_CurrentScene = "GameSceneSlice";
+#endif
+    
     GameSceneExe::Initialize();
 
     // ƒV[ƒ“‚ÉŒq‚®î•ñ‚ÍŠî’ê‰Šú‰»Œã‚Ìˆê”ÔÅ‰‚Éİ’è

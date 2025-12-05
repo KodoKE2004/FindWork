@@ -15,7 +15,10 @@ void Wipe::Initialize()
     TextureManager* textureMgr = Game::GetInstance();
     m_Texture = textureMgr->GetTexture("Black.png");
 
-    SetScale(SCREEN_WIDTH, SCREEN_HEIGHT, 1.0f);
+    SetScale(static_cast<float>(Application::GetGameWidth()),
+             static_cast<float>(Application::GetGameHeight()),
+             1.0f);
+
     SetColor(0.0f, 0.0f, 0.0f, 1.0f);
 
     m_Phase = PHASE::TRANS_IN;
@@ -220,8 +223,8 @@ void Wipe::CheckPointSetting()
 {
 
     float posX,posY;
-    posX = static_cast<float>(Application::GetWidth() );
-    posY = static_cast<float>(Application::GetHeight());
+    posX = static_cast<float>(Application::GetGameWidth() );
+    posY = static_cast<float>(Application::GetGameHeight());
     
     float massX,massY;
     massX = 1.0f;

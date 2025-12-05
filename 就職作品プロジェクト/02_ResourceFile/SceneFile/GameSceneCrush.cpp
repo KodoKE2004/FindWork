@@ -5,7 +5,9 @@ using namespace Math::Collider2D;
 
 void GameSceneCrush::Initialize()
 {
+#ifdef _DEBUG
     DebugUI::TEXT_CurrentScene = "GameSceneCrush";
+#endif 
 
     // Šî’êƒNƒ‰ƒX‚Ì‰Šú‰»
     GameSceneExe::Initialize();

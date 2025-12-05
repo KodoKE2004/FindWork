@@ -2,6 +2,7 @@
 
 std::vector<std::function<void(void)>> DebugUI::m_debugfunction;
 std::string DebugUI::TEXT_CurrentScene = "TitleScene" ;
+
 void DebugUI::Init(ID3D11Device* device, ID3D11DeviceContext* context) 
 {
 #ifdef _DEBUG

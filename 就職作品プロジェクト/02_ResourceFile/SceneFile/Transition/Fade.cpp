@@ -32,7 +32,9 @@ void Fade::Initialize()
     m_Texture = textureMgr->GetTexture("Black.png");
 
     // フルスクリーンに設定
-    SetScale(SCREEN_WIDTH, SCREEN_HEIGHT, 1.0f);
+    SetScale(static_cast<float>(Application::GetGameWidth ()),
+             static_cast<float>(Application::GetGameHeight()), 
+             1.0f);
 
     std::vector<VERTEX_3D> vertices(4);
     vertices[0].position = NVector3(-0.5f,  0.5f, 0.0f);

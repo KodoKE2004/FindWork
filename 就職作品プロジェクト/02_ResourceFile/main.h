@@ -15,5 +15,11 @@
 
 #pragma comment (lib,"winmm.lib")
 
+#ifdef _DEBUG
+constexpr uint32_t SCREEN_WIDTH  = 15u * 80u;	// ウィンドウの横幅
+constexpr uint32_t SCREEN_HEIGHT =  9u * 80u; // ウィンドウの縦幅
+#else
 constexpr uint32_t SCREEN_WIDTH = 1280;	// ウィンドウの横幅
 constexpr uint32_t SCREEN_HEIGHT = 720; // ウィンドウの縦幅
+#endif
+

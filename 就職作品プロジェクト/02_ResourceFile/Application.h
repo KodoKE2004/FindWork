@@ -20,6 +20,15 @@ public:
         return m_Height;
     }
 
+    static uint32_t GetGameWidth() {
+        return m_GameWidth;
+    }
+
+    static uint32_t GetGameHeight() {
+        return m_GameHeight;
+    }
+
+
     // ウインドウハンドルを返す
     static HWND GetWindow() {
         return m_hWnd;
@@ -31,6 +40,8 @@ private:
     static HWND        m_hWnd;      // ウィンドウハンドル
     static uint32_t    m_Width;     // ウィンドウの横幅
     static uint32_t    m_Height;    // ウィンドウの縦幅
+    static uint32_t    m_GameWidth; // ゲーム画面の横幅
+    static uint32_t    m_GameHeight;// ゲーム画面の縦幅
 
     // 初期化処理
 	static bool InitApp();          
