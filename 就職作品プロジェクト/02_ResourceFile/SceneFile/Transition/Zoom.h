@@ -15,11 +15,11 @@ using namespace Microsoft::WRL;
 // edgeWidth: フェードのエッジの幅を指定します。
 struct FADE_BUFFER
 {
-    DirectX::XMFLOAT2 centerUV;
-    float             fadeProgress;
-    float             maxInnerRadius;
-    float             edgeWidth;
-    float             pad[3];
+    DirectX::XMFLOAT2 centerUV          = XMFLOAT2(0.0f, 0.0f);
+    float             fadeProgress      = 0.0f;
+    float             maxInnerRadius    = 0.0f;
+    float             edgeWidth         = 0.0f;
+    float             pad[3]            = {0.0f, 0.0f, 0.0f};
 };
 
 // 中心からフェードするクラス
