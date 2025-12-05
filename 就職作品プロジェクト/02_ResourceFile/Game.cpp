@@ -123,14 +123,16 @@ void Game::Draw()
 		o->Draw();
 	}
 	
+
+	#ifdef _DEBUG
+		Renderer::PresentDebugGameView();
+	#endif
+
 	// TransitionTextureを最後に描く（必ず最前面になる）
-    auto transTex = instance.m_TransitionTexture;
-	if (transTex != nullptr) {
-        transTex->Draw();
-	}
-#ifdef _DEBUG
-	Renderer::PresentDebugGameView();
-#endif
+	if (instance.m_TransitionTexture != nullptr) {
+	    instance.m_TransitionTexture->Draw();
+    }
+
 	DebugUI::Render();
 	Renderer::Finish();
 }

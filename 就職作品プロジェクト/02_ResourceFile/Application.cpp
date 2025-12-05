@@ -88,6 +88,7 @@ float Application::GetDeltaTime()
 //==============================
 bool Application::InitApp()
 {
+
     QueryPerformanceFrequency(&g_frequency);
     QueryPerformanceCounter(&g_prevTime);
     return InitWindow();

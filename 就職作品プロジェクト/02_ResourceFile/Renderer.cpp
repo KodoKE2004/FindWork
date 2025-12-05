@@ -547,7 +547,8 @@ void Renderer::BlitSRVToBackbuffer(ID3D11ShaderResourceView* srv, float alpha)
 		const char* vsSrc = R"(
 		struct VSOut 
 		{
-			float4 pos:SV_POSITION; float2 uv:TEXCOORD0;
+			float4 pos:SV_POSITION;
+			float2 uv:TEXCOORD0;
 		};
 
 		VSOut main(uint id:SV_VertexID)
@@ -562,6 +563,8 @@ void Renderer::BlitSRVToBackbuffer(ID3D11ShaderResourceView* srv, float alpha)
 			VSOut o;
 			o.pos=float4(v[id],0,1);
 			o.uv=0.5f*(v[id]+float2(1,1));
+
+			o.uv.y = 1.0f - o.uv.y;
 		
 			return o;
 		})";

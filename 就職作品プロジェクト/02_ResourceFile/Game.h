@@ -100,12 +100,10 @@ public:
 
 
 	// Debug関連
-#ifdef _DEBUG
 	DebugGridLine m_Grid;
 	static void RegistDebugObject();
-#else
 	static void RegistDebugFunction(){}
-#endif // _DEBUG
+
 	//================================
 	// オブジェクト管理
 	//================================
