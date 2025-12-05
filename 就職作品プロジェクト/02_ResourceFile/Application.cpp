@@ -29,13 +29,6 @@ Application::Application(uint32_t width, uint32_t height)
     m_GameWidth  = width;
     m_GameHeight = height;
 
-//#ifdef _DEBUG
-//    constexpr uint32_t kDebugGameWidth  = 11u * 200u;
-//    constexpr uint32_t kDebugGameHeight = 9u  * 200u;
-//    m_GameWidth  = std::min(m_GameWidth,  kDebugGameWidth);
-//    m_GameHeight = std::min(m_GameHeight, kDebugGameHeight);
-//#endif
-
     timeBeginPeriod(1);
 }
 

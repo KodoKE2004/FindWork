@@ -3,6 +3,7 @@
 #include "main.h"
 #include "Application.h"
 #include "Collider.h"
+#include "Renderer.h"
 #include <vector>
 #include <algorithm>
 
@@ -32,8 +33,8 @@ void Fade::Initialize()
     m_Texture = textureMgr->GetTexture("Black.png");
 
     // フルスクリーンに設定
-    SetScale(static_cast<float>(Application::GetGameWidth ()),
-             static_cast<float>(Application::GetGameHeight()), 
+    SetScale(static_cast<float>(Renderer::GetScreenWidth()),
+             static_cast<float>(Renderer::GetScreenHeight()),
              1.0f);
 
     std::vector<VERTEX_3D> vertices(4);

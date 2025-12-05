@@ -11,6 +11,7 @@
 #include	<SimpleMath.h>
 
 #include	"RenderTarget.h"
+#include    "Application.h"
 
 using namespace DirectX;
 using namespace SimpleMath;
@@ -190,6 +191,9 @@ private:
 public:
 	static ID3D11Device*		GetDevice	    (void)	{ return m_Device; }
 	static ID3D11DeviceContext* GetDeviceContext(void)	{ return m_DeviceContext; }
+
+	static float GetScreenWidth();
+    static float GetScreenHeight();
 };
 
 inline std::vector<UINT> Renderer::MakeInstanceIDs(UINT count)
@@ -238,4 +242,23 @@ inline D3D11_INPUT_ELEMENT_DESC Renderer::MakeInstancneIDElement(UINT semanticIn
 	return e;
 }
 
+inline float Renderer::GetScreenWidth()
+{
+#ifdef _DEBUG
+	return m_DebugPresentViewport.Width;
+#else
+	return static_cast<float>(Application::GetGameWidth());
+#endif	
+}
+
+inline float Renderer::GetScreenHeight()
+{
+#ifdef _DEBUG
+	return m_DebugPresentViewport.Height;
+#else
+	return static_cast<float>(Application::GetGameHeight());
+#endif	
+
+
+}
 

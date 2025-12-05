@@ -12,7 +12,6 @@ void Skydome::Initialize() {
 
     SetShader("VS_Unlit","PS_Unlit");
     
-
 }
 
 void Skydome::Spin(float spinX, float spinY, float spinZ)

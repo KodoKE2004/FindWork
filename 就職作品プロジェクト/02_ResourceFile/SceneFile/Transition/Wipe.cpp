@@ -4,6 +4,7 @@
 #include "Renderer.h"
 #include "Application.h"
 #include "Collider.h"
+#include "Renderer.h"
 #include <algorithm>
 
 Wipe::Wipe(Camera* cam) : TransitionBase(cam)
@@ -15,8 +16,8 @@ void Wipe::Initialize()
     TextureManager* textureMgr = Game::GetInstance();
     m_Texture = textureMgr->GetTexture("Black.png");
 
-    SetScale(static_cast<float>(Application::GetGameWidth()),
-             static_cast<float>(Application::GetGameHeight()),
+    SetScale(static_cast<float>(Renderer::GetScreenWidth()),
+             static_cast<float>(Renderer::GetScreenHeight()),
              1.0f);
 
     SetColor(0.0f, 0.0f, 0.0f, 1.0f);

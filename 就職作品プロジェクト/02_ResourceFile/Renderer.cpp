@@ -119,9 +119,9 @@ void Renderer::Initialize()
 		previewWidth = previewHeight * aspect;
 	}
 
-	m_DebugPresentViewport.TopLeftX = 8.0f;
-	m_DebugPresentViewport.TopLeftY = 8.0f;
-	m_DebugPresentViewport.Width = previewWidth;
+	m_DebugPresentViewport.TopLeftX = 0.0f;
+	m_DebugPresentViewport.TopLeftY = 0.0f;
+	m_DebugPresentViewport.Width  = previewWidth;
 	m_DebugPresentViewport.Height = previewHeight;
 	m_DebugPresentViewport.MinDepth = 0.0f;
 	m_DebugPresentViewport.MaxDepth = 1.0f;
@@ -350,7 +350,7 @@ void Renderer::PresentDebugGameView()
 	m_DeviceContext->OMSetRenderTargets(1, rtvs, nullptr);
 	m_DeviceContext->RSSetViewports(1, &m_BackBufferViewport);
 
-	const float background[4] = { 0.1f, 0.1f, 0.1f, 1.0f };
+	const float background[4] = { 0.0f, 0.0f, 0.5f, 1.0f };
 	m_DeviceContext->ClearRenderTargetView(m_RenderTargetView, background);
 
 	m_DeviceContext->RSSetViewports(1, &m_DebugPresentViewport);
