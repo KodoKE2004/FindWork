@@ -4,12 +4,12 @@
 #include "TransitionBase.h"
 #include "Collider.h"
 
-TransitionState TitleToWait{};
-TransitionState WaitToGame{};
-TransitionState GameToWait{};
-TransitionState WaitToResult{};
-TransitionState ResultToTitle{};
-TransitionState ResultToGame{};
+SceneTransitionParam TitleToWait{};
+SceneTransitionParam WaitToGame{};
+SceneTransitionParam GameToWait{};
+SceneTransitionParam WaitToResult{};
+SceneTransitionParam ResultToTitle{};
+SceneTransitionParam ResultToGame{};
 
 namespace TransGui
 {
@@ -62,7 +62,7 @@ namespace TransGui
 		"InOut Expo",
 	};
 
-	void DrawTransitionParamUI(const char* label, SceneTransitionParam& param)
+	void DrawTransitionStateUI(const char* label, SceneTransitionParam& param)
 	{
 		ImGui::PushID(label);
 		if (ImGui::TreeNode(label))
@@ -73,7 +73,7 @@ namespace TransGui
 				param.mode = static_cast<TRANS_MODE>(modeIndex);
 			}
 
-			ImGui::DragFloat("Duration", &param.duration, 0.01f, 0.0f,30.0f, "%.2f sec");
+			ImGui::DragFloat("Duration", &param.duration, 0.01f, 0.0f, 30.0f, "%.2f sec");
 
 			int easingIndex = param.EasingAsIndex();
 			if (ImGui::Combo("Easing", &easingIndex, kEasingLabels, kEaseingTypeCount))
@@ -83,15 +83,6 @@ namespace TransGui
 			ImGui::TreePop();
 		}
 		ImGui::PopID();
-	}
-
-	void DrawTransitionStateUI(const char* label, TransitionState& state)
-	{
-		if (ImGui::CollapsingHeader(label, ImGuiTreeNodeFlags_DefaultOpen))
-		{
-			DrawTransitionParamUI("In",  state.inParam);
-			DrawTransitionParamUI("Out", state.outParam);
-		}								 
 	}
 
 }
@@ -172,7 +163,7 @@ float TransitionBase::EvaluateEasing(const SceneTransitionParam& param, float t)
 
 void TransitionBase::ApplyPhaseSetting(PHASE phase)
 {
-	const auto& param = GetParamForPhase(phase);
+	const auto& param = m_transParam;
 	m_Duration = max(param.duration, 0.0001f);
 	SetTransMode(param.mode);
 	m_Phase = phase;

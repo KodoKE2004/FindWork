@@ -6,11 +6,9 @@
 #include <vector>
 #include <algorithm>
 
-
 Fade::Fade(Camera* cam) : TransitionBase(cam)
 {
 }
-
 
 void Fade::Initialize()
 {
@@ -73,6 +71,7 @@ void Fade::Update(float tick)
     default: break;
     }
 }
+
 void Fade::Draw()
 {
     Renderer::SetDepthEnable(false);
@@ -121,13 +120,12 @@ void Fade::SetTransMode(TRANS_MODE transMode)
     m_TransMode = transMode;
 }
 
-
 void Fade::FADE_IN(float tick)
 {
     if (m_Phase != PHASE::TRANS_IN) return;
 
     m_Elapsed += tick;
-    const auto& param = GetParamForPhase(m_Phase);
+    const auto& param = m_transParam;
     const float duration = param.duration;
     const float t = std::clamp(m_Elapsed /max(duration, 0.0001f), 0.0f, 1.0f);
     const float eased = EvaluateEasing(param, t);
@@ -143,13 +141,12 @@ void Fade::FADE_IN(float tick)
     ApplyAlpha();
 }
 
-
 void Fade::FADE_OUT(float tick)
 {
     if (m_Phase != PHASE::TRANS_OUT) return;
 
     m_Elapsed += tick;
-    const auto& param = GetParamForPhase(m_Phase);
+    const auto& param = m_transParam;
     const float duration = param.duration;
     const float t = std::clamp(m_Elapsed / max(duration, 0.0001f), 0.0f, 1.0f);
     const float eased = EvaluateEasing(param, t);

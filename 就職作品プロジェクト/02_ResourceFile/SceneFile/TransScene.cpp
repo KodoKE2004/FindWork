@@ -28,8 +28,8 @@ void TransScene::Initialize()
 	m_Alpha = 0.0f;
 	m_isChange = false;
 
-	m_Duration = max(m_OutParam.duration, 0.0001f);
-	m_TransMode = m_OutParam.mode;
+	m_Duration = max(m_transParam.duration, 0.0001f);
+	m_TransMode = m_transParam.mode;
 	m_Step = STEP::DOING;
 	m_AlphaValue = 1.0f / m_Duration;
 
@@ -42,7 +42,7 @@ void TransScene::Initialize()
 	case TRANS_MODE::FADE:
 	{
         m_TransitionTexture = std::make_shared<Fade>(instance.GetCamera());
-        m_TransitionTexture->SetTransitionParams(m_InParam, m_OutParam);
+        m_TransitionTexture->SetTransitionParams(m_transParam);
 		m_TransitionTexture->Initialize();
         m_TransitionTexture->SetTransMode(m_TransMode);
 
@@ -56,7 +56,7 @@ void TransScene::Initialize()
 	{
 
 		m_TransitionTexture = std::make_shared<Wipe>(instance.GetCamera());
-		m_TransitionTexture->SetTransitionParams(m_InParam, m_OutParam);
+		m_TransitionTexture->SetTransitionParams(m_transParam);
 		m_TransitionTexture->Initialize();
         m_TransitionTexture->SetTransMode(m_TransMode);
 		

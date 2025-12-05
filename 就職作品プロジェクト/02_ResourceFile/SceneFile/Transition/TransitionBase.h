@@ -79,18 +79,12 @@ struct SceneTransitionParam
     int EasingAsIndex() const { return static_cast<int>(easing); }
 };
 
-struct TransitionState
-{
-    SceneTransitionParam inParam;
-    SceneTransitionParam outParam;
-};
-
-extern TransitionState TitleToWait;
-extern TransitionState WaitToGame;
-extern TransitionState GameToWait;
-extern TransitionState WaitToResult;
-extern TransitionState ResultToTitle;
-extern TransitionState ResultToGame;
+extern SceneTransitionParam TitleToWait;
+extern SceneTransitionParam WaitToGame;
+extern SceneTransitionParam GameToWait;
+extern SceneTransitionParam WaitToResult;
+extern SceneTransitionParam ResultToTitle;
+extern SceneTransitionParam ResultToGame;
 
 void DrawTransitionStateGUI();
 
@@ -117,8 +111,7 @@ protected:
     TRANS_MODE m_TransMode;
 
     // 遷移演出のパラメータ
-    SceneTransitionParam m_InParam{};
-    SceneTransitionParam m_OutParam{};
+    SceneTransitionParam m_transParam{};
 
     bool m_isChange = false;
 
@@ -168,21 +161,14 @@ public:
     // タイマー関連
     void SetDuration(const float& duration) { m_Duration = duration; }
     
-    void SetTransitionParams(SceneTransitionParam inParam, SceneTransitionParam outParam)
+    void SetTransitionParams(SceneTransitionParam param)
     {
-        m_InParam  = inParam;
-        m_OutParam = outParam;
-    }
-
-    // フェーズによってIN・OUTのパラメータを返す
-    const SceneTransitionParam& GetParamForPhase(PHASE phase) const
-    {
-        return phase == PHASE::TRANS_IN ? m_InParam : m_OutParam;
+        m_transParam = param;
     }
 
     float GetDurationForPhase(PHASE phase) const
     {
-        return max(GetParamForPhase(phase).duration, 0.0001f);
+        return max(m_transParam.duration, 0.0001f);
     }
     
     

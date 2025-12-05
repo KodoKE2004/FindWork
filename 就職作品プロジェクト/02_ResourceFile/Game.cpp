@@ -40,12 +40,12 @@ void Game::Initialize()
         EASING_TYPE::IN_OUT_SINE
     };
 
-	TitleToWait   = TransitionState{ SceneTransitionParam(initParam), SceneTransitionParam(initParam)};
-	WaitToGame    = TransitionState{ SceneTransitionParam(initParam), SceneTransitionParam(initParam)};
-	GameToWait    = TransitionState{ SceneTransitionParam(initParam), SceneTransitionParam(initParam)};
-	WaitToResult  = TransitionState{ SceneTransitionParam(initParam), SceneTransitionParam(initParam)};
-	ResultToTitle = TransitionState{ SceneTransitionParam(initParam), SceneTransitionParam(initParam)};
-	ResultToGame  = TransitionState{ SceneTransitionParam(initParam), SceneTransitionParam(initParam)};
+	TitleToWait   = initParam;
+	WaitToGame    = initParam;
+	GameToWait    = initParam;
+	WaitToResult  = initParam;
+	ResultToTitle = initParam;
+	ResultToGame  = initParam;
 
 	DebugUI::RedistDebugFunction([]() {
 		DrawTransitionStateGUI();

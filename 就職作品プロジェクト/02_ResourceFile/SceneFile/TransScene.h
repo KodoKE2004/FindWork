@@ -40,8 +40,7 @@ private:
 	float m_Duration = 0.0f;
 
 	// 遷移演出のパラメータ
-	SceneTransitionParam m_InParam{};
-	SceneTransitionParam m_OutParam{};
+	SceneTransitionParam m_transParam{};
 
     // トランジション関連
 	float m_Alpha	   = 0.0f;
@@ -71,17 +70,9 @@ public:
 	/// </summary>
 	void DrawNextScene();
 
-	void SetTransitionParam(SceneTransitionParam inParam,
-							SceneTransitionParam outParam) 
+	void SetTransitionParam(SceneTransitionParam param) 
 	{	
-		m_InParam  = inParam;  
-        m_OutParam = outParam;
-	}
-
-	void SetTransitionParam(TransitionState state)
-	{
-		m_InParam  = state.inParam;
-		m_OutParam = state.outParam;
+		m_transParam  = param;  
 	}
 
 	void SetOldScene(Scene* sceneOld)      { m_SceneOld  = sceneOld;  }

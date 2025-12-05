@@ -163,7 +163,7 @@ void Wipe::WIPE_IN(float tick)
 
     m_Elapsed += tick;
 
-    const auto& param = GetParamForPhase(m_Phase);
+    const auto& param = m_transParam;
     const float duration = GetDurationForPhase(m_Phase);
     const float t = std::clamp(m_Elapsed / max(duration * 0.5f, 0.0001f), 0.0f, 1.0f);
     float eased = CalculateWipeEasing(param, t);
@@ -185,7 +185,7 @@ void Wipe::WIPE_OUT(float tick)
 
     m_Elapsed += tick;
 
-    const auto& param = GetParamForPhase(m_Phase);
+    const auto& param = m_transParam;
     const float duration = GetDurationForPhase(m_Phase);
     const float t = std::clamp(m_Elapsed / max(duration * 0.5f, 0.0001f), 0.0f, 1.0f);
     float eased = CalculateWipeEasing(param, t);
