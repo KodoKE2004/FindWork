@@ -128,7 +128,9 @@ void Game::Draw()
 	if (transTex != nullptr) {
         transTex->Draw();
 	}
-
+#ifdef _DEBUG
+	Renderer::PresentDebugGameView();
+#endif
 	DebugUI::Render();
 	Renderer::Finish();
 }

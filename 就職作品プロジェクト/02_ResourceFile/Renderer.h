@@ -1,6 +1,7 @@
 #pragma once
 
 #include	"Transform.h"
+#include    <memory>
 #include	<d3d11.h>
 #include	<io.h>
 #include	<string>
@@ -8,6 +9,8 @@
 #include	<wrl/client.h>
 #include	<DirectXMath.h>
 #include	<SimpleMath.h>
+
+#include	"RenderTarget.h"
 
 using namespace DirectX;
 using namespace SimpleMath;
@@ -97,15 +100,15 @@ public:
 	//			ループ内の処理
 	//---------------------------------
 
-	// レンダラーの初期化
 	static void Initialize();
-	// レンダラーの終了処理
+
 	static void Finalize();
-	// 描画の開始
+
 	static void Start();
-	// 描画の終了
+
 	static void Finish();
 
+	static void PresentDebugGameView();
 	//---------------------------------
 	//	 セッターとシングルトンパターンの実装
 	//---------------------------------
@@ -151,6 +154,13 @@ private:
 	static IDXGISwapChain*			m_SwapChain			;	// スワップチェーン
 	static ID3D11RenderTargetView*	m_RenderTargetView	;	// レンダーターゲットビュー
 	static ID3D11DepthStencilView*	m_DepthStencilView	;	// 深度ステンシルビュー
+
+    static D3D11_VIEWPORT			m_BackBufferViewport;	// バックバッファのビューポート
+
+#ifdef _DEBUG
+	static std::unique_ptr<RenderTarget> m_DebugGameTarget;		    // デバッグ用ゲーム画面レンダーターゲット
+	static D3D11_VIEWPORT                m_DebugPresentViewport;	// デバッグ用ゲーム画面のビューポート
+#endif
 
 	static ID3D11DepthStencilState* m_DepthStateEnable ;	// 深度ステンシルステート（有効）
 	static ID3D11DepthStencilState* m_DepthStateDisable;	// 深度ステンシルステート（無効）

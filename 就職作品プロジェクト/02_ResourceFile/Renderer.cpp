@@ -2,6 +2,8 @@
 #include "Application.h"
 #include "Debug.hpp"
 #include <d3dcompiler.h>
+#include <algorithm>
+
 #pragma comment(lib, "d3dcompiler.lib")
 
 
@@ -12,6 +14,14 @@ ID3D11DeviceContext*			Renderer::m_DeviceContext;		// デバイスコンテキスト
 IDXGISwapChain*					Renderer::m_SwapChain;			// スワップチェーン
 ID3D11RenderTargetView*			Renderer::m_RenderTargetView;	// レンダーターゲットビュー
 ID3D11DepthStencilView*			Renderer::m_DepthStencilView;	// 深度ステンシルビュー
+
+D3D11_VIEWPORT                              Renderer::m_BackBufferViewport;
+
+#ifdef _DEBUG
+std::unique_ptr<RenderTarget>               Renderer::m_DebugGameTarget;
+D3D11_VIEWPORT                              Renderer::m_DebugPresentViewport;
+#endif
+
 
 ID3D11DepthStencilState*		Renderer::m_DepthStateEnable;	// 深度ステンシルステート（有効）
 ID3D11DepthStencilState*		Renderer::m_DepthStateDisable;	// 深度ステンシルステート（無効）
@@ -87,15 +97,35 @@ void Renderer::Initialize()
 	m_DeviceContext->OMSetRenderTargets(1, &m_RenderTargetView, m_DepthStencilView); // レンダーターゲットとデプスステンシルビューを設定
 
 	// ビューポート設定
-	D3D11_VIEWPORT viewport;
-	viewport.Width = (FLOAT)Application::GetWidth();   // ビューポートの幅
-	viewport.Height = (FLOAT)Application::GetHeight(); // ビューポートの高さ
-	viewport.MinDepth = 0.0f;                          // 深度範囲の最小値
-	viewport.MaxDepth = 1.0f;                          // 深度範囲の最大値
-	viewport.TopLeftX = 0;                             // ビューポートの左上隅のX座標
-	viewport.TopLeftY = 0;                             // ビューポートの左上隅のY座標）
-	m_DeviceContext->RSSetViewports(1, &viewport);
+	m_BackBufferViewport.Width  = (FLOAT)Application::GetGameWidth();   // ビューポートの幅
+	m_BackBufferViewport.Height = (FLOAT)Application::GetGameHeight();  // ビューポートの高さ
+	m_BackBufferViewport.MinDepth = 0.0f;								// 深度範囲の最小値
+	m_BackBufferViewport.MaxDepth = 1.0f;								// 深度範囲の最大値
+	m_BackBufferViewport.TopLeftX = 0;									// ビューポートの左上隅のX座標
+	m_BackBufferViewport.TopLeftY = 0;									// ビューポートの左上隅のY座標）
+	m_DeviceContext->RSSetViewports(1, &m_BackBufferViewport);
 
+#ifdef _DEBUG
+	m_DebugGameTarget = std::make_unique<RenderTarget>();
+	m_DebugGameTarget->Create(m_Device, Application::GetGameWidth(), Application::GetGameHeight(), true);
+
+	const float aspect = static_cast<float>(Application::GetGameWidth()) / static_cast<float>(Application::GetGameHeight());
+	const float maxPreviewWidth  = static_cast<float>(Application::GetWidth())  * 0.8f;
+	const float maxPreviewHeight = static_cast<float>(Application::GetHeight()) * 0.8f;
+	float previewWidth = min(static_cast<float>(Application::GetGameWidth()), maxPreviewWidth);
+	float previewHeight = previewWidth / aspect;
+	if (previewHeight > maxPreviewHeight) {
+		previewHeight = maxPreviewHeight;
+		previewWidth = previewHeight * aspect;
+	}
+
+	m_DebugPresentViewport.TopLeftX = 8.0f;
+	m_DebugPresentViewport.TopLeftY = 8.0f;
+	m_DebugPresentViewport.Width = previewWidth;
+	m_DebugPresentViewport.Height = previewHeight;
+	m_DebugPresentViewport.MinDepth = 0.0f;
+	m_DebugPresentViewport.MaxDepth = 1.0f;
+#endif
 
 	// ラスタライザステート設定
 	D3D11_RASTERIZER_DESC rasterizerDesc{};
@@ -258,6 +288,10 @@ void Renderer::Finalize()
 	if (m_DepthStateEnable)  { m_DepthStateEnable ->Release(); m_DepthStateEnable  = nullptr; }
 	if (m_DepthStateDisable) { m_DepthStateDisable->Release(); m_DepthStateDisable = nullptr; }
 
+#ifdef _DEBUG
+    m_DebugGameTarget.reset();
+#endif
+
 	m_WorldBuffer->Release();
 	m_ViewBuffer->Release();
 	m_ProjectionBuffer->Release();
@@ -277,6 +311,16 @@ void Renderer::Finalize()
 void Renderer::Start()
 {
 	float clearColor[4] = { 0.5f, 0.5f, 0.5f, 1.0f };
+
+#ifdef _DEBUG
+	if (m_DebugGameTarget) {
+		m_DebugGameTarget->Begin(m_DeviceContext, clearColor);
+		return;
+	}
+#endif
+	ID3D11RenderTargetView* rtvs[] = { m_RenderTargetView };
+	m_DeviceContext->OMSetRenderTargets(1, rtvs, m_DepthStencilView);
+	m_DeviceContext->RSSetViewports(1, &m_BackBufferViewport);
 	m_DeviceContext->ClearRenderTargetView(m_RenderTargetView, clearColor);
 	m_DeviceContext->ClearDepthStencilView(m_DepthStencilView, D3D11_CLEAR_DEPTH, 1.0f, 0);
 }
@@ -294,6 +338,24 @@ void Renderer::Finish()
 		debugDev->ReportLiveDeviceObjects(D3D11_RLDO_DETAIL);
 		debugDev->Release();
 	}
+#endif
+}
+
+void Renderer::PresentDebugGameView()
+{
+#ifdef _DEBUG
+	if (!m_DebugGameTarget) { return; }
+
+	ID3D11RenderTargetView* rtvs[] = { m_RenderTargetView };
+	m_DeviceContext->OMSetRenderTargets(1, rtvs, nullptr);
+	m_DeviceContext->RSSetViewports(1, &m_BackBufferViewport);
+
+	const float background[4] = { 0.1f, 0.1f, 0.1f, 1.0f };
+	m_DeviceContext->ClearRenderTargetView(m_RenderTargetView, background);
+
+	m_DeviceContext->RSSetViewports(1, &m_DebugPresentViewport);
+	BlitSRVToBackbuffer(m_DebugGameTarget->GetSRV());
+	m_DeviceContext->RSSetViewports(1, &m_BackBufferViewport);
 #endif
 }
 
@@ -483,21 +545,43 @@ void Renderer::BlitSRVToBackbuffer(ID3D11ShaderResourceView* srv, float alpha)
 	if (!sReady)
 	{
 		const char* vsSrc = R"(
-struct VSOut { float4 pos:SV_POSITION; float2 uv:TEXCOORD0; };
-VSOut main(uint id:SV_VertexID){
-    float2 v[3] = { float2(-1,-1), float2(-1,3), float2(3,-1) };
-    VSOut o; o.pos=float4(v[id],0,1); o.uv=0.5f*(v[id]+float2(1,1)); return o;
-})";
+		struct VSOut 
+		{
+			float4 pos:SV_POSITION; float2 uv:TEXCOORD0;
+		};
+
+		VSOut main(uint id:SV_VertexID)
+		{
+			float2 v[3] = 
+			{
+				float2(-1,-1),
+				float2(-1,3),
+				float2(3,-1)
+			};
+		
+			VSOut o;
+			o.pos=float4(v[id],0,1);
+			o.uv=0.5f*(v[id]+float2(1,1));
+		
+			return o;
+		})";
 
 		const char* psSrc = R"(
-Texture2D    gTex : register(t0);
-SamplerState gSmp : register(s0);
-cbuffer CB : register(b7){ float gAlpha; float3 pad; };
-float4 main(float4 pos:SV_POSITION, float2 uv:TEXCOORD0) : SV_Target {
-    float4 c = gTex.Sample(gSmp, uv);
-    c.a = saturate(gAlpha);
-    return c;
-})";
+		Texture2D    gTex : register(t0);
+		SamplerState gSmp : register(s0);
+		cbuffer CB : register(b7)
+		{
+			float gAlpha;
+			float3 pad;
+		};
+
+		float4 main(float4 pos:SV_POSITION, float2 uv:TEXCOORD0) : SV_Target 
+		{
+			float4 c = gTex.Sample(gSmp, uv);
+			c.a = saturate(gAlpha);
+		
+			return c;
+		})";
 		Microsoft::WRL::ComPtr<ID3DBlob> vsBlob, psBlob;
 		CompileShaderFromSource(vsSrc, "main", "vs_5_0", vsBlob.GetAddressOf());
 		CompileShaderFromSource(psSrc, "main", "ps_5_0", psBlob.GetAddressOf());
@@ -601,4 +685,5 @@ void Renderer::CreatePixelShader(ID3D11PixelShader** PixelShader, const char* Fi
 
 void Renderer::SetDrawState()
 {
+
 }
