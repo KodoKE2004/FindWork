@@ -18,7 +18,11 @@ private:
     ComPtr<ID3D11ShaderResourceView> m_Srv;
     ComPtr<ID3D11Texture2D>          m_DepthTex;
     ComPtr<ID3D11DepthStencilView>   m_Dsv;
+    ComPtr<ID3D11RenderTargetView>   m_PrevRTV;
+    ComPtr<ID3D11DepthStencilView>   m_PrevDSV;
     D3D11_VIEWPORT                   m_Vp{};
+    D3D11_VIEWPORT                   m_PrevVp{};
+    bool                             m_HasPrevState = false;
 
 public:
     RenderTarget() = default;
@@ -29,8 +33,7 @@ public:
     // bind & clear
     void Begin(ID3D11DeviceContext* ctx, const float clear[4], ID3D11DepthStencilView* clearDsv = nullptr);
 
-    // restore backbuffer
-    static void End(ID3D11DeviceContext* ctx, ID3D11RenderTargetView* backBufferRTV, const D3D11_VIEWPORT& backVP);
+    void End(ID3D11DeviceContext* ctx);
 
     // accessors
     ID3D11RenderTargetView* GetRTV() const { return m_Rtv.Get(); }

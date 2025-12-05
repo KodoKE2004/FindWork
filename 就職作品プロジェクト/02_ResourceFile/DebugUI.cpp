@@ -1,4 +1,5 @@
 #include "DebugUI.h"
+#include "Game.h"
 
 std::vector<std::function<void(void)>> DebugUI::m_debugfunction;
 std::string DebugUI::TEXT_CurrentScene = "TitleScene" ;
@@ -56,6 +57,23 @@ void DebugUI::Render() {
     ImGui::Begin(text);
     ImGuiIO& io = ImGui::GetIO();
     ImGui::Text("Application average %.3f ms/frame (%.1f FPS)", 1000.0f / io.Framerate, io.Framerate);
+
+    static bool reloadSuccess = true;
+    static bool reloadAttempted = false;
+    if (ImGui::Button("Hot Reload Shaders"))
+    {
+        ShaderManager* shaderMgr = Game::GetInstance();
+        if (shaderMgr)
+        {
+            reloadSuccess = shaderMgr->ReloadAll();
+            reloadAttempted = true;
+        }
+    }
+    if (reloadAttempted)
+    {
+        ImGui::SameLine();
+        ImGui::Text(reloadSuccess ? "Reload succeeded" : "Reload failed");
+    }
 
     ImGui::End();
 

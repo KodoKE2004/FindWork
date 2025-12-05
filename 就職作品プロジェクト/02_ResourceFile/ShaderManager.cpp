@@ -114,3 +114,25 @@ BaseShader* ShaderManager::GetOrCreateShader(const std::string& name)
 	return shader;
 }
 
+bool ShaderManager::ReloadAll()
+{
+    bool allSuccess = true;
+
+    for (auto& [name, shader] : m_ShaderList)
+    {
+        if (!shader) { continue; }
+
+        if (!shader->Create(shader->GetHlslName()))
+        {
+            Debug::Log("[[é∏îs]]ShaderManager: failed to reload '" + name + "'.\n" );
+            allSuccess = false;
+        }
+        else
+        {
+            Debug::Log("[[ê¨å˜]]ShaderManager: reloaded '" + name + "'.\n");
+        }
+    }
+
+    return allSuccess;
+}
+

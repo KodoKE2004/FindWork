@@ -57,6 +57,29 @@ bool RenderTarget::Create(ID3D11Device* dev, UINT width, UINT height, bool withD
 
 void RenderTarget::Begin(ID3D11DeviceContext* ctx, const float clear[4], ID3D11DepthStencilView* clearDsv)
 {
+    m_PrevRTV.Reset();
+    m_PrevDSV.Reset();
+    m_PrevVp = {};
+    m_HasPrevState = true;
+
+    ID3D11RenderTargetView* prevRtv = nullptr;
+    ID3D11DepthStencilView* prevDsv = nullptr;
+    ctx->OMGetRenderTargets(1, &prevRtv, &prevDsv);
+    m_PrevRTV = prevRtv;
+    m_PrevDSV = prevDsv;
+    if (prevRtv) prevRtv->Release();
+    if (prevDsv) prevDsv->Release();
+
+    UINT vpCount = 1;
+    ctx->RSGetViewports(&vpCount, &m_PrevVp);
+    if (vpCount == 0)
+    {
+        m_PrevVp.TopLeftX = 0.0f; m_PrevVp.TopLeftY = 0.0f;
+        m_PrevVp.Width = static_cast<float>(m_Width);
+        m_PrevVp.Height = static_cast<float>(m_Height);
+        m_PrevVp.MinDepth = 0.0f; m_PrevVp.MaxDepth = 1.0f;
+    }
+
     ID3D11RenderTargetView* rtvs[] = { m_Rtv.Get() };
     ctx->OMSetRenderTargets(1, rtvs, m_Dsv.Get());
     ctx->RSSetViewports(1, &m_Vp);
@@ -65,9 +88,12 @@ void RenderTarget::Begin(ID3D11DeviceContext* ctx, const float clear[4], ID3D11D
     if (clearDsv) ctx->ClearDepthStencilView(clearDsv, D3D11_CLEAR_DEPTH | D3D11_CLEAR_STENCIL, 1.0f, 0);
 }
 
-void RenderTarget::End(ID3D11DeviceContext* ctx, ID3D11RenderTargetView* backBufferRTV, const D3D11_VIEWPORT& backVP)
+void RenderTarget::End(ID3D11DeviceContext* ctx)
 {
-    ID3D11RenderTargetView* rtvs[] = { backBufferRTV };
-    ctx->OMSetRenderTargets(1, rtvs, nullptr);
-    ctx->RSSetViewports(1, &backVP);
+    if (!m_HasPrevState) { return; }
+
+    ID3D11RenderTargetView* rtvs[] = { m_PrevRTV.Get() };
+    ctx->OMSetRenderTargets(1, rtvs, m_PrevDSV.Get());
+    ctx->RSSetViewports(1, &m_PrevVp);
+    m_HasPrevState = false;
 }

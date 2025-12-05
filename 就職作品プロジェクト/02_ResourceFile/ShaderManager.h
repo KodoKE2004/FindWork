@@ -37,6 +37,8 @@ public:
 	BaseShader* GetShader(const std::string& name) const;
 	BaseShader* GetOrCreateShader(const std::string& name);
 
+	bool ReloadAll();
+
 	//BaseShader* Aho(const std::string& name)
 	//{
 	//	//// ‚·‚Å‚É“o˜^‚³‚ê‚Ä‚¢‚½‚ç

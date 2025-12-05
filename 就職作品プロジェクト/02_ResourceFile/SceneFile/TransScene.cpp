@@ -154,7 +154,8 @@ void TransScene::DrawNextScene()
 			if (obj) obj->Draw();
 		}
 	}
-	RenderTarget::End(context, Renderer::GetBackBufferRTV(), vp);
+	
+	m_RenderTarget->End(context);
 
 	m_NextSceneSRV = m_RenderTarget->GetSRV();
 
