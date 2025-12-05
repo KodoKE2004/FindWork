@@ -20,6 +20,10 @@ void Wipe::Initialize()
              static_cast<float>(Renderer::GetScreenHeight()),
              1.0f);
 
+#ifdef _DEBUG
+    SetPos(ConvertToDebugScreenPosition(GetPos()));
+#endif
+
     SetColor(0.0f, 0.0f, 0.0f, 1.0f);
 
     m_Phase = PHASE::TRANS_IN;
@@ -144,7 +148,11 @@ void Wipe::ApplyWipeAmount(float amount)
     pos.y = start.y + (end.y - start.y) * amount;
     pos.z = depth;
 
+#ifdef _DEBUG
+    SetPos(ConvertToDebugScreenPosition(pos));
+#else
     SetPos(pos);
+#endif
 
 }
 
@@ -217,7 +225,12 @@ void Wipe::SetTransMode(TRANS_MODE transMode)
     
     CheckPointSetting();
     SetPos(m_StartPos.x, m_StartPos.y, GetPos().z);
-
+#ifdef _DEBUG
+    // ゲーム座標 → デバッグ表示用に変換してからセット
+    SetPos(ConvertToDebugScreenPosition(m_StartPos));
+#else
+    SetPos(m_StartPos);
+#endif
 }
 
 void Wipe::CheckPointSetting()

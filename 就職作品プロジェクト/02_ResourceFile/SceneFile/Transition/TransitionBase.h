@@ -123,6 +123,10 @@ protected:
 
     float m_Duration = 1.0f;    // ‘JˆÚ‚ÌŠ—vŠÔ
 
+#ifdef _DEBUG
+    NVector3 ConvertToDebugScreenPosition(const NVector3& position) const;
+#endif
+
 public:
 
     TransitionBase() = default ;

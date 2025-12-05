@@ -37,6 +37,10 @@ void Fade::Initialize()
              static_cast<float>(Renderer::GetScreenHeight()),
              1.0f);
 
+#ifdef _DEBUG
+    SetPos(ConvertToDebugScreenPosition(GetPos()));
+#endif
+
     std::vector<VERTEX_3D> vertices(4);
     vertices[0].position = NVector3(-0.5f,  0.5f, 0.0f);
     vertices[1].position = NVector3( 0.5f,  0.5f, 0.0f);
