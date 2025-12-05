@@ -147,7 +147,6 @@ void Game::Finalize()
 	instance.DeleteAllObject();	//オブジェクトを全て削除
 	Renderer::Finalize();			// レンダラーの終了処理
 
-
 }
 
 void Game::SetSceneCurrent(Scene* newScene)
