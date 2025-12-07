@@ -82,7 +82,7 @@ void Game::Initialize()
 
 #endif // _DEBUG
 
-	instance.m_SceneCurrent = new TitleScene;				// タイトルシーンのインスタンスを生成
+	instance.m_SceneCurrent = new GameSceneSlice;				// タイトルシーンのインスタンスを生成
 	instance.m_SceneCurrent->Initialize();
 }
 
@@ -97,6 +97,7 @@ void Game::Update(float tick)
 
 	// カメラの更新
 	instance.m_Camera->Update();
+
 	// 入力の更新
 	// オブジェクトの更新
 	for (auto& o : instance.m_GameObjects)

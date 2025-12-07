@@ -115,10 +115,10 @@ void Square::Draw()
 	m_Materiale->SetGPU();
 
 	// UV‚Ìİ’è‚ğw’è
-	float u = m_NumU - 1;
-	float v = m_NumV - 1;
-	float uw = 1 / m_SplitX;
-	float vh = 1 / m_SplitY;
+	float u = m_NumU - 1.0f;
+	float v = m_NumV - 1.0f;
+	float uw = 1.0f / m_SplitX;
+	float vh = 1.0f / m_SplitY;
 
 	Renderer::SetUV(u, v, uw, vh);
 	Camera::ScopedMode scepedMode(m_Camera, CAMERA_2D);

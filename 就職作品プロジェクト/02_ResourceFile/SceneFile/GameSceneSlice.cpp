@@ -80,7 +80,7 @@ void GameSceneSlice::Update(float tick)
         }
     }
 
-    GameSceneExe::Update(tick);
+    // GameSceneExe::Update(tick);
 
     if (IsChange()) {
         ChangeScenePop(GameToWait);
