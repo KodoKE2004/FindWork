@@ -4,7 +4,7 @@ struct VS_IN
     float4 nrm : NORMAL0;
     float4 col : COLOR0;
     float2 tex : TEXCOORD0;
-    
+	uint instanceID : TEXCOORD1;
 };
 
 struct PS_IN
@@ -12,6 +12,7 @@ struct PS_IN
     float4 pos : SV_POSITION;
     float4 col : COLOR0;
     float2 tex : TEXCOORD0;
+	float3 nrm : TEXCOORD1;
 };
 
 struct MATERIAL
@@ -48,18 +49,16 @@ cbuffer ProjectionBuffer : register(b2)
 {
     matrix Projection;
 };
-
 cbuffer LightBuffer : register(b3)
 {
 	LightBuffer gLight;
 };
-	
 cbuffer MeterialBuffer : register(b4)
 {
     MATERIAL Material;
 };
-
 cbuffer TextureBuffer : register(b5)
 {
     float4x4 matrixTex;
 };
+

@@ -1,24 +1,16 @@
 #include "common.hlsl"
 
 PS_IN main(in VS_IN input)
-{
+{	
+	PS_IN output = (PS_IN) 0;
+	float4 worldPos = mul(input.pos, World);
 	
-	PS_IN output;
-	
-	matrix wvp;
-	wvp = mul(World, View);
-	wvp = mul(wvp, Projection);
-
-	output.pos = mul(input.pos, wvp);
-   
-	float4 uv;
-	uv.xy = input.tex;
-	uv.z = 0.0f;
-	uv.w = 1.0f;
-	uv = mul(uv, matrixTex);
-
-	output.tex = uv.xy;
+	output.pos = mul(worldPos, mul(View, Projection));
+	output.tex = input.tex;
 	output.col = input.col;
-	
+    float4 n = input.nrm;
+    n.w = 0.0f;
+    output.nrm = normalize( mul( n, World).xyz); // ƒ[ƒ‹ƒh‹óŠÔ‚É•ÏŠ·‚µ‚Ä“n‚·
 	return output;
+	
 }

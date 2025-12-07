@@ -5,6 +5,7 @@
 #include "Game.h"
 #include "ObjectFile/Model.h"
 #include "ObjectFile/Skydome.h"
+#include <algorithm>
 
 void GameSceneExe::Initialize()
 {
@@ -45,7 +46,11 @@ void GameSceneExe::Initialize()
     m_TimerList.clear();
     SetTimer(&m_TimeChangeScene.timer);
 
-
+    if (m_TimeGaugeBack && m_TimeChangeScene.limit > 0.0f)
+    {
+        float elapsedRate = std::clamp(m_TimeChangeScene.timer / m_TimeChangeScene.limit, 0.0f, 1.0f);
+        m_TimeGaugeBack->SetFillRatio(1.0f - elapsedRate);
+    }
 
 }
 
@@ -68,6 +73,12 @@ void GameSceneExe::Update(float tick)
     
 
     CountTimer(tick);
+    if (m_TimeGaugeBack && m_TimeChangeScene.limit > 0.0f)
+    {
+        float elapsedRate = std::clamp(m_TimeChangeScene.timer / m_TimeChangeScene.limit, 0.0f, 1.0f);
+        m_TimeGaugeBack->SetFillRatio(1.0f - elapsedRate);
+    }
+
 }
 
 void GameSceneExe::Finalize()
