@@ -33,9 +33,7 @@ void TransScene::Initialize()
 	m_Step = STEP::DOING;
 	m_AlphaValue = 1.0f / m_Duration;
 
-	if (m_SceneNext) {
-		DrawNextScene();
-	}
+	
 	
 	switch (m_TransMode)
 	{
@@ -93,11 +91,13 @@ void TransScene::Update(float tick)
     // ‰‰o‚ªIN‚©‚çOUT‚É•Ï‚í‚Á‚½uŠÔ‚ðŒŸo
 	if (!m_isChange && m_TransitionTexture->IsChange() )
 	{
+
 		m_SceneOld->Finalize();
 		m_SceneNext->Initialize();
+		if (m_SceneNext) {
+			DrawNextScene();
+		}
 		
-		
-
 		m_isChange = true;
 	}
 	if (phase == PHASE::FINISH)

@@ -1,43 +1,75 @@
-﻿  Application.cpp
+﻿  compilation object save succeeded; see C:\Users\kodokeの世界\Desktop\HAL\VisualSutdio\就職作品\個人製作\FindWork\就職作品プロジェクト\x64\Release\PS_Alpha.cso
+  compilation object save succeeded; see C:\Users\kodokeの世界\Desktop\HAL\VisualSutdio\就職作品\個人製作\FindWork\就職作品プロジェクト\x64\Release\PS_CenterFade.cso
+  compilation object save succeeded; see C:\Users\kodokeの世界\Desktop\HAL\VisualSutdio\就職作品\個人製作\FindWork\就職作品プロジェクト\x64\Release\PS_Default.cso
+  compilation object save succeeded; see C:\Users\kodokeの世界\Desktop\HAL\VisualSutdio\就職作品\個人製作\FindWork\就職作品プロジェクト\x64\Release\PS_Skydome.cso
+  compilation object save succeeded; see C:\Users\kodokeの世界\Desktop\HAL\VisualSutdio\就職作品\個人製作\FindWork\就職作品プロジェクト\x64\Release\PS_Unlit.cso
+  compilation object save succeeded; see C:\Users\kodokeの世界\Desktop\HAL\VisualSutdio\就職作品\個人製作\FindWork\就職作品プロジェクト\x64\Release\VS_Alpha.cso
+  compilation object save succeeded; see C:\Users\kodokeの世界\Desktop\HAL\VisualSutdio\就職作品\個人製作\FindWork\就職作品プロジェクト\x64\Release\VS_DebugGrid.cso
+  compilation object save succeeded; see C:\Users\kodokeの世界\Desktop\HAL\VisualSutdio\就職作品\個人製作\FindWork\就職作品プロジェクト\x64\Release\VS_Default.cso
+  compilation object save succeeded; see C:\Users\kodokeの世界\Desktop\HAL\VisualSutdio\就職作品\個人製作\FindWork\就職作品プロジェクト\x64\Release\VS_Skydome.cso
+  compilation object save succeeded; see C:\Users\kodokeの世界\Desktop\HAL\VisualSutdio\就職作品\個人製作\FindWork\就職作品プロジェクト\x64\Release\VS_Unlit.cso
+  Application.cpp
+  Audio.cpp
+  RhythmBeat.cpp
+  AudioManager.cpp
   Camera.cpp
   Collider.cpp
   DebugGridLine.cpp
   DebugUI.cpp
+  Dx11helper.cpp
   Game.cpp
-  MeshManager.cpp
-  Bullet.cpp
+  input.cpp
+  main.cpp
   Car.cpp
   CartWarning.cpp
   Circle.cpp
-  Cube.cpp
-  Enemy.cpp
   Hammer.cpp
-  Light.cpp
-  Model.cpp
-  Object.cpp
   Player.cpp
-  Skydome.cpp
-  Sphere.cpp
-  RenderTarget.cpp
-  Renderer.cpp
+  Sord.cpp
+  Enemy.cpp
   GameSceneCrush.cpp
-  GameSceneExe.cpp
   GameSceneJump.cpp
   GameSceneSlice.cpp
   GameSceneWait.cpp
   ResultScene.cpp
   Scene.cpp
-  SelectScene.cpp
-  TitleScene.cpp
-  TransScene.cpp
-  Fade.cpp
-  SnapshotOverlay.cpp
   TransitionBase.cpp
   Wipe.cpp
   Zoom.cpp
+  StaticMesh.cpp
+  MeshManager.cpp
+  Bullet.cpp
+  Cube.cpp
+  Light.cpp
+  Model.cpp
+  Object.cpp
+  Sphere.cpp
+  Skydome.cpp
+  Renderer.cpp
+  RenderTarget.cpp
+  GameSceneExe.cpp
+  SelectScene.cpp
+  TitleScene.cpp
+  Fade.cpp
+  SnapshotOverlay.cpp
+  TransScene.cpp
+  Shader.cpp
   ShaderManager.cpp
+  TestPlane.cpp
+  Square.cpp
+  Texture.cpp
+  TextureManager.cpp
+  Transform.cpp
+  utility.cpp
+  imgui.cpp
+  imgui_demo.cpp
+  imgui_draw.cpp
+  imgui_impl_dx11.cpp
+  imgui_impl_win32.cpp
+  imgui_tables.cpp
+  imgui_widgets.cpp
   コード生成しています。
-  Previous IPDB and IOBJ mismatch, fall back to full compilation.
-  All 4490 functions were compiled because no usable IPDB/IOBJ from previous compilation was found.
+  Previous IPDB was built with incompatible compiler, fall back to full compilation.
+  All 4444 functions were compiled because no usable IPDB/IOBJ from previous compilation was found.
   コード生成が終了しました。
-  就職作品プロジェクト.vcxproj -> C:\Users\dorae\Desktop\HAL\class3\FindWork\就職作品プロジェクト\x64\Release\NishiguchiGame.exe
+  就職作品プロジェクト.vcxproj -> C:\Users\kodokeの世界\Desktop\HAL\VisualSutdio\就職作品\個人製作\FindWork\就職作品プロジェクト\x64\Release\NishiguchiGame.exe

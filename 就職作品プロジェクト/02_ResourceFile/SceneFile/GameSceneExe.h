@@ -12,6 +12,12 @@ enum class GAME_MODE
 
 class GameSceneExe : public Scene
 {
+private: 
+//===============================
+//      全クラス共通オブジェクト
+//===============================
+    Square* m_TimeGaugeBack = nullptr;	// スピードゲージ背景
+
 // inゲーム基底クラス
 protected:
 
