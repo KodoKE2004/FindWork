@@ -244,6 +244,9 @@
     <ClCompile Include="02_ResourceFile\SceneFile\Transition\Zoom.cpp">
       <Filter>SourceFile\Scene\Transition</Filter>
     </ClCompile>
+    <ClCompile Include="02_ResourceFile\ObjectFile\Bomber.cpp">
+      <Filter>SourceFile</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="02_ResourceFile\SceneFile\Scene.h">
@@ -453,6 +456,7 @@
     <ClInclude Include="02_ResourceFile\SceneFile\Transition\Zoom.h">
       <Filter>SourceFile\Scene\Transition</Filter>
     </ClInclude>
+    <ClInclude Include="02_ResourceFile\ObjectFile\Bomber.h" />
   </ItemGroup>
   <ItemGroup>
     <FxCompile Include="ShaderFile\Common.hlsl">
