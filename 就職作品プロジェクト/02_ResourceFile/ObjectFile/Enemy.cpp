@@ -23,7 +23,9 @@ void Enemy::Update()
 {
     auto& instance = Game::GetInstance();
     
-    #pragma region “–‚½‚è”»’èˆ—
+    //-------------------------------
+    //          “–‚½‚è”»’èˆ—
+    //-------------------------------
     switch (Scene::m_RelationData.previousScene)
     {
     case SCENE_NO::GAME_CRUSH:
@@ -45,7 +47,7 @@ void Enemy::Update()
         if (!sord.empty())
         {
             bool isHit = Math::Collider2D::isHitSquareSquare(*sord[0], *this);
-            if (isHit)
+            if (isHit && !m_isDeath)
             {
                 Death();                 
             }

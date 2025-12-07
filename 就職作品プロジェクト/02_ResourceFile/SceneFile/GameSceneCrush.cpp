@@ -26,6 +26,13 @@ void GameSceneCrush::Initialize()
     m_Skydome->SetRadius(500.0f);
     m_MySceneObjects.emplace_back(m_Skydome);
 
+    m_TimeGaugeBack = instance.AddObject<Square>();
+    m_TimeGaugeBack->SetTexture(textureMgr->GetTexture("Bomber.png"));
+    m_TimeGaugeBack->SetPos(NVector3(-100.0f, -250.0f, 0.0f));
+    m_TimeGaugeBack->SetScale(NVector3(700.0f, 100.0f, 1.0f));
+    m_TimeGaugeBack->SetShader("VS_Alpha", "VS_Alpha");
+    m_MySceneObjects.emplace_back(m_TimeGaugeBack);
+    
     m_Hammer = instance.AddObject<Hammer>();
     m_Hammer->SetName("m_Hammer");
     m_Hammer->SetPos(0.0f, 200.0f, 1.0f);

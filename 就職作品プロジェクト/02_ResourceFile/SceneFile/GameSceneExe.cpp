@@ -8,6 +8,9 @@
 
 void GameSceneExe::Initialize()
 {
+    auto& instance = Game::GetInstance();
+    TextureManager* textureMgr = instance;
+
     // 初期化
     m_Difficulty    = 0;
     m_GameSpeedMass = 1.0f;
@@ -16,12 +19,14 @@ void GameSceneExe::Initialize()
     m_isFastChange = false;
     m_ChangeFastTimer = 0.0f;
     
+
+
     //===============================
-    //   ゲームスピード倍率設
+    //   ゲームスピード倍率設定o
     //   n && 8 == 0 なら難易度アップ 
     //   n && 4 == 0 ならスピードアップ
     //===============================
-    
+   
     ++m_RelationData.stageCount;
     // 難易度 0 ~
     if (m_RelationData.stageCount % 8 == 0) {
@@ -39,6 +44,8 @@ void GameSceneExe::Initialize()
     m_ChangeFastTime   = 2.0f * (1 - m_GameSpeedMass);
     m_TimerList.clear();
     SetTimer(&m_TimeChangeScene.timer);
+
+
 
 }
 
