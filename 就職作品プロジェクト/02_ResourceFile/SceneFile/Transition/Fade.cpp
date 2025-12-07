@@ -102,8 +102,8 @@ void Fade::Draw()
     m_Materiale->Update();
     m_Materiale->SetGPU();
 
-    float u = m_NumU - 1;
-    float v = m_NumV - 1;
+    float u = (m_NumU - 1.0f) / m_SplitX;
+    float v = (m_NumV - 1.0f) / m_SplitY;
     float uw = 1.0f / m_SplitX;
     float vh = 1.0f / m_SplitY;
     Renderer::SetUV(u, v, uw, vh);

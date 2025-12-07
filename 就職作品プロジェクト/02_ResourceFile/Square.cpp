@@ -115,8 +115,8 @@ void Square::Draw()
 	m_Materiale->SetGPU();
 
 	// UV‚Ìİ’è‚ğw’è
-	float u = m_NumU - 1.0f;
-	float v = m_NumV - 1.0f;
+	float u = (m_NumU - 1.0f) / m_SplitX;
+	float v = (m_NumV - 1.0f) / m_SplitY;
 	float uw = 1.0f / m_SplitX;
 	float vh = 1.0f / m_SplitY;
 
