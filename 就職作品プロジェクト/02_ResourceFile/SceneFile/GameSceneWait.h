@@ -49,9 +49,7 @@ private:
     bool m_wasDecrementLife		   = false;		// ライフが減ったかどうかのフラグ
 
     bool m_WasPlayBGM = false;				// BGMを再生したかどうかのフラグ
-
-    RhythmBeat m_RhythmBeat;			// リズムビート管理用変数
-    bool m_IsLifeTiltPositive = true;	// ライフの傾きが正かどうかのフラグ
+    bool m_IsLifeTiltPositive = true;		// ライフの傾きが正かどうかのフラグ
 
 private:
 	// Exeシーンの乱数選択を行う。

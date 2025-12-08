@@ -57,7 +57,7 @@ void GameSceneWait::Initialize()
     SetTimer(&m_DecrementLife.timer);
 
     beatConfig.Setup(120.0f, 4, 1); // 120 BPM, 4/4 拍子
-    m_RhythmBeat.Initialize(beatConfig);
+    m_RelationData.rhythmBeat.Initialize(beatConfig);
     m_IsFirstInitialized = true;
 
     auto& instance = Game::GetInstance();
@@ -125,7 +125,7 @@ void GameSceneWait::Update(float tick)
 
     // リズムを取る
     // ライフをリズムに合わせて回転させる
-    int advancedTicks = m_RhythmBeat.Update(tick);
+    int advancedTicks = m_RelationData.rhythmBeat.Update(tick);
     if (advancedTicks > 0)
     {
         for (int i = 0; i < advancedTicks; ++i)

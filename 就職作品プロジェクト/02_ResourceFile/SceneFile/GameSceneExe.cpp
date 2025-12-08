@@ -20,8 +20,6 @@ void GameSceneExe::Initialize()
     m_isFastChange = false;
     m_ChangeFastTimer = 0.0f;
     
-
-
     //===============================
     //   ゲームスピード倍率設定o
     //   n && 8 == 0 なら難易度アップ 
@@ -46,10 +44,22 @@ void GameSceneExe::Initialize()
     m_TimerList.clear();
     SetTimer(&m_TimeChangeScene.timer);
 
-    if (m_TimeGaugeBack && m_TimeChangeScene.limit > 0.0f)
+    RhythmBeatConst beatConfig{};
+    beatConfig.Setup(120.0f, 4, 1); // 120 BPM, 4/4 拍子
+    m_TimeGaugeRatio = 1.0f;
+    if (m_TimeChangeScene.limit > 0.0f &&
+        beatConfig.secondsPerBeat > 0.0f)
     {
-        float elapsedRate = std::clamp(m_TimeChangeScene.timer / m_TimeChangeScene.limit, 0.0f, 1.0f);
-        m_TimeGaugeBack->SetFillRatio(1.0f - elapsedRate);
+        float beatCount = m_TimeChangeScene.limit / beatConfig.secondsPerBeat;
+        m_TimeGaugeStep = (beatCount > 0.0f) ? 1.0f / beatCount : 0.0f;
+    }
+    else
+    {
+        m_TimeGaugeStep = 0.0f;
+    }
+
+    if (m_TimeGaugeBack) {
+        m_TimeGaugeBack->SetFillRatio(m_TimeGaugeRatio);
     }
 
 }
@@ -73,10 +83,22 @@ void GameSceneExe::Update(float tick)
     
 
     CountTimer(tick);
-    if (m_TimeGaugeBack && m_TimeChangeScene.limit > 0.0f)
+   
+    int advancedTicks = m_RhythmBeat.Update(tick);
+    if (advancedTicks > 0 && m_TimeGaugeBack && m_TimeGaugeStep > 0.0f)
     {
-        float elapsedRate = std::clamp(m_TimeChangeScene.timer / m_TimeChangeScene.limit, 0.0f, 1.0f);
-        m_TimeGaugeBack->SetFillRatio(1.0f - elapsedRate);
+        m_TimeGaugeRatio = std::clamp(m_TimeGaugeRatio - (m_TimeGaugeStep * static_cast<float>(advancedTicks)), 0.12f, 1.0f);
+        m_TimeGaugeBack->SetFillRatio(m_TimeGaugeRatio);
+    }
+    else if (m_TimeGaugeBack && m_TimeGaugeStep <= 0.0f)
+    {
+        m_TimeGaugeBack->SetFillRatio(m_TimeGaugeRatio);
+    }
+
+    if (m_TimeChangeScene.IsTimeUp() && m_TimeGaugeBack && m_TimeGaugeRatio > 0.0f)
+    {
+        m_TimeGaugeRatio = 0.0f;
+        m_TimeGaugeBack->SetFillRatio(m_TimeGaugeRatio);
     }
 
 }

@@ -30,15 +30,16 @@ enum class SCENE_NO
 // previousScene : 現在のシーン
 // oldScene      : 一つ前のシーン
 // nextScen      : 次のシーン
-class SceneRelationData
+struct SceneRelationData
 {
-public:
-	bool isClear      = true;
 	uint32_t gameLife = 4;
 	int  stageCount   = 0;
+	RhythmBeat rhythmBeat;
 	SCENE_NO previousScene = SCENE_NO::NONE;
     SCENE_NO oldScene	   = SCENE_NO::NONE;
 	SCENE_NO nextScene     = SCENE_NO::NONE;
+	bool isClear      = true;
+    bool pad[3]		  = { false,false,false };
 };
 
 class Scene

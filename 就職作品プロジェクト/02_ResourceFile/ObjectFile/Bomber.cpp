@@ -73,7 +73,7 @@ void Bomber::ApplyFillTransform()
         return;
     }
 
-    constexpr float minRatio = 0.01f;
+    constexpr float minRatio = 0.12f;
     float widthRatio = max(m_FillRatio, minRatio);
 
     NVector3 newScale = m_BaseScale;
