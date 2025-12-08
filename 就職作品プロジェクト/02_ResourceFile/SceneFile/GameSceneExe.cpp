@@ -84,22 +84,7 @@ void GameSceneExe::Update(float tick)
 
     CountTimer(tick);
    
-    int advancedTicks = m_RhythmBeat.Update(tick);
-    if (advancedTicks > 0 && m_TimeGaugeBack && m_TimeGaugeStep > 0.0f)
-    {
-        m_TimeGaugeRatio = std::clamp(m_TimeGaugeRatio - (m_TimeGaugeStep * static_cast<float>(advancedTicks)), 0.12f, 1.0f);
-        m_TimeGaugeBack->SetFillRatio(m_TimeGaugeRatio);
-    }
-    else if (m_TimeGaugeBack && m_TimeGaugeStep <= 0.0f)
-    {
-        m_TimeGaugeBack->SetFillRatio(m_TimeGaugeRatio);
-    }
-
-    if (m_TimeChangeScene.IsTimeUp() && m_TimeGaugeBack && m_TimeGaugeRatio > 0.0f)
-    {
-        m_TimeGaugeRatio = 0.0f;
-        m_TimeGaugeBack->SetFillRatio(m_TimeGaugeRatio);
-    }
+    
 
 }
 

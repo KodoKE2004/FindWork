@@ -32,7 +32,7 @@ void GameSceneCrush::Initialize()
     m_Hammer = instance.AddObject<Hammer>();
     m_Hammer->SetName("m_Hammer");
     m_Hammer->SetPos(0.0f, 200.0f, 1.0f);
-    m_Hammer->SetTexture(textureMgr->GetTexture("Plane.png"));
+    m_Hammer->SetTexture(textureMgr->GetTexture("Weight.png"));
     m_Hammer->SetSpeedMass(m_GameSpeedMass);
     m_MySceneObjects.emplace_back(m_Hammer);
     
@@ -42,7 +42,7 @@ void GameSceneCrush::Initialize()
     {
         auto enemy = instance.AddObject<Enemy>();
         enemy->SetName("m_Enemy");
-        enemy->SetPos  ( 0.0f, - 200.0f, 1.0f);
+        enemy->SetPos  ( 0.0f, - 180.0f, 1.0f);
         m_MySceneObjects.emplace_back(enemy);
     }
 
@@ -63,7 +63,7 @@ void GameSceneCrush::Update(float tick)
 
     GameSceneExe::Update(tick);
     if (IsChange()) {
-        ChangeScenePop(GameToWait);
+        // ChangeScenePop(GameToWait);
     }
 }
 

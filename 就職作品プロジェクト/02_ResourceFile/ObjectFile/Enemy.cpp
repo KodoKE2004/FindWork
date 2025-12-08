@@ -47,7 +47,7 @@ void Enemy::Update()
         if (!sord.empty())
         {
             bool isHit = Math::Collider2D::isHitSquareSquare(*sord[0], *this);
-            if (isHit && !m_isDeath)
+            if (isHit)
             {
                 Death();                 
             }
@@ -55,7 +55,7 @@ void Enemy::Update()
     }
     break;
     }
-    #pragma endregion
+
 }
 
 void Enemy::Draw()
@@ -70,6 +70,10 @@ void Enemy::Finalize()
 
 void Enemy::Death()
 {
+    if (m_isDeath) {
+        return;
+    }
+
     TextureManager* textureMgr = Game::GetInstance();
     SetTexture(textureMgr->GetTexture("EnemyDeath.png"));
     m_isDeath = true;

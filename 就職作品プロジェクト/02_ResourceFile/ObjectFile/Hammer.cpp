@@ -36,7 +36,7 @@ void Hammer::Update()
             // キャンセルアニメーション処理
             p = (m_TimeCool.timer <= 0.0f) ? 
             1.0f : std::clamp(m_TimeCool.timer / m_TimeCool.limit, 0.0f, 1.0f);
-            w = Math::Easing::EaseOutQuart(p);
+            w = Math::Easing::EaseInQuint(p);
             m_Position.y = m_AttackPosY  + ( - m_MoveValue ) * w;
         }
 

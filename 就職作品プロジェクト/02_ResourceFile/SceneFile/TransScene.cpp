@@ -93,11 +93,19 @@ void TransScene::Update(float tick)
 	{
 
 		m_SceneOld->Finalize();
-		m_SceneNext->Initialize();
+#ifdef _RELEASE
 		if (m_SceneNext) {
 			DrawNextScene();
 		}
-		
+#endif // _RELEASE
+
+		m_SceneNext->Initialize();
+
+#ifdef _DEBUG
+		if (m_SceneNext) {
+			DrawNextScene();
+		}
+#endif // _DEBUG
 		m_isChange = true;
 	}
 	if (phase == PHASE::FINISH)

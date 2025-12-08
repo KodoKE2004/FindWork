@@ -15,8 +15,8 @@ void Bomber::Initialize()
 
     SetTexture(textureMgr->GetTexture("Bomber.png"));
 
-    const NVector3 basePos   = NVector3(-100.0f, -250.0f, 0.0f);
-    const NVector3 baseScale = NVector3(700.0f, 100.0f, 1.0f);
+    const NVector3 basePos   = NVector3(-275.0f, -285.0f, 0.0f);
+    const NVector3 baseScale = NVector3( 700.0f,  100.0f, 1.0f);
 
     SetPos  (basePos);
     SetScale(baseScale);
