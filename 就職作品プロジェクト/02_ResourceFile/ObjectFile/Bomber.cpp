@@ -55,6 +55,7 @@ void Bomber::SetFillRatio(float ratio)
 
     m_FillRatio = clamped;
     UpdateUV();
+    ApplyFillTransform();
 }
 
 void Bomber::UpdateUV()
@@ -76,7 +77,7 @@ void Bomber::ApplyFillTransform()
     float widthRatio = max(m_FillRatio, minRatio);
 
     NVector3 newScale = m_BaseScale;
-    newScale.x = m_BasePos.x * widthRatio;
+    newScale.x = m_BaseScale.x * widthRatio;
     SetScale(newScale);
 
     float baseHalfW = m_BaseScale.x * 0.5f;
