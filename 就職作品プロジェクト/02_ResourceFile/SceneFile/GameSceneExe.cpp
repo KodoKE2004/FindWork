@@ -69,23 +69,31 @@ void GameSceneExe::Update(float tick)
     bool clearConect =  m_RelationData.isClear &&
                        (m_isFastChange || m_TimeChangeScene.IsTimeUp());
 
-    if (m_isFastChange) {
+    if (m_isFastChange) 
+    {
         TimeCountFast(tick);
 
         if (IsFastTimeUp()) {
             m_isChange = true;
         }
     }
+
     if (m_TimeChangeScene.IsTimeUp() &&
         !m_isChange) {
         m_isChange = true;
     }
     
-
     CountTimer(tick);
    
-    
+    // 爆弾のリズム処理
+    m_RhythmBeat.Update(tick);
 
+    // ゲージの更新
+    if (m_TimeGaugeBack) {
+        m_TimeGaugeRatio -= m_TimeGaugeStep * tick;
+        m_TimeGaugeRatio = std::clamp(m_TimeGaugeBack->GetFillRatio() - 0.1f, 0.0f, 1.0f);
+        m_TimeGaugeBack->SetFillRatio(m_TimeGaugeRatio);
+    }
 }
 
 void GameSceneExe::Finalize()
