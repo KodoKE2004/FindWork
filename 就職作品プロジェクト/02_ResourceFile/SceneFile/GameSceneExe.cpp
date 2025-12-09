@@ -65,8 +65,15 @@ void GameSceneExe::Initialize()
     SetTimer(&m_TimeChangeScene.timer);
 
     PlayParams clockParam{};
-    m_AudioList.emplace("clock", AudioConfig(L"SE/Rithm.wav", clockParam, false, false));
+    m_AudioList.emplace("clock", AudioConfig(L"SE/Clock.wav", clockParam, false, false));
 
+    if (AudioManager* audioMgr = instance)
+    {
+        for (const auto& [key, config] : m_AudioList)
+        {
+            audioMgr->Add(key, config.filePath);
+        }
+    }
 }
 
 void GameSceneExe::Update(float tick)
@@ -100,13 +107,6 @@ void GameSceneExe::Update(float tick)
         ratio = std::clamp(ratio, 0.13f, 1.0f);
         if (ratio == 0.13f){
             m_TimeGauge->ReadyExpo();
-        }
-
-        if (m_TimeGauge->IsReadyExpo()) {
-            m_Number->SetCount(m_TimeGauge->GetCount());
-            m_Number->ChangeTexture();
-            m_TimeGauge->CountDown();
-
             // SE‚ÌÄ¶
             if (AudioManager* audioMgr = Game::GetInstance())
             {
@@ -124,6 +124,14 @@ void GameSceneExe::Update(float tick)
                     audioMgr->Play("clock");
                 }
             }
+        }
+
+        if (m_TimeGauge->IsReadyExpo()) {
+            m_Number->SetCount(m_TimeGauge->GetCount());
+            m_Number->ChangeTexture();
+            m_TimeGauge->CountDown();
+
+            
         }
         else {
             m_TimeGaugeRatio = ratio;

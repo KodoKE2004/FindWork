@@ -39,7 +39,13 @@ void ResultScene::Initialize()
     corsorParam.volume = DEFAULT_VALUME;
     m_AudioList.emplace("moveCorsor", AudioConfig(L"SE/MoveCorsor.wav", corsorParam, false, false));
 
-
+    if (AudioManager* audioMgr = instance)
+    {
+        for (const auto& [key, config] : m_AudioList)
+        {
+            audioMgr->Add(key, config.filePath);
+        }
+    }
 
     MyDebugLog(std::cout << "クリアステージ数" << m_RelationData.stageCount << std::endl;)
 }
