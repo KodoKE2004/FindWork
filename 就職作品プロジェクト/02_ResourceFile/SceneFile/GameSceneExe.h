@@ -2,6 +2,7 @@
 #include "Scene.h"
 #include "Square.h"
 #include "Bomber.h"
+#include "BomTimeLimit.h"
 #include "RhythmBeat.h"
 
 enum class GAME_MODE
@@ -17,12 +18,12 @@ class GameSceneExe : public Scene
 
 // inゲーム基底クラス
 protected:
-	Bomber* m_TimeGauge = nullptr;	// スピードゲージ背景
+	Bomber* m_TimeGauge = nullptr;		// スピードゲージ背景
     float	m_TimeGaugeRatio = 1.0f;	// スピードゲージの割合
     float	m_TimeGaugeStep  = 0.0f;	// スピードゲージの減少ステップ量
 
-    Square* m_Background = nullptr;
-    int     m_Counter    = 0;
+    BomTimeLimit* m_Number = nullptr;	// カウントダウン用数字
+    int     m_Counter = 0;				// カウントダウン用カウンター
 
     static constexpr float m_GameSceneTimeBase = 5.0f;	// ゲーム時間の基準値
     TimerData m_TimeChangeScene = {0.0f, 5.0f};			// 実際に扱うシーン変更までの時間
@@ -40,7 +41,6 @@ protected:
 	//================================
 	// 	このシーンで使うオブジェクト
     //================================
-    Square*  m_Background = nullptr;
     Skydome* m_Skydome    = nullptr;
 public:
 	//================================

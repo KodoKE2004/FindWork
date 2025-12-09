@@ -11,8 +11,8 @@ void Bomber::Initialize()
 {
     Square::Initialize();
 
-    TextureManager* textureMgr = Game::GetInstance();
 
+    TextureManager* textureMgr = Game::GetInstance();
     SetTexture(textureMgr->GetTexture("Bomber.png"));
 
     const NVector3 basePos   = NVector3(-275.0f, -285.0f, 0.0f);
@@ -21,9 +21,11 @@ void Bomber::Initialize()
     SetPos  (basePos);
     SetScale(baseScale);
 
-    m_BasePos = basePos;
-    m_BaseScale = baseScale;
-    m_HasBase = true;
+    m_BasePos     = basePos;
+    m_BaseScale   = baseScale;
+    m_HasBase     = true;
+    m_isReadyExpo = false;
+    m_Count = 3;
 
     SetShader("VS_Alpha", "PS_Alpha");
     
@@ -33,6 +35,7 @@ void Bomber::Initialize()
 
 void Bomber::Update()
 {
+    
 }
 
 void Bomber::Draw()
@@ -45,6 +48,35 @@ void Bomber::Finalize()
     Square::Finalize();
 }
 
+void Bomber::CountDown()
+{
+    if (m_Count < 0) {
+        return;
+    }
+
+    auto& instance = Game::GetInstance();
+    TextureManager* textureMgr = instance;
+    
+
+
+    switch (m_Count)
+    {
+    case 3: 
+        SetPos  (-575.0f, GetPos().y,GetPos().z);
+        SetScale(100.0f,100.0f,1.0f);
+        SetUV(1.0f, 1.0f, 1.0f, 1.0f);
+        SetTexture(textureMgr->GetTexture("BomberCountThree.png")); 
+    break;
+    case 2: SetTexture(textureMgr->GetTexture("BomberCountTwo.png"))  ; break;
+    case 1: SetTexture(textureMgr->GetTexture("BomberCountOne.png"))  ; break;
+    case 0: 
+        SetScale(150.0f,150.0f,1.0f);
+        SetTexture(textureMgr->GetTexture("BomberExplosion.png")) ; 
+    break;
+    }
+    --m_Count;
+}
+
 void Bomber::SetFillRatio(float ratio)
 {
     float clamped = std::clamp(ratio, 0.0f, 1.0f);
@@ -54,6 +86,7 @@ void Bomber::SetFillRatio(float ratio)
     }
 
     m_FillRatio = clamped;
+    
     UpdateUV();
     ApplyFillTransform();
 }

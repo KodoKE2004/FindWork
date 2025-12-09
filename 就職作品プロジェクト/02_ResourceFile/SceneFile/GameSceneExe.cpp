@@ -54,7 +54,7 @@ void GameSceneExe::Initialize()
         m_TimeGauge->SetFillRatio(1.0f);
     }
 
-    constexpr int GaugeTicks = 16;
+    constexpr int GaugeTicks = 11;
     m_TimeGaugeStep = 1.0f / static_cast<float>(GaugeTicks);
 
     m_TimeChangeScene.timer = 5.0f;
@@ -93,9 +93,37 @@ void GameSceneExe::Update(float tick)
         ratio -= m_TimeGaugeStep * static_cast<float>(advanceTick);
 
         ratio = std::clamp(ratio, 0.13f, 1.0f);
+        if (ratio == 0.13f){
+            m_TimeGauge->ReadyExpo();
+        }
 
-        m_TimeGaugeRatio = ratio;
-        m_TimeGauge->SetFillRatio(m_TimeGaugeRatio);
+        if (m_TimeGauge->IsReadyExpo()) {
+            m_Number->SetCount(m_TimeGauge->GetCount());
+            m_Number->ChangeTexture();
+            m_TimeGauge->CountDown();
+
+            // SE‚ÌÄ¶
+            if (AudioManager* audioMgr = Game::GetInstance())
+            {
+                if (auto it = m_AudioList.find("Clock"); it != m_AudioList.end())
+                {
+                    auto params = it->second.params;
+                    if (it->second.loop)
+                    {
+                        params.loop.loopCount = XAUDIO2_LOOP_INFINITE;
+                    }
+                    audioMgr->Play("Clock", params);
+                }
+                else
+                {
+                    audioMgr->Play("Clock");
+                }
+            }
+        }
+        else {
+            m_TimeGaugeRatio = ratio;
+            m_TimeGauge->SetFillRatio(m_TimeGaugeRatio);
+        }
     }
 
 }

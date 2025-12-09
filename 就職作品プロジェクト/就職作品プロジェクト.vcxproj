@@ -22,6 +22,7 @@
     <ClCompile Include="02_ResourceFile\Application.cpp" />
     <ClCompile Include="02_ResourceFile\Audio.cpp" />
     <ClCompile Include="02_ResourceFile\ObjectFile\Bomber.cpp" />
+    <ClCompile Include="02_ResourceFile\ObjectFile\BomTimeLimit.cpp" />
     <ClCompile Include="02_ResourceFile\RhythmBeat.cpp" />
     <ClCompile Include="02_ResourceFile\AudioManager.cpp" />
     <ClCompile Include="02_ResourceFile\Camera.cpp" />
@@ -87,6 +88,7 @@
     <ClInclude Include="02_ResourceFile\Application.h" />
     <ClInclude Include="02_ResourceFile\Audio.h" />
     <ClInclude Include="02_ResourceFile\ObjectFile\Bomber.h" />
+    <ClInclude Include="02_ResourceFile\ObjectFile\BomTimeLimit.h" />
     <ClInclude Include="02_ResourceFile\RhythmBeat.h" />
     <ClInclude Include="02_ResourceFile\AudioManager.h" />
     <ClInclude Include="02_ResourceFile\Camera.h" />
