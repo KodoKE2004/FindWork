@@ -195,6 +195,7 @@ void GameSceneWait::Finalize()
 // 次のステージ選択とシーン遷移処理
 void GameSceneWait::StartNextStageTransition()
 {
+    ApplyBeatDuration(GameToWait, m_RelationData);
     // シーン遷移処理
     switch (m_RelationData.nextScene)
     {

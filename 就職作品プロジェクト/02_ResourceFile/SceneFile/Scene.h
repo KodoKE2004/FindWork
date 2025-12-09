@@ -9,6 +9,8 @@
 #include <unordered_map>
 #include <vector>
 
+
+
 enum class SCENE_NO
 {
 	NONE = -1,
@@ -42,6 +44,19 @@ struct SceneRelationData
 	bool isClear      = true;
     bool pad[3]		  = { false,false,false };
 };
+
+// ƒŠƒYƒ€‚É‡‚í‚¹‚ÄƒV[ƒ“‘JˆÚŽžŠÔ‚ð’²®‚·‚éŠÖ”
+namespace
+{
+	void ApplyBeatDuration(SceneTransitionParam& transition, const SceneRelationData& relationData)
+	{
+		const float secondsPerBeat = relationData.rhythmBeat.GetBeatConst().secondsPerBeat;
+		if (secondsPerBeat > 0.0f)
+		{
+			transition.duration = secondsPerBeat;
+		}
+	}
+}
 
 class Scene
 {
