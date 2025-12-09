@@ -36,7 +36,7 @@ void ResultScene::Initialize()
     m_MySceneObjects.emplace_back(m_ButtonRetry);
 
     PlayParams corsorParam{};
-    corsorParam.volume = DEFAULT_VALUME;
+    corsorParam.volume = DEFAULT_VOLUME;
     m_AudioList.emplace("moveCorsor", AudioConfig(L"SE/MoveCorsor.wav", corsorParam, false, false));
 
     if (AudioManager* audioMgr = instance)

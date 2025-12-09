@@ -65,6 +65,7 @@ void GameSceneExe::Initialize()
     SetTimer(&m_TimeChangeScene.timer);
 
     PlayParams clockParam{};
+    clockParam.volume = DEFAULT_VOLUME;
     m_AudioList.emplace("clock", AudioConfig(L"SE/Clock.wav", clockParam, false, false));
 
     if (AudioManager* audioMgr = instance)

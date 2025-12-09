@@ -5,6 +5,7 @@
 #include "../Audio.h"
 #include "RhythmBeat.h"
 
+#include <optional>
 #include <unordered_map>
 #include <vector>
 
@@ -46,7 +47,7 @@ class Scene
 {
 protected:
 	// PressEnterの点滅タイマー間隔
-    static constexpr float DEFAULT_VALUME = 0.2f; 
+    static constexpr float DEFAULT_VOLUME = 0.2f; 
 protected:
 	
 	std::vector<Object*> m_MySceneObjects;
@@ -59,7 +60,7 @@ protected:
 	TransitionBase* m_TransitionTexture = nullptr;
 
 	// ExeSceneで使う変数
-	float m_TimerGameExe = 0.0f;			// 経過時間
+	float m_TimerGameExe = 0.0f;				// 経過時間
     static std::vector<float*>	m_TimerList;	// タイマー格納用
 
 public:
@@ -123,7 +124,7 @@ public:
     // 効果音再生関数
     // seName : AudioConfigに登録した名前
     // Game.hのAudioManagerを通じて再生する
-	void PlaySE(std::string seName);
+	void PlaySE(std::string seName, std::optional<float> overrideVolume);
 };
 
 
