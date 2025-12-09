@@ -38,8 +38,9 @@ class RhythmBeat
 {
 private:
     RhythmBeatConst m_Beat{};
-    float           m_TickCounter = 0.0f;   // 経過時間の蓄積
-    int             m_TickIndex = 0;            // 現在のTick数
+    float           m_TickCounter = 0.0f;       // 経過時間の蓄積
+    int             m_TickIndex   = 0;          // 現在のTick数
+    int             m_Advance     = 0;          // 現在の拍子インデックス
 public:
     RhythmBeat() = default;
     // 初期化
@@ -70,6 +71,10 @@ public:
     const RhythmBeatConst& GetBeatConst()const
     {
         return m_Beat;
+    }
+
+    int GetAdvance() const {
+        return m_Advance;
     }
 };
 

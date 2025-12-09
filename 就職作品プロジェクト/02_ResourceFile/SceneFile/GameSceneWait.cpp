@@ -50,12 +50,12 @@ void GameSceneWait::Initialize()
     m_IsFirstInitialized = !s_HasFirstGameSceneWaitInitialized;
     s_HasFirstGameSceneWaitInitialized = true;
 
-    RhythmBeatConst beatConfig{};
     m_TimerList.clear();
     SetTimer(&m_Tick);
     SetTimer(&m_ChangeStage.timer);
     SetTimer(&m_DecrementLife.timer);
 
+    RhythmBeatConst beatConfig{};
     beatConfig.Setup(120.0f, 4, 1); // 120 BPM, 4/4 ”Žq
     m_RelationData.rhythmBeat.Initialize(beatConfig);
     m_IsFirstInitialized = true;
@@ -119,7 +119,7 @@ void GameSceneWait::Update(float tick)
     }
     if (m_ShouldTransitionToStage)
     {
-        StartNextStageTransition();
+        // StartNextStageTransition();
     }
 
 
@@ -128,7 +128,7 @@ void GameSceneWait::Update(float tick)
     int advancedTicks = m_RelationData.rhythmBeat.Update(tick);
     if (advancedTicks > 0)
     {
-        for (int i = 0; i < advancedTicks; ++i)
+        if (advancedTicks % 2 == 1)
         {
             m_IsLifeTiltPositive = !m_IsLifeTiltPositive;
         }

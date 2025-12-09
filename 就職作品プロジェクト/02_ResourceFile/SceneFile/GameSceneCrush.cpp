@@ -26,8 +26,8 @@ void GameSceneCrush::Initialize()
     m_Skydome->SetRadius(500.0f);
     m_MySceneObjects.emplace_back(m_Skydome);
 
-    m_TimeGaugeBack = instance.AddObject<Bomber>();
-    m_MySceneObjects.emplace_back(m_TimeGaugeBack);
+    m_TimeGauge = instance.AddObject<Bomber>();
+    m_MySceneObjects.emplace_back(m_TimeGauge);
     
     m_Hammer = instance.AddObject<Hammer>();
     m_Hammer->SetName("m_Hammer");

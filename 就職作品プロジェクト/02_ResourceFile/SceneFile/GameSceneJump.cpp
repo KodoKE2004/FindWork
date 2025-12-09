@@ -36,8 +36,8 @@ void GameSceneJump::Initialize()
     m_Skydome->SetRadius(500.0f);
     m_MySceneObjects.emplace_back(m_Skydome);
 
-    m_TimeGaugeBack = instance.AddObject<Bomber>();
-    m_MySceneObjects.emplace_back(m_TimeGaugeBack);
+    m_TimeGauge = instance.AddObject<Bomber>();
+    m_MySceneObjects.emplace_back(m_TimeGauge);
 
     // ÉvÉåÉCÉÑÅ[
     m_Player = instance.AddObject<Player>(instance.GetCamera());

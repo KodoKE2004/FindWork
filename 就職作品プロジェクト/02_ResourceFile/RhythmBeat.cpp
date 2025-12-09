@@ -12,14 +12,14 @@ int RhythmBeat::Update(float deltaTime)
     // 1秒あたり ticksPerSecond 進むので、deltaSecondsを掛けて進行
     m_TickCounter += m_Beat.ticksPerSecond * deltaTime;
 
-    int advanced = 0; // このフレームで何Tick進んだか
+    m_Advance = 0; // このフレームで何Tick進んだか
 
     while (m_TickCounter >= 1.0f)
     {
         m_TickCounter -= 1.0f;
         ++m_TickIndex;
-        ++advanced;
+        ++m_Advance;
     }
 
-    return advanced;
+    return m_Advance;
 }

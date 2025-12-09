@@ -43,25 +43,25 @@ void GameSceneExe::Initialize()
     m_ChangeFastTime   = 2.0f * (1 - m_GameSpeedMass);
     m_TimerList.clear();
     SetTimer(&m_TimeChangeScene.timer);
-
+    
     RhythmBeatConst beatConfig{};
     beatConfig.Setup(120.0f, 4, 1); // 120 BPM, 4/4 拍子
+    m_RelationData.rhythmBeat.Initialize(beatConfig);
+
     m_TimeGaugeRatio = 1.0f;
-    if (m_TimeChangeScene.limit > 0.0f &&
-        beatConfig.secondsPerBeat > 0.0f)
+    if (m_TimeGauge)
     {
-        float beatCount = m_TimeChangeScene.limit / beatConfig.secondsPerBeat;
-        m_TimeGaugeStep = (beatCount > 0.0f) ? 1.0f / beatCount : 0.0f;
-    }
-    else
-    {
-        m_TimeGaugeStep = 0.0f;
+        m_TimeGauge->SetFillRatio(1.0f);
     }
 
-    if (m_TimeGaugeBack) {
-        m_TimeGaugeBack->SetFillRatio(m_TimeGaugeRatio);
-    }
+    constexpr int GaugeTicks = 16;
+    m_TimeGaugeStep = 1.0f / static_cast<float>(GaugeTicks);
 
+    m_TimeChangeScene.timer = 5.0f;
+    m_TimeChangeScene.limit /= m_GameSpeedMass;
+    m_ChangeFastTime = 2.0f * (1 - m_GameSpeedMass);
+    m_TimerList.clear();
+    SetTimer(&m_TimeChangeScene.timer);
 }
 
 void GameSceneExe::Update(float tick)
@@ -86,14 +86,18 @@ void GameSceneExe::Update(float tick)
     CountTimer(tick);
    
     // 爆弾のリズム処理
-    m_RhythmBeat.Update(tick);
+    int advanceTick = m_RelationData.rhythmBeat.Update(tick);
+    if (advanceTick > 0)
+    {
+        float ratio = m_TimeGauge->GetFillRatio();
+        ratio -= m_TimeGaugeStep * static_cast<float>(advanceTick);
 
-    // ゲージの更新
-    if (m_TimeGaugeBack) {
-        m_TimeGaugeRatio -= m_TimeGaugeStep * tick;
-        m_TimeGaugeRatio = std::clamp(m_TimeGaugeBack->GetFillRatio() - 0.1f, 0.0f, 1.0f);
-        m_TimeGaugeBack->SetFillRatio(m_TimeGaugeRatio);
+        ratio = std::clamp(ratio, 0.13f, 1.0f);
+
+        m_TimeGaugeRatio = ratio;
+        m_TimeGauge->SetFillRatio(m_TimeGaugeRatio);
     }
+
 }
 
 void GameSceneExe::Finalize()
