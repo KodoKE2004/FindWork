@@ -69,7 +69,9 @@ void GameSceneCrush::Update(float tick)
     }
 
     GameSceneExe::Update(tick);
-    if (IsChange()) {
+    if (IsChange() && !m_hasRequestedSceneChange) 
+    {
+        m_hasRequestedSceneChange = true;
         ChangeScenePop(GameToWait);
     }
 }

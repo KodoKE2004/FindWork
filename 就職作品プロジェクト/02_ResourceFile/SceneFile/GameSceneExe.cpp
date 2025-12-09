@@ -19,6 +19,7 @@ void GameSceneExe::Initialize()
     m_isChange     = false;
     m_isFastChange = false;
     m_ChangeFastTimer = 0.0f;
+    m_hasRequestedSceneChange = false;
     
     //===============================
     //   ゲームスピード倍率設定o
@@ -62,6 +63,10 @@ void GameSceneExe::Initialize()
     m_ChangeFastTime = 2.0f * (1 - m_GameSpeedMass);
     m_TimerList.clear();
     SetTimer(&m_TimeChangeScene.timer);
+
+    PlayParams clockParam{};
+    m_AudioList.emplace("clock", AudioConfig(L"SE/Rithm.wav", clockParam, false, false));
+
 }
 
 void GameSceneExe::Update(float tick)
@@ -105,18 +110,18 @@ void GameSceneExe::Update(float tick)
             // SEの再生
             if (AudioManager* audioMgr = Game::GetInstance())
             {
-                if (auto it = m_AudioList.find("Clock"); it != m_AudioList.end())
+                if (auto it = m_AudioList.find("clock"); it != m_AudioList.end())
                 {
                     auto params = it->second.params;
                     if (it->second.loop)
                     {
                         params.loop.loopCount = XAUDIO2_LOOP_INFINITE;
                     }
-                    audioMgr->Play("Clock", params);
+                    audioMgr->Play("clock", params);
                 }
                 else
                 {
-                    audioMgr->Play("Clock");
+                    audioMgr->Play("clock");
                 }
             }
         }

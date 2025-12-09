@@ -31,6 +31,7 @@ protected:
     float m_GameSpeedMass = 1.0f;						// ゲームスピード倍率・移動速度や制限時間まで変更
     int   m_Difficulty    = 0;							// 難易度 範囲 0 ～ 3 
     bool  m_isChange	  = false;						// シーン変更フラグ
+	bool  m_hasRequestedSceneChange = false;
 
 	// 先行でステージをクリア場合に適応するフラグ
     float m_ChangeFastTime  = 0.0f;						// 速攻でシーン変更する時間

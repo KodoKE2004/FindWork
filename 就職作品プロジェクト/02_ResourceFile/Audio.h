@@ -46,10 +46,10 @@ struct PlayParams {
 
 struct AudioConfig
 {
-	std::wstring filePath;
-	PlayParams params;
-	bool loop = false;
-	bool autoPlay = false;
+    std::wstring filePath;	// WAVファイルパス
+    PlayParams params;		// 再生パラメータ
+    bool loop = false;		// ループ再生するか
+	bool autoPlay = false;	// 登録時に自動再生するか
 };
 
 // フレーム単位で渡す「傾き」
