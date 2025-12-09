@@ -26,7 +26,6 @@ protected:
     int     m_Counter = 0;				// カウントダウン用カウンター
 
     static constexpr float m_GameSceneTimeBase = 5.0f;	// ゲーム時間の基準値
-    TimerData m_TimeChangeScene = {0.0f, 5.0f};			// 実際に扱うシーン変更までの時間
 
     float m_GameSpeedMass = 1.0f;						// ゲームスピード倍率・移動速度や制限時間まで変更
     int   m_Difficulty    = 0;							// 難易度 範囲 0 ～ 3 

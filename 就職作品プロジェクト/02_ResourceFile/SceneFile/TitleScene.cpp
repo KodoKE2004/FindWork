@@ -70,11 +70,10 @@ void TitleScene::Initialize()
 	// オーディオの登録
 	m_AudioList.clear();
 	PlayParams bgmParam{};
-    bgmParam.volume = 0.2f;
+    bgmParam.volume = DEFAULT_VOLUME;
     m_AudioList.emplace("bgm",AudioConfig(L"BGM/TitleScene.wav", bgmParam, true, true));
 
     PlayParams enterParam{};
-	enterParam.volume = DEFAULT_VOLUME;
     m_AudioList.emplace("enter", AudioConfig(L"SE/Enter.wav", enterParam, false, false));
 
 	if (AudioManager* audioMgr = instance)

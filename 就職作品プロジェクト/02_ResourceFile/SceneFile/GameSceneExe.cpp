@@ -15,7 +15,6 @@ void GameSceneExe::Initialize()
     // ‰Šú‰»
     m_Difficulty    = 0;
     m_GameSpeedMass = 1.0f;
-    m_TimeChangeScene.timer = 5.0f;
     m_isChange     = false;
     m_isFastChange = false;
     m_ChangeFastTimer = 0.0f;
@@ -40,10 +39,8 @@ void GameSceneExe::Initialize()
     }
 
     // ’l‚Ì”½‰f
-    m_TimeChangeScene.limit /= m_GameSpeedMass;
     m_ChangeFastTime   = 2.0f * (1 - m_GameSpeedMass);
     m_TimerList.clear();
-    SetTimer(&m_TimeChangeScene.timer);
     
     RhythmBeatConst beatConfig{};
     beatConfig.Setup(120.0f, 4, 1); // 120 BPM, 4/4 ”Žq
@@ -55,14 +52,10 @@ void GameSceneExe::Initialize()
         m_TimeGauge->SetFillRatio(1.0f);
     }
 
-    constexpr int GaugeTicks = 11;
+    constexpr int GaugeTicks = 10;
     m_TimeGaugeStep = 1.0f / static_cast<float>(GaugeTicks);
 
-    m_TimeChangeScene.timer = 5.0f;
-    m_TimeChangeScene.limit /= m_GameSpeedMass;
-    m_ChangeFastTime = 2.0f * (1 - m_GameSpeedMass);
     m_TimerList.clear();
-    SetTimer(&m_TimeChangeScene.timer);
 
     PlayParams clockParam{};
     clockParam.volume = DEFAULT_VOLUME;
@@ -79,8 +72,6 @@ void GameSceneExe::Initialize()
 
 void GameSceneExe::Update(float tick)
 {
-    bool clearConect =  m_RelationData.isClear &&
-                       (m_isFastChange || m_TimeChangeScene.IsTimeUp());
 
     if (m_isFastChange) 
     {
@@ -91,8 +82,9 @@ void GameSceneExe::Update(float tick)
         }
     }
 
-    if (m_TimeChangeScene.IsTimeUp() &&
-        !m_isChange) {
+    if (m_TimeGauge->GetFillRatio() < 1.0f &&
+        !m_isChange) 
+    {
         m_isChange = true;
     }
     
@@ -102,11 +94,12 @@ void GameSceneExe::Update(float tick)
     int advanceTick = m_RelationData.rhythmBeat.Update(tick);
     if (advanceTick > 0)
     {
+        
         float ratio = m_TimeGauge->GetFillRatio();
         ratio -= m_TimeGaugeStep * static_cast<float>(advanceTick);
 
         ratio = std::clamp(ratio, 0.13f, 1.0f);
-        if (ratio == 0.13f){
+        if (ratio == 0.13f && m_TimeGauge->GetCount() > 0){
             m_TimeGauge->ReadyExpo();
             // SE‚ÌÄ¶
             if (AudioManager* audioMgr = Game::GetInstance())
@@ -131,14 +124,13 @@ void GameSceneExe::Update(float tick)
             m_Number->SetCount(m_TimeGauge->GetCount());
             m_Number->ChangeTexture();
             m_TimeGauge->CountDown();
-
-            
         }
         else {
             m_TimeGaugeRatio = ratio;
             m_TimeGauge->SetFillRatio(m_TimeGaugeRatio);
         }
     }
+
 
 }
 
