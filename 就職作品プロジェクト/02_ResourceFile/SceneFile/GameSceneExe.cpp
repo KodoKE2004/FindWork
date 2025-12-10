@@ -18,10 +18,8 @@ void GameSceneExe::Initialize()
     m_GameSpeedMass = 1.0f;
     m_isChange     = false;
     m_isFastChange = false;
-    m_FastChangeStartBeat  = -1;
-    m_FastChangeTargetBeat = -1;
-    m_hasScheduledFastChange = false;
     m_hasRequestedSceneChange = false;
+    m_ShouldSkipNextBoundary  = false;
     
     //===============================
     //   ゲームスピード倍率設定
@@ -122,16 +120,25 @@ void GameSceneExe::Update(float tick)
     // 時間切れの場合
     if (m_isFastChange)
     {
-        if (!m_hasScheduledFastChange)
+        const int beatsPerBar = m_RelationData.rhythmBeat.GetBeatConst().beatUnit;
+        const bool isValidBarLength = beatsPerBar > 0;
+        const bool isBarChanged = isValidBarLength && (m_ElapsedBeats > 0) && (m_ElapsedBeats % beatsPerBar == 0);
+
+        if (isBarChanged)
         {
-            m_FastChangeStartBeat = m_ElapsedBeats;
-            m_FastChangeTargetBeat = m_ElapsedBeats + FastChangeDelayBeats;
-            m_hasScheduledFastChange = true;
-        }
-        else if (m_ElapsedBeats >= m_FastChangeTargetBeat)
-        {
-            m_hasRequestedSceneChange = true;
-            m_isChange = true;
+            const int currentMeasureIndex = m_ElapsedBeats / beatsPerBar;
+            if (currentMeasureIndex <= 2)
+            {
+                if (m_ShouldSkipNextBoundary)
+                {
+                    m_ShouldSkipNextBoundary = false;
+                }
+                else
+                {
+                    m_hasRequestedSceneChange = true;
+                    m_isChange = true;
+                }
+            }
         }
     }
 
@@ -166,6 +173,21 @@ void GameSceneExe::Finalize()
         {
             audioManager->StopAllByName(key);
         }
+    }
+}
+
+void GameSceneExe::StageChangeFast()
+{
+    m_isFastChange = true;
+    const int beatsPerBar = m_RelationData.rhythmBeat.GetBeatConst().beatUnit;
+    if (beatsPerBar > 0)
+    {
+        const int beatInBar = m_ElapsedBeats % beatsPerBar;
+        m_ShouldSkipNextBoundary = (beatsPerBar - beatInBar == 1);
+    }
+    else
+    {
+        m_ShouldSkipNextBoundary = false;
     }
 }
 
