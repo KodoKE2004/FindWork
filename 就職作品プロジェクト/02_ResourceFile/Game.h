@@ -223,7 +223,7 @@ inline void ChangeScenePop(SceneTransitionParam& state)
     // 現在のシーン
     auto scene = std::make_shared<TransScene>();
     auto sceneNext = instance.ScenePop();
-	if (sceneNext) {
+	if (!sceneNext) {
 		return;
 	}
 
@@ -240,7 +240,7 @@ inline void ChangeScenePop(SceneTransitionParam& state)
 inline void Game::ScenePush(std::shared_ptr<Scene> newScene)
 {
     // 遷移前のシーンをスタックに保存
-    if (newScene) m_SceneStack.push_back(std::move(newScene));
+    if (newScene) m_SceneStack.push_back(newScene);
 }
 
 inline std::shared_ptr<Scene> Game::ScenePop()

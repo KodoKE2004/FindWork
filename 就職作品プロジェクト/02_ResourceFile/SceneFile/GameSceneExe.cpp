@@ -66,6 +66,10 @@ void GameSceneExe::Initialize()
     PlayParams clockParam{};
     clockParam.volume = DEFAULT_VOLUME;
     m_AudioList.emplace("clock", AudioConfig(L"SE/Clock.wav", clockParam, false, false));
+    
+    PlayParams exploParam{};
+    exploParam.volume = DEFAULT_VOLUME;
+    m_AudioList.emplace("explosion", AudioConfig(L"SE/Explosion.wav", exploParam, false, false));
 
     if (AudioManager* audioMgr = instance)
     {
@@ -101,6 +105,9 @@ void GameSceneExe::Update(float tick)
             // SEの再生
             PlaySE("clock",std::nullopt);
         }
+        else if (m_TimeGauge->GetCount() == 0) {
+            PlaySE("explosion", std::nullopt);
+        }
 
         if (m_TimeGauge->IsReadyExpo()) {
             m_Number->SetCount(m_TimeGauge->GetCount());
@@ -113,11 +120,7 @@ void GameSceneExe::Update(float tick)
         }
     }
 
-    // シーン遷移の条件
-
     // 速めにクリアした場合そこから一小節おいて遷移
-
-    // 時間切れの場合
     if (m_isFastChange)
     {
         const int beatsPerBar = m_RelationData.rhythmBeat.GetBeatConst().beatUnit;

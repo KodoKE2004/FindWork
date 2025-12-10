@@ -23,6 +23,7 @@
     <ClCompile Include="02_ResourceFile\Audio.cpp" />
     <ClCompile Include="02_ResourceFile\ObjectFile\Bomber.cpp" />
     <ClCompile Include="02_ResourceFile\ObjectFile\BomTimeLimit.cpp" />
+    <ClCompile Include="02_ResourceFile\Particle.cpp" />
     <ClCompile Include="02_ResourceFile\RhythmBeat.cpp" />
     <ClCompile Include="02_ResourceFile\AudioManager.cpp" />
     <ClCompile Include="02_ResourceFile\Camera.cpp" />
@@ -68,9 +69,6 @@
     <ClCompile Include="02_ResourceFile\SceneFile\TransScene.cpp" />
     <ClCompile Include="02_ResourceFile\Shader.cpp" />
     <ClCompile Include="02_ResourceFile\ShaderManager.cpp" />
-    <ClCompile Include="02_ResourceFile\TestFile\TestPlane.cpp">
-      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">true</ExcludedFromBuild>
-    </ClCompile>
     <ClCompile Include="02_ResourceFile\Square.cpp" />
     <ClCompile Include="02_ResourceFile\Texture.cpp" />
     <ClCompile Include="02_ResourceFile\TextureManager.cpp" />
@@ -89,6 +87,7 @@
     <ClInclude Include="02_ResourceFile\Audio.h" />
     <ClInclude Include="02_ResourceFile\ObjectFile\Bomber.h" />
     <ClInclude Include="02_ResourceFile\ObjectFile\BomTimeLimit.h" />
+    <ClInclude Include="02_ResourceFile\Particle.h" />
     <ClInclude Include="02_ResourceFile\RhythmBeat.h" />
     <ClInclude Include="02_ResourceFile\AudioManager.h" />
     <ClInclude Include="02_ResourceFile\Camera.h" />
@@ -141,9 +140,6 @@
     <ClInclude Include="02_ResourceFile\SceneFile\TransScene.h" />
     <ClInclude Include="02_ResourceFile\Shader.h" />
     <ClInclude Include="02_ResourceFile\ShaderManager.h" />
-    <ClInclude Include="02_ResourceFile\TestFile\TestPlane.h">
-      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">true</ExcludedFromBuild>
-    </ClInclude>
     <ClInclude Include="02_ResourceFile\Square.h" />
     <ClInclude Include="02_ResourceFile\Texture.h" />
     <ClInclude Include="02_ResourceFile\TextureManager.h" />

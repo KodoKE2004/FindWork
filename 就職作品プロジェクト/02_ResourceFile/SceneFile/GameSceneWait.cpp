@@ -24,7 +24,7 @@ T RandomChoose(const T& a, const T& b)
 
 namespace
 {
-    constexpr std::array<SCENE_NO, 3> kStaegeCandidates = {
+    constexpr std::array<SCENE_NO, 3> kStageCandidates = {
         SCENE_NO::GAME_SLICE,
         SCENE_NO::GAME_JUMP,
         SCENE_NO::GAME_CRUSH
@@ -167,18 +167,18 @@ void GameSceneWait::Update(float tick)
     }
 
 
-    #pragma region ライフ減少処理
     // ライフ減少処理
     if ( m_DecrementLife.IsTimeUp() &&
         !m_wasDecrementLife         &&
         !m_RelationData.isClear)
     {
+        // ライフが減る演出
+        
         // ライフを減らす
         m_RelationData.gameLife -= 1u;
         DecrementLife();
         m_wasDecrementLife = true;
     }
-    #pragma endregion
 
     // タイマー更新処理
     CountTimer(tick);
@@ -223,18 +223,9 @@ void GameSceneWait::StartNextStageTransition()
     // シーン遷移処理
     switch (m_RelationData.nextScene)
     {
-    case SCENE_NO::GAME_SLICE: {
-        ChangeScenePush<GameSceneSlice>(WaitToGame); 
-    }  
-    break;
-    case SCENE_NO::GAME_JUMP:  {
-        ChangeScenePush<GameSceneJump>(WaitToGame);
-    }  
-    break;
-    case SCENE_NO::GAME_CRUSH: {
-        ChangeScenePush<GameSceneCrush>(WaitToGame);
-    }  
-    break;
+    case SCENE_NO::GAME_SLICE: ChangeScenePush<GameSceneSlice>(WaitToGame); break;
+    case SCENE_NO::GAME_JUMP : ChangeScenePush<GameSceneJump>(WaitToGame);  break;
+    case SCENE_NO::GAME_CRUSH: ChangeScenePush<GameSceneCrush>(WaitToGame); break;
     default: return;
     }
 }
@@ -252,53 +243,53 @@ void GameSceneWait::DecrementLife()
 void GameSceneWait::PrepareNextStage()
 {
     // ステージのインデックスを格納
-    SCENE_NO _NextScene = SCENE_NO::NONE;
+    SCENE_NO nextScene = SCENE_NO::NONE;
 
     // 乱数の作成
     // 初回初期化時は前回の連続するので要素の削除
     // 全3ステージからランダム選択
-    if (m_IsFirstInitialized)
+    if (m_IsFirstInitialized ||
+        m_RelationData.oldScene == SCENE_NO::NONE)
     {
-        _NextScene = StageSelectAllRandom();
+        nextScene = StageSelectAllRandom();
     }
     // oldを見てから2パターンの選択
     else
     {
-        switch (m_RelationData.oldScene)
+
+        std::vector<SCENE_NO> candidates;
+        candidates.reserve(kStageCandidates.size());
+
+        for (auto scene : kStageCandidates)
         {
-        case SCENE_NO::GAME_SLICE:
-            _NextScene = RandomChoose<SCENE_NO>(SCENE_NO::GAME_JUMP,
-                SCENE_NO::GAME_CRUSH);
-            break;
-        case SCENE_NO::GAME_JUMP:
-            _NextScene = RandomChoose<SCENE_NO>(SCENE_NO::GAME_SLICE,
-                SCENE_NO::GAME_CRUSH);
-            break;
-        case SCENE_NO::GAME_CRUSH:
-            _NextScene = RandomChoose<SCENE_NO>(SCENE_NO::GAME_JUMP,
-                SCENE_NO::GAME_SLICE);
-            break;
-        default: _NextScene = StageSelectAllRandom();
-            break;
+            if (scene != m_RelationData.oldScene)
+            {
+                candidates.emplace_back(scene);
+            }
+        }
+
+        if (candidates.empty())
+        {
+            nextScene = StageSelectAllRandom();
+        }
+        else
+        {
+            // ③ 残った候補の中からランダム選択
+            std::uniform_int_distribution<std::size_t> dist(0, candidates.size() - 1);
+            nextScene = candidates[dist(m_RandomEngine)];
         }
     }
 
     // 次のシーンRelationDataに格納
-    m_RelationData.nextScene = _NextScene;
+    m_RelationData.nextScene = nextScene;
 }
 
 // 全ステージから選ぶ時の乱数を取得する関数
 
 SCENE_NO GameSceneWait::StageSelectAllRandom()
 {
-    SCENE_NO stageKinds[3] = {
-            SCENE_NO::GAME_SLICE,
-            SCENE_NO::GAME_CRUSH,
-            SCENE_NO::GAME_JUMP
-    };
+    std::uniform_int_distribution<std::size_t> dist(0, kStageCandidates.size() - 1);
 
-    // 最初の一回だけ作成する乱数は３パターンの中から選択
-    std::uniform_int_distribution<int> dist(0, 2);
-    int selectedIdx = dist(m_RandomEngine);
-    return stageKinds[selectedIdx];
+    // 候補配列から１つ選んで返す
+    return kStageCandidates[dist(m_RandomEngine)];
 }

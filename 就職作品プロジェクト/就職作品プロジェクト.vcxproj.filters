@@ -26,9 +26,6 @@
     <Filter Include="SourceFile\Scene">
       <UniqueIdentifier>{f78adc59-4616-4046-9b02-cf41e56ab265}</UniqueIdentifier>
     </Filter>
-    <Filter Include="SourceFile\Test">
-      <UniqueIdentifier>{4ad23906-4894-4555-a4fb-65f33d245b5c}</UniqueIdentifier>
-    </Filter>
     <Filter Include="SourceFile\Model\Subset">
       <UniqueIdentifier>{141faefb-0bc1-455e-86cf-317d53ef6d27}</UniqueIdentifier>
     </Filter>
@@ -97,9 +94,6 @@
     <ClCompile Include="03_ExternalFile\imgui\imgui_widgets.cpp">
       <Filter>ImGui</Filter>
     </ClCompile>
-    <ClCompile Include="02_ResourceFile\TestFile\TestPlane.cpp">
-      <Filter>SourceFile\Test</Filter>
-    </ClCompile>
     <ClCompile Include="02_ResourceFile\DebugUI.cpp">
       <Filter>SourceFile\Debug</Filter>
     </ClCompile>
@@ -158,9 +152,6 @@
       <Filter>SourceFile\Core</Filter>
     </ClCompile>
     <ClCompile Include="02_ResourceFile\Dx11helper.cpp">
-      <Filter>SourceFile\Core</Filter>
-    </ClCompile>
-    <ClCompile Include="02_ResourceFile\Audio.cpp">
       <Filter>SourceFile\Core</Filter>
     </ClCompile>
     <ClCompile Include="02_ResourceFile\AudioManager.cpp">
@@ -250,6 +241,12 @@
     <ClCompile Include="02_ResourceFile\ObjectFile\BomTimeLimit.cpp">
       <Filter>SourceFile\Object\2D</Filter>
     </ClCompile>
+    <ClCompile Include="02_ResourceFile\Audio.cpp">
+      <Filter>SourceFile\Core\Resouce</Filter>
+    </ClCompile>
+    <ClCompile Include="02_ResourceFile\Particle.cpp">
+      <Filter>SourceFile\Core</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="02_ResourceFile\SceneFile\Scene.h">
@@ -299,9 +296,6 @@
     </ClInclude>
     <ClInclude Include="03_ExternalFile\imgui\imstb_truetype.h">
       <Filter>ImGui</Filter>
-    </ClInclude>
-    <ClInclude Include="02_ResourceFile\TestFile\TestPlane.h">
-      <Filter>SourceFile\Test</Filter>
     </ClInclude>
     <ClInclude Include="02_ResourceFile\DebugUI.h">
       <Filter>SourceFile\Debug</Filter>
@@ -373,9 +367,6 @@
       <Filter>SourceFile\Core</Filter>
     </ClInclude>
     <ClInclude Include="02_ResourceFile\Dx11helper.h">
-      <Filter>SourceFile\Core</Filter>
-    </ClInclude>
-    <ClInclude Include="02_ResourceFile\Audio.h">
       <Filter>SourceFile\Core</Filter>
     </ClInclude>
     <ClInclude Include="02_ResourceFile\AudioManager.h">
@@ -464,6 +455,12 @@
     </ClInclude>
     <ClInclude Include="02_ResourceFile\ObjectFile\BomTimeLimit.h">
       <Filter>SourceFile\Object\2D</Filter>
+    </ClInclude>
+    <ClInclude Include="02_ResourceFile\Audio.h">
+      <Filter>SourceFile\Core\Resouce</Filter>
+    </ClInclude>
+    <ClInclude Include="02_ResourceFile\Particle.h">
+      <Filter>SourceFile\Core</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
