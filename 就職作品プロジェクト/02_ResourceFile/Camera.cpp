@@ -8,6 +8,11 @@
 using namespace DirectX::SimpleMath;
 
 
+Camera::Camera()
+{
+	Initialize();
+}
+
 //-------------------------------
 //			  ‰Šú‰»ˆ—
 //-------------------------------

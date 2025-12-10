@@ -144,6 +144,7 @@ void TitleScene::Update(float tick)
 		}
 
 		ChangeScenePush<GameSceneWait>(TitleToWait);
+		return;
 	}
 
 	// Skydome‚Ì‰ñ“]

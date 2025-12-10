@@ -25,6 +25,7 @@ void Game::Initialize()
 
 	instance.m_Input			 = std::make_unique<Input>();			// 入力の初期化
 	instance.m_Camera			 = std::make_unique<Camera>();			// カメラ作成
+	//instance.m_Camera->Initialize();									// カメラの初期化
     instance.m_TransitionTexture = nullptr;								// トランジション用テクスチャ初期化
 
 	//		シーンをタイトルシーンに設定
@@ -52,7 +53,6 @@ void Game::Initialize()
 	});
 
 #endif
-	instance.m_Camera->Initialize();									// カメラの初期化
 
 	// マネージャーの初期化
 	// モデル・テクスチャのパスを設定
@@ -81,7 +81,7 @@ void Game::Initialize()
 
 #endif // _DEBUG
 
-	instance.m_SceneCurrent = std::make_unique<TitleScene>();				// タイトルシーンのインスタンスを生成
+	instance.m_SceneCurrent = std::make_shared<TitleScene>();				// タイトルシーンのインスタンスを生成
 	instance.m_SceneCurrent->Initialize();
 }
 
@@ -159,10 +159,10 @@ void Game::SetSceneCurrent(Scene* newScene)
 	instance.m_SceneCurrent.reset(newScene);	// 新しいシーンを設定
 }
 
-void Game::SetSceneCurrent(std::unique_ptr<Scene> newScene)
+void Game::SetSceneCurrent(std::shared_ptr<Scene> newScene)
 {
 	auto& instance = GetInstance();
-	instance.m_SceneCurrent = std::move(newScene);
+	instance.m_SceneCurrent = newScene;
 }
 
 Game& Game::GetInstance()
@@ -174,9 +174,9 @@ Game& Game::GetInstance()
 	return *m_pInstance.get();
 }
 
-Scene* Game::GetCurrentScene() const
+std::shared_ptr<Scene> Game::GetCurrentScene() const
 {
-	return m_SceneCurrent.get();
+	return m_SceneCurrent;
 }
 
 void Game::RegistDebugObject()

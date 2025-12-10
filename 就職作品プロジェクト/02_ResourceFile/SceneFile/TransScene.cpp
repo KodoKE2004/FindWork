@@ -19,6 +19,11 @@ TransScene::TransScene()
 {
 }
 
+TransScene::~TransScene()
+{
+	Finalize();
+}
+
 void TransScene::Initialize()
 {
     auto& instance = Game::GetInstance();
@@ -116,7 +121,7 @@ void TransScene::Update(float tick)
 	if (m_Step == STEP::FINISH)
 	{
 		instance.SetSceneCurrent(m_SceneNext);
-		Finalize();
+		return;
 	}
 }
 

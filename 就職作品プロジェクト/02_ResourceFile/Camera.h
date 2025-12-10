@@ -67,6 +67,9 @@ public:
 		bool        m_ShouldRestore = false;
 	};
 
+	Camera();
+    ~Camera() = default;
+
 	//-------------------------------
 	//			ƒƒCƒ“ƒ‹[ƒvˆ—
 	//-------------------------------

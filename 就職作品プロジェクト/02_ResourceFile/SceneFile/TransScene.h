@@ -25,8 +25,8 @@ class TransScene : public Scene
 {
 private:
 	// シーンの前後 
-	Scene* m_SceneOld  = nullptr;
-	Scene* m_SceneNext = nullptr;
+	std::shared_ptr<Scene> m_SceneOld  = nullptr;
+	std::shared_ptr<Scene> m_SceneNext = nullptr;
 
 	// オフスクリーン用
 	std::unique_ptr<RenderTarget> m_RenderTarget;
@@ -58,7 +58,7 @@ public:
     // コンストラクタとデストラクタ
 
 	TransScene();
-    ~TransScene()			override = default;
+    ~TransScene();
 
 	void Initialize()		override;
 	void Update(float tick)	override;
@@ -75,8 +75,8 @@ public:
 		m_transParam  = param;  
 	}
 
-	void SetOldScene(Scene* sceneOld)      { m_SceneOld  = sceneOld;  }
-	void SetNextScene(Scene* sceneNext)    { m_SceneNext = sceneNext; }
+	void SetOldScene (std::shared_ptr<Scene> sceneOld)     { m_SceneOld  = sceneOld;  }
+	void SetNextScene(std::shared_ptr<Scene> sceneNext)    { m_SceneNext = sceneNext; }
 	void SetTransMode(TRANS_MODE mode)     { m_TransMode = mode;	  }
 	void SetStep(STEP step)				   { m_Step		 = step;	  }
 	void SetTimer(float timer)			   { m_Timer	 = timer;	  }

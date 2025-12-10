@@ -23,13 +23,13 @@ class Game
 {
 private:
 	static std::unique_ptr<Game>		 m_pInstance;		  // ゲームのインスタンス
-	std::unique_ptr<Scene>				 m_SceneCurrent;	  // 現在のシーン
+	std::shared_ptr<Scene>				 m_SceneCurrent;	  // 現在のシーン
 	std::unique_ptr<Input>				 m_Input;			  // 入力管理
 	std::unique_ptr<Camera>				 m_Camera;			  // カメラ
 	std::vector<std::unique_ptr<Object>> m_GameObjects;		  // オブジェクト
 
     std::shared_ptr<TransitionBase>		 m_TransitionTexture; // トランジション用テクスチャ
-    std::vector<std::unique_ptr<Scene>>	 m_SceneStack;		  // シーンスタック
+    std::vector<std::shared_ptr<Scene>>	 m_SceneStack;		  // シーンスタック
 
 	//================================
 	//	   ゲームを支えるマネージャー達
@@ -59,7 +59,7 @@ public:
 
 	// 現在のシーンを設定
 	static void SetSceneCurrent(Scene* newScene);
-    static void SetSceneCurrent(std::unique_ptr<Scene> newScene);
+    static void SetSceneCurrent(std::shared_ptr<Scene> newScene);
 
     // TranstionTextureをTransSceneと連携させる
 	void SetTransitionTexture(std::shared_ptr<TransitionBase> tex) {
@@ -73,8 +73,8 @@ public:
 	//		シーンのスタック管理
 	//===============================
     
-	void ScenePush(Scene* newScene);
-	Scene* ScenePop();
+	void ScenePush(std::shared_ptr<Scene> newScene);
+	std::shared_ptr<Scene> ScenePop();
 	size_t GetSceneStackSize() const {
 		return m_SceneStack.size();
     }
@@ -86,7 +86,7 @@ public:
 	// ゲームのインスタンスを取得
 	static Game& GetInstance();	
 	// 現在のシーンを取得
-	Scene* GetCurrentScene() const; 
+	std::shared_ptr<Scene> GetCurrentScene() const;
 
 	// インスタンスのカメラ
 	Camera& GetCamera() {
@@ -118,18 +118,20 @@ public:
 		static_assert(std::is_base_of_v<Object, T>, "TがObjectを継承していない");
 		static_assert(!std::is_abstract_v<T>	  , "Tが抽象クラスだった");
 
+		auto& instance = *m_pInstance;
+
 		// コンストラクタ引数を完全転送して unique_ptrを作成
 		std::unique_ptr<T> up;
 
 		if constexpr (sizeof...(Args) == 0) {
-			up = std::make_unique<T>(*m_Camera);
+			up = std::make_unique<T>(*instance.m_Camera.get());
 		}
 		else {
 			up = std::make_unique<T>(std::forward<Args>(args)...);
 		}
 		T* pt = up.get();
 
-		m_pInstance->m_GameObjects.emplace_back(std::move(up));
+		instance.m_GameObjects.emplace_back(std::move(up));
 		pt->Initialize(); // 初期化
 		return pt;
 	}
@@ -175,26 +177,28 @@ void ChangeScenePush(SceneTransitionParam& state)
 
 	Scene::ClearTimerList();
 
-	auto scene = new TransScene;
-	auto sceneNext = new T;
+	auto scene     = std::make_shared<TransScene>();
+	auto sceneNext = std::make_shared<T>();
+
+    auto sceneCurrent = instance.GetCurrentScene();
 
     // シーン間の受け渡しデータを設定
 	SceneRelationData relationData{};
-	if (auto currentScene = instance.GetCurrentScene())
+	if (sceneCurrent)
 	{
-		relationData = currentScene->GetRelationData();
-		relationData.previousScene = currentScene->GetSceneNo();
+		relationData = sceneCurrent->GetRelationData();
+		relationData.previousScene = sceneCurrent->GetSceneNo();
 	}
 	relationData.nextScene = sceneNext->GetSceneNo();
 
 	sceneNext->SetRelationData(relationData);
 	scene->SetRelationData(relationData);
 
-    instance.ScenePush(instance.GetCurrentScene());
-	scene->SetOldScene(instance.GetCurrentScene());
+    instance.ScenePush(sceneCurrent);
 
-	scene->SetTransitionParam(state);
+	scene->SetOldScene(sceneCurrent);
 	scene->SetNextScene(sceneNext);
+	scene->SetTransitionParam(state);
 	scene->SetStep(STEP::START);
 	scene->Initialize();
 
@@ -217,10 +221,9 @@ inline void ChangeScenePop(SceneTransitionParam& state)
 	Scene::ClearTimerList();
 
     // 現在のシーン
-    auto scene = new TransScene;
-    Scene* sceneNext = instance.ScenePop();
-	if (sceneNext == nullptr) {
-		delete scene;
+    auto scene = std::make_shared<TransScene>();
+    auto sceneNext = instance.ScenePop();
+	if (sceneNext) {
 		return;
 	}
 
@@ -234,17 +237,17 @@ inline void ChangeScenePop(SceneTransitionParam& state)
     instance.SetSceneCurrent(scene);
 }
 
-inline void Game::ScenePush(Scene* newScene)
+inline void Game::ScenePush(std::shared_ptr<Scene> newScene)
 {
     // 遷移前のシーンをスタックに保存
-    if (newScene) m_SceneStack.push_back(std::unique_ptr<Scene>(newScene));
+    if (newScene) m_SceneStack.push_back(std::move(newScene));
 }
 
-inline Scene* Game::ScenePop()
+inline std::shared_ptr<Scene> Game::ScenePop()
 {
 	if(m_SceneStack.empty())	return nullptr;
 	
-    Scene* scene = m_SceneStack.back().release();
+    auto scene = m_SceneStack.back();
     m_SceneStack.pop_back();
 
 	return scene;
