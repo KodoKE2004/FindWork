@@ -4,7 +4,9 @@
 #include "SceneList.h"
 
 #include <array>
+#include <algorithm>
 #include <random>
+#include <cmath>
 
 bool GameSceneWait::s_HasFirstGameSceneWaitInitialized = false;
 GAME_PHASE GameSceneWait::s_CurrentGamePhase = GAME_PHASE::START;
@@ -40,10 +42,10 @@ void GameSceneWait::Initialize()
     m_RelationData.previousScene = SCENE_NO::GAME_WAIT;
 
     if (m_RelationData.isClear) {
-        MyDebugLog(std::cout << "=====  成功  =====" << std::endl;)
+        Debug::Log("=====  ステージ成功  =====");
     }
     else {
-        MyDebugLog(std::cout << "=====  失敗  =====" << std::endl;)
+        Debug::Log("=====  ステージ失敗  =====");
     }
 
     // 最初の一度だけ or 指定したタイミングのみフラグを立てる
@@ -52,12 +54,26 @@ void GameSceneWait::Initialize()
 
     m_TimerList.clear();
     SetTimer(&m_Tick);
-    SetTimer(&m_ChangeStage.timer);
     SetTimer(&m_DecrementLife.timer);
 
     RhythmBeatConst beatConfig{};
     beatConfig.Setup(120.0f, 4, 1); // 120 BPM, 4/4 拍子
     m_RelationData.rhythmBeat.Initialize(beatConfig);
+
+    m_BeatCounterToStage = 0;
+    m_PreviousBeatInWait = 0;
+
+    const auto& beatConst = m_RelationData.rhythmBeat.GetBeatConst();
+    if (beatConst.secondsPerBeat > 0.0f)
+    {
+        m_TargetBeatsToStage = max(1, static_cast<int>(std::ceil(kStageTransitionDelay / 
+                                                       beatConst.secondsPerBeat)));
+    }
+    else
+    {
+        m_TargetBeatsToStage = 1;
+    }
+
     m_IsFirstInitialized = true;
 
     auto& instance = Game::GetInstance();
@@ -106,28 +122,30 @@ void GameSceneWait::Initialize()
 
     // ステージ乱数選択処理   
     PrepareNextStage();
+    std::cout << "ステージ突破数" << m_RelationData.stageCount << std::endl;
 }
 
 void GameSceneWait::Update(float tick)
 {   
     auto& instance = Game::GetInstance();
 
-    // 一定時間経過後に次のステージ選択処理へ
-    if (m_ChangeStage.IsTimeUp())
-    {
-        m_ShouldTransitionToStage = true;
-    }
-    if (m_ShouldTransitionToStage)
-    {
-        StartNextStageTransition();
-    }
-
-
     // リズムを取る
     // ライフをリズムに合わせて回転させる
     int advancedTicks = m_RelationData.rhythmBeat.Update(tick);
     if (advancedTicks > 0)
     {
+        const int currentBeatIndex = m_RelationData.rhythmBeat.GetBeatIndex();
+        if (currentBeatIndex > m_PreviousBeatInWait)
+        {
+            m_BeatCounterToStage += currentBeatIndex - m_PreviousBeatInWait;
+            m_PreviousBeatInWait = currentBeatIndex;
+        }
+
+        if (m_BeatCounterToStage >= m_TargetBeatsToStage)
+        {
+            m_ShouldTransitionToStage = true;
+        }
+
         if (advancedTicks % 2 == 1)
         {
             m_IsLifeTiltPositive = !m_IsLifeTiltPositive;
@@ -142,6 +160,12 @@ void GameSceneWait::Update(float tick)
             }
         }
     }
+
+    if (m_ShouldTransitionToStage)
+    {
+        StartNextStageTransition();
+    }
+
 
     #pragma region ライフ減少処理
     // ライフ減少処理

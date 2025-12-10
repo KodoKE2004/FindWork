@@ -24,10 +24,10 @@ void ShaderManager::Add(const std::string& name, ShaderStage stage)
     case ShaderStage::PS:
     case ShaderStage::GS:
     case ShaderStage::CS:
-        break; // Šù‚É–¾¦‚³‚ê‚Ä‚¢‚é
+    break; // Šù‚É–¾¦‚³‚ê‚Ä‚¢‚é
     default:
         if (!InferStageFromName(name, s)) {
-            Debug::Log("ShaderManager: could not infer stage from '" + name + "'.");
+            Debug::Log("[[–½–¼ˆá”½]] AddShader‚ğ’†~‚µ‚Ü‚·'" + name + "'.");
             return;
         }
         break;
@@ -35,13 +35,14 @@ void ShaderManager::Add(const std::string& name, ShaderStage stage)
 
     // ƒXƒe[ƒW‚É‰‚¶‚Ä”h¶ƒNƒ‰ƒX‚ğ¶¬
     BaseShader* shader = nullptr;
+
     switch (s) {
-    case ShaderStage::VS: shader = new VertexShader();  break;
-    case ShaderStage::PS: shader = new PixelShader();   break;
-    case ShaderStage::GS: shader = new GeometryShader(); break;
-    case ShaderStage::CS: shader = new ComputeShader(); break;
+    case ShaderStage::VS: shader = new VertexShader();      break;
+    case ShaderStage::PS: shader = new PixelShader();       break;
+    case ShaderStage::GS: shader = new GeometryShader();    break;
+    case ShaderStage::CS: shader = new ComputeShader();     break;
     default:
-        Debug::Log("ShaderManager: unsupported stage for '" + name + "'.");
+        Debug::Log("[[•s–¾‚ÈƒXƒe[ƒW]] AddShader‚ğ’†~‚µ‚Ü‚·'" + name + "'.");
         return;
     }
 
@@ -51,13 +52,13 @@ void ShaderManager::Add(const std::string& name, ShaderStage stage)
 
     if (!shader->Create(shader->GetHlslName())) {
         delete shader; // ¸”s‚Í‰ğ•ú
-        Debug::Log("ShaderManager: “o˜^¸”s '" + name + "'.");
+        Debug::Log("[[¸”s]] AddShader'" + name + "'.");
         return;
     }
 
     // “o˜^
     m_ShaderList[name] = shader;
-    Debug::Log("ShaderManager: “o˜^Š®—¹ '" + name + "'.");
+    Debug::Log("[[¬Œ÷]] AddShader '" + name + "'.");
 }
 
 bool ShaderManager::HasShader(const std::string& shaderName) const
@@ -124,12 +125,12 @@ bool ShaderManager::ReloadAll()
 
         if (!shader->Create(shader->GetHlslName()))
         {
-            Debug::Log("[[¸”s]]ShaderManager: failed to reload '" + name + "'.\n" );
+            Debug::Log("[[¸”s]] ShaderManagerReload '" + name + "'.\n" );
             allSuccess = false;
         }
         else
         {
-            Debug::Log("[[¬Œ÷]]ShaderManager: reloaded '" + name + "'.\n");
+            Debug::Log("[[¬Œ÷]] ShaderManagerReloaded '" + name + "'.\n");
         }
     }
 

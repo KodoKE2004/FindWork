@@ -79,7 +79,7 @@ void GameSceneSlice::Update(float tick)
             
             if (m_Sord->m_HitResult.isTriggered() && !it->IsDeath()) 
             {
-                MyDebugLog(Debug::Log("“–‚½‚Á‚½");)
+                Debug::Log("[[Õ“Ë]] Sord -> Enemy");
                 it->Death();
             }
         }

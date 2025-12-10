@@ -169,7 +169,7 @@ void ChangeScenePush(SceneTransitionParam& state)
 	static_assert(std::is_base_of_v<Scene, T>, "T は Scene を継承している必要があります");
 	static_assert(!std::is_abstract_v<T>, "T は抽象クラスではいけません");
 
-	MyDebugLog(std::cout << "ChangeScenePushの読み込み検出\n");
+	Debug::Log("\n[[検出]] シーンのPush \n");
 
 	auto scene = new TransScene;
 	auto sceneNext = new T;
@@ -204,9 +204,11 @@ inline void ChangeScenePop(SceneTransitionParam& state)
     auto& instance = Game::GetInstance();
 
 	if (instance.GetSceneStackSize() == 0) {
-		Debug::Log("シーンスタックが空です");
+		Debug::Log("[[警告]] シーンスタックが空です");
 		return ;
 	}
+
+	Debug::Log("[[検出]] シーンのPop");
 
     // 現在のシーン
     auto scene = new TransScene;

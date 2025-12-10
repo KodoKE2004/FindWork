@@ -76,8 +76,3 @@ namespace Debug
     }
 };
 
-#ifdef _DEBUG                
-    #define MyDebugLog(code) code
-#else 
-    #define MyDebugLog(code) ;
-#endif 

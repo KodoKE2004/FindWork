@@ -16,18 +16,17 @@ bool TextureManager::HasTexture(const std::string& relativePath) const
 
 bool TextureManager::AddTexture(const std::string& relativePath) {
     if (HasTexture(relativePath)) {
-        Debug::Log("ロード済みのテクスチャ: " + relativePath);
+        Debug::Log("[[中止]] 取得済みのTexture : " + relativePath);
         return false;
     }
 
     std::string fullPath = m_FilePath + relativePath;
     auto tex = std::make_shared<Texture>();
     if (!tex->LoadFromFile(fullPath)) {
-        Debug::Log("ロードに失敗しました : " + relativePath);
         return false;
     }
 
-    Debug::Log("ロード成功 リストに追加します: " + relativePath);
+    // Debug::Log("[成功] AddTexture : " + relativePath);
     m_TextureList.emplace(relativePath, tex);
     return true;
 }
@@ -36,7 +35,7 @@ std::shared_ptr<Texture> TextureManager::GetTexture(const std::string& relativeP
 
     auto it = m_TextureList.find(relativePath);
     if (it != m_TextureList.end()) {
-        Debug::Log("テクスチャを取得しました : " + relativePath);
+        Debug::Log("[[成功]] GetTexture : " + relativePath);
         return it->second;
     }
 

@@ -11,8 +11,9 @@ void GameSceneExe::Initialize()
 {
     auto& instance = Game::GetInstance();
     TextureManager* textureMgr = instance;
-
-    // 初期化
+    //-------------------------------
+    //          メンバ初期化
+    //-------------------------------
     m_Difficulty    = 0;
     m_GameSpeedMass = 1.0f;
     m_isChange     = false;
@@ -20,7 +21,8 @@ void GameSceneExe::Initialize()
     m_hasRequestedSceneChange = false;
     
     //===============================
-    //   ゲームスピード倍率設定o
+    //   ゲームスピード倍率設定
+    //   ステージクリア数 n
     //   n && 8 == 0 なら難易度アップ 
     //   n && 4 == 0 ならスピードアップ
     //===============================
@@ -43,6 +45,11 @@ void GameSceneExe::Initialize()
     RhythmBeatConst beatConfig{};
     beatConfig.Setup(120.0f, 4, 1); // 120 BPM, 4/4 拍子
     m_RelationData.rhythmBeat.Initialize(beatConfig);
+
+    m_ElapsedBeats = 0;
+    m_PreviousBeatIndex = 0;
+    m_ForcedReturnBeatCount = beatConfig.beatUnit * ForcedReturnMeasures;
+
 
     m_TimeGaugeRatio = 1.0f;
     if (m_TimeGauge)
@@ -84,7 +91,13 @@ void GameSceneExe::Update(float tick)
     int advanceTick = m_RelationData.rhythmBeat.Update(tick);
     if (advanceTick > 0)
     {
-        
+        const int currentBeat = m_RelationData.rhythmBeat.GetBeatIndex();
+        if (currentBeat > m_PreviousBeatIndex)
+        {
+            m_ElapsedBeats     += currentBeat - m_PreviousBeatIndex;
+            m_PreviousBeatIndex = currentBeat;
+        }
+
         float ratio = m_TimeGauge->GetFillRatio();
         ratio -= m_TimeGaugeStep * static_cast<float>(advanceTick);
 
@@ -92,22 +105,7 @@ void GameSceneExe::Update(float tick)
         if (ratio == 0.13f && m_TimeGauge->GetCount() > 0){
             m_TimeGauge->ReadyExpo();
             // SEの再生
-            if (AudioManager* audioMgr = Game::GetInstance())
-            {
-                if (auto it = m_AudioList.find("clock"); it != m_AudioList.end())
-                {
-                    auto params = it->second.params;
-                    if (it->second.loop)
-                    {
-                        params.loop.loopCount = XAUDIO2_LOOP_INFINITE;
-                    }
-                    audioMgr->Play("clock", params);
-                }
-                else
-                {
-                    audioMgr->Play("clock");
-                }
-            }
+            PlaySE("clock",std::nullopt);
         }
 
         if (m_TimeGauge->IsReadyExpo()) {
@@ -121,6 +119,20 @@ void GameSceneExe::Update(float tick)
         }
     }
 
+    if (m_isFastChange)
+    {
+        m_hasRequestedSceneChange = true;
+    }
+
+    if (m_ForcedReturnBeatCount > 0 && m_ElapsedBeats >= m_ForcedReturnBeatCount)
+    {
+        m_hasRequestedSceneChange = true;
+    }
+
+    if (m_hasRequestedSceneChange) 
+    {
+        m_isChange = true;
+    }
 
 }
 

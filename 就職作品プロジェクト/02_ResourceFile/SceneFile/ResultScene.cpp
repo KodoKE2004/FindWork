@@ -47,7 +47,7 @@ void ResultScene::Initialize()
         }
     }
 
-    MyDebugLog(std::cout << "クリアステージ数" << m_RelationData.stageCount << std::endl;)
+    Debug::Log("クリアステージ数 : " + std::to_string(m_RelationData.stageCount));
 }
 
 void ResultScene::Update(float tick)

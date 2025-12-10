@@ -34,7 +34,6 @@ private:
 	//	  (スピード倍率によって変化)
 	//================================
     TimerData m_DecrementLife = { 0.0f,0.5f };	// ライフが減るまでのタイマー管理用構造体
-    TimerData m_ChangeStage   = { 0.0f,1.0f };	// ステージ遷移までのタイマー管理用構造体
 
     //================================
     //		 ステージ遷移用フラグ
@@ -44,9 +43,13 @@ private:
     static bool s_HasFirstGameSceneWaitInitialized;	
 	static GAME_PHASE s_CurrentGamePhase;	// 現在のゲームフェーズを管理する変数
 
-	bool m_ShouldTransitionToStage = false;		// 次のステージを設定できたか判断するフラグ
-    bool m_IsFirstInitialized	   = false;		// シーンが最初に初期化されたかどうかのフラグ
-    bool m_wasDecrementLife		   = false;		// ライフが減ったかどうかのフラグ
+	int m_TargetBeatsToStage = 1;			// 
+	int m_BeatCounterToStage = 0;			//
+	int m_PreviousBeatInWait = 0;			//
+
+	bool m_ShouldTransitionToStage = false;	// 次のステージを設定できたか判断するフラグ
+    bool m_IsFirstInitialized	   = false;	// シーンが最初に初期化されたかどうかのフラグ
+    bool m_wasDecrementLife		   = false;	// ライフが減ったかどうかのフラグ
 
     bool m_WasPlayBGM = false;				// BGMを再生したかどうかのフラグ
     bool m_IsLifeTiltPositive = true;		// ライフの傾きが正かどうかのフラグ
