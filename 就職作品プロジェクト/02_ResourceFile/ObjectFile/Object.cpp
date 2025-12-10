@@ -2,14 +2,12 @@
 #include "Game.h"
 #include "ShaderManager.h"
 
-Object::Object(Camera* cam) : m_Camera(cam)
+Object::Object(Camera& cam) : m_Camera(cam)
 {
     m_Color = Color(1.0f, 1.0f, 1.0f, 1.0f);
 }
 
-Object::~Object()
-{
-}
+Object::~Object() = default;
 
 void Object::SetShader(std::string hlslName)
 {

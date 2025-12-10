@@ -23,7 +23,7 @@ class Game
 {
 private:
 	static std::unique_ptr<Game>		 m_pInstance;		  // ゲームのインスタンス
-	Scene*								 m_SceneCurrent;	  // 現在のシーン
+	std::unique_ptr<Scene>				 m_SceneCurrent;	  // 現在のシーン
 	std::unique_ptr<Input>				 m_Input;			  // 入力管理
 	std::unique_ptr<Camera>				 m_Camera;			  // カメラ
 	std::vector<std::unique_ptr<Object>> m_GameObjects;		  // オブジェクト
@@ -58,7 +58,8 @@ public:
 	static void Finalize();			// ゲームの終了処理
 
 	// 現在のシーンを設定
-	static void  SetSceneCurrent(Scene* newScene);
+	static void SetSceneCurrent(Scene* newScene);
+    static void SetSceneCurrent(std::unique_ptr<Scene> newScene);
 
     // TranstionTextureをTransSceneと連携させる
 	void SetTransitionTexture(std::shared_ptr<TransitionBase> tex) {
@@ -88,8 +89,8 @@ public:
 	Scene* GetCurrentScene() const; 
 
 	// インスタンスのカメラ
-	Camera* GetCamera() {
-		return m_Camera.get();
+	Camera& GetCamera() {
+		return *m_Camera.get();
 	}
 	
 	// メッシュマネージャー
@@ -119,8 +120,9 @@ public:
 
 		// コンストラクタ引数を完全転送して unique_ptrを作成
 		std::unique_ptr<T> up;
+
 		if constexpr (sizeof...(Args) == 0) {
-			up = std::make_unique<T>(m_Camera.get());
+			up = std::make_unique<T>(*m_Camera);
 		}
 		else {
 			up = std::make_unique<T>(std::forward<Args>(args)...);
@@ -171,6 +173,8 @@ void ChangeScenePush(SceneTransitionParam& state)
 
 	Debug::Log("[[検出]] シーンのPush");
 
+	Scene::ClearTimerList();
+
 	auto scene = new TransScene;
 	auto sceneNext = new T;
 
@@ -209,6 +213,8 @@ inline void ChangeScenePop(SceneTransitionParam& state)
 	}
 
 	Debug::Log("[[検出]] シーンのPop");
+
+	Scene::ClearTimerList();
 
     // 現在のシーン
     auto scene = new TransScene;

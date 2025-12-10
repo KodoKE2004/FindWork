@@ -24,7 +24,7 @@ class Object : public Transform
 protected:
 	std::string m_Name;
 	// •`‰æ‚Ìˆ×‚Ìî•ñiŒ©‚½–Ú‚ÉŠÖ‚í‚é•”•ªj
-	Camera*  m_Camera;
+	Camera&  m_Camera;
 	Color    m_Color;
 
 	BaseShader* m_VertexShader    = nullptr;
@@ -36,7 +36,7 @@ protected:
 
 public:
 
-	Object(Camera* cam);
+	Object(Camera& cam);
 	virtual ~Object();
 
 	virtual void Initialize() = 0;

@@ -11,7 +11,7 @@ protected:
    int m_Count = 3;
 
 public:
-    BomTimeLimit(Camera* cam);
+    BomTimeLimit(Camera& cam);
     ~BomTimeLimit() = default;
 
     void Initialize() override;

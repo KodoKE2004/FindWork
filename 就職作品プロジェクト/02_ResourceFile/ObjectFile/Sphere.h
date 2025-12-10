@@ -38,7 +38,7 @@ public:
 
 
 public:
-	Sphere(Camera* cam);
+	Sphere(Camera& cam);
 
 	void Initialize() override;
 	void Update()	  override;

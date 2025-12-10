@@ -56,13 +56,13 @@ public:
 	class ScopedMode
 	{
 	public:
-		ScopedMode(Camera* camera, CAMERA_MODE mode);
+		ScopedMode(Camera & camera, CAMERA_MODE mode);
 		~ScopedMode();
 
 		void Restore();
 
 	private:
-		Camera* m_Camera = nullptr;
+		Camera& m_Camera;
 		CAMERA_MODE m_PreviousMode = CAMERA_3D;
 		bool        m_ShouldRestore = false;
 	};

@@ -7,7 +7,7 @@
 #include "Renderer.h"
 #include <algorithm>
 
-Wipe::Wipe(Camera* cam) : TransitionBase(cam)
+Wipe::Wipe(Camera& cam) : TransitionBase(cam)
 {
 }
 

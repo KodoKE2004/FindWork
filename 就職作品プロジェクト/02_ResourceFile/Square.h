@@ -60,7 +60,7 @@ protected:
 public:
 	isHitResult m_HitResult;
 
-	Square(Camera* cam); // コンストラクタ
+	Square(Camera& cam); // コンストラクタ
 	~Square(); // デストラクタ
 
 	// 純粋仮想関数化

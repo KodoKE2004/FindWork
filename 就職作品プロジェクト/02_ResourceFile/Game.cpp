@@ -52,8 +52,7 @@ void Game::Initialize()
 	});
 
 #endif
-	instance.GetCamera()->Initialize();									// カメラの初期化
-
+	instance.GetCamera().Initialize();									// カメラの初期化
 
 	// マネージャーの初期化
 	// モデル・テクスチャのパスを設定
@@ -82,7 +81,7 @@ void Game::Initialize()
 
 #endif // _DEBUG
 
-	instance.m_SceneCurrent = new TitleScene;				// タイトルシーンのインスタンスを生成
+	instance.m_SceneCurrent = std::make_unique<TitleScene>();				// タイトルシーンのインスタンスを生成
 	instance.m_SceneCurrent->Initialize();
 }
 
@@ -141,19 +140,29 @@ void Game::Draw()
 void Game::Finalize()
 {
 	auto& instance = GetInstance();
+
 #ifdef _DEBUG
 	instance.m_Grid.Finalize();
 #endif //_DEBUG
+
 	DebugUI::DisposeUI();		// デバッグUIの終了処理
 	instance.DeleteAllObject();	//オブジェクトを全て削除
 	Renderer::Finalize();			// レンダラーの終了処理
 
+	instance.m_SceneCurrent.reset();
+	instance.m_SceneStack.clear();
 }
 
 void Game::SetSceneCurrent(Scene* newScene)
 {
 	auto& instance = GetInstance();
-	instance.m_SceneCurrent = newScene;	// 新しいシーンを設定
+	instance.m_SceneCurrent.reset(newScene);	// 新しいシーンを設定
+}
+
+void Game::SetSceneCurrent(std::unique_ptr<Scene> newScene)
+{
+	auto& instance = GetInstance();
+	instance.m_SceneCurrent = std::move(newScene);
 }
 
 Game& Game::GetInstance()
@@ -167,7 +176,7 @@ Game& Game::GetInstance()
 
 Scene* Game::GetCurrentScene() const
 {
-	return m_SceneCurrent;
+	return m_SceneCurrent.get();
 }
 
 void Game::RegistDebugObject()

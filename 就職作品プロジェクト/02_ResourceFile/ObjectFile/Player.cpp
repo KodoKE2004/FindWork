@@ -33,7 +33,7 @@ namespace
     }
 }
 
-Player::Player(Camera* cam) : Square(cam)
+Player::Player(Camera& cam) : Square(cam)
 {
     m_TuningParameters = CalculateDefaultTuningParameters();
     m_AirControl = m_TuningParameters.airControl;

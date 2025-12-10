@@ -107,7 +107,7 @@ NVector3 TransitionBase::ConvertToDebugScreenPosition(const NVector3& position) 
 }
 #endif
 
-TransitionBase::TransitionBase(Camera* cam) : Object(cam)
+TransitionBase::TransitionBase(Camera& cam) : Object(cam)
 {
     m_Texture = std::make_shared<Texture>();
 	m_TransMode = TRANS_MODE::NUM;

@@ -32,7 +32,7 @@ private:
     bool  m_IsGround = true;
 
 public:
-    Player(Camera* cam);
+    Player(Camera & cam);
     ~Player() override = default;
 
     void Initialize() override;

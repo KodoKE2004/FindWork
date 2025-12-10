@@ -51,7 +51,7 @@ float MoveInfo::ApplyEasing(CarEasingType type, float t)
     }
 }
 
-Cart::Cart(Camera* cam) : Square(cam)
+Cart::Cart(Camera& cam) : Square(cam)
 {
 }
 

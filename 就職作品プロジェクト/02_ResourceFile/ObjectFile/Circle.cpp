@@ -2,7 +2,7 @@
 
 
 
-Circle::Circle(Camera* cam) : Object(cam)
+Circle::Circle(Camera& cam) : Object(cam)
 {
 }
 
@@ -71,7 +71,7 @@ void Circle::Initialize()
     m_Materiale->Create(mtrl);
 
     // デフォルト：2Dモードのカメラ（必要なら変更）
-    if (m_Camera) m_Camera->SetCamera(CAMERA_2D);
+    m_Camera.SetCamera(CAMERA_2D);
 }
 
 void Circle::Update()

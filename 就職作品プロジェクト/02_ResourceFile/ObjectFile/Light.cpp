@@ -1,6 +1,6 @@
 #include "Light.h"
 
-Light::Light(Camera* cam) : Cube(cam)
+Light::Light(Camera& cam) : Cube(cam)
 {
 }
 
@@ -75,7 +75,7 @@ void Light::Draw()
 	m_VertexBuffer.SetGPU();
 	m_IndexBuffer.SetGPU();
 	if (m_Texture != nullptr) { m_Texture->SetGPU(); }
-	m_Camera->SetCamera(CAMERA_3D);
+	m_Camera.SetCamera(CAMERA_3D);
 
 	devicecontext->DrawIndexed(
 		36,							// 描画するインデックス数（四角形なんで４）

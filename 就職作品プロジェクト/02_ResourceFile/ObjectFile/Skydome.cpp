@@ -1,7 +1,7 @@
 #include "Skydome.h"
 #include "../Game.h"
 
-Skydome::Skydome(Camera* cam) : Sphere(cam)
+Skydome::Skydome(Camera& cam) : Sphere(cam)
 {
     m_Texture = nullptr;
 }
@@ -23,7 +23,7 @@ void Skydome::Spin(float spinX, float spinY, float spinZ)
     spinZ *= 0.0001f;
 
     // ‰ñ“]•ûŒü‚ÌÝ’è
-    auto camPos = m_Camera->GetPosition();
+    auto camPos = m_Camera.GetPosition();
     m_Position = NVector3(camPos.x, camPos.y, camPos.z);
     m_Rotation = NVector3(GetRotate().x + spinX, GetRotate().y + spinY, GetRotate().z + spinZ);
 

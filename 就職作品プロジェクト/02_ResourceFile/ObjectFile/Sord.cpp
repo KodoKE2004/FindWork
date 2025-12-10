@@ -1,6 +1,6 @@
 #include "Sord.h"
 
-Sord::Sord(Camera* cam) : Square(cam)
+Sord::Sord(Camera& cam) : Square(cam)
 {
 }
 

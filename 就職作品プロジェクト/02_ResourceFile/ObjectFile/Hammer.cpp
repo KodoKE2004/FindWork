@@ -4,7 +4,7 @@
 #include "Scene.h"
 #include <algorithm>
 
-Hammer::Hammer(Camera* cam) : Square(cam)
+Hammer::Hammer(Camera& cam) : Square(cam)
 {
 }
 

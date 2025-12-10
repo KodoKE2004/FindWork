@@ -5,7 +5,7 @@
 #include "../Debug.hpp"
 #include <iostream>
 
-Model::Model(Camera* cam) : Object(cam) {}
+Model::Model(Camera& cam) : Object(cam) {}
 
 void Model::Initialize()
 {
@@ -14,7 +14,7 @@ void Model::Initialize()
 
     SetShader("VS_Default","PS_Default"),
 
-    m_Camera->SetCamera(CAMERA_3D);
+    m_Camera.SetCamera(CAMERA_3D);
 
     for (const auto& mtrl : m_MeshModel.mesh->GetMaterials())
     {
@@ -141,7 +141,7 @@ void Model::DrawSky()
     ctx->RSSetState(m_RS_CullFront.Get());
     ctx->OMSetDepthStencilState(m_DSS_NoWrite_Lequal.Get(), 0);
 
-    auto camPos = m_Camera->GetPosition();
+    auto camPos = m_Camera.GetPosition();
     Matrix s = Matrix::CreateScale(m_SkyRadius);
     Matrix t = Matrix::CreateTranslation(camPos.x, camPos.y, camPos.z);
     Matrix world = s * t;

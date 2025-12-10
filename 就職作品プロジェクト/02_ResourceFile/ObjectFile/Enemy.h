@@ -6,7 +6,7 @@ class Enemy : public Square
 private:
     bool m_isDeath = false;
 public:
-    Enemy(Camera* cam);
+    Enemy(Camera & cam);
     ~Enemy() = default ;
     void Initialize() override;
     void Update()     override;

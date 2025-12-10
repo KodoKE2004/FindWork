@@ -4,7 +4,7 @@
 
 using namespace DirectX::SimpleMath;
 
-Bullet::Bullet(Camera* cam) : Square(cam), m_Direction(Vector3::Zero), m_Speed(10.0f), m_IsAlive(false) 
+Bullet::Bullet(Camera& cam) : Square(cam), m_Direction(Vector3::Zero), m_Speed(10.0f), m_IsAlive(false)
 {
 
 }
@@ -35,7 +35,7 @@ void Bullet::Update() {
     m_Position.y += m_Direction.y * m_Speed;
     m_Position.z += m_Direction.z * m_Speed;
 
-    Vector3 toCam = m_Camera->GetPosition() - Vector3(m_Position.x, m_Position.y, m_Position.z);
+    Vector3 toCam = m_Camera.GetPosition() - Vector3(m_Position.x, m_Position.y, m_Position.z);
     float yaw = std::atan2(toCam.x, toCam.z);
     float pitch = std::atan2(toCam.y, std::sqrt(toCam.x * toCam.x + toCam.z * toCam.z));
     m_Rotation.x = yaw;   // yaw

@@ -130,7 +130,7 @@ protected:
 public:
 
     TransitionBase() = default ;
-    TransitionBase(Camera* cam);
+    TransitionBase(Camera& cam);
     virtual ~TransitionBase() = default;
     virtual void Initialize() = 0;
     void Update(){};

@@ -13,7 +13,7 @@ class SnapshotOverlay : public Object
 
 public:
     SnapshotOverlay() = default;
-    SnapshotOverlay(Camera* cam) : Object(cam), m_SRV(nullptr), m_Alpha(0.0f){	}
+    SnapshotOverlay(Camera& cam) : Object(cam), m_SRV(nullptr), m_Alpha(0.0f){	}
     ~SnapshotOverlay() override = default;
 
     void Initialize() override {}

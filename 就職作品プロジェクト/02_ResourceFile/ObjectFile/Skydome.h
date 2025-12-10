@@ -6,7 +6,7 @@
 class Skydome : public Sphere {
 public:
     // Forward to Sphere constructor
-    Skydome(Camera* cam);
+    Skydome(Camera& cam);
 
     // Initialize sphere geometry and enable sky-dome mode with default settings
     void Initialize() override;

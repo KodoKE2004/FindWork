@@ -6,7 +6,7 @@ using namespace std;
 using namespace DirectX::SimpleMath;
 
 // コンストラクタ
-Square::Square(Camera* cam) :Object(cam)
+Square::Square(Camera& cam) :Object(cam)
 {
     m_Texture = std::make_shared<Texture>();
 	m_HitResult.m_Now = false;

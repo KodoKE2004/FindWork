@@ -13,7 +13,7 @@ private:
     NVector3 m_BasePosition = NVector3(0.0f, 0.0f, 0.0f);
 
 public:
-    CartWarning(Camera* cam);
+    CartWarning(Camera& cam);
     ~CartWarning() = default;
     void Initialize() override;
     void Update()     override;

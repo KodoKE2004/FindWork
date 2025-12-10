@@ -34,7 +34,7 @@ protected:
     Microsoft::WRL::ComPtr<ID3D11DepthStencilState> m_DSS_NoWrite_Lequal;
 
 public:
-    Model(Camera* cam);
+    Model(Camera& cam);
 
     void Initialize() override;
     void Update()     override;

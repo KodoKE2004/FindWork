@@ -19,7 +19,7 @@ protected:
     std::unique_ptr<Material> m_Materiale;	  //ƒ}ƒeƒŠƒAƒ‹
 
 public:
-    Circle(Camera* cam);
+    Circle(Camera& cam);
     void Initialize() override;
     void Update()     override;
     void Draw()       override;

@@ -93,7 +93,7 @@ private:
 
 public:
     Vector2 m_MoveTimer   { 0.0f, 0.0f };
-    Cart(Camera* cam);
+    Cart(Camera& cam);
 
     void Initialize() override;
     void Update()     override;

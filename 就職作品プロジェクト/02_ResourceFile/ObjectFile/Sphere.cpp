@@ -6,7 +6,7 @@
 
 using namespace DirectX::SimpleMath;
 
-Sphere::Sphere(Camera* cam) : Object(cam)
+Sphere::Sphere(Camera& cam) : Object(cam)
 {
     
 }
@@ -75,7 +75,7 @@ void Sphere::Initialize()
         m_Texture = textureMgr->GetTexture("Plane.png");
     }
 
-    m_Camera->SetCamera(CAMERA_3D);
+    m_Camera.SetCamera(CAMERA_3D);
 }
 
 void Sphere::Update()
@@ -128,7 +128,7 @@ void Sphere::DrawAsSky()
     devicecontext->OMSetDepthStencilState(m_DSS_NoWrite_Lequal.Get(), 0);
 
     // Build world matrix centered on camera
-    auto camPos = m_Camera->GetPosition();
+    auto camPos = m_Camera.GetPosition();
     Matrix s = Matrix::CreateScale(m_SkyRadius);
     Matrix r = Matrix::CreateFromYawPitchRoll(m_Rotation.y,m_Rotation.x,m_Rotation.z);
     Matrix t = Matrix::CreateTranslation(camPos.x, camPos.y, camPos.z);
@@ -145,7 +145,7 @@ void Sphere::DrawAsSky()
     {
         m_Texture->SetGPU();
     }
-    m_Camera->SetCamera(CAMERA_3D);
+    m_Camera.SetCamera(CAMERA_3D);
 
     devicecontext->DrawIndexed(m_IndexCount, 0, 0);
 
@@ -175,7 +175,7 @@ void Sphere::DrawAsMesh()
     {
         m_Texture->SetGPU();
     }
-    m_Camera->SetCamera(CAMERA_3D);
+    m_Camera.SetCamera(CAMERA_3D);
 
     devicecontext->DrawIndexed(m_IndexCount, 0, 0);
 }

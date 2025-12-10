@@ -4,7 +4,7 @@
 class Bullet : public Square
 {
 public:
-    Bullet(Camera* cam);
+    Bullet(Camera & cam);
 
     void Initialize() override;
     void Update() override;

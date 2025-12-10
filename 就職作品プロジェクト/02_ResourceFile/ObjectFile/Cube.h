@@ -23,7 +23,7 @@ protected:
 
 
 public:
-	Cube(Camera* cam);  // コンストラクタ
+	Cube(Camera& cam);  // コンストラクタ
 	~Cube() = default;  // デストラクタ
 
 	void Initialize();

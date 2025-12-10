@@ -9,7 +9,7 @@ private:
     float m_Elapsed = 0.0f;  
 
 public:
-    explicit Fade(Camera* cam);
+    explicit Fade(Camera& cam);
     void Initialize()       override;  
     void Update(float tick) override;      
     void Draw()             override;        

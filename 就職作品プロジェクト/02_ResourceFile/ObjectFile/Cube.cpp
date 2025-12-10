@@ -4,7 +4,7 @@
 
 using namespace DirectX::SimpleMath;
 
-Cube::Cube(Camera* cam) : Object(cam)
+Cube::Cube(Camera& cam) : Object(cam)
 {
 	
 }
@@ -189,7 +189,7 @@ void Cube::Initialize()
     TextureManager* textureMgr = Game::GetInstance();
 	m_Texture = textureMgr->GetTexture("dice.png");
 
-	m_Camera->SetCamera(CAMERA_3D);
+	m_Camera.SetCamera(CAMERA_3D);
 }
 
 
@@ -227,7 +227,7 @@ void Cube::Draw()
 	m_VertexBuffer.SetGPU();
 	m_IndexBuffer.SetGPU();
 	if (m_Texture != nullptr) {	m_Texture->SetGPU(); }
-	m_Camera->SetCamera(CAMERA_3D);
+	m_Camera.SetCamera(CAMERA_3D);
 
 	devicecontext->DrawIndexed(
 		36,							// 描画するインデックス数（四角形なんで４）

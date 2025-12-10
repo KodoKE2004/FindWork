@@ -1,7 +1,7 @@
 #include "BomTimeLimit.h"
 #include "Game.h"
 
-BomTimeLimit::BomTimeLimit(Camera* cam) : Square(cam)
+BomTimeLimit::BomTimeLimit(Camera& cam) : Square(cam)
 {
 }
 

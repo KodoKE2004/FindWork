@@ -7,7 +7,7 @@
 #include <vector>
 #include <algorithm>
 
-Fade::Fade(Camera* cam) : TransitionBase(cam)
+Fade::Fade(Camera& cam) : TransitionBase(cam)
 {
 }
 

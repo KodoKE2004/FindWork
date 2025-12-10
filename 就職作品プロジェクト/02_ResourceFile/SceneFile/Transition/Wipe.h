@@ -29,7 +29,7 @@ private:
     // 方向ごとにイージングを分岐させる
     float CalculateWipeEasing(const SceneTransitionParam& param, float t);
 public:
-    explicit Wipe(Camera* cam);
+    explicit Wipe(Camera& cam);
 
     void Initialize()       override;
     void Update(float tick) override;

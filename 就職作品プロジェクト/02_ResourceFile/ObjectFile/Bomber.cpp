@@ -3,7 +3,7 @@
 #include <algorithm>
 #include <cmath>
 
-Bomber::Bomber(Camera* cam) : Square(cam)
+Bomber::Bomber(Camera& cam) : Square(cam)
 {
 }
 

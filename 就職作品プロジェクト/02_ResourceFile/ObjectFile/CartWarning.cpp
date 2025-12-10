@@ -1,6 +1,6 @@
 #include "CartWarning.h"
 #include "Application.h"
-CartWarning::CartWarning(Camera* cam) : Square(cam)
+CartWarning::CartWarning(Camera& cam) : Square(cam)
 {
 }
 

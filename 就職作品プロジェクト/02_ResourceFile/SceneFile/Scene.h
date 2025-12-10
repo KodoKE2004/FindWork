@@ -119,6 +119,11 @@ public:
 		m_TimerList.emplace_back(timer);
 	}
 
+	static void ClearTimerList()
+	{
+        m_TimerList.clear();
+	}
+
 	// ‚»‚ê‚¼‚ê‚ªì¬‚µ‚½Timer•Ï”‚ğƒJƒEƒ“ƒg
 	void CountTimer(const float tick)
 	{	

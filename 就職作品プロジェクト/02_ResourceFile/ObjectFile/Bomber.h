@@ -13,7 +13,7 @@ private:
     bool     m_isReadyExpo = false;
 
 public:
-    Bomber(Camera* cam);
+    Bomber(Camera& cam);
     ~Bomber() = default;
     void Initialize() override;
     void Update()     override;

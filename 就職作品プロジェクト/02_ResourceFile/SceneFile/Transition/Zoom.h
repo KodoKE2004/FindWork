@@ -130,7 +130,7 @@ private:
     std::unique_ptr<CenterFade> m_CenterFade{};
 
 public:
-    explicit Zoom(Camera* cam);
+    Zoom(Camera& cam);
     void Initialize()       override;  
     void Update(float tick) override;      
     void Draw()             override;        

@@ -18,7 +18,7 @@ private:
     float m_MoveValue = 0.0f;            // ƒnƒ“ƒ}[‚ÌˆÚ“®—Ê
 
 public:
-    Hammer(Camera* cam);
+    Hammer(Camera& cam);
     ~Hammer() override = default ;
     void Initialize() override;
     void Update()     override;

@@ -6,7 +6,7 @@
 #include "Hammer.h"
 #include "Scene.h"
 
-Enemy::Enemy(Camera* cam) : Square(cam)
+Enemy::Enemy(Camera& cam) : Square(cam)
 {
 }
 
