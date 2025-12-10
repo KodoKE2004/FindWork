@@ -36,6 +36,7 @@ void Enemy::Update()
             bool isHit = Math::Collider2D::isHitSquareSquare(*hammer[0], *this);
             if (isHit && hammer[0]->IsAttack())
             {
+                Debug::Log("[è’ìÀ] Enemy - Hammer");
                 Death();                 
             }
         }
@@ -49,6 +50,7 @@ void Enemy::Update()
             bool isHit = Math::Collider2D::isHitSquareSquare(*sord[0], *this);
             if (isHit)
             {
+                Debug::Log("[è’ìÀ] Enemy - Sord");
                 Death();                 
             }
         }

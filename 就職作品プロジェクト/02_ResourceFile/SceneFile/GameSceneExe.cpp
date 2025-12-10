@@ -17,7 +17,6 @@ void GameSceneExe::Initialize()
     m_GameSpeedMass = 1.0f;
     m_isChange     = false;
     m_isFastChange = false;
-    m_ChangeFastTimer = 0.0f;
     m_hasRequestedSceneChange = false;
     
     //===============================
@@ -39,7 +38,6 @@ void GameSceneExe::Initialize()
     }
 
     // ’l‚Ì”½‰f
-    m_ChangeFastTime   = 2.0f * (1 - m_GameSpeedMass);
     m_TimerList.clear();
     
     RhythmBeatConst beatConfig{};
@@ -52,7 +50,6 @@ void GameSceneExe::Initialize()
         m_TimeGauge->SetFillRatio(1.0f);
     }
 
-    constexpr int GaugeTicks = 10;
     m_TimeGaugeStep = 1.0f / static_cast<float>(GaugeTicks);
 
     m_TimerList.clear();
@@ -73,14 +70,7 @@ void GameSceneExe::Initialize()
 void GameSceneExe::Update(float tick)
 {
 
-    if (m_isFastChange) 
-    {
-        TimeCountFast(tick);
-
-        if (IsFastTimeUp()) {
-            m_isChange = true;
-        }
-    }
+ 
 
     if (m_TimeGauge->GetFillRatio() < 1.0f &&
         !m_isChange) 
@@ -156,8 +146,3 @@ void GameSceneExe::Finalize()
     }
 }
 
-void GameSceneExe::FastChangeScene(float time)
-{
-    m_ChangeFastTime = time;
-    m_ChangeFastTimer = 0.0f;
-}

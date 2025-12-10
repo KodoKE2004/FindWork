@@ -69,9 +69,8 @@ void GameSceneCrush::Update(float tick)
     }
 
     GameSceneExe::Update(tick);
-    if (IsChange() && !m_hasRequestedSceneChange) 
+    if (IsChange() && m_hasRequestedSceneChange) 
     {
-        m_hasRequestedSceneChange = true;
         ApplyBeatDuration(GameToWait, m_RelationData);
         ChangeScenePop(GameToWait);
     }

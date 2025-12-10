@@ -4,7 +4,7 @@
 #include "Debug.hpp"
 
 MeshManager::MeshManager() {
-    Debug::Log("MeshManager: コンストラクタ - NULLモデル登録開始");
+    Debug::Log("[NULLモデル登録開始] MeshManager: コンストラクタ");
     // "NULL" モデルを最初に登録しておく
     Add(m_DefaultName, "spot.fbx", "spot");
 }
@@ -12,7 +12,7 @@ MeshManager::MeshManager() {
 MeshManager::MeshManager(std::string filePath)
 {
 	m_FilePath = std::move(filePath);
-    Debug::Log("MeshManager: コンストラクタ - NULLモデル登録開始");
+    Debug::Log("[NULLモデル登録開始] MeshManager: コンストラクタ");
     // "NULL" モデルを最初に登録しておく
     Add(m_DefaultName, "spot.fbx", "spot");
 
@@ -27,7 +27,7 @@ bool MeshManager::Add(const std::string& modelName,
     const std::string& texDirectory) {
     // 重複チェック
     if (m_MeshMap.find(modelName) != m_MeshMap.end()) {
-        Debug::Log("失敗 : modelName 被り " + modelName);
+        Debug::Log("[失敗] modelName 被り " + modelName);
         return false;
     }
 
@@ -38,7 +38,7 @@ bool MeshManager::Add(const std::string& modelName,
     // ロード
     auto meshModel = std::make_shared<StaticMesh>();
     if (!meshModel->Load(filePath, texPath)) {
-        Debug::Log("失敗 : モデル登録 " + modelName);
+        Debug::Log("[失敗] モデル登録 " + modelName);
         return false;
     }
 
@@ -49,17 +49,17 @@ bool MeshManager::Add(const std::string& modelName,
     info.texDirectory = texPath;
     m_MeshMap.emplace(modelName, std::move(info));
 
-    Debug::Log("成功 : モデル登録 " + modelName);
+    Debug::Log("[成功] モデル登録 " + modelName);
     return true;
 }
 
 std::shared_ptr<StaticMesh> MeshManager::GetStaticMesh(const std::string& modelName) {
     auto it = m_MeshMap.find(modelName);
     if (it != m_MeshMap.end()) {
-        Debug::Log("成功 : MeshModel取得 " + modelName);
+        Debug::Log("[成功] StaticMesh取得 " + modelName);
         return it->second.mesh;
     }
-    Debug::Log("警告 : GetMeshModel に失敗, デフォルトを返却 " + modelName);
+    Debug::Log("[失敗] デフォルトを返却  StaticMesh:" + modelName);
     // デフォルト ("NULL") を返す
     return m_MeshMap[m_DefaultName].mesh;
 }
@@ -67,10 +67,10 @@ std::shared_ptr<StaticMesh> MeshManager::GetStaticMesh(const std::string& modelN
 std::string MeshManager::GetFilePath(const std::string& modelName) {
     auto it = m_MeshMap.find(modelName);
     if (it != m_MeshMap.end()) {
-        Debug::Log("成功 : FilePath取得 " + modelName);
+        Debug::Log("[成功] FilePath取得 " + modelName);
         return it->second.filePath;
     }
-    Debug::Log("警告 : FilePath取得に失敗, デフォルトを返却 " + modelName);
+    Debug::Log("[失敗] デフォルトを返却 FilePath : " + modelName);
     return m_MeshMap[m_DefaultName].filePath;
 }
 

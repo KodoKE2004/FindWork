@@ -92,7 +92,7 @@ void GameSceneJump::Update(float tick)
 
     if (m_Player->m_HitResult.isTriggered())
     {
-        MyDebugLog(Debug::Log("ìñÇΩÇ¡ÇΩ");)
+        Debug::Log("[è’ìÀ] Player - Cart");
         m_RelationData.isClear = false;
     }
 
@@ -125,9 +125,8 @@ void GameSceneJump::Update(float tick)
     }
    
     GameSceneExe::Update(tick);
-    if (IsChange() && !m_hasRequestedSceneChange) 
+    if (IsChange() && m_hasRequestedSceneChange) 
     {
-        m_hasRequestedSceneChange = true;
         ApplyBeatDuration(GameToWait, m_RelationData);
         ChangeScenePop(GameToWait);
     }

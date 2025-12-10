@@ -25,7 +25,7 @@ protected:
     BomTimeLimit* m_Number = nullptr;	// カウントダウン用数字
     int     m_Counter = 0;				// カウントダウン用カウンター
 
-    static constexpr float m_GameSceneTimeBase = 5.0f;	// ゲーム時間の基準値
+	static constexpr int   GaugeTicks = 10;		// 拍で遷移の確認をとる
 
     float m_GameSpeedMass = 1.0f;						// ゲームスピード倍率・移動速度や制限時間まで変更
     int   m_Difficulty    = 0;							// 難易度 範囲 0 ～ 3 
@@ -33,9 +33,8 @@ protected:
 	bool  m_hasRequestedSceneChange = false;
 
 	// 先行でステージをクリア場合に適応するフラグ
-    float m_ChangeFastTime  = 0.0f;						// 速攻でシーン変更する時間
-    float m_ChangeFastTimer = 0.0f;						// 速攻でシーン変更するタイマー
     bool  m_isFastChange = false;						// 速攻シーン変更フラグ
+    float m_OneMeasure   = 0.0f;						// １小節の時間
 
 
 	//================================
@@ -63,16 +62,11 @@ public:
 
 	bool IsChange() const { return m_isChange; }
 
-    void TimeCountFast(const float tick) { m_ChangeFastTimer += tick; }
-    bool IsFastTimeUp() const			 { return m_ChangeFastTimer >= m_ChangeFastTime; }
     bool IsFastChange() const			 { return m_isFastChange; }
 
 	SCENE_NO GetSceneNo() const override {
 		return SCENE_NO::GAME_EXE;
-	}
-
-	void FastChangeScene(float time) ;
-    
+	}    
 
 };
 
