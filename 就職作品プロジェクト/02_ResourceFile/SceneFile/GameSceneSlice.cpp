@@ -76,6 +76,9 @@ void GameSceneSlice::Update(float tick)
         // UŒ‚”»’è
         for(auto it : enemys)
         { 
+            if (it->IsDeath()) {
+                continue;
+            }
             m_Sord->m_HitResult.SetHitResult(
                 isHitSquareSquare(*m_Sord, *it)
             );

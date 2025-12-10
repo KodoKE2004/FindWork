@@ -18,6 +18,9 @@ void GameSceneExe::Initialize()
     m_GameSpeedMass = 1.0f;
     m_isChange     = false;
     m_isFastChange = false;
+    m_FastChangeStartBeat  = -1;
+    m_FastChangeTargetBeat = -1;
+    m_hasScheduledFastChange = false;
     m_hasRequestedSceneChange = false;
     
     //===============================
@@ -119,7 +122,17 @@ void GameSceneExe::Update(float tick)
     // ŽžŠÔØ‚ê‚Ìê‡
     if (m_isFastChange)
     {
-
+        if (!m_hasScheduledFastChange)
+        {
+            m_FastChangeStartBeat = m_ElapsedBeats;
+            m_FastChangeTargetBeat = m_ElapsedBeats + FastChangeDelayBeats;
+            m_hasScheduledFastChange = true;
+        }
+        else if (m_ElapsedBeats >= m_FastChangeTargetBeat)
+        {
+            m_hasRequestedSceneChange = true;
+            m_isChange = true;
+        }
     }
 
     if (m_ForcedReturnBeatCount > 0 && m_ElapsedBeats >= m_ForcedReturnBeatCount)

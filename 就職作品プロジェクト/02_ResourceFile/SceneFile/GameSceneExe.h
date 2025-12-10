@@ -51,8 +51,12 @@ protected:
 	int m_ForcedReturnBeatCount = 0;			// 強制リターンまでの拍数
 
 	// 先行クリア時の早回し用フラグ
-    bool  m_isFastChange = false;				// 速攻シーン変更フラグ
-    float m_OneMeasure   = 0.0f;				// １小節の時間
+    bool  m_isFastChange = false;					// 速攻シーン変更フラグ
+    float m_OneMeasure   = 0.0f;					// １小節の時間
+	static constexpr int FastChangeDelayBeats = 3;	// 
+	int   m_FastChangeStartBeat = -1;				// 
+	int   m_FastChangeTargetBeat = -1;				// 
+	bool  m_hasScheduledFastChange = false;			// 
 
 
 

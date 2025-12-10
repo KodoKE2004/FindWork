@@ -21,11 +21,15 @@ void Enemy::Initialize()
 
 void Enemy::Update()
 {
+    if (IsDeath()) 
+        return;
+
     auto& instance = Game::GetInstance();
     
     //-------------------------------
     //          “–‚½‚è”»’èˆ—
     //-------------------------------
+
     switch (Scene::m_RelationData.previousScene)
     {
     case SCENE_NO::GAME_CRUSH:
