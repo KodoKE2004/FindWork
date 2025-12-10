@@ -122,7 +122,7 @@ void GameSceneWait::Initialize()
 
     // ステージ乱数選択処理   
     PrepareNextStage();
-    Debug::Log("===== クリアステージ数 : " + std::to_string(m_RelationData.stageCount) + "=====");
+    Debug::Log("===== クリアステージ数 : " + std::to_string(m_RelationData.stageCount) + " =====");
 }
 
 void GameSceneWait::Update(float tick)

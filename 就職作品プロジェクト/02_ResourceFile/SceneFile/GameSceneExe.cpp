@@ -42,13 +42,14 @@ void GameSceneExe::Initialize()
     // 値の反映
     m_TimerList.clear();
     
+    // スピードゲージ関連初期化
     RhythmBeatConst beatConfig{};
     beatConfig.Setup(120.0f, 4, 1); // 120 BPM, 4/4 拍子
     m_RelationData.rhythmBeat.Initialize(beatConfig);
 
-    m_ElapsedBeats = 0;
-    m_PreviousBeatIndex = 0;
-    m_ForcedReturnBeatCount = beatConfig.beatUnit * ForcedReturnMeasures;
+    m_ElapsedBeats = 0;                                                   // 経過拍数
+    m_PreviousBeatIndex = 0;                                              // 前回の拍数
+    m_ForcedReturnBeatCount = beatConfig.beatUnit * ForcedReturnMeasures; // 強制リターンまでの拍数
 
 
     m_TimeGaugeRatio = 1.0f;
@@ -76,14 +77,6 @@ void GameSceneExe::Initialize()
 
 void GameSceneExe::Update(float tick)
 {
-
- 
-
-    if (m_TimeGauge->GetFillRatio() < 1.0f &&
-        !m_isChange) 
-    {
-        m_isChange = true;
-    }
     
     CountTimer(tick);
    
@@ -119,9 +112,14 @@ void GameSceneExe::Update(float tick)
         }
     }
 
+    // シーン遷移の条件
+
+    // 速めにクリアした場合そこから一小節おいて遷移
+
+    // 時間切れの場合
     if (m_isFastChange)
     {
-        m_hasRequestedSceneChange = true;
+
     }
 
     if (m_ForcedReturnBeatCount > 0 && m_ElapsedBeats >= m_ForcedReturnBeatCount)

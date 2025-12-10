@@ -19,6 +19,9 @@ void GameSceneSlice::Initialize()
     auto& instance = Game::GetInstance();
     TextureManager* textureMgr = instance;
 
+    //===============================
+    //      シーン内オブジェクト生成
+    //===============================
     m_Skydome = instance.AddObject<Skydome>();
     m_Skydome->SetName("m_Skydome");
     m_Skydome->SetSkyDomeMode(true);
@@ -65,8 +68,8 @@ void GameSceneSlice::Update(float tick)
     std::vector<Enemy*> enemys = instance.GetObjects<Enemy>();
     if (IsAllDeathEnemy(enemys)) {
         // SceneExeで早めにクリアをした場合も想定
-        m_isFastChange = true;
-         m_RelationData.isClear = true;
+        StageClear();
+        StageChangeFast();
     }
     else
     {
@@ -87,7 +90,7 @@ void GameSceneSlice::Update(float tick)
 
     GameSceneExe::Update(tick);
 
-    if (IsChange() && m_hasRequestedSceneChange) 
+    if (IsChange()) 
     {
         ApplyBeatDuration(GameToWait, m_RelationData);
         ChangeScenePop(GameToWait);

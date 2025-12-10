@@ -47,7 +47,7 @@ void ResultScene::Initialize()
         }
     }
 
-    Debug::Log("===== クリアステージ数 : " + std::to_string(m_RelationData.stageCount) + "=====");
+    Debug::Log("===== クリアステージ数 : " + std::to_string(m_RelationData.stageCount) + " =====");
 }
 
 void ResultScene::Update(float tick)

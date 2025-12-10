@@ -71,6 +71,18 @@ public:
 	virtual void Update(float tick) ;
 	virtual void Finalize()			;
 
+	void StageFail()
+	{
+        m_RelationData.isClear = false;
+	}
+    void StageClear()	  
+	{ 
+        m_RelationData.isClear = true;
+	}
+    void StageChangeFast() 
+	{
+		m_isFastChange = true;
+	}
 
 	bool IsChange()		const { return m_isChange; }
     bool IsFastChange() const { return m_isFastChange; }
