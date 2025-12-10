@@ -169,7 +169,7 @@ void ChangeScenePush(SceneTransitionParam& state)
 	static_assert(std::is_base_of_v<Scene, T>, "T は Scene を継承している必要があります");
 	static_assert(!std::is_abstract_v<T>, "T は抽象クラスではいけません");
 
-	Debug::Log("\n[[検出]] シーンのPush \n");
+	Debug::Log("[[検出]] シーンのPush");
 
 	auto scene = new TransScene;
 	auto sceneNext = new T;
