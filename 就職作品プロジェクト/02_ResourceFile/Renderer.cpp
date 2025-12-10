@@ -292,24 +292,26 @@ void Renderer::Finalize()
     m_DebugGameTarget.reset();
 #endif
 
-	m_WorldBuffer->Release();
-	m_ViewBuffer->Release();
-	m_ProjectionBuffer->Release();
+	if (m_WorldBuffer)		{ m_WorldBuffer->Release();       m_WorldBuffer		 = nullptr; }
+	if (m_ViewBuffer)		{ m_ViewBuffer->Release();        m_ViewBuffer		 = nullptr; }
+	if (m_ProjectionBuffer) { m_ProjectionBuffer->Release();  m_ProjectionBuffer = nullptr; }
 
-	m_MaterialBuffer->Release();
-	m_TextureBuffer->Release();
-	m_LightBuffer->Release(); m_LightBuffer = nullptr; 
+	if (m_MaterialBuffer) { m_MaterialBuffer->Release();    m_MaterialBuffer = nullptr; }
+	if (m_TextureBuffer)  { m_TextureBuffer->Release();     m_TextureBuffer  = nullptr; }
+	if (m_LightBuffer)    { m_LightBuffer->Release();       m_LightBuffer    = nullptr; }
 
-	m_DeviceContext->ClearState();
+	if (m_DeviceContext)  { m_DeviceContext->ClearState(); }
 
-	m_RenderTargetView->Release();
-	m_SwapChain->Release();
-	m_DeviceContext->Release();
-	m_Device->Release();
+	if (m_RenderTargetView) { m_RenderTargetView->Release();  m_RenderTargetView = nullptr; }
+	if (m_SwapChain)		{ m_SwapChain->Release();         m_SwapChain		 = nullptr; }
+	if (m_DeviceContext)	{ m_DeviceContext->Release();     m_DeviceContext	 = nullptr; }
+	if (m_Device)			{ m_Device->Release();            m_Device			 = nullptr; }
 }
 
 void Renderer::Start()
 {
+	if (!m_DeviceContext || !m_RenderTargetView || !m_DepthStencilView) { return; }
+    // バックバッファのクリア
 	float clearColor[4] = { 0.5f, 0.5f, 0.5f, 1.0f };
 
 #ifdef _DEBUG
@@ -327,6 +329,7 @@ void Renderer::Start()
 
 void Renderer::Finish()
 {
+	if (!m_SwapChain || !m_DeviceContext) { return; }
 	// フレームの表示
 	m_SwapChain->Present(1, 0);
 
@@ -334,7 +337,7 @@ void Renderer::Finish()
 #ifdef _DEBUG
 	// デバッグレイヤーで未解放オブジェクトをレポート
 	ID3D11Debug* debugDev = nullptr;
-	if (SUCCEEDED(m_Device->QueryInterface(__uuidof(ID3D11Debug), (void**)&debugDev))) {
+	if (m_Device && SUCCEEDED(m_Device->QueryInterface(__uuidof(ID3D11Debug), (void**)&debugDev))) {
 		debugDev->ReportLiveDeviceObjects(D3D11_RLDO_DETAIL);
 		debugDev->Release();
 	}

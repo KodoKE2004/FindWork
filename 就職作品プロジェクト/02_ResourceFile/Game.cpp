@@ -52,7 +52,7 @@ void Game::Initialize()
 	});
 
 #endif
-	instance.GetCamera().Initialize();									// カメラの初期化
+	instance.m_Camera->Initialize();									// カメラの初期化
 
 	// マネージャーの初期化
 	// モデル・テクスチャのパスを設定
