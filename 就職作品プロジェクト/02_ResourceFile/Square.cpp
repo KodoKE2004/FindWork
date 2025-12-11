@@ -72,17 +72,17 @@ void Square::Initialize()
 
 }
 
-//======
-// 更新処理
-//======
+//======================
+//		  更新処理
+//======================
 void Square::Update()
 {
 	
 }
 
-//======
-// 描画処理
-//======
+//======================
+//		  描画処理
+//======================
 void Square::Draw()
 {
 	Renderer::SetBlendState(BS_ALPHABLEND);
@@ -129,9 +129,9 @@ void Square::Draw()
 		0);
 }
 
-//======
-// 終了処理
-//======
+//==========================
+//			終了処理
+//==========================
 void Square::Finalize()
 {
 
@@ -147,11 +147,16 @@ void Square::SetTexture(const char* imgname)
 
 	bool sts = m_Texture->LoadFromFile(imgname);
 	assert(sts != true);
+
+    Object::SetTexture(m_Texture);
 }
 
 void Square::SetTexture(std::shared_ptr<Texture> texture)
 {
 	m_Texture = texture;
+
+	Object::SetTexture(m_Texture);
+
 }
 
 // UV座標を指定

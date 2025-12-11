@@ -55,6 +55,9 @@ public:
 	void SetName(std::string name);
 
 	void SetTexture(std::shared_ptr<Texture> setTexture);
+	std::shared_ptr<Texture> GetTexture() const { 
+		return m_Texture; 
+	}
 
 	void SetColor(const Color color);
 	void SetColor(const float r, const float g, const float b, const float a);
