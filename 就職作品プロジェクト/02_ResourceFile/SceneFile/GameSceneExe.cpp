@@ -52,6 +52,19 @@ void GameSceneExe::Initialize()
     m_PreviousBeatIndex = 0;                                              // 前回の拍数
     m_ForcedReturnBeatCount = beatConfig.beatUnit * ForcedReturnMeasures; // 強制リターンまでの拍数
 
+    const auto& beatConst = m_RelationData.rhythmBeat.GetBeatConst();
+    const float secondsPerBeat = beatConst.secondsPerBeat;
+
+    m_OneMeasure = secondsPerBeat * static_cast<float>(beatConst.beatUnit);
+
+    constexpr float kGaugeFillPortion = 0.7f;
+    m_GaugeAnimDuration = secondsPerBeat * kGaugeFillPortion;
+
+    m_GaugeBeatElapsed = 0.0f;
+    m_GaugeStartRatio = 1.0f;
+    m_GaugeTargetRatio = 1.0f;
+
+    SetTimer(&m_GaugeBeatElapsed);
 
     m_TimeGaugeRatio = 1.0f;
     if (m_TimeGauge)
@@ -82,50 +95,82 @@ void GameSceneExe::Initialize()
 
 void GameSceneExe::Update(float tick)
 {
-    
     CountTimer(tick);
-   
-    // 爆弾のリズム処理
+
+    const float minRatio = 0.13f;
+
+    if (m_TimeGauge && !m_TimeGauge->IsReadyExpo() && m_GaugeAnimDuration > 0.0f)
+    {
+        m_GaugeBeatElapsed += tick;
+
+        float clampedTarget = std::clamp(m_GaugeTargetRatio, minRatio, 1.0f);
+        float ratio = clampedTarget;
+
+        if (m_GaugeBeatElapsed < m_GaugeAnimDuration)
+        {
+            float t = m_GaugeBeatElapsed / m_GaugeAnimDuration;
+
+            auto EaseOutCubic = [](float x)
+                {
+                    float inv = 1.0f - x;
+                    return 1.0f - inv * inv * inv;
+                };
+
+            float eased = EaseOutCubic(t);
+            ratio = m_GaugeStartRatio + (clampedTarget - m_GaugeStartRatio) * eased;
+        }
+        else
+        {
+            ratio = clampedTarget;
+        }
+
+        m_TimeGaugeRatio = ratio;
+        m_TimeGauge->SetFillRatio(m_TimeGaugeRatio);
+    }
+
     int advanceTick = m_RelationData.rhythmBeat.Update(tick);
     if (advanceTick > 0)
     {
         const int currentBeat = m_RelationData.rhythmBeat.GetBeatIndex();
         if (currentBeat > m_PreviousBeatIndex)
         {
-            m_ElapsedBeats     += currentBeat - m_PreviousBeatIndex;
+            m_ElapsedBeats += currentBeat - m_PreviousBeatIndex;
             m_PreviousBeatIndex = currentBeat;
         }
 
-        float ratio = m_TimeGauge->GetFillRatio();
-        ratio -= m_TimeGaugeStep * static_cast<float>(advanceTick);
+        m_GaugeBeatElapsed = 0.0f;
+        m_GaugeStartRatio = m_TimeGaugeRatio;
 
-        ratio = std::clamp(ratio, 0.13f, 1.0f);
-        if (ratio == 0.13f && m_TimeGauge->GetCount() > 0){
+        float nextTarget = m_GaugeStartRatio - m_TimeGaugeStep * static_cast<float>(advanceTick);
+        m_GaugeTargetRatio = std::clamp(nextTarget, minRatio, 1.0f);
+
+        if (m_GaugeTargetRatio <= minRatio &&
+            m_TimeGauge->GetCount() > 0 &&
+            !m_TimeGauge->IsReadyExpo())
+        {
             m_TimeGauge->ReadyExpo();
-            // SEの再生
-            PlaySE("clock",std::nullopt);
+            PlaySE("clock", std::nullopt);
         }
-        else if (m_TimeGauge->GetCount() == 0) {
+        else if (m_TimeGauge->GetCount() == 0)
+        {
             PlaySE("explosion", std::nullopt);
         }
 
-        if (m_TimeGauge->IsReadyExpo()) {
+        if (m_TimeGauge->IsReadyExpo())
+        {
             m_Number->SetCount(m_TimeGauge->GetCount());
             m_Number->ChangeTexture();
             m_TimeGauge->CountDown();
         }
-        else {
-            m_TimeGaugeRatio = ratio;
-            m_TimeGauge->SetFillRatio(m_TimeGaugeRatio);
-        }
     }
 
-    // 速めにクリアした場合そこから一小節おいて遷移
     if (m_isFastChange)
     {
         const int beatsPerBar = m_RelationData.rhythmBeat.GetBeatConst().beatUnit;
         const bool isValidBarLength = beatsPerBar > 0;
-        const bool isBarChanged = isValidBarLength && (m_ElapsedBeats > 0) && (m_ElapsedBeats % beatsPerBar == 0);
+        const bool isBarChanged = isValidBarLength &&
+            (m_ElapsedBeats > 0) &&
+            (m_ElapsedBeats % beatsPerBar == 0);
 
         if (isBarChanged)
         {
@@ -150,11 +195,10 @@ void GameSceneExe::Update(float tick)
         m_hasRequestedSceneChange = true;
     }
 
-    if (m_hasRequestedSceneChange) 
+    if (m_hasRequestedSceneChange)
     {
         m_isChange = true;
     }
-
 }
 
 void GameSceneExe::Finalize()

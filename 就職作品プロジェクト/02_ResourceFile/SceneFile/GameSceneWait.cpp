@@ -31,6 +31,10 @@ namespace
     };
 
     constexpr float kStageTransitionDelay = 1.0f;
+
+    constexpr uint32_t kLifeParticleCount = 12u;
+    constexpr float    kLifeParticleSpeed = 400.0f;
+    constexpr float    kLifeParticleLifeSec = 0.8f;
 }
 
 void GameSceneWait::Initialize()
@@ -78,6 +82,8 @@ void GameSceneWait::Initialize()
 
     auto& instance = Game::GetInstance();
     TextureManager* textureMgr = instance.GetInstance();
+
+    m_LifeParticleEmitter = std::make_shared<ParticleEmitter>(instance.GetCamera());
 
     // スカイドーム初期化
     // Skydome初期化 
@@ -177,9 +183,13 @@ void GameSceneWait::Update(float tick)
         // ライフを減らす
         m_RelationData.gameLife -= 1u;
         DecrementLife();
+
         m_wasDecrementLife = true;
     }
-
+    if (m_LifeParticleEmitter)
+    {
+        m_LifeParticleEmitter->Update(tick);
+    }
     // タイマー更新処理
     CountTimer(tick);
 

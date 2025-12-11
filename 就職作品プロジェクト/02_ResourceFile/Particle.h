@@ -6,6 +6,7 @@
 #include <random>
 #include <type_traits>
 #include <vector>
+#include <cstdint>
 
 class ParticleEmitter
 {
@@ -18,12 +19,9 @@ private:
         float elapsed = 0.0f;
     };
 
-    void Spawn(std::shared_ptr<Texture> texture,
-               const NVector3& position,
-               const NVector3& scale,
-               float baseSpeed,
-               float lifeTime
-               );
+    float m_BaseSpeed = 250.0f; 
+    float m_LifeTime = 0.5f;    
+    float m_Scale = 50.0f;      
 
     Camera& m_Camera;
     std::vector<Particle> m_Particles;
@@ -31,10 +29,25 @@ private:
     std::mt19937 m_RandomEngine;
     std::uniform_real_distribution<float> m_AngleDist;
     std::uniform_real_distribution<float> m_SpeedScaleDist;
+
 public :
-    explicit ParticleEmitter(Camera& cam);
-    ~ParticleEmitter() = default;
-    void Clear();
-    void Update(float deltaTime);
+    ParticleEmitter(Camera& cam)
+        : m_Camera(cam),
+        m_RandomEngine(std::random_device{}()),
+        m_AngleDist(0.0f, DirectX::XM_2PI)
+    {
+    }
+
+    void SetParams(float speed, float life, float scale)
+    {
+        m_BaseSpeed = speed;
+        m_LifeTime = life;
+        m_Scale = scale;
+    }
+
+    void Emit(std::shared_ptr<Texture> tex, const NVector3& pos, uint32_t count);
+
+    void Update(float dt);
     void Draw();
+    void Clear();
 };

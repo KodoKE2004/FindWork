@@ -31,6 +31,12 @@ protected:
     float	m_TimeGaugeRatio = 1.0f;	// スピードゲージの割合
     float	m_TimeGaugeStep  = 0.0f;	// スピードゲージの減少ステップ量
 	
+	float m_GaugeStartRatio   = 1.0f;	// この拍の頭での比率
+	float m_GaugeTargetRatio  = 1.0f;	// この拍で到達したい比率
+	float m_GaugeBeatElapsed  = 0.0f;	// 拍頭からの経過時間(秒)
+	float m_GaugeAnimDuration = 0.0f;	// 1拍の中で実際に動かす時間(秒)
+
+
     int     m_Counter = 0;				// カウントダウン用カウンター
 
 	static constexpr int   GaugeTicks = 10;		// 拍で遷移の確認をとる

@@ -1,69 +1,53 @@
 #include "Particle.h"
 
-ParticleEmitter::ParticleEmitter(Camera& cam) :
-    m_Camera(cam),
-    m_RandomEngine(std::random_device{}()),
-    m_AngleDist(0.0f, DirectX::XM_2PI),
-    m_SpeedScaleDist(0.6f, 1.0f)
+void ParticleEmitter::Emit(std::shared_ptr<Texture> tex,
+    const NVector3& pos,
+    uint32_t count)
 {
-    
+    if (!tex || count == 0) return;
+
+    for (uint32_t i = 0; i < count; i++)
+    {
+        float angle = m_AngleDist(m_RandomEngine);
+        float vx = std::cos(angle) * m_BaseSpeed;
+        float vy = std::sin(angle) * m_BaseSpeed;
+
+        Particle p;
+        p.quad = std::make_unique<Square>(m_Camera);
+        p.quad->Initialize();
+        p.quad->SetTexture(tex);
+        p.quad->SetPos(pos);
+        p.quad->SetScale(m_Scale, m_Scale, 1.0f);
+
+        p.velocity = { vx, vy, 0.0f };
+        p.lifeTime = m_LifeTime;
+        p.elapsed = 0.0f;
+
+        m_Particles.emplace_back(std::move(p));
+    }
 }
 
-void ParticleEmitter::Spawn(std::shared_ptr<Texture> texture, const NVector3& position, const NVector3& scale, float baseSpeed, float lifeTime)
+void ParticleEmitter::Update(float dt)
 {
-    Particle particle;
-    particle.quad = std::make_unique<Square>(m_Camera);
-    particle.quad->Initialize();
-    particle.quad->SetTexture(texture);
-    particle.quad->SetPos(position);
-    particle.quad->SetScale(scale);
+    for (auto& p : m_Particles)
+    {
+        p.elapsed += dt;
+        p.quad->SetPos(p.quad->GetPos() + p.velocity * dt);
+    }
 
-    float angle = m_AngleDist(m_RandomEngine);
-    float speed = baseSpeed * m_SpeedScaleDist(m_RandomEngine);
-    particle.velocity = NVector3(std::cos(angle) * speed, std::sin(angle) * speed, 0.0f);
+    m_Particles.erase(
+        std::remove_if(m_Particles.begin(), m_Particles.end(),
+            [](const Particle& p) { return p.elapsed >= p.lifeTime; }),
+        m_Particles.end());
+}
 
-    particle.lifeTime = lifeTime;
-    particle.elapsed = 0.0f;
-
-    m_Particles.emplace_back(std::move(particle));
+void ParticleEmitter::Draw()
+{
+    for (auto& p : m_Particles)
+        p.quad->Draw();
 }
 
 void ParticleEmitter::Clear()
 {
     m_Particles.clear();
 }
-
-void ParticleEmitter::Update(float deltaTime)
-{
-    float dt = deltaTime;
-    if (dt <= 0.0f)
-    {
-        return;
-    }
-
-    for (auto& particle : m_Particles)
-    {
-        particle.elapsed += dt;
-        auto nextPos = particle.quad->GetPos() + particle.velocity * dt;
-        particle.quad->SetPos(nextPos);
-    }
-
-    m_Particles.erase(
-        std::remove_if(
-            m_Particles.begin(),
-            m_Particles.end(),
-            [](const Particle& p)
-            {
-                return p.elapsed >= p.lifeTime;
-            }),
-        m_Particles.end());
-}
-
-void ParticleEmitter::Draw()
-{
-    for (auto& particle : m_Particles)
-    {
-        particle.quad->Draw();
-    }
-}
-
