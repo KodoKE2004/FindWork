@@ -59,9 +59,7 @@ public:
 	static void Finalize();			// ゲームの終了処理
 
 	// 現在のシーンを設定
-	static void SetSceneCurrent(Scene* newScene);
     static void SetSceneCurrent(std::shared_ptr<Scene> newScene);
-    static void SetSceneNext   (Scene* newScene);
     static void SetSceneNext(std::shared_ptr<Scene> newScene);
     // TranstionTextureをTransSceneと連携させる
 	void SetTransitionTexture(std::shared_ptr<TransitionBase> tex) {

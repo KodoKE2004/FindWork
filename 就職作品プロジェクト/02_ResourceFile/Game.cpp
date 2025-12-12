@@ -154,23 +154,11 @@ void Game::Finalize()
 	instance.m_SceneStack.clear();
 }
 
-void Game::SetSceneCurrent(Scene* newScene)
-{
-	auto& instance = GetInstance();
-	instance.m_SceneCurrent.reset(newScene);	// 新しいシーンを設定
-}
-
 void Game::SetSceneCurrent(std::shared_ptr<Scene> newScene)
 {
 	auto& instance = GetInstance();
     instance.m_SceneCurrent = newScene;	// 新しいシーンを設定
 	instance.m_SceneCurrent = std::move(newScene);
-}
-
-void Game::SetSceneNext(Scene* newScene)
-{
-	auto& instance = GetInstance();
-    instance.m_SceneNext.reset(newScene);	// 新しいシーンを設定	auto& instance = GetInstance();
 }
 
 void Game::SetSceneNext(std::shared_ptr<Scene> newScene)
