@@ -190,7 +190,7 @@ bool LoadTransitionSettingsFromCsv(const std::string& filePath, std::string& err
 	std::ifstream ifs(filePath);
 	if (!ifs.is_open())
 	{
-		errorMessage = "Failed to open file for reading: " + filePath;
+		errorMessage = "[[失敗]] ファイルを開けませんでした。" + filePath;
 		return false;
 	}
 
@@ -236,21 +236,21 @@ bool LoadTransitionSettingsFromCsv(const std::string& filePath, std::string& err
 		auto it = mapping.find(from + "->" + to);
 		if (it == mapping.end())
 		{
-			errorMessage = "Unknown transition entry: " + from + " -> " + to;
+			errorMessage = "[[失敗]] 未定義のシーン遷移です : " + from + " -> " + to;
 			return false;
 		}
 
 		TRANS_MODE mode{};
 		if (!TryParseTransMode(modeLabel, mode))
 		{
-			errorMessage = "Unknown mode: " + modeLabel;
+			errorMessage = "[[失敗]] 不明な遷移モードです : " + modeLabel;
 			return false;
 		}
 
 		EASING_TYPE easing{};
 		if (!TryParseEasingType(easingLabel, easing))
 		{
-			errorMessage = "Unknown easing: " + easingLabel;
+			errorMessage = "[[失敗]] 不明なイージングタイプです : " + easingLabel;
 			return false;
 		}
 
@@ -261,7 +261,7 @@ bool LoadTransitionSettingsFromCsv(const std::string& filePath, std::string& err
 		}
 		catch (...)
 		{
-			errorMessage = "Invalid duration: " + durationStr;
+			errorMessage = "[[失敗]] 遷移時間が不正です : " + durationStr;
 			return false;
 		}
 
@@ -274,7 +274,7 @@ bool LoadTransitionSettingsFromCsv(const std::string& filePath, std::string& err
 
 	if (!hasAny)
 	{
-		errorMessage = "No transition rows found in " + filePath;
+		errorMessage = "[[失敗]] 有効なシーン遷移設定が見つかりませんでした : " + filePath;
 		return false;
 	}
 
@@ -381,7 +381,7 @@ void DrawTransitionStateGUI()
 {
 	if (ImGui::Begin("Scene Transition Settings"))
 	{
-		static char csvPath[260] = "SceneTransitions.csv";
+		static char csvPath[260] = "TransitionData.csv";
 		static std::string csvStatus;
 
 		ImGui::InputText("CSV Path", csvPath, IM_ARRAYSIZE(csvPath));
@@ -390,11 +390,11 @@ void DrawTransitionStateGUI()
 			std::string error;
 			if (LoadTransitionSettingsFromCsv(csvPath, error))
 			{
-				csvStatus = std::string("Loaded settings from ") + csvPath;
+				csvStatus = std::string("true LoadCSV : ") + csvPath;
 			}
 			else
 			{
-				csvStatus = std::string("Load failed: ") + error;
+				csvStatus = std::string("false LoadCSV : ") + error;
 			}
 		}
 		ImGui::SameLine();
@@ -403,11 +403,11 @@ void DrawTransitionStateGUI()
 			std::string error;
 			if (SaveTransitionSettingsToCsv(csvPath, error))
 			{
-				csvStatus = std::string("Saved settings to ") + csvPath;
+				csvStatus = std::string("ture SaveCSV : ") + csvPath;
 			}
 			else
 			{
-				csvStatus = std::string("Save failed: ") + error;
+				csvStatus = std::string("false SaveCSV : ") + error;
 			}
 		}
 
@@ -418,12 +418,12 @@ void DrawTransitionStateGUI()
 
 		ImGui::Separator();
 
-		TransGui::DrawTransitionStateUI("Title  -> Wait", TitleToWait);
-		TransGui::DrawTransitionStateUI("Wait   -> Game", WaitToGame);
-		TransGui::DrawTransitionStateUI("Game   -> Wait", GameToWait);
+		TransGui::DrawTransitionStateUI("Title  -> Wait",   TitleToWait);
+		TransGui::DrawTransitionStateUI("Wait   -> Game",   WaitToGame);
+		TransGui::DrawTransitionStateUI("Game   -> Wait",   GameToWait);
 		TransGui::DrawTransitionStateUI("Wait   -> Result", WaitToResult);
-		TransGui::DrawTransitionStateUI("Result -> Title", ResultToTitle);
-		TransGui::DrawTransitionStateUI("Result -> Game", ResultToGame);
+		TransGui::DrawTransitionStateUI("Result -> Title",  ResultToTitle);
+		TransGui::DrawTransitionStateUI("Result -> Game",   ResultToGame);
 	}
 	ImGui::End();
 }

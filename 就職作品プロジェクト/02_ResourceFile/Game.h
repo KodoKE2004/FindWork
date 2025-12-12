@@ -40,7 +40,8 @@ private:
 	std::shared_ptr<ShaderManager>		 m_ShaderManager;	// シェーダーをまとめたもの
 	std::shared_ptr<AudioManager>		 m_AudioManager;	// オーディオマネージャー
 
-
+    static void InitializeTransitionCSV();					// トランジションCSVの初期化
+    static void FinalizeTransitionCSV();					// トランジションCSVの終了処理
 
 public:
 	//================================
@@ -94,10 +95,10 @@ public:
 	}
 	
 	// メッシュマネージャー
-	[[nodiscard]] operator MeshManager*   () const { return m_MeshManager.get(); }
-	[[nodiscard]] operator TextureManager*() const { return m_TextureManager.get(); }
-	[[nodiscard]] operator ShaderManager* () const { return m_ShaderManager.get(); }
-	[[nodiscard]] operator AudioManager*  () const { return m_AudioManager.get(); }
+	[[nodiscard]] operator MeshManager*    () const { return m_MeshManager.get(); }
+	[[nodiscard]] operator TextureManager* () const { return m_TextureManager.get(); }
+	[[nodiscard]] operator ShaderManager*  () const { return m_ShaderManager.get(); }
+	[[nodiscard]] operator AudioManager*   () const { return m_AudioManager.get(); }
 
 
 	// Debug関連

@@ -1,10 +1,14 @@
 #include "Game.h"
 #include "Renderer.h"
 #include "Application.h"
-#include "SceneFile/SceneList.h"
+#include "SceneList.h"
 #include "DebugUI.h"
 #include "Audio.h" 
-#include "SceneFile/Transition/Fade.h"
+#include "Fade.h"
+#include "CSVLoader.h"
+
+#include <fstream>
+#include <cstdio>
 #include <algorithm>
 #include <cmath>
 #include <cstdint>
@@ -13,6 +17,36 @@
 
 
 std::unique_ptr<Game> Game::m_pInstance  = nullptr; // ゲームのインスタンス初期化
+
+void Game::InitializeTransitionCSV()
+{
+    constexpr char kTransitionCsvPath[] = "AssetFile/Csv/TransitionData.csv";
+
+	std::string loadError;
+	if (!LoadTransitionSettingsFromCsv(kTransitionCsvPath, loadError))
+	{
+        Debug::Log(loadError);
+	}
+	else
+	{
+        Debug::Log("[[成功]] LoadTransitionSettingFromCsv : " + std::string(kTransitionCsvPath));
+	}
+}
+
+void Game::FinalizeTransitionCSV()
+{
+	std::filesystem::path savePath = SaveDir() / "TransitionData.csv";
+	std::string saveError;
+
+	if (!SaveTransitionSettingsToCsv(savePath.string(), saveError))
+	{
+		Debug::Log(saveError);
+	}
+	else
+	{
+		Debug::Log("[[成功]] SaveTransitionSettingFromCsv : " + savePath.string());
+	}
+}
 
 Game::Game()
 {
@@ -54,6 +88,8 @@ void Game::Initialize()
 	});
 
 #endif
+	
+	InitializeTransitionCSV();
 
 	// マネージャーの初期化
 	// モデル・テクスチャのパスを設定
@@ -138,6 +174,7 @@ void Game::Draw()
 void Game::Finalize()
 {
 	auto& instance = GetInstance();
+	FinalizeTransitionCSV();
 
 #ifdef _DEBUG
 	instance.m_Grid.Finalize();
