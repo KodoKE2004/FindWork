@@ -144,12 +144,16 @@ void GameSceneExe::Update(float tick)
         float nextTarget = m_GaugeStartRatio - m_TimeGaugeStep * static_cast<float>(advanceTick);
         m_GaugeTargetRatio = std::clamp(nextTarget, minRatio, 1.0f);
 
+        
+
         if (m_GaugeTargetRatio <= minRatio &&
-            m_TimeGauge->GetCount() > 0 &&
-            !m_TimeGauge->IsReadyExpo())
+            m_TimeGauge->GetCount() > 0 )
         {
-            m_TimeGauge->ReadyExpo();
             PlaySE("clock", std::nullopt);
+            if (!m_TimeGauge->IsReadyExpo()) 
+            {
+                m_TimeGauge->ReadyExpo();
+            }
         }
         else if (m_TimeGauge->GetCount() == 0)
         {

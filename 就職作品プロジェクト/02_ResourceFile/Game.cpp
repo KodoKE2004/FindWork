@@ -66,13 +66,10 @@ void Game::Initialize()
 	// シェーダー登録
 	instance.m_ShaderManager->Add("VS_Default",ShaderStage::VS);
 	instance.m_ShaderManager->Add("PS_Default",ShaderStage::PS);
-
 	instance.m_ShaderManager->Add("VS_Unlit"  ,ShaderStage::VS);
 	instance.m_ShaderManager->Add("PS_Unlit"  ,ShaderStage::PS);
-
 	instance.m_ShaderManager->Add("VS_Alpha"  ,ShaderStage::VS);
 	instance.m_ShaderManager->Add("PS_Alpha"  ,ShaderStage::PS);
-
 	instance.m_ShaderManager->Add("PS_CenterFade", ShaderStage::PS);
 
 #ifdef _DEBUG

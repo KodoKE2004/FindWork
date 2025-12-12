@@ -1,4 +1,5 @@
 #pragma once
+#include <string>
 #include <memory>
 #include <wrl/client.h>
 #include <d3d11.h>
@@ -86,6 +87,9 @@ extern SceneTransitionParam GameToWait;
 extern SceneTransitionParam WaitToResult;
 extern SceneTransitionParam ResultToTitle;
 extern SceneTransitionParam ResultToGame;
+
+bool SaveTransitionSettingsToCsv  (const std::string& filePath, std::string& errorMessage);
+bool LoadTransitionSettingsFromCsv(const std::string& filePath, std::string& errorMessage);
 
 void DrawTransitionStateGUI();
 

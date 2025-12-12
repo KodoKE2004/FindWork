@@ -1,0 +1,7 @@
+from,to,mode,duration,easing
+Title,Wait,,,
+Wait,Game,,,
+Game,Wait,,,
+Wait,Result,,,
+Reslut,Title,,,
+Reslut,Game,,,

@@ -1,6 +1,12 @@
 #include <cassert>
 #include <cmath>
 #include <imgui.h>
+#include <algorithm>
+#include <cctype>
+#include <fstream>
+#include <sstream>
+#include <unordered_map>
+
 #include "TransitionBase.h"
 #include "Collider.h"
 #ifdef _DEBUG
@@ -91,6 +97,189 @@ namespace TransGui
 
 }
 
+namespace
+{
+	struct TransitionEntry
+	{
+		const char* from;
+		const char* to;
+        SceneTransitionParam* param;
+    };
+
+	constexpr TransitionEntry kTransitionEntries[] = 
+	{
+		{"Title",  "Wait",   &TitleToWait},
+		{"Wait",   "Game",   &WaitToGame},
+		{"Game",   "Wait",   &GameToWait},
+		{"Wait",   "Result", &WaitToResult},
+		{"Result", "Title",  &ResultToTitle},
+		{"Result", "Game",   &ResultToGame},
+    };
+
+	std::string Trim(const std::string& value)
+	{
+        const auto first = std::find_if_not(value.begin(),
+											value.end(),
+											[](unsigned char ch) {
+												return std::isspace(ch);
+											});
+
+		const auto last = std::find_if_not(value.rbegin(),
+										   value.rend(),
+										   [](unsigned char ch) {
+											   return std::isspace(ch);
+										    }).base();
+
+		if (first >= last) {
+			return {};
+		}
+        return std::string(first, last);
+	}
+
+	bool TryParseTransMode(const std::string& label, TRANS_MODE& mode)
+	{
+		for (int i = 0; i < TransGui::kTransModeCount; ++i)
+		{
+			if (label == TransGui::kTransModeLabels[i])
+			{
+				mode = static_cast<TRANS_MODE>(i);
+				return true;
+			}
+		}
+		return false;
+	}
+
+	bool TryParseEasingType(const std::string& label, EASING_TYPE& easing)
+	{
+		for (int i = 0; i < TransGui::kEaseingTypeCount; ++i)
+		{
+			if (label == TransGui::kEasingLabels[i])
+			{
+				easing = static_cast<EASING_TYPE>(i);
+				return true;
+			}
+		}
+		return false;
+	}
+}
+
+bool SaveTransitionSettingsToCsv(const std::string& filePath, std::string& errorMessage)
+{
+	std::ofstream ofs(filePath);
+	if (!ofs.is_open())
+	{
+		errorMessage = "Failed to open file for writing: " + filePath;
+		return false;
+	}
+
+	ofs << "from,to,mode,duration,easing\n";
+	for (const auto& entry : kTransitionEntries)
+	{
+		const auto& param = *entry.param;
+		ofs << entry.from << ',' << entry.to << ','
+			<< TransGui::kTransModeLabels[param.ModeAsIndex()] << ','
+			<< param.duration << ','
+			<< TransGui::kEasingLabels[param.EasingAsIndex()] << '\n';
+	}
+
+	return true;
+}
+
+bool LoadTransitionSettingsFromCsv(const std::string& filePath, std::string& errorMessage)
+{
+	std::ifstream ifs(filePath);
+	if (!ifs.is_open())
+	{
+		errorMessage = "Failed to open file for reading: " + filePath;
+		return false;
+	}
+
+	std::unordered_map<std::string, SceneTransitionParam*> mapping;
+	for (const auto& entry : kTransitionEntries)
+	{
+		mapping.emplace(std::string(entry.from) + "->" + entry.to, entry.param);
+	}
+
+	std::string line;
+	bool hasAny = false;
+	while (std::getline(ifs, line))
+	{
+		if (line.empty())
+		{
+			continue;
+		}
+
+		std::stringstream ss(line);
+		std::string from;
+		std::string to;
+		std::string modeLabel;
+		std::string durationStr;
+		std::string easingLabel;
+
+		if (!std::getline(ss, from, ',')) continue;
+		if (!std::getline(ss, to, ',')) continue;
+		if (!std::getline(ss, modeLabel, ',')) continue;
+		if (!std::getline(ss, durationStr, ',')) continue;
+		if (!std::getline(ss, easingLabel)) continue;
+
+		from = Trim(from);
+		to   = Trim(to);
+		modeLabel   = Trim(modeLabel);
+		durationStr = Trim(durationStr);
+		easingLabel = Trim(easingLabel);
+
+		if (from == "from" && to == "to")
+		{
+			continue;
+		}
+
+		auto it = mapping.find(from + "->" + to);
+		if (it == mapping.end())
+		{
+			errorMessage = "Unknown transition entry: " + from + " -> " + to;
+			return false;
+		}
+
+		TRANS_MODE mode{};
+		if (!TryParseTransMode(modeLabel, mode))
+		{
+			errorMessage = "Unknown mode: " + modeLabel;
+			return false;
+		}
+
+		EASING_TYPE easing{};
+		if (!TryParseEasingType(easingLabel, easing))
+		{
+			errorMessage = "Unknown easing: " + easingLabel;
+			return false;
+		}
+
+		float duration = 0.0f;
+		try
+		{
+			duration = std::stof(durationStr);
+		}
+		catch (...)
+		{
+			errorMessage = "Invalid duration: " + durationStr;
+			return false;
+		}
+
+		SceneTransitionParam* param = it->second;
+		param->mode = mode;
+		param->duration = duration;
+		param->easing = easing;
+		hasAny = true;
+	}
+
+	if (!hasAny)
+	{
+		errorMessage = "No transition rows found in " + filePath;
+		return false;
+	}
+
+	return true;
+}
 
 #ifdef _DEBUG
 NVector3 TransitionBase::ConvertToDebugScreenPosition(const NVector3& position) const
@@ -187,16 +376,54 @@ void TransitionBase::ApplyPhaseSetting(TRANS_PHASE phase)
 	m_Phase = phase;
 }
 
+
 void DrawTransitionStateGUI()
 {
 	if (ImGui::Begin("Scene Transition Settings"))
 	{
-		TransGui::DrawTransitionStateUI("Title  -> Wait"  , TitleToWait);
-		TransGui::DrawTransitionStateUI("Wait   -> Game"  , WaitToGame);
-		TransGui::DrawTransitionStateUI("Game   -> Wait"  , GameToWait);
+		static char csvPath[260] = "SceneTransitions.csv";
+		static std::string csvStatus;
+
+		ImGui::InputText("CSV Path", csvPath, IM_ARRAYSIZE(csvPath));
+		if (ImGui::Button("Load CSV"))
+		{
+			std::string error;
+			if (LoadTransitionSettingsFromCsv(csvPath, error))
+			{
+				csvStatus = std::string("Loaded settings from ") + csvPath;
+			}
+			else
+			{
+				csvStatus = std::string("Load failed: ") + error;
+			}
+		}
+		ImGui::SameLine();
+		if (ImGui::Button("Save CSV"))
+		{
+			std::string error;
+			if (SaveTransitionSettingsToCsv(csvPath, error))
+			{
+				csvStatus = std::string("Saved settings to ") + csvPath;
+			}
+			else
+			{
+				csvStatus = std::string("Save failed: ") + error;
+			}
+		}
+
+		if (!csvStatus.empty())
+		{
+			ImGui::TextWrapped("%s", csvStatus.c_str());
+		}
+
+		ImGui::Separator();
+
+		TransGui::DrawTransitionStateUI("Title  -> Wait", TitleToWait);
+		TransGui::DrawTransitionStateUI("Wait   -> Game", WaitToGame);
+		TransGui::DrawTransitionStateUI("Game   -> Wait", GameToWait);
 		TransGui::DrawTransitionStateUI("Wait   -> Result", WaitToResult);
-		TransGui::DrawTransitionStateUI("Result -> Title" , ResultToTitle);
-		TransGui::DrawTransitionStateUI("Result -> Game"  , ResultToGame);
+		TransGui::DrawTransitionStateUI("Result -> Title", ResultToTitle);
+		TransGui::DrawTransitionStateUI("Result -> Game", ResultToGame);
 	}
 	ImGui::End();
 }

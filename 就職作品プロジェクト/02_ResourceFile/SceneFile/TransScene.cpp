@@ -19,7 +19,6 @@ TransScene::TransScene()
 
 TransScene::~TransScene()
 {
-
 }
 
 void TransScene::Initialize()
