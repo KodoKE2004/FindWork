@@ -27,8 +27,8 @@ class TransScene : public Scene
 {
 private:
 	// シーンの前後 
-	std::weak_ptr<Scene> m_SceneOld ;
-	std::weak_ptr<Scene> m_SceneNext;
+	std::shared_ptr<Scene> m_SceneOld ;
+	std::shared_ptr<Scene> m_SceneNext;
 
 	// オフスクリーン用
 	std::unique_ptr<RenderTarget> m_RenderTarget;

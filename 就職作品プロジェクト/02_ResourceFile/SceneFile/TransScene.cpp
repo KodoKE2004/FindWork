@@ -87,13 +87,10 @@ void TransScene::Update(float tick)
 		return;
 	}
 
-	// ‘JˆÚ‰‰o‚ÌXV
-	auto sceneOld  = m_SceneOld .lock();
-    auto sceneNext = m_SceneNext.lock();
 
 	const auto phase = m_TransitionTexture->GetPhase();
     
-	if (!sceneOld) {
+	if (!m_SceneOld) {
         m_Step = STEP::FINISH;
 		return;
 	}
@@ -102,31 +99,27 @@ void TransScene::Update(float tick)
 
 	if (!m_isChange && m_TransitionTexture->IsChange())
 	{
-        sceneOld->Finalize();
+		m_SceneOld->Finalize();
 #ifdef _RELEASE
 		if (sceneNext) {
 			DrawNextScene();
 		}
 #endif // _RELEASE
-
-		sceneNext->Initialize();
-
+		m_SceneNext->Initialize();
+		Debug::Log("[[‘JˆÚ]] sceneNext->Initialize()");
 #ifdef _DEBUG
-		if (sceneNext) {
+		if (m_SceneNext) {
 			DrawNextScene();
 		}
 #endif // _DEBUG
 		m_isChange = true;
+	}
 
-		if (phase == TRANS_PHASE::FINISH) {
-			m_Step = STEP::FINISH;
-		}
-		if (m_Step == STEP::FINISH) {
-			instance.SetSceneCurrent(sceneNext);
-			Finalize();
-			return;
-		}
-
+	if (phase == TRANS_PHASE::FINISH)
+	{
+		m_Step = STEP::FINISH;
+		instance.SetSceneCurrent(m_SceneNext);
+		return;
 	}
 
 
@@ -158,8 +151,7 @@ void TransScene::Finalize()
 void TransScene::DrawNextScene()
 {
 	auto& instance  = Game::GetInstance();
-    auto  sceneNext = m_SceneNext.lock();
-	if (!sceneNext) {
+	if (!m_SceneNext) {
 		return;
 	}
 
@@ -174,7 +166,7 @@ void TransScene::DrawNextScene()
 	const float clear[4]{ 0, 0, 0, 0 };
 	m_RenderTarget->Begin(context, clear);
 	{
-		for (auto obj : sceneNext->GetSceneObjects()) {
+		for (auto obj : m_SceneNext->GetSceneObjects()) {
 			if (obj) obj->Draw();
 		}
 	}

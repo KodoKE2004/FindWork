@@ -163,6 +163,7 @@ void Game::SetSceneCurrent(Scene* newScene)
 void Game::SetSceneCurrent(std::shared_ptr<Scene> newScene)
 {
 	auto& instance = GetInstance();
+    instance.m_SceneCurrent = newScene;	// V‚µ‚¢ƒV[ƒ“‚ğİ’è
 	instance.m_SceneCurrent = std::move(newScene);
 }
 
