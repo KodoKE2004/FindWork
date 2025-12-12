@@ -12,11 +12,12 @@
 
 // トランジションのフェーズ
 // 遷移の進行状況を示す列挙型
-enum class PHASE
+enum class TRANS_PHASE
 {
+    NONE,
     TRANS_IN,
     TRANS_OUT,
-    FINISH
+    FINISH,
 };
 
 // トランジションのモード
@@ -107,7 +108,7 @@ protected:
     std::unique_ptr<Material> m_Materiale;	//マテリアル
 
     Microsoft::WRL::ComPtr<ID3D11ShaderResourceView> m_InputSRV;
-    PHASE m_Phase;
+    TRANS_PHASE m_Phase;
     TRANS_MODE m_TransMode;
 
     // 遷移演出のパラメータ
@@ -149,7 +150,7 @@ public:
     //          遷移パラメータ群
     //--------------------------------
     float EvaluateEasing(const SceneTransitionParam& param, float t);
-    void  ApplyPhaseSetting(PHASE phase);
+    void  ApplyPhaseSetting(TRANS_PHASE phase);
 
     //===============================
     //         セッター・ゲッター
@@ -170,7 +171,7 @@ public:
         m_transParam = param;
     }
 
-    float GetDurationForPhase(PHASE phase) const
+    float GetDurationForPhase(TRANS_PHASE phase) const
     {
         return max(m_transParam.duration, 0.0001f);
     }
@@ -183,8 +184,8 @@ public:
     }
     
     // 遷移状況の変数
-    void  SetPhase(PHASE phase) { m_Phase = phase; }
-    PHASE GetPhase()            { return m_Phase; }
+    void  SetPhase(TRANS_PHASE phase) { m_Phase = phase; }
+    TRANS_PHASE GetPhase()            { return m_Phase; }
     bool IsChange()             { return m_isChange; }
 
 };

@@ -26,7 +26,7 @@ void Wipe::Initialize()
 
     SetColor(0.0f, 0.0f, 0.0f, 1.0f);
 
-    m_Phase = PHASE::TRANS_IN;
+    m_Phase = TRANS_PHASE::TRANS_IN;
     m_Elapsed = 0.0f;
 
     if (m_Duration <= 0.0f) m_Duration = 1.0f;
@@ -63,8 +63,8 @@ void Wipe::Update(float tick)
 {
     switch (m_Phase)
     {
-    case PHASE::TRANS_OUT: WIPE_OUT(tick); break;
-    case PHASE::TRANS_IN : WIPE_IN (tick); break;
+    case TRANS_PHASE::TRANS_OUT: WIPE_OUT(tick); break;
+    case TRANS_PHASE::TRANS_IN : WIPE_IN (tick); break;
     default: break;
     }
 }
@@ -74,7 +74,7 @@ void Wipe::Draw()
 
     if (auto* srv = GetTextureSRV())
     {
-        if (m_Phase == PHASE::FINISH)
+        if (m_Phase == TRANS_PHASE::FINISH)
         {
             Renderer::SetDepthEnable(false);
             Renderer::SetBlendState(BS_ALPHABLEND);
@@ -132,12 +132,12 @@ void Wipe::ApplyWipeAmount(float amount)
     // ‰Šúó‘Ô‚Í‘S‰æ–Ê•\Ž¦
     const float depth = GetPos().z;
     NVector3 start,end;
-    if (m_Phase == PHASE::TRANS_IN)
+    if (m_Phase == TRANS_PHASE::TRANS_IN)
     {
         start = NVector3(m_StartPos.x, m_StartPos.y, depth);
         end   = NVector3(CheckPoint.x, CheckPoint.y, depth);
     }
-    else if (m_Phase == PHASE::TRANS_OUT)
+    else if (m_Phase == TRANS_PHASE::TRANS_OUT)
     {
         start = NVector3(CheckPoint.x, CheckPoint.y, depth);
         end   = NVector3(m_EndPos.x  , m_EndPos.y, depth);
@@ -171,7 +171,7 @@ float Wipe::CalculateWipeEasing(const SceneTransitionParam& param, float t)
 
 void Wipe::WIPE_IN(float tick)
 {
-    if (m_Phase != PHASE::TRANS_IN) return;
+    if (m_Phase != TRANS_PHASE::TRANS_IN) return;
 
     m_Elapsed += tick;
 
@@ -184,7 +184,7 @@ void Wipe::WIPE_IN(float tick)
 
     if (t >= 1.0f)
     {
-        ApplyPhaseSetting(PHASE::TRANS_OUT);
+        ApplyPhaseSetting(TRANS_PHASE::TRANS_OUT);
         SetPos(0.0f,0.0f,0.0f);
         m_isChange = true;
         m_Elapsed = 0.0f;
@@ -193,7 +193,7 @@ void Wipe::WIPE_IN(float tick)
 
 void Wipe::WIPE_OUT(float tick)
 {
-    if (m_Phase != PHASE::TRANS_OUT) return;
+    if (m_Phase != TRANS_PHASE::TRANS_OUT) return;
 
     m_Elapsed += tick;
 
@@ -206,7 +206,7 @@ void Wipe::WIPE_OUT(float tick)
 
     if (t >= 1.0f)
     {
-        m_Phase = PHASE::FINISH;
+        m_Phase = TRANS_PHASE::FINISH;
         m_Elapsed = 0.0f;
     }
 }

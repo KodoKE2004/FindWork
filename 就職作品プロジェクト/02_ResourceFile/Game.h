@@ -24,6 +24,7 @@ class Game
 private:
 	static std::unique_ptr<Game>		 m_pInstance;		  // ゲームのインスタンス
 	std::shared_ptr<Scene>				 m_SceneCurrent;	  // 現在のシーン
+    std::shared_ptr<Scene>				 m_SceneNext;		  // 次のシーン
 	std::unique_ptr<Input>				 m_Input;			  // 入力管理
 	std::unique_ptr<Camera>				 m_Camera;			  // カメラ
 	std::vector<std::unique_ptr<Object>> m_GameObjects;		  // オブジェクト
@@ -60,7 +61,8 @@ public:
 	// 現在のシーンを設定
 	static void SetSceneCurrent(Scene* newScene);
     static void SetSceneCurrent(std::shared_ptr<Scene> newScene);
-
+    static void SetSceneNext   (Scene* newScene);
+    static void SetSceneNext(std::shared_ptr<Scene> newScene);
     // TranstionTextureをTransSceneと連携させる
 	void SetTransitionTexture(std::shared_ptr<TransitionBase> tex) {
 		m_TransitionTexture = tex;
@@ -179,22 +181,10 @@ void ChangeScenePush(SceneTransitionParam& state)
 
 	auto scene     = std::make_shared<TransScene>();
 	auto sceneNext = std::make_shared<T>();
-
     auto sceneCurrent = instance.GetCurrentScene();
 
-    // シーン間の受け渡しデータを設定
-	SceneRelationData relationData{};
-	if (sceneCurrent)
-	{
-		relationData = sceneCurrent->GetRelationData();
-		relationData.previousScene = sceneCurrent->GetSceneNo();
-	}
-	relationData.nextScene = sceneNext->GetSceneNo();
-
-	sceneNext->SetRelationData(relationData);
-	scene->SetRelationData(relationData);
-
     instance.ScenePush(sceneCurrent);
+    instance.SetSceneNext(sceneNext);
 
 	scene->SetOldScene(sceneCurrent);
 	scene->SetNextScene(sceneNext);
@@ -223,6 +213,7 @@ inline void ChangeScenePop(SceneTransitionParam& state)
     // 現在のシーン
     auto scene = std::make_shared<TransScene>();
     auto sceneNext = instance.ScenePop();
+
 	if (!sceneNext) {
 		return;
 	}

@@ -26,7 +26,7 @@ void Fade::Initialize()
     ApplyAlpha();
 
     // フェードアウトから開始
-    ApplyPhaseSetting(PHASE::TRANS_OUT);
+    ApplyPhaseSetting(TRANS_PHASE::TRANS_OUT);
 
     // テクスチャの取得
     TextureManager* textureMgr = Game::GetInstance();
@@ -73,8 +73,8 @@ void Fade::Update(float tick)
 {
     switch (m_Phase)
     {
-    case PHASE::TRANS_OUT: FADE_OUT(tick); break;
-    case PHASE::TRANS_IN:  FADE_IN(tick); break;
+    case TRANS_PHASE::TRANS_OUT: FADE_OUT(tick); break;
+    case TRANS_PHASE::TRANS_IN:  FADE_IN(tick); break;
     default: break;
     }
 }
@@ -129,7 +129,7 @@ void Fade::SetTransMode(TRANS_MODE transMode)
 
 void Fade::FADE_IN(float tick)
 {
-    if (m_Phase != PHASE::TRANS_IN) return;
+    if (m_Phase != TRANS_PHASE::TRANS_IN) return;
 
     m_Elapsed += tick;
     const auto& param = m_transParam;
@@ -142,7 +142,7 @@ void Fade::FADE_IN(float tick)
     if (t >= 1.0f)
     {
         m_Alpha = 0.0f;
-        m_Phase = PHASE::FINISH;
+        m_Phase = TRANS_PHASE::FINISH;
     }
 
     ApplyAlpha();
@@ -150,7 +150,7 @@ void Fade::FADE_IN(float tick)
 
 void Fade::FADE_OUT(float tick)
 {
-    if (m_Phase != PHASE::TRANS_OUT) return;
+    if (m_Phase != TRANS_PHASE::TRANS_OUT) return;
 
     m_Elapsed += tick;
     const auto& param = m_transParam;
@@ -162,7 +162,7 @@ void Fade::FADE_OUT(float tick)
     if (t >= 1.0f)
     {
         m_Alpha = 1.0f;
-        ApplyPhaseSetting(PHASE::TRANS_IN);
+        ApplyPhaseSetting(TRANS_PHASE::TRANS_IN);
         m_isChange = true;
         m_Elapsed = 0.0f;
     }

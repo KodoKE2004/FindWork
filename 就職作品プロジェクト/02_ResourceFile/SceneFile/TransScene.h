@@ -7,6 +7,8 @@
 #include "TransitionBase.h"
 #include "SnapshotOverlay.h"
 
+#include <memory>
+
 // 列挙型PHASEの進行状況の監視
 // OFF    : トランジション処理を行わない
 // START  : トランジション処理を開始する
@@ -25,8 +27,8 @@ class TransScene : public Scene
 {
 private:
 	// シーンの前後 
-	std::shared_ptr<Scene> m_SceneOld  = nullptr;
-	std::shared_ptr<Scene> m_SceneNext = nullptr;
+	std::weak_ptr<Scene> m_SceneOld ;
+	std::weak_ptr<Scene> m_SceneNext;
 
 	// オフスクリーン用
 	std::unique_ptr<RenderTarget> m_RenderTarget;
@@ -75,8 +77,8 @@ public:
 		m_transParam  = param;  
 	}
 
-	void SetOldScene (std::shared_ptr<Scene> sceneOld)     { m_SceneOld  = sceneOld;  }
-	void SetNextScene(std::shared_ptr<Scene> sceneNext)    { m_SceneNext = sceneNext; }
+	void SetOldScene (const std::shared_ptr<Scene>& sceneOld)     { m_SceneOld  = sceneOld;  }
+	void SetNextScene(const std::shared_ptr<Scene>& sceneNext)    { m_SceneNext = sceneNext; }
 	void SetTransMode(TRANS_MODE mode)     { m_TransMode = mode;	  }
 	void SetStep(STEP step)				   { m_Step		 = step;	  }
 	void SetTimer(float timer)			   { m_Timer	 = timer;	  }

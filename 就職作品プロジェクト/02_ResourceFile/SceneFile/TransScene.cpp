@@ -12,16 +12,14 @@
 
 
 TransScene::TransScene()
-	: m_SceneOld (nullptr)
-	, m_SceneNext(nullptr)
-	, m_Step(STEP::OFF)
+	: m_Step(STEP::OFF)
 	, m_TransMode(TRANS_MODE::FADE)
 {
 }
 
 TransScene::~TransScene()
 {
-	Finalize();
+
 }
 
 void TransScene::Initialize()
@@ -90,39 +88,48 @@ void TransScene::Update(float tick)
 	}
 
 	// 遷移演出の更新
-	m_TransitionTexture->Update(tick);
+	auto sceneOld  = m_SceneOld .lock();
+    auto sceneNext = m_SceneNext.lock();
 
 	const auto phase = m_TransitionTexture->GetPhase();
-    // 演出がINからOUTに変わった瞬間を検出
-	if (!m_isChange && m_TransitionTexture->IsChange() )
-	{
+    
+	if (!sceneOld) {
+        m_Step = STEP::FINISH;
+		return;
+	}
 
-		m_SceneOld->Finalize();
+	m_TransitionTexture->Update(tick);
+
+	if (!m_isChange && m_TransitionTexture->IsChange())
+	{
+        sceneOld->Finalize();
 #ifdef _RELEASE
-		if (m_SceneNext) {
+		if (sceneNext) {
 			DrawNextScene();
 		}
 #endif // _RELEASE
 
-		m_SceneNext->Initialize();
+		sceneNext->Initialize();
 
 #ifdef _DEBUG
-		if (m_SceneNext) {
+		if (sceneNext) {
 			DrawNextScene();
 		}
 #endif // _DEBUG
 		m_isChange = true;
-	}
-	if (phase == PHASE::FINISH)
-	{
-		m_Step = STEP::FINISH;
+
+		if (phase == TRANS_PHASE::FINISH) {
+			m_Step = STEP::FINISH;
+		}
+		if (m_Step == STEP::FINISH) {
+			instance.SetSceneCurrent(sceneNext);
+			Finalize();
+			return;
+		}
+
 	}
 
-	if (m_Step == STEP::FINISH)
-	{
-		instance.SetSceneCurrent(m_SceneNext);
-		return;
-	}
+
 }
 
 void TransScene::Finalize()
@@ -150,20 +157,24 @@ void TransScene::Finalize()
 
 void TransScene::DrawNextScene()
 {
-	auto& instance = Game::GetInstance();
+	auto& instance  = Game::GetInstance();
+    auto  sceneNext = m_SceneNext.lock();
+	if (!sceneNext) {
+		return;
+	}
 
-	auto* device  = Renderer::GetDevice();
-	auto* context = Renderer::GetDeviceContext();
-	auto  vp	  = Renderer::GetViewport();
+	auto* device   = Renderer::GetDevice();
+	auto* context  = Renderer::GetDeviceContext();
+	auto  viewport = Renderer::GetViewport();
 
 	m_RenderTarget = std::make_unique<RenderTarget>();
 
-	m_RenderTarget->Create(device, (UINT)vp.Width, (UINT)vp.Height, true);
+	m_RenderTarget->Create(device, (UINT)viewport.Width, (UINT)viewport.Height, true);
 
 	const float clear[4]{ 0, 0, 0, 0 };
 	m_RenderTarget->Begin(context, clear);
 	{
-		for (auto obj : m_SceneNext->GetSceneObjects()) {
+		for (auto obj : sceneNext->GetSceneObjects()) {
 			if (obj) obj->Draw();
 		}
 	}

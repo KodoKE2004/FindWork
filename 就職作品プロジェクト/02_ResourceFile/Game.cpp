@@ -17,6 +17,7 @@ std::unique_ptr<Game> Game::m_pInstance  = nullptr; // ƒQ[ƒ€‚ÌƒCƒ“ƒXƒ^ƒ“ƒX‰Šú‰
 Game::Game()
 {
     m_SceneCurrent = nullptr; // Œ»İ‚ÌƒV[ƒ“‰Šú‰»
+    m_SceneNext	   = nullptr; // Ÿ‚ÌƒV[ƒ“‰Šú‰»
 }
 
 void Game::Initialize()
@@ -162,7 +163,19 @@ void Game::SetSceneCurrent(Scene* newScene)
 void Game::SetSceneCurrent(std::shared_ptr<Scene> newScene)
 {
 	auto& instance = GetInstance();
-	instance.m_SceneCurrent = newScene;
+	instance.m_SceneCurrent = std::move(newScene);
+}
+
+void Game::SetSceneNext(Scene* newScene)
+{
+	auto& instance = GetInstance();
+    instance.m_SceneNext.reset(newScene);	// V‚µ‚¢ƒV[ƒ“‚ğİ’è	auto& instance = GetInstance();
+}
+
+void Game::SetSceneNext(std::shared_ptr<Scene> newScene)
+{
+	auto& instance = GetInstance();
+    instance.m_SceneNext = newScene;
 }
 
 Game& Game::GetInstance()

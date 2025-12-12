@@ -111,7 +111,7 @@ TransitionBase::TransitionBase(Camera& cam) : Object(cam)
 {
     m_Texture = std::make_shared<Texture>();
 	m_TransMode = TRANS_MODE::NUM;
-    m_Phase = PHASE::FINISH;
+    m_Phase = TRANS_PHASE::NONE;
 }
 
 // テクスチャを指定
@@ -179,7 +179,7 @@ float TransitionBase::EvaluateEasing(const SceneTransitionParam& param, float t)
 	}
 }
 
-void TransitionBase::ApplyPhaseSetting(PHASE phase)
+void TransitionBase::ApplyPhaseSetting(TRANS_PHASE phase)
 {
 	const auto& param = m_transParam;
 	m_Duration = max(param.duration, 0.0001f);
