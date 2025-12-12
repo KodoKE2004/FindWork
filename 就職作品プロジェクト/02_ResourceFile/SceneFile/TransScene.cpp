@@ -102,7 +102,7 @@ void TransScene::Update(float tick)
 
 		if (m_SceneNext) {
             m_SceneNext->Initialize();
-            Debug::Log("NextScene Initialize");
+            Debug::Log("[[åüèo]] NextScene Initialize");
 			DrawNextScene();
 		}
 		m_isChange = true;

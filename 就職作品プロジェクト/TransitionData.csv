@@ -1,7 +1,2 @@
-from,to,mode,duration,easing
-Title,Wait,Wipe Top -> Bottom,1,InOut Sine
-Wait,Game,Wipe Top -> Bottom,1,InOut Sine
-Game,Wait,Wipe Right -> Left,1,InOut Sine
-Wait,Result,Wipe Left -> Right,1,InOut Sine
-Result,Title,Fade,1,InOut Sine
-Result,Game,Wipe Bottom -> Top,1,InOut Sine
+﻿from,to,mode,duration,easing
+Title,Wait,Fade,1,InOut Sine2573Wait,Game,Fade,1,InOut Sine2573Game,Wait,Fade,1,InOut Sine2573Wait,Result,Fade,1,InOut Sine2573Result,Title,Fade,1,InOut Sine2573Result,Game,Fade,1,InOut Sine2573

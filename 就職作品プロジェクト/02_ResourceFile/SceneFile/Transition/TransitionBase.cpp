@@ -4,6 +4,7 @@
 #include <algorithm>
 #include <cctype>
 #include <fstream>
+#include <filesystem>
 #include <sstream>
 #include <unordered_map>
 
@@ -165,24 +166,40 @@ namespace
 
 bool SaveTransitionSettingsToCsv(const std::string& filePath, std::string& errorMessage)
 {
-	std::ofstream ofs(filePath);
+	std::filesystem::path path(filePath);
+	if (!path.parent_path().empty())
+	{
+		std::error_code ec{};
+		std::filesystem::create_directories(path.parent_path(), ec);
+		if (ec)
+		{
+			errorMessage = "Failed to create directories: " + ec.message();
+			return false;
+		}
+	}
+
+	std::ofstream ofs(path, std::ios::binary | std::ios::trunc);	
 	if (!ofs.is_open())
 	{
 		errorMessage = "Failed to open file for writing: " + filePath;
 		return false;
 	}
 
-	ofs << "from,to,mode,duration,easing\n";
+	const unsigned char bom[3] = { 0xEF, 0xBB, 0xBF };
+	ofs.write(reinterpret_cast<const char*>(bom), 3);
+
+	ofs.imbue(std::locale::classic());
+	ofs << "from,to,mode,duration,easing\r\n";
 	for (const auto& entry : kTransitionEntries)
 	{
 		const auto& param = *entry.param;
 		ofs << entry.from << ',' << entry.to << ','
 			<< TransGui::kTransModeLabels[param.ModeAsIndex()] << ','
 			<< param.duration << ','
-			<< TransGui::kEasingLabels[param.EasingAsIndex()] << '\n';
+			<< TransGui::kEasingLabels[param.EasingAsIndex()] << '\r\n';
 	}
 
-	return true;
+	return static_cast<bool>(ofs);
 }
 
 bool LoadTransitionSettingsFromCsv(const std::string& filePath, std::string& errorMessage)

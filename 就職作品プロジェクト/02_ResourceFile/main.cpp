@@ -9,7 +9,6 @@ int main(void)
 {
 #ifdef _DEBUG
 
-
 #endif
 
 	// アプリケーション実行

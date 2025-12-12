@@ -247,6 +247,7 @@
     <ClCompile Include="02_ResourceFile\Particle.cpp">
       <Filter>SourceFile\Core</Filter>
     </ClCompile>
+    <ClCompile Include="pch.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="02_ResourceFile\SceneFile\Scene.h">
@@ -462,6 +463,7 @@
     <ClInclude Include="02_ResourceFile\Particle.h">
       <Filter>SourceFile\Core</Filter>
     </ClInclude>
+    <ClInclude Include="pch.h" />
   </ItemGroup>
   <ItemGroup>
     <FxCompile Include="ShaderFile\Common.hlsl">
