@@ -100,24 +100,19 @@ void TransScene::Update(float tick)
 	if (!m_isChange && m_TransitionTexture->IsChange())
 	{
 		m_SceneOld->Finalize();
-#ifdef _RELEASE
-		if (sceneNext) {
-			DrawNextScene();
-		}
-#endif // _RELEASE
-		m_SceneNext->Initialize();
-		Debug::Log("[[‘JˆÚ]] sceneNext->Initialize()");
-#ifdef _DEBUG
+
 		if (m_SceneNext) {
+            m_SceneNext->Initialize();
+            Debug::Log("NextScene Initialize");
 			DrawNextScene();
 		}
-#endif // _DEBUG
 		m_isChange = true;
 	}
 
 	if (phase == TRANS_PHASE::FINISH)
 	{
 		m_Step = STEP::FINISH;
+		Finalize();
 		instance.SetSceneCurrent(m_SceneNext);
 		return;
 	}
