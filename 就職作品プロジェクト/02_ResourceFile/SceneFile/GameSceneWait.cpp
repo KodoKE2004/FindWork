@@ -101,8 +101,10 @@ void GameSceneWait::Initialize()
     m_ShouldTransitionToStage = false;
     m_wasDecrementLife        = false;
 
+    m_LifeGame.clear();
+    m_LifeCount = m_RelationData.gameLife;
     // ライフオブジェクトの生成
-    for(uint32_t i = 0; i < m_RelationData.gameLife; ++i)
+    for(uint32_t i = 0; i < m_LifeCount; ++i)
     {
         const float distance = 130.0f;
 

@@ -71,7 +71,8 @@ void GameSceneCrush::Update(float tick)
     GameSceneExe::Update(tick);
     if (IsChange() && m_hasRequestedSceneChange) 
     {
-        ApplyBeatDuration(GameToWait, m_RelationData);
+        const float beatMultiplier = (IsFastChange() && m_RelationData.isClear) ? 0.7f : 1.0f;
+        ApplyBeatDuration(GameToWait, m_RelationData, beatMultiplier);
         ChangeScenePop(GameToWait);
     }
 }

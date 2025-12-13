@@ -48,12 +48,14 @@ struct SceneRelationData
 // ƒŠƒYƒ€‚É‡‚í‚¹‚ÄƒV[ƒ“‘JˆÚŽžŠÔ‚ð’²®‚·‚éŠÖ”
 namespace
 {
-	void ApplyBeatDuration(SceneTransitionParam& transition, const SceneRelationData& relationData)
+	void ApplyBeatDuration(SceneTransitionParam& transition,
+						   const SceneRelationData& relationData,
+						   float beatLengthMultiplier = 1.0f)
 	{
 		const float secondsPerBeat = relationData.rhythmBeat.GetBeatConst().secondsPerBeat;
 		if (secondsPerBeat > 0.0f)
 		{
-			transition.duration = secondsPerBeat;
+			transition.duration = secondsPerBeat * beatLengthMultiplier;
 		}
 	}
 }

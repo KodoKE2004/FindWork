@@ -170,16 +170,18 @@ void GameSceneExe::Update(float tick)
 
     if (m_isFastChange)
     {
+        // 先行シーン変更
         const int beatsPerBar = m_RelationData.rhythmBeat.GetBeatConst().beatUnit;
+        // 小節の最後の拍の開始時かどうか
         const bool isValidBarLength = beatsPerBar > 0;
-        const bool isBarChanged = isValidBarLength &&
-            (m_ElapsedBeats > 0) &&
-            (m_ElapsedBeats % beatsPerBar == 0);
-
-        if (isBarChanged)
+        // 小節内の拍位置
+        const int beatInBar = isValidBarLength ? (m_ElapsedBeats % beatsPerBar) : 0;
+        // 小節の最後の拍の開始時かどうか
+        const bool isStartOfLastBeat = isValidBarLength && (beatInBar == beatsPerBar - 1);
+        if (isStartOfLastBeat)
         {
             const int currentMeasureIndex = m_ElapsedBeats / beatsPerBar;
-            if (currentMeasureIndex <= 2)
+            if (currentMeasureIndex <= ForcedReturnMeasures)
             {
                 if (m_ShouldSkipNextBoundary)
                 {
@@ -230,15 +232,6 @@ void GameSceneExe::Finalize()
 void GameSceneExe::StageChangeFast()
 {
     m_isFastChange = true;
-    const int beatsPerBar = m_RelationData.rhythmBeat.GetBeatConst().beatUnit;
-    if (beatsPerBar > 0)
-    {
-        const int beatInBar = m_ElapsedBeats % beatsPerBar;
-        m_ShouldSkipNextBoundary = (beatsPerBar - beatInBar == 1);
-    }
-    else
-    {
-        m_ShouldSkipNextBoundary = false;
-    }
+    m_ShouldSkipNextBoundary = false;
 }
 
