@@ -48,7 +48,7 @@ struct SceneRelationData
 // ƒŠƒYƒ€‚É‡‚í‚¹‚ÄƒV[ƒ“‘JˆÚŠÔ‚ğ’²®‚·‚éŠÖ”
 namespace
 {
-	void ApplyBeatDuration(SceneTransitionParam& transition,
+	void ApplyBeatDuration(SceneTransitionParam&    transition,
 						   const SceneRelationData& relationData,
 						   float beatLengthMultiplier = 1.0f)
 	{

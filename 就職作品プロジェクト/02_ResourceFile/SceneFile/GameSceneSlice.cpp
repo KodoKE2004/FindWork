@@ -29,13 +29,9 @@ void GameSceneSlice::Initialize()
     m_Skydome->SetRadius(500.0f);
     m_MySceneObjects.emplace_back(m_Skydome);
 
-    m_TimeGauge = instance.AddObject<Bomber>();
-    m_TimeGauge->SetName("m_TimeGauge");
-    m_MySceneObjects.emplace_back(m_TimeGauge);
-
-    m_Number = instance.AddObject<BomTimeLimit>();
-    m_Number->SetName("m_Number");
-    m_MySceneObjects.emplace_back(m_Number);
+    m_Bomber = instance.AddObject<Bomber>();
+    m_Bomber->SetName("m_TimeGauge");
+    m_MySceneObjects.emplace_back(m_Bomber);
 
     m_Sord = instance.AddObject<Sord>();
     m_Sord->SetName("m_Sord");

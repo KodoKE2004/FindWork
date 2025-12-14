@@ -1,8 +1,14 @@
 #pragma once
 #include "Square.h"
+#include "BomTimeLimit.h"
+
 class Bomber : public Square
 {
 private:
+
+    Square* m_Rope   = nullptr;  
+    Square* m_Number = nullptr;
+    
     float m_FillRatio = 1.0f;
     int   m_Count     = 3;
 
@@ -33,6 +39,12 @@ public:
     }
 private:
     void UpdateUV();
+
+    // Object‚Ì¶’[‚ğŠî€‚ÉTexture‚ÌUV‚É‡‚í‚¹‚Ä
+    // Pos‚ÆScale‚ğ•â³
     void ApplyFillTransform();
+
+    // 
+    void CountDownTexture();
 };
 

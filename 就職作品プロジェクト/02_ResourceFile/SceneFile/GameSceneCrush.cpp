@@ -28,14 +28,10 @@ void GameSceneCrush::Initialize()
     m_Skydome->SetRadius(500.0f);
     m_MySceneObjects.emplace_back(m_Skydome);
 
-    m_TimeGauge = instance.AddObject<Bomber>();
-    m_TimeGauge->SetName("m_TimeGauge");
-    m_MySceneObjects.emplace_back(m_TimeGauge);
+    m_Bomber = instance.AddObject<Bomber>();
+    m_Bomber->SetName("m_Bomber");
+    m_MySceneObjects.emplace_back(m_Bomber);
     
-    m_Number = instance.AddObject<BomTimeLimit>();
-    m_Number->SetName("m_Number");
-    m_MySceneObjects.emplace_back(m_Number);
-
     m_Hammer = instance.AddObject<Hammer>();
     m_Hammer->SetName("m_Hammer");
     m_Hammer->SetPos(0.0f, 200.0f, 1.0f);
@@ -69,6 +65,8 @@ void GameSceneCrush::Update(float tick)
     }
 
     GameSceneExe::Update(tick);
+
+    return;
     if (IsChange() && m_hasRequestedSceneChange) 
     {
         const float beatMultiplier = (IsFastChange() && m_RelationData.isClear) ? 0.7f : 1.0f;

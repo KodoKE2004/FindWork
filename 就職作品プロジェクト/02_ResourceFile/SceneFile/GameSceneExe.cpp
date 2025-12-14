@@ -3,8 +3,9 @@
 #include "input.h"
 #include "DebugUI.h"
 #include "Game.h"
-#include "ObjectFile/Model.h"
-#include "ObjectFile/Skydome.h"
+#include "Model.h"
+#include "Skydome.h"
+#include "Collider.h"
 #include <algorithm>
 
 void GameSceneExe::Initialize()
@@ -50,26 +51,26 @@ void GameSceneExe::Initialize()
 
     m_ElapsedBeats = 0;                                                   // 経過拍数
     m_PreviousBeatIndex = 0;                                              // 前回の拍数
-    m_ForcedReturnBeatCount = beatConfig.beatUnit * ForcedReturnMeasures; // 強制リターンまでの拍数
+    m_ForcedReturnBeatCount = beatConfig.m_BeatUnit * ForcedReturnMeasures; // 強制リターンまでの拍数
 
     const auto& beatConst = m_RelationData.rhythmBeat.GetBeatConst();
     const float secondsPerBeat = beatConst.secondsPerBeat;
 
-    m_OneMeasure = secondsPerBeat * static_cast<float>(beatConst.beatUnit);
+    m_OneMeasure = secondsPerBeat * static_cast<float>(beatConst.m_BeatUnit);
 
     constexpr float kGaugeFillPortion = 0.7f;
     m_GaugeAnimDuration = secondsPerBeat * kGaugeFillPortion;
 
     m_GaugeBeatElapsed = 0.0f;
-    m_GaugeStartRatio = 1.0f;
+    m_GaugeStartRatio  = 1.0f;
     m_GaugeTargetRatio = 1.0f;
 
     SetTimer(&m_GaugeBeatElapsed);
 
     m_TimeGaugeRatio = 1.0f;
-    if (m_TimeGauge)
+    if (m_Bomber)
     {
-        m_TimeGauge->SetFillRatio(1.0f);
+        m_Bomber->SetFillRatio(1.0f);
     }
 
     m_TimeGaugeStep = 1.0f / static_cast<float>(GaugeTicks);
@@ -97,26 +98,18 @@ void GameSceneExe::Update(float tick)
 {
     CountTimer(tick);
 
-    const float minRatio = 0.13f;
-
-    if (m_TimeGauge && !m_TimeGauge->IsReadyExpo() && m_GaugeAnimDuration > 0.0f)
+    if (m_Bomber && m_GaugeAnimDuration > 0.0f)
     {
         m_GaugeBeatElapsed += tick;
 
-        float clampedTarget = std::clamp(m_GaugeTargetRatio, minRatio, 1.0f);
-        float ratio = clampedTarget;
+        float clampedTarget = std::clamp(m_GaugeTargetRatio, 0.0f, 1.0f);
+        float ratio         = clampedTarget;
 
         if (m_GaugeBeatElapsed < m_GaugeAnimDuration)
         {
             float t = m_GaugeBeatElapsed / m_GaugeAnimDuration;
 
-            auto EaseOutCubic = [](float x)
-                {
-                    float inv = 1.0f - x;
-                    return 1.0f - inv * inv * inv;
-                };
-
-            float eased = EaseOutCubic(t);
+            float eased = Math::Easing::EaseOutBack(t);
             ratio = m_GaugeStartRatio + (clampedTarget - m_GaugeStartRatio) * eased;
         }
         else
@@ -125,11 +118,14 @@ void GameSceneExe::Update(float tick)
         }
 
         m_TimeGaugeRatio = ratio;
-        m_TimeGauge->SetFillRatio(m_TimeGaugeRatio);
+        m_Bomber->SetFillRatio(m_TimeGaugeRatio);
     }
 
+    // 拍数の経過を確認
     int advanceTick = m_RelationData.rhythmBeat.Update(tick);
-    if (advanceTick > 0)
+
+    // 一拍以上経った時の処理
+    if (advanceTick >= 0)
     {
         const int currentBeat = m_RelationData.rhythmBeat.GetBeatIndex();
         if (currentBeat > m_PreviousBeatIndex)
@@ -142,41 +138,32 @@ void GameSceneExe::Update(float tick)
         m_GaugeStartRatio = m_TimeGaugeRatio;
 
         float nextTarget = m_GaugeStartRatio - m_TimeGaugeStep * static_cast<float>(advanceTick);
-        m_GaugeTargetRatio = std::clamp(nextTarget, minRatio, 1.0f);
+        m_GaugeTargetRatio = std::clamp(nextTarget, 0.0f, 1.0f);
 
-        
-
-        if (m_GaugeTargetRatio <= minRatio &&
-            m_TimeGauge->GetCount() > 0 )
+        if (m_GaugeTargetRatio <= 0.0f &&
+            m_Bomber->GetCount() > 0)
         {
             PlaySE("clock", std::nullopt);
-            if (!m_TimeGauge->IsReadyExpo()) 
+            if (!m_Bomber->IsReadyExpo())
             {
-                m_TimeGauge->ReadyExpo();
+                m_Bomber->ReadyExpo();
             }
         }
-        else if (m_TimeGauge->GetCount() == 0)
+        else if (m_Bomber->GetCount() == 0)
         {
             PlaySE("explosion", std::nullopt);
         }
-
-        if (m_TimeGauge->IsReadyExpo())
-        {
-            m_Number->SetCount(m_TimeGauge->GetCount());
-            m_Number->ChangeTexture();
-            m_TimeGauge->CountDown();
-        }
     }
 
-    if (m_isFastChange)
+    if (advanceTick >= 1.0f)
     {
-        // 先行シーン変更
-        const int beatsPerBar = m_RelationData.rhythmBeat.GetBeatConst().beatUnit;
-        // 小節の最後の拍の開始時かどうか
+        
+        const int beatsPerBar = m_RelationData.rhythmBeat.GetBeatConst().m_BeatUnit;
+
         const bool isValidBarLength = beatsPerBar > 0;
-        // 小節内の拍位置
+
         const int beatInBar = isValidBarLength ? (m_ElapsedBeats % beatsPerBar) : 0;
-        // 小節の最後の拍の開始時かどうか
+
         const bool isStartOfLastBeat = isValidBarLength && (beatInBar == beatsPerBar - 1);
         if (isStartOfLastBeat)
         {
@@ -196,15 +183,7 @@ void GameSceneExe::Update(float tick)
         }
     }
 
-    if (m_ForcedReturnBeatCount > 0 && m_ElapsedBeats >= m_ForcedReturnBeatCount)
-    {
-        m_hasRequestedSceneChange = true;
-    }
 
-    if (m_hasRequestedSceneChange)
-    {
-        m_isChange = true;
-    }
 }
 
 void GameSceneExe::Finalize()

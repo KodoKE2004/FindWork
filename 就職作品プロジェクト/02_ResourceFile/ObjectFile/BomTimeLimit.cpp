@@ -39,6 +39,5 @@ void BomTimeLimit::ChangeTexture()
     case 1: SetTexture(textureMgr->GetTexture("CountOne.png"));   break;
     default: SetPos(1000.0f,0.0f,0.0f); break;
     }
-
-
+    --m_Count;
 }

@@ -1,10 +1,13 @@
 #pragma once
+
+// リズムの変数
+// 
 struct RhythmBeatConst
 {
     // 入力値
-    float bpm = 120.0f;        // BPM (Beats Per Minute)
-    int   beatUnit = 4;        // 拍子の分母 (4 = 4分音符, 8 = 8分音符, etc.)
-    int   ticksPerBeat = 16;   // 1拍を何分割するか
+    float m_Bpm = 120.0f;        // BPM (Beats Per Minute)
+    int   m_BeatUnit = 4;        // 拍子の分母 (4 = 4分音符, 8 = 8分音符, etc.)
+    int   m_TicksPerBeat = 16;   // 1拍を何分割するか
 
     // 計算結果
     float secondsPerBeat = 0.0f; // 1拍の長さ（秒）
@@ -14,20 +17,20 @@ struct RhythmBeatConst
 
     // Setup（セットアップ）:
     //     設定をまとめて反映する関数名によく使われる
-    void Setup(float bpm_, int beatsPerBar_ = 4, int ticksPerBeat_ = 16)
+    void Setup(float bpm, int beatsPerBar = 4, int ticksPerBeat = 16)
     {
-        bpm = bpm_;
-        beatUnit = beatsPerBar_;
-        ticksPerBeat = ticksPerBeat_;
+        m_Bpm = bpm;
+        m_BeatUnit = beatsPerBar;
+        m_TicksPerBeat = ticksPerBeat;
 
         // 1拍の長さ（秒） = 60 / BPM
-        secondsPerBeat = 60.0f / bpm;
+        secondsPerBeat = 60.0f / m_Bpm;
 
         // 1小節の長さ（秒） = 1拍 * 拍数
-        secondsPerBar = secondsPerBeat * static_cast<float>(beatUnit);
+        secondsPerBar = secondsPerBeat * static_cast<float>(m_BeatUnit);
 
         // 1Tickの長さ（秒） = 1拍 / Tick数
-        secondsPerTick = secondsPerBeat / static_cast<float>(ticksPerBeat);
+        secondsPerTick = secondsPerBeat / static_cast<float>(m_TicksPerBeat);
 
         // 1秒あたりのTick数 = 1 / secondsPerTick
         ticksPerSecond = 1.0f / secondsPerTick;
@@ -41,6 +44,7 @@ private:
     float           m_TickCounter = 0.0f;       // 経過時間の蓄積
     int             m_TickIndex   = 0;          // 現在のTick数
     int             m_Advance     = 0;          // 現在の拍子インデックス
+
 public:
     RhythmBeat() = default;
     // 初期化
@@ -58,14 +62,14 @@ public:
     // 今が何泊目かを返す
     int GetBeatIndex() const
     {
-        return m_TickIndex / m_Beat.ticksPerBeat;
+        return m_TickIndex / m_Beat.m_TicksPerBeat;
     }
 
     // 現在の拍子内のTick位置を取得
     // 今の拍子の中で何Tick目かを返す
     int GetTickInBeat() const
     {
-        return m_TickIndex % m_Beat.ticksPerBeat;
+        return m_TickIndex % m_Beat.m_TicksPerBeat;
     }
 
     const RhythmBeatConst& GetBeatConst()const

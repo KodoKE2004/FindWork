@@ -22,8 +22,7 @@ protected:
 	// 	共通オブジェクト
     //================================
     Skydome* m_Skydome    = nullptr;
-	Bomber* m_TimeGauge = nullptr;		// スピードゲージ背景
-    BomTimeLimit* m_Number = nullptr;	// カウントダウン用数字
+	Bomber*  m_Bomber = nullptr;		// スピードゲージ背景
 
     //================================
 	//			制限時間ゲージ群
