@@ -38,12 +38,12 @@ public:
 	}
 
 	// サブセット描画
-	virtual void DrawSubset(unsigned int indexnum,unsigned int baseindex,unsigned int basevertexindex ) 
+	virtual void DrawSubset(unsigned int indexNum,unsigned int baseIndex,unsigned int baseVertexIndex ) 
 	{
 		Renderer::GetDeviceContext()->DrawIndexed(
-			indexnum,								// 描画するインデックス数（面数×３）
-			baseindex,								// 最初のインデックスバッファの位置
-			basevertexindex);						// 頂点バッファの最初から使う
+			indexNum,								// 描画するインデックス数（面数×３）
+			baseIndex,								// 最初のインデックスバッファの位置
+			baseVertexIndex);						// 頂点バッファの最初から使う
 	}
 
 	// 描画

@@ -3,13 +3,15 @@
 #include "Camera.h"
 #include "Collider.h"
 
+// 空中制御の状態を表す構造体
 struct PlayerAieControlState
 {
-    float acceleration = 4200.0f;   //
-    float maxSpeed     = 650.0f ;   //
-    float airFriction  = 100.0f;   //
+    float acceleration = 4200.0f;   
+    float maxSpeed     = 650.0f;    
+    float airFriction  = 100.0f;    
 };
 
+// プレイヤーチューニングパラメータを表す構造体
 struct PlayerTuningState
 {
     float jumpHeight = 850.0f;          // ジャンプ力
@@ -19,6 +21,7 @@ struct PlayerTuningState
     PlayerAieControlState airControl;   // 空中制御
 };
 
+// GameSceneJumpで使用するプレイヤークラス
 class Player : public Square
 {
 private:
@@ -43,6 +46,9 @@ public:
     void SetAirControlState(const PlayerAieControlState& state);
     
 private:
+
+    // 計算済みのジャンプ初速を取得
     void ApplyAirControlState();
+    // ジャンプ関連の状態を適用
     void ApplyJumpState();
 };

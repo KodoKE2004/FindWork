@@ -1,6 +1,7 @@
 #pragma once
 #include "Square.h"
 #include <vector>
+
 class Enemy : public Square
 {
 private:

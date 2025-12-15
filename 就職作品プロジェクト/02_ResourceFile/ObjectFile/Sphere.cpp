@@ -1,5 +1,5 @@
 #include "Sphere.h"
-#include "../Game.h"
+#include "Game.h"
 #include <SimpleMath.h>
 #include <vector>
 #include <cmath>

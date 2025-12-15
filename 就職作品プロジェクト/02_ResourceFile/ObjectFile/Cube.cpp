@@ -1,5 +1,5 @@
 #include	"Cube.h"
-#include	"../Game.h"
+#include	"Game.h"
 #include	<SimpleMath.h>
 
 using namespace DirectX::SimpleMath;

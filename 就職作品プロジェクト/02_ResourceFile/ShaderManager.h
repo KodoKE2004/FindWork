@@ -16,7 +16,10 @@ private:
 public:
 	
 	ShaderManager() = default;
-	ShaderManager(std::string entryPoint);
+
+	// ƒRƒ“ƒXƒgƒ‰ƒNƒ^
+    // explicit ‚ğ‚Â‚¯‚ÄˆÃ–Ù‚ÌŒ^•ÏŠ·‚ğ–h~
+	explicit ShaderManager(std::string entryPoint);
 	~ShaderManager()
 	{
 		for (auto& [name, shader] : m_ShaderList)

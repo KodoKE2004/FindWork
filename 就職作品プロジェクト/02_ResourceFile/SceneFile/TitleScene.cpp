@@ -4,12 +4,7 @@
 #include "Cube.h"
 #include "Skydome.h"
 #include "Square.h"
-#include "ObjectFile/Model.h"
-
-TitleScene::TitleScene(bool entryFlg)
-{
-	m_EntryFlg = entryFlg;
-}
+#include "Model.h"
 
 void TitleScene::Initialize()
 {
@@ -56,16 +51,6 @@ void TitleScene::Initialize()
 	m_PressEnter->SetShader("VS_Alpha","PS_Alpha");
 	m_PressEnter->SetColor(1.0f,1.0f,1.0f,1.0f);
 	m_MySceneObjects.emplace_back(m_PressEnter);
-
-	if (m_EntryFlg)
-	{
-		m_FadeMask = instance.AddObject<Square>(instance.GetCamera());
-		m_FadeMask->SetScale(1920.0f, 1080.0f, 1.0f);
-		m_FadeMask->SetTexture(textureMgr->GetTexture("Black.png"));
-		m_FadeMask->SetShader("VS_Alpha","PS_Alpha");
-		m_FadeMask->SetColor(1.0f,1.0f,1.0f,1.0f);
-		m_MySceneObjects.emplace_back(m_FadeMask);
-	}
 	
 	// ƒI[ƒfƒBƒI‚Ì“o˜^
 	m_AudioList.clear();
@@ -149,26 +134,6 @@ void TitleScene::Update(float tick)
 
 	// Skydome‚Ì‰ñ“]
 	m_Skydome->Spin(0.0f, -4.0f, 0.0f);
-
-	//===============================
-	//		 ŠJ–‹‚Ì‚Ý—¬‚ê‚éˆ—
-	//	‰º‚É‘‚­‚ÆŒJ‚è•Ô‚·‚Æ‚«”½‰f‚³‚ê‚Ü‚¹‚ñ	
-	//===============================
-	if (!m_EntryFlg || !m_FadeMask)
-	{
-		return;
-	}
-
-	Color colorFadeMask = m_FadeMask->GetColor();
-	float fadeSpeed = 1.0f / m_FadeTimer;
-	colorFadeMask.w -= (fadeSpeed * tick);
-
-	if (colorFadeMask.w <= 0.0f)
-	{
-		colorFadeMask.w = 0.0f;
-		m_EntryFlg = false;
-	}
-	m_FadeMask->SetColor(colorFadeMask);
 
 }
 

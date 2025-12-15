@@ -67,9 +67,11 @@ public:
 	void Finalize()			override;
 
 	SCENE_NO GetSceneNo() const override { return SCENE_NO::TRANSITION; }
-	/// <summary>
-	/// 次のシーンの一フレーム目を描画する
-	/// </summary>
+	
+
+	// 次のシーンの一フレーム目を描画する
+    // 描画結果をSRVとして保持する
+    // 次のシーンのSnapshotOverlay用
 	void DrawNextScene();
 
 	void SetTransitionParam(SceneTransitionParam param) 

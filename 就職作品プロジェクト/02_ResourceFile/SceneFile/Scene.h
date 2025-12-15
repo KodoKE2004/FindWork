@@ -60,6 +60,7 @@ namespace
 	}
 }
 
+// シーンの基底クラス
 class Scene
 {
 protected:

@@ -16,7 +16,7 @@ private:
     // ベースディレクトリ
 	std::string m_FilePath;
 
-	/// デフォルト（NULL）モデルの登録名 ("NULL")
+	// デフォルト（NULL）モデルの登録名 ("NULL")
 	static constexpr const char* m_DefaultName = "NULL";
 
 public:
@@ -24,27 +24,27 @@ public:
     MeshManager(std::string filePath);
     ~MeshManager() = default;
 
-    /// @brief キャッシュをクリア
+    // キャッシュをクリア
     void Clear();
 
-    /// @brief MeshModel を追加してキャッシュ
-    /// @param modelName 登録名
-    /// @param modelPath  fbx ファイル名（ベースディレクトリは内部で構築）
-    /// @param texDirectory テクスチャフォルダ名（ベースディレクトリは内部で構築）
-    /// @return 追加成功なら true（未登録かつロード成功）、重複／失敗なら false
+    // MeshModel を追加してキャッシュ
+    // modelName 登録名
+    // modelPath  fbx ファイル名（ベースディレクトリは内部で構築）
+    // texDirectory テクスチャフォルダ名（ベースディレクトリは内部で構築）
+    // 追加成功なら true（未登録かつロード成功）、重複／失敗なら false
     bool Add(const std::string& modelName,
         const std::string& modelPath,
         const std::string& texDirectory);
 
-    /// @brief 登録済みの MeshModel を取得
-    /// @param modelName 登録名
-    /// @return 成功時は shared_ptr、失敗時はデフォルト登録（NULL）の MeshModel
+    // 登録済みの MeshModel を取得
+    // modelName 登録名
+    // 成功時は shared_ptr、失敗時はデフォルト登録（NULL）の MeshModel
     std::shared_ptr<StaticMesh> GetStaticMesh(const std::string& modelName);
 
-    /// @brief ファイルパスを取得
+    // ファイルパスを取得
     std::string GetFilePath(const std::string& modelName);
 
-    /// @brief テクスチャディレクトリを取得
+    // テクスチャディレクトリを取得
     std::string GetTextureDirectory(const std::string& modelName);
 
 };

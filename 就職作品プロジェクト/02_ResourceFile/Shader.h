@@ -18,9 +18,9 @@ class PixelShader    ;
 class ComputeShader  ;
 class GeometoryShader;
 
-//=====
+//--------------------------------------
 //				Shaderクラス
-//=====
+//--------------------------------------
 class BaseShader {
 protected:
 	std::string m_HlslName;
@@ -45,10 +45,10 @@ public:
 	virtual void SetGPU() = 0;
 };
 
-//=====
+//--------------------------------------
 //			VertexShaderクラス
-//=====
-class VertexShader : public BaseShader 
+//--------------------------------------
+class VertexShader : public BaseShader
 {
 private:
 	ComPtr<ID3D11VertexShader> m_VertexShader;
@@ -58,10 +58,10 @@ public:
 	void SetGPU();
 };
 
-//=====
+//--------------------------------------
 //			PixelShaderクラス
-//=====
-class PixelShader : public BaseShader 
+//--------------------------------------
+class PixelShader : public BaseShader
 {
 private:
 	ComPtr<ID3D11PixelShader> m_PixelShader;
@@ -71,10 +71,10 @@ public:
 	void SetGPU();
 };
 
-//=====
+//--------------------------------------
 //			ComputeShaderクラス
-//=====
-class ComputeShader : public BaseShader 
+//--------------------------------------
+class ComputeShader : public BaseShader
 {
 private:
 	ComPtr<ID3D11ComputeShader> m_ComputeShader;
@@ -83,10 +83,10 @@ public:
 	void SetGPU();
 };
 
-//=====
+//--------------------------------------
 //			GeometoryShaderクラス
-//=====
-class GeometryShader : public BaseShader 
+//--------------------------------------
+class GeometryShader : public BaseShader
 {
 private:
 	ComPtr<ID3D11GeometryShader> m_GeometryShader;

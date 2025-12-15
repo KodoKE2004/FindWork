@@ -52,7 +52,6 @@
     <ClCompile Include="02_ResourceFile\SceneFile\Transition\Zoom.cpp" />
     <ClCompile Include="02_ResourceFile\StaticMesh.cpp" />
     <ClCompile Include="02_ResourceFile\MeshManager.cpp" />
-    <ClCompile Include="02_ResourceFile\ObjectFile\Bullet.cpp" />
     <ClCompile Include="02_ResourceFile\ObjectFile\Cube.cpp" />
     <ClCompile Include="02_ResourceFile\ObjectFile\Light.cpp" />
     <ClCompile Include="02_ResourceFile\ObjectFile\Model.cpp" />
@@ -62,7 +61,6 @@
     <ClCompile Include="02_ResourceFile\Renderer.cpp" />
     <ClCompile Include="02_ResourceFile\RenderTarget.cpp" />
     <ClCompile Include="02_ResourceFile\SceneFile\GameSceneExe.cpp" />
-    <ClCompile Include="02_ResourceFile\SceneFile\SelectScene.cpp" />
     <ClCompile Include="02_ResourceFile\SceneFile\TitleScene.cpp" />
     <ClCompile Include="02_ResourceFile\SceneFile\Transition\Fade.cpp" />
     <ClCompile Include="02_ResourceFile\SceneFile\Transition\SnapshotOverlay.cpp" />
@@ -125,7 +123,6 @@
     <ClInclude Include="02_ResourceFile\SceneFile\Transition\Zoom.h" />
     <ClInclude Include="02_ResourceFile\StaticMesh.h" />
     <ClInclude Include="02_ResourceFile\MeshManager.h" />
-    <ClInclude Include="02_ResourceFile\ObjectFile\Bullet.h" />
     <ClInclude Include="02_ResourceFile\ObjectFile\Cube.h" />
     <ClInclude Include="02_ResourceFile\ObjectFile\Light.h" />
     <ClInclude Include="02_ResourceFile\ObjectFile\Model.h" />
@@ -137,7 +134,6 @@
     <ClInclude Include="02_ResourceFile\SceneFile\GameSceneExe.h" />
     <ClInclude Include="02_ResourceFile\SceneFile\Scene.h" />
     <ClInclude Include="02_ResourceFile\SceneFile\SceneList.h" />
-    <ClInclude Include="02_ResourceFile\SceneFile\SelectScene.h" />
     <ClInclude Include="02_ResourceFile\SceneFile\TitleScene.h" />
     <ClInclude Include="02_ResourceFile\SceneFile\Transition\Fade.h" />
     <ClInclude Include="02_ResourceFile\SceneFile\Transition\SnapshotOverlay.h" />

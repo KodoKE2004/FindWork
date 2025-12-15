@@ -1,5 +1,5 @@
 #include "Skydome.h"
-#include "../Game.h"
+#include "Game.h"
 
 Skydome::Skydome(Camera& cam) : Sphere(cam)
 {

@@ -36,7 +36,7 @@ void TransScene::Initialize()
 	m_AlphaValue = 1.0f / m_Duration;
 
 	
-	
+    // トランジションテクスチャの生成	
 	switch (m_TransMode)
 	{
 	case TRANS_MODE::FADE:
@@ -144,6 +144,9 @@ void TransScene::Finalize()
 
 void TransScene::DrawNextScene()
 {
+    // 次のシーンを一フレーム描画してSRVを取得
+    // シーンが設定されていなければ処理しない
+
 	auto& instance  = Game::GetInstance();
 	if (!m_SceneNext) {
 		return;

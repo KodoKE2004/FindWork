@@ -18,6 +18,7 @@ public:
     void FADE_IN (float tick);
     void FADE_OUT(float tick);
 
+    // “§–¾“x‚ð“K—p
     void ApplyAlpha();
 
     void SetTransMode(TRANS_MODE transMode) override;

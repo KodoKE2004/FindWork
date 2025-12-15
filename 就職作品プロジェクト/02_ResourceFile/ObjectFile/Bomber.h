@@ -1,5 +1,6 @@
 #pragma once
 #include "Square.h"
+
 class Bomber : public Square
 {
 private:

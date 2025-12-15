@@ -2,8 +2,9 @@
 #include "TransitionBase.h"
 #include <wrl/client.h>
 #include <d3d11.h>
-
-
+//---------------------------
+//       ワイプ遷移クラス
+//---------------------------
 class Wipe : public TransitionBase
 {
 private:

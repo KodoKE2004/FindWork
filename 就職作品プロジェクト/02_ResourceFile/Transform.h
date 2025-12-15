@@ -42,7 +42,6 @@ struct NVector3
 	NVector3& operator%=(float value) { x = fmodf(x, value); y = fmodf(y, value); z = fmodf(z, value); return *this; }
 
 	// ƒxƒNƒgƒ‹“¯Žm‚Ì‰‰ŽZ
-
 	NVector3 operator+(const NVector3& rhs) const { return NVector3(x + rhs.x, y + rhs.y, z + rhs.z); }
 	NVector3 operator-(const NVector3& rhs) const { return NVector3(x - rhs.x, y - rhs.y, z - rhs.z); }
 	NVector3 operator*(const NVector3& rhs) const { return NVector3(x * rhs.x, y * rhs.y, z * rhs.z); }

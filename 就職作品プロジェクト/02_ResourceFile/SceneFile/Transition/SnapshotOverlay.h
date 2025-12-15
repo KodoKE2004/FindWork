@@ -1,7 +1,7 @@
 #pragma once
 // 次シーンのスナップショット（SRV）を最後にアルファ合成で全画面描画するだけのオブジェクト
 
-#include "ObjectFile/Object.h" 
+#include "Object.h" 
 #include "Renderer.h"
 #include <wrl/client.h>
 #include <d3d11.h>

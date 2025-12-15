@@ -4,6 +4,9 @@
 #include <wrl/client.h>
 using namespace Microsoft::WRL;
 
+//----------------------------------
+//       ワールドにグリッド線を描画
+//----------------------------------
 class DebugGridLine
 {
 public:

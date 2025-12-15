@@ -3,7 +3,7 @@
 #include <algorithm>
 #include "Application.h"
 #include "Game.h"
-#include "../03_ExternalFile/imgui/imgui_impl_win32.h"
+#include "imgui_impl_win32.h"
 
 const auto ClassName  = TEXT("就職作品");              //!< ウィンドウクラス名.
 const auto WindowName = TEXT("就職作品 初期化終わり");    //!< ウィンドウ名.

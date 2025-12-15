@@ -1,9 +1,9 @@
 #pragma once
 
-#include "../VertexBuffer.h"
-#include "../IndexBuffer.h"
-#include "../Texture.h"
-#include "../Camera.h"
+#include "VertexBuffer.h"
+#include "IndexBuffer.h"
+#include "Texture.h"
+#include "Camera.h"
 #include "Object.h"
 
 //-----------------------------------------------------------------------------

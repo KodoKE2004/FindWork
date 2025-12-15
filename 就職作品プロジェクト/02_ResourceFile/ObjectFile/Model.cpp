@@ -1,8 +1,8 @@
 #include "Model.h"
-#include "../Game.h"
-#include "../Renderer.h"
-#include "../Material.h"
-#include "../Debug.hpp"
+#include "Game.h"
+#include "Renderer.h"
+#include "Material.h"
+#include "Debug.hpp"
 #include <iostream>
 
 Model::Model(Camera& cam) : Object(cam) {}

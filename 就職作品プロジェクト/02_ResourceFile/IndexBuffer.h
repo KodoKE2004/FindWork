@@ -8,7 +8,7 @@
 using Microsoft::WRL::ComPtr;
 
 //-----------------------------
-//IndexBufferクラス
+//		IndexBufferクラス
 //-----------------------------
 
 class IndexBuffer {

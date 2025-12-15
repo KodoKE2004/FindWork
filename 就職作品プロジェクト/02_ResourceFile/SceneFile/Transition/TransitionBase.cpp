@@ -299,6 +299,7 @@ bool LoadTransitionSettingsFromCsv(const std::string& filePath, std::string& err
 }
 
 #ifdef _DEBUG
+// デバッグ画面用のスクリーン座標に変換
 NVector3 TransitionBase::ConvertToDebugScreenPosition(const NVector3& position) const
 {
 	const float debugWidth = Renderer::GetScreenWidth();

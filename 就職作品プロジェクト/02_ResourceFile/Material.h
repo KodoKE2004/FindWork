@@ -31,8 +31,8 @@ public:
 
 		// コンスタントバッファ作成
 		bool sts = CreateConstantBuffer(
-			dev,								// デバイス
-			sizeof(ConstantBufferMaterial),		// サイズ
+			dev,											// デバイス
+			sizeof(ConstantBufferMaterial),					// サイズ
 			m_pConstantBufferMaterial.GetAddressOf());		// コンスタントバッファ４
 		if (!sts) {
 			MessageBox(NULL, L"CreateBuffer(constant buffer Material) error", L"Error", MB_OK);

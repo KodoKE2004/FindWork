@@ -19,6 +19,9 @@ public:
 	}
 };
 
+//----------------------------------
+//			ObjectŠî’êƒNƒ‰ƒX
+//----------------------------------
 class Object : public Transform
 {
 protected:

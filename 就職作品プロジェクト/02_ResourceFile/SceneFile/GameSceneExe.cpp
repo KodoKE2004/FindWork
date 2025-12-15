@@ -3,8 +3,8 @@
 #include "input.h"
 #include "DebugUI.h"
 #include "Game.h"
-#include "ObjectFile/Model.h"
-#include "ObjectFile/Skydome.h"
+#include "Model.h"
+#include "Skydome.h"
 #include <algorithm>
 
 void GameSceneExe::Initialize()

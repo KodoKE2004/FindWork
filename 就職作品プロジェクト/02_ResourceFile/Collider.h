@@ -7,8 +7,12 @@
 #include "Circle.h"
 #include "Square.h"
 
+// 2D数学関連名前空間
 namespace Math
 {
+    //-----------------------------
+    //        軽量な四角形情報
+    //-----------------------------
     struct SquareInfo
     {
         NVector3 pos;       // 頂点情報
@@ -18,9 +22,19 @@ namespace Math
         float halfH;        // 半分の高さ
     };
 
+    //-----------------------------
+    //      当たり判定関連
+    //-----------------------------
     namespace Collider2D
     {
+        //-----------------------------
+        //       2D当たり判定用名前空間
+        //         衝突判定用関数群
+        //-----------------------------
+        
+        // 軸に投影して重なりがあるかどうか
         static bool OverlapOnAxis(NVector3 & axis, std::array<NVector3,4>& vertsA, std::array<NVector3,4>& vertsB);
+        // 点が四角形の内側にあるかどうか
         static bool IsHitPoint(NVector3& pt, SquareInfo sq);
         bool isHitSquareCircle(Square& square , Circle& circle );
         bool isHitCircleCircle(Circle& circleA, Circle& circleB);
@@ -39,6 +53,9 @@ namespace Math
         std::array<NVector3, 4> SettingVertex(Transform transform);
     }
 
+    //-----------------------------
+    //      イージング関連
+    //-----------------------------
     namespace Easing
     {
         float EaseInSine(float p);
@@ -74,6 +91,9 @@ namespace Math
 
     };
 
+    //-----------------------------
+    // 2D物理演算関連
+    //-----------------------------
     namespace Physics
     {
         struct VerticalMotionState
@@ -85,8 +105,10 @@ namespace Math
             float groundY = 0.0f;
         };
 
+        // 垂直方向の位置更新
         float UpdateVerticalPosition(VerticalMotionState& state, float currentPosY, float deltaTime);
 
+        // 水平方向の移動状態
         struct HorizontalMotionState
         {
             float velocity = 0.0f;
@@ -95,6 +117,7 @@ namespace Math
             float airFriction  = 2200.0f;
         };
 
+        // 水平方向の移動結果
         struct HorizontalMotionResult
         {
             float velocity = 0.0f;

@@ -12,7 +12,7 @@
 #include "DirectXMath.h"
 
 #ifdef _DEBUG
-#include "../03_ExternalFile/imgui/imgui.h"
+#include "imgui.h"
 #include "DebugUI.h"
 #endif
 

@@ -17,9 +17,9 @@ public:
 	VertexBuffer() = default;
 	~VertexBuffer() = default;
 
-	//=========================
-	// VertexBufferの作成
-	//=========================
+	//-------------------------
+	//	  VertexBufferの作成
+	//-------------------------
 	void Create(const std::vector<T>& vertices)
 	{
 		ID3D11Device* device = Renderer::GetDevice();
@@ -41,10 +41,10 @@ public:
 			}
 	}
 
-	//=========================
-	// GPUにデータを送る
-	// ここでは、頂点バッファをセットするだけ
-	//=========================
+	//------------------------------------
+	//		      GPUにデータを送る
+	//	   ここでは、頂点バッファをセットするだけ
+	//------------------------------------
 	void SetGPU()
 	{
 		// デバイスコンテキストを取得
@@ -56,9 +56,9 @@ public:
 		deveiceContext->IASetVertexBuffers(0, 1, m_Buffer.GetAddressOf(), &stride, &offset);
 	}
 
-	//=========================
-	// VertexBufferの変更
-	//=========================
+	//------------------------------------
+	//			VertexBufferの変更
+	//------------------------------------
 	void Modify(const std::vector<T>& vertices)
 	{
 		// 頂点データの書き換え

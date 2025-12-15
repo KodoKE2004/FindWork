@@ -10,8 +10,8 @@ private:
     TimerData m_TimeAttack = { 0.0f, 0.4f };
     TimerData m_TimeCool   = { 0.0f, 0.6f };
 
-    float m_SpeedMass     = 1.0f;      // スピード倍率
-    const float MoveValue = 4.0f;
+    float       m_SpeedMass = 1.0f;      // スピード倍率
+    const float MoveValue   = 4.0f;      // ハンマーの移動量基準値
 
     const float m_DefaultPosY =  200.0f; // ハンマーの初期化位置Y座標
     const float m_AttackPosY = - 180.0f; // ハンマーの攻撃位置Y座標

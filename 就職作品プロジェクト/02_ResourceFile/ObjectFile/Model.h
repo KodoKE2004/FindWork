@@ -10,6 +10,7 @@
 #include <d3d11.h>
 #include <wrl/client.h>
 
+// ƒƒbƒVƒ…î•ñ\‘¢‘Ì
 struct MeshInfo {
     std::shared_ptr<StaticMesh> mesh;
     std::string filePath;

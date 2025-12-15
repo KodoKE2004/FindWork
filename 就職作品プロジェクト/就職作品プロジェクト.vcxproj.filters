@@ -64,9 +64,6 @@
     <ClCompile Include="02_ResourceFile\SceneFile\TitleScene.cpp">
       <Filter>SourceFile\Scene</Filter>
     </ClCompile>
-    <ClCompile Include="02_ResourceFile\SceneFile\SelectScene.cpp">
-      <Filter>SourceFile\Scene</Filter>
-    </ClCompile>
     <ClCompile Include="02_ResourceFile\Transform.cpp">
       <Filter>SourceFile\Object</Filter>
     </ClCompile>
@@ -163,9 +160,6 @@
     <ClCompile Include="02_ResourceFile\ObjectFile\Skydome.cpp">
       <Filter>SourceFile\Object\3D</Filter>
     </ClCompile>
-    <ClCompile Include="02_ResourceFile\ObjectFile\Bullet.cpp">
-      <Filter>SourceFile\Object\2D</Filter>
-    </ClCompile>
     <ClCompile Include="02_ResourceFile\DebugGridLine.cpp">
       <Filter>SourceFile\Debug</Filter>
     </ClCompile>
@@ -251,9 +245,6 @@
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="02_ResourceFile\SceneFile\Scene.h">
-      <Filter>SourceFile\Scene</Filter>
-    </ClInclude>
-    <ClInclude Include="02_ResourceFile\SceneFile\SelectScene.h">
       <Filter>SourceFile\Scene</Filter>
     </ClInclude>
     <ClInclude Include="02_ResourceFile\SceneFile\TitleScene.h">
@@ -378,9 +369,6 @@
     </ClInclude>
     <ClInclude Include="02_ResourceFile\ObjectFile\Skydome.h">
       <Filter>SourceFile\Object\3D</Filter>
-    </ClInclude>
-    <ClInclude Include="02_ResourceFile\ObjectFile\Bullet.h">
-      <Filter>SourceFile\Object\2D</Filter>
     </ClInclude>
     <ClInclude Include="02_ResourceFile\DebugGridLine.h">
       <Filter>SourceFile\Debug</Filter>

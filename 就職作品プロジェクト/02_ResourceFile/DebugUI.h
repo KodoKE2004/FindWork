@@ -10,6 +10,7 @@
 #include "imgui_impl_dx11.h"
 #include "imgui_impl_win32.h"
 
+// GUI登録用デバッグクラス
 class DebugUI {
     static std::vector<std::function<void(void)>> m_debugfunction;
 public:

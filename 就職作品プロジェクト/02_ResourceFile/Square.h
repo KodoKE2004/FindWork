@@ -1,5 +1,5 @@
 #pragma once
-#include "ObjectFile/Object.h"
+#include "Object.h"
 #include "VertexBuffer.h"
 #include "IndexBuffer.h"
 #include "Texture.h"

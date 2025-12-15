@@ -33,6 +33,7 @@ namespace
     }
 }
 
+// コンストラクタ: 調整とモーション状態を初期化
 Player::Player(Camera& cam) : Square(cam)
 {
     m_TuningParameters = CalculateDefaultTuningParameters();
@@ -41,6 +42,8 @@ Player::Player(Camera& cam) : Square(cam)
     ApplyAirControlState();
 }
 
+
+// シーン開始時にインスタンスの位置やモーションをリセット
 void Player::Initialize()
 {
     Square::Initialize();
@@ -50,6 +53,8 @@ void Player::Initialize()
     m_HorizontalMotion.velocity = 0.0f;
 }
 
+
+// フレーム毎の更新: ジャンプ判定と垂直方向の物理統合
 void Player::Update()
 {
     const float deltaTime = Application::GetDeltaTime();
@@ -72,6 +77,8 @@ void Player::Update()
 
 }
 
+
+
 void Player::Draw()
 {
     Square::Draw();
@@ -88,13 +95,15 @@ void Player::SetAirControlState(const PlayerAieControlState& state)
     m_TuningParameters.airControl = state;
     ApplyAirControlState();
 }
-
+// 空中制御パラメータを横方向モーション状態に適用
 void Player::ApplyAirControlState()
 {
     m_HorizontalMotion.acceleration = m_AirControl.acceleration;
     m_HorizontalMotion.maxSpeed     = m_AirControl.maxSpeed;
     m_HorizontalMotion.airFriction  = m_AirControl.airFriction;
 }
+
+
 
 void Player::ApplyJumpState()
 {
@@ -108,6 +117,7 @@ void Player::ApplyJumpState()
 
     m_VerticalMotion.gravity = m_TuningParameters.gravity;
     m_VerticalMotion.weight  = 1.0f;
+    // 端末速度: 落下速度を重力の適切な倍率で制限
     m_VerticalMotion.terminalVelocity = - max(m_TuningParameters.gravity, 0.0f) * 5.0f;
 }
 

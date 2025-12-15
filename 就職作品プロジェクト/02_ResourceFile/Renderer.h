@@ -177,12 +177,16 @@ private:
 	static ID3D11BlendState* m_BlendState[MAX_BLENDSTATE];	// ブレンド ステート;
 	static ID3D11BlendState* m_BlendStateATC			 ;	// ブレンド ステート（加算合成）
 	
+    // インスタンシング描画ヘルパ
 	inline std::vector<UINT> MakeInstanceIDs(UINT count);
+    // インスタンスIDバッファ作成
 	inline HRESULT CreateInstanceIDBuffer(const std::vector<UINT>& ids,
 										  ID3D11Buffer** outVB,
 										  D3D11_USAGE usage = D3D11_USAGE_IMMUTABLE,
 										  UINT cpuAccess = 0);
+    // インスタンスIDバッファをバインド
 	inline void BindInstanceIDs(ID3D11Buffer* vb, UINT slot = 1);
+    // インスタンスID用入力レイアウト要素作成
 	inline D3D11_INPUT_ELEMENT_DESC MakeInstancneIDElement(UINT semanticIndex = 1,
 														  UINT slot = 1,
 														  UINT alignedByteOffset = 0,
