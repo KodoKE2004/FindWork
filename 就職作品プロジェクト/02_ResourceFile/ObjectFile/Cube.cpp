@@ -187,7 +187,7 @@ void Cube::Initialize()
 
 	//テクスチャロード
     TextureManager* textureMgr = Game::GetInstance();
-	m_Texture = textureMgr->GetTexture("dice.png");
+	m_Texture = textureMgr->GetTexture("Plane.png");
 
 	m_Camera.SetCamera(CAMERA_3D);
 }

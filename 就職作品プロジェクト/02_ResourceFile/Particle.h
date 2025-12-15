@@ -45,13 +45,9 @@ public :
         m_Scale = scale;
     }
 
-    // 指定位置にテクスチャ`tex`で`count`個のパーティクルを発生させる
     void Emit(std::shared_ptr<Texture> tex, const NVector3& pos, uint32_t count);
 
-    // デルタ時間でパーティクルの寿命と位置を更新する
     void Update(float dt);
-    // 生存しているパーティクルを描画する
     void Draw();
-    // 全パーティクルを削除して内部状態をリセットする
     void Clear();
 };

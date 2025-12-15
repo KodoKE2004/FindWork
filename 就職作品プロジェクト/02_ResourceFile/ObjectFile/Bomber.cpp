@@ -93,10 +93,8 @@ void Bomber::SetFillRatio(float ratio)
 
 void Bomber::UpdateUV()
 {
-    // ゼロ除算防止
     constexpr float minRatio = 0.01f;
     float width = max(m_FillRatio, minRatio);
-    // 塗り比率に応じてテクスチャを横方向に繰り返す
     float splitX = 1.0f / width;
 
     SetUV(1.0f,1.0f, splitX, 1.0f);
@@ -108,18 +106,16 @@ void Bomber::ApplyFillTransform()
         return;
     }
 
-    // 最小幅を確保
     constexpr float minRatio = 0.12f;
     float widthRatio = max(m_FillRatio, minRatio);
 
-    // 基本幅を現在の比率でスケーリング
     NVector3 newScale = m_BaseScale;
     newScale.x = m_BaseScale.x * widthRatio;
     SetScale(newScale);
 
-    // 左端が固定されるよう再計算
     float baseHalfW = m_BaseScale.x * 0.5f;
     float newHalfW = newScale.x * 0.5f;
+
     float left = m_BasePos.x - baseHalfW;
 
     NVector3 newPos = m_BasePos;
