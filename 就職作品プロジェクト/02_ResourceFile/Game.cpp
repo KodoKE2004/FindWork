@@ -35,7 +35,7 @@ void Game::InitializeTransitionCSV()
 
 void Game::FinalizeTransitionCSV()
 {
-	std::filesystem::path savePath = SaveDir() / "TransitionData.csv";
+	std::filesystem::path savePath = SaveDir() / "AssetFile/Csv/TransitionData.csv";
 	std::string saveError;
 
 	if (!SaveTransitionSettingsToCsv(savePath.string(), saveError))

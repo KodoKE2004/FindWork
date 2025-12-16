@@ -189,14 +189,14 @@ bool SaveTransitionSettingsToCsv(const std::string& filePath, std::string& error
 	ofs.write(reinterpret_cast<const char*>(bom), 3);
 
 	ofs.imbue(std::locale::classic());
-	ofs << "from,to,mode,duration,easing\r\n";
+	ofs << "from,to,mode,duration,easing\n";
 	for (const auto& entry : kTransitionEntries)
 	{
 		const auto& param = *entry.param;
 		ofs << entry.from << ',' << entry.to << ','
 			<< TransGui::kTransModeLabels[param.ModeAsIndex()] << ','
 			<< param.duration << ','
-			<< TransGui::kEasingLabels[param.EasingAsIndex()] << '\r\n';
+			<< TransGui::kEasingLabels[param.EasingAsIndex()] << '\n';
 	}
 
 	return static_cast<bool>(ofs);
@@ -398,7 +398,7 @@ void DrawTransitionStateGUI()
 {
 	if (ImGui::Begin("Scene Transition Settings"))
 	{
-		static char csvPath[260] = "TransitionData.csv";
+		static char csvPath[260] = "AssetFile/Csv/TransitionData.csv";
 		static std::string csvStatus;
 
 		ImGui::InputText("CSV Path", csvPath, IM_ARRAYSIZE(csvPath));
