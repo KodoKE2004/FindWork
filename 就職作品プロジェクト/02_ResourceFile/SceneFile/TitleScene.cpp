@@ -50,7 +50,7 @@ void TitleScene::Initialize()
 
 	m_PressEnterBack = instance.AddObject<Square>();
 	m_PressEnterBack->SetName("m_PressEnterBack");
-	m_PressEnterBack->SetTexture(textureMgr->GetTexture("ButtonPressEnterBack.png"));
+	m_PressEnterBack->SetTexture(textureMgr->GetTexture("Black.png"));
 	m_PressEnterBack->SetPos(0.0f,- 250.0f,0.0f);
 	m_PressEnterBack->SetScale(1500.0f,100.0f,1.0f);
 	m_PressEnterBack->SetShader("VS_Alpha","PS_Alpha");
