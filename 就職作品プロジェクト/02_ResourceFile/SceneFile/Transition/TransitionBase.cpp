@@ -204,7 +204,7 @@ bool SaveTransitionSettingsToCsv(const std::string& filePath, std::string& error
 
 bool LoadTransitionSettingsFromCsv(const std::string& filePath, std::string& errorMessage)
 {
-	std::ifstream ifs(filePath);
+	std::ifstream ifs(filePath, std::ios::binary);
 	if (!ifs.is_open())
 	{
 		errorMessage = "[[失敗]] ファイルを開けませんでした。" + filePath;
@@ -218,9 +218,15 @@ bool LoadTransitionSettingsFromCsv(const std::string& filePath, std::string& err
 	}
 
 	std::string line;
+	std::size_t lineNumber = 0;
 	bool hasAny = false;
 	while (std::getline(ifs, line))
 	{
+		++lineNumber;
+		if (!line.empty() && line.back() == '\r')
+		{
+			line.pop_back();
+		}
 		if (line.empty())
 		{
 			continue;
@@ -237,13 +243,40 @@ bool LoadTransitionSettingsFromCsv(const std::string& filePath, std::string& err
 		if (!std::getline(ss, to, ',')) continue;
 		if (!std::getline(ss, modeLabel, ',')) continue;
 		if (!std::getline(ss, durationStr, ',')) continue;
+
 		if (!std::getline(ss, easingLabel)) continue;
 
+		auto removeBom = [](std::string& value)
+			{
+				const unsigned char bom[3] = { 0xEF, 0xBB, 0xBF };
+				if (value.size() >= 3 && static_cast<unsigned char>(value[0]) == bom[0]
+					&& static_cast<unsigned char>(value[1]) == bom[1]
+					&& static_cast<unsigned char>(value[2]) == bom[2])
+				{
+					value.erase(0, 3);
+				}
+			};
+
+		auto removeTrailingCr = [](std::string& value)
+			{
+				if (!value.empty() && value.back() == '\r')
+				{
+					value.pop_back();
+				}
+			};
+
 		from = Trim(from);
-		to   = Trim(to);
-		modeLabel   = Trim(modeLabel);
+		to = Trim(to);
+		modeLabel = Trim(modeLabel);
 		durationStr = Trim(durationStr);
 		easingLabel = Trim(easingLabel);
+
+		removeBom(from);
+		removeTrailingCr(from);
+		removeTrailingCr(to);
+		removeTrailingCr(modeLabel);
+		removeTrailingCr(durationStr);
+		removeTrailingCr(easingLabel);
 
 		if (from == "from" && to == "to")
 		{
