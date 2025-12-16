@@ -35,7 +35,6 @@ protected:
 	float m_GaugeBeatElapsed  = 0.0f;	// 拍頭からの経過時間(秒)
 	float m_GaugeAnimDuration = 0.0f;	// 1拍の中で実際に動かす時間(秒)
 
-
     int     m_Counter = 0;				// カウントダウン用カウンター
 
 	static constexpr int   GaugeTicks = 10;		// 拍で遷移の確認をとる

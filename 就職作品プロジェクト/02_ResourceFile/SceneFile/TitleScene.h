@@ -9,9 +9,11 @@
 class TitleScene : public Scene
 {
 private:
-	Square*	m_TitleLogo  = nullptr;
-	Square* m_PressEnter = nullptr;
-	Square* m_FadeMask   = nullptr;
+	Square*	m_TitleLogo		 = nullptr;
+	Square* m_PressEnter	 = nullptr;
+	Square* m_FadeMask		 = nullptr;
+	Square* m_PressEnterBack = nullptr;
+
 	static constexpr float AlphaChangeTimer = 0.5f;
 
 	// UIŠÇ—‚Ì•Ï”

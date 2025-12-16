@@ -98,92 +98,18 @@ void GameSceneExe::Update(float tick)
 {
     CountTimer(tick);
 
-    if (m_Bomber && m_GaugeAnimDuration > 0.0f)
-    {
-        m_GaugeBeatElapsed += tick;
-
-        float clampedTarget = std::clamp(m_GaugeTargetRatio, 0.0f, 1.0f);
-        float ratio         = clampedTarget;
-
-        if (m_GaugeBeatElapsed < m_GaugeAnimDuration)
-        {
-            float t = m_GaugeBeatElapsed / m_GaugeAnimDuration;
-
-            float eased = Math::Easing::EaseOutBack(t);
-            ratio = m_GaugeStartRatio + (clampedTarget - m_GaugeStartRatio) * eased;
-        }
-        else
-        {
-            ratio = clampedTarget;
-        }
-
-        m_TimeGaugeRatio = ratio;
-        m_Bomber->SetFillRatio(m_TimeGaugeRatio);
-    }
-
-    // 拍数の経過を確認
+    // 進んだTick(拍数)を取得
     int advanceTick = m_RelationData.rhythmBeat.Update(tick);
-
-    // 一拍以上経った時の処理
-    if (advanceTick >= 0)
+    if (advanceTick > 1)
     {
-        const int currentBeat = m_RelationData.rhythmBeat.GetBeatIndex();
-        if (currentBeat > m_PreviousBeatIndex)
-        {
-            m_ElapsedBeats += currentBeat - m_PreviousBeatIndex;
-            m_PreviousBeatIndex = currentBeat;
-        }
-
-        m_GaugeBeatElapsed = 0.0f;
-        m_GaugeStartRatio = m_TimeGaugeRatio;
-
-        float nextTarget = m_GaugeStartRatio - m_TimeGaugeStep * static_cast<float>(advanceTick);
-        m_GaugeTargetRatio = std::clamp(nextTarget, 0.0f, 1.0f);
-
-        if (m_GaugeTargetRatio <= 0.0f &&
-            m_Bomber->GetCount() > 0)
-        {
-            PlaySE("clock", std::nullopt);
-            if (!m_Bomber->IsReadyExpo())
-            {
-                m_Bomber->ReadyExpo();
-            }
-        }
-        else if (m_Bomber->GetCount() == 0)
-        {
-            PlaySE("explosion", std::nullopt);
-        }
+        // const float
     }
-
-    if (advanceTick >= 1.0f)
+    
+    // Countが0になったらシーン切り替え
+    if (m_Counter == 0)
     {
-        
-        const int beatsPerBar = m_RelationData.rhythmBeat.GetBeatConst().m_BeatUnit;
-
-        const bool isValidBarLength = beatsPerBar > 0;
-
-        const int beatInBar = isValidBarLength ? (m_ElapsedBeats % beatsPerBar) : 0;
-
-        const bool isStartOfLastBeat = isValidBarLength && (beatInBar == beatsPerBar - 1);
-        if (isStartOfLastBeat)
-        {
-            const int currentMeasureIndex = m_ElapsedBeats / beatsPerBar;
-            if (currentMeasureIndex <= ForcedReturnMeasures)
-            {
-                if (m_ShouldSkipNextBoundary)
-                {
-                    m_ShouldSkipNextBoundary = false;
-                }
-                else
-                {
-                    m_hasRequestedSceneChange = true;
-                    m_isChange = true;
-                }
-            }
-        }
+        m_isChange = true;
     }
-
-
 }
 
 void GameSceneExe::Finalize()

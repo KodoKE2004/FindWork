@@ -1,7 +1,2 @@
-from,to,mode,duration,easing
-Title,Wait,,,
-Wait,Game,,,
-Game,Wait,,,
-Wait,Result,,,
-Reslut,Title,,,
-Reslut,Game,,,
+﻿from,to,mode,duration,easing
+Title,Wait,Fade,1,InOut Sine2573Wait,Game,Fade,1,InOut Sine2573Game,Wait,Fade,1,InOut Sine2573Wait,Result,Fade,1,InOut Sine2573Result,Title,Fade,1,InOut Sine2573Result,Game,Fade,1,InOut Sine2573

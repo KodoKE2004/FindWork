@@ -23,7 +23,7 @@ struct SaveSnapShot {
 
 // ← ここは "struct" を付けない（ヘッダ配置なら inline 推奨）
 inline std::filesystem::path SaveDir() {
-    auto dir = std::filesystem::current_path() / "Save";
+    auto dir = std::filesystem::current_path() / "AssetFile/Csv";
     std::filesystem::create_directories(dir);
     return dir;
 }

@@ -48,6 +48,15 @@ void TitleScene::Initialize()
 	m_TitleLogo->SetShader("VS_Default","PS_Default");
 	m_MySceneObjects.emplace_back(m_TitleLogo);
 
+	m_PressEnterBack = instance.AddObject<Square>();
+	m_PressEnterBack->SetName("m_PressEnterBack");
+	m_PressEnterBack->SetTexture(textureMgr->GetTexture("ButtonPressEnterBack.png"));
+	m_PressEnterBack->SetPos(0.0f,- 250.0f,0.0f);
+	m_PressEnterBack->SetScale(1500.0f,100.0f,1.0f);
+	m_PressEnterBack->SetShader("VS_Alpha","PS_Alpha");
+	m_PressEnterBack->SetColor(1.0f,1.0f,1.0f,0.4f);
+	m_MySceneObjects.emplace_back(m_PressEnterBack);
+
 	m_PressEnter = instance.AddObject<Square>();
 	m_PressEnter->SetName("m_PressEnter");
 	m_PressEnter->SetTexture(textureMgr->GetTexture("ButtonPressEnter.png"));
@@ -56,6 +65,7 @@ void TitleScene::Initialize()
 	m_PressEnter->SetShader("VS_Alpha","PS_Alpha");
 	m_PressEnter->SetColor(1.0f,1.0f,1.0f,1.0f);
 	m_MySceneObjects.emplace_back(m_PressEnter);
+
 
 	if (m_EntryFlg)
 	{
@@ -117,6 +127,8 @@ void TitleScene::Update(float tick)
 	{
 		float alpha = m_PressEnter->GetColor().w;
 		m_PressEnter->SetColor(1.0f,1.0f,1.0f,1.0f - alpha);
+		alpha = m_PressEnterBack->GetColor().w;
+		m_PressEnterBack->SetColor(1.0f, 1.0f, 1.0f, 0.4f - alpha);
 		m_DurationPressEnter = 0.0f;
 	}
 

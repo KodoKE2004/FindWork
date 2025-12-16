@@ -93,9 +93,17 @@ void Bomber::SetFillRatio(float ratio)
 
 void Bomber::UpdateUV()
 {
+    if (!m_Rope) {
+        return;
+    }
 
     constexpr float minRatio = 0.0f;
     float width = max(m_FillRatio, minRatio);
+    if (width <= 0.0f)
+    {
+        m_Rope->SetUV(1.0f,1.0f, 1.0f, 1.0f);
+        return;
+    }
     float splitX = 1.0f / width;
 
     m_Rope->SetUV(1.0f,1.0f, splitX, 1.0f);
@@ -104,7 +112,7 @@ void Bomber::UpdateUV()
 void Bomber::ApplyFillTransform()
 {
 
-    if (!m_HasBase) {
+    if (!m_Rope || !m_HasBase) {
         return;
     }
 
