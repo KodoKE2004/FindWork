@@ -145,8 +145,9 @@ void GameSceneWait::Update(float tick)
         const int currentBeatIndex = m_RelationData.rhythmBeat.GetBeatIndex();
         if (currentBeatIndex > m_PreviousBeatInWait)
         {
+            // ·•ª‚©‚ç‚Ì˜a‚ÅŒ»Ý‚Ì””‚ðƒJƒEƒ“ƒg
             m_BeatCounterToStage += currentBeatIndex - m_PreviousBeatInWait;
-            m_PreviousBeatInWait = currentBeatIndex;
+            m_PreviousBeatInWait  = currentBeatIndex;
         }
 
         if (m_BeatCounterToStage >= m_TargetBeatsToStage)
@@ -236,7 +237,7 @@ void GameSceneWait::StartNextStageTransition()
     switch (m_RelationData.nextScene)
     {
     case SCENE_NO::GAME_SLICE: ChangeScenePush<GameSceneSlice>(WaitToGame); break;
-    case SCENE_NO::GAME_JUMP : ChangeScenePush<GameSceneJump>(WaitToGame);  break;
+    case SCENE_NO::GAME_JUMP : ChangeScenePush<GameSceneJump> (WaitToGame); break;
     case SCENE_NO::GAME_CRUSH: ChangeScenePush<GameSceneCrush>(WaitToGame); break;
     default: return;
     }

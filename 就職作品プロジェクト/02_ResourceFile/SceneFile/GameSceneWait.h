@@ -47,8 +47,8 @@ private:
 	static GAME_PHASE s_CurrentGamePhase;	// 現在のゲームフェーズを管理する変数
 
 	int m_TargetBeatsToStage = 1;			// 
-	int m_BeatCounterToStage = 0;			//
-	int m_PreviousBeatInWait = 0;			//
+	int m_BeatCounterToStage = 0;			// 現在の拍数
+	int m_PreviousBeatInWait = 0;			// 全体で進んでいる拍数
 
 	bool m_ShouldTransitionToStage = false;	// 次のステージを設定できたか判断するフラグ
     bool m_IsFirstInitialized	   = false;	// シーンが最初に初期化されたかどうかのフラグ

@@ -19,7 +19,6 @@ void GameSceneExe::Initialize()
     m_GameSpeedMass = 1.0f;
     m_isChange     = false;
     m_isFastChange = false;
-    m_hasRequestedSceneChange = false;
     
     //===============================
     //   ゲームスピード倍率設定
@@ -67,10 +66,10 @@ void GameSceneExe::Update(float tick)
     CountTimer(tick);
 
     // 進んだTick(拍数)を取得
-    int advanceTick = m_RelationData.rhythmBeat.Update(tick);
-    if (advanceTick > 1)
+    int advancedTick = m_RelationData.rhythmBeat.Update(tick);
+    if (advancedTick > 0)
     {
-        m_Bomber->CountDown();
+        const int currentBeatIndex = m_RelationData.rhythmBeat.GetBeatIndex();
         
     }
     
