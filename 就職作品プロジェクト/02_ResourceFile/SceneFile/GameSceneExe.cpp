@@ -102,7 +102,7 @@ void GameSceneExe::Update(float tick)
     int advanceTick = m_RelationData.rhythmBeat.Update(tick);
     if (advanceTick > 1)
     {
-        
+        m_Bomber->CountDown();
         
     }
     

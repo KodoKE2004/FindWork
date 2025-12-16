@@ -25,6 +25,12 @@ void Bomber::Initialize()
     m_Rope = instance.AddObject<Square>();
     m_Rope->SetTexture(textureMgr->GetTexture("BomberRope.png"));
     m_Rope->SetName("m_Rope");
+    instance.GetCurrentScene()->GetSceneObjects().emplace_back(m_Rope);
+
+    m_Number = instance.AddObject<Square>();
+    m_Number->SetTexture(textureMgr->GetTexture("CountThree.png"));
+    m_Number->SetName("m_Number");
+    instance.GetCurrentScene()->GetSceneObjects().emplace_back(m_Number);
 
     const NVector3 basePos   = NVector3(-110.0f, -285.0f, 0.0f);
     const NVector3 baseScale = NVector3( 900.0f,  100.0f, 1.0f);
@@ -146,10 +152,10 @@ void Bomber::CountDownTexture()
     
     switch (m_Count)
     {
-    case 3: SetTexture(textureMgr->GetTexture("CountThree.png")); break;
-    case 2: SetTexture(textureMgr->GetTexture("CountTwo.png"));   break;
-    case 1: SetTexture(textureMgr->GetTexture("CountOne.png"));   break;
-    default: SetPos(1000.0f, 0.0f, 0.0f); break;
+    case 3: m_Number->SetTexture(textureMgr->GetTexture("CountThree.png")); break;
+    case 2: m_Number->SetTexture(textureMgr->GetTexture("CountTwo.png"));   break;
+    case 1: m_Number->SetTexture(textureMgr->GetTexture("CountOne.png"));   break;
+    default: m_Number->SetPos(1000.0f, 0.0f, 0.0f); break;
     }
 
 }
