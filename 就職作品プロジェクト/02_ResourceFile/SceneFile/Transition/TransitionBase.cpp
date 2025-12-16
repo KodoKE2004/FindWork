@@ -202,6 +202,7 @@ bool SaveTransitionSettingsToCsv(const std::string& filePath, std::string& error
 	return static_cast<bool>(ofs);
 }
 
+
 bool LoadTransitionSettingsFromCsv(const std::string& filePath, std::string& errorMessage)
 {
 	std::ifstream ifs(filePath, std::ios::binary);

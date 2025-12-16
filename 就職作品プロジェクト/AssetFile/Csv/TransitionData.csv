@@ -1,5 +1,5 @@
 ﻿from,to,mode,duration,easing
-Title,Wait,Wipe Right -> Left,1,InOut Sine
+Title,Wait,Wipe Left -> Right,2,InOut Sine
 Wait,Game,Fade,1,InOut Sine
 Game,Wait,Fade,0.5,InOut Sine
 Wait,Result,Fade,1,InOut Sine
