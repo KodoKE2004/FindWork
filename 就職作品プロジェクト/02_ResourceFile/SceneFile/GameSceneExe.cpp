@@ -62,6 +62,7 @@ void GameSceneExe::Update(float tick)
         const float t = std::clamp(m_Elapsed / max(duration, 0.0001f), 0.0f, 1.0f);
         const float ease = Math::Easing::EaseOutQuart(t);
 
+        m_Bomber->SetFillRatio(1.0f - (FILL_RATIO * ease));
 
     }
 
@@ -69,10 +70,16 @@ void GameSceneExe::Update(float tick)
 
     // i‚ñ‚¾Tick(””)‚ðŽæ“¾
     int advancedTick = m_RelationData.rhythmBeat.Update(tick);
+    // ”‚ªi‚ñ‚Å‚¢‚½‚çBeatTimer‚ði‚ß‚é
     if (advancedTick > 0)
     {
+        m_Elapsed = 0.0f;
         const int currentIndex = m_RelationData.rhythmBeat.GetBeatIndex();
         m_BeatTimer.Advance(currentIndex);
+        std::cout << "Beat Index : " << currentIndex << std::endl;
+
+        float setU = 1.0f - (static_cast<float>(currentIndex) / 12.0f);
+        m_Bomber->SetUV(setU, 1.0f, 1.0f, 1.0f);
     }
 
     

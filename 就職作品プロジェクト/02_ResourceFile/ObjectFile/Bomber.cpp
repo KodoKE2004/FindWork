@@ -87,7 +87,7 @@ void Bomber::CountDown()
 void Bomber::SetFillRatio(float ratio)
 {
     float clamped = std::clamp(ratio, 0.0f, 1.0f);
-    if(std::abs(m_FillRatio - clamped) < 0.001f)
+    if(std::abs(1.0f - clamped) < 0.001f)
     {
         return;
     }
@@ -102,18 +102,19 @@ void Bomber::UpdateUV()
 {
     if(!m_Rope) return;
 
-    if (!m_Rope) {
-        return;
-    }
+    const float widthRatio = std::clamp(m_FillRatio, 0.0f, 1.0f);
 
-    constexpr float minRatio = 0.0f;
-    float width = max(m_FillRatio, minRatio);
-    if (width <= 0.0f)
+    if (widthRatio <= 0.0001f)
     {
         m_Rope->SetUV(1.0f, 1.0f, 1.0f, 1.0f);
         return;
     }
-    float splitX = 1.0f / width;
+    const float u0 = 0.0f;
+    const float v0 = 0.0f;
+    const float u1 = widthRatio;
+    const float v1 = 1.0f;
+
+    m_Rope->SetUV(u0, v0, u1, v1);
 }
 
 void Bomber::ApplyFillTransform()
