@@ -63,7 +63,6 @@ void GameSceneExe::Update(float tick)
         const float ease = Math::Easing::EaseOutQuart(t);
 
 
-        m_Bomber->SetFillRatio(FILL_RATIO * ease);
     }
 
 
