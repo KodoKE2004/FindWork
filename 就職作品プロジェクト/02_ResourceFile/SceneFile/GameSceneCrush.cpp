@@ -36,7 +36,6 @@ void GameSceneCrush::Initialize()
     m_Hammer->SetName("m_Hammer");
     m_Hammer->SetPos(0.0f, 200.0f, 1.0f);
     m_Hammer->SetTexture(textureMgr->GetTexture("Weight.png"));
-    m_Hammer->SetSpeedMass(m_GameSpeedMass);
     m_MySceneObjects.emplace_back(m_Hammer);
     
     int difficult = m_RelationData.stageCount / 4;

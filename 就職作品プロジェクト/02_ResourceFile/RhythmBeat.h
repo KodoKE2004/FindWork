@@ -82,3 +82,47 @@ public:
     }
 };
 
+// あらかじめ設定したビート数分更新をしていく。
+class BeatTimer
+{
+private:
+    int m_GameBeats     = 1;			// ゲーム内でとるビート数
+    int m_BeatRest      = 0;			// 現在のビート数 GameBeats - m_BeatPrevious の差分を引く
+    int	m_BeatPrevious  = 0;			// ビート数更新用カウンター
+public:
+    BeatTimer() = default;
+
+    /// BeatTimer初期化
+    /// @param 何拍とるか
+    void Initialize(int gameBeats)
+    {
+        m_GameBeats = gameBeats;
+        m_BeatRest = m_GameBeats;
+        m_BeatPrevious = 0;
+    }
+
+    // 更新
+    /// @param 経過拍数
+    void Advance(const int beatIndex)
+    {
+        m_BeatRest     -= beatIndex - m_BeatPrevious;
+        m_BeatPrevious  = beatIndex;
+    }
+
+    // 残りのビート数を取得
+    int GetRestBeats()
+    {   
+        return m_BeatRest <= 0 ? 0 : m_BeatRest; 
+    }
+
+    // 経過したビート数を取得
+    int GetCurrentBeat()
+    {
+        return m_GameBeats - m_BeatRest ;
+    }
+
+    bool IsBeatZero()
+    {
+        return m_BeatRest <= 0;
+    }
+};

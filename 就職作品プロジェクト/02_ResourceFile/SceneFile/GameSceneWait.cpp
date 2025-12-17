@@ -41,6 +41,10 @@ void GameSceneWait::Initialize()
 {
     DebugUI::TEXT_CurrentScene = "GameSceneWait";
 
+    // 最初の一度だけ or 指定したタイミングのみフラグを立てる
+    m_IsFirstInitialized = !s_HasFirstGameSceneWaitInitialized;
+    s_HasFirstGameSceneWaitInitialized = true;
+
     // 引き渡しデータのシーンの整理
     m_RelationData.oldScene      = m_RelationData.previousScene;
     m_RelationData.previousScene = SCENE_NO::GAME_WAIT;
@@ -52,9 +56,20 @@ void GameSceneWait::Initialize()
         Debug::Log("=====  ステージ失敗  =====");
     }
 
-    // 最初の一度だけ or 指定したタイミングのみフラグを立てる
-    m_IsFirstInitialized = !s_HasFirstGameSceneWaitInitialized;
-    s_HasFirstGameSceneWaitInitialized = true;
+    // 難易度アップ処理 
+    ++m_RelationData.stageCount;
+    // 難易度 0 ~
+    if (m_RelationData.stageCount % 8 == 0) {
+        int difficulty = m_RelationData.stageCount / 8;
+        m_Difficulty = difficulty;
+        Debug::Log("[[検出]] 難易度アップ");
+    }
+    // スピード
+    else if (m_RelationData.stageCount % 4 == 0) {
+
+
+
+    }
 
     m_TimerList.clear();
     SetTimer(&m_Tick);
@@ -64,19 +79,7 @@ void GameSceneWait::Initialize()
     beatConfig.Setup(120.0f, 4, 1); // 120 BPM, 4/4 拍子
     m_RelationData.rhythmBeat.Initialize(beatConfig);
 
-    m_BeatCounterToStage = 0;
-    m_PreviousBeatInWait = 0;
-
-    const auto& beatConst = m_RelationData.rhythmBeat.GetBeatConst();
-    if (beatConst.secondsPerBeat > 0.0f)
-    {
-        m_TargetBeatsToStage = max(1, static_cast<int>(std::ceil(kStageTransitionDelay / 
-                                                       beatConst.secondsPerBeat)));
-    }
-    else
-    {
-        m_TargetBeatsToStage = 1;
-    }
+    m_BeatTimer.Initialize(8);
 
     m_IsFirstInitialized = true;
 
@@ -143,14 +146,9 @@ void GameSceneWait::Update(float tick)
     if (advancedTicks > 0)
     {
         const int currentBeatIndex = m_RelationData.rhythmBeat.GetBeatIndex();
-        if (currentBeatIndex > m_PreviousBeatInWait)
-        {
-            // 差分からの和で現在の拍数をカウント
-            m_BeatCounterToStage += currentBeatIndex - m_PreviousBeatInWait;
-            m_PreviousBeatInWait  = currentBeatIndex;
-        }
 
-        if (m_BeatCounterToStage >= m_TargetBeatsToStage)
+        m_BeatTimer.Advance(currentBeatIndex);
+        if (m_BeatTimer.IsBeatZero())
         {
             m_ShouldTransitionToStage = true;
         }

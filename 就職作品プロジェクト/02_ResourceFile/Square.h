@@ -52,10 +52,11 @@ protected:
 	std::unique_ptr<Material> m_Materiale;	//マテリアル
 
 	// UV座標の情報
-	float m_NumU = 1.0f;
-	float m_NumV = 1.0f;
-	float m_SplitX = 1.0f;
-	float m_SplitY = 1.0f;
+
+	float m_NumU = 1.0f;		// U座標の位置
+	float m_NumV = 1.0f;		// V座標の位置
+	float m_SplitX = 1.0f;		// U座標の分割数
+	float m_SplitY = 1.0f;		// V座標の分割数
 
 public:
 	isHitResult m_HitResult;

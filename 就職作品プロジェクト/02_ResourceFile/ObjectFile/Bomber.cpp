@@ -29,6 +29,7 @@ void Bomber::Initialize()
 
     m_Number = instance.AddObject<Square>();
     m_Number->SetTexture(textureMgr->GetTexture("CountThree.png"));
+    m_Number->SetPos(1000.0f,0.0f,0.0f);
     m_Number->SetName("m_Number");
     instance.GetCurrentScene()->GetSceneObjects().emplace_back(m_Number);
 
@@ -99,6 +100,8 @@ void Bomber::SetFillRatio(float ratio)
 
 void Bomber::UpdateUV()
 {
+    if(!m_Rope) return;
+
     if (!m_Rope) {
         return;
     }
@@ -107,12 +110,10 @@ void Bomber::UpdateUV()
     float width = max(m_FillRatio, minRatio);
     if (width <= 0.0f)
     {
-        m_Rope->SetUV(1.0f,1.0f, 1.0f, 1.0f);
+        m_Rope->SetUV(1.0f, 1.0f, 1.0f, 1.0f);
         return;
     }
     float splitX = 1.0f / width;
-
-    m_Rope->SetUV(1.0f,1.0f, splitX, 1.0f);
 }
 
 void Bomber::ApplyFillTransform()

@@ -238,9 +238,6 @@
     <ClCompile Include="02_ResourceFile\ObjectFile\Bomber.cpp">
       <Filter>SourceFile\Object\2D</Filter>
     </ClCompile>
-    <ClCompile Include="02_ResourceFile\ObjectFile\BomTimeLimit.cpp">
-      <Filter>SourceFile\Object\2D</Filter>
-    </ClCompile>
     <ClCompile Include="02_ResourceFile\Audio.cpp">
       <Filter>SourceFile\Core\Resouce</Filter>
     </ClCompile>
@@ -452,9 +449,6 @@
       <Filter>SourceFile\Scene\Transition</Filter>
     </ClInclude>
     <ClInclude Include="02_ResourceFile\ObjectFile\Bomber.h">
-      <Filter>SourceFile\Object\2D</Filter>
-    </ClInclude>
-    <ClInclude Include="02_ResourceFile\ObjectFile\BomTimeLimit.h">
       <Filter>SourceFile\Object\2D</Filter>
     </ClInclude>
     <ClInclude Include="02_ResourceFile\Audio.h">

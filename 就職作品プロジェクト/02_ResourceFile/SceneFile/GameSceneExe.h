@@ -2,7 +2,6 @@
 #include "Scene.h"
 #include "Square.h"
 #include "Bomber.h"
-#include "BomTimeLimit.h"
 #include "RhythmBeat.h"
 
 enum class GAME_MODE
@@ -18,23 +17,21 @@ class GameSceneExe : public Scene
 
 // inゲーム基底クラス
 protected:
-	//================================
 	// 	共通オブジェクト
-    //================================
     Skydome* m_Skydome    = nullptr;
 	Bomber*  m_Bomber = nullptr;		// スピードゲージ背景
 
-    int     m_Counter = 0;				// カウントダウン用カウンター
-
-	// 難易度・スピード関連
-    float m_GameSpeedMass = 1.0f;				// ゲームスピード倍率・移動速度や制限時間まで変更
-    int   m_Difficulty    = 0;					// 難易度 範囲 0 ～ 3 
-
+    // カウントダウン関連
+	BeatTimer m_BeatTimer;
+    float m_Elapsed = 0.0f;		// 経過時間
 	// シーン遷移フラグ
     bool  m_isChange	  = false;				// シーン変更フラグ
 
 	// 先行クリア時の早回し用フラグ
     bool  m_isFastChange = false;					// 速攻シーン変更フラグ
+
+    // UVを削る数値
+	float m_FillRatio = 0.0f;
 
 public:
 	//================================

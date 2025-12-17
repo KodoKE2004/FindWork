@@ -15,34 +15,20 @@ void GameSceneExe::Initialize()
     //-------------------------------
     //          メンバ初期化
     //-------------------------------
-    m_Difficulty    = 0;
-    m_GameSpeedMass = 1.0f;
     m_isChange     = false;
     m_isFastChange = false;
-    
-    //===============================
-    //   ゲームスピード倍率設定
-    //   ステージクリア数 n
-    //   n && 8 == 0 なら難易度アップ 
-    //   n && 4 == 0 ならスピードアップ
-    //===============================
-   
-    ++m_RelationData.stageCount;
-    // 難易度 0 ~
-    if (m_RelationData.stageCount % 8 == 0) {
-        int difficulty = m_RelationData.stageCount / 8;
-        m_Difficulty = difficulty;
-        Debug::Log("[[検出]] 難易度アップ");
-    }
-    // スピード
-    else if(m_RelationData.stageCount % 4 == 0){
-        float speedMass = ((float)m_RelationData.stageCount / 8.0f) + 1.0f;
-        m_GameSpeedMass = 1.0f + (speedMass * 0.2f);
-        Debug::Log("[[検出]] スピードアップ x" + std::to_string(m_GameSpeedMass));
-    }
+
+    RhythmBeatConst beatConfig{};
+    beatConfig.Setup(120.0f, 4, 1); // 120 BPM, 4/4 拍子
+    m_RelationData.rhythmBeat.Initialize(beatConfig);
+
+    m_BeatTimer.Initialize(12);
 
     // 値の反映
     m_TimerList.clear();
+
+    SetTimer(&m_Elapsed);
+
 
     PlayParams clockParam{};
     clockParam.volume = DEFAULT_VOLUME;
@@ -65,19 +51,35 @@ void GameSceneExe::Update(float tick)
 {
     CountTimer(tick);
 
+    // 拍が進んでいた場合Uの更新を行う
+    if (m_BeatTimer.GetCurrentBeat() > 1)
+    {
+        // 塗りつぶし率計算 0.13f分に4拍利用
+        // 残りの0.87f分を8拍で均等に割る
+        const float FILL_RATIO = (1.0f - 0.13f) * 0.125f;
+        // 1拍の長さ（Tick数）の７割の時間で塗りつぶし率を進める
+        const float duration   = m_RelationData.rhythmBeat.GetBeatConst().secondsPerBeat * 0.7f;
+        const float t = std::clamp(m_Elapsed / max(duration, 0.0001f), 0.0f, 1.0f);
+        const float ease = Math::Easing::EaseOutQuart(t);
+
+
+        m_Bomber->SetFillRatio(FILL_RATIO * ease);
+    }
+
+
+
     // 進んだTick(拍数)を取得
     int advancedTick = m_RelationData.rhythmBeat.Update(tick);
     if (advancedTick > 0)
     {
-        const int currentBeatIndex = m_RelationData.rhythmBeat.GetBeatIndex();
-        
+        const int currentIndex = m_RelationData.rhythmBeat.GetBeatIndex();
+        m_BeatTimer.Advance(currentIndex);
     }
+
     
-    // Countが0になったらシーン切り替え
-    if (m_Counter == 0)
-    {
-        m_isChange = true;
-    }
+
+
+    
 }
 
 void GameSceneExe::Finalize()
