@@ -65,7 +65,6 @@ void GameSceneCrush::Update(float tick)
 
     GameSceneExe::Update(tick);
 
-    return;
     if (IsChange()) 
     {
         const float beatMultiplier = (IsFastChange() && m_RelationData.isClear) ? 0.7f : 1.0f;

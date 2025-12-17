@@ -3,6 +3,8 @@
 #include <algorithm>
 #include <cmath>
 
+
+
 Bomber::Bomber(Camera& cam) : Square(cam)
 {
 }
@@ -100,21 +102,11 @@ void Bomber::SetFillRatio(float ratio)
 
 void Bomber::UpdateUV()
 {
-    if(!m_Rope) return;
+    constexpr float minRatio = 0.0f;
+    float width = max(m_FillRatio, minRatio);
+    float splitX = 1.0f / width;
 
-    const float widthRatio = std::clamp(m_FillRatio, 0.0f, 1.0f);
-
-    if (widthRatio <= 0.0001f)
-    {
-        m_Rope->SetUV(1.0f, 1.0f, 1.0f, 1.0f);
-        return;
-    }
-    const float u0 = 0.0f;
-    const float v0 = 0.0f;
-    const float u1 = widthRatio;
-    const float v1 = 1.0f;
-
-    m_Rope->SetUV(u0, v0, u1, v1);
+    m_Rope->SetUV(1.0f, 1.0f, splitX, 1.0f);
 }
 
 void Bomber::ApplyFillTransform()
@@ -155,8 +147,8 @@ void Bomber::CountDownTexture()
     switch (m_Count)
     {
     case 3: m_Number->SetTexture(textureMgr->GetTexture("CountThree.png")); break;
-    case 2: m_Number->SetTexture(textureMgr->GetTexture("CountTwo.png"));   break;
-    case 1: m_Number->SetTexture(textureMgr->GetTexture("CountOne.png"));   break;
+    case 2: m_Number->SetTexture(textureMgr->GetTexture("CountTwo.png"))  ; break;
+    case 1: m_Number->SetTexture(textureMgr->GetTexture("CountOne.png"))  ; break;
     default: m_Number->SetPos(1000.0f, 0.0f, 0.0f); break;
     }
 

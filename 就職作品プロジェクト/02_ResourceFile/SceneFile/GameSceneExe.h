@@ -23,15 +23,22 @@ protected:
 
     // カウントダウン関連
 	BeatTimer m_BeatTimer;
-    float m_Elapsed = 0.0f;		// 経過時間
+    
+	float m_Elapsed		  = 0.0f;		// 経過時間
+	float m_SpecialFrom   = 0.0f;     
+	float m_SpecialTo	  = 0.0f;       
+	int   m_SpecialRest   = -1;       
+	bool  m_SpecialActive = false;  
+
+	float m_FillRatio	  = 0.0f;
+	float m_SegmentFrom	  = 0.0f;
+	float m_SegmentTo	  = 0.0f;
+
 	// シーン遷移フラグ
     bool  m_isChange	  = false;				// シーン変更フラグ
 
 	// 先行クリア時の早回し用フラグ
     bool  m_isFastChange = false;					// 速攻シーン変更フラグ
-
-    // UVを削る数値
-	float m_FillRatio = 0.0f;
 
 public:
 	//================================
