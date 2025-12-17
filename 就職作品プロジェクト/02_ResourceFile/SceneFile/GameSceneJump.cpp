@@ -66,7 +66,7 @@ void GameSceneJump::Initialize()
 
     // ÉJÅ[ÉgåxçêÇÃê∂ê¨
     m_CartWarning = instance.AddObject<CartWarning>(instance.GetCamera());
-    m_CartWarning->SetTexture(textureMgr->GetTexture("Plane.png"));
+    m_CartWarning->SetTexture(textureMgr->GetTexture("CartWarning.png"));
     m_CartWarning->SetColor(1.0f, 0.25f, 0.25f, 0.85f);
     m_CartWarning->SetBaseScale(NVector3(200.0f, 200.0f, 1.0f));
     m_CartWarning->SetTowardsCenterOffset(200.0f);
