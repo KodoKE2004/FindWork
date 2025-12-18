@@ -115,7 +115,7 @@ void Game::Initialize()
 
 #endif // _DEBUG
 
-	instance.m_SceneCurrent = std::make_shared<GameSceneCrush>();				// タイトルシーンのインスタンスを生成
+	instance.m_SceneCurrent = std::make_shared<TitleScene>();				// タイトルシーンのインスタンスを生成
 	instance.m_SceneCurrent->Initialize();
 }
 
@@ -123,7 +123,7 @@ void Game::Update(float tick)
 {	
 	auto& instance = GetInstance();
 
-	instance.m_Input->Update();
+	instance.m_Input->Update(Application::GetWindow());
 
 	// 現在のシーンの更新
 	instance.m_SceneCurrent->Update(tick);

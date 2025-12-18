@@ -1,6 +1,8 @@
 #pragma once
 #include <d3d11.h>  // DirectX11を使うためのヘッダーファイル
 //#include <DirectXMath.h> // DirextXの数学関連のヘッダーファイル
+#include <Windows.h>
+#include <cstdint>
 #include "SimpleMath.h"
 
 #include <Xinput.h> //XInputを使うためのヘッダーファイル
@@ -70,11 +72,21 @@ private:
 
 	static int VibrationTime; //振動継続時間をカウントする変数
 
+	static uint32_t m_MouseNowMask;
+    static uint32_t m_MouseOldMask;
+
+	static uint32_t VkToMouseButton(int vk);
+	
+	// マウス関連
+    static POINT m_MousePos   ;
+    static POINT m_MouseOldPos;
+    static POINT m_MouseDelta ;
+
 public:
 
 	Input(); //コンストラクタ
 	~Input(); //デストラクタ
-	void Update(); //更新
+	void Update(HWND hWnd); //更新
 
 	//キー入力
 	static bool GetKeyPress  (int key); //プレス(押している間ずっと)
@@ -94,6 +106,13 @@ public:
 	static bool GetButtonTrigger(WORD btn); //トリガー(押し始めた時)
 	static bool GetButtonRelease(WORD btn); //リリース(押し終わった時)
 	
+	// マウス入力
+	static bool GetMousePress  (int vk);
+	static bool GetMouseTrigger(int vk);
+	static bool GetMouseRelease(int vk);
+
+    static POINT  GetMousePos();          //マウスのX座標を取得
+
 	//振動(コントローラー)
 	//flame：振動を継続する時間(単位：フレーム)
 	//powoe：振動の強さ(0～1)

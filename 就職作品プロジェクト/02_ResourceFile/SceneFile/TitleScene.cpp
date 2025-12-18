@@ -111,6 +111,8 @@ void TitleScene::Update(float tick)
 	m_DurationPressEnter += tick;
 	m_MoveTitleLogo		 += tick;
 
+    std::cout << "マウス座標 X:" << Input::GetMousePos().x << " Y:" << Input::GetMousePos().y << std::endl;
+
 	// TitleLogoをふわふわさせる
 	// 上下に一定座標を超えると反対方向に一定量移動＆補正
 	const float twoPI = 6.27318530718f;
@@ -168,17 +170,6 @@ void TitleScene::Update(float tick)
 	{
 		return;
 	}
-
-	Color colorFadeMask = m_FadeMask->GetColor();
-	float fadeSpeed = 1.0f / m_FadeTimer;
-	colorFadeMask.w -= (fadeSpeed * tick);
-
-	if (colorFadeMask.w <= 0.0f)
-	{
-		colorFadeMask.w = 0.0f;
-		m_EntryFlg = false;
-	}
-	m_FadeMask->SetColor(colorFadeMask);
 
 }
 
