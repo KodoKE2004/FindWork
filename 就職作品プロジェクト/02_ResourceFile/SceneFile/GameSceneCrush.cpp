@@ -34,7 +34,7 @@ void GameSceneCrush::Initialize()
     m_MySceneObjects.emplace_back(m_Bomber);
     
     m_Player = instance.AddObject<Player>();
-    m_Player->SetName("m_Hammer");
+    m_Player->SetName("m_Player");
     m_Player->SetPos(0.0f, 200.0f, 1.0f);
     m_Player->SetTexture(textureMgr->GetTexture("Weight.png"));
     m_MySceneObjects.emplace_back(m_Player);

@@ -43,6 +43,7 @@ void GameSceneJump::Initialize()
 
     // ƒvƒŒƒCƒ„[
     m_Player = instance.AddObject<Player>(instance.GetCamera());
+    m_Player->SetName("m_Player");
     m_Player->SetTexture(textureMgr->GetTexture("Plane.png"));
     m_MySceneObjects.emplace_back(m_Player);
 

@@ -7,9 +7,9 @@ XINPUT_STATE Input::controllerState = {};
 XINPUT_STATE Input::controllerState_old = {};
 uint32_t Input::m_MouseNowMask = 0;
 uint32_t Input::m_MouseOldMask = 0;
-POINT Input::m_MousePos	   = {};
-POINT Input::m_MouseOldPos = {};
-POINT Input::m_MouseDelta  = {};
+DirectX::SimpleMath::Vector2 Input::m_MousePos = {};
+DirectX::SimpleMath::Vector2 Input::m_MouseOldPos = {};
+DirectX::SimpleMath::Vector2 Input::m_MouseDelta  = {};
 int Input::VibrationTime = 0;
 
 static bool IsDownAsync(int key)
@@ -52,8 +52,8 @@ void Input::Update(HWND hWnd)
 	//1フレーム前の入力を記録しておく
 	for (int i = 0; i < 256; i++) { keyState_old[i] = keyState[i]; }	// キー
     controllerState_old = controllerState;								// コントローラー
-    m_MouseOldMask = m_MouseNowMask;									// マウス
-
+    m_MouseOldMask = m_MouseNowMask;									// マウスボタン
+    m_MouseOldPos = m_MousePos;											// マウス座標
 	//キー入力を更新
 	BOOL hr = GetKeyboardState(keyState);
 	POINT mousePos;
@@ -62,9 +62,13 @@ void Input::Update(HWND hWnd)
     GetCursorPos(&mousePos);
 	ScreenToClient(hWnd, &mousePos);
     // 画面中央を基準にする
-    mousePos.x -= static_cast<LONG>(Application::GetGameWidth()  * 0.5f);
-    mousePos.y  = - mousePos.y - static_cast<LONG>(Application::GetGameHeight() * 0.5f);
-    m_MousePos = mousePos;
+
+    DirectX::SimpleMath::Vector2 mousePosF(static_cast<float>(mousePos.x),
+										   static_cast<float>(mousePos.y));
+
+    mousePos.x -= Application::GetGameWidth()  * 0.5f;
+    mousePos.y = - mousePos.y - Application::GetGameHeight() * 0.5f;
+    m_MousePos = mousePosF;
 
 	// Delta差分取得
 	m_MouseDelta.x = m_MousePos.x - m_MouseOldPos.x;
@@ -182,7 +186,7 @@ bool Input::GetMouseRelease(int vk)
 	return ((m_MouseNowMask & m) == 0) && ((m_MouseOldMask & m) != 0);
 }
 
-POINT Input::GetMousePos()
+DirectX::SimpleMath::Vector2 Input::GetMousePos()
 {
 	return m_MousePos;
 }

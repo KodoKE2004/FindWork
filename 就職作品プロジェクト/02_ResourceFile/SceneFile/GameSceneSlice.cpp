@@ -34,7 +34,7 @@ void GameSceneSlice::Initialize()
     m_MySceneObjects.emplace_back(m_Bomber);
 
     m_Player = instance.AddObject<Player>();
-    m_Player->SetName("m_Sord");
+    m_Player->SetName("m_Player");
     m_Player->SetPos(-200.0f, 0.0f, 1.0f);
     m_Player->SetTexture(textureMgr->GetTexture("Sord.png"));
     m_MySceneObjects.emplace_back(m_Player);

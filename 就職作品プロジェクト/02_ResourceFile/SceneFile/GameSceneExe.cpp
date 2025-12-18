@@ -22,15 +22,6 @@ void GameSceneExe::Initialize()
     m_isChange     = false;
     m_isFastChange = false;
 
-
-    //===============================
-    //      シーン内オブジェクト生成
-    //===============================
-
-    m_Player = instance.AddObject<Player>();
-    m_Player->SetName("m_Player");
-    m_MySceneObjects.emplace_back(m_Player);
-
     // リズムの定義
     RhythmBeatConst beatConfig{};
     beatConfig.Setup(120.0f, 4, 1); // 120 BPM, 4/4 拍子

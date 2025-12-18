@@ -78,9 +78,9 @@ private:
 	static uint32_t VkToMouseButton(int vk);
 	
 	// マウス関連
-    static POINT m_MousePos   ;
-    static POINT m_MouseOldPos;
-    static POINT m_MouseDelta ;
+    static DirectX::SimpleMath::Vector2 m_MousePos   ;
+    static DirectX::SimpleMath::Vector2 m_MouseOldPos;
+    static DirectX::SimpleMath::Vector2 m_MouseDelta ;
 
 public:
 
@@ -111,7 +111,7 @@ public:
 	static bool GetMouseTrigger(int vk);
 	static bool GetMouseRelease(int vk);
 
-    static POINT  GetMousePos();          //マウスのX座標を取得
+    static DirectX::SimpleMath::Vector2  GetMousePos();          //マウスのX座標を取得
 
 	//振動(コントローラー)
 	//flame：振動を継続する時間(単位：フレーム)
