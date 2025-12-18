@@ -127,8 +127,6 @@ void TitleScene::Update(float tick)
 	{
 		float alpha = m_PressEnter->GetColor().w;
 		m_PressEnter->SetColor(1.0f,1.0f,1.0f,1.0f - alpha);
-		alpha = m_PressEnterBack->GetColor().w;
-		m_PressEnterBack->SetColor(1.0f, 1.0f, 1.0f, 0.4f - alpha);
 		m_DurationPressEnter = 0.0f;
 	}
 

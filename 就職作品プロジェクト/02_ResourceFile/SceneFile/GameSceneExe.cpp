@@ -93,7 +93,7 @@ void GameSceneExe::Update(float tick)
         m_SpecialFrom   = m_FillRatio;
         m_SpecialTo     = targetProgress;
 
-        std::cout << "Beat Index : " << currentIndex << std::endl;
+        std::cout << "Beat Index : " << rest << std::endl;
     }
 
     // ボンバーの更新
