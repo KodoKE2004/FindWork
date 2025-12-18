@@ -35,7 +35,7 @@ float4 main(PS_IN input) : SV_TARGET
 			if (x == 0 && y == 0)
 				continue;
 
-			float2 uv2 = input. + float2(x, y) * gTexelSize;
+			float2 uv2 = input.col.xy + float2(x, y) * gTexelSize;
 
             // Clampサンプラなら不要だが、念のため範囲外を避けたい場合は saturate
             // uv2 = saturate(uv2);

@@ -60,15 +60,37 @@ void Input::Update(HWND hWnd)
 
     // マウス座標の取得
     GetCursorPos(&mousePos);
-	ScreenToClient(hWnd, &mousePos);
-    // 画面中央を基準にする
 
-    DirectX::SimpleMath::Vector2 mousePosF(static_cast<float>(mousePos.x),
-										   static_cast<float>(mousePos.y));
+	POINT clientOrigin{ 0, 0 };
+	ClientToScreen(hWnd, &clientOrigin);
 
-    mousePos.x -= Application::GetGameWidth()  * 0.5f;
-    mousePos.y = - mousePos.y - Application::GetGameHeight() * 0.5f;
+	DirectX::SimpleMath::Vector2 mousePosF{};
+	MOUSEMOVEPOINT hiResPoint{};
+	hiResPoint.x = mousePos.x;
+	hiResPoint.y = mousePos.y;
+
+	constexpr float HighResScale = 1.0f / 120.0f;
+	if (GetMouseMovePointsEx(sizeof(MOUSEMOVEPOINT), &hiResPoint, &hiResPoint, 1, GMMP_USE_HIGH_RESOLUTION_POINTS) == 1)
+	{
+		DirectX::SimpleMath::Vector2 screenPos(
+			static_cast<float>(hiResPoint.x) * HighResScale,
+			static_cast<float>(hiResPoint.y) * HighResScale);
+
+		mousePosF = screenPos - DirectX::SimpleMath::Vector2(
+			static_cast<float>(clientOrigin.x),
+			static_cast<float>(clientOrigin.y));
+	}
+	else
+	{
+		ScreenToClient(hWnd, &mousePos);
+		mousePosF = DirectX::SimpleMath::Vector2(
+			static_cast<float>(mousePos.x),
+			static_cast<float>(mousePos.y));
+	}
+
     m_MousePos = mousePosF;
+
+
 
 	// Delta差分取得
 	m_MouseDelta.x = m_MousePos.x - m_MouseOldPos.x;
