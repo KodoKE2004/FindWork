@@ -8,7 +8,7 @@ void GameSceneSlice::Initialize()
 #ifdef _DEBUG
     DebugUI::TEXT_CurrentScene = "GameSceneSlice";
 #endif
-    
+    GameSceneExe::SetBaseBeatCount(BASE_BEATS);
     GameSceneExe::Initialize();
 
     // ƒV[ƒ“‚ÉŒq‚®î•ñ‚ÍŠî’ê‰Šú‰»Œã‚Ìˆê”ÔÅ‰‚ÉÝ’è
@@ -33,11 +33,11 @@ void GameSceneSlice::Initialize()
     m_Bomber->SetName("m_TimeGauge");
     m_MySceneObjects.emplace_back(m_Bomber);
 
-    m_Sord = instance.AddObject<Sord>();
-    m_Sord->SetName("m_Sord");
-    m_Sord->SetPos(-200.0f, 0.0f, 1.0f);
-    m_Sord->SetTexture(textureMgr->GetTexture("Sord.png"));
-    m_MySceneObjects.emplace_back(m_Sord);
+    m_Player = instance.AddObject<Player>();
+    m_Player->SetName("m_Sord");
+    m_Player->SetPos(-200.0f, 0.0f, 1.0f);
+    m_Player->SetTexture(textureMgr->GetTexture("Sord.png"));
+    m_MySceneObjects.emplace_back(m_Player);
 
     
     int difficult = m_RelationData.stageCount / 4;
@@ -75,11 +75,11 @@ void GameSceneSlice::Update(float tick)
             if (it->IsDeath()) {
                 continue;
             }
-            m_Sord->m_HitResult.SetHitResult(
-                isHitSquareSquare(*m_Sord, *it)
+            m_Player->m_HitResult.SetHitResult(
+                isHitSquareSquare(*m_Player, *it)
             );
             
-            if (m_Sord->m_HitResult.isTriggered() && !it->IsDeath()) 
+            if (m_Player->m_HitResult.isTriggered() && !it->IsDeath())
             {
                 Debug::Log("[[Õ“Ë]] Sord -> Enemy");
                 it->Death();

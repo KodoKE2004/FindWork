@@ -11,8 +11,6 @@ class GameSceneJump : public GameSceneExe
 private:
     Cart*        m_Cart   = nullptr;
     CartWarning* m_CartWarning = nullptr;
-    Player*      m_Player = nullptr;
-
 
     float m_PlayerGroundHeight    = - 100.0f;
     float m_PlayerJumpApexHeight  =   200.0f;

@@ -18,6 +18,7 @@ void GameSceneJump::Initialize()
     DebugUI::TEXT_CurrentScene = "GameSceneJump";
 
     // 基底クラスの初期化
+    GameSceneExe::SetBaseBeatCount(BASE_BEATS);
     GameSceneExe::Initialize();
 
     // シーンに繋ぐ情報は基底初期化後の一番最初に設定

@@ -1,14 +1,12 @@
 #pragma once
 #include "GameSceneExe.h"
 #include "Square.h"
-#include "Sord.h"
 #include "Skydome.h"
 #include "Enemy.h"
 
 class GameSceneSlice : public GameSceneExe
 {
 private:
-    Sord*  m_Sord    = nullptr;
     Enemy* m_Enemy   = nullptr;
 
 public:

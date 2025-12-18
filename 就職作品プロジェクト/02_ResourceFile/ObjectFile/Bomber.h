@@ -27,7 +27,7 @@ public:
     void Finalize()   override;
 
     void CountDown();
-
+    void SetCount(const int count) { m_Count = count; }
     void  SetFillRatio(float ratio);
     float GetFillRatio() const { return m_FillRatio; }
 

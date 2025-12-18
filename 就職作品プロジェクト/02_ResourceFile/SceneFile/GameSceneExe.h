@@ -2,7 +2,13 @@
 #include "Scene.h"
 #include "Square.h"
 #include "Bomber.h"
+#include "Player.h"
 #include "RhythmBeat.h"
+
+namespace
+{
+	constexpr int BASE_BEATS   = 12;
+}
 
 enum class GAME_MODE
 {
@@ -19,11 +25,16 @@ class GameSceneExe : public Scene
 protected:
 	// 	共通オブジェクト
     Skydome* m_Skydome    = nullptr;
-	Bomber*  m_Bomber = nullptr;		// スピードゲージ背景
+	Bomber*  m_Bomber	  = nullptr;		// スピードゲージ背景
+
+    Player*  m_Player	  = nullptr;		// プレイヤーオブジェクト
+
 
     // カウントダウン関連
 	BeatTimer m_BeatTimer;
     
+    int m_BaseBeats;
+
 	float m_Elapsed		  = 0.0f;		// 経過時間
 	float m_SpecialFrom   = 0.0f;     
 	float m_SpecialTo	  = 0.0f;       
@@ -55,12 +66,13 @@ public:
 	virtual void Update(float tick) ;
 	virtual void Finalize()			;
 
-	void StageFail()
-	{
+    void SetBaseBeatCount(const int count) {
+		m_BaseBeats = count; 
+	}
+	void StageFail() {
         m_RelationData.isClear = false;
 	}
-    void StageClear()	  
-	{ 
+    void StageClear() { 
         m_RelationData.isClear = true;
 	}
     void StageChangeFast();

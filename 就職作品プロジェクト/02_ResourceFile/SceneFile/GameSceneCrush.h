@@ -1,13 +1,11 @@
 #pragma once
 #include <vector>
 #include "GameSceneExe.h"
-#include "Hammer.h"
 
 
 class GameSceneCrush : public GameSceneExe
 {
 private:
-    Hammer* m_Hammer = nullptr;
     
 public:
 

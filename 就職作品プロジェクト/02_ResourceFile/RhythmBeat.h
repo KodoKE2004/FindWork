@@ -112,7 +112,7 @@ public:
     // 残りのビート数を取得
     int GetRestBeats()
     {   
-        return m_BeatRest <= 0 ? 0 : m_BeatRest; 
+        return m_BeatRest; 
     }
 
     // 経過したビート数を取得

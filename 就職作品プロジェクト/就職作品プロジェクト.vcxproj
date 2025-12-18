@@ -36,9 +36,7 @@
     <ClCompile Include="02_ResourceFile\ObjectFile\Car.cpp" />
     <ClCompile Include="02_ResourceFile\ObjectFile\CartWarning.cpp" />
     <ClCompile Include="02_ResourceFile\ObjectFile\Circle.cpp" />
-    <ClCompile Include="02_ResourceFile\ObjectFile\Hammer.cpp" />
     <ClCompile Include="02_ResourceFile\ObjectFile\Player.cpp" />
-    <ClCompile Include="02_ResourceFile\ObjectFile\Sord.cpp" />
     <ClCompile Include="02_ResourceFile\ObjectFile\Enemy.cpp" />
     <ClCompile Include="02_ResourceFile\SceneFile\GameSceneCrush.cpp" />
     <ClCompile Include="02_ResourceFile\SceneFile\GameSceneJump.cpp" />
@@ -109,9 +107,7 @@
     <ClInclude Include="02_ResourceFile\ObjectFile\Car.h" />
     <ClInclude Include="02_ResourceFile\ObjectFile\CartWarning.h" />
     <ClInclude Include="02_ResourceFile\ObjectFile\Circle.h" />
-    <ClInclude Include="02_ResourceFile\ObjectFile\Hammer.h" />
     <ClInclude Include="02_ResourceFile\ObjectFile\Player.h" />
-    <ClInclude Include="02_ResourceFile\ObjectFile\Sord.h" />
     <ClInclude Include="02_ResourceFile\ObjectFile\Enemy.h" />
     <ClInclude Include="02_ResourceFile\SceneFile\GameSceneCrush.h" />
     <ClInclude Include="02_ResourceFile\SceneFile\GameSceneJump.h" />

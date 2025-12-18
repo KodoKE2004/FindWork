@@ -68,21 +68,19 @@ void Bomber::Finalize()
 
 void Bomber::CountDown()
 {
-    if (m_Count < 0) {
+    if(m_Count < 0){
         return;
     }
 
+    CountDownTexture();
+
     auto& instance = Game::GetInstance();
     TextureManager* textureMgr = instance;
-    
-   if (m_Count == 0)
-   {
+
+    if (m_Count == 0) {
         SetTexture(textureMgr->GetTexture("BomberExplosion.png")); 
-   }
-   else 
-   {
-        CountDownTexture();
-   }
+    }
+
     --m_Count;
 }
 
@@ -146,9 +144,15 @@ void Bomber::CountDownTexture()
     
     switch (m_Count)
     {
-    case 3: m_Number->SetTexture(textureMgr->GetTexture("CountThree.png")); break;
-    case 2: m_Number->SetTexture(textureMgr->GetTexture("CountTwo.png"))  ; break;
-    case 1: m_Number->SetTexture(textureMgr->GetTexture("CountOne.png"))  ; break;
+    case 3: m_Number->SetTexture(textureMgr->GetTexture("CountThree.png")); 
+            m_Number->SetPos(- 560.0f, - 230.0f, 0.0f);
+    break;
+    case 2: m_Number->SetTexture(textureMgr->GetTexture("CountTwo.png"));
+            m_Number->SetPos(- 560.0f, - 230.0f, 0.0f);
+    break;
+    case 1: m_Number->SetTexture(textureMgr->GetTexture("CountOne.png")); 
+            m_Number->SetPos(- 560.0f, - 230.0f, 0.0f);    
+    break;
     default: m_Number->SetPos(1000.0f, 0.0f, 0.0f); break;
     }
 

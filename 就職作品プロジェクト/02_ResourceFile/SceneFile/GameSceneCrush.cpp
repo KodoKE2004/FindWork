@@ -12,6 +12,7 @@ void GameSceneCrush::Initialize()
 #endif 
 
     // 基底クラスの初期化
+    GameSceneExe::SetBaseBeatCount(10);
     GameSceneExe::Initialize();
     // シーンに繋ぐ情報は基底初期化後の一番最初に設定
     m_RelationData.previousScene = SCENE_NO::GAME_CRUSH;
@@ -32,11 +33,11 @@ void GameSceneCrush::Initialize()
     m_Bomber->SetName("m_Bomber");
     m_MySceneObjects.emplace_back(m_Bomber);
     
-    m_Hammer = instance.AddObject<Hammer>();
-    m_Hammer->SetName("m_Hammer");
-    m_Hammer->SetPos(0.0f, 200.0f, 1.0f);
-    m_Hammer->SetTexture(textureMgr->GetTexture("Weight.png"));
-    m_MySceneObjects.emplace_back(m_Hammer);
+    m_Player = instance.AddObject<Player>();
+    m_Player->SetName("m_Hammer");
+    m_Player->SetPos(0.0f, 200.0f, 1.0f);
+    m_Player->SetTexture(textureMgr->GetTexture("Weight.png"));
+    m_MySceneObjects.emplace_back(m_Player);
     
     int difficult = m_RelationData.stageCount / 4;
     if (difficult >= 4){ difficult = 3; }
@@ -47,9 +48,6 @@ void GameSceneCrush::Initialize()
         enemy->SetPos  ( 0.0f, - 180.0f, 1.0f);
         m_MySceneObjects.emplace_back(enemy);
     }
-
-    SetTimer(m_Hammer->GetTimeAttack());
-    SetTimer(m_Hammer->GetTimeCool());
 
 }
 
