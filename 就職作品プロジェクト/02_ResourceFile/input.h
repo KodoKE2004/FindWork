@@ -1,6 +1,8 @@
 #pragma once
 #include <d3d11.h>  // DirectX11を使うためのヘッダーファイル
 //#include <DirectXMath.h> // DirextXの数学関連のヘッダーファイル
+#include <Mouse.h>
+#include <Keyboard.h>
 #include <Windows.h>
 #include <cstdint>
 #include "SimpleMath.h"
@@ -60,8 +62,24 @@
 #define VK_Y 0x59
 #define VK_Z 0x5A
 
+enum class MOUSE_BUTTON
+{
+	vkLEFT = 0,
+	vkRIGHT,
+	vkMIDDLE,
+	vkXBUTTON1,
+	vkXBUTTON2,
+};
+
 class Input {
 private:
+
+	// マウス入力
+	static DirectX::Mouse::State			  m_State;
+	static DirectX::Mouse::ButtonStateTracker m_Tracker;
+	static DirectX::SimpleMath::Vector2		  m_MousePos;
+	static DirectX::SimpleMath::Vector2		  m_MouseDelta;
+
 	//キー入力情報を保存する変数
 	static BYTE keyState[256];
 	static BYTE keyState_old[256];
@@ -72,22 +90,21 @@ private:
 
 	static int VibrationTime; //振動継続時間をカウントする変数
 
-	static uint32_t m_MouseNowMask;
-    static uint32_t m_MouseOldMask;
-
-	static uint32_t VkToMouseButton(int vk);
-	
-	// マウス関連
-    static DirectX::SimpleMath::Vector2 m_MousePos   ;
-    static DirectX::SimpleMath::Vector2 m_MouseOldPos;
-    static DirectX::SimpleMath::Vector2 m_MouseDelta ;
-
 public:
 
 	Input(); //コンストラクタ
 	~Input(); //デストラクタ
 	void Update(HWND hWnd); //更新
 
+    //マウス入力
+	static bool GetMousePress  (MOUSE_BUTTON mouseButton);
+	static bool GetMouseTrriger(MOUSE_BUTTON mouseButton);
+	static bool GetMouseRelease(MOUSE_BUTTON mouseButton);
+
+	static DirectX::SimpleMath::Vector2 GetMousePos  ();
+	static DirectX::SimpleMath::Vector2 GetMouseDelta();
+
+	static int GetWheel();
 	//キー入力
 	static bool GetKeyPress  (int key); //プレス(押している間ずっと)
 	static bool GetKeyTrigger(int key); //トリガー(押し始めた時)
@@ -106,16 +123,8 @@ public:
 	static bool GetButtonTrigger(WORD btn); //トリガー(押し始めた時)
 	static bool GetButtonRelease(WORD btn); //リリース(押し終わった時)
 	
-	// マウス入力
-	static bool GetMousePress  (int vk);
-	static bool GetMouseTrigger(int vk);
-	static bool GetMouseRelease(int vk);
-
-    static DirectX::SimpleMath::Vector2  GetMousePos();          //マウスのX座標を取得
-
 	//振動(コントローラー)
 	//flame：振動を継続する時間(単位：フレーム)
 	//powoe：振動の強さ(0～1)
 	static void SetVibration(int frame = 1, float powor = 1);
 };
-

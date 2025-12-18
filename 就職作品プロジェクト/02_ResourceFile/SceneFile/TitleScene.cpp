@@ -111,8 +111,6 @@ void TitleScene::Update(float tick)
 	m_DurationPressEnter += tick;
 	m_MoveTitleLogo		 += tick;
 
-    std::cout << "マウス座標 X:" << Input::GetMousePos().x << "\t\t Y:" << Input::GetMousePos().y << std::endl;
-
 	// TitleLogoをふわふわさせる
 	// 上下に一定座標を超えると反対方向に一定量移動＆補正
 	const float twoPI = 6.27318530718f;

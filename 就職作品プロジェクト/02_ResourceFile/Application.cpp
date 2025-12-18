@@ -3,7 +3,7 @@
 #include <algorithm>
 #include "Application.h"
 #include "Game.h"
-#include "../03_ExternalFile/imgui/imgui_impl_win32.h"
+#include "imgui_impl_win32.h"
 
 const auto ClassName  = TEXT("就職作品");              //!< ウィンドウクラス名.
 const auto WindowName = TEXT("就職作品 初期化終わり");    //!< ウィンドウ名.
@@ -197,6 +197,14 @@ void Application::MainLoop()
     auto& instance = Game::GetInstance();
     instance.Initialize();
 
+    static HWND s_bound = nullptr;
+    HWND now = GetWindow();
+    if (now && IsWindow(now) && now != s_bound)
+    {
+        DirectX::Mouse::Get().SetWindow(now);
+        s_bound = now;
+    }
+
     const double targetFrameSec = 1.0 / 60.0;
 
     while (true) {
@@ -205,9 +213,13 @@ void Application::MainLoop()
             TranslateMessage(&msg);
             DispatchMessage(&msg);
             if (msg.message == WM_QUIT) break;
+
         }
         else
         {
+            auto& mouse = DirectX::Mouse::Get();
+            mouse.SetWindow(GetWindow());
+
             LARGE_INTEGER currentTime;
             QueryPerformanceCounter(&currentTime);
 
@@ -247,11 +259,15 @@ LRESULT Application::WndProc(HWND hWnd, UINT msg, WPARAM wParam, LPARAM lParam)
     if (ImGui_ImplWin32_WndProcHandler(hWnd, msg, wParam, lParam))
         return true;
 
+    DirectX::Keyboard::ProcessMessage(msg, wParam, lParam);
+    DirectX::Mouse::   ProcessMessage(msg, wParam, lParam);
+
     switch (msg)
     {
     case WM_DESTROY:// ウィンドウ破棄のメッセージ
     {
         PostQuitMessage(0);// 「WM_QUIT」メッセージを送る　→　アプリ終了
+        return 0;
     }
     break;
 
@@ -261,6 +277,7 @@ LRESULT Application::WndProc(HWND hWnd, UINT msg, WPARAM wParam, LPARAM lParam)
         if (res == IDOK) {
             DestroyWindow(hWnd);  // WM_DESTROY が呼ばれて PostQuitMessage が送られる
         }
+        return 0;
     }
     break;
 
@@ -272,13 +289,7 @@ LRESULT Application::WndProc(HWND hWnd, UINT msg, WPARAM wParam, LPARAM lParam)
     }
     break;
 
-    default:
-    {   // 受け取ったメッセージに対してデフォルトの処理を実行
-        return DefWindowProc(hWnd, msg, wParam, lParam);
-        break;
     }
 
-    }
-
-    return 0;
+    return DefWindowProc(hWnd, msg, wParam, lParam);
 }

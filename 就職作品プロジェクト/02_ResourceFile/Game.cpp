@@ -57,7 +57,7 @@ Game::Game()
 void Game::Initialize()
 {	
 	auto& instance = GetInstance();
-
+	
 	instance.m_Input			 = std::make_unique<Input>();			// “ü—Í‚Ì‰Šú‰»
 	instance.m_Camera			 = std::make_unique<Camera>();			// ƒJƒƒ‰ì¬
 	//instance.m_Camera->Initialize();									// ƒJƒƒ‰‚Ì‰Šú‰»
@@ -122,6 +122,7 @@ void Game::Initialize()
 void Game::Update(float tick)
 {	
 	auto& instance = GetInstance();
+	
 
 	instance.m_Input->Update(Application::GetWindow());
 
