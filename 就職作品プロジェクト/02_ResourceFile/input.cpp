@@ -1,10 +1,11 @@
 #include "input.h"
 #include "Application.h"
 
-DirectX::Mouse::State			   Input::m_State;
-DirectX::Mouse::ButtonStateTracker Input::m_Tracker;
-DirectX::SimpleMath::Vector2	   Input::m_MousePos;
-DirectX::SimpleMath::Vector2	   Input::m_MouseDelta;
+POINT Input::m_MousePos = {};
+POINT Input::m_MouseDelta = {};
+bool Input::m_MouseButtons[5] = {};
+bool Input::m_MouseButtonsOld[5] = {};
+int Input::m_MouseWheel = 0;
 
 BYTE Input::keyState[256] = {};
 BYTE Input::keyState_old[256] = {};
@@ -40,27 +41,37 @@ void Input::Update(HWND hWnd)
 	//1フレーム前の入力を記録しておく
 	for (int i = 0; i < 256; i++) { keyState_old[i] = keyState[i]; }	// キー
     controllerState_old = controllerState;								// コントローラー
-    auto& mouse = DirectX::Mouse::Get();
 
-	//キー入力を更新
+    for(int i = 0; i < 5; ++i) {
+		m_MouseButtonsOld[i] = m_MouseButtons[i];
+    }
+
 	BOOL hr = GetKeyboardState(keyState);
 
-    // マウス座標の取得
+	POINT prevPos = m_MousePos;
+	POINT currentPos{};
+	if (GetCursorPos(&currentPos)) {
+		if (hWnd != nullptr) {
+			ScreenToClient(hWnd, &currentPos);
+		}
+		m_MousePos = currentPos;
+        m_MousePos.x -= Application::GetGameWidth() * 0.5f;
+        m_MousePos.y  = - m_MousePos.y + Application::GetGameHeight() * 0.5f;
 
-	// 現在の状態を取得
-    m_State = mouse.GetState();
-    m_Tracker.Update(m_State);
+		m_MouseDelta.x = m_MousePos.x - prevPos.x;
+		m_MouseDelta.y = m_MousePos.y - prevPos.y;
+	}
+	else {
+		m_MouseDelta.x = 0;
+		m_MouseDelta.y = 0;
+	}
 
-    // float型に変換
-	m_MousePos = DirectX::SimpleMath::Vector2(
-		static_cast<float>(m_State.x),
-		static_cast<float>(m_State.y)
-	);
-
-	m_MouseDelta = DirectX::SimpleMath::Vector2(
-		static_cast<float>(m_State.x),
-		static_cast<float>(m_State.y)
-	);
+	m_MouseButtons[0] = (GetAsyncKeyState(VK_LBUTTON) & 0x8000) != 0;
+	m_MouseButtons[1] = (GetAsyncKeyState(VK_RBUTTON) & 0x8000) != 0;
+	m_MouseButtons[2] = (GetAsyncKeyState(VK_MBUTTON) & 0x8000) != 0;
+	m_MouseButtons[3] = (GetAsyncKeyState(VK_XBUTTON1) & 0x8000) != 0;
+	m_MouseButtons[4] = (GetAsyncKeyState(VK_XBUTTON2) & 0x8000) != 0;
+	m_MouseWheel = 0;
 
 	//コントローラー入力を更新(XInput)
 	XInputGetState(0, &controllerState);
@@ -86,11 +97,11 @@ bool Input::GetMousePress(MOUSE_BUTTON mouseButton)
 {
 	switch (mouseButton)
 	{
-	case MOUSE_BUTTON::vkLEFT	 :	return m_State.leftButton	; break;
-	case MOUSE_BUTTON::vkRIGHT	 :	return m_State.rightButton	; break;
-	case MOUSE_BUTTON::vkMIDDLE	 :	return m_State.middleButton	; break;
-	case MOUSE_BUTTON::vkXBUTTON1:	return m_State.xButton1		; break;
-	case MOUSE_BUTTON::vkXBUTTON2:	return m_State.xButton2		; break;
+	case MOUSE_BUTTON::vkLEFT:		return m_MouseButtons[0]; break;
+	case MOUSE_BUTTON::vkRIGHT:		return m_MouseButtons[1]; break;
+	case MOUSE_BUTTON::vkMIDDLE:	return m_MouseButtons[2]; break;
+	case MOUSE_BUTTON::vkXBUTTON1:	return m_MouseButtons[3]; break;
+	case MOUSE_BUTTON::vkXBUTTON2:	return m_MouseButtons[4]; break;
 	}
 }
 
@@ -98,11 +109,11 @@ bool Input::GetMouseTrriger(MOUSE_BUTTON mouseButton)
 {
 	switch (mouseButton)
 	{
-	case MOUSE_BUTTON::vkLEFT	 :	return m_State.leftButton	== DirectX::Mouse::ButtonStateTracker::PRESSED; break;
-	case MOUSE_BUTTON::vkRIGHT	 :	return m_State.rightButton	== DirectX::Mouse::ButtonStateTracker::PRESSED; break;
-	case MOUSE_BUTTON::vkMIDDLE	 :	return m_State.middleButton	== DirectX::Mouse::ButtonStateTracker::PRESSED; break;
-	case MOUSE_BUTTON::vkXBUTTON1:	return m_State.xButton1		== DirectX::Mouse::ButtonStateTracker::PRESSED; break;
-	case MOUSE_BUTTON::vkXBUTTON2:	return m_State.xButton2		== DirectX::Mouse::ButtonStateTracker::PRESSED; break;
+	case MOUSE_BUTTON::vkLEFT:		return m_MouseButtons[0] && !m_MouseButtonsOld[0]; break;
+	case MOUSE_BUTTON::vkRIGHT:		return m_MouseButtons[1] && !m_MouseButtonsOld[1]; break;
+	case MOUSE_BUTTON::vkMIDDLE:	return m_MouseButtons[2] && !m_MouseButtonsOld[2]; break;
+	case MOUSE_BUTTON::vkXBUTTON1:	return m_MouseButtons[3] && !m_MouseButtonsOld[3]; break;
+	case MOUSE_BUTTON::vkXBUTTON2:	return m_MouseButtons[4] && !m_MouseButtonsOld[4]; break;
 	}
 }
 
@@ -110,27 +121,27 @@ bool Input::GetMouseRelease(MOUSE_BUTTON mouseButton)
 {
 	switch (mouseButton)
 	{
-	case MOUSE_BUTTON::vkLEFT	 :	return m_State.leftButton	== DirectX::Mouse::ButtonStateTracker::RELEASED; break;
-	case MOUSE_BUTTON::vkRIGHT	 :	return m_State.rightButton	== DirectX::Mouse::ButtonStateTracker::RELEASED; break;
-	case MOUSE_BUTTON::vkMIDDLE	 :	return m_State.middleButton	== DirectX::Mouse::ButtonStateTracker::RELEASED; break;
-	case MOUSE_BUTTON::vkXBUTTON1:	return m_State.xButton1		== DirectX::Mouse::ButtonStateTracker::RELEASED; break;
-	case MOUSE_BUTTON::vkXBUTTON2:	return m_State.xButton2		== DirectX::Mouse::ButtonStateTracker::RELEASED; break;
+	case MOUSE_BUTTON::vkLEFT:		return !m_MouseButtons[0] && m_MouseButtonsOld[0]; break;
+	case MOUSE_BUTTON::vkRIGHT:		return !m_MouseButtons[1] && m_MouseButtonsOld[1]; break;
+	case MOUSE_BUTTON::vkMIDDLE:	return !m_MouseButtons[2] && m_MouseButtonsOld[2]; break;
+	case MOUSE_BUTTON::vkXBUTTON1:	return !m_MouseButtons[3] && m_MouseButtonsOld[3]; break;
+	case MOUSE_BUTTON::vkXBUTTON2:	return !m_MouseButtons[4] && m_MouseButtonsOld[4]; break;
 	}
 }
 
 DirectX::SimpleMath::Vector2 Input::GetMousePos()
 {
-    return m_MousePos;
+    return DirectX::SimpleMath::Vector2(static_cast<float>(m_MousePos.x), static_cast<float>(m_MousePos.y));;
 }
 
 DirectX::SimpleMath::Vector2 Input::GetMouseDelta()
 {
-    return m_MouseDelta;
+    return DirectX::SimpleMath::Vector2(static_cast<float>(m_MouseDelta.x), static_cast<float>(m_MouseDelta.y));;
 }
 
 int Input::GetWheel()
 {
-	return m_State.scrollWheelValue;
+	return m_MouseWheel;
 }
 
 

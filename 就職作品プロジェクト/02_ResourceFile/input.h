@@ -1,8 +1,6 @@
 #pragma once
 #include <d3d11.h>  // DirectX11を使うためのヘッダーファイル
 //#include <DirectXMath.h> // DirextXの数学関連のヘッダーファイル
-#include <Mouse.h>
-#include <Keyboard.h>
 #include <Windows.h>
 #include <cstdint>
 #include "SimpleMath.h"
@@ -75,10 +73,11 @@ class Input {
 private:
 
 	// マウス入力
-	static DirectX::Mouse::State			  m_State;
-	static DirectX::Mouse::ButtonStateTracker m_Tracker;
-	static DirectX::SimpleMath::Vector2		  m_MousePos;
-	static DirectX::SimpleMath::Vector2		  m_MouseDelta;
+	static POINT m_MousePos;
+	static POINT m_MouseDelta;
+	static bool m_MouseButtons[5];
+	static bool m_MouseButtonsOld[5];
+	static int m_MouseWheel;
 
 	//キー入力情報を保存する変数
 	static BYTE keyState[256];
@@ -91,7 +90,7 @@ private:
 	static int VibrationTime; //振動継続時間をカウントする変数
 
 public:
-
+	
 	Input(); //コンストラクタ
 	~Input(); //デストラクタ
 	void Update(HWND hWnd); //更新

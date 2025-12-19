@@ -1,2 +1,11 @@
-﻿  Application.cpp
+﻿  input.cpp
+C:\Users\kodokeの世界\Desktop\HAL\VisualSutdio\就職作品\個人製作\FindWork\就職作品プロジェクト\02_ResourceFile\input.cpp(58,53): warning C4244: '-=': 'float' から 'LONG' への変換です。データが失われる可能性があります。
+  (ソース ファイル '/02_ResourceFile/input.cpp' をコンパイルしています)
+  
+C:\Users\kodokeの世界\Desktop\HAL\VisualSutdio\就職作品\個人製作\FindWork\就職作品プロジェクト\02_ResourceFile\input.cpp(59,40): warning C4244: '=': 'float' から 'LONG' への変換です。データが失われる可能性があります。
+  (ソース ファイル '/02_ResourceFile/input.cpp' をコンパイルしています)
+  
+C:\Users\kodokeの世界\Desktop\HAL\VisualSutdio\就職作品\個人製作\FindWork\就職作品プロジェクト\02_ResourceFile\input.cpp(105): warning C4715: 'Input::GetMousePress': 値を返さないコントロール パスがあります。
+C:\Users\kodokeの世界\Desktop\HAL\VisualSutdio\就職作品\個人製作\FindWork\就職作品プロジェクト\02_ResourceFile\input.cpp(117): warning C4715: 'Input::GetMouseTrriger': 値を返さないコントロール パスがあります。
+C:\Users\kodokeの世界\Desktop\HAL\VisualSutdio\就職作品\個人製作\FindWork\就職作品プロジェクト\02_ResourceFile\input.cpp(129): warning C4715: 'Input::GetMouseRelease': 値を返さないコントロール パスがあります。
   就職作品プロジェクト.vcxproj -> C:\Users\kodokeの世界\Desktop\HAL\VisualSutdio\就職作品\個人製作\FindWork\就職作品プロジェクト\x64\Debug\NishiguchiGame.exe
