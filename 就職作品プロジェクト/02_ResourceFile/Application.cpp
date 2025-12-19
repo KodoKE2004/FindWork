@@ -197,14 +197,6 @@ void Application::MainLoop()
     auto& instance = Game::GetInstance();
     instance.Initialize();
 
-    static HWND s_bound = nullptr;
-    HWND now = GetWindow();
-    if (now && IsWindow(now) && now != s_bound)
-    {
-        DirectX::Mouse::Get().SetWindow(now);
-        s_bound = now;
-    }
-
     const double targetFrameSec = 1.0 / 60.0;
 
     while (true) {
@@ -217,9 +209,6 @@ void Application::MainLoop()
         }
         else
         {
-            auto& mouse = DirectX::Mouse::Get();
-            mouse.SetWindow(GetWindow());
-
             LARGE_INTEGER currentTime;
             QueryPerformanceCounter(&currentTime);
 
@@ -258,9 +247,6 @@ LRESULT Application::WndProc(HWND hWnd, UINT msg, WPARAM wParam, LPARAM lParam)
 {
     if (ImGui_ImplWin32_WndProcHandler(hWnd, msg, wParam, lParam))
         return true;
-
-    DirectX::Keyboard::ProcessMessage(msg, wParam, lParam);
-    DirectX::Mouse::   ProcessMessage(msg, wParam, lParam);
 
     switch (msg)
     {
