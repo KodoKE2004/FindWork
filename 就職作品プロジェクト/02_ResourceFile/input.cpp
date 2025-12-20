@@ -66,11 +66,11 @@ void Input::Update(HWND hWnd)
 		m_MouseDelta.y = 0;
 	}
 
-	m_MouseButtons[0] = (GetAsyncKeyState(VK_LBUTTON) & 0x8000) != 0;
-	m_MouseButtons[1] = (GetAsyncKeyState(VK_RBUTTON) & 0x8000) != 0;
-	m_MouseButtons[2] = (GetAsyncKeyState(VK_MBUTTON) & 0x8000) != 0;
-	m_MouseButtons[3] = (GetAsyncKeyState(VK_XBUTTON1) & 0x8000) != 0;
-	m_MouseButtons[4] = (GetAsyncKeyState(VK_XBUTTON2) & 0x8000) != 0;
+	m_MouseButtons[vkLEFT]		= (GetAsyncKeyState(VK_LBUTTON)  & 0x8000) != 0;
+	m_MouseButtons[vkRIGHT]		= (GetAsyncKeyState(VK_RBUTTON)  & 0x8000) != 0;
+	m_MouseButtons[vkMIDDLE]	= (GetAsyncKeyState(VK_MBUTTON)  & 0x8000) != 0;
+	m_MouseButtons[vkXBUTTON1]	= (GetAsyncKeyState(VK_XBUTTON1) & 0x8000) != 0;
+	m_MouseButtons[vkXBUTTON2]	= (GetAsyncKeyState(VK_XBUTTON2) & 0x8000) != 0;
 	m_MouseWheel = 0;
 
 	//コントローラー入力を更新(XInput)
@@ -95,38 +95,17 @@ void Input::Update(HWND hWnd)
 
 bool Input::GetMousePress(MOUSE_BUTTON mouseButton)
 {
-	switch (mouseButton)
-	{
-	case MOUSE_BUTTON::vkLEFT:		return m_MouseButtons[0]; break;
-	case MOUSE_BUTTON::vkRIGHT:		return m_MouseButtons[1]; break;
-	case MOUSE_BUTTON::vkMIDDLE:	return m_MouseButtons[2]; break;
-	case MOUSE_BUTTON::vkXBUTTON1:	return m_MouseButtons[3]; break;
-	case MOUSE_BUTTON::vkXBUTTON2:	return m_MouseButtons[4]; break;
-	}
+	return m_MouseButtons[mouseButton];
 }
 
 bool Input::GetMouseTrriger(MOUSE_BUTTON mouseButton)
 {
-	switch (mouseButton)
-	{
-	case MOUSE_BUTTON::vkLEFT:		return m_MouseButtons[0] && !m_MouseButtonsOld[0]; break;
-	case MOUSE_BUTTON::vkRIGHT:		return m_MouseButtons[1] && !m_MouseButtonsOld[1]; break;
-	case MOUSE_BUTTON::vkMIDDLE:	return m_MouseButtons[2] && !m_MouseButtonsOld[2]; break;
-	case MOUSE_BUTTON::vkXBUTTON1:	return m_MouseButtons[3] && !m_MouseButtonsOld[3]; break;
-	case MOUSE_BUTTON::vkXBUTTON2:	return m_MouseButtons[4] && !m_MouseButtonsOld[4]; break;
-	}
+	return m_MouseButtons[mouseButton] && !m_MouseButtonsOld[mouseButton];
 }
 
 bool Input::GetMouseRelease(MOUSE_BUTTON mouseButton)
 {
-	switch (mouseButton)
-	{
-	case MOUSE_BUTTON::vkLEFT:		return !m_MouseButtons[0] && m_MouseButtonsOld[0]; break;
-	case MOUSE_BUTTON::vkRIGHT:		return !m_MouseButtons[1] && m_MouseButtonsOld[1]; break;
-	case MOUSE_BUTTON::vkMIDDLE:	return !m_MouseButtons[2] && m_MouseButtonsOld[2]; break;
-	case MOUSE_BUTTON::vkXBUTTON1:	return !m_MouseButtons[3] && m_MouseButtonsOld[3]; break;
-	case MOUSE_BUTTON::vkXBUTTON2:	return !m_MouseButtons[4] && m_MouseButtonsOld[4]; break;
-	}
+	return !m_MouseButtons[mouseButton] && m_MouseButtonsOld[mouseButton];
 }
 
 DirectX::SimpleMath::Vector2 Input::GetMousePos()

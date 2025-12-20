@@ -60,13 +60,14 @@
 #define VK_Y 0x59
 #define VK_Z 0x5A
 
-enum class MOUSE_BUTTON
+enum MOUSE_BUTTON
 {
 	vkLEFT = 0,
 	vkRIGHT,
 	vkMIDDLE,
 	vkXBUTTON1,
 	vkXBUTTON2,
+    vkMAX
 };
 
 class Input {
@@ -75,8 +76,8 @@ private:
 	// マウス入力
 	static POINT m_MousePos;
 	static POINT m_MouseDelta;
-	static bool m_MouseButtons[5];
-	static bool m_MouseButtonsOld[5];
+	static bool m_MouseButtons   [vkMAX];
+	static bool m_MouseButtonsOld[vkMAX];
 	static int m_MouseWheel;
 
 	//キー入力情報を保存する変数

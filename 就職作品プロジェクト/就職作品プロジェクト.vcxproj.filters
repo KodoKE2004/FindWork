@@ -239,6 +239,9 @@
       <Filter>SourceFile\Core</Filter>
     </ClCompile>
     <ClCompile Include="pch.cpp" />
+    <ClCompile Include="02_ResourceFile\ObjectFile\DragController.cpp">
+      <Filter>SourceFile\Object\2D</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="02_ResourceFile\SceneFile\Scene.h">
@@ -446,6 +449,9 @@
       <Filter>SourceFile\Core</Filter>
     </ClInclude>
     <ClInclude Include="pch.h" />
+    <ClInclude Include="02_ResourceFile\ObjectFile\DragController.h">
+      <Filter>SourceFile\Object\2D</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <FxCompile Include="ShaderFile\Common.hlsl">
