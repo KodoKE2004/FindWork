@@ -55,9 +55,14 @@ void Input::Update(HWND hWnd)
 			ScreenToClient(hWnd, &currentPos);
 		}
 		m_MousePos = currentPos;
-        m_MousePos.x -= Application::GetGameWidth() * 0.5f;
-        m_MousePos.y  = - m_MousePos.y + Application::GetGameHeight() * 0.5f;
 
+	#ifdef _DEBUG
+		m_MousePos.x -=  static_cast<LONG>(Application::GetGameWidth() * 0.5f);
+		m_MousePos.y  = -m_MousePos.y + static_cast<LONG>(Application::GetGameHeight() * 0.5f);
+	#else 
+        m_MousePos.x -= static_cast<LONG>(Application::GetGameWidth() * 0.5f);
+        m_MousePos.y  = - m_MousePos.y + static_cast<LONG>(Application::GetGameHeight() * 0.5f);
+	#endif
 		m_MouseDelta.x = m_MousePos.x - prevPos.x;
 		m_MouseDelta.y = m_MousePos.y - prevPos.y;
 	}

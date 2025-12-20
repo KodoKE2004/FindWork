@@ -201,7 +201,7 @@ inline void ChangeScenePop(SceneTransitionParam& state)
     auto& instance = Game::GetInstance();
 
 	if (instance.GetSceneStackSize() == 0) {
-		Debug::Log("[[警告]] シーンスタックが空です");
+		Debug::Log("[[警告]] シーンスタックが空です", MessageColor::Yellow);
 		return ;
 	}
 

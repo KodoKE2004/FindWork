@@ -4,7 +4,7 @@
 
 class DragController : public Square
 {
-private:
+protected:
     enum MOVE_DIR
     {
         MOVE_NONE = -1,
@@ -42,6 +42,9 @@ public:
     void Finalize()   override;
     void SetDirection(const MOVE_DIR dir) {
         m_MoveDir = dir;
+    }
+    bool IsDragging() const {
+        return m_IsDragging;
     }
 };
 

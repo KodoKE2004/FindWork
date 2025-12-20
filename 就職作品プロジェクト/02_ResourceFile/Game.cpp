@@ -25,11 +25,11 @@ void Game::InitializeTransitionCSV()
 	std::string loadError;
 	if (!LoadTransitionSettingsFromCsv(kTransitionCsvPath, loadError))
 	{
-        Debug::Log(loadError);
+        Debug::Log(loadError, MessageColor::Red);
 	}
 	else
 	{
-        Debug::Log("[[ê¨å˜]] LoadTransitionSettingFromCsv : " + std::string(kTransitionCsvPath));
+        Debug::Log("[[ê¨å˜]] LoadTransitionSettingFromCsv : " + std::string(kTransitionCsvPath),MessageColor::Green);
 	}
 }
 
@@ -40,11 +40,11 @@ void Game::FinalizeTransitionCSV()
 
 	if (!SaveTransitionSettingsToCsv(savePath.string(), saveError))
 	{
-		Debug::Log(saveError);
+		Debug::Log(saveError, MessageColor::Red);
 	}
 	else
 	{
-		Debug::Log("[[ê¨å˜]] SaveTransitionSettingFromCsv : " + savePath.string());
+		Debug::Log("[[ê¨å˜]] SaveTransitionSettingFromCsv : " + savePath.string(), MessageColor::Green);
 	}
 }
 

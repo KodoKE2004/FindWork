@@ -3,6 +3,16 @@
 #include <vector>
 #include <source_location>
 #include <filesystem>
+#include <windows.h>
+
+enum class MessageColor
+{
+    Red,
+    Green,
+    Yellow,
+    White
+};
+
 
 namespace Debug
 {
@@ -64,6 +74,32 @@ namespace Debug
     {
     #ifdef _DEBUG
         std::cout << message << std::endl;
+    #endif
+    }
+    static void Log(std::string_view message, MessageColor color)
+    {
+    #ifdef _DEBUG
+        HANDLE hConsole = GetStdHandle(STD_OUTPUT_HANDLE);
+
+        const WORD green  = FOREGROUND_GREEN | FOREGROUND_INTENSITY;
+        const WORD red    = FOREGROUND_RED   | FOREGROUND_INTENSITY;
+        const WORD yellow = FOREGROUND_RED   | FOREGROUND_GREEN | FOREGROUND_INTENSITY;
+        const WORD white  = FOREGROUND_RED   | FOREGROUND_GREEN | FOREGROUND_BLUE;
+        
+        WORD originalAttrs;
+        switch (color)
+        {
+        case MessageColor::Red   : originalAttrs = red;     break;
+        case MessageColor::Green : originalAttrs = green;   break;
+        case MessageColor::Yellow: originalAttrs = yellow;  break;
+        case MessageColor::White : originalAttrs = white;   break;
+        default: break;
+        }
+
+        SetConsoleTextAttribute(hConsole, originalAttrs);
+        std::cout << message << std::endl;
+        SetConsoleTextAttribute(hConsole,white);
+
     #endif
     }
 

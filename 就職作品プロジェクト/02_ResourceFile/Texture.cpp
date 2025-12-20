@@ -21,20 +21,20 @@ bool Texture::LoadFromFile(const std::string& path)
         hr = DirectX::LoadFromWICFile(wpath, DirectX::WIC_FLAGS::WIC_FLAGS_NONE, &meta, img);
     if (FAILED(hr))
     {
-        Debug::Log("[[é∏îs]] TextureLoad : LoadFromFileÅ@: " + path);
+        Debug::Log("[[é∏îs]] TextureLoad : LoadFromFileÅ@: " + path, MessageColor::Red);
         return false;
     }
     hr = CreateShaderResourceView(Renderer::GetDevice(), img.GetImages(), img.GetImageCount(), meta, m_srv.GetAddressOf());
     if (FAILED(hr)) 
     {
-        Debug::Log("[[é∏îs]] TextureLoad : CreateShaderResourceView : " + path);
+        Debug::Log("[[é∏îs]] TextureLoad : CreateShaderResourceView : " + path, MessageColor::Red);
         return false;
     }
 
     m_width = static_cast<UINT>(meta.width);
     m_height = static_cast<UINT>(meta.height);
 
-    Debug::Log("[[ê¨å˜]] TextureLoad : " + path);
+    Debug::Log("[[ê¨å˜]] TextureLoad : " + path, MessageColor::Green);
     return true;
 }
 

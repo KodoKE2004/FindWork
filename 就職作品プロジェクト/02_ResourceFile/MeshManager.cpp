@@ -27,7 +27,7 @@ bool MeshManager::Add(const std::string& modelName,
     const std::string& texDirectory) {
     // 重複チェック
     if (m_MeshMap.find(modelName) != m_MeshMap.end()) {
-        Debug::Log("[[失敗]] modelName 被り " + modelName);
+        Debug::Log("[[失敗]] modelName 被り " + modelName, MessageColor::Red);
         return false;
     }
 
@@ -38,7 +38,7 @@ bool MeshManager::Add(const std::string& modelName,
     // ロード
     auto meshModel = std::make_shared<StaticMesh>();
     if (!meshModel->Load(filePath, texPath)) {
-        Debug::Log("[[失敗]] 登録モデル名 " + modelName);
+        Debug::Log("[[失敗]] 登録モデル名 " + modelName, MessageColor::Red);
         return false;
     }
 
@@ -49,17 +49,17 @@ bool MeshManager::Add(const std::string& modelName,
     info.texDirectory = texPath;
     m_MeshMap.emplace(modelName, std::move(info));
 
-    Debug::Log("[[成功]] 登録モデル名 " + modelName);
+    Debug::Log("[[成功]] 登録モデル名 " + modelName,MessageColor::Green);
     return true;
 }
 
 std::shared_ptr<StaticMesh> MeshManager::GetStaticMesh(const std::string& modelName) {
     auto it = m_MeshMap.find(modelName);
     if (it != m_MeshMap.end()) {
-        Debug::Log("[[成功]] StaticMesh取得 " + modelName);
+        Debug::Log("[[成功]] StaticMesh取得 " + modelName, MessageColor::Green);
         return it->second.mesh;
     }
-    Debug::Log("[[失敗]] デフォルトを返却  StaticMesh:" + modelName);
+    Debug::Log("[[失敗]] デフォルトを返却  StaticMesh:" + modelName, MessageColor::Red);
     // デフォルト ("NULL") を返す
     return m_MeshMap[m_DefaultName].mesh;
 }
@@ -67,19 +67,19 @@ std::shared_ptr<StaticMesh> MeshManager::GetStaticMesh(const std::string& modelN
 std::string MeshManager::GetFilePath(const std::string& modelName) {
     auto it = m_MeshMap.find(modelName);
     if (it != m_MeshMap.end()) {
-        Debug::Log("[[成功]] FilePath取得 " + modelName);
+        Debug::Log("[[成功]] FilePath取得 " + modelName, MessageColor::Green);
         return it->second.filePath;
     }
-    Debug::Log("[[失敗]] デフォルトを返却 FilePath : " + modelName);
+    Debug::Log("[[失敗]] デフォルトを返却 FilePath : " + modelName, MessageColor::Red);
     return m_MeshMap[m_DefaultName].filePath;
 }
 
 std::string MeshManager::GetTextureDirectory(const std::string& modelName) {
     auto it = m_MeshMap.find(modelName);
     if (it != m_MeshMap.end()) {
-        Debug::Log("[[成功]] : TextureDirectory取得 " + modelName);
+        Debug::Log("[[成功]] : TextureDirectory取得 " + modelName, MessageColor::Green);
         return it->second.texDirectory;
     }
-    Debug::Log("[[失敗]] : TextureDirectory取得, デフォルトを返却 " + modelName);
+    Debug::Log("[[失敗]] : TextureDirectory取得, デフォルトを返却 " + modelName, MessageColor::Red);
     return m_MeshMap[m_DefaultName].texDirectory;
 }
