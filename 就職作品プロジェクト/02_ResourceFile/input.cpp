@@ -57,12 +57,13 @@ void Input::Update(HWND hWnd)
 		m_MousePos = currentPos;
 
 	#ifdef _DEBUG
-		m_MousePos.x -=  static_cast<LONG>(Application::GetGameWidth() * 0.5f);
-		m_MousePos.y  = -m_MousePos.y + static_cast<LONG>(Application::GetGameHeight() * 0.5f);
+        m_MousePos.x -= static_cast<LONG>(Application::GetGameWidth() * 0.5f);
+        m_MousePos.y  = - m_MousePos.y + static_cast<LONG>(Application::GetGameHeight() * 0.5f);
 	#else 
         m_MousePos.x -= static_cast<LONG>(Application::GetGameWidth() * 0.5f);
         m_MousePos.y  = - m_MousePos.y + static_cast<LONG>(Application::GetGameHeight() * 0.5f);
 	#endif
+
 		m_MouseDelta.x = m_MousePos.x - prevPos.x;
 		m_MouseDelta.y = m_MousePos.y - prevPos.y;
 	}

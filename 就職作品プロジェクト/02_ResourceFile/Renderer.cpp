@@ -119,6 +119,7 @@ void Renderer::Initialize()
 		previewWidth = previewHeight * aspect;
 	}
 
+
 	m_DebugPresentViewport.TopLeftX = 0.0f;
 	m_DebugPresentViewport.TopLeftY = 0.0f;
 	m_DebugPresentViewport.Width  = previewWidth;
