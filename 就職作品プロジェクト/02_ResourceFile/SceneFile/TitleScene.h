@@ -5,6 +5,7 @@
 #include "Sphere.h"
 #include "Skydome.h"
 #include "Square.h"
+#include "DragController.h"
 
 class TitleScene : public Scene
 {
@@ -13,6 +14,8 @@ private:
 	Square* m_PressEnter	 = nullptr;
 	Square* m_FadeMask		 = nullptr;
 	Square* m_PressEnterBack = nullptr;
+
+    DragController* m_DragController = nullptr;
 
 	static constexpr float AlphaChangeTimer = 0.5f;
 

@@ -1,6 +1,7 @@
 #include "Square.h"
 #include "Game.h"
 #include <memory>
+#include "Game.h"
 
 using namespace std;
 using namespace DirectX::SimpleMath;
@@ -12,6 +13,8 @@ Square::Square(Camera& cam) :Object(cam)
 	m_HitResult.m_Now = false;
 	m_HitResult.m_Old = false;
 
+    TextureManager* textureMgr = Game::GetInstance();
+    SetTexture(textureMgr->GetTexture("Plane.png"));
 }
 
 // デストラクタ
