@@ -127,6 +127,9 @@ public:
 	static void SetBlendState(int nBlendState);		// ブレンド ステート設定
     static void SetDefaultInputLayout();			// デフォルトの入力レイアウト設定
 
+#ifdef _DEBUG
+    static D3D11_VIEWPORT GetDebugPresentViewport();
+#endif
 	// インスタンシング描画テンプレート
 	template<class T> static void SetInstanceID(T* method,InstancePaked iPaked)
 	{

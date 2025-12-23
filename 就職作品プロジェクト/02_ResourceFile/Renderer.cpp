@@ -484,7 +484,12 @@ void Renderer::SetDefaultInputLayout()
 {
 	
 }
-
+#ifdef _DEBUG
+D3D11_VIEWPORT Renderer::GetDebugPresentViewport()
+{
+	return m_DebugPresentViewport;
+}
+#endif
 D3D11_VIEWPORT Renderer::GetRenderTargetView(void)
 {
 	D3D11_VIEWPORT viewport{};
