@@ -19,6 +19,15 @@ const float MOVE_ANGLE[MOVE_MAX] = {
     45.0f,
 };
 
+const float MOVE_INV_SQRT2 = 0.70710678f;
+
+const DirectX::SimpleMath::Vector2 MOVE_DIR_VEC[MOVE_MAX] = {
+    { 0.0f, 1.0f },                        // MOVE_UP (90°)
+    { MOVE_INV_SQRT2, MOVE_INV_SQRT2 },    // MOVE_DOWN_RIGHT (315°)
+    { 1.0f, 0.0f },                        // MOVE_RIGHT (0°)
+    { MOVE_INV_SQRT2, -MOVE_INV_SQRT2 },   // MOVE_UP_RIGHT (45°)
+};
+
 class DragController : public Square
 {
 protected:
@@ -37,11 +46,7 @@ public:
     void SetDirection(const MOVE_DIR dir) {
 
         m_MoveDir = dir;
-    
-        // 角度から単位ベクトルを計算
-        const float dirX = std::cosf(DirectX::XMConvertToRadians(MOVE_ANGLE[dir]));
-        const float dirY = std::sinf(DirectX::XMConvertToRadians(MOVE_ANGLE[dir]));
-        m_Dir = DirectX::SimpleMath::Vector2(dirX, dirY);
+        m_Dir = MOVE_DIR_VEC[dir];
     }
 
     bool IsDragging() const {

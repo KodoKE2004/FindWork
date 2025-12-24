@@ -46,12 +46,14 @@ void DragController::Update()
     if (m_MoveDir != MOVE_NONE)
     {
         m_Rotation.z = MOVE_ANGLE[m_MoveDir];
+
     }
 
     const DirectX::SimpleMath::Vector2 mouseDelta = Input::GetMouseDelta();
+    const float delta = mouseDelta.x;
 
-    m_DragOffset.x = m_Dir.x * mouseDelta.x;
-    m_DragOffset.y = m_Dir.y * mouseDelta.y;
+    m_DragOffset.x = m_Dir.x * delta;
+    m_DragOffset.y = m_Dir.y * delta;
 
     auto pos = GetPos();
     pos.x += m_DragOffset.x;
