@@ -112,7 +112,7 @@ void GameSceneWait::Initialize()
     {
         const float distance = 130.0f;
 
-        Square* life = instance.AddObject<Square>(instance.GetCamera());
+        std::shared_ptr<Square> life = instance.AddObject<Square>(instance.GetCamera());
         life->SetTexture(textureMgr->GetTexture("DestroyBullet.png"));
         life->SetPos(lifePosX + ( i * distance), lifePosY, 1.0f);
         life->SetScale(100.0f, 100.0f, 1.0f);
@@ -124,7 +124,7 @@ void GameSceneWait::Initialize()
     }
 
     const float initialTilt = m_IsLifeTiltPositive ? 30.0f : -30.0f;
-    for (auto* life : m_LifeGame)
+    for (auto life : m_LifeGame)
     {
         if (life)
         {
@@ -163,7 +163,7 @@ void GameSceneWait::Update(float tick)
             m_IsLifeTiltPositive = !m_IsLifeTiltPositive;
         }
         const float tiltAngle = m_IsLifeTiltPositive ? 30.0f : -30.0f;
-        for (auto* life : m_LifeGame)
+        for (auto life : m_LifeGame)
         {
             if (life)
             {

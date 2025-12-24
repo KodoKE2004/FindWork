@@ -96,7 +96,7 @@ public:
 	//================================
 	// オブジェクト管理
 	//================================
-	void DeleteObject(std::shared_ptr<Object> pt); // オブジェクトを削除する
+	void DeleteObject(const std::shared_ptr<Object>& pt); // オブジェクトを削除する
 	void DeleteAllObject(); // オブジェクトをすべて削除する
 
 	// オブジェクトを追加する
@@ -109,7 +109,7 @@ public:
 		auto& instance = *m_pInstance;
 
 		// コンストラクタ引数を完全転送して unique_ptrを作成
-		std::unique_ptr<T> up;
+		std::shared_ptr<T> up;
 		if constexpr (sizeof...(Args) == 0) {
 			up = std::make_shared<T>(*instance.m_Camera.get());
 		}
@@ -117,21 +117,25 @@ public:
 			up = std::make_shared<T>(std::forward<Args>(args)...);
 		}
 
-		std::shared_ptr<T> pt = up;
-		instance.m_GameObjects.emplace_back(up));
-		pt->Initialize(); // 初期化
-		return pt;
+		instance.m_GameObjects.emplace_back(up);
+		up->Initialize(); // 初期化
+		return up;
 	}
 
 	// オブジェクトを取得する
 	template<class T> 
 	std::vector<std::shared_ptr<T>> GetObjects()
 	{
+        static_assert(std::is_base_of_v<Object, T>, "TがObjectを継承していない");
+
 		std::vector<std::shared_ptr<T>> res;
 		for (const auto& o : m_pInstance->m_GameObjects) {
 			// dynamic_castで型をチェック
-			if (std::shared_ptr<T> derivedObj = dynamic_cast<std::shared_ptr<T>>(o.get())) {
-				res.emplace_back(derivedObj);
+			if (!o) {
+				continue;
+			}
+			if (auto derivedObj = std::dynamic_pointer_cast<T>(o)) {
+				res.emplace_back(std::move(derivedObj));
 			}
 		}
 		return res;

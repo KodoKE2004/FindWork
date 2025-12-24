@@ -182,8 +182,12 @@ void Game::Finalize()
 
 	DebugUI::DisposeUI();		// デバッグUIの終了処理
 	instance.DeleteAllObject();	//オブジェクトを全て削除
-	instance.m_TransitionTexture->Finalize();
-	instance.m_Theme->Finalize();
+	if (instance.m_TransitionTexture) {
+		instance.m_TransitionTexture->Finalize();
+	}
+	if(instance.m_Theme){
+		instance.m_Theme->Finalize();
+	}
 	Renderer::Finalize();			// レンダラーの終了処理
 
 	instance.m_SceneCurrent.reset();
@@ -293,23 +297,22 @@ void Game::RegistDebugObject()
 #endif // _DEBUG
 }
 
-void Game::DeleteObject(std::shared_ptr<Object> pt)
+void Game::DeleteObject(const std::shared_ptr<Object>& pt)
 {
 	auto& instance = GetInstance();
 	if (pt == nullptr) return;
 
 	auto& objs = instance.m_GameObjects;
-	auto it = std::find_if(objs.begin(), objs.end(),
-		[pt](const std::unique_ptr<Object>&up) {
-			return up.get() == pt.get();
+	const auto raw = pt.get();
+    auto it = std::find_if(objs.begin(), objs.end(),
+		[raw](const std::shared_ptr<Object>& up) {
+			return up.get() == raw;
 		});
 
 	if (it != objs.end())
 	{
-		it->get()->Finalize();
-        it->reset();
+		(*it)->Finalize();
 		objs.erase(it);
-		objs.shrink_to_fit();	
 	}
 
 }
@@ -320,8 +323,9 @@ void Game::DeleteAllObject()
 	// オブジェクト終了処理
 	for (auto& o : m_pInstance->m_GameObjects)
 	{
-		o->Finalize();
-        o.reset();
+		if (!o) {
+			o->Finalize();
+		}
 	}
 
 	instance.m_GameObjects.clear();
