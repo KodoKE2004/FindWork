@@ -19,6 +19,11 @@ void Transform::SetPos(const NVector3 _Pos)
     m_Position = _Pos;
 }
 
+void Transform::SetPos(const DirectX::SimpleMath::Vector3 _Pos)
+{
+    SetPos(_Pos.x, _Pos.y, _Pos.z);
+}
+
 void Transform::SetPos(const float _PosX, const float _PosY, const float _PosZ)
 {
     m_Position.x = _PosX;
@@ -38,6 +43,11 @@ void Transform::SetRotate(const NVector3 _Rotate)
 	m_Rotation = _Rotate;
 }
 
+void Transform::SetRotate(const DirectX::SimpleMath::Vector3 _Rotate)
+{
+    SetRotate(_Rotate.x, _Rotate.y, _Rotate.z);
+}
+
 void Transform::SetRotate(const float _RotateX, const float _RotateY, const float _RotateZ)
 {
     m_Rotation.x = _RotateX;
@@ -55,6 +65,11 @@ void Transform::SetRotate(const float _Rotate)
 void Transform::SetScale(const NVector3 _Scale)
 {
 	m_Scale = _Scale;
+}
+
+void Transform::SetScale(const DirectX::SimpleMath::Vector3 _Scale)
+{
+    SetScale(_Scale.x, _Scale.y, _Scale.z);
 }
 
 void Transform::SetScale(const float _ScaleX, const float _ScaleY, const float _ScaleZ)

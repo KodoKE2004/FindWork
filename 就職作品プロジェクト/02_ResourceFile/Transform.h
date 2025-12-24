@@ -126,22 +126,26 @@ public:
 	void SetTransform(const NVector3 _Pos, const NVector3 _Rotate, const NVector3 _Scale);
 
 	void SetPos(const NVector3 _Pos);
+	void SetPos(const DirectX::SimpleMath::Vector3 _Pos);
 	void SetPos(const float _PosX, const float _PosY, const float _PosZ);
 	void SetPos(const float _Pos);
 
 	void SetRotate(const NVector3 _Rotate);
+	void SetRotate(const DirectX::SimpleMath::Vector3 _Rotate);
 	void SetRotate(const float _RotateX, const float _RotateY, const float _RotateZ);
 	void SetRotate(const float _Rotate);
 
 	void SetScale(const NVector3 _Scale);
+	void SetScale(const DirectX::SimpleMath::Vector3 _Scale);
 	void SetScale(const float _ScaleX, const float _ScaleY, const float _ScaleZ);
 	void SetScale(const float _Scale);
 
 	/// ================
-	///                    ゲッター
+	///      ゲッター
 	/// ================
-	Transform GetTransform() const;
+	Transform  GetTransform() const;
 	NVector3   GetPos()		const { return m_Position; }
 	NVector3   GetRotate()  const { return m_Rotation; }
 	NVector3   GetScale()   const { return m_Scale   ; }
+
 };

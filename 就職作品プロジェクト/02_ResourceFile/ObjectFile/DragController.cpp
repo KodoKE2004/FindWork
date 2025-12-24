@@ -29,7 +29,12 @@ void DragController::Update()
         const bool  isOverObject = std::abs(mousePos.x - pos.x) <= halfWidth &&
                                    std::abs(mousePos.y - pos.y) <= halfHeight;
 
-        m_IsDragging = isOverObject;
+        if (isOverObject)
+        {
+            m_IsDragging = true;
+            m_MouseDownPos = mousePos;
+            m_ObjectDownPos = DirectX::SimpleMath::Vector2(pos.x,pos.y);
+        }
     }
 
     if (Input::GetMouseRelease(vkLEFT))
@@ -39,27 +44,29 @@ void DragController::Update()
 
     if (!m_IsDragging)
     {
-        m_DragOffset = {};
         return;
     }
 
-    if (m_MoveDir != MOVE_NONE)
+    if (m_MoveDir == MOVE_NONE)
     {
-        m_Rotation.z = MOVE_ANGLE[m_MoveDir];
-
+        return;
     }
 
-    const DirectX::SimpleMath::Vector2 mouseDelta = Input::GetMouseDelta();
-    const float delta = mouseDelta.x;
+    m_Rotation.z = MOVE_ANGLE[m_MoveDir];
+    
+    const DirectX::SimpleMath::Vector2 currentMousePos = Input::GetMousePos();
+    const DirectX::SimpleMath::Vector2 delta = currentMousePos - m_MouseDownPos;
+    const float rad = DirectX::XMConvertToRadians(MOVE_ANGLE[m_MoveDir]);
+    DirectX::SimpleMath::Vector2 dir(std::cos(rad), std::sin(rad));
+    if (dir.LengthSquared() > 0.0f)
+    {
+        dir.Normalize();
+    }
 
-    m_DragOffset.x = m_Dir.x * delta;
-    m_DragOffset.y = m_Dir.y * delta;
+    const float t = (delta.x * dir.x) + (delta.y * dir.y);
+    const auto pos = m_ObjectDownPos + (dir * t);
 
-    auto pos = GetPos();
-    pos.x += m_DragOffset.x;
-    pos.y += m_DragOffset.y;
-
-    SetPos(pos);
+    SetPos(pos.x,pos.y, 0.0f);
 }
 
 void DragController::Draw()

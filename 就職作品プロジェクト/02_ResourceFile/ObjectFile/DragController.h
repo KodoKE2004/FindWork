@@ -33,7 +33,8 @@ class DragController : public Square
 protected:
 
     bool m_IsDragging = false;
-    DirectX::SimpleMath::Vector2 m_DragOffset{};
+    DirectX::SimpleMath::Vector2 m_MouseDownPos{};
+    DirectX::SimpleMath::Vector2 m_ObjectDownPos{};
     DirectX::SimpleMath::Vector2 m_Dir{};
     MOVE_DIR m_MoveDir = MOVE_NONE;
 public:
@@ -45,8 +46,9 @@ public:
     void Finalize()   override;
     void SetDirection(const MOVE_DIR dir) {
 
-        m_MoveDir = dir;
-        m_Dir = MOVE_DIR_VEC[dir];
+        m_MoveDir    = dir;
+        m_Dir        = MOVE_DIR_VEC[dir];
+        m_Rotation.z = MOVE_ANGLE[dir];
     }
 
     bool IsDragging() const {
