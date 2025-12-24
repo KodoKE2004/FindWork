@@ -20,14 +20,23 @@ void Theme::Initialize()
 
 void Theme::Update()
 {
+    if(m_isActive){ return; }
+
+
 }
 
 void Theme::Draw()
 {
+    if(m_isActive){ return; }
     Square::Draw();
 }
 
 void Theme::Finalize()
 {
     Square::Finalize();
+}
+
+void Theme::SetActive(const bool isActive)
+{
+    m_isActive = isActive;
 }

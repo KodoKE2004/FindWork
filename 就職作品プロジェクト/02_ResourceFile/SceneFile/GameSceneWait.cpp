@@ -98,6 +98,12 @@ void GameSceneWait::Initialize()
     m_Skydome->SetRadius(500.0f);
     m_MySceneObjects.emplace_back(m_Skydome);
 
+    m_Theme = instance.AddObject<Theme>(instance.GetCamera());
+    m_Theme->SetName("m_Theme");
+    m_Theme->SetActive(false);
+    m_Theme->SetTexture(textureMgr->GetTexture("Plane.png"));
+    m_MySceneObjects.emplace_back(m_Theme);
+
     // ライフの数だけハートの生成
     const float lifePosX = - 200.0f;
     const float lifePosY = - 100.0f;
@@ -156,7 +162,7 @@ void GameSceneWait::Update(float tick)
         // 残り一拍のタイミングでお題提示処理開始
         else if (m_BeatTimer.GetRestBeats() == 1)
         {
-            
+            m_Theme->SetActive(true);
         }
         if (advancedTicks % 2 == 1)
         {

@@ -50,14 +50,8 @@ void DragController::Update()
 
     const DirectX::SimpleMath::Vector2 mouseDelta = Input::GetMouseDelta();
 
-    const float angleDeg = m_Rotation.z;
-    const float angleRad = DirectX::XMConvertToRadians(angleDeg);
-    const float dirX = std::cos(angleRad);
-    const float dirY = std::sin(angleRad);
-
-    const float axisOffset = mouseDelta.x * dirX + mouseDelta.y * dirY;
-    m_DragOffset.x = dirX * axisOffset;
-    m_DragOffset.y = dirY * axisOffset;
+    m_DragOffset.x = m_Dir.x * mouseDelta.x;
+    m_DragOffset.y = m_Dir.y * mouseDelta.y;
 
     auto pos = GetPos();
     pos.x += m_DragOffset.x;

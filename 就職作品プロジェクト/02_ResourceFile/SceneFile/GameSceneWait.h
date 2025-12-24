@@ -2,6 +2,7 @@
 #include "Scene.h"
 #include "Square.h"
 #include "Particle.h"
+#include "Theme.h"
 
 #include <vector>
 #include <random>
@@ -26,9 +27,9 @@ private:
     uint32_t							 m_LifeCount = 4;		// 自分のライフ数
     std::vector<std::shared_ptr<Square>> m_LifeGame;			// ライフのオブジェクト格納用
     std::shared_ptr<ParticleEmitter>	 m_LifeParticleEmitter; // ライフ減少時のパーティクルエミッター
+    std::shared_ptr<Theme>				 m_Theme;				// お題表示用テーマオブジェクト
 
-    // 経過時間管理用変数
-	float m_Tick = 0.0f;
+    float m_Tick = 0.0f;
     
 	std::mt19937_64 m_RandomEngine{ std::random_device{}() };
 

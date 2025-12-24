@@ -5,7 +5,7 @@
 class Theme : public Square
 {
 protected:
-    bool m_IsActive = false;
+    bool m_isActive = false;
 
 public:
     Theme(Camera& cam);
@@ -16,5 +16,7 @@ public:
     void Update()	  override;
     void Draw()		  override;
     void Finalize()	  override;
+
+    void SetActive(const bool isActive);
 };
 
