@@ -113,10 +113,6 @@ void TitleScene::Update(float tick)
 	m_DurationPressEnter += tick;
 	m_MoveTitleLogo		 += tick;
 
-    DirectX::SimpleMath::Vector2 mousePos = Input::GetMousePos();
-
-    std::cout << "Mouse X:" << mousePos.x << "\t Y:" << mousePos.y << std::endl;
-
 	// TitleLogo‚ð‚Ó‚í‚Ó‚í‚³‚¹‚é
 	// ã‰º‚Éˆê’èÀ•W‚ð’´‚¦‚é‚Æ”½‘Î•ûŒü‚Éˆê’è—ÊˆÚ“®••â³
 	const float twoPI = 6.27318530718f;

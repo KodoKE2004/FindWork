@@ -58,6 +58,7 @@ void Input::Update(HWND hWnd)
 		m_MousePos = currentPos;
 
 	#ifdef _DEBUG
+
 		const auto debugViewport = Renderer::GetDebugPresentViewport();
 		const float gameWidth = static_cast<float>(Application::GetGameWidth());
 		const float gameHeight = static_cast<float>(Application::GetGameHeight());
@@ -80,6 +81,7 @@ void Input::Update(HWND hWnd)
 			m_MousePos.x -= static_cast<LONG>(gameWidth * 0.5f);
 			m_MousePos.y = -m_MousePos.y + static_cast<LONG>(gameHeight * 0.5f);
 		}
+
 	#else 
         m_MousePos.x -= static_cast<LONG>(Application::GetGameWidth() * 0.5f);
         m_MousePos.y  = - m_MousePos.y + static_cast<LONG>(Application::GetGameHeight() * 0.5f);

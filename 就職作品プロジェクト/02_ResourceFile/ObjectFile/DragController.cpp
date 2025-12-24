@@ -24,9 +24,10 @@ void DragController::Update()
         const auto scale = GetScale();
         const float halfWidth  = scale.x * 0.5f;
         const float halfHeight = scale.y * 0.5f;
+
         // オブジェクトの範囲内にマウスがあるか
-        const bool  isOverObject = std::abs(mousePos.x - pos.x) <= halfWidth
-        && std::abs(mousePos.y - pos.y) <= halfHeight;
+        const bool  isOverObject = std::abs(mousePos.x - pos.x) <= halfWidth &&
+                                   std::abs(mousePos.y - pos.y) <= halfHeight;
 
         m_IsDragging = isOverObject;
     }

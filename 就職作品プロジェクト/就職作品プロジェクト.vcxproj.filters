@@ -490,8 +490,5 @@
     <FxCompile Include="ShaderFile\VS_DebugGrid.hlsl">
       <Filter>HLSL\VertexShader</Filter>
     </FxCompile>
-    <FxCompile Include="ShaderFile\PS_OutLine.hlsl">
-      <Filter>HLSL\PixelShader</Filter>
-    </FxCompile>
   </ItemGroup>
 </Project>

@@ -58,11 +58,11 @@ void Game::Initialize()
 {	
 	auto& instance = GetInstance();
 	
-	instance.m_Input			 = std::make_unique<Input>();			// 入力の初期化
-	instance.m_Camera			 = std::make_unique<Camera>();			// カメラ作成
-	//instance.m_Camera->Initialize();									// カメラの初期化
-    instance.m_TransitionTexture = nullptr;								// トランジション用テクスチャ初期化
-    instance.m_Theme             = nullptr;								// テーマ管理初期化
+	instance.m_Input			 = std::make_unique<Input>();	
+	instance.m_Camera			 = std::make_unique<Camera>();	
+	//instance.m_Camera->Initialize();							
+    instance.m_TransitionTexture = nullptr;						
+    instance.m_Theme             = nullptr;						
 	//		シーンをタイトルシーンに設定
 	Renderer::Initialize();
 	DebugUI::Init(Renderer::GetDevice(), Renderer::GetDeviceContext());	// デバッグUIの初期化
@@ -121,9 +121,17 @@ void Game::Initialize()
 void Game::Update(float tick)
 {	
 	auto& instance = GetInstance();
-	
-
 	instance.m_Input->Update(Application::GetWindow());
+
+#ifdef _DEBUG
+	DirectX::SimpleMath::Vector2 mousePos = Input::GetMousePos();
+    float mouseDiffX = mousePos.x - instance.m_PreviewMousePos.x;
+    float mouseDiffY = mousePos.y - instance.m_PreviewMousePos.y;
+	if (mouseDiffX != 0 || mouseDiffY != 0) {
+		std::cout << "Mouse X:" << mousePos.x << "\t Y:" << mousePos.y << std::endl;
+	}
+	instance.m_PreviewMousePos = mousePos;
+#endif
 
 	// 現在のシーンの更新
 	instance.m_SceneCurrent->Update(tick);

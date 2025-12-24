@@ -32,6 +32,10 @@ private:
     std::shared_ptr<Theme>				 m_Theme;			  // テーマ管理
     std::vector<std::shared_ptr<Scene>>	 m_SceneStack;		  // シーンスタック
 
+#ifdef _DEBUG
+    DirectX::SimpleMath::Vector2 m_PreviewMousePos;  // デバッグ用ビュー行列
+#endif
+
 	//================================
 	//	   ゲームを支えるマネージャー達
 	//================================
