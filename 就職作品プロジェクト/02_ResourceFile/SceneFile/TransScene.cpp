@@ -123,14 +123,14 @@ void TransScene::Finalize()
 {
     auto& instance = Game::GetInstance();
 	m_Step = STEP::OFF;
-	for (auto* obj : m_MySceneObjects)
+	for (auto obj : m_MySceneObjects)
 	{
 		obj->SetTexture(nullptr);
 		instance.DeleteObject(obj);
 	}
 	m_MySceneObjects.clear();
 
-	m_OverlayNext = nullptr;
+	m_OverlayNext.reset();
 	m_TransitionTexture = nullptr ;
 	instance.SetTransitionTexture(nullptr);
 	m_NextSceneSRV.Reset();

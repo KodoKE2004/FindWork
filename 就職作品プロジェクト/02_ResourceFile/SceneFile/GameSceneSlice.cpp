@@ -61,7 +61,7 @@ void GameSceneSlice::Update(float tick)
 
     auto& instance = Game::GetInstance();
 
-    std::vector<Enemy*> enemys = instance.GetObjects<Enemy>();
+    std::vector<std::shared_ptr<Enemy>> enemys = instance.GetObjects<Enemy>();
     if (IsAllDeathEnemy(enemys)) {
         // SceneExe‚Å‘‚ß‚ÉƒNƒŠƒA‚ğ‚µ‚½ê‡‚à‘z’è
         StageClear();

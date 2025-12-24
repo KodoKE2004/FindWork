@@ -242,6 +242,9 @@
     <ClCompile Include="02_ResourceFile\ObjectFile\DragController.cpp">
       <Filter>SourceFile\Object\2D</Filter>
     </ClCompile>
+    <ClCompile Include="02_ResourceFile\ObjectFile\Theme.cpp">
+      <Filter>SourceFile\Object\2D</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="02_ResourceFile\SceneFile\Scene.h">
@@ -450,6 +453,9 @@
     </ClInclude>
     <ClInclude Include="pch.h" />
     <ClInclude Include="02_ResourceFile\ObjectFile\DragController.h">
+      <Filter>SourceFile\Object\2D</Filter>
+    </ClInclude>
+    <ClInclude Include="02_ResourceFile\ObjectFile\Theme.h">
       <Filter>SourceFile\Object\2D</Filter>
     </ClInclude>
   </ItemGroup>

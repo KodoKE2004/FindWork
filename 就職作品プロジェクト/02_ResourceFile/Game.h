@@ -9,7 +9,7 @@
 #include "TransScene.h"
 #include "TransitionBase.h"
 #include "Object.h"
-
+#include "Theme.h"
 #include "input.h"
 #include "GameSceneExe.h"
 
@@ -17,7 +17,6 @@
 #include "TextureManager.h"
 #include "ShaderManager.h"
 #include "AudioManager.h"
-
 
 class Game
 {
@@ -27,9 +26,10 @@ private:
     std::shared_ptr<Scene>				 m_SceneNext;		  // 次のシーン
 	std::unique_ptr<Input>				 m_Input;			  // 入力管理
 	std::unique_ptr<Camera>				 m_Camera;			  // カメラ
-	std::vector<std::unique_ptr<Object>> m_GameObjects;		  // オブジェクト
+	std::vector<std::shared_ptr<Object>> m_GameObjects;		  // オブジェクト
 
     std::shared_ptr<TransitionBase>		 m_TransitionTexture; // トランジション用テクスチャ
+    std::shared_ptr<Theme>				 m_Theme;			  // テーマ管理
     std::vector<std::shared_ptr<Scene>>	 m_SceneStack;		  // シーンスタック
 
 	//================================
@@ -42,7 +42,6 @@ private:
 
     static void InitializeTransitionCSV();					// トランジションCSVの初期化
     static void FinalizeTransitionCSV();					// トランジションCSVの終了処理
-
 public:
 	//================================
 	//		コンストラクタとデストラクタ
@@ -62,44 +61,32 @@ public:
 	// 現在のシーンを設定
     static void SetSceneCurrent(std::shared_ptr<Scene> newScene);
     static void SetSceneNext(std::shared_ptr<Scene> newScene);
-    // TranstionTextureをTransSceneと連携させる
+
+    // TranstionTextureをTransSceneと連携
 	void SetTransitionTexture(std::shared_ptr<TransitionBase> tex) {
 		m_TransitionTexture = tex;
     }
 
-	std::shared_ptr<TransitionBase> GetTransitionTexture() const {
-		return m_TransitionTexture;
-    }
+	std::shared_ptr<TransitionBase> GetTransitionTexture() const;
+
     //===============================
-	//		シーンのスタック管理
+	//			シーンの関連群
 	//===============================
-    
-	void ScenePush(std::shared_ptr<Scene> newScene);
-	std::shared_ptr<Scene> ScenePop();
-	size_t GetSceneStackSize() const {
-		return m_SceneStack.size();
-    }
-
-	//===============================
-	// ゲッターとシングルトンパターンの実装
-	//===============================
+	void					ScenePush(std::shared_ptr<Scene> newScene);
+	std::shared_ptr<Scene>	ScenePop();
+	size_t					GetSceneStackSize() const;
 	
-	// ゲームのインスタンスを取得
-	static Game& GetInstance();	
-	// 現在のシーンを取得
-	std::shared_ptr<Scene> GetCurrentScene() const;
-
-	// インスタンスのカメラ
-	Camera& GetCamera() {
-		return *m_Camera.get();
-	}
+	static Game&			GetInstance();	
+	std::shared_ptr<Scene>	GetCurrentScene() const;
+	Camera&					GetCamera();
 	
-	// メッシュマネージャー
-	[[nodiscard]] operator MeshManager*    () const { return m_MeshManager.get(); }
-	[[nodiscard]] operator TextureManager* () const { return m_TextureManager.get(); }
+    //================================
+	//		  マネージャーの取得
+    //================================
+	[[nodiscard]] operator MeshManager*    () const { return m_MeshManager.get();	}
+	[[nodiscard]] operator TextureManager* () const { return m_TextureManager.get();}
 	[[nodiscard]] operator ShaderManager*  () const { return m_ShaderManager.get(); }
-	[[nodiscard]] operator AudioManager*   () const { return m_AudioManager.get(); }
-
+	[[nodiscard]] operator AudioManager*   () const { return m_AudioManager.get();	}
 
 	// Debug関連
 	DebugGridLine m_Grid;
@@ -109,12 +96,12 @@ public:
 	//================================
 	// オブジェクト管理
 	//================================
-	void DeleteObject(Object* pt); // オブジェクトを削除する
+	void DeleteObject(std::shared_ptr<Object> pt); // オブジェクトを削除する
 	void DeleteAllObject(); // オブジェクトをすべて削除する
 
 	// オブジェクトを追加する
 	template<class T, class... Args>
-	T* AddObject(Args&&... args)
+	std::shared_ptr<T> AddObject(Args&&... args)
 	{
 		static_assert(std::is_base_of_v<Object, T>, "TがObjectを継承していない");
 		static_assert(!std::is_abstract_v<T>	  , "Tが抽象クラスだった");
@@ -123,36 +110,32 @@ public:
 
 		// コンストラクタ引数を完全転送して unique_ptrを作成
 		std::unique_ptr<T> up;
-
 		if constexpr (sizeof...(Args) == 0) {
-			up = std::make_unique<T>(*instance.m_Camera.get());
+			up = std::make_shared<T>(*instance.m_Camera.get());
 		}
 		else {
-			up = std::make_unique<T>(std::forward<Args>(args)...);
+			up = std::make_shared<T>(std::forward<Args>(args)...);
 		}
-		T* pt = up.get();
 
-		instance.m_GameObjects.emplace_back(std::move(up));
+		std::shared_ptr<T> pt = up;
+		instance.m_GameObjects.emplace_back(up));
 		pt->Initialize(); // 初期化
 		return pt;
 	}
 
-
 	// オブジェクトを取得する
 	template<class T> 
-	std::vector<T*> GetObjects()
+	std::vector<std::shared_ptr<T>> GetObjects()
 	{
-		std::vector<T*> res;
+		std::vector<std::shared_ptr<T>> res;
 		for (const auto& o : m_pInstance->m_GameObjects) {
 			// dynamic_castで型をチェック
-			if (T* derivedObj = dynamic_cast<T*>(o.get())) {
+			if (std::shared_ptr<T> derivedObj = dynamic_cast<std::shared_ptr<T>>(o.get())) {
 				res.emplace_back(derivedObj);
 			}
 		}
 		return res;
 	}
-
-
 };
 
 //================================
@@ -227,6 +210,11 @@ inline void ChangeScenePop(SceneTransitionParam& state)
     instance.SetSceneCurrent(scene);
 }
 
+inline std::shared_ptr<TransitionBase> Game::GetTransitionTexture() const
+{
+	return m_TransitionTexture;
+}
+
 inline void Game::ScenePush(std::shared_ptr<Scene> newScene)
 {
     // 遷移前のシーンをスタックに保存
@@ -241,5 +229,10 @@ inline std::shared_ptr<Scene> Game::ScenePop()
     m_SceneStack.pop_back();
 
 	return scene;
+}
+
+inline size_t Game::GetSceneStackSize() const
+{
+	return m_SceneStack.size();
 }
 

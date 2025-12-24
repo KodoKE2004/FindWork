@@ -56,6 +56,9 @@ void GameSceneWait::Initialize()
         Debug::Log("=====  ステージ失敗  =====");
     }
 
+    RhythmBeatConst beatConfig{};
+    beatConfig.Setup(120.0f, 4, 1); // 120 BPM, 4/4 拍子
+
     // 難易度アップ処理 
     ++m_RelationData.stageCount;
     // 難易度 0 ~
@@ -66,8 +69,8 @@ void GameSceneWait::Initialize()
     }
     // スピード
     else if (m_RelationData.stageCount % 4 == 0) {
-
-
+        beatConfig.Setup(120.0f + (m_RelationData.stageCount / 4) * 10.0f, 4, 1);
+        Debug::Log("[[検出]] スピードアップ");
 
     }
 
@@ -75,8 +78,6 @@ void GameSceneWait::Initialize()
     SetTimer(&m_Tick);
     SetTimer(&m_DecrementLife.timer);
 
-    RhythmBeatConst beatConfig{};
-    beatConfig.Setup(120.0f, 4, 1); // 120 BPM, 4/4 拍子
     m_RelationData.rhythmBeat.Initialize(beatConfig);
 
     m_BeatTimer.Initialize(8);
@@ -152,12 +153,15 @@ void GameSceneWait::Update(float tick)
         {
             m_ShouldTransitionToStage = true;
         }
-
+        // 残り一拍のタイミングでお題提示処理開始
+        else if (m_BeatTimer.GetRestBeats() == 1)
+        {
+            
+        }
         if (advancedTicks % 2 == 1)
         {
             m_IsLifeTiltPositive = !m_IsLifeTiltPositive;
         }
-
         const float tiltAngle = m_IsLifeTiltPositive ? 30.0f : -30.0f;
         for (auto* life : m_LifeGame)
         {

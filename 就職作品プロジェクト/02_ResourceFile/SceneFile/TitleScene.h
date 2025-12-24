@@ -10,12 +10,12 @@
 class TitleScene : public Scene
 {
 private:
-	Square*	m_TitleLogo		 = nullptr;
-	Square* m_PressEnter	 = nullptr;
-	Square* m_FadeMask		 = nullptr;
-	Square* m_PressEnterBack = nullptr;
+	std::shared_ptr<Square>	m_TitleLogo		 ;
+	std::shared_ptr<Square> m_PressEnter	 ;
+	std::shared_ptr<Square> m_FadeMask		 ;
+	std::shared_ptr<Square> m_PressEnterBack ;
 
-    DragController* m_DragController = nullptr;
+    std::shared_ptr<DragController> m_DragController;
 
 	static constexpr float AlphaChangeTimer = 0.5f;
 

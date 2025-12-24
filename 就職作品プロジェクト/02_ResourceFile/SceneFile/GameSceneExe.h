@@ -24,10 +24,9 @@ class GameSceneExe : public Scene
 // inゲーム基底クラス
 protected:
 	// 	共通オブジェクト
-    Skydome* m_Skydome    = nullptr;
-	Bomber*  m_Bomber	  = nullptr;		// スピードゲージ背景
-
-    Player*  m_Player	  = nullptr;		// プレイヤーオブジェクト
+    std::shared_ptr<Skydome> m_Skydome;
+	std::shared_ptr<Bomber>  m_Bomber ;		// スピードゲージ背景
+    std::shared_ptr<Player>  m_Player ;		// プレイヤーオブジェクト
 
 
     // カウントダウン関連

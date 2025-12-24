@@ -23,6 +23,7 @@
     <ClCompile Include="02_ResourceFile\Audio.cpp" />
     <ClCompile Include="02_ResourceFile\ObjectFile\Bomber.cpp" />
     <ClCompile Include="02_ResourceFile\ObjectFile\DragController.cpp" />
+    <ClCompile Include="02_ResourceFile\ObjectFile\Theme.cpp" />
     <ClCompile Include="02_ResourceFile\Particle.cpp" />
     <ClCompile Include="02_ResourceFile\RhythmBeat.cpp" />
     <ClCompile Include="02_ResourceFile\AudioManager.cpp" />
@@ -89,6 +90,7 @@
     <ClInclude Include="02_ResourceFile\Audio.h" />
     <ClInclude Include="02_ResourceFile\ObjectFile\Bomber.h" />
     <ClInclude Include="02_ResourceFile\ObjectFile\DragController.h" />
+    <ClInclude Include="02_ResourceFile\ObjectFile\Theme.h" />
     <ClInclude Include="02_ResourceFile\Particle.h" />
     <ClInclude Include="02_ResourceFile\RhythmBeat.h" />
     <ClInclude Include="02_ResourceFile\AudioManager.h" />

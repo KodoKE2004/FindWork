@@ -5,8 +5,8 @@ class Bomber : public Square
 {
 private:
 
-    Square* m_Rope   = nullptr;  
-    Square* m_Number = nullptr;
+    std::shared_ptr<Square> m_Rope   = nullptr;  
+    std::shared_ptr<Square> m_Number = nullptr;
     
     float m_FillRatio = 1.0f;  // U�̔䗦(0.0f ~ 1.0f)
 

@@ -9,8 +9,8 @@
 class GameSceneJump : public GameSceneExe
 {
 private:
-    Cart*        m_Cart   = nullptr;
-    CartWarning* m_CartWarning = nullptr;
+    std::shared_ptr<Cart>        m_Cart;
+    std::shared_ptr<CartWarning> m_CartWarning;
 
     float m_PlayerGroundHeight    = - 100.0f;
     float m_PlayerJumpApexHeight  =   200.0f;

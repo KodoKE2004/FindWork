@@ -6,8 +6,8 @@ class ResultScene : public Scene
 {
 private:
 
-    Square* m_ButtonToTitle = nullptr; 
-    Square* m_ButtonRetry   = nullptr;
+    std::shared_ptr<Square> m_ButtonToTitle; 
+    std::shared_ptr<Square> m_ButtonRetry  ;
 
     bool m_isCorsorButtonToTitle = true;
 

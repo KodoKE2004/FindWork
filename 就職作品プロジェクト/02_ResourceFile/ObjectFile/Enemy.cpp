@@ -46,9 +46,9 @@ void Enemy::Death()
     m_isDeath = true;
 }
 
-bool IsAllDeathEnemy(std::vector<Enemy*> enemys)
+bool IsAllDeathEnemy(std::vector<std::shared_ptr<Enemy>> enemys)
 {
-    for (Enemy* it : enemys)
+    for (std::shared_ptr<Enemy> it : enemys)
     {
         if (!it->IsDeath()) {
             return false;

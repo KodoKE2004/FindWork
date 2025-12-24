@@ -5,6 +5,11 @@
 SceneRelationData Scene::m_RelationData;
 std::vector<float*> Scene::m_TimerList;
 
+std::vector<std::shared_ptr<Object>> Scene::GetSceneObjects()
+{
+	return m_MySceneObjects;
+}
+
 void Scene::PlaySE(std::string seName, std::optional<float> overrideVolume)
 {
 	// SEÇÃçƒê∂

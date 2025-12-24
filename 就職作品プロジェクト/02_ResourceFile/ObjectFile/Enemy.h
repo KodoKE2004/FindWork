@@ -19,4 +19,4 @@ public:
     }
 };
 
-bool IsAllDeathEnemy(std::vector<Enemy*> enemys);
+bool IsAllDeathEnemy(std::vector<std::shared_ptr<Enemy>> enemys);

@@ -1,46 +1,1310 @@
 ﻿  Application.cpp
+  Bomber.cpp
+  Theme.cpp
   Camera.cpp
-  Collider.cpp
   DebugGridLine.cpp
   DebugUI.cpp
   Game.cpp
-  MeshManager.cpp
-  Bomber.cpp
-  Bullet.cpp
-  Car.cpp
-  CartWarning.cpp
-  Circle.cpp
-  Cube.cpp
-  DragController.cpp
   Enemy.cpp
-  Light.cpp
-  Model.cpp
-  Object.cpp
-  Player.cpp
-  Skydome.cpp
-  Sphere.cpp
-  Particle.cpp
-  Renderer.cpp
   GameSceneCrush.cpp
-  GameSceneExe.cpp
   GameSceneJump.cpp
   GameSceneSlice.cpp
   GameSceneWait.cpp
   ResultScene.cpp
   Scene.cpp
-  SelectScene.cpp
-  TitleScene.cpp
-  TransScene.cpp
-  Fade.cpp
-  SnapshotOverlay.cpp
-  TransitionBase.cpp
   Wipe.cpp
   Zoom.cpp
-  Shader.cpp
-  ShaderManager.cpp
+C:\Users\kodokeの世界\Desktop\HAL\VisualSutdio\就職作品\個人製作\FindWork\就職作品プロジェクト\02_ResourceFile\Game.h(121,1): error C2059: 構文エラー: ')'
+  (ソース ファイル '/02_ResourceFile/DebugUI.cpp' をコンパイルしています)
+  
+C:\Users\kodokeの世界\Desktop\HAL\VisualSutdio\就職作品\個人製作\FindWork\就職作品プロジェクト\02_ResourceFile\Game.h(122,3): error C3927: '->': 後続の戻り値の型は、関数以外の宣言子の後に許可されていません
+  (ソース ファイル '/02_ResourceFile/DebugUI.cpp' をコンパイルしています)
+  
+C:\Users\kodokeの世界\Desktop\HAL\VisualSutdio\就職作品\個人製作\FindWork\就職作品プロジェクト\02_ResourceFile\Game.h(122,7): error C3613: '->' の後に戻り型が指定されていません ('int' と見なされます)
+  (ソース ファイル '/02_ResourceFile/DebugUI.cpp' をコンパイルしています)
+  
+C:\Users\kodokeの世界\Desktop\HAL\VisualSutdio\就職作品\個人製作\FindWork\就職作品プロジェクト\02_ResourceFile\Game.h(122,7): error C3646: 'Initialize': 不明なオーバーライド指定子です
+  (ソース ファイル '/02_ResourceFile/DebugUI.cpp' をコンパイルしています)
+  
+C:\Users\kodokeの世界\Desktop\HAL\VisualSutdio\就職作品\個人製作\FindWork\就職作品プロジェクト\02_ResourceFile\Game.h(122,17): error C2059: 構文エラー: '('
+  (ソース ファイル '/02_ResourceFile/DebugUI.cpp' をコンパイルしています)
+  
+C:\Users\kodokeの世界\Desktop\HAL\VisualSutdio\就職作品\個人製作\FindWork\就職作品プロジェクト\02_ResourceFile\Game.h(122,19): error C2238: ';' の前に無効なトークンがあります。
+  (ソース ファイル '/02_ResourceFile/DebugUI.cpp' をコンパイルしています)
+  
+C:\Users\kodokeの世界\Desktop\HAL\VisualSutdio\就職作品\個人製作\FindWork\就職作品プロジェクト\02_ResourceFile\Game.h(123,3): error C2059: 構文エラー: 'return'
+  (ソース ファイル '/02_ResourceFile/DebugUI.cpp' をコンパイルしています)
+  
+C:\Users\kodokeの世界\Desktop\HAL\VisualSutdio\就職作品\個人製作\FindWork\就職作品プロジェクト\02_ResourceFile\Game.h(123,12): error C2238: ';' の前に無効なトークンがあります。
+  (ソース ファイル '/02_ResourceFile/DebugUI.cpp' をコンパイルしています)
+  
+C:\Users\kodokeの世界\Desktop\HAL\VisualSutdio\就職作品\個人製作\FindWork\就職作品プロジェクト\02_ResourceFile\Game.h(121,1): error C2760: 構文エラー: '}' は予期しないエラーでした。';' が必要です
+  (ソース ファイル '/02_ResourceFile/DebugUI.cpp' をコンパイルしています)
+      C:\Users\kodokeの世界\Desktop\HAL\VisualSutdio\就職作品\個人製作\FindWork\就職作品プロジェクト\02_ResourceFile\Game.h(104,21):
+      コンパイラでのこの診断により関数 'std::shared_ptr<_Ty> Game::AddObject(Args &&...)' が生成されました。
+  
+C:\Users\kodokeの世界\Desktop\HAL\VisualSutdio\就職作品\個人製作\FindWork\就職作品プロジェクト\02_ResourceFile\Game.h(127,2): error C2059: 構文エラー: '<L_GRAMMAR_template_head_l>'
+  (ソース ファイル '/02_ResourceFile/DebugUI.cpp' をコンパイルしています)
+  
+C:\Users\kodokeの世界\Desktop\HAL\VisualSutdio\就職作品\個人製作\FindWork\就職作品プロジェクト\02_ResourceFile\Game.h(129,2): error C2143: 構文エラー: ';' が '{' の前にありません。
+  (ソース ファイル '/02_ResourceFile/DebugUI.cpp' をコンパイルしています)
+  
+C:\Users\kodokeの世界\Desktop\HAL\VisualSutdio\就職作品\個人製作\FindWork\就職作品プロジェクト\02_ResourceFile\Game.h(129,2): error C2447: '{': 対応する関数ヘッダーがありません (旧形式の仮引数リスト?)
+  (ソース ファイル '/02_ResourceFile/DebugUI.cpp' をコンパイルしています)
+  
+C:\Users\kodokeの世界\Desktop\HAL\VisualSutdio\就職作品\個人製作\FindWork\就職作品プロジェクト\02_ResourceFile\Game.h(139,1): error C2059: 構文エラー: '}'
+  (ソース ファイル '/02_ResourceFile/DebugUI.cpp' をコンパイルしています)
+  
+C:\Users\kodokeの世界\Desktop\HAL\VisualSutdio\就職作品\個人製作\FindWork\就職作品プロジェクト\02_ResourceFile\Game.h(139,1): error C2143: 構文エラー: ';' が '}' の前にありません。
+  (ソース ファイル '/02_ResourceFile/DebugUI.cpp' をコンパイルしています)
+  
+C:\Users\kodokeの世界\Desktop\HAL\VisualSutdio\就職作品\個人製作\FindWork\就職作品プロジェクト\02_ResourceFile\Game.h(121,1): error C2059: 構文エラー: ')'
+  (ソース ファイル '/02_ResourceFile/SceneFile/GameSceneJump.cpp' をコンパイルしています)
+  
+C:\Users\kodokeの世界\Desktop\HAL\VisualSutdio\就職作品\個人製作\FindWork\就職作品プロジェクト\02_ResourceFile\Game.h(122,3): error C3927: '->': 後続の戻り値の型は、関数以外の宣言子の後に許可されていません
+  (ソース ファイル '/02_ResourceFile/SceneFile/GameSceneJump.cpp' をコンパイルしています)
+  
+C:\Users\kodokeの世界\Desktop\HAL\VisualSutdio\就職作品\個人製作\FindWork\就職作品プロジェクト\02_ResourceFile\Game.h(122,7): error C3613: '->' の後に戻り型が指定されていません ('int' と見なされます)
+  (ソース ファイル '/02_ResourceFile/SceneFile/GameSceneJump.cpp' をコンパイルしています)
+  
+C:\Users\kodokeの世界\Desktop\HAL\VisualSutdio\就職作品\個人製作\FindWork\就職作品プロジェクト\02_ResourceFile\Game.h(122,7): error C3646: 'Initialize': 不明なオーバーライド指定子です
+  (ソース ファイル '/02_ResourceFile/SceneFile/GameSceneJump.cpp' をコンパイルしています)
+  
+C:\Users\kodokeの世界\Desktop\HAL\VisualSutdio\就職作品\個人製作\FindWork\就職作品プロジェクト\02_ResourceFile\Game.h(122,17): error C2059: 構文エラー: '('
+  (ソース ファイル '/02_ResourceFile/SceneFile/GameSceneJump.cpp' をコンパイルしています)
+  
+C:\Users\kodokeの世界\Desktop\HAL\VisualSutdio\就職作品\個人製作\FindWork\就職作品プロジェクト\02_ResourceFile\Game.h(122,19): error C2238: ';' の前に無効なトークンがあります。
+  (ソース ファイル '/02_ResourceFile/SceneFile/GameSceneJump.cpp' をコンパイルしています)
+  
+C:\Users\kodokeの世界\Desktop\HAL\VisualSutdio\就職作品\個人製作\FindWork\就職作品プロジェクト\02_ResourceFile\Game.h(123,3): error C2059: 構文エラー: 'return'
+  (ソース ファイル '/02_ResourceFile/SceneFile/GameSceneJump.cpp' をコンパイルしています)
+  
+C:\Users\kodokeの世界\Desktop\HAL\VisualSutdio\就職作品\個人製作\FindWork\就職作品プロジェクト\02_ResourceFile\Game.h(123,12): error C2238: ';' の前に無効なトークンがあります。
+  (ソース ファイル '/02_ResourceFile/SceneFile/GameSceneJump.cpp' をコンパイルしています)
+  
+C:\Users\kodokeの世界\Desktop\HAL\VisualSutdio\就職作品\個人製作\FindWork\就職作品プロジェクト\02_ResourceFile\Game.h(121,1): error C2760: 構文エラー: '}' は予期しないエラーでした。';' が必要です
+  (ソース ファイル '/02_ResourceFile/SceneFile/GameSceneJump.cpp' をコンパイルしています)
+      C:\Users\kodokeの世界\Desktop\HAL\VisualSutdio\就職作品\個人製作\FindWork\就職作品プロジェクト\02_ResourceFile\Game.h(104,21):
+      コンパイラでのこの診断により関数 'std::shared_ptr<_Ty> Game::AddObject(Args &&...)' が生成されました。
+  
+C:\Users\kodokeの世界\Desktop\HAL\VisualSutdio\就職作品\個人製作\FindWork\就職作品プロジェクト\02_ResourceFile\Game.h(127,2): error C2059: 構文エラー: '<L_GRAMMAR_template_head_l>'
+  (ソース ファイル '/02_ResourceFile/SceneFile/GameSceneJump.cpp' をコンパイルしています)
+  
+C:\Users\kodokeの世界\Desktop\HAL\VisualSutdio\就職作品\個人製作\FindWork\就職作品プロジェクト\02_ResourceFile\Game.h(121,1): error C2059: 構文エラー: ')'
+  (ソース ファイル '/02_ResourceFile/DebugGridLine.cpp' をコンパイルしています)
+  
+C:\Users\kodokeの世界\Desktop\HAL\VisualSutdio\就職作品\個人製作\FindWork\就職作品プロジェクト\02_ResourceFile\Game.h(122,3): error C3927: '->': 後続の戻り値の型は、関数以外の宣言子の後に許可されていません
+  (ソース ファイル '/02_ResourceFile/DebugGridLine.cpp' をコンパイルしています)
+  
+C:\Users\kodokeの世界\Desktop\HAL\VisualSutdio\就職作品\個人製作\FindWork\就職作品プロジェクト\02_ResourceFile\Game.h(122,7): error C3613: '->' の後に戻り型が指定されていません ('int' と見なされます)
+  (ソース ファイル '/02_ResourceFile/DebugGridLine.cpp' をコンパイルしています)
+  
+C:\Users\kodokeの世界\Desktop\HAL\VisualSutdio\就職作品\個人製作\FindWork\就職作品プロジェクト\02_ResourceFile\Game.h(129,2): error C2143: 構文エラー: ';' が '{' の前にありません。
+  (ソース ファイル '/02_ResourceFile/SceneFile/GameSceneJump.cpp' をコンパイルしています)
+  
+C:\Users\kodokeの世界\Desktop\HAL\VisualSutdio\就職作品\個人製作\FindWork\就職作品プロジェクト\02_ResourceFile\Game.h(122,7): error C3646: 'Initialize': 不明なオーバーライド指定子です
+  (ソース ファイル '/02_ResourceFile/DebugGridLine.cpp' をコンパイルしています)
+  
+C:\Users\kodokeの世界\Desktop\HAL\VisualSutdio\就職作品\個人製作\FindWork\就職作品プロジェクト\02_ResourceFile\Game.h(122,17): error C2059: 構文エラー: '('
+  (ソース ファイル '/02_ResourceFile/DebugGridLine.cpp' をコンパイルしています)
+  
+C:\Users\kodokeの世界\Desktop\HAL\VisualSutdio\就職作品\個人製作\FindWork\就職作品プロジェクト\02_ResourceFile\Game.h(122,19): error C2238: ';' の前に無効なトークンがあります。
+  (ソース ファイル '/02_ResourceFile/DebugGridLine.cpp' をコンパイルしています)
+  
+C:\Users\kodokeの世界\Desktop\HAL\VisualSutdio\就職作品\個人製作\FindWork\就職作品プロジェクト\02_ResourceFile\Game.h(123,3): error C2059: 構文エラー: 'return'
+  (ソース ファイル '/02_ResourceFile/DebugGridLine.cpp' をコンパイルしています)
+  
+C:\Users\kodokeの世界\Desktop\HAL\VisualSutdio\就職作品\個人製作\FindWork\就職作品プロジェクト\02_ResourceFile\Game.h(123,12): error C2238: ';' の前に無効なトークンがあります。
+  (ソース ファイル '/02_ResourceFile/DebugGridLine.cpp' をコンパイルしています)
+  
+C:\Users\kodokeの世界\Desktop\HAL\VisualSutdio\就職作品\個人製作\FindWork\就職作品プロジェクト\02_ResourceFile\Game.h(129,2): error C2447: '{': 対応する関数ヘッダーがありません (旧形式の仮引数リスト?)
+  (ソース ファイル '/02_ResourceFile/SceneFile/GameSceneJump.cpp' をコンパイルしています)
+  
+C:\Users\kodokeの世界\Desktop\HAL\VisualSutdio\就職作品\個人製作\FindWork\就職作品プロジェクト\02_ResourceFile\Game.h(139,1): error C2059: 構文エラー: '}'
+  (ソース ファイル '/02_ResourceFile/SceneFile/GameSceneJump.cpp' をコンパイルしています)
+  
+C:\Users\kodokeの世界\Desktop\HAL\VisualSutdio\就職作品\個人製作\FindWork\就職作品プロジェクト\02_ResourceFile\Game.h(139,1): error C2143: 構文エラー: ';' が '}' の前にありません。
+  (ソース ファイル '/02_ResourceFile/SceneFile/GameSceneJump.cpp' をコンパイルしています)
+  
+C:\Users\kodokeの世界\Desktop\HAL\VisualSutdio\就職作品\個人製作\FindWork\就職作品プロジェクト\02_ResourceFile\Game.h(121,1): error C2760: 構文エラー: '}' は予期しないエラーでした。';' が必要です
+  (ソース ファイル '/02_ResourceFile/DebugGridLine.cpp' をコンパイルしています)
+      C:\Users\kodokeの世界\Desktop\HAL\VisualSutdio\就職作品\個人製作\FindWork\就職作品プロジェクト\02_ResourceFile\Game.h(104,21):
+      コンパイラでのこの診断により関数 'std::shared_ptr<_Ty> Game::AddObject(Args &&...)' が生成されました。
+  
+C:\Users\kodokeの世界\Desktop\HAL\VisualSutdio\就職作品\個人製作\FindWork\就職作品プロジェクト\02_ResourceFile\Game.h(127,2): error C2059: 構文エラー: '<L_GRAMMAR_template_head_l>'
+  (ソース ファイル '/02_ResourceFile/DebugGridLine.cpp' をコンパイルしています)
+  
+C:\Users\kodokeの世界\Desktop\HAL\VisualSutdio\就職作品\個人製作\FindWork\就職作品プロジェクト\02_ResourceFile\Game.h(129,2): error C2143: 構文エラー: ';' が '{' の前にありません。
+  (ソース ファイル '/02_ResourceFile/DebugGridLine.cpp' をコンパイルしています)
+  
+C:\Users\kodokeの世界\Desktop\HAL\VisualSutdio\就職作品\個人製作\FindWork\就職作品プロジェクト\02_ResourceFile\Game.h(129,2): error C2447: '{': 対応する関数ヘッダーがありません (旧形式の仮引数リスト?)
+  (ソース ファイル '/02_ResourceFile/DebugGridLine.cpp' をコンパイルしています)
+  
+C:\Users\kodokeの世界\Desktop\HAL\VisualSutdio\就職作品\個人製作\FindWork\就職作品プロジェクト\02_ResourceFile\Game.h(139,1): error C2059: 構文エラー: '}'
+  (ソース ファイル '/02_ResourceFile/DebugGridLine.cpp' をコンパイルしています)
+  
+C:\Users\kodokeの世界\Desktop\HAL\VisualSutdio\就職作品\個人製作\FindWork\就職作品プロジェクト\02_ResourceFile\Game.h(139,1): error C2143: 構文エラー: ';' が '}' の前にありません。
+  (ソース ファイル '/02_ResourceFile/DebugGridLine.cpp' をコンパイルしています)
+  
+C:\Users\kodokeの世界\Desktop\HAL\VisualSutdio\就職作品\個人製作\FindWork\就職作品プロジェクト\02_ResourceFile\Game.h(121,1): error C2059: 構文エラー: ')'
+  (ソース ファイル '/02_ResourceFile/SceneFile/GameSceneWait.cpp' をコンパイルしています)
+  
+C:\Users\kodokeの世界\Desktop\HAL\VisualSutdio\就職作品\個人製作\FindWork\就職作品プロジェクト\02_ResourceFile\Game.h(122,3): error C3927: '->': 後続の戻り値の型は、関数以外の宣言子の後に許可されていません
+  (ソース ファイル '/02_ResourceFile/SceneFile/GameSceneWait.cpp' をコンパイルしています)
+  
+C:\Users\kodokeの世界\Desktop\HAL\VisualSutdio\就職作品\個人製作\FindWork\就職作品プロジェクト\02_ResourceFile\Game.h(122,7): error C3613: '->' の後に戻り型が指定されていません ('int' と見なされます)
+  (ソース ファイル '/02_ResourceFile/SceneFile/GameSceneWait.cpp' をコンパイルしています)
+  
+C:\Users\kodokeの世界\Desktop\HAL\VisualSutdio\就職作品\個人製作\FindWork\就職作品プロジェクト\02_ResourceFile\Game.h(122,7): error C3646: 'Initialize': 不明なオーバーライド指定子です
+  (ソース ファイル '/02_ResourceFile/SceneFile/GameSceneWait.cpp' をコンパイルしています)
+  
+C:\Users\kodokeの世界\Desktop\HAL\VisualSutdio\就職作品\個人製作\FindWork\就職作品プロジェクト\02_ResourceFile\Game.h(122,17): error C2059: 構文エラー: '('
+  (ソース ファイル '/02_ResourceFile/SceneFile/GameSceneWait.cpp' をコンパイルしています)
+  
+C:\Users\kodokeの世界\Desktop\HAL\VisualSutdio\就職作品\個人製作\FindWork\就職作品プロジェクト\02_ResourceFile\Game.h(122,19): error C2238: ';' の前に無効なトークンがあります。
+  (ソース ファイル '/02_ResourceFile/SceneFile/GameSceneWait.cpp' をコンパイルしています)
+  
+C:\Users\kodokeの世界\Desktop\HAL\VisualSutdio\就職作品\個人製作\FindWork\就職作品プロジェクト\02_ResourceFile\Game.h(123,3): error C2059: 構文エラー: 'return'
+  (ソース ファイル '/02_ResourceFile/SceneFile/GameSceneWait.cpp' をコンパイルしています)
+  
+C:\Users\kodokeの世界\Desktop\HAL\VisualSutdio\就職作品\個人製作\FindWork\就職作品プロジェクト\02_ResourceFile\Game.h(123,12): error C2238: ';' の前に無効なトークンがあります。
+  (ソース ファイル '/02_ResourceFile/SceneFile/GameSceneWait.cpp' をコンパイルしています)
+  
+C:\Users\kodokeの世界\Desktop\HAL\VisualSutdio\就職作品\個人製作\FindWork\就職作品プロジェクト\02_ResourceFile\Game.h(121,1): error C2760: 構文エラー: '}' は予期しないエラーでした。';' が必要です
+  (ソース ファイル '/02_ResourceFile/SceneFile/GameSceneWait.cpp' をコンパイルしています)
+      C:\Users\kodokeの世界\Desktop\HAL\VisualSutdio\就職作品\個人製作\FindWork\就職作品プロジェクト\02_ResourceFile\Game.h(104,21):
+      コンパイラでのこの診断により関数 'std::shared_ptr<_Ty> Game::AddObject(Args &&...)' が生成されました。
+  
+C:\Users\kodokeの世界\Desktop\HAL\VisualSutdio\就職作品\個人製作\FindWork\就職作品プロジェクト\02_ResourceFile\Game.h(127,2): error C2059: 構文エラー: '<L_GRAMMAR_template_head_l>'
+  (ソース ファイル '/02_ResourceFile/SceneFile/GameSceneWait.cpp' をコンパイルしています)
+  
+C:\Users\kodokeの世界\Desktop\HAL\VisualSutdio\就職作品\個人製作\FindWork\就職作品プロジェクト\02_ResourceFile\Game.h(129,2): error C2143: 構文エラー: ';' が '{' の前にありません。
+  (ソース ファイル '/02_ResourceFile/SceneFile/GameSceneWait.cpp' をコンパイルしています)
+  
+C:\Users\kodokeの世界\Desktop\HAL\VisualSutdio\就職作品\個人製作\FindWork\就職作品プロジェクト\02_ResourceFile\Game.h(129,2): error C2447: '{': 対応する関数ヘッダーがありません (旧形式の仮引数リスト?)
+  (ソース ファイル '/02_ResourceFile/SceneFile/GameSceneWait.cpp' をコンパイルしています)
+  
+C:\Users\kodokeの世界\Desktop\HAL\VisualSutdio\就職作品\個人製作\FindWork\就職作品プロジェクト\02_ResourceFile\Game.h(139,1): error C2059: 構文エラー: '}'
+  (ソース ファイル '/02_ResourceFile/SceneFile/GameSceneWait.cpp' をコンパイルしています)
+  
+C:\Users\kodokeの世界\Desktop\HAL\VisualSutdio\就職作品\個人製作\FindWork\就職作品プロジェクト\02_ResourceFile\Game.h(139,1): error C2143: 構文エラー: ';' が '}' の前にありません。
+  (ソース ファイル '/02_ResourceFile/SceneFile/GameSceneWait.cpp' をコンパイルしています)
+  
+C:\Users\kodokeの世界\Desktop\HAL\VisualSutdio\就職作品\個人製作\FindWork\就職作品プロジェクト\02_ResourceFile\Game.h(121,1): error C2059: 構文エラー: ')'
+  (ソース ファイル '/02_ResourceFile/SceneFile/GameSceneSlice.cpp' をコンパイルしています)
+  
+C:\Users\kodokeの世界\Desktop\HAL\VisualSutdio\就職作品\個人製作\FindWork\就職作品プロジェクト\02_ResourceFile\Game.h(122,3): error C3927: '->': 後続の戻り値の型は、関数以外の宣言子の後に許可されていません
+  (ソース ファイル '/02_ResourceFile/SceneFile/GameSceneSlice.cpp' をコンパイルしています)
+  
+C:\Users\kodokeの世界\Desktop\HAL\VisualSutdio\就職作品\個人製作\FindWork\就職作品プロジェクト\02_ResourceFile\Game.h(122,7): error C3613: '->' の後に戻り型が指定されていません ('int' と見なされます)
+  (ソース ファイル '/02_ResourceFile/SceneFile/GameSceneSlice.cpp' をコンパイルしています)
+  
+C:\Users\kodokeの世界\Desktop\HAL\VisualSutdio\就職作品\個人製作\FindWork\就職作品プロジェクト\02_ResourceFile\Game.h(122,7): error C3646: 'Initialize': 不明なオーバーライド指定子です
+  (ソース ファイル '/02_ResourceFile/SceneFile/GameSceneSlice.cpp' をコンパイルしています)
+  
+C:\Users\kodokeの世界\Desktop\HAL\VisualSutdio\就職作品\個人製作\FindWork\就職作品プロジェクト\02_ResourceFile\Game.h(122,17): error C2059: 構文エラー: '('
+  (ソース ファイル '/02_ResourceFile/SceneFile/GameSceneSlice.cpp' をコンパイルしています)
+  
+C:\Users\kodokeの世界\Desktop\HAL\VisualSutdio\就職作品\個人製作\FindWork\就職作品プロジェクト\02_ResourceFile\Game.h(122,19): error C2238: ';' の前に無効なトークンがあります。
+  (ソース ファイル '/02_ResourceFile/SceneFile/GameSceneSlice.cpp' をコンパイルしています)
+  
+C:\Users\kodokeの世界\Desktop\HAL\VisualSutdio\就職作品\個人製作\FindWork\就職作品プロジェクト\02_ResourceFile\Game.h(123,3): error C2059: 構文エラー: 'return'
+  (ソース ファイル '/02_ResourceFile/SceneFile/GameSceneSlice.cpp' をコンパイルしています)
+  
+C:\Users\kodokeの世界\Desktop\HAL\VisualSutdio\就職作品\個人製作\FindWork\就職作品プロジェクト\02_ResourceFile\Game.h(123,12): error C2238: ';' の前に無効なトークンがあります。
+  (ソース ファイル '/02_ResourceFile/SceneFile/GameSceneSlice.cpp' をコンパイルしています)
+  
+C:\Users\kodokeの世界\Desktop\HAL\VisualSutdio\就職作品\個人製作\FindWork\就職作品プロジェクト\02_ResourceFile\Game.h(121,1): error C2760: 構文エラー: '}' は予期しないエラーでした。';' が必要です
+  (ソース ファイル '/02_ResourceFile/SceneFile/GameSceneSlice.cpp' をコンパイルしています)
+      C:\Users\kodokeの世界\Desktop\HAL\VisualSutdio\就職作品\個人製作\FindWork\就職作品プロジェクト\02_ResourceFile\Game.h(104,21):
+      コンパイラでのこの診断により関数 'std::shared_ptr<_Ty> Game::AddObject(Args &&...)' が生成されました。
+  
+C:\Users\kodokeの世界\Desktop\HAL\VisualSutdio\就職作品\個人製作\FindWork\就職作品プロジェクト\02_ResourceFile\Game.h(127,2): error C2059: 構文エラー: '<L_GRAMMAR_template_head_l>'
+  (ソース ファイル '/02_ResourceFile/SceneFile/GameSceneSlice.cpp' をコンパイルしています)
+  
+C:\Users\kodokeの世界\Desktop\HAL\VisualSutdio\就職作品\個人製作\FindWork\就職作品プロジェクト\02_ResourceFile\Game.h(129,2): error C2143: 構文エラー: ';' が '{' の前にありません。
+  (ソース ファイル '/02_ResourceFile/SceneFile/GameSceneSlice.cpp' をコンパイルしています)
+  
+C:\Users\kodokeの世界\Desktop\HAL\VisualSutdio\就職作品\個人製作\FindWork\就職作品プロジェクト\02_ResourceFile\Game.h(129,2): error C2447: '{': 対応する関数ヘッダーがありません (旧形式の仮引数リスト?)
+  (ソース ファイル '/02_ResourceFile/SceneFile/GameSceneSlice.cpp' をコンパイルしています)
+  
+C:\Users\kodokeの世界\Desktop\HAL\VisualSutdio\就職作品\個人製作\FindWork\就職作品プロジェクト\02_ResourceFile\Game.h(139,1): error C2059: 構文エラー: '}'
+  (ソース ファイル '/02_ResourceFile/SceneFile/GameSceneSlice.cpp' をコンパイルしています)
+  
+C:\Users\kodokeの世界\Desktop\HAL\VisualSutdio\就職作品\個人製作\FindWork\就職作品プロジェクト\02_ResourceFile\Game.h(139,1): error C2143: 構文エラー: ';' が '}' の前にありません。
+  (ソース ファイル '/02_ResourceFile/SceneFile/GameSceneSlice.cpp' をコンパイルしています)
+  
+C:\Users\kodokeの世界\Desktop\HAL\VisualSutdio\就職作品\個人製作\FindWork\就職作品プロジェクト\02_ResourceFile\Game.h(121,1): error C2059: 構文エラー: ')'
+  (ソース ファイル '/02_ResourceFile/Application.cpp' をコンパイルしています)
+  
+C:\Users\kodokeの世界\Desktop\HAL\VisualSutdio\就職作品\個人製作\FindWork\就職作品プロジェクト\02_ResourceFile\Game.h(122,3): error C3927: '->': 後続の戻り値の型は、関数以外の宣言子の後に許可されていません
+  (ソース ファイル '/02_ResourceFile/Application.cpp' をコンパイルしています)
+  
+C:\Users\kodokeの世界\Desktop\HAL\VisualSutdio\就職作品\個人製作\FindWork\就職作品プロジェクト\02_ResourceFile\Game.h(122,7): error C3613: '->' の後に戻り型が指定されていません ('int' と見なされます)
+  (ソース ファイル '/02_ResourceFile/Application.cpp' をコンパイルしています)
+  
+C:\Users\kodokeの世界\Desktop\HAL\VisualSutdio\就職作品\個人製作\FindWork\就職作品プロジェクト\02_ResourceFile\Game.h(122,7): error C3646: 'Initialize': 不明なオーバーライド指定子です
+  (ソース ファイル '/02_ResourceFile/Application.cpp' をコンパイルしています)
+  
+C:\Users\kodokeの世界\Desktop\HAL\VisualSutdio\就職作品\個人製作\FindWork\就職作品プロジェクト\02_ResourceFile\Game.h(122,17): error C2059: 構文エラー: '('
+  (ソース ファイル '/02_ResourceFile/Application.cpp' をコンパイルしています)
+  
+C:\Users\kodokeの世界\Desktop\HAL\VisualSutdio\就職作品\個人製作\FindWork\就職作品プロジェクト\02_ResourceFile\Game.h(122,19): error C2238: ';' の前に無効なトークンがあります。
+  (ソース ファイル '/02_ResourceFile/Application.cpp' をコンパイルしています)
+  
+C:\Users\kodokeの世界\Desktop\HAL\VisualSutdio\就職作品\個人製作\FindWork\就職作品プロジェクト\02_ResourceFile\Game.h(123,3): error C2059: 構文エラー: 'return'
+  (ソース ファイル '/02_ResourceFile/Application.cpp' をコンパイルしています)
+  
+C:\Users\kodokeの世界\Desktop\HAL\VisualSutdio\就職作品\個人製作\FindWork\就職作品プロジェクト\02_ResourceFile\Game.h(123,12): error C2238: ';' の前に無効なトークンがあります。
+  (ソース ファイル '/02_ResourceFile/Application.cpp' をコンパイルしています)
+  
+  Bullet.cpp
+C:\Users\kodokeの世界\Desktop\HAL\VisualSutdio\就職作品\個人製作\FindWork\就職作品プロジェクト\02_ResourceFile\Game.h(121,1): error C2760: 構文エラー: '}' は予期しないエラーでした。';' が必要です
+  (ソース ファイル '/02_ResourceFile/Application.cpp' をコンパイルしています)
+      C:\Users\kodokeの世界\Desktop\HAL\VisualSutdio\就職作品\個人製作\FindWork\就職作品プロジェクト\02_ResourceFile\Game.h(104,21):
+      コンパイラでのこの診断により関数 'std::shared_ptr<_Ty> Game::AddObject(Args &&...)' が生成されました。
+  
+C:\Users\kodokeの世界\Desktop\HAL\VisualSutdio\就職作品\個人製作\FindWork\就職作品プロジェクト\02_ResourceFile\Game.h(127,2): error C2059: 構文エラー: '<L_GRAMMAR_template_head_l>'
+  (ソース ファイル '/02_ResourceFile/Application.cpp' をコンパイルしています)
+  
+C:\Users\kodokeの世界\Desktop\HAL\VisualSutdio\就職作品\個人製作\FindWork\就職作品プロジェクト\02_ResourceFile\Game.h(129,2): error C2143: 構文エラー: ';' が '{' の前にありません。
+  (ソース ファイル '/02_ResourceFile/Application.cpp' をコンパイルしています)
+  
+C:\Users\kodokeの世界\Desktop\HAL\VisualSutdio\就職作品\個人製作\FindWork\就職作品プロジェクト\02_ResourceFile\Game.h(129,2): error C2447: '{': 対応する関数ヘッダーがありません (旧形式の仮引数リスト?)
+  (ソース ファイル '/02_ResourceFile/Application.cpp' をコンパイルしています)
+  
+C:\Users\kodokeの世界\Desktop\HAL\VisualSutdio\就職作品\個人製作\FindWork\就職作品プロジェクト\02_ResourceFile\Game.h(139,1): error C2059: 構文エラー: '}'
+  (ソース ファイル '/02_ResourceFile/Application.cpp' をコンパイルしています)
+  
+C:\Users\kodokeの世界\Desktop\HAL\VisualSutdio\就職作品\個人製作\FindWork\就職作品プロジェクト\02_ResourceFile\Game.h(139,1): error C2143: 構文エラー: ';' が '}' の前にありません。
+  (ソース ファイル '/02_ResourceFile/Application.cpp' をコンパイルしています)
+  
+C:\Users\kodokeの世界\Desktop\HAL\VisualSutdio\就職作品\個人製作\FindWork\就職作品プロジェクト\02_ResourceFile\Game.h(121,1): error C2059: 構文エラー: ')'
+  (ソース ファイル '/02_ResourceFile/SceneFile/ResultScene.cpp' をコンパイルしています)
+  
+C:\Users\kodokeの世界\Desktop\HAL\VisualSutdio\就職作品\個人製作\FindWork\就職作品プロジェクト\02_ResourceFile\Game.h(122,3): error C3927: '->': 後続の戻り値の型は、関数以外の宣言子の後に許可されていません
+  (ソース ファイル '/02_ResourceFile/SceneFile/ResultScene.cpp' をコンパイルしています)
+  
+C:\Users\kodokeの世界\Desktop\HAL\VisualSutdio\就職作品\個人製作\FindWork\就職作品プロジェクト\02_ResourceFile\Game.h(122,7): error C3613: '->' の後に戻り型が指定されていません ('int' と見なされます)
+  (ソース ファイル '/02_ResourceFile/SceneFile/ResultScene.cpp' をコンパイルしています)
+  
+C:\Users\kodokeの世界\Desktop\HAL\VisualSutdio\就職作品\個人製作\FindWork\就職作品プロジェクト\02_ResourceFile\Game.h(122,7): error C3646: 'Initialize': 不明なオーバーライド指定子です
+  (ソース ファイル '/02_ResourceFile/SceneFile/ResultScene.cpp' をコンパイルしています)
+  
+C:\Users\kodokeの世界\Desktop\HAL\VisualSutdio\就職作品\個人製作\FindWork\就職作品プロジェクト\02_ResourceFile\Game.h(122,17): error C2059: 構文エラー: '('
+  (ソース ファイル '/02_ResourceFile/SceneFile/ResultScene.cpp' をコンパイルしています)
+  
+C:\Users\kodokeの世界\Desktop\HAL\VisualSutdio\就職作品\個人製作\FindWork\就職作品プロジェクト\02_ResourceFile\Game.h(122,19): error C2238: ';' の前に無効なトークンがあります。
+  (ソース ファイル '/02_ResourceFile/SceneFile/ResultScene.cpp' をコンパイルしています)
+  
+C:\Users\kodokeの世界\Desktop\HAL\VisualSutdio\就職作品\個人製作\FindWork\就職作品プロジェクト\02_ResourceFile\Game.h(123,3): error C2059: 構文エラー: 'return'
+  (ソース ファイル '/02_ResourceFile/SceneFile/ResultScene.cpp' をコンパイルしています)
+  
+C:\Users\kodokeの世界\Desktop\HAL\VisualSutdio\就職作品\個人製作\FindWork\就職作品プロジェクト\02_ResourceFile\Game.h(123,12): error C2238: ';' の前に無効なトークンがあります。
+  (ソース ファイル '/02_ResourceFile/SceneFile/ResultScene.cpp' をコンパイルしています)
+  
+C:\Users\kodokeの世界\Desktop\HAL\VisualSutdio\就職作品\個人製作\FindWork\就職作品プロジェクト\02_ResourceFile\Game.h(121,1): error C2760: 構文エラー: '}' は予期しないエラーでした。';' が必要です
+  (ソース ファイル '/02_ResourceFile/SceneFile/ResultScene.cpp' をコンパイルしています)
+      C:\Users\kodokeの世界\Desktop\HAL\VisualSutdio\就職作品\個人製作\FindWork\就職作品プロジェクト\02_ResourceFile\Game.h(104,21):
+      コンパイラでのこの診断により関数 'std::shared_ptr<_Ty> Game::AddObject(Args &&...)' が生成されました。
+  
+C:\Users\kodokeの世界\Desktop\HAL\VisualSutdio\就職作品\個人製作\FindWork\就職作品プロジェクト\02_ResourceFile\Game.h(127,2): error C2059: 構文エラー: '<L_GRAMMAR_template_head_l>'
+  (ソース ファイル '/02_ResourceFile/SceneFile/ResultScene.cpp' をコンパイルしています)
+  
+C:\Users\kodokeの世界\Desktop\HAL\VisualSutdio\就職作品\個人製作\FindWork\就職作品プロジェクト\02_ResourceFile\Game.h(129,2): error C2143: 構文エラー: ';' が '{' の前にありません。
+  (ソース ファイル '/02_ResourceFile/SceneFile/ResultScene.cpp' をコンパイルしています)
+  
+C:\Users\kodokeの世界\Desktop\HAL\VisualSutdio\就職作品\個人製作\FindWork\就職作品プロジェクト\02_ResourceFile\Game.h(129,2): error C2447: '{': 対応する関数ヘッダーがありません (旧形式の仮引数リスト?)
+  (ソース ファイル '/02_ResourceFile/SceneFile/ResultScene.cpp' をコンパイルしています)
+  
+C:\Users\kodokeの世界\Desktop\HAL\VisualSutdio\就職作品\個人製作\FindWork\就職作品プロジェクト\02_ResourceFile\Game.h(139,1): error C2059: 構文エラー: '}'
+  (ソース ファイル '/02_ResourceFile/SceneFile/ResultScene.cpp' をコンパイルしています)
+  
+C:\Users\kodokeの世界\Desktop\HAL\VisualSutdio\就職作品\個人製作\FindWork\就職作品プロジェクト\02_ResourceFile\Game.h(139,1): error C2143: 構文エラー: ';' が '}' の前にありません。
+  (ソース ファイル '/02_ResourceFile/SceneFile/ResultScene.cpp' をコンパイルしています)
+  
+C:\Users\kodokeの世界\Desktop\HAL\VisualSutdio\就職作品\個人製作\FindWork\就職作品プロジェクト\02_ResourceFile\SceneFile\GameSceneWait.cpp(115,22): error C2440: '初期化中': 'std::shared_ptr<Square>' から 'Square *' に変換できません。
+  (ソース ファイル '/02_ResourceFile/SceneFile/GameSceneWait.cpp' をコンパイルしています)
+      C:\Users\kodokeの世界\Desktop\HAL\VisualSutdio\就職作品\個人製作\FindWork\就職作品プロジェクト\02_ResourceFile\SceneFile\GameSceneWait.cpp(115,22):
+      この変換を実行可能なユーザー定義変換演算子がないか、または演算子を呼び出せません。
+  
+C:\Users\kodokeの世界\Desktop\HAL\VisualSutdio\就職作品\個人製作\FindWork\就職作品プロジェクト\02_ResourceFile\Game.h(121,1): error C2059: 構文エラー: ')'
+  (ソース ファイル '/02_ResourceFile/ObjectFile/Enemy.cpp' をコンパイルしています)
+  
+C:\Users\kodokeの世界\Desktop\HAL\VisualSutdio\就職作品\個人製作\FindWork\就職作品プロジェクト\02_ResourceFile\Game.h(122,3): error C3927: '->': 後続の戻り値の型は、関数以外の宣言子の後に許可されていません
+  (ソース ファイル '/02_ResourceFile/ObjectFile/Enemy.cpp' をコンパイルしています)
+  
+C:\Users\kodokeの世界\Desktop\HAL\VisualSutdio\就職作品\個人製作\FindWork\就職作品プロジェクト\02_ResourceFile\Game.h(122,7): error C3613: '->' の後に戻り型が指定されていません ('int' と見なされます)
+  (ソース ファイル '/02_ResourceFile/ObjectFile/Enemy.cpp' をコンパイルしています)
+  
+C:\Users\kodokeの世界\Desktop\HAL\VisualSutdio\就職作品\個人製作\FindWork\就職作品プロジェクト\02_ResourceFile\Game.h(122,7): error C3646: 'Initialize': 不明なオーバーライド指定子です
+  (ソース ファイル '/02_ResourceFile/ObjectFile/Enemy.cpp' をコンパイルしています)
+  
+C:\Users\kodokeの世界\Desktop\HAL\VisualSutdio\就職作品\個人製作\FindWork\就職作品プロジェクト\02_ResourceFile\Game.h(122,17): error C2059: 構文エラー: '('
+  (ソース ファイル '/02_ResourceFile/ObjectFile/Enemy.cpp' をコンパイルしています)
+  
+C:\Users\kodokeの世界\Desktop\HAL\VisualSutdio\就職作品\個人製作\FindWork\就職作品プロジェクト\02_ResourceFile\Game.h(122,19): error C2238: ';' の前に無効なトークンがあります。
+  (ソース ファイル '/02_ResourceFile/ObjectFile/Enemy.cpp' をコンパイルしています)
+  
+C:\Users\kodokeの世界\Desktop\HAL\VisualSutdio\就職作品\個人製作\FindWork\就職作品プロジェクト\02_ResourceFile\Game.h(123,3): error C2059: 構文エラー: 'return'
+  (ソース ファイル '/02_ResourceFile/ObjectFile/Enemy.cpp' をコンパイルしています)
+  
+C:\Users\kodokeの世界\Desktop\HAL\VisualSutdio\就職作品\個人製作\FindWork\就職作品プロジェクト\02_ResourceFile\Game.h(123,12): error C2238: ';' の前に無効なトークンがあります。
+  (ソース ファイル '/02_ResourceFile/ObjectFile/Enemy.cpp' をコンパイルしています)
+  
+  Cube.cpp
+C:\Users\kodokeの世界\Desktop\HAL\VisualSutdio\就職作品\個人製作\FindWork\就職作品プロジェクト\02_ResourceFile\Game.h(121,1): error C2059: 構文エラー: ')'
+  (ソース ファイル '/02_ResourceFile/ObjectFile/Theme.cpp' をコンパイルしています)
+  
+C:\Users\kodokeの世界\Desktop\HAL\VisualSutdio\就職作品\個人製作\FindWork\就職作品プロジェクト\02_ResourceFile\Game.h(122,3): error C3927: '->': 後続の戻り値の型は、関数以外の宣言子の後に許可されていません
+  (ソース ファイル '/02_ResourceFile/ObjectFile/Theme.cpp' をコンパイルしています)
+  
+C:\Users\kodokeの世界\Desktop\HAL\VisualSutdio\就職作品\個人製作\FindWork\就職作品プロジェクト\02_ResourceFile\Game.h(122,7): error C3613: '->' の後に戻り型が指定されていません ('int' と見なされます)
+  (ソース ファイル '/02_ResourceFile/ObjectFile/Theme.cpp' をコンパイルしています)
+  
+C:\Users\kodokeの世界\Desktop\HAL\VisualSutdio\就職作品\個人製作\FindWork\就職作品プロジェクト\02_ResourceFile\Game.h(122,7): error C3646: 'Initialize': 不明なオーバーライド指定子です
+  (ソース ファイル '/02_ResourceFile/ObjectFile/Theme.cpp' をコンパイルしています)
+  
+C:\Users\kodokeの世界\Desktop\HAL\VisualSutdio\就職作品\個人製作\FindWork\就職作品プロジェクト\02_ResourceFile\Game.h(122,17): error C2059: 構文エラー: '('
+  (ソース ファイル '/02_ResourceFile/ObjectFile/Theme.cpp' をコンパイルしています)
+  
+C:\Users\kodokeの世界\Desktop\HAL\VisualSutdio\就職作品\個人製作\FindWork\就職作品プロジェクト\02_ResourceFile\Game.h(122,19): error C2238: ';' の前に無効なトークンがあります。
+  (ソース ファイル '/02_ResourceFile/ObjectFile/Theme.cpp' をコンパイルしています)
+  
+C:\Users\kodokeの世界\Desktop\HAL\VisualSutdio\就職作品\個人製作\FindWork\就職作品プロジェクト\02_ResourceFile\Game.h(123,3): error C2059: 構文エラー: 'return'
+  (ソース ファイル '/02_ResourceFile/ObjectFile/Theme.cpp' をコンパイルしています)
+  
+C:\Users\kodokeの世界\Desktop\HAL\VisualSutdio\就職作品\個人製作\FindWork\就職作品プロジェクト\02_ResourceFile\Game.h(121,1): error C2760: 構文エラー: '}' は予期しないエラーでした。';' が必要です
+  (ソース ファイル '/02_ResourceFile/ObjectFile/Enemy.cpp' をコンパイルしています)
+      C:\Users\kodokeの世界\Desktop\HAL\VisualSutdio\就職作品\個人製作\FindWork\就職作品プロジェクト\02_ResourceFile\Game.h(104,21):
+      コンパイラでのこの診断により関数 'std::shared_ptr<_Ty> Game::AddObject(Args &&...)' が生成されました。
+  
+C:\Users\kodokeの世界\Desktop\HAL\VisualSutdio\就職作品\個人製作\FindWork\就職作品プロジェクト\02_ResourceFile\Game.h(123,12): error C2238: ';' の前に無効なトークンがあります。
+  (ソース ファイル '/02_ResourceFile/ObjectFile/Theme.cpp' をコンパイルしています)
+  
+C:\Users\kodokeの世界\Desktop\HAL\VisualSutdio\就職作品\個人製作\FindWork\就職作品プロジェクト\02_ResourceFile\Game.h(127,2): error C2059: 構文エラー: '<L_GRAMMAR_template_head_l>'
+  (ソース ファイル '/02_ResourceFile/ObjectFile/Enemy.cpp' をコンパイルしています)
+  
+C:\Users\kodokeの世界\Desktop\HAL\VisualSutdio\就職作品\個人製作\FindWork\就職作品プロジェクト\02_ResourceFile\Game.h(129,2): error C2143: 構文エラー: ';' が '{' の前にありません。
+  (ソース ファイル '/02_ResourceFile/ObjectFile/Enemy.cpp' をコンパイルしています)
+  
+C:\Users\kodokeの世界\Desktop\HAL\VisualSutdio\就職作品\個人製作\FindWork\就職作品プロジェクト\02_ResourceFile\SceneFile\GameSceneSlice.cpp(64,59): error C2039: 'GetObjects': 'Game' のメンバーではありません
+  (ソース ファイル '/02_ResourceFile/SceneFile/GameSceneSlice.cpp' をコンパイルしています)
+      C:\Users\kodokeの世界\Desktop\HAL\VisualSutdio\就職作品\個人製作\FindWork\就職作品プロジェクト\02_ResourceFile\Game.h(21,7):
+      'Game' の宣言を確認してください
+  
+C:\Users\kodokeの世界\Desktop\HAL\VisualSutdio\就職作品\個人製作\FindWork\就職作品プロジェクト\02_ResourceFile\SceneFile\GameSceneSlice.cpp(64,77): error C2059: 構文エラー: ')'
+  (ソース ファイル '/02_ResourceFile/SceneFile/GameSceneSlice.cpp' をコンパイルしています)
+  
+C:\Users\kodokeの世界\Desktop\HAL\VisualSutdio\就職作品\個人製作\FindWork\就職作品プロジェクト\02_ResourceFile\Game.h(129,2): error C2447: '{': 対応する関数ヘッダーがありません (旧形式の仮引数リスト?)
+  (ソース ファイル '/02_ResourceFile/ObjectFile/Enemy.cpp' をコンパイルしています)
+  
+C:\Users\kodokeの世界\Desktop\HAL\VisualSutdio\就職作品\個人製作\FindWork\就職作品プロジェクト\02_ResourceFile\Game.h(121,1): error C2760: 構文エラー: '}' は予期しないエラーでした。';' が必要です
+  (ソース ファイル '/02_ResourceFile/ObjectFile/Theme.cpp' をコンパイルしています)
+      C:\Users\kodokeの世界\Desktop\HAL\VisualSutdio\就職作品\個人製作\FindWork\就職作品プロジェクト\02_ResourceFile\Game.h(104,21):
+      コンパイラでのこの診断により関数 'std::shared_ptr<_Ty> Game::AddObject(Args &&...)' が生成されました。
+  
+C:\Users\kodokeの世界\Desktop\HAL\VisualSutdio\就職作品\個人製作\FindWork\就職作品プロジェクト\02_ResourceFile\Game.h(139,1): error C2059: 構文エラー: '}'
+  (ソース ファイル '/02_ResourceFile/ObjectFile/Enemy.cpp' をコンパイルしています)
+  
+C:\Users\kodokeの世界\Desktop\HAL\VisualSutdio\就職作品\個人製作\FindWork\就職作品プロジェクト\02_ResourceFile\Game.h(127,2): error C2059: 構文エラー: '<L_GRAMMAR_template_head_l>'
+  (ソース ファイル '/02_ResourceFile/ObjectFile/Theme.cpp' をコンパイルしています)
+  
+C:\Users\kodokeの世界\Desktop\HAL\VisualSutdio\就職作品\個人製作\FindWork\就職作品プロジェクト\02_ResourceFile\Game.h(139,1): error C2143: 構文エラー: ';' が '}' の前にありません。
+  (ソース ファイル '/02_ResourceFile/ObjectFile/Enemy.cpp' をコンパイルしています)
+  
+C:\Users\kodokeの世界\Desktop\HAL\VisualSutdio\就職作品\個人製作\FindWork\就職作品プロジェクト\02_ResourceFile\Game.h(129,2): error C2143: 構文エラー: ';' が '{' の前にありません。
+  (ソース ファイル '/02_ResourceFile/ObjectFile/Theme.cpp' をコンパイルしています)
+  
+C:\Users\kodokeの世界\Desktop\HAL\VisualSutdio\就職作品\個人製作\FindWork\就職作品プロジェクト\02_ResourceFile\Game.h(129,2): error C2447: '{': 対応する関数ヘッダーがありません (旧形式の仮引数リスト?)
+  (ソース ファイル '/02_ResourceFile/ObjectFile/Theme.cpp' をコンパイルしています)
+  
+C:\Users\kodokeの世界\Desktop\HAL\VisualSutdio\就職作品\個人製作\FindWork\就職作品プロジェクト\02_ResourceFile\Game.h(139,1): error C2059: 構文エラー: '}'
+  (ソース ファイル '/02_ResourceFile/ObjectFile/Theme.cpp' をコンパイルしています)
+  
+C:\Users\kodokeの世界\Desktop\HAL\VisualSutdio\就職作品\個人製作\FindWork\就職作品プロジェクト\02_ResourceFile\Game.h(139,1): error C2143: 構文エラー: ';' が '}' の前にありません。
+  (ソース ファイル '/02_ResourceFile/ObjectFile/Theme.cpp' をコンパイルしています)
+  
+C:\Users\kodokeの世界\Desktop\HAL\VisualSutdio\就職作品\個人製作\FindWork\就職作品プロジェクト\02_ResourceFile\SceneFile\GameSceneWait.cpp(252,13): error C2664: 'void Game::DeleteObject(std::shared_ptr<Object>)': 引数 1 を '_Ty' から 'std::shared_ptr<Object>' へ変換できません。
+C:\Users\kodokeの世界\Desktop\HAL\VisualSutdio\就職作品\個人製作\FindWork\就職作品プロジェクト\02_ResourceFile\SceneFile\GameSceneWait.cpp(252,13): error C2664:         with
+C:\Users\kodokeの世界\Desktop\HAL\VisualSutdio\就職作品\個人製作\FindWork\就職作品プロジェクト\02_ResourceFile\SceneFile\GameSceneWait.cpp(252,13): error C2664:         [
+C:\Users\kodokeの世界\Desktop\HAL\VisualSutdio\就職作品\個人製作\FindWork\就職作品プロジェクト\02_ResourceFile\SceneFile\GameSceneWait.cpp(252,13): error C2664:             _Ty=Square *
+C:\Users\kodokeの世界\Desktop\HAL\VisualSutdio\就職作品\個人製作\FindWork\就職作品プロジェクト\02_ResourceFile\SceneFile\GameSceneWait.cpp(252,13): error C2664:         ]
+  (ソース ファイル '/02_ResourceFile/SceneFile/GameSceneWait.cpp' をコンパイルしています)
+      C:\Users\kodokeの世界\Desktop\HAL\VisualSutdio\就職作品\個人製作\FindWork\就職作品プロジェクト\02_ResourceFile\SceneFile\GameSceneWait.cpp(252,42):
+      class 'std::shared_ptr<Object>' のコンストラクターが 'explicit' と宣言されています。
+      C:\Users\kodokeの世界\Desktop\HAL\VisualSutdio\就職作品\個人製作\FindWork\就職作品プロジェクト\02_ResourceFile\Game.h(99,7):
+      'Game::DeleteObject' の宣言を確認してください
+      C:\Users\kodokeの世界\Desktop\HAL\VisualSutdio\就職作品\個人製作\FindWork\就職作品プロジェクト\02_ResourceFile\SceneFile\GameSceneWait.cpp(252,13):
+      引数リスト '(_Ty)' を一致させようとしているとき
+          with
+          [
+              _Ty=Square *
+          ]
+  
+  Model.cpp
+C:\Users\kodokeの世界\Desktop\HAL\VisualSutdio\就職作品\個人製作\FindWork\就職作品プロジェクト\02_ResourceFile\Game.h(121,1): error C2059: 構文エラー: ')'
+  (ソース ファイル '/02_ResourceFile/SceneFile/Transition/Wipe.cpp' をコンパイルしています)
+  
+C:\Users\kodokeの世界\Desktop\HAL\VisualSutdio\就職作品\個人製作\FindWork\就職作品プロジェクト\02_ResourceFile\Game.h(122,3): error C3927: '->': 後続の戻り値の型は、関数以外の宣言子の後に許可されていません
+  (ソース ファイル '/02_ResourceFile/SceneFile/Transition/Wipe.cpp' をコンパイルしています)
+  
+C:\Users\kodokeの世界\Desktop\HAL\VisualSutdio\就職作品\個人製作\FindWork\就職作品プロジェクト\02_ResourceFile\Game.h(122,7): error C3613: '->' の後に戻り型が指定されていません ('int' と見なされます)
+  (ソース ファイル '/02_ResourceFile/SceneFile/Transition/Wipe.cpp' をコンパイルしています)
+  
+C:\Users\kodokeの世界\Desktop\HAL\VisualSutdio\就職作品\個人製作\FindWork\就職作品プロジェクト\02_ResourceFile\Game.h(122,7): error C3646: 'Initialize': 不明なオーバーライド指定子です
+  (ソース ファイル '/02_ResourceFile/SceneFile/Transition/Wipe.cpp' をコンパイルしています)
+  
+C:\Users\kodokeの世界\Desktop\HAL\VisualSutdio\就職作品\個人製作\FindWork\就職作品プロジェクト\02_ResourceFile\Game.h(122,17): error C2059: 構文エラー: '('
+  (ソース ファイル '/02_ResourceFile/SceneFile/Transition/Wipe.cpp' をコンパイルしています)
+  
+C:\Users\kodokeの世界\Desktop\HAL\VisualSutdio\就職作品\個人製作\FindWork\就職作品プロジェクト\02_ResourceFile\Game.h(122,19): error C2238: ';' の前に無効なトークンがあります。
+  (ソース ファイル '/02_ResourceFile/SceneFile/Transition/Wipe.cpp' をコンパイルしています)
+  
+C:\Users\kodokeの世界\Desktop\HAL\VisualSutdio\就職作品\個人製作\FindWork\就職作品プロジェクト\02_ResourceFile\Game.h(123,3): error C2059: 構文エラー: 'return'
+  (ソース ファイル '/02_ResourceFile/SceneFile/Transition/Wipe.cpp' をコンパイルしています)
+  
+C:\Users\kodokeの世界\Desktop\HAL\VisualSutdio\就職作品\個人製作\FindWork\就職作品プロジェクト\02_ResourceFile\Game.h(123,12): error C2238: ';' の前に無効なトークンがあります。
+  (ソース ファイル '/02_ResourceFile/SceneFile/Transition/Wipe.cpp' をコンパイルしています)
+  
+C:\Users\kodokeの世界\Desktop\HAL\VisualSutdio\就職作品\個人製作\FindWork\就職作品プロジェクト\02_ResourceFile\Game.h(121,1): error C2760: 構文エラー: '}' は予期しないエラーでした。';' が必要です
+  (ソース ファイル '/02_ResourceFile/SceneFile/Transition/Wipe.cpp' をコンパイルしています)
+      C:\Users\kodokeの世界\Desktop\HAL\VisualSutdio\就職作品\個人製作\FindWork\就職作品プロジェクト\02_ResourceFile\Game.h(104,21):
+      コンパイラでのこの診断により関数 'std::shared_ptr<_Ty> Game::AddObject(Args &&...)' が生成されました。
+  
+C:\Users\kodokeの世界\Desktop\HAL\VisualSutdio\就職作品\個人製作\FindWork\就職作品プロジェクト\02_ResourceFile\Game.h(127,2): error C2059: 構文エラー: '<L_GRAMMAR_template_head_l>'
+  (ソース ファイル '/02_ResourceFile/SceneFile/Transition/Wipe.cpp' をコンパイルしています)
+  
+C:\Users\kodokeの世界\Desktop\HAL\VisualSutdio\就職作品\個人製作\FindWork\就職作品プロジェクト\02_ResourceFile\Game.h(129,2): error C2143: 構文エラー: ';' が '{' の前にありません。
+  (ソース ファイル '/02_ResourceFile/SceneFile/Transition/Wipe.cpp' をコンパイルしています)
+  
+C:\Users\kodokeの世界\Desktop\HAL\VisualSutdio\就職作品\個人製作\FindWork\就職作品プロジェクト\02_ResourceFile\Game.h(129,2): error C2447: '{': 対応する関数ヘッダーがありません (旧形式の仮引数リスト?)
+  (ソース ファイル '/02_ResourceFile/SceneFile/Transition/Wipe.cpp' をコンパイルしています)
+  
+C:\Users\kodokeの世界\Desktop\HAL\VisualSutdio\就職作品\個人製作\FindWork\就職作品プロジェクト\02_ResourceFile\Game.h(139,1): error C2059: 構文エラー: '}'
+  (ソース ファイル '/02_ResourceFile/SceneFile/Transition/Wipe.cpp' をコンパイルしています)
+  
+C:\Users\kodokeの世界\Desktop\HAL\VisualSutdio\就職作品\個人製作\FindWork\就職作品プロジェクト\02_ResourceFile\Game.h(139,1): error C2143: 構文エラー: ';' が '}' の前にありません。
+  (ソース ファイル '/02_ResourceFile/SceneFile/Transition/Wipe.cpp' をコンパイルしています)
+  
+  Object.cpp
+C:\Users\kodokeの世界\Desktop\HAL\VisualSutdio\就職作品\個人製作\FindWork\就職作品プロジェクト\02_ResourceFile\Game.h(121,1): error C2059: 構文エラー: ')'
+  (ソース ファイル '/02_ResourceFile/Camera.cpp' をコンパイルしています)
+  
+C:\Users\kodokeの世界\Desktop\HAL\VisualSutdio\就職作品\個人製作\FindWork\就職作品プロジェクト\02_ResourceFile\Game.h(122,3): error C3927: '->': 後続の戻り値の型は、関数以外の宣言子の後に許可されていません
+  (ソース ファイル '/02_ResourceFile/Camera.cpp' をコンパイルしています)
+  
+C:\Users\kodokeの世界\Desktop\HAL\VisualSutdio\就職作品\個人製作\FindWork\就職作品プロジェクト\02_ResourceFile\Game.h(122,7): error C3613: '->' の後に戻り型が指定されていません ('int' と見なされます)
+  (ソース ファイル '/02_ResourceFile/Camera.cpp' をコンパイルしています)
+  
+C:\Users\kodokeの世界\Desktop\HAL\VisualSutdio\就職作品\個人製作\FindWork\就職作品プロジェクト\02_ResourceFile\Game.h(122,7): error C3646: 'Initialize': 不明なオーバーライド指定子です
+  (ソース ファイル '/02_ResourceFile/Camera.cpp' をコンパイルしています)
+  
+C:\Users\kodokeの世界\Desktop\HAL\VisualSutdio\就職作品\個人製作\FindWork\就職作品プロジェクト\02_ResourceFile\Game.h(122,17): error C2059: 構文エラー: '('
+  (ソース ファイル '/02_ResourceFile/Camera.cpp' をコンパイルしています)
+  
+C:\Users\kodokeの世界\Desktop\HAL\VisualSutdio\就職作品\個人製作\FindWork\就職作品プロジェクト\02_ResourceFile\Game.h(122,19): error C2238: ';' の前に無効なトークンがあります。
+  (ソース ファイル '/02_ResourceFile/Camera.cpp' をコンパイルしています)
+  
+C:\Users\kodokeの世界\Desktop\HAL\VisualSutdio\就職作品\個人製作\FindWork\就職作品プロジェクト\02_ResourceFile\Game.h(123,3): error C2059: 構文エラー: 'return'
+  (ソース ファイル '/02_ResourceFile/Camera.cpp' をコンパイルしています)
+  
+C:\Users\kodokeの世界\Desktop\HAL\VisualSutdio\就職作品\個人製作\FindWork\就職作品プロジェクト\02_ResourceFile\Game.h(123,12): error C2238: ';' の前に無効なトークンがあります。
+  (ソース ファイル '/02_ResourceFile/Camera.cpp' をコンパイルしています)
+  
+C:\Users\kodokeの世界\Desktop\HAL\VisualSutdio\就職作品\個人製作\FindWork\就職作品プロジェクト\02_ResourceFile\Game.h(121,1): error C2760: 構文エラー: '}' は予期しないエラーでした。';' が必要です
+  (ソース ファイル '/02_ResourceFile/Camera.cpp' をコンパイルしています)
+      C:\Users\kodokeの世界\Desktop\HAL\VisualSutdio\就職作品\個人製作\FindWork\就職作品プロジェクト\02_ResourceFile\Game.h(104,21):
+      コンパイラでのこの診断により関数 'std::shared_ptr<_Ty> Game::AddObject(Args &&...)' が生成されました。
+  
+C:\Users\kodokeの世界\Desktop\HAL\VisualSutdio\就職作品\個人製作\FindWork\就職作品プロジェクト\02_ResourceFile\Game.h(127,2): error C2059: 構文エラー: '<L_GRAMMAR_template_head_l>'
+  (ソース ファイル '/02_ResourceFile/Camera.cpp' をコンパイルしています)
+  
+C:\Users\kodokeの世界\Desktop\HAL\VisualSutdio\就職作品\個人製作\FindWork\就職作品プロジェクト\02_ResourceFile\Game.h(129,2): error C2143: 構文エラー: ';' が '{' の前にありません。
+  (ソース ファイル '/02_ResourceFile/Camera.cpp' をコンパイルしています)
+  
+C:\Users\kodokeの世界\Desktop\HAL\VisualSutdio\就職作品\個人製作\FindWork\就職作品プロジェクト\02_ResourceFile\Game.h(129,2): error C2447: '{': 対応する関数ヘッダーがありません (旧形式の仮引数リスト?)
+  (ソース ファイル '/02_ResourceFile/Camera.cpp' をコンパイルしています)
+  
+C:\Users\kodokeの世界\Desktop\HAL\VisualSutdio\就職作品\個人製作\FindWork\就職作品プロジェクト\02_ResourceFile\Game.h(139,1): error C2059: 構文エラー: '}'
+  (ソース ファイル '/02_ResourceFile/Camera.cpp' をコンパイルしています)
+  
+C:\Users\kodokeの世界\Desktop\HAL\VisualSutdio\就職作品\個人製作\FindWork\就職作品プロジェクト\02_ResourceFile\Game.h(139,1): error C2143: 構文エラー: ';' が '}' の前にありません。
+  (ソース ファイル '/02_ResourceFile/Camera.cpp' をコンパイルしています)
+  
+  Sphere.cpp
+C:\Users\kodokeの世界\Desktop\HAL\VisualSutdio\就職作品\個人製作\FindWork\就職作品プロジェクト\02_ResourceFile\Game.h(121,1): error C2059: 構文エラー: ')'
+  (ソース ファイル '/02_ResourceFile/Game.cpp' をコンパイルしています)
+  
+C:\Users\kodokeの世界\Desktop\HAL\VisualSutdio\就職作品\個人製作\FindWork\就職作品プロジェクト\02_ResourceFile\Game.h(122,3): error C3927: '->': 後続の戻り値の型は、関数以外の宣言子の後に許可されていません
+  (ソース ファイル '/02_ResourceFile/Game.cpp' をコンパイルしています)
+  
+C:\Users\kodokeの世界\Desktop\HAL\VisualSutdio\就職作品\個人製作\FindWork\就職作品プロジェクト\02_ResourceFile\Game.h(122,7): error C3613: '->' の後に戻り型が指定されていません ('int' と見なされます)
+  (ソース ファイル '/02_ResourceFile/Game.cpp' をコンパイルしています)
+  
+C:\Users\kodokeの世界\Desktop\HAL\VisualSutdio\就職作品\個人製作\FindWork\就職作品プロジェクト\02_ResourceFile\Game.h(122,7): error C3646: 'Initialize': 不明なオーバーライド指定子です
+  (ソース ファイル '/02_ResourceFile/Game.cpp' をコンパイルしています)
+  
+C:\Users\kodokeの世界\Desktop\HAL\VisualSutdio\就職作品\個人製作\FindWork\就職作品プロジェクト\02_ResourceFile\Game.h(122,17): error C2059: 構文エラー: '('
+  (ソース ファイル '/02_ResourceFile/Game.cpp' をコンパイルしています)
+  
+C:\Users\kodokeの世界\Desktop\HAL\VisualSutdio\就職作品\個人製作\FindWork\就職作品プロジェクト\02_ResourceFile\Game.h(122,19): error C2238: ';' の前に無効なトークンがあります。
+  (ソース ファイル '/02_ResourceFile/Game.cpp' をコンパイルしています)
+  
+C:\Users\kodokeの世界\Desktop\HAL\VisualSutdio\就職作品\個人製作\FindWork\就職作品プロジェクト\02_ResourceFile\Game.h(123,3): error C2059: 構文エラー: 'return'
+  (ソース ファイル '/02_ResourceFile/Game.cpp' をコンパイルしています)
+  
+C:\Users\kodokeの世界\Desktop\HAL\VisualSutdio\就職作品\個人製作\FindWork\就職作品プロジェクト\02_ResourceFile\Game.h(123,12): error C2238: ';' の前に無効なトークンがあります。
+  (ソース ファイル '/02_ResourceFile/Game.cpp' をコンパイルしています)
+  
+  Skydome.cpp
+C:\Users\kodokeの世界\Desktop\HAL\VisualSutdio\就職作品\個人製作\FindWork\就職作品プロジェクト\02_ResourceFile\Game.h(121,1): error C2760: 構文エラー: '}' は予期しないエラーでした。';' が必要です
+  (ソース ファイル '/02_ResourceFile/Game.cpp' をコンパイルしています)
+      C:\Users\kodokeの世界\Desktop\HAL\VisualSutdio\就職作品\個人製作\FindWork\就職作品プロジェクト\02_ResourceFile\Game.h(104,21):
+      コンパイラでのこの診断により関数 'std::shared_ptr<_Ty> Game::AddObject(Args &&...)' が生成されました。
+  
+C:\Users\kodokeの世界\Desktop\HAL\VisualSutdio\就職作品\個人製作\FindWork\就職作品プロジェクト\02_ResourceFile\Game.h(127,2): error C2059: 構文エラー: '<L_GRAMMAR_template_head_l>'
+  (ソース ファイル '/02_ResourceFile/Game.cpp' をコンパイルしています)
+  
+C:\Users\kodokeの世界\Desktop\HAL\VisualSutdio\就職作品\個人製作\FindWork\就職作品プロジェクト\02_ResourceFile\Game.h(129,2): error C2143: 構文エラー: ';' が '{' の前にありません。
+  (ソース ファイル '/02_ResourceFile/Game.cpp' をコンパイルしています)
+  
+C:\Users\kodokeの世界\Desktop\HAL\VisualSutdio\就職作品\個人製作\FindWork\就職作品プロジェクト\02_ResourceFile\Game.h(129,2): error C2447: '{': 対応する関数ヘッダーがありません (旧形式の仮引数リスト?)
+  (ソース ファイル '/02_ResourceFile/Game.cpp' をコンパイルしています)
+  
+C:\Users\kodokeの世界\Desktop\HAL\VisualSutdio\就職作品\個人製作\FindWork\就職作品プロジェクト\02_ResourceFile\Game.h(139,1): error C2059: 構文エラー: '}'
+  (ソース ファイル '/02_ResourceFile/Game.cpp' をコンパイルしています)
+  
+C:\Users\kodokeの世界\Desktop\HAL\VisualSutdio\就職作品\個人製作\FindWork\就職作品プロジェクト\02_ResourceFile\Game.h(139,1): error C2143: 構文エラー: ';' が '}' の前にありません。
+  (ソース ファイル '/02_ResourceFile/Game.cpp' をコンパイルしています)
+  
+C:\Users\kodokeの世界\Desktop\HAL\VisualSutdio\就職作品\個人製作\FindWork\就職作品プロジェクト\02_ResourceFile\Game.h(121,1): error C2059: 構文エラー: ')'
+  (ソース ファイル '/02_ResourceFile/SceneFile/GameSceneCrush.cpp' をコンパイルしています)
+  
+C:\Users\kodokeの世界\Desktop\HAL\VisualSutdio\就職作品\個人製作\FindWork\就職作品プロジェクト\02_ResourceFile\Game.h(122,3): error C3927: '->': 後続の戻り値の型は、関数以外の宣言子の後に許可されていません
+  (ソース ファイル '/02_ResourceFile/SceneFile/GameSceneCrush.cpp' をコンパイルしています)
+  
+C:\Users\kodokeの世界\Desktop\HAL\VisualSutdio\就職作品\個人製作\FindWork\就職作品プロジェクト\02_ResourceFile\Game.h(122,7): error C3613: '->' の後に戻り型が指定されていません ('int' と見なされます)
+  (ソース ファイル '/02_ResourceFile/SceneFile/GameSceneCrush.cpp' をコンパイルしています)
+  
+C:\Users\kodokeの世界\Desktop\HAL\VisualSutdio\就職作品\個人製作\FindWork\就職作品プロジェクト\02_ResourceFile\Game.h(122,7): error C3646: 'Initialize': 不明なオーバーライド指定子です
+  (ソース ファイル '/02_ResourceFile/SceneFile/GameSceneCrush.cpp' をコンパイルしています)
+  
+C:\Users\kodokeの世界\Desktop\HAL\VisualSutdio\就職作品\個人製作\FindWork\就職作品プロジェクト\02_ResourceFile\Game.h(122,17): error C2059: 構文エラー: '('
+  (ソース ファイル '/02_ResourceFile/SceneFile/GameSceneCrush.cpp' をコンパイルしています)
+  
+C:\Users\kodokeの世界\Desktop\HAL\VisualSutdio\就職作品\個人製作\FindWork\就職作品プロジェクト\02_ResourceFile\Game.h(122,19): error C2238: ';' の前に無効なトークンがあります。
+  (ソース ファイル '/02_ResourceFile/SceneFile/GameSceneCrush.cpp' をコンパイルしています)
+  
+C:\Users\kodokeの世界\Desktop\HAL\VisualSutdio\就職作品\個人製作\FindWork\就職作品プロジェクト\02_ResourceFile\Game.h(123,3): error C2059: 構文エラー: 'return'
+  (ソース ファイル '/02_ResourceFile/SceneFile/GameSceneCrush.cpp' をコンパイルしています)
+  
+C:\Users\kodokeの世界\Desktop\HAL\VisualSutdio\就職作品\個人製作\FindWork\就職作品プロジェクト\02_ResourceFile\Game.h(123,12): error C2238: ';' の前に無効なトークンがあります。
+  (ソース ファイル '/02_ResourceFile/SceneFile/GameSceneCrush.cpp' をコンパイルしています)
+  
+C:\Users\kodokeの世界\Desktop\HAL\VisualSutdio\就職作品\個人製作\FindWork\就職作品プロジェクト\02_ResourceFile\Game.h(121,1): error C2059: 構文エラー: ')'
+  (ソース ファイル '/02_ResourceFile/SceneFile/Scene.cpp' をコンパイルしています)
+  
+C:\Users\kodokeの世界\Desktop\HAL\VisualSutdio\就職作品\個人製作\FindWork\就職作品プロジェクト\02_ResourceFile\Game.h(122,3): error C3927: '->': 後続の戻り値の型は、関数以外の宣言子の後に許可されていません
+  (ソース ファイル '/02_ResourceFile/SceneFile/Scene.cpp' をコンパイルしています)
+  
+C:\Users\kodokeの世界\Desktop\HAL\VisualSutdio\就職作品\個人製作\FindWork\就職作品プロジェクト\02_ResourceFile\Game.h(121,1): error C2760: 構文エラー: '}' は予期しないエラーでした。';' が必要です
+  (ソース ファイル '/02_ResourceFile/SceneFile/GameSceneCrush.cpp' をコンパイルしています)
+      C:\Users\kodokeの世界\Desktop\HAL\VisualSutdio\就職作品\個人製作\FindWork\就職作品プロジェクト\02_ResourceFile\Game.h(104,21):
+      コンパイラでのこの診断により関数 'std::shared_ptr<_Ty> Game::AddObject(Args &&...)' が生成されました。
+  
+C:\Users\kodokeの世界\Desktop\HAL\VisualSutdio\就職作品\個人製作\FindWork\就職作品プロジェクト\02_ResourceFile\Game.h(122,7): error C3613: '->' の後に戻り型が指定されていません ('int' と見なされます)
+  (ソース ファイル '/02_ResourceFile/SceneFile/Scene.cpp' をコンパイルしています)
+  
+C:\Users\kodokeの世界\Desktop\HAL\VisualSutdio\就職作品\個人製作\FindWork\就職作品プロジェクト\02_ResourceFile\Game.h(122,7): error C3646: 'Initialize': 不明なオーバーライド指定子です
+  (ソース ファイル '/02_ResourceFile/SceneFile/Scene.cpp' をコンパイルしています)
+  
+C:\Users\kodokeの世界\Desktop\HAL\VisualSutdio\就職作品\個人製作\FindWork\就職作品プロジェクト\02_ResourceFile\Game.h(127,2): error C2059: 構文エラー: '<L_GRAMMAR_template_head_l>'
+  (ソース ファイル '/02_ResourceFile/SceneFile/GameSceneCrush.cpp' をコンパイルしています)
+  
+C:\Users\kodokeの世界\Desktop\HAL\VisualSutdio\就職作品\個人製作\FindWork\就職作品プロジェクト\02_ResourceFile\Game.h(122,17): error C2059: 構文エラー: '('
+  (ソース ファイル '/02_ResourceFile/SceneFile/Scene.cpp' をコンパイルしています)
+  
+C:\Users\kodokeの世界\Desktop\HAL\VisualSutdio\就職作品\個人製作\FindWork\就職作品プロジェクト\02_ResourceFile\Game.h(129,2): error C2143: 構文エラー: ';' が '{' の前にありません。
+  (ソース ファイル '/02_ResourceFile/SceneFile/GameSceneCrush.cpp' をコンパイルしています)
+  
+C:\Users\kodokeの世界\Desktop\HAL\VisualSutdio\就職作品\個人製作\FindWork\就職作品プロジェクト\02_ResourceFile\Game.h(122,19): error C2238: ';' の前に無効なトークンがあります。
+  (ソース ファイル '/02_ResourceFile/SceneFile/Scene.cpp' をコンパイルしています)
+  
+C:\Users\kodokeの世界\Desktop\HAL\VisualSutdio\就職作品\個人製作\FindWork\就職作品プロジェクト\02_ResourceFile\Game.h(123,3): error C2059: 構文エラー: 'return'
+  (ソース ファイル '/02_ResourceFile/SceneFile/Scene.cpp' をコンパイルしています)
+  
+C:\Users\kodokeの世界\Desktop\HAL\VisualSutdio\就職作品\個人製作\FindWork\就職作品プロジェクト\02_ResourceFile\Game.h(123,12): error C2238: ';' の前に無効なトークンがあります。
+  (ソース ファイル '/02_ResourceFile/SceneFile/Scene.cpp' をコンパイルしています)
+  
+C:\Users\kodokeの世界\Desktop\HAL\VisualSutdio\就職作品\個人製作\FindWork\就職作品プロジェクト\02_ResourceFile\Game.h(129,2): error C2447: '{': 対応する関数ヘッダーがありません (旧形式の仮引数リスト?)
+  (ソース ファイル '/02_ResourceFile/SceneFile/GameSceneCrush.cpp' をコンパイルしています)
+  
+C:\Users\kodokeの世界\Desktop\HAL\VisualSutdio\就職作品\個人製作\FindWork\就職作品プロジェクト\02_ResourceFile\Game.h(139,1): error C2059: 構文エラー: '}'
+  (ソース ファイル '/02_ResourceFile/SceneFile/GameSceneCrush.cpp' をコンパイルしています)
+  
+C:\Users\kodokeの世界\Desktop\HAL\VisualSutdio\就職作品\個人製作\FindWork\就職作品プロジェクト\02_ResourceFile\Game.h(139,1): error C2143: 構文エラー: ';' が '}' の前にありません。
+  (ソース ファイル '/02_ResourceFile/SceneFile/GameSceneCrush.cpp' をコンパイルしています)
+  
+C:\Users\kodokeの世界\Desktop\HAL\VisualSutdio\就職作品\個人製作\FindWork\就職作品プロジェクト\02_ResourceFile\Game.h(121,1): error C2760: 構文エラー: '}' は予期しないエラーでした。';' が必要です
+  (ソース ファイル '/02_ResourceFile/SceneFile/Scene.cpp' をコンパイルしています)
+      C:\Users\kodokeの世界\Desktop\HAL\VisualSutdio\就職作品\個人製作\FindWork\就職作品プロジェクト\02_ResourceFile\Game.h(104,21):
+      コンパイラでのこの診断により関数 'std::shared_ptr<_Ty> Game::AddObject(Args &&...)' が生成されました。
+  
+C:\Users\kodokeの世界\Desktop\HAL\VisualSutdio\就職作品\個人製作\FindWork\就職作品プロジェクト\02_ResourceFile\Game.h(127,2): error C2059: 構文エラー: '<L_GRAMMAR_template_head_l>'
+  (ソース ファイル '/02_ResourceFile/SceneFile/Scene.cpp' をコンパイルしています)
+  
+C:\Users\kodokeの世界\Desktop\HAL\VisualSutdio\就職作品\個人製作\FindWork\就職作品プロジェクト\02_ResourceFile\Game.h(129,2): error C2143: 構文エラー: ';' が '{' の前にありません。
+  (ソース ファイル '/02_ResourceFile/SceneFile/Scene.cpp' をコンパイルしています)
+  
+C:\Users\kodokeの世界\Desktop\HAL\VisualSutdio\就職作品\個人製作\FindWork\就職作品プロジェクト\02_ResourceFile\Game.h(129,2): error C2447: '{': 対応する関数ヘッダーがありません (旧形式の仮引数リスト?)
+  (ソース ファイル '/02_ResourceFile/SceneFile/Scene.cpp' をコンパイルしています)
+  
+C:\Users\kodokeの世界\Desktop\HAL\VisualSutdio\就職作品\個人製作\FindWork\就職作品プロジェクト\02_ResourceFile\Game.h(139,1): error C2059: 構文エラー: '}'
+  (ソース ファイル '/02_ResourceFile/SceneFile/Scene.cpp' をコンパイルしています)
+  
+C:\Users\kodokeの世界\Desktop\HAL\VisualSutdio\就職作品\個人製作\FindWork\就職作品プロジェクト\02_ResourceFile\Game.h(139,1): error C2143: 構文エラー: ';' が '}' の前にありません。
+  (ソース ファイル '/02_ResourceFile/SceneFile/Scene.cpp' をコンパイルしています)
+  
+  GameSceneExe.cpp
+  SelectScene.cpp
+C:\Users\kodokeの世界\Desktop\HAL\VisualSutdio\就職作品\個人製作\FindWork\就職作品プロジェクト\02_ResourceFile\SceneFile\GameSceneCrush.cpp(57,28): error C2039: 'GetObjects': 'Game' のメンバーではありません
+  (ソース ファイル '/02_ResourceFile/SceneFile/GameSceneCrush.cpp' をコンパイルしています)
+      C:\Users\kodokeの世界\Desktop\HAL\VisualSutdio\就職作品\個人製作\FindWork\就職作品プロジェクト\02_ResourceFile\Game.h(21,7):
+      'Game' の宣言を確認してください
+  
+C:\Users\kodokeの世界\Desktop\HAL\VisualSutdio\就職作品\個人製作\FindWork\就職作品プロジェクト\02_ResourceFile\SceneFile\GameSceneCrush.cpp(57,46): error C2059: 構文エラー: ')'
+  (ソース ファイル '/02_ResourceFile/SceneFile/GameSceneCrush.cpp' をコンパイルしています)
+  
+C:\Users\kodokeの世界\Desktop\HAL\VisualSutdio\就職作品\個人製作\FindWork\就職作品プロジェクト\02_ResourceFile\SceneFile\GameSceneCrush.cpp(58,25): error C3536: 'enemys': 初期化前に使用することはできません
+  (ソース ファイル '/02_ResourceFile/SceneFile/GameSceneCrush.cpp' をコンパイルしています)
+  
+C:\Users\kodokeの世界\Desktop\HAL\VisualSutdio\就職作品\個人製作\FindWork\就職作品プロジェクト\02_ResourceFile\SceneFile\GameSceneCrush.cpp(58,9): error C2664: 'bool IsAllDeathEnemy(std::vector<std::shared_ptr<Enemy>,std::allocator<std::shared_ptr<Enemy>>>)': 引数 1 を 'int' から 'std::vector<std::shared_ptr<Enemy>,std::allocator<std::shared_ptr<Enemy>>>' へ変換できません。
+  (ソース ファイル '/02_ResourceFile/SceneFile/GameSceneCrush.cpp' をコンパイルしています)
+      C:\Users\kodokeの世界\Desktop\HAL\VisualSutdio\就職作品\個人製作\FindWork\就職作品プロジェクト\02_ResourceFile\SceneFile\GameSceneCrush.cpp(58,25):
+      class 'std::vector<std::shared_ptr<Enemy>,std::allocator<std::shared_ptr<Enemy>>>' のコンストラクターが 'explicit' と宣言されています。
+      C:\Users\kodokeの世界\Desktop\HAL\VisualSutdio\就職作品\個人製作\FindWork\就職作品プロジェクト\02_ResourceFile\ObjectFile\Enemy.h(22,6):
+      'IsAllDeathEnemy' の宣言を確認してください
+      C:\Users\kodokeの世界\Desktop\HAL\VisualSutdio\就職作品\個人製作\FindWork\就職作品プロジェクト\02_ResourceFile\SceneFile\GameSceneCrush.cpp(58,9):
+      引数リスト '(int)' を一致させようとしているとき
+  
+C:\Users\kodokeの世界\Desktop\HAL\VisualSutdio\就職作品\個人製作\FindWork\就職作品プロジェクト\02_ResourceFile\Game.h(121,1): error C2059: 構文エラー: ')'
+  (ソース ファイル '/02_ResourceFile/ObjectFile/Bomber.cpp' をコンパイルしています)
+  
+  TitleScene.cpp
+C:\Users\kodokeの世界\Desktop\HAL\VisualSutdio\就職作品\個人製作\FindWork\就職作品プロジェクト\02_ResourceFile\Game.h(122,3): error C3927: '->': 後続の戻り値の型は、関数以外の宣言子の後に許可されていません
+  (ソース ファイル '/02_ResourceFile/ObjectFile/Bomber.cpp' をコンパイルしています)
+  
+C:\Users\kodokeの世界\Desktop\HAL\VisualSutdio\就職作品\個人製作\FindWork\就職作品プロジェクト\02_ResourceFile\Game.h(122,7): error C3613: '->' の後に戻り型が指定されていません ('int' と見なされます)
+  (ソース ファイル '/02_ResourceFile/ObjectFile/Bomber.cpp' をコンパイルしています)
+  
+C:\Users\kodokeの世界\Desktop\HAL\VisualSutdio\就職作品\個人製作\FindWork\就職作品プロジェクト\02_ResourceFile\Game.h(122,7): error C3646: 'Initialize': 不明なオーバーライド指定子です
+  (ソース ファイル '/02_ResourceFile/ObjectFile/Bomber.cpp' をコンパイルしています)
+  
+C:\Users\kodokeの世界\Desktop\HAL\VisualSutdio\就職作品\個人製作\FindWork\就職作品プロジェクト\02_ResourceFile\Game.h(122,17): error C2059: 構文エラー: '('
+  (ソース ファイル '/02_ResourceFile/ObjectFile/Bomber.cpp' をコンパイルしています)
+  
+C:\Users\kodokeの世界\Desktop\HAL\VisualSutdio\就職作品\個人製作\FindWork\就職作品プロジェクト\02_ResourceFile\Game.h(122,19): error C2238: ';' の前に無効なトークンがあります。
+  (ソース ファイル '/02_ResourceFile/ObjectFile/Bomber.cpp' をコンパイルしています)
+  
+C:\Users\kodokeの世界\Desktop\HAL\VisualSutdio\就職作品\個人製作\FindWork\就職作品プロジェクト\02_ResourceFile\Game.h(123,3): error C2059: 構文エラー: 'return'
+  (ソース ファイル '/02_ResourceFile/ObjectFile/Bomber.cpp' をコンパイルしています)
+  
+C:\Users\kodokeの世界\Desktop\HAL\VisualSutdio\就職作品\個人製作\FindWork\就職作品プロジェクト\02_ResourceFile\Game.h(123,12): error C2238: ';' の前に無効なトークンがあります。
+  (ソース ファイル '/02_ResourceFile/ObjectFile/Bomber.cpp' をコンパイルしています)
+  
+C:\Users\kodokeの世界\Desktop\HAL\VisualSutdio\就職作品\個人製作\FindWork\就職作品プロジェクト\02_ResourceFile\Game.h(121,1): error C2760: 構文エラー: '}' は予期しないエラーでした。';' が必要です
+  (ソース ファイル '/02_ResourceFile/ObjectFile/Bomber.cpp' をコンパイルしています)
+      C:\Users\kodokeの世界\Desktop\HAL\VisualSutdio\就職作品\個人製作\FindWork\就職作品プロジェクト\02_ResourceFile\Game.h(104,21):
+      コンパイラでのこの診断により関数 'std::shared_ptr<_Ty> Game::AddObject(Args &&...)' が生成されました。
+  
+C:\Users\kodokeの世界\Desktop\HAL\VisualSutdio\就職作品\個人製作\FindWork\就職作品プロジェクト\02_ResourceFile\Game.h(127,2): error C2059: 構文エラー: '<L_GRAMMAR_template_head_l>'
+  (ソース ファイル '/02_ResourceFile/ObjectFile/Bomber.cpp' をコンパイルしています)
+  
+C:\Users\kodokeの世界\Desktop\HAL\VisualSutdio\就職作品\個人製作\FindWork\就職作品プロジェクト\02_ResourceFile\Game.h(129,2): error C2143: 構文エラー: ';' が '{' の前にありません。
+  (ソース ファイル '/02_ResourceFile/ObjectFile/Bomber.cpp' をコンパイルしています)
+  
+C:\Users\kodokeの世界\Desktop\HAL\VisualSutdio\就職作品\個人製作\FindWork\就職作品プロジェクト\02_ResourceFile\Game.h(129,2): error C2447: '{': 対応する関数ヘッダーがありません (旧形式の仮引数リスト?)
+  (ソース ファイル '/02_ResourceFile/ObjectFile/Bomber.cpp' をコンパイルしています)
+  
+C:\Users\kodokeの世界\Desktop\HAL\VisualSutdio\就職作品\個人製作\FindWork\就職作品プロジェクト\02_ResourceFile\Game.h(139,1): error C2059: 構文エラー: '}'
+  (ソース ファイル '/02_ResourceFile/ObjectFile/Bomber.cpp' をコンパイルしています)
+  
+C:\Users\kodokeの世界\Desktop\HAL\VisualSutdio\就職作品\個人製作\FindWork\就職作品プロジェクト\02_ResourceFile\Game.h(139,1): error C2143: 構文エラー: ';' が '}' の前にありません。
+  (ソース ファイル '/02_ResourceFile/ObjectFile/Bomber.cpp' をコンパイルしています)
+  
+  Fade.cpp
+  TransScene.cpp
   Square.cpp
-  StaticMesh.cpp
-  Texture.cpp
-  TextureManager.cpp
-  input.cpp
-  就職作品プロジェクト.vcxproj -> C:\Users\kodokeの世界\Desktop\HAL\VisualSutdio\就職作品\個人製作\FindWork\就職作品プロジェクト\x64\Debug\NishiguchiGame.exe
+C:\Users\kodokeの世界\Desktop\HAL\VisualSutdio\就職作品\個人製作\FindWork\就職作品プロジェクト\02_ResourceFile\Game.h(121,1): error C2059: 構文エラー: ')'
+  (ソース ファイル '/02_ResourceFile/SceneFile/Transition/Zoom.cpp' をコンパイルしています)
+  
+C:\Users\kodokeの世界\Desktop\HAL\VisualSutdio\就職作品\個人製作\FindWork\就職作品プロジェクト\02_ResourceFile\Game.h(122,3): error C3927: '->': 後続の戻り値の型は、関数以外の宣言子の後に許可されていません
+  (ソース ファイル '/02_ResourceFile/SceneFile/Transition/Zoom.cpp' をコンパイルしています)
+  
+C:\Users\kodokeの世界\Desktop\HAL\VisualSutdio\就職作品\個人製作\FindWork\就職作品プロジェクト\02_ResourceFile\Game.h(122,7): error C3613: '->' の後に戻り型が指定されていません ('int' と見なされます)
+  (ソース ファイル '/02_ResourceFile/SceneFile/Transition/Zoom.cpp' をコンパイルしています)
+  
+C:\Users\kodokeの世界\Desktop\HAL\VisualSutdio\就職作品\個人製作\FindWork\就職作品プロジェクト\02_ResourceFile\Game.h(122,7): error C3646: 'Initialize': 不明なオーバーライド指定子です
+  (ソース ファイル '/02_ResourceFile/SceneFile/Transition/Zoom.cpp' をコンパイルしています)
+  
+C:\Users\kodokeの世界\Desktop\HAL\VisualSutdio\就職作品\個人製作\FindWork\就職作品プロジェクト\02_ResourceFile\Game.h(122,17): error C2059: 構文エラー: '('
+  (ソース ファイル '/02_ResourceFile/SceneFile/Transition/Zoom.cpp' をコンパイルしています)
+  
+C:\Users\kodokeの世界\Desktop\HAL\VisualSutdio\就職作品\個人製作\FindWork\就職作品プロジェクト\02_ResourceFile\Game.h(122,19): error C2238: ';' の前に無効なトークンがあります。
+  (ソース ファイル '/02_ResourceFile/SceneFile/Transition/Zoom.cpp' をコンパイルしています)
+  
+C:\Users\kodokeの世界\Desktop\HAL\VisualSutdio\就職作品\個人製作\FindWork\就職作品プロジェクト\02_ResourceFile\Game.h(123,3): error C2059: 構文エラー: 'return'
+  (ソース ファイル '/02_ResourceFile/SceneFile/Transition/Zoom.cpp' をコンパイルしています)
+  
+C:\Users\kodokeの世界\Desktop\HAL\VisualSutdio\就職作品\個人製作\FindWork\就職作品プロジェクト\02_ResourceFile\Game.h(123,12): error C2238: ';' の前に無効なトークンがあります。
+  (ソース ファイル '/02_ResourceFile/SceneFile/Transition/Zoom.cpp' をコンパイルしています)
+  
+C:\Users\kodokeの世界\Desktop\HAL\VisualSutdio\就職作品\個人製作\FindWork\就職作品プロジェクト\02_ResourceFile\Game.h(121,1): error C2760: 構文エラー: '}' は予期しないエラーでした。';' が必要です
+  (ソース ファイル '/02_ResourceFile/SceneFile/Transition/Zoom.cpp' をコンパイルしています)
+      C:\Users\kodokeの世界\Desktop\HAL\VisualSutdio\就職作品\個人製作\FindWork\就職作品プロジェクト\02_ResourceFile\Game.h(104,21):
+      コンパイラでのこの診断により関数 'std::shared_ptr<_Ty> Game::AddObject(Args &&...)' が生成されました。
+  
+C:\Users\kodokeの世界\Desktop\HAL\VisualSutdio\就職作品\個人製作\FindWork\就職作品プロジェクト\02_ResourceFile\Game.h(127,2): error C2059: 構文エラー: '<L_GRAMMAR_template_head_l>'
+  (ソース ファイル '/02_ResourceFile/SceneFile/Transition/Zoom.cpp' をコンパイルしています)
+  
+C:\Users\kodokeの世界\Desktop\HAL\VisualSutdio\就職作品\個人製作\FindWork\就職作品プロジェクト\02_ResourceFile\Game.h(129,2): error C2143: 構文エラー: ';' が '{' の前にありません。
+  (ソース ファイル '/02_ResourceFile/SceneFile/Transition/Zoom.cpp' をコンパイルしています)
+  
+C:\Users\kodokeの世界\Desktop\HAL\VisualSutdio\就職作品\個人製作\FindWork\就職作品プロジェクト\02_ResourceFile\Game.h(129,2): error C2447: '{': 対応する関数ヘッダーがありません (旧形式の仮引数リスト?)
+  (ソース ファイル '/02_ResourceFile/SceneFile/Transition/Zoom.cpp' をコンパイルしています)
+  
+C:\Users\kodokeの世界\Desktop\HAL\VisualSutdio\就職作品\個人製作\FindWork\就職作品プロジェクト\02_ResourceFile\Game.h(139,1): error C2059: 構文エラー: '}'
+  (ソース ファイル '/02_ResourceFile/SceneFile/Transition/Zoom.cpp' をコンパイルしています)
+  
+C:\Users\kodokeの世界\Desktop\HAL\VisualSutdio\就職作品\個人製作\FindWork\就職作品プロジェクト\02_ResourceFile\Game.h(139,1): error C2143: 構文エラー: ';' が '}' の前にありません。
+  (ソース ファイル '/02_ResourceFile/SceneFile/Transition/Zoom.cpp' をコンパイルしています)
+  
+C:\Users\kodokeの世界\Desktop\HAL\VisualSutdio\就職作品\個人製作\FindWork\就職作品プロジェクト\02_ResourceFile\Game.h(121,1): error C2059: 構文エラー: ')'
+  (ソース ファイル '/02_ResourceFile/ObjectFile/Model.cpp' をコンパイルしています)
+  
+C:\Users\kodokeの世界\Desktop\HAL\VisualSutdio\就職作品\個人製作\FindWork\就職作品プロジェクト\02_ResourceFile\Game.h(122,3): error C3927: '->': 後続の戻り値の型は、関数以外の宣言子の後に許可されていません
+  (ソース ファイル '/02_ResourceFile/ObjectFile/Model.cpp' をコンパイルしています)
+  
+C:\Users\kodokeの世界\Desktop\HAL\VisualSutdio\就職作品\個人製作\FindWork\就職作品プロジェクト\02_ResourceFile\Game.h(122,7): error C3613: '->' の後に戻り型が指定されていません ('int' と見なされます)
+  (ソース ファイル '/02_ResourceFile/ObjectFile/Model.cpp' をコンパイルしています)
+  
+C:\Users\kodokeの世界\Desktop\HAL\VisualSutdio\就職作品\個人製作\FindWork\就職作品プロジェクト\02_ResourceFile\Game.h(122,7): error C3646: 'Initialize': 不明なオーバーライド指定子です
+  (ソース ファイル '/02_ResourceFile/ObjectFile/Model.cpp' をコンパイルしています)
+  
+C:\Users\kodokeの世界\Desktop\HAL\VisualSutdio\就職作品\個人製作\FindWork\就職作品プロジェクト\02_ResourceFile\Game.h(122,17): error C2059: 構文エラー: '('
+  (ソース ファイル '/02_ResourceFile/ObjectFile/Model.cpp' をコンパイルしています)
+  
+C:\Users\kodokeの世界\Desktop\HAL\VisualSutdio\就職作品\個人製作\FindWork\就職作品プロジェクト\02_ResourceFile\Game.h(122,19): error C2238: ';' の前に無効なトークンがあります。
+  (ソース ファイル '/02_ResourceFile/ObjectFile/Model.cpp' をコンパイルしています)
+  
+C:\Users\kodokeの世界\Desktop\HAL\VisualSutdio\就職作品\個人製作\FindWork\就職作品プロジェクト\02_ResourceFile\Game.h(123,3): error C2059: 構文エラー: 'return'
+  (ソース ファイル '/02_ResourceFile/ObjectFile/Model.cpp' をコンパイルしています)
+  
+C:\Users\kodokeの世界\Desktop\HAL\VisualSutdio\就職作品\個人製作\FindWork\就職作品プロジェクト\02_ResourceFile\Game.h(123,12): error C2238: ';' の前に無効なトークンがあります。
+  (ソース ファイル '/02_ResourceFile/ObjectFile/Model.cpp' をコンパイルしています)
+  
+C:\Users\kodokeの世界\Desktop\HAL\VisualSutdio\就職作品\個人製作\FindWork\就職作品プロジェクト\02_ResourceFile\Game.h(121,1): error C2760: 構文エラー: '}' は予期しないエラーでした。';' が必要です
+  (ソース ファイル '/02_ResourceFile/ObjectFile/Model.cpp' をコンパイルしています)
+      C:\Users\kodokeの世界\Desktop\HAL\VisualSutdio\就職作品\個人製作\FindWork\就職作品プロジェクト\02_ResourceFile\Game.h(104,21):
+      コンパイラでのこの診断により関数 'std::shared_ptr<_Ty> Game::AddObject(Args &&...)' が生成されました。
+  
+C:\Users\kodokeの世界\Desktop\HAL\VisualSutdio\就職作品\個人製作\FindWork\就職作品プロジェクト\02_ResourceFile\Game.h(127,2): error C2059: 構文エラー: '<L_GRAMMAR_template_head_l>'
+  (ソース ファイル '/02_ResourceFile/ObjectFile/Model.cpp' をコンパイルしています)
+  
+C:\Users\kodokeの世界\Desktop\HAL\VisualSutdio\就職作品\個人製作\FindWork\就職作品プロジェクト\02_ResourceFile\Game.h(129,2): error C2143: 構文エラー: ';' が '{' の前にありません。
+  (ソース ファイル '/02_ResourceFile/ObjectFile/Model.cpp' をコンパイルしています)
+  
+C:\Users\kodokeの世界\Desktop\HAL\VisualSutdio\就職作品\個人製作\FindWork\就職作品プロジェクト\02_ResourceFile\Game.h(129,2): error C2447: '{': 対応する関数ヘッダーがありません (旧形式の仮引数リスト?)
+  (ソース ファイル '/02_ResourceFile/ObjectFile/Model.cpp' をコンパイルしています)
+  
+C:\Users\kodokeの世界\Desktop\HAL\VisualSutdio\就職作品\個人製作\FindWork\就職作品プロジェクト\02_ResourceFile\Game.h(139,1): error C2059: 構文エラー: '}'
+  (ソース ファイル '/02_ResourceFile/ObjectFile/Model.cpp' をコンパイルしています)
+  
+C:\Users\kodokeの世界\Desktop\HAL\VisualSutdio\就職作品\個人製作\FindWork\就職作品プロジェクト\02_ResourceFile\Game.h(139,1): error C2143: 構文エラー: ';' が '}' の前にありません。
+  (ソース ファイル '/02_ResourceFile/ObjectFile/Model.cpp' をコンパイルしています)
+  
+C:\Users\kodokeの世界\Desktop\HAL\VisualSutdio\就職作品\個人製作\FindWork\就職作品プロジェクト\02_ResourceFile\Game.h(121,1): error C2059: 構文エラー: ')'
+  (ソース ファイル '/02_ResourceFile/ObjectFile/Object.cpp' をコンパイルしています)
+  
+C:\Users\kodokeの世界\Desktop\HAL\VisualSutdio\就職作品\個人製作\FindWork\就職作品プロジェクト\02_ResourceFile\Game.h(122,3): error C3927: '->': 後続の戻り値の型は、関数以外の宣言子の後に許可されていません
+  (ソース ファイル '/02_ResourceFile/ObjectFile/Object.cpp' をコンパイルしています)
+  
+C:\Users\kodokeの世界\Desktop\HAL\VisualSutdio\就職作品\個人製作\FindWork\就職作品プロジェクト\02_ResourceFile\Game.h(122,7): error C3613: '->' の後に戻り型が指定されていません ('int' と見なされます)
+  (ソース ファイル '/02_ResourceFile/ObjectFile/Object.cpp' をコンパイルしています)
+  
+C:\Users\kodokeの世界\Desktop\HAL\VisualSutdio\就職作品\個人製作\FindWork\就職作品プロジェクト\02_ResourceFile\Game.h(122,7): error C3646: 'Initialize': 不明なオーバーライド指定子です
+  (ソース ファイル '/02_ResourceFile/ObjectFile/Object.cpp' をコンパイルしています)
+  
+C:\Users\kodokeの世界\Desktop\HAL\VisualSutdio\就職作品\個人製作\FindWork\就職作品プロジェクト\02_ResourceFile\Game.h(122,17): error C2059: 構文エラー: '('
+  (ソース ファイル '/02_ResourceFile/ObjectFile/Object.cpp' をコンパイルしています)
+  
+C:\Users\kodokeの世界\Desktop\HAL\VisualSutdio\就職作品\個人製作\FindWork\就職作品プロジェクト\02_ResourceFile\Game.h(122,19): error C2238: ';' の前に無効なトークンがあります。
+  (ソース ファイル '/02_ResourceFile/ObjectFile/Object.cpp' をコンパイルしています)
+  
+C:\Users\kodokeの世界\Desktop\HAL\VisualSutdio\就職作品\個人製作\FindWork\就職作品プロジェクト\02_ResourceFile\Game.h(123,3): error C2059: 構文エラー: 'return'
+  (ソース ファイル '/02_ResourceFile/ObjectFile/Object.cpp' をコンパイルしています)
+  
+C:\Users\kodokeの世界\Desktop\HAL\VisualSutdio\就職作品\個人製作\FindWork\就職作品プロジェクト\02_ResourceFile\Game.h(123,12): error C2238: ';' の前に無効なトークンがあります。
+  (ソース ファイル '/02_ResourceFile/ObjectFile/Object.cpp' をコンパイルしています)
+  
+C:\Users\kodokeの世界\Desktop\HAL\VisualSutdio\就職作品\個人製作\FindWork\就職作品プロジェクト\02_ResourceFile\Game.h(121,1): error C2059: 構文エラー: ')'
+  (ソース ファイル '/02_ResourceFile/ObjectFile/Bullet.cpp' をコンパイルしています)
+  
+C:\Users\kodokeの世界\Desktop\HAL\VisualSutdio\就職作品\個人製作\FindWork\就職作品プロジェクト\02_ResourceFile\Game.h(122,3): error C3927: '->': 後続の戻り値の型は、関数以外の宣言子の後に許可されていません
+  (ソース ファイル '/02_ResourceFile/ObjectFile/Bullet.cpp' をコンパイルしています)
+  
+C:\Users\kodokeの世界\Desktop\HAL\VisualSutdio\就職作品\個人製作\FindWork\就職作品プロジェクト\02_ResourceFile\Game.h(122,7): error C3613: '->' の後に戻り型が指定されていません ('int' と見なされます)
+  (ソース ファイル '/02_ResourceFile/ObjectFile/Bullet.cpp' をコンパイルしています)
+  
+C:\Users\kodokeの世界\Desktop\HAL\VisualSutdio\就職作品\個人製作\FindWork\就職作品プロジェクト\02_ResourceFile\Game.h(122,7): error C3646: 'Initialize': 不明なオーバーライド指定子です
+  (ソース ファイル '/02_ResourceFile/ObjectFile/Bullet.cpp' をコンパイルしています)
+  
+C:\Users\kodokeの世界\Desktop\HAL\VisualSutdio\就職作品\個人製作\FindWork\就職作品プロジェクト\02_ResourceFile\Game.h(122,17): error C2059: 構文エラー: '('
+  (ソース ファイル '/02_ResourceFile/ObjectFile/Bullet.cpp' をコンパイルしています)
+  
+C:\Users\kodokeの世界\Desktop\HAL\VisualSutdio\就職作品\個人製作\FindWork\就職作品プロジェクト\02_ResourceFile\Game.h(122,19): error C2238: ';' の前に無効なトークンがあります。
+  (ソース ファイル '/02_ResourceFile/ObjectFile/Bullet.cpp' をコンパイルしています)
+  
+C:\Users\kodokeの世界\Desktop\HAL\VisualSutdio\就職作品\個人製作\FindWork\就職作品プロジェクト\02_ResourceFile\Game.h(123,3): error C2059: 構文エラー: 'return'
+  (ソース ファイル '/02_ResourceFile/ObjectFile/Bullet.cpp' をコンパイルしています)
+  
+C:\Users\kodokeの世界\Desktop\HAL\VisualSutdio\就職作品\個人製作\FindWork\就職作品プロジェクト\02_ResourceFile\Game.h(123,12): error C2238: ';' の前に無効なトークンがあります。
+  (ソース ファイル '/02_ResourceFile/ObjectFile/Bullet.cpp' をコンパイルしています)
+  
+C:\Users\kodokeの世界\Desktop\HAL\VisualSutdio\就職作品\個人製作\FindWork\就職作品プロジェクト\02_ResourceFile\Game.h(121,1): error C2760: 構文エラー: '}' は予期しないエラーでした。';' が必要です
+  (ソース ファイル '/02_ResourceFile/ObjectFile/Object.cpp' をコンパイルしています)
+      C:\Users\kodokeの世界\Desktop\HAL\VisualSutdio\就職作品\個人製作\FindWork\就職作品プロジェクト\02_ResourceFile\Game.h(104,21):
+      コンパイラでのこの診断により関数 'std::shared_ptr<_Ty> Game::AddObject(Args &&...)' が生成されました。
+  
+C:\Users\kodokeの世界\Desktop\HAL\VisualSutdio\就職作品\個人製作\FindWork\就職作品プロジェクト\02_ResourceFile\Game.h(127,2): error C2059: 構文エラー: '<L_GRAMMAR_template_head_l>'
+  (ソース ファイル '/02_ResourceFile/ObjectFile/Object.cpp' をコンパイルしています)
+  
+C:\Users\kodokeの世界\Desktop\HAL\VisualSutdio\就職作品\個人製作\FindWork\就職作品プロジェクト\02_ResourceFile\Game.h(129,2): error C2143: 構文エラー: ';' が '{' の前にありません。
+  (ソース ファイル '/02_ResourceFile/ObjectFile/Object.cpp' をコンパイルしています)
+  
+C:\Users\kodokeの世界\Desktop\HAL\VisualSutdio\就職作品\個人製作\FindWork\就職作品プロジェクト\02_ResourceFile\Game.h(129,2): error C2447: '{': 対応する関数ヘッダーがありません (旧形式の仮引数リスト?)
+  (ソース ファイル '/02_ResourceFile/ObjectFile/Object.cpp' をコンパイルしています)
+  
+C:\Users\kodokeの世界\Desktop\HAL\VisualSutdio\就職作品\個人製作\FindWork\就職作品プロジェクト\02_ResourceFile\Game.h(121,1): error C2760: 構文エラー: '}' は予期しないエラーでした。';' が必要です
+  (ソース ファイル '/02_ResourceFile/ObjectFile/Bullet.cpp' をコンパイルしています)
+      C:\Users\kodokeの世界\Desktop\HAL\VisualSutdio\就職作品\個人製作\FindWork\就職作品プロジェクト\02_ResourceFile\Game.h(104,21):
+      コンパイラでのこの診断により関数 'std::shared_ptr<_Ty> Game::AddObject(Args &&...)' が生成されました。
+  
+C:\Users\kodokeの世界\Desktop\HAL\VisualSutdio\就職作品\個人製作\FindWork\就職作品プロジェクト\02_ResourceFile\Game.h(139,1): error C2059: 構文エラー: '}'
+  (ソース ファイル '/02_ResourceFile/ObjectFile/Object.cpp' をコンパイルしています)
+  
+C:\Users\kodokeの世界\Desktop\HAL\VisualSutdio\就職作品\個人製作\FindWork\就職作品プロジェクト\02_ResourceFile\Game.h(127,2): error C2059: 構文エラー: '<L_GRAMMAR_template_head_l>'
+  (ソース ファイル '/02_ResourceFile/ObjectFile/Bullet.cpp' をコンパイルしています)
+  
+C:\Users\kodokeの世界\Desktop\HAL\VisualSutdio\就職作品\個人製作\FindWork\就職作品プロジェクト\02_ResourceFile\Game.h(139,1): error C2143: 構文エラー: ';' が '}' の前にありません。
+  (ソース ファイル '/02_ResourceFile/ObjectFile/Object.cpp' をコンパイルしています)
+  
+C:\Users\kodokeの世界\Desktop\HAL\VisualSutdio\就職作品\個人製作\FindWork\就職作品プロジェクト\02_ResourceFile\Game.h(129,2): error C2143: 構文エラー: ';' が '{' の前にありません。
+  (ソース ファイル '/02_ResourceFile/ObjectFile/Bullet.cpp' をコンパイルしています)
+  
+C:\Users\kodokeの世界\Desktop\HAL\VisualSutdio\就職作品\個人製作\FindWork\就職作品プロジェクト\02_ResourceFile\Game.h(129,2): error C2447: '{': 対応する関数ヘッダーがありません (旧形式の仮引数リスト?)
+  (ソース ファイル '/02_ResourceFile/ObjectFile/Bullet.cpp' をコンパイルしています)
+  
+C:\Users\kodokeの世界\Desktop\HAL\VisualSutdio\就職作品\個人製作\FindWork\就職作品プロジェクト\02_ResourceFile\Game.h(139,1): error C2059: 構文エラー: '}'
+  (ソース ファイル '/02_ResourceFile/ObjectFile/Bullet.cpp' をコンパイルしています)
+  
+C:\Users\kodokeの世界\Desktop\HAL\VisualSutdio\就職作品\個人製作\FindWork\就職作品プロジェクト\02_ResourceFile\Game.h(139,1): error C2143: 構文エラー: ';' が '}' の前にありません。
+  (ソース ファイル '/02_ResourceFile/ObjectFile/Bullet.cpp' をコンパイルしています)
+  
+C:\Users\kodokeの世界\Desktop\HAL\VisualSutdio\就職作品\個人製作\FindWork\就職作品プロジェクト\02_ResourceFile\Game.h(121,1): error C2059: 構文エラー: ')'
+  (ソース ファイル '/02_ResourceFile/SceneFile/GameSceneExe.cpp' をコンパイルしています)
+  
+C:\Users\kodokeの世界\Desktop\HAL\VisualSutdio\就職作品\個人製作\FindWork\就職作品プロジェクト\02_ResourceFile\Game.h(122,3): error C3927: '->': 後続の戻り値の型は、関数以外の宣言子の後に許可されていません
+  (ソース ファイル '/02_ResourceFile/SceneFile/GameSceneExe.cpp' をコンパイルしています)
+  
+C:\Users\kodokeの世界\Desktop\HAL\VisualSutdio\就職作品\個人製作\FindWork\就職作品プロジェクト\02_ResourceFile\Game.h(122,7): error C3613: '->' の後に戻り型が指定されていません ('int' と見なされます)
+  (ソース ファイル '/02_ResourceFile/SceneFile/GameSceneExe.cpp' をコンパイルしています)
+  
+C:\Users\kodokeの世界\Desktop\HAL\VisualSutdio\就職作品\個人製作\FindWork\就職作品プロジェクト\02_ResourceFile\Game.h(122,7): error C3646: 'Initialize': 不明なオーバーライド指定子です
+  (ソース ファイル '/02_ResourceFile/SceneFile/GameSceneExe.cpp' をコンパイルしています)
+  
+C:\Users\kodokeの世界\Desktop\HAL\VisualSutdio\就職作品\個人製作\FindWork\就職作品プロジェクト\02_ResourceFile\Game.h(122,17): error C2059: 構文エラー: '('
+  (ソース ファイル '/02_ResourceFile/SceneFile/GameSceneExe.cpp' をコンパイルしています)
+  
+C:\Users\kodokeの世界\Desktop\HAL\VisualSutdio\就職作品\個人製作\FindWork\就職作品プロジェクト\02_ResourceFile\Game.h(122,19): error C2238: ';' の前に無効なトークンがあります。
+  (ソース ファイル '/02_ResourceFile/SceneFile/GameSceneExe.cpp' をコンパイルしています)
+  
+C:\Users\kodokeの世界\Desktop\HAL\VisualSutdio\就職作品\個人製作\FindWork\就職作品プロジェクト\02_ResourceFile\Game.h(123,3): error C2059: 構文エラー: 'return'
+  (ソース ファイル '/02_ResourceFile/SceneFile/GameSceneExe.cpp' をコンパイルしています)
+  
+C:\Users\kodokeの世界\Desktop\HAL\VisualSutdio\就職作品\個人製作\FindWork\就職作品プロジェクト\02_ResourceFile\Game.h(123,12): error C2238: ';' の前に無効なトークンがあります。
+  (ソース ファイル '/02_ResourceFile/SceneFile/GameSceneExe.cpp' をコンパイルしています)
+  
+C:\Users\kodokeの世界\Desktop\HAL\VisualSutdio\就職作品\個人製作\FindWork\就職作品プロジェクト\02_ResourceFile\Game.h(121,1): error C2760: 構文エラー: '}' は予期しないエラーでした。';' が必要です
+  (ソース ファイル '/02_ResourceFile/SceneFile/GameSceneExe.cpp' をコンパイルしています)
+      C:\Users\kodokeの世界\Desktop\HAL\VisualSutdio\就職作品\個人製作\FindWork\就職作品プロジェクト\02_ResourceFile\Game.h(104,21):
+      コンパイラでのこの診断により関数 'std::shared_ptr<_Ty> Game::AddObject(Args &&...)' が生成されました。
+  
+C:\Users\kodokeの世界\Desktop\HAL\VisualSutdio\就職作品\個人製作\FindWork\就職作品プロジェクト\02_ResourceFile\Game.h(127,2): error C2059: 構文エラー: '<L_GRAMMAR_template_head_l>'
+  (ソース ファイル '/02_ResourceFile/SceneFile/GameSceneExe.cpp' をコンパイルしています)
+  
+C:\Users\kodokeの世界\Desktop\HAL\VisualSutdio\就職作品\個人製作\FindWork\就職作品プロジェクト\02_ResourceFile\Game.h(129,2): error C2143: 構文エラー: ';' が '{' の前にありません。
+  (ソース ファイル '/02_ResourceFile/SceneFile/GameSceneExe.cpp' をコンパイルしています)
+  
+C:\Users\kodokeの世界\Desktop\HAL\VisualSutdio\就職作品\個人製作\FindWork\就職作品プロジェクト\02_ResourceFile\Game.h(121,1): error C2059: 構文エラー: ')'
+  (ソース ファイル '/02_ResourceFile/ObjectFile/Sphere.cpp' をコンパイルしています)
+  
+C:\Users\kodokeの世界\Desktop\HAL\VisualSutdio\就職作品\個人製作\FindWork\就職作品プロジェクト\02_ResourceFile\Game.h(122,3): error C3927: '->': 後続の戻り値の型は、関数以外の宣言子の後に許可されていません
+  (ソース ファイル '/02_ResourceFile/ObjectFile/Sphere.cpp' をコンパイルしています)
+  
+C:\Users\kodokeの世界\Desktop\HAL\VisualSutdio\就職作品\個人製作\FindWork\就職作品プロジェクト\02_ResourceFile\Game.h(122,7): error C3613: '->' の後に戻り型が指定されていません ('int' と見なされます)
+  (ソース ファイル '/02_ResourceFile/ObjectFile/Sphere.cpp' をコンパイルしています)
+  
+C:\Users\kodokeの世界\Desktop\HAL\VisualSutdio\就職作品\個人製作\FindWork\就職作品プロジェクト\02_ResourceFile\Game.h(122,7): error C3646: 'Initialize': 不明なオーバーライド指定子です
+  (ソース ファイル '/02_ResourceFile/ObjectFile/Sphere.cpp' をコンパイルしています)
+  
+C:\Users\kodokeの世界\Desktop\HAL\VisualSutdio\就職作品\個人製作\FindWork\就職作品プロジェクト\02_ResourceFile\Game.h(122,17): error C2059: 構文エラー: '('
+  (ソース ファイル '/02_ResourceFile/ObjectFile/Sphere.cpp' をコンパイルしています)
+  
+C:\Users\kodokeの世界\Desktop\HAL\VisualSutdio\就職作品\個人製作\FindWork\就職作品プロジェクト\02_ResourceFile\Game.h(122,19): error C2238: ';' の前に無効なトークンがあります。
+  (ソース ファイル '/02_ResourceFile/ObjectFile/Sphere.cpp' をコンパイルしています)
+  
+C:\Users\kodokeの世界\Desktop\HAL\VisualSutdio\就職作品\個人製作\FindWork\就職作品プロジェクト\02_ResourceFile\Game.h(123,3): error C2059: 構文エラー: 'return'
+  (ソース ファイル '/02_ResourceFile/ObjectFile/Sphere.cpp' をコンパイルしています)
+  
+C:\Users\kodokeの世界\Desktop\HAL\VisualSutdio\就職作品\個人製作\FindWork\就職作品プロジェクト\02_ResourceFile\Game.h(129,2): error C2447: '{': 対応する関数ヘッダーがありません (旧形式の仮引数リスト?)
+  (ソース ファイル '/02_ResourceFile/SceneFile/GameSceneExe.cpp' をコンパイルしています)
+  
+C:\Users\kodokeの世界\Desktop\HAL\VisualSutdio\就職作品\個人製作\FindWork\就職作品プロジェクト\02_ResourceFile\Game.h(123,12): error C2238: ';' の前に無効なトークンがあります。
+  (ソース ファイル '/02_ResourceFile/ObjectFile/Sphere.cpp' をコンパイルしています)
+  
+C:\Users\kodokeの世界\Desktop\HAL\VisualSutdio\就職作品\個人製作\FindWork\就職作品プロジェクト\02_ResourceFile\Game.h(139,1): error C2059: 構文エラー: '}'
+  (ソース ファイル '/02_ResourceFile/SceneFile/GameSceneExe.cpp' をコンパイルしています)
+  
+C:\Users\kodokeの世界\Desktop\HAL\VisualSutdio\就職作品\個人製作\FindWork\就職作品プロジェクト\02_ResourceFile\Game.h(139,1): error C2143: 構文エラー: ';' が '}' の前にありません。
+  (ソース ファイル '/02_ResourceFile/SceneFile/GameSceneExe.cpp' をコンパイルしています)
+  
+C:\Users\kodokeの世界\Desktop\HAL\VisualSutdio\就職作品\個人製作\FindWork\就職作品プロジェクト\02_ResourceFile\Game.h(121,1): error C2059: 構文エラー: ')'
+  (ソース ファイル '/02_ResourceFile/ObjectFile/Skydome.cpp' をコンパイルしています)
+  
+C:\Users\kodokeの世界\Desktop\HAL\VisualSutdio\就職作品\個人製作\FindWork\就職作品プロジェクト\02_ResourceFile\Game.h(122,3): error C3927: '->': 後続の戻り値の型は、関数以外の宣言子の後に許可されていません
+  (ソース ファイル '/02_ResourceFile/ObjectFile/Skydome.cpp' をコンパイルしています)
+  
+C:\Users\kodokeの世界\Desktop\HAL\VisualSutdio\就職作品\個人製作\FindWork\就職作品プロジェクト\02_ResourceFile\Game.h(122,7): error C3613: '->' の後に戻り型が指定されていません ('int' と見なされます)
+  (ソース ファイル '/02_ResourceFile/ObjectFile/Skydome.cpp' をコンパイルしています)
+  
+C:\Users\kodokeの世界\Desktop\HAL\VisualSutdio\就職作品\個人製作\FindWork\就職作品プロジェクト\02_ResourceFile\Game.h(122,7): error C3646: 'Initialize': 不明なオーバーライド指定子です
+  (ソース ファイル '/02_ResourceFile/ObjectFile/Skydome.cpp' をコンパイルしています)
+  
+C:\Users\kodokeの世界\Desktop\HAL\VisualSutdio\就職作品\個人製作\FindWork\就職作品プロジェクト\02_ResourceFile\Game.h(122,17): error C2059: 構文エラー: '('
+  (ソース ファイル '/02_ResourceFile/ObjectFile/Skydome.cpp' をコンパイルしています)
+  
+C:\Users\kodokeの世界\Desktop\HAL\VisualSutdio\就職作品\個人製作\FindWork\就職作品プロジェクト\02_ResourceFile\Game.h(122,19): error C2238: ';' の前に無効なトークンがあります。
+  (ソース ファイル '/02_ResourceFile/ObjectFile/Skydome.cpp' をコンパイルしています)
+  
+C:\Users\kodokeの世界\Desktop\HAL\VisualSutdio\就職作品\個人製作\FindWork\就職作品プロジェクト\02_ResourceFile\Game.h(123,3): error C2059: 構文エラー: 'return'
+  (ソース ファイル '/02_ResourceFile/ObjectFile/Skydome.cpp' をコンパイルしています)
+  
+C:\Users\kodokeの世界\Desktop\HAL\VisualSutdio\就職作品\個人製作\FindWork\就職作品プロジェクト\02_ResourceFile\Game.h(123,12): error C2238: ';' の前に無効なトークンがあります。
+  (ソース ファイル '/02_ResourceFile/ObjectFile/Skydome.cpp' をコンパイルしています)
+  
+C:\Users\kodokeの世界\Desktop\HAL\VisualSutdio\就職作品\個人製作\FindWork\就職作品プロジェクト\02_ResourceFile\Game.h(121,1): error C2760: 構文エラー: '}' は予期しないエラーでした。';' が必要です
+  (ソース ファイル '/02_ResourceFile/ObjectFile/Sphere.cpp' をコンパイルしています)
+      C:\Users\kodokeの世界\Desktop\HAL\VisualSutdio\就職作品\個人製作\FindWork\就職作品プロジェクト\02_ResourceFile\Game.h(104,21):
+      コンパイラでのこの診断により関数 'std::shared_ptr<_Ty> Game::AddObject(Args &&...)' が生成されました。
+  
+C:\Users\kodokeの世界\Desktop\HAL\VisualSutdio\就職作品\個人製作\FindWork\就職作品プロジェクト\02_ResourceFile\Game.h(127,2): error C2059: 構文エラー: '<L_GRAMMAR_template_head_l>'
+  (ソース ファイル '/02_ResourceFile/ObjectFile/Sphere.cpp' をコンパイルしています)
+  
+C:\Users\kodokeの世界\Desktop\HAL\VisualSutdio\就職作品\個人製作\FindWork\就職作品プロジェクト\02_ResourceFile\Game.h(129,2): error C2143: 構文エラー: ';' が '{' の前にありません。
+  (ソース ファイル '/02_ResourceFile/ObjectFile/Sphere.cpp' をコンパイルしています)
+  
+C:\Users\kodokeの世界\Desktop\HAL\VisualSutdio\就職作品\個人製作\FindWork\就職作品プロジェクト\02_ResourceFile\Game.h(121,1): error C2760: 構文エラー: '}' は予期しないエラーでした。';' が必要です
+  (ソース ファイル '/02_ResourceFile/ObjectFile/Skydome.cpp' をコンパイルしています)
+      C:\Users\kodokeの世界\Desktop\HAL\VisualSutdio\就職作品\個人製作\FindWork\就職作品プロジェクト\02_ResourceFile\Game.h(104,21):
+      コンパイラでのこの診断により関数 'std::shared_ptr<_Ty> Game::AddObject(Args &&...)' が生成されました。
+  
+C:\Users\kodokeの世界\Desktop\HAL\VisualSutdio\就職作品\個人製作\FindWork\就職作品プロジェクト\02_ResourceFile\Game.h(129,2): error C2447: '{': 対応する関数ヘッダーがありません (旧形式の仮引数リスト?)
+  (ソース ファイル '/02_ResourceFile/ObjectFile/Sphere.cpp' をコンパイルしています)
+  
+C:\Users\kodokeの世界\Desktop\HAL\VisualSutdio\就職作品\個人製作\FindWork\就職作品プロジェクト\02_ResourceFile\Game.h(127,2): error C2059: 構文エラー: '<L_GRAMMAR_template_head_l>'
+  (ソース ファイル '/02_ResourceFile/ObjectFile/Skydome.cpp' をコンパイルしています)
+  
+C:\Users\kodokeの世界\Desktop\HAL\VisualSutdio\就職作品\個人製作\FindWork\就職作品プロジェクト\02_ResourceFile\Game.h(129,2): error C2143: 構文エラー: ';' が '{' の前にありません。
+  (ソース ファイル '/02_ResourceFile/ObjectFile/Skydome.cpp' をコンパイルしています)
+  
+C:\Users\kodokeの世界\Desktop\HAL\VisualSutdio\就職作品\個人製作\FindWork\就職作品プロジェクト\02_ResourceFile\Game.h(139,1): error C2059: 構文エラー: '}'
+  (ソース ファイル '/02_ResourceFile/ObjectFile/Sphere.cpp' をコンパイルしています)
+  
+C:\Users\kodokeの世界\Desktop\HAL\VisualSutdio\就職作品\個人製作\FindWork\就職作品プロジェクト\02_ResourceFile\Game.h(139,1): error C2143: 構文エラー: ';' が '}' の前にありません。
+  (ソース ファイル '/02_ResourceFile/ObjectFile/Sphere.cpp' をコンパイルしています)
+  
+C:\Users\kodokeの世界\Desktop\HAL\VisualSutdio\就職作品\個人製作\FindWork\就職作品プロジェクト\02_ResourceFile\Game.h(129,2): error C2447: '{': 対応する関数ヘッダーがありません (旧形式の仮引数リスト?)
+  (ソース ファイル '/02_ResourceFile/ObjectFile/Skydome.cpp' をコンパイルしています)
+  
+C:\Users\kodokeの世界\Desktop\HAL\VisualSutdio\就職作品\個人製作\FindWork\就職作品プロジェクト\02_ResourceFile\Game.h(139,1): error C2059: 構文エラー: '}'
+  (ソース ファイル '/02_ResourceFile/ObjectFile/Skydome.cpp' をコンパイルしています)
+  
+C:\Users\kodokeの世界\Desktop\HAL\VisualSutdio\就職作品\個人製作\FindWork\就職作品プロジェクト\02_ResourceFile\Game.h(139,1): error C2143: 構文エラー: ';' が '}' の前にありません。
+  (ソース ファイル '/02_ResourceFile/ObjectFile/Skydome.cpp' をコンパイルしています)
+  
+C:\Users\kodokeの世界\Desktop\HAL\VisualSutdio\就職作品\個人製作\FindWork\就職作品プロジェクト\02_ResourceFile\Game.h(121,1): error C2059: 構文エラー: ')'
+  (ソース ファイル '/02_ResourceFile/ObjectFile/Cube.cpp' をコンパイルしています)
+  
+C:\Users\kodokeの世界\Desktop\HAL\VisualSutdio\就職作品\個人製作\FindWork\就職作品プロジェクト\02_ResourceFile\Game.h(122,3): error C3927: '->': 後続の戻り値の型は、関数以外の宣言子の後に許可されていません
+  (ソース ファイル '/02_ResourceFile/ObjectFile/Cube.cpp' をコンパイルしています)
+  
+C:\Users\kodokeの世界\Desktop\HAL\VisualSutdio\就職作品\個人製作\FindWork\就職作品プロジェクト\02_ResourceFile\Game.h(122,7): error C3613: '->' の後に戻り型が指定されていません ('int' と見なされます)
+  (ソース ファイル '/02_ResourceFile/ObjectFile/Cube.cpp' をコンパイルしています)
+  
+C:\Users\kodokeの世界\Desktop\HAL\VisualSutdio\就職作品\個人製作\FindWork\就職作品プロジェクト\02_ResourceFile\Game.h(122,7): error C3646: 'Initialize': 不明なオーバーライド指定子です
+  (ソース ファイル '/02_ResourceFile/ObjectFile/Cube.cpp' をコンパイルしています)
+  
+C:\Users\kodokeの世界\Desktop\HAL\VisualSutdio\就職作品\個人製作\FindWork\就職作品プロジェクト\02_ResourceFile\Game.h(122,17): error C2059: 構文エラー: '('
+  (ソース ファイル '/02_ResourceFile/ObjectFile/Cube.cpp' をコンパイルしています)
+  
+C:\Users\kodokeの世界\Desktop\HAL\VisualSutdio\就職作品\個人製作\FindWork\就職作品プロジェクト\02_ResourceFile\Game.h(122,19): error C2238: ';' の前に無効なトークンがあります。
+  (ソース ファイル '/02_ResourceFile/ObjectFile/Cube.cpp' をコンパイルしています)
+  
+C:\Users\kodokeの世界\Desktop\HAL\VisualSutdio\就職作品\個人製作\FindWork\就職作品プロジェクト\02_ResourceFile\Game.h(123,3): error C2059: 構文エラー: 'return'
+  (ソース ファイル '/02_ResourceFile/ObjectFile/Cube.cpp' をコンパイルしています)
+  
+C:\Users\kodokeの世界\Desktop\HAL\VisualSutdio\就職作品\個人製作\FindWork\就職作品プロジェクト\02_ResourceFile\Game.h(123,12): error C2238: ';' の前に無効なトークンがあります。
+  (ソース ファイル '/02_ResourceFile/ObjectFile/Cube.cpp' をコンパイルしています)
+  
+C:\Users\kodokeの世界\Desktop\HAL\VisualSutdio\就職作品\個人製作\FindWork\就職作品プロジェクト\02_ResourceFile\Game.h(121,1): error C2760: 構文エラー: '}' は予期しないエラーでした。';' が必要です
+  (ソース ファイル '/02_ResourceFile/ObjectFile/Cube.cpp' をコンパイルしています)
+      C:\Users\kodokeの世界\Desktop\HAL\VisualSutdio\就職作品\個人製作\FindWork\就職作品プロジェクト\02_ResourceFile\Game.h(104,21):
+      コンパイラでのこの診断により関数 'std::shared_ptr<_Ty> Game::AddObject(Args &&...)' が生成されました。
+  
+C:\Users\kodokeの世界\Desktop\HAL\VisualSutdio\就職作品\個人製作\FindWork\就職作品プロジェクト\02_ResourceFile\Game.h(127,2): error C2059: 構文エラー: '<L_GRAMMAR_template_head_l>'
+  (ソース ファイル '/02_ResourceFile/ObjectFile/Cube.cpp' をコンパイルしています)
+  
+C:\Users\kodokeの世界\Desktop\HAL\VisualSutdio\就職作品\個人製作\FindWork\就職作品プロジェクト\02_ResourceFile\Game.h(129,2): error C2143: 構文エラー: ';' が '{' の前にありません。
+  (ソース ファイル '/02_ResourceFile/ObjectFile/Cube.cpp' をコンパイルしています)
+  
+C:\Users\kodokeの世界\Desktop\HAL\VisualSutdio\就職作品\個人製作\FindWork\就職作品プロジェクト\02_ResourceFile\Game.h(129,2): error C2447: '{': 対応する関数ヘッダーがありません (旧形式の仮引数リスト?)
+  (ソース ファイル '/02_ResourceFile/ObjectFile/Cube.cpp' をコンパイルしています)
+  
+C:\Users\kodokeの世界\Desktop\HAL\VisualSutdio\就職作品\個人製作\FindWork\就職作品プロジェクト\02_ResourceFile\Game.h(139,1): error C2059: 構文エラー: '}'
+  (ソース ファイル '/02_ResourceFile/ObjectFile/Cube.cpp' をコンパイルしています)
+  
+C:\Users\kodokeの世界\Desktop\HAL\VisualSutdio\就職作品\個人製作\FindWork\就職作品プロジェクト\02_ResourceFile\Game.h(139,1): error C2143: 構文エラー: ';' が '}' の前にありません。
+  (ソース ファイル '/02_ResourceFile/ObjectFile/Cube.cpp' をコンパイルしています)
+  
+C:\Users\kodokeの世界\Desktop\HAL\VisualSutdio\就職作品\個人製作\FindWork\就職作品プロジェクト\02_ResourceFile\Game.h(121,1): error C2059: 構文エラー: ')'
+  (ソース ファイル '/02_ResourceFile/SceneFile/SelectScene.cpp' をコンパイルしています)
+  
+C:\Users\kodokeの世界\Desktop\HAL\VisualSutdio\就職作品\個人製作\FindWork\就職作品プロジェクト\02_ResourceFile\Game.h(122,3): error C3927: '->': 後続の戻り値の型は、関数以外の宣言子の後に許可されていません
+  (ソース ファイル '/02_ResourceFile/SceneFile/SelectScene.cpp' をコンパイルしています)
+  
+C:\Users\kodokeの世界\Desktop\HAL\VisualSutdio\就職作品\個人製作\FindWork\就職作品プロジェクト\02_ResourceFile\Game.h(122,7): error C3613: '->' の後に戻り型が指定されていません ('int' と見なされます)
+  (ソース ファイル '/02_ResourceFile/SceneFile/SelectScene.cpp' をコンパイルしています)
+  
+C:\Users\kodokeの世界\Desktop\HAL\VisualSutdio\就職作品\個人製作\FindWork\就職作品プロジェクト\02_ResourceFile\Game.h(122,7): error C3646: 'Initialize': 不明なオーバーライド指定子です
+  (ソース ファイル '/02_ResourceFile/SceneFile/SelectScene.cpp' をコンパイルしています)
+  
+C:\Users\kodokeの世界\Desktop\HAL\VisualSutdio\就職作品\個人製作\FindWork\就職作品プロジェクト\02_ResourceFile\Game.h(122,17): error C2059: 構文エラー: '('
+  (ソース ファイル '/02_ResourceFile/SceneFile/SelectScene.cpp' をコンパイルしています)
+  
+C:\Users\kodokeの世界\Desktop\HAL\VisualSutdio\就職作品\個人製作\FindWork\就職作品プロジェクト\02_ResourceFile\Game.h(122,19): error C2238: ';' の前に無効なトークンがあります。
+  (ソース ファイル '/02_ResourceFile/SceneFile/SelectScene.cpp' をコンパイルしています)
+  
+C:\Users\kodokeの世界\Desktop\HAL\VisualSutdio\就職作品\個人製作\FindWork\就職作品プロジェクト\02_ResourceFile\Game.h(123,3): error C2059: 構文エラー: 'return'
+  (ソース ファイル '/02_ResourceFile/SceneFile/SelectScene.cpp' をコンパイルしています)
+  
+C:\Users\kodokeの世界\Desktop\HAL\VisualSutdio\就職作品\個人製作\FindWork\就職作品プロジェクト\02_ResourceFile\Game.h(123,12): error C2238: ';' の前に無効なトークンがあります。
+  (ソース ファイル '/02_ResourceFile/SceneFile/SelectScene.cpp' をコンパイルしています)
+  
+C:\Users\kodokeの世界\Desktop\HAL\VisualSutdio\就職作品\個人製作\FindWork\就職作品プロジェクト\02_ResourceFile\Game.h(121,1): error C2760: 構文エラー: '}' は予期しないエラーでした。';' が必要です
+  (ソース ファイル '/02_ResourceFile/SceneFile/SelectScene.cpp' をコンパイルしています)
+      C:\Users\kodokeの世界\Desktop\HAL\VisualSutdio\就職作品\個人製作\FindWork\就職作品プロジェクト\02_ResourceFile\Game.h(104,21):
+      コンパイラでのこの診断により関数 'std::shared_ptr<_Ty> Game::AddObject(Args &&...)' が生成されました。
+  
+C:\Users\kodokeの世界\Desktop\HAL\VisualSutdio\就職作品\個人製作\FindWork\就職作品プロジェクト\02_ResourceFile\Game.h(127,2): error C2059: 構文エラー: '<L_GRAMMAR_template_head_l>'
+  (ソース ファイル '/02_ResourceFile/SceneFile/SelectScene.cpp' をコンパイルしています)
+  
+C:\Users\kodokeの世界\Desktop\HAL\VisualSutdio\就職作品\個人製作\FindWork\就職作品プロジェクト\02_ResourceFile\Game.h(129,2): error C2143: 構文エラー: ';' が '{' の前にありません。
+  (ソース ファイル '/02_ResourceFile/SceneFile/SelectScene.cpp' をコンパイルしています)
+  
+C:\Users\kodokeの世界\Desktop\HAL\VisualSutdio\就職作品\個人製作\FindWork\就職作品プロジェクト\02_ResourceFile\Game.h(129,2): error C2447: '{': 対応する関数ヘッダーがありません (旧形式の仮引数リスト?)
+  (ソース ファイル '/02_ResourceFile/SceneFile/SelectScene.cpp' をコンパイルしています)
+  
+C:\Users\kodokeの世界\Desktop\HAL\VisualSutdio\就職作品\個人製作\FindWork\就職作品プロジェクト\02_ResourceFile\Game.h(139,1): error C2059: 構文エラー: '}'
+  (ソース ファイル '/02_ResourceFile/SceneFile/SelectScene.cpp' をコンパイルしています)
+  
+C:\Users\kodokeの世界\Desktop\HAL\VisualSutdio\就職作品\個人製作\FindWork\就職作品プロジェクト\02_ResourceFile\Game.h(139,1): error C2143: 構文エラー: ';' が '}' の前にありません。
+  (ソース ファイル '/02_ResourceFile/SceneFile/SelectScene.cpp' をコンパイルしています)
+  
+C:\Users\kodokeの世界\Desktop\HAL\VisualSutdio\就職作品\個人製作\FindWork\就職作品プロジェクト\02_ResourceFile\Game.h(121,1): error C2059: 構文エラー: ')'
+  (ソース ファイル '/02_ResourceFile/SceneFile/TitleScene.cpp' をコンパイルしています)
+  
+C:\Users\kodokeの世界\Desktop\HAL\VisualSutdio\就職作品\個人製作\FindWork\就職作品プロジェクト\02_ResourceFile\Game.h(122,3): error C3927: '->': 後続の戻り値の型は、関数以外の宣言子の後に許可されていません
+  (ソース ファイル '/02_ResourceFile/SceneFile/TitleScene.cpp' をコンパイルしています)
+  
+C:\Users\kodokeの世界\Desktop\HAL\VisualSutdio\就職作品\個人製作\FindWork\就職作品プロジェクト\02_ResourceFile\Game.h(122,7): error C3613: '->' の後に戻り型が指定されていません ('int' と見なされます)
+  (ソース ファイル '/02_ResourceFile/SceneFile/TitleScene.cpp' をコンパイルしています)
+  
+C:\Users\kodokeの世界\Desktop\HAL\VisualSutdio\就職作品\個人製作\FindWork\就職作品プロジェクト\02_ResourceFile\Game.h(122,7): error C3646: 'Initialize': 不明なオーバーライド指定子です
+  (ソース ファイル '/02_ResourceFile/SceneFile/TitleScene.cpp' をコンパイルしています)
+  
+C:\Users\kodokeの世界\Desktop\HAL\VisualSutdio\就職作品\個人製作\FindWork\就職作品プロジェクト\02_ResourceFile\Game.h(122,17): error C2059: 構文エラー: '('
+  (ソース ファイル '/02_ResourceFile/SceneFile/TitleScene.cpp' をコンパイルしています)
+  
+C:\Users\kodokeの世界\Desktop\HAL\VisualSutdio\就職作品\個人製作\FindWork\就職作品プロジェクト\02_ResourceFile\Game.h(122,19): error C2238: ';' の前に無効なトークンがあります。
+  (ソース ファイル '/02_ResourceFile/SceneFile/TitleScene.cpp' をコンパイルしています)
+  
+C:\Users\kodokeの世界\Desktop\HAL\VisualSutdio\就職作品\個人製作\FindWork\就職作品プロジェクト\02_ResourceFile\Game.h(123,3): error C2059: 構文エラー: 'return'
+  (ソース ファイル '/02_ResourceFile/SceneFile/TitleScene.cpp' をコンパイルしています)
+  
+C:\Users\kodokeの世界\Desktop\HAL\VisualSutdio\就職作品\個人製作\FindWork\就職作品プロジェクト\02_ResourceFile\Game.h(123,12): error C2238: ';' の前に無効なトークンがあります。
+  (ソース ファイル '/02_ResourceFile/SceneFile/TitleScene.cpp' をコンパイルしています)
+  
+C:\Users\kodokeの世界\Desktop\HAL\VisualSutdio\就職作品\個人製作\FindWork\就職作品プロジェクト\02_ResourceFile\Game.h(121,1): error C2059: 構文エラー: ')'
+  (ソース ファイル '/02_ResourceFile/SceneFile/TransScene.cpp' をコンパイルしています)
+  
+C:\Users\kodokeの世界\Desktop\HAL\VisualSutdio\就職作品\個人製作\FindWork\就職作品プロジェクト\02_ResourceFile\Game.h(122,3): error C3927: '->': 後続の戻り値の型は、関数以外の宣言子の後に許可されていません
+  (ソース ファイル '/02_ResourceFile/SceneFile/TransScene.cpp' をコンパイルしています)
+  
+C:\Users\kodokeの世界\Desktop\HAL\VisualSutdio\就職作品\個人製作\FindWork\就職作品プロジェクト\02_ResourceFile\Game.h(122,7): error C3613: '->' の後に戻り型が指定されていません ('int' と見なされます)
+  (ソース ファイル '/02_ResourceFile/SceneFile/TransScene.cpp' をコンパイルしています)
+  
+C:\Users\kodokeの世界\Desktop\HAL\VisualSutdio\就職作品\個人製作\FindWork\就職作品プロジェクト\02_ResourceFile\Game.h(122,7): error C3646: 'Initialize': 不明なオーバーライド指定子です
+  (ソース ファイル '/02_ResourceFile/SceneFile/TransScene.cpp' をコンパイルしています)
+  
+C:\Users\kodokeの世界\Desktop\HAL\VisualSutdio\就職作品\個人製作\FindWork\就職作品プロジェクト\02_ResourceFile\Game.h(122,17): error C2059: 構文エラー: '('
+  (ソース ファイル '/02_ResourceFile/SceneFile/TransScene.cpp' をコンパイルしています)
+  
+C:\Users\kodokeの世界\Desktop\HAL\VisualSutdio\就職作品\個人製作\FindWork\就職作品プロジェクト\02_ResourceFile\Game.h(122,19): error C2238: ';' の前に無効なトークンがあります。
+  (ソース ファイル '/02_ResourceFile/SceneFile/TransScene.cpp' をコンパイルしています)
+  
+C:\Users\kodokeの世界\Desktop\HAL\VisualSutdio\就職作品\個人製作\FindWork\就職作品プロジェクト\02_ResourceFile\Game.h(123,3): error C2059: 構文エラー: 'return'
+  (ソース ファイル '/02_ResourceFile/SceneFile/TransScene.cpp' をコンパイルしています)
+  
+C:\Users\kodokeの世界\Desktop\HAL\VisualSutdio\就職作品\個人製作\FindWork\就職作品プロジェクト\02_ResourceFile\Game.h(123,12): error C2238: ';' の前に無効なトークンがあります。
+  (ソース ファイル '/02_ResourceFile/SceneFile/TransScene.cpp' をコンパイルしています)
+  
+C:\Users\kodokeの世界\Desktop\HAL\VisualSutdio\就職作品\個人製作\FindWork\就職作品プロジェクト\02_ResourceFile\Game.h(121,1): error C2760: 構文エラー: '}' は予期しないエラーでした。';' が必要です
+  (ソース ファイル '/02_ResourceFile/SceneFile/TitleScene.cpp' をコンパイルしています)
+      C:\Users\kodokeの世界\Desktop\HAL\VisualSutdio\就職作品\個人製作\FindWork\就職作品プロジェクト\02_ResourceFile\Game.h(104,21):
+      コンパイラでのこの診断により関数 'std::shared_ptr<_Ty> Game::AddObject(Args &&...)' が生成されました。
+  
+C:\Users\kodokeの世界\Desktop\HAL\VisualSutdio\就職作品\個人製作\FindWork\就職作品プロジェクト\02_ResourceFile\Game.h(127,2): error C2059: 構文エラー: '<L_GRAMMAR_template_head_l>'
+  (ソース ファイル '/02_ResourceFile/SceneFile/TitleScene.cpp' をコンパイルしています)
+  
+C:\Users\kodokeの世界\Desktop\HAL\VisualSutdio\就職作品\個人製作\FindWork\就職作品プロジェクト\02_ResourceFile\Game.h(129,2): error C2143: 構文エラー: ';' が '{' の前にありません。
+  (ソース ファイル '/02_ResourceFile/SceneFile/TitleScene.cpp' をコンパイルしています)
+  
+C:\Users\kodokeの世界\Desktop\HAL\VisualSutdio\就職作品\個人製作\FindWork\就職作品プロジェクト\02_ResourceFile\Game.h(129,2): error C2447: '{': 対応する関数ヘッダーがありません (旧形式の仮引数リスト?)
+  (ソース ファイル '/02_ResourceFile/SceneFile/TitleScene.cpp' をコンパイルしています)
+  
+C:\Users\kodokeの世界\Desktop\HAL\VisualSutdio\就職作品\個人製作\FindWork\就職作品プロジェクト\02_ResourceFile\Game.h(139,1): error C2059: 構文エラー: '}'
+  (ソース ファイル '/02_ResourceFile/SceneFile/TitleScene.cpp' をコンパイルしています)
+  
+C:\Users\kodokeの世界\Desktop\HAL\VisualSutdio\就職作品\個人製作\FindWork\就職作品プロジェクト\02_ResourceFile\Game.h(121,1): error C2760: 構文エラー: '}' は予期しないエラーでした。';' が必要です
+  (ソース ファイル '/02_ResourceFile/SceneFile/TransScene.cpp' をコンパイルしています)
+      C:\Users\kodokeの世界\Desktop\HAL\VisualSutdio\就職作品\個人製作\FindWork\就職作品プロジェクト\02_ResourceFile\Game.h(104,21):
+      コンパイラでのこの診断により関数 'std::shared_ptr<_Ty> Game::AddObject(Args &&...)' が生成されました。
+  
+C:\Users\kodokeの世界\Desktop\HAL\VisualSutdio\就職作品\個人製作\FindWork\就職作品プロジェクト\02_ResourceFile\Game.h(139,1): error C2143: 構文エラー: ';' が '}' の前にありません。
+  (ソース ファイル '/02_ResourceFile/SceneFile/TitleScene.cpp' をコンパイルしています)
+  
+C:\Users\kodokeの世界\Desktop\HAL\VisualSutdio\就職作品\個人製作\FindWork\就職作品プロジェクト\02_ResourceFile\Game.h(127,2): error C2059: 構文エラー: '<L_GRAMMAR_template_head_l>'
+  (ソース ファイル '/02_ResourceFile/SceneFile/TransScene.cpp' をコンパイルしています)
+  
+C:\Users\kodokeの世界\Desktop\HAL\VisualSutdio\就職作品\個人製作\FindWork\就職作品プロジェクト\02_ResourceFile\Game.h(129,2): error C2143: 構文エラー: ';' が '{' の前にありません。
+  (ソース ファイル '/02_ResourceFile/SceneFile/TransScene.cpp' をコンパイルしています)
+  
+C:\Users\kodokeの世界\Desktop\HAL\VisualSutdio\就職作品\個人製作\FindWork\就職作品プロジェクト\02_ResourceFile\Game.h(129,2): error C2447: '{': 対応する関数ヘッダーがありません (旧形式の仮引数リスト?)
+  (ソース ファイル '/02_ResourceFile/SceneFile/TransScene.cpp' をコンパイルしています)
+  
+C:\Users\kodokeの世界\Desktop\HAL\VisualSutdio\就職作品\個人製作\FindWork\就職作品プロジェクト\02_ResourceFile\Game.h(139,1): error C2059: 構文エラー: '}'
+  (ソース ファイル '/02_ResourceFile/SceneFile/TransScene.cpp' をコンパイルしています)
+  
+C:\Users\kodokeの世界\Desktop\HAL\VisualSutdio\就職作品\個人製作\FindWork\就職作品プロジェクト\02_ResourceFile\Game.h(139,1): error C2143: 構文エラー: ';' が '}' の前にありません。
+  (ソース ファイル '/02_ResourceFile/SceneFile/TransScene.cpp' をコンパイルしています)
+  
+C:\Users\kodokeの世界\Desktop\HAL\VisualSutdio\就職作品\個人製作\FindWork\就職作品プロジェクト\02_ResourceFile\Game.h(121,1): error C2059: 構文エラー: ')'
+  (ソース ファイル '/02_ResourceFile/SceneFile/Transition/Fade.cpp' をコンパイルしています)
+  
+C:\Users\kodokeの世界\Desktop\HAL\VisualSutdio\就職作品\個人製作\FindWork\就職作品プロジェクト\02_ResourceFile\Game.h(122,3): error C3927: '->': 後続の戻り値の型は、関数以外の宣言子の後に許可されていません
+  (ソース ファイル '/02_ResourceFile/SceneFile/Transition/Fade.cpp' をコンパイルしています)
+  
+C:\Users\kodokeの世界\Desktop\HAL\VisualSutdio\就職作品\個人製作\FindWork\就職作品プロジェクト\02_ResourceFile\Game.h(122,7): error C3613: '->' の後に戻り型が指定されていません ('int' と見なされます)
+  (ソース ファイル '/02_ResourceFile/SceneFile/Transition/Fade.cpp' をコンパイルしています)
+  
+C:\Users\kodokeの世界\Desktop\HAL\VisualSutdio\就職作品\個人製作\FindWork\就職作品プロジェクト\02_ResourceFile\Game.h(122,7): error C3646: 'Initialize': 不明なオーバーライド指定子です
+  (ソース ファイル '/02_ResourceFile/SceneFile/Transition/Fade.cpp' をコンパイルしています)
+  
+C:\Users\kodokeの世界\Desktop\HAL\VisualSutdio\就職作品\個人製作\FindWork\就職作品プロジェクト\02_ResourceFile\Game.h(122,17): error C2059: 構文エラー: '('
+  (ソース ファイル '/02_ResourceFile/SceneFile/Transition/Fade.cpp' をコンパイルしています)
+  
+C:\Users\kodokeの世界\Desktop\HAL\VisualSutdio\就職作品\個人製作\FindWork\就職作品プロジェクト\02_ResourceFile\Game.h(122,19): error C2238: ';' の前に無効なトークンがあります。
+  (ソース ファイル '/02_ResourceFile/SceneFile/Transition/Fade.cpp' をコンパイルしています)
+  
+C:\Users\kodokeの世界\Desktop\HAL\VisualSutdio\就職作品\個人製作\FindWork\就職作品プロジェクト\02_ResourceFile\Game.h(123,3): error C2059: 構文エラー: 'return'
+  (ソース ファイル '/02_ResourceFile/SceneFile/Transition/Fade.cpp' をコンパイルしています)
+  
+C:\Users\kodokeの世界\Desktop\HAL\VisualSutdio\就職作品\個人製作\FindWork\就職作品プロジェクト\02_ResourceFile\Game.h(123,12): error C2238: ';' の前に無効なトークンがあります。
+  (ソース ファイル '/02_ResourceFile/SceneFile/Transition/Fade.cpp' をコンパイルしています)
+  
+C:\Users\kodokeの世界\Desktop\HAL\VisualSutdio\就職作品\個人製作\FindWork\就職作品プロジェクト\02_ResourceFile\Game.h(121,1): error C2760: 構文エラー: '}' は予期しないエラーでした。';' が必要です
+  (ソース ファイル '/02_ResourceFile/SceneFile/Transition/Fade.cpp' をコンパイルしています)
+      C:\Users\kodokeの世界\Desktop\HAL\VisualSutdio\就職作品\個人製作\FindWork\就職作品プロジェクト\02_ResourceFile\Game.h(104,21):
+      コンパイラでのこの診断により関数 'std::shared_ptr<_Ty> Game::AddObject(Args &&...)' が生成されました。
+  
+C:\Users\kodokeの世界\Desktop\HAL\VisualSutdio\就職作品\個人製作\FindWork\就職作品プロジェクト\02_ResourceFile\Game.h(127,2): error C2059: 構文エラー: '<L_GRAMMAR_template_head_l>'
+  (ソース ファイル '/02_ResourceFile/SceneFile/Transition/Fade.cpp' をコンパイルしています)
+  
+C:\Users\kodokeの世界\Desktop\HAL\VisualSutdio\就職作品\個人製作\FindWork\就職作品プロジェクト\02_ResourceFile\Game.h(129,2): error C2143: 構文エラー: ';' が '{' の前にありません。
+  (ソース ファイル '/02_ResourceFile/SceneFile/Transition/Fade.cpp' をコンパイルしています)
+  
+C:\Users\kodokeの世界\Desktop\HAL\VisualSutdio\就職作品\個人製作\FindWork\就職作品プロジェクト\02_ResourceFile\Game.h(129,2): error C2447: '{': 対応する関数ヘッダーがありません (旧形式の仮引数リスト?)
+  (ソース ファイル '/02_ResourceFile/SceneFile/Transition/Fade.cpp' をコンパイルしています)
+  
+C:\Users\kodokeの世界\Desktop\HAL\VisualSutdio\就職作品\個人製作\FindWork\就職作品プロジェクト\02_ResourceFile\Game.h(139,1): error C2059: 構文エラー: '}'
+  (ソース ファイル '/02_ResourceFile/SceneFile/Transition/Fade.cpp' をコンパイルしています)
+  
+C:\Users\kodokeの世界\Desktop\HAL\VisualSutdio\就職作品\個人製作\FindWork\就職作品プロジェクト\02_ResourceFile\Game.h(139,1): error C2143: 構文エラー: ';' が '}' の前にありません。
+  (ソース ファイル '/02_ResourceFile/SceneFile/Transition/Fade.cpp' をコンパイルしています)
+  
+C:\Users\kodokeの世界\Desktop\HAL\VisualSutdio\就職作品\個人製作\FindWork\就職作品プロジェクト\02_ResourceFile\Game.h(121,1): error C2059: 構文エラー: ')'
+  (ソース ファイル '/02_ResourceFile/Square.cpp' をコンパイルしています)
+  
+C:\Users\kodokeの世界\Desktop\HAL\VisualSutdio\就職作品\個人製作\FindWork\就職作品プロジェクト\02_ResourceFile\Game.h(122,3): error C3927: '->': 後続の戻り値の型は、関数以外の宣言子の後に許可されていません
+  (ソース ファイル '/02_ResourceFile/Square.cpp' をコンパイルしています)
+  
+C:\Users\kodokeの世界\Desktop\HAL\VisualSutdio\就職作品\個人製作\FindWork\就職作品プロジェクト\02_ResourceFile\Game.h(122,7): error C3613: '->' の後に戻り型が指定されていません ('int' と見なされます)
+  (ソース ファイル '/02_ResourceFile/Square.cpp' をコンパイルしています)
+  
+C:\Users\kodokeの世界\Desktop\HAL\VisualSutdio\就職作品\個人製作\FindWork\就職作品プロジェクト\02_ResourceFile\Game.h(122,7): error C3646: 'Initialize': 不明なオーバーライド指定子です
+  (ソース ファイル '/02_ResourceFile/Square.cpp' をコンパイルしています)
+  
+C:\Users\kodokeの世界\Desktop\HAL\VisualSutdio\就職作品\個人製作\FindWork\就職作品プロジェクト\02_ResourceFile\Game.h(122,17): error C2059: 構文エラー: '('
+  (ソース ファイル '/02_ResourceFile/Square.cpp' をコンパイルしています)
+  
+C:\Users\kodokeの世界\Desktop\HAL\VisualSutdio\就職作品\個人製作\FindWork\就職作品プロジェクト\02_ResourceFile\Game.h(122,19): error C2238: ';' の前に無効なトークンがあります。
+  (ソース ファイル '/02_ResourceFile/Square.cpp' をコンパイルしています)
+  
+C:\Users\kodokeの世界\Desktop\HAL\VisualSutdio\就職作品\個人製作\FindWork\就職作品プロジェクト\02_ResourceFile\Game.h(123,3): error C2059: 構文エラー: 'return'
+  (ソース ファイル '/02_ResourceFile/Square.cpp' をコンパイルしています)
+  
+C:\Users\kodokeの世界\Desktop\HAL\VisualSutdio\就職作品\個人製作\FindWork\就職作品プロジェクト\02_ResourceFile\Game.h(123,12): error C2238: ';' の前に無効なトークンがあります。
+  (ソース ファイル '/02_ResourceFile/Square.cpp' をコンパイルしています)
+  
+C:\Users\kodokeの世界\Desktop\HAL\VisualSutdio\就職作品\個人製作\FindWork\就職作品プロジェクト\02_ResourceFile\Game.h(121,1): error C2760: 構文エラー: '}' は予期しないエラーでした。';' が必要です
+  (ソース ファイル '/02_ResourceFile/Square.cpp' をコンパイルしています)
+      C:\Users\kodokeの世界\Desktop\HAL\VisualSutdio\就職作品\個人製作\FindWork\就職作品プロジェクト\02_ResourceFile\Game.h(104,21):
+      コンパイラでのこの診断により関数 'std::shared_ptr<_Ty> Game::AddObject(Args &&...)' が生成されました。
+  
+C:\Users\kodokeの世界\Desktop\HAL\VisualSutdio\就職作品\個人製作\FindWork\就職作品プロジェクト\02_ResourceFile\Game.h(127,2): error C2059: 構文エラー: '<L_GRAMMAR_template_head_l>'
+  (ソース ファイル '/02_ResourceFile/Square.cpp' をコンパイルしています)
+  
+C:\Users\kodokeの世界\Desktop\HAL\VisualSutdio\就職作品\個人製作\FindWork\就職作品プロジェクト\02_ResourceFile\Game.h(129,2): error C2143: 構文エラー: ';' が '{' の前にありません。
+  (ソース ファイル '/02_ResourceFile/Square.cpp' をコンパイルしています)
+  
+C:\Users\kodokeの世界\Desktop\HAL\VisualSutdio\就職作品\個人製作\FindWork\就職作品プロジェクト\02_ResourceFile\Game.h(129,2): error C2447: '{': 対応する関数ヘッダーがありません (旧形式の仮引数リスト?)
+  (ソース ファイル '/02_ResourceFile/Square.cpp' をコンパイルしています)
+  
+C:\Users\kodokeの世界\Desktop\HAL\VisualSutdio\就職作品\個人製作\FindWork\就職作品プロジェクト\02_ResourceFile\Game.h(139,1): error C2059: 構文エラー: '}'
+  (ソース ファイル '/02_ResourceFile/Square.cpp' をコンパイルしています)
+  
+C:\Users\kodokeの世界\Desktop\HAL\VisualSutdio\就職作品\個人製作\FindWork\就職作品プロジェクト\02_ResourceFile\Game.h(139,1): error C2143: 構文エラー: ';' が '}' の前にありません。
+  (ソース ファイル '/02_ResourceFile/Square.cpp' をコンパイルしています)
+  

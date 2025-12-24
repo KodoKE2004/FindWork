@@ -62,7 +62,7 @@ void Game::Initialize()
 	instance.m_Camera			 = std::make_unique<Camera>();			// カメラ作成
 	//instance.m_Camera->Initialize();									// カメラの初期化
     instance.m_TransitionTexture = nullptr;								// トランジション用テクスチャ初期化
-
+    instance.m_Theme             = nullptr;								// テーマ管理初期化
 	//		シーンをタイトルシーンに設定
 	Renderer::Initialize();
 	DebugUI::Init(Renderer::GetDevice(), Renderer::GetDeviceContext());	// デバッグUIの初期化
@@ -182,6 +182,8 @@ void Game::Finalize()
 
 	DebugUI::DisposeUI();		// デバッグUIの終了処理
 	instance.DeleteAllObject();	//オブジェクトを全て削除
+	instance.m_TransitionTexture->Finalize();
+	instance.m_Theme->Finalize();
 	Renderer::Finalize();			// レンダラーの終了処理
 
 	instance.m_SceneCurrent.reset();
@@ -213,6 +215,11 @@ Game& Game::GetInstance()
 std::shared_ptr<Scene> Game::GetCurrentScene() const
 {
 	return m_SceneCurrent;
+}
+
+Camera& Game::GetCamera()
+{
+	return *m_Camera.get();
 }
 
 void Game::RegistDebugObject()
@@ -286,7 +293,7 @@ void Game::RegistDebugObject()
 #endif // _DEBUG
 }
 
-void Game::DeleteObject(Object* pt)
+void Game::DeleteObject(std::shared_ptr<Object> pt)
 {
 	auto& instance = GetInstance();
 	if (pt == nullptr) return;
@@ -294,12 +301,13 @@ void Game::DeleteObject(Object* pt)
 	auto& objs = instance.m_GameObjects;
 	auto it = std::find_if(objs.begin(), objs.end(),
 		[pt](const std::unique_ptr<Object>&up) {
-			return up.get() == pt;
+			return up.get() == pt.get();
 		});
 
 	if (it != objs.end())
 	{
-		(*it)->Finalize();
+		it->get()->Finalize();
+        it->reset();
 		objs.erase(it);
 		objs.shrink_to_fit();	
 	}
@@ -313,6 +321,7 @@ void Game::DeleteAllObject()
 	for (auto& o : m_pInstance->m_GameObjects)
 	{
 		o->Finalize();
+        o.reset();
 	}
 
 	instance.m_GameObjects.clear();

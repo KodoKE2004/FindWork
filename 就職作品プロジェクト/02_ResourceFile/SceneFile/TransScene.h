@@ -34,8 +34,8 @@ private:
 	std::unique_ptr<RenderTarget> m_RenderTarget;
 	Microsoft::WRL::ComPtr<ID3D11ShaderResourceView> m_NextSceneSRV;
 
-	SnapshotOverlay* m_OverlayOld  = nullptr;
-	SnapshotOverlay* m_OverlayNext = nullptr;
+	std::shared_ptr<SnapshotOverlay> m_OverlayOld ;
+	std::shared_ptr<SnapshotOverlay> m_OverlayNext;
 
     // タイマー関連
 	float m_Timer	 = 0.0f;

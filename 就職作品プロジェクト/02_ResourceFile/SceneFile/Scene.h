@@ -67,10 +67,10 @@ protected:
     static constexpr float DEFAULT_VOLUME = 0.2f; 
 protected:
 	
-	std::vector<Object*> m_MySceneObjects;
+	std::vector<std::shared_ptr<Object>>		 m_MySceneObjects;
 	std::unordered_map<std::string, AudioConfig> m_AudioList;
 	
-	Skydome* m_Skydome = nullptr;
+	std::shared_ptr<Skydome> m_Skydome = nullptr;
 
 	const int stageCountMax = 5;
 
@@ -96,9 +96,7 @@ public:
 	virtual void Finalize()			= 0;	// 解放処理
 
 	// そのシーンのオブジェクトを定義
-	std::vector<Object*> GetSceneObjects() {
-		return m_MySceneObjects;
-	}
+	std::vector<std::shared_ptr<Object>> GetSceneObjects();
 
 	virtual SCENE_NO GetSceneNo() const = 0;
 

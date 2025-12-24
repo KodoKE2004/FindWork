@@ -10,9 +10,9 @@ class SelectScene : public Scene
 {
 private:
 
-	Square* m_ButtonGamePlay = nullptr;
-	Square* m_ButtonPractice = nullptr;
-    Square* m_Corsor		 = nullptr;
+	std::shared_ptr<Square> m_ButtonGamePlay ;
+	std::shared_ptr<Square> m_ButtonPractice ;
+    std::shared_ptr<Square> m_Corsor		 ;
 
 public:
 	//================================
