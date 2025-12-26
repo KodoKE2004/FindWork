@@ -30,6 +30,12 @@ namespace
         SCENE_NO::GAME_CRUSH
     };
 
+    const char* kStageTheme[3] = {
+        "ThemeAvoid.png",
+        "ThemeHit.png",
+        "ThemeSlice.png"
+    };
+
     constexpr float kStageTransitionDelay = 1.0f;
 
     constexpr uint32_t kLifeParticleCount = 12u;
@@ -121,6 +127,7 @@ void GameSceneWait::Initialize()
         std::shared_ptr<Square> life = instance.AddObject<Square>(instance.GetCamera());
         life->SetTexture(textureMgr->GetTexture("DestroyBullet.png"));
         life->SetPos(lifePosX + ( i * distance), lifePosY, 1.0f);
+        life->SetName("m_life");
         life->SetScale(100.0f, 100.0f, 1.0f);
         life->SetShader("VS_Alpha","PS_Alpha");
         life->SetColor(1.0f, 1.0f, 1.0f, 1.0f);
@@ -150,6 +157,7 @@ void GameSceneWait::Update(float tick)
     // リズムを取る
     // ライフをリズムに合わせて回転させる
     int advancedTicks = m_RelationData.rhythmBeat.Update(tick);
+    advancedTicks = 0;
     if (advancedTicks > 0)
     {
         const int currentBeatIndex = m_RelationData.rhythmBeat.GetBeatIndex();

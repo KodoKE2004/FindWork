@@ -20,14 +20,16 @@ void Theme::Initialize()
 
 void Theme::Update()
 {
-    if(m_isActive){ return; }
+    if(!m_isActive){ 
+        return; 
+    }
 
 
 }
 
 void Theme::Draw()
 {
-    if(m_isActive){ return; }
+    // if(!m_isActive){ return; }
     Square::Draw();
 }
 

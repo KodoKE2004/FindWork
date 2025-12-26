@@ -20,10 +20,12 @@ enum class GAME_PHASE
 };
 
 
+
+
 class GameSceneWait : public Scene
 {
 private:
-	
+
     uint32_t							 m_LifeCount = 4;		// 自分のライフ数
     std::vector<std::shared_ptr<Square>> m_LifeGame;			// ライフのオブジェクト格納用
     std::shared_ptr<ParticleEmitter>	 m_LifeParticleEmitter; // ライフ減少時のパーティクルエミッター
