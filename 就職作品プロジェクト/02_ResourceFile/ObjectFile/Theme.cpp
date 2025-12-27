@@ -25,11 +25,13 @@ void Theme::Update()
     }
 
 
+
+
 }
 
 void Theme::Draw()
 {
-    // if(!m_isActive){ return; }
+    if(!m_isActive){ return; }
     Square::Draw();
 }
 

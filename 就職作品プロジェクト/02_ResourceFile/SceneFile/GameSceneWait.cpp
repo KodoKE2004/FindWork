@@ -3,8 +3,8 @@
 #include "DebugUI.h"
 #include "SceneList.h"
 
+#include <array>
 #include <vector>
-#include <algorithm>
 #include <random>
 #include <cmath>
 
@@ -24,7 +24,66 @@ T RandomChoose(const T& a, const T& b)
 
 namespace
 {
-    std::vector<SCENE_NO> kStageCandidates;
+    struct StageEntry
+    {
+        SCENE_NO scene;
+        void (*transition)();
+    };
+
+    template<class T>
+    void PushGameStage()
+    {
+        ChangeScenePush<T>(WaitToGame);
+    }
+
+    const std::array<StageEntry, 3> kStageEntries = { {
+        { SCENE_NO::GAME_SLICE, &PushGameStage<GameSceneSlice> },
+        { SCENE_NO::GAME_JUMP,  &PushGameStage<GameSceneJump>  },
+        { SCENE_NO::GAME_CRUSH, &PushGameStage<GameSceneCrush> },
+    } };
+
+    std::vector<SCENE_NO> BuildStageCandidates(SCENE_NO excludeScene)
+    {
+        std::vector<SCENE_NO> candidates;
+        candidates.reserve(kStageEntries.size());
+
+        for (const auto& entry : kStageEntries)
+        {
+            if (entry.scene != excludeScene)
+            {
+                candidates.emplace_back(entry.scene);
+            }
+        }
+
+        if (candidates.empty())
+        {
+            for (const auto& entry : kStageEntries)
+            {
+                candidates.emplace_back(entry.scene);
+            }
+        }
+
+        return candidates;
+    }
+
+    SCENE_NO SelectRandomStage(std::mt19937_64& randomEngine, SCENE_NO excludeScene)
+    {
+        const std::vector<SCENE_NO> candidates = BuildStageCandidates(excludeScene);
+        std::uniform_int_distribution<std::size_t> dist(0, candidates.size() - 1);
+        return candidates[dist(randomEngine)];
+    }
+
+    const StageEntry* FindStageEntry(SCENE_NO scene)
+    {
+        for (const auto& entry : kStageEntries)
+        {
+            if (entry.scene == scene)
+            {
+                return &entry;
+            }
+        }
+        return nullptr;
+    }
 
     const char* kStageTheme[3] = {
         "ThemeAvoid.png",
@@ -55,13 +114,7 @@ void GameSceneWait::Initialize()
 
     // 引き渡しデータのシーンの整理
     m_RelationData.oldScene      = m_RelationData.previousScene;
-    m_RelationData.previousScene = SCENE_NO::GAME_WAIT;
-
-    kStageCandidates.clear();
-    kStageCandidates.emplace_back(SCENE_NO::GAME_SLICE);
-    kStageCandidates.emplace_back(SCENE_NO::GAME_JUMP);
-    kStageCandidates.emplace_back(SCENE_NO::GAME_CRUSH);
-    
+    m_RelationData.previousScene = SCENE_NO::GAME_WAIT;    
     
     if (m_RelationData.isClear) {
         Debug::Log("=====  ステージ成功  =====");
@@ -282,42 +335,7 @@ void GameSceneWait::DecrementLife()
 void GameSceneWait::PrepareNextStage()
 {
     // ステージのインデックスを格納
-    SCENE_NO nextScene = SCENE_NO::NONE;
-
-    // 乱数の作成
-    // 初回初期化時は前回の連続するので要素の削除
-    // 全3ステージからランダム選択
-    if (m_IsFirstInitialized ||
-        m_RelationData.oldScene == SCENE_NO::NONE)
-    {
-        nextScene = StageSelectAllRandom();
-    }
-    // oldを見てから2パターンの選択
-    else
-    {
-
-        std::vector<SCENE_NO> candidates;
-        candidates.reserve(kStageCandidates.size());
-
-        for (auto scene : kStageCandidates)
-        {
-            if (scene != m_RelationData.oldScene)
-            {
-                candidates.emplace_back(scene);
-            }
-        }
-
-        if (candidates.empty())
-        {
-            nextScene = StageSelectAllRandom();
-        }
-        else
-        {
-            // ③ 残った候補の中からランダム選択
-            std::uniform_int_distribution<std::size_t> dist(0, candidates.size() - 1);
-            nextScene = candidates[dist(m_RandomEngine)];
-        }
-    }
+    SCENE_NO nextScene = StageSelectAllRandom();
 
     // 次のシーンRelationDataに格納
     m_RelationData.nextScene = nextScene;
@@ -327,8 +345,5 @@ void GameSceneWait::PrepareNextStage()
 
 SCENE_NO GameSceneWait::StageSelectAllRandom()
 {
-    std::uniform_int_distribution<std::size_t> dist(0, kStageCandidates.size() - 1);
-
-    // 候補配列から１つ選んで返す
-    return kStageCandidates[dist(m_RandomEngine)];
+    return SelectRandomStage(m_RandomEngine, m_RelationData.oldScene);
 }
