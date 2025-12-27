@@ -114,7 +114,7 @@ void Game::Initialize()
 
 #endif // _DEBUG
 
-	instance.m_SceneCurrent = std::make_shared<TitleScene>();				// タイトルシーンのインスタンスを生成
+	instance.m_SceneCurrent = std::make_shared<GameSceneWait>();				// タイトルシーンのインスタンスを生成
 	instance.m_SceneCurrent->Initialize();
 }
 

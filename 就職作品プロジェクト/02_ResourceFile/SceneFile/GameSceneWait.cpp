@@ -3,7 +3,7 @@
 #include "DebugUI.h"
 #include "SceneList.h"
 
-#include <array>
+#include <vector>
 #include <algorithm>
 #include <random>
 #include <cmath>
@@ -24,16 +24,18 @@ T RandomChoose(const T& a, const T& b)
 
 namespace
 {
-    constexpr std::array<SCENE_NO, 3> kStageCandidates = {
-        SCENE_NO::GAME_SLICE,
-        SCENE_NO::GAME_JUMP,
-        SCENE_NO::GAME_CRUSH
-    };
+    std::vector<SCENE_NO> kStageCandidates;
 
     const char* kStageTheme[3] = {
         "ThemeAvoid.png",
         "ThemeHit.png",
         "ThemeSlice.png"
+    };
+
+    const NVector3 kThemeScale[3] = {
+        NVector3( 550.0f, 200.0f, 1.0f),
+        NVector3( 546.0f, 223.0f, 1.0f),
+        NVector3( 417.0f, 217.0f, 1.0f),
     };
 
     constexpr float kStageTransitionDelay = 1.0f;
@@ -55,6 +57,12 @@ void GameSceneWait::Initialize()
     m_RelationData.oldScene      = m_RelationData.previousScene;
     m_RelationData.previousScene = SCENE_NO::GAME_WAIT;
 
+    kStageCandidates.clear();
+    kStageCandidates.emplace_back(SCENE_NO::GAME_SLICE);
+    kStageCandidates.emplace_back(SCENE_NO::GAME_JUMP);
+    kStageCandidates.emplace_back(SCENE_NO::GAME_CRUSH);
+    
+    
     if (m_RelationData.isClear) {
         Debug::Log("=====  ステージ成功  =====");
     }
@@ -104,11 +112,6 @@ void GameSceneWait::Initialize()
     m_Skydome->SetRadius(500.0f);
     m_MySceneObjects.emplace_back(m_Skydome);
 
-    m_Theme = instance.AddObject<Theme>(instance.GetCamera());
-    m_Theme->SetName("m_Theme");
-    m_Theme->SetActive(false);
-    m_Theme->SetTexture(textureMgr->GetTexture("Plane.png"));
-    m_MySceneObjects.emplace_back(m_Theme);
 
     // ライフの数だけハートの生成
     const float lifePosX = - 200.0f;
@@ -144,6 +147,13 @@ void GameSceneWait::Initialize()
             life->SetRotate(life->GetRotate().x, life->GetRotate().y, initialTilt);
         }
     }
+
+    m_Theme = instance.AddObject<Theme>(instance.GetCamera());
+    m_Theme->SetName("m_Theme");
+    m_Theme->SetActive(false);
+    m_Theme->SetTexture(textureMgr->GetTexture(kStageTheme[1]));
+    m_Theme->SetScale(kThemeScale[1]);
+    m_MySceneObjects.emplace_back(m_Theme);
 
     // ステージ乱数選択処理   
     PrepareNextStage();
