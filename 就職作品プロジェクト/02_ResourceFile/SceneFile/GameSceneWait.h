@@ -19,9 +19,6 @@ enum class GAME_PHASE
 	NUM
 };
 
-
-
-
 class GameSceneWait : public Scene
 {
 private:

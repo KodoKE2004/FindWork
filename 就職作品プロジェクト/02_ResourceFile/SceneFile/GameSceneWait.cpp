@@ -201,7 +201,7 @@ void GameSceneWait::Initialize()
         }
     }
 
-    m_Theme = instance.AddObject<Theme>(instance.GetCamera());
+    m_Theme = std::make_unique<Theme>(instance.GetCamera());
     m_Theme->SetName("m_Theme");
     m_Theme->SetActive(false);
     m_Theme->SetTexture(textureMgr->GetTexture(kStageTheme[1]));
