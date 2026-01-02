@@ -73,7 +73,7 @@ public:
 	void SetTheme(const std::shared_ptr<Theme>& theme);
 
 	std::shared_ptr<TransitionBase> GetTransitionTexture() const;
-	std::shared_ptr<Theme>			GetTheme() const; 
+	std::shared_ptr<Theme>			GetTheme() ; 
 
     //===============================
 	//			ƒV[ƒ“‚ÌŠÖ˜AŒQ

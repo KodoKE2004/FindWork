@@ -243,12 +243,14 @@ void Game::SetTheme(const std::shared_ptr<Theme>& theme)
 	}
 }
 
-std::shared_ptr<Theme> Game::GetTheme() const
+std::shared_ptr<Theme> Game::GetTheme()
 {
 	auto& instance = GetInstance();
 	
 	if (!m_Theme) {
 		m_Theme = std::make_shared<Theme>(instance.GetCamera());
+		m_Theme->Initialize();
+		m_Theme->SetName("m_Theme");
 	}
 
 	return m_Theme;

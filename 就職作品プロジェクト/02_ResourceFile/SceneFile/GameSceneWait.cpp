@@ -202,12 +202,13 @@ void GameSceneWait::Initialize()
     }
 
     m_Theme = instance.GetTheme();
-    if (!m_Theme)
+    if (m_Theme)
     {
         m_Theme->SetName("m_Theme");
         m_Theme->SetActive(true);
         m_Theme->SetTexture(textureMgr->GetTexture(kStageTheme[1]));
         m_Theme->SetScale(kThemeScale[1]);
+        m_Theme->SetPos(0.0f,0.0f,0.0f);
     }
 
     // ステージ乱数選択処理   
