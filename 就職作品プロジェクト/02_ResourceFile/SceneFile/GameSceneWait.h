@@ -26,7 +26,6 @@ private:
     uint32_t							 m_LifeCount = 4;		// 自分のライフ数
     std::vector<std::shared_ptr<Square>> m_LifeGame;			// ライフのオブジェクト格納用
     std::shared_ptr<ParticleEmitter>	 m_LifeParticleEmitter; // ライフ減少時のパーティクルエミッター
-    std::shared_ptr<Theme>				 m_Theme;				// お題表示用テーマオブジェクト
 
     float m_Tick = 0.0f;
     

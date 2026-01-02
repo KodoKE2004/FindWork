@@ -201,12 +201,14 @@ void GameSceneWait::Initialize()
         }
     }
 
-    m_Theme = std::make_unique<Theme>(instance.GetCamera());
-    m_Theme->SetName("m_Theme");
-    m_Theme->SetActive(false);
-    m_Theme->SetTexture(textureMgr->GetTexture(kStageTheme[1]));
-    m_Theme->SetScale(kThemeScale[1]);
-    m_MySceneObjects.emplace_back(m_Theme);
+    m_Theme = instance.GetTheme();
+    if (!m_Theme)
+    {
+        m_Theme->SetName("m_Theme");
+        m_Theme->SetActive(true);
+        m_Theme->SetTexture(textureMgr->GetTexture(kStageTheme[1]));
+        m_Theme->SetScale(kThemeScale[1]);
+    }
 
     // ステージ乱数選択処理   
     PrepareNextStage();
@@ -233,7 +235,7 @@ void GameSceneWait::Update(float tick)
         // 残り一拍のタイミングでお題提示処理開始
         else if (m_BeatTimer.GetRestBeats() == 1)
         {
-            m_Theme->SetActive(true);
+            // m_Theme->SetActive(true);
         }
         if (advancedTicks % 2 == 1)
         {

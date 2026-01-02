@@ -40,6 +40,11 @@ void Theme::Finalize()
     Square::Finalize();
 }
 
+void Theme::SetActive()
+{   
+    m_isActive = true;
+}
+
 void Theme::SetActive(const bool isActive)
 {
     m_isActive = isActive;

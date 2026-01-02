@@ -17,6 +17,7 @@ public:
     void Draw()		  override;
     void Finalize()	  override;
 
+    void SetActive();
     void SetActive(const bool isActive);
 };
 

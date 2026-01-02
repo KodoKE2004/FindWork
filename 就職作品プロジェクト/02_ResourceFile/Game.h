@@ -70,8 +70,10 @@ public:
 	void SetTransitionTexture(std::shared_ptr<TransitionBase> tex) {
 		m_TransitionTexture = tex;
     }
+	void SetTheme(const std::shared_ptr<Theme>& theme);
 
 	std::shared_ptr<TransitionBase> GetTransitionTexture() const;
+	std::shared_ptr<Theme>			GetTheme() const; 
 
     //===============================
 	//			ƒV[ƒ“‚ÌŠÖ˜AŒQ

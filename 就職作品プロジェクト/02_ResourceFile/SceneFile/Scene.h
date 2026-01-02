@@ -9,7 +9,7 @@
 #include <unordered_map>
 #include <vector>
 
-
+class Theme;
 
 enum class SCENE_NO
 {
@@ -71,6 +71,7 @@ protected:
 	std::unordered_map<std::string, AudioConfig> m_AudioList;
 	
 	std::shared_ptr<Skydome> m_Skydome = nullptr;
+	std::shared_ptr<Theme>	 m_Theme   = nullptr;
 
 	const int stageCountMax = 5;
 
@@ -97,6 +98,12 @@ public:
 
 	// そのシーンのオブジェクトを定義
 	std::vector<std::shared_ptr<Object>> GetSceneObjects();
+	void SetTheme(const std::shared_ptr<Theme>& theme) {
+		m_Theme = theme;
+	}
+	std::shared_ptr<Theme> GetTheme() const {
+		return m_Theme;
+	}
 
 	virtual SCENE_NO GetSceneNo() const = 0;
 

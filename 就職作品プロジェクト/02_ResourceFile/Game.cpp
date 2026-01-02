@@ -8,6 +8,7 @@
 #include "CSVLoader.h"
 
 #include <fstream>
+#include <memory>
 #include <cstdio>
 #include <algorithm>
 #include <cmath>
@@ -146,6 +147,10 @@ void Game::Update(float tick)
 		if(o == nullptr){ continue; }
 		o->Update(); // オブジェクトの更新
 	}
+	if (instance.m_Theme)
+	{
+		instance.m_Theme->Update();
+	}
 	// オーディオマネージャーの更新
 	instance.m_AudioManager->Update();
 #ifdef _DEBUG
@@ -174,6 +179,10 @@ void Game::Draw()
 	if (instance.m_TransitionTexture != nullptr) {
 	    instance.m_TransitionTexture->Draw();
     }
+	if (instance.m_Theme)
+	{
+		instance.m_Theme->Draw();
+	}
 
 	DebugUI::Render();
 	Renderer::Finish();
@@ -205,14 +214,44 @@ void Game::Finalize()
 void Game::SetSceneCurrent(std::shared_ptr<Scene> newScene)
 {
 	auto& instance = GetInstance();
-    instance.m_SceneCurrent = newScene;	// 新しいシーンを設定
 	instance.m_SceneCurrent = std::move(newScene);
+	if (instance.m_SceneCurrent && instance.m_Theme)
+	{
+		instance.m_SceneCurrent->SetTheme(instance.m_Theme);
+	}
 }
 
 void Game::SetSceneNext(std::shared_ptr<Scene> newScene)
 {
 	auto& instance = GetInstance();
-    instance.m_SceneNext = newScene;
+	instance.m_SceneNext = std::move(newScene);
+	if (instance.m_SceneNext && instance.m_Theme)
+	{
+		instance.m_SceneNext->SetTheme(instance.m_Theme);
+	}
+}
+
+void Game::SetTheme(const std::shared_ptr<Theme>& theme)
+{
+	auto& instance = GetInstance();
+	instance.m_Theme = theme;
+	if (instance.m_SceneCurrent) {
+		instance.m_SceneCurrent->SetTheme(theme);
+	}
+	if (instance.m_SceneNext) {
+		instance.m_SceneNext->SetTheme(theme);
+	}
+}
+
+std::shared_ptr<Theme> Game::GetTheme() const
+{
+	auto& instance = GetInstance();
+	
+	if (!m_Theme) {
+		m_Theme = std::make_shared<Theme>(instance.GetCamera());
+	}
+
+	return m_Theme;
 }
 
 Game& Game::GetInstance()
