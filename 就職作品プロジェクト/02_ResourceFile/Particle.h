@@ -1,12 +1,12 @@
 #pragma once
-#include "Square.h"
 #include "Application.h"
+#include "Square.h"
 
+#include <cstdint>
 #include <memory>
 #include <random>
 #include <type_traits>
 #include <vector>
-#include <cstdint>
 
 class ParticleEmitter
 {

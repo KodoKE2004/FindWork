@@ -1,7 +1,7 @@
-#include "GameSceneCrush.h"
-#include "Game.h"
-#include "Collider.h"
 #include "Enemy.h"
+#include "Game.h"
+#include "GameSceneCrush.h"
+#include "Math.h"
 
 using namespace Math::Collider2D;
 

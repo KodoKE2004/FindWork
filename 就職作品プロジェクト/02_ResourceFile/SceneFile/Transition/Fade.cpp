@@ -1,11 +1,11 @@
+#include "Application.h"
 #include "Fade.h"
 #include "Game.h"
 #include "main.h"
-#include "Application.h"
-#include "Collider.h"
+#include "Math.h"
 #include "Renderer.h"
-#include <vector>
 #include <algorithm>
+#include <vector>
 
 Fade::Fade(Camera& cam) : TransitionBase(cam)
 {
@@ -36,10 +36,6 @@ void Fade::Initialize()
     SetScale(static_cast<float>(Renderer::GetScreenWidth()),
              static_cast<float>(Renderer::GetScreenHeight()),
              1.0f);
-
-#ifdef _DEBUG
-    SetPos(ConvertToDebugScreenPosition(GetPos()));
-#endif
 
     std::vector<VERTEX_3D> vertices(4);
     vertices[0].position = NVector3(-0.5f,  0.5f, 0.0f);

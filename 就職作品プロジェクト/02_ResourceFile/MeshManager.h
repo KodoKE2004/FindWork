@@ -1,10 +1,10 @@
 #pragma once
-#include "StaticMesh.h"
 #include "ObjectFile/Model.h"
-#include <vector>
-#include <string>
+#include "StaticMesh.h"
 #include <memory>
+#include <string>
 #include <unordered_map>
+#include <vector>
 
 class MeshManager
 {

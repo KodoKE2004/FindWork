@@ -1,5 +1,5 @@
-#include "main.h"
 #include "Application.h"
+#include "main.h"
 
 //=============================
 //         エントリポイント

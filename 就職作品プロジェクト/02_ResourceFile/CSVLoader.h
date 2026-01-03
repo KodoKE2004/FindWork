@@ -1,12 +1,12 @@
 #pragma once
-#include <fstream>
+#include <cmath>
 #include <filesystem>
+#include <fstream>
 #include <iomanip>
+#include <locale>
+#include <sstream>
 #include <string>
 #include <vector>
-#include <sstream>
-#include <cmath>
-#include <locale>
 
 struct TransformRow {
     std::string id;

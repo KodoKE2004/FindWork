@@ -1,15 +1,15 @@
-#include <cassert>
-#include <cmath>
-#include <imgui.h>
 #include <algorithm>
+#include <cassert>
 #include <cctype>
-#include <fstream>
+#include <cmath>
 #include <filesystem>
+#include <fstream>
+#include <imgui.h>
 #include <sstream>
 #include <unordered_map>
 
+#include "Math.h"
 #include "TransitionBase.h"
-#include "Collider.h"
 #ifdef _DEBUG
 #include "Application.h"
 #include "Renderer.h"
@@ -331,21 +331,6 @@ bool LoadTransitionSettingsFromCsv(const std::string& filePath, std::string& err
 
 	return true;
 }
-
-#ifdef _DEBUG
-NVector3 TransitionBase::ConvertToDebugScreenPosition(const NVector3& position) const
-{
-	const float debugWidth = Renderer::GetScreenWidth();
-	const float debugHeight = Renderer::GetScreenHeight();
-	const float gameWidth = static_cast<float>(Application::GetGameWidth());
-	const float gameHeight = static_cast<float>(Application::GetGameHeight());
-
-	const float offsetX = (debugWidth - gameWidth) * 0.5f;
-	const float offsetY = (debugHeight - gameHeight) * 0.5f;
-
-	return NVector3(position.x + offsetX, position.y - offsetY, position.z);
-}
-#endif
 
 TransitionBase::TransitionBase(Camera& cam) : Object(cam)
 {

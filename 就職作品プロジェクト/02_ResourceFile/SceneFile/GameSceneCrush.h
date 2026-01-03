@@ -1,6 +1,6 @@
 #pragma once
-#include <vector>
 #include "GameSceneExe.h"
+#include <vector>
 
 
 class GameSceneCrush : public GameSceneExe

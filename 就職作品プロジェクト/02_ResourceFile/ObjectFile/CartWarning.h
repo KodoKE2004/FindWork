@@ -1,5 +1,6 @@
 #pragma once
 #include "Square.h"
+
 class CartWarning : public Square
 {
 private:

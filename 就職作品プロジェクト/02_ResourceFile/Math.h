@@ -1,11 +1,11 @@
 #pragma once
+#include <array>
 #include <cmath>
 #include <SimpleMath.h>
-#include <array>
 
-#include "Transform.h"
 #include "Circle.h"
 #include "Square.h"
+#include "Transform.h"
 
 namespace Math
 {

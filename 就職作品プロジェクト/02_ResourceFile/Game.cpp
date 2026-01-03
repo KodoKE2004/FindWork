@@ -1,18 +1,18 @@
+#include "Application.h"
+#include "Audio.h" 
+#include "CSVLoader.h"
+#include "DebugUI.h"
+#include "Fade.h"
 #include "Game.h"
 #include "Renderer.h"
-#include "Application.h"
 #include "SceneList.h"
-#include "DebugUI.h"
-#include "Audio.h" 
-#include "Fade.h"
-#include "CSVLoader.h"
 
-#include <fstream>
-#include <memory>
-#include <cstdio>
 #include <algorithm>
 #include <cmath>
 #include <cstdint>
+#include <cstdio>
+#include <fstream>
+#include <memory>
 #include <string>
 #include <typeinfo>
 
@@ -171,9 +171,6 @@ void Game::Draw()
 	}
 	
 
-	#ifdef _DEBUG
-		Renderer::PresentDebugGameView();
-	#endif
 
 	// TransitionTextureを最後に描く（必ず最前面になる）
 	if (instance.m_TransitionTexture != nullptr) {
@@ -183,6 +180,9 @@ void Game::Draw()
 	{
 		instance.m_Theme->Draw();
 	}
+	#ifdef _DEBUG
+		Renderer::PresentDebugGameView();
+	#endif
 
 	DebugUI::Render();
 	Renderer::Finish();

@@ -1,7 +1,5 @@
 #include "Circle.h"
 
-
-
 Circle::Circle(Camera& cam) : Object(cam)
 {
 }

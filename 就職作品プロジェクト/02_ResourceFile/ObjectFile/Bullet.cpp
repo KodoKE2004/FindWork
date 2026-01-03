@@ -1,5 +1,5 @@
+#include "Game.h"
 #include "Bullet.h"
-#include "../Game.h"
 #include <cmath>
 
 using namespace DirectX::SimpleMath;

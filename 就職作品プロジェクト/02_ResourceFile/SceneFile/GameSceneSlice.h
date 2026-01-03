@@ -1,8 +1,8 @@
 #pragma once
-#include "GameSceneExe.h"
-#include "Square.h"
-#include "Skydome.h"
 #include "Enemy.h"
+#include "GameSceneExe.h"
+#include "Skydome.h"
+#include "Square.h"
 
 class GameSceneSlice : public GameSceneExe
 {

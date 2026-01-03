@@ -1,12 +1,12 @@
 #pragma once
 
 #define _CRT_SECURE_NO_WARNINGS
+#include <assert.h>
+#include <functional>
+#include <locale.h>
 #include <stdio.h>
 #include <string>
-#include <functional>
 #include <windows.h>
-#include <assert.h>
-#include <locale.h>
 
 #pragma warning(push)				//警告設定をスタックに保存
 #pragma warning(disable:4005)		//マクロの再定義の指摘 ( 警告4005 ) を無効化

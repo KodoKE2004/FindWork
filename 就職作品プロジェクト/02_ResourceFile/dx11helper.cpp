@@ -1,6 +1,6 @@
-#include	<vector>
-#include	<string>
 #include	"Dx11helper.h"
+#include	<string>
+#include	<vector>
 
 #pragma comment(lib,"d3dcompiler.lib")
 

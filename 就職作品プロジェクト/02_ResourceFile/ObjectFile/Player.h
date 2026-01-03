@@ -1,7 +1,7 @@
 #pragma once
-#include "Square.h"
 #include "Camera.h"
-#include "Collider.h"
+#include "Math.h"
+#include "Square.h"
 
 struct PlayerAieControlState
 {

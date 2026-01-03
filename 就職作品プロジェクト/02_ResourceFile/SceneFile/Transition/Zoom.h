@@ -1,9 +1,9 @@
 #pragma once
-#include <wrl.h>
 #include <memory>
+#include <wrl.h>
 
-#include "TransitionBase.h"
 #include "Renderer.h"
+#include "TransitionBase.h"
 
 using namespace Microsoft::WRL;
 

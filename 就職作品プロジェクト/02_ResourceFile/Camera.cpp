@@ -1,9 +1,9 @@
-#include "Camera.h"
-#include "Renderer.h"
 #include "Application.h"
-#include "Input.h"
-#include "Game.h"
+#include "Camera.h"
 #include "DebugUI.h"
+#include "Game.h"
+#include "Input.h"
+#include "Renderer.h"
 
 using namespace DirectX::SimpleMath;
 

@@ -1,10 +1,10 @@
 #pragma once
 
-#include <d3d11.h>
-#include <vector>
-#include <string>
-#include <functional>
 #include "Application.h"
+#include <d3d11.h>
+#include <functional>
+#include <string>
+#include <vector>
 
 #include "imgui.h"
 #include "imgui_impl_dx11.h"

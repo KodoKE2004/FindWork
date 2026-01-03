@@ -1,7 +1,7 @@
 #pragma once
-#include	<wrl/client.h>
-#include	<string>
 #include	<d3d11.h>
+#include	<string>
+#include	<wrl/client.h>
 
 using Microsoft::WRL::ComPtr;
 

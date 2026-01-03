@@ -1,6 +1,6 @@
-#include "Texture.h"
-#include "DirectXTex.h"
 #include "Debug.hpp"
+#include "DirectXTex.h"
+#include "Texture.h"
 
 #pragma comment(lib,"Windowscodecs.lib")
 

@@ -1,6 +1,7 @@
-#include "Theme.h"
-#include "Game.h"
 #include "Application.h"
+#include "Game.h"
+#include "Math.h"
+#include "Theme.h"
 
 Theme::Theme(Camera& cam):Square(cam)
 {
@@ -24,6 +25,7 @@ void Theme::Update()
         return; 
     }
 
+    float elapsed = 
 
 
 

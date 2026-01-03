@@ -1,8 +1,8 @@
-#include "Renderer.h"
 #include "Application.h"
 #include "Debug.hpp"
-#include <d3dcompiler.h>
+#include "Renderer.h"
 #include <algorithm>
+#include <d3dcompiler.h>
 
 #pragma comment(lib, "d3dcompiler.lib")
 
@@ -321,6 +321,7 @@ void Renderer::Start()
 		return;
 	}
 #endif
+
 	ID3D11RenderTargetView* rtvs[] = { m_RenderTargetView };
 	m_DeviceContext->OMSetRenderTargets(1, rtvs, m_DepthStencilView);
 	m_DeviceContext->RSSetViewports(1, &m_BackBufferViewport);

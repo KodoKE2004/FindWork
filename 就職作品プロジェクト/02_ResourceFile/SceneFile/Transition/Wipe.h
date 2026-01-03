@@ -1,7 +1,7 @@
 #pragma once
 #include "TransitionBase.h"
-#include <wrl/client.h>
 #include <d3d11.h>
+#include <wrl/client.h>
 
 
 class Wipe : public TransitionBase

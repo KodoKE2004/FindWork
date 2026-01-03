@@ -1,8 +1,8 @@
 #pragma once
 #include "Texture.h"
-#include <unordered_map>
 #include <memory>
 #include <string>
+#include <unordered_map>
 
 class TextureManager
 {

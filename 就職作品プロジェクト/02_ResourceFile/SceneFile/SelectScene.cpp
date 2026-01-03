@@ -1,12 +1,12 @@
 #include"SceneList.h"
 
-#include "Game.h"
-#include "DebugUI.h"
-#include "Square.h"
-#include "ObjectFile/Model.h"
-#include "ObjectFile/Bullet.h"
 #include "Camera.h"
+#include "DebugUI.h"
+#include "Game.h"
 #include "input.h"
+#include "Bullet.h"
+#include "Model.h"
+#include "Square.h"
 
 void SelectScene::Initialize()
 {

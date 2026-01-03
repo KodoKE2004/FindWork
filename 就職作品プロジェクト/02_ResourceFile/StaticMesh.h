@@ -1,14 +1,14 @@
 #pragma once
-#include	<assimp/Importer.hpp>
-#include	<assimp/scene.h>
-#include	<assimp/postprocess.h>
+#include    "Material.h"
+#include    "Mesh.h"
+#include    "Texture.h"
 #include	<assimp/cimport.h>
+#include	<assimp/Importer.hpp>
+#include	<assimp/postprocess.h>
+#include	<assimp/scene.h>
+#include	<memory>
 #include	<string>
 #include	<vector>
-#include	<memory>
-#include    "Texture.h"
-#include    "Mesh.h"
-#include    "Material.h"
 
 class StaticMesh : public Mesh
 {

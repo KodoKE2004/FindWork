@@ -1,9 +1,9 @@
 #include "AudioManager.h"
-#include <fstream>
-#include <filesystem>
 #include <algorithm>
-#include <cstring>
 #include <cmath>
+#include <cstring>
+#include <filesystem>
+#include <fstream>
 
 
 // ========================= AudioManager =========================

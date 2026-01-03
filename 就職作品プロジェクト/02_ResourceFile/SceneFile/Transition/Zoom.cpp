@@ -1,5 +1,5 @@
-#include "Zoom.h"
 #include "Game.h"
+#include "Zoom.h"
 
 Zoom::Zoom(Camera& cam) : TransitionBase(cam)
 {

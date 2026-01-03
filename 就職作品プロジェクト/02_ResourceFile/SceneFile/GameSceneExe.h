@@ -1,9 +1,9 @@
 #pragma once
-#include "Scene.h"
-#include "Square.h"
 #include "Bomber.h"
 #include "Player.h"
 #include "RhythmBeat.h"
+#include "Scene.h"
+#include "Square.h"
 
 namespace
 {

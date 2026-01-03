@@ -1,7 +1,7 @@
-#include "GameSceneJump.h"
-#include "Game.h"
-#include "Collider.h"
 #include "DebugUI.h"
+#include "Game.h"
+#include "GameSceneJump.h"
+#include "Math.h"
 #include <random>
 
 float GameSceneJump::GenerateActivationDelay()

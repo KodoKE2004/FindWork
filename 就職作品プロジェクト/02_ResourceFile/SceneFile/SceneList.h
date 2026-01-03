@@ -2,12 +2,12 @@
 ///
 ///  ゲームで動くScene.hをインクルード
 ///  
-#include "TitleScene.h"
-#include "SelectScene.h"
-#include "GameSceneExe.h"
-#include "GameSceneWait.h"
-#include "GameSceneSlice.h"
 #include "GameSceneCrush.h"
+#include "GameSceneExe.h"
 #include "GameSceneJump.h"
+#include "GameSceneSlice.h"
+#include "GameSceneWait.h"
 #include "ResultScene.h"
+#include "SelectScene.h"
+#include "TitleScene.h"
 

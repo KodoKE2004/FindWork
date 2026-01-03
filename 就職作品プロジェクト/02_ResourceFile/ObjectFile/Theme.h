@@ -7,6 +7,8 @@ class Theme : public Square
 protected:
     bool m_isActive = false;
 
+    float m_Elapsed = 0.0f;
+
 public:
     Theme(Camera& cam);
     ~Theme() = default;
