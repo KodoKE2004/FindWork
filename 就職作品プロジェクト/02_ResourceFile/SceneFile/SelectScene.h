@@ -1,12 +1,11 @@
 #pragma once
 #include "Scene.h"
-#include "Sphere.h"
 #include "Square.h"
+#include "Sphere.h"
 
 #include "Game.h"
-#include <memory>
 #include <vector>
-
+#include <memory>
 class SelectScene : public Scene
 {
 private:

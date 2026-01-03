@@ -1,10 +1,9 @@
 #pragma once
-#include "Renderer.h"
-#include <d3d11.h>
-#include <SimpleMath.h>
 #include <string>
 #include <wrl/client.h>
-
+#include <d3d11.h>
+#include <SimpleMath.h>
+#include "Renderer.h"
 using Microsoft::WRL::ComPtr;
 
 class Texture

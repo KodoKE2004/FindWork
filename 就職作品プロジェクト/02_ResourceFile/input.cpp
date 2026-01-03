@@ -1,5 +1,5 @@
-#include "Application.h"
 #include "input.h"
+#include "Application.h"
 #include "Renderer.h"
 
 POINT Input::m_MousePos = {};

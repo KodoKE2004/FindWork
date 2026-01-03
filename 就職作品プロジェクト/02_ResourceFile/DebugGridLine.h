@@ -1,6 +1,6 @@
 #pragma once
-#include "ShaderManager.h"
 #include "VertexBuffer.h"
+#include "ShaderManager.h"
 #include <wrl/client.h>
 using namespace Microsoft::WRL;
 

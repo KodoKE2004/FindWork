@@ -2,9 +2,9 @@
 
 #include <memory>
 
-#include "Game.h"
-#include "main.h"
 #include "SceneList.h"
+#include "main.h"
+#include "Game.h"
 
 #include "Fade.h"
 #include "Wipe.h"

@@ -1,7 +1,7 @@
-#include "Game.h"
-#include "Game.h"
 #include "Square.h"
+#include "Game.h"
 #include <memory>
+#include "Game.h"
 
 using namespace std;
 using namespace DirectX::SimpleMath;

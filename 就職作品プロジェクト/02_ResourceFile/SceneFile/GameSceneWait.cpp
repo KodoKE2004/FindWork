@@ -1,12 +1,12 @@
-#include "DebugUI.h"
-#include "Game.h"
 #include "GameSceneWait.h"
+#include "Game.h"
+#include "DebugUI.h"
 #include "SceneList.h"
 
 #include <array>
-#include <cmath>
-#include <random>
 #include <vector>
+#include <random>
+#include <cmath>
 
 bool GameSceneWait::s_HasFirstGameSceneWaitInitialized = false;
 GAME_PHASE GameSceneWait::s_CurrentGamePhase = GAME_PHASE::START;

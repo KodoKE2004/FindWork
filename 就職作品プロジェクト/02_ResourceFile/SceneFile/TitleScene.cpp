@@ -1,10 +1,10 @@
-#include "Cube.h"
-#include "DebugUI.h"
-#include "Game.h"
-#include "Model.h"
 #include "SceneList.h"
+#include "Game.h"
+#include "DebugUI.h"
+#include "Cube.h"
 #include "Skydome.h"
 #include "Square.h"
+#include "ObjectFile/Model.h"
 
 TitleScene::TitleScene(bool entryFlg)
 {

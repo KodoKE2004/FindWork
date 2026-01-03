@@ -1,9 +1,9 @@
 #pragma once
 
-#include	"dx11helper.h"
-#include	"Renderer.h"
 #include	<vector>
 #include	<wrl/client.h>
+#include	"dx11helper.h"
+#include	"Renderer.h"
 
 using Microsoft::WRL::ComPtr;
 

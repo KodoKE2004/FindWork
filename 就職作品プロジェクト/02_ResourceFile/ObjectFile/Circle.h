@@ -1,9 +1,9 @@
 #pragma once
-#include "IndexBuffer.h"
-#include "Material.h"
 #include "Object.h"
-#include "Texture.h"
 #include "VertexBuffer.h"
+#include "IndexBuffer.h"
+#include "Texture.h"
+#include "Material.h"
 #include <memory>
 
 class Circle : public Object

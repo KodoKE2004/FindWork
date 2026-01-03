@@ -1,13 +1,13 @@
 #pragma once
-#include "IndexBuffer.h"
-#include "Material.h"
-#include "MeshRenderer.h"
 #include "Object.h"
 #include "StaticMesh.h"
+#include "MeshRenderer.h"
 #include "VertexBuffer.h"
-#include <d3d11.h>
+#include "IndexBuffer.h"
+#include "Material.h"
 #include <memory>
 #include <vector>
+#include <d3d11.h>
 #include <wrl/client.h>
 
 struct MeshInfo {

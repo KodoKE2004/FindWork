@@ -1,13 +1,9 @@
 #pragma once
-#include "IndexBuffer.h"
-#include "Material.h"
 #include "Object.h"
-#include "Texture.h"
 #include "VertexBuffer.h"
-
-// ‘O•ûéŒ¾
-class  Square;
-struct isHitResult;
+#include "IndexBuffer.h"
+#include "Texture.h"
+#include "Material.h"
 
 //----------------------------------------
 //		2D	“–‚½‚è”»’è‚ÌŒ‹‰Ê‚ğó‚¯æ‚éƒNƒ‰ƒX
@@ -39,7 +35,6 @@ struct isHitResult
 		m_Old = m_Now;
 	}
 };
-
 
 
 //-----------------------------------------------------------------------------

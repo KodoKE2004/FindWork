@@ -1,11 +1,11 @@
 #pragma once
-#include "Application.h"
 #include "Scene.h"
 #include "Square.h"
+#include "Application.h"
 
 #include "RenderTarget.h"
-#include "SnapshotOverlay.h"
 #include "TransitionBase.h"
+#include "SnapshotOverlay.h"
 
 #include <memory>
 

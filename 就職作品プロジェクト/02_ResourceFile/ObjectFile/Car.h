@@ -2,8 +2,8 @@
 
 #include <algorithm>
 
-#include "Math.h"
 #include "Square.h"
+#include "Collider.h"
 
 /// <summary>
 /// フェイントの挙動タイプ

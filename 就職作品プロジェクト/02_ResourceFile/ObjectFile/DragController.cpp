@@ -1,8 +1,7 @@
 #include "DragController.h"
 #include "input.h"
-#include <cmath>
 #include <DirectXMath.h>
-
+#include <cmath>
 DragController::DragController(Camera& cam) : Square(cam)
 {
 }

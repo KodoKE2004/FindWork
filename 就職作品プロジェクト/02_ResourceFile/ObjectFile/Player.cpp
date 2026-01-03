@@ -1,9 +1,9 @@
-#include "Application.h"
-#include "Car.h"
 #include "Player.h"
+#include "Car.h"
+#include "Application.h"
 
-#include <algorithm>
 #include <cmath>
+#include <algorithm>
 
 namespace
 {

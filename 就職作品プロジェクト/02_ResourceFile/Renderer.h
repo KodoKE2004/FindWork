@@ -1,17 +1,17 @@
 #pragma once
 
 #include	"Transform.h"
-#include	<d3d11.h>
-#include	<DirectXMath.h>
-#include	<io.h>
 #include    <memory>
-#include	<SimpleMath.h>
+#include	<d3d11.h>
+#include	<io.h>
 #include	<string>
 #include	<vector>
 #include	<wrl/client.h>
+#include	<DirectXMath.h>
+#include	<SimpleMath.h>
 
-#include    "Application.h"
 #include	"RenderTarget.h"
+#include    "Application.h"
 
 using namespace DirectX;
 using namespace SimpleMath;

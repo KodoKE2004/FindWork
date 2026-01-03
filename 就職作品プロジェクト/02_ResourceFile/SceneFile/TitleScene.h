@@ -1,11 +1,11 @@
 #pragma once
 
-#include "DragController.h"
-#include "Object.h"
 #include "Scene.h"
-#include "Skydome.h"
+#include "Object.h"
 #include "Sphere.h"
+#include "Skydome.h"
 #include "Square.h"
+#include "DragController.h"
 
 class TitleScene : public Scene
 {

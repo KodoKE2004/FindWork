@@ -1,6 +1,6 @@
-#include "Debug.hpp"
-#include "Texture.h"
 #include "TextureManager.h"
+#include "Texture.h"
+#include "Debug.hpp"
 
 TextureManager::TextureManager(const std::string& basePath)
     : m_FilePath(basePath)

@@ -1,7 +1,7 @@
-#include "Debug.hpp"
-#include "Game.h"
 #include "GameSceneSlice.h"
-#include "Math.h"
+#include "Game.h"
+#include "Collider.h"
+#include "Debug.hpp"
 
 void GameSceneSlice::Initialize()
 {

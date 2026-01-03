@@ -1,8 +1,8 @@
 #pragma once
+#include "VertexBuffer.h"
 #include "IndexBuffer.h"
 #include "Mesh.h"
 #include "StaticMesh.h"
-#include "VertexBuffer.h"
 
 class MeshRenderer {
 protected:

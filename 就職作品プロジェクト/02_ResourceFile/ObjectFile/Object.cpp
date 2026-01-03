@@ -1,5 +1,5 @@
-#include "Game.h"
 #include "Object.h"
+#include "Game.h"
 #include "ShaderManager.h"
 
 Object::Object(Camera& cam) : m_Camera(cam)

@@ -1,7 +1,7 @@
 #pragma once
 
-#include    <cstdint>
 #include    <Windows.h>
+#include    <cstdint>
 
 class Application
 {

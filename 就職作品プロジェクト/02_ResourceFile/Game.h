@@ -1,22 +1,22 @@
 #pragma once
-#include "DebugGridLine.h"
-#include <Debug.hpp>
 #include <memory>
-#include <type_traits>
 #include <vector>
+#include <type_traits>
+#include <Debug.hpp>
+#include "DebugGridLine.h"
 
-#include "GameSceneExe.h"
-#include "input.h"
-#include "Object.h"
 #include "Scene.h"
-#include "Theme.h"
-#include "TransitionBase.h"
 #include "TransScene.h"
+#include "TransitionBase.h"
+#include "Object.h"
+#include "Theme.h"
+#include "input.h"
+#include "GameSceneExe.h"
 
-#include "AudioManager.h"
 #include "MeshManager.h"
-#include "ShaderManager.h"
 #include "TextureManager.h"
+#include "ShaderManager.h"
+#include "AudioManager.h"
 
 class Game
 {

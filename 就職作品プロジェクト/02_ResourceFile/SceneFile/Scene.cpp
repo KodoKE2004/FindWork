@@ -1,5 +1,5 @@
-#include "Game.h"
 #include "Scene.h"
+#include "Game.h"
 #include <algorithm>
 
 SceneRelationData Scene::m_RelationData;

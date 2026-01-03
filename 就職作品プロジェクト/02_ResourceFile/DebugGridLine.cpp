@@ -1,5 +1,5 @@
-#include "Debug.hpp"
 #include "DebugGridLine.h"
+#include "Debug.hpp"
 #include "Game.h"
 
 #include <algorithm>

@@ -1,7 +1,7 @@
-#include "DebugUI.h"
-#include "Game.h"
 #include "ResultScene.h"
 #include "SceneList.h"
+#include "Game.h"
+#include "DebugUI.h"
 
 void ResultScene::Initialize()
 {

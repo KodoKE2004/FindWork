@@ -1,6 +1,6 @@
 #include "Enemy.h"
 #include "Game.h"
-#include "Math.h"
+#include "Collider.h"
 #include "Player.h"
 #include "Scene.h"
 

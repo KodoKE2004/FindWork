@@ -1,8 +1,8 @@
 #pragma once
 
 #include "Transform.h"
-#include <DirectXMath.h>
 #include <SimpleMath.h>
+#include <DirectXMath.h>
 
 using namespace DirectX::SimpleMath;
 

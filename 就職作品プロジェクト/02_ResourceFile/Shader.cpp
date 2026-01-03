@@ -1,6 +1,6 @@
+#include "Shader.h"
 #include "dx11helper.h"
 #include "Renderer.h"
-#include "Shader.h"
 #include <d3d11.h>
 
 BaseShader::~BaseShader() = default;

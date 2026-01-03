@@ -1,11 +1,11 @@
-#include "Application.h"
 #include "Fade.h"
 #include "Game.h"
 #include "main.h"
-#include "Math.h"
+#include "Application.h"
+#include "Collider.h"
 #include "Renderer.h"
-#include <algorithm>
 #include <vector>
+#include <algorithm>
 
 Fade::Fade(Camera& cam) : TransitionBase(cam)
 {

@@ -1,9 +1,10 @@
-#include "Application.h"
+#include "Wipe.h"
 #include "Game.h"
 #include "main.h"
-#include "Math.h"
 #include "Renderer.h"
-#include "Wipe.h"
+#include "Application.h"
+#include "Collider.h"
+#include "Renderer.h"
 #include <algorithm>
 
 Wipe::Wipe(Camera& cam) : TransitionBase(cam)
@@ -215,7 +216,7 @@ void Wipe::SetTransMode(TRANS_MODE transMode)
     }
     
     CheckPointSetting();
-
+    SetPos(m_StartPos.x, m_StartPos.y, GetPos().z);
     SetPos(m_StartPos);
 
 }

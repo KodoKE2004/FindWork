@@ -1,16 +1,15 @@
 #pragma once
-#include "Camera.h"
-#include "imgui.h"
-#include "IndexBuffer.h"
-#include "Material.h"
-#include "Object.h"
-#include "Texture.h"
-#include "VertexBuffer.h"
-
-#include <d3d11.h>
-#include <memory>
 #include <string>
+#include <memory>
 #include <wrl/client.h>
+#include <d3d11.h>
+#include "imgui.h"
+#include "Object.h"
+#include "Camera.h"
+#include "VertexBuffer.h"
+#include "IndexBuffer.h"
+#include "Texture.h"
+#include "Material.h"
 
 // トランジションのフェーズ
 // 遷移の進行状況を示す列挙型
@@ -128,6 +127,8 @@ protected:
     float m_SplitY = 1.0f;
 
     float m_Duration = 1.0f;    // 遷移の所要時間
+
+
 
 public:
 

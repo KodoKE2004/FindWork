@@ -1,9 +1,9 @@
 #pragma once
-#include "Camera.h"
-#include "input.h"
-#include "Shader.h"
-#include "Texture.h"
 #include "Transform.h"
+#include "Shader.h"
+#include "input.h"
+#include "Camera.h"
+#include "Texture.h"
 
 #include <memory>
 

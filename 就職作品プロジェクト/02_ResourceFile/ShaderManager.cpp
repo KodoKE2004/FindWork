@@ -1,5 +1,5 @@
-#include "Debug.hpp"
 #include "ShaderManager.h"
+#include "Debug.hpp"
 
 ShaderManager::ShaderManager(std::string entryPoint) : m_FilePath(std::move(entryPoint))
 {

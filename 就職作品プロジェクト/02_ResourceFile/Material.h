@@ -1,10 +1,10 @@
 #pragma once
+#include	<Windows.h>
+#include	<directxmath.h>
+#include	<d3d11.h>
+#include	<wrl/client.h>
 #include	"dx11helper.h"
 #include	"renderer.h"
-#include	<d3d11.h>
-#include	<directxmath.h>
-#include	<Windows.h>
-#include	<wrl/client.h>
 
 class Material {
 
