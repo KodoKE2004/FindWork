@@ -1,13 +1,4 @@
-﻿  compilation object save succeeded; see C:\Users\dorae\Desktop\HAL\class3\FindWork\就職作品プロジェクト\x64\Debug\PS_Alpha.cso
-  compilation object save succeeded; see C:\Users\dorae\Desktop\HAL\class3\FindWork\就職作品プロジェクト\x64\Debug\PS_Default.cso
-  compilation object save succeeded; see C:\Users\dorae\Desktop\HAL\class3\FindWork\就職作品プロジェクト\x64\Debug\PS_Skydome.cso
-  compilation object save succeeded; see C:\Users\dorae\Desktop\HAL\class3\FindWork\就職作品プロジェクト\x64\Debug\PS_Unlit.cso
-  compilation object save succeeded; see C:\Users\dorae\Desktop\HAL\class3\FindWork\就職作品プロジェクト\x64\Debug\VS_Alpha.cso
-  compilation object save succeeded; see C:\Users\dorae\Desktop\HAL\class3\FindWork\就職作品プロジェクト\x64\Debug\VS_DebugGrid.cso
-  compilation object save succeeded; see C:\Users\dorae\Desktop\HAL\class3\FindWork\就職作品プロジェクト\x64\Debug\VS_Default.cso
-  compilation object save succeeded; see C:\Users\dorae\Desktop\HAL\class3\FindWork\就職作品プロジェクト\x64\Debug\VS_Skydome.cso
-  compilation object save succeeded; see C:\Users\dorae\Desktop\HAL\class3\FindWork\就職作品プロジェクト\x64\Debug\VS_Unlit.cso
-  pch.cpp
+﻿  pch.cpp
 C:\Program Files\Microsoft Visual Studio\2022\Community\VC\Tools\MSVC\14.44.35207\include\array(22,21): error C2143: 構文エラー: ';' が '*' の前にありません。
   (ソース ファイル 'pch.cpp' をコンパイルしています)
   
