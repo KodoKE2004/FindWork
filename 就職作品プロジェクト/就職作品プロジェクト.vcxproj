@@ -243,14 +243,14 @@
     <ConfigurationType>Application</ConfigurationType>
     <UseDebugLibraries>true</UseDebugLibraries>
     <PlatformToolset>v143</PlatformToolset>
-    <CharacterSet>Unicode</CharacterSet>
+    <CharacterSet>MultiByte</CharacterSet>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'" Label="Configuration">
     <ConfigurationType>Application</ConfigurationType>
     <UseDebugLibraries>false</UseDebugLibraries>
     <PlatformToolset>v143</PlatformToolset>
     <WholeProgramOptimization>true</WholeProgramOptimization>
-    <CharacterSet>Unicode</CharacterSet>
+    <CharacterSet>MultiByte</CharacterSet>
   </PropertyGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.props" />
   <ImportGroup Label="ExtensionSettings">
@@ -305,7 +305,7 @@
       <PreprocessorDefinitions>_DEBUG;_CONSOLE;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <ConformanceMode>true</ConformanceMode>
       <LanguageStandard>stdcpp20</LanguageStandard>
-      <AdditionalIncludeDirectories>$(ProjectDir)03_ExternalFile/assimp/5.2.5/include;$(ProjectDir)03_ExternalFile\DirectXTex\include;$(ProjectDir)03_ExternalFile\DirectXTK\include;$(ProjectDir)02_ResourceFile;$(ProjectDir)02_ResourceFile\ObjectFile;$(ProjectDir)02_ResourceFile\SceneFile;$(ProjectDir)02_ResourceFile\SceneFile\Transition;$(ProjectDir)03_ExternalFile\imgui;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>$(ProjectDir)02_ResourceFile;$(ProjectDir)02_ResourceFile\ObjectFile;$(ProjectDir)02_ResourceFile\SceneFile;$(ProjectDir)02_ResourceFile\SceneFile\Transition;$(ProjectDir)03_ExternalFile;$(ProjectDir)03_ExternalFile\DirectXTex\include;$(ProjectDir)03_ExternalFile\DirectXTK\include;$(ProjectDir)03_ExternalFile\imgui;$(ProjectDir)03_ExternalFile\magic_enum-master\include;$(ProjectDir)03_ExternalFile\assimp\5.2.5\include</AdditionalIncludeDirectories>
       <RuntimeLibrary>MultiThreadedDebugDLL</RuntimeLibrary>
       <BasicRuntimeChecks>Default</BasicRuntimeChecks>
       <MultiProcessorCompilation>true</MultiProcessorCompilation>
@@ -317,7 +317,7 @@
       <SubSystem>Console</SubSystem>
       <GenerateDebugInformation>true</GenerateDebugInformation>
       <AdditionalDependencies>DirectXTK.lib;%(AdditionalDependencies)</AdditionalDependencies>
-      <AdditionalLibraryDirectories>$(ProjectDir)03_ExternalFile/assimp/5.2.5/lib;$(ProjectDir)03_ExternalFile\DirectXTK\lib\Debug;$(ProjectDir)03_ExternalFile\DirectXTex\lib;%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
+      <AdditionalLibraryDirectories>$(ProjectDir)03_ExternalFile\assimp\5.2.5\lib;$(ProjectDir)03_ExternalFile\DirectXTex\lib;$(ProjectDir)03_ExternalFile\DirectXTK\lib\Debug;$(ProjectDir)03_ExternalFile\DirectXTK\lib\Release</AdditionalLibraryDirectories>
       <AdditionalDependencies>$(ProjectDir)03_ExternalFile\DirectXTex\lib\DirectXTex.lib;$(ProjectDir)03_ExternalFile\DirectXTK\lib\Debug\DirectXTK.lib;%(AdditionalDependencies)</AdditionalDependencies>
     </Link>
     <FxCompile>
@@ -333,7 +333,7 @@
       <PreprocessorDefinitions>NDEBUG;_CONSOLE;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <ConformanceMode>true</ConformanceMode>
       <RuntimeLibrary>MultiThreadedDLL</RuntimeLibrary>
-      <AdditionalIncludeDirectories>$(ProjectDir)03_ExternalFile\DirectXTex\include;$(ProjectDir)03_ExternalFile\DirectXTK\include;$(ProjectDir)03_ExternalFile\assimp\5.2.5\include;$(ProjectDir)02_ResourceFile;$(ProjectDir)02_ResourceFile\ObjectFile;$(ProjectDir)02_ResourceFile\SceneFile;$(ProjectDir)02_ResourceFile\SceneFile\Transition;$(ProjectDir)03_ExternalFile\imgui;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>$(ProjectDir)02_ResourceFile;$(ProjectDir)02_ResourceFile\ObjectFile;$(ProjectDir)02_ResourceFile\SceneFile;$(ProjectDir)02_ResourceFile\SceneFile\Transition;$(ProjectDir)03_ExternalFile;$(ProjectDir)03_ExternalFile\DirectXTex\include;$(ProjectDir)03_ExternalFile\DirectXTK\include;$(ProjectDir)03_ExternalFile\imgui;$(ProjectDir)03_ExternalFile\magic_enum-master\include;$(ProjectDir)03_ExternalFile\assimp\5.2.5\include</AdditionalIncludeDirectories>
       <LanguageStandard>stdcpp20</LanguageStandard>
       <MultiProcessorCompilation>true</MultiProcessorCompilation>
       <PrecompiledHeader>Use</PrecompiledHeader>
@@ -344,7 +344,7 @@
       <SubSystem>Console</SubSystem>
       <GenerateDebugInformation>true</GenerateDebugInformation>
       <AdditionalDependencies>DirectXTK.lib;%(AdditionalDependencies)</AdditionalDependencies>
-      <AdditionalLibraryDirectories>$(ProjectDir)03_ExternalFile\directxtk\lib\x64\Release;$(ProjectDir)03_ExternalFile\DirectXTex\x64\Release;$(ProjectDir)03_ExternalFile\assimp\5.2.5\lib;$(ProjectDir)03_ExternalFile\DirectXTK\lib\Release;%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
+      <AdditionalLibraryDirectories>$(ProjectDir)03_ExternalFile\assimp\5.2.5\lib;$(ProjectDir)03_ExternalFile\DirectXTex\lib;$(ProjectDir)03_ExternalFile\DirectXTK\lib\Debug;$(ProjectDir)03_ExternalFile\DirectXTK\lib\Release</AdditionalLibraryDirectories>
     </Link>
     <FxCompile>
       <ShaderModel>5.0</ShaderModel>

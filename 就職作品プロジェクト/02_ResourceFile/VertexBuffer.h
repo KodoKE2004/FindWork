@@ -36,7 +36,7 @@ public:
 			(void*)vertices.data(),
 			m_Buffer.ReleaseAndGetAddressOf())) 
 			{
-				MessageBox(nullptr, L"CreateVertexBuffer error", L"error", MB_OK);
+				MessageBox(nullptr, "CreateVertexBuffer error", "error", MB_OK);
 				return;
 			}
 	}

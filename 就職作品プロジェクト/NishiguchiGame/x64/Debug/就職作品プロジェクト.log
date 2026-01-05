@@ -1,2 +1,1100 @@
-﻿  TransScene.cpp
-  就職作品プロジェクト.vcxproj -> C:\Users\dorae\Desktop\HAL\class3\FindWork\就職作品プロジェクト\x64\Debug\NishiguchiGame.exe
+﻿  Application.cpp
+  Bomber.cpp
+  Theme.cpp
+  Camera.cpp
+  DebugGridLine.cpp
+  DebugUI.cpp
+  Game.cpp
+  Enemy.cpp
+  GameSceneCrush.cpp
+  GameSceneJump.cpp
+  GameSceneSlice.cpp
+  GameSceneWait.cpp
+  ResultScene.cpp
+  Scene.cpp
+  TransitionBase.cpp
+  Wipe.cpp
+C:\Users\dorae\Desktop\HAL\class3\FindWork\就職作品プロジェクト\02_ResourceFile\Game.cpp(1,1): warning C4819: ファイルは、現在のコード ページ (932) で表示できない文字を含んでいます。データの損失を防ぐために、ファイルを Unicode 形式で保存してください。
+  (ソース ファイル '/02_ResourceFile/Game.cpp' をコンパイルしています)
+  
+C:\Users\dorae\Desktop\HAL\class3\FindWork\就職作品プロジェクト\02_ResourceFile\ObjectFile\Theme.cpp(1,1): warning C4819: ファイルは、現在のコード ページ (932) で表示できない文字を含んでいます。データの損失を防ぐために、ファイルを Unicode 形式で保存してください。
+  (ソース ファイル '/02_ResourceFile/ObjectFile/Theme.cpp' をコンパイルしています)
+  
+C:\Users\dorae\Desktop\HAL\class3\FindWork\就職作品プロジェクト\02_ResourceFile\SceneFile\Transition\Wipe.cpp(1,1): warning C4819: ファイルは、現在のコード ページ (932) で表示できない文字を含んでいます。データの損失を防ぐために、ファイルを Unicode 形式で保存してください。
+  (ソース ファイル '/02_ResourceFile/SceneFile/Transition/Wipe.cpp' をコンパイルしています)
+  
+C:\Users\dorae\Desktop\HAL\class3\FindWork\就職作品プロジェクト\02_ResourceFile\SceneFile\Transition\TransitionBase.cpp(1,1): warning C4819: ファイルは、現在のコード ページ (932) で表示できない文字を含んでいます。データの損失を防ぐために、ファイルを Unicode 形式で保存してください。
+  (ソース ファイル '/02_ResourceFile/SceneFile/Transition/TransitionBase.cpp' をコンパイルしています)
+  
+C:\Users\dorae\Desktop\HAL\class3\FindWork\就職作品プロジェクト\02_ResourceFile\Game.h(1,1): warning C4819: ファイルは、現在のコード ページ (932) で表示できない文字を含んでいます。データの損失を防ぐために、ファイルを Unicode 形式で保存してください。
+  (ソース ファイル '/02_ResourceFile/Game.cpp' をコンパイルしています)
+  
+C:\Users\dorae\Desktop\HAL\class3\FindWork\就職作品プロジェクト\02_ResourceFile\ObjectFile\Theme.h(1,1): warning C4819: ファイルは、現在のコード ページ (932) で表示できない文字を含んでいます。データの損失を防ぐために、ファイルを Unicode 形式で保存してください。
+  (ソース ファイル '/02_ResourceFile/ObjectFile/Theme.cpp' をコンパイルしています)
+  
+C:\Users\dorae\Desktop\HAL\class3\FindWork\就職作品プロジェクト\02_ResourceFile\Square.h(1,1): warning C4819: ファイルは、現在のコード ページ (932) で表示できない文字を含んでいます。データの損失を防ぐために、ファイルを Unicode 形式で保存してください。
+  (ソース ファイル '/02_ResourceFile/ObjectFile/Enemy.cpp' をコンパイルしています)
+  
+C:\Users\dorae\Desktop\HAL\class3\FindWork\就職作品プロジェクト\02_ResourceFile\SceneFile\Transition\TransitionBase.h(1,1): warning C4819: ファイルは、現在のコード ページ (932) で表示できない文字を含んでいます。データの損失を防ぐために、ファイルを Unicode 形式で保存してください。
+  (ソース ファイル '/02_ResourceFile/SceneFile/Transition/Wipe.cpp' をコンパイルしています)
+  
+C:\Users\dorae\Desktop\HAL\class3\FindWork\就職作品プロジェクト\02_ResourceFile\Square.h(1,1): warning C4819: ファイルは、現在のコード ページ (932) で表示できない文字を含んでいます。データの損失を防ぐために、ファイルを Unicode 形式で保存してください。
+  (ソース ファイル '/02_ResourceFile/ObjectFile/Theme.cpp' をコンパイルしています)
+  
+C:\Users\dorae\Desktop\HAL\class3\FindWork\就職作品プロジェクト\02_ResourceFile\Square.h(1,1): warning C4819: ファイルは、現在のコード ページ (932) で表示できない文字を含んでいます。データの損失を防ぐために、ファイルを Unicode 形式で保存してください。
+  (ソース ファイル '/02_ResourceFile/ObjectFile/Bomber.cpp' をコンパイルしています)
+  
+C:\Users\dorae\Desktop\HAL\class3\FindWork\就職作品プロジェクト\02_ResourceFile\Game.h(1,1): warning C4819: ファイルは、現在のコード ページ (932) で表示できない文字を含んでいます。データの損失を防ぐために、ファイルを Unicode 形式で保存してください。
+  (ソース ファイル '/02_ResourceFile/Application.cpp' をコンパイルしています)
+  
+C:\Users\dorae\Desktop\HAL\class3\FindWork\就職作品プロジェクト\02_ResourceFile\SceneFile\Transition\TransitionBase.h(1,1): warning C4819: ファイルは、現在のコード ページ (932) で表示できない文字を含んでいます。データの損失を防ぐために、ファイルを Unicode 形式で保存してください。
+  (ソース ファイル '/02_ResourceFile/SceneFile/Transition/TransitionBase.cpp' をコンパイルしています)
+  
+C:\Users\dorae\Desktop\HAL\class3\FindWork\就職作品プロジェクト\02_ResourceFile\Game.h(1,1): warning C4819: ファイルは、現在のコード ページ (932) で表示できない文字を含んでいます。データの損失を防ぐために、ファイルを Unicode 形式で保存してください。
+  (ソース ファイル '/02_ResourceFile/DebugUI.cpp' をコンパイルしています)
+  
+C:\Users\dorae\Desktop\HAL\class3\FindWork\就職作品プロジェクト\02_ResourceFile\Renderer.h(1,1): warning C4819: ファイルは、現在のコード ページ (932) で表示できない文字を含んでいます。データの損失を防ぐために、ファイルを Unicode 形式で保存してください。
+  (ソース ファイル '/02_ResourceFile/Game.cpp' をコンパイルしています)
+  
+C:\Users\dorae\Desktop\HAL\class3\FindWork\就職作品プロジェクト\02_ResourceFile\Renderer.h(1,1): warning C4819: ファイルは、現在のコード ページ (932) で表示できない文字を含んでいます。データの損失を防ぐために、ファイルを Unicode 形式で保存してください。
+  (ソース ファイル '/02_ResourceFile/Application.cpp' をコンパイルしています)
+  
+C:\Users\dorae\Desktop\HAL\class3\FindWork\就職作品プロジェクト\02_ResourceFile\Renderer.h(1,1): warning C4819: ファイルは、現在のコード ページ (932) で表示できない文字を含んでいます。データの損失を防ぐために、ファイルを Unicode 形式で保存してください。
+  (ソース ファイル '/02_ResourceFile/DebugGridLine.cpp' をコンパイルしています)
+  
+C:\Users\dorae\Desktop\HAL\class3\FindWork\就職作品プロジェクト\02_ResourceFile\Renderer.h(1,1): warning C4819: ファイルは、現在のコード ページ (932) で表示できない文字を含んでいます。データの損失を防ぐために、ファイルを Unicode 形式で保存してください。
+  (ソース ファイル '/02_ResourceFile/Camera.cpp' をコンパイルしています)
+  
+C:\Users\dorae\Desktop\HAL\class3\FindWork\就職作品プロジェクト\02_ResourceFile\Renderer.h(1,1): warning C4819: ファイルは、現在のコード ページ (932) で表示できない文字を含んでいます。データの損失を防ぐために、ファイルを Unicode 形式で保存してください。
+  (ソース ファイル '/02_ResourceFile/DebugUI.cpp' をコンパイルしています)
+  
+C:\Users\dorae\Desktop\HAL\class3\FindWork\就職作品プロジェクト\02_ResourceFile\Renderer.h(1,1): warning C4819: ファイルは、現在のコード ページ (932) で表示できない文字を含んでいます。データの損失を防ぐために、ファイルを Unicode 形式で保存してください。
+  (ソース ファイル '/02_ResourceFile/ObjectFile/Enemy.cpp' をコンパイルしています)
+  
+C:\Users\dorae\Desktop\HAL\class3\FindWork\就職作品プロジェクト\02_ResourceFile\Game.h(1,1): warning C4819: ファイルは、現在のコード ページ (932) で表示できない文字を含んでいます。データの損失を防ぐために、ファイルを Unicode 形式で保存してください。
+  (ソース ファイル '/02_ResourceFile/ObjectFile/Enemy.cpp' をコンパイルしています)
+  
+C:\Users\dorae\Desktop\HAL\class3\FindWork\就職作品プロジェクト\02_ResourceFile\Renderer.h(1,1): warning C4819: ファイルは、現在のコード ページ (932) で表示できない文字を含んでいます。データの損失を防ぐために、ファイルを Unicode 形式で保存してください。
+  (ソース ファイル '/02_ResourceFile/SceneFile/GameSceneSlice.cpp' をコンパイルしています)
+  
+C:\Users\dorae\Desktop\HAL\class3\FindWork\就職作品プロジェクト\02_ResourceFile\Renderer.h(1,1): warning C4819: ファイルは、現在のコード ページ (932) で表示できない文字を含んでいます。データの損失を防ぐために、ファイルを Unicode 形式で保存してください。
+  (ソース ファイル '/02_ResourceFile/SceneFile/ResultScene.cpp' をコンパイルしています)
+  
+C:\Users\dorae\Desktop\HAL\class3\FindWork\就職作品プロジェクト\02_ResourceFile\Renderer.h(1,1): warning C4819: ファイルは、現在のコード ページ (932) で表示できない文字を含んでいます。データの損失を防ぐために、ファイルを Unicode 形式で保存してください。
+  (ソース ファイル '/02_ResourceFile/ObjectFile/Theme.cpp' をコンパイルしています)
+  
+C:\Users\dorae\Desktop\HAL\class3\FindWork\就職作品プロジェクト\02_ResourceFile\Game.h(1,1): warning C4819: ファイルは、現在のコード ページ (932) で表示できない文字を含んでいます。データの損失を防ぐために、ファイルを Unicode 形式で保存してください。
+  (ソース ファイル '/02_ResourceFile/Camera.cpp' をコンパイルしています)
+  
+C:\Users\dorae\Desktop\HAL\class3\FindWork\就職作品プロジェクト\02_ResourceFile\SceneFile\Transition\TransitionBase.h(1,1): warning C4819: ファイルは、現在のコード ページ (932) で表示できない文字を含んでいます。データの損失を防ぐために、ファイルを Unicode 形式で保存してください。
+  (ソース ファイル '/02_ResourceFile/SceneFile/GameSceneSlice.cpp' をコンパイルしています)
+  
+C:\Users\dorae\Desktop\HAL\class3\FindWork\就職作品プロジェクト\02_ResourceFile\Renderer.h(1,1): warning C4819: ファイルは、現在のコード ページ (932) で表示できない文字を含んでいます。データの損失を防ぐために、ファイルを Unicode 形式で保存してください。
+  (ソース ファイル '/02_ResourceFile/SceneFile/GameSceneCrush.cpp' をコンパイルしています)
+  
+C:\Users\dorae\Desktop\HAL\class3\FindWork\就職作品プロジェクト\02_ResourceFile\SceneFile\Transition\TransitionBase.h(1,1): warning C4819: ファイルは、現在のコード ページ (932) で表示できない文字を含んでいます。データの損失を防ぐために、ファイルを Unicode 形式で保存してください。
+  (ソース ファイル '/02_ResourceFile/ObjectFile/Enemy.cpp' をコンパイルしています)
+  
+C:\Users\dorae\Desktop\HAL\class3\FindWork\就職作品プロジェクト\02_ResourceFile\SceneFile\Transition\TransitionBase.h(1,1): warning C4819: ファイルは、現在のコード ページ (932) で表示できない文字を含んでいます。データの損失を防ぐために、ファイルを Unicode 形式で保存してください。
+  (ソース ファイル '/02_ResourceFile/SceneFile/ResultScene.cpp' をコンパイルしています)
+  
+C:\Users\dorae\Desktop\HAL\class3\FindWork\就職作品プロジェクト\02_ResourceFile\Renderer.h(1,1): warning C4819: ファイルは、現在のコード ページ (932) で表示できない文字を含んでいます。データの損失を防ぐために、ファイルを Unicode 形式で保存してください。
+  (ソース ファイル '/02_ResourceFile/SceneFile/GameSceneWait.cpp' をコンパイルしています)
+  
+C:\Users\dorae\Desktop\HAL\class3\FindWork\就職作品プロジェクト\02_ResourceFile\Game.h(1,1): warning C4819: ファイルは、現在のコード ページ (932) で表示できない文字を含んでいます。データの損失を防ぐために、ファイルを Unicode 形式で保存してください。
+  (ソース ファイル '/02_ResourceFile/ObjectFile/Theme.cpp' をコンパイルしています)
+  
+C:\Users\dorae\Desktop\HAL\class3\FindWork\就職作品プロジェクト\02_ResourceFile\SceneFile\Transition\TransitionBase.h(1,1): warning C4819: ファイルは、現在のコード ページ (932) で表示できない文字を含んでいます。データの損失を防ぐために、ファイルを Unicode 形式で保存してください。
+  (ソース ファイル '/02_ResourceFile/SceneFile/GameSceneCrush.cpp' をコンパイルしています)
+  
+C:\Users\dorae\Desktop\HAL\class3\FindWork\就職作品プロジェクト\02_ResourceFile\Renderer.h(1,1): warning C4819: ファイルは、現在のコード ページ (932) で表示できない文字を含んでいます。データの損失を防ぐために、ファイルを Unicode 形式で保存してください。
+  (ソース ファイル '/02_ResourceFile/ObjectFile/Bomber.cpp' をコンパイルしています)
+  
+C:\Users\dorae\Desktop\HAL\class3\FindWork\就職作品プロジェクト\02_ResourceFile\Renderer.h(1,1): warning C4819: ファイルは、現在のコード ページ (932) で表示できない文字を含んでいます。データの損失を防ぐために、ファイルを Unicode 形式で保存してください。
+  (ソース ファイル '/02_ResourceFile/SceneFile/GameSceneJump.cpp' をコンパイルしています)
+  
+C:\Users\dorae\Desktop\HAL\class3\FindWork\就職作品プロジェクト\02_ResourceFile\SceneFile\Transition\TransitionBase.h(1,1): warning C4819: ファイルは、現在のコード ページ (932) で表示できない文字を含んでいます。データの損失を防ぐために、ファイルを Unicode 形式で保存してください。
+  (ソース ファイル '/02_ResourceFile/Camera.cpp' をコンパイルしています)
+  
+C:\Users\dorae\Desktop\HAL\class3\FindWork\就職作品プロジェクト\02_ResourceFile\SceneFile\Transition\TransitionBase.h(1,1): warning C4819: ファイルは、現在のコード ページ (932) で表示できない文字を含んでいます。データの損失を防ぐために、ファイルを Unicode 形式で保存してください。
+  (ソース ファイル '/02_ResourceFile/ObjectFile/Theme.cpp' をコンパイルしています)
+  
+C:\Users\dorae\Desktop\HAL\class3\FindWork\就職作品プロジェクト\02_ResourceFile\SceneFile\Transition\TransitionBase.h(1,1): warning C4819: ファイルは、現在のコード ページ (932) で表示できない文字を含んでいます。データの損失を防ぐために、ファイルを Unicode 形式で保存してください。
+  (ソース ファイル '/02_ResourceFile/SceneFile/GameSceneWait.cpp' をコンパイルしています)
+  
+C:\Users\dorae\Desktop\HAL\class3\FindWork\就職作品プロジェクト\02_ResourceFile\Renderer.h(1,1): warning C4819: ファイルは、現在のコード ページ (932) で表示できない文字を含んでいます。データの損失を防ぐために、ファイルを Unicode 形式で保存してください。
+  (ソース ファイル '/02_ResourceFile/SceneFile/Transition/Wipe.cpp' をコンパイルしています)
+  
+C:\Users\dorae\Desktop\HAL\class3\FindWork\就職作品プロジェクト\02_ResourceFile\SceneFile\Transition\TransitionBase.h(1,1): warning C4819: ファイルは、現在のコード ページ (932) で表示できない文字を含んでいます。データの損失を防ぐために、ファイルを Unicode 形式で保存してください。
+  (ソース ファイル '/02_ResourceFile/SceneFile/GameSceneJump.cpp' をコンパイルしています)
+  
+C:\Users\dorae\Desktop\HAL\class3\FindWork\就職作品プロジェクト\02_ResourceFile\Square.h(1,1): warning C4819: ファイルは、現在のコード ページ (932) で表示できない文字を含んでいます。データの損失を防ぐために、ファイルを Unicode 形式で保存してください。
+  (ソース ファイル '/02_ResourceFile/SceneFile/GameSceneSlice.cpp' をコンパイルしています)
+  
+C:\Users\dorae\Desktop\HAL\class3\FindWork\就職作品プロジェクト\02_ResourceFile\Square.h(1,1): warning C4819: ファイルは、現在のコード ページ (932) で表示できない文字を含んでいます。データの損失を防ぐために、ファイルを Unicode 形式で保存してください。
+  (ソース ファイル '/02_ResourceFile/SceneFile/ResultScene.cpp' をコンパイルしています)
+  
+C:\Users\dorae\Desktop\HAL\class3\FindWork\就職作品プロジェクト\02_ResourceFile\Game.h(1,1): warning C4819: ファイルは、現在のコード ページ (932) で表示できない文字を含んでいます。データの損失を防ぐために、ファイルを Unicode 形式で保存してください。
+  (ソース ファイル '/02_ResourceFile/ObjectFile/Bomber.cpp' をコンパイルしています)
+  
+C:\Users\dorae\Desktop\HAL\class3\FindWork\就職作品プロジェクト\02_ResourceFile\Renderer.h(1,1): warning C4819: ファイルは、現在のコード ページ (932) で表示できない文字を含んでいます。データの損失を防ぐために、ファイルを Unicode 形式で保存してください。
+  (ソース ファイル '/02_ResourceFile/SceneFile/Scene.cpp' をコンパイルしています)
+  
+C:\Users\dorae\Desktop\HAL\class3\FindWork\就職作品プロジェクト\02_ResourceFile\Square.h(1,1): warning C4819: ファイルは、現在のコード ページ (932) で表示できない文字を含んでいます。データの損失を防ぐために、ファイルを Unicode 形式で保存してください。
+  (ソース ファイル '/02_ResourceFile/SceneFile/GameSceneCrush.cpp' をコンパイルしています)
+  
+C:\Users\dorae\Desktop\HAL\class3\FindWork\就職作品プロジェクト\02_ResourceFile\Square.h(1,1): warning C4819: ファイルは、現在のコード ページ (932) で表示できない文字を含んでいます。データの損失を防ぐために、ファイルを Unicode 形式で保存してください。
+  (ソース ファイル '/02_ResourceFile/SceneFile/Transition/Wipe.cpp' をコンパイルしています)
+  
+C:\Users\dorae\Desktop\HAL\class3\FindWork\就職作品プロジェクト\02_ResourceFile\Game.h(1,1): warning C4819: ファイルは、現在のコード ページ (932) で表示できない文字を含んでいます。データの損失を防ぐために、ファイルを Unicode 形式で保存してください。
+  (ソース ファイル '/02_ResourceFile/SceneFile/Transition/Wipe.cpp' をコンパイルしています)
+  
+C:\Users\dorae\Desktop\HAL\class3\FindWork\就職作品プロジェクト\02_ResourceFile\SceneFile\Transition\TransitionBase.h(1,1): warning C4819: ファイルは、現在のコード ページ (932) で表示できない文字を含んでいます。データの損失を防ぐために、ファイルを Unicode 形式で保存してください。
+  (ソース ファイル '/02_ResourceFile/ObjectFile/Bomber.cpp' をコンパイルしています)
+  
+C:\Users\dorae\Desktop\HAL\class3\FindWork\就職作品プロジェクト\02_ResourceFile\Game.h(1,1): warning C4819: ファイルは、現在のコード ページ (932) で表示できない文字を含んでいます。データの損失を防ぐために、ファイルを Unicode 形式で保存してください。
+  (ソース ファイル '/02_ResourceFile/DebugGridLine.cpp' をコンパイルしています)
+  
+C:\Users\dorae\Desktop\HAL\class3\FindWork\就職作品プロジェクト\02_ResourceFile\Square.h(1,1): warning C4819: ファイルは、現在のコード ページ (932) で表示できない文字を含んでいます。データの損失を防ぐために、ファイルを Unicode 形式で保存してください。
+  (ソース ファイル '/02_ResourceFile/SceneFile/GameSceneJump.cpp' をコンパイルしています)
+  
+C:\Users\dorae\Desktop\HAL\class3\FindWork\就職作品プロジェクト\02_ResourceFile\SceneFile\Transition\TransitionBase.h(1,1): warning C4819: ファイルは、現在のコード ページ (932) で表示できない文字を含んでいます。データの損失を防ぐために、ファイルを Unicode 形式で保存してください。
+  (ソース ファイル '/02_ResourceFile/DebugGridLine.cpp' をコンパイルしています)
+  
+C:\Users\dorae\Desktop\HAL\class3\FindWork\就職作品プロジェクト\02_ResourceFile\SceneFile\Transition\TransitionBase.h(1,1): warning C4819: ファイルは、現在のコード ページ (932) で表示できない文字を含んでいます。データの損失を防ぐために、ファイルを Unicode 形式で保存してください。
+  (ソース ファイル '/02_ResourceFile/SceneFile/Scene.cpp' をコンパイルしています)
+  
+C:\Users\dorae\Desktop\HAL\class3\FindWork\就職作品プロジェクト\02_ResourceFile\SceneFile\Transition\TransitionBase.h(1,1): warning C4819: ファイルは、現在のコード ページ (932) で表示できない文字を含んでいます。データの損失を防ぐために、ファイルを Unicode 形式で保存してください。
+  (ソース ファイル '/02_ResourceFile/DebugUI.cpp' をコンパイルしています)
+  
+C:\Users\dorae\Desktop\HAL\class3\FindWork\就職作品プロジェクト\02_ResourceFile\SceneFile\Transition\TransitionBase.h(1,1): warning C4819: ファイルは、現在のコード ページ (932) で表示できない文字を含んでいます。データの損失を防ぐために、ファイルを Unicode 形式で保存してください。
+  (ソース ファイル '/02_ResourceFile/Application.cpp' をコンパイルしています)
+  
+C:\Users\dorae\Desktop\HAL\class3\FindWork\就職作品プロジェクト\02_ResourceFile\Square.h(1,1): warning C4819: ファイルは、現在のコード ページ (932) で表示できない文字を含んでいます。データの損失を防ぐために、ファイルを Unicode 形式で保存してください。
+  (ソース ファイル '/02_ResourceFile/Camera.cpp' をコンパイルしています)
+  
+C:\Users\dorae\Desktop\HAL\class3\FindWork\就職作品プロジェクト\02_ResourceFile\Square.h(1,1): warning C4819: ファイルは、現在のコード ページ (932) で表示できない文字を含んでいます。データの損失を防ぐために、ファイルを Unicode 形式で保存してください。
+  (ソース ファイル '/02_ResourceFile/SceneFile/GameSceneWait.cpp' をコンパイルしています)
+  
+C:\Users\dorae\Desktop\HAL\class3\FindWork\就職作品プロジェクト\02_ResourceFile\SceneFile\TransScene.h(1,1): warning C4819: ファイルは、現在のコード ページ (932) で表示できない文字を含んでいます。データの損失を防ぐために、ファイルを Unicode 形式で保存してください。
+  (ソース ファイル '/02_ResourceFile/ObjectFile/Enemy.cpp' をコンパイルしています)
+  
+C:\Users\dorae\Desktop\HAL\class3\FindWork\就職作品プロジェクト\02_ResourceFile\SceneFile\Transition\TransitionBase.h(1,1): warning C4819: ファイルは、現在のコード ページ (932) で表示できない文字を含んでいます。データの損失を防ぐために、ファイルを Unicode 形式で保存してください。
+  (ソース ファイル '/02_ResourceFile/Game.cpp' をコンパイルしています)
+  
+C:\Users\dorae\Desktop\HAL\class3\FindWork\就職作品プロジェクト\02_ResourceFile\Square.h(1,1): warning C4819: ファイルは、現在のコード ページ (932) で表示できない文字を含んでいます。データの損失を防ぐために、ファイルを Unicode 形式で保存してください。
+  (ソース ファイル '/02_ResourceFile/DebugUI.cpp' をコンパイルしています)
+  
+C:\Users\dorae\Desktop\HAL\class3\FindWork\就職作品プロジェクト\02_ResourceFile\Game.h(1,1): warning C4819: ファイルは、現在のコード ページ (932) で表示できない文字を含んでいます。データの損失を防ぐために、ファイルを Unicode 形式で保存してください。
+  (ソース ファイル '/02_ResourceFile/SceneFile/ResultScene.cpp' をコンパイルしています)
+  
+C:\Users\dorae\Desktop\HAL\class3\FindWork\就職作品プロジェクト\02_ResourceFile\Game.h(1,1): warning C4819: ファイルは、現在のコード ページ (932) で表示できない文字を含んでいます。データの損失を防ぐために、ファイルを Unicode 形式で保存してください。
+  (ソース ファイル '/02_ResourceFile/SceneFile/GameSceneSlice.cpp' をコンパイルしています)
+  
+C:\Users\dorae\Desktop\HAL\class3\FindWork\就職作品プロジェクト\02_ResourceFile\SceneFile\TransScene.h(1,1): warning C4819: ファイルは、現在のコード ページ (932) で表示できない文字を含んでいます。データの損失を防ぐために、ファイルを Unicode 形式で保存してください。
+  (ソース ファイル '/02_ResourceFile/SceneFile/ResultScene.cpp' をコンパイルしています)
+  
+C:\Users\dorae\Desktop\HAL\class3\FindWork\就職作品プロジェクト\02_ResourceFile\ObjectFile\Theme.h(1,1): warning C4819: ファイルは、現在のコード ページ (932) で表示できない文字を含んでいます。データの損失を防ぐために、ファイルを Unicode 形式で保存してください。
+  (ソース ファイル '/02_ResourceFile/ObjectFile/Enemy.cpp' をコンパイルしています)
+  
+C:\Users\dorae\Desktop\HAL\class3\FindWork\就職作品プロジェクト\02_ResourceFile\SceneFile\TransScene.h(1,1): warning C4819: ファイルは、現在のコード ページ (932) で表示できない文字を含んでいます。データの損失を防ぐために、ファイルを Unicode 形式で保存してください。
+  (ソース ファイル '/02_ResourceFile/ObjectFile/Theme.cpp' をコンパイルしています)
+  
+C:\Users\dorae\Desktop\HAL\class3\FindWork\就職作品プロジェクト\02_ResourceFile\SceneFile\TransScene.h(1,1): warning C4819: ファイルは、現在のコード ページ (932) で表示できない文字を含んでいます。データの損失を防ぐために、ファイルを Unicode 形式で保存してください。
+  (ソース ファイル '/02_ResourceFile/SceneFile/GameSceneSlice.cpp' をコンパイルしています)
+  
+C:\Users\dorae\Desktop\HAL\class3\FindWork\就職作品プロジェクト\02_ResourceFile\ObjectFile\Theme.h(1,1): warning C4819: ファイルは、現在のコード ページ (932) で表示できない文字を含んでいます。データの損失を防ぐために、ファイルを Unicode 形式で保存してください。
+  (ソース ファイル '/02_ResourceFile/SceneFile/ResultScene.cpp' をコンパイルしています)
+  
+C:\Users\dorae\Desktop\HAL\class3\FindWork\就職作品プロジェクト\02_ResourceFile\Renderer.h(1,1): warning C4819: ファイルは、現在のコード ページ (932) で表示できない文字を含んでいます。データの損失を防ぐために、ファイルを Unicode 形式で保存してください。
+  (ソース ファイル '/02_ResourceFile/SceneFile/Transition/TransitionBase.cpp' をコンパイルしています)
+  
+C:\Users\dorae\Desktop\HAL\class3\FindWork\就職作品プロジェクト\02_ResourceFile\ObjectFile\Theme.h(1,1): warning C4819: ファイルは、現在のコード ページ (932) で表示できない文字を含んでいます。データの損失を防ぐために、ファイルを Unicode 形式で保存してください。
+  (ソース ファイル '/02_ResourceFile/SceneFile/GameSceneSlice.cpp' をコンパイルしています)
+  
+C:\Users\dorae\Desktop\HAL\class3\FindWork\就職作品プロジェクト\02_ResourceFile\Square.h(1,1): warning C4819: ファイルは、現在のコード ページ (932) で表示できない文字を含んでいます。データの損失を防ぐために、ファイルを Unicode 形式で保存してください。
+  (ソース ファイル '/02_ResourceFile/DebugGridLine.cpp' をコンパイルしています)
+  
+C:\Users\dorae\Desktop\HAL\class3\FindWork\就職作品プロジェクト\02_ResourceFile\Game.h(1,1): warning C4819: ファイルは、現在のコード ページ (932) で表示できない文字を含んでいます。データの損失を防ぐために、ファイルを Unicode 形式で保存してください。
+  (ソース ファイル '/02_ResourceFile/SceneFile/GameSceneCrush.cpp' をコンパイルしています)
+  
+C:\Users\dorae\Desktop\HAL\class3\FindWork\就職作品プロジェクト\02_ResourceFile\Square.h(1,1): warning C4819: ファイルは、現在のコード ページ (932) で表示できない文字を含んでいます。データの損失を防ぐために、ファイルを Unicode 形式で保存してください。
+  (ソース ファイル '/02_ResourceFile/Application.cpp' をコンパイルしています)
+  
+C:\Users\dorae\Desktop\HAL\class3\FindWork\就職作品プロジェクト\02_ResourceFile\Game.h(1,1): warning C4819: ファイルは、現在のコード ページ (932) で表示できない文字を含んでいます。データの損失を防ぐために、ファイルを Unicode 形式で保存してください。
+  (ソース ファイル '/02_ResourceFile/SceneFile/GameSceneJump.cpp' をコンパイルしています)
+  
+C:\Users\dorae\Desktop\HAL\class3\FindWork\就職作品プロジェクト\02_ResourceFile\Square.h(1,1): warning C4819: ファイルは、現在のコード ページ (932) で表示できない文字を含んでいます。データの損失を防ぐために、ファイルを Unicode 形式で保存してください。
+  (ソース ファイル '/02_ResourceFile/Game.cpp' をコンパイルしています)
+  
+C:\Users\dorae\Desktop\HAL\class3\FindWork\就職作品プロジェクト\02_ResourceFile\SceneFile\TransScene.h(1,1): warning C4819: ファイルは、現在のコード ページ (932) で表示できない文字を含んでいます。データの損失を防ぐために、ファイルを Unicode 形式で保存してください。
+  (ソース ファイル '/02_ResourceFile/SceneFile/GameSceneJump.cpp' をコンパイルしています)
+  
+C:\Users\dorae\Desktop\HAL\class3\FindWork\就職作品プロジェクト\02_ResourceFile\Square.h(1,1): warning C4819: ファイルは、現在のコード ページ (932) で表示できない文字を含んでいます。データの損失を防ぐために、ファイルを Unicode 形式で保存してください。
+  (ソース ファイル '/02_ResourceFile/SceneFile/Scene.cpp' をコンパイルしています)
+  
+C:\Users\dorae\Desktop\HAL\class3\FindWork\就職作品プロジェクト\02_ResourceFile\ObjectFile\Theme.h(1,1): warning C4819: ファイルは、現在のコード ページ (932) で表示できない文字を含んでいます。データの損失を防ぐために、ファイルを Unicode 形式で保存してください。
+  (ソース ファイル '/02_ResourceFile/SceneFile/GameSceneJump.cpp' をコンパイルしています)
+  
+C:\Users\dorae\Desktop\HAL\class3\FindWork\就職作品プロジェクト\02_ResourceFile\SceneFile\TransScene.h(1,1): warning C4819: ファイルは、現在のコード ページ (932) で表示できない文字を含んでいます。データの損失を防ぐために、ファイルを Unicode 形式で保存してください。
+  (ソース ファイル '/02_ResourceFile/SceneFile/Transition/Wipe.cpp' をコンパイルしています)
+  
+C:\Users\dorae\Desktop\HAL\class3\FindWork\就職作品プロジェクト\02_ResourceFile\SceneFile\TransScene.h(1,1): warning C4819: ファイルは、現在のコード ページ (932) で表示できない文字を含んでいます。データの損失を防ぐために、ファイルを Unicode 形式で保存してください。
+  (ソース ファイル '/02_ResourceFile/Camera.cpp' をコンパイルしています)
+  
+C:\Users\dorae\Desktop\HAL\class3\FindWork\就職作品プロジェクト\02_ResourceFile\SceneFile\TransScene.h(1,1): warning C4819: ファイルは、現在のコード ページ (932) で表示できない文字を含んでいます。データの損失を防ぐために、ファイルを Unicode 形式で保存してください。
+  (ソース ファイル '/02_ResourceFile/SceneFile/GameSceneCrush.cpp' をコンパイルしています)
+  
+C:\Users\dorae\Desktop\HAL\class3\FindWork\就職作品プロジェクト\02_ResourceFile\ObjectFile\Theme.h(1,1): warning C4819: ファイルは、現在のコード ページ (932) で表示できない文字を含んでいます。データの損失を防ぐために、ファイルを Unicode 形式で保存してください。
+  (ソース ファイル '/02_ResourceFile/SceneFile/Transition/Wipe.cpp' をコンパイルしています)
+  
+C:\Users\dorae\Desktop\HAL\class3\FindWork\就職作品プロジェクト\02_ResourceFile\SceneFile\TransScene.h(1,1): warning C4819: ファイルは、現在のコード ページ (932) で表示できない文字を含んでいます。データの損失を防ぐために、ファイルを Unicode 形式で保存してください。
+  (ソース ファイル '/02_ResourceFile/ObjectFile/Bomber.cpp' をコンパイルしています)
+  
+C:\Users\dorae\Desktop\HAL\class3\FindWork\就職作品プロジェクト\02_ResourceFile\SceneFile\TransScene.h(1,1): warning C4819: ファイルは、現在のコード ページ (932) で表示できない文字を含んでいます。データの損失を防ぐために、ファイルを Unicode 形式で保存してください。
+  (ソース ファイル '/02_ResourceFile/DebugUI.cpp' をコンパイルしています)
+  
+C:\Users\dorae\Desktop\HAL\class3\FindWork\就職作品プロジェクト\02_ResourceFile\Square.h(1,1): warning C4819: ファイルは、現在のコード ページ (932) で表示できない文字を含んでいます。データの損失を防ぐために、ファイルを Unicode 形式で保存してください。
+  (ソース ファイル '/02_ResourceFile/SceneFile/Transition/TransitionBase.cpp' をコンパイルしています)
+  
+C:\Users\dorae\Desktop\HAL\class3\FindWork\就職作品プロジェクト\02_ResourceFile\Game.h(1,1): warning C4819: ファイルは、現在のコード ページ (932) で表示できない文字を含んでいます。データの損失を防ぐために、ファイルを Unicode 形式で保存してください。
+  (ソース ファイル '/02_ResourceFile/SceneFile/Transition/TransitionBase.cpp' をコンパイルしています)
+  
+C:\Users\dorae\Desktop\HAL\class3\FindWork\就職作品プロジェクト\02_ResourceFile\ObjectFile\Theme.h(1,1): warning C4819: ファイルは、現在のコード ページ (932) で表示できない文字を含んでいます。データの損失を防ぐために、ファイルを Unicode 形式で保存してください。
+  (ソース ファイル '/02_ResourceFile/Camera.cpp' をコンパイルしています)
+  
+C:\Users\dorae\Desktop\HAL\class3\FindWork\就職作品プロジェクト\02_ResourceFile\ObjectFile\Theme.h(1,1): warning C4819: ファイルは、現在のコード ページ (932) で表示できない文字を含んでいます。データの損失を防ぐために、ファイルを Unicode 形式で保存してください。
+  (ソース ファイル '/02_ResourceFile/ObjectFile/Bomber.cpp' をコンパイルしています)
+  
+C:\Users\dorae\Desktop\HAL\class3\FindWork\就職作品プロジェクト\02_ResourceFile\ObjectFile\Theme.h(1,1): warning C4819: ファイルは、現在のコード ページ (932) で表示できない文字を含んでいます。データの損失を防ぐために、ファイルを Unicode 形式で保存してください。
+  (ソース ファイル '/02_ResourceFile/SceneFile/GameSceneCrush.cpp' をコンパイルしています)
+  
+C:\Users\dorae\Desktop\HAL\class3\FindWork\就職作品プロジェクト\02_ResourceFile\ObjectFile\Theme.h(1,1): warning C4819: ファイルは、現在のコード ページ (932) で表示できない文字を含んでいます。データの損失を防ぐために、ファイルを Unicode 形式で保存してください。
+  (ソース ファイル '/02_ResourceFile/DebugUI.cpp' をコンパイルしています)
+  
+C:\Users\dorae\Desktop\HAL\class3\FindWork\就職作品プロジェクト\02_ResourceFile\SceneFile\TransScene.h(1,1): warning C4819: ファイルは、現在のコード ページ (932) で表示できない文字を含んでいます。データの損失を防ぐために、ファイルを Unicode 形式で保存してください。
+  (ソース ファイル '/02_ResourceFile/Application.cpp' をコンパイルしています)
+  
+C:\Users\dorae\Desktop\HAL\class3\FindWork\就職作品プロジェクト\02_ResourceFile\SceneFile\TransScene.h(1,1): warning C4819: ファイルは、現在のコード ページ (932) で表示できない文字を含んでいます。データの損失を防ぐために、ファイルを Unicode 形式で保存してください。
+  (ソース ファイル '/02_ResourceFile/Game.cpp' をコンパイルしています)
+  
+C:\Users\dorae\Desktop\HAL\class3\FindWork\就職作品プロジェクト\02_ResourceFile\ObjectFile\Theme.h(1,1): warning C4819: ファイルは、現在のコード ページ (932) で表示できない文字を含んでいます。データの損失を防ぐために、ファイルを Unicode 形式で保存してください。
+  (ソース ファイル '/02_ResourceFile/Application.cpp' をコンパイルしています)
+  
+C:\Users\dorae\Desktop\HAL\class3\FindWork\就職作品プロジェクト\02_ResourceFile\Game.h(1,1): warning C4819: ファイルは、現在のコード ページ (932) で表示できない文字を含んでいます。データの損失を防ぐために、ファイルを Unicode 形式で保存してください。
+  (ソース ファイル '/02_ResourceFile/SceneFile/Scene.cpp' をコンパイルしています)
+  
+C:\Users\dorae\Desktop\HAL\class3\FindWork\就職作品プロジェクト\02_ResourceFile\SceneFile\TransScene.h(1,1): warning C4819: ファイルは、現在のコード ページ (932) で表示できない文字を含んでいます。データの損失を防ぐために、ファイルを Unicode 形式で保存してください。
+  (ソース ファイル '/02_ResourceFile/SceneFile/Scene.cpp' をコンパイルしています)
+  
+C:\Users\dorae\Desktop\HAL\class3\FindWork\就職作品プロジェクト\02_ResourceFile\SceneFile\TransScene.h(1,1): warning C4819: ファイルは、現在のコード ページ (932) で表示できない文字を含んでいます。データの損失を防ぐために、ファイルを Unicode 形式で保存してください。
+  (ソース ファイル '/02_ResourceFile/DebugGridLine.cpp' をコンパイルしています)
+  
+C:\Users\dorae\Desktop\HAL\class3\FindWork\就職作品プロジェクト\02_ResourceFile\ObjectFile\Theme.h(1,1): warning C4819: ファイルは、現在のコード ページ (932) で表示できない文字を含んでいます。データの損失を防ぐために、ファイルを Unicode 形式で保存してください。
+  (ソース ファイル '/02_ResourceFile/Game.cpp' をコンパイルしています)
+  
+C:\Users\dorae\Desktop\HAL\class3\FindWork\就職作品プロジェクト\02_ResourceFile\ObjectFile\Theme.h(1,1): warning C4819: ファイルは、現在のコード ページ (932) で表示できない文字を含んでいます。データの損失を防ぐために、ファイルを Unicode 形式で保存してください。
+  (ソース ファイル '/02_ResourceFile/DebugGridLine.cpp' をコンパイルしています)
+  
+C:\Users\dorae\Desktop\HAL\class3\FindWork\就職作品プロジェクト\02_ResourceFile\ObjectFile\Theme.h(1,1): warning C4819: ファイルは、現在のコード ページ (932) で表示できない文字を含んでいます。データの損失を防ぐために、ファイルを Unicode 形式で保存してください。
+  (ソース ファイル '/02_ResourceFile/SceneFile/Scene.cpp' をコンパイルしています)
+  
+C:\Users\dorae\Desktop\HAL\class3\FindWork\就職作品プロジェクト\02_ResourceFile\ObjectFile\Theme.h(1,1): warning C4819: ファイルは、現在のコード ページ (932) で表示できない文字を含んでいます。データの損失を防ぐために、ファイルを Unicode 形式で保存してください。
+  (ソース ファイル '/02_ResourceFile/SceneFile/GameSceneWait.cpp' をコンパイルしています)
+  
+C:\Users\dorae\Desktop\HAL\class3\FindWork\就職作品プロジェクト\02_ResourceFile\SceneFile\TransScene.h(1,1): warning C4819: ファイルは、現在のコード ページ (932) で表示できない文字を含んでいます。データの損失を防ぐために、ファイルを Unicode 形式で保存してください。
+  (ソース ファイル '/02_ResourceFile/SceneFile/Transition/TransitionBase.cpp' をコンパイルしています)
+  
+C:\Users\dorae\Desktop\HAL\class3\FindWork\就職作品プロジェクト\02_ResourceFile\Game.h(1,1): warning C4819: ファイルは、現在のコード ページ (932) で表示できない文字を含んでいます。データの損失を防ぐために、ファイルを Unicode 形式で保存してください。
+  (ソース ファイル '/02_ResourceFile/SceneFile/GameSceneWait.cpp' をコンパイルしています)
+  
+C:\Users\dorae\Desktop\HAL\class3\FindWork\就職作品プロジェクト\02_ResourceFile\ObjectFile\Theme.h(1,1): warning C4819: ファイルは、現在のコード ページ (932) で表示できない文字を含んでいます。データの損失を防ぐために、ファイルを Unicode 形式で保存してください。
+  (ソース ファイル '/02_ResourceFile/SceneFile/Transition/TransitionBase.cpp' をコンパイルしています)
+  
+C:\Users\dorae\Desktop\HAL\class3\FindWork\就職作品プロジェクト\02_ResourceFile\SceneFile\TransScene.h(1,1): warning C4819: ファイルは、現在のコード ページ (932) で表示できない文字を含んでいます。データの損失を防ぐために、ファイルを Unicode 形式で保存してください。
+  (ソース ファイル '/02_ResourceFile/SceneFile/GameSceneWait.cpp' をコンパイルしています)
+  
+C:\Users\dorae\Desktop\HAL\class3\FindWork\就職作品プロジェクト\02_ResourceFile\Game.h(115,47): error C2001: 定数が 2 行目に続いています。
+  (ソース ファイル '/02_ResourceFile/ObjectFile/Enemy.cpp' をコンパイルしています)
+  
+C:\Users\dorae\Desktop\HAL\class3\FindWork\就職作品プロジェクト\02_ResourceFile\Game.h(116,44): error C2001: 定数が 2 行目に続いています。
+  (ソース ファイル '/02_ResourceFile/ObjectFile/Enemy.cpp' をコンパイルしています)
+  
+C:\Users\dorae\Desktop\HAL\class3\FindWork\就職作品プロジェクト\02_ResourceFile\Game.h(138,53): error C2001: 定数が 2 行目に続いています。
+  (ソース ファイル '/02_ResourceFile/ObjectFile/Enemy.cpp' をコンパイルしています)
+  
+C:\Users\dorae\Desktop\HAL\class3\FindWork\就職作品プロジェクト\02_ResourceFile\Game.h(172,8): error C2001: 定数が 2 行目に続いています。
+  (ソース ファイル '/02_ResourceFile/ObjectFile/Enemy.cpp' をコンパイルしています)
+  
+C:\Users\dorae\Desktop\HAL\class3\FindWork\就職作品プロジェクト\02_ResourceFile\Game.h(115,47): error C2001: 定数が 2 行目に続いています。
+  (ソース ファイル '/02_ResourceFile/ObjectFile/Theme.cpp' をコンパイルしています)
+  
+C:\Users\dorae\Desktop\HAL\class3\FindWork\就職作品プロジェクト\02_ResourceFile\Game.h(205,26): error C2001: 定数が 2 行目に続いています。
+  (ソース ファイル '/02_ResourceFile/ObjectFile/Enemy.cpp' をコンパイルしています)
+  
+C:\Users\dorae\Desktop\HAL\class3\FindWork\就職作品プロジェクト\02_ResourceFile\Game.h(116,44): error C2001: 定数が 2 行目に続いています。
+  (ソース ファイル '/02_ResourceFile/ObjectFile/Theme.cpp' をコンパイルしています)
+  
+C:\Users\dorae\Desktop\HAL\class3\FindWork\就職作品プロジェクト\02_ResourceFile\Game.h(138,53): error C2001: 定数が 2 行目に続いています。
+  (ソース ファイル '/02_ResourceFile/ObjectFile/Theme.cpp' をコンパイルしています)
+  
+C:\Users\dorae\Desktop\HAL\class3\FindWork\就職作品プロジェクト\02_ResourceFile\Game.h(138,22): error C1075: '(': 一致するトークンが見つかりませんでした
+  (ソース ファイル '/02_ResourceFile/ObjectFile/Enemy.cpp' をコンパイルしています)
+  
+C:\Users\dorae\Desktop\HAL\class3\FindWork\就職作品プロジェクト\02_ResourceFile\Game.h(172,8): error C2001: 定数が 2 行目に続いています。
+  (ソース ファイル '/02_ResourceFile/ObjectFile/Theme.cpp' をコンパイルしています)
+  
+C:\Users\dorae\Desktop\HAL\class3\FindWork\就職作品プロジェクト\02_ResourceFile\Game.h(205,26): error C2001: 定数が 2 行目に続いています。
+  (ソース ファイル '/02_ResourceFile/ObjectFile/Theme.cpp' をコンパイルしています)
+  
+C:\Users\dorae\Desktop\HAL\class3\FindWork\就職作品プロジェクト\02_ResourceFile\Game.h(138,22): error C1075: '(': 一致するトークンが見つかりませんでした
+  (ソース ファイル '/02_ResourceFile/ObjectFile/Theme.cpp' をコンパイルしています)
+  
+  Zoom.cpp
+  Bullet.cpp
+C:\Users\dorae\Desktop\HAL\class3\FindWork\就職作品プロジェクト\02_ResourceFile\Game.h(115,47): error C2001: 定数が 2 行目に続いています。
+  (ソース ファイル '/02_ResourceFile/SceneFile/ResultScene.cpp' をコンパイルしています)
+  
+C:\Users\dorae\Desktop\HAL\class3\FindWork\就職作品プロジェクト\02_ResourceFile\Game.h(116,44): error C2001: 定数が 2 行目に続いています。
+  (ソース ファイル '/02_ResourceFile/SceneFile/ResultScene.cpp' をコンパイルしています)
+  
+C:\Users\dorae\Desktop\HAL\class3\FindWork\就職作品プロジェクト\02_ResourceFile\Game.h(138,53): error C2001: 定数が 2 行目に続いています。
+  (ソース ファイル '/02_ResourceFile/SceneFile/ResultScene.cpp' をコンパイルしています)
+  
+C:\Users\dorae\Desktop\HAL\class3\FindWork\就職作品プロジェクト\02_ResourceFile\Game.h(172,8): error C2001: 定数が 2 行目に続いています。
+  (ソース ファイル '/02_ResourceFile/SceneFile/ResultScene.cpp' をコンパイルしています)
+  
+C:\Users\dorae\Desktop\HAL\class3\FindWork\就職作品プロジェクト\02_ResourceFile\Game.h(205,26): error C2001: 定数が 2 行目に続いています。
+  (ソース ファイル '/02_ResourceFile/SceneFile/ResultScene.cpp' をコンパイルしています)
+  
+C:\Users\dorae\Desktop\HAL\class3\FindWork\就職作品プロジェクト\02_ResourceFile\Square.h(1,1): warning C4819: ファイルは、現在のコード ページ (932) で表示できない文字を含んでいます。データの損失を防ぐために、ファイルを Unicode 形式で保存してください。
+  (ソース ファイル '/02_ResourceFile/ObjectFile/Bullet.cpp' をコンパイルしています)
+  
+C:\Users\dorae\Desktop\HAL\class3\FindWork\就職作品プロジェクト\02_ResourceFile\SceneFile\Transition\Zoom.cpp(1,1): warning C4819: ファイルは、現在のコード ページ (932) で表示できない文字を含んでいます。データの損失を防ぐために、ファイルを Unicode 形式で保存してください。
+  (ソース ファイル '/02_ResourceFile/SceneFile/Transition/Zoom.cpp' をコンパイルしています)
+  
+C:\Users\dorae\Desktop\HAL\class3\FindWork\就職作品プロジェクト\02_ResourceFile\Game.h(115,47): error C2001: 定数が 2 行目に続いています。
+  (ソース ファイル '/02_ResourceFile/SceneFile/GameSceneJump.cpp' をコンパイルしています)
+  
+C:\Users\dorae\Desktop\HAL\class3\FindWork\就職作品プロジェクト\02_ResourceFile\Game.h(116,44): error C2001: 定数が 2 行目に続いています。
+  (ソース ファイル '/02_ResourceFile/SceneFile/GameSceneJump.cpp' をコンパイルしています)
+  
+C:\Users\dorae\Desktop\HAL\class3\FindWork\就職作品プロジェクト\02_ResourceFile\Game.h(138,22): error C1075: '(': 一致するトークンが見つかりませんでした
+  (ソース ファイル '/02_ResourceFile/SceneFile/ResultScene.cpp' をコンパイルしています)
+  
+C:\Users\dorae\Desktop\HAL\class3\FindWork\就職作品プロジェクト\02_ResourceFile\Game.h(138,53): error C2001: 定数が 2 行目に続いています。
+  (ソース ファイル '/02_ResourceFile/SceneFile/GameSceneJump.cpp' をコンパイルしています)
+  
+C:\Users\dorae\Desktop\HAL\class3\FindWork\就職作品プロジェクト\02_ResourceFile\Game.h(115,47): error C2001: 定数が 2 行目に続いています。
+  (ソース ファイル '/02_ResourceFile/Camera.cpp' をコンパイルしています)
+  
+C:\Users\dorae\Desktop\HAL\class3\FindWork\就職作品プロジェクト\02_ResourceFile\Game.h(115,47): error C2001: 定数が 2 行目に続いています。
+  (ソース ファイル '/02_ResourceFile/SceneFile/GameSceneCrush.cpp' をコンパイルしています)
+  
+C:\Users\dorae\Desktop\HAL\class3\FindWork\就職作品プロジェクト\02_ResourceFile\Game.h(172,8): error C2001: 定数が 2 行目に続いています。
+  (ソース ファイル '/02_ResourceFile/SceneFile/GameSceneJump.cpp' をコンパイルしています)
+  
+C:\Users\dorae\Desktop\HAL\class3\FindWork\就職作品プロジェクト\02_ResourceFile\Game.h(116,44): error C2001: 定数が 2 行目に続いています。
+  (ソース ファイル '/02_ResourceFile/Camera.cpp' をコンパイルしています)
+  
+C:\Users\dorae\Desktop\HAL\class3\FindWork\就職作品プロジェクト\02_ResourceFile\Game.h(116,44): error C2001: 定数が 2 行目に続いています。
+  (ソース ファイル '/02_ResourceFile/SceneFile/GameSceneCrush.cpp' をコンパイルしています)
+  
+C:\Users\dorae\Desktop\HAL\class3\FindWork\就職作品プロジェクト\02_ResourceFile\Game.h(205,26): error C2001: 定数が 2 行目に続いています。
+  (ソース ファイル '/02_ResourceFile/SceneFile/GameSceneJump.cpp' をコンパイルしています)
+  
+C:\Users\dorae\Desktop\HAL\class3\FindWork\就職作品プロジェクト\02_ResourceFile\Game.h(138,53): error C2001: 定数が 2 行目に続いています。
+  (ソース ファイル '/02_ResourceFile/Camera.cpp' をコンパイルしています)
+  
+C:\Users\dorae\Desktop\HAL\class3\FindWork\就職作品プロジェクト\02_ResourceFile\Game.h(138,53): error C2001: 定数が 2 行目に続いています。
+  (ソース ファイル '/02_ResourceFile/SceneFile/GameSceneCrush.cpp' をコンパイルしています)
+  
+C:\Users\dorae\Desktop\HAL\class3\FindWork\就職作品プロジェクト\02_ResourceFile\Game.h(172,8): error C2001: 定数が 2 行目に続いています。
+  (ソース ファイル '/02_ResourceFile/Camera.cpp' をコンパイルしています)
+  
+C:\Users\dorae\Desktop\HAL\class3\FindWork\就職作品プロジェクト\02_ResourceFile\Game.h(172,8): error C2001: 定数が 2 行目に続いています。
+  (ソース ファイル '/02_ResourceFile/SceneFile/GameSceneCrush.cpp' をコンパイルしています)
+  
+C:\Users\dorae\Desktop\HAL\class3\FindWork\就職作品プロジェクト\02_ResourceFile\Game.h(205,26): error C2001: 定数が 2 行目に続いています。
+  (ソース ファイル '/02_ResourceFile/Camera.cpp' をコンパイルしています)
+  
+C:\Users\dorae\Desktop\HAL\class3\FindWork\就職作品プロジェクト\02_ResourceFile\Game.h(205,26): error C2001: 定数が 2 行目に続いています。
+  (ソース ファイル '/02_ResourceFile/SceneFile/GameSceneCrush.cpp' をコンパイルしています)
+  
+C:\Users\dorae\Desktop\HAL\class3\FindWork\就職作品プロジェクト\02_ResourceFile\Game.h(115,47): error C2001: 定数が 2 行目に続いています。
+  (ソース ファイル '/02_ResourceFile/SceneFile/GameSceneSlice.cpp' をコンパイルしています)
+  
+C:\Users\dorae\Desktop\HAL\class3\FindWork\就職作品プロジェクト\02_ResourceFile\Game.h(138,22): error C1075: '(': 一致するトークンが見つかりませんでした
+  (ソース ファイル '/02_ResourceFile/Camera.cpp' をコンパイルしています)
+  
+C:\Users\dorae\Desktop\HAL\class3\FindWork\就職作品プロジェクト\02_ResourceFile\Game.h(116,44): error C2001: 定数が 2 行目に続いています。
+  (ソース ファイル '/02_ResourceFile/SceneFile/GameSceneSlice.cpp' をコンパイルしています)
+  
+C:\Users\dorae\Desktop\HAL\class3\FindWork\就職作品プロジェクト\02_ResourceFile\Game.h(138,53): error C2001: 定数が 2 行目に続いています。
+  (ソース ファイル '/02_ResourceFile/SceneFile/GameSceneSlice.cpp' をコンパイルしています)
+  
+C:\Users\dorae\Desktop\HAL\class3\FindWork\就職作品プロジェクト\02_ResourceFile\Game.h(172,8): error C2001: 定数が 2 行目に続いています。
+  (ソース ファイル '/02_ResourceFile/SceneFile/GameSceneSlice.cpp' をコンパイルしています)
+  
+C:\Users\dorae\Desktop\HAL\class3\FindWork\就職作品プロジェクト\02_ResourceFile\Game.h(138,22): error C1075: '(': 一致するトークンが見つかりませんでした
+  (ソース ファイル '/02_ResourceFile/SceneFile/GameSceneCrush.cpp' をコンパイルしています)
+  
+C:\Users\dorae\Desktop\HAL\class3\FindWork\就職作品プロジェクト\02_ResourceFile\Game.h(138,22): error C1075: '(': 一致するトークンが見つかりませんでした
+  (ソース ファイル '/02_ResourceFile/SceneFile/GameSceneJump.cpp' をコンパイルしています)
+  
+C:\Users\dorae\Desktop\HAL\class3\FindWork\就職作品プロジェクト\02_ResourceFile\Game.h(115,47): error C2001: 定数が 2 行目に続いています。
+  (ソース ファイル '/02_ResourceFile/SceneFile/Transition/Wipe.cpp' をコンパイルしています)
+  
+C:\Users\dorae\Desktop\HAL\class3\FindWork\就職作品プロジェクト\02_ResourceFile\Game.h(116,44): error C2001: 定数が 2 行目に続いています。
+  (ソース ファイル '/02_ResourceFile/SceneFile/Transition/Wipe.cpp' をコンパイルしています)
+  
+C:\Users\dorae\Desktop\HAL\class3\FindWork\就職作品プロジェクト\02_ResourceFile\Game.h(138,53): error C2001: 定数が 2 行目に続いています。
+  (ソース ファイル '/02_ResourceFile/SceneFile/Transition/Wipe.cpp' をコンパイルしています)
+  
+C:\Users\dorae\Desktop\HAL\class3\FindWork\就職作品プロジェクト\02_ResourceFile\Game.h(172,8): error C2001: 定数が 2 行目に続いています。
+  (ソース ファイル '/02_ResourceFile/SceneFile/Transition/Wipe.cpp' をコンパイルしています)
+  
+C:\Users\dorae\Desktop\HAL\class3\FindWork\就職作品プロジェクト\02_ResourceFile\Game.h(205,26): error C2001: 定数が 2 行目に続いています。
+  (ソース ファイル '/02_ResourceFile/SceneFile/Transition/Wipe.cpp' をコンパイルしています)
+  
+C:\Users\dorae\Desktop\HAL\class3\FindWork\就職作品プロジェクト\02_ResourceFile\Game.h(205,26): error C2001: 定数が 2 行目に続いています。
+  (ソース ファイル '/02_ResourceFile/SceneFile/GameSceneSlice.cpp' をコンパイルしています)
+  
+C:\Users\dorae\Desktop\HAL\class3\FindWork\就職作品プロジェクト\02_ResourceFile\Game.h(138,22): error C1075: '(': 一致するトークンが見つかりませんでした
+  Cube.cpp
+  (ソース ファイル '/02_ResourceFile/SceneFile/Transition/Wipe.cpp' をコンパイルしています)
+  
+  Model.cpp
+C:\Users\dorae\Desktop\HAL\class3\FindWork\就職作品プロジェクト\02_ResourceFile\Game.h(115,47): error C2001: 定数が 2 行目に続いています。
+  (ソース ファイル '/02_ResourceFile/ObjectFile/Bomber.cpp' をコンパイルしています)
+  
+C:\Users\dorae\Desktop\HAL\class3\FindWork\就職作品プロジェクト\02_ResourceFile\Game.h(116,44): error C2001: 定数が 2 行目に続いています。
+  (ソース ファイル '/02_ResourceFile/ObjectFile/Bomber.cpp' をコンパイルしています)
+  
+C:\Users\dorae\Desktop\HAL\class3\FindWork\就職作品プロジェクト\02_ResourceFile\Game.h(138,53): error C2001: 定数が 2 行目に続いています。
+  (ソース ファイル '/02_ResourceFile/ObjectFile/Bomber.cpp' をコンパイルしています)
+  
+C:\Users\dorae\Desktop\HAL\class3\FindWork\就職作品プロジェクト\02_ResourceFile\Game.h(172,8): error C2001: 定数が 2 行目に続いています。
+  (ソース ファイル '/02_ResourceFile/ObjectFile/Bomber.cpp' をコンパイルしています)
+  
+C:\Users\dorae\Desktop\HAL\class3\FindWork\就職作品プロジェクト\02_ResourceFile\Game.h(205,26): error C2001: 定数が 2 行目に続いています。
+  (ソース ファイル '/02_ResourceFile/ObjectFile/Bomber.cpp' をコンパイルしています)
+  
+C:\Users\dorae\Desktop\HAL\class3\FindWork\就職作品プロジェクト\02_ResourceFile\Game.h(138,22): error C1075: '(': 一致するトークンが見つかりませんでした
+  (ソース ファイル '/02_ResourceFile/ObjectFile/Bomber.cpp' をコンパイルしています)
+  
+  Object.cpp
+C:\Users\dorae\Desktop\HAL\class3\FindWork\就職作品プロジェクト\02_ResourceFile\Game.h(138,22): error C1075: '(': 一致するトークンが見つかりませんでした
+  (ソース ファイル '/02_ResourceFile/SceneFile/GameSceneSlice.cpp' をコンパイルしています)
+  
+  Sphere.cpp
+  Skydome.cpp
+  GameSceneExe.cpp
+C:\Users\dorae\Desktop\HAL\class3\FindWork\就職作品プロジェクト\02_ResourceFile\Game.h(115,47): error C2001: 定数が 2 行目に続いています。
+  (ソース ファイル '/02_ResourceFile/Application.cpp' をコンパイルしています)
+  
+C:\Users\dorae\Desktop\HAL\class3\FindWork\就職作品プロジェクト\02_ResourceFile\Game.h(116,44): error C2001: 定数が 2 行目に続いています。
+  (ソース ファイル '/02_ResourceFile/Application.cpp' をコンパイルしています)
+  
+C:\Users\dorae\Desktop\HAL\class3\FindWork\就職作品プロジェクト\02_ResourceFile\Game.h(138,53): error C2001: 定数が 2 行目に続いています。
+  (ソース ファイル '/02_ResourceFile/Application.cpp' をコンパイルしています)
+  
+C:\Users\dorae\Desktop\HAL\class3\FindWork\就職作品プロジェクト\02_ResourceFile\Game.h(172,8): error C2001: 定数が 2 行目に続いています。
+  (ソース ファイル '/02_ResourceFile/Application.cpp' をコンパイルしています)
+  
+C:\Users\dorae\Desktop\HAL\class3\FindWork\就職作品プロジェクト\02_ResourceFile\Game.h(205,26): error C2001: 定数が 2 行目に続いています。
+  (ソース ファイル '/02_ResourceFile/Application.cpp' をコンパイルしています)
+  
+C:\Users\dorae\Desktop\HAL\class3\FindWork\就職作品プロジェクト\02_ResourceFile\Game.h(138,22): error C1075: '(': 一致するトークンが見つかりませんでした
+  (ソース ファイル '/02_ResourceFile/Application.cpp' をコンパイルしています)
+  
+  SelectScene.cpp
+C:\Users\dorae\Desktop\HAL\class3\FindWork\就職作品プロジェクト\02_ResourceFile\Game.h(115,47): error C2001: 定数が 2 行目に続いています。
+  (ソース ファイル '/02_ResourceFile/DebugUI.cpp' をコンパイルしています)
+  
+C:\Users\dorae\Desktop\HAL\class3\FindWork\就職作品プロジェクト\02_ResourceFile\Game.h(116,44): error C2001: 定数が 2 行目に続いています。
+  (ソース ファイル '/02_ResourceFile/DebugUI.cpp' をコンパイルしています)
+  
+C:\Users\dorae\Desktop\HAL\class3\FindWork\就職作品プロジェクト\02_ResourceFile\Game.h(138,53): error C2001: 定数が 2 行目に続いています。
+  (ソース ファイル '/02_ResourceFile/DebugUI.cpp' をコンパイルしています)
+  
+C:\Users\dorae\Desktop\HAL\class3\FindWork\就職作品プロジェクト\02_ResourceFile\Game.h(172,8): error C2001: 定数が 2 行目に続いています。
+  (ソース ファイル '/02_ResourceFile/DebugUI.cpp' をコンパイルしています)
+  
+C:\Users\dorae\Desktop\HAL\class3\FindWork\就職作品プロジェクト\02_ResourceFile\Game.h(205,26): error C2001: 定数が 2 行目に続いています。
+  (ソース ファイル '/02_ResourceFile/DebugUI.cpp' をコンパイルしています)
+  
+C:\Users\dorae\Desktop\HAL\class3\FindWork\就職作品プロジェクト\02_ResourceFile\Game.h(115,47): error C2001: 定数が 2 行目に続いています。
+  (ソース ファイル '/02_ResourceFile/DebugGridLine.cpp' をコンパイルしています)
+  
+C:\Users\dorae\Desktop\HAL\class3\FindWork\就職作品プロジェクト\02_ResourceFile\Game.h(116,44): error C2001: 定数が 2 行目に続いています。
+  (ソース ファイル '/02_ResourceFile/DebugGridLine.cpp' をコンパイルしています)
+  
+C:\Users\dorae\Desktop\HAL\class3\FindWork\就職作品プロジェクト\02_ResourceFile\Game.h(138,22): error C1075: '(': 一致するトークンが見つかりませんでした
+  (ソース ファイル '/02_ResourceFile/DebugUI.cpp' をコンパイルしています)
+  
+C:\Users\dorae\Desktop\HAL\class3\FindWork\就職作品プロジェクト\02_ResourceFile\Game.h(138,53): error C2001: 定数が 2 行目に続いています。
+  (ソース ファイル '/02_ResourceFile/DebugGridLine.cpp' をコンパイルしています)
+  
+C:\Users\dorae\Desktop\HAL\class3\FindWork\就職作品プロジェクト\02_ResourceFile\Game.h(172,8): error C2001: 定数が 2 行目に続いています。
+  (ソース ファイル '/02_ResourceFile/DebugGridLine.cpp' をコンパイルしています)
+  
+C:\Users\dorae\Desktop\HAL\class3\FindWork\就職作品プロジェクト\02_ResourceFile\Game.h(205,26): error C2001: 定数が 2 行目に続いています。
+  (ソース ファイル '/02_ResourceFile/DebugGridLine.cpp' をコンパイルしています)
+  
+C:\Users\dorae\Desktop\HAL\class3\FindWork\就職作品プロジェクト\02_ResourceFile\Game.h(138,22): error C1075: '(': 一致するトークンが見つかりませんでした
+  (ソース ファイル '/02_ResourceFile/DebugGridLine.cpp' をコンパイルしています)
+  
+  TitleScene.cpp
+  Fade.cpp
+  TransScene.cpp
+C:\Users\dorae\Desktop\HAL\class3\FindWork\就職作品プロジェクト\02_ResourceFile\Game.h(115,47): error C2001: 定数が 2 行目に続いています。
+  (ソース ファイル '/02_ResourceFile/Game.cpp' をコンパイルしています)
+  
+C:\Users\dorae\Desktop\HAL\class3\FindWork\就職作品プロジェクト\02_ResourceFile\Game.h(116,44): error C2001: 定数が 2 行目に続いています。
+  (ソース ファイル '/02_ResourceFile/Game.cpp' をコンパイルしています)
+  
+C:\Users\dorae\Desktop\HAL\class3\FindWork\就職作品プロジェクト\02_ResourceFile\Game.h(138,53): error C2001: 定数が 2 行目に続いています。
+  (ソース ファイル '/02_ResourceFile/Game.cpp' をコンパイルしています)
+  
+C:\Users\dorae\Desktop\HAL\class3\FindWork\就職作品プロジェクト\02_ResourceFile\Game.h(172,8): error C2001: 定数が 2 行目に続いています。
+  (ソース ファイル '/02_ResourceFile/Game.cpp' をコンパイルしています)
+  
+C:\Users\dorae\Desktop\HAL\class3\FindWork\就職作品プロジェクト\02_ResourceFile\Game.h(205,26): error C2001: 定数が 2 行目に続いています。
+  (ソース ファイル '/02_ResourceFile/Game.cpp' をコンパイルしています)
+  
+C:\Users\dorae\Desktop\HAL\class3\FindWork\就職作品プロジェクト\02_ResourceFile\SceneFile\Transition\Fade.cpp(1,1): warning C4819: ファイルは、現在のコード ページ (932) で表示できない文字を含んでいます。データの損失を防ぐために、ファイルを Unicode 形式で保存してください。
+  (ソース ファイル '/02_ResourceFile/SceneFile/Transition/Fade.cpp' をコンパイルしています)
+  
+C:\Users\dorae\Desktop\HAL\class3\FindWork\就職作品プロジェクト\02_ResourceFile\SceneFile\Transition\TransitionBase.h(1,1): warning C4819: ファイルは、現在のコード ページ (932) で表示できない文字を含んでいます。データの損失を防ぐために、ファイルを Unicode 形式で保存してください。
+  (ソース ファイル '/02_ResourceFile/SceneFile/Transition/Fade.cpp' をコンパイルしています)
+  
+C:\Users\dorae\Desktop\HAL\class3\FindWork\就職作品プロジェクト\02_ResourceFile\SceneFile\TransScene.cpp(1,1): warning C4819: ファイルは、現在のコード ページ (932) で表示できない文字を含んでいます。データの損失を防ぐために、ファイルを Unicode 形式で保存してください。
+  (ソース ファイル '/02_ResourceFile/SceneFile/TransScene.cpp' をコンパイルしています)
+  
+C:\Users\dorae\Desktop\HAL\class3\FindWork\就職作品プロジェクト\02_ResourceFile\SceneFile\TransScene.h(1,1): warning C4819: ファイルは、現在のコード ページ (932) で表示できない文字を含んでいます。データの損失を防ぐために、ファイルを Unicode 形式で保存してください。
+  (ソース ファイル '/02_ResourceFile/SceneFile/TransScene.cpp' をコンパイルしています)
+  
+C:\Users\dorae\Desktop\HAL\class3\FindWork\就職作品プロジェクト\02_ResourceFile\Game.h(115,47): error C2001: 定数が 2 行目に続いています。
+  (ソース ファイル '/02_ResourceFile/SceneFile/Scene.cpp' をコンパイルしています)
+  
+C:\Users\dorae\Desktop\HAL\class3\FindWork\就職作品プロジェクト\02_ResourceFile\Game.h(116,44): error C2001: 定数が 2 行目に続いています。
+  (ソース ファイル '/02_ResourceFile/SceneFile/Scene.cpp' をコンパイルしています)
+  
+C:\Users\dorae\Desktop\HAL\class3\FindWork\就職作品プロジェクト\02_ResourceFile\Game.h(138,53): error C2001: 定数が 2 行目に続いています。
+  (ソース ファイル '/02_ResourceFile/SceneFile/Scene.cpp' をコンパイルしています)
+  
+C:\Users\dorae\Desktop\HAL\class3\FindWork\就職作品プロジェクト\02_ResourceFile\Game.h(172,8): error C2001: 定数が 2 行目に続いています。
+  (ソース ファイル '/02_ResourceFile/SceneFile/Scene.cpp' をコンパイルしています)
+  
+C:\Users\dorae\Desktop\HAL\class3\FindWork\就職作品プロジェクト\02_ResourceFile\Game.h(205,26): error C2001: 定数が 2 行目に続いています。
+  (ソース ファイル '/02_ResourceFile/SceneFile/Scene.cpp' をコンパイルしています)
+  
+C:\Users\dorae\Desktop\HAL\class3\FindWork\就職作品プロジェクト\02_ResourceFile\Game.h(138,22): error C1075: '(': 一致するトークンが見つかりませんでした
+  (ソース ファイル '/02_ResourceFile/SceneFile/Scene.cpp' をコンパイルしています)
+  
+C:\Users\dorae\Desktop\HAL\class3\FindWork\就職作品プロジェクト\02_ResourceFile\Game.h(115,47): error C2001: 定数が 2 行目に続いています。
+  (ソース ファイル '/02_ResourceFile/SceneFile/Transition/TransitionBase.cpp' をコンパイルしています)
+  
+C:\Users\dorae\Desktop\HAL\class3\FindWork\就職作品プロジェクト\02_ResourceFile\Game.h(116,44): error C2001: 定数が 2 行目に続いています。
+  (ソース ファイル '/02_ResourceFile/SceneFile/Transition/TransitionBase.cpp' をコンパイルしています)
+  
+C:\Users\dorae\Desktop\HAL\class3\FindWork\就職作品プロジェクト\02_ResourceFile\Game.h(138,53): error C2001: 定数が 2 行目に続いています。
+  (ソース ファイル '/02_ResourceFile/SceneFile/Transition/TransitionBase.cpp' をコンパイルしています)
+  
+C:\Users\dorae\Desktop\HAL\class3\FindWork\就職作品プロジェクト\02_ResourceFile\Game.h(172,8): error C2001: 定数が 2 行目に続いています。
+  (ソース ファイル '/02_ResourceFile/SceneFile/Transition/TransitionBase.cpp' をコンパイルしています)
+  
+C:\Users\dorae\Desktop\HAL\class3\FindWork\就職作品プロジェクト\02_ResourceFile\Game.h(205,26): error C2001: 定数が 2 行目に続いています。
+  (ソース ファイル '/02_ResourceFile/SceneFile/Transition/TransitionBase.cpp' をコンパイルしています)
+  
+C:\Users\dorae\Desktop\HAL\class3\FindWork\就職作品プロジェクト\02_ResourceFile\Game.h(138,22): error C1075: '(': 一致するトークンが見つかりませんでした
+  (ソース ファイル '/02_ResourceFile/Game.cpp' をコンパイルしています)
+  
+C:\Users\dorae\Desktop\HAL\class3\FindWork\就職作品プロジェクト\02_ResourceFile\SceneFile\Transition\TransitionBase.cpp(209,18): error C2001: 定数が 2 行目に続いています。
+  (ソース ファイル '/02_ResourceFile/SceneFile/Transition/TransitionBase.cpp' をコンパイルしています)
+  
+C:\Users\dorae\Desktop\HAL\class3\FindWork\就職作品プロジェクト\02_ResourceFile\Game.h(138,22): error C1075: '(': 一致するトークンが見つかりませんでした
+  (ソース ファイル '/02_ResourceFile/SceneFile/Transition/TransitionBase.cpp' をコンパイルしています)
+  
+  Square.cpp
+C:\Users\dorae\Desktop\HAL\class3\FindWork\就職作品プロジェクト\02_ResourceFile\Square.cpp(1,1): warning C4819: ファイルは、現在のコード ページ (932) で表示できない文字を含んでいます。データの損失を防ぐために、ファイルを Unicode 形式で保存してください。
+  (ソース ファイル '/02_ResourceFile/Square.cpp' をコンパイルしています)
+  
+C:\Users\dorae\Desktop\HAL\class3\FindWork\就職作品プロジェクト\02_ResourceFile\Square.h(1,1): warning C4819: ファイルは、現在のコード ページ (932) で表示できない文字を含んでいます。データの損失を防ぐために、ファイルを Unicode 形式で保存してください。
+  (ソース ファイル '/02_ResourceFile/Square.cpp' をコンパイルしています)
+  
+C:\Users\dorae\Desktop\HAL\class3\FindWork\就職作品プロジェクト\02_ResourceFile\SceneFile\Transition\TransitionBase.h(1,1): warning C4819: ファイルは、現在のコード ページ (932) で表示できない文字を含んでいます。データの損失を防ぐために、ファイルを Unicode 形式で保存してください。
+  (ソース ファイル '/02_ResourceFile/SceneFile/Transition/Zoom.cpp' をコンパイルしています)
+  
+C:\Users\dorae\Desktop\HAL\class3\FindWork\就職作品プロジェクト\02_ResourceFile\Game.h(115,47): error C2001: 定数が 2 行目に続いています。
+  (ソース ファイル '/02_ResourceFile/SceneFile/GameSceneWait.cpp' をコンパイルしています)
+  
+C:\Users\dorae\Desktop\HAL\class3\FindWork\就職作品プロジェクト\02_ResourceFile\Game.h(116,44): error C2001: 定数が 2 行目に続いています。
+  (ソース ファイル '/02_ResourceFile/SceneFile/GameSceneWait.cpp' をコンパイルしています)
+  
+C:\Users\dorae\Desktop\HAL\class3\FindWork\就職作品プロジェクト\02_ResourceFile\Game.h(138,53): error C2001: 定数が 2 行目に続いています。
+  (ソース ファイル '/02_ResourceFile/SceneFile/GameSceneWait.cpp' をコンパイルしています)
+  
+C:\Users\dorae\Desktop\HAL\class3\FindWork\就職作品プロジェクト\02_ResourceFile\Game.h(172,8): error C2001: 定数が 2 行目に続いています。
+  (ソース ファイル '/02_ResourceFile/SceneFile/GameSceneWait.cpp' をコンパイルしています)
+  
+C:\Users\dorae\Desktop\HAL\class3\FindWork\就職作品プロジェクト\02_ResourceFile\Game.h(205,26): error C2001: 定数が 2 行目に続いています。
+  (ソース ファイル '/02_ResourceFile/SceneFile/GameSceneWait.cpp' をコンパイルしています)
+  
+C:\Users\dorae\Desktop\HAL\class3\FindWork\就職作品プロジェクト\02_ResourceFile\Game.h(138,22): error C1075: '(': 一致するトークンが見つかりませんでした
+  (ソース ファイル '/02_ResourceFile/SceneFile/GameSceneWait.cpp' をコンパイルしています)
+  
+C:\Users\dorae\Desktop\HAL\class3\FindWork\就職作品プロジェクト\02_ResourceFile\Renderer.h(1,1): warning C4819: ファイルは、現在のコード ページ (932) で表示できない文字を含んでいます。データの損失を防ぐために、ファイルを Unicode 形式で保存してください。
+  (ソース ファイル '/02_ResourceFile/ObjectFile/Cube.cpp' をコンパイルしています)
+  
+C:\Users\dorae\Desktop\HAL\class3\FindWork\就職作品プロジェクト\02_ResourceFile\Renderer.h(1,1): warning C4819: ファイルは、現在のコード ページ (932) で表示できない文字を含んでいます。データの損失を防ぐために、ファイルを Unicode 形式で保存してください。
+  (ソース ファイル '/02_ResourceFile/ObjectFile/Bullet.cpp' をコンパイルしています)
+  
+C:\Users\dorae\Desktop\HAL\class3\FindWork\就職作品プロジェクト\02_ResourceFile\Game.h(1,1): warning C4819: ファイルは、現在のコード ページ (932) で表示できない文字を含んでいます。データの損失を防ぐために、ファイルを Unicode 形式で保存してください。
+  (ソース ファイル '/02_ResourceFile/ObjectFile/Bullet.cpp' をコンパイルしています)
+  
+C:\Users\dorae\Desktop\HAL\class3\FindWork\就職作品プロジェクト\02_ResourceFile\Renderer.h(1,1): warning C4819: ファイルは、現在のコード ページ (932) で表示できない文字を含んでいます。データの損失を防ぐために、ファイルを Unicode 形式で保存してください。
+  (ソース ファイル '/02_ResourceFile/SceneFile/SelectScene.cpp' をコンパイルしています)
+  
+C:\Users\dorae\Desktop\HAL\class3\FindWork\就職作品プロジェクト\02_ResourceFile\Game.h(1,1): warning C4819: ファイルは、現在のコード ページ (932) で表示できない文字を含んでいます。データの損失を防ぐために、ファイルを Unicode 形式で保存してください。
+  (ソース ファイル '/02_ResourceFile/ObjectFile/Cube.cpp' をコンパイルしています)
+  
+C:\Users\dorae\Desktop\HAL\class3\FindWork\就職作品プロジェクト\02_ResourceFile\Renderer.h(1,1): warning C4819: ファイルは、現在のコード ページ (932) で表示できない文字を含んでいます。データの損失を防ぐために、ファイルを Unicode 形式で保存してください。
+  (ソース ファイル '/02_ResourceFile/ObjectFile/Model.cpp' をコンパイルしています)
+  
+C:\Users\dorae\Desktop\HAL\class3\FindWork\就職作品プロジェクト\02_ResourceFile\SceneFile\Transition\TransitionBase.h(1,1): warning C4819: ファイルは、現在のコード ページ (932) で表示できない文字を含んでいます。データの損失を防ぐために、ファイルを Unicode 形式で保存してください。
+  (ソース ファイル '/02_ResourceFile/ObjectFile/Bullet.cpp' をコンパイルしています)
+  
+C:\Users\dorae\Desktop\HAL\class3\FindWork\就職作品プロジェクト\02_ResourceFile\Renderer.h(1,1): warning C4819: ファイルは、現在のコード ページ (932) で表示できない文字を含んでいます。データの損失を防ぐために、ファイルを Unicode 形式で保存してください。
+  (ソース ファイル '/02_ResourceFile/ObjectFile/Sphere.cpp' をコンパイルしています)
+  
+C:\Users\dorae\Desktop\HAL\class3\FindWork\就職作品プロジェクト\02_ResourceFile\SceneFile\Transition\TransitionBase.h(1,1): warning C4819: ファイルは、現在のコード ページ (932) で表示できない文字を含んでいます。データの損失を防ぐために、ファイルを Unicode 形式で保存してください。
+  (ソース ファイル '/02_ResourceFile/SceneFile/SelectScene.cpp' をコンパイルしています)
+  
+C:\Users\dorae\Desktop\HAL\class3\FindWork\就職作品プロジェクト\02_ResourceFile\Renderer.h(1,1): warning C4819: ファイルは、現在のコード ページ (932) で表示できない文字を含んでいます。データの損失を防ぐために、ファイルを Unicode 形式で保存してください。
+  (ソース ファイル '/02_ResourceFile/ObjectFile/Skydome.cpp' をコンパイルしています)
+  
+C:\Users\dorae\Desktop\HAL\class3\FindWork\就職作品プロジェクト\02_ResourceFile\Renderer.h(1,1): warning C4819: ファイルは、現在のコード ページ (932) で表示できない文字を含んでいます。データの損失を防ぐために、ファイルを Unicode 形式で保存してください。
+  (ソース ファイル '/02_ResourceFile/SceneFile/GameSceneExe.cpp' をコンパイルしています)
+  
+C:\Users\dorae\Desktop\HAL\class3\FindWork\就職作品プロジェクト\02_ResourceFile\SceneFile\Transition\TransitionBase.h(1,1): warning C4819: ファイルは、現在のコード ページ (932) で表示できない文字を含んでいます。データの損失を防ぐために、ファイルを Unicode 形式で保存してください。
+  (ソース ファイル '/02_ResourceFile/ObjectFile/Cube.cpp' をコンパイルしています)
+  
+C:\Users\dorae\Desktop\HAL\class3\FindWork\就職作品プロジェクト\02_ResourceFile\Renderer.h(1,1): warning C4819: ファイルは、現在のコード ページ (932) で表示できない文字を含んでいます。データの損失を防ぐために、ファイルを Unicode 形式で保存してください。
+  (ソース ファイル '/02_ResourceFile/ObjectFile/Object.cpp' をコンパイルしています)
+  
+C:\Users\dorae\Desktop\HAL\class3\FindWork\就職作品プロジェクト\02_ResourceFile\SceneFile\Transition\TransitionBase.h(1,1): warning C4819: ファイルは、現在のコード ページ (932) で表示できない文字を含んでいます。データの損失を防ぐために、ファイルを Unicode 形式で保存してください。
+  (ソース ファイル '/02_ResourceFile/SceneFile/GameSceneExe.cpp' をコンパイルしています)
+  
+C:\Users\dorae\Desktop\HAL\class3\FindWork\就職作品プロジェクト\02_ResourceFile\Game.h(1,1): warning C4819: ファイルは、現在のコード ページ (932) で表示できない文字を含んでいます。データの損失を防ぐために、ファイルを Unicode 形式で保存してください。
+  (ソース ファイル '/02_ResourceFile/ObjectFile/Object.cpp' をコンパイルしています)
+  
+C:\Users\dorae\Desktop\HAL\class3\FindWork\就職作品プロジェクト\02_ResourceFile\Game.h(1,1): warning C4819: ファイルは、現在のコード ページ (932) で表示できない文字を含んでいます。データの損失を防ぐために、ファイルを Unicode 形式で保存してください。
+  (ソース ファイル '/02_ResourceFile/ObjectFile/Sphere.cpp' をコンパイルしています)
+  
+C:\Users\dorae\Desktop\HAL\class3\FindWork\就職作品プロジェクト\02_ResourceFile\Renderer.h(1,1): warning C4819: ファイルは、現在のコード ページ (932) で表示できない文字を含んでいます。データの損失を防ぐために、ファイルを Unicode 形式で保存してください。
+  (ソース ファイル '/02_ResourceFile/SceneFile/TransScene.cpp' をコンパイルしています)
+  
+C:\Users\dorae\Desktop\HAL\class3\FindWork\就職作品プロジェクト\02_ResourceFile\Game.h(1,1): warning C4819: ファイルは、現在のコード ページ (932) で表示できない文字を含んでいます。データの損失を防ぐために、ファイルを Unicode 形式で保存してください。
+  (ソース ファイル '/02_ResourceFile/ObjectFile/Skydome.cpp' をコンパイルしています)
+  
+C:\Users\dorae\Desktop\HAL\class3\FindWork\就職作品プロジェクト\02_ResourceFile\SceneFile\Transition\TransitionBase.h(1,1): warning C4819: ファイルは、現在のコード ページ (932) で表示できない文字を含んでいます。データの損失を防ぐために、ファイルを Unicode 形式で保存してください。
+  (ソース ファイル '/02_ResourceFile/ObjectFile/Sphere.cpp' をコンパイルしています)
+  
+C:\Users\dorae\Desktop\HAL\class3\FindWork\就職作品プロジェクト\02_ResourceFile\SceneFile\Transition\TransitionBase.h(1,1): warning C4819: ファイルは、現在のコード ページ (932) で表示できない文字を含んでいます。データの損失を防ぐために、ファイルを Unicode 形式で保存してください。
+  (ソース ファイル '/02_ResourceFile/SceneFile/TransScene.cpp' をコンパイルしています)
+  
+C:\Users\dorae\Desktop\HAL\class3\FindWork\就職作品プロジェクト\02_ResourceFile\SceneFile\Transition\TransitionBase.h(1,1): warning C4819: ファイルは、現在のコード ページ (932) で表示できない文字を含んでいます。データの損失を防ぐために、ファイルを Unicode 形式で保存してください。
+  (ソース ファイル '/02_ResourceFile/ObjectFile/Object.cpp' をコンパイルしています)
+  
+C:\Users\dorae\Desktop\HAL\class3\FindWork\就職作品プロジェクト\02_ResourceFile\Square.h(1,1): warning C4819: ファイルは、現在のコード ページ (932) で表示できない文字を含んでいます。データの損失を防ぐために、ファイルを Unicode 形式で保存してください。
+  (ソース ファイル '/02_ResourceFile/ObjectFile/Cube.cpp' をコンパイルしています)
+  
+C:\Users\dorae\Desktop\HAL\class3\FindWork\就職作品プロジェクト\02_ResourceFile\SceneFile\Transition\TransitionBase.h(1,1): warning C4819: ファイルは、現在のコード ページ (932) で表示できない文字を含んでいます。データの損失を防ぐために、ファイルを Unicode 形式で保存してください。
+  (ソース ファイル '/02_ResourceFile/ObjectFile/Skydome.cpp' をコンパイルしています)
+  
+C:\Users\dorae\Desktop\HAL\class3\FindWork\就職作品プロジェクト\02_ResourceFile\Square.h(1,1): warning C4819: ファイルは、現在のコード ページ (932) で表示できない文字を含んでいます。データの損失を防ぐために、ファイルを Unicode 形式で保存してください。
+  (ソース ファイル '/02_ResourceFile/SceneFile/SelectScene.cpp' をコンパイルしています)
+  
+C:\Users\dorae\Desktop\HAL\class3\FindWork\就職作品プロジェクト\02_ResourceFile\Renderer.h(1,1): warning C4819: ファイルは、現在のコード ページ (932) で表示できない文字を含んでいます。データの損失を防ぐために、ファイルを Unicode 形式で保存してください。
+  (ソース ファイル '/02_ResourceFile/SceneFile/TitleScene.cpp' をコンパイルしています)
+  
+C:\Users\dorae\Desktop\HAL\class3\FindWork\就職作品プロジェクト\02_ResourceFile\Renderer.h(1,1): warning C4819: ファイルは、現在のコード ページ (932) で表示できない文字を含んでいます。データの損失を防ぐために、ファイルを Unicode 形式で保存してください。
+  (ソース ファイル '/02_ResourceFile/SceneFile/Transition/Fade.cpp' をコンパイルしています)
+  
+C:\Users\dorae\Desktop\HAL\class3\FindWork\就職作品プロジェクト\02_ResourceFile\SceneFile\Transition\TransitionBase.h(1,1): warning C4819: ファイルは、現在のコード ページ (932) で表示できない文字を含んでいます。データの損失を防ぐために、ファイルを Unicode 形式で保存してください。
+  (ソース ファイル '/02_ResourceFile/SceneFile/TitleScene.cpp' をコンパイルしています)
+  
+C:\Users\dorae\Desktop\HAL\class3\FindWork\就職作品プロジェクト\02_ResourceFile\Square.h(1,1): warning C4819: ファイルは、現在のコード ページ (932) で表示できない文字を含んでいます。データの損失を防ぐために、ファイルを Unicode 形式で保存してください。
+  (ソース ファイル '/02_ResourceFile/SceneFile/GameSceneExe.cpp' をコンパイルしています)
+  
+C:\Users\dorae\Desktop\HAL\class3\FindWork\就職作品プロジェクト\02_ResourceFile\SceneFile\TransScene.h(1,1): warning C4819: ファイルは、現在のコード ページ (932) で表示できない文字を含んでいます。データの損失を防ぐために、ファイルを Unicode 形式で保存してください。
+  (ソース ファイル '/02_ResourceFile/ObjectFile/Bullet.cpp' をコンパイルしています)
+  
+C:\Users\dorae\Desktop\HAL\class3\FindWork\就職作品プロジェクト\02_ResourceFile\Square.h(1,1): warning C4819: ファイルは、現在のコード ページ (932) で表示できない文字を含んでいます。データの損失を防ぐために、ファイルを Unicode 形式で保存してください。
+  (ソース ファイル '/02_ResourceFile/ObjectFile/Sphere.cpp' をコンパイルしています)
+  
+C:\Users\dorae\Desktop\HAL\class3\FindWork\就職作品プロジェクト\02_ResourceFile\Renderer.h(1,1): warning C4819: ファイルは、現在のコード ページ (932) で表示できない文字を含んでいます。データの損失を防ぐために、ファイルを Unicode 形式で保存してください。
+  (ソース ファイル '/02_ResourceFile/Square.cpp' をコンパイルしています)
+  
+C:\Users\dorae\Desktop\HAL\class3\FindWork\就職作品プロジェクト\02_ResourceFile\Square.h(1,1): warning C4819: ファイルは、現在のコード ページ (932) で表示できない文字を含んでいます。データの損失を防ぐために、ファイルを Unicode 形式で保存してください。
+  (ソース ファイル '/02_ResourceFile/ObjectFile/Object.cpp' をコンパイルしています)
+  
+C:\Users\dorae\Desktop\HAL\class3\FindWork\就職作品プロジェクト\02_ResourceFile\Square.h(1,1): warning C4819: ファイルは、現在のコード ページ (932) で表示できない文字を含んでいます。データの損失を防ぐために、ファイルを Unicode 形式で保存してください。
+  (ソース ファイル '/02_ResourceFile/ObjectFile/Skydome.cpp' をコンパイルしています)
+  
+C:\Users\dorae\Desktop\HAL\class3\FindWork\就職作品プロジェクト\02_ResourceFile\ObjectFile\Theme.h(1,1): warning C4819: ファイルは、現在のコード ページ (932) で表示できない文字を含んでいます。データの損失を防ぐために、ファイルを Unicode 形式で保存してください。
+  (ソース ファイル '/02_ResourceFile/ObjectFile/Bullet.cpp' をコンパイルしています)
+  
+C:\Users\dorae\Desktop\HAL\class3\FindWork\就職作品プロジェクト\02_ResourceFile\SceneFile\TransScene.h(1,1): warning C4819: ファイルは、現在のコード ページ (932) で表示できない文字を含んでいます。データの損失を防ぐために、ファイルを Unicode 形式で保存してください。
+  (ソース ファイル '/02_ResourceFile/ObjectFile/Cube.cpp' をコンパイルしています)
+  
+C:\Users\dorae\Desktop\HAL\class3\FindWork\就職作品プロジェクト\02_ResourceFile\Square.h(1,1): warning C4819: ファイルは、現在のコード ページ (932) で表示できない文字を含んでいます。データの損失を防ぐために、ファイルを Unicode 形式で保存してください。
+  (ソース ファイル '/02_ResourceFile/SceneFile/TransScene.cpp' をコンパイルしています)
+  
+C:\Users\dorae\Desktop\HAL\class3\FindWork\就職作品プロジェクト\02_ResourceFile\Square.h(1,1): warning C4819: ファイルは、現在のコード ページ (932) で表示できない文字を含んでいます。データの損失を防ぐために、ファイルを Unicode 形式で保存してください。
+  (ソース ファイル '/02_ResourceFile/SceneFile/Transition/Fade.cpp' をコンパイルしています)
+  
+C:\Users\dorae\Desktop\HAL\class3\FindWork\就職作品プロジェクト\02_ResourceFile\Game.h(1,1): warning C4819: ファイルは、現在のコード ページ (932) で表示できない文字を含んでいます。データの損失を防ぐために、ファイルを Unicode 形式で保存してください。
+  (ソース ファイル '/02_ResourceFile/ObjectFile/Model.cpp' をコンパイルしています)
+  
+C:\Users\dorae\Desktop\HAL\class3\FindWork\就職作品プロジェクト\02_ResourceFile\Game.h(1,1): warning C4819: ファイルは、現在のコード ページ (932) で表示できない文字を含んでいます。データの損失を防ぐために、ファイルを Unicode 形式で保存してください。
+  (ソース ファイル '/02_ResourceFile/SceneFile/SelectScene.cpp' をコンパイルしています)
+  
+C:\Users\dorae\Desktop\HAL\class3\FindWork\就職作品プロジェクト\02_ResourceFile\Game.h(1,1): warning C4819: ファイルは、現在のコード ページ (932) で表示できない文字を含んでいます。データの損失を防ぐために、ファイルを Unicode 形式で保存してください。
+  (ソース ファイル '/02_ResourceFile/SceneFile/Transition/Fade.cpp' をコンパイルしています)
+  
+C:\Users\dorae\Desktop\HAL\class3\FindWork\就職作品プロジェクト\02_ResourceFile\ObjectFile\Theme.h(1,1): warning C4819: ファイルは、現在のコード ページ (932) で表示できない文字を含んでいます。データの損失を防ぐために、ファイルを Unicode 形式で保存してください。
+  (ソース ファイル '/02_ResourceFile/ObjectFile/Cube.cpp' をコンパイルしています)
+  
+C:\Users\dorae\Desktop\HAL\class3\FindWork\就職作品プロジェクト\02_ResourceFile\Renderer.h(1,1): warning C4819: ファイルは、現在のコード ページ (932) で表示できない文字を含んでいます。データの損失を防ぐために、ファイルを Unicode 形式で保存してください。
+  (ソース ファイル '/02_ResourceFile/SceneFile/Transition/Zoom.cpp' をコンパイルしています)
+  
+C:\Users\dorae\Desktop\HAL\class3\FindWork\就職作品プロジェクト\02_ResourceFile\Square.h(1,1): warning C4819: ファイルは、現在のコード ページ (932) で表示できない文字を含んでいます。データの損失を防ぐために、ファイルを Unicode 形式で保存してください。
+  (ソース ファイル '/02_ResourceFile/SceneFile/TitleScene.cpp' をコンパイルしています)
+  
+C:\Users\dorae\Desktop\HAL\class3\FindWork\就職作品プロジェクト\02_ResourceFile\SceneFile\TransScene.h(1,1): warning C4819: ファイルは、現在のコード ページ (932) で表示できない文字を含んでいます。データの損失を防ぐために、ファイルを Unicode 形式で保存してください。
+  (ソース ファイル '/02_ResourceFile/SceneFile/SelectScene.cpp' をコンパイルしています)
+  
+C:\Users\dorae\Desktop\HAL\class3\FindWork\就職作品プロジェクト\02_ResourceFile\SceneFile\Transition\TransitionBase.h(1,1): warning C4819: ファイルは、現在のコード ページ (932) で表示できない文字を含んでいます。データの損失を防ぐために、ファイルを Unicode 形式で保存してください。
+  (ソース ファイル '/02_ResourceFile/ObjectFile/Model.cpp' をコンパイルしています)
+  
+C:\Users\dorae\Desktop\HAL\class3\FindWork\就職作品プロジェクト\02_ResourceFile\Game.h(1,1): warning C4819: ファイルは、現在のコード ページ (932) で表示できない文字を含んでいます。データの損失を防ぐために、ファイルを Unicode 形式で保存してください。
+  (ソース ファイル '/02_ResourceFile/Square.cpp' をコンパイルしています)
+  
+C:\Users\dorae\Desktop\HAL\class3\FindWork\就職作品プロジェクト\02_ResourceFile\ObjectFile\Theme.h(1,1): warning C4819: ファイルは、現在のコード ページ (932) で表示できない文字を含んでいます。データの損失を防ぐために、ファイルを Unicode 形式で保存してください。
+  (ソース ファイル '/02_ResourceFile/SceneFile/SelectScene.cpp' をコンパイルしています)
+  
+C:\Users\dorae\Desktop\HAL\class3\FindWork\就職作品プロジェクト\02_ResourceFile\SceneFile\Transition\TransitionBase.h(1,1): warning C4819: ファイルは、現在のコード ページ (932) で表示できない文字を含んでいます。データの損失を防ぐために、ファイルを Unicode 形式で保存してください。
+  (ソース ファイル '/02_ResourceFile/Square.cpp' をコンパイルしています)
+  
+C:\Users\dorae\Desktop\HAL\class3\FindWork\就職作品プロジェクト\02_ResourceFile\SceneFile\TransScene.h(1,1): warning C4819: ファイルは、現在のコード ページ (932) で表示できない文字を含んでいます。データの損失を防ぐために、ファイルを Unicode 形式で保存してください。
+  (ソース ファイル '/02_ResourceFile/ObjectFile/Object.cpp' をコンパイルしています)
+  
+C:\Users\dorae\Desktop\HAL\class3\FindWork\就職作品プロジェクト\02_ResourceFile\SceneFile\TransScene.h(1,1): warning C4819: ファイルは、現在のコード ページ (932) で表示できない文字を含んでいます。データの損失を防ぐために、ファイルを Unicode 形式で保存してください。
+  (ソース ファイル '/02_ResourceFile/ObjectFile/Sphere.cpp' をコンパイルしています)
+  
+C:\Users\dorae\Desktop\HAL\class3\FindWork\就職作品プロジェクト\02_ResourceFile\SceneFile\TransScene.h(1,1): warning C4819: ファイルは、現在のコード ページ (932) で表示できない文字を含んでいます。データの損失を防ぐために、ファイルを Unicode 形式で保存してください。
+  (ソース ファイル '/02_ResourceFile/ObjectFile/Skydome.cpp' をコンパイルしています)
+  
+C:\Users\dorae\Desktop\HAL\class3\FindWork\就職作品プロジェクト\02_ResourceFile\Game.h(1,1): warning C4819: ファイルは、現在のコード ページ (932) で表示できない文字を含んでいます。データの損失を防ぐために、ファイルを Unicode 形式で保存してください。
+  (ソース ファイル '/02_ResourceFile/SceneFile/GameSceneExe.cpp' をコンパイルしています)
+  
+C:\Users\dorae\Desktop\HAL\class3\FindWork\就職作品プロジェクト\02_ResourceFile\ObjectFile\Theme.h(1,1): warning C4819: ファイルは、現在のコード ページ (932) で表示できない文字を含んでいます。データの損失を防ぐために、ファイルを Unicode 形式で保存してください。
+  (ソース ファイル '/02_ResourceFile/ObjectFile/Object.cpp' をコンパイルしています)
+  
+C:\Users\dorae\Desktop\HAL\class3\FindWork\就職作品プロジェクト\02_ResourceFile\ObjectFile\Theme.h(1,1): warning C4819: ファイルは、現在のコード ページ (932) で表示できない文字を含んでいます。データの損失を防ぐために、ファイルを Unicode 形式で保存してください。
+  (ソース ファイル '/02_ResourceFile/ObjectFile/Sphere.cpp' をコンパイルしています)
+  
+C:\Users\dorae\Desktop\HAL\class3\FindWork\就職作品プロジェクト\02_ResourceFile\ObjectFile\Theme.h(1,1): warning C4819: ファイルは、現在のコード ページ (932) で表示できない文字を含んでいます。データの損失を防ぐために、ファイルを Unicode 形式で保存してください。
+  (ソース ファイル '/02_ResourceFile/ObjectFile/Skydome.cpp' をコンパイルしています)
+  
+C:\Users\dorae\Desktop\HAL\class3\FindWork\就職作品プロジェクト\02_ResourceFile\Square.h(1,1): warning C4819: ファイルは、現在のコード ページ (932) で表示できない文字を含んでいます。データの損失を防ぐために、ファイルを Unicode 形式で保存してください。
+  (ソース ファイル '/02_ResourceFile/SceneFile/Transition/Zoom.cpp' をコンパイルしています)
+  
+C:\Users\dorae\Desktop\HAL\class3\FindWork\就職作品プロジェクト\02_ResourceFile\Square.h(1,1): warning C4819: ファイルは、現在のコード ページ (932) で表示できない文字を含んでいます。データの損失を防ぐために、ファイルを Unicode 形式で保存してください。
+  (ソース ファイル '/02_ResourceFile/ObjectFile/Model.cpp' をコンパイルしています)
+  
+C:\Users\dorae\Desktop\HAL\class3\FindWork\就職作品プロジェクト\02_ResourceFile\SceneFile\TransScene.h(1,1): warning C4819: ファイルは、現在のコード ページ (932) で表示できない文字を含んでいます。データの損失を防ぐために、ファイルを Unicode 形式で保存してください。
+  (ソース ファイル '/02_ResourceFile/SceneFile/GameSceneExe.cpp' をコンパイルしています)
+  
+C:\Users\dorae\Desktop\HAL\class3\FindWork\就職作品プロジェクト\02_ResourceFile\Game.h(1,1): warning C4819: ファイルは、現在のコード ページ (932) で表示できない文字を含んでいます。データの損失を防ぐために、ファイルを Unicode 形式で保存してください。
+  (ソース ファイル '/02_ResourceFile/SceneFile/Transition/Zoom.cpp' をコンパイルしています)
+  
+C:\Users\dorae\Desktop\HAL\class3\FindWork\就職作品プロジェクト\02_ResourceFile\ObjectFile\Theme.h(1,1): warning C4819: ファイルは、現在のコード ページ (932) で表示できない文字を含んでいます。データの損失を防ぐために、ファイルを Unicode 形式で保存してください。
+  (ソース ファイル '/02_ResourceFile/SceneFile/GameSceneExe.cpp' をコンパイルしています)
+  
+C:\Users\dorae\Desktop\HAL\class3\FindWork\就職作品プロジェクト\02_ResourceFile\SceneFile\TransScene.h(1,1): warning C4819: ファイルは、現在のコード ページ (932) で表示できない文字を含んでいます。データの損失を防ぐために、ファイルを Unicode 形式で保存してください。
+  (ソース ファイル '/02_ResourceFile/SceneFile/Transition/Fade.cpp' をコンパイルしています)
+  
+C:\Users\dorae\Desktop\HAL\class3\FindWork\就職作品プロジェクト\02_ResourceFile\Game.h(1,1): warning C4819: ファイルは、現在のコード ページ (932) で表示できない文字を含んでいます。データの損失を防ぐために、ファイルを Unicode 形式で保存してください。
+  (ソース ファイル '/02_ResourceFile/SceneFile/TransScene.cpp' をコンパイルしています)
+  
+C:\Users\dorae\Desktop\HAL\class3\FindWork\就職作品プロジェクト\02_ResourceFile\ObjectFile\Theme.h(1,1): warning C4819: ファイルは、現在のコード ページ (932) で表示できない文字を含んでいます。データの損失を防ぐために、ファイルを Unicode 形式で保存してください。
+  (ソース ファイル '/02_ResourceFile/SceneFile/Transition/Fade.cpp' をコンパイルしています)
+  
+C:\Users\dorae\Desktop\HAL\class3\FindWork\就職作品プロジェクト\02_ResourceFile\Game.h(1,1): warning C4819: ファイルは、現在のコード ページ (932) で表示できない文字を含んでいます。データの損失を防ぐために、ファイルを Unicode 形式で保存してください。
+  (ソース ファイル '/02_ResourceFile/SceneFile/TitleScene.cpp' をコンパイルしています)
+  
+C:\Users\dorae\Desktop\HAL\class3\FindWork\就職作品プロジェクト\02_ResourceFile\ObjectFile\Theme.h(1,1): warning C4819: ファイルは、現在のコード ページ (932) で表示できない文字を含んでいます。データの損失を防ぐために、ファイルを Unicode 形式で保存してください。
+  (ソース ファイル '/02_ResourceFile/SceneFile/TransScene.cpp' をコンパイルしています)
+  
+C:\Users\dorae\Desktop\HAL\class3\FindWork\就職作品プロジェクト\02_ResourceFile\SceneFile\TransScene.h(1,1): warning C4819: ファイルは、現在のコード ページ (932) で表示できない文字を含んでいます。データの損失を防ぐために、ファイルを Unicode 形式で保存してください。
+  (ソース ファイル '/02_ResourceFile/SceneFile/TitleScene.cpp' をコンパイルしています)
+  
+C:\Users\dorae\Desktop\HAL\class3\FindWork\就職作品プロジェクト\02_ResourceFile\SceneFile\TransScene.h(1,1): warning C4819: ファイルは、現在のコード ページ (932) で表示できない文字を含んでいます。データの損失を防ぐために、ファイルを Unicode 形式で保存してください。
+  (ソース ファイル '/02_ResourceFile/ObjectFile/Model.cpp' をコンパイルしています)
+  
+C:\Users\dorae\Desktop\HAL\class3\FindWork\就職作品プロジェクト\02_ResourceFile\ObjectFile\Theme.h(1,1): warning C4819: ファイルは、現在のコード ページ (932) で表示できない文字を含んでいます。データの損失を防ぐために、ファイルを Unicode 形式で保存してください。
+  (ソース ファイル '/02_ResourceFile/SceneFile/TitleScene.cpp' をコンパイルしています)
+  
+C:\Users\dorae\Desktop\HAL\class3\FindWork\就職作品プロジェクト\02_ResourceFile\ObjectFile\Theme.h(1,1): warning C4819: ファイルは、現在のコード ページ (932) で表示できない文字を含んでいます。データの損失を防ぐために、ファイルを Unicode 形式で保存してください。
+  (ソース ファイル '/02_ResourceFile/ObjectFile/Model.cpp' をコンパイルしています)
+  
+C:\Users\dorae\Desktop\HAL\class3\FindWork\就職作品プロジェクト\02_ResourceFile\SceneFile\TransScene.h(1,1): warning C4819: ファイルは、現在のコード ページ (932) で表示できない文字を含んでいます。データの損失を防ぐために、ファイルを Unicode 形式で保存してください。
+  (ソース ファイル '/02_ResourceFile/SceneFile/Transition/Zoom.cpp' をコンパイルしています)
+  
+C:\Users\dorae\Desktop\HAL\class3\FindWork\就職作品プロジェクト\02_ResourceFile\SceneFile\TransScene.h(1,1): warning C4819: ファイルは、現在のコード ページ (932) で表示できない文字を含んでいます。データの損失を防ぐために、ファイルを Unicode 形式で保存してください。
+  (ソース ファイル '/02_ResourceFile/Square.cpp' をコンパイルしています)
+  
+C:\Users\dorae\Desktop\HAL\class3\FindWork\就職作品プロジェクト\02_ResourceFile\ObjectFile\Theme.h(1,1): warning C4819: ファイルは、現在のコード ページ (932) で表示できない文字を含んでいます。データの損失を防ぐために、ファイルを Unicode 形式で保存してください。
+  (ソース ファイル '/02_ResourceFile/SceneFile/Transition/Zoom.cpp' をコンパイルしています)
+  
+C:\Users\dorae\Desktop\HAL\class3\FindWork\就職作品プロジェクト\02_ResourceFile\ObjectFile\Theme.h(1,1): warning C4819: ファイルは、現在のコード ページ (932) で表示できない文字を含んでいます。データの損失を防ぐために、ファイルを Unicode 形式で保存してください。
+  (ソース ファイル '/02_ResourceFile/Square.cpp' をコンパイルしています)
+  
+C:\Users\dorae\Desktop\HAL\class3\FindWork\就職作品プロジェクト\02_ResourceFile\Game.h(115,47): error C2001: 定数が 2 行目に続いています。
+  (ソース ファイル '/02_ResourceFile/ObjectFile/Bullet.cpp' をコンパイルしています)
+  
+C:\Users\dorae\Desktop\HAL\class3\FindWork\就職作品プロジェクト\02_ResourceFile\Game.h(116,44): error C2001: 定数が 2 行目に続いています。
+  (ソース ファイル '/02_ResourceFile/ObjectFile/Bullet.cpp' をコンパイルしています)
+  
+C:\Users\dorae\Desktop\HAL\class3\FindWork\就職作品プロジェクト\02_ResourceFile\Game.h(138,53): error C2001: 定数が 2 行目に続いています。
+  (ソース ファイル '/02_ResourceFile/ObjectFile/Bullet.cpp' をコンパイルしています)
+  
+C:\Users\dorae\Desktop\HAL\class3\FindWork\就職作品プロジェクト\02_ResourceFile\Game.h(172,8): error C2001: 定数が 2 行目に続いています。
+  (ソース ファイル '/02_ResourceFile/ObjectFile/Bullet.cpp' をコンパイルしています)
+  
+C:\Users\dorae\Desktop\HAL\class3\FindWork\就職作品プロジェクト\02_ResourceFile\Game.h(205,26): error C2001: 定数が 2 行目に続いています。
+  (ソース ファイル '/02_ResourceFile/ObjectFile/Bullet.cpp' をコンパイルしています)
+  
+C:\Users\dorae\Desktop\HAL\class3\FindWork\就職作品プロジェクト\02_ResourceFile\Game.h(138,22): error C1075: '(': 一致するトークンが見つかりませんでした
+  (ソース ファイル '/02_ResourceFile/ObjectFile/Bullet.cpp' をコンパイルしています)
+  
+C:\Users\dorae\Desktop\HAL\class3\FindWork\就職作品プロジェクト\02_ResourceFile\Game.h(115,47): error C2001: 定数が 2 行目に続いています。
+  (ソース ファイル '/02_ResourceFile/ObjectFile/Cube.cpp' をコンパイルしています)
+  
+C:\Users\dorae\Desktop\HAL\class3\FindWork\就職作品プロジェクト\02_ResourceFile\Game.h(116,44): error C2001: 定数が 2 行目に続いています。
+  (ソース ファイル '/02_ResourceFile/ObjectFile/Cube.cpp' をコンパイルしています)
+  
+C:\Users\dorae\Desktop\HAL\class3\FindWork\就職作品プロジェクト\02_ResourceFile\Game.h(138,53): error C2001: 定数が 2 行目に続いています。
+  (ソース ファイル '/02_ResourceFile/ObjectFile/Cube.cpp' をコンパイルしています)
+  
+C:\Users\dorae\Desktop\HAL\class3\FindWork\就職作品プロジェクト\02_ResourceFile\Game.h(172,8): error C2001: 定数が 2 行目に続いています。
+  (ソース ファイル '/02_ResourceFile/ObjectFile/Cube.cpp' をコンパイルしています)
+  
+C:\Users\dorae\Desktop\HAL\class3\FindWork\就職作品プロジェクト\02_ResourceFile\Game.h(205,26): error C2001: 定数が 2 行目に続いています。
+  (ソース ファイル '/02_ResourceFile/ObjectFile/Cube.cpp' をコンパイルしています)
+  
+C:\Users\dorae\Desktop\HAL\class3\FindWork\就職作品プロジェクト\02_ResourceFile\Game.h(138,22): error C1075: '(': 一致するトークンが見つかりませんでした
+  (ソース ファイル '/02_ResourceFile/ObjectFile/Cube.cpp' をコンパイルしています)
+  
+C:\Users\dorae\Desktop\HAL\class3\FindWork\就職作品プロジェクト\02_ResourceFile\Game.h(115,47): error C2001: 定数が 2 行目に続いています。
+  (ソース ファイル '/02_ResourceFile/SceneFile/SelectScene.cpp' をコンパイルしています)
+  
+C:\Users\dorae\Desktop\HAL\class3\FindWork\就職作品プロジェクト\02_ResourceFile\Game.h(116,44): error C2001: 定数が 2 行目に続いています。
+  (ソース ファイル '/02_ResourceFile/SceneFile/SelectScene.cpp' をコンパイルしています)
+  
+C:\Users\dorae\Desktop\HAL\class3\FindWork\就職作品プロジェクト\02_ResourceFile\Game.h(138,53): error C2001: 定数が 2 行目に続いています。
+  (ソース ファイル '/02_ResourceFile/SceneFile/SelectScene.cpp' をコンパイルしています)
+  
+C:\Users\dorae\Desktop\HAL\class3\FindWork\就職作品プロジェクト\02_ResourceFile\Game.h(172,8): error C2001: 定数が 2 行目に続いています。
+  (ソース ファイル '/02_ResourceFile/SceneFile/SelectScene.cpp' をコンパイルしています)
+  
+C:\Users\dorae\Desktop\HAL\class3\FindWork\就職作品プロジェクト\02_ResourceFile\Game.h(205,26): error C2001: 定数が 2 行目に続いています。
+  (ソース ファイル '/02_ResourceFile/SceneFile/SelectScene.cpp' をコンパイルしています)
+  
+C:\Users\dorae\Desktop\HAL\class3\FindWork\就職作品プロジェクト\02_ResourceFile\Game.h(115,47): error C2001: 定数が 2 行目に続いています。
+  (ソース ファイル '/02_ResourceFile/ObjectFile/Model.cpp' をコンパイルしています)
+  
+C:\Users\dorae\Desktop\HAL\class3\FindWork\就職作品プロジェクト\02_ResourceFile\Game.h(116,44): error C2001: 定数が 2 行目に続いています。
+  (ソース ファイル '/02_ResourceFile/ObjectFile/Model.cpp' をコンパイルしています)
+  
+C:\Users\dorae\Desktop\HAL\class3\FindWork\就職作品プロジェクト\02_ResourceFile\Game.h(138,53): error C2001: 定数が 2 行目に続いています。
+  (ソース ファイル '/02_ResourceFile/ObjectFile/Model.cpp' をコンパイルしています)
+  
+C:\Users\dorae\Desktop\HAL\class3\FindWork\就職作品プロジェクト\02_ResourceFile\Game.h(172,8): error C2001: 定数が 2 行目に続いています。
+  (ソース ファイル '/02_ResourceFile/ObjectFile/Model.cpp' をコンパイルしています)
+  
+C:\Users\dorae\Desktop\HAL\class3\FindWork\就職作品プロジェクト\02_ResourceFile\Game.h(205,26): error C2001: 定数が 2 行目に続いています。
+  (ソース ファイル '/02_ResourceFile/ObjectFile/Model.cpp' をコンパイルしています)
+  
+C:\Users\dorae\Desktop\HAL\class3\FindWork\就職作品プロジェクト\02_ResourceFile\Game.h(138,22): error C1075: '(': 一致するトークンが見つかりませんでした
+  (ソース ファイル '/02_ResourceFile/ObjectFile/Model.cpp' をコンパイルしています)
+  
+C:\Users\dorae\Desktop\HAL\class3\FindWork\就職作品プロジェクト\02_ResourceFile\Game.h(138,22): error C1075: '(': 一致するトークンが見つかりませんでした
+  (ソース ファイル '/02_ResourceFile/SceneFile/SelectScene.cpp' をコンパイルしています)
+  
+C:\Users\dorae\Desktop\HAL\class3\FindWork\就職作品プロジェクト\02_ResourceFile\Game.h(115,47): error C2001: 定数が 2 行目に続いています。
+  (ソース ファイル '/02_ResourceFile/ObjectFile/Sphere.cpp' をコンパイルしています)
+  
+C:\Users\dorae\Desktop\HAL\class3\FindWork\就職作品プロジェクト\02_ResourceFile\Game.h(116,44): error C2001: 定数が 2 行目に続いています。
+  (ソース ファイル '/02_ResourceFile/ObjectFile/Sphere.cpp' をコンパイルしています)
+  
+C:\Users\dorae\Desktop\HAL\class3\FindWork\就職作品プロジェクト\02_ResourceFile\Game.h(138,53): error C2001: 定数が 2 行目に続いています。
+  (ソース ファイル '/02_ResourceFile/ObjectFile/Sphere.cpp' をコンパイルしています)
+  
+C:\Users\dorae\Desktop\HAL\class3\FindWork\就職作品プロジェクト\02_ResourceFile\Game.h(172,8): error C2001: 定数が 2 行目に続いています。
+  (ソース ファイル '/02_ResourceFile/ObjectFile/Sphere.cpp' をコンパイルしています)
+  
+C:\Users\dorae\Desktop\HAL\class3\FindWork\就職作品プロジェクト\02_ResourceFile\Game.h(205,26): error C2001: 定数が 2 行目に続いています。
+  (ソース ファイル '/02_ResourceFile/ObjectFile/Sphere.cpp' をコンパイルしています)
+  
+C:\Users\dorae\Desktop\HAL\class3\FindWork\就職作品プロジェクト\02_ResourceFile\Game.h(138,22): error C1075: '(': 一致するトークンが見つかりませんでした
+  (ソース ファイル '/02_ResourceFile/ObjectFile/Sphere.cpp' をコンパイルしています)
+  
+C:\Users\dorae\Desktop\HAL\class3\FindWork\就職作品プロジェクト\02_ResourceFile\Game.h(115,47): error C2001: 定数が 2 行目に続いています。
+  (ソース ファイル '/02_ResourceFile/ObjectFile/Skydome.cpp' をコンパイルしています)
+  
+C:\Users\dorae\Desktop\HAL\class3\FindWork\就職作品プロジェクト\02_ResourceFile\Game.h(116,44): error C2001: 定数が 2 行目に続いています。
+  (ソース ファイル '/02_ResourceFile/ObjectFile/Skydome.cpp' をコンパイルしています)
+  
+C:\Users\dorae\Desktop\HAL\class3\FindWork\就職作品プロジェクト\02_ResourceFile\Game.h(138,53): error C2001: 定数が 2 行目に続いています。
+  (ソース ファイル '/02_ResourceFile/ObjectFile/Skydome.cpp' をコンパイルしています)
+  
+C:\Users\dorae\Desktop\HAL\class3\FindWork\就職作品プロジェクト\02_ResourceFile\Game.h(172,8): error C2001: 定数が 2 行目に続いています。
+  (ソース ファイル '/02_ResourceFile/ObjectFile/Skydome.cpp' をコンパイルしています)
+  
+C:\Users\dorae\Desktop\HAL\class3\FindWork\就職作品プロジェクト\02_ResourceFile\Game.h(205,26): error C2001: 定数が 2 行目に続いています。
+  (ソース ファイル '/02_ResourceFile/ObjectFile/Skydome.cpp' をコンパイルしています)
+  
+C:\Users\dorae\Desktop\HAL\class3\FindWork\就職作品プロジェクト\02_ResourceFile\Game.h(138,22): error C1075: '(': 一致するトークンが見つかりませんでした
+  (ソース ファイル '/02_ResourceFile/ObjectFile/Skydome.cpp' をコンパイルしています)
+  
+C:\Users\dorae\Desktop\HAL\class3\FindWork\就職作品プロジェクト\02_ResourceFile\Game.h(115,47): error C2001: 定数が 2 行目に続いています。
+  (ソース ファイル '/02_ResourceFile/ObjectFile/Object.cpp' をコンパイルしています)
+  
+C:\Users\dorae\Desktop\HAL\class3\FindWork\就職作品プロジェクト\02_ResourceFile\Game.h(116,44): error C2001: 定数が 2 行目に続いています。
+  (ソース ファイル '/02_ResourceFile/ObjectFile/Object.cpp' をコンパイルしています)
+  
+C:\Users\dorae\Desktop\HAL\class3\FindWork\就職作品プロジェクト\02_ResourceFile\Game.h(138,53): error C2001: 定数が 2 行目に続いています。
+  (ソース ファイル '/02_ResourceFile/ObjectFile/Object.cpp' をコンパイルしています)
+  
+C:\Users\dorae\Desktop\HAL\class3\FindWork\就職作品プロジェクト\02_ResourceFile\Game.h(172,8): error C2001: 定数が 2 行目に続いています。
+  (ソース ファイル '/02_ResourceFile/ObjectFile/Object.cpp' をコンパイルしています)
+  
+C:\Users\dorae\Desktop\HAL\class3\FindWork\就職作品プロジェクト\02_ResourceFile\Game.h(205,26): error C2001: 定数が 2 行目に続いています。
+  (ソース ファイル '/02_ResourceFile/ObjectFile/Object.cpp' をコンパイルしています)
+  
+C:\Users\dorae\Desktop\HAL\class3\FindWork\就職作品プロジェクト\02_ResourceFile\Game.h(138,22): error C1075: '(': 一致するトークンが見つかりませんでした
+  (ソース ファイル '/02_ResourceFile/ObjectFile/Object.cpp' をコンパイルしています)
+  
+C:\Users\dorae\Desktop\HAL\class3\FindWork\就職作品プロジェクト\02_ResourceFile\Game.h(115,47): error C2001: 定数が 2 行目に続いています。
+  (ソース ファイル '/02_ResourceFile/SceneFile/GameSceneExe.cpp' をコンパイルしています)
+  
+C:\Users\dorae\Desktop\HAL\class3\FindWork\就職作品プロジェクト\02_ResourceFile\Game.h(116,44): error C2001: 定数が 2 行目に続いています。
+  (ソース ファイル '/02_ResourceFile/SceneFile/GameSceneExe.cpp' をコンパイルしています)
+  
+C:\Users\dorae\Desktop\HAL\class3\FindWork\就職作品プロジェクト\02_ResourceFile\Game.h(138,53): error C2001: 定数が 2 行目に続いています。
+  (ソース ファイル '/02_ResourceFile/SceneFile/GameSceneExe.cpp' をコンパイルしています)
+  
+C:\Users\dorae\Desktop\HAL\class3\FindWork\就職作品プロジェクト\02_ResourceFile\Game.h(172,8): error C2001: 定数が 2 行目に続いています。
+  (ソース ファイル '/02_ResourceFile/SceneFile/GameSceneExe.cpp' をコンパイルしています)
+  
+C:\Users\dorae\Desktop\HAL\class3\FindWork\就職作品プロジェクト\02_ResourceFile\Game.h(205,26): error C2001: 定数が 2 行目に続いています。
+  (ソース ファイル '/02_ResourceFile/SceneFile/GameSceneExe.cpp' をコンパイルしています)
+  
+C:\Users\dorae\Desktop\HAL\class3\FindWork\就職作品プロジェクト\02_ResourceFile\Game.h(138,22): error C1075: '(': 一致するトークンが見つかりませんでした
+  (ソース ファイル '/02_ResourceFile/SceneFile/GameSceneExe.cpp' をコンパイルしています)
+  
+C:\Users\dorae\Desktop\HAL\class3\FindWork\就職作品プロジェクト\02_ResourceFile\Game.h(115,47): error C2001: 定数が 2 行目に続いています。
+  (ソース ファイル '/02_ResourceFile/SceneFile/Transition/Fade.cpp' をコンパイルしています)
+  
+C:\Users\dorae\Desktop\HAL\class3\FindWork\就職作品プロジェクト\02_ResourceFile\Game.h(116,44): error C2001: 定数が 2 行目に続いています。
+  (ソース ファイル '/02_ResourceFile/SceneFile/Transition/Fade.cpp' をコンパイルしています)
+  
+C:\Users\dorae\Desktop\HAL\class3\FindWork\就職作品プロジェクト\02_ResourceFile\Game.h(138,53): error C2001: 定数が 2 行目に続いています。
+  (ソース ファイル '/02_ResourceFile/SceneFile/Transition/Fade.cpp' をコンパイルしています)
+  
+C:\Users\dorae\Desktop\HAL\class3\FindWork\就職作品プロジェクト\02_ResourceFile\Game.h(172,8): error C2001: 定数が 2 行目に続いています。
+  (ソース ファイル '/02_ResourceFile/SceneFile/Transition/Fade.cpp' をコンパイルしています)
+  
+C:\Users\dorae\Desktop\HAL\class3\FindWork\就職作品プロジェクト\02_ResourceFile\Game.h(205,26): error C2001: 定数が 2 行目に続いています。
+  (ソース ファイル '/02_ResourceFile/SceneFile/Transition/Fade.cpp' をコンパイルしています)
+  
+C:\Users\dorae\Desktop\HAL\class3\FindWork\就職作品プロジェクト\02_ResourceFile\Game.h(138,22): error C1075: '(': 一致するトークンが見つかりませんでした
+  (ソース ファイル '/02_ResourceFile/SceneFile/Transition/Fade.cpp' をコンパイルしています)
+  
+C:\Users\dorae\Desktop\HAL\class3\FindWork\就職作品プロジェクト\02_ResourceFile\Game.h(115,47): error C2001: 定数が 2 行目に続いています。
+  (ソース ファイル '/02_ResourceFile/SceneFile/TransScene.cpp' をコンパイルしています)
+  
+C:\Users\dorae\Desktop\HAL\class3\FindWork\就職作品プロジェクト\02_ResourceFile\Game.h(116,44): error C2001: 定数が 2 行目に続いています。
+  (ソース ファイル '/02_ResourceFile/SceneFile/TransScene.cpp' をコンパイルしています)
+  
+C:\Users\dorae\Desktop\HAL\class3\FindWork\就職作品プロジェクト\02_ResourceFile\Game.h(138,53): error C2001: 定数が 2 行目に続いています。
+  (ソース ファイル '/02_ResourceFile/SceneFile/TransScene.cpp' をコンパイルしています)
+  
+C:\Users\dorae\Desktop\HAL\class3\FindWork\就職作品プロジェクト\02_ResourceFile\Game.h(172,8): error C2001: 定数が 2 行目に続いています。
+  (ソース ファイル '/02_ResourceFile/SceneFile/TransScene.cpp' をコンパイルしています)
+  
+C:\Users\dorae\Desktop\HAL\class3\FindWork\就職作品プロジェクト\02_ResourceFile\Game.h(205,26): error C2001: 定数が 2 行目に続いています。
+  (ソース ファイル '/02_ResourceFile/SceneFile/TransScene.cpp' をコンパイルしています)
+  
+C:\Users\dorae\Desktop\HAL\class3\FindWork\就職作品プロジェクト\02_ResourceFile\Game.h(115,47): error C2001: 定数が 2 行目に続いています。
+  (ソース ファイル '/02_ResourceFile/SceneFile/TitleScene.cpp' をコンパイルしています)
+  
+C:\Users\dorae\Desktop\HAL\class3\FindWork\就職作品プロジェクト\02_ResourceFile\Game.h(116,44): error C2001: 定数が 2 行目に続いています。
+  (ソース ファイル '/02_ResourceFile/SceneFile/TitleScene.cpp' をコンパイルしています)
+  
+C:\Users\dorae\Desktop\HAL\class3\FindWork\就職作品プロジェクト\02_ResourceFile\Game.h(138,53): error C2001: 定数が 2 行目に続いています。
+  (ソース ファイル '/02_ResourceFile/SceneFile/TitleScene.cpp' をコンパイルしています)
+  
+C:\Users\dorae\Desktop\HAL\class3\FindWork\就職作品プロジェクト\02_ResourceFile\Game.h(172,8): error C2001: 定数が 2 行目に続いています。
+  (ソース ファイル '/02_ResourceFile/SceneFile/TitleScene.cpp' をコンパイルしています)
+  
+C:\Users\dorae\Desktop\HAL\class3\FindWork\就職作品プロジェクト\02_ResourceFile\Game.h(205,26): error C2001: 定数が 2 行目に続いています。
+  (ソース ファイル '/02_ResourceFile/SceneFile/TitleScene.cpp' をコンパイルしています)
+  
+C:\Users\dorae\Desktop\HAL\class3\FindWork\就職作品プロジェクト\02_ResourceFile\Game.h(138,22): error C1075: '(': 一致するトークンが見つかりませんでした
+  (ソース ファイル '/02_ResourceFile/SceneFile/TitleScene.cpp' をコンパイルしています)
+  
+C:\Users\dorae\Desktop\HAL\class3\FindWork\就職作品プロジェクト\02_ResourceFile\Game.h(138,22): error C1075: '(': 一致するトークンが見つかりませんでした
+  (ソース ファイル '/02_ResourceFile/SceneFile/TransScene.cpp' をコンパイルしています)
+  
+C:\Users\dorae\Desktop\HAL\class3\FindWork\就職作品プロジェクト\02_ResourceFile\Game.h(115,47): error C2001: 定数が 2 行目に続いています。
+  (ソース ファイル '/02_ResourceFile/SceneFile/Transition/Zoom.cpp' をコンパイルしています)
+  
+C:\Users\dorae\Desktop\HAL\class3\FindWork\就職作品プロジェクト\02_ResourceFile\Game.h(116,44): error C2001: 定数が 2 行目に続いています。
+  (ソース ファイル '/02_ResourceFile/SceneFile/Transition/Zoom.cpp' をコンパイルしています)
+  
+C:\Users\dorae\Desktop\HAL\class3\FindWork\就職作品プロジェクト\02_ResourceFile\Game.h(138,53): error C2001: 定数が 2 行目に続いています。
+  (ソース ファイル '/02_ResourceFile/SceneFile/Transition/Zoom.cpp' をコンパイルしています)
+  
+C:\Users\dorae\Desktop\HAL\class3\FindWork\就職作品プロジェクト\02_ResourceFile\Game.h(172,8): error C2001: 定数が 2 行目に続いています。
+  (ソース ファイル '/02_ResourceFile/SceneFile/Transition/Zoom.cpp' をコンパイルしています)
+  
+C:\Users\dorae\Desktop\HAL\class3\FindWork\就職作品プロジェクト\02_ResourceFile\Game.h(205,26): error C2001: 定数が 2 行目に続いています。
+  (ソース ファイル '/02_ResourceFile/SceneFile/Transition/Zoom.cpp' をコンパイルしています)
+  
+C:\Users\dorae\Desktop\HAL\class3\FindWork\就職作品プロジェクト\02_ResourceFile\Game.h(138,22): error C1075: '(': 一致するトークンが見つかりませんでした
+  (ソース ファイル '/02_ResourceFile/SceneFile/Transition/Zoom.cpp' をコンパイルしています)
+  
+C:\Users\dorae\Desktop\HAL\class3\FindWork\就職作品プロジェクト\02_ResourceFile\Game.h(115,47): error C2001: 定数が 2 行目に続いています。
+  (ソース ファイル '/02_ResourceFile/Square.cpp' をコンパイルしています)
+  
+C:\Users\dorae\Desktop\HAL\class3\FindWork\就職作品プロジェクト\02_ResourceFile\Game.h(116,44): error C2001: 定数が 2 行目に続いています。
+  (ソース ファイル '/02_ResourceFile/Square.cpp' をコンパイルしています)
+  
+C:\Users\dorae\Desktop\HAL\class3\FindWork\就職作品プロジェクト\02_ResourceFile\Game.h(138,53): error C2001: 定数が 2 行目に続いています。
+  (ソース ファイル '/02_ResourceFile/Square.cpp' をコンパイルしています)
+  
+C:\Users\dorae\Desktop\HAL\class3\FindWork\就職作品プロジェクト\02_ResourceFile\Game.h(172,8): error C2001: 定数が 2 行目に続いています。
+  (ソース ファイル '/02_ResourceFile/Square.cpp' をコンパイルしています)
+  
+C:\Users\dorae\Desktop\HAL\class3\FindWork\就職作品プロジェクト\02_ResourceFile\Game.h(205,26): error C2001: 定数が 2 行目に続いています。
+  (ソース ファイル '/02_ResourceFile/Square.cpp' をコンパイルしています)
+  
+C:\Users\dorae\Desktop\HAL\class3\FindWork\就職作品プロジェクト\02_ResourceFile\Game.h(138,22): error C1075: '(': 一致するトークンが見つかりませんでした
+  (ソース ファイル '/02_ResourceFile/Square.cpp' をコンパイルしています)
+  

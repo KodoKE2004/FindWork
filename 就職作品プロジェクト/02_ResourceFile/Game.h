@@ -135,7 +135,7 @@ public:
 	template<class T> 
 	std::vector<std::shared_ptr<T>> GetObjects()
 	{
-        static_assert(std::is_base_of_v<Object, T>, "TがObjectを継承していない");
+        static_assert(std::is_base_of_v<Object, T>, L"TがObjectを継承していない");
 
 		std::vector<std::shared_ptr<T>> res;
 		for (const auto& o : m_pInstance->m_GameObjects) {
@@ -167,8 +167,8 @@ void ChangeScenePush(SceneTransitionParam& state)
 	// テンプレートなので
 	// 既定がSceneでなければエラー
 	// T が Scene を継承していること、かつ抽象クラスでないことをチェック
-	static_assert(std::is_base_of_v<Scene, T>, "T は Scene を継承している必要があります");
-	static_assert(!std::is_abstract_v<T>, "T は抽象クラスではいけません");
+	static_assert(std::is_base_of_v<Scene, T>, L"T は Scene を継承している必要があります");
+	static_assert(!std::is_abstract_v<T>, L"T は抽象クラスではいけません");
 
 	Debug::Log("[[検出]] シーンのPush");
 
@@ -197,7 +197,8 @@ inline void ChangeScenePop(SceneTransitionParam& state)
     auto& instance = Game::GetInstance();
 
 	if (instance.GetSceneStackSize() == 0) {
-		Debug::Log("[[警告]] シーンスタックが空です", MessageColor::Yellow);
+		std::string_view msg = "[[警告]] シーンスタックが空です";
+		Debug::Log(msg, MessageColor::Yellow);
 		return ;
 	}
 
