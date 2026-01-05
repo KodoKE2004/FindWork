@@ -39,8 +39,45 @@ namespace Math
         std::array<NVector3, 4> SettingVertex(Transform transform);
     }
 
+
     namespace Easing
     {
+        enum class EASING_TYPE
+        {
+            NONE,
+            IN_SINE,
+            IN_QUAD,
+            IN_CUBIC,
+            IN_QUINT,
+            IN_QUART,
+            IN_EXPO,
+            IN_CIRC,
+            IN_BACK,
+            IN_BOUNCE,
+            IN_ELASTIC,
+            OUT_SINE,
+            OUT_QUAD,
+            OUT_CUBIC,
+            OUT_QUINT,
+            OUT_QUART,
+            OUT_CIRC,
+            OUT_BACK,
+            OUT_ElASTIC,
+            OUT_BOUNCE,
+            OUT_EXPO,
+            IN_OUT_SINE,
+            IN_OUT_QUAD,
+            IN_OUT_CUBIC,
+            IN_OUT_QUINT,
+            IN_OUT_QUART,
+            IN_OUT_CIRC,
+            IN_OUT_BACK,
+            IN_OUT_ELASTIC,
+            IN_OUT_BOUNCE,
+            IN_OUT_EXPO,
+            NUM
+        };
+
         float EaseInSine(float p);
         float EaseOutSine(float p);
         float EaseInOutSine(float p);
@@ -72,6 +109,7 @@ namespace Math
         float EaseOutBounce(float p);
         float EaseInOutBounce(float p);
 
+        float EvaluateEasing(EASING_TYPE type,float p);
     };
 
     namespace Physics

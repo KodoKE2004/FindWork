@@ -1,6 +1,6 @@
 #include "GameSceneSlice.h"
 #include "Game.h"
-#include "Collider.h"
+#include "Calculator.h"
 #include "Debug.hpp"
 
 void GameSceneSlice::Initialize()

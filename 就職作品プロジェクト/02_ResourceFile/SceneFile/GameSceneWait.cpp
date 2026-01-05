@@ -205,9 +205,9 @@ void GameSceneWait::Initialize()
     if (m_Theme)
     {
         m_Theme->SetName("m_Theme");
-        m_Theme->SetActive(true);
+        m_Theme->SetActive(false);
         m_Theme->SetTexture(textureMgr->GetTexture(kStageTheme[1]));
-        m_Theme->SetScale(kThemeScale[1]);
+        m_Theme->SetScaleBase(kThemeScale[1]);
         m_Theme->SetPos(0.0f,0.0f,0.0f);
     }
 
@@ -223,7 +223,6 @@ void GameSceneWait::Update(float tick)
     // リズムを取る
     // ライフをリズムに合わせて回転させる
     int advancedTicks = m_RelationData.rhythmBeat.Update(tick);
-    advancedTicks = 0;
     if (advancedTicks > 0)
     {
         const int currentBeatIndex = m_RelationData.rhythmBeat.GetBeatIndex();
@@ -236,7 +235,7 @@ void GameSceneWait::Update(float tick)
         // 残り一拍のタイミングでお題提示処理開始
         else if (m_BeatTimer.GetRestBeats() == 1)
         {
-            // m_Theme->SetActive(true);
+            m_Theme->SetActive(true);
         }
         if (advancedTicks % 2 == 1)
         {
@@ -265,6 +264,7 @@ void GameSceneWait::Update(float tick)
     {
         // ライフが減る演出
         
+
         // ライフを減らす
         m_RelationData.gameLife -= 1u;
         DecrementLife();
@@ -280,13 +280,11 @@ void GameSceneWait::Update(float tick)
 
     // デバッグ用　終わったら消す予定のreturn
     // return ;
-    #pragma region リザルトシーン遷移処理
     if (m_RelationData.gameLife == 0u)
     {
         // ライフが0になったらリザルトシーンへ
         ChangeScenePush<ResultScene>(WaitToResult);
     }
-    #pragma endregion
 }
 
 void GameSceneWait::Finalize()

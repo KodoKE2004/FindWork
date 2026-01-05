@@ -3,9 +3,10 @@
 #include "main.h"
 #include "Renderer.h"
 #include "Application.h"
-#include "Collider.h"
-#include "Renderer.h"
+#include "Calculator.h"
 #include <algorithm>
+
+using namespace Math::Easing;
 
 Wipe::Wipe(Camera& cam) : TransitionBase(cam)
 {
@@ -151,7 +152,7 @@ void Wipe::ApplyWipeAmount(float amount)
 float Wipe::CalculateWipeEasing(const SceneTransitionParam& param, float t)
 {
     if (param.easing != EASING_TYPE::NONE) {
-        return EvaluateEasing(param, t);
+        return Math::Easing::EvaluateEasing(param.easing, t);
     }
     else {
         return t;
@@ -216,7 +217,6 @@ void Wipe::SetTransMode(TRANS_MODE transMode)
     }
     
     CheckPointSetting();
-    SetPos(m_StartPos.x, m_StartPos.y, GetPos().z);
     SetPos(m_StartPos);
 
 }

@@ -1,4 +1,4 @@
-#include "Collider.h"
+#include "Calculator.h"
 #include <cmath>
 #include <DirectXMath.h>
 #include <SimpleMath.h>
@@ -555,6 +555,44 @@ namespace Math
                 return (1.0f - EaseOutBounce(1.0f - 2.0f * p)) * 0.5f;
             }
             return (1.0f + EaseOutBounce(2.0f * p - 1.0f)) * 0.5f;
+        }
+
+        float EvaluateEasing(EASING_TYPE type, float p)
+        {
+            switch (type)
+            {
+            default:							return p;
+            case EASING_TYPE::IN_SINE:			return Math::Easing::EaseInSine(p);
+            case EASING_TYPE::IN_QUAD:			return Math::Easing::EaseInQuad(p);
+            case EASING_TYPE::IN_CUBIC:			return Math::Easing::EaseInCubic(p);
+            case EASING_TYPE::IN_QUINT:			return Math::Easing::EaseInQuint(p);
+            case EASING_TYPE::IN_QUART:			return Math::Easing::EaseInQuart(p);
+            case EASING_TYPE::IN_EXPO:			return Math::Easing::EaseInExpo(p);
+            case EASING_TYPE::IN_CIRC:			return Math::Easing::EaseInCirc(p);
+            case EASING_TYPE::IN_BACK:			return Math::Easing::EaseInBack(p);
+            case EASING_TYPE::IN_BOUNCE:		return Math::Easing::EaseInBounce(p);
+            case EASING_TYPE::IN_ELASTIC:		return Math::Easing::EaseInElastic(p);
+            case EASING_TYPE::OUT_SINE:			return Math::Easing::EaseOutSine(p);
+            case EASING_TYPE::OUT_QUAD:			return Math::Easing::EaseOutQuad(p);
+            case EASING_TYPE::OUT_CUBIC:		return Math::Easing::EaseOutCubic(p);
+            case EASING_TYPE::OUT_QUINT:		return Math::Easing::EaseOutQuint(p);
+            case EASING_TYPE::OUT_QUART:		return Math::Easing::EaseOutQuart(p);
+            case EASING_TYPE::OUT_CIRC:			return Math::Easing::EaseOutCirc(p);
+            case EASING_TYPE::OUT_BACK:			return Math::Easing::EaseOutBack(p);
+            case EASING_TYPE::OUT_ElASTIC:		return Math::Easing::EaseOutElastic(p);
+            case EASING_TYPE::OUT_BOUNCE:		return Math::Easing::EaseOutBounce(p);
+            case EASING_TYPE::OUT_EXPO:			return Math::Easing::EaseOutExpo(p);
+            case EASING_TYPE::IN_OUT_SINE:		return Math::Easing::EaseInOutSine(p);
+            case EASING_TYPE::IN_OUT_QUAD:		return Math::Easing::EaseInOutQuad(p);
+            case EASING_TYPE::IN_OUT_CUBIC:		return Math::Easing::EaseInOutCubic(p);
+            case EASING_TYPE::IN_OUT_QUINT:		return Math::Easing::EaseInOutQuint(p);
+            case EASING_TYPE::IN_OUT_QUART:		return Math::Easing::EaseInOutQuart(p);
+            case EASING_TYPE::IN_OUT_CIRC:		return Math::Easing::EaseInOutCirc(p);
+            case EASING_TYPE::IN_OUT_BACK:		return Math::Easing::EaseInOutBack(p);
+            case EASING_TYPE::IN_OUT_ELASTIC:	return Math::Easing::EaseInOutElastic(p);
+            case EASING_TYPE::IN_OUT_BOUNCE:	return Math::Easing::EaseInOutBounce(p);
+            case EASING_TYPE::IN_OUT_EXPO:		return Math::Easing::EaseInOutExpo(p);
+            }
         }
     }
 

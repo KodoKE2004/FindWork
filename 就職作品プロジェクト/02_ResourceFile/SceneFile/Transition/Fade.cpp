@@ -2,7 +2,7 @@
 #include "Game.h"
 #include "main.h"
 #include "Application.h"
-#include "Collider.h"
+#include "Calculator.h"
 #include "Renderer.h"
 #include <vector>
 #include <algorithm>
@@ -131,7 +131,7 @@ void Fade::FADE_IN(float tick)
     const auto& param = m_transParam;
     const float duration = param.duration;
     const float t = std::clamp(m_Elapsed /max(duration, 0.0001f), 0.0f, 1.0f);
-    const float eased = EvaluateEasing(param, t);
+    const float eased = Math::Easing::EvaluateEasing(param.easing, t);
 
     m_Alpha = 1.0f - eased;
 
@@ -152,7 +152,7 @@ void Fade::FADE_OUT(float tick)
     const auto& param = m_transParam;
     const float duration = param.duration;
     const float t = std::clamp(m_Elapsed / max(duration, 0.0001f), 0.0f, 1.0f);
-    const float eased = EvaluateEasing(param, t);
+    const float eased = Math::Easing::EvaluateEasing(param.easing, t);
 
     m_Alpha = eased;
     if (t >= 1.0f)

@@ -10,6 +10,9 @@
 #include "IndexBuffer.h"
 #include "Texture.h"
 #include "Material.h"
+#include "Calculator.h"
+
+using namespace Math::Easing;
 
 // トランジションのフェーズ
 // 遷移の進行状況を示す列挙型
@@ -35,41 +38,6 @@ enum class TRANS_MODE
     NUM
 };
 
-enum class EASING_TYPE
-{
-    NONE,
-    IN_SINE,
-    IN_QUAD,
-    IN_CUBIC,
-    IN_QUINT,
-    IN_QUART,
-    IN_EXPO,
-    IN_CIRC,
-    IN_BACK,
-    IN_BOUNCE,
-    IN_ELASTIC,
-    OUT_SINE,
-    OUT_QUAD,
-    OUT_CUBIC,
-    OUT_QUINT,
-    OUT_QUART,
-    OUT_CIRC,
-    OUT_BACK,
-    OUT_ElASTIC,
-    OUT_BOUNCE,
-    OUT_EXPO,
-    IN_OUT_SINE,
-    IN_OUT_QUAD,
-    IN_OUT_CUBIC,
-    IN_OUT_QUINT,
-    IN_OUT_QUART,
-    IN_OUT_CIRC,
-    IN_OUT_BACK,
-    IN_OUT_ELASTIC,
-    IN_OUT_BOUNCE,
-    IN_OUT_EXPO,
-    NUM
-};
 
 struct SceneTransitionParam
 {
@@ -151,7 +119,6 @@ public:
     //--------------------------------
     //          遷移パラメータ群
     //--------------------------------
-    float EvaluateEasing(const SceneTransitionParam& param, float t);
     void  ApplyPhaseSetting(TRANS_PHASE phase);
 
     //===============================

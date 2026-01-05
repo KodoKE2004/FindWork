@@ -190,7 +190,7 @@
     <ClCompile Include="02_ResourceFile\SceneFile\GameSceneWait.cpp">
       <Filter>SourceFile\Scene\GameScene</Filter>
     </ClCompile>
-    <ClCompile Include="02_ResourceFile\Collider.cpp">
+    <ClCompile Include="02_ResourceFile\Calculator.cpp">
       <Filter>SourceFile\Core</Filter>
     </ClCompile>
     <ClCompile Include="02_ResourceFile\ObjectFile\Circle.cpp">
@@ -406,7 +406,7 @@
     <ClInclude Include="02_ResourceFile\SceneFile\GameSceneWait.h">
       <Filter>SourceFile\Scene\GameScene</Filter>
     </ClInclude>
-    <ClInclude Include="02_ResourceFile\Collider.h">
+    <ClInclude Include="02_ResourceFile\Calculator.h">
       <Filter>SourceFile\Core</Filter>
     </ClInclude>
     <ClInclude Include="02_ResourceFile\ObjectFile\Circle.h">

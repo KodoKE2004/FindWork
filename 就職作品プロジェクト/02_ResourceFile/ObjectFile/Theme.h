@@ -6,7 +6,10 @@ class Theme : public Square
 {
 protected:
     bool m_isActive = false;
-
+    float m_ScaleMass = 0.0f;
+    float m_Elapsed   = 0.0f;
+    float m_Duration  = 0.0f;
+    NVector3 m_ScaleBase;
 public:
     Theme(Camera& cam);
     ~Theme() = default;
@@ -19,5 +22,6 @@ public:
 
     void SetActive();
     void SetActive(const bool isActive);
+    void SetScaleBase(NVector3 scale);
 };
 

@@ -1,6 +1,6 @@
 #include "GameSceneJump.h"
 #include "Game.h"
-#include "Collider.h"
+#include "Calculator.h"
 #include "DebugUI.h"
 #include <random>
 

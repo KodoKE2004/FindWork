@@ -28,7 +28,7 @@
     <ClCompile Include="02_ResourceFile\RhythmBeat.cpp" />
     <ClCompile Include="02_ResourceFile\AudioManager.cpp" />
     <ClCompile Include="02_ResourceFile\Camera.cpp" />
-    <ClCompile Include="02_ResourceFile\Collider.cpp" />
+    <ClCompile Include="02_ResourceFile\Calculator.cpp" />
     <ClCompile Include="02_ResourceFile\DebugGridLine.cpp" />
     <ClCompile Include="02_ResourceFile\DebugUI.cpp" />
     <ClCompile Include="02_ResourceFile\Dx11helper.cpp" />
@@ -95,7 +95,7 @@
     <ClInclude Include="02_ResourceFile\RhythmBeat.h" />
     <ClInclude Include="02_ResourceFile\AudioManager.h" />
     <ClInclude Include="02_ResourceFile\Camera.h" />
-    <ClInclude Include="02_ResourceFile\Collider.h" />
+    <ClInclude Include="02_ResourceFile\Calculator.h" />
     <ClInclude Include="02_ResourceFile\CSVLoader.h" />
     <ClInclude Include="02_ResourceFile\Debug.hpp" />
     <ClInclude Include="02_ResourceFile\DebugGridLine.h" />

@@ -2,36 +2,36 @@
 <Project>
   <ProjectOutputs>
     <ProjectOutput>
-      <FullPath>C:\Users\kodokeの世界\Desktop\HAL\VisualSutdio\就職作品\個人製作\FindWork\就職作品プロジェクト\x64\Release\NishiguchiGame.exe</FullPath>
+      <FullPath>C:\Users\dorae\Desktop\HAL\class3\FindWork\就職作品プロジェクト\x64\Release\NishiguchiGame.exe</FullPath>
     </ProjectOutput>
   </ProjectOutputs>
   <ContentFiles>
     <ContentFile>
-      <FullPath>C:\Users\kodokeの世界\Desktop\HAL\VisualSutdio\就職作品\個人製作\FindWork\就職作品プロジェクト\x64\Release\PS_Alpha.cso</FullPath>
+      <FullPath>C:\Users\dorae\Desktop\HAL\class3\FindWork\就職作品プロジェクト\x64\Release\PS_Alpha.cso</FullPath>
     </ContentFile>
     <ContentFile>
-      <FullPath>C:\Users\kodokeの世界\Desktop\HAL\VisualSutdio\就職作品\個人製作\FindWork\就職作品プロジェクト\x64\Release\PS_Default.cso</FullPath>
+      <FullPath>C:\Users\dorae\Desktop\HAL\class3\FindWork\就職作品プロジェクト\x64\Release\PS_Default.cso</FullPath>
     </ContentFile>
     <ContentFile>
-      <FullPath>C:\Users\kodokeの世界\Desktop\HAL\VisualSutdio\就職作品\個人製作\FindWork\就職作品プロジェクト\x64\Release\PS_Skydome.cso</FullPath>
+      <FullPath>C:\Users\dorae\Desktop\HAL\class3\FindWork\就職作品プロジェクト\x64\Release\PS_Skydome.cso</FullPath>
     </ContentFile>
     <ContentFile>
-      <FullPath>C:\Users\kodokeの世界\Desktop\HAL\VisualSutdio\就職作品\個人製作\FindWork\就職作品プロジェクト\x64\Release\PS_Unlit.cso</FullPath>
+      <FullPath>C:\Users\dorae\Desktop\HAL\class3\FindWork\就職作品プロジェクト\x64\Release\PS_Unlit.cso</FullPath>
     </ContentFile>
     <ContentFile>
-      <FullPath>C:\Users\kodokeの世界\Desktop\HAL\VisualSutdio\就職作品\個人製作\FindWork\就職作品プロジェクト\x64\Release\VS_Alpha.cso</FullPath>
+      <FullPath>C:\Users\dorae\Desktop\HAL\class3\FindWork\就職作品プロジェクト\x64\Release\VS_Alpha.cso</FullPath>
     </ContentFile>
     <ContentFile>
-      <FullPath>C:\Users\kodokeの世界\Desktop\HAL\VisualSutdio\就職作品\個人製作\FindWork\就職作品プロジェクト\x64\Release\VS_DebugGrid.cso</FullPath>
+      <FullPath>C:\Users\dorae\Desktop\HAL\class3\FindWork\就職作品プロジェクト\x64\Release\VS_DebugGrid.cso</FullPath>
     </ContentFile>
     <ContentFile>
-      <FullPath>C:\Users\kodokeの世界\Desktop\HAL\VisualSutdio\就職作品\個人製作\FindWork\就職作品プロジェクト\x64\Release\VS_Default.cso</FullPath>
+      <FullPath>C:\Users\dorae\Desktop\HAL\class3\FindWork\就職作品プロジェクト\x64\Release\VS_Default.cso</FullPath>
     </ContentFile>
     <ContentFile>
-      <FullPath>C:\Users\kodokeの世界\Desktop\HAL\VisualSutdio\就職作品\個人製作\FindWork\就職作品プロジェクト\x64\Release\VS_Skydome.cso</FullPath>
+      <FullPath>C:\Users\dorae\Desktop\HAL\class3\FindWork\就職作品プロジェクト\x64\Release\VS_Skydome.cso</FullPath>
     </ContentFile>
     <ContentFile>
-      <FullPath>C:\Users\kodokeの世界\Desktop\HAL\VisualSutdio\就職作品\個人製作\FindWork\就職作品プロジェクト\x64\Release\VS_Unlit.cso</FullPath>
+      <FullPath>C:\Users\dorae\Desktop\HAL\class3\FindWork\就職作品プロジェクト\x64\Release\VS_Unlit.cso</FullPath>
     </ContentFile>
   </ContentFiles>
   <SatelliteDlls />

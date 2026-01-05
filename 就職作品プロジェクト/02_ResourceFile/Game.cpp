@@ -16,6 +16,7 @@
 #include <string>
 #include <typeinfo>
 
+using namespace Math::Easing;
 
 std::unique_ptr<Game> Game::m_pInstance  = nullptr; // ゲームのインスタンス初期化
 

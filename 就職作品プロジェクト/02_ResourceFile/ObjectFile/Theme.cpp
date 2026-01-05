@@ -1,6 +1,9 @@
 #include "Theme.h"
 #include "Game.h"
 #include "Application.h"
+#include <algorithm>
+
+using namespace Math::Easing;
 
 Theme::Theme(Camera& cam):Square(cam)
 {
@@ -13,6 +16,9 @@ void Theme::Initialize()
 
     Square::Initialize();
 
+    m_Duration  = 2.0f;
+    m_ScaleMass = 5.0f;
+    m_Elapsed   = 0.0f;
     SetShader("VS_Alpha","PS_Alpha");
     SetTexture(textureManager->GetTexture("Plane.png"));
 
@@ -24,9 +30,16 @@ void Theme::Update()
         return; 
     }
 
+    NVector3 scale = m_ScaleBase;
+    m_Elapsed += Application::GetDeltaTime();
 
+    float t = std::clamp(m_Elapsed / max(m_Duration, 0.0001f), 0.0f, 1.0f);
+    float ease = EvaluateEasing(EASING_TYPE::IN_EXPO, t);
+    float mass = max(0.6f, m_ScaleMass - (m_ScaleMass * ease));
 
-
+    scale *= mass; 
+    
+    SetScale(scale);
 }
 
 void Theme::Draw()
@@ -48,4 +61,9 @@ void Theme::SetActive()
 void Theme::SetActive(const bool isActive)
 {
     m_isActive = isActive;
+}
+
+void Theme::SetScaleBase(NVector3 scale)
+{
+    m_ScaleBase = scale; 
 }

@@ -3,6 +3,8 @@
 #include "Game.h"
 #include "DebugUI.h"
 
+using namespace Math::Easing;
+
 void ResultScene::Initialize()
 {
     auto& instance = Game::GetInstance();

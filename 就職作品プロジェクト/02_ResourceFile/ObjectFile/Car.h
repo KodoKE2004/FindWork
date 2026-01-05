@@ -3,7 +3,7 @@
 #include <algorithm>
 
 #include "Square.h"
-#include "Collider.h"
+#include "Calculator.h"
 
 /// <summary>
 /// フェイントの挙動タイプ
