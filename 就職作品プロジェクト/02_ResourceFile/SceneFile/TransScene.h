@@ -9,11 +9,11 @@
 
 #include <memory>
 
-// —ñ‹“Œ^PHASE‚Ìisó‹µ‚ÌŠÄ‹
-// OFF    : ƒgƒ‰ƒ“ƒWƒVƒ‡ƒ“ˆ—‚ğs‚í‚È‚¢
-// START  : ƒgƒ‰ƒ“ƒWƒVƒ‡ƒ“ˆ—‚ğŠJn‚·‚é
-// DOING  : ƒgƒ‰ƒ“ƒWƒVƒ‡ƒ“ˆ—’†
-// FINISH : ƒgƒ‰ƒ“ƒWƒVƒ‡ƒ“ˆ—‚ªI—¹‚µ‚½
+// åˆ—æŒ™å‹PHASEã®é€²è¡ŒçŠ¶æ³ã®ç›£è¦–
+// OFF    : ãƒˆãƒ©ãƒ³ã‚¸ã‚·ãƒ§ãƒ³å‡¦ç†ã‚’è¡Œã‚ãªã„
+// START  : ãƒˆãƒ©ãƒ³ã‚¸ã‚·ãƒ§ãƒ³å‡¦ç†ã‚’é–‹å§‹ã™ã‚‹
+// DOING  : ãƒˆãƒ©ãƒ³ã‚¸ã‚·ãƒ§ãƒ³å‡¦ç†ä¸­
+// FINISH : ãƒˆãƒ©ãƒ³ã‚¸ã‚·ãƒ§ãƒ³å‡¦ç†ãŒçµ‚äº†ã—ãŸ
 enum class STEP
 {
 	OFF,
@@ -26,29 +26,30 @@ enum class STEP
 class TransScene : public Scene
 {
 private:
-	// ƒV[ƒ“‚Ì‘OŒã 
+	// ã‚·ãƒ¼ãƒ³ã®å‰å¾Œ 
 	std::shared_ptr<Scene> m_SceneOld ;
 	std::shared_ptr<Scene> m_SceneNext;
 
-	// ƒIƒtƒXƒNƒŠ[ƒ“—p
+	// ã‚ªãƒ•ã‚¹ã‚¯ãƒªãƒ¼ãƒ³ç”¨
 	std::unique_ptr<RenderTarget> m_RenderTarget;
 	Microsoft::WRL::ComPtr<ID3D11ShaderResourceView> m_NextSceneSRV;
 
 	std::shared_ptr<SnapshotOverlay> m_OverlayOld ;
 	std::shared_ptr<SnapshotOverlay> m_OverlayNext;
 
-    // ƒ^ƒCƒ}[ŠÖ˜A
+    // ã‚¿ã‚¤ãƒãƒ¼é–¢é€£
 	float m_Timer	 = 0.0f;
 	float m_Duration = 0.0f;
 
-	// ‘JˆÚ‰‰o‚Ìƒpƒ‰ƒ[ƒ^
+	// é·ç§»æ¼”å‡ºã®ãƒ‘ãƒ©ãƒ¡ãƒ¼ã‚¿
 	SceneTransitionParam m_transParam{};
 
-    // ƒgƒ‰ƒ“ƒWƒVƒ‡ƒ“ŠÖ˜A
+    // ãƒˆãƒ©ãƒ³ã‚¸ã‚·ãƒ§ãƒ³é–¢é€£
 	float m_Alpha	   = 0.0f;
 	float m_AlphaValue = 0.0f;
 
 	bool m_isChange		    = false;
+    bool m_RequestNextSceneDraw = false;
 
 	STEP m_Step;
 
@@ -57,7 +58,7 @@ private:
 	std::shared_ptr<TransitionBase> m_TransitionTexture;
 
 public:
-    // ƒRƒ“ƒXƒgƒ‰ƒNƒ^‚ÆƒfƒXƒgƒ‰ƒNƒ^
+    // ã‚³ãƒ³ã‚¹ãƒˆãƒ©ã‚¯ã‚¿ã¨ãƒ‡ã‚¹ãƒˆãƒ©ã‚¯ã‚¿
 
 	TransScene();
     ~TransScene();
@@ -65,10 +66,11 @@ public:
 	void Initialize()		override;
 	void Update(float tick)	override;
 	void Finalize()			override;
+	void Draw();
 
 	SCENE_NO GetSceneNo() const override { return SCENE_NO::TRANSITION; }
 	/// <summary>
-	/// Ÿ‚ÌƒV[ƒ“‚ÌˆêƒtƒŒ[ƒ€–Ú‚ğ•`‰æ‚·‚é
+	/// æ¬¡ã®ã‚·ãƒ¼ãƒ³ã®ä¸€ãƒ•ãƒ¬ãƒ¼ãƒ ç›®ã‚’æç”»ã™ã‚‹
 	/// </summary>
 	void DrawNextScene();
 
@@ -83,7 +85,7 @@ public:
 	void SetStep(STEP step)				   { m_Step		 = step;	  }
 	void SetTimer(float timer)			   { m_Timer	 = timer;	  }
 
-	// İ’è‚µ‚½ŠÔ‚É“’B‚µ‚½‚©‚Ç‚¤‚©
+	// è¨­å®šã—ãŸæ™‚é–“ã«åˆ°é”ã—ãŸã‹ã©ã†ã‹
 	bool isOverClock();  
 
 };

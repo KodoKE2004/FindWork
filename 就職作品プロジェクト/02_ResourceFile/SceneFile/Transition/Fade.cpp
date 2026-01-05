@@ -6,6 +6,7 @@
 #include "Renderer.h"
 #include <vector>
 #include <algorithm>
+#include "Debug.hpp"
 
 Fade::Fade(Camera& cam) : TransitionBase(cam)
 {
@@ -13,26 +14,26 @@ Fade::Fade(Camera& cam) : TransitionBase(cam)
 
 void Fade::Initialize()
 {
-    // ‰ŠúƒJƒ‰[‚ğ“§–¾‚Éİ’è
+    // åˆæœŸã‚«ãƒ©ãƒ¼ã‚’é€æ˜ã«è¨­å®š
     m_Alpha = 0.0f;
     m_Elapsed = 0.0f;
 
-    // Duration‚ÌƒPƒA
+    // Durationã®ã‚±ã‚¢
     if (m_Duration <= 0.0f) {
         m_Duration = 1.0f;
     }
 
-    // ƒAƒ‹ƒtƒ@’l‚ÌŒvZ‚Æ“K—p
+    // ã‚¢ãƒ«ãƒ•ã‚¡å€¤ã®è¨ˆç®—ã¨é©ç”¨
     ApplyAlpha();
 
-    // ƒtƒF[ƒhƒAƒEƒg‚©‚çŠJn
+    // ãƒ•ã‚§ãƒ¼ãƒ‰ã‚¢ã‚¦ãƒˆã‹ã‚‰é–‹å§‹
     ApplyPhaseSetting(TRANS_PHASE::TRANS_OUT);
 
-    // ƒeƒNƒXƒ`ƒƒ‚Ìæ“¾
+    // ãƒ†ã‚¯ã‚¹ãƒãƒ£ã®å–å¾—
     TextureManager* textureMgr = Game::GetInstance();
     m_Texture = textureMgr->GetTexture("Black.png");
 
-    // ƒtƒ‹ƒXƒNƒŠ[ƒ“‚Éİ’è
+    // ãƒ•ãƒ«ã‚¹ã‚¯ãƒªãƒ¼ãƒ³ã«è¨­å®š
     SetScale(static_cast<float>(Renderer::GetScreenWidth()),
              static_cast<float>(Renderer::GetScreenHeight()),
              1.0f);
@@ -77,6 +78,21 @@ void Fade::Update(float tick)
 
 void Fade::Draw()
 {
+    // Stateç ´å£Šã®å½±éŸ¿ã‚’å—ã‘ãªã„ã‚ˆã†ã€ãƒ‘ã‚¤ãƒ—ãƒ©ã‚¤ãƒ³ã‚’å…ˆé ­ã§å†è¨­å®šã™ã‚‹
+    SetPipeline();
+
+    static uint64_t s_LastLogFrame = 0;
+    const auto frame = Game::GetDrawFrameCounter();
+    if (frame != s_LastLogFrame) {
+        Debug::Log("[[æç”»]] Transition: Fade");
+        s_LastLogFrame = frame;
+    }
+
+    if (m_DebugSolidDraw) {
+        DrawDebugFullscreenSolid();
+        return;
+    }
+
     Renderer::SetDepthEnable(false);
     Renderer::SetBlendState(BS_ALPHABLEND);
 
@@ -87,11 +103,6 @@ void Fade::Draw()
     Renderer::SetWorldMatrix(&world);
 
     ID3D11DeviceContext* dc = Renderer::GetDeviceContext();
-    dc->IASetPrimitiveTopology(D3D11_PRIMITIVE_TOPOLOGY_TRIANGLESTRIP);
-
-    SetGPU();
-    m_VertexBuffer.SetGPU();
-    m_IndexBuffer.SetGPU();
     m_Texture->SetGPU();
 
     m_Materiale->SetDiffuse(DirectX::XMFLOAT4(m_Color.x, m_Color.y, m_Color.z, m_Color.w));

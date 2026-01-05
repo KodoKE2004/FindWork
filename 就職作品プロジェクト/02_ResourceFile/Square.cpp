@@ -6,7 +6,7 @@
 using namespace std;
 using namespace DirectX::SimpleMath;
 
-// ƒRƒ“ƒXƒgƒ‰ƒNƒ^
+// ã‚³ãƒ³ã‚¹ãƒˆãƒ©ã‚¯ã‚¿
 Square::Square(Camera& cam) :Object(cam)
 {
     m_Texture = std::make_shared<Texture>();
@@ -17,19 +17,19 @@ Square::Square(Camera& cam) :Object(cam)
     SetTexture(textureMgr->GetTexture("Plane.png"));
 }
 
-// ƒfƒXƒgƒ‰ƒNƒ^
+// ãƒ‡ã‚¹ãƒˆãƒ©ã‚¯ã‚¿
 Square::~Square()
 {
 
 }
 
 //======
-// ‰Šú‰»ˆ—
+// åˆæœŸåŒ–å‡¦ç†
 //======
 void Square::Initialize()
 {
 
-	// ’¸“_ƒf[ƒ^
+	// é ‚ç‚¹ãƒ‡ãƒ¼ã‚¿
 	std::vector<VERTEX_3D> vertices;
 
 	vertices.resize(4);
@@ -76,40 +76,49 @@ void Square::Initialize()
 }
 
 //======================
-//		  XVˆ—
+//		  æ›´æ–°å‡¦ç†
 //======================
 void Square::Update()
 {
 	
 }
 
+void Square::SetPipeline()
+{
+	ID3D11DeviceContext* devicecontext = Renderer::GetDeviceContext();
+	if (!devicecontext) {
+		return;
+	}
+
+	// Sprite/FullscreenQuadç”¨: æ¯å›ç¢ºå®Ÿã«ãƒ‘ã‚¤ãƒ—ãƒ©ã‚¤ãƒ³ã‚’è¨­å®šã™ã‚‹
+	SetGPU();
+	m_VertexBuffer.SetGPU();
+	m_IndexBuffer.SetGPU();
+	devicecontext->IASetPrimitiveTopology(D3D11_PRIMITIVE_TOPOLOGY_TRIANGLESTRIP);
+	Renderer::BindDefaultSamplers();
+	Renderer::BindDefaultConstantBuffers();
+}
+
 //======================
-//		  •`‰æˆ—
+//		  æç”»å‡¦ç†
 //======================
 void Square::Draw()
 {
+	// Stateç ´å£Šã®å½±éŸ¿ã‚’å—ã‘ãªã„ã‚ˆã†ã€ãƒ‘ã‚¤ãƒ—ãƒ©ã‚¤ãƒ³ã‚’å…ˆé ­ã§å†è¨­å®šã™ã‚‹
+	SetPipeline();
 	Renderer::SetBlendState(BS_ALPHABLEND);
 
-	// SRTî•ñì¬
+	// SRTæƒ…å ±ä½œæˆ
 	Matrix r = Matrix::CreateFromYawPitchRoll(m_Rotation.x, m_Rotation.y, m_Rotation.z);
 	Matrix t = Matrix::CreateTranslation(m_Position.x, m_Position.y, m_Position.z);
 	Matrix s = Matrix::CreateScale(m_Scale.x, m_Scale.y, m_Scale.z);
 
 	Matrix worldmtx;
 	worldmtx = s * r * t;
-	Renderer::SetWorldMatrix(&worldmtx); // GPU‚ÉƒZƒbƒg
+	Renderer::SetWorldMatrix(&worldmtx); // GPUã«ã‚»ãƒƒãƒˆ
 
-	// •`‰æ‚Ìˆ—
-	ID3D11DeviceContext* devicecontext;
-	devicecontext = Renderer::GetDeviceContext();
-
-	// ƒgƒ|ƒƒW[‚ğƒZƒbƒgiƒvƒŠƒ~ƒeƒBƒuƒ^ƒCƒvj
-	devicecontext->IASetPrimitiveTopology(D3D11_PRIMITIVE_TOPOLOGY_TRIANGLESTRIP);
-
-	SetGPU();
-
-	m_VertexBuffer.SetGPU();
-	m_IndexBuffer.SetGPU();
+	// æç”»ã®å‡¦ç†
+	ID3D11DeviceContext* devicecontext = Renderer::GetDeviceContext();
 
 	m_Texture->SetGPU();
 
@@ -117,7 +126,7 @@ void Square::Draw()
 	m_Materiale->Update();
 	m_Materiale->SetGPU();
 
-	// UV‚Ìİ’è‚ğw’è
+	// UVã®è¨­å®šã‚’æŒ‡å®š
 	float u = (m_NumU - 1.0f) / m_SplitX;
 	float v = (m_NumV - 1.0f) / m_SplitY;
 	float uw = 1.0f / m_SplitX;
@@ -127,20 +136,20 @@ void Square::Draw()
 	Camera::ScopedMode scepedMode(m_Camera, CAMERA_2D);
 
 	devicecontext->DrawIndexed(
-		4, // •`‰æ‚·‚éƒCƒ“ƒfƒbƒNƒX”ilŠpŒ`‚È‚ñ‚Å‚Sj
-		0, // Å‰‚ÌƒCƒ“ƒfƒbƒNƒXƒoƒbƒtƒ@‚ÌˆÊ’u
+		4, // æç”»ã™ã‚‹ã‚¤ãƒ³ãƒ‡ãƒƒã‚¯ã‚¹æ•°ï¼ˆå››è§’å½¢ãªã‚“ã§ï¼”ï¼‰
+		0, // æœ€åˆã®ã‚¤ãƒ³ãƒ‡ãƒƒã‚¯ã‚¹ãƒãƒƒãƒ•ã‚¡ã®ä½ç½®
 		0);
 }
 
 //==========================
-//			I—¹ˆ—
+//			çµ‚äº†å‡¦ç†
 //==========================
 void Square::Finalize()
 {
 
 }
 
-// ƒeƒNƒXƒ`ƒƒ‚ğw’è
+// ãƒ†ã‚¯ã‚¹ãƒãƒ£ã‚’æŒ‡å®š
 void Square::SetTexture(const char* imgname)
 {
 	if (!m_Texture)
@@ -162,7 +171,7 @@ void Square::SetTexture(std::shared_ptr<Texture> texture)
 
 }
 
-// UVÀ•W‚ğw’è
+// UVåº§æ¨™ã‚’æŒ‡å®š
 void Square::SetUV(const float& nu, const float& nv, const float& sx, const float& sy)
 {
 	m_NumU = nu;

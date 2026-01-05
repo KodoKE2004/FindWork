@@ -18,7 +18,8 @@
 
 using namespace Math::Easing;
 
-std::unique_ptr<Game> Game::m_pInstance  = nullptr; // ƒQ[ƒ€‚ÌƒCƒ“ƒXƒ^ƒ“ƒX‰Šú‰»
+std::unique_ptr<Game> Game::m_pInstance  = nullptr; // ã‚²ãƒ¼ãƒ ã®ã‚¤ãƒ³ã‚¹ã‚¿ãƒ³ã‚¹åˆæœŸåŒ–
+uint64_t Game::m_DrawFrameCounter = 0;
 
 void Game::InitializeTransitionCSV()
 {
@@ -31,7 +32,7 @@ void Game::InitializeTransitionCSV()
 	}
 	else
 	{
-        Debug::Log("[[¬Œ÷]] LoadTransitionSettingFromCsv : " + std::string(kTransitionCsvPath),MessageColor::Green);
+        Debug::Log("[[æˆåŠŸ]] LoadTransitionSettingFromCsv : " + std::string(kTransitionCsvPath),MessageColor::Green);
 	}
 }
 
@@ -46,14 +47,14 @@ void Game::FinalizeTransitionCSV()
 	}
 	else
 	{
-		Debug::Log("[[¬Œ÷]] SaveTransitionSettingFromCsv : " + savePath.string(), MessageColor::Green);
+		Debug::Log("[[æˆåŠŸ]] SaveTransitionSettingFromCsv : " + savePath.string(), MessageColor::Green);
 	}
 }
 
 Game::Game()
 {
-    m_SceneCurrent = nullptr; // Œ»İ‚ÌƒV[ƒ“‰Šú‰»
-    m_SceneNext	   = nullptr; // Ÿ‚ÌƒV[ƒ“‰Šú‰»
+    m_SceneCurrent = nullptr; // ç¾åœ¨ã®ã‚·ãƒ¼ãƒ³åˆæœŸåŒ–
+    m_SceneNext	   = nullptr; // æ¬¡ã®ã‚·ãƒ¼ãƒ³åˆæœŸåŒ–
 }
 
 void Game::Initialize()
@@ -65,9 +66,9 @@ void Game::Initialize()
 	//instance.m_Camera->Initialize();							
     instance.m_TransitionTexture = nullptr;						
     instance.m_Theme             = nullptr;						
-	//		ƒV[ƒ“‚ğƒ^ƒCƒgƒ‹ƒV[ƒ“‚Éİ’è
+	//		ã‚·ãƒ¼ãƒ³ã‚’ã‚¿ã‚¤ãƒˆãƒ«ã‚·ãƒ¼ãƒ³ã«è¨­å®š
 	Renderer::Initialize();
-	DebugUI::Init(Renderer::GetDevice(), Renderer::GetDeviceContext());	// ƒfƒoƒbƒOUI‚Ì‰Šú‰»
+	DebugUI::Init(Renderer::GetDevice(), Renderer::GetDeviceContext());	// ãƒ‡ãƒãƒƒã‚°UIã®åˆæœŸåŒ–
 #ifdef _DEBUG
 
 	RegistDebugObject();
@@ -93,15 +94,15 @@ void Game::Initialize()
 	
 	InitializeTransitionCSV();
 
-	// ƒ}ƒl[ƒWƒƒ[‚Ì‰Šú‰»
-	// ƒ‚ƒfƒ‹EƒeƒNƒXƒ`ƒƒ‚ÌƒpƒX‚ğİ’è
+	// ãƒãƒãƒ¼ã‚¸ãƒ£ãƒ¼ã®åˆæœŸåŒ–
+	// ãƒ¢ãƒ‡ãƒ«ãƒ»ãƒ†ã‚¯ã‚¹ãƒãƒ£ã®ãƒ‘ã‚¹ã‚’è¨­å®š
 	instance.m_ShaderManager  = std::make_shared<ShaderManager> ("ShaderFile/");
 	instance.m_MeshManager	  = std::make_shared<MeshManager>	("AssetFile/Model/");
 	instance.m_TextureManager = std::make_shared<TextureManager>("AssetFile/Texture/");
 	instance.m_AudioManager   = std::make_shared<AudioManager>	(L"AssetFile/Sound/");
 	instance.m_AudioManager->Init();
 
-	// ƒVƒF[ƒ_[“o˜^
+	// ã‚·ã‚§ãƒ¼ãƒ€ãƒ¼ç™»éŒ²
 	instance.m_ShaderManager->Add("VS_Default",ShaderStage::VS);
 	instance.m_ShaderManager->Add("PS_Default",ShaderStage::PS);
 	instance.m_ShaderManager->Add("VS_Unlit"  ,ShaderStage::VS);
@@ -116,7 +117,7 @@ void Game::Initialize()
 
 #endif // _DEBUG
 
-	instance.m_SceneCurrent = std::make_shared<GameSceneWait>();				// ƒ^ƒCƒgƒ‹ƒV[ƒ“‚ÌƒCƒ“ƒXƒ^ƒ“ƒX‚ğ¶¬
+	instance.m_SceneCurrent = std::make_shared<GameSceneWait>();				// ã‚¿ã‚¤ãƒˆãƒ«ã‚·ãƒ¼ãƒ³ã®ã‚¤ãƒ³ã‚¹ã‚¿ãƒ³ã‚¹ã‚’ç”Ÿæˆ
 	instance.m_SceneCurrent->Initialize();
 }
 
@@ -135,24 +136,24 @@ void Game::Update(float tick)
 	instance.m_PreviewMousePos = mousePos;
 #endif
 
-	// Œ»İ‚ÌƒV[ƒ“‚ÌXV
+	// ç¾åœ¨ã®ã‚·ãƒ¼ãƒ³ã®æ›´æ–°
 	instance.m_SceneCurrent->Update(tick);
 
-	// ƒJƒƒ‰‚ÌXV
+	// ã‚«ãƒ¡ãƒ©ã®æ›´æ–°
 	instance.m_Camera->Update();
 
-	// “ü—Í‚ÌXV
-	// ƒIƒuƒWƒFƒNƒg‚ÌXV
+	// å…¥åŠ›ã®æ›´æ–°
+	// ã‚ªãƒ–ã‚¸ã‚§ã‚¯ãƒˆã®æ›´æ–°
 	for (auto& o : instance.m_GameObjects)
 	{
 		if(o == nullptr){ continue; }
-		o->Update(); // ƒIƒuƒWƒFƒNƒg‚ÌXV
+		o->Update(); // ã‚ªãƒ–ã‚¸ã‚§ã‚¯ãƒˆã®æ›´æ–°
 	}
 	if (instance.m_Theme)
 	{
 		instance.m_Theme->Update();
 	}
-	// ƒI[ƒfƒBƒIƒ}ƒl[ƒWƒƒ[‚ÌXV
+	// ã‚ªãƒ¼ãƒ‡ã‚£ã‚ªãƒãƒãƒ¼ã‚¸ãƒ£ãƒ¼ã®æ›´æ–°
 	instance.m_AudioManager->Update();
 
 #ifdef _DEBUG
@@ -165,20 +166,33 @@ void Game::Draw()
 {
 	auto& instance = GetInstance();
 
+	++m_DrawFrameCounter;
 	Renderer::Start();
+
+	// Updateä¸­ã®Drawã‚„ã‚ªãƒ•ã‚¹ã‚¯ãƒªãƒ¼ãƒ³æç”»ã®å½±éŸ¿ã‚’é¿ã‘ã‚‹ãŸã‚ã€
+	// TransSceneã®DrawNextSceneã¯Drawãƒ‘ã‚¹ã§å®Ÿè¡Œã™ã‚‹ã€‚
+	if (auto transScene = std::dynamic_pointer_cast<TransScene>(instance.m_SceneCurrent)) {
+		transScene->Draw();
+	}
 
 	for (auto& o : instance.m_GameObjects)
 	{
 		if (!o) continue;
 		o->Draw();
 	}
-	
-	if (instance.m_TransitionTexture != nullptr) {
-	    instance.m_TransitionTexture->Draw();
-    }
+
+	// Theme/Transitionæç”»å‰ã«çŠ¶æ…‹ã‚’æ—¢å®šåŒ–ã—ã¦ã€Stateç ´å£Šã‚„Scissorè¨­å®šã®å½±éŸ¿ã‚’æ’é™¤ã™ã‚‹
+	Renderer::ResetForFullscreenPass(Renderer::GetDeviceContext(),
+									 static_cast<UINT>(Renderer::GetScreenWidth()),
+									 static_cast<UINT>(Renderer::GetScreenHeight()));
+
+	// æç”»é †ã®çŸ›ç›¾ã‚’æ’é™¤: Theme -> Transitionï¼ˆTransitionãŒæœ€å‰é¢ï¼‰
 	if (instance.m_Theme)
 	{
 		instance.m_Theme->Draw();
+	}
+	if (instance.m_TransitionTexture != nullptr) {
+		instance.m_TransitionTexture->Draw();
 	}
 
 	#ifdef _DEBUG
@@ -198,15 +212,15 @@ void Game::Finalize()
 	instance.m_Grid.Finalize();
 #endif //_DEBUG
 
-	DebugUI::DisposeUI();		// ƒfƒoƒbƒOUI‚ÌI—¹ˆ—
-	instance.DeleteAllObject();	//ƒIƒuƒWƒFƒNƒg‚ğ‘S‚Äíœ
+	DebugUI::DisposeUI();		// ãƒ‡ãƒãƒƒã‚°UIã®çµ‚äº†å‡¦ç†
+	instance.DeleteAllObject();	//ã‚ªãƒ–ã‚¸ã‚§ã‚¯ãƒˆã‚’å…¨ã¦å‰Šé™¤
 	if (instance.m_TransitionTexture) {
 		instance.m_TransitionTexture->Finalize();
 	}
 	if(instance.m_Theme){
 		instance.m_Theme->Finalize();
 	}
-	Renderer::Finalize();			// ƒŒƒ“ƒ_ƒ‰[‚ÌI—¹ˆ—
+	Renderer::Finalize();			// ãƒ¬ãƒ³ãƒ€ãƒ©ãƒ¼ã®çµ‚äº†å‡¦ç†
 
 	instance.m_SceneCurrent.reset();
 	instance.m_SceneStack.clear();
@@ -279,7 +293,7 @@ Camera& Game::GetCamera()
 void Game::RegistDebugObject()
 {
 #ifdef _DEBUG
-	// ImGui •`‰æˆ—‚ğ“o˜^
+	// ImGui æç”»å‡¦ç†ã‚’ç™»éŒ²
 	DebugUI::RedistDebugFunction([]()
 		{
 			auto& instance = Game::GetInstance();
@@ -370,7 +384,7 @@ void Game::DeleteObject(const std::shared_ptr<Object>& pt)
 void Game::DeleteAllObject()
 {
 	auto& instance = GetInstance();
-	// ƒIƒuƒWƒFƒNƒgI—¹ˆ—
+	// ã‚ªãƒ–ã‚¸ã‚§ã‚¯ãƒˆçµ‚äº†å‡¦ç†
 	for (auto& o : m_pInstance->m_GameObjects)
 	{
 		if (!o) {

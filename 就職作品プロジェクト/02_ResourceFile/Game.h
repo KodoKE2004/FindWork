@@ -2,6 +2,7 @@
 #include <memory>
 #include <vector>
 #include <type_traits>
+#include <cstdint>
 #include <Debug.hpp>
 #include "DebugGridLine.h"
 
@@ -21,52 +22,53 @@
 class Game
 {
 private:
-	static std::unique_ptr<Game>		 m_pInstance;		  // ƒQ[ƒ€‚ÌƒCƒ“ƒXƒ^ƒ“ƒX
-	std::shared_ptr<Scene>				 m_SceneCurrent;	  // Œ»İ‚ÌƒV[ƒ“
-    std::shared_ptr<Scene>				 m_SceneNext;		  // Ÿ‚ÌƒV[ƒ“
-	std::unique_ptr<Input>				 m_Input;			  // “ü—ÍŠÇ—
-	std::unique_ptr<Camera>				 m_Camera;			  // ƒJƒƒ‰
-	std::vector<std::shared_ptr<Object>> m_GameObjects;		  // ƒIƒuƒWƒFƒNƒg
+	static std::unique_ptr<Game>		 m_pInstance;		  // ã‚²ãƒ¼ãƒ ã®ã‚¤ãƒ³ã‚¹ã‚¿ãƒ³ã‚¹
+	static uint64_t					 m_DrawFrameCounter;  // Draw å‘¼ã³å‡ºã—ã®ãƒ•ãƒ¬ãƒ¼ãƒ ç•ªå·
+	std::shared_ptr<Scene>				 m_SceneCurrent;	  // ç¾åœ¨ã®ã‚·ãƒ¼ãƒ³
+    std::shared_ptr<Scene>				 m_SceneNext;		  // æ¬¡ã®ã‚·ãƒ¼ãƒ³
+	std::unique_ptr<Input>				 m_Input;			  // å…¥åŠ›ç®¡ç†
+	std::unique_ptr<Camera>				 m_Camera;			  // ã‚«ãƒ¡ãƒ©
+	std::vector<std::shared_ptr<Object>> m_GameObjects;		  // ã‚ªãƒ–ã‚¸ã‚§ã‚¯ãƒˆ
 
-    std::shared_ptr<TransitionBase>		 m_TransitionTexture; // ƒgƒ‰ƒ“ƒWƒVƒ‡ƒ“—pƒeƒNƒXƒ`ƒƒ
-    std::shared_ptr<Theme>				 m_Theme;			  // ƒe[ƒ}ŠÇ—
-    std::vector<std::shared_ptr<Scene>>	 m_SceneStack;		  // ƒV[ƒ“ƒXƒ^ƒbƒN
+    std::shared_ptr<TransitionBase>		 m_TransitionTexture; // ãƒˆãƒ©ãƒ³ã‚¸ã‚·ãƒ§ãƒ³ç”¨ãƒ†ã‚¯ã‚¹ãƒãƒ£
+    std::shared_ptr<Theme>				 m_Theme;			  // ãƒ†ãƒ¼ãƒç®¡ç†
+    std::vector<std::shared_ptr<Scene>>	 m_SceneStack;		  // ã‚·ãƒ¼ãƒ³ã‚¹ã‚¿ãƒƒã‚¯
 
 #ifdef _DEBUG
-    DirectX::SimpleMath::Vector2 m_PreviewMousePos;  // ƒfƒoƒbƒO—pƒrƒ…[s—ñ
+    DirectX::SimpleMath::Vector2 m_PreviewMousePos;  // ãƒ‡ãƒãƒƒã‚°ç”¨ãƒ“ãƒ¥ãƒ¼è¡Œåˆ—
 #endif
 
 	//================================
-	//	   ƒQ[ƒ€‚ğx‚¦‚éƒ}ƒl[ƒWƒƒ[’B
+	//	   ã‚²ãƒ¼ãƒ ã‚’æ”¯ãˆã‚‹ãƒãƒãƒ¼ã‚¸ãƒ£ãƒ¼é”
 	//================================
-	std::shared_ptr<MeshManager>		 m_MeshManager;		// ƒV[ƒ“‚Åˆµ‚¤ƒƒbƒVƒ…
-	std::shared_ptr<TextureManager>		 m_TextureManager;	// ƒQ[ƒ€‚Åˆµ‚¤‰æ‘œ
-	std::shared_ptr<ShaderManager>		 m_ShaderManager;	// ƒVƒF[ƒ_[‚ğ‚Ü‚Æ‚ß‚½‚à‚Ì
-	std::shared_ptr<AudioManager>		 m_AudioManager;	// ƒI[ƒfƒBƒIƒ}ƒl[ƒWƒƒ[
+	std::shared_ptr<MeshManager>		 m_MeshManager;		// ã‚·ãƒ¼ãƒ³ã§æ‰±ã†ãƒ¡ãƒƒã‚·ãƒ¥
+	std::shared_ptr<TextureManager>		 m_TextureManager;	// ã‚²ãƒ¼ãƒ ã§æ‰±ã†ç”»åƒ
+	std::shared_ptr<ShaderManager>		 m_ShaderManager;	// ã‚·ã‚§ãƒ¼ãƒ€ãƒ¼ã‚’ã¾ã¨ã‚ãŸã‚‚ã®
+	std::shared_ptr<AudioManager>		 m_AudioManager;	// ã‚ªãƒ¼ãƒ‡ã‚£ã‚ªãƒãƒãƒ¼ã‚¸ãƒ£ãƒ¼
 
-    static void InitializeTransitionCSV();					// ƒgƒ‰ƒ“ƒWƒVƒ‡ƒ“CSV‚Ì‰Šú‰»
-    static void FinalizeTransitionCSV();					// ƒgƒ‰ƒ“ƒWƒVƒ‡ƒ“CSV‚ÌI—¹ˆ—
+    static void InitializeTransitionCSV();					// ãƒˆãƒ©ãƒ³ã‚¸ã‚·ãƒ§ãƒ³CSVã®åˆæœŸåŒ–
+    static void FinalizeTransitionCSV();					// ãƒˆãƒ©ãƒ³ã‚¸ã‚·ãƒ§ãƒ³CSVã®çµ‚äº†å‡¦ç†
 public:
 	//================================
-	//		ƒRƒ“ƒXƒgƒ‰ƒNƒ^‚ÆƒfƒXƒgƒ‰ƒNƒ^
+	//		ã‚³ãƒ³ã‚¹ãƒˆãƒ©ã‚¯ã‚¿ã¨ãƒ‡ã‚¹ãƒˆãƒ©ã‚¯ã‚¿
 	//================================
 
 	Game();
 	~Game() = default;
 	//================================
-	//			ƒ‹[ƒv“à‚Ìˆ—
+	//			ãƒ«ãƒ¼ãƒ—å†…ã®å‡¦ç†
 	//================================
 	
-	static void Initialize();		// ƒQ[ƒ€‚Ì‰Šú‰»
-	static void Update(float tick);	// ƒQ[ƒ€‚ÌXV
-	static void Draw();				// ƒQ[ƒ€‚Ì•`‰æ
-	static void Finalize();			// ƒQ[ƒ€‚ÌI—¹ˆ—
+	static void Initialize();		// ã‚²ãƒ¼ãƒ ã®åˆæœŸåŒ–
+	static void Update(float tick);	// ã‚²ãƒ¼ãƒ ã®æ›´æ–°
+	static void Draw();				// ã‚²ãƒ¼ãƒ ã®æç”»
+	static void Finalize();			// ã‚²ãƒ¼ãƒ ã®çµ‚äº†å‡¦ç†
 
-	// Œ»İ‚ÌƒV[ƒ“‚ğİ’è
+	// ç¾åœ¨ã®ã‚·ãƒ¼ãƒ³ã‚’è¨­å®š
     static void SetSceneCurrent(std::shared_ptr<Scene> newScene);
     static void SetSceneNext(std::shared_ptr<Scene> newScene);
 
-    // TranstionTexture‚ğTransScene‚Æ˜AŒg
+    // TranstionTextureã‚’TransSceneã¨é€£æº
 	void SetTransitionTexture(std::shared_ptr<TransitionBase> tex) {
 		m_TransitionTexture = tex;
     }
@@ -76,7 +78,7 @@ public:
 	std::shared_ptr<Theme>			GetTheme() ; 
 
     //===============================
-	//			ƒV[ƒ“‚ÌŠÖ˜AŒQ
+	//			ã‚·ãƒ¼ãƒ³ã®é–¢é€£ç¾¤
 	//===============================
 	void					ScenePush(std::shared_ptr<Scene> newScene);
 	std::shared_ptr<Scene>	ScenePop();
@@ -85,36 +87,37 @@ public:
 	static Game&			GetInstance();	
 	std::shared_ptr<Scene>	GetCurrentScene() const;
 	Camera&					GetCamera();
+	static uint64_t			GetDrawFrameCounter() { return m_DrawFrameCounter; }
 	
     //================================
-	//		  ƒ}ƒl[ƒWƒƒ[‚Ìæ“¾
+	//		  ãƒãƒãƒ¼ã‚¸ãƒ£ãƒ¼ã®å–å¾—
     //================================
 	[[nodiscard]] operator MeshManager*    () const { return m_MeshManager.get();	}
 	[[nodiscard]] operator TextureManager* () const { return m_TextureManager.get();}
 	[[nodiscard]] operator ShaderManager*  () const { return m_ShaderManager.get(); }
 	[[nodiscard]] operator AudioManager*   () const { return m_AudioManager.get();	}
 
-	// DebugŠÖ˜A
+	// Debugé–¢é€£
 	DebugGridLine m_Grid;
 	static void RegistDebugObject();
 	static void RegistDebugFunction(){}
 
 	//================================
-	// ƒIƒuƒWƒFƒNƒgŠÇ—
+	// ã‚ªãƒ–ã‚¸ã‚§ã‚¯ãƒˆç®¡ç†
 	//================================
-	void DeleteObject(const std::shared_ptr<Object>& pt); // ƒIƒuƒWƒFƒNƒg‚ğíœ‚·‚é
-	void DeleteAllObject(); // ƒIƒuƒWƒFƒNƒg‚ğ‚·‚×‚Äíœ‚·‚é
+	void DeleteObject(const std::shared_ptr<Object>& pt); // ã‚ªãƒ–ã‚¸ã‚§ã‚¯ãƒˆã‚’å‰Šé™¤ã™ã‚‹
+	void DeleteAllObject(); // ã‚ªãƒ–ã‚¸ã‚§ã‚¯ãƒˆã‚’ã™ã¹ã¦å‰Šé™¤ã™ã‚‹
 
-	// ƒIƒuƒWƒFƒNƒg‚ğ’Ç‰Á‚·‚é
+	// ã‚ªãƒ–ã‚¸ã‚§ã‚¯ãƒˆã‚’è¿½åŠ ã™ã‚‹
 	template<class T, class... Args>
 	std::shared_ptr<T> AddObject(Args&&... args)
 	{
-		static_assert(std::is_base_of_v<Object, T>, "T‚ªObject‚ğŒp³‚µ‚Ä‚¢‚È‚¢");
-		static_assert(!std::is_abstract_v<T>	  , "T‚ª’ŠÛƒNƒ‰ƒX‚¾‚Á‚½");
+		static_assert(std::is_base_of_v<Object, T>, "TãŒObjectã‚’ç¶™æ‰¿ã—ã¦ã„ãªã„");
+		static_assert(!std::is_abstract_v<T>	  , "TãŒæŠ½è±¡ã‚¯ãƒ©ã‚¹ã ã£ãŸ");
 
 		auto& instance = *m_pInstance;
 
-		// ƒRƒ“ƒXƒgƒ‰ƒNƒ^ˆø”‚ğŠ®‘S“]‘—‚µ‚Ä unique_ptr‚ğì¬
+		// ã‚³ãƒ³ã‚¹ãƒˆãƒ©ã‚¯ã‚¿å¼•æ•°ã‚’å®Œå…¨è»¢é€ã—ã¦ unique_ptrã‚’ä½œæˆ
 		std::shared_ptr<T> up;
 		if constexpr (sizeof...(Args) == 0) {
 			up = std::make_shared<T>(*instance.m_Camera.get());
@@ -124,19 +127,19 @@ public:
 		}
 
 		instance.m_GameObjects.emplace_back(up);
-		up->Initialize(); // ‰Šú‰»
+		up->Initialize(); // åˆæœŸåŒ–
 		return up;
 	}
 
-	// ƒIƒuƒWƒFƒNƒg‚ğæ“¾‚·‚é
+	// ã‚ªãƒ–ã‚¸ã‚§ã‚¯ãƒˆã‚’å–å¾—ã™ã‚‹
 	template<class T> 
 	std::vector<std::shared_ptr<T>> GetObjects()
 	{
-        static_assert(std::is_base_of_v<Object, T>, "T‚ªObject‚ğŒp³‚µ‚Ä‚¢‚È‚¢");
+        static_assert(std::is_base_of_v<Object, T>, "TãŒObjectã‚’ç¶™æ‰¿ã—ã¦ã„ãªã„");
 
 		std::vector<std::shared_ptr<T>> res;
 		for (const auto& o : m_pInstance->m_GameObjects) {
-			// dynamic_cast‚ÅŒ^‚ğƒ`ƒFƒbƒN
+			// dynamic_castã§å‹ã‚’ãƒã‚§ãƒƒã‚¯
 			if (!o) {
 				continue;
 			}
@@ -149,25 +152,25 @@ public:
 };
 
 //================================
-//			ƒOƒ[ƒoƒ‹ŠÖ”
-// @@@ƒCƒ“ƒXƒ^ƒ“ƒX‚Ìæ“¾‚ğŠÈˆÕ‰»
+//			ã‚°ãƒ­ãƒ¼ãƒãƒ«é–¢æ•°
+// ã€€ã€€ã€€ã‚¤ãƒ³ã‚¹ã‚¿ãƒ³ã‚¹ã®å–å¾—ã‚’ç°¡æ˜“åŒ–
 //================================
 
 //================================
-//	  ƒV[ƒ“‚ğ‘JˆÚ‚·‚éƒeƒ“ƒvƒŒ[ƒgŠÖ”
+//	  ã‚·ãƒ¼ãƒ³ã‚’é·ç§»ã™ã‚‹ãƒ†ãƒ³ãƒ—ãƒ¬ãƒ¼ãƒˆé–¢æ•°
 //================================
 template<class T>
 void ChangeScenePush(SceneTransitionParam& state)
 {
     auto& instance = Game::GetInstance();
 
-	// ƒeƒ“ƒvƒŒ[ƒg‚È‚Ì‚Å
-	// Šù’è‚ªScene‚Å‚È‚¯‚ê‚ÎƒGƒ‰[
-	// T ‚ª Scene ‚ğŒp³‚µ‚Ä‚¢‚é‚±‚ÆA‚©‚Â’ŠÛƒNƒ‰ƒX‚Å‚È‚¢‚±‚Æ‚ğƒ`ƒFƒbƒN
-	static_assert(std::is_base_of_v<Scene, T>, "T ‚Í Scene ‚ğŒp³‚µ‚Ä‚¢‚é•K—v‚ª‚ ‚è‚Ü‚·");
-	static_assert(!std::is_abstract_v<T>, "T ‚Í’ŠÛƒNƒ‰ƒX‚Å‚Í‚¢‚¯‚Ü‚¹‚ñ");
+	// ãƒ†ãƒ³ãƒ—ãƒ¬ãƒ¼ãƒˆãªã®ã§
+	// æ—¢å®šãŒSceneã§ãªã‘ã‚Œã°ã‚¨ãƒ©ãƒ¼
+	// T ãŒ Scene ã‚’ç¶™æ‰¿ã—ã¦ã„ã‚‹ã“ã¨ã€ã‹ã¤æŠ½è±¡ã‚¯ãƒ©ã‚¹ã§ãªã„ã“ã¨ã‚’ãƒã‚§ãƒƒã‚¯
+	static_assert(std::is_base_of_v<Scene, T>, "T ã¯ Scene ã‚’ç¶™æ‰¿ã—ã¦ã„ã‚‹å¿…è¦ãŒã‚ã‚Šã¾ã™");
+	static_assert(!std::is_abstract_v<T>, "T ã¯æŠ½è±¡ã‚¯ãƒ©ã‚¹ã§ã¯ã„ã‘ã¾ã›ã‚“");
 
-	Debug::Log("[[ŒŸo]] ƒV[ƒ“‚ÌPush");
+	Debug::Log("[[æ¤œå‡º]] ã‚·ãƒ¼ãƒ³ã®Push");
 
 	Scene::ClearTimerList();
 
@@ -188,21 +191,21 @@ void ChangeScenePush(SceneTransitionParam& state)
 
 }
 
-// ˆê‚Â‘O‚ÌƒV[ƒ“‚É–ß‚é
+// ä¸€ã¤å‰ã®ã‚·ãƒ¼ãƒ³ã«æˆ»ã‚‹
 inline void ChangeScenePop(SceneTransitionParam& state)
 {
     auto& instance = Game::GetInstance();
 
 	if (instance.GetSceneStackSize() == 0) {
-		Debug::Log("[[Œx]] ƒV[ƒ“ƒXƒ^ƒbƒN‚ª‹ó‚Å‚·", MessageColor::Yellow);
+		Debug::Log("[[è­¦å‘Š]] ã‚·ãƒ¼ãƒ³ã‚¹ã‚¿ãƒƒã‚¯ãŒç©ºã§ã™", MessageColor::Yellow);
 		return ;
 	}
 
-	Debug::Log("[[ŒŸo]] ƒV[ƒ“‚ÌPop");
+	Debug::Log("[[æ¤œå‡º]] ã‚·ãƒ¼ãƒ³ã®Pop");
 
 	Scene::ClearTimerList();
 
-    // Œ»İ‚ÌƒV[ƒ“
+    // ç¾åœ¨ã®ã‚·ãƒ¼ãƒ³
     auto scene = std::make_shared<TransScene>();
     auto sceneNext = instance.ScenePop();
 
@@ -227,7 +230,7 @@ inline std::shared_ptr<TransitionBase> Game::GetTransitionTexture() const
 
 inline void Game::ScenePush(std::shared_ptr<Scene> newScene)
 {
-    // ‘JˆÚ‘O‚ÌƒV[ƒ“‚ğƒXƒ^ƒbƒN‚É•Û‘¶
+    // é·ç§»å‰ã®ã‚·ãƒ¼ãƒ³ã‚’ã‚¹ã‚¿ãƒƒã‚¯ã«ä¿å­˜
     if (newScene) m_SceneStack.push_back(newScene);
 }
 
@@ -245,4 +248,3 @@ inline size_t Game::GetSceneStackSize() const
 {
 	return m_SceneStack.size();
 }
-

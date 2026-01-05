@@ -9,10 +9,9 @@
 #include <unordered_map>
 
 #include "TransitionBase.h"
-#ifdef _DEBUG
 #include "Application.h"
 #include "Renderer.h"
-#endif
+#include "Game.h"
 
 SceneTransitionParam TitleToWait{};
 SceneTransitionParam WaitToGame{};
@@ -207,7 +206,7 @@ bool LoadTransitionSettingsFromCsv(const std::string& filePath, std::string& err
 	std::ifstream ifs(filePath, std::ios::binary);
 	if (!ifs.is_open())
 	{
-		errorMessage = "[[¸”s]] ƒtƒ@ƒCƒ‹‚ğŠJ‚¯‚Ü‚¹‚ñ‚Å‚µ‚½B" + filePath;
+		errorMessage = "[[å¤±æ•—]] ãƒ•ã‚¡ã‚¤ãƒ«ã‚’é–‹ã‘ã¾ã›ã‚“ã§ã—ãŸã€‚" + filePath;
 		return false;
 	}
 
@@ -286,21 +285,21 @@ bool LoadTransitionSettingsFromCsv(const std::string& filePath, std::string& err
 		auto it = mapping.find(from + "->" + to);
 		if (it == mapping.end())
 		{
-			errorMessage = "[[¸”s]] –¢’è‹`‚ÌƒV[ƒ“‘JˆÚ‚Å‚· : " + from + " -> " + to;
+			errorMessage = "[[å¤±æ•—]] æœªå®šç¾©ã®ã‚·ãƒ¼ãƒ³é·ç§»ã§ã™ : " + from + " -> " + to;
 			return false;
 		}
 
 		TRANS_MODE mode{};
 		if (!TryParseTransMode(modeLabel, mode))
 		{
-			errorMessage = "[[¸”s]] •s–¾‚È‘JˆÚƒ‚[ƒh‚Å‚· : " + modeLabel;
+			errorMessage = "[[å¤±æ•—]] ä¸æ˜ãªé·ç§»ãƒ¢ãƒ¼ãƒ‰ã§ã™ : " + modeLabel;
 			return false;
 		}
 
 		EASING_TYPE easing{};
 		if (!TryParseEasingType(easingLabel, easing))
 		{
-			errorMessage = "[[¸”s]] •s–¾‚ÈƒC[ƒWƒ“ƒOƒ^ƒCƒv‚Å‚· : " + easingLabel;
+			errorMessage = "[[å¤±æ•—]] ä¸æ˜ãªã‚¤ãƒ¼ã‚¸ãƒ³ã‚°ã‚¿ã‚¤ãƒ—ã§ã™ : " + easingLabel;
 			return false;
 		}
 
@@ -311,7 +310,7 @@ bool LoadTransitionSettingsFromCsv(const std::string& filePath, std::string& err
 		}
 		catch (...)
 		{
-			errorMessage = "[[¸”s]] ‘JˆÚŠÔ‚ª•s³‚Å‚· : " + durationStr;
+			errorMessage = "[[å¤±æ•—]] é·ç§»æ™‚é–“ãŒä¸æ­£ã§ã™ : " + durationStr;
 			return false;
 		}
 
@@ -324,7 +323,7 @@ bool LoadTransitionSettingsFromCsv(const std::string& filePath, std::string& err
 
 	if (!hasAny)
 	{
-		errorMessage = "[[¸”s]] —LŒø‚ÈƒV[ƒ“‘JˆÚİ’è‚ªŒ©‚Â‚©‚è‚Ü‚¹‚ñ‚Å‚µ‚½ : " + filePath;
+		errorMessage = "[[å¤±æ•—]] æœ‰åŠ¹ãªã‚·ãƒ¼ãƒ³é·ç§»è¨­å®šãŒè¦‹ã¤ã‹ã‚Šã¾ã›ã‚“ã§ã—ãŸ : " + filePath;
 		return false;
 	}
 
@@ -338,7 +337,77 @@ TransitionBase::TransitionBase(Camera& cam) : Object(cam)
     m_Phase = TRANS_PHASE::NONE;
 }
 
-// ƒeƒNƒXƒ`ƒƒ‚ğw’è
+void TransitionBase::SetPipeline()
+{
+	ID3D11DeviceContext* devicecontext = Renderer::GetDeviceContext();
+	if (!devicecontext) {
+		return;
+	}
+
+	// Sprite/FullscreenQuadç”¨: æ¯å›ç¢ºå®Ÿã«ãƒ‘ã‚¤ãƒ—ãƒ©ã‚¤ãƒ³ã‚’è¨­å®šã™ã‚‹
+	SetGPU();
+	m_VertexBuffer.SetGPU();
+	m_IndexBuffer.SetGPU();
+	devicecontext->IASetPrimitiveTopology(D3D11_PRIMITIVE_TOPOLOGY_TRIANGLESTRIP);
+	Renderer::BindDefaultSamplers();
+	Renderer::BindDefaultConstantBuffers();
+}
+
+void TransitionBase::DrawDebugFullscreenSolid()
+{
+	// å‘¼ã°ã‚Œã¦ã„ã‚‹ãŒæã‘ã¦ã„ãªã„å ´åˆã®åˆ‡ã‚Šåˆ†ã‘: å˜è‰²ãƒ•ãƒ«ã‚¹ã‚¯ãƒªãƒ¼ãƒ³æç”»
+	static std::shared_ptr<Texture> s_DebugTexture;
+	if (!s_DebugTexture) {
+		TextureManager* textureMgr = Game::GetInstance();
+		s_DebugTexture = textureMgr->GetTexture("Plane.png");
+	}
+
+	SetPipeline();
+	ID3D11DeviceContext* devicecontext = Renderer::GetDeviceContext();
+	if (!devicecontext) {
+		return;
+	}
+	Renderer::SetDepthEnable(false);
+	Renderer::SetBlendState(BS_ALPHABLEND);
+
+	const auto prevColor = m_Color;
+	const auto prevTexture = m_Texture;
+
+	if (s_DebugTexture) {
+		m_Texture = s_DebugTexture;
+	}
+	SetColor(m_DebugSolidColor);
+
+	Matrix r = Matrix::CreateFromYawPitchRoll(m_Rotation.x, m_Rotation.y, m_Rotation.z);
+	Matrix t = Matrix::CreateTranslation(m_Position.x, m_Position.y, m_Position.z);
+	Matrix s = Matrix::CreateScale(m_Scale.x, m_Scale.y, m_Scale.z);
+	Matrix world = s * r * t;
+	Renderer::SetWorldMatrix(&world);
+
+	if (m_Texture) {
+		m_Texture->SetGPU();
+	}
+	if (m_Materiale) {
+		m_Materiale->SetDiffuse(DirectX::XMFLOAT4(m_Color.x, m_Color.y, m_Color.z, m_Color.w));
+		m_Materiale->Update();
+		m_Materiale->SetGPU();
+	}
+
+	float u = (m_NumU - 1.0f) / m_SplitX;
+	float v = (m_NumV - 1.0f) / m_SplitY;
+	float uw = 1.0f / m_SplitX;
+	float vh = 1.0f / m_SplitY;
+	Renderer::SetUV(u, v, uw, vh);
+
+	Camera::ScopedMode scoped(m_Camera, CAMERA_2D);
+	devicecontext->DrawIndexed(4, 0, 0);
+
+	m_Texture = prevTexture;
+	SetColor(prevColor);
+	Renderer::SetDepthEnable(true);
+}
+
+// ãƒ†ã‚¯ã‚¹ãƒãƒ£ã‚’æŒ‡å®š
 void TransitionBase::SetTexture(const char* imgname)
 {
 	if (!m_Texture)
@@ -355,7 +424,7 @@ void TransitionBase::SetTexture(std::shared_ptr<Texture> texture)
 	m_Texture = texture;
 }
 
-// UVÀ•W‚ğw’è
+// UVåº§æ¨™ã‚’æŒ‡å®š
 void TransitionBase::SetUV(const float& nu, const float& nv, const float& sx, const float& sy)
 {
 	m_NumU = nu;

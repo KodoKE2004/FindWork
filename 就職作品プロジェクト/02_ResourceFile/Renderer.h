@@ -17,17 +17,17 @@ using namespace DirectX;
 using namespace SimpleMath;
 using Microsoft::WRL::ComPtr;
 
-//ŠO•”ƒ‰ƒCƒuƒ‰ƒŠ
+//å¤–éƒ¨ãƒ©ã‚¤ãƒ–ãƒ©ãƒª
 //#pragma comment(lib,"DirectXTK.lib")
 #pragma comment(lib,"d3d11.lib")
 #pragma comment(lib,"Ole32.lib")
 #pragma comment(lib,"d3dcompiler.lib")
 
-/// @brief 3DƒQ[ƒ€‚ÌVretexî•ñ
-/// @param position  = À•Wî•ñ
-/// @param normal	 = –@üî•ñ
-/// @param color	 = Fî•ñ
-/// @param uv	     = UVÀ•W
+/// @brief 3Dã‚²ãƒ¼ãƒ ã®Vretexæƒ…å ±
+/// @param position  = åº§æ¨™æƒ…å ±
+/// @param normal	 = æ³•ç·šæƒ…å ±
+/// @param color	 = è‰²æƒ…å ±
+/// @param uv	     = UVåº§æ¨™
 struct VERTEX_3D
 {
 	NVector3 position;
@@ -36,46 +36,46 @@ struct VERTEX_3D
 	Vector2 uv;
 };
 
-// ƒuƒŒƒ“ƒhƒXƒe[ƒg
+// ãƒ–ãƒ¬ãƒ³ãƒ‰ã‚¹ãƒ†ãƒ¼ãƒˆ
 enum EBlendState {
-	BS_NONE = 0,							// ”¼“§–¾‡¬–³‚µ
-	BS_ALPHABLEND,							// ”¼“§–¾‡¬
-	BS_ADDITIVE,							// ‰ÁZ‡¬
-	BS_SUBTRACTION,							// Œ¸Z‡¬
+	BS_NONE = 0,							// åŠé€æ˜åˆæˆç„¡ã—
+	BS_ALPHABLEND,							// åŠé€æ˜åˆæˆ
+	BS_ADDITIVE,							// åŠ ç®—åˆæˆ
+	BS_SUBTRACTION,							// æ¸›ç®—åˆæˆ
 	MAX_BLENDSTATE
 };
 
-//ƒTƒuƒZƒbƒg
+//ã‚µãƒ–ã‚»ãƒƒãƒˆ
 struct SUBSET {
 
-	std::string MtrlName;			//ƒ}ƒeƒŠƒAƒ‹–¼
-	unsigned int IndexNum    = 0;	//ƒCƒ“ƒfƒbƒNƒX”
-	unsigned int VertexNum   = 0;	//’¸“_”
-	unsigned int IndexBase   = 0;	//ŠJnƒCƒ“ƒfƒbƒNƒX
-	unsigned int VertexBase  = 0;	//’¸“_ƒx[ƒX
-	unsigned int MaterialIdx = 0;	//ƒ}ƒeƒŠƒAƒ‹‚Ì”Ô†
+	std::string MtrlName;			//ãƒãƒ†ãƒªã‚¢ãƒ«å
+	unsigned int IndexNum    = 0;	//ã‚¤ãƒ³ãƒ‡ãƒƒã‚¯ã‚¹æ•°
+	unsigned int VertexNum   = 0;	//é ‚ç‚¹æ•°
+	unsigned int IndexBase   = 0;	//é–‹å§‹ã‚¤ãƒ³ãƒ‡ãƒƒã‚¯ã‚¹
+	unsigned int VertexBase  = 0;	//é ‚ç‚¹ãƒ™ãƒ¼ã‚¹
+	unsigned int MaterialIdx = 0;	//ãƒãƒ†ãƒªã‚¢ãƒ«ã®ç•ªå·
 
 };
 
-//ƒ}ƒeƒŠƒAƒ‹
+//ãƒãƒ†ãƒªã‚¢ãƒ«
 struct MATERIAL {
-	DirectX::SimpleMath::Color Ambient;		//ŠÂ‹«”½Ë
-	DirectX::SimpleMath::Color Diffuse;		//ŠgU”½Ë
-	DirectX::SimpleMath::Color Specular;	//‹¾–Ê”½Ë
-	DirectX::SimpleMath::Color Emission;	//”­Œõ
-	float Shiness;							//Œõ‘ò‚ÌŠŠ‚ç‚©‚³
-	BOOL TextureEnable;						//ƒeƒNƒXƒ`ƒƒ‚ğg‚¤‚©”Û‚©‚Ìƒtƒ‰ƒO
+	DirectX::SimpleMath::Color Ambient;		//ç’°å¢ƒåå°„
+	DirectX::SimpleMath::Color Diffuse;		//æ‹¡æ•£åå°„
+	DirectX::SimpleMath::Color Specular;	//é¡é¢åå°„
+	DirectX::SimpleMath::Color Emission;	//ç™ºå…‰
+	float Shiness;							//å…‰æ²¢ã®æ»‘ã‚‰ã‹ã•
+	BOOL TextureEnable;						//ãƒ†ã‚¯ã‚¹ãƒãƒ£ã‚’ä½¿ã†ã‹å¦ã‹ã®ãƒ•ãƒ©ã‚°
 	BOOL Dummy[2]{};
 };
 
 struct LightBuffer
 {
-	DirectX::SimpleMath::Vector4 Direction;	// ƒ‰ƒCƒg‚Ì•ûŒü
-	DirectX::SimpleMath::Color LightColor;			// ƒ‰ƒCƒg‚ÌF
-	float AmbientIntensity;							// ŠÂ‹«Œõ‚Ì‹­‚³
-	float DiffuseIntensity;							// ŠgUŒõ‚Ì‹­‚³
-	float SpecularIntensity;						// ‹¾–ÊŒõ‚Ì‹­‚³
-	float Padding;									// ƒpƒfƒBƒ“ƒOiƒAƒ‰ƒCƒƒ“ƒg’²®—pj
+	DirectX::SimpleMath::Vector4 Direction;	// ãƒ©ã‚¤ãƒˆã®æ–¹å‘
+	DirectX::SimpleMath::Color LightColor;			// ãƒ©ã‚¤ãƒˆã®è‰²
+	float AmbientIntensity;							// ç’°å¢ƒå…‰ã®å¼·ã•
+	float DiffuseIntensity;							// æ‹¡æ•£å…‰ã®å¼·ã•
+	float SpecularIntensity;						// é¡é¢å…‰ã®å¼·ã•
+	float Padding;									// ãƒ‘ãƒ‡ã‚£ãƒ³ã‚°ï¼ˆã‚¢ãƒ©ã‚¤ãƒ¡ãƒ³ãƒˆèª¿æ•´ç”¨ï¼‰
 };
 
 struct InstancePaked
@@ -90,15 +90,15 @@ class Renderer
 {
 public:
 	//---------------------------------
-	//		ƒRƒ“ƒXƒgƒ‰ƒNƒ^‚ÆƒfƒXƒgƒ‰ƒNƒ^
+	//		ã‚³ãƒ³ã‚¹ãƒˆãƒ©ã‚¯ã‚¿ã¨ãƒ‡ã‚¹ãƒˆãƒ©ã‚¯ã‚¿
 	//---------------------------------
 	
-	// ƒfƒtƒHƒ‹ƒgƒRƒ“ƒXƒgƒ‰ƒNƒ^
+	// ãƒ‡ãƒ•ã‚©ãƒ«ãƒˆã‚³ãƒ³ã‚¹ãƒˆãƒ©ã‚¯ã‚¿
 	Renderer() = default;		
-	// ƒfƒXƒgƒ‰ƒNƒ^
+	// ãƒ‡ã‚¹ãƒˆãƒ©ã‚¯ã‚¿
 	~Renderer() = default;		
 	//---------------------------------
-	//			ƒ‹[ƒv“à‚Ìˆ—
+	//			ãƒ«ãƒ¼ãƒ—å†…ã®å‡¦ç†
 	//---------------------------------
 
 	static void Initialize();
@@ -111,10 +111,13 @@ public:
 
 	static void PresentDebugGameView();
 	//---------------------------------
-	//	 ƒZƒbƒ^[‚ÆƒVƒ“ƒOƒ‹ƒgƒ“ƒpƒ^[ƒ“‚ÌÀ‘•
+	//	 ã‚»ãƒƒã‚¿ãƒ¼ã¨ã‚·ãƒ³ã‚°ãƒ«ãƒˆãƒ³ãƒ‘ã‚¿ãƒ¼ãƒ³ã®å®Ÿè£…
 	//---------------------------------
 	static void SetDepthEnable(bool Enable);
 	static void SetATCEnable(bool Enable);
+	// ãƒ•ãƒ«ã‚¹ã‚¯ãƒªãƒ¼ãƒ³åˆæˆç”¨ã«æç”»çŠ¶æ…‹ã‚’æ—¢å®šåŒ–ã™ã‚‹
+	// (Stateç ´å£Šã‚„Scissor/Blend/Depth/Rasterizerã®å½±éŸ¿ã‚’æ’é™¤ã™ã‚‹ãŸã‚)
+	static void ResetForFullscreenPass(ID3D11DeviceContext* ctx, UINT w, UINT h);
 
 	static void SetWorldViewProjection2D();
 	static void SetWorldMatrix	   (DirectX::SimpleMath::Matrix* WorldMatrix);
@@ -124,22 +127,24 @@ public:
 	static void SetMaterial(MATERIAL Material);
 	static void SetLightBuffer(LightBuffer* LightBuffer);
 	static void SetUV(float u, float v, float uw, float vh);
-	static void SetBlendState(int nBlendState);		// ƒuƒŒƒ“ƒh ƒXƒe[ƒgİ’è
-    static void SetDefaultInputLayout();			// ƒfƒtƒHƒ‹ƒg‚Ì“ü—ÍƒŒƒCƒAƒEƒgİ’è
+	static void SetBlendState(int nBlendState);		// ãƒ–ãƒ¬ãƒ³ãƒ‰ ã‚¹ãƒ†ãƒ¼ãƒˆè¨­å®š
+    static void SetDefaultInputLayout();			// ãƒ‡ãƒ•ã‚©ãƒ«ãƒˆã®å…¥åŠ›ãƒ¬ã‚¤ã‚¢ã‚¦ãƒˆè¨­å®š
+	static void BindDefaultSamplers();
+	static void BindDefaultConstantBuffers();
 
 #ifdef _DEBUG
     static D3D11_VIEWPORT GetDebugPresentViewport();
 #endif
-	// ƒCƒ“ƒXƒ^ƒ“ƒVƒ“ƒO•`‰æƒeƒ“ƒvƒŒ[ƒg
+	// ã‚¤ãƒ³ã‚¹ã‚¿ãƒ³ã‚·ãƒ³ã‚°æç”»ãƒ†ãƒ³ãƒ—ãƒ¬ãƒ¼ãƒˆ
 	template<class T> static void SetInstanceID(T* method,InstancePaked iPaked)
 	{
 		
 	}
 
-	// ƒQƒbƒ^[
+	// ã‚²ãƒƒã‚¿ãƒ¼
 	static D3D11_VIEWPORT		   GetRenderTargetView(void);
 
-	// ’Ç‰ÁÀ‘•: ƒIƒtƒXƒNƒŠ[ƒ“˜AŒgƒwƒ‹ƒp =====
+	// è¿½åŠ å®Ÿè£…: ã‚ªãƒ•ã‚¹ã‚¯ãƒªãƒ¼ãƒ³é€£æºãƒ˜ãƒ«ãƒ‘ =====
 	static D3D11_VIEWPORT		   GetViewport();
 	static ID3D11RenderTargetView* GetBackBufferRTV();
 	
@@ -147,38 +152,39 @@ public:
 	static void CreateVertexShader(ID3D11VertexShader** VertexShader, ID3D11InputLayout** VertexLayout, const char* FileName);
 	static void CreatePixelShader (ID3D11PixelShader** PixelShader, const char* FileName);
 	
-	// •`‰æİ’è‘‚«‚İ
+	// æç”»è¨­å®šæ›¸ãè¾¼ã¿
 	static void SetDrawState();
 	
 private:
-	static D3D_FEATURE_LEVEL				m_FeatureLevel;			// Direct3D‚Ì‹@”\ƒŒƒxƒ‹
+	static D3D_FEATURE_LEVEL				m_FeatureLevel;			// Direct3Dã®æ©Ÿèƒ½ãƒ¬ãƒ™ãƒ«
 
-	static ID3D11Device*			m_Device			;	// Direct3DƒfƒoƒCƒX
-	static ID3D11DeviceContext*		m_DeviceContext		;	// ƒfƒoƒCƒXƒRƒ“ƒeƒLƒXƒg
-	static IDXGISwapChain*			m_SwapChain			;	// ƒXƒƒbƒvƒ`ƒF[ƒ“
-	static ID3D11RenderTargetView*	m_RenderTargetView	;	// ƒŒƒ“ƒ_[ƒ^[ƒQƒbƒgƒrƒ…[
-	static ID3D11DepthStencilView*	m_DepthStencilView	;	// [“xƒXƒeƒ“ƒVƒ‹ƒrƒ…[
+	static ID3D11Device*			m_Device			;	// Direct3Dãƒ‡ãƒã‚¤ã‚¹
+	static ID3D11DeviceContext*		m_DeviceContext		;	// ãƒ‡ãƒã‚¤ã‚¹ã‚³ãƒ³ãƒ†ã‚­ã‚¹ãƒˆ
+	static IDXGISwapChain*			m_SwapChain			;	// ã‚¹ãƒ¯ãƒƒãƒ—ãƒã‚§ãƒ¼ãƒ³
+	static ID3D11RenderTargetView*	m_RenderTargetView	;	// ãƒ¬ãƒ³ãƒ€ãƒ¼ã‚¿ãƒ¼ã‚²ãƒƒãƒˆãƒ“ãƒ¥ãƒ¼
+	static ID3D11DepthStencilView*	m_DepthStencilView	;	// æ·±åº¦ã‚¹ãƒ†ãƒ³ã‚·ãƒ«ãƒ“ãƒ¥ãƒ¼
 
-    static D3D11_VIEWPORT			m_BackBufferViewport;	// ƒoƒbƒNƒoƒbƒtƒ@‚Ìƒrƒ…[ƒ|[ƒg
+    static D3D11_VIEWPORT			m_BackBufferViewport;	// ãƒãƒƒã‚¯ãƒãƒƒãƒ•ã‚¡ã®ãƒ“ãƒ¥ãƒ¼ãƒãƒ¼ãƒˆ
 
 #ifdef _DEBUG
-	static std::unique_ptr<RenderTarget> m_DebugGameTarget;		    // ƒfƒoƒbƒO—pƒQ[ƒ€‰æ–ÊƒŒƒ“ƒ_[ƒ^[ƒQƒbƒg
-	static D3D11_VIEWPORT                m_DebugPresentViewport;	// ƒfƒoƒbƒO—pƒQ[ƒ€‰æ–Ê‚Ìƒrƒ…[ƒ|[ƒg
+	static std::unique_ptr<RenderTarget> m_DebugGameTarget;		    // ãƒ‡ãƒãƒƒã‚°ç”¨ã‚²ãƒ¼ãƒ ç”»é¢ãƒ¬ãƒ³ãƒ€ãƒ¼ã‚¿ãƒ¼ã‚²ãƒƒãƒˆ
+	static D3D11_VIEWPORT                m_DebugPresentViewport;	// ãƒ‡ãƒãƒƒã‚°ç”¨ã‚²ãƒ¼ãƒ ç”»é¢ã®ãƒ“ãƒ¥ãƒ¼ãƒãƒ¼ãƒˆ
 #endif
 
-	static ID3D11DepthStencilState* m_DepthStateEnable ;	// [“xƒXƒeƒ“ƒVƒ‹ƒXƒe[ƒgi—LŒøj
-	static ID3D11DepthStencilState* m_DepthStateDisable;	// [“xƒXƒeƒ“ƒVƒ‹ƒXƒe[ƒgi–³Œøj
+	static ID3D11DepthStencilState* m_DepthStateEnable ;	// æ·±åº¦ã‚¹ãƒ†ãƒ³ã‚·ãƒ«ã‚¹ãƒ†ãƒ¼ãƒˆï¼ˆæœ‰åŠ¹ï¼‰
+	static ID3D11DepthStencilState* m_DepthStateDisable;	// æ·±åº¦ã‚¹ãƒ†ãƒ³ã‚·ãƒ«ã‚¹ãƒ†ãƒ¼ãƒˆï¼ˆç„¡åŠ¹ï¼‰
 
-	static ID3D11Buffer* m_WorldBuffer		;				// ƒ[ƒ‹ƒhs—ñƒoƒbƒtƒ@
-	static ID3D11Buffer* m_ViewBuffer		;				// ƒrƒ…[s—ñƒoƒbƒtƒ@
-	static ID3D11Buffer* m_ProjectionBuffer	;				// ƒvƒƒWƒFƒNƒVƒ‡ƒ“s—ñƒoƒbƒtƒ@
+	static ID3D11Buffer* m_WorldBuffer		;				// ãƒ¯ãƒ¼ãƒ«ãƒ‰è¡Œåˆ—ãƒãƒƒãƒ•ã‚¡
+	static ID3D11Buffer* m_ViewBuffer		;				// ãƒ“ãƒ¥ãƒ¼è¡Œåˆ—ãƒãƒƒãƒ•ã‚¡
+	static ID3D11Buffer* m_ProjectionBuffer	;				// ãƒ—ãƒ­ã‚¸ã‚§ã‚¯ã‚·ãƒ§ãƒ³è¡Œåˆ—ãƒãƒƒãƒ•ã‚¡
 
-	static ID3D11Buffer* m_MaterialBuffer	;				// ƒ}ƒeƒŠƒAƒ‹î•ñƒoƒbƒtƒ@
-	static ID3D11Buffer* m_TextureBuffer	;				// ƒvƒƒWƒFƒNƒVƒ‡ƒ“s—ñƒoƒbƒtƒ@
-	static ID3D11Buffer* m_LightBuffer;						// ƒ‰ƒCƒgî•ñƒoƒbƒtƒ@
+	static ID3D11Buffer* m_MaterialBuffer	;				// ãƒãƒ†ãƒªã‚¢ãƒ«æƒ…å ±ãƒãƒƒãƒ•ã‚¡
+	static ID3D11Buffer* m_TextureBuffer	;				// ãƒ—ãƒ­ã‚¸ã‚§ã‚¯ã‚·ãƒ§ãƒ³è¡Œåˆ—ãƒãƒƒãƒ•ã‚¡
+	static ID3D11Buffer* m_LightBuffer;						// ãƒ©ã‚¤ãƒˆæƒ…å ±ãƒãƒƒãƒ•ã‚¡
 
-	static ID3D11BlendState* m_BlendState[MAX_BLENDSTATE];	// ƒuƒŒƒ“ƒh ƒXƒe[ƒg;
-	static ID3D11BlendState* m_BlendStateATC			 ;	// ƒuƒŒƒ“ƒh ƒXƒe[ƒgi‰ÁZ‡¬j
+	static ID3D11BlendState* m_BlendState[MAX_BLENDSTATE];	// ãƒ–ãƒ¬ãƒ³ãƒ‰ ã‚¹ãƒ†ãƒ¼ãƒˆ;
+	static ID3D11BlendState* m_BlendStateATC			 ;	// ãƒ–ãƒ¬ãƒ³ãƒ‰ ã‚¹ãƒ†ãƒ¼ãƒˆï¼ˆåŠ ç®—åˆæˆï¼‰
+	static ID3D11SamplerState* m_DefaultSampler;			// ãƒ‡ãƒ•ã‚©ãƒ«ãƒˆã‚µãƒ³ãƒ—ãƒ©ãƒ¼
 	
 	inline std::vector<UINT> MakeInstanceIDs(UINT count);
 	inline HRESULT CreateInstanceIDBuffer(const std::vector<UINT>& ids,
@@ -236,12 +242,12 @@ inline D3D11_INPUT_ELEMENT_DESC Renderer::MakeInstancneIDElement(UINT semanticIn
 {
 	D3D11_INPUT_ELEMENT_DESC e{};
 	e.SemanticName = "TEXCOORD";
-	e.SemanticIndex = semanticIndex;					// Šù’è: TEXCOORD1
-	e.Format = DXGI_FORMAT_R32_UINT;					// UINT 1ŒÂ
-	e.InputSlot = slot;									// Šù’è: slot1
-	e.AlignedByteOffset = alignedByteOffset;            // Šù’è: 0
+	e.SemanticIndex = semanticIndex;					// æ—¢å®š: TEXCOORD1
+	e.Format = DXGI_FORMAT_R32_UINT;					// UINT 1å€‹
+	e.InputSlot = slot;									// æ—¢å®š: slot1
+	e.AlignedByteOffset = alignedByteOffset;            // æ—¢å®š: 0
 	e.InputSlotClass = D3D11_INPUT_PER_INSTANCE_DATA;
-	e.InstanceDataStepRate = stepRate;                  // Šù’è: 1
+	e.InstanceDataStepRate = stepRate;                  // æ—¢å®š: 1
 	return e;
 }
 
@@ -254,4 +260,3 @@ inline float Renderer::GetScreenHeight()
 {
 	return static_cast<float>(Application::GetGameHeight());
 }
-
