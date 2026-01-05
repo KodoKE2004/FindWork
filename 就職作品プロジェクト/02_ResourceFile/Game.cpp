@@ -186,6 +186,10 @@ void Game::Draw()
 									 static_cast<UINT>(Renderer::GetScreenWidth()),
 									 static_cast<UINT>(Renderer::GetScreenHeight()));
 
+	#ifdef _DEBUG
+		Renderer::PresentDebugGameView();
+	#endif
+
 	if (instance.m_TransitionTexture != nullptr) {
 		instance.m_TransitionTexture->Draw();
 	}
@@ -193,17 +197,11 @@ void Game::Draw()
 	{
 		instance.m_Theme->Draw();
 	}
-	#ifdef _DEBUG
-		Renderer::PresentDebugGameView();
-	#endif
 	
 
 
 	DebugUI::Render();
 	Renderer::Finish();
-
-
-
 }
 
 void Game::Finalize()
