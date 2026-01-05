@@ -4,6 +4,10 @@
 #include <source_location>
 #include <filesystem>
 #include <windows.h>
+#include <iomanip>
+#include <sstream>
+#include <string>
+#include <string_view>
 
 enum class MessageColor
 {
@@ -16,6 +20,92 @@ enum class MessageColor
 
 namespace Debug
 {
+    inline static void LogAlways(std::string_view message)
+    {
+        const std::string msg(message);
+        OutputDebugStringA(msg.c_str());
+        OutputDebugStringA("\n");
+        std::cerr << msg << std::endl;
+    }
+
+    inline static std::string FormatHResult(HRESULT hr)
+    {
+        std::ostringstream oss;
+        oss << "0x" << std::uppercase << std::hex << std::setw(8) << std::setfill('0')
+            << static_cast<unsigned long>(hr);
+        return oss.str();
+    }
+
+    inline static void LogLastError(std::string_view context,
+        const std::source_location& loc = std::source_location::current())
+    {
+        DWORD err = GetLastError();
+        LPSTR buffer = nullptr;
+        DWORD size = FormatMessageA(
+            FORMAT_MESSAGE_ALLOCATE_BUFFER | FORMAT_MESSAGE_FROM_SYSTEM | FORMAT_MESSAGE_IGNORE_INSERTS,
+            nullptr,
+            err,
+            MAKELANGID(LANG_NEUTRAL, SUBLANG_DEFAULT),
+            reinterpret_cast<LPSTR>(&buffer),
+            0,
+            nullptr);
+
+        std::ostringstream oss;
+        oss << "Win32 Error: " << context << " (GetLastError=" << err << ")"
+            << " File=" << loc.file_name() << " Line=" << loc.line();
+        if (size && buffer)
+        {
+            oss << " Message=" << buffer;
+        }
+        LogAlways(oss.str());
+        if (buffer)
+        {
+            LocalFree(buffer);
+        }
+    }
+
+    inline static bool CheckHr(HRESULT hr,
+        std::string_view context,
+        const std::source_location& loc = std::source_location::current())
+    {
+        if (FAILED(hr))
+        {
+            std::ostringstream oss;
+            oss << "HRESULT FAILED: " << context
+                << " hr=" << FormatHResult(hr)
+                << " File=" << loc.file_name()
+                << " Line=" << loc.line()
+                << " Function=" << loc.function_name();
+            LogAlways(oss.str());
+#ifdef _DEBUG
+            __debugbreak();
+#endif
+            return false;
+        }
+        return true;
+    }
+
+    template <typename T>
+    inline static bool CheckPtr(T* ptr,
+        std::string_view context,
+        const std::source_location& loc = std::source_location::current())
+    {
+        if (ptr == nullptr)
+        {
+            std::ostringstream oss;
+            oss << "Pointer NULL: " << context
+                << " File=" << loc.file_name()
+                << " Line=" << loc.line()
+                << " Function=" << loc.function_name();
+            LogAlways(oss.str());
+#ifdef _DEBUG
+            __debugbreak();
+#endif
+            return false;
+        }
+        return true;
+    }
+
     inline static void Assert(
         bool expression,
         std::string_view message,
@@ -112,3 +202,5 @@ namespace Debug
     }
 };
 
+#define CHECK_HR(hr, contextText) Debug::CheckHr((hr), (contextText), std::source_location::current())
+#define CHECK_PTR(ptr, contextText) Debug::CheckPtr((ptr), (contextText), std::source_location::current())

@@ -46,6 +46,8 @@ void Theme::Draw()
 {
     if(!m_isActive){ return; }
     Square::Draw();
+    // Debug::Log("[[描画]] Themeオブジェクト");
+
 }
 
 void Theme::Finalize()

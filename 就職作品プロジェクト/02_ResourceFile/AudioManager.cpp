@@ -18,9 +18,14 @@ AudioManager::AudioManager(std::wstring baseDir) : m_baseDir(std::move(baseDir))
 bool AudioManager::Init() {
     if (m_xa) return true;
     HRESULT hr = XAudio2Create(m_xa.GetAddressOf(), 0, XAUDIO2_DEFAULT_PROCESSOR);
-    if (FAILED(hr)) return false;
+    if (!CHECK_HR(hr, "XAudio2Create")) {
+        return false;
+    }
     hr = m_xa->CreateMasteringVoice(&m_master);
-    if (FAILED(hr)) { m_xa.Reset(); return false; }
+    if (!CHECK_HR(hr, "IXAudio2::CreateMasteringVoice")) {
+        m_xa.Reset();
+        return false;
+    }
     return true;
 }
 
@@ -55,9 +60,15 @@ struct ChunkHeader { char id[4]; uint32_t size; };
 static bool readAllFile(const std::wstring& path, std::vector<uint8_t>& out) {
     std::filesystem::path p(path);
     if (!std::filesystem::exists(p)) {
+        Debug::LogAlways(std::string("[[Ž¸”s]] Audioƒtƒ@ƒCƒ‹‚ªŒ©‚Â‚©‚è‚Ü‚¹‚ñ‚Å‚µ‚½ : ") + std::filesystem::absolute(p).string());
         return false;
     }
-    std::ifstream ifs(p, std::ios::binary);    if (!ifs) return false;
+    std::ifstream ifs(p, std::ios::binary);
+    if (!ifs) {
+        Debug::LogAlways(std::string("[[Ž¸”s]] Audioƒtƒ@ƒCƒ‹‚ªŠJ‚¯‚Ü‚¹‚ñ‚Å‚µ‚½ : ") + std::filesystem::absolute(p).string());
+        return false;
+    }
+
     ifs.seekg(0, std::ios::end);
     size_t sz = static_cast<size_t>(ifs.tellg());
     ifs.seekg(0);
@@ -68,11 +79,27 @@ static bool readAllFile(const std::wstring& path, std::vector<uint8_t>& out) {
 
 std::shared_ptr<AudioClip> AudioManager::loadWavFull(const std::wstring& fullPath, std::string* err) {
     std::vector<uint8_t> bin;
-    if (!readAllFile(fullPath, bin)) { if (err) *err = "read fail"; return {}; }
-    if (bin.size() < sizeof(RiffHeader)) { if (err) *err = "too small"; return {}; }
+    if (!readAllFile(fullPath, bin)) 
+    { 
+        if (err) {
+            *err = "read fail";
+            Debug::LogAlways(std::string("Audio load failed: ") + std::filesystem::absolute(fullPath).string());
+            return {};
+        }
+
+        Debug::LogAlways(std::string("[[Ž¸”s]] Audio load : ") + std::filesystem::absolute(fullPath).string()); return {};
+    }
+    if (bin.size() < sizeof(RiffHeader)) 
+    {
+        if (err) {
+            *err = "too small";
+        }
+        return {}; 
+    }
 
     auto* rh = reinterpret_cast<const RiffHeader*>(bin.data());
-    if (std::strncmp(rh->id, "RIFF", 4) != 0 || std::strncmp(rh->wave, "WAVE", 4) != 0) {
+    if (std::strncmp(rh->id, "RIFF", 4)   != 0 || 
+        std::strncmp(rh->wave, "WAVE", 4) != 0) {
         if (err) *err = "not WAV"; return {};
     }
 
@@ -114,7 +141,12 @@ bool AudioManager::Add(std::string key, std::wstring relativePath) {
     std::string err;
     auto full = joinPath(m_baseDir, relativePath);
     auto clip = loadWavFull(full, &err);
-    if (!clip) return false;
+
+    if (!clip) {
+        Debug::LogAlways(std::string("[[Ž¸”s]] AudioManager::Add : ") + std::filesystem::absolute(full).string() + " reason=" + err);
+        return false;
+    }
+
     std::lock_guard<std::mutex> lk(mtx_);
     m_key2clip[std::move(key)] = std::move(clip);
     return true;

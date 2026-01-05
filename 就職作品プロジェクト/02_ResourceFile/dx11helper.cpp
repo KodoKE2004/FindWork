@@ -1,7 +1,8 @@
 #include	<vector>
 #include	<string>
 #include	"Dx11helper.h"
-
+#include "Debug.hpp"
+#include <filesystem>
 #pragma comment(lib,"d3dcompiler.lib")
 
 //--------------------------------------------------------------------------------------
@@ -38,6 +39,8 @@ bool readShader(const char* csoName, std::vector<unsigned char>& byteArray)
 	FILE* fp;
 	int ret = fopen_s(&fp, csoName, "rb");
 	if (ret != 0) {
+		Debug::LogAlways(std::string("[[失敗]] shaderが開けません") + std::filesystem::absolute(csoName).string());
+		Debug::LogLastError("fopen_s readShader");
 		return false;
 	}
 	fseek(fp, 0, SEEK_END);
@@ -64,10 +67,7 @@ HRESULT CompileShader(const char* szFileName, LPCSTR szEntryPoint, LPCSTR szShad
 	if (extname == "cso") {
 		bool sts = readShader(szFileName, byteArray);
 		if (!sts) {
-			FILE* fp;
-			fopen_s(&fp, "debug.txt", "a");
-			fprintf(fp, "file open error \n");
-			fclose(fp);
+			Debug::LogAlways(std::string("[[失敗]]コンパイルエラー CSO : ") + std::filesystem::absolute(szFileName).string());
 			return E_FAIL;
 		}
 		*ShaderObject = byteArray.data();
@@ -76,6 +76,7 @@ HRESULT CompileShader(const char* szFileName, LPCSTR szEntryPoint, LPCSTR szShad
 	else {
 		hr = CompileShaderFromFile(szFileName, szEntryPoint, szShaderModel, ppBlobOut);
 		if (FAILED(hr)) {
+			Debug::LogAlways(std::string("[[失敗]]コンパイルエラー : ") + std::filesystem::absolute(szFileName).string());
 			if (*ppBlobOut)(*ppBlobOut)->Release();
 			return E_FAIL;
 		}
@@ -126,9 +127,9 @@ HRESULT CompileShaderFromFile(const char* szFileName, LPCSTR szEntryPoint, LPCST
 	if (FAILED(hr))
 	{
 		if (pErrorBlob != nullptr){
-			MessageBox(NULL,
-				(wchar_t*)pErrorBlob->GetBufferPointer(), L"Error", MB_OK);
+			Debug::LogAlways(std::string("[[失敗]] D3DCompileFromFile : ") + (char*)pErrorBlob->GetBufferPointer());
 		}
+		Debug::LogAlways(std::string("[[失敗]] CompileShaderFromFile failed: ") + std::filesystem::absolute(szFileName).string());
 		if (pErrorBlob) pErrorBlob->Release();
 		return hr;
 	}
@@ -161,13 +162,14 @@ bool CreateVertexShader(
 	hr = CompileShader(szFileName, szEntryPoint, szShaderModel, &ShaderObject, ShaderObjectSize, &pBlob);
 	if (FAILED(hr))
 	{
+		Debug::LogAlways(std::string("[[失敗]] CreateVertexShader : ") + std::filesystem::absolute(szFileName).string());
 		if (pBlob)pBlob->Release();
 		return false;
 	}
 
 	// 頂点シェーダーを生成
 	hr = device->CreateVertexShader(ShaderObject, ShaderObjectSize, nullptr, ppVertexShader);
-	if (FAILED(hr))
+	if (!CHECK_HR(hr, std::string("[[検出]] ID3D11Device::CreateVertexShader file=") + std::filesystem::absolute(szFileName).string()))
 	{
 		if (pBlob)pBlob->Release();
 		return false;
@@ -180,9 +182,8 @@ bool CreateVertexShader(
 		ShaderObject,
 		ShaderObjectSize,
 		ppVertexLayout);
-	if (FAILED(hr)) {
-		MessageBox(nullptr, L"CreateInputLayout error", L"error", MB_OK);
-		pBlob->Release();
+	if (!CHECK_HR(hr, std::string("ID3D11Device::CreateInputLayout file =") + std::filesystem::absolute(szFileName).string())) {
+		if (pBlob) pBlob->Release();
 		return false;
 	}
 
@@ -245,7 +246,8 @@ bool CreateGeometryShader(
 	// ジオメトリシェーダー生成
 	hr = device->CreateGeometryShader(shaderObject, shaderObjSize, nullptr, outShader);
 	if (pBlob) pBlob->Release();
-	return SUCCEEDED(hr);
+	if (!CHECK_HR(hr, std::string("ID3D11Device::CreateGeometryShader file=") + std::filesystem::absolute(hlslPath).string())) { return false; }
+	return true;
 }
 
 bool CreateComputeShader(
@@ -269,7 +271,8 @@ bool CreateComputeShader(
 	// コンピュートシェーダー生成
 	hr = device->CreateComputeShader(shaderObject, shaderObjSize, nullptr, outShader);
 	if (pBlob) pBlob->Release();
-	return SUCCEEDED(hr);
+	if (!CHECK_HR(hr, std::string("ID3D11Device::CreateComputeShader file=") + std::filesystem::absolute(hlslPath).string())) { return false; }
+	return true;
 }
 
 
@@ -294,8 +297,7 @@ bool CreateConstantBuffer(
 	bd.CPUAccessFlags = 0;										// CPUアクセス不要
 
 	HRESULT hr = device->CreateBuffer(&bd, nullptr, pConstantBuffer);
-	if (FAILED(hr)){
-		MessageBox(nullptr, L"CreateBuffer(constant buffer) error", L"Error", MB_OK);
+	if (!CHECK_HR(hr, "CreateBuffer(constant buffer)")) {
 		return false;
 	}
 
@@ -321,8 +323,7 @@ bool CreateConstantBufferWrite(
 	bd.CPUAccessFlags = D3D11_CPU_ACCESS_WRITE;					// CPUアクセス可能
 
 	HRESULT hr = device->CreateBuffer(&bd, nullptr, pConstantBuffer);
-	if (FAILED(hr)) {
-		MessageBox(nullptr, L"CreateBuffer(constant buffer) error", L"Error", MB_OK);
+	if(!CHECK_HR(hr, "CreateBuffer(constant buffer write)")) {
 		return false;
 	}
 
@@ -352,8 +353,7 @@ bool CreateIndexBuffer(
 	InitData.pSysMem = indexdata;
 
 	HRESULT hr = device->CreateBuffer(&bd, &InitData, pIndexBuffer);
-	if (FAILED(hr)){
-		MessageBox(nullptr, L"CreateBuffer(index buffer) error", L"Error", MB_OK);
+	if (!CHECK_HR(hr, "CreateBuffer(vertex buffer)")) {
 		return false;
 	}
 
@@ -387,8 +387,7 @@ bool CreateVertexBuffer(
 	InitData.pSysMem = vertexdata;				// バッファの初期値
 
 	hr = device->CreateBuffer(&bd, &InitData, pVertexBuffer);		// バッファ生成
-	if (FAILED(hr)){
-		MessageBox(nullptr, L"CreateBuffer(vertex buffer) error", L"Error", MB_OK);
+	if (!CHECK_HR(hr, "CreateBuffer(vertex buffer)")) {
 		return false;
 	}
 
@@ -422,8 +421,7 @@ bool CreateVertexBufferWrite(
 	InitData.pSysMem = vertexdata;							// バッファの初期値
 
 	hr = device->CreateBuffer(&bd, &InitData, pVertexBuffer);		// バッファ生成
-	if (FAILED(hr)) {
-		MessageBox(nullptr, L"CreateBuffer(vertex buffer) error", L"Error", MB_OK);
+	if (!CHECK_HR(hr, "CreateBuffer(vertex buffer write)")) {
 		return false;
 	}
 
@@ -503,8 +501,7 @@ bool CreateStructuredBuffer(
 	else{
 		hr = device->CreateBuffer(&bd, nullptr, pStructuredBuffer);		// バッファ生成
 	}
-	if (FAILED(hr)){
-		MessageBox(nullptr, L"CreateBuffer(StructuredBuffer) error", L"Error", MB_OK);
+	if (!CHECK_HR(hr, "CreateBuffer(vertex buffer)")) {
 		return false;
 	}
 
@@ -538,6 +535,9 @@ ID3D11Buffer* CreateAndCopyToBuffer(
 	hr = device->CreateBuffer(&bd, nullptr, &CloneBuffer);
 	if (SUCCEEDED(hr)){
 		devicecontext->CopyResource(CloneBuffer, pBuffer);
+	} 
+	else {
+		CHECK_HR(hr, "CreateAndCopyToBuffer CreateBuffer");
 	}
 
 	return CloneBuffer;
@@ -575,8 +575,7 @@ bool CreateShaderResourceView(
 
 	HRESULT hr;
 	hr = device->CreateShaderResourceView(pBuffer, &srvDesc, ppSRV);
-	if (FAILED(hr)){
-		MessageBox(nullptr, L"CreateShaderResourceView error", L"Error", MB_OK);
+	if (!CHECK_HR(hr, "CreateShaderResourceView")) {
 		return false;
 	}
 
@@ -616,8 +615,7 @@ bool CreateUnOrderAccessView(
 
 	HRESULT hr;
 	hr = device->CreateUnorderedAccessView(pBuffer, &uavDesc, ppUAV);
-	if (FAILED(hr)){
-		MessageBox(nullptr, L"CreateUnorderedAccessView error", L"Error", MB_OK);
+	if (!CHECK_HR(hr, "CreateUnorderedAccessView")) {
 		return false;
 	}
 

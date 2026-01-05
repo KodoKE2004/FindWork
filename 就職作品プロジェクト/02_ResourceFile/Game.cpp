@@ -130,7 +130,7 @@ void Game::Update(float tick)
     float mouseDiffX = mousePos.x - instance.m_PreviewMousePos.x;
     float mouseDiffY = mousePos.y - instance.m_PreviewMousePos.y;
 	if (mouseDiffX != 0 || mouseDiffY != 0) {
-		std::cout << "Mouse X:" << mousePos.x << "\t Y:" << mousePos.y << std::endl;
+		// std::cout << "Mouse X:" << mousePos.x << "\t Y:" << mousePos.y << std::endl;
 	}
 	instance.m_PreviewMousePos = mousePos;
 #endif
