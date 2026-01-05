@@ -197,8 +197,6 @@ void Game::Draw()
 	{
 		instance.m_Theme->Draw();
 	}
-	
-
 
 	DebugUI::Render();
 	Renderer::Finish();
