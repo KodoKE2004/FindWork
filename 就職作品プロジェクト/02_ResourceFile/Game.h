@@ -22,13 +22,18 @@
 class Game
 {
 private:
+	static constexpr size_t kOverlayThemeIndex = 0;
+	static constexpr size_t kOverlayTransitionIndex = 1;
+	static constexpr size_t kOverlayReservedCount = 2;
+
 	static std::unique_ptr<Game>		 m_pInstance;		  // ゲームのインスタンス
 	static uint64_t					 m_DrawFrameCounter;  // Draw 呼び出しのフレーム番号
 	std::shared_ptr<Scene>				 m_SceneCurrent;	  // 現在のシーン
     std::shared_ptr<Scene>				 m_SceneNext;		  // 次のシーン
 	std::unique_ptr<Input>				 m_Input;			  // 入力管理
 	std::unique_ptr<Camera>				 m_Camera;			  // カメラ
-	std::vector<std::shared_ptr<Object>> m_GameObjects;		  // オブジェクト
+	std::vector<std::shared_ptr<Object>> m_WorldObjects;		  // 通常のオブジェクト
+    std::vector<std::shared_ptr<Object>> m_OverlayObjects;	  // 最前面描画オブジェクト
 
     std::shared_ptr<TransitionBase>		 m_TransitionTexture; // トランジション用テクスチャ
     std::shared_ptr<Theme>				 m_Theme;			  // テーマ管理
@@ -69,9 +74,7 @@ public:
     static void SetSceneNext(std::shared_ptr<Scene> newScene);
 
     // TranstionTextureをTransSceneと連携
-	void SetTransitionTexture(std::shared_ptr<TransitionBase> tex) {
-		m_TransitionTexture = tex;
-    }
+	void SetTransitionTexture(std::shared_ptr<TransitionBase> tex);
 	void SetTheme(const std::shared_ptr<Theme>& theme);
 
 	std::shared_ptr<TransitionBase> GetTransitionTexture() const;
@@ -110,7 +113,7 @@ public:
 
 	// オブジェクトを追加する
 	template<class T, class... Args>
-	std::shared_ptr<T> AddObject(Args&&... args)
+	std::shared_ptr<T> AddWorldObject(Args&&... args)
 	{
 		static_assert(std::is_base_of_v<Object, T>, "TがObjectを継承していない");
 		static_assert(!std::is_abstract_v<T>	  , "Tが抽象クラスだった");
@@ -126,9 +129,40 @@ public:
 			up = std::make_shared<T>(std::forward<Args>(args)...);
 		}
 
-		instance.m_GameObjects.emplace_back(up);
+		instance.m_WorldObjects.emplace_back(up);
 		up->Initialize(); // 初期化
 		return up;
+	}
+
+	// オーバーレイオブジェクトを追加する
+	template<class T, class... Args>
+	std::shared_ptr<T> AddOverlayObject(Args&&... args)
+	{
+		static_assert(std::is_base_of_v<Object, T>, "TがObjectを継承していない");
+		static_assert(!std::is_abstract_v<T>	  , "Tが抽象クラスだった");
+
+		auto& instance = *m_pInstance;
+
+		std::shared_ptr<T> up;
+		if constexpr (sizeof...(Args) == 0) {
+			up = std::make_shared<T>(*instance.m_Camera.get());
+		}
+		else {
+			up = std::make_shared<T>(std::forward<Args>(args)...);
+		}
+
+		if (instance.m_OverlayObjects.size() < kOverlayReservedCount) {
+			instance.m_OverlayObjects.resize(kOverlayReservedCount);
+		}
+		instance.m_OverlayObjects.emplace_back(up);
+		up->Initialize(); // 初期化
+		return up;
+	}
+
+	template<class T, class... Args>
+	std::shared_ptr<T> AddObject(Args&&... args)
+	{
+		return AddWorldObject<T>(std::forward<Args>(args)...);
 	}
 
 	// オブジェクトを取得する
@@ -138,7 +172,7 @@ public:
         static_assert(std::is_base_of_v<Object, T>, L"TがObjectを継承していない");
 
 		std::vector<std::shared_ptr<T>> res;
-		for (const auto& o : m_pInstance->m_GameObjects) {
+		for (const auto& o : m_pInstance->m_WorldObjects) {
 			// dynamic_castで型をチェック
 			if (!o) {
 				continue;

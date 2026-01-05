@@ -11,10 +11,10 @@ void GameSceneCrush::Initialize()
     DebugUI::TEXT_CurrentScene = "GameSceneCrush";
 #endif 
 
-    // Šî’êƒNƒ‰ƒX‚Ì‰Šú‰»
-    GameSceneExe::SetBaseBeatCount(10);
-    GameSceneExe::Initialize();
-    // ƒV[ƒ“‚ÉŒq‚®î•ñ‚ÍŠî’ê‰Šú‰»Œã‚Ìˆê”ÔÅ‰‚Éİ’è
+    m_Skydome = instance.AddWorldObject<Skydome>();
+    m_Bomber = instance.AddWorldObject<Bomber>();
+    m_Player = instance.AddWorldObject<Player>();
+        auto enemy = instance.AddWorldObject<Enemy>();
     m_RelationData.previousScene = SCENE_NO::GAME_CRUSH;
     m_RelationData.oldScene      = SCENE_NO::GAME_WAIT;
     m_RelationData.isClear = false;
@@ -56,7 +56,7 @@ void GameSceneCrush::Update(float tick)
     auto& instance = Game::GetInstance();
     auto enemys = instance.GetObjects<Enemy>();
     if (IsAllDeathEnemy(enemys)) {
-        // SceneExe‚Å‘‚ß‚ÉƒNƒŠƒA‚ğ‚µ‚½ê‡‚à‘z’è
+        // SceneExeã§æ—©ã‚ã«ã‚¯ãƒªã‚¢ã‚’ã—ãŸå ´åˆã‚‚æƒ³å®š
         m_isFastChange = true;
         m_RelationData.isClear = true;
     }

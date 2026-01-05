@@ -11,14 +11,14 @@
 bool GameSceneWait::s_HasFirstGameSceneWaitInitialized = false;
 GAME_PHASE GameSceneWait::s_CurrentGamePhase = GAME_PHASE::START;
 
-// a ‚© b ‚Ì‚Ç‚¿‚ç‚©‚ğƒ‰ƒ“ƒ_ƒ€‚É•Ô‚·ƒeƒ“ƒvƒŒ[ƒgŠÖ”
+// a ã‹ b ã®ã©ã¡ã‚‰ã‹ã‚’ãƒ©ãƒ³ãƒ€ãƒ ã«è¿”ã™ãƒ†ãƒ³ãƒ—ãƒ¬ãƒ¼ãƒˆé–¢æ•°
 template<class T>
 T RandomChoose(const T& a, const T& b)
 {
     static std::mt19937 mt{std::random_device{}() };
     unsigned int bit = mt() & 1u;
 
-    // bit ‚ª 0 ‚Ì‚Æ‚« a ‚ğA1 ‚Ì‚Æ‚« b ‚ğ•Ô‚·
+    // bit ãŒ 0 ã®ã¨ã a ã‚’ã€1 ã®ã¨ã b ã‚’è¿”ã™
     return (bit == 0) ? a : b;
 }
 
@@ -108,36 +108,36 @@ void GameSceneWait::Initialize()
 {
     DebugUI::TEXT_CurrentScene = "GameSceneWait";
 
-    // Å‰‚Ìˆê“x‚¾‚¯ or w’è‚µ‚½ƒ^ƒCƒ~ƒ“ƒO‚Ì‚İƒtƒ‰ƒO‚ğ—§‚Ä‚é
+    // æœ€åˆã®ä¸€åº¦ã ã‘ or æŒ‡å®šã—ãŸã‚¿ã‚¤ãƒŸãƒ³ã‚°ã®ã¿ãƒ•ãƒ©ã‚°ã‚’ç«‹ã¦ã‚‹
     m_IsFirstInitialized = !s_HasFirstGameSceneWaitInitialized;
     s_HasFirstGameSceneWaitInitialized = true;
 
-    // ˆø‚«“n‚µƒf[ƒ^‚ÌƒV[ƒ“‚Ì®—
+    // å¼•ãæ¸¡ã—ãƒ‡ãƒ¼ã‚¿ã®ã‚·ãƒ¼ãƒ³ã®æ•´ç†
     m_RelationData.oldScene      = m_RelationData.previousScene;
     m_RelationData.previousScene = SCENE_NO::GAME_WAIT;    
     
     if (m_RelationData.isClear) {
-        Debug::Log("=====  ƒXƒe[ƒW¬Œ÷  =====");
+        Debug::Log("=====  ã‚¹ãƒ†ãƒ¼ã‚¸æˆåŠŸ  =====");
     }
     else {
-        Debug::Log("=====  ƒXƒe[ƒW¸”s  =====");
+        Debug::Log("=====  ã‚¹ãƒ†ãƒ¼ã‚¸å¤±æ•—  =====");
     }
 
     RhythmBeatConst beatConfig{};
-    beatConfig.Setup(120.0f, 4, 1); // 120 BPM, 4/4 ”q
+    beatConfig.Setup(120.0f, 4, 1); // 120 BPM, 4/4 æ‹å­
 
-    // “ïˆÕ“xƒAƒbƒvˆ— 
+    // é›£æ˜“åº¦ã‚¢ãƒƒãƒ—å‡¦ç† 
     ++m_RelationData.stageCount;
-    // “ïˆÕ“x 0 ~
+    // é›£æ˜“åº¦ 0 ~
     if (m_RelationData.stageCount % 8 == 0) {
         int difficulty = m_RelationData.stageCount / 8;
         m_Difficulty = difficulty;
-        Debug::Log("[[ŒŸo]] “ïˆÕ“xƒAƒbƒv");
+        Debug::Log("[[æ¤œå‡º]] é›£æ˜“åº¦ã‚¢ãƒƒãƒ—");
     }
-    // ƒXƒs[ƒh
-    else if (m_RelationData.stageCount % 4 == 0) {
+    m_Skydome = instance.AddWorldObject<Skydome>();
+        std::shared_ptr<Square> life = instance.AddWorldObject<Square>(instance.GetCamera());
         beatConfig.Setup(120.0f + (m_RelationData.stageCount / 4) * 10.0f, 4, 1);
-        Debug::Log("[[ŒŸo]] ƒXƒs[ƒhƒAƒbƒv");
+        Debug::Log("[[æ¤œå‡º]] ã‚¹ãƒ”ãƒ¼ãƒ‰ã‚¢ãƒƒãƒ—");
 
     }
 
@@ -156,8 +156,8 @@ void GameSceneWait::Initialize()
 
     m_LifeParticleEmitter = std::make_shared<ParticleEmitter>(instance.GetCamera());
 
-    // ƒXƒJƒCƒh[ƒ€‰Šú‰»
-    // Skydome‰Šú‰» 
+    // ã‚¹ã‚«ã‚¤ãƒ‰ãƒ¼ãƒ åˆæœŸåŒ–
+    // SkydomeåˆæœŸåŒ– 
     m_Skydome = instance.AddObject<Skydome>();
     m_Skydome->SetName("m_Skydome");
     m_Skydome->SetSkyDomeMode(true);
@@ -166,7 +166,7 @@ void GameSceneWait::Initialize()
     m_MySceneObjects.emplace_back(m_Skydome);
 
 
-    // ƒ‰ƒCƒt‚Ì”‚¾‚¯ƒn[ƒg‚Ì¶¬
+    // ãƒ©ã‚¤ãƒ•ã®æ•°ã ã‘ãƒãƒ¼ãƒˆã®ç”Ÿæˆ
     const float lifePosX = - 200.0f;
     const float lifePosY = - 100.0f;
 
@@ -175,7 +175,7 @@ void GameSceneWait::Initialize()
 
     m_LifeGame.clear();
     m_LifeCount = m_RelationData.gameLife;
-    // ƒ‰ƒCƒtƒIƒuƒWƒFƒNƒg‚Ì¶¬
+    // ãƒ©ã‚¤ãƒ•ã‚ªãƒ–ã‚¸ã‚§ã‚¯ãƒˆã®ç”Ÿæˆ
     for(uint32_t i = 0; i < m_LifeCount; ++i)
     {
         const float distance = 130.0f;
@@ -211,17 +211,17 @@ void GameSceneWait::Initialize()
         m_Theme->SetPos(0.0f,0.0f,0.0f);
     }
 
-    // ƒXƒe[ƒW—”‘I‘ğˆ—   
+    // ã‚¹ãƒ†ãƒ¼ã‚¸ä¹±æ•°é¸æŠå‡¦ç†   
     PrepareNextStage();
-    Debug::Log("===== ƒNƒŠƒAƒXƒe[ƒW” : " + std::to_string(m_RelationData.stageCount) + " =====");
+    Debug::Log("===== ã‚¯ãƒªã‚¢ã‚¹ãƒ†ãƒ¼ã‚¸æ•° : " + std::to_string(m_RelationData.stageCount) + " =====");
 }
 
 void GameSceneWait::Update(float tick)
 {   
     auto& instance = Game::GetInstance();
 
-    // ƒŠƒYƒ€‚ğæ‚é
-    // ƒ‰ƒCƒt‚ğƒŠƒYƒ€‚É‡‚í‚¹‚Ä‰ñ“]‚³‚¹‚é
+    // ãƒªã‚ºãƒ ã‚’å–ã‚‹
+    // ãƒ©ã‚¤ãƒ•ã‚’ãƒªã‚ºãƒ ã«åˆã‚ã›ã¦å›è»¢ã•ã›ã‚‹
     int advancedTicks = m_RelationData.rhythmBeat.Update(tick);
     if (advancedTicks > 0)
     {
@@ -232,7 +232,7 @@ void GameSceneWait::Update(float tick)
         {
             m_ShouldTransitionToStage = true;
         }
-        // c‚èˆê”‚Ìƒ^ƒCƒ~ƒ“ƒO‚Å‚¨‘è’ñ¦ˆ—ŠJn
+        // æ®‹ã‚Šä¸€æ‹ã®ã‚¿ã‚¤ãƒŸãƒ³ã‚°ã§ãŠé¡Œæç¤ºå‡¦ç†é–‹å§‹
         else if (m_BeatTimer.GetRestBeats() == 1)
         {
             m_Theme->SetActive(true);
@@ -257,15 +257,15 @@ void GameSceneWait::Update(float tick)
     }
 
 
-    // ƒ‰ƒCƒtŒ¸­ˆ—
+    // ãƒ©ã‚¤ãƒ•æ¸›å°‘å‡¦ç†
     if ( m_DecrementLife.IsTimeUp() &&
         !m_wasDecrementLife         &&
         !m_RelationData.isClear)
     {
-        // ƒ‰ƒCƒt‚ªŒ¸‚é‰‰o
+        // ãƒ©ã‚¤ãƒ•ãŒæ¸›ã‚‹æ¼”å‡º
         
 
-        // ƒ‰ƒCƒt‚ğŒ¸‚ç‚·
+        // ãƒ©ã‚¤ãƒ•ã‚’æ¸›ã‚‰ã™
         m_RelationData.gameLife -= 1u;
         DecrementLife();
 
@@ -275,14 +275,14 @@ void GameSceneWait::Update(float tick)
     {
         m_LifeParticleEmitter->Update(tick);
     }
-    // ƒ^ƒCƒ}[XVˆ—
+    // ã‚¿ã‚¤ãƒãƒ¼æ›´æ–°å‡¦ç†
     CountTimer(tick);
 
-    // ƒfƒoƒbƒO—p@I‚í‚Á‚½‚çÁ‚·—\’è‚Ìreturn
+    // ãƒ‡ãƒãƒƒã‚°ç”¨ã€€çµ‚ã‚ã£ãŸã‚‰æ¶ˆã™äºˆå®šã®return
     // return ;
     if (m_RelationData.gameLife == 0u)
     {
-        // ƒ‰ƒCƒt‚ª0‚É‚È‚Á‚½‚çƒŠƒUƒ‹ƒgƒV[ƒ“‚Ö
+        // ãƒ©ã‚¤ãƒ•ãŒ0ã«ãªã£ãŸã‚‰ãƒªã‚¶ãƒ«ãƒˆã‚·ãƒ¼ãƒ³ã¸
         ChangeScenePush<ResultScene>(WaitToResult);
     }
 }
@@ -294,12 +294,12 @@ void GameSceneWait::Finalize()
     instance.m_Grid.SetEnabled(false);
 #endif
 
-    // ‚±‚ÌƒV[ƒ“‚ÌƒIƒuƒWƒFƒNƒg‚ğíœ‚·‚é
+    // ã“ã®ã‚·ãƒ¼ãƒ³ã®ã‚ªãƒ–ã‚¸ã‚§ã‚¯ãƒˆã‚’å‰Šé™¤ã™ã‚‹
     for (auto o : m_MySceneObjects) {
         instance.DeleteObject(o);
     }
     m_MySceneObjects.clear();
-    // ƒI[ƒfƒBƒI‚Ì’â~
+    // ã‚ªãƒ¼ãƒ‡ã‚£ã‚ªã®åœæ­¢
     if (AudioManager* audioManager = instance)
     {
         for (const auto& [key, config] : m_AudioList)
@@ -309,11 +309,11 @@ void GameSceneWait::Finalize()
     }
 }
 
-// Ÿ‚ÌƒXƒe[ƒW‘I‘ğ‚ÆƒV[ƒ“‘JˆÚˆ—
+// æ¬¡ã®ã‚¹ãƒ†ãƒ¼ã‚¸é¸æŠã¨ã‚·ãƒ¼ãƒ³é·ç§»å‡¦ç†
 void GameSceneWait::StartNextStageTransition()
 {
     ApplyBeatDuration(GameToWait, m_RelationData);
-    // ƒV[ƒ“‘JˆÚˆ—
+    // ã‚·ãƒ¼ãƒ³é·ç§»å‡¦ç†
     switch (m_RelationData.nextScene)
     {
     case SCENE_NO::GAME_SLICE: ChangeScenePush<GameSceneSlice>(WaitToGame); break;
@@ -335,14 +335,14 @@ void GameSceneWait::DecrementLife()
 
 void GameSceneWait::PrepareNextStage()
 {
-    // ƒXƒe[ƒW‚ÌƒCƒ“ƒfƒbƒNƒX‚ğŠi”[
+    // ã‚¹ãƒ†ãƒ¼ã‚¸ã®ã‚¤ãƒ³ãƒ‡ãƒƒã‚¯ã‚¹ã‚’æ ¼ç´
     SCENE_NO nextScene = StageSelectAllRandom();
 
-    // Ÿ‚ÌƒV[ƒ“RelationData‚ÉŠi”[
+    // æ¬¡ã®ã‚·ãƒ¼ãƒ³RelationDataã«æ ¼ç´
     m_RelationData.nextScene = nextScene;
 }
 
-// ‘SƒXƒe[ƒW‚©‚ç‘I‚Ô‚Ì—”‚ğæ“¾‚·‚éŠÖ”
+// å…¨ã‚¹ãƒ†ãƒ¼ã‚¸ã‹ã‚‰é¸ã¶æ™‚ã®ä¹±æ•°ã‚’å–å¾—ã™ã‚‹é–¢æ•°
 
 SCENE_NO GameSceneWait::StageSelectAllRandom()
 {

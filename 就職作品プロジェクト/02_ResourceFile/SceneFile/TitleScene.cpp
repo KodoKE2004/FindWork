@@ -17,22 +17,22 @@ void TitleScene::Initialize()
 	TextureManager* textureMgr = instance;
     DebugUI::TEXT_CurrentScene = "TitleScene";
 
-	// ƒV[ƒ“‚ğæ‚è‚Â‚È‚®ƒf[ƒ^‚Ìì¬
-	// ¸”s”»’è‚ÅWiatƒV[ƒ“‚É¸”sˆ—‚ğ‚³‚¹‚È‚¢‚½‚ß‚Étrue
-	m_RelationData.stageCount = 0;
-	m_RelationData.isClear = true;
-	m_RelationData.nextScene = SCENE_NO::GAME_WAIT;
-	m_RelationData.oldScene  = SCENE_NO::NONE;
+	m_Skydome = instance.AddWorldObject<Skydome>();
+	m_TitleLogo = instance.AddWorldObject<Square>();
+	m_PressEnterBack = instance.AddWorldObject<Square>();
+	m_PressEnter = instance.AddWorldObject<Square>();
+    m_DragController = instance.AddWorldObject<DragController>();
+		m_FadeMask = instance.AddWorldObject<Square>(instance.GetCamera());
 	m_RelationData.previousScene = SCENE_NO::TITLE;
     m_RelationData.gameLife = 4;
 
 #ifdef _DEBUG
 	instance.m_Grid.SetEnabled(true);
 #endif
-	// ƒ^ƒCƒ}[‰Šú‰»
+	// ã‚¿ã‚¤ãƒãƒ¼åˆæœŸåŒ–
 	m_DurationPressEnter = 0.0f;
 	
-	// Skydome‰Šú‰» 
+	// SkydomeåˆæœŸåŒ– 
 	m_Skydome = instance.AddObject<Skydome>();
 	m_Skydome->SetName("m_Skydome");
 	m_Skydome->SetSkyDomeMode(true);
@@ -81,7 +81,7 @@ void TitleScene::Initialize()
 		m_MySceneObjects.emplace_back(m_FadeMask);
 	}
 	
-	// ƒI[ƒfƒBƒI‚Ì“o˜^
+	// ã‚ªãƒ¼ãƒ‡ã‚£ã‚ªã®ç™»éŒ²
 	m_AudioList.clear();
 	PlayParams bgmParam{};
     bgmParam.volume = DEFAULT_VOLUME;
@@ -115,8 +115,8 @@ void TitleScene::Update(float tick)
 	m_DurationPressEnter += tick;
 	m_MoveTitleLogo		 += tick;
 
-	// TitleLogo‚ğ‚Ó‚í‚Ó‚í‚³‚¹‚é
-	// ã‰º‚Éˆê’èÀ•W‚ğ’´‚¦‚é‚Æ”½‘Î•ûŒü‚Éˆê’è—ÊˆÚ“®••â³
+	// TitleLogoã‚’ãµã‚ãµã‚ã•ã›ã‚‹
+	// ä¸Šä¸‹ã«ä¸€å®šåº§æ¨™ã‚’è¶…ãˆã‚‹ã¨åå¯¾æ–¹å‘ã«ä¸€å®šé‡ç§»å‹•ï¼†è£œæ­£
 	const float twoPI = 6.27318530718f;
 	float phase = (m_MoveTitleLogo / TitleLogoCycle) * twoPI;
 	float offsetY = std::sin(phase) * TitleLogoAmp;
@@ -125,8 +125,8 @@ void TitleScene::Update(float tick)
 	pos.y = TitleLogoBaseY + offsetY;
 	m_TitleLogo->SetPos(pos);
 
-	// PressEnter‚ğƒ`ƒJƒ`ƒJ‚³‚¹‚é
-	// ˆê’èŠÔŒo‰ß‚ÅƒAƒ‹ƒtƒ@’l‚ğ‚¢‚¶‚é
+	// PressEnterã‚’ãƒã‚«ãƒã‚«ã•ã›ã‚‹
+	// ä¸€å®šæ™‚é–“çµŒéã§ã‚¢ãƒ«ãƒ•ã‚¡å€¤ã‚’ã„ã˜ã‚‹
 	if (m_DurationPressEnter >= AlphaChangeTimer) 
 	{
 		float alpha = m_PressEnter->GetColor().w;
@@ -134,10 +134,10 @@ void TitleScene::Update(float tick)
 		m_DurationPressEnter = 0.0f;
 	}
 
-	// Enter‚Ìˆ—
+	// Enterã®å‡¦ç†
 	if (Input::GetKeyTrigger(VK_RETURN))
 	{
-		// SE‚ÌÄ¶
+		// SEã®å†ç”Ÿ
 		if (AudioManager* audioMgr = Game::GetInstance())
 		{
 			if (auto it = m_AudioList.find("enter"); it != m_AudioList.end())
@@ -161,12 +161,12 @@ void TitleScene::Update(float tick)
 		return;
 	}
 
-	// Skydome‚Ì‰ñ“]
+	// Skydomeã®å›è»¢
 	m_Skydome->Spin(0.0f, -4.0f, 0.0f);
 
 	//===============================
-	//		 ŠJ–‹‚Ì‚İ—¬‚ê‚éˆ—
-	//	‰º‚É‘‚­‚ÆŒJ‚è•Ô‚·‚Æ‚«”½‰f‚³‚ê‚Ü‚¹‚ñ	
+	//		 é–‹å¹•ã®ã¿æµã‚Œã‚‹å‡¦ç†
+	//	ä¸‹ã«æ›¸ãã¨ç¹°ã‚Šè¿”ã™ã¨ãåæ˜ ã•ã‚Œã¾ã›ã‚“	
 	//===============================
 	if (!m_EntryFlg || !m_FadeMask)
 	{
@@ -182,12 +182,12 @@ void TitleScene::Finalize()
 	instance.m_Grid.SetEnabled(false);
 #endif
 
-	// ‚±‚ÌƒV[ƒ“‚ÌƒIƒuƒWƒFƒNƒg‚ğíœ‚·‚é
+	// ã“ã®ã‚·ãƒ¼ãƒ³ã®ã‚ªãƒ–ã‚¸ã‚§ã‚¯ãƒˆã‚’å‰Šé™¤ã™ã‚‹
 	for (auto o : m_MySceneObjects) {
 		instance.DeleteObject(o);
 	}
 	m_MySceneObjects.clear();
-    // ƒI[ƒfƒBƒI‚Ì’â~
+    // ã‚ªãƒ¼ãƒ‡ã‚£ã‚ªã®åœæ­¢
     if (AudioManager* audioMgr = instance)
 	{
 		for (const auto& [key, config] : m_AudioList)

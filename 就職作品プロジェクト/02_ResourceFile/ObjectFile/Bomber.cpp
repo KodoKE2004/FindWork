@@ -24,12 +24,12 @@ void Bomber::Initialize()
     m_Count = 3;
 
 
-    m_Rope = instance.AddObject<Square>();
+    m_Rope = instance.AddWorldObject<Square>();
     m_Rope->SetTexture(textureMgr->GetTexture("BomberRope.png"));
     m_Rope->SetName("m_Rope");
     instance.GetCurrentScene()->GetSceneObjects().emplace_back(m_Rope);
 
-    m_Number = instance.AddObject<Square>();
+    m_Number = instance.AddWorldObject<Square>();
     m_Number->SetTexture(textureMgr->GetTexture("CountThree.png"));
     m_Number->SetPos(1000.0f,0.0f,0.0f);
     m_Number->SetName("m_Number");

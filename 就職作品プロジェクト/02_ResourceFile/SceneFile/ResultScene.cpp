@@ -11,9 +11,9 @@ void ResultScene::Initialize()
     DebugUI::TEXT_CurrentScene = "ResultScene";
 
     TextureManager* textureMgr = instance;
-    // Skydome‰Šú‰» 
-    m_Skydome = instance.AddObject<Skydome>();
-    m_Skydome->SetName("m_Skydome");
+    m_Skydome = instance.AddWorldObject<Skydome>();
+    m_ButtonToTitle = instance.AddWorldObject<Square>();
+    m_ButtonRetry = instance.AddWorldObject<Square>();
     m_Skydome->SetSkyDomeMode(true);
     m_Skydome->SetTexture(textureMgr->GetTexture("SkydomeSpace.png"));
     m_Skydome->SetRadius(500.0f);
@@ -49,7 +49,7 @@ void ResultScene::Initialize()
         }
     }
 
-    Debug::Log("===== ƒNƒŠƒAƒXƒe[ƒW” : " + std::to_string(m_RelationData.stageCount) + " =====");
+    Debug::Log("===== ã‚¯ãƒªã‚¢ã‚¹ãƒ†ãƒ¼ã‚¸æ•° : " + std::to_string(m_RelationData.stageCount) + " =====");
 }
 
 void ResultScene::Update(float tick)
@@ -59,7 +59,7 @@ void ResultScene::Update(float tick)
     if (Input::GetKeyTrigger(VK_UP) || Input::GetKeyTrigger(VK_DOWN) ||
         Input::GetKeyTrigger(VK_W)  || Input::GetKeyTrigger(VK_S)){
         m_isCorsorButtonToTitle ^= true;
-        // SE‚ÌÄ¶
+        // SEã®å†ç”Ÿ
         if (AudioManager* audioMgr = Game::GetInstance())
         {
             if (auto it = m_AudioList.find("moveCorsor"); it != m_AudioList.end())
@@ -78,8 +78,8 @@ void ResultScene::Update(float tick)
         }
     }
     
-    // PressEnter‚ğƒ`ƒJƒ`ƒJ‚³‚¹‚é
-    // ˆê’èŠÔŒo‰ß‚ÅƒAƒ‹ƒtƒ@’l‚ğ‚¢‚¶‚é
+    // PressEnterã‚’ãƒã‚«ãƒã‚«ã•ã›ã‚‹
+    // ä¸€å®šæ™‚é–“çµŒéã§ã‚¢ãƒ«ãƒ•ã‚¡å€¤ã‚’ã„ã˜ã‚‹
     if (m_DurationCuror >= AlphaChangeTimer)
     {
         float alpha = 1.0f;
@@ -100,7 +100,7 @@ void ResultScene::Update(float tick)
 
     if (Input::GetKeyTrigger(VK_RETURN))
     {
-        // SE‚ÌÄ¶
+        // SEã®å†ç”Ÿ
         if (AudioManager* audioMgr = Game::GetInstance())
         {
             if (auto it = m_AudioList.find("enter"); it != m_AudioList.end())
@@ -121,7 +121,7 @@ void ResultScene::Update(float tick)
         }
         if (m_isCorsorButtonToTitle)
         {
-            // ƒ^ƒCƒgƒ‹‚Ö–ß‚é
+            // ã‚¿ã‚¤ãƒˆãƒ«ã¸æˆ»ã‚‹
             m_RelationData.previousScene = SCENE_NO::RESULT;
             m_RelationData.nextScene     = SCENE_NO::TITLE;
             SceneTransitionParam transition{ TRANS_MODE::FADE, 0.3f, EASING_TYPE::NONE };
@@ -129,8 +129,8 @@ void ResultScene::Update(float tick)
         }
         else
         {
-            // ƒQ[ƒ€‚ğÅ‰‚©‚çn‚ß‚é
-            // ƒV[ƒ“‚ÉŒq‚®î•ñ‚ÍŠî’ê‰Šú‰»Œã‚Ìˆê”ÔÅ‰‚Éİ’è
+            // ã‚²ãƒ¼ãƒ ã‚’æœ€åˆã‹ã‚‰å§‹ã‚ã‚‹
+            // ã‚·ãƒ¼ãƒ³ã«ç¹‹ãæƒ…å ±ã¯åŸºåº•åˆæœŸåŒ–å¾Œã®ä¸€ç•ªæœ€åˆã«è¨­å®š
             m_RelationData.previousScene = SCENE_NO::RESULT;
             m_RelationData.nextScene     = SCENE_NO::GAME_WAIT;
             m_RelationData.isClear = true;
@@ -148,12 +148,12 @@ void ResultScene::Update(float tick)
 void ResultScene::Finalize()
 {
     auto& instance = Game::GetInstance();
-    // ‚±‚ÌƒV[ƒ“‚ÌƒIƒuƒWƒFƒNƒg‚ğíœ‚·‚é
+    // ã“ã®ã‚·ãƒ¼ãƒ³ã®ã‚ªãƒ–ã‚¸ã‚§ã‚¯ãƒˆã‚’å‰Šé™¤ã™ã‚‹
     for (auto o : m_MySceneObjects) {
         instance.DeleteObject(o);
     }
     m_MySceneObjects.clear();
-    // ƒI[ƒfƒBƒI‚Ì’â~
+    // ã‚ªãƒ¼ãƒ‡ã‚£ã‚ªã®åœæ­¢
     if (AudioManager* audioManager = instance)
     {
         for (const auto& [key, config] : m_AudioList)

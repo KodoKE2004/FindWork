@@ -17,19 +17,19 @@ void GameSceneJump::Initialize()
 {
     DebugUI::TEXT_CurrentScene = "GameSceneJump";
 
-    // Šî’êƒNƒ‰ƒX‚Ì‰Šú‰»
-    GameSceneExe::SetBaseBeatCount(BASE_BEATS);
-    GameSceneExe::Initialize();
+    m_Skydome = instance.AddWorldObject<Skydome>();
+    m_Bomber = instance.AddWorldObject<Bomber>();
+    m_Player = instance.AddWorldObject<Player>(instance.GetCamera());
 
-    // ƒV[ƒ“‚ÉŒq‚®î•ñ‚ÍŠî’ê‰Šú‰»Œã‚Ìˆê”ÔÅ‰‚Éİ’è
-    m_RelationData.previousScene = SCENE_NO::GAME_JUMP;
+    m_Cart = instance.AddWorldObject<Cart>(instance.GetCamera());
+    m_CartWarning = instance.AddWorldObject<CartWarning>(instance.GetCamera());
     m_RelationData.oldScene = SCENE_NO::GAME_WAIT;
     m_RelationData.isClear = true;
 
     auto& instance = Game::GetInstance();
     TextureManager* textureMgr = instance;
 
-    // ƒXƒJƒCƒh[ƒ€‚Ìİ’è
+    // ã‚¹ã‚«ã‚¤ãƒ‰ãƒ¼ãƒ ã®è¨­å®š
     m_Skydome = instance.AddObject<Skydome>();
     m_Skydome->SetName("m_Skydome");
     m_Skydome->SetSkyDomeMode(true);
@@ -41,13 +41,13 @@ void GameSceneJump::Initialize()
     m_Bomber->SetName("m_TimeGauge");
     m_MySceneObjects.emplace_back(m_Bomber);
 
-    // ƒvƒŒƒCƒ„[
+    // ãƒ—ãƒ¬ã‚¤ãƒ¤ãƒ¼
     m_Player = instance.AddObject<Player>(instance.GetCamera());
     m_Player->SetName("m_Player");
     m_Player->SetTexture(textureMgr->GetTexture("Plane.png"));
     m_MySceneObjects.emplace_back(m_Player);
 
-    // ‰Šú”z’uİ’è
+    // åˆæœŸé…ç½®è¨­å®š
     if (m_Player)
     {
         m_Player->SetPos(0.0f, m_PlayerGroundHeight, 0.0f);
@@ -55,18 +55,18 @@ void GameSceneJump::Initialize()
         m_PlayerJumpApexHeight = m_PlayerGroundHeight + jumpOffset;
     }
 
-    // ƒJ[ƒg‚Ì¶¬
+    // ã‚«ãƒ¼ãƒˆã®ç”Ÿæˆ
     m_Cart = instance.AddObject<Cart>(instance.GetCamera());
     m_Cart->SetTexture(textureMgr->GetTexture("Car.png"));
-    m_Cart->CreateStartPattern(0);              // ƒpƒ^[ƒ“‚ğ“o˜^
+    m_Cart->CreateStartPattern(0);              // ãƒ‘ã‚¿ãƒ¼ãƒ³ã‚’ç™»éŒ²
     m_Cart->SetSpeedFactor(0.0f);
-    m_Cart->SetStartPattern();                  // ƒJ[ƒg‚ÌŠJnƒpƒ^[ƒ“İ’è
+    m_Cart->SetStartPattern();                  // ã‚«ãƒ¼ãƒˆã®é–‹å§‹ãƒ‘ã‚¿ãƒ¼ãƒ³è¨­å®š
 
     m_MySceneObjects.emplace_back(m_Cart);
 
     m_TimeCartActivetion.limit = GenerateActivationDelay();
 
-    // ƒJ[ƒgŒx‚Ì¶¬
+    // ã‚«ãƒ¼ãƒˆè­¦å‘Šã®ç”Ÿæˆ
     m_CartWarning = instance.AddObject<CartWarning>(instance.GetCamera());
     m_CartWarning->SetTexture(textureMgr->GetTexture("CartWarning.png"));
     m_CartWarning->SetColor(1.0f, 0.25f, 0.25f, 0.85f);
@@ -90,7 +90,7 @@ void GameSceneJump::Update(float tick)
 
     if (m_Player->m_HitResult.isTriggered())
     {
-        Debug::Log("[Õ“Ë] Player - Cart");
+        Debug::Log("[è¡çª] Player - Cart");
         m_RelationData.isClear = false;
     }
 

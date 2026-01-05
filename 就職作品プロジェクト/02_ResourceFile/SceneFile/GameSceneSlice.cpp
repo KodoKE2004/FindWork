@@ -11,16 +11,16 @@ void GameSceneSlice::Initialize()
     GameSceneExe::SetBaseBeatCount(BASE_BEATS);
     GameSceneExe::Initialize();
 
-    // ƒV[ƒ“‚ÉŒq‚®î•ñ‚ÍŠî’ê‰Šú‰»Œã‚Ìˆê”ÔÅ‰‚Éİ’è
-    m_RelationData.previousScene = SCENE_NO::GAME_SLICE;
-    m_RelationData.oldScene = SCENE_NO::GAME_WAIT;
-    m_RelationData.isClear = false;
+    m_Skydome = instance.AddWorldObject<Skydome>();
+    m_Bomber = instance.AddWorldObject<Bomber>();
+    m_Player = instance.AddWorldObject<Player>();
+        auto enemy = instance.AddWorldObject<Enemy>();
 
     auto& instance = Game::GetInstance();
     TextureManager* textureMgr = instance;
 
     //===============================
-    //      ƒV[ƒ““àƒIƒuƒWƒFƒNƒg¶¬
+    //      ã‚·ãƒ¼ãƒ³å†…ã‚ªãƒ–ã‚¸ã‚§ã‚¯ãƒˆç”Ÿæˆ
     //===============================
     m_Skydome = instance.AddObject<Skydome>();
     m_Skydome->SetName("m_Skydome");
@@ -63,13 +63,13 @@ void GameSceneSlice::Update(float tick)
 
     std::vector<std::shared_ptr<Enemy>> enemys = instance.GetObjects<Enemy>();
     if (IsAllDeathEnemy(enemys)) {
-        // SceneExe‚Å‘‚ß‚ÉƒNƒŠƒA‚ğ‚µ‚½ê‡‚à‘z’è
+        // SceneExeã§æ—©ã‚ã«ã‚¯ãƒªã‚¢ã‚’ã—ãŸå ´åˆã‚‚æƒ³å®š
         StageClear();
         StageChangeFast();
     }
     else
     {
-        // UŒ‚”»’è
+        // æ”»æ’ƒåˆ¤å®š
         for(auto it : enemys)
         { 
             if (it->IsDeath()) {
@@ -81,7 +81,7 @@ void GameSceneSlice::Update(float tick)
             
             if (m_Player->m_HitResult.isTriggered() && !it->IsDeath())
             {
-                Debug::Log("[[Õ“Ë]] Sord -> Enemy");
+                Debug::Log("[[è¡çª]] Sord -> Enemy");
                 it->Death();
             }
         }

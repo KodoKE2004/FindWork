@@ -19,28 +19,28 @@ void SelectScene::Initialize()
 	instance.m_Grid.SetEnabled(true);
 #endif
 	
-    m_Skydome = instance.AddObject<Skydome>();
+    m_Skydome = instance.AddWorldObject<Skydome>();
     m_Skydome->SetName("m_SkyDome");
 	m_Skydome->SetSkyDomeMode(true);
     m_Skydome->SetTexture(textureMgr->GetTexture("SkydomeSpace.png"));
 	m_Skydome->SetRadius(500.0f);
 	m_MySceneObjects.emplace_back(m_Skydome);
 
-	m_ButtonGamePlay = instance.AddObject<Square>();
+	m_ButtonGamePlay = instance.AddWorldObject<Square>();
     m_ButtonGamePlay->SetName("m_ButtonGamePlay");
 	m_ButtonGamePlay->SetPos(0.0f, -150.0f, 0.0f);
     m_ButtonGamePlay->SetScale(450.0f, 100.0f, 1.0f);
     m_ButtonGamePlay->SetTexture(textureMgr->GetTexture("ButtonGamePlay.png"));
 	m_MySceneObjects.emplace_back(m_ButtonGamePlay);
 
-    m_ButtonPractice = instance.AddObject<Square>();
+    m_ButtonPractice = instance.AddWorldObject<Square>();
     m_ButtonPractice->SetName("m_ButtonPractice");
 	m_ButtonPractice->SetPos(0.0f, -275.0f, 0.0f);
     m_ButtonPractice->SetScale(450.0f, 100.0f, 1.0f);
     m_ButtonPractice->SetTexture(textureMgr->GetTexture("ButtonPractice.png"));
     m_MySceneObjects.emplace_back(m_ButtonPractice);
 
-    m_Corsor = instance.AddObject<Square>();
+    m_Corsor = instance.AddWorldObject<Square>();
     m_Corsor->SetName("m_Corsor");
     m_Corsor->SetPos(m_ButtonGamePlay->GetPos());
     m_Corsor->SetScale(450.0f, 100.0f, 1.0f);
@@ -78,7 +78,7 @@ void SelectScene::Finalize()
 #ifdef _DEBUG
 	instance.m_Grid.SetEnabled(false);
 #endif
-	// このシーンのオブジェクトを削除する
+	// 縺薙�ｮ繧ｷ繝ｼ繝ｳ縺ｮ繧ｪ繝悶ず繧ｧ繧ｯ繝医ｒ蜑企勁縺吶ｋ
 	for (auto obj : m_MySceneObjects) {
 		instance.DeleteObject(obj);
 	}

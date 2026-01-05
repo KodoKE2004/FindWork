@@ -201,7 +201,7 @@ void TransScene::DrawNextScene()
 
 	m_NextSceneSRV = m_RenderTarget->GetSRV();
 
-	m_OverlayNext = instance.AddObject<SnapshotOverlay>();
+	m_OverlayNext = instance.AddWorldObject<SnapshotOverlay>();
 	m_OverlayNext->SetSRV(m_NextSceneSRV.Get());
 	m_OverlayNext->SetAlpha(0.0f);
 	m_MySceneObjects.emplace_back(m_OverlayNext);

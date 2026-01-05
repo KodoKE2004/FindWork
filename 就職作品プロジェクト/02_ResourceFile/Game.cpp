@@ -66,6 +66,7 @@ void Game::Initialize()
 	//instance.m_Camera->Initialize();							
     instance.m_TransitionTexture = nullptr;						
     instance.m_Theme             = nullptr;						
+	instance.m_OverlayObjects.resize(kOverlayReservedCount);
 	//		シーンをタイトルシーンに設定
 	Renderer::Initialize();
 	DebugUI::Init(Renderer::GetDevice(), Renderer::GetDeviceContext());	// デバッグUIの初期化
@@ -144,7 +145,7 @@ void Game::Update(float tick)
 
 	// 入力の更新
 	// オブジェクトの更新
-	for (auto& o : instance.m_GameObjects)
+	for (auto& o : instance.m_WorldObjects)
 	{
 		if(o == nullptr){ continue; }
 		o->Update(); // オブジェクトの更新
@@ -152,6 +153,13 @@ void Game::Update(float tick)
 	if (instance.m_Theme)
 	{
 		instance.m_Theme->Update();
+	}
+	for (auto& o : instance.m_OverlayObjects)
+	{
+		if (!o || o == instance.m_Theme || o == instance.m_TransitionTexture) {
+			continue;
+		}
+		o->Update();
 	}
 	// オーディオマネージャーの更新
 	instance.m_AudioManager->Update();
@@ -175,28 +183,35 @@ void Game::Draw()
 		transScene->Draw();
 	}
 
-	for (auto& o : instance.m_GameObjects)
+	for (auto& o : instance.m_WorldObjects)
 	{
 		if (!o) continue;
 		o->Draw();
 	}
+
+	#ifdef _DEBUG
+		Renderer::PresentDebugGameView();
+	#endif
 
 	// Theme/Transition描画前に状態を既定化して、State破壊やScissor設定の影響を排除する
 	Renderer::ResetForFullscreenPass(Renderer::GetDeviceContext(),
 									 static_cast<UINT>(Renderer::GetScreenWidth()),
 									 static_cast<UINT>(Renderer::GetScreenHeight()));
 
-	if (instance.m_TransitionTexture != nullptr) {
-		instance.m_TransitionTexture->Draw();
-	}
 	if (instance.m_Theme)
 	{
 		instance.m_Theme->Draw();
 	}
-	#ifdef _DEBUG
-		Renderer::PresentDebugGameView();
-	#endif
-	
+	for (auto& o : instance.m_OverlayObjects)
+	{
+		if (!o || o == instance.m_Theme || o == instance.m_TransitionTexture) {
+			continue;
+		}
+		o->Draw();
+	}
+	if (instance.m_TransitionTexture != nullptr) {
+		instance.m_TransitionTexture->Draw();
+	}
 
 
 	DebugUI::Render();
@@ -223,6 +238,7 @@ void Game::Finalize()
 	if(instance.m_Theme){
 		instance.m_Theme->Finalize();
 	}
+	instance.m_OverlayObjects.clear();
 	Renderer::Finalize();			// レンダラーの終了処理
 
 	instance.m_SceneCurrent.reset();
@@ -249,10 +265,24 @@ void Game::SetSceneNext(std::shared_ptr<Scene> newScene)
 	}
 }
 
+void Game::SetTransitionTexture(std::shared_ptr<TransitionBase> tex)
+{
+	auto& instance = GetInstance();
+	instance.m_TransitionTexture = std::move(tex);
+	if (instance.m_OverlayObjects.size() < kOverlayReservedCount) {
+		instance.m_OverlayObjects.resize(kOverlayReservedCount);
+	}
+	instance.m_OverlayObjects[kOverlayTransitionIndex] = instance.m_TransitionTexture;
+}
+
 void Game::SetTheme(const std::shared_ptr<Theme>& theme)
 {
 	auto& instance = GetInstance();
 	instance.m_Theme = theme;
+	if (instance.m_OverlayObjects.size() < kOverlayReservedCount) {
+		instance.m_OverlayObjects.resize(kOverlayReservedCount);
+	}
+	instance.m_OverlayObjects[kOverlayThemeIndex] = instance.m_Theme;
 	if (instance.m_SceneCurrent) {
 		instance.m_SceneCurrent->SetTheme(theme);
 	}
@@ -269,6 +299,7 @@ std::shared_ptr<Theme> Game::GetTheme()
 		m_Theme = std::make_shared<Theme>(instance.GetCamera());
 		m_Theme->Initialize();
 		m_Theme->SetName("m_Theme");
+		SetTheme(m_Theme);
 	}
 
 	return m_Theme;
@@ -303,15 +334,15 @@ void Game::RegistDebugObject()
 
 			ImGui::Begin("Game Objects");
 
-			ImGui::Text("Object Count: %zu", instance.m_GameObjects.size());
+			ImGui::Text("Object Count: %zu", instance.m_WorldObjects.size());
 			ImGui::Separator();
 
 			static int selectedIndex = -1;
 
 			ImGui::BeginChild("ObjList", ImVec2(220, 0), true);
-			for (int i = 0; i < (int)instance.m_GameObjects.size(); ++i)
+			for (int i = 0; i < (int)instance.m_WorldObjects.size(); ++i)
 			{
-				auto& up = instance.m_GameObjects[i];
+				auto& up = instance.m_WorldObjects[i];
 				std::string label = up ? up->GetName() : std::string("null");
 				if (label.empty()) label = std::string("Object ") + std::to_string(i);
 				if (ImGui::Selectable(label.c_str(), selectedIndex == i))
@@ -324,9 +355,9 @@ void Game::RegistDebugObject()
 			ImGui::SameLine();
 
 			ImGui::BeginGroup();
-			if (selectedIndex >= 0 && selectedIndex < (int)instance.m_GameObjects.size() && instance.m_GameObjects[selectedIndex])
+			if (selectedIndex >= 0 && selectedIndex < (int)instance.m_WorldObjects.size() && instance.m_WorldObjects[selectedIndex])
 			{
-				Object* obj = instance.m_GameObjects[selectedIndex].get();
+				Object* obj = instance.m_WorldObjects[selectedIndex].get();
 				ImGui::Text("Name: %s", obj->GetName().c_str());
 
 				// Position
@@ -369,18 +400,28 @@ void Game::DeleteObject(const std::shared_ptr<Object>& pt)
 	auto& instance = GetInstance();
 	if (pt == nullptr) return;
 
-	auto& objs = instance.m_GameObjects;
 	const auto raw = pt.get();
-    auto it = std::find_if(objs.begin(), objs.end(),
-		[raw](const std::shared_ptr<Object>& up) {
-			return up.get() == raw;
-		});
 
-	if (it != objs.end())
+	auto removeFromList = [raw](std::vector<std::shared_ptr<Object>>& objs) -> bool
 	{
-		(*it)->Finalize();
-		objs.erase(it);
+		auto it = std::find_if(objs.begin(), objs.end(),
+			[raw](const std::shared_ptr<Object>& up) {
+				return up.get() == raw;
+			});
+
+		if (it != objs.end())
+		{
+			(*it)->Finalize();
+			objs.erase(it);
+			return true;
+		}
+		return false;
+	};
+
+	if (removeFromList(instance.m_WorldObjects)) {
+		return;
 	}
+	removeFromList(instance.m_OverlayObjects);
 
 }
 
@@ -388,14 +429,14 @@ void Game::DeleteAllObject()
 {
 	auto& instance = GetInstance();
 	// オブジェクト終了処理
-	for (auto& o : m_pInstance->m_GameObjects)
+	for (auto& o : m_pInstance->m_WorldObjects)
 	{
 		if (!o) {
 			o->Finalize();
 		}
 	}
 
-	instance.m_GameObjects.clear();
+	instance.m_WorldObjects.clear();
 	instance.m_MeshManager->Clear();
-	instance.m_GameObjects.shrink_to_fit();
+	instance.m_WorldObjects.shrink_to_fit();
 }
