@@ -1,4 +1,4 @@
-#pragma once
+﻿#pragma once
 #include "Square.h"
 
 // テーマを描画するクラス

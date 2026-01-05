@@ -1,4 +1,4 @@
-#include "Square.h"
+﻿#include "Square.h"
 #include "Game.h"
 #include <memory>
 #include "Game.h"

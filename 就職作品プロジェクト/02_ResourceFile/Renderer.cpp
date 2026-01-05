@@ -1,4 +1,4 @@
-#include "Renderer.h"
+﻿#include "Renderer.h"
 #include "Application.h"
 #include "Debug.hpp"
 #include <d3dcompiler.h>

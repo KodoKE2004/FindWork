@@ -1,4 +1,4 @@
-#include "RenderTarget.h"
+﻿#include "RenderTarget.h"
 
 bool RenderTarget::Create(ID3D11Device* dev, UINT width, UINT height, bool withDepth, bool srvMipGen)
 {

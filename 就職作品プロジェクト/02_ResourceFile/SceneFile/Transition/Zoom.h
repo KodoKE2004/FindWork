@@ -58,7 +58,7 @@ public:
             m_pConstantBufferFade.GetAddressOf());      // コンスタントバッファ４
 
         if (!sts) {
-            MessageBox(NULL, "CreateBuffer(constant buffer Fade) error", "Error", MB_OK);
+            MessageBox(NULL, L"CreateBuffer(constant buffer Fade) error", L"Error", MB_OK);
             return false;
         }
 

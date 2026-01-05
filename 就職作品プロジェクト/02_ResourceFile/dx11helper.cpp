@@ -459,7 +459,7 @@ bool CreateVertexBufferUAV(
 
 	hr = device->CreateBuffer(&bd, &InitData, pVertexBuffer);		// バッファ生成
 	if (FAILED(hr)){
-		MessageBox(nullptr, "CreateBuffer(vertex buffer) error", "Error", MB_OK);
+		MessageBox(nullptr, L"CreateBuffer(vertex buffer) error", L"Error", MB_OK);
 		return false;
 	}
 

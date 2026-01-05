@@ -1,4 +1,4 @@
-#include "Game.h"
+﻿#include "Game.h"
 #include "Renderer.h"
 #include "Application.h"
 #include "SceneList.h"
@@ -186,21 +186,24 @@ void Game::Draw()
 									 static_cast<UINT>(Renderer::GetScreenWidth()),
 									 static_cast<UINT>(Renderer::GetScreenHeight()));
 
-	// 描画順の矛盾を排除: Theme -> Transition（Transitionが最前面）
+	if (instance.m_TransitionTexture != nullptr) {
+		instance.m_TransitionTexture->Draw();
+	}
 	if (instance.m_Theme)
 	{
 		instance.m_Theme->Draw();
 	}
-	if (instance.m_TransitionTexture != nullptr) {
-		instance.m_TransitionTexture->Draw();
-	}
-
 	#ifdef _DEBUG
 		Renderer::PresentDebugGameView();
 	#endif
+	
+
 
 	DebugUI::Render();
 	Renderer::Finish();
+
+
+
 }
 
 void Game::Finalize()

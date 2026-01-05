@@ -35,7 +35,7 @@ public:
 			sizeof(ConstantBufferMaterial),		// サイズ
 			m_pConstantBufferMaterial.GetAddressOf());		// コンスタントバッファ４
 		if (!sts) {
-			MessageBox(NULL, "CreateBuffer(constant buffer Material) error", "Error", MB_OK);
+			MessageBox(NULL, L"CreateBuffer(constant buffer Material) error", L"Error", MB_OK);
 			return false;
 		}
 
