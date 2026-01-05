@@ -154,9 +154,11 @@ void Game::Update(float tick)
 	}
 	// オーディオマネージャーの更新
 	instance.m_AudioManager->Update();
+
 #ifdef _DEBUG
 	GetAudioHelperTickDebugger().Tick(tick);
 #endif
+
 }
 
 void Game::Draw()
@@ -171,8 +173,6 @@ void Game::Draw()
 		o->Draw();
 	}
 	
-
-
 	// TransitionTextureを最後に描く（必ず最前面になる）
 	if (instance.m_TransitionTexture != nullptr) {
 	    instance.m_TransitionTexture->Draw();

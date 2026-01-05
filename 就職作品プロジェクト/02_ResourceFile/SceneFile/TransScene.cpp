@@ -164,6 +164,7 @@ void TransScene::DrawNextScene()
 			if (obj) obj->Draw();
 		}
 	}
+	auto theme = instance.GetTheme();
 	
 	m_RenderTarget->End(context);
 
