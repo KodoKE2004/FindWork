@@ -96,4 +96,5 @@ void RenderTarget::End(ID3D11DeviceContext* ctx)
     ctx->OMSetRenderTargets(1, rtvs, m_PrevDSV.Get());
     ctx->RSSetViewports(1, &m_PrevVp);
     m_HasPrevState = false;
+
 }
