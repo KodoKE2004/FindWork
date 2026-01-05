@@ -6,7 +6,7 @@
 #include "Material.h"
 
 //----------------------------------------
-//		2D	“–‚½‚è”»’è‚ÌŒ‹‰Ê‚ğó‚¯æ‚éƒNƒ‰ƒX
+//		2D	å½“ãŸã‚Šåˆ¤å®šã®çµæœã‚’å—ã‘å–ã‚‹ã‚¯ãƒ©ã‚¹
 //----------------------------------------
 struct isHitResult
 {
@@ -38,44 +38,46 @@ struct isHitResult
 
 
 //-----------------------------------------------------------------------------
-// 2D‚ÌSquareƒNƒ‰ƒX
+// 2Dã®Squareã‚¯ãƒ©ã‚¹
 //-----------------------------------------------------------------------------
 class Square : public Object
 {
 protected:
-	// •`‰æ‚Ìˆ×‚Ìî•ñiƒƒbƒVƒ…‚ÉŠÖ‚í‚éî•ñj
-	IndexBuffer m_IndexBuffer; // ƒCƒ“ƒfƒbƒNƒXƒoƒbƒtƒ@
-	VertexBuffer<VERTEX_3D> m_VertexBuffer; // ’¸“_ƒoƒbƒtƒ@
+	// æç”»ã®ç‚ºã®æƒ…å ±ï¼ˆãƒ¡ãƒƒã‚·ãƒ¥ã«é–¢ã‚ã‚‹æƒ…å ±ï¼‰
+	IndexBuffer m_IndexBuffer; // ã‚¤ãƒ³ãƒ‡ãƒƒã‚¯ã‚¹ãƒãƒƒãƒ•ã‚¡
+	VertexBuffer<VERTEX_3D> m_VertexBuffer; // é ‚ç‚¹ãƒãƒƒãƒ•ã‚¡
 
-	// •`‰æ‚Ìˆ×‚Ìî•ñiŒ©‚½–Ú‚ÉŠÖ‚í‚é•”•ªj
-	std::shared_ptr<Texture>  m_Texture;	// ƒeƒNƒXƒ`ƒƒ
-	std::unique_ptr<Material> m_Materiale;	//ƒ}ƒeƒŠƒAƒ‹
+	// æç”»ã®ç‚ºã®æƒ…å ±ï¼ˆè¦‹ãŸç›®ã«é–¢ã‚ã‚‹éƒ¨åˆ†ï¼‰
+	std::shared_ptr<Texture>  m_Texture;	// ãƒ†ã‚¯ã‚¹ãƒãƒ£
+	std::unique_ptr<Material> m_Materiale;	//ãƒãƒ†ãƒªã‚¢ãƒ«
 
-	// UVÀ•W‚Ìî•ñ
+	// UVåº§æ¨™ã®æƒ…å ±
 
-	float m_NumU = 1.0f;		// UÀ•W‚ÌˆÊ’u
-	float m_NumV = 1.0f;		// VÀ•W‚ÌˆÊ’u
-	float m_SplitX = 1.0f;		// UÀ•W‚Ì•ªŠ„”
-	float m_SplitY = 1.0f;		// VÀ•W‚Ì•ªŠ„”
+	float m_NumU = 1.0f;		// Uåº§æ¨™ã®ä½ç½®
+	float m_NumV = 1.0f;		// Våº§æ¨™ã®ä½ç½®
+	float m_SplitX = 1.0f;		// Uåº§æ¨™ã®åˆ†å‰²æ•°
+	float m_SplitY = 1.0f;		// Våº§æ¨™ã®åˆ†å‰²æ•°
+
+	// æç”»ãƒ‘ã‚¤ãƒ—ãƒ©ã‚¤ãƒ³ã®æ—¢å®šåŒ–ï¼ˆä»–ã®æç”»ã§çŠ¶æ…‹ãŒå¤‰ã‚ã£ã¦ã‚‚å½±éŸ¿ã‚’å—ã‘ãªã„ã‚ˆã†ã«ã™ã‚‹ï¼‰
+	void SetPipeline();
 
 public:
 	isHitResult m_HitResult;
 
-	Square(Camera& cam); // ƒRƒ“ƒXƒgƒ‰ƒNƒ^
-	~Square(); // ƒfƒXƒgƒ‰ƒNƒ^
+	Square(Camera& cam); // ã‚³ãƒ³ã‚¹ãƒˆãƒ©ã‚¯ã‚¿
+	~Square(); // ãƒ‡ã‚¹ãƒˆãƒ©ã‚¯ã‚¿
 
-	// ƒˆ‰¼‘zŠÖ”‰»
-    // ‚±‚ÌƒNƒ‰ƒX“à‚É‚àŠÖ”‚ğ‹Lq‚µ‚Ä‚¢‚é
+	// ç´”ç²‹ä»®æƒ³é–¢æ•°åŒ–
+    // ã“ã®ã‚¯ãƒ©ã‚¹å†…ã«ã‚‚é–¢æ•°ã‚’è¨˜è¿°ã—ã¦ã„ã‚‹
 	void Initialize() override;
 	void Update()	  override;
 	void Draw()		  override;
 	void Finalize()	  override;
 
-	// ƒeƒNƒXƒ`ƒƒ‚ğw’è
+	// ãƒ†ã‚¯ã‚¹ãƒãƒ£ã‚’æŒ‡å®š
 	void SetTexture(const char* imgname);
 	void SetTexture(std::shared_ptr<Texture> texture);
-	// UVÀ•W‚ğw’è
+	// UVåº§æ¨™ã‚’æŒ‡å®š
 	void SetUV(const float& nu, const float& nv, const float& sx, const float& sy);
 
 };
-

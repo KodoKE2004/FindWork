@@ -9,10 +9,10 @@ bool RenderTarget::Create(ID3D11Device* dev, UINT width, UINT height, bool withD
     D3D11_TEXTURE2D_DESC td{};
     td.Width = m_Width;
     td.Height = m_Height;
-    td.MipLevels = srvMipGen ? 0 : 1;              // 0 �őS Mip �\�iGenerateMips �p�j
+    td.MipLevels = srvMipGen ? 0 : 1;              // 0 で全 Mip 可能（GenerateMips 用）
     td.ArraySize = 1;
-    td.Format = m_ColorFormat;                     // _SRGB �w�����
-    td.SampleDesc.Count = 1;                       // MSAA �Ȃ��i�������y�j
+    td.Format = m_ColorFormat;                     // _SRGB 指定も可
+    td.SampleDesc.Count = 1;                       // MSAA なし（合成が楽）
     td.SampleDesc.Quality = 0;
     td.Usage = D3D11_USAGE_DEFAULT;
     td.BindFlags = D3D11_BIND_RENDER_TARGET | D3D11_BIND_SHADER_RESOURCE;
@@ -27,7 +27,7 @@ bool RenderTarget::Create(ID3D11Device* dev, UINT width, UINT height, bool withD
     D3D11_SHADER_RESOURCE_VIEW_DESC sd{};
     sd.Format = td.Format;
     sd.ViewDimension = D3D11_SRV_DIMENSION_TEXTURE2D;
-    sd.Texture2D.MipLevels = srvMipGen ? -1 : 1;   // -1 �őS Mip
+    sd.Texture2D.MipLevels = srvMipGen ? -1 : 1;   // -1 で全 Mip
     hr = dev->CreateShaderResourceView(m_ColorTex.Get(), srvMipGen ? &sd : nullptr, m_Srv.GetAddressOf());
     if (FAILED(hr)) return false;
 
@@ -61,6 +61,14 @@ void RenderTarget::Begin(ID3D11DeviceContext* ctx, const float clear[4], ID3D11D
     m_PrevDSV.Reset();
     m_PrevVp = {};
     m_HasPrevState = true;
+
+    // SRV/RTV 競合の安全策: オフスクリーンへ切り替える直前に SRV を全解除する
+    // (直前までSRVで使用していた場合の競合が原因ならこれで復帰する)
+    ID3D11ShaderResourceView* nullSrvs[16] = {};
+    ctx->PSSetShaderResources(0, 16, nullSrvs);
+    ctx->VSSetShaderResources(0, 16, nullSrvs);
+    ctx->GSSetShaderResources(0, 16, nullSrvs);
+    ctx->CSSetShaderResources(0, 16, nullSrvs);
 
     ID3D11RenderTargetView* prevRtv = nullptr;
     ID3D11DepthStencilView* prevDsv = nullptr;

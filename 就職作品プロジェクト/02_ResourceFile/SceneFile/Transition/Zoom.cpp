@@ -1,5 +1,6 @@
 #include "Zoom.h"
 #include "Game.h"
+#include "Debug.hpp"
 
 Zoom::Zoom(Camera& cam) : TransitionBase(cam)
 {
@@ -57,6 +58,21 @@ void Zoom::Update(float tick)
 
 void Zoom::Draw()
 {
+    // State破壊の影響を受けないよう、パイプラインを先頭で再設定する
+    SetPipeline();
+
+    static uint64_t s_LastLogFrame = 0;
+    const auto frame = Game::GetDrawFrameCounter();
+    if (frame != s_LastLogFrame) {
+        Debug::Log("[[描画]] Transition: Zoom");
+        s_LastLogFrame = frame;
+    }
+
+    if (m_DebugSolidDraw) {
+        DrawDebugFullscreenSolid();
+        return;
+    }
+
     Renderer::SetDepthEnable(false);
     Renderer::SetBlendState(BS_ALPHABLEND);
 
@@ -67,11 +83,6 @@ void Zoom::Draw()
     Renderer::SetWorldMatrix(&world);
 
     ID3D11DeviceContext* dc = Renderer::GetDeviceContext();
-    dc->IASetPrimitiveTopology(D3D11_PRIMITIVE_TOPOLOGY_TRIANGLESTRIP);
-
-    SetGPU();
-    m_VertexBuffer.SetGPU();
-    m_IndexBuffer.SetGPU();
     m_Texture->SetGPU();
 
     m_Materiale->SetDiffuse(DirectX::XMFLOAT4(m_Color.x, m_Color.y, m_Color.z, m_Color.w));

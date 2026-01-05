@@ -5,6 +5,7 @@
 #include "Application.h"
 #include "Calculator.h"
 #include <algorithm>
+#include "Debug.hpp"
 
 using namespace Math::Easing;
 
@@ -68,6 +69,20 @@ void Wipe::Update(float tick)
 
 void Wipe::Draw()
 {
+    // State破壊の影響を受けないよう、パイプラインを先頭で再設定する
+    SetPipeline();
+
+    static uint64_t s_LastLogFrame = 0;
+    const auto frame = Game::GetDrawFrameCounter();
+    if (frame != s_LastLogFrame) {
+        Debug::Log("[[描画]] Transition: Wipe");
+        s_LastLogFrame = frame;
+    }
+
+    if (m_DebugSolidDraw) {
+        DrawDebugFullscreenSolid();
+        return;
+    }
 
     if (auto* srv = GetTextureSRV())
     {
@@ -91,11 +106,6 @@ void Wipe::Draw()
     Renderer::SetWorldMatrix(&world);
 
     ID3D11DeviceContext* dc = Renderer::GetDeviceContext();
-    dc->IASetPrimitiveTopology(D3D11_PRIMITIVE_TOPOLOGY_TRIANGLESTRIP);
-
-    SetGPU();
-    m_VertexBuffer.SetGPU();
-    m_IndexBuffer.SetGPU();
     if (m_Texture)
     {
         m_Texture->SetGPU();
@@ -123,10 +133,10 @@ void Wipe::Finalize() {}
 
 void Wipe::ApplyWipeAmount(float amount)
 {
-    // �i�s��Ԃ̃P�A
+    // 進行状態のケア
     amount = std::clamp(amount, 0.0f, 1.0f);
 
-    // ������Ԃ͑S��ʕ\��
+    // 初期状態は全画面表示
     const float depth = GetPos().z;
     NVector3 start,end;
     if (m_Phase == TRANS_PHASE::TRANS_IN)

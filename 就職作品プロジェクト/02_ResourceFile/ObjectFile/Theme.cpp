@@ -1,6 +1,8 @@
 #include "Theme.h"
 #include "Game.h"
 #include "Application.h"
+#include "Renderer.h"
+#include "Debug.hpp"
 #include <algorithm>
 
 using namespace Math::Easing;
@@ -45,8 +47,31 @@ void Theme::Update()
 void Theme::Draw()
 {
     if(!m_isActive){ return; }
+    // State破壊の影響を受けないよう、パイプラインを先頭で再設定する
+    SetPipeline();
+
+    static uint64_t s_LastLogFrame = 0;
+    const auto frame = Game::GetDrawFrameCounter();
+    if (frame != s_LastLogFrame) {
+        Debug::Log("[[描画]] Theme");
+        s_LastLogFrame = frame;
+    }
+
+    if (m_DebugSolidDraw) {
+        // 呼ばれているが描けていない場合の切り分け: 単色フルスクリーン描画
+        const auto prevScale = m_Scale;
+        const auto prevColor = m_Color;
+        SetScale(static_cast<float>(Renderer::GetScreenWidth()),
+                 static_cast<float>(Renderer::GetScreenHeight()),
+                 1.0f);
+        SetColor(m_DebugSolidColor);
+        Square::Draw();
+        SetScale(prevScale);
+        SetColor(prevColor);
+        return;
+    }
+
     Square::Draw();
-    // Debug::Log("[[�`��]] Theme�I�u�W�F�N�g");
 
 }
 

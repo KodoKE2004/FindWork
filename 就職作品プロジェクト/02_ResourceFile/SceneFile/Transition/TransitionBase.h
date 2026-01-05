@@ -14,8 +14,8 @@
 
 using namespace Math::Easing;
 
-// ƒgƒ‰ƒ“ƒWƒVƒ‡ƒ“‚ÌƒtƒF[ƒY
-// ‘JˆÚ‚Ìisó‹µ‚ğ¦‚·—ñ‹“Œ^
+// ãƒˆãƒ©ãƒ³ã‚¸ã‚·ãƒ§ãƒ³ã®ãƒ•ã‚§ãƒ¼ã‚º
+// é·ç§»ã®é€²è¡ŒçŠ¶æ³ã‚’ç¤ºã™åˆ—æŒ™å‹
 enum class TRANS_PHASE
 {
     NONE,
@@ -24,8 +24,8 @@ enum class TRANS_PHASE
     FINISH,
 };
 
-// ƒgƒ‰ƒ“ƒWƒVƒ‡ƒ“‚Ìƒ‚[ƒh
-// ƒgƒ‰ƒ“ƒWƒVƒ‡ƒ“ƒGƒtƒFƒNƒg‚Ìí—Ş‚ğ¦‚·—ñ‹“Œ^
+// ãƒˆãƒ©ãƒ³ã‚¸ã‚·ãƒ§ãƒ³ã®ãƒ¢ãƒ¼ãƒ‰
+// ãƒˆãƒ©ãƒ³ã‚¸ã‚·ãƒ§ãƒ³ã‚¨ãƒ•ã‚§ã‚¯ãƒˆã®ç¨®é¡ã‚’ç¤ºã™åˆ—æŒ™å‹
 enum class TRANS_MODE
 {
     FADE,
@@ -61,41 +61,48 @@ bool LoadTransitionSettingsFromCsv(const std::string& filePath, std::string& err
 
 void DrawTransitionStateGUI();
 
-/// @brief ƒgƒ‰ƒ“ƒWƒVƒ‡ƒ“‚ÌŠî’êƒNƒ‰ƒX
-/// @param ƒgƒ‰ƒ“ƒWƒVƒ‡ƒ“ƒGƒtƒFƒNƒg‚ğÀ‘•‚·‚é‚½‚ß‚ÌŠî’êƒNƒ‰ƒX‚Å‚·B
-/// @param ‚±‚ÌƒNƒ‰ƒX‚ÍA•`‰æ‚É•K—v‚ÈƒƒbƒVƒ…î•ñAƒeƒNƒXƒ`ƒƒAƒ}ƒeƒŠƒAƒ‹AUVÀ•WAƒ^ƒCƒ}[î•ñ‚ğŠÇ—‚µ‚Ü‚·B
-/// @param ”h¶ƒNƒ‰ƒX‚ÍAInitializeAUpdateADrawAFinalize‚ÌŠeƒƒ\ƒbƒh‚ğÀ‘•‚·‚é•K—v‚ª‚ ‚è‚Ü‚·B
-/// @param ‚Ü‚½Aƒ^ƒCƒ}[‚Ìisó‹µ‚ğŠm”F‚·‚é‚½‚ß‚ÌisFinishƒƒ\ƒbƒh‚à’ñ‹Ÿ‚µ‚Ä‚¢‚Ü‚·B
-/// @param Updateƒƒ\ƒbƒh“à‚Åƒ^ƒCƒ}[‚ğis‚³‚¹ADrawƒƒ\ƒbƒh“à‚Å•`‰æˆ—‚ğÀ‘•‚µ‚Ä‚­‚¾‚³‚¢B
+/// @brief ãƒˆãƒ©ãƒ³ã‚¸ã‚·ãƒ§ãƒ³ã®åŸºåº•ã‚¯ãƒ©ã‚¹
+/// @param ãƒˆãƒ©ãƒ³ã‚¸ã‚·ãƒ§ãƒ³ã‚¨ãƒ•ã‚§ã‚¯ãƒˆã‚’å®Ÿè£…ã™ã‚‹ãŸã‚ã®åŸºåº•ã‚¯ãƒ©ã‚¹ã§ã™ã€‚
+/// @param ã“ã®ã‚¯ãƒ©ã‚¹ã¯ã€æç”»ã«å¿…è¦ãªãƒ¡ãƒƒã‚·ãƒ¥æƒ…å ±ã€ãƒ†ã‚¯ã‚¹ãƒãƒ£ã€ãƒãƒ†ãƒªã‚¢ãƒ«ã€UVåº§æ¨™ã€ã‚¿ã‚¤ãƒãƒ¼æƒ…å ±ã‚’ç®¡ç†ã—ã¾ã™ã€‚
+/// @param æ´¾ç”Ÿã‚¯ãƒ©ã‚¹ã¯ã€Initializeã€Updateã€Drawã€Finalizeã®å„ãƒ¡ã‚½ãƒƒãƒ‰ã‚’å®Ÿè£…ã™ã‚‹å¿…è¦ãŒã‚ã‚Šã¾ã™ã€‚
+/// @param ã¾ãŸã€ã‚¿ã‚¤ãƒãƒ¼ã®é€²è¡ŒçŠ¶æ³ã‚’ç¢ºèªã™ã‚‹ãŸã‚ã®isFinishãƒ¡ã‚½ãƒƒãƒ‰ã‚‚æä¾›ã—ã¦ã„ã¾ã™ã€‚
+/// @param Updateãƒ¡ã‚½ãƒƒãƒ‰å†…ã§ã‚¿ã‚¤ãƒãƒ¼ã‚’é€²è¡Œã•ã›ã€Drawãƒ¡ã‚½ãƒƒãƒ‰å†…ã§æç”»å‡¦ç†ã‚’å®Ÿè£…ã—ã¦ãã ã•ã„ã€‚
 class TransitionBase : public Object
 {
 protected:
 
-    // •`‰æ‚Ìˆ×‚Ìî•ñiƒƒbƒVƒ…‚ÉŠÖ‚í‚éî•ñj
-    IndexBuffer             m_IndexBuffer ; // ƒCƒ“ƒfƒbƒNƒXƒoƒbƒtƒ@
-    VertexBuffer<VERTEX_3D> m_VertexBuffer; // ’¸“_ƒoƒbƒtƒ@
+    // æç”»ã®ç‚ºã®æƒ…å ±ï¼ˆãƒ¡ãƒƒã‚·ãƒ¥ã«é–¢ã‚ã‚‹æƒ…å ±ï¼‰
+    IndexBuffer             m_IndexBuffer ; // ã‚¤ãƒ³ãƒ‡ãƒƒã‚¯ã‚¹ãƒãƒƒãƒ•ã‚¡
+    VertexBuffer<VERTEX_3D> m_VertexBuffer; // é ‚ç‚¹ãƒãƒƒãƒ•ã‚¡
 
-    // •`‰æ‚Ìˆ×‚Ìî•ñiŒ©‚½–Ú‚ÉŠÖ‚í‚é•”•ªj
-    std::shared_ptr<Texture>  m_Texture;	// ƒeƒNƒXƒ`ƒƒ
-    std::unique_ptr<Material> m_Materiale;	//ƒ}ƒeƒŠƒAƒ‹
+    // æç”»ã®ç‚ºã®æƒ…å ±ï¼ˆè¦‹ãŸç›®ã«é–¢ã‚ã‚‹éƒ¨åˆ†ï¼‰
+    std::shared_ptr<Texture>  m_Texture;	// ãƒ†ã‚¯ã‚¹ãƒãƒ£
+    std::unique_ptr<Material> m_Materiale;	//ãƒãƒ†ãƒªã‚¢ãƒ«
 
     Microsoft::WRL::ComPtr<ID3D11ShaderResourceView> m_InputSRV;
     TRANS_PHASE m_Phase;
     TRANS_MODE m_TransMode;
 
-    // ‘JˆÚ‰‰o‚Ìƒpƒ‰ƒ[ƒ^
+    // é·ç§»æ¼”å‡ºã®ãƒ‘ãƒ©ãƒ¡ãƒ¼ã‚¿
     SceneTransitionParam m_transParam{};
 
     bool m_isChange = false;
 
-    // UVÀ•W‚Ìî•ñ
+    // UVåº§æ¨™ã®æƒ…å ±
     float m_NumU   = 1.0f;
     float m_NumV   = 1.0f;
     float m_SplitX = 1.0f;
     float m_SplitY = 1.0f;
 
-    float m_Duration = 1.0f;    // ‘JˆÚ‚ÌŠ—vŠÔ
+    float m_Duration = 1.0f;    // é·ç§»ã®æ‰€è¦æ™‚é–“
 
+    // ãƒ‡ãƒãƒƒã‚°ç”¨: å˜è‰²ãƒ•ãƒ«ã‚¹ã‚¯ãƒªãƒ¼ãƒ³ã‚’æã‘ã‚‹ã‚ˆã†ã«ã™ã‚‹
+    bool m_DebugSolidDraw = false;
+    Color m_DebugSolidColor = Color(1.0f, 0.0f, 1.0f, 1.0f);
+
+    // æç”»ãƒ‘ã‚¤ãƒ—ãƒ©ã‚¤ãƒ³ã®æ—¢å®šåŒ–ï¼ˆä»–ã®æç”»ã§çŠ¶æ…‹ãŒå¤‰ã‚ã£ã¦ã‚‚å½±éŸ¿ã‚’å—ã‘ãªã„ã‚ˆã†ã«ã™ã‚‹ï¼‰
+    void SetPipeline();
+    void DrawDebugFullscreenSolid();
 
 
 public:
@@ -109,30 +116,37 @@ public:
     virtual void Draw()       = 0;
     virtual void Finalize()   = 0;
 
-    // SRV‚ğ’¼ÚƒZƒbƒg
-    // Texture‚ğG‚ç‚¸‚ÉA”h¶‚ªSRV‚ğ‚»‚Ì‚Ü‚Üg‚¦‚é
+    // SRVã‚’ç›´æ¥ã‚»ãƒƒãƒˆ
+    // Textureã‚’è§¦ã‚‰ãšã«ã€æ´¾ç”ŸãŒSRVã‚’ãã®ã¾ã¾ä½¿ãˆã‚‹
     void SetTextureSRV(ID3D11ShaderResourceView* srv){ m_InputSRV = srv; }
     ID3D11ShaderResourceView* GetTextureSRV() const { return m_InputSRV.Get(); }
     void ClearTextureSRV() { m_InputSRV.Reset(); }
 
 
     //--------------------------------
-    //          ‘JˆÚƒpƒ‰ƒ[ƒ^ŒQ
+    //          é·ç§»ãƒ‘ãƒ©ãƒ¡ãƒ¼ã‚¿ç¾¤
     //--------------------------------
     void  ApplyPhaseSetting(TRANS_PHASE phase);
 
     //===============================
-    //         ƒZƒbƒ^[EƒQƒbƒ^[
+    //         ã‚»ãƒƒã‚¿ãƒ¼ãƒ»ã‚²ãƒƒã‚¿ãƒ¼
     //===============================
     
-    // ƒeƒNƒXƒ`ƒƒ
+    // ãƒ†ã‚¯ã‚¹ãƒãƒ£
     void SetTexture(const char* imgname);
     void SetTexture(std::shared_ptr<Texture> texture);
 
-    // UVÀ•W
+    // UVåº§æ¨™
     void SetUV(const float& nu, const float& nv, const float& sx, const float& sy);
+
+    // ãƒ‡ãƒãƒƒã‚°ç”¨ãƒ•ãƒ«ã‚¹ã‚¯ãƒªãƒ¼ãƒ³æç”»ã®åˆ‡æ›¿
+    void SetDebugSolidDraw(bool enable, const Color& color = Color(1.0f, 0.0f, 1.0f, 1.0f))
+    {
+        m_DebugSolidDraw = enable;
+        m_DebugSolidColor = color;
+    }
      
-    // ƒ^ƒCƒ}[ŠÖ˜A
+    // ã‚¿ã‚¤ãƒãƒ¼é–¢é€£
     void SetDuration(const float& duration) { m_Duration = duration; }
     
     void SetTransitionParams(SceneTransitionParam param)
@@ -146,16 +160,15 @@ public:
     }
     
     
-    // ƒgƒ‰ƒ“ƒWƒVƒ‡ƒ“ƒ‚[ƒh
-    virtual void SetTransMode(TRANS_MODE transMode) = 0;    // ƒˆ‰¼‘zŠÖ”
+    // ãƒˆãƒ©ãƒ³ã‚¸ã‚·ãƒ§ãƒ³ãƒ¢ãƒ¼ãƒ‰
+    virtual void SetTransMode(TRANS_MODE transMode) = 0;    // ç´”ç²‹ä»®æƒ³é–¢æ•°
     TRANS_MODE GetTransMode() {
         return m_TransMode;
     }
     
-    // ‘JˆÚó‹µ‚Ì•Ï”
+    // é·ç§»çŠ¶æ³ã®å¤‰æ•°
     void  SetPhase(TRANS_PHASE phase) { m_Phase = phase; }
     TRANS_PHASE GetPhase()            { return m_Phase; }
     bool IsChange()             { return m_isChange; }
 
 };
-

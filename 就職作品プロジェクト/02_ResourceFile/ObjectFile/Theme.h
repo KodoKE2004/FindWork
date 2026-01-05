@@ -1,7 +1,7 @@
 #pragma once
 #include "Square.h"
 
-// ƒe[ƒ}‚ğ•`‰æ‚·‚éƒNƒ‰ƒX
+// ãƒ†ãƒ¼ãƒã‚’æç”»ã™ã‚‹ã‚¯ãƒ©ã‚¹
 class Theme : public Square
 {
 protected:
@@ -10,11 +10,13 @@ protected:
     float m_Elapsed   = 0.0f;
     float m_Duration  = 0.0f;
     NVector3 m_ScaleBase;
+    bool m_DebugSolidDraw = false;
+    Color m_DebugSolidColor = Color(1.0f, 0.0f, 1.0f, 1.0f);
 public:
     Theme(Camera& cam);
     ~Theme() = default;
-    // ƒˆ‰¼‘zŠÖ”‰»
-    // ‚±‚ÌƒNƒ‰ƒX“à‚É‚àŠÖ”‚ğ‹Lq‚µ‚Ä‚¢‚é
+    // ç´”ç²‹ä»®æƒ³é–¢æ•°åŒ–
+    // ã“ã®ã‚¯ãƒ©ã‚¹å†…ã«ã‚‚é–¢æ•°ã‚’è¨˜è¿°ã—ã¦ã„ã‚‹
     void Initialize() override;
     void Update()	  override;
     void Draw()		  override;
@@ -23,5 +25,9 @@ public:
     void SetActive();
     void SetActive(const bool isActive);
     void SetScaleBase(NVector3 scale);
+    void SetDebugSolidDraw(bool enable, const Color& color = Color(1.0f, 0.0f, 1.0f, 1.0f))
+    {
+        m_DebugSolidDraw = enable;
+        m_DebugSolidColor = color;
+    }
 };
-

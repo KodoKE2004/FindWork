@@ -25,7 +25,7 @@ void TransScene::Initialize()
 {
     auto& instance = Game::GetInstance();
 
-	// ������
+	// 初期化
 	m_Timer = 0.0f;
 	m_Alpha = 0.0f;
 	m_isChange = false;
@@ -102,11 +102,10 @@ void TransScene::Update(float tick)
 
 		if (m_SceneNext) {
             m_SceneNext->Initialize();
-            Debug::Log("[[���o]] NextScene Initialize");
-			DrawNextScene();
+            Debug::Log("[[検出]] NextScene Initialize");
+			// Update中のDrawを避けてDrawパス側でオフスクリーン描画する
+			m_RequestNextSceneDraw = true;
 
-			auto ctx = Renderer::GetDeviceContext();
-			
 		}
 		m_isChange = true;
 	}
@@ -138,11 +137,24 @@ void TransScene::Finalize()
 	instance.SetTransitionTexture(nullptr);
 	m_NextSceneSRV.Reset();
 	m_RenderTarget.reset();
+	m_RequestNextSceneDraw = false;
 
 #ifdef _DEBUG
 	instance.m_Grid.DeInitialized();
 #endif // _DEBUG
 	
+}
+
+void TransScene::Draw()
+{
+	if (!m_RequestNextSceneDraw) {
+		return;
+	}
+
+	// Update中にContext状態を触るとDraw側が壊れる可能性があるため、
+	// Drawパスでのみオフスクリーン描画を行う。
+	DrawNextScene();
+	m_RequestNextSceneDraw = false;
 }
 
 void TransScene::DrawNextScene()
@@ -157,7 +169,7 @@ void TransScene::DrawNextScene()
 	auto* context  = Renderer::GetDeviceContext();
 	auto  viewport = Renderer::GetViewport();
 
-	// �ޔ�
+	// 退避
 	Microsoft::WRL::ComPtr<ID3D11RenderTargetView> oldRTV;
 	Microsoft::WRL::ComPtr<ID3D11DepthStencilView> oldDSV;
 	context->OMGetRenderTargets(1, oldRTV.GetAddressOf(), oldDSV.GetAddressOf());
@@ -172,12 +184,12 @@ void TransScene::DrawNextScene()
 		m_RenderTarget = std::make_unique<RenderTarget>();
 	}
 
-	// �I�t�X�N���[���`��
+	// オフスクリーン描画
 	m_RenderTarget->Begin(context, clear);
 	for (auto obj : m_SceneNext->GetSceneObjects()) {
 		if (obj) obj->Draw();
 	}
-	// �K�v�Ȃ� Theme �������ŕ`��
+	// 必要なら Theme もここで描く
 	// instance.GetTheme()->Draw();
 	m_RenderTarget->End(context);
 
