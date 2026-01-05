@@ -247,21 +247,11 @@ inline D3D11_INPUT_ELEMENT_DESC Renderer::MakeInstancneIDElement(UINT semanticIn
 
 inline float Renderer::GetScreenWidth()
 {
-#ifdef _DEBUG
-	return m_DebugPresentViewport.Width;
-#else
 	return static_cast<float>(Application::GetGameWidth());
-#endif	
 }
 
 inline float Renderer::GetScreenHeight()
 {
-#ifdef _DEBUG
-	return m_DebugPresentViewport.Height;
-#else
 	return static_cast<float>(Application::GetGameHeight());
-#endif	
-
-
 }
 

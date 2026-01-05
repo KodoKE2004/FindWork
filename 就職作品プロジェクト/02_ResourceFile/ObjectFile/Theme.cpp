@@ -56,11 +56,16 @@ void Theme::Finalize()
 void Theme::SetActive()
 {   
     m_isActive = true;
+    m_Elapsed = 0.0f;
 }
 
 void Theme::SetActive(const bool isActive)
 {
     m_isActive = isActive;
+    if (m_isActive)
+    {
+        m_Elapsed = 0.0f;
+    }
 }
 
 void Theme::SetScaleBase(NVector3 scale)
