@@ -33,6 +33,11 @@ ID3D11BlendState*				Renderer::m_BlendState[MAX_BLENDSTATE];		// ブレンド �
 ID3D11BlendState*				Renderer::m_BlendStateATC;
 ID3D11SamplerState*				Renderer::m_DefaultSampler = nullptr;
 
+std::unique_ptr<RenderTarget>  Renderer::m_GameRenderTarget;
+UINT Renderer::m_GameRenderWidth;
+UINT Renderer::m_GameRenderHeight;
+
+
 
 void Renderer::Initialize()
 {

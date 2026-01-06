@@ -1,4 +1,4 @@
-#include "input.h"
+﻿#include "input.h"
 #include "Application.h"
 #include "Renderer.h"
 #ifdef _DEBUG
@@ -23,9 +23,36 @@ static bool IsDownAsync(int key)
 	return (GetAsyncKeyState(key) & 0x8000) != 0;
 }
 
+Input::Input()
+{
+}
+
+Input::~Input()
+{
+	XINPUT_VIBRATION vibration;
+	ZeroMemory(&vibration, sizeof(XINPUT_VIBRATION));
+	vibration.wLeftMotorSpeed = 0;
+	vibration.wRightMotorSpeed = 0;
+	XInputSetState(0, &vibration);
+}
+
+void Input::Update(HWND hWnd)
+{
+	for (int i = 0; i < 256; i++) { keyState_old[i] = keyState[i]; }
+	controllerState_old = controllerState;							
+
+	for (int i = 0; i < 5; ++i) {
+		m_MouseButtonsOld[i] = m_MouseButtons[i];
+	}
+
+	BOOL hr = GetKeyboardState(keyState);
+
+	POINT prevPos = m_MousePos;
+	POINT currentPos{};
 
 	bool usedImGuiPos = false;
 	bool ignoreMouseInput = false;
+
 #ifdef _DEBUG
 	ImVec2 imageMin{};
 	ImVec2 imageMax{};
@@ -51,6 +78,7 @@ static bool IsDownAsync(int key)
 			m_MouseDelta.x = m_MousePos.x - prevPos.x;
 			m_MouseDelta.y = m_MousePos.y - prevPos.y;
 			usedImGuiPos = true;
+		}
 		else if (!inBounds)
 		{
 			m_MousePos = prevPos;
@@ -61,14 +89,17 @@ static bool IsDownAsync(int key)
 		}
 	}
 #endif
+
 	if (!usedImGuiPos) {
 		if (GetCursorPos(&currentPos)) {
 			if (hWnd != nullptr) {
 				ScreenToClient(hWnd, &currentPos);
 			}
 			m_MousePos = currentPos;
+
 			m_MousePos.x -= static_cast<LONG>(Application::GetWidth() * 0.5f);
-			m_MousePos.y  = - m_MousePos.y + static_cast<LONG>(Application::GetHeight() * 0.5f);
+			m_MousePos.y = -m_MousePos.y + static_cast<LONG>(Application::GetHeight() * 0.5f);
+
 			m_MouseDelta.x = m_MousePos.x - prevPos.x;
 			m_MouseDelta.y = m_MousePos.y - prevPos.y;
 		}
@@ -76,7 +107,13 @@ static bool IsDownAsync(int key)
 			m_MouseDelta.x = 0;
 			m_MouseDelta.y = 0;
 		}
-	m_MouseButtons[vkRIGHT]	= (GetAsyncKeyState(VK_RBUTTON)  & 0x8000) != 0;
+	}
+
+	m_MouseButtons[vkLEFT]	   = (GetAsyncKeyState(VK_LBUTTON) & 0x8000) != 0;
+	m_MouseButtons[vkRIGHT]    = (GetAsyncKeyState(VK_RBUTTON) & 0x8000) != 0;
+	m_MouseButtons[vkMIDDLE]   = (GetAsyncKeyState(VK_MBUTTON) & 0x8000) != 0;
+	m_MouseButtons[vkXBUTTON1] = (GetAsyncKeyState(VK_XBUTTON1) & 0x8000) != 0;
+	m_MouseButtons[vkXBUTTON2] = (GetAsyncKeyState(VK_XBUTTON2) & 0x8000) != 0;
 	if (ignoreMouseInput)
 	{
 		for (int i = 0; i < 5; ++i)
@@ -85,66 +122,20 @@ static bool IsDownAsync(int key)
 			m_MouseButtonsOld[i] = false;
 		}
 	}
-	vibration.wRightMotorSpeed = 0;
-	XInputSetState(0, &vibration);
-}
-
-void Input::Update(HWND hWnd)
-{
-	//1フレーム前の入力を記録しておく
-	for (int i = 0; i < 256; i++) { keyState_old[i] = keyState[i]; }	// キー
-    controllerState_old = controllerState;								// コントローラー
-
-    for(int i = 0; i < 5; ++i) {
-		m_MouseButtonsOld[i] = m_MouseButtons[i];
-    }
-
-	BOOL hr = GetKeyboardState(keyState);
-
-	POINT prevPos = m_MousePos;
-	POINT currentPos{};
-	if (GetCursorPos(&currentPos)) {
-		if (hWnd != nullptr) {
-			ScreenToClient(hWnd, &currentPos);
-		}
-		m_MousePos = currentPos;
-
-
-        m_MousePos.x -= static_cast<LONG>(Application::GetWidth() * 0.5f);
-        m_MousePos.y  = - m_MousePos.y + static_cast<LONG>(Application::GetHeight() * 0.5f);
-
-		m_MouseDelta.x = m_MousePos.x - prevPos.x;
-		m_MouseDelta.y = m_MousePos.y - prevPos.y;
-	}
-	else {
-		m_MouseDelta.x = 0;
-		m_MouseDelta.y = 0;
-	}
-
-	m_MouseButtons[vkLEFT]		= (GetAsyncKeyState(VK_LBUTTON)  & 0x8000) != 0;
-	m_MouseButtons[vkRIGHT]		= (GetAsyncKeyState(VK_RBUTTON)  & 0x8000) != 0;
-	m_MouseButtons[vkMIDDLE]	= (GetAsyncKeyState(VK_MBUTTON)  & 0x8000) != 0;
-	m_MouseButtons[vkXBUTTON1]	= (GetAsyncKeyState(VK_XBUTTON1) & 0x8000) != 0;
-	m_MouseButtons[vkXBUTTON2]	= (GetAsyncKeyState(VK_XBUTTON2) & 0x8000) != 0;
 	m_MouseWheel = 0;
 
-	//コントローラー入力を更新(XInput)
 	XInputGetState(0, &controllerState);
 
-	//振動継続時間をカウント
 	if (VibrationTime > 0) {
 		VibrationTime--;
-		if (VibrationTime == 0) { //振動継続時間が経った時に振動を止める
+		if (VibrationTime == 0) {
 			XINPUT_VIBRATION vibration;
 			ZeroMemory(&vibration, sizeof(XINPUT_VIBRATION));
-			vibration.wLeftMotorSpeed  = 0;
+			vibration.wLeftMotorSpeed = 0;
 			vibration.wRightMotorSpeed = 0;
 			XInputSetState(0, &vibration);
 		}
 	}
-
-
-
 
 }
 

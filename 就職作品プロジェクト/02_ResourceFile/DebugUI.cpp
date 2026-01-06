@@ -1,4 +1,4 @@
-#include "DebugUI.h"
+﻿#include "DebugUI.h"
 #include "Game.h"
 
 std::vector<std::function<void(void)>> DebugUI::m_debugfunction;
@@ -43,10 +43,16 @@ void DebugUI::DisposeUI() {
 #endif // _DEBUG
 }
 
-void DebugUI::Render(ID3D11ShaderResourceView* gameSrv, const ImVec2& gameSize) {
+void DebugUI::Render(ID3D11ShaderResourceView* gameSrv, const ImVec2& gameSize) 
+{
+#ifdef _DEBUG
     s_HasGameViewRect = false;
     s_GameRenderSize = gameSize;
-    // ImGui�̐V�����t���[�����J�n
+
+    ImGui_ImplDX11_NewFrame();
+    ImGui_ImplWin32_NewFrame();
+    ImGui::NewFrame();
+
     if (gameSrv)
     {
         ImGui::Begin("Game View");
@@ -59,11 +65,37 @@ void DebugUI::Render(ID3D11ShaderResourceView* gameSrv, const ImVec2& gameSize) 
         ImGui::End();
     }
 
-    // �E�B���h�E�ƃf�o�b�O���̕`��
+    const char* text = TEXT_CurrentScene.c_str();
+    ImGui::Begin(text);
+    ImGuiIO& io = ImGui::GetIO();
+    ImGui::Text("Application average %.3f ms/frame (%.1f FPS)", 1000.0f / io.Framerate, io.Framerate);
 
-    // �f�o�b�O�֐��̎��s
+    static bool reloadSuccess = true;
+    static bool reloadAttempted = false;
+    if (ImGui::Button("Hot Reload Shaders"))
+    {
+        ShaderManager* shaderMgr = Game::GetInstance();
+        if (shaderMgr)
+        {
+            reloadSuccess = shaderMgr->ReloadAll();
+            reloadAttempted = true;
+        }
+    }
+    if (reloadAttempted)
+    {
+        ImGui::SameLine();
+        ImGui::Text(reloadSuccess ? "Reload succeeded" : "Reload failed");
+    }
 
-    // �t���[���̃����_�����O������
+    ImGui::End();
+    
+    for (auto& f : m_debugfunction)
+    {
+        f();
+    }
+    ImGui::Render();
+    ImGui_ImplDX11_RenderDrawData(ImGui::GetDrawData());
+#endif // _DEBUG
 }
 
 bool DebugUI::GetGameViewRect(ImVec2& outMin, ImVec2& outMax)
@@ -88,47 +120,12 @@ ImVec2 DebugUI::GetGameRenderSize()
     return s_GameRenderSize;
 }
 
-void DebugUI::Render() {
+void DebugUI::RedistDebugFunction(std::function<void(void)> f)
+{
 #ifdef _DEBUG
 
-    // ImGuiの新しいフレームを開始
-    ImGui_ImplDX11_NewFrame();
-    ImGui_ImplWin32_NewFrame();
-    ImGui::NewFrame();
+    m_debugfunction.push_back(std::move(f));
 
-    // ウィンドウとデバッグ情報の描画
-    const char* text = TEXT_CurrentScene.c_str();
-    ImGui::Begin(text);
-    ImGuiIO& io = ImGui::GetIO();
-    ImGui::Text("Application average %.3f ms/frame (%.1f FPS)", 1000.0f / io.Framerate, io.Framerate);
-
-    static bool reloadSuccess = true;
-    static bool reloadAttempted = false;
-    if (ImGui::Button("Hot Reload Shaders"))
-    {
-        ShaderManager* shaderMgr = Game::GetInstance();
-        if (shaderMgr)
-        {
-            reloadSuccess = shaderMgr->ReloadAll();
-            reloadAttempted = true;
-        }
-    }
-    if (reloadAttempted)
-    {
-        ImGui::SameLine();
-        ImGui::Text(reloadSuccess ? "Reload succeeded" : "Reload failed");
-    }
-
-    ImGui::End();
-
-    // デバッグ関数の実行
-    for (auto& f : m_debugfunction)
-    {
-        f();
-    }
-
-    // フレームのレンダリングを完了
-    ImGui::Render();
-    ImGui_ImplDX11_RenderDrawData(ImGui::GetDrawData());
 #endif // _DEBUG
 }
+
