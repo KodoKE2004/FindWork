@@ -61,7 +61,7 @@ void Square::Initialize()
 
 	m_IndexBuffer.Create(indices);
 
-	SetShader("VS_Default", "PS_Default");
+	SetShader("VS_Alpha", "PS_Alpha");
 
 	m_Materiale = std::make_unique<Material>();
 	MATERIAL mtrl;
