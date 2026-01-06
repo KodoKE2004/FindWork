@@ -209,6 +209,14 @@ void GameSceneWait::Initialize()
         m_Theme->SetTexture(textureMgr->GetTexture(kStageTheme[1]));
         m_Theme->SetScaleBase(kThemeScale[1]);
         m_Theme->SetPos(0.0f,0.0f,0.0f);
+    #ifdef _DEBUG
+        float scale = 0.8f;
+        float posX = static_cast<float>(Application::GetWidth());
+        posX = -(posX - (posX * scale)) * 0.5f;
+        float posY = static_cast<float>(Application::GetHeight());
+        posY =  (posY - (posY * scale)) * 0.5f;
+        m_Theme->SetDebugViewAdjust(true, scale, NVector3( posX, posY, 0.0f));
+    #endif
     }
 
     // ステージ乱数選択処理   

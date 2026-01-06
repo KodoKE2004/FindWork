@@ -37,7 +37,7 @@ void Theme::Update()
 
     float t = std::clamp(m_Elapsed / max(m_Duration, 0.0001f), 0.0f, 1.0f);
     float ease = EvaluateEasing(EASING_TYPE::IN_EXPO, t);
-    float mass = max(0.6f, m_ScaleMass - (m_ScaleMass * ease));
+    float mass = max(1.0f, m_ScaleMass - (m_ScaleMass * ease));
 
     scale *= mass; 
     
@@ -53,7 +53,6 @@ void Theme::Draw()
     static uint64_t s_LastLogFrame = 0;
     const auto frame = Game::GetDrawFrameCounter();
     if (frame != s_LastLogFrame) {
-        Debug::Log("[[描画]] Theme");
         s_LastLogFrame = frame;
     }
 
@@ -71,8 +70,26 @@ void Theme::Draw()
         return;
     }
 
+#ifdef _DEBUG
+    // Draw中だけ補正を掛けてすぐ戻す（状態を残さない）
+    const auto prevPos   = m_Position; // Square/Object 側のメンバ想定
+    const auto prevScale = m_Scale;
+
+    if (m_DebugViewAdjustEnabled) {
+        // アニメーション等の“現在値”に対して倍率+オフセット
+        m_Position = (m_Position * m_DebugViewScaleMul) + m_DebugViewPosOffset;
+        m_Scale = (m_Scale * m_DebugViewScaleMul);
+    }
+#endif
+
     Square::Draw();
 
+#ifdef _DEBUG
+    if (m_DebugViewAdjustEnabled) {
+        m_Position = prevPos;
+        m_Scale    = prevScale;
+    }
+#endif
 }
 
 void Theme::Finalize()
@@ -84,6 +101,7 @@ void Theme::SetActive()
 {   
     m_isActive = true;
     m_Elapsed = 0.0f;
+    Debug::Log("[[検出]] Theme Active");
 }
 
 void Theme::SetActive(const bool isActive)
@@ -92,6 +110,7 @@ void Theme::SetActive(const bool isActive)
     if (m_isActive)
     {
         m_Elapsed = 0.0f;
+        Debug::Log("[[検出]] Theme Active");
     }
 }
 

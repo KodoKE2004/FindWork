@@ -253,10 +253,10 @@ inline D3D11_INPUT_ELEMENT_DESC Renderer::MakeInstancneIDElement(UINT semanticIn
 
 inline float Renderer::GetScreenWidth()
 {
-	return static_cast<float>(Application::GetGameWidth());
+	return static_cast<float>(Application::GetWidth());
 }
 
 inline float Renderer::GetScreenHeight()
 {
-	return static_cast<float>(Application::GetGameHeight());
+	return static_cast<float>(Application::GetHeight());
 }

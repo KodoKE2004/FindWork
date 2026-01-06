@@ -12,6 +12,13 @@ protected:
     NVector3 m_ScaleBase;
     bool m_DebugSolidDraw = false;
     Color m_DebugSolidColor = Color(1.0f, 0.0f, 1.0f, 1.0f);
+
+#ifdef _DEBUG
+    bool     m_DebugViewAdjustEnabled = false;
+    float    m_DebugViewScaleMul = 1.0f;                    
+    NVector3 m_DebugViewPosOffset = NVector3(0, 0, 0);      // 例: 左上寄せ分
+#endif
+
 public:
     Theme(Camera& cam);
     ~Theme() = default;
@@ -30,4 +37,17 @@ public:
         m_DebugSolidDraw = enable;
         m_DebugSolidColor = color;
     }
+
+#ifdef _DEBUG
+    // Debug時だけ、描画直前に Position/Scale を倍率＋オフセット補正する
+    void SetDebugViewAdjust(bool enable, float scaleMul, const NVector3& posOffset)
+    {
+        m_DebugViewAdjustEnabled = enable;
+        m_DebugViewScaleMul = scaleMul;
+        m_DebugViewPosOffset = posOffset;
+    }
+#else
+    void SetDebugViewAdjust(bool, float, const NVector3&) {}
+#endif
+
 };

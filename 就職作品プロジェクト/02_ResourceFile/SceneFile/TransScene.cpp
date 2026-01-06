@@ -45,7 +45,9 @@ void TransScene::Initialize()
         m_TransitionTexture->SetTransitionParams(m_transParam);
 		m_TransitionTexture->Initialize();
         m_TransitionTexture->SetTransMode(m_TransMode);
-
+	#ifdef _DEBUG
+		m_TransitionTexture->SetDebugViewAdjust(true, 1.0f, NVector3(0.0f, 0.0f, 0.0f));
+	#endif
 		instance.SetTransitionTexture(m_TransitionTexture);
 	}
 	break;
@@ -59,6 +61,9 @@ void TransScene::Initialize()
 		m_TransitionTexture->SetTransitionParams(m_transParam);
 		m_TransitionTexture->Initialize();
         m_TransitionTexture->SetTransMode(m_TransMode);
+	#ifdef _DEBUG
+		m_TransitionTexture->SetDebugViewAdjust(true, 1.0f, NVector3( 0.0f, 0.0f, 0.0f));
+	#endif
 		
 		instance.SetTransitionTexture(m_TransitionTexture);
 	}
@@ -70,6 +75,9 @@ void TransScene::Initialize()
 		m_TransitionTexture->SetDuration(m_Duration);
 		m_TransitionTexture->Initialize();
 		m_TransitionTexture->SetTransMode(m_TransMode);
+	#ifdef _DEBUG
+		m_TransitionTexture->SetDebugViewAdjust(true, 1.0f, NVector3(0.0f, 0.0f, 0.0f));
+#endif
 
 		instance.SetTransitionTexture(m_TransitionTexture);
 	}

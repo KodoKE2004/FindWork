@@ -117,7 +117,7 @@ void Game::Initialize()
 
 #endif // _DEBUG
 
-	instance.m_SceneCurrent = std::make_shared<GameSceneWait>();				// タイトルシーンのインスタンスを生成
+	instance.m_SceneCurrent = std::make_shared<TitleScene>();				// タイトルシーンのインスタンスを生成
 	instance.m_SceneCurrent->Initialize();
 }
 
@@ -181,12 +181,12 @@ void Game::Draw()
 		o->Draw();
 	}
 
+	#ifdef _DEBUG
 	// Theme/Transition描画前に状態を既定化して、State破壊やScissor設定の影響を排除する
 	Renderer::ResetForFullscreenPass(Renderer::GetDeviceContext(),
 									 static_cast<UINT>(Renderer::GetScreenWidth()),
 									 static_cast<UINT>(Renderer::GetScreenHeight()));
 
-	#ifdef _DEBUG
 		Renderer::PresentDebugGameView();
 	#endif
 

@@ -75,7 +75,6 @@ void Wipe::Draw()
     static uint64_t s_LastLogFrame = 0;
     const auto frame = Game::GetDrawFrameCounter();
     if (frame != s_LastLogFrame) {
-        Debug::Log("[[描画]] Transition: Wipe");
         s_LastLogFrame = frame;
     }
 
@@ -83,6 +82,10 @@ void Wipe::Draw()
         DrawDebugFullscreenSolid();
         return;
     }
+
+#ifdef _DEBUG
+    TransitionBase::ScopedDebugViewAdjust _dbg(*this);
+#endif
 
     if (auto* srv = GetTextureSRV())
     {
@@ -235,8 +238,8 @@ void Wipe::CheckPointSetting()
 {
 
     float posX,posY;
-    posX = static_cast<float>(Application::GetGameWidth() );
-    posY = static_cast<float>(Application::GetGameHeight());
+    posX = static_cast<float>(Application::GetWidth() );
+    posY = static_cast<float>(Application::GetHeight());
     
     float massX,massY;
     massX = 1.0f;

@@ -60,8 +60,8 @@ void Input::Update(HWND hWnd)
 	#ifdef _DEBUG
 
 		const auto debugViewport = Renderer::GetDebugPresentViewport();
-		const float gameWidth = static_cast<float>(Application::GetGameWidth());
-		const float gameHeight = static_cast<float>(Application::GetGameHeight());
+		const float gameWidth = static_cast<float>(Application::GetWidth());
+		const float gameHeight = static_cast<float>(Application::GetHeight());
 		const float scaleX = debugViewport.Width / gameWidth;
 		const float scaleY = debugViewport.Height / gameHeight;
 		if (scaleX > 0.0f && scaleY > 0.0f) {
@@ -83,8 +83,8 @@ void Input::Update(HWND hWnd)
 		}
 
 	#else 
-        m_MousePos.x -= static_cast<LONG>(Application::GetGameWidth() * 0.5f);
-        m_MousePos.y  = - m_MousePos.y + static_cast<LONG>(Application::GetGameHeight() * 0.5f);
+        m_MousePos.x -= static_cast<LONG>(Application::GetWidth() * 0.5f);
+        m_MousePos.y  = - m_MousePos.y + static_cast<LONG>(Application::GetHeight() * 0.5f);
 	#endif
 
 		m_MouseDelta.x = m_MousePos.x - prevPos.x;

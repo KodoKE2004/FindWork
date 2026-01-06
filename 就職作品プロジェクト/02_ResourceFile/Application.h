@@ -20,15 +20,6 @@ public:
         return m_Height;
     }
 
-    static uint32_t GetGameWidth() {
-        return m_GameWidth;
-    }
-
-    static uint32_t GetGameHeight() {
-        return m_GameHeight;
-    }
-
-
     // ウインドウハンドルを返す
     static HWND GetWindow() {
         return m_hWnd;

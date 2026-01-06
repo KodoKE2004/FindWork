@@ -104,6 +104,37 @@ protected:
     void SetPipeline();
     void DrawDebugFullscreenSolid();
 
+#ifdef _DEBUG
+    bool     m_DebugViewAdjustEnabled = false;
+    float    m_DebugViewScaleMul = 1.0f;
+    NVector3 m_DebugViewPosOffset = NVector3(0, 0, 0);
+
+    // Draw中だけ m_Position/m_Scale を補正して、必ず戻す
+    struct ScopedDebugViewAdjust
+    {
+        TransitionBase& self;
+        NVector3 oldPos;
+        NVector3 oldScale;
+        bool active = false;
+
+        explicit ScopedDebugViewAdjust(TransitionBase& s)
+            : self(s), oldPos(s.m_Position), oldScale(s.m_Scale)
+        {
+            if (!self.m_DebugViewAdjustEnabled) return;
+            active = true;
+
+            self.m_Position = (self.m_Position * self.m_DebugViewScaleMul) + self.m_DebugViewPosOffset;
+            self.m_Scale    = (self.m_Scale * self.m_DebugViewScaleMul);
+        }
+
+        ~ScopedDebugViewAdjust()
+        {
+            if (!active) return;
+            self.m_Position = oldPos;
+            self.m_Scale = oldScale;
+        }
+    };
+#endif
 
 public:
 
@@ -171,4 +202,16 @@ public:
     TRANS_PHASE GetPhase()            { return m_Phase; }
     bool IsChange()             { return m_isChange; }
 
+#ifdef _DEBUG
+    // デバッグ用
+    // レンダーターゲットに合わせた位置・サイズの補完
+    void SetDebugViewAdjust(bool enable, float scaleMul, const NVector3& posOffset)
+    {
+        m_DebugViewAdjustEnabled = enable;
+        m_DebugViewScaleMul = scaleMul;
+        m_DebugViewPosOffset = posOffset;
+    }
+#else
+    void SetDebugViewAdjust(bool, float, const NVector3&) {}
+#endif
 };

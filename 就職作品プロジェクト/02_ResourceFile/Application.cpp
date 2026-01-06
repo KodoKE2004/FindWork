@@ -26,8 +26,6 @@ Application::Application(uint32_t width, uint32_t height)
 {
     m_Height = height;
     m_Width  = width;
-    m_GameWidth  = width;
-    m_GameHeight = height;
 
     timeBeginPeriod(1);
 }

@@ -84,7 +84,6 @@ void Fade::Draw()
     static uint64_t s_LastLogFrame = 0;
     const auto frame = Game::GetDrawFrameCounter();
     if (frame != s_LastLogFrame) {
-        Debug::Log("[[描画]] Transition: Fade");
         s_LastLogFrame = frame;
     }
 
@@ -92,6 +91,10 @@ void Fade::Draw()
         DrawDebugFullscreenSolid();
         return;
     }
+
+#ifdef _DEBUG
+    TransitionBase::ScopedDebugViewAdjust _dbg(*this);
+#endif
 
     Renderer::SetDepthEnable(false);
     Renderer::SetBlendState(BS_ALPHABLEND);

@@ -36,7 +36,7 @@ ID3D11Buffer*					Renderer::m_LightBuffer;		// ライト設定
 
 ID3D11BlendState*				Renderer::m_BlendState[MAX_BLENDSTATE];		// ブレンド ステート
 ID3D11BlendState*				Renderer::m_BlendStateATC;
-ID3D11SamplerState*			Renderer::m_DefaultSampler = nullptr;
+ID3D11SamplerState*				Renderer::m_DefaultSampler = nullptr;
 
 
 void Renderer::Initialize()
@@ -46,8 +46,8 @@ void Renderer::Initialize()
 	// デバイス、スワップチェーン作成
 	DXGI_SWAP_CHAIN_DESC swapChainDesc{};
 	swapChainDesc.BufferCount = 1;									// バックバッファの数を1に設定（ダブルバッファリング）
-	swapChainDesc.BufferDesc.Width  = Application::GetGameWidth();	// バッファの幅をウィンドウサイズに合わせる
-	swapChainDesc.BufferDesc.Height = Application::GetGameHeight();	// バッファの高さをウィンドウサイズに合わせる
+	swapChainDesc.BufferDesc.Width  = Application::GetWidth();		// バッファの幅をウィンドウサイズに合わせる
+	swapChainDesc.BufferDesc.Height = Application::GetHeight();		// バッファの高さをウィンドウサイズに合わせる
 	swapChainDesc.BufferDesc.Format = DXGI_FORMAT_R8G8B8A8_UNORM;	// バッファのピクセルフォーマットを設定
 	swapChainDesc.BufferDesc.RefreshRate.Numerator = 60;			// リフレッシュレートを設定（Hz）
 	swapChainDesc.BufferDesc.RefreshRate.Denominator = 1;			// リフレッシュレートの分母を設定（1で60Hz）
@@ -98,8 +98,8 @@ void Renderer::Initialize()
 	m_DeviceContext->OMSetRenderTargets(1, &m_RenderTargetView, m_DepthStencilView); // レンダーターゲットとデプスステンシルビューを設定
 
 	// ビューポート設定
-	m_BackBufferViewport.Width  = (FLOAT)Application::GetGameWidth();   // ビューポートの幅
-	m_BackBufferViewport.Height = (FLOAT)Application::GetGameHeight();  // ビューポートの高さ
+	m_BackBufferViewport.Width  = (FLOAT)Application::GetWidth();   // ビューポートの幅
+	m_BackBufferViewport.Height = (FLOAT)Application::GetHeight();  // ビューポートの高さ
 	m_BackBufferViewport.MinDepth = 0.0f;								// 深度範囲の最小値
 	m_BackBufferViewport.MaxDepth = 1.0f;								// 深度範囲の最大値
 	m_BackBufferViewport.TopLeftX = 0;									// ビューポートの左上隅のX座標
@@ -108,12 +108,12 @@ void Renderer::Initialize()
 
 #ifdef _DEBUG
 	m_DebugGameTarget = std::make_unique<RenderTarget>();
-	m_DebugGameTarget->Create(m_Device, Application::GetGameWidth(), Application::GetGameHeight(), true);
+	m_DebugGameTarget->Create(m_Device, Application::GetWidth(), Application::GetHeight(), true);
 
-	const float aspect = static_cast<float>(Application::GetGameWidth()) / static_cast<float>(Application::GetGameHeight());
+	const float aspect = static_cast<float>(Application::GetWidth()) / static_cast<float>(Application::GetHeight());
 	const float maxPreviewWidth  = static_cast<float>(Application::GetWidth())  * 0.8f;
 	const float maxPreviewHeight = static_cast<float>(Application::GetHeight()) * 0.8f;
-	float previewWidth = min(static_cast<float>(Application::GetGameWidth()), maxPreviewWidth);
+	float previewWidth = min(static_cast<float>(Application::GetWidth()), maxPreviewWidth);
 	float previewHeight = previewWidth / aspect;
 	if (previewHeight > maxPreviewHeight) {
 		previewHeight = maxPreviewHeight;
@@ -436,9 +436,9 @@ void Renderer::SetWorldViewProjection2D()
 	// 2D描画を左上原点にする
 	Matrix projection = DirectX::XMMatrixOrthographicOffCenterLH(
 		0.0f,
-		static_cast<float>(Application::GetGameWidth()),	// ビューボリュームの最小Ｘ
-		static_cast<float>(Application::GetGameHeight()),	// ビューボリュームの最小Ｙ
-		0.0f,												// ビューボリュームの最大Ｙ
+		static_cast<float>(Application::GetWidth()),	// ビューボリュームの最小Ｘ
+		static_cast<float>(Application::GetHeight()),	// ビューボリュームの最小Ｙ
+		0.0f,											// ビューボリュームの最大Ｙ
 		0.0f,
 		1.0f);
 
@@ -553,8 +553,8 @@ D3D11_VIEWPORT Renderer::GetRenderTargetView(void)
 	if (count == 0) {
 		viewport.TopLeftX = 0.0f;
 		viewport.TopLeftY = 0.0f;
-		viewport.Width = static_cast<FLOAT> (Application::GetGameWidth());
-		viewport.Height = static_cast<FLOAT>(Application::GetGameHeight());
+		viewport.Width = static_cast<FLOAT> (Application::GetWidth());
+		viewport.Height = static_cast<FLOAT>(Application::GetHeight());
 		viewport.MinDepth = 0.0f;
 		viewport.MaxDepth = 1.0f;
 	}
@@ -569,8 +569,8 @@ D3D11_VIEWPORT Renderer::GetViewport()
 	m_DeviceContext->RSGetViewports(&count, &vp);
 	if (count == 0) {
 		vp.TopLeftX = 0.0f; vp.TopLeftY = 0.0f;
-		vp.Width =  (FLOAT)Application::GetGameWidth();
-		vp.Height = (FLOAT)Application::GetGameHeight();
+		vp.Width =  (FLOAT)Application::GetWidth();
+		vp.Height = (FLOAT)Application::GetHeight();
 		vp.MinDepth = 0.0f; vp.MaxDepth = 1.0f;
 	}
 	return vp;
