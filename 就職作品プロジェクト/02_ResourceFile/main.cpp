@@ -7,9 +7,6 @@
 
 int main(void)
 {
-#ifdef _DEBUG
-
-#endif
 
 	// アプリケーション実行
 	Application app(SCREEN_WIDTH, SCREEN_HEIGHT);

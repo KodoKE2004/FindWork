@@ -110,13 +110,6 @@ void Game::Initialize()
 	instance.m_ShaderManager->Add("VS_Alpha"  ,ShaderStage::VS);
 	instance.m_ShaderManager->Add("PS_Alpha"  ,ShaderStage::PS);
 
-#ifdef _DEBUG
-
-	instance.m_ShaderManager->Add("VS_DebugGrid" , ShaderStage::VS);
-	instance.m_Grid.Initialize();
-
-#endif // _DEBUG
-
 	instance.m_SceneCurrent = std::make_shared<TitleScene>();				// タイトルシーンのインスタンスを生成
 	instance.m_SceneCurrent->Initialize();
 }
@@ -131,7 +124,7 @@ void Game::Update(float tick)
     float mouseDiffX = mousePos.x - instance.m_PreviewMousePos.x;
     float mouseDiffY = mousePos.y - instance.m_PreviewMousePos.y;
 	if (mouseDiffX != 0 || mouseDiffY != 0) {
-		// std::cout << "Mouse X:" << mousePos.x << "\t Y:" << mousePos.y << std::endl;
+		std::cout << "Mouse X:" << mousePos.x << "\t Y:" << mousePos.y << std::endl;
 	}
 	instance.m_PreviewMousePos = mousePos;
 #endif
@@ -181,15 +174,6 @@ void Game::Draw()
 		o->Draw();
 	}
 
-#ifdef _DEBUG
-	// Theme/Transition描画前に状態を既定化して、State破壊やScissor設定の影響を排除する
-	Renderer::ResetForFullscreenPass(Renderer::GetDeviceContext(),
-									 static_cast<UINT>(Renderer::GetScreenWidth()),
-									 static_cast<UINT>(Renderer::GetScreenHeight()));
-
-	Renderer::PresentDebugGameView();
-#endif
-
 	if (instance.m_TransitionTexture != nullptr) {
 		instance.m_TransitionTexture->Draw();
 	}
@@ -206,10 +190,6 @@ void Game::Finalize()
 {
 	auto& instance = GetInstance();
 	FinalizeTransitionCSV();
-
-#ifdef _DEBUG
-	instance.m_Grid.Finalize();
-#endif //_DEBUG
 
 	DebugUI::DisposeUI();		// デバッグUIの終了処理
 	instance.DeleteAllObject();	//オブジェクトを全て削除

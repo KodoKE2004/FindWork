@@ -14,10 +14,6 @@ void SelectScene::Initialize()
 
 	DebugUI::TEXT_CurrentScene = "SelectScene";
     TextureManager* textureMgr = instance;
-
-#ifdef _DEBUG
-	instance.m_Grid.SetEnabled(true);
-#endif
 	
     m_Skydome = instance.AddObject<Skydome>();
     m_Skydome->SetName("m_SkyDome");
@@ -63,21 +59,14 @@ void SelectScene::Update(float tick)
 	if (Input::GetKeyTrigger(VK_RETURN)) 
 	{
 		ChangeScenePush<GameSceneWait>(TitleToWait);
-	}
-
-	
-
-	
-	
+	}	
 
 }
 
 void SelectScene::Finalize()
 {
     auto& instance = Game::GetInstance();
-#ifdef _DEBUG
-	instance.m_Grid.SetEnabled(false);
-#endif
+
 	// このシーンのオブジェクトを削除する
 	for (auto obj : m_MySceneObjects) {
 		instance.DeleteObject(obj);

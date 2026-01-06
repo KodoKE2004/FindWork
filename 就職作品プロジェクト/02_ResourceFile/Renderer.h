@@ -109,7 +109,6 @@ public:
 
 	static void Finish();
 
-	static void PresentDebugGameView();
 	//---------------------------------
 	//	 セッターとシングルトンパターンの実装
 	//---------------------------------
@@ -163,7 +162,6 @@ private:
 	static IDXGISwapChain*			 m_SwapChain		 ;	// スワップチェーン
 	static ID3D11RenderTargetView*	 m_RenderTargetView	 ;	// レンダーターゲットビュー
 	static ID3D11DepthStencilView*	 m_DepthStencilView	 ;	// 深度ステンシルビュー
-	static ID3D11ShaderResourceView* m_ShaderResourceView;	// シェーダーリソースビュー
     static D3D11_VIEWPORT			m_BackBufferViewport ;	// バックバッファのビューポート
 
 #ifdef _DEBUG

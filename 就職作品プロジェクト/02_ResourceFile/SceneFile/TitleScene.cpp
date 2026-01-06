@@ -26,9 +26,6 @@ void TitleScene::Initialize()
 	m_RelationData.previousScene = SCENE_NO::TITLE;
     m_RelationData.gameLife = 4;
 
-#ifdef _DEBUG
-	instance.m_Grid.SetEnabled(true);
-#endif
 	// タイマー初期化
 	m_DurationPressEnter = 0.0f;
 	
@@ -178,9 +175,6 @@ void TitleScene::Update(float tick)
 void TitleScene::Finalize()
 {
 	auto& instance = Game::GetInstance();
-#ifdef _DEBUG
-	instance.m_Grid.SetEnabled(false);
-#endif
 
 	// このシーンのオブジェクトを削除する
 	for (auto o : m_MySceneObjects) {

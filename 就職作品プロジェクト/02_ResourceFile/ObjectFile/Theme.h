@@ -42,9 +42,9 @@ public:
     // Debug時だけ、描画直前に Position/Scale を倍率＋オフセット補正する
     void SetDebugViewAdjust(bool enable, float scaleMul, const NVector3& posOffset)
     {
-        m_DebugViewAdjustEnabled = enable;
-        m_DebugViewScaleMul = scaleMul;
-        m_DebugViewPosOffset = posOffset;
+//        m_DebugViewAdjustEnabled = enable;
+//        m_DebugViewScaleMul = scaleMul;
+//        m_DebugViewPosOffset = posOffset;
     }
 #else
     void SetDebugViewAdjust(bool, float, const NVector3&) {}

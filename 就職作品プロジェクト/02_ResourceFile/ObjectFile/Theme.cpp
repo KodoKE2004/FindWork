@@ -70,26 +70,8 @@ void Theme::Draw()
         return;
     }
 
-#ifdef _DEBUG
-    // Draw中だけ補正を掛けてすぐ戻す（状態を残さない）
-    const auto prevPos   = m_Position; // Square/Object 側のメンバ想定
-    const auto prevScale = m_Scale;
-
-    if (m_DebugViewAdjustEnabled) {
-        // アニメーション等の“現在値”に対して倍率+オフセット
-        m_Position = (m_Position * m_DebugViewScaleMul) + m_DebugViewPosOffset;
-        m_Scale = (m_Scale * m_DebugViewScaleMul);
-    }
-#endif
-
     Square::Draw();
 
-#ifdef _DEBUG
-    if (m_DebugViewAdjustEnabled) {
-        m_Position = prevPos;
-        m_Scale    = prevScale;
-    }
-#endif
 }
 
 void Theme::Finalize()

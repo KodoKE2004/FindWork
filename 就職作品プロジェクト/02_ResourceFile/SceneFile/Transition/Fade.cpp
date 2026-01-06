@@ -92,10 +92,6 @@ void Fade::Draw()
         return;
     }
 
-#ifdef _DEBUG
-    TransitionBase::ScopedDebugViewAdjust _dbg(*this);
-#endif
-
     Renderer::SetDepthEnable(false);
     Renderer::SetBlendState(BS_ALPHABLEND);
 

@@ -131,9 +131,6 @@ void GameSceneExe::Update(float tick)
 void GameSceneExe::Finalize()
 {
     auto& instance = Game::GetInstance();
-#ifdef _DEBUG
-    instance.m_Grid.SetEnabled(false);
-#endif
 
     // このシーンのオブジェクトを削除する
     for (auto o : m_MySceneObjects) {

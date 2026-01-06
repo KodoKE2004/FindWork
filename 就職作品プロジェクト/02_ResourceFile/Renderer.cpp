@@ -14,7 +14,6 @@ ID3D11DeviceContext*			Renderer::m_DeviceContext;		// デバイスコンテキ�
 IDXGISwapChain*					Renderer::m_SwapChain;			// スワップチェーン
 ID3D11RenderTargetView*			Renderer::m_RenderTargetView;	// レンダーターゲットビュー
 ID3D11DepthStencilView*			Renderer::m_DepthStencilView;	// 深度ステンシルビュー
-ID3D11ShaderResourceView*		Renderer::m_ShaderResourceView;	// シェーダーリソースビュー
 
 D3D11_VIEWPORT                              Renderer::m_BackBufferViewport;
 
@@ -67,8 +66,8 @@ void Renderer::Initialize()
 	hr = m_SwapChain->GetBuffer(0, __uuidof(ID3D11Texture2D), (void**)&rt);
 	if (SUCCEEDED(hr) && rt) {
 		hr = m_Device->CreateRenderTargetView(rt, nullptr, &m_RenderTargetView); 
-		hr = m_Device->CreateShaderResourceView(rt, nullptr, &m_ShaderResourceView); 
 	}
+
 	if (rt) rt->Release();
 	if (FAILED(hr)) return;
 
@@ -107,29 +106,6 @@ void Renderer::Initialize()
 	m_BackBufferViewport.TopLeftX = 0;									// ビューポートの左上隅のX座標
 	m_BackBufferViewport.TopLeftY = 0;									// ビューポートの左上隅のY座標）
 	m_DeviceContext->RSSetViewports(1, &m_BackBufferViewport);
-
-#ifdef _DEBUG
-	m_DebugGameTarget = std::make_unique<RenderTarget>();
-	m_DebugGameTarget->Create(m_Device, Application::GetWidth(), Application::GetHeight(), true);
-
-	const float aspect = static_cast<float>(Application::GetWidth()) / static_cast<float>(Application::GetHeight());
-	const float maxPreviewWidth  = static_cast<float>(Application::GetWidth())  * 0.8f;
-	const float maxPreviewHeight = static_cast<float>(Application::GetHeight()) * 0.8f;
-	float previewWidth = min(static_cast<float>(Application::GetWidth()), maxPreviewWidth);
-	float previewHeight = previewWidth / aspect;
-	if (previewHeight > maxPreviewHeight) {
-		previewHeight = maxPreviewHeight;
-		previewWidth = previewHeight * aspect;
-	}
-
-
-	m_DebugPresentViewport.TopLeftX = 0.0f;
-	m_DebugPresentViewport.TopLeftY = 0.0f;
-	m_DebugPresentViewport.Width  = previewWidth;
-	m_DebugPresentViewport.Height = previewHeight;
-	m_DebugPresentViewport.MinDepth = 0.0f;
-	m_DebugPresentViewport.MaxDepth = 1.0f;
-#endif
 
 	// ラスタライザステート設定
 	D3D11_RASTERIZER_DESC rasterizerDesc{};
@@ -318,12 +294,6 @@ void Renderer::Start()
     // バックバッファのクリア
 	float clearColor[4] = { 0.5f, 0.5f, 0.5f, 1.0f };
 
-#ifdef _DEBUG
-	if (m_DebugGameTarget) {
-		m_DebugGameTarget->Begin(m_DeviceContext, clearColor);
-		return;
-	}
-#endif
 	ID3D11RenderTargetView* rtvs[] = { m_RenderTargetView };
 	m_DeviceContext->OMSetRenderTargets(1, rtvs, m_DepthStencilView);
 	m_DeviceContext->RSSetViewports(1, &m_BackBufferViewport);
@@ -345,24 +315,6 @@ void Renderer::Finish()
 		debugDev->ReportLiveDeviceObjects(D3D11_RLDO_DETAIL);
 		debugDev->Release();
 	}
-#endif
-}
-
-void Renderer::PresentDebugGameView()
-{
-#ifdef _DEBUG
-	if (!m_DebugGameTarget) { return; }
-
-	ID3D11RenderTargetView* rtvs[] = { m_RenderTargetView };
-	m_DeviceContext->OMSetRenderTargets(1, rtvs, nullptr);
-	m_DeviceContext->RSSetViewports(1, &m_BackBufferViewport);
-
-	const float background[4] = { 0.0f, 0.0f, 0.5f, 1.0f };
-	m_DeviceContext->ClearRenderTargetView(m_RenderTargetView, background);
-
-	m_DeviceContext->RSSetViewports(1, &m_DebugPresentViewport);
-	BlitSRVToBackbuffer(m_DebugGameTarget->GetSRV());
-	m_DeviceContext->RSSetViewports(1, &m_BackBufferViewport);
 #endif
 }
 

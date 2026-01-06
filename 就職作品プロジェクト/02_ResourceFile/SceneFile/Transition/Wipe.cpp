@@ -83,10 +83,6 @@ void Wipe::Draw()
         return;
     }
 
-#ifdef _DEBUG
-    TransitionBase::ScopedDebugViewAdjust _dbg(*this);
-#endif
-
     if (auto* srv = GetTextureSRV())
     {
         if (m_Phase == TRANS_PHASE::FINISH)
@@ -236,31 +232,12 @@ void Wipe::SetTransMode(TRANS_MODE transMode)
 
 void Wipe::CheckPointSetting()
 {
-
-    float posX,posY;
-    float _DebugMass = 1.0f;
-    // デバッグ中はレンダーターゲットのサイズと位置が変わるのでそれを考慮
-#ifdef _DEBUG
-    _DebugMass = 0.8f;
-#endif
-    
     // 定数設定
-    const float width  = static_cast<float>(Application::GetWidth()) ;
-    const float height = static_cast<float>(Application::GetHeight());
-
-    const float widthHalf  = width  * 0.5f;
-    const float heightHalf = height * 0.5f;
-
-    // 実行画面の原点(0,0)を計算
-    posX = - (width  - (width  * _DebugMass)) * 0.5f;
-    posY =   (height - (height * _DebugMass)) * 0.5f;
+    const float widthHalf  = static_cast<float>(Application::GetWidth())  * 0.5f;
+    const float heightHalf = static_cast<float>(Application::GetHeight()) * 0.5f;
 
     // 中間地点は原点
-    m_CheckPoint = NVector3(posX, posY ,0.0f);
-
-    // レンダーターゲットの端までの距離 (絶対値)
-    float defX = widthHalf  - abs(posX);
-    float defY = heightHalf - abs(posY);
+    m_CheckPoint = NVector3(0.0f, 0.0f ,0.0f);
 
     float massX,massY;
     massX = 1.0f;
@@ -273,21 +250,15 @@ void Wipe::CheckPointSetting()
     case TRANS_MODE::WIPE_BOTTOM_TO_TOP: massX =   0.0f; massY = - 1.0f; break;
     }
 
-    float offsetX = defX;
-    float offsetY = defY;
-
-    NVector3 scale = GetScale() * _DebugMass;
-    SetScale(scale);
-
     NVector3 startPos;
-    startPos.x = (posX + offsetX * massX) + (scale.x * 0.5f * massX);
-    startPos.y = (posY + offsetY * massY) + (scale.y * 0.5f * massY);
+    startPos.x = (widthHalf  * massX) + (GetScale().x * 0.5f * massX);
+    startPos.y = (heightHalf * massY) + (GetScale().y * 0.5f * massY);
     startPos.z = GetPos().z;
 
     NVector3 endPos;
-    endPos.x = (posX - offsetX * massX) - (scale.x * 0.5f * massX);
-    endPos.y = (posY - offsetY * massY) - (scale.y * 0.5f * massY);
-    endPos.z = GetPos().z;
+    endPos.x = - startPos.x ;
+    endPos.y = - startPos.y ;
+    endPos.z =   startPos.z ;
     
     m_StartPos = NVector3(startPos);
     m_EndPos   = NVector3(endPos)  ;

@@ -97,8 +97,6 @@ public:
 	[[nodiscard]] operator ShaderManager*  () const { return m_ShaderManager.get(); }
 	[[nodiscard]] operator AudioManager*   () const { return m_AudioManager.get();	}
 
-	// Debug関連
-	DebugGridLine m_Grid;
 	static void RegistDebugObject();
 	static void RegistDebugFunction(){}
 
