@@ -158,13 +158,13 @@ public:
 private:
 	static D3D_FEATURE_LEVEL				m_FeatureLevel;			// Direct3Dの機能レベル
 
-	static ID3D11Device*			m_Device			;	// Direct3Dデバイス
-	static ID3D11DeviceContext*		m_DeviceContext		;	// デバイスコンテキスト
-	static IDXGISwapChain*			m_SwapChain			;	// スワップチェーン
-	static ID3D11RenderTargetView*	m_RenderTargetView	;	// レンダーターゲットビュー
-	static ID3D11DepthStencilView*	m_DepthStencilView	;	// 深度ステンシルビュー
-
-    static D3D11_VIEWPORT			m_BackBufferViewport;	// バックバッファのビューポート
+	static ID3D11Device*			 m_Device			 ;	// Direct3Dデバイス
+	static ID3D11DeviceContext*		 m_DeviceContext	 ;	// デバイスコンテキスト
+	static IDXGISwapChain*			 m_SwapChain		 ;	// スワップチェーン
+	static ID3D11RenderTargetView*	 m_RenderTargetView	 ;	// レンダーターゲットビュー
+	static ID3D11DepthStencilView*	 m_DepthStencilView	 ;	// 深度ステンシルビュー
+	static ID3D11ShaderResourceView* m_ShaderResourceView;	// シェーダーリソースビュー
+    static D3D11_VIEWPORT			m_BackBufferViewport ;	// バックバッファのビューポート
 
 #ifdef _DEBUG
 	static std::unique_ptr<RenderTarget> m_DebugGameTarget;		    // デバッグ用ゲーム画面レンダーターゲット

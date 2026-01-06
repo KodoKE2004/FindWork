@@ -14,6 +14,7 @@ ID3D11DeviceContext*			Renderer::m_DeviceContext;		// デバイスコンテキ�
 IDXGISwapChain*					Renderer::m_SwapChain;			// スワップチェーン
 ID3D11RenderTargetView*			Renderer::m_RenderTargetView;	// レンダーターゲットビュー
 ID3D11DepthStencilView*			Renderer::m_DepthStencilView;	// 深度ステンシルビュー
+ID3D11ShaderResourceView*		Renderer::m_ShaderResourceView;	// シェーダーリソースビュー
 
 D3D11_VIEWPORT                              Renderer::m_BackBufferViewport;
 
@@ -65,7 +66,8 @@ void Renderer::Initialize()
 	ID3D11Texture2D* rt = nullptr;
 	hr = m_SwapChain->GetBuffer(0, __uuidof(ID3D11Texture2D), (void**)&rt);
 	if (SUCCEEDED(hr) && rt) {
-		hr = m_Device->CreateRenderTargetView(rt, nullptr, &m_RenderTargetView);
+		hr = m_Device->CreateRenderTargetView(rt, nullptr, &m_RenderTargetView); 
+		hr = m_Device->CreateShaderResourceView(rt, nullptr, &m_ShaderResourceView); 
 	}
 	if (rt) rt->Release();
 	if (FAILED(hr)) return;
