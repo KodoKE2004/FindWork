@@ -182,7 +182,11 @@ void Game::Draw()
 		instance.m_Theme->Draw();
 	}
 
-	DebugUI::Render();
+	Renderer::EndGameRender();
+#ifdef _DEBUG
+	Renderer::ClearBackBuffer();
+#endif
+	DebugUI::Render(Renderer::GetGameRenderSRV(), ImVec2(static_cast<float>(Application::GetWidth()), static_cast<float>(Application::GetHeight())));
 	Renderer::Finish();
 }
 

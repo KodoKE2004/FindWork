@@ -4,6 +4,14 @@
 std::vector<std::function<void(void)>> DebugUI::m_debugfunction;
 std::string DebugUI::TEXT_CurrentScene = "TitleScene" ;
 
+namespace {
+    ImVec2 s_GameViewMin{};
+    ImVec2 s_GameViewMax{};
+    ImVec2 s_GameRenderSize{};
+    bool s_HasGameViewRect = false;
+    float s_GameViewScale = 0.5f;
+}
+
 void DebugUI::Init(ID3D11Device* device, ID3D11DeviceContext* context) 
 {
 #ifdef _DEBUG
@@ -35,24 +43,60 @@ void DebugUI::DisposeUI() {
 #endif // _DEBUG
 }
 
-// ƒfƒoƒbƒO•\¦ŠÖ”‚Ì“o˜^
-void DebugUI::RedistDebugFunction(std::function<void(void)> f) {
+void DebugUI::Render(ID3D11ShaderResourceView* gameSrv, const ImVec2& gameSize) {
+    s_HasGameViewRect = false;
+    s_GameRenderSize = gameSize;
+    // ImGuiï¿½ÌVï¿½ï¿½ï¿½ï¿½ï¿½tï¿½ï¿½ï¿½[ï¿½ï¿½ï¿½ï¿½ï¿½Jï¿½n
+    if (gameSrv)
+    {
+        ImGui::Begin("Game View");
+        ImGui::SliderFloat("Scale", &s_GameViewScale, 0.1f, 1.0f, "%.2f");
+        ImVec2 displaySize(gameSize.x * s_GameViewScale, gameSize.y * s_GameViewScale);
+        ImGui::Image((ImTextureID)gameSrv, displaySize);
+        s_GameViewMin = ImGui::GetItemRectMin();
+        s_GameViewMax = ImGui::GetItemRectMax();
+        s_HasGameViewRect = true;
+        ImGui::End();
+    }
+
+    // ï¿½Eï¿½Bï¿½ï¿½ï¿½hï¿½Eï¿½Æƒfï¿½oï¿½bï¿½Oï¿½ï¿½ï¿½Ì•`ï¿½ï¿½
+
+    // ï¿½fï¿½oï¿½bï¿½Oï¿½Öï¿½ï¿½Ìï¿½ï¿½s
+
+    // ï¿½tï¿½ï¿½ï¿½[ï¿½ï¿½ï¿½Ìƒï¿½ï¿½ï¿½ï¿½_ï¿½ï¿½ï¿½ï¿½ï¿½Oï¿½ï¿½ï¿½ï¿½ï¿½ï¿½
+}
+
+bool DebugUI::GetGameViewRect(ImVec2& outMin, ImVec2& outMax)
+{
 #ifdef _DEBUG
+    if (!s_HasGameViewRect)
+    {
+        return false;
+    }
+    outMin = s_GameViewMin;
+    outMax = s_GameViewMax;
+    return true;
+#else
+    (void)outMin;
+    (void)outMax;
+    return false;
+#endif
+}
 
-    m_debugfunction.push_back(std::move(f));
-
-#endif // _DEBUG
+ImVec2 DebugUI::GetGameRenderSize()
+{
+    return s_GameRenderSize;
 }
 
 void DebugUI::Render() {
 #ifdef _DEBUG
 
-    // ImGui‚ÌV‚µ‚¢ƒtƒŒ[ƒ€‚ğŠJn
+    // ImGuiã®æ–°ã—ã„ãƒ•ãƒ¬ãƒ¼ãƒ ã‚’é–‹å§‹
     ImGui_ImplDX11_NewFrame();
     ImGui_ImplWin32_NewFrame();
     ImGui::NewFrame();
 
-    // ƒEƒBƒ“ƒhƒE‚ÆƒfƒoƒbƒOî•ñ‚Ì•`‰æ
+    // ã‚¦ã‚£ãƒ³ãƒ‰ã‚¦ã¨ãƒ‡ãƒãƒƒã‚°æƒ…å ±ã®æç”»
     const char* text = TEXT_CurrentScene.c_str();
     ImGui::Begin(text);
     ImGuiIO& io = ImGui::GetIO();
@@ -77,13 +121,13 @@ void DebugUI::Render() {
 
     ImGui::End();
 
-    // ƒfƒoƒbƒOŠÖ”‚ÌÀs
+    // ãƒ‡ãƒãƒƒã‚°é–¢æ•°ã®å®Ÿè¡Œ
     for (auto& f : m_debugfunction)
     {
         f();
     }
 
-    // ƒtƒŒ[ƒ€‚ÌƒŒƒ“ƒ_ƒŠƒ“ƒO‚ğŠ®—¹
+    // ãƒ•ãƒ¬ãƒ¼ãƒ ã®ãƒ¬ãƒ³ãƒ€ãƒªãƒ³ã‚°ã‚’å®Œäº†
     ImGui::Render();
     ImGui_ImplDX11_RenderDrawData(ImGui::GetDrawData());
 #endif // _DEBUG

@@ -1,6 +1,10 @@
 #include "input.h"
 #include "Application.h"
 #include "Renderer.h"
+#ifdef _DEBUG
+#include "DebugUI.h"
+#include "imgui.h"
+#endif
 
 POINT Input::m_MousePos = {};
 POINT Input::m_MouseDelta = {};
@@ -20,28 +24,76 @@ static bool IsDownAsync(int key)
 }
 
 
-//ƒRƒ“ƒXƒgƒ‰ƒNƒ^
-Input::Input()
-{
-	
-}
+	bool usedImGuiPos = false;
+	bool ignoreMouseInput = false;
+#ifdef _DEBUG
+	ImVec2 imageMin{};
+	ImVec2 imageMax{};
+	if (DebugUI::GetGameViewRect(imageMin, imageMax))
+	{
+		const ImVec2 gameSize = DebugUI::GetGameRenderSize();
+		const ImVec2 mousePos = ImGui::GetMousePos();
+		const ImVec2 displaySize(imageMax.x - imageMin.x, imageMax.y - imageMin.y);
+		const bool inBounds = mousePos.x >= imageMin.x && mousePos.y >= imageMin.y &&
+			mousePos.x <= imageMax.x && mousePos.y <= imageMax.y;
+		if (inBounds && displaySize.x > 0.0f && displaySize.y > 0.0f &&
+			gameSize.x > 0.0f && gameSize.y > 0.0f)
+		{
+			const float localX = mousePos.x - imageMin.x;
+			const float localY = mousePos.y - imageMin.y;
+			const float uvx = localX / displaySize.x;
+			const float uvy = localY / displaySize.y;
+			const float gameX = uvx * gameSize.x;
+			const float gameY = uvy * gameSize.y;
 
-//ƒfƒXƒgƒ‰ƒNƒ^
-Input::~Input()
-{
-	//U“®‚ğI—¹‚³‚¹‚é
-	XINPUT_VIBRATION vibration;
-	ZeroMemory(&vibration, sizeof(XINPUT_VIBRATION));
-	vibration.wLeftMotorSpeed = 0;
+			m_MousePos.x = static_cast<LONG>(gameX - gameSize.x * 0.5f);
+			m_MousePos.y = static_cast<LONG>(-gameY + gameSize.y * 0.5f);
+			m_MouseDelta.x = m_MousePos.x - prevPos.x;
+			m_MouseDelta.y = m_MousePos.y - prevPos.y;
+			usedImGuiPos = true;
+		else if (!inBounds)
+		{
+			m_MousePos = prevPos;
+			m_MouseDelta.x = 0;
+			m_MouseDelta.y = 0;
+			usedImGuiPos = true;
+			ignoreMouseInput = true;
+		}
+	}
+#endif
+	if (!usedImGuiPos) {
+		if (GetCursorPos(&currentPos)) {
+			if (hWnd != nullptr) {
+				ScreenToClient(hWnd, &currentPos);
+			}
+			m_MousePos = currentPos;
+			m_MousePos.x -= static_cast<LONG>(Application::GetWidth() * 0.5f);
+			m_MousePos.y  = - m_MousePos.y + static_cast<LONG>(Application::GetHeight() * 0.5f);
+			m_MouseDelta.x = m_MousePos.x - prevPos.x;
+			m_MouseDelta.y = m_MousePos.y - prevPos.y;
+		}
+		else {
+			m_MouseDelta.x = 0;
+			m_MouseDelta.y = 0;
+		}
+	m_MouseButtons[vkRIGHT]	= (GetAsyncKeyState(VK_RBUTTON)  & 0x8000) != 0;
+	if (ignoreMouseInput)
+	{
+		for (int i = 0; i < 5; ++i)
+		{
+			m_MouseButtons[i] = false;
+			m_MouseButtonsOld[i] = false;
+		}
+	}
 	vibration.wRightMotorSpeed = 0;
 	XInputSetState(0, &vibration);
 }
 
 void Input::Update(HWND hWnd)
 {
-	//1ƒtƒŒ[ƒ€‘O‚Ì“ü—Í‚ğ‹L˜^‚µ‚Ä‚¨‚­
-	for (int i = 0; i < 256; i++) { keyState_old[i] = keyState[i]; }	// ƒL[
-    controllerState_old = controllerState;								// ƒRƒ“ƒgƒ[ƒ‰[
+	//1ãƒ•ãƒ¬ãƒ¼ãƒ å‰ã®å…¥åŠ›ã‚’è¨˜éŒ²ã—ã¦ãŠã
+	for (int i = 0; i < 256; i++) { keyState_old[i] = keyState[i]; }	// ã‚­ãƒ¼
+    controllerState_old = controllerState;								// ã‚³ãƒ³ãƒˆãƒ­ãƒ¼ãƒ©ãƒ¼
 
     for(int i = 0; i < 5; ++i) {
 		m_MouseButtonsOld[i] = m_MouseButtons[i];
@@ -76,13 +128,13 @@ void Input::Update(HWND hWnd)
 	m_MouseButtons[vkXBUTTON2]	= (GetAsyncKeyState(VK_XBUTTON2) & 0x8000) != 0;
 	m_MouseWheel = 0;
 
-	//ƒRƒ“ƒgƒ[ƒ‰[“ü—Í‚ğXV(XInput)
+	//ã‚³ãƒ³ãƒˆãƒ­ãƒ¼ãƒ©ãƒ¼å…¥åŠ›ã‚’æ›´æ–°(XInput)
 	XInputGetState(0, &controllerState);
 
-	//U“®Œp‘±ŠÔ‚ğƒJƒEƒ“ƒg
+	//æŒ¯å‹•ç¶™ç¶šæ™‚é–“ã‚’ã‚«ã‚¦ãƒ³ãƒˆ
 	if (VibrationTime > 0) {
 		VibrationTime--;
-		if (VibrationTime == 0) { //U“®Œp‘±ŠÔ‚ªŒo‚Á‚½‚ÉU“®‚ğ~‚ß‚é
+		if (VibrationTime == 0) { //æŒ¯å‹•ç¶™ç¶šæ™‚é–“ãŒçµŒã£ãŸæ™‚ã«æŒ¯å‹•ã‚’æ­¢ã‚ã‚‹
 			XINPUT_VIBRATION vibration;
 			ZeroMemory(&vibration, sizeof(XINPUT_VIBRATION));
 			vibration.wLeftMotorSpeed  = 0;
@@ -127,85 +179,85 @@ int Input::GetWheel()
 }
 
 
-//ƒL[“ü—Í
-bool Input::GetKeyPress(int key) //ƒvƒŒƒX
+//ã‚­ãƒ¼å…¥åŠ›
+bool Input::GetKeyPress(int key) //ãƒ—ãƒ¬ã‚¹
 {
 	return keyState[key] & 0x80;
 }
-bool Input::GetKeyTrigger(int key) //ƒgƒŠƒK[
+bool Input::GetKeyTrigger(int key) //ãƒˆãƒªã‚¬ãƒ¼
 {
 	return (keyState[key] & 0x80) && !(keyState_old[key] & 0x80);
 }
-bool Input::GetKeyRelease(int key) //ƒŠƒŠ[ƒX
+bool Input::GetKeyRelease(int key) //ãƒªãƒªãƒ¼ã‚¹
 {
 	return !(keyState[key] & 0x80) && (keyState_old[key] & 0x80);
 }
 
-//¶ƒAƒiƒƒOƒXƒeƒBƒbƒN
+//å·¦ã‚¢ãƒŠãƒ­ã‚°ã‚¹ãƒ†ã‚£ãƒƒã‚¯
 DirectX::SimpleMath::Vector2 Input::GetLeftAnalogStick(void)
 {
-	SHORT x = controllerState.Gamepad.sThumbLX; // -32768`32767
-	SHORT y = controllerState.Gamepad.sThumbLY; // -32768`32767
+	SHORT x = controllerState.Gamepad.sThumbLX; // -32768ï½32767
+	SHORT y = controllerState.Gamepad.sThumbLY; // -32768ï½32767
 
 	DirectX::XMFLOAT2 res;
-	res.x = x / 32767.0f; //-1`1
-	res.y = y / 32767.0f; //-1`1
+	res.x = x / 32767.0f; //-1ï½1
+	res.y = y / 32767.0f; //-1ï½1
 	return res;
 }
 
-//‰EƒAƒiƒƒOƒXƒeƒBƒbƒN
+//å³ã‚¢ãƒŠãƒ­ã‚°ã‚¹ãƒ†ã‚£ãƒƒã‚¯
 DirectX::SimpleMath::Vector2 Input::GetRightAnalogStick(void)
 {
-	SHORT x = controllerState.Gamepad.sThumbRX; // -32768`32767
-	SHORT y = controllerState.Gamepad.sThumbRY; // -32768`32767
+	SHORT x = controllerState.Gamepad.sThumbRX; // -32768ï½32767
+	SHORT y = controllerState.Gamepad.sThumbRY; // -32768ï½32767
 
 	DirectX::XMFLOAT2 res;
-	res.x = x / 32767.0f; //-1`1
-	res.y = y / 32767.0f; //-1`1
+	res.x = x / 32767.0f; //-1ï½1
+	res.y = y / 32767.0f; //-1ï½1
 	return res;
 }
 
-//¶ƒgƒŠƒK[
+//å·¦ãƒˆãƒªã‚¬ãƒ¼
 float Input::GetLeftTrigger(void)
 {
-	BYTE t = controllerState.Gamepad.bLeftTrigger; // 0`255
+	BYTE t = controllerState.Gamepad.bLeftTrigger; // 0ï½255
 	return t / 255.0f;
 }
 
-//‰EƒgƒŠƒK[
+//å³ãƒˆãƒªã‚¬ãƒ¼
 float Input::GetRightTrigger(void)
 {
-	BYTE t = controllerState.Gamepad.bRightTrigger; // 0`255
+	BYTE t = controllerState.Gamepad.bRightTrigger; // 0ï½255
 	return t / 255.0f;
 }
 
-//ƒ{ƒ^ƒ““ü—Í
-bool Input::GetButtonPress(WORD btn) //ƒvƒŒƒX
+//ãƒœã‚¿ãƒ³å…¥åŠ›
+bool Input::GetButtonPress(WORD btn) //ãƒ—ãƒ¬ã‚¹
 {
 	return (controllerState.Gamepad.wButtons & btn) != 0;
 }
-bool Input::GetButtonTrigger(WORD btn) //ƒgƒŠƒK[
+bool Input::GetButtonTrigger(WORD btn) //ãƒˆãƒªã‚¬ãƒ¼
 {
 	return (controllerState.Gamepad.wButtons & btn) != 0 && (controllerState_old.Gamepad.wButtons & btn) == 0;
 }
-bool Input::GetButtonRelease(WORD btn) //ƒŠƒŠ[ƒX
+bool Input::GetButtonRelease(WORD btn) //ãƒªãƒªãƒ¼ã‚¹
 {
 	return (controllerState.Gamepad.wButtons & btn) == 0 && (controllerState_old.Gamepad.wButtons & btn) != 0;
 }
 
 
-//U“®
+//æŒ¯å‹•
 void Input::SetVibration(int frame, float powor)
 {
-	// XINPUT_VIBRATION\‘¢‘Ì‚ÌƒCƒ“ƒXƒ^ƒ“ƒX‚ğì¬
+	// XINPUT_VIBRATIONæ§‹é€ ä½“ã®ã‚¤ãƒ³ã‚¹ã‚¿ãƒ³ã‚¹ã‚’ä½œæˆ
 	XINPUT_VIBRATION vibration;
 	ZeroMemory(&vibration, sizeof(XINPUT_VIBRATION));
 
-	// ƒ‚[ƒ^[‚Ì‹­“x‚ğİ’èi0`65535j
+	// ãƒ¢ãƒ¼ã‚¿ãƒ¼ã®å¼·åº¦ã‚’è¨­å®šï¼ˆ0ï½65535ï¼‰
 	vibration.wLeftMotorSpeed = (WORD)(powor * 65535.0f);
 	vibration.wRightMotorSpeed = (WORD)(powor * 65535.0f);
 	XInputSetState(0, &vibration);
 
-	//U“®Œp‘±ŠÔ‚ğ‘ã“ü
+	//æŒ¯å‹•ç¶™ç¶šæ™‚é–“ã‚’ä»£å…¥
 	VibrationTime = frame;
 }
