@@ -145,11 +145,11 @@ void Wipe::ApplyWipeAmount(float amount)
     if (m_Phase == TRANS_PHASE::TRANS_IN)
     {
         start = NVector3(m_StartPos.x, m_StartPos.y, depth);
-        end   = NVector3(CheckPoint.x, CheckPoint.y, depth);
+        end   = NVector3(m_CheckPoint.x, m_CheckPoint.y, depth);
     }
     else if (m_Phase == TRANS_PHASE::TRANS_OUT)
     {
-        start = NVector3(CheckPoint.x, CheckPoint.y, depth);
+        start = NVector3(m_CheckPoint.x, m_CheckPoint.y, depth);
         end   = NVector3(m_EndPos.x  , m_EndPos.y, depth);
     }
     NVector3 pos;
@@ -238,20 +238,58 @@ void Wipe::CheckPointSetting()
 {
 
     float posX,posY;
-    posX = static_cast<float>(Application::GetWidth() );
-    posY = static_cast<float>(Application::GetHeight());
+    float _DebugMass = 1.0f;
+    // デバッグ中はレンダーターゲットのサイズと位置が変わるのでそれを考慮
+#ifdef _DEBUG
+    _DebugMass = 0.8f;
+#endif
     
+    // 定数設定
+    const float width  = static_cast<float>(Application::GetWidth()) ;
+    const float height = static_cast<float>(Application::GetHeight());
+
+    const float widthHalf  = width  * 0.5f;
+    const float heightHalf = height * 0.5f;
+
+    // 実行画面の原点(0,0)を計算
+    posX = - (width  - (width  * _DebugMass)) * 0.5f;
+    posY =   (height - (height * _DebugMass)) * 0.5f;
+
+    // 中間地点は原点
+    m_CheckPoint = NVector3(posX, posY ,0.0f);
+
+    // レンダーターゲットの端までの距離 (絶対値)
+    float defX = widthHalf  - abs(posX);
+    float defY = heightHalf - abs(posY);
+
     float massX,massY;
     massX = 1.0f;
     massY = 1.0f;
     switch (m_TransMode)
     {
-    case TRANS_MODE::WIPE_LEFT_TO_RIGHT: massX = - 1.0f; massY = 0.0f; break;
-    case TRANS_MODE::WIPE_RIGHT_TO_LEFT: massX =   1.0f; massY = 0.0f; break;
-    case TRANS_MODE::WIPE_TOP_TO_BOTTOM: massY =   1.0f; massX = 0.0f; break;
-    case TRANS_MODE::WIPE_BOTTOM_TO_TOP: massY = - 1.0f; massX = 0.0f; break;
+    case TRANS_MODE::WIPE_LEFT_TO_RIGHT: massX = - 1.0f; massY =   0.0f; break;
+    case TRANS_MODE::WIPE_RIGHT_TO_LEFT: massX =   1.0f; massY =   0.0f; break;
+    case TRANS_MODE::WIPE_TOP_TO_BOTTOM: massX =   0.0f; massY =   1.0f; break;
+    case TRANS_MODE::WIPE_BOTTOM_TO_TOP: massX =   0.0f; massY = - 1.0f; break;
     }
-    m_StartPos = NVector3(  posX * massX,   posY * massY, GetPos().z);
-    m_EndPos   = NVector3(- m_StartPos.x, - m_StartPos.y, GetPos().z);
+
+    float offsetX = defX;
+    float offsetY = defY;
+
+    NVector3 scale = GetScale() * _DebugMass;
+    SetScale(scale);
+
+    NVector3 startPos;
+    startPos.x = (posX + offsetX * massX) + (scale.x * 0.5f * massX);
+    startPos.y = (posY + offsetY * massY) + (scale.y * 0.5f * massY);
+    startPos.z = GetPos().z;
+
+    NVector3 endPos;
+    endPos.x = (posX - offsetX * massX) - (scale.x * 0.5f * massX);
+    endPos.y = (posY - offsetY * massY) - (scale.y * 0.5f * massY);
+    endPos.z = GetPos().z;
+    
+    m_StartPos = NVector3(startPos);
+    m_EndPos   = NVector3(endPos)  ;
 
 }

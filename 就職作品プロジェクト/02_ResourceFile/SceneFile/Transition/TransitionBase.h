@@ -208,8 +208,8 @@ public:
     void SetDebugViewAdjust(bool enable, float scaleMul, const NVector3& posOffset)
     {
         m_DebugViewAdjustEnabled = enable;
-        m_DebugViewScaleMul = scaleMul;
-        m_DebugViewPosOffset = posOffset;
+        m_DebugViewScaleMul     = scaleMul;
+        m_DebugViewPosOffset    = posOffset;
     }
 #else
     void SetDebugViewAdjust(bool, float, const NVector3&) {}

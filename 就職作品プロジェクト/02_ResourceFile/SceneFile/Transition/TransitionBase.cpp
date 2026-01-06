@@ -437,7 +437,6 @@ void TransitionBase::ApplyPhaseSetting(TRANS_PHASE phase)
 {
 	const auto& param = m_transParam;
 	m_Duration = max(param.duration, 0.0001f);
-	SetTransMode(param.mode);
 	m_Phase = phase;
 }
 
