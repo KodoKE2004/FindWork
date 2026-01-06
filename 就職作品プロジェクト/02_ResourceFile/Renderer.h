@@ -107,6 +107,8 @@ public:
 
 	static void Start();
 
+	static void EndGameRender();
+	static void ClearBackBuffer(const float clearColor[4] = nullptr);
 	static void Finish();
 
 	//---------------------------------
@@ -143,6 +145,7 @@ public:
 	// 追加実装: オフスクリーン連携ヘルパ =====
 	static D3D11_VIEWPORT		   GetViewport();
 	static ID3D11RenderTargetView* GetBackBufferRTV();
+	static ID3D11ShaderResourceView* GetGameRenderSRV();
 	
 	static void BlitSRVToBackbuffer(ID3D11ShaderResourceView* srv, float alpha = 1.0f);
 	static void CreateVertexShader(ID3D11VertexShader** VertexShader, ID3D11InputLayout** VertexLayout, const char* FileName);
@@ -175,8 +178,12 @@ private:
 	static ID3D11BlendState* m_BlendState[MAX_BLENDSTATE];	// ブレンド ステート;
 	static ID3D11BlendState* m_BlendStateATC			 ;	// ブレンド ステート（加算合成）
 	static ID3D11SamplerState* m_DefaultSampler;			// デフォルトサンプラー
+	static std::unique_ptr<RenderTarget> m_GameRenderTarget;
+	static UINT m_GameRenderWidth;
+	static UINT m_GameRenderHeight;
 	
 	inline std::vector<UINT> MakeInstanceIDs(UINT count);
+	static void EnsureGameRenderTarget();
 	inline HRESULT CreateInstanceIDBuffer(const std::vector<UINT>& ids,
 										  ID3D11Buffer** outVB,
 										  D3D11_USAGE usage = D3D11_USAGE_IMMUTABLE,

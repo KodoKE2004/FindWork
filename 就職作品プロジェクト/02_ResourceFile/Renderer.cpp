@@ -253,8 +253,39 @@ void Renderer::Initialize()
 	SetUV(0.0f, 0.0f, 1.0f, 1.0f); // UV行列を初期化
 }
 
+
+void Renderer::EnsureGameRenderTarget()
+{
+    if (!m_Device)
+    {
+        return;
+    }
+
+    const UINT width = Application::GetWidth();
+    const UINT height = Application::GetHeight();
+    if (m_GameRenderTarget && width == m_GameRenderWidth && height == m_GameRenderHeight)
+    {
+        return;
+    }
+
+    m_GameRenderTarget = std::make_unique<RenderTarget>();
+    if (!m_GameRenderTarget->Create(m_Device, width, height, true))
+    {
+        m_GameRenderTarget.reset();
+        m_GameRenderWidth = 0;
+        m_GameRenderHeight = 0;
+        return;
+    }
+
+    m_GameRenderWidth = width;
+    m_GameRenderHeight = height;
+}
+
 void Renderer::Finalize()
 {
+    m_GameRenderTarget.reset();
+    m_GameRenderWidth = 0;
+    m_GameRenderHeight = 0;
 	for (auto& bs : m_BlendState) { if (bs) { bs->Release(); bs = nullptr; } }
 	if (m_BlendStateATC) { m_BlendStateATC->Release(); m_BlendStateATC = nullptr; }
 	if (m_DefaultSampler) { m_DefaultSampler->Release(); m_DefaultSampler = nullptr; }
@@ -281,20 +312,66 @@ void Renderer::Finalize()
 
 void Renderer::Start()
 {
-	if (!m_DeviceContext || !m_RenderTargetView || !m_DepthStencilView) { return; }
+	if (!m_DeviceContext || !m_DepthStencilView) { return; }
     // バックバッファのクリア
 	float clearColor[4] = { 0.5f, 0.5f, 0.5f, 1.0f };
 
-	ID3D11RenderTargetView* rtvs[] = { m_RenderTargetView };
-	m_DeviceContext->OMSetRenderTargets(1, rtvs, m_DepthStencilView);
-	m_DeviceContext->RSSetViewports(1, &m_BackBufferViewport);
-	m_DeviceContext->ClearRenderTargetView(m_RenderTargetView, clearColor);
-	m_DeviceContext->ClearDepthStencilView(m_DepthStencilView, D3D11_CLEAR_DEPTH, 1.0f, 0);
+    EnsureGameRenderTarget();
+    if (m_GameRenderTarget)
+    {
+        m_GameRenderTarget->Begin(m_DeviceContext, clearColor);
+    }
+    else
+    {
+        ID3D11RenderTargetView* rtvs[] = { m_RenderTargetView };
+        m_DeviceContext->OMSetRenderTargets(1, rtvs, m_DepthStencilView);
+        m_DeviceContext->RSSetViewports(1, &m_BackBufferViewport);
+        m_DeviceContext->ClearRenderTargetView(m_RenderTargetView, clearColor);
+        m_DeviceContext->ClearDepthStencilView(m_DepthStencilView, D3D11_CLEAR_DEPTH, 1.0f, 0);
+    }
+}
+
+
+void Renderer::EndGameRender()
+{
+    if (!m_DeviceContext)
+    {
+        return;
+    }
+    if (m_GameRenderTarget)
+    {
+        m_GameRenderTarget->End(m_DeviceContext);
+    }
+}
+
+void Renderer::ClearBackBuffer(const float clearColor[4])
+{
+    if (!m_DeviceContext || !m_RenderTargetView)
+    {
+        return;
+    }
+
+    const float defaultColor[4] = { 0.1f, 0.1f, 0.1f, 1.0f };
+    const float* color = clearColor ? clearColor : defaultColor;
+    ID3D11RenderTargetView* rtvs[] = { m_RenderTargetView };
+    m_DeviceContext->OMSetRenderTargets(1, rtvs, m_DepthStencilView);
+    m_DeviceContext->RSSetViewports(1, &m_BackBufferViewport);
+    m_DeviceContext->ClearRenderTargetView(m_RenderTargetView, color);
+    if (m_DepthStencilView)
+    {
+        m_DeviceContext->ClearDepthStencilView(m_DepthStencilView, D3D11_CLEAR_DEPTH, 1.0f, 0);
+    }
 }
 
 void Renderer::Finish()
 {
 	if (!m_SwapChain || !m_DeviceContext) { return; }
+#ifndef _DEBUG
+    if (m_GameRenderTarget)
+    {
+        BlitSRVToBackbuffer(m_GameRenderTarget->GetSRV(), 1.0f);
+    }
+#endif
 	// フレームの表示
 	m_SwapChain->Present(1, 0);
 
@@ -520,6 +597,16 @@ ID3D11RenderTargetView* Renderer::GetBackBufferRTV()
 {
 	return m_RenderTargetView;
 }
+
+ID3D11ShaderResourceView* Renderer::GetGameRenderSRV()
+{
+    if (!m_GameRenderTarget)
+    {
+        return nullptr;
+    }
+    return m_GameRenderTarget->GetSRV();
+}
+
 
 static void CompileShaderFromSource(const char* src, const char* entry, const char* target, ID3DBlob** blobOut)
 {
