@@ -131,9 +131,6 @@ public:
 	static void BindDefaultSamplers();
 	static void BindDefaultConstantBuffers();
 
-#ifdef _DEBUG
-    static D3D11_VIEWPORT GetDebugPresentViewport();
-#endif
 	// インスタンシング描画テンプレート
 	template<class T> static void SetInstanceID(T* method,InstancePaked iPaked)
 	{
@@ -163,11 +160,6 @@ private:
 	static ID3D11RenderTargetView*	 m_RenderTargetView	 ;	// レンダーターゲットビュー
 	static ID3D11DepthStencilView*	 m_DepthStencilView	 ;	// 深度ステンシルビュー
     static D3D11_VIEWPORT			m_BackBufferViewport ;	// バックバッファのビューポート
-
-#ifdef _DEBUG
-	static std::unique_ptr<RenderTarget> m_DebugGameTarget;		    // デバッグ用ゲーム画面レンダーターゲット
-	static D3D11_VIEWPORT                m_DebugPresentViewport;	// デバッグ用ゲーム画面のビューポート
-#endif
 
 	static ID3D11DepthStencilState* m_DepthStateEnable ;	// 深度ステンシルステート（有効）
 	static ID3D11DepthStencilState* m_DepthStateDisable;	// 深度ステンシルステート（無効）

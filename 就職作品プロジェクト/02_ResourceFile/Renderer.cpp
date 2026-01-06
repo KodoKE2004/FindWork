@@ -17,11 +17,6 @@ ID3D11DepthStencilView*			Renderer::m_DepthStencilView;	// 深度ステンシル
 
 D3D11_VIEWPORT                              Renderer::m_BackBufferViewport;
 
-#ifdef _DEBUG
-std::unique_ptr<RenderTarget>               Renderer::m_DebugGameTarget;
-D3D11_VIEWPORT                              Renderer::m_DebugPresentViewport;
-#endif
-
 
 ID3D11DepthStencilState*		Renderer::m_DepthStateEnable;	// 深度ステンシルステート（有効）
 ID3D11DepthStencilState*		Renderer::m_DepthStateDisable;	// 深度ステンシルステート（無効）
@@ -268,10 +263,6 @@ void Renderer::Finalize()
 	if (m_DepthStateEnable)  { m_DepthStateEnable ->Release(); m_DepthStateEnable  = nullptr; }
 	if (m_DepthStateDisable) { m_DepthStateDisable->Release(); m_DepthStateDisable = nullptr; }
 
-#ifdef _DEBUG
-    m_DebugGameTarget.reset();
-#endif
-
 	if (m_WorldBuffer)		{ m_WorldBuffer->Release();       m_WorldBuffer		 = nullptr; }
 	if (m_ViewBuffer)		{ m_ViewBuffer->Release();        m_ViewBuffer		 = nullptr; }
 	if (m_ProjectionBuffer) { m_ProjectionBuffer->Release();  m_ProjectionBuffer = nullptr; }
@@ -490,12 +481,7 @@ void Renderer::BindDefaultConstantBuffers()
 	m_DeviceContext->PSSetConstantBuffers(3, 1, &m_LightBuffer);
 	m_DeviceContext->PSSetConstantBuffers(4, 1, &m_MaterialBuffer);
 }
-#ifdef _DEBUG
-D3D11_VIEWPORT Renderer::GetDebugPresentViewport()
-{
-	return m_DebugPresentViewport;
-}
-#endif
+
 D3D11_VIEWPORT Renderer::GetRenderTargetView(void)
 {
 	D3D11_VIEWPORT viewport{};
@@ -507,7 +493,7 @@ D3D11_VIEWPORT Renderer::GetRenderTargetView(void)
 	if (count == 0) {
 		viewport.TopLeftX = 0.0f;
 		viewport.TopLeftY = 0.0f;
-		viewport.Width = static_cast<FLOAT> (Application::GetWidth());
+		viewport.Width  = static_cast<FLOAT> (Application::GetWidth());
 		viewport.Height = static_cast<FLOAT>(Application::GetHeight());
 		viewport.MinDepth = 0.0f;
 		viewport.MaxDepth = 1.0f;

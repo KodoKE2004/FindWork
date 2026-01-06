@@ -57,35 +57,9 @@ void Input::Update(HWND hWnd)
 		}
 		m_MousePos = currentPos;
 
-	#ifdef _DEBUG
 
-		const auto debugViewport = Renderer::GetDebugPresentViewport();
-		const float gameWidth = static_cast<float>(Application::GetWidth());
-		const float gameHeight = static_cast<float>(Application::GetHeight());
-		const float scaleX = debugViewport.Width / gameWidth;
-		const float scaleY = debugViewport.Height / gameHeight;
-		if (scaleX > 0.0f && scaleY > 0.0f) {
-			DirectX::SimpleMath::Vector2 mouseClient(static_cast<float>(currentPos.x), static_cast<float>(currentPos.y));
-			DirectX::SimpleMath::Vector2 debugCenter(
-				debugViewport.TopLeftX + debugViewport.Width * 0.5f,
-				debugViewport.TopLeftY + debugViewport.Height * 0.5f);
-			DirectX::SimpleMath::Vector2 gameCenter(gameWidth * 0.5f, gameHeight * 0.5f);
-			DirectX::SimpleMath::Vector2 delta = mouseClient - debugCenter;
-			DirectX::SimpleMath::Vector2 unscaled(delta.x / scaleX, delta.y / scaleY);
-			DirectX::SimpleMath::Vector2 gamePos = gameCenter + unscaled;
-
-			m_MousePos.x = static_cast<LONG>(gamePos.x - gameCenter.x);
-			m_MousePos.y = static_cast<LONG>(-(gamePos.y - gameCenter.y));
-		}
-		else {
-			m_MousePos.x -= static_cast<LONG>(gameWidth * 0.5f);
-			m_MousePos.y = -m_MousePos.y + static_cast<LONG>(gameHeight * 0.5f);
-		}
-
-	#else 
         m_MousePos.x -= static_cast<LONG>(Application::GetWidth() * 0.5f);
         m_MousePos.y  = - m_MousePos.y + static_cast<LONG>(Application::GetHeight() * 0.5f);
-	#endif
 
 		m_MouseDelta.x = m_MousePos.x - prevPos.x;
 		m_MouseDelta.y = m_MousePos.y - prevPos.y;
