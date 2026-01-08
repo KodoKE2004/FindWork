@@ -779,7 +779,11 @@ void Renderer::BlitSRVToBackbuffer(ID3D11ShaderResourceView* srv, float alpha)
 	SetBlendState(BS_ALPHABLEND);
 	SetDepthEnable(false);
 
+#ifdef _DEBUG
+
+#else
 	DrawFullscreenBlit(m_DeviceContext, srv, alpha);
+#endif
 }
 
 ID3D11ShaderResourceView* Renderer::BlitSRVToTexture(ID3D11ShaderResourceView* srv, float alpha)
