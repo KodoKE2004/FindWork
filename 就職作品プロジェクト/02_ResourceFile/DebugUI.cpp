@@ -55,13 +55,23 @@ void DebugUI::Render(ID3D11ShaderResourceView* gameSrv, const ImVec2& gameSize)
 
     if (gameSrv)
     {
-        ImGui::Begin("Game View");
-        ImGui::SliderFloat("Scale", &s_GameViewScale, 0.1f, 1.0f, "%.2f");
-        ImVec2 displaySize(gameSize.x * s_GameViewScale, gameSize.y * s_GameViewScale);
+        ImVec2 displaySize(gameSize.x * 0.8f, gameSize.y * 0.8f);
+        ImGui::SetNextWindowPos(ImVec2(- 7.5f, - 7.5f), ImGuiCond_Always);
+        ImGui::SetNextWindowSize(displaySize, ImGuiCond_Always);
+
+        ImGuiWindowFlags flags =
+            ImGuiWindowFlags_NoTitleBar |
+            ImGuiWindowFlags_NoResize |
+            ImGuiWindowFlags_NoMove |
+            ImGuiWindowFlags_NoScrollbar |
+            ImGuiWindowFlags_NoScrollWithMouse |
+            ImGuiWindowFlags_NoCollapse;
+
+        ImGui::Begin("GameView",nullptr,flags);
+
         ImGui::Image((ImTextureID)gameSrv, displaySize);
-        s_GameViewMin = ImGui::GetItemRectMin();
-        s_GameViewMax = ImGui::GetItemRectMax();
         s_HasGameViewRect = true;
+
         ImGui::End();
     }
 
