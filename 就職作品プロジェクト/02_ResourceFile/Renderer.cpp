@@ -725,14 +725,15 @@ namespace
 		CompileShaderFromSource(vsSrc, "main", "vs_5_0", vsBlob.GetAddressOf());
 		CompileShaderFromSource(psSrc, "main", "ps_5_0", psBlob.GetAddressOf());
 
-		if (vsBlob) device->CreateVertexShader(vsBlob->GetBufferPointer(), vsBlob->GetBufferSize(), nullptr, g_BlitPipeline.vs.GetAddressOf());
-		if (psBlob) device->CreatePixelShader(psBlob->GetBufferPointer(), psBlob->GetBufferSize(), nullptr, g_BlitPipeline.ps.GetAddressOf());
+		if (vsBlob) device->CreateVertexShader(vsBlob->GetBufferPointer(), vsBlob->GetBufferSize(), nullptr, g_BlitPipeline.vs.ReleaseAndGetAddressOf());
+		if (psBlob) device->CreatePixelShader(psBlob->GetBufferPointer(), psBlob->GetBufferSize(), nullptr, g_BlitPipeline.ps.ReleaseAndGetAddressOf());
 
 		D3D11_BUFFER_DESC cbd{};
 		cbd.ByteWidth = 16;
 		cbd.Usage = D3D11_USAGE_DEFAULT;
 		cbd.BindFlags = D3D11_BIND_CONSTANT_BUFFER;
-		device->CreateBuffer(&cbd, nullptr, g_BlitPipeline.cb.GetAddressOf());
+		device->CreateBuffer(&cbd, nullptr, g_BlitPipeline.cb.ReleaseAndGetAddressOf());
+		g_BlitPipeline.ready = true;
 	}
 
 	void DrawFullscreenBlit(ID3D11DeviceContext* ctx, ID3D11ShaderResourceView* srv, float alpha)
