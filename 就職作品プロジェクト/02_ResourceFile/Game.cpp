@@ -162,12 +162,6 @@ void Game::Draw()
 	++m_DrawFrameCounter;
 	Renderer::Start();
 
-	// Update中のDrawやオフスクリーン描画の影響を避けるため、
-	// TransSceneのDrawNextSceneはDrawパスで実行する。
-	if (auto transScene = std::dynamic_pointer_cast<TransScene>(instance.m_SceneCurrent)) {
-		transScene->Draw();
-	}
-
 	for (auto& o : instance.m_GameObjects)
 	{
 		if (!o) continue;

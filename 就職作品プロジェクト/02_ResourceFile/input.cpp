@@ -54,42 +54,9 @@ void Input::Update(HWND hWnd)
 	bool ignoreMouseInput = false;
 
 #ifdef _DEBUG
-	ImVec2 imageMin{};
-	ImVec2 imageMax{};
-	if (DebugUI::GetGameViewRect(imageMin, imageMax))
-	{
-		const ImVec2 gameSize = DebugUI::GetGameRenderSize();
-		const ImVec2 mousePos = ImGui::GetMousePos();
-		const ImVec2 displaySize(imageMax.x - imageMin.x, imageMax.y - imageMin.y);
-		const bool inBounds = mousePos.x >= imageMin.x && mousePos.y >= imageMin.y &&
-			mousePos.x <= imageMax.x && mousePos.y <= imageMax.y;
-		if (inBounds && displaySize.x > 0.0f && displaySize.y > 0.0f &&
-			gameSize.x > 0.0f && gameSize.y > 0.0f)
-		{
-			const float localX = mousePos.x - imageMin.x;
-			const float localY = mousePos.y - imageMin.y;
-			const float uvx = localX / displaySize.x;
-			const float uvy = localY / displaySize.y;
-			const float gameX = uvx * gameSize.x;
-			const float gameY = uvy * gameSize.y;
 
-			m_MousePos.x = static_cast<LONG>(gameX - gameSize.x * 0.5f);
-			m_MousePos.y = static_cast<LONG>(-gameY + gameSize.y * 0.5f);
-			m_MouseDelta.x = m_MousePos.x - prevPos.x;
-			m_MouseDelta.y = m_MousePos.y - prevPos.y;
-			usedImGuiPos = true;
-		}
-		else if (!inBounds)
-		{
-			m_MousePos = prevPos;
-			m_MouseDelta.x = 0;
-			m_MouseDelta.y = 0;
-			usedImGuiPos = true;
-			ignoreMouseInput = true;
-		}
-	}
+
 #endif
-
 	if (!usedImGuiPos) {
 		if (GetCursorPos(&currentPos)) {
 			if (hWnd != nullptr) {

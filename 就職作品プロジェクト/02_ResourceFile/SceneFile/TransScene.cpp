@@ -141,18 +141,6 @@ void TransScene::Finalize()
 
 }
 
-void TransScene::Draw()
-{
-	if (!m_RequestNextSceneDraw) {
-		return;
-	}
-
-	// Update中にContext状態を触るとDraw側が壊れる可能性があるため、
-	// Drawパスでのみオフスクリーン描画を行う。
-	DrawNextScene();
-	m_RequestNextSceneDraw = false;
-}
-
 void TransScene::DrawNextScene()
 {
 

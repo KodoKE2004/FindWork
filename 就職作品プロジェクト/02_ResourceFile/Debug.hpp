@@ -176,7 +176,7 @@ namespace Debug
         const WORD yellow = FOREGROUND_RED   | FOREGROUND_GREEN | FOREGROUND_INTENSITY;
         const WORD white  = FOREGROUND_RED   | FOREGROUND_GREEN | FOREGROUND_BLUE;
         
-        WORD originalAttrs;
+        WORD originalAttrs = white;
         switch (color)
         {
         case MessageColor::Red   : originalAttrs = red;     break;

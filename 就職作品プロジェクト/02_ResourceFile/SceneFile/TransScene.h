@@ -66,7 +66,6 @@ public:
 	void Initialize()		override;
 	void Update(float tick)	override;
 	void Finalize()			override;
-	void Draw();
 
 	SCENE_NO GetSceneNo() const override { return SCENE_NO::TRANSITION; }
 	/// <summary>
