@@ -183,16 +183,19 @@ void Game::Draw()
 	}
 
 	Renderer::EndGameRender();
+	Renderer::ClearBackBuffer();
 
 #ifdef _DEBUG
-	Renderer::ClearBackBuffer();
 	if (auto* gameSrv = Renderer::GetGameRenderSRV())
 	{
+		const float width = static_cast<float>(Application::GetWidth());
+		const float height = static_cast<float>(Application::GetHeight());
+
+		auto srvTex = Renderer::BlitSRVToTexture(gameSrv, 1.0f);
 		Renderer::BlitSRVToBackbuffer(gameSrv, 1.0f);
-		Renderer::BlitSRVToTexture(gameSrv,1.0f);
+		DebugUI::Render(srvTex, ImVec2(width, height));
 	}
 #endif
-	DebugUI::Render(Renderer::GetGameRenderSRV(), ImVec2(static_cast<float>(Application::GetWidth()), static_cast<float>(Application::GetHeight())));
 	Renderer::Finish();
 }
 
