@@ -189,6 +189,7 @@ void Game::Draw()
 	if (auto* gameSrv = Renderer::GetGameRenderSRV())
 	{
 		Renderer::BlitSRVToBackbuffer(gameSrv, 1.0f);
+		Renderer::BlitSRVToTexture(gameSrv,1.0f);
 	}
 #endif
 	DebugUI::Render(Renderer::GetGameRenderSRV(), ImVec2(static_cast<float>(Application::GetWidth()), static_cast<float>(Application::GetHeight())));

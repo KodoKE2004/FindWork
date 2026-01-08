@@ -148,9 +148,9 @@ public:
 	static ID3D11ShaderResourceView* GetGameRenderSRV();
 	
 	static void BlitSRVToBackbuffer(ID3D11ShaderResourceView* srv, float alpha = 1.0f);
+	static ID3D11ShaderResourceView* BlitSRVToTexture(ID3D11ShaderResourceView* srv,float alpha = 1.0f);
 	static void CreateVertexShader(ID3D11VertexShader** VertexShader, ID3D11InputLayout** VertexLayout, const char* FileName);
 	static void CreatePixelShader (ID3D11PixelShader** PixelShader, const char* FileName);
-	
 	// 描画設定書き込み
 	static void SetDrawState();
 	
@@ -179,11 +179,16 @@ private:
 	static ID3D11BlendState* m_BlendStateATC			 ;	// ブレンド ステート（加算合成）
 	static ID3D11SamplerState* m_DefaultSampler;			// デフォルトサンプラー
 	static std::unique_ptr<RenderTarget> m_GameRenderTarget;
+	static std::unique_ptr<RenderTarget> m_BlitRenderTarget;
+
 	static UINT m_GameRenderWidth;
 	static UINT m_GameRenderHeight;
-	
+	static UINT m_BlitRenderWidth;
+	static UINT m_BlitRenderHeight;
+
 	inline std::vector<UINT> MakeInstanceIDs(UINT count);
 	static void EnsureGameRenderTarget();
+	static void EnsureBlitRenderTarget();
 	inline HRESULT CreateInstanceIDBuffer(const std::vector<UINT>& ids,
 										  ID3D11Buffer** outVB,
 										  D3D11_USAGE usage = D3D11_USAGE_IMMUTABLE,

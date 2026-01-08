@@ -34,9 +34,12 @@ ID3D11BlendState*				Renderer::m_BlendStateATC;
 ID3D11SamplerState*				Renderer::m_DefaultSampler = nullptr;
 
 std::unique_ptr<RenderTarget>  Renderer::m_GameRenderTarget;
+std::unique_ptr<RenderTarget>  Renderer::m_BlitRenderTarget;
+
 UINT Renderer::m_GameRenderWidth;
 UINT Renderer::m_GameRenderHeight;
-
+UINT Renderer::m_BlitRenderWidth;
+UINT Renderer::m_BlitRenderHeight;
 
 
 void Renderer::Initialize()
@@ -286,11 +289,44 @@ void Renderer::EnsureGameRenderTarget()
     m_GameRenderHeight = height;
 }
 
+void Renderer::EnsureBlitRenderTarget()
+{
+	if (!m_Device)
+	{
+		return;
+	}
+
+	const UINT width = Application::GetWidth();
+	const UINT height = Application::GetHeight();
+	if (m_BlitRenderTarget && width == m_BlitRenderWidth && height == m_BlitRenderHeight)
+	{
+		return;
+	}
+
+	m_BlitRenderTarget = std::make_unique<RenderTarget>();
+	if (!m_BlitRenderTarget->Create(m_Device, width, height, false))
+	{
+		m_BlitRenderTarget.reset();
+		m_BlitRenderWidth = 0;
+		m_BlitRenderHeight = 0;
+		return;
+	}
+
+	m_BlitRenderWidth = width;
+	m_BlitRenderHeight = height;
+}
+
+
 void Renderer::Finalize()
 {
     m_GameRenderTarget.reset();
     m_GameRenderWidth = 0;
     m_GameRenderHeight = 0;
+
+	m_BlitRenderTarget.reset();
+	m_BlitRenderWidth = 0;
+	m_BlitRenderHeight = 0;
+
 	for (auto& bs : m_BlendState) { if (bs) { bs->Release(); bs = nullptr; } }
 	if (m_BlendStateATC) { m_BlendStateATC->Release(); m_BlendStateATC = nullptr; }
 	if (m_DefaultSampler) { m_DefaultSampler->Release(); m_DefaultSampler = nullptr; }
@@ -625,18 +661,24 @@ static void CompileShaderFromSource(const char* src, const char* entry, const ch
 	if (errorBlob) errorBlob->Release();
 }
 
-// SRV をバックバッファへフルスクリーン合成（αブレンドON/深度OFF）
-void Renderer::BlitSRVToBackbuffer(ID3D11ShaderResourceView* srv, float alpha)
+namespace
 {
-	if (!srv) return;
-
-	static Microsoft::WRL::ComPtr<ID3D11VertexShader> sVS;
-	static Microsoft::WRL::ComPtr<ID3D11PixelShader>  sPS;
-	static Microsoft::WRL::ComPtr<ID3D11Buffer>       sCB; // alpha
-	static bool sReady = false;
-
-	if (!sReady)
+	struct BlitPipeline
 	{
+		Microsoft::WRL::ComPtr<ID3D11VertexShader> vs;
+		Microsoft::WRL::ComPtr<ID3D11PixelShader> ps;
+		Microsoft::WRL::ComPtr<ID3D11Buffer> cb;
+		bool ready = false;
+	};
+
+	BlitPipeline g_BlitPipeline;
+	void EnsureBlitPipeline(ID3D11Device* device)
+	{
+		if (g_BlitPipeline.ready || !device)
+		{
+			return;
+		}
+
 		const char* vsSrc = R"(
 		struct VSOut 
 		{
@@ -678,18 +720,53 @@ void Renderer::BlitSRVToBackbuffer(ID3D11ShaderResourceView* srv, float alpha)
 		
 			return c;
 		})";
+
 		Microsoft::WRL::ComPtr<ID3DBlob> vsBlob, psBlob;
 		CompileShaderFromSource(vsSrc, "main", "vs_5_0", vsBlob.GetAddressOf());
 		CompileShaderFromSource(psSrc, "main", "ps_5_0", psBlob.GetAddressOf());
-		if (vsBlob) m_Device->CreateVertexShader(vsBlob->GetBufferPointer(), vsBlob->GetBufferSize(), nullptr, sVS.GetAddressOf());
-		if (psBlob) m_Device->CreatePixelShader(psBlob->GetBufferPointer(), psBlob->GetBufferSize(), nullptr, sPS.GetAddressOf());
 
-		D3D11_BUFFER_DESC cbd{}; cbd.ByteWidth = 16; cbd.Usage = D3D11_USAGE_DEFAULT; cbd.BindFlags = D3D11_BIND_CONSTANT_BUFFER;
-		m_Device->CreateBuffer(&cbd, nullptr, sCB.GetAddressOf());
+		if (vsBlob) device->CreateVertexShader(vsBlob->GetBufferPointer(), vsBlob->GetBufferSize(), nullptr, g_BlitPipeline.vs.GetAddressOf());
+		if (psBlob) device->CreatePixelShader(psBlob->GetBufferPointer(), psBlob->GetBufferSize(), nullptr, g_BlitPipeline.ps.GetAddressOf());
 
-		sReady = true;
+		D3D11_BUFFER_DESC cbd{};
+		cbd.ByteWidth = 16;
+		cbd.Usage = D3D11_USAGE_DEFAULT;
+		cbd.BindFlags = D3D11_BIND_CONSTANT_BUFFER;
+		device->CreateBuffer(&cbd, nullptr, g_BlitPipeline.cb.GetAddressOf());
 	}
 
+	void DrawFullscreenBlit(ID3D11DeviceContext* ctx, ID3D11ShaderResourceView* srv, float alpha)
+	{
+		if (!ctx || !srv)
+		{
+			return;
+		}
+
+		ctx->VSSetShader(g_BlitPipeline.vs.Get(), nullptr, 0);
+		ctx->PSSetShader(g_BlitPipeline.ps.Get(), nullptr, 0);
+		ctx->PSSetShaderResources(0, 1, &srv);
+
+		float data[4] = { alpha, 0, 0, 0 };
+		ctx->UpdateSubresource(g_BlitPipeline.cb.Get(), 0, nullptr, data, 0, 0);
+		ctx->VSSetConstantBuffers(7, 1, g_BlitPipeline.cb.GetAddressOf());
+		ctx->PSSetConstantBuffers(7, 1, g_BlitPipeline.cb.GetAddressOf());
+
+		ctx->IASetPrimitiveTopology(D3D11_PRIMITIVE_TOPOLOGY_TRIANGLELIST);
+		ctx->Draw(3, 0);
+
+		ID3D11ShaderResourceView* nullSRV[1] = { nullptr };
+		ctx->PSSetShaderResources(0, 1, nullSRV);
+	}
+};
+
+
+// SRV をバックバッファへフルスクリーン合成（αブレンドON/深度OFF）
+void Renderer::BlitSRVToBackbuffer(ID3D11ShaderResourceView* srv, float alpha)
+{
+	if (!srv) return;
+
+	EnsureBlitPipeline(m_Device);
+	
 	// OM backbuffer
 	ID3D11RenderTargetView* rtvs[] = { m_RenderTargetView };
 	m_DeviceContext->OMSetRenderTargets(1, rtvs, nullptr);
@@ -702,22 +779,35 @@ void Renderer::BlitSRVToBackbuffer(ID3D11ShaderResourceView* srv, float alpha)
 	SetBlendState(BS_ALPHABLEND);
 	SetDepthEnable(false);
 
-	// bind shaders & SRV
-	m_DeviceContext->VSSetShader(sVS.Get(), nullptr, 0);
-	m_DeviceContext->PSSetShader(sPS.Get(), nullptr, 0);
-	m_DeviceContext->PSSetShaderResources(0, 1, &srv);
+	DrawFullscreenBlit(m_DeviceContext, srv, alpha);
+}
 
-	float data[4] = { alpha, 0, 0, 0 };
-	m_DeviceContext->UpdateSubresource(sCB.Get(), 0, nullptr, data, 0, 0);
-	m_DeviceContext->VSSetConstantBuffers(7, 1, sCB.GetAddressOf());
-	m_DeviceContext->PSSetConstantBuffers(7, 1, sCB.GetAddressOf());
+ID3D11ShaderResourceView* Renderer::BlitSRVToTexture(ID3D11ShaderResourceView* srv, float alpha)
+{
+	if (!srv)
+	{
+		return nullptr;
+	}
 
-	m_DeviceContext->IASetPrimitiveTopology(D3D11_PRIMITIVE_TOPOLOGY_TRIANGLELIST);
-	m_DeviceContext->Draw(3, 0);
+	EnsureBlitPipeline(m_Device);
+	EnsureBlitRenderTarget();
+	if (!m_BlitRenderTarget)
+	{
+		return nullptr;
+	}
 
-	// unbind SRV（ハザード回避）
-	ID3D11ShaderResourceView* nullSRV[1] = { nullptr };
-	m_DeviceContext->PSSetShaderResources(0, 1, nullSRV);
+	ID3D11RenderTargetView* rtvs[] = { m_BlitRenderTarget->GetRTV() };
+	m_DeviceContext->OMSetRenderTargets(1, rtvs, nullptr);
+
+	const auto& vp = m_BlitRenderTarget->GetViewport();
+	m_DeviceContext->RSSetViewports(1, &vp);
+
+	SetBlendState(BS_NONE);
+	SetDepthEnable(false);
+
+	DrawFullscreenBlit(m_DeviceContext, srv, alpha);
+
+	return m_BlitRenderTarget->GetSRV();
 }
 
 
