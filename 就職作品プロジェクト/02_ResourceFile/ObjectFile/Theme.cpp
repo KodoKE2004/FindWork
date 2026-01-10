@@ -1,4 +1,5 @@
 ﻿#include "Theme.h"
+#include "../Audio.h"
 #include "Game.h"
 #include "Application.h"
 #include "Renderer.h"
@@ -15,10 +16,10 @@ void Theme::Initialize()
 {
     auto& instance = Game::GetInstance();
     TextureManager* textureManager = instance;
-
+    RhythmBeat      rhythmBeat = instance.GetCurrentScene()->GetRelationData().rhythmBeat;
     Square::Initialize();
-
-    m_Duration  = 2.0f;
+    
+    m_Duration  = 1.5f * rhythmBeat.GetBeatConst().secondsPerBeat;
     m_ScaleMass = 5.0f;
     m_Elapsed   = 0.0f;
     SetShader("VS_Alpha","PS_Alpha");
@@ -34,6 +35,15 @@ void Theme::Update()
 
     NVector3 scale = m_ScaleBase;
     m_Elapsed += Application::GetDeltaTime();
+    
+    // 6拍経ったらactiveをfalseにする
+    // m_Durationは1.5拍の設定
+    float activeBeat = 4.0f * m_Duration;
+    if (activeBeat < m_Elapsed) 
+    {
+        m_isActive = false;
+        return;
+    }
 
     float t = std::clamp(m_Elapsed / max(m_Duration, 0.0001f), 0.0f, 1.0f);
     float ease = EvaluateEasing(EASING_TYPE::IN_EXPO, t);

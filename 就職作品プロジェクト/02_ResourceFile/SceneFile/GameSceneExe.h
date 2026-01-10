@@ -28,7 +28,6 @@ protected:
 	std::shared_ptr<Bomber>  m_Bomber ;		// スピードゲージ背景
     std::shared_ptr<Player>  m_Player ;		// プレイヤーオブジェクト
 
-
     // カウントダウン関連
 	BeatTimer m_BeatTimer;
     

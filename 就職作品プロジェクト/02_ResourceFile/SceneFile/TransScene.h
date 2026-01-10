@@ -83,8 +83,4 @@ public:
 	void SetTransMode(TRANS_MODE mode)     { m_TransMode = mode;	  }
 	void SetStep(STEP step)				   { m_Step		 = step;	  }
 	void SetTimer(float timer)			   { m_Timer	 = timer;	  }
-
-	// 設定した時間に到達したかどうか
-	bool isOverClock();  
-
 };

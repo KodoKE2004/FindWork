@@ -65,7 +65,7 @@ void TitleScene::Initialize()
 
     m_DragController = instance.AddObject<DragController>();
     m_DragController->SetName("m_DragController");
-    m_DragController->SetDirection(MOVE_DOWN_RIGHT);
+    m_DragController->SetDirection(MOVE_UP_RIGHT);
     m_MySceneObjects.emplace_back(m_DragController);
 
 	if (m_EntryFlg)

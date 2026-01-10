@@ -5,9 +5,9 @@
 enum MOVE_DIR
 {
     MOVE_UP = 0,
-    MOVE_UP_RIGHT,
-    MOVE_RIGHT,
     MOVE_DOWN_RIGHT,
+    MOVE_RIGHT,
+    MOVE_UP_RIGHT,
     MOVE_MAX,
     MOVE_NONE = -1,
 };

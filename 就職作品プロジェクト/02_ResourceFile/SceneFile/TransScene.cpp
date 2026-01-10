@@ -191,14 +191,3 @@ void TransScene::DrawNextScene()
 	m_MySceneObjects.emplace_back(m_OverlayNext);
 
 }
-
-bool TransScene::isOverClock()
-{
-	if (m_Timer >= m_Duration)
-	{
-		m_Timer = 0.0f;
-		return true;
-	}
-
-	return false;
-}

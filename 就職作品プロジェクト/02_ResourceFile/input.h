@@ -76,6 +76,7 @@ private:
 	// マウス入力
 	static POINT m_MousePos;
 	static POINT m_MouseDelta;
+	static DirectX::SimpleMath::Vector2 m_MousePosNormalizedLH;
 	static bool m_MouseButtons   [vkMAX];
 	static bool m_MouseButtonsOld[vkMAX];
 	static int m_MouseWheel;
@@ -103,6 +104,7 @@ public:
 
 	static DirectX::SimpleMath::Vector2 GetMousePos  ();
 	static DirectX::SimpleMath::Vector2 GetMouseDelta();
+	static DirectX::SimpleMath::Vector2 GetMousePosNormalizedLH();
 
 	static int GetWheel();
 	//キー入力

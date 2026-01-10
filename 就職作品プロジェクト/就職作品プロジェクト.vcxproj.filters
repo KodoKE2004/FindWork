@@ -246,7 +246,7 @@
       <Filter>SourceFile\Object\2D</Filter>
     </ClCompile>
     <ClCompile Include="02_ResourceFile\ImGuiUtil.cpp">
-      <Filter>SourceFile\Core</Filter>
+      <Filter>SourceFile\Debug</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -462,7 +462,7 @@
       <Filter>SourceFile\Object\2D</Filter>
     </ClInclude>
     <ClInclude Include="02_ResourceFile\ImGuiUtil.h">
-      <Filter>SourceFile\Core</Filter>
+      <Filter>SourceFile\Debug</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>

@@ -3,11 +3,13 @@
 #include "Renderer.h"
 #ifdef _DEBUG
 #include "DebugUI.h"
+#include "ImGuiUtil.h"
 #include "imgui.h"
 #endif
 
 POINT Input::m_MousePos = {};
 POINT Input::m_MouseDelta = {};
+DirectX::SimpleMath::Vector2 Input::m_MousePosNormalizedLH = {};
 bool Input::m_MouseButtons[5] = {};
 bool Input::m_MouseButtonsOld[5] = {};
 int Input::m_MouseWheel = 0;
@@ -55,8 +57,20 @@ void Input::Update(HWND hWnd)
 
 #ifdef _DEBUG
 
+	m_MousePosNormalizedLH = DirectX::SimpleMath::Vector2(0.0f, 0.0f);
+	const GuiMousePos guiMouse = GetMousePosInGameView();
+	if (guiMouse.inside)
+	{
+		m_MousePosNormalizedLH = DirectX::SimpleMath::Vector2(
+			guiMouse.leftHandedNormalized.x,
+			guiMouse.leftHandedNormalized.y
+		);
+	}
 
-#endif
+	m_MousePos.x = static_cast<LONG>(guiMouse.leftHandedNormalized.x * static_cast<float>(Application::GetWidth()));
+	m_MousePos.y = static_cast<LONG>(guiMouse.leftHandedNormalized.y * static_cast<float>(Application::GetHeight()));
+
+#else
 	if (!usedImGuiPos) {
 		if (GetCursorPos(&currentPos)) {
 			if (hWnd != nullptr) {
@@ -75,6 +89,7 @@ void Input::Update(HWND hWnd)
 			m_MouseDelta.y = 0;
 		}
 	}
+#endif
 
 	m_MouseButtons[vkLEFT]	   = (GetAsyncKeyState(VK_LBUTTON) & 0x8000) != 0;
 	m_MouseButtons[vkRIGHT]    = (GetAsyncKeyState(VK_RBUTTON) & 0x8000) != 0;
@@ -129,6 +144,11 @@ DirectX::SimpleMath::Vector2 Input::GetMousePos()
 DirectX::SimpleMath::Vector2 Input::GetMouseDelta()
 {
     return DirectX::SimpleMath::Vector2(static_cast<float>(m_MouseDelta.x), static_cast<float>(m_MouseDelta.y));;
+}
+
+DirectX::SimpleMath::Vector2 Input::GetMousePosNormalizedLH()
+{
+	return m_MousePosNormalizedLH;
 }
 
 int Input::GetWheel()

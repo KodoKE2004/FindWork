@@ -31,8 +31,8 @@ void DragController::Update()
 
         if (isOverObject)
         {
-            m_IsDragging = true;
-            m_MouseDownPos = mousePos;
+            m_IsDragging    = true;
+            m_MouseDownPos  = mousePos;
             m_ObjectDownPos = DirectX::SimpleMath::Vector2(pos.x,pos.y);
         }
     }
@@ -58,6 +58,7 @@ void DragController::Update()
     const DirectX::SimpleMath::Vector2 delta = currentMousePos - m_MouseDownPos;
     const float rad = DirectX::XMConvertToRadians(MOVE_ANGLE[m_MoveDir]);
     DirectX::SimpleMath::Vector2 dir(std::cos(rad), std::sin(rad));
+
     if (dir.LengthSquared() > 0.0f)
     {
         dir.Normalize();

@@ -1,4 +1,5 @@
 #include "ImGuiUtil.h"
+#include "DebugUI.h"
 
 GuiMousePos GetMousePosInCurrentGui()
 {
@@ -27,6 +28,51 @@ GuiMousePos GetMousePosInCurrentGui()
             mouse.x - contentTL.x,
             mouse.y - contentTL.y
         );
+        if (r.size.x > 0.0f && r.size.y > 0.0f)
+        {
+            r.normalized = ImVec2(r.local.x / r.size.x, r.local.y / r.size.y);
+            r.leftHandedNormalized = ImVec2(
+                r.normalized.x - 0.5f,
+                0.5f - r.normalized.y
+            );
+        }
+    }
+
+    return r;
+}
+
+GuiMousePos GetMousePosInGameView()
+{
+    GuiMousePos r{};
+    ImVec2 viewMin{};
+    ImVec2 viewMax{};
+    if (!DebugUI::GetGameViewRect(viewMin, viewMax))
+    {
+        return r;
+    }
+
+    const ImVec2 mouse = ImGui::GetMousePos();
+    r.size = ImVec2(viewMax.x - viewMin.x, viewMax.y - viewMin.y);
+
+    r.inside =
+        mouse.x >= viewMin.x && mouse.x < viewMax.x &&
+        mouse.y >= viewMin.y && mouse.y < viewMax.y;
+
+    if (r.inside)
+    {
+        // GuiÀ•W‚ð”÷’²®‚Å‰ÁŽZ‚³‚ê‚½’l•ª‰ÁŽZ
+        r.local = ImVec2(
+            (mouse.x + SCREEN_CORRECT_VALUE) - viewMin.x,
+            (mouse.y + SCREEN_CORRECT_VALUE) - viewMin.y
+        );
+        if (r.size.x > 0.0f && r.size.y > 0.0f)
+        {
+            r.normalized = ImVec2(r.local.x / r.size.x, r.local.y / r.size.y);
+            r.leftHandedNormalized = ImVec2(
+                r.normalized.x - 0.5f,
+                0.5f - r.normalized.y
+            );
+        }
     }
 
     return r;

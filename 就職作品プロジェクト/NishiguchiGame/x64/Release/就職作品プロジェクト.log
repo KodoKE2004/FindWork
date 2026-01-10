@@ -1,8 +1,7 @@
-﻿  Game.cpp
-  Renderer.cpp
+﻿  input.cpp
   コード生成しています。
-  17 of 5073 functions ( 0.3%) were compiled, the rest were copied from previous compilation.
-    1 functions were new in current compilation
-    18 functions had inline decision re-evaluated but remain unchanged
+  2 of 5029 functions (<0.1%) were compiled, the rest were copied from previous compilation.
+    0 functions were new in current compilation
+    8 functions had inline decision re-evaluated but remain unchanged
   コード生成が終了しました。
   就職作品プロジェクト.vcxproj -> C:\Users\kodokeの世界\Desktop\HAL\VisualSutdio\就職作品\個人製作\FindWork\就職作品プロジェクト\x64\Release\NishiguchiGame.exe

@@ -26,7 +26,7 @@ bool TextureManager::AddTexture(const std::string& relativePath) {
         return false;
     }
 
-    Debug::Log("[[¬Œ÷]] AddTexture : " + relativePath,MessageColor::Green);
+    Debug::Log("[[¬Œ÷]] AddTexture  : " + fullPath,MessageColor::Green);
     m_TextureList.emplace(relativePath, tex);
     return true;
 }
@@ -35,7 +35,7 @@ std::shared_ptr<Texture> TextureManager::GetTexture(const std::string& relativeP
 
     auto it = m_TextureList.find(relativePath);
     if (it != m_TextureList.end()) {
-        // Debug::Log("[[¬Œ÷]] GetTexture : " + relativePath, MessageColor::Green);
+        Debug::Log("[[¬Œ÷]] GetTexture  : " + relativePath, MessageColor::Green);
         return it->second;
     }
 
@@ -43,6 +43,7 @@ std::shared_ptr<Texture> TextureManager::GetTexture(const std::string& relativeP
     if (AddTexture(relativePath)) {
         return m_TextureList[relativePath];
     }
+
     // ƒ[ƒh¸”s
     return nullptr;
 }
