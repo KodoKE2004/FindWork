@@ -55,8 +55,11 @@ void Input::Update(HWND hWnd)
 	bool usedImGuiPos = false;
 	bool ignoreMouseInput = false;
 
-#ifdef _DEBUG
+	Vector2 windowSize = {static_cast<float>(Application::GetWidth() ),
+						  static_cast<float>(Application::GetHeight())};
 
+#ifdef _DEBUG
+	
 	m_MousePosNormalizedLH = DirectX::SimpleMath::Vector2(0.0f, 0.0f);
 	const GuiMousePos guiMouse = GetMousePosInGameView();
 	if (guiMouse.inside)
@@ -67,8 +70,8 @@ void Input::Update(HWND hWnd)
 		);
 	}
 
-	m_MousePos.x = static_cast<LONG>(guiMouse.leftHandedNormalized.x * static_cast<float>(Application::GetWidth()));
-	m_MousePos.y = static_cast<LONG>(guiMouse.leftHandedNormalized.y * static_cast<float>(Application::GetHeight()));
+	m_MousePos.x = static_cast<LONG>(guiMouse.leftHandedNormalized.x * windowSize.x);
+	m_MousePos.y = static_cast<LONG>(guiMouse.leftHandedNormalized.y * windowSize.y);
 
 #else
 	if (!usedImGuiPos) {
@@ -78,8 +81,8 @@ void Input::Update(HWND hWnd)
 			}
 			m_MousePos = currentPos;
 
-			m_MousePos.x -= static_cast<LONG>(Application::GetWidth() * 0.5f);
-			m_MousePos.y = -m_MousePos.y + static_cast<LONG>(Application::GetHeight() * 0.5f);
+			m_MousePos.x -= static_cast<LONG>(windowSize.x * 0.5f);
+			m_MousePos.y = -m_MousePos.y + static_cast<LONG>(windowSize.y * 0.5f);
 
 			m_MouseDelta.x = m_MousePos.x - prevPos.x;
 			m_MouseDelta.y = m_MousePos.y - prevPos.y;
