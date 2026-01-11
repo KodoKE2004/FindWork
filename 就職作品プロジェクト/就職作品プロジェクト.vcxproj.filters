@@ -59,6 +59,9 @@
     <Filter Include="SourceFile\Scene\GameScene">
       <UniqueIdentifier>{ee46045f-f61f-4173-98a7-81fce1c52fab}</UniqueIdentifier>
     </Filter>
+    <Filter Include="SourceFile\Object\2D\DragObject">
+      <UniqueIdentifier>{02cd06c0-f01c-460f-bceb-318b1d452d0b}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="02_ResourceFile\SceneFile\TitleScene.cpp">
@@ -239,14 +242,17 @@
       <Filter>SourceFile\Core</Filter>
     </ClCompile>
     <ClCompile Include="pch.cpp" />
-    <ClCompile Include="02_ResourceFile\ObjectFile\DragController.cpp">
-      <Filter>SourceFile\Object\2D</Filter>
-    </ClCompile>
     <ClCompile Include="02_ResourceFile\ObjectFile\Theme.cpp">
       <Filter>SourceFile\Object\2D</Filter>
     </ClCompile>
     <ClCompile Include="02_ResourceFile\ImGuiUtil.cpp">
       <Filter>SourceFile\Debug</Filter>
+    </ClCompile>
+    <ClCompile Include="02_ResourceFile\ObjectFile\DragController.cpp">
+      <Filter>SourceFile\Object\2D\DragObject</Filter>
+    </ClCompile>
+    <ClCompile Include="02_ResourceFile\ObjectFile\DragObject.cpp">
+      <Filter>SourceFile\Object\2D\DragObject</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -455,14 +461,17 @@
       <Filter>SourceFile\Core</Filter>
     </ClInclude>
     <ClInclude Include="pch.h" />
-    <ClInclude Include="02_ResourceFile\ObjectFile\DragController.h">
-      <Filter>SourceFile\Object\2D</Filter>
-    </ClInclude>
     <ClInclude Include="02_ResourceFile\ObjectFile\Theme.h">
       <Filter>SourceFile\Object\2D</Filter>
     </ClInclude>
     <ClInclude Include="02_ResourceFile\ImGuiUtil.h">
       <Filter>SourceFile\Debug</Filter>
+    </ClInclude>
+    <ClInclude Include="02_ResourceFile\ObjectFile\DragController.h">
+      <Filter>SourceFile\Object\2D\DragObject</Filter>
+    </ClInclude>
+    <ClInclude Include="02_ResourceFile\ObjectFile\DragObject.h">
+      <Filter>SourceFile\Object\2D\DragObject</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
