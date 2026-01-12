@@ -36,10 +36,14 @@ namespace
         ChangeScenePush<T>(WaitToGame);
     }
 
-    const std::array<StageEntry, 3> kStageEntries = { {
+    const size_t GAME_EXE_NUM = static_cast<size_t>(SCENE_NO::EXE_NUM);
+
+    const std::array<StageEntry, GAME_EXE_NUM> kStageEntries = { {
         { SCENE_NO::GAME_SLICE, &PushGameStage<GameSceneSlice> },
-        { SCENE_NO::GAME_JUMP,  &PushGameStage<GameSceneJump>  },
+        { SCENE_NO::GAME_JUMP , &PushGameStage<GameSceneJump>  },
         { SCENE_NO::GAME_CRUSH, &PushGameStage<GameSceneCrush> },
+        { SCENE_NO::GAME_TEXT , &PushGameStage<GameSceneText> },
+
     } };
 
     std::vector<SCENE_NO> BuildStageCandidates(SCENE_NO excludeScene)
@@ -85,16 +89,18 @@ namespace
         return nullptr;
     }
 
-    const char* kStageTheme[3] = {
-        "ThemeAvoid.png",
-        "ThemeHit.png",
-        "ThemeSlice.png"
+    const char* kStageTheme[GAME_EXE_NUM] = {
+        "Theme/Avoid.png",
+        "Theme/Hit.png",
+        "Theme/Slice.png",
+        "Theme/Convey.png"
     };
 
-    const NVector3 kThemeScale[3] = {
+    const NVector3 kThemeScale[GAME_EXE_NUM] = {
         NVector3( 550.0f, 200.0f, 1.0f),
         NVector3( 546.0f, 223.0f, 1.0f),
         NVector3( 417.0f, 217.0f, 1.0f),
+        NVector3( 554.0f, 198.0f, 1.0f),
     };
 
     constexpr float kStageTransitionDelay = 1.0f;
@@ -201,18 +207,22 @@ void GameSceneWait::Initialize()
         }
     }
 
+    // ステージ乱数選択処理   
+    PrepareNextStage();
+
+    // ステージ用のお題を作成
     m_Theme = instance.GetTheme();
     if (m_Theme)
     {
         m_Theme->SetName("m_Theme");
         m_Theme->SetActive(false);
-        m_Theme->SetTexture(textureMgr->GetTexture(kStageTheme[1]));
-        m_Theme->SetScaleBase(kThemeScale[1]);
+
+        size_t path = static_cast<size_t>(m_RelationData.nextScene);
+        m_Theme->SetTexture(textureMgr->GetTexture(kStageTheme[path]));
+        m_Theme->SetScaleBase(kThemeScale[path]);
         m_Theme->SetPos(0.0f,0.0f,0.0f);
     }
 
-    // ステージ乱数選択処理   
-    PrepareNextStage();
     Debug::Log("===== クリアステージ数 : " + std::to_string(m_RelationData.stageCount) + " =====");
 }
 
@@ -310,12 +320,14 @@ void GameSceneWait::Finalize()
 void GameSceneWait::StartNextStageTransition()
 {
     ApplyBeatDuration(WaitToGame, m_RelationData);
+
     // シーン遷移処理
     switch (m_RelationData.nextScene)
     {
     case SCENE_NO::GAME_SLICE: ChangeScenePush<GameSceneSlice>(WaitToGame); break;
     case SCENE_NO::GAME_JUMP : ChangeScenePush<GameSceneJump> (WaitToGame); break;
     case SCENE_NO::GAME_CRUSH: ChangeScenePush<GameSceneCrush>(WaitToGame); break;
+    case SCENE_NO::GAME_TEXT : ChangeScenePush<GameSceneText> (WaitToGame); break;
     default: return;
     }
 }

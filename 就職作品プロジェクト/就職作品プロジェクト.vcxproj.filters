@@ -254,6 +254,9 @@
     <ClCompile Include="02_ResourceFile\ObjectFile\DragObject.cpp">
       <Filter>SourceFile\Object\2D\DragObject</Filter>
     </ClCompile>
+    <ClCompile Include="02_ResourceFile\SceneFile\GameSceneText.cpp">
+      <Filter>SourceFile\Scene\GameScene</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="02_ResourceFile\SceneFile\Scene.h">
@@ -472,6 +475,9 @@
     </ClInclude>
     <ClInclude Include="02_ResourceFile\ObjectFile\DragObject.h">
       <Filter>SourceFile\Object\2D\DragObject</Filter>
+    </ClInclude>
+    <ClInclude Include="02_ResourceFile\SceneFile\GameSceneText.h">
+      <Filter>SourceFile\Scene\GameScene</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>

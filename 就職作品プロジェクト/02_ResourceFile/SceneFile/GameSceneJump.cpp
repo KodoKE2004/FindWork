@@ -3,6 +3,7 @@
 #include "Calculator.h"
 #include "DebugUI.h"
 #include <random>
+#include "GameSceneText.h"
 
 float GameSceneJump::GenerateActivationDelay()
 {
@@ -29,31 +30,9 @@ void GameSceneJump::Initialize()
     auto& instance = Game::GetInstance();
     TextureManager* textureMgr = instance;
 
-    // スカイドームの設定
-    m_Skydome = instance.AddObject<Skydome>();
-    m_Skydome->SetName("m_Skydome");
-    m_Skydome->SetSkyDomeMode(true);
-    m_Skydome->SetTexture(textureMgr->GetTexture("SkydomeSpace.png"));
-    m_Skydome->SetRadius(500.0f);
-    m_MySceneObjects.emplace_back(m_Skydome);
-
     m_Bomber = instance.AddObject<Bomber>();
     m_Bomber->SetName("m_TimeGauge");
     m_MySceneObjects.emplace_back(m_Bomber);
-
-    // プレイヤー
-    m_Player = instance.AddObject<Player>(instance.GetCamera());
-    m_Player->SetName("m_Player");
-    m_Player->SetTexture(textureMgr->GetTexture("Plane.png"));
-    m_MySceneObjects.emplace_back(m_Player);
-
-    // 初期配置設定
-    if (m_Player)
-    {
-        m_Player->SetPos(0.0f, m_PlayerGroundHeight, 0.0f);
-        const float jumpOffset = m_Player->GetScale().y * PlayerJumpHeightScale;
-        m_PlayerJumpApexHeight = m_PlayerGroundHeight + jumpOffset;
-    }
 
     // カートの生成
     m_Cart = instance.AddObject<Cart>(instance.GetCamera());
@@ -87,13 +66,6 @@ void GameSceneJump::Initialize()
 void GameSceneJump::Update(float tick)
 {
  
-
-    if (m_Player->m_HitResult.isTriggered())
-    {
-        Debug::Log("[衝突] Player - Cart");
-        m_RelationData.isClear = false;
-    }
-
     if (m_CartWarning)
     {
         if (!m_HasSpawnedCartWarning &&

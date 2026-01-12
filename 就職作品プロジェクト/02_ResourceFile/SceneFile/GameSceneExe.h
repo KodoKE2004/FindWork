@@ -7,7 +7,7 @@
 
 namespace
 {
-	constexpr int BASE_BEATS   = 12;
+	constexpr int BASE_BEATS   = 11;
 }
 
 enum class GAME_MODE
@@ -26,7 +26,6 @@ protected:
 	// 	共通オブジェクト
     std::shared_ptr<Skydome> m_Skydome;
 	std::shared_ptr<Bomber>  m_Bomber ;		// スピードゲージ背景
-    std::shared_ptr<Player>  m_Player ;		// プレイヤーオブジェクト
 
     // カウントダウン関連
 	BeatTimer m_BeatTimer;
@@ -64,6 +63,10 @@ public:
 	virtual void Update(float tick) ;
 	virtual void Finalize()			;
 
+    /// <summary>
+	/// シーンの存在する拍数を設定
+    /// </summary>
+    /// <param name="count"></param>
     void SetBaseBeatCount(const int count) {
 		m_BaseBeats = count; 
 	}
@@ -73,14 +76,16 @@ public:
     void StageClear() { 
         m_RelationData.isClear = true;
 	}
-    void StageChangeFast();
+	// 先行クリアの処理
+    void StageChangeFast() {
+		m_isFastChange = true;
+	}
 	
-
 	bool IsChange()		const { return m_isChange; }
     bool IsFastChange() const { return m_isFastChange; }
 
 	SCENE_NO GetSceneNo() const override {
-		return SCENE_NO::GAME_EXE;
+		return SCENE_NO::NONE;
 	}    
 
 };

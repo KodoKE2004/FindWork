@@ -45,6 +45,7 @@
     <ClCompile Include="02_ResourceFile\SceneFile\GameSceneCrush.cpp" />
     <ClCompile Include="02_ResourceFile\SceneFile\GameSceneJump.cpp" />
     <ClCompile Include="02_ResourceFile\SceneFile\GameSceneSlice.cpp" />
+    <ClCompile Include="02_ResourceFile\SceneFile\GameSceneText.cpp" />
     <ClCompile Include="02_ResourceFile\SceneFile\GameSceneWait.cpp" />
     <ClCompile Include="02_ResourceFile\SceneFile\ResultScene.cpp" />
     <ClCompile Include="02_ResourceFile\SceneFile\Scene.cpp" />
@@ -120,6 +121,7 @@
     <ClInclude Include="02_ResourceFile\SceneFile\GameSceneCrush.h" />
     <ClInclude Include="02_ResourceFile\SceneFile\GameSceneJump.h" />
     <ClInclude Include="02_ResourceFile\SceneFile\GameSceneSlice.h" />
+    <ClInclude Include="02_ResourceFile\SceneFile\GameSceneText.h" />
     <ClInclude Include="02_ResourceFile\SceneFile\GameSceneWait.h" />
     <ClInclude Include="02_ResourceFile\SceneFile\ResultScene.h" />
     <ClInclude Include="02_ResourceFile\SceneFile\Transition\TransitionBase.h" />

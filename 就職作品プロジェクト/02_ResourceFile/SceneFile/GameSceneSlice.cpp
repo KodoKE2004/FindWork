@@ -22,24 +22,10 @@ void GameSceneSlice::Initialize()
     //===============================
     //      シーン内オブジェクト生成
     //===============================
-    m_Skydome = instance.AddObject<Skydome>();
-    m_Skydome->SetName("m_Skydome");
-    m_Skydome->SetSkyDomeMode(true);
-    m_Skydome->SetTexture(textureMgr->GetTexture("SkydomeSpace.png"));
-    m_Skydome->SetRadius(500.0f);
-    m_MySceneObjects.emplace_back(m_Skydome);
-
     m_Bomber = instance.AddObject<Bomber>();
     m_Bomber->SetName("m_TimeGauge");
     m_MySceneObjects.emplace_back(m_Bomber);
 
-    m_Player = instance.AddObject<Player>();
-    m_Player->SetName("m_Player");
-    m_Player->SetPos(-200.0f, 0.0f, 1.0f);
-    m_Player->SetTexture(textureMgr->GetTexture("Sord.png"));
-    m_MySceneObjects.emplace_back(m_Player);
-
-    
     int difficult = m_RelationData.stageCount / 4;
     for (int i = 0; i <= difficult; ++i)
     {
@@ -50,9 +36,6 @@ void GameSceneSlice::Initialize()
         enemy->SetScale(100.0f, 100.0f, 1.0f);
         m_MySceneObjects.emplace_back(enemy);
     }
-
-   
-    
 }
 
 void GameSceneSlice::Update(float tick)
@@ -69,20 +52,10 @@ void GameSceneSlice::Update(float tick)
     }
     else
     {
-        // 攻撃判定
         for(auto it : enemys)
         { 
             if (it->IsDeath()) {
                 continue;
-            }
-            m_Player->m_HitResult.SetHitResult(
-                isHitSquareSquare(*m_Player, *it)
-            );
-            
-            if (m_Player->m_HitResult.isTriggered() && !it->IsDeath())
-            {
-                Debug::Log("[[衝突]] Sord -> Enemy");
-                it->Death();
             }
         }
     }

@@ -19,9 +19,11 @@ void Theme::Initialize()
     RhythmBeat      rhythmBeat = instance.GetCurrentScene()->GetRelationData().rhythmBeat;
     Square::Initialize();
     
-    m_Duration  = 1.5f * rhythmBeat.GetBeatConst().secondsPerBeat;
+    m_SecondPerBeat = rhythmBeat.GetBeatConst().secondsPerBeat;
+    m_Duration  = 1.5f * m_SecondPerBeat;
     m_ScaleMass = 5.0f;
     m_Elapsed   = 0.0f;
+
     SetShader("VS_Alpha","PS_Alpha");
     SetTexture(textureManager->GetTexture("Plane.png"));
 
@@ -36,9 +38,8 @@ void Theme::Update()
     NVector3 scale = m_ScaleBase;
     m_Elapsed += Application::GetDeltaTime();
     
-    // 6拍経ったらactiveをfalseにする
-    // m_Durationは1.5拍の設定
-    float activeBeat = 4.0f * m_Duration;
+    // 一定の拍が経ったらactiveをfalseにする
+    float activeBeat = 5.0f * m_SecondPerBeat;
     if (activeBeat < m_Elapsed) 
     {
         m_isActive = false;
@@ -64,20 +65,6 @@ void Theme::Draw()
     const auto frame = Game::GetDrawFrameCounter();
     if (frame != s_LastLogFrame) {
         s_LastLogFrame = frame;
-    }
-
-    if (m_DebugSolidDraw) {
-        // 呼ばれているが描けていない場合の切り分け: 単色フルスクリーン描画
-        const auto prevScale = m_Scale;
-        const auto prevColor = m_Color;
-        SetScale(static_cast<float>(Renderer::GetScreenWidth()),
-                 static_cast<float>(Renderer::GetScreenHeight()),
-                 1.0f);
-        SetColor(m_DebugSolidColor);
-        Square::Draw();
-        SetScale(prevScale);
-        SetColor(prevColor);
-        return;
     }
 
     Square::Draw();

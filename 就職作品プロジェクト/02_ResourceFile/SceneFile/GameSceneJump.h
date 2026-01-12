@@ -12,10 +12,6 @@ private:
     std::shared_ptr<Cart>        m_Cart;
     std::shared_ptr<CartWarning> m_CartWarning;
 
-    float m_PlayerGroundHeight    = - 100.0f;
-    float m_PlayerJumpApexHeight  =   200.0f;
-    static constexpr float PlayerJumpHeightScale = 2.5f;
-
     TimerData m_TimeCartActivetion = { 0.0f, 0.0f };
     TimerData m_TimeCartWarning    = { 0.0f, 0.5f };
 

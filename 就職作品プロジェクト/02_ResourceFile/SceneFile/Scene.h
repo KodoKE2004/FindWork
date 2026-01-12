@@ -13,17 +13,18 @@ class Theme;
 
 enum class SCENE_NO
 {
-	NONE = -1,
+	NONE = - 6,
 	TITLE,
 	SELECT,
 	RESULT,
 	GAME_WAIT,
-	GAME_EXE,
-    GAME_SLICE,
-	GAME_JUMP,
+    GAME_SLICE = 0,
+	GAME_JUMP ,
 	GAME_CRUSH,
+	GAME_TEXT,
+	EXE_NUM,
 	TRANSITION,
-	NUM
+	NUM = TRANSITION - NONE + 1
 };
 
 // Sceneクラス間の受け渡しデータ

@@ -65,8 +65,6 @@ void GameSceneExe::Update(float tick)
         m_Elapsed = 0.0f;
         const int currentIndex = m_RelationData.rhythmBeat.GetBeatIndex();
         m_BeatTimer.Advance(currentIndex);
-
-
         m_SegmentFrom = m_FillRatio;
 
         float targetProgressNormal = 
@@ -147,8 +145,4 @@ void GameSceneExe::Finalize()
     }
 }
 
-void GameSceneExe::StageChangeFast()
-{
-    m_isFastChange = true;
-}
 

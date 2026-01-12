@@ -110,7 +110,7 @@ void Game::Initialize()
 	instance.m_ShaderManager->Add("VS_Alpha"  ,ShaderStage::VS);
 	instance.m_ShaderManager->Add("PS_Alpha"  ,ShaderStage::PS);
 
-	instance.m_SceneCurrent = std::make_shared<TitleScene>();				// タイトルシーンのインスタンスを生成
+	instance.m_SceneCurrent = std::make_shared<GameSceneWait>();				// タイトルシーンのインスタンスを生成
 	instance.m_SceneCurrent->Initialize();
 }
 
@@ -183,7 +183,7 @@ void Game::Draw()
 	if (gameSrv)
 	{
 	#ifdef _DEBUG
-		const float width = static_cast<float>(Application::GetWidth());
+		const float width  = static_cast<float>(Application::GetWidth());
 		const float height = static_cast<float>(Application::GetHeight());
 
 		auto srvTex = Renderer::BlitSRVToTexture(gameSrv, 1.0f);

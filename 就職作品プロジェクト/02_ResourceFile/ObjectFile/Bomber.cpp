@@ -15,7 +15,7 @@ void Bomber::Initialize()
     TextureManager* textureMgr = instance;
 
     Square::Initialize();
-    SetTexture(textureMgr->GetTexture("BomberBody.png"));
+    SetTexture(textureMgr->GetTexture("Bomber/Body.png"));
     SetPos   (-560.0f,-296.0f, 0.0f);
     SetRotate( 0.0f  ,   0.0f,-0.1f);
     SetScale ( 100.0f, 100.0f, 1.0f);
@@ -25,12 +25,12 @@ void Bomber::Initialize()
 
 
     m_Rope = instance.AddObject<Square>();
-    m_Rope->SetTexture(textureMgr->GetTexture("BomberRope.png"));
+    m_Rope->SetTexture(textureMgr->GetTexture("Bomber/Rope.png"));
     m_Rope->SetName("m_Rope");
     instance.GetCurrentScene()->GetSceneObjects().emplace_back(m_Rope);
 
     m_Number = instance.AddObject<Square>();
-    m_Number->SetTexture(textureMgr->GetTexture("CountThree.png"));
+    m_Number->SetTexture(textureMgr->GetTexture("Bomber/CountThree.png"));
     m_Number->SetPos(1000.0f,0.0f,0.0f);
     m_Number->SetName("m_Number");
     instance.GetCurrentScene()->GetSceneObjects().emplace_back(m_Number);
@@ -78,7 +78,7 @@ void Bomber::CountDown()
     TextureManager* textureMgr = instance;
 
     if (m_Count == 0) {
-        SetTexture(textureMgr->GetTexture("BomberExplosion.png")); 
+        SetTexture(textureMgr->GetTexture("Bomber/Explosion.png")); 
     }
 
     --m_Count;
@@ -144,13 +144,13 @@ void Bomber::CountDownTexture()
     
     switch (m_Count)
     {
-    case 3: m_Number->SetTexture(textureMgr->GetTexture("CountThree.png")); 
+    case 3: m_Number->SetTexture(textureMgr->GetTexture("Bomber/CountThree.png")); 
             m_Number->SetPos(- 560.0f, - 230.0f, 0.0f);
     break;
-    case 2: m_Number->SetTexture(textureMgr->GetTexture("CountTwo.png"));
+    case 2: m_Number->SetTexture(textureMgr->GetTexture("Bomber/CountTwo.png"));
             m_Number->SetPos(- 560.0f, - 230.0f, 0.0f);
     break;
-    case 1: m_Number->SetTexture(textureMgr->GetTexture("CountOne.png")); 
+    case 1: m_Number->SetTexture(textureMgr->GetTexture("Bomber/CountOne.png")); 
             m_Number->SetPos(- 560.0f, - 230.0f, 0.0f);    
     break;
     default: m_Number->SetPos(1000.0f, 0.0f, 0.0f); break;

@@ -50,7 +50,6 @@ void TitleScene::Initialize()
 	m_PressEnterBack->SetTexture(textureMgr->GetTexture("Black.png"));
 	m_PressEnterBack->SetPos(0.0f,- 250.0f,0.0f);
 	m_PressEnterBack->SetScale(1500.0f,100.0f,1.0f);
-	m_PressEnterBack->SetShader("VS_Alpha","PS_Alpha");
 	m_PressEnterBack->SetColor(1.0f,1.0f,1.0f,0.4f);
 	m_MySceneObjects.emplace_back(m_PressEnterBack);
 
@@ -59,21 +58,14 @@ void TitleScene::Initialize()
 	m_PressEnter->SetTexture(textureMgr->GetTexture("ButtonPressEnter.png"));
 	m_PressEnter->SetPos(0.0f,- 250.0f,0.0f);
 	m_PressEnter->SetScale(903.8f,100.0f,1.0f);
-	m_PressEnter->SetShader("VS_Alpha","PS_Alpha");
 	m_PressEnter->SetColor(1.0f,1.0f,1.0f,1.0f);
 	m_MySceneObjects.emplace_back(m_PressEnter);
-
-    m_DragController = instance.AddObject<DragController>();
-    m_DragController->SetName("m_DragController");
-    m_DragController->SetDirection(MOVE_UP_RIGHT);
-    m_MySceneObjects.emplace_back(m_DragController);
 
 	if (m_EntryFlg)
 	{
 		m_FadeMask = instance.AddObject<Square>(instance.GetCamera());
 		m_FadeMask->SetScale(1920.0f, 1080.0f, 1.0f);
 		m_FadeMask->SetTexture(textureMgr->GetTexture("Black.png"));
-		m_FadeMask->SetShader("VS_Alpha","PS_Alpha");
 		m_FadeMask->SetColor(1.0f,1.0f,1.0f,1.0f);
 		m_MySceneObjects.emplace_back(m_FadeMask);
 	}

@@ -15,8 +15,6 @@ private:
 	std::shared_ptr<Square> m_FadeMask		 ;
 	std::shared_ptr<Square> m_PressEnterBack ;
 
-    std::shared_ptr<DragController> m_DragController;
-
 	static constexpr float AlphaChangeTimer = 0.5f;
 
 	// UIŠÇ—‚Ì•Ï”

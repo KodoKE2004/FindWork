@@ -22,22 +22,9 @@ void GameSceneCrush::Initialize()
     auto& instance  = Game::GetInstance();
     TextureManager* textureMgr = instance;
 
-    m_Skydome = instance.AddObject<Skydome>();
-    m_Skydome->SetName("m_Skydome");
-    m_Skydome->SetSkyDomeMode(true);
-    m_Skydome->SetTexture(textureMgr->GetTexture("SkydomeSpace.png"));
-    m_Skydome->SetRadius(500.0f);
-    m_MySceneObjects.emplace_back(m_Skydome);
-
     m_Bomber = instance.AddObject<Bomber>();
     m_Bomber->SetName("m_Bomber");
     m_MySceneObjects.emplace_back(m_Bomber);
-    
-    m_Player = instance.AddObject<Player>();
-    m_Player->SetName("m_Player");
-    m_Player->SetPos(0.0f, 200.0f, 1.0f);
-    m_Player->SetTexture(textureMgr->GetTexture("Weight.png"));
-    m_MySceneObjects.emplace_back(m_Player);
     
     int difficult = m_RelationData.stageCount / 4;
     if (difficult >= 4){ difficult = 3; }

@@ -1,7 +1,5 @@
 #include "DragObject.h"
 
-
-
 DragObject::DragObject(Camera& cam) : Square(cam)
 {
 }
