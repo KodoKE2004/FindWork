@@ -98,7 +98,6 @@ void Game::Initialize()
 	// マネージャーの初期化
 	// モデル・テクスチャのパスを設定
 	instance.m_ShaderManager  = std::make_shared<ShaderManager> ("ShaderFile/");
-	instance.m_MeshManager	  = std::make_shared<MeshManager>	("AssetFile/Model/");
 	instance.m_TextureManager = std::make_shared<TextureManager>("AssetFile/Texture/");
 	instance.m_AudioManager   = std::make_shared<AudioManager>	(L"AssetFile/Sound/");
 	instance.m_AudioManager->Init();
@@ -386,6 +385,5 @@ void Game::DeleteAllObject()
 	}
 
 	instance.m_GameObjects.clear();
-	instance.m_MeshManager->Clear();
 	instance.m_GameObjects.shrink_to_fit();
 }

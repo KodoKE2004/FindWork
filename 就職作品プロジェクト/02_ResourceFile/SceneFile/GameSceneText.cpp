@@ -1,5 +1,8 @@
 #include "GameSceneText.h"
 #include "Game.h"
+#include <algorithm>
+#include <array>
+#include <random>
 
 namespace
 {
@@ -8,6 +11,14 @@ namespace
         NVector3(    0.0f,0.0f,0.0f),
         NVector3(  300.0f,0.0f,0.0f),
     };
+
+    std::array<size_t, 3> ShuffleButtonIndices()
+    {
+        static std::mt19937 engine{ std::random_device{}() };
+        std::array<size_t, 3> indices{ 0, 1, 2 };
+        std::shuffle(indices.begin(), indices.end(), engine);
+        return indices;
+    }
 }
 
 void GameSceneText::Initialize()
@@ -44,13 +55,19 @@ void GameSceneText::Initialize()
     m_FalseA->SetTexture(textureMgr->GetTexture("Text/Frame.png"));
     m_FalseB->SetTexture(textureMgr->GetTexture("Text/Frame.png"));
 
-    m_True  ->SetBaseScale(NVector3(450.0f * 0.8f, 300.0f * 0.8f, 1.0f));
-    m_FalseA->SetBaseScale(NVector3(450.0f * 0.8f, 300.0f * 0.8f, 1.0f));
-    m_FalseB->SetBaseScale(NVector3(450.0f * 0.8f, 300.0f * 0.8f, 1.0f));
+    m_True  ->SetBaseScale(NVector3(360.0f, 240.0f, 1.0f));
+    m_FalseA->SetBaseScale(NVector3(360.0f, 240.0f, 1.0f));
+    m_FalseB->SetBaseScale(NVector3(360.0f, 240.0f, 1.0f));
 
     m_True  ->SetTextTexture(textureMgr->GetTexture("Text/LoveYouTrue.png"));
     m_FalseA->SetTextTexture(textureMgr->GetTexture("Text/LoveYouFalseA.png"));
     m_FalseB->SetTextTexture(textureMgr->GetTexture("Text/LoveYouFalseB.png"));
+
+    std::array<size_t, 3> number = ShuffleButtonIndices();
+
+    m_True  ->SetPos(gButtonPos[number[0]]);
+    m_FalseA->SetPos(gButtonPos[number[1]]);
+    m_FalseB->SetPos(gButtonPos[number[2]]);
 
     m_MySceneObjects.emplace_back(m_True);
     m_MySceneObjects.emplace_back(m_FalseA);
@@ -60,6 +77,10 @@ void GameSceneText::Initialize()
 void GameSceneText::Update(float tick)
 {
     GameSceneExe::Update(tick);
+
+
+
+
     if (IsChange())
     {
         ApplyBeatDuration(GameToWait, m_RelationData);

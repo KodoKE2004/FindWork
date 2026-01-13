@@ -4,7 +4,7 @@
 #include "Debug.hpp"
 
 MeshManager::MeshManager() {
-    Debug::Log("[[NULLモデル登録開始]] MeshManager コンストラクタ");
+    Debug::Log("[[登録]] MeshManager コンストラクタ");
     // "NULL" モデルを最初に登録しておく
     Add(m_DefaultName, "spot.fbx", "spot");
 }
@@ -12,7 +12,7 @@ MeshManager::MeshManager() {
 MeshManager::MeshManager(std::string filePath)
 {
 	m_FilePath = std::move(filePath);
-    Debug::Log("[[NULLモデル登録開始]] MeshManager コンストラクタ");
+    Debug::Log("[[登録]] MeshManager コンストラクタ");
     // "NULL" モデルを最初に登録しておく
     Add(m_DefaultName, "spot.fbx", "spot");
 

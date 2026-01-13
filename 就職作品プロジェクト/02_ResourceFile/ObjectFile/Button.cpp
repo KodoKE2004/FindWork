@@ -12,13 +12,14 @@ void Button::Initialize()
     TextureManager* textureMgr = instance;
 
     m_Text = instance.AddObject<Square>();
+    m_Text->SetScale(150.0f, 50.0f, 1.0f);
     instance.GetCurrentScene()->GetSceneObjects().emplace_back(m_Text);
 }
 
 void Button::Update()
 {
     MouseObject::Update();
-    m_Text->SetPos(GetPos());
+    m_Text->SetPos(GetPos().x, GetPos().y + 5.0f, GetPos().z);
 }
 
 void Button::Draw()
