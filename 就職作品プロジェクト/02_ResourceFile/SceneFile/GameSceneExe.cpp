@@ -56,6 +56,7 @@ void GameSceneExe::Update(float tick)
 {
     CountTimer(tick);
     const int rest = m_BeatTimer.GetRestBeats();
+   
 
     // i‚ñ‚¾Tick(””)‚ğæ“¾
     int advancedTick = m_RelationData.rhythmBeat.Update(tick);
@@ -85,9 +86,10 @@ void GameSceneExe::Update(float tick)
         case 3: targetProgress = 1.0f - (0.10f * scaleMass); useSpecial = true; break;
         case 2: targetProgress = 1.0f - (0.05f * scaleMass); useSpecial = true; break;
         case 1: targetProgress = 1.0f;                       useSpecial = true; break;
-        case 0: m_isChange     = true;                                          break;
         }
-
+        if (rest <= 0) {
+            m_isChange = true;
+        }
         m_SegmentTo = std::clamp(targetProgress, 0.0f, 1.0f);
 
         m_SpecialRest   = rest;

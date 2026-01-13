@@ -69,6 +69,7 @@ void Game::Initialize()
 	//		シーンをタイトルシーンに設定
 	Renderer::Initialize();
 	DebugUI::Init(Renderer::GetDevice(), Renderer::GetDeviceContext());	// デバッグUIの初期化
+
 #ifdef _DEBUG
 
 	RegistDebugObject();
@@ -119,6 +120,7 @@ void Game::Update(float tick)
 	auto& instance = GetInstance();
 	instance.m_Input->Update(Application::GetWindow());
 
+#ifdef _DEBUG
 	DirectX::SimpleMath::Vector2 mousePos = Input::GetMousePos();
     float mouseDiffX = mousePos.x - instance.m_PreviewMousePos.x;
     float mouseDiffY = mousePos.y - instance.m_PreviewMousePos.y;
@@ -126,7 +128,6 @@ void Game::Update(float tick)
 		std::cout << "Mouse X:" << mousePos.x << "\t Y:" << mousePos.y << std::endl;
 	}
 	instance.m_PreviewMousePos = mousePos;
-#ifdef _DEBUG
 #endif
 
 	// 現在のシーンの更新

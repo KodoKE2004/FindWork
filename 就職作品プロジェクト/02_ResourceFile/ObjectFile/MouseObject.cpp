@@ -1,17 +1,17 @@
-#include "DragObject.h"
+#include "MouseObject.h"
 
-DragObject::DragObject(Camera& cam) : Square(cam)
+MouseObject::MouseObject(Camera& cam) : Square(cam)
 {
 }
 
-void DragObject::Initialize()
+void MouseObject::Initialize()
 {
     Square::Initialize();
     m_isDrag    = false;
     m_isInside  = false;
 }
 
-void DragObject::Update()
+void MouseObject::Update()
 {
     const auto mousePos = Input::GetMousePos();
     const auto pos = GetPos();
@@ -36,17 +36,17 @@ void DragObject::Update()
     }
 }
 
-void DragObject::Draw()
+void MouseObject::Draw()
 {
     Square::Draw();
 }
 
-void DragObject::Finalize()
+void MouseObject::Finalize()
 {
     Square::Finalize();
 }
 
-bool DragObject::IsDrag()
+bool MouseObject::IsDrag()
 {
     return m_isDrag;
 }

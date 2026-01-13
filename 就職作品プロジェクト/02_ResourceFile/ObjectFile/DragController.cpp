@@ -2,7 +2,7 @@
 #include "input.h"
 #include <DirectXMath.h>
 #include <cmath>
-DragController::DragController(Camera& cam) : DragObject(cam)
+DragController::DragController(Camera& cam) : MouseObject(cam)
 {
 }
 
@@ -17,7 +17,7 @@ void DragController::Initialize()
 
 void DragController::Update()
 {
-    DragObject::Update();
+    MouseObject::Update();
     if (!m_isDrag) { return; }
     if (m_MoveDir == MOVE_NONE){ return; }
 

@@ -1,5 +1,5 @@
 #pragma once
-#include "DragObject.h"
+#include "MouseObject.h"
 #include <SimpleMath.h>
 
 enum MOVE_DIR
@@ -28,7 +28,7 @@ const DirectX::SimpleMath::Vector2 MOVE_DIR_VEC[MOVE_MAX] = {
     { MOVE_INV_SQRT2, -MOVE_INV_SQRT2 },   // MOVE_UP_RIGHT (45Åã)
 };
 
-class DragController : public DragObject
+class DragController : public MouseObject
 {
 protected:
 

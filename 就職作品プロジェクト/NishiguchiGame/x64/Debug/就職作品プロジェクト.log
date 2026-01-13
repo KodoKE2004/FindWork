@@ -1,120 +1,12 @@
 ﻿  Application.cpp
-  Bomber.cpp
-  Theme.cpp
-  Camera.cpp
-  DebugGridLine.cpp
-  DebugUI.cpp
   Game.cpp
-  Enemy.cpp
-  GameSceneCrush.cpp
+  Button.cpp
+  GameSceneExe.cpp
   GameSceneJump.cpp
-  GameSceneSlice.cpp
   GameSceneText.cpp
   GameSceneWait.cpp
   ResultScene.cpp
-  Scene.cpp
-  TransitionBase.cpp
-C:\Users\kodokeの世界\Desktop\HAL\VisualSutdio\就職作品\個人製作\FindWork\就職作品プロジェクト\02_ResourceFile\SceneFile\GameSceneText.h(8,10): error C2923: 'std::shared_ptr': 'DragObject' は、パラメーター '_Ty' の有効な テンプレート 型引数ではありません
-  (ソース ファイル '/02_ResourceFile/SceneFile/GameSceneText.cpp' をコンパイルしています)
-      C:\Program Files (x86)\Windows Kits\10\Include\10.0.26100.0\um\winuser.h(8145,1):
-      'DragObject' の宣言を確認してください
-  
-C:\Users\kodokeの世界\Desktop\HAL\VisualSutdio\就職作品\個人製作\FindWork\就職作品プロジェクト\02_ResourceFile\SceneFile\GameSceneText.h(8,33): error C2955: 'std::shared_ptr': クラス テンプレート を使用するには テンプレート 引数リストが必要です
-  (ソース ファイル '/02_ResourceFile/SceneFile/GameSceneText.cpp' をコンパイルしています)
-      C:\Program Files\Microsoft Visual Studio\2022\Community\VC\Tools\MSVC\14.38.33130\include\memory(1557,1):
-      'std::shared_ptr' の宣言を確認してください
-  
-  Wipe.cpp
-C:\Users\kodokeの世界\Desktop\HAL\VisualSutdio\就職作品\個人製作\FindWork\就職作品プロジェクト\02_ResourceFile\SceneFile\GameSceneText.h(8,10): error C2923: 'std::shared_ptr': 'DragObject' は、パラメーター '_Ty' の有効な テンプレート 型引数ではありません
-  (ソース ファイル '/02_ResourceFile/SceneFile/GameSceneJump.cpp' をコンパイルしています)
-      C:\Program Files (x86)\Windows Kits\10\Include\10.0.26100.0\um\winuser.h(8145,1):
-      'DragObject' の宣言を確認してください
-  
-C:\Users\kodokeの世界\Desktop\HAL\VisualSutdio\就職作品\個人製作\FindWork\就職作品プロジェクト\02_ResourceFile\SceneFile\GameSceneText.h(8,33): error C2955: 'std::shared_ptr': クラス テンプレート を使用するには テンプレート 引数リストが必要です
-  (ソース ファイル '/02_ResourceFile/SceneFile/GameSceneJump.cpp' をコンパイルしています)
-      C:\Program Files\Microsoft Visual Studio\2022\Community\VC\Tools\MSVC\14.38.33130\include\memory(1557,1):
-      'std::shared_ptr' の宣言を確認してください
-  
-  Zoom.cpp
-C:\Users\kodokeの世界\Desktop\HAL\VisualSutdio\就職作品\個人製作\FindWork\就職作品プロジェクト\02_ResourceFile\SceneFile\GameSceneText.h(8,10): error C2923: 'std::shared_ptr': 'DragObject' は、パラメーター '_Ty' の有効な テンプレート 型引数ではありません
-  (ソース ファイル '/02_ResourceFile/SceneFile/ResultScene.cpp' をコンパイルしています)
-      C:\Program Files (x86)\Windows Kits\10\Include\10.0.26100.0\um\winuser.h(8145,1):
-      'DragObject' の宣言を確認してください
-  
-C:\Users\kodokeの世界\Desktop\HAL\VisualSutdio\就職作品\個人製作\FindWork\就職作品プロジェクト\02_ResourceFile\SceneFile\GameSceneText.h(8,33): error C2955: 'std::shared_ptr': クラス テンプレート を使用するには テンプレート 引数リストが必要です
-  (ソース ファイル '/02_ResourceFile/SceneFile/ResultScene.cpp' をコンパイルしています)
-      C:\Program Files\Microsoft Visual Studio\2022\Community\VC\Tools\MSVC\14.38.33130\include\memory(1557,1):
-      'std::shared_ptr' の宣言を確認してください
-  
-C:\Users\kodokeの世界\Desktop\HAL\VisualSutdio\就職作品\個人製作\FindWork\就職作品プロジェクト\02_ResourceFile\SceneFile\GameSceneText.h(8,10): error C2923: 'std::shared_ptr': 'DragObject' は、パラメーター '_Ty' の有効な テンプレート 型引数ではありません
-  (ソース ファイル '/02_ResourceFile/SceneFile/GameSceneWait.cpp' をコンパイルしています)
-      C:\Program Files (x86)\Windows Kits\10\Include\10.0.26100.0\um\winuser.h(8145,1):
-      'DragObject' の宣言を確認してください
-  
-C:\Users\kodokeの世界\Desktop\HAL\VisualSutdio\就職作品\個人製作\FindWork\就職作品プロジェクト\02_ResourceFile\SceneFile\GameSceneText.h(8,33): error C2955: 'std::shared_ptr': クラス テンプレート を使用するには テンプレート 引数リストが必要です
-  (ソース ファイル '/02_ResourceFile/SceneFile/GameSceneWait.cpp' をコンパイルしています)
-      C:\Program Files\Microsoft Visual Studio\2022\Community\VC\Tools\MSVC\14.38.33130\include\memory(1557,1):
-      'std::shared_ptr' の宣言を確認してください
-  
-  Bullet.cpp
-  Cube.cpp
-  Model.cpp
-  Object.cpp
-  Sphere.cpp
-C:\Users\kodokeの世界\Desktop\HAL\VisualSutdio\就職作品\個人製作\FindWork\就職作品プロジェクト\02_ResourceFile\SceneFile\GameSceneText.h(8,10): error C2923: 'std::shared_ptr': 'DragObject' は、パラメーター '_Ty' の有効な テンプレート 型引数ではありません
-  (ソース ファイル '/02_ResourceFile/Game.cpp' をコンパイルしています)
-      C:\Program Files (x86)\Windows Kits\10\Include\10.0.26100.0\um\winuser.h(8145,1):
-      'DragObject' の宣言を確認してください
-  
-C:\Users\kodokeの世界\Desktop\HAL\VisualSutdio\就職作品\個人製作\FindWork\就職作品プロジェクト\02_ResourceFile\SceneFile\GameSceneText.h(8,33): error C2955: 'std::shared_ptr': クラス テンプレート を使用するには テンプレート 引数リストが必要です
-  (ソース ファイル '/02_ResourceFile/Game.cpp' をコンパイルしています)
-      C:\Program Files\Microsoft Visual Studio\2022\Community\VC\Tools\MSVC\14.38.33130\include\memory(1557,1):
-      'std::shared_ptr' の宣言を確認してください
-  
-  Skydome.cpp
-  GameSceneExe.cpp
   SelectScene.cpp
   TitleScene.cpp
-  Fade.cpp
   TransScene.cpp
-  Square.cpp
-C:\Users\kodokeの世界\Desktop\HAL\VisualSutdio\就職作品\個人製作\FindWork\就職作品プロジェクト\02_ResourceFile\SceneFile\GameSceneText.h(8,10): error C2923: 'std::shared_ptr': 'DragObject' は、パラメーター '_Ty' の有効な テンプレート 型引数ではありません
-  (ソース ファイル '/02_ResourceFile/SceneFile/GameSceneExe.cpp' をコンパイルしています)
-      C:\Program Files (x86)\Windows Kits\10\Include\10.0.26100.0\um\winuser.h(8145,1):
-      'DragObject' の宣言を確認してください
-  
-C:\Users\kodokeの世界\Desktop\HAL\VisualSutdio\就職作品\個人製作\FindWork\就職作品プロジェクト\02_ResourceFile\SceneFile\GameSceneText.h(8,33): error C2955: 'std::shared_ptr': クラス テンプレート を使用するには テンプレート 引数リストが必要です
-  (ソース ファイル '/02_ResourceFile/SceneFile/GameSceneExe.cpp' をコンパイルしています)
-      C:\Program Files\Microsoft Visual Studio\2022\Community\VC\Tools\MSVC\14.38.33130\include\memory(1557,1):
-      'std::shared_ptr' の宣言を確認してください
-  
-C:\Users\kodokeの世界\Desktop\HAL\VisualSutdio\就職作品\個人製作\FindWork\就職作品プロジェクト\02_ResourceFile\SceneFile\GameSceneText.h(8,10): error C2923: 'std::shared_ptr': 'DragObject' は、パラメーター '_Ty' の有効な テンプレート 型引数ではありません
-  (ソース ファイル '/02_ResourceFile/SceneFile/TitleScene.cpp' をコンパイルしています)
-      C:\Program Files (x86)\Windows Kits\10\Include\10.0.26100.0\um\winuser.h(8145,1):
-      'DragObject' の宣言を確認してください
-  
-C:\Users\kodokeの世界\Desktop\HAL\VisualSutdio\就職作品\個人製作\FindWork\就職作品プロジェクト\02_ResourceFile\SceneFile\GameSceneText.h(8,33): error C2955: 'std::shared_ptr': クラス テンプレート を使用するには テンプレート 引数リストが必要です
-  (ソース ファイル '/02_ResourceFile/SceneFile/TitleScene.cpp' をコンパイルしています)
-      C:\Program Files\Microsoft Visual Studio\2022\Community\VC\Tools\MSVC\14.38.33130\include\memory(1557,1):
-      'std::shared_ptr' の宣言を確認してください
-  
-C:\Users\kodokeの世界\Desktop\HAL\VisualSutdio\就職作品\個人製作\FindWork\就職作品プロジェクト\02_ResourceFile\SceneFile\GameSceneText.h(8,10): error C2923: 'std::shared_ptr': 'DragObject' は、パラメーター '_Ty' の有効な テンプレート 型引数ではありません
-  (ソース ファイル '/02_ResourceFile/SceneFile/TransScene.cpp' をコンパイルしています)
-      C:\Program Files (x86)\Windows Kits\10\Include\10.0.26100.0\um\winuser.h(8145,1):
-      'DragObject' の宣言を確認してください
-  
-C:\Users\kodokeの世界\Desktop\HAL\VisualSutdio\就職作品\個人製作\FindWork\就職作品プロジェクト\02_ResourceFile\SceneFile\GameSceneText.h(8,33): error C2955: 'std::shared_ptr': クラス テンプレート を使用するには テンプレート 引数リストが必要です
-  (ソース ファイル '/02_ResourceFile/SceneFile/TransScene.cpp' をコンパイルしています)
-      C:\Program Files\Microsoft Visual Studio\2022\Community\VC\Tools\MSVC\14.38.33130\include\memory(1557,1):
-      'std::shared_ptr' の宣言を確認してください
-  
-C:\Users\kodokeの世界\Desktop\HAL\VisualSutdio\就職作品\個人製作\FindWork\就職作品プロジェクト\02_ResourceFile\SceneFile\GameSceneText.h(8,10): error C2923: 'std::shared_ptr': 'DragObject' は、パラメーター '_Ty' の有効な テンプレート 型引数ではありません
-  (ソース ファイル '/02_ResourceFile/SceneFile/SelectScene.cpp' をコンパイルしています)
-      C:\Program Files (x86)\Windows Kits\10\Include\10.0.26100.0\um\winuser.h(8145,1):
-      'DragObject' の宣言を確認してください
-  
-C:\Users\kodokeの世界\Desktop\HAL\VisualSutdio\就職作品\個人製作\FindWork\就職作品プロジェクト\02_ResourceFile\SceneFile\GameSceneText.h(8,33): error C2955: 'std::shared_ptr': クラス テンプレート を使用するには テンプレート 引数リストが必要です
-  (ソース ファイル '/02_ResourceFile/SceneFile/SelectScene.cpp' をコンパイルしています)
-      C:\Program Files\Microsoft Visual Studio\2022\Community\VC\Tools\MSVC\14.38.33130\include\memory(1557,1):
-      'std::shared_ptr' の宣言を確認してください
-  
+  就職作品プロジェクト.vcxproj -> C:\Users\kodokeの世界\Desktop\HAL\VisualSutdio\就職作品\個人製作\FindWork\就職作品プロジェクト\x64\Debug\NishiguchiGame.exe

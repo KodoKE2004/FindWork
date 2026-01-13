@@ -3,7 +3,9 @@
 
 void GameSceneText::Initialize()
 {
+#ifdef _DEBUG
     DebugUI::TEXT_CurrentScene = "GameSceneText";
+#endif
     GameSceneExe::SetBaseBeatCount(BASE_BEATS);
     GameSceneExe::Initialize();
 
@@ -20,6 +22,14 @@ void GameSceneText::Initialize()
     m_Bomber = instance.AddObject<Bomber>();
     m_Bomber->SetName("m_TimeGauge");
     m_MySceneObjects.emplace_back(m_Bomber);
+
+    m_True   = instance.AddObject<Button>();
+    m_FalseA = instance.AddObject<Button>();
+    m_FalseB = instance.AddObject<Button>();
+    
+    m_MySceneObjects.emplace_back(m_True);
+    m_MySceneObjects.emplace_back(m_FalseA);
+    m_MySceneObjects.emplace_back(m_FalseB);
 }
 
 void GameSceneText::Update(float tick)

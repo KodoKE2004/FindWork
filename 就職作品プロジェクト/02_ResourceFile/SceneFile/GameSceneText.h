@@ -1,11 +1,15 @@
 #pragma once
 #include "GameSceneExe.h"
-#include "DragObject.h"
+#include "Button.h"
 #include <memory>
+
 class GameSceneText : public GameSceneExe
 {
 private:
-    std::shared_ptr<DragObject> m_DragObject;
+    std::shared_ptr<Button> m_True;
+    std::shared_ptr<Button> m_FalseA;
+    std::shared_ptr<Button> m_FalseB;
+
     bool  m_HasSpawnedCartWarning = false;
 
     size_t m_CurrentCartPatternIndex = 0;
