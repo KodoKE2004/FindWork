@@ -1,12 +1,11 @@
 #pragma once
 #include "GameSceneExe.h"
+#include "DragObject.h"
+#include <memory>
 class GameSceneText : public GameSceneExe
 {
 private:
-
-    TimerData m_TimeCartActivetion = { 0.0f, 0.0f };
-    TimerData m_TimeCartWarning = { 0.0f, 0.5f };
-
+    std::shared_ptr<DragObject> m_DragObject;
     bool  m_HasSpawnedCartWarning = false;
 
     size_t m_CurrentCartPatternIndex = 0;

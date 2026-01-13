@@ -25,11 +25,10 @@ void GameSceneText::Initialize()
 void GameSceneText::Update(float tick)
 {
     GameSceneExe::Update(tick);
-
     if (IsChange())
     {
         ApplyBeatDuration(GameToWait, m_RelationData);
-        ChangeScenePop(GameToWait);
+        // ChangeScenePop(GameToWait);
     }
 
 }

@@ -24,7 +24,7 @@ void DebugUI::Init(ID3D11Device* device, ID3D11DeviceContext* context)
 
     // Setup Dear ImGui style
     ImGui::StyleColorsDark();
-    //ImGui::StyleColorsLight();
+    // ImGui::StyleColorsLight();
 
     // Setup Platform/Renderer backends
     ImGui_ImplWin32_Init(Application::GetWindow());
