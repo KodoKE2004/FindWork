@@ -14,6 +14,7 @@ public:
 
     void SetBaseScale(NVector3 scale) {
         m_BaseScale = scale;
+        SetScale(scale);
     }
     void SetTextScale(NVector3 scale) {
         m_Text->SetScale(scale);

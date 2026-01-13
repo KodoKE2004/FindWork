@@ -54,9 +54,10 @@ void GameSceneExe::Initialize()
 
 void GameSceneExe::Update(float tick)
 {
+    return;
+
     CountTimer(tick);
     const int rest = m_BeatTimer.GetRestBeats();
-   
 
     // i‚ñ‚¾Tick(””)‚ğæ“¾
     int advancedTick = m_RelationData.rhythmBeat.Update(tick);

@@ -1,12 +1,2 @@
-﻿  Application.cpp
-  Game.cpp
-  Button.cpp
-  GameSceneExe.cpp
-  GameSceneJump.cpp
-  GameSceneText.cpp
-  GameSceneWait.cpp
-  ResultScene.cpp
-  SelectScene.cpp
-  TitleScene.cpp
-  TransScene.cpp
+﻿  Button.cpp
   就職作品プロジェクト.vcxproj -> C:\Users\kodokeの世界\Desktop\HAL\VisualSutdio\就職作品\個人製作\FindWork\就職作品プロジェクト\x64\Debug\NishiguchiGame.exe

@@ -1,6 +1,15 @@
 #include "GameSceneText.h"
 #include "Game.h"
 
+namespace
+{
+    NVector3 gButtonPos[3] = {
+        NVector3(- 300.0f,0.0f,0.0f),
+        NVector3(    0.0f,0.0f,0.0f),
+        NVector3(  300.0f,0.0f,0.0f),
+    };
+}
+
 void GameSceneText::Initialize()
 {
 #ifdef _DEBUG
@@ -15,7 +24,7 @@ void GameSceneText::Initialize()
     m_RelationData.isClear = false;
 
     auto& instance = Game::GetInstance();
-
+    TextureManager* textureMgr = instance; 
     //===============================
     //      シーン内オブジェクト生成
     //===============================
@@ -27,6 +36,22 @@ void GameSceneText::Initialize()
     m_FalseA = instance.AddObject<Button>();
     m_FalseB = instance.AddObject<Button>();
     
+    m_True  ->SetName("m_True");
+    m_FalseA->SetName("m_FalseA");
+    m_FalseB->SetName("m_FalseB");
+
+    m_True  ->SetTexture(textureMgr->GetTexture("Text/Frame.png"));
+    m_FalseA->SetTexture(textureMgr->GetTexture("Text/Frame.png"));
+    m_FalseB->SetTexture(textureMgr->GetTexture("Text/Frame.png"));
+
+    m_True  ->SetBaseScale(NVector3(450.0f * 0.8f, 300.0f * 0.8f, 1.0f));
+    m_FalseA->SetBaseScale(NVector3(450.0f * 0.8f, 300.0f * 0.8f, 1.0f));
+    m_FalseB->SetBaseScale(NVector3(450.0f * 0.8f, 300.0f * 0.8f, 1.0f));
+
+    m_True  ->SetTextTexture(textureMgr->GetTexture("Text/LoveYouTrue.png"));
+    m_FalseA->SetTextTexture(textureMgr->GetTexture("Text/LoveYouFalseA.png"));
+    m_FalseB->SetTextTexture(textureMgr->GetTexture("Text/LoveYouFalseB.png"));
+
     m_MySceneObjects.emplace_back(m_True);
     m_MySceneObjects.emplace_back(m_FalseA);
     m_MySceneObjects.emplace_back(m_FalseB);
