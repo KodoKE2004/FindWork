@@ -261,7 +261,10 @@
       <Filter>SourceFile\Object\2D\DragObject</Filter>
     </ClCompile>
     <ClCompile Include="02_ResourceFile\ObjectFile\Bird.cpp">
-      <Filter>SourceFile</Filter>
+      <Filter>SourceFile\Object\2D</Filter>
+    </ClCompile>
+    <ClCompile Include="02_ResourceFile\ObjectFile\Stone.cpp">
+      <Filter>SourceFile\Object\2D</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -488,7 +491,12 @@
     <ClInclude Include="02_ResourceFile\ObjectFile\Button.h">
       <Filter>SourceFile\Object\2D\DragObject</Filter>
     </ClInclude>
-    <ClInclude Include="02_ResourceFile\ObjectFile\Bird.h" />
+    <ClInclude Include="02_ResourceFile\ObjectFile\Bird.h">
+      <Filter>SourceFile\Object\2D</Filter>
+    </ClInclude>
+    <ClInclude Include="02_ResourceFile\ObjectFile\Stone.h">
+      <Filter>SourceFile\Object\2D</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <FxCompile Include="ShaderFile\Common.hlsl">

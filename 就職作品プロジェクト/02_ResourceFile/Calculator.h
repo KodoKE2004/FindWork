@@ -117,8 +117,8 @@ namespace Math
         struct VerticalMotionState
         {
             float velocity = 0.0f;
-            float gravity = 980.0f;
-            float weight = 1.0f;
+            float gravity  = 980.0f;
+            float weight   = 1.0f;
             float terminalVelocity = -2500.0f;
             float groundY = 0.0f;
         };

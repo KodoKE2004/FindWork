@@ -27,6 +27,7 @@
     <ClCompile Include="02_ResourceFile\ObjectFile\Button.cpp" />
     <ClCompile Include="02_ResourceFile\ObjectFile\DragController.cpp" />
     <ClCompile Include="02_ResourceFile\ObjectFile\MouseObject.cpp" />
+    <ClCompile Include="02_ResourceFile\ObjectFile\Stone.cpp" />
     <ClCompile Include="02_ResourceFile\ObjectFile\Theme.cpp" />
     <ClCompile Include="02_ResourceFile\Particle.cpp" />
     <ClCompile Include="02_ResourceFile\RhythmBeat.cpp" />
@@ -99,6 +100,7 @@
     <ClInclude Include="02_ResourceFile\ObjectFile\Button.h" />
     <ClInclude Include="02_ResourceFile\ObjectFile\DragController.h" />
     <ClInclude Include="02_ResourceFile\ObjectFile\MouseObject.h" />
+    <ClInclude Include="02_ResourceFile\ObjectFile\Stone.h" />
     <ClInclude Include="02_ResourceFile\ObjectFile\Theme.h" />
     <ClInclude Include="02_ResourceFile\Particle.h" />
     <ClInclude Include="02_ResourceFile\RhythmBeat.h" />

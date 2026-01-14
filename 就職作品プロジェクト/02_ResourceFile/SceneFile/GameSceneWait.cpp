@@ -11,17 +11,6 @@
 bool GameSceneWait::s_HasFirstGameSceneWaitInitialized = false;
 GAME_PHASE GameSceneWait::s_CurrentGamePhase = GAME_PHASE::START;
 
-// a か b のどちらかをランダムに返すテンプレート関数
-template<class T>
-T RandomChoose(const T& a, const T& b)
-{
-    static std::mt19937 mt{std::random_device{}() };
-    unsigned int bit = mt() & 1u;
-
-    // bit が 0 のとき a を、1 のとき b を返す
-    return (bit == 0) ? a : b;
-}
-
 namespace
 {
     struct StageEntry

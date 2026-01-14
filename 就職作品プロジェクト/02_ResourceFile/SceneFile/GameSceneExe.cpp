@@ -54,7 +54,7 @@ void GameSceneExe::Initialize()
 
 void GameSceneExe::Update(float tick)
 {
-    return;
+    // return;
 
     CountTimer(tick);
     const int rest = m_BeatTimer.GetRestBeats();
@@ -103,8 +103,8 @@ void GameSceneExe::Update(float tick)
         {
             m_Bomber->SetCount(m_SpecialRest);
             m_Bomber->CountDown();
-            if (rest == 0) { PlaySE("explosion", std::nullopt); }
-            else           { PlaySE("clock"    , std::nullopt); }
+            if (rest == 0)    { PlaySE("explosion", std::nullopt); }
+            else if(rest > 0) { PlaySE("clock"    , std::nullopt); }
         }
     }
 

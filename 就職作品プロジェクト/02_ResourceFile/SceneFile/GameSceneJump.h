@@ -2,17 +2,18 @@
 #include "GameSceneExe.h"
 #include "Player.h"
 #include "Bird.h"
+#include "Stone.h"
 
-#include <array>
+#include <vector>
 
 class GameSceneJump : public GameSceneExe
 {
 private:
     
-    std::shared_ptr<Bird> m_Bird;
+    std::shared_ptr<Bird>  m_Bird;
+    std::vector<std::shared_ptr<Stone>> m_StoneList;
 
-    bool  m_HasSpawnedCartWarning = false;
-
+    int m_Beat;
     size_t m_CurrentCartPatternIndex = 0;
 
     float GenerateActivationDelay();
