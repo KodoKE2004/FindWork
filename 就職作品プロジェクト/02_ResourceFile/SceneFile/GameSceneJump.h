@@ -1,19 +1,15 @@
 #pragma once
 #include "GameSceneExe.h"
 #include "Player.h"
-#include "Car.h"
-#include "CartWarning.h" 
+#include "Bird.h"
 
 #include <array>
 
 class GameSceneJump : public GameSceneExe
 {
 private:
-    std::shared_ptr<Cart>        m_Cart;
-    std::shared_ptr<CartWarning> m_CartWarning;
-
-    TimerData m_TimeCartActivetion = { 0.0f, 0.0f };
-    TimerData m_TimeCartWarning    = { 0.0f, 0.5f };
+    
+    std::shared_ptr<Bird> m_Bird;
 
     bool  m_HasSpawnedCartWarning = false;
 
