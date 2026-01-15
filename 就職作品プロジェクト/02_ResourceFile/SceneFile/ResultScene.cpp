@@ -21,7 +21,7 @@ void ResultScene::Initialize()
 
     m_ButtonToTitle = instance.AddObject<Square>();
     m_ButtonToTitle->SetName("m_ButtonToTitle");
-    m_ButtonToTitle->SetTexture(textureMgr->GetTexture("ButtonToTitle.png"));
+    m_ButtonToTitle->SetTexture(textureMgr->GetTexture("Button/Text/ToTitle.png"));
     m_ButtonToTitle->SetPos(0.0f, -100.0f, 0.0f);
     m_ButtonToTitle->SetScale(940.0f, 100.0f, 1.0f);
     m_ButtonToTitle->SetShader("VS_Alpha", "PS_Alpha");
@@ -30,7 +30,7 @@ void ResultScene::Initialize()
 
     m_ButtonRetry = instance.AddObject<Square>();
     m_ButtonRetry->SetName("m_ButtonToRetry");
-    m_ButtonRetry->SetTexture(textureMgr->GetTexture("ButtonRetry.png"));
+    m_ButtonRetry->SetTexture(textureMgr->GetTexture("Button/Text/Retry.png"));
     m_ButtonRetry->SetPos(0.0f, -200.0f, 0.0f);
     m_ButtonRetry->SetScale(940.0f, 100.0f, 1.0f);
     m_ButtonRetry->SetShader("VS_Alpha", "PS_Alpha");

@@ -15,7 +15,10 @@ void TitleScene::Initialize()
 {
 	auto& instance    = Game::GetInstance();
 	TextureManager* textureMgr = instance;
+#ifndef _DEBUG
     DebugUI::TEXT_CurrentScene = "TitleScene";
+#endif // !_DEBUG
+
 
 	// シーンを取りつなぐデータの作成
 	// 失敗判定でWiatシーンに失敗処理をさせないためにtrue
@@ -55,7 +58,7 @@ void TitleScene::Initialize()
 
 	m_PressEnter = instance.AddObject<Square>();
 	m_PressEnter->SetName("m_PressEnter");
-	m_PressEnter->SetTexture(textureMgr->GetTexture("ButtonPressEnter.png"));
+	m_PressEnter->SetTexture(textureMgr->GetTexture("Button/Text/PressEnter.png"));
 	m_PressEnter->SetPos(0.0f,- 250.0f,0.0f);
 	m_PressEnter->SetScale(903.8f,100.0f,1.0f);
 	m_PressEnter->SetColor(1.0f,1.0f,1.0f,1.0f);

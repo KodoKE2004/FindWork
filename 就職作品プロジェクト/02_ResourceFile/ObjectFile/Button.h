@@ -27,5 +27,8 @@ public:
     NVector3 GetBaseScale() const {
         return m_BaseScale;
     }
+    std::shared_ptr<Square> GetTextObject() const {
+        return m_Text;
+    }
 };
 

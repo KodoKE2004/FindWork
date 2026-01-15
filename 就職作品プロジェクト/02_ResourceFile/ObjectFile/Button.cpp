@@ -13,7 +13,6 @@ void Button::Initialize()
 
     m_Text = instance.AddObject<Square>();
     m_Text->SetScale(120.0f, 40.0f, 1.0f);
-    instance.GetCurrentScene()->GetSceneObjects().emplace_back(m_Text);
 }
 
 void Button::Update()
@@ -29,6 +28,8 @@ void Button::Draw()
 
 void Button::Finalize()
 {
+    m_Text->Finalize();
+    m_Text = nullptr;
     MouseObject::Finalize();
 }
 

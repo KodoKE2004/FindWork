@@ -26,7 +26,7 @@ void GameSceneText::Initialize()
 #ifdef _DEBUG
     DebugUI::TEXT_CurrentScene = "GameSceneText";
 #endif
-    GameSceneExe::SetBaseBeatCount(BASE_BEATS);
+    GameSceneExe::SetBaseBeatCount(BASE_BEATS + 4);
     GameSceneExe::Initialize();
     m_ButtonFadeDuration = static_cast<float>(m_RelationData.rhythmBeat.GetBeatConst().m_TicksPerBeat);
 
@@ -105,6 +105,10 @@ void GameSceneText::Initialize()
     m_MySceneObjects.emplace_back(m_True);
     m_MySceneObjects.emplace_back(m_FalseA);
     m_MySceneObjects.emplace_back(m_FalseB);
+
+    m_MySceneObjects.emplace_back(m_True  ->GetTextObject());
+    m_MySceneObjects.emplace_back(m_FalseA->GetTextObject());
+    m_MySceneObjects.emplace_back(m_FalseB->GetTextObject());
 
     m_TimerUI = instance.AddObject<Timer>();
     m_TimerUI->SetName("m_TimerUI");
@@ -203,7 +207,7 @@ void GameSceneText::Update(float tick)
     if (IsChange())
     {
         ApplyBeatDuration(GameToWait, m_RelationData);
-        // ChangeScenePop(GameToWait);
+        ChangeScenePop(GameToWait);
     }
 
 }

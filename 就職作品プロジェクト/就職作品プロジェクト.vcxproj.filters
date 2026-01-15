@@ -535,5 +535,8 @@
     <FxCompile Include="ShaderFile\VS_DebugGrid.hlsl">
       <Filter>HLSL\VertexShader</Filter>
     </FxCompile>
+    <FxCompile Include="ShaderFile\PS_Sprite.hlsl">
+      <Filter>HLSL\PixelShader</Filter>
+    </FxCompile>
   </ItemGroup>
 </Project>
