@@ -28,6 +28,7 @@ void GameSceneText::Initialize()
 #endif
     GameSceneExe::SetBaseBeatCount(BASE_BEATS);
     GameSceneExe::Initialize();
+    m_ButtonFadeDuration = static_cast<float>(m_RelationData.rhythmBeat.GetBeatConst().m_TicksPerBeat);
 
     // ÉVÅ[ÉìÇ…åqÇÆèÓïÒÇÕäÓíÍèâä˙âªå„ÇÃàÍî‘ç≈èâÇ…ê›íË
     m_RelationData.previousScene = SCENE_NO::GAME_TEXT;
@@ -49,6 +50,13 @@ void GameSceneText::Initialize()
     backGround->SetScale(1280.0f,720.0f,1.0f);
     m_MySceneObjects.emplace_back(backGround);
 
+    m_Girl = instance.AddObject<Square>();
+    m_Girl->SetName("m_Girl");
+    m_Girl->SetTexture(textureMgr->GetTexture("Girl/LoveLatterGirlNormal.png"));
+    m_Girl->SetScale(400.0f,600.0f,1.0f);
+    m_Girl->SetPos  (  0.0f, 50.0f,0.0f);
+    m_MySceneObjects.emplace_back(m_Girl);
+
     m_Boy = instance.AddObject<Square>();
     m_Boy->SetName("m_Boy");
     m_Boy->SetTexture(textureMgr->GetTexture("LoveLatterOffer.png"));
@@ -56,11 +64,6 @@ void GameSceneText::Initialize()
     m_Boy->SetPos  (0.0f, -200.0f, 0.0f);
     m_MySceneObjects.emplace_back(m_Boy);
 
-    m_Girl = instance.AddObject<Square>();
-    m_Girl->SetName("m_Girl");
-    m_Girl->SetTexture(textureMgr->GetTexture("LoveLatterOffer.png"));
-    m_Girl->SetScale(600.0f,400.0f,1.0f);
-    m_MySceneObjects.emplace_back(m_Girl);
 
 
     m_True   = instance.AddObject<Button>();
@@ -85,9 +88,22 @@ void GameSceneText::Initialize()
 
     std::array<size_t, 3> number = ShuffleButtonIndices();
 
-    m_True  ->SetPos(gButtonPos[number[0]]);
-    m_FalseA->SetPos(gButtonPos[number[1]]);
-    m_FalseB->SetPos(gButtonPos[number[2]]);
+    m_TrueTargetPos   = gButtonPos[number[0]];
+    m_FalseATargetPos = gButtonPos[number[1]];
+    m_FalseBTargetPos = gButtonPos[number[2]];
+
+    const NVector3 fadeOffset(0.0f, kButtonFadeOffsetY, 0.0f);
+    m_True->SetPos(m_TrueTargetPos + fadeOffset);
+    m_FalseA->SetPos(m_FalseATargetPos + fadeOffset);
+    m_FalseB->SetPos(m_FalseBTargetPos + fadeOffset);
+
+    m_True  ->SetColor(1.0f, 1.0f, 1.0f, 0.0f);
+    m_FalseA->SetColor(1.0f, 1.0f, 1.0f, 0.0f);
+    m_FalseB->SetColor(1.0f, 1.0f, 1.0f, 0.0f);
+
+    m_True  ->SetTextColor(1.0f, 1.0f, 1.0f, 0.0f);
+    m_FalseA->SetTextColor(1.0f, 1.0f, 1.0f, 0.0f);
+    m_FalseB->SetTextColor(1.0f, 1.0f, 1.0f, 0.0f);
 
     m_MySceneObjects.emplace_back(m_True);
     m_MySceneObjects.emplace_back(m_FalseA);
@@ -116,7 +132,6 @@ void GameSceneText::Initialize()
                 {
                     params.loop.loopCount = XAUDIO2_LOOP_INFINITE;
                 }
-                audioMgr->Play(key, params);
             }
         }
     }
@@ -127,10 +142,34 @@ void GameSceneText::Update(float tick)
     GameSceneExe::Update(tick);
     AudioManager* audioMgr = Game::GetInstance();
 
-    // ç≈å„Ç…êGÇÍÇΩButtonÇåüèoÇ∑ÇÈ
-    InsideButton(m_SelectedButton, m_True  , BUTTON_TRUE   );
-    InsideButton(m_SelectedButton, m_FalseA, BUTTON_FALSE_A);
-    InsideButton(m_SelectedButton, m_FalseB, BUTTON_FALSE_B);
+    m_ButtonFadeTimer = std::min(m_ButtonFadeTimer + tick, m_ButtonFadeDuration);
+    const float rawFadeProgress = std::clamp(m_ButtonFadeTimer / m_ButtonFadeDuration, 0.0f, 1.0f);
+    const float fadeProgress = rawFadeProgress * rawFadeProgress * (3.0f - 2.0f * rawFadeProgress);
+
+    auto applyButtonFade = [&](const std::shared_ptr<Button>& button, const NVector3& targetPos)
+        {
+            if (!button)
+            {
+                return;
+            }
+            const NVector3 startPos = targetPos + NVector3(0.0f, kButtonFadeOffsetY, 0.0f);
+            const NVector3 nextPos = startPos + (targetPos - startPos) * fadeProgress;
+            button->SetPos(nextPos);
+            button->SetColor(1.0f, 1.0f, 1.0f, fadeProgress);
+            button->SetTextColor(1.0f, 1.0f, 1.0f, fadeProgress);
+        };
+
+    applyButtonFade(m_True  , m_TrueTargetPos);
+    applyButtonFade(m_FalseA, m_FalseATargetPos);
+    applyButtonFade(m_FalseB, m_FalseBTargetPos);
+
+    if (!trigger)
+    {
+        // ç≈å„Ç…êGÇÍÇΩButtonÇåüèoÇ∑ÇÈ
+        InsideButton(m_SelectedButton, m_True  , BUTTON_TRUE   );
+        InsideButton(m_SelectedButton, m_FalseA, BUTTON_FALSE_A);
+        InsideButton(m_SelectedButton, m_FalseB, BUTTON_FALSE_B);
+    }
     
     if (m_BeatTimer.GetRestBeats() == 3 && !trigger)
     {
@@ -141,11 +180,13 @@ void GameSceneText::Update(float tick)
         {
             StageClear();
             PlaySE("true", 0.5f);
+            m_Girl->SetTexture(textureMgr->GetTexture("Girl/LoveLatterGirlGlad.png"));
         }
         else
         {
             StageFail();
             PlaySE("false", 0.5f);
+            m_Girl->SetTexture(textureMgr->GetTexture("Girl/LoveLatterGirlWhy.png"));
         }
     }
 

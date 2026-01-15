@@ -21,6 +21,9 @@ public:
     }
     void SetTextTexture(std::shared_ptr<Texture> m_Tex);
 
+    void SetTextColor(const Color color);
+    void SetTextColor(const float r, const float g, const float b, const float a);
+
     NVector3 GetBaseScale() const {
         return m_BaseScale;
     }

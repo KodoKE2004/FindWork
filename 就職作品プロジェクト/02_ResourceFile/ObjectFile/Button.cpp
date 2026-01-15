@@ -36,3 +36,19 @@ void Button::SetTextTexture(std::shared_ptr<Texture> m_Tex)
 {
     m_Text->SetTexture(m_Tex);
 }
+
+void Button::SetTextColor(const Color color)
+{
+    if (m_Text)
+    {
+        m_Text->SetColor(color);
+    }
+}
+
+void Button::SetTextColor(const float r, const float g, const float b, const float a)
+{
+    if (m_Text)
+    {
+        m_Text->SetColor(r, g, b, a);
+    }
+}
