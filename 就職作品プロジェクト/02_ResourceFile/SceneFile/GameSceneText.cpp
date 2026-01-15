@@ -106,6 +106,12 @@ void GameSceneText::Initialize()
     m_MySceneObjects.emplace_back(m_FalseA);
     m_MySceneObjects.emplace_back(m_FalseB);
 
+    m_TimerUI = instance.AddObject<Timer>();
+    m_TimerUI->SetName("m_TimerUI");
+    m_TimerUI->SetPos(500.0f, 300.0f, 0.0f);
+    m_TimerUI->SetTexture(textureMgr->GetTexture("Clock.png"));
+    m_MySceneObjects.emplace_back(m_TimerUI);
+
     m_Bomber = instance.AddObject<Bomber>();
     m_Bomber->SetName("m_TimeGauge");
     m_MySceneObjects.emplace_back(m_Bomber);
@@ -142,6 +148,8 @@ void GameSceneText::Update(float tick)
 {
     GameSceneExe::Update(tick);
     AudioManager* audioMgr = Game::GetInstance();
+
+    TimerUIUpdate(tick);
 
     m_ButtonFadeTimer = std::min(m_ButtonFadeTimer + tick, m_ButtonFadeDuration);
     const float rawFadeProgress = std::clamp(m_ButtonFadeTimer / m_ButtonFadeDuration, 0.0f, 1.0f);

@@ -31,6 +31,7 @@ void GameSceneExe::Initialize()
     // ’l‚Ì”½‰f
     m_TimerList.clear();
     SetTimer(&m_Elapsed);
+    m_TimerLimit = 0.0f;
 
     //-------------------------------
     //      ‰¹Œ¹‚ÌŽæ“¾E¶¬
@@ -54,7 +55,7 @@ void GameSceneExe::Initialize()
 
 void GameSceneExe::Update(float tick)
 {
-    // return;
+    //return;
 
     CountTimer(tick);
     const int rest = m_BeatTimer.GetRestBeats();
@@ -145,6 +146,22 @@ void GameSceneExe::Finalize()
         {
             audioManager->StopAllByName(key);
         }
+    }
+}
+
+void GameSceneExe::TimerUIUpdate(float tick)
+{
+    m_TimerElapsed += tick;
+    const RhythmBeatConst& beatConst = m_RelationData.rhythmBeat.GetBeatConst();
+    if (m_TimerLimit <= 0.0f && beatConst.secondsPerBar > 0.0f)
+    {
+        m_TimerLimit = beatConst.secondsPerBar * 2.0f;
+    }
+    if (m_TimerUI && m_TimerLimit > 0.0f)
+    {
+        const float remaining = max(0.0f, m_TimerLimit - m_TimerElapsed);
+        const float ratio = remaining / m_TimerLimit;
+        m_TimerUI->SetProgress(ratio);
     }
 }
 

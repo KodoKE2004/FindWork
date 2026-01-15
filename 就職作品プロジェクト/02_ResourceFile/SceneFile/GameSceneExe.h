@@ -2,6 +2,7 @@
 #include "Scene.h"
 #include "Square.h"
 #include "Bomber.h"
+#include "Timer.h"
 #include "RhythmBeat.h"
 
 namespace
@@ -23,7 +24,8 @@ class GameSceneExe : public Scene
 // inゲーム基底クラス
 protected:
 	// 	共通オブジェクト
-	std::shared_ptr<Bomber>  m_Bomber ;		// スピードゲージ背景
+	std::shared_ptr<Bomber> m_Bomber ;		// スピードゲージ背景
+	std::shared_ptr<Timer>  m_TimerUI;		// スピードゲージ背景
 
     // カウントダウン関連
 	BeatTimer m_BeatTimer;
@@ -31,6 +33,8 @@ protected:
     int m_BaseBeats;
 
 	float m_Elapsed		  = 0.0f;		// 経過時間
+    float m_TimerElapsed = 0.0f;		// タイマー経過時間
+    float m_TimerLimit = 0.0f;			// タイマー制限時間
 	float m_SpecialFrom   = 0.0f;     
 	float m_SpecialTo	  = 0.0f;       
 	int   m_SpecialRest   = -1;       
@@ -61,6 +65,8 @@ public:
 	virtual void Update(float tick) ;
 	virtual void Finalize()			;
 
+    void TimerUIUpdate(float tick);
+
     /// <summary>
 	/// シーンの存在する拍数を設定
     /// </summary>
@@ -79,6 +85,8 @@ public:
 		m_isFastChange = true;
 	}
 	
+
+
 	bool IsChange()		const { return m_isChange; }
     bool IsFastChange() const { return m_isFastChange; }
 

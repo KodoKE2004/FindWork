@@ -1,6 +1,6 @@
 #include "Circle.h"
-
-
+#include <algorithm>
+#include <cmath>
 
 Circle::Circle(Camera& cam) : Object(cam)
 {
@@ -106,7 +106,29 @@ void Circle::Draw()
     }
 
     // •`‰æ
-    dc->DrawIndexed(m_IndexCount, 0, 0);
+    if (m_DrawIndexCount == 0) {
+        return;
+    }
+    dc->DrawIndexed(m_DrawIndexCount, 0, 0);
+}
+
+void Circle::SetRadius(float radius)
+{
+    m_Radius = radius;
+}
+
+void Circle::SetFillRatio(float ratio)
+{
+    m_DrawRatio = std::clamp(ratio, 0.0f, 1.0f);
+    if (m_DrawRatio <= 0.0f)
+    {
+        m_DrawIndexCount = 0;
+        return;
+    }
+
+    const int segmentCount = max(1, static_cast<int>(std::round(static_cast<float>(m_Segments) * m_DrawRatio)));
+    const int clamped = min(segmentCount, m_Segments);
+    m_DrawIndexCount = static_cast<unsigned int>(clamped * 3);
 }
 
 void Circle::Finalize()
