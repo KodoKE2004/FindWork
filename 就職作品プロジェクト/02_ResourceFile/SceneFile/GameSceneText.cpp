@@ -40,9 +40,6 @@ void GameSceneText::Initialize()
     //===============================
     //      シーン内オブジェクト生成
     //===============================
-    m_Bomber = instance.AddObject<Bomber>();
-    m_Bomber->SetName("m_TimeGauge");
-    m_MySceneObjects.emplace_back(m_Bomber);
 
     std::shared_ptr<Square> backGround = instance.AddObject<Square>();
     backGround->SetName("backGround");
@@ -74,17 +71,17 @@ void GameSceneText::Initialize()
     m_FalseA->SetName("m_FalseA");
     m_FalseB->SetName("m_FalseB");
 
-    m_True  ->SetTexture(textureMgr->GetTexture("Text/Frame.png"));
-    m_FalseA->SetTexture(textureMgr->GetTexture("Text/Frame.png"));
-    m_FalseB->SetTexture(textureMgr->GetTexture("Text/Frame.png"));
+    m_True  ->SetTexture(textureMgr->GetTexture("Button/Frame.png"));
+    m_FalseA->SetTexture(textureMgr->GetTexture("Button/Frame.png"));
+    m_FalseB->SetTexture(textureMgr->GetTexture("Button/Frame.png"));
 
     m_True  ->SetBaseScale(NVector3(240.0f, 80.0f, 1.0f));
     m_FalseA->SetBaseScale(NVector3(240.0f, 80.0f, 1.0f));
     m_FalseB->SetBaseScale(NVector3(240.0f, 80.0f, 1.0f));
 
-    m_True  ->SetTextTexture(textureMgr->GetTexture("Text/LoveYouTrue.png"));
-    m_FalseA->SetTextTexture(textureMgr->GetTexture("Text/LoveYouFalseA.png"));
-    m_FalseB->SetTextTexture(textureMgr->GetTexture("Text/LoveYouFalseB.png"));
+    m_True  ->SetTextTexture(textureMgr->GetTexture("Button/Text/LoveYouTrue.png"));
+    m_FalseA->SetTextTexture(textureMgr->GetTexture("Button/Text/LoveYouFalseA.png"));
+    m_FalseB->SetTextTexture(textureMgr->GetTexture("Button/Text/LoveYouFalseB.png"));
 
     std::array<size_t, 3> number = ShuffleButtonIndices();
 
@@ -108,6 +105,10 @@ void GameSceneText::Initialize()
     m_MySceneObjects.emplace_back(m_True);
     m_MySceneObjects.emplace_back(m_FalseA);
     m_MySceneObjects.emplace_back(m_FalseB);
+
+    m_Bomber = instance.AddObject<Bomber>();
+    m_Bomber->SetName("m_TimeGauge");
+    m_MySceneObjects.emplace_back(m_Bomber);
 
     PlayParams insideParam{};
     m_AudioList.emplace("rhythm", AudioConfig(L"SE/Rhythm.wav", insideParam, false, false));
