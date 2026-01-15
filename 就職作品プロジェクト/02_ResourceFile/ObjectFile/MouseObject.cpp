@@ -46,7 +46,12 @@ void MouseObject::Finalize()
     Square::Finalize();
 }
 
-bool MouseObject::IsDrag()
+bool MouseObject::IsDrag() const
 {
     return m_isDrag;
+}
+
+bool MouseObject::IsInside() const 
+{
+    return m_isInside;
 }

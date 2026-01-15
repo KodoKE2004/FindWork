@@ -16,6 +16,7 @@ public:
     void Draw()       override;
     void Finalize()   override;
 
-    bool IsDrag();
+    bool IsDrag()   const;
+    bool IsInside() const;
 };
 

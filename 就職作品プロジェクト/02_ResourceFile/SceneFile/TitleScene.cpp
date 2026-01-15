@@ -127,25 +127,7 @@ void TitleScene::Update(float tick)
 	if (Input::GetKeyTrigger(VK_RETURN))
 	{
 		// SE‚ÌÄ¶
-		if (AudioManager* audioMgr = Game::GetInstance())
-		{
-			if (auto it = m_AudioList.find("enter"); it != m_AudioList.end())
-			{
-				auto params = it->second.params;
-				if (it->second.loop)
-				{
-					params.loop.loopCount = XAUDIO2_LOOP_INFINITE;
-				}
-				audioMgr->Play("enter", params);
-			}
-			else
-			{
-				audioMgr->Play("enter");
-			}
-
-			audioMgr->StopAllByName("bgm", false);
-		}
-
+		PlaySE("enter", 0.7f);
 		ChangeScenePush<GameSceneWait>(TitleToWait);
 		return;
 	}

@@ -20,5 +20,9 @@ public:
         m_Text->SetScale(scale);
     }
     void SetTextTexture(std::shared_ptr<Texture> m_Tex);
+
+    NVector3 GetBaseScale() const {
+        return m_BaseScale;
+    }
 };
 
