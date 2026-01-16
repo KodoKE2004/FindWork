@@ -12,7 +12,7 @@ void Button::Initialize()
     TextureManager* textureMgr = instance;
 
     m_Text = instance.AddObject<Square>();
-    m_Text->SetScale(120.0f, 40.0f, 1.0f);
+    m_Text->SetScale( 51.2f, 43.8f, 1.0f);
 }
 
 void Button::Update()

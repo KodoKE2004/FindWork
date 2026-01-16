@@ -7,7 +7,6 @@ class GameSceneText : public GameSceneExe
 {
 private:
     const NVector3 BUTTTON_BASE_SCALE = NVector3(240.0f, 100.0f, 1.0f);
-    static constexpr float kButtonFadeOffsetY = -120.0f;
 
     enum LAST_DRAG
     {
@@ -19,15 +18,15 @@ private:
     std::shared_ptr<Square> m_Boy;
     std::shared_ptr<Square> m_Girl;
 
-    std::shared_ptr<Button> m_True;
-    std::shared_ptr<Button> m_FalseA;
-    std::shared_ptr<Button> m_FalseB;
+    std::shared_ptr<Button> m_Adverb;
+    std::shared_ptr<Button> m_AdjectiveA;
+    std::shared_ptr<Button> m_AdjectiveB;
 
     NVector3 m_TrueTargetPos{};
     NVector3 m_FalseATargetPos{};
     NVector3 m_FalseBTargetPos{};
 
-    float m_GameRhythm[3] = { 0.0f, 0.0f, 0.0f};
+    float m_GameRhythm[3] = { 0.0f, 0.0f, 0.0f };    // ƒŠƒYƒ€‚ðŠi”[‚·‚é”z—ñ
 
     float m_ButtonFadeTimer = 0.0f;
     float m_ButtonFadeDuration;

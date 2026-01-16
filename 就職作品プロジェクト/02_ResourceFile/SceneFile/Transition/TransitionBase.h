@@ -44,6 +44,7 @@ struct SceneTransitionParam
     TRANS_MODE  mode     = TRANS_MODE::FADE;
     float       duration = 1.0f;
     EASING_TYPE easing   = EASING_TYPE::NONE;
+    std::shared_ptr<Texture> texture = nullptr;
 
     int ModeAsIndex()   const { return static_cast<int>(mode);   }
     int EasingAsIndex() const { return static_cast<int>(easing); }

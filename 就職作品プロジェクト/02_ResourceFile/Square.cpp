@@ -172,6 +172,10 @@ void Square::SetTexture(std::shared_ptr<Texture> texture)
 }
 
 // UV座標を指定
+// nu = U座標の位置
+// nv = V座標の位置
+// sx = U座標の分割数
+// sy = V座標の分割数
 void Square::SetUV(const float& nu, const float& nv, const float& sx, const float& sy)
 {
 	m_NumU = nu;

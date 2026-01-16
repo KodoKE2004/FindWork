@@ -21,9 +21,10 @@ namespace
     }
 
     // 4パターンのリズム配置 
-    float kGameRhythm[2][3] = {
+    float kGameRhythm[3][3] = {
         { 1.0f, 2.0f, 3.0f },
         { 1.0f, 2.5f, 3.0f },
+        { 1.0f, 1.5f, 2.0f },
     };
 }
 
@@ -55,7 +56,8 @@ void GameSceneText::Initialize()
 
     m_Girl = instance.AddObject<Square>();
     m_Girl->SetName("m_Girl");
-    m_Girl->SetTexture(textureMgr->GetTexture("Girl/LoveLatterGirlNormal.png"));
+    m_Girl->SetTexture(textureMgr->GetTexture("Girl.png"));
+    m_Girl->SetUV(1.0f,1.0f,5.0f,1.0f);
     m_Girl->SetScale(400.0f,600.0f,1.0f);
     m_Girl->SetPos  (  0.0f, 50.0f,0.0f);
     m_MySceneObjects.emplace_back(m_Girl);
@@ -67,57 +69,47 @@ void GameSceneText::Initialize()
     m_Boy->SetPos  (0.0f, -200.0f, 0.0f);
     m_MySceneObjects.emplace_back(m_Boy);
 
-    m_True   = instance.AddObject<Button>();
-    m_FalseA = instance.AddObject<Button>();
-    m_FalseB = instance.AddObject<Button>();
+    m_Adverb     = instance.AddObject<Button>();
+    m_AdjectiveA = instance.AddObject<Button>();
+    m_AdjectiveB = instance.AddObject<Button>();
     
-    m_True  ->SetName("m_True");
-    m_FalseA->SetName("m_FalseA");
-    m_FalseB->SetName("m_FalseB");
+    m_Adverb    ->SetName("m_True");
+    m_AdjectiveA->SetName("m_FalseA");
+    m_AdjectiveB->SetName("m_FalseB");
 
-    m_True  ->SetTexture(textureMgr->GetTexture("Button/Frame.png"));
-    m_FalseA->SetTexture(textureMgr->GetTexture("Button/Frame.png"));
-    m_FalseB->SetTexture(textureMgr->GetTexture("Button/Frame.png"));
+    m_Adverb    ->SetTexture(textureMgr->GetTexture("Button/Frame.png"));
+    m_AdjectiveA->SetTexture(textureMgr->GetTexture("Button/Frame.png"));
+    m_AdjectiveB->SetTexture(textureMgr->GetTexture("Button/Frame.png"));
 
-    m_True  ->SetBaseScale(NVector3(240.0f, 80.0f, 1.0f));
-    m_FalseA->SetBaseScale(NVector3(240.0f, 80.0f, 1.0f));
-    m_FalseB->SetBaseScale(NVector3(240.0f, 80.0f, 1.0f));
+    m_Adverb    ->SetBaseScale(NVector3(240.0f, 80.0f, 1.0f));
+    m_AdjectiveA->SetBaseScale(NVector3(240.0f, 80.0f, 1.0f));
+    m_AdjectiveB->SetBaseScale(NVector3(240.0f, 80.0f, 1.0f));
 
-    m_True  ->SetTextTexture(textureMgr->GetTexture("Button/Text/LoveYouTrue.png"));
-    m_FalseA->SetTextTexture(textureMgr->GetTexture("Button/Text/LoveYouFalseA.png"));
-    m_FalseB->SetTextTexture(textureMgr->GetTexture("Button/Text/LoveYouFalseB.png"));
+    m_Adverb    ->SetTextTexture(textureMgr->GetTexture("Button/Text/MessageSlot.png"));
+    m_AdjectiveA->SetTextTexture(textureMgr->GetTexture("Button/Text/MessageSlot.png"));
+    m_AdjectiveB->SetTextTexture(textureMgr->GetTexture("Button/Text/MessageSlot.png"));
+
+    m_Adverb    ->GetTextObject()->SetUV( 1.0f, 1.0f, 3.0f, 3.0f);
+    m_AdjectiveA->GetTextObject()->SetUV( 4.0f, 4.0f, 3.0f, 3.0f);
+    m_AdjectiveB->GetTextObject()->SetUV( 3.0f, 3.0f, 3.0f, 3.0f);
+
+    m_Adverb    ->SetPos(kButtonPos[0]);
+    m_AdjectiveA->SetPos(kButtonPos[1]);
+    m_AdjectiveB->SetPos(kButtonPos[2]);
+
+    m_MySceneObjects.emplace_back(m_Adverb);
+    m_MySceneObjects.emplace_back(m_AdjectiveA);
+    m_MySceneObjects.emplace_back(m_AdjectiveB);
+
+    m_MySceneObjects.emplace_back(m_Adverb    ->GetTextObject());
+    m_MySceneObjects.emplace_back(m_AdjectiveA->GetTextObject());
+    m_MySceneObjects.emplace_back(m_AdjectiveB->GetTextObject());
 
     std::array<size_t, 3> number = ShuffleButtonIndices();
 
-    m_TrueTargetPos   = kButtonPos[number[0]];
-    m_FalseATargetPos = kButtonPos[number[1]];
-    m_FalseBTargetPos = kButtonPos[number[2]];
-
-    size_t rhythm = number[0] % 2;
-    m_GameRhythm[0] = kGameRhythm[rhythm][0] * GetOneBeat();
-    m_GameRhythm[1] = kGameRhythm[rhythm][1] * GetOneBeat();
-    m_GameRhythm[2] = kGameRhythm[rhythm][2] * GetOneBeat();
-
-    const NVector3 fadeOffset(0.0f, kButtonFadeOffsetY, 0.0f);
-    m_True->SetPos(m_TrueTargetPos + fadeOffset);
-    m_FalseA->SetPos(m_FalseATargetPos + fadeOffset);
-    m_FalseB->SetPos(m_FalseBTargetPos + fadeOffset);
-
-    m_True  ->SetColor(1.0f, 1.0f, 1.0f, 0.0f);
-    m_FalseA->SetColor(1.0f, 1.0f, 1.0f, 0.0f);
-    m_FalseB->SetColor(1.0f, 1.0f, 1.0f, 0.0f);
-
-    m_True  ->SetTextColor(1.0f, 1.0f, 1.0f, 0.0f);
-    m_FalseA->SetTextColor(1.0f, 1.0f, 1.0f, 0.0f);
-    m_FalseB->SetTextColor(1.0f, 1.0f, 1.0f, 0.0f);
-
-    m_MySceneObjects.emplace_back(m_True);
-    m_MySceneObjects.emplace_back(m_FalseA);
-    m_MySceneObjects.emplace_back(m_FalseB);
-
-    m_MySceneObjects.emplace_back(m_True  ->GetTextObject());
-    m_MySceneObjects.emplace_back(m_FalseA->GetTextObject());
-    m_MySceneObjects.emplace_back(m_FalseB->GetTextObject());
+    m_GameRhythm[0] = kGameRhythm[number[0]][0] * GetOneBeat();
+    m_GameRhythm[1] = kGameRhythm[number[0]][1] * GetOneBeat();
+    m_GameRhythm[2] = kGameRhythm[number[0]][2] * GetOneBeat();
 
     m_TimerUI = instance.AddObject<Timer>();
     m_TimerUI->SetName("m_TimerUI");
@@ -162,55 +154,7 @@ void GameSceneText::Update(float tick)
     GameSceneExe::Update(tick);
     AudioManager* audioMgr = Game::GetInstance();
 
-    TimerUIUpdate(tick);
-
-    m_ButtonFadeTimer = std::min(m_ButtonFadeTimer + tick, m_ButtonFadeDuration);
-    const float rawFadeProgress = std::clamp(m_ButtonFadeTimer / m_ButtonFadeDuration, 0.0f, 1.0f);
-    const float fadeProgress = rawFadeProgress * rawFadeProgress * (3.0f - 2.0f * rawFadeProgress);
-
-    auto applyButtonFade = [&](const std::shared_ptr<Button>& button, const NVector3& targetPos)
-        {
-            if (!button)
-            {
-                return;
-            }
-            const NVector3 startPos = targetPos + NVector3(0.0f, kButtonFadeOffsetY, 0.0f);
-            const NVector3 nextPos = startPos + (targetPos - startPos) * fadeProgress;
-            button->SetPos(nextPos);
-            button->SetColor(1.0f, 1.0f, 1.0f, fadeProgress);
-            button->SetTextColor(1.0f, 1.0f, 1.0f, fadeProgress);
-        };
-
-    applyButtonFade(m_True  , m_TrueTargetPos);
-    applyButtonFade(m_FalseA, m_FalseATargetPos);
-    applyButtonFade(m_FalseB, m_FalseBTargetPos);
-
-    if (!trigger)
-    {
-        // 最後に触れたButtonを検出する
-        InsideButton(m_SelectedButton, m_True  , BUTTON_TRUE   );
-        InsideButton(m_SelectedButton, m_FalseA, BUTTON_FALSE_A);
-        InsideButton(m_SelectedButton, m_FalseB, BUTTON_FALSE_B);
-    }
     
-    if (m_BeatTimer.GetRestBeats() == 3 && !trigger)
-    {
-        trigger = true;
-        TextureManager* textureMgr = Game::GetInstance();
-        m_Boy->SetTexture(textureMgr->GetTexture("LoveLatterHeldOut.png"));
-        if (m_SelectedButton == BUTTON_TRUE)
-        {
-            StageClear();
-            PlaySE("true", 0.5f);
-            m_Girl->SetTexture(textureMgr->GetTexture("Girl/LoveLatterGirlGlad.png"));
-        }
-        else
-        {
-            StageFail();
-            PlaySE("false", 0.5f);
-            m_Girl->SetTexture(textureMgr->GetTexture("Girl/LoveLatterGirlWhy.png"));
-        }
-    }
 
 
     if (IsChange())
