@@ -127,12 +127,13 @@ void Square::Draw()
 	m_Materiale->SetGPU();
 
 	// UVの設定を指定
-	float u = (m_NumU - 1.0f) / m_SplitX;
-	float v = (m_NumV - 1.0f) / m_SplitY;
-	float uw = 1.0f / m_SplitX;
-	float vh = 1.0f / m_SplitY;
+	float u0 = (m_NumU - 1.0f) / m_SplitX;
+	float v0 = (m_NumV - 1.0f) / m_SplitY;
+	float u1 = u0 + 1.0f / m_SplitX;
+	float v1 = v0 + 1.0f / m_SplitY;
 
-	Renderer::SetUV(u, v, uw, vh);
+	Renderer::SetUV(u0, v0, u1, v1);
+
 	Camera::ScopedMode scepedMode(m_Camera, CAMERA_2D);
 
 	devicecontext->DrawIndexed(

@@ -89,9 +89,9 @@ void GameSceneText::Initialize()
     m_AdjectiveA->SetTextTexture(textureMgr->GetTexture("Button/Text/MessageSlot.png"));
     m_AdjectiveB->SetTextTexture(textureMgr->GetTexture("Button/Text/MessageSlot.png"));
 
-    m_Adverb    ->GetTextObject()->SetUV( 1.0f, 1.0f, 3.0f, 3.0f);
-    m_AdjectiveA->GetTextObject()->SetUV( 4.0f, 4.0f, 3.0f, 3.0f);
-    m_AdjectiveB->GetTextObject()->SetUV( 3.0f, 3.0f, 3.0f, 3.0f);
+    m_Adverb    ->GetTextObject()->SetUV(1.0f, 1.0f, 3.0f, 3.0f);
+    m_AdjectiveA->GetTextObject()->SetUV(1.0f, 2.0f, 3.0f, 3.0f);
+    m_AdjectiveB->GetTextObject()->SetUV(1.0f, 3.0f, 3.0f, 3.0f);
 
     m_Adverb    ->SetPos(kButtonPos[0]);
     m_AdjectiveA->SetPos(kButtonPos[1]);
@@ -149,12 +149,22 @@ void GameSceneText::Initialize()
     }
 }
 
+float i = 0; 
 void GameSceneText::Update(float tick)
 {
     GameSceneExe::Update(tick);
     AudioManager* audioMgr = Game::GetInstance();
 
     
+    if (Input::GetKeyTrigger(VK_LEFT))
+    {
+        i += 1.0f;
+    }
+    if (Input::GetKeyTrigger(VK_RIGHT))
+    {
+        i -= 1.0f;
+    }
+
 
 
     if (IsChange())

@@ -555,9 +555,11 @@ void Renderer::SetLightBuffer(LightBuffer* LightBuffer)
 
 void Renderer::SetUV(float u, float v, float uw, float vh)
 {
-	//UV行列作成
-	Matrix mat = Matrix::CreateScale(uw, vh, 1.0f);
-	mat *= Matrix::CreateTranslation(u, v, 0.0f).Transpose();
+	// UV変換: (0..1) を [u,u+uw], [v,v+vh] に写す
+	Matrix mat = Matrix::CreateScale(uw, vh, 1.0f) * Matrix::CreateTranslation(u, v, 0.0f);
+
+	// HLSL側が column_major（デフォルト）で受けるなら Transpose して渡す
+	mat = mat.Transpose();
 
 	m_DeviceContext->UpdateSubresource(m_TextureBuffer, 0, NULL, &mat, 0, 0);
 
