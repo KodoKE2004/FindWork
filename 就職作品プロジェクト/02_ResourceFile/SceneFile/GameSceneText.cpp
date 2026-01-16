@@ -6,7 +6,7 @@
 
 namespace
 {
-    NVector3 gButtonPos[3] = {
+    NVector3 kButtonPos[3] = {
         NVector3(- 375.0f,0.0f,0.0f),
         NVector3(    0.0f,0.0f,0.0f),
         NVector3(  375.0f,0.0f,0.0f),
@@ -19,6 +19,12 @@ namespace
         std::shuffle(indices.begin(), indices.end(), engine);
         return indices;
     }
+
+    // 4パターンのリズム配置 
+    float kGameRhythm[2][3] = {
+        { 1.0f, 2.0f, 3.0f },
+        { 1.0f, 2.5f, 3.0f },
+    };
 }
 
 void GameSceneText::Initialize()
@@ -61,8 +67,6 @@ void GameSceneText::Initialize()
     m_Boy->SetPos  (0.0f, -200.0f, 0.0f);
     m_MySceneObjects.emplace_back(m_Boy);
 
-
-
     m_True   = instance.AddObject<Button>();
     m_FalseA = instance.AddObject<Button>();
     m_FalseB = instance.AddObject<Button>();
@@ -85,9 +89,14 @@ void GameSceneText::Initialize()
 
     std::array<size_t, 3> number = ShuffleButtonIndices();
 
-    m_TrueTargetPos   = gButtonPos[number[0]];
-    m_FalseATargetPos = gButtonPos[number[1]];
-    m_FalseBTargetPos = gButtonPos[number[2]];
+    m_TrueTargetPos   = kButtonPos[number[0]];
+    m_FalseATargetPos = kButtonPos[number[1]];
+    m_FalseBTargetPos = kButtonPos[number[2]];
+
+    size_t rhythm = number[0] % 2;
+    m_GameRhythm[0] = kGameRhythm[rhythm][0] * GetOneBeat();
+    m_GameRhythm[1] = kGameRhythm[rhythm][1] * GetOneBeat();
+    m_GameRhythm[2] = kGameRhythm[rhythm][2] * GetOneBeat();
 
     const NVector3 fadeOffset(0.0f, kButtonFadeOffsetY, 0.0f);
     m_True->SetPos(m_TrueTargetPos + fadeOffset);

@@ -27,6 +27,8 @@ private:
     NVector3 m_FalseATargetPos{};
     NVector3 m_FalseBTargetPos{};
 
+    float m_GameRhythm[3] = { 0.0f, 0.0f, 0.0f};
+
     float m_ButtonFadeTimer = 0.0f;
     float m_ButtonFadeDuration;
 

@@ -148,6 +148,10 @@ public:
 		return time >= limit; 
 	}
 
+	float GetOneBeat() const {
+        return m_RelationData.rhythmBeat.GetBeatConst().secondsPerBeat;
+	}
+
     // Œø‰Ê‰¹Ä¶ŠÖ”
     // seName : AudioConfig‚É“o˜^‚µ‚½–¼‘O
     // Game.h‚ÌAudioManager‚ğ’Ê‚¶‚ÄÄ¶‚·‚é
