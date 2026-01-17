@@ -80,4 +80,12 @@ public:
 	// UV座標を指定
 	void SetUV(const float& nu, const float& nv, const float& sx, const float& sy);
 
+	Vector2 GetUV () const {
+		return Vector2(m_NumU, m_NumV);
+    }
+
+	Vector2 GetSplit() const {
+		return Vector2(m_SplitX, m_SplitY);
+    }
+
 };

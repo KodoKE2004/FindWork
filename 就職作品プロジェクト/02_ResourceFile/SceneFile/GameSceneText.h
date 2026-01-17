@@ -20,9 +20,7 @@ private:
     std::shared_ptr<Square> m_Boy;
     std::shared_ptr<Square> m_Girl;
 
-    std::shared_ptr<Button> m_Adverb;
-    std::shared_ptr<Button> m_AdjectiveA;
-    std::shared_ptr<Button> m_AdjectiveB;
+    std::array<std::shared_ptr<Button>, 3> m_MessageSlot;
 
     NVector3 m_TrueTargetPos{};
     NVector3 m_FalseATargetPos{};
@@ -33,7 +31,13 @@ private:
     std::array<float,3> m_GameRhythm = { 0.0f, 0.0f, 0.0f };    // リズムを格納する配列
     std::array<bool, 3> m_Clicked    = { false, false, false }; // クリックされたかどうかの配列
 
-    size_t m_PhaseIndex = 0;
+    float m_Elapsed = 0.0f;
+    size_t m_CurrentRhythmIndex = 0;
+    float m_JudgeWindow = 0.1f;
+
+    bool m_isEntry = false;
+    bool m_isInput = false;
+
 public:
     GameSceneText() = default;
     ~GameSceneText() = default;

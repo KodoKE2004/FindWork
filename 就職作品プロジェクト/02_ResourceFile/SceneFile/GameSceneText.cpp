@@ -67,47 +67,24 @@ void GameSceneText::Initialize()
     m_Boy->SetPos  (0.0f, -200.0f, 0.0f);
     m_MySceneObjects.emplace_back(m_Boy);
 
-    m_Adverb     = instance.AddObject<Button>();
-    m_AdjectiveA = instance.AddObject<Button>();
-    m_AdjectiveB = instance.AddObject<Button>();
-    
-    m_Adverb    ->SetName("m_True");
-    m_AdjectiveA->SetName("m_FalseA");
-    m_AdjectiveB->SetName("m_FalseB");
-
-    m_Adverb    ->SetTexture(textureMgr->GetTexture("Button/Frame.png"));
-    m_AdjectiveA->SetTexture(textureMgr->GetTexture("Button/Frame.png"));
-    m_AdjectiveB->SetTexture(textureMgr->GetTexture("Button/Frame.png"));
-
-    m_Adverb    ->SetBaseScale(NVector3(240.0f, 80.0f, 1.0f));
-    m_AdjectiveA->SetBaseScale(NVector3(240.0f, 80.0f, 1.0f));
-    m_AdjectiveB->SetBaseScale(NVector3(240.0f, 80.0f, 1.0f));
-
-    m_Adverb    ->SetTextTexture(textureMgr->GetTexture("Button/Text/MessageSlot.png"));
-    m_AdjectiveA->SetTextTexture(textureMgr->GetTexture("Button/Text/MessageSlot.png"));
-    m_AdjectiveB->SetTextTexture(textureMgr->GetTexture("Button/Text/MessageSlot.png"));
-
-    m_Adverb    ->GetTextObject()->SetUV(1.0f, 1.0f, 3.0f, 3.0f);
-    m_AdjectiveA->GetTextObject()->SetUV(1.0f, 2.0f, 3.0f, 3.0f);
-    m_AdjectiveB->GetTextObject()->SetUV(1.0f, 3.0f, 3.0f, 3.0f);
-
-    m_Adverb    ->SetPos(kButtonPos[0]);
-    m_AdjectiveA->SetPos(kButtonPos[1]);
-    m_AdjectiveB->SetPos(kButtonPos[2]);
-
-    m_MySceneObjects.emplace_back(m_Adverb);
-    m_MySceneObjects.emplace_back(m_AdjectiveA);
-    m_MySceneObjects.emplace_back(m_AdjectiveB);
-
-    m_MySceneObjects.emplace_back(m_Adverb    ->GetTextObject());
-    m_MySceneObjects.emplace_back(m_AdjectiveA->GetTextObject());
-    m_MySceneObjects.emplace_back(m_AdjectiveB->GetTextObject());
-
     m_Number = ShuffleButtonIndices();
+    for (size_t i = 0; i < 3; ++i)
+    {
+        float uvY = static_cast<float>(i + 1);
+        m_GameRhythm [i] = kGameRhythm[m_Number[0]][i] * GetOneBeat();
 
-    m_GameRhythm[0] = kGameRhythm[m_Number[0]][0] * GetOneBeat();
-    m_GameRhythm[1] = kGameRhythm[m_Number[0]][1] * GetOneBeat();
-    m_GameRhythm[2] = kGameRhythm[m_Number[0]][2] * GetOneBeat();
+        m_MessageSlot[i] = instance.AddObject<Button>();
+        m_MessageSlot[i]->SetName("MessageSlot " + std::to_string(i));
+        m_MessageSlot[i]->SetTexture(textureMgr->GetTexture("Button/Frame.png"));
+        m_MessageSlot[i]->SetBaseScale(NVector3(240.0f, 80.0f, 1.0f));
+        m_MessageSlot[i]->SetTextTexture(textureMgr->GetTexture("Button/Text/MessageSlot.png"));
+        m_MessageSlot[i]->GetTextObject()->SetUV(2.0f, uvY, 3.0f, 3.0f);
+        m_MessageSlot[i]->SetPos(kButtonPos[i]);
+        
+        m_MySceneObjects.emplace_back(m_MessageSlot[i]);
+        m_MySceneObjects.emplace_back(m_MessageSlot[i]->GetTextObject());
+    }
+
 
     m_TimerUI = instance.AddObject<Timer>();
     m_TimerUI->SetName("m_TimerUI");
@@ -119,8 +96,6 @@ void GameSceneText::Initialize()
     m_Bomber->SetName("m_TimeGauge");
     m_MySceneObjects.emplace_back(m_Bomber);
 
-    m_PhaseIndex = 0;
-
     PlayParams insideParam{};
     m_AudioList.emplace("rhythm", AudioConfig(L"SE/Rhythm.wav", insideParam, false, false));
 
@@ -129,6 +104,12 @@ void GameSceneText::Initialize()
 
     PlayParams falseParam{};
     m_AudioList.emplace("false", AudioConfig(L"SE/ExeFalse.wav", falseParam, false, false));
+
+    PlayParams clapParam{};
+    m_AudioList.emplace("clap", AudioConfig(L"SE/HandClap.wav" , clapParam, false, false));
+    
+    PlayParams whistleParam{};
+    m_AudioList.emplace("whistle", AudioConfig(L"SE/Whistle.wav"  , whistleParam, false, false));
 
     if (AudioManager* audioMgr = instance)
     {
@@ -154,8 +135,47 @@ void GameSceneText::Update(float tick)
     GameSceneExe::Update(tick);
     AudioManager* audioMgr = Game::GetInstance();
 
-    // 指定のリズムまでUVを高速回転
-    if(m_GameRhythm[m_PhaseIndex])
+    m_Elapsed += tick;
+    if (Input::GetKeyTrigger(VK_RETURN))
+    {
+        // 一定の時間が来るまでは音声のみ再生
+        PlaySE("clap", 0.5f);
+        size_t index = m_CurrentRhythmIndex;
+        const float tolerance = 0.3f;
+        bool justTiming = (m_GameRhythm[index] - tolerance) <= m_Elapsed && 
+                           m_Elapsed <= (m_GameRhythm[index] + tolerance);
+
+        if (m_isInput && justTiming) 
+        {
+        m_MessageSlot[index]->SetUV(1.0f,
+                                    m_MessageSlot[index]->GetUV().y, 
+                                    m_MessageSlot[index]->GetSplit().x, 
+                                    m_MessageSlot[index]->GetSplit().y);
+        }
+    }
+
+    // リズムに合わせて効果音を鳴らす
+    if (m_Elapsed >= m_GameRhythm[m_CurrentRhythmIndex] && !m_isEntry)
+    {
+        PlaySE("whistle", 0.5f);
+        
+        float nextBeat = 4.0f + kGameRhythm[m_Number[0]][m_CurrentRhythmIndex];
+        if(m_CurrentRhythmIndex == 2) {
+            m_isInput = true;
+        }
+        m_GameRhythm[m_CurrentRhythmIndex] = nextBeat * GetOneBeat();
+        m_CurrentRhythmIndex++;
+
+        if(m_CurrentRhythmIndex >= 3) {
+            m_CurrentRhythmIndex = 0;
+        }
+
+        // 最後のリズムが来たらエントリーフラグを立てる
+        if (m_Elapsed >= m_GameRhythm[2]) {
+            m_isEntry = true;
+        }
+    }
+
 
     if (IsChange())
     {

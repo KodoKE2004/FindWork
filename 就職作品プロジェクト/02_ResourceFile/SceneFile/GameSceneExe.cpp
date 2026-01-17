@@ -30,8 +30,7 @@ void GameSceneExe::Initialize()
 
     // 値の反映
     m_TimerList.clear();
-    SetTimer(&m_Elapsed);
-    m_TimerLimit = 0.0f;
+    SetTimer(&m_BomberElapsed);
 
     //-------------------------------
     //      音源の取得・生成
@@ -55,7 +54,7 @@ void GameSceneExe::Initialize()
 
 void GameSceneExe::Update(float tick)
 {
-    return;
+    //return;
 
     CountTimer(tick);
     const int rest = m_BeatTimer.GetRestBeats();
@@ -65,7 +64,7 @@ void GameSceneExe::Update(float tick)
     // 拍が進んでいたらBeatTimerを進める
     for (int i = 0; i < advancedTick; ++i)
     {
-        m_Elapsed = 0.0f;
+        m_BomberElapsed = 0.0f;
         const int currentIndex = m_RelationData.rhythmBeat.GetBeatIndex();
         m_BeatTimer.Advance(currentIndex);
         m_SegmentFrom = m_FillRatio;
@@ -110,10 +109,9 @@ void GameSceneExe::Update(float tick)
     }
 
     // ボンバーの更新
-    const RhythmBeatConst& beatConst = m_RelationData.rhythmBeat.GetBeatConst();
-    if (m_Bomber && beatConst.secondsPerBeat > 0.0f)
+    if (m_Bomber && GetOneBeat() > 0.0f)
     {
-        const float t = std::clamp(m_Elapsed / beatConst.secondsPerBeat, 0.0f, 1.0f);
+        const float t = std::clamp(m_BomberElapsed / GetOneBeat(), 0.0f, 1.0f);
         const float e = Math::Easing::EaseOutQuart(t);
 
         m_FillRatio = m_SegmentFrom + (m_SegmentTo - m_SegmentFrom) * e;
@@ -146,22 +144,6 @@ void GameSceneExe::Finalize()
         {
             audioManager->StopAllByName(key);
         }
-    }
-}
-
-void GameSceneExe::TimerUIUpdate(float tick)
-{
-    m_TimerElapsed += tick;
-    const RhythmBeatConst& beatConst = m_RelationData.rhythmBeat.GetBeatConst();
-    if (m_TimerLimit <= 0.0f && beatConst.secondsPerBar > 0.0f)
-    {
-        m_TimerLimit = beatConst.secondsPerBar * 2.0f;
-    }
-    if (m_TimerUI && m_TimerLimit > 0.0f)
-    {
-        const float remaining = max(0.0f, m_TimerLimit - m_TimerElapsed);
-        const float ratio = remaining / m_TimerLimit;
-        m_TimerUI->SetProgress(ratio);
     }
 }
 

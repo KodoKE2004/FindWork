@@ -32,9 +32,8 @@ protected:
     
     int m_BaseBeats;
 
-	float m_Elapsed		  = 0.0f;		// 経過時間
-    float m_TimerElapsed = 0.0f;		// タイマー経過時間
-    float m_TimerLimit = 0.0f;			// タイマー制限時間
+	float m_BomberElapsed = 0.0f;		// 経過時間
+
 	float m_SpecialFrom   = 0.0f;     
 	float m_SpecialTo	  = 0.0f;       
 	int   m_SpecialRest   = -1;       
