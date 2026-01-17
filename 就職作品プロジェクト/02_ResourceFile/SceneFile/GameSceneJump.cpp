@@ -20,15 +20,6 @@ namespace
     }
 }
 
-float GameSceneJump::GenerateActivationDelay()
-{
-
-    static std::mt19937 engine{ std::random_device{}() };
-    std::uniform_real_distribution<float> dist(1.0f, 2.0f);
-
-    return dist(engine);
-}
-
 void GameSceneJump::Initialize()
 {
     DebugUI::TEXT_CurrentScene = "GameSceneJump";

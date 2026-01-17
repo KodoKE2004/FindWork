@@ -1,7 +1,6 @@
 #include "GameSceneText.h"
 #include "Game.h"
 #include <algorithm>
-#include <array>
 #include <random>
 
 namespace
@@ -35,7 +34,6 @@ void GameSceneText::Initialize()
 #endif
     GameSceneExe::SetBaseBeatCount(BASE_BEATS + 4);
     GameSceneExe::Initialize();
-    m_ButtonFadeDuration = static_cast<float>(m_RelationData.rhythmBeat.GetBeatConst().m_TicksPerBeat);
 
     // シーンに繋ぐ情報は基底初期化後の一番最初に設定
     m_RelationData.previousScene = SCENE_NO::GAME_TEXT;
@@ -105,11 +103,11 @@ void GameSceneText::Initialize()
     m_MySceneObjects.emplace_back(m_AdjectiveA->GetTextObject());
     m_MySceneObjects.emplace_back(m_AdjectiveB->GetTextObject());
 
-    std::array<size_t, 3> number = ShuffleButtonIndices();
+    m_Number = ShuffleButtonIndices();
 
-    m_GameRhythm[0] = kGameRhythm[number[0]][0] * GetOneBeat();
-    m_GameRhythm[1] = kGameRhythm[number[0]][1] * GetOneBeat();
-    m_GameRhythm[2] = kGameRhythm[number[0]][2] * GetOneBeat();
+    m_GameRhythm[0] = kGameRhythm[m_Number[0]][0] * GetOneBeat();
+    m_GameRhythm[1] = kGameRhythm[m_Number[0]][1] * GetOneBeat();
+    m_GameRhythm[2] = kGameRhythm[m_Number[0]][2] * GetOneBeat();
 
     m_TimerUI = instance.AddObject<Timer>();
     m_TimerUI->SetName("m_TimerUI");
@@ -120,6 +118,8 @@ void GameSceneText::Initialize()
     m_Bomber = instance.AddObject<Bomber>();
     m_Bomber->SetName("m_TimeGauge");
     m_MySceneObjects.emplace_back(m_Bomber);
+
+    m_PhaseIndex = 0;
 
     PlayParams insideParam{};
     m_AudioList.emplace("rhythm", AudioConfig(L"SE/Rhythm.wav", insideParam, false, false));
@@ -149,23 +149,13 @@ void GameSceneText::Initialize()
     }
 }
 
-float i = 0; 
 void GameSceneText::Update(float tick)
 {
     GameSceneExe::Update(tick);
     AudioManager* audioMgr = Game::GetInstance();
 
-    
-    if (Input::GetKeyTrigger(VK_LEFT))
-    {
-        i += 1.0f;
-    }
-    if (Input::GetKeyTrigger(VK_RIGHT))
-    {
-        i -= 1.0f;
-    }
-
-
+    // 指定のリズムまでUVを高速回転
+    if(m_GameRhythm[m_PhaseIndex])
 
     if (IsChange())
     {

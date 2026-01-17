@@ -129,8 +129,8 @@ void Square::Draw()
 	// UVの設定を指定
 	float u0 = (m_NumU - 1.0f) / m_SplitX;
 	float v0 = (m_NumV - 1.0f) / m_SplitY;
-	float u1 = u0 + 1.0f / m_SplitX;
-	float v1 = v0 + 1.0f / m_SplitY;
+	float u1 = 1.0f / m_SplitX;
+	float v1 = 1.0f / m_SplitY;
 
 	Renderer::SetUV(u0, v0, u1, v1);
 

@@ -2,6 +2,7 @@
 #include "GameSceneExe.h"
 #include "Button.h"
 #include <memory>
+#include <array>
 
 class GameSceneText : public GameSceneExe
 {
@@ -15,6 +16,7 @@ private:
         BUTTON_FALSE_A,
         BUTTON_FALSE_B,
     };
+
     std::shared_ptr<Square> m_Boy;
     std::shared_ptr<Square> m_Girl;
 
@@ -26,19 +28,12 @@ private:
     NVector3 m_FalseATargetPos{};
     NVector3 m_FalseBTargetPos{};
 
-    float m_GameRhythm[3] = { 0.0f, 0.0f, 0.0f };    // リズムを格納する配列
+    std::array<size_t, 3> m_Number;
 
-    float m_ButtonFadeTimer = 0.0f;
-    float m_ButtonFadeDuration;
+    std::array<float,3> m_GameRhythm = { 0.0f, 0.0f, 0.0f };    // リズムを格納する配列
+    std::array<bool, 3> m_Clicked    = { false, false, false }; // クリックされたかどうかの配列
 
-    bool m_HasSpawnedCartWarning = false;
-    bool trigger = false;
-
-    LAST_DRAG m_SelectedButton;
-
-    size_t m_CurrentCartPatternIndex = 0;
-
-    float GenerateActivationDelay();
+    size_t m_PhaseIndex = 0;
 public:
     GameSceneText() = default;
     ~GameSceneText() = default;

@@ -10,12 +10,10 @@ PS_IN main(in VS_IN input)
     wvp = mul(wvp, Projection); // ビュー　 ⇒ プロジェクション
     output.pos = mul(input.pos, wvp); // 最終的にoutput.posに代入しラスタライザに渡される
 
-	float4 uv = (float4) 0;
-    uv.xy = input.tex;
-	uv.w  = input.tex.y; // テクスチャ座標のyをwに代入
-    uv = mul(uv, matrixTex);
-
-    output.tex = uv.xy;
+	float4 uv = float4(input.tex.xy, 0.0f, 1.0f); // z=0, w=1 が基本
+	uv = mul(uv, matrixTex);
+	output.tex = uv.xy;
+	
     output.col = input.col;
 	
     return output;

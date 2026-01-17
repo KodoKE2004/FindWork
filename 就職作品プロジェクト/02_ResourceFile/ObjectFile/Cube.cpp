@@ -209,7 +209,7 @@ void Cube::Draw()
 	// SRTèÓïÒçÏê¨
 	DirectX::SimpleMath::Matrix r = DirectX::SimpleMath::Matrix::CreateFromYawPitchRoll(m_Rotation.y, m_Rotation.x, m_Rotation.z);
 	DirectX::SimpleMath::Matrix t = DirectX::SimpleMath::Matrix::CreateTranslation(m_Position.x, m_Position.y, m_Position.z);
-	DirectX::SimpleMath::Matrix s = DirectX::SimpleMath::Matrix::CreateScale			 ( m_Scale.x   , m_Scale.y   , m_Scale.z);
+	DirectX::SimpleMath::Matrix s = DirectX::SimpleMath::Matrix::CreateScale( m_Scale.x, m_Scale.y, m_Scale.z);
 
 	DirectX::SimpleMath::Matrix worldmtx;
 	worldmtx = s * r * t;
