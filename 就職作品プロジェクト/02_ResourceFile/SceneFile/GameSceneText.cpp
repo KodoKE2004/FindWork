@@ -19,6 +19,13 @@ namespace
         return indices;
     }
 
+    std::array<float, 2> ShuffleButtonIndices(std::array<float, 2> indices)
+    {
+        static std::mt19937 engine{ std::random_device{}() };
+        std::shuffle(indices.begin(), indices.end(), engine);
+        return indices;
+    }
+
     // 4パターンのリズム配置 
     float kGameRhythm[3][3] = {
         { 1.0f, 2.0f, 3.0f },
@@ -85,6 +92,13 @@ void GameSceneText::Initialize()
         m_MySceneObjects.emplace_back(m_MessageSlot[i]->GetTextObject());
     }
 
+    m_InputIndex = 0;
+    m_CurrentRhythmIndex = 0;
+    m_isEntry = true;
+    m_isInput = false;
+    m_UvXOffset = 1.0f;
+    m_Elapsed = 0.0f;
+    std::fill(std::begin(m_Clicked), std::end(m_Clicked), false);
 
     m_TimerUI = instance.AddObject<Timer>();
     m_TimerUI->SetName("m_TimerUI");
@@ -136,44 +150,77 @@ void GameSceneText::Update(float tick)
     AudioManager* audioMgr = Game::GetInstance();
 
     m_Elapsed += tick;
-    if (Input::GetKeyTrigger(VK_RETURN))
+    if (Input::GetKeyTrigger(VK_RETURN) || Input::GetMouseTrriger(vkLEFT))
     {
         // 一定の時間が来るまでは音声のみ再生
         PlaySE("clap", 0.5f);
-        size_t index = m_CurrentRhythmIndex;
-        const float tolerance = 0.3f;
-        bool justTiming = (m_GameRhythm[index] - tolerance) <= m_Elapsed && 
-                           m_Elapsed <= (m_GameRhythm[index] + tolerance);
-
-        if (m_isInput && justTiming) 
+        size_t index = m_InputIndex;
+        if (index < 3)
         {
-        m_MessageSlot[index]->SetUV(1.0f,
-                                    m_MessageSlot[index]->GetUV().y, 
-                                    m_MessageSlot[index]->GetSplit().x, 
-                                    m_MessageSlot[index]->GetSplit().y);
+            const float tolerance = 0.4f;
+            bool justTiming = (m_GameRhythm[index] - tolerance) <= m_Elapsed && 
+                               m_Elapsed <= (m_GameRhythm[index] + tolerance);
+
+            auto textObject = m_MessageSlot[index]->GetTextObject();
+
+            // 正しいタイミングで押された場合
+            if (m_isInput && justTiming) 
+            {
+                textObject->SetUV( 1.0f,                     textObject->GetUV().y, 
+                                   textObject->GetSplit().x, textObject->GetSplit().y);
+            }
+            // 間違ったタイミングで押された場合
+            else if (m_isInput && !justTiming) {
+                std::array<float, 2> falseUV_X = {2.0f,3.0f};
+                falseUV_X = ShuffleButtonIndices(falseUV_X);
+                textObject->SetUV( falseUV_X[0]            , textObject->GetUV().y,
+                                   textObject->GetSplit().x, textObject->GetSplit().y);
+            }
+            if (m_isInput)
+            {
+                m_Clicked[index] = true;
+                ++m_InputIndex ;
+            }
+        }
+    }
+
+    m_UvXOffset = 4.0f <= m_UvXOffset ? 
+                  1.0f :  m_UvXOffset + 1.0f;
+    for (size_t i = 0; i < 3; ++i)
+    {
+        if (!m_Clicked[i])
+        {
+            auto textObject = m_MessageSlot[i]->GetTextObject();
+            textObject->SetUV(m_UvXOffset, textObject->GetUV().y, textObject->GetSplit().x, textObject->GetSplit().y);
         }
     }
 
     // リズムに合わせて効果音を鳴らす
-    if (m_Elapsed >= m_GameRhythm[m_CurrentRhythmIndex] && !m_isEntry)
+    if (m_Elapsed >= m_GameRhythm[m_CurrentRhythmIndex] && m_isEntry)
     {
         PlaySE("whistle", 0.5f);
         
+        // 次のリズムをセット
         float nextBeat = 4.0f + kGameRhythm[m_Number[0]][m_CurrentRhythmIndex];
+
+        // 入力受付フラグを立てる
+        // 指定された3拍目以降から受付開始
         if(m_CurrentRhythmIndex == 2) {
             m_isInput = true;
         }
+
         m_GameRhythm[m_CurrentRhythmIndex] = nextBeat * GetOneBeat();
         m_CurrentRhythmIndex++;
+
+        // 最後のリズムがが経過したらエントリーフラグを立てる
+        if (m_Elapsed >= m_GameRhythm[2]) {
+            m_isEntry = false;
+        }
 
         if(m_CurrentRhythmIndex >= 3) {
             m_CurrentRhythmIndex = 0;
         }
 
-        // 最後のリズムが来たらエントリーフラグを立てる
-        if (m_Elapsed >= m_GameRhythm[2]) {
-            m_isEntry = true;
-        }
     }
 
 

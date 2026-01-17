@@ -33,10 +33,13 @@ private:
 
     float m_Elapsed = 0.0f;
     size_t m_CurrentRhythmIndex = 0;
+    size_t m_InputIndex = 0;
     float m_JudgeWindow = 0.1f;
+    float m_UvXOffset = 0.0f;
 
     bool m_isEntry = false;
-    bool m_isInput = false;
+    bool m_isInput = false;     // “ü—ÍŽó•tƒtƒ‰ƒO
+
 
 public:
     GameSceneText() = default;
