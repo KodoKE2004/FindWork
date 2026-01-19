@@ -127,7 +127,7 @@ void Game::Initialize()
     bgmConfig.params.pan	= 0.0f;
 
     instance.m_AudioManager->Create(bgmConfig);
-
+	instance.m_BgmAudio = std::make_shared<Audio>();
 	if (bgmConfig.autoPlay && instance.m_BgmAudio)
 	{
         instance.m_BgmAudio->Play(bgmConfig.params);

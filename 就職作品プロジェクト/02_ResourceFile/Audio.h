@@ -126,6 +126,7 @@ private:
     uint32_t m_id = 0;							// Ž¯•Ê—p
 
 public:
+	Audio() = default;
 	Audio(IXAudio2* xa, IXAudio2MasteringVoice* master, std::shared_ptr<AudioClip> clip, uint32_t id);
 	~Audio();
 

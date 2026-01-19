@@ -162,7 +162,7 @@ std::shared_ptr<AudioClip> AudioManager::LoadWavClip(const std::wstring& path)
 {
     {
         std::lock_guard<std::mutex> lk(mtx_);
-        std::wstring fullPath = m_baseDir + path;
+        std::wstring fullPath = joinPath(m_baseDir, path);
         auto it = m_PathCache.find(fullPath);
         if (it != m_PathCache.end()) {
             if (auto cached = it->second.lock()) {
@@ -172,7 +172,8 @@ std::shared_ptr<AudioClip> AudioManager::LoadWavClip(const std::wstring& path)
     }
 
     std::vector<uint8_t> bin;
-    if (!readAllFile(path, bin)) {
+    std::wstring fullPath = joinPath(m_baseDir, path);
+    if (!readAllFile(fullPath, bin)) {
         throw std::runtime_error("Audio load failed");
     }
     if (bin.size() < sizeof(RiffHeader)) {
@@ -262,7 +263,7 @@ std::shared_ptr<AudioClip> AudioManager::LoadWavClip(const std::wstring& path)
 
     {
         std::lock_guard<std::mutex> lk(mtx_);
-        m_PathCache[path] = clip;
+        m_PathCache[fullPath] = clip;
     }
 
     return clip;
