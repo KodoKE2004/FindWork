@@ -31,6 +31,7 @@ private:
 	std::vector<std::shared_ptr<Object>> m_GameObjects;		  // オブジェクト
 
     std::shared_ptr<Audio>				 m_BgmAudio;		  // BGM再生用オーディオ
+	PlayParams							 m_BgmPlayParams{};	  // BGM再生用パラメータ
     std::shared_ptr<TransitionBase>		 m_TransitionTexture; // トランジション用テクスチャ
     std::shared_ptr<Theme>				 m_Theme;			  // テーマ管理
     std::vector<std::shared_ptr<Scene>>	 m_SceneStack;		  // シーンスタック

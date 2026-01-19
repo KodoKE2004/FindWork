@@ -126,12 +126,8 @@ void Game::Initialize()
 	bgmConfig.params.pitch  = 1.0f;
     bgmConfig.params.pan	= 0.0f;
 
-    instance.m_AudioManager->Create(bgmConfig);
-	instance.m_BgmAudio = std::make_shared<Audio>();
-	if (bgmConfig.autoPlay && instance.m_BgmAudio)
-	{
-        instance.m_BgmAudio->Play(bgmConfig.params);
-	}
+    instance.m_BgmAudio = instance.m_AudioManager->Create(bgmConfig);
+    instance.m_BgmPlayParams = bgmConfig.params;
 
 }
 
@@ -149,6 +145,25 @@ void Game::Update(float tick)
 //	}
 //	instance.m_PreviewMousePos = mousePos;
 //#endif
+
+	if (instance.m_BgmAudio)
+	{
+		const SCENE_NO previousScene = instance.m_SceneCurrent->GetRelationData().previousScene;
+		const bool shouldPlayBgm = previousScene >= SCENE_NO::GAME_WAIT  &&
+								   previousScene <= SCENE_NO::TRANSITION;
+
+		if (shouldPlayBgm)
+		{
+			if (!instance.m_BgmAudio->IsPlaying())
+			{
+				instance.m_BgmAudio->Play(instance.m_BgmPlayParams);
+			}
+		}
+		else if (instance.m_BgmAudio->IsPlaying())
+		{
+			instance.m_BgmAudio->Stop();
+		}
+	}
 
 	// 現在のシーンの更新
 	instance.m_SceneCurrent->Update(tick);
