@@ -127,7 +127,7 @@ private:
     bool m_autoRelease = true;					// 再生終了後に自動回収
     uint32_t m_id = 0;							// 識別用
     float m_Bpm   = 120.0f;						// 曲のBPM（必要なら）
-    float m_BaseBpm = 120.0f;						// 基準BPM（必要なら）
+    float m_BaseBpm = 120.0f;					// 基準BPM（必要なら）
 public:
 	Audio() = default;
 	Audio(IXAudio2* xa, IXAudio2MasteringVoice* master, std::shared_ptr<AudioClip> clip, uint32_t id);

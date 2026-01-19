@@ -126,6 +126,7 @@ void Game::Initialize()
 	bgmConfig.params.pitch  = 1.0f;
     bgmConfig.params.pan	= 0.0f;
 	bgmConfig.baseBpm		= 100.0f;
+    bgmConfig.bpm			= bgmConfig.baseBpm;
 
     instance.m_BgmAudio = instance.m_AudioManager->Create(bgmConfig);
     instance.m_BgmPlayParams = bgmConfig.params;
