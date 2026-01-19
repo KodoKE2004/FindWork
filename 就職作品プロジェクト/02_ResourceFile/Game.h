@@ -23,13 +23,14 @@ class Game
 {
 private:
 	static std::unique_ptr<Game>		 m_pInstance;		  // ゲームのインスタンス
-	static uint64_t					 m_DrawFrameCounter;  // Draw 呼び出しのフレーム番号
+	static uint64_t						 m_DrawFrameCounter;  // Draw 呼び出しのフレーム番号
 	std::shared_ptr<Scene>				 m_SceneCurrent;	  // 現在のシーン
     std::shared_ptr<Scene>				 m_SceneNext;		  // 次のシーン
 	std::unique_ptr<Input>				 m_Input;			  // 入力管理
 	std::unique_ptr<Camera>				 m_Camera;			  // カメラ
 	std::vector<std::shared_ptr<Object>> m_GameObjects;		  // オブジェクト
 
+    std::shared_ptr<Audio>				 m_BgmAudio;		  // BGM再生用オーディオ
     std::shared_ptr<TransitionBase>		 m_TransitionTexture; // トランジション用テクスチャ
     std::shared_ptr<Theme>				 m_Theme;			  // テーマ管理
     std::vector<std::shared_ptr<Scene>>	 m_SceneStack;		  // シーンスタック

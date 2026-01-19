@@ -20,7 +20,7 @@
 struct AudioClip {
 	WAVEFORMATEX* wfex = nullptr;	// 所有
 	std::vector<uint8_t> pcm;		// 生データ
-	~AudioClip() { delete wfex; }
+	~AudioClip() { delete[] reinterpret_cast<uint8_t*>(wfex); }
 };
 
 
@@ -28,9 +28,9 @@ struct AudioClip {
 // 			  ループ設定
 //-------------------------------
 struct LoopConfig {
-	uint32_t loopBegin = 0;  // samples
-	uint32_t loopLength = 0; // 0=to end
-	uint32_t loopCount = 0;  // 0=no loop / XAUDIO2_LOOP_INFINITE
+	uint32_t loopBegin  = 0;  // samples
+	uint32_t loopLength = 0;  // 0=to end
+	uint32_t loopCount  = 0;  // 0=no loop / XAUDIO2_LOOP_INFINITE
 };
 
 //-------------------------------

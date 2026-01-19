@@ -5,6 +5,7 @@
 #include <unordered_map>
 #include <string>
 #include <mutex>
+#include <memory>
 #include <filesystem>
 #include <type_traits>
 using namespace Microsoft::WRL;
@@ -14,12 +15,13 @@ using namespace Microsoft::WRL;
 class AudioManager
 {
 public:
+	public: AudioManager& Get();
 	// baseDir: 例 L"assets/audio/"（末尾に自動で区切り追加）
 	explicit AudioManager(std::wstring baseDir = L"");
-	~AudioManager() { Shutdown(); }
+	~AudioManager() { Finalize(); }
 
-	bool Init();
-	void Shutdown();
+	bool Initialize();
+	void Finalize();
 	void Update(); // 終了インスタンスのGC
 
 	// 登録（アセット）
@@ -51,10 +53,12 @@ public:
 	void StopAll(bool immediate = true);
 	// クリップ取得（必要なら）
 	std::shared_ptr<AudioClip> GetClip(std::string_view key);
+	std::shared_ptr<Audio>	   Create(const AudioConfig& cfg);
 
 private:
 	// 低レベルI/O
 	std::shared_ptr<AudioClip> loadWavFull(const std::wstring& fullPath, std::string* err = nullptr);
+    std::shared_ptr<AudioClip> LoadWavClip(const std::wstring& path);
 
 	// パス結合
 	std::wstring joinPath(const std::wstring& base, const std::wstring& rel) const;
@@ -70,9 +74,9 @@ private:
 
 	// 登録
 	std::wstring m_baseDir; // 共通基準パス
-	std::unordered_map<std::string, std::shared_ptr<AudioClip>> m_key2clip; // name -> clip
-	std::unordered_map<int, std::string> m_id2key; // id -> name
-
+	std::unordered_map<std::string, std::shared_ptr<AudioClip>> m_key2clip;	 // name -> clip
+	std::unordered_map<int, std::string> m_id2key;							 // id -> name
+    std::unordered_map<std::wstring, std::weak_ptr<AudioClip>>  m_PathCache; // path -> clip（重複読み込み防止）
 
 	// 実行中インスタンス
 	std::mutex mtx_;

@@ -100,7 +100,7 @@ void Game::Initialize()
 	instance.m_ShaderManager  = std::make_shared<ShaderManager> ("ShaderFile/");
 	instance.m_TextureManager = std::make_shared<TextureManager>("AssetFile/Texture/");
 	instance.m_AudioManager   = std::make_shared<AudioManager>	(L"AssetFile/Sound/");
-	instance.m_AudioManager->Init();
+	instance.m_AudioManager->Initialize();
 
 	// シェーダー登録
 	instance.m_ShaderManager->Add("VS_Default",ShaderStage::VS);
@@ -110,8 +110,29 @@ void Game::Initialize()
 	instance.m_ShaderManager->Add("VS_Alpha"  ,ShaderStage::VS);
 	instance.m_ShaderManager->Add("PS_Alpha"  ,ShaderStage::PS);
 
-	instance.m_SceneCurrent = std::make_shared<GameSceneText>();				// タイトルシーンのインスタンスを生成
+	instance.m_SceneCurrent = std::make_shared<TitleScene>();				// タイトルシーンのインスタンスを生成
 	instance.m_SceneCurrent->Initialize();
+
+    AudioConfig bgmConfig{};
+    bgmConfig.filePath = L"BGM/GameMelody.wav";
+	bgmConfig.autoPlay = true;
+
+	bgmConfig.loop = true;
+    bgmConfig.params.loop.loopCount = XAUDIO2_LOOP_INFINITE;
+    bgmConfig.params.loop.loopBegin  = 0;
+    bgmConfig.params.loop.loopLength = 0;	
+
+	bgmConfig.params.volume = 0.6f;
+	bgmConfig.params.pitch  = 1.0f;
+    bgmConfig.params.pan	= 0.0f;
+
+    instance.m_AudioManager->Create(bgmConfig);
+
+	if (bgmConfig.autoPlay && instance.m_BgmAudio)
+	{
+        instance.m_BgmAudio->Play(bgmConfig.params);
+	}
+
 }
 
 void Game::Update(float tick)
@@ -211,6 +232,11 @@ void Game::Finalize()
 	}
 	if(instance.m_Theme){
 		instance.m_Theme->Finalize();
+	}
+	if (instance.m_BgmAudio)
+	{
+		instance.m_BgmAudio->Stop(true);
+		instance.m_BgmAudio.reset();
 	}
 	Renderer::Finalize();			// レンダラーの終了処理
 
