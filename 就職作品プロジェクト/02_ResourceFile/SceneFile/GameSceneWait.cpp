@@ -119,7 +119,7 @@ void GameSceneWait::Initialize()
     }
 
     RhythmBeatConst beatConfig{};
-    beatConfig.Setup(120.0f, 4, 1); // 120 BPM, 4/4 拍子
+    beatConfig.Setup(Game::GetBgmBpm(), 4, 1);
 
     // 難易度アップ処理 
     ++m_RelationData.stageCount;
@@ -131,10 +131,12 @@ void GameSceneWait::Initialize()
     }
     // スピード
     else if (m_RelationData.stageCount % 4 == 0) {
-        beatConfig.Setup(120.0f + (m_RelationData.stageCount / 4) * 10.0f, 4, 1);
+        beatConfig.Setup(Game::GetBgmBpm() + (m_RelationData.stageCount / 4) * 10.0f, 4, 1);
         Debug::Log("[[検出]] スピードアップ");
 
     }
+
+    Game::SetBgmBpm(beatConfig.m_Bpm);
 
     m_TimerList.clear();
     SetTimer(&m_Tick);

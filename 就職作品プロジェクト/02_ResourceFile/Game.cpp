@@ -125,6 +125,7 @@ void Game::Initialize()
 	bgmConfig.params.volume = 0.6f;
 	bgmConfig.params.pitch  = 1.0f;
     bgmConfig.params.pan	= 0.0f;
+	bgmConfig.baseBpm		= 100.0f;
 
     instance.m_BgmAudio = instance.m_AudioManager->Create(bgmConfig);
     instance.m_BgmPlayParams = bgmConfig.params;
@@ -149,8 +150,10 @@ void Game::Update(float tick)
 	if (instance.m_BgmAudio)
 	{
 		const SCENE_NO previousScene = instance.m_SceneCurrent->GetRelationData().previousScene;
-		const bool shouldPlayBgm = previousScene >= SCENE_NO::GAME_WAIT  &&
-								   previousScene <= SCENE_NO::TRANSITION;
+        const SCENE_NO oldScene		 = instance.m_SceneCurrent->GetRelationData().oldScene;
+		const bool shouldPlayBgm = previousScene == SCENE_NO::GAME_WAIT || 
+								   oldScene		 == SCENE_NO::GAME_WAIT;
+								   
 
 		if (shouldPlayBgm)
 		{
@@ -162,6 +165,12 @@ void Game::Update(float tick)
 		else if (instance.m_BgmAudio->IsPlaying())
 		{
 			instance.m_BgmAudio->Stop();
+		}
+
+		const float bgmBpm = instance.m_BgmAudio->GetBpm();
+		if (bgmBpm > 0.0f && Scene::m_RelationData.rhythmBeat.GetBeatConst().m_Bpm != bgmBpm)
+		{
+			Scene::m_RelationData.rhythmBeat.SyncBpm(bgmBpm);
 		}
 	}
 
@@ -321,6 +330,27 @@ std::shared_ptr<Scene> Game::GetCurrentScene() const
 Camera& Game::GetCamera()
 {
 	return *m_Camera.get();
+}
+
+void Game::SetBgmBpm(float bpm)
+{
+	auto& instance = GetInstance();
+	if (!instance.m_BgmAudio)
+	{
+		return;
+	}
+	instance.m_BgmAudio->SetBpm(bpm);
+	Scene::m_RelationData.rhythmBeat.SyncBpm(instance.m_BgmAudio->GetBpm());
+}
+
+float Game::GetBgmBpm()
+{
+	auto& instance = GetInstance();
+	if (!instance.m_BgmAudio)
+	{
+		return 0.0f;
+	}
+	return instance.m_BgmAudio->GetBpm();
 }
 
 void Game::RegistDebugObject()

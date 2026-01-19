@@ -51,7 +51,15 @@ public:
     void Initialize(const RhythmBeatConst& config);
     // XV
     int Update(float deltaTime);
-
+    // BPM“¯Šú
+    void SyncBpm(float bpm)
+    {
+        if (bpm <= 0.0f || m_Beat.m_Bpm == bpm)
+        {
+            return;
+        }
+        m_Beat.Setup(bpm, m_Beat.m_BeatUnit, m_Beat.m_TicksPerBeat);
+    }
     // Œ»İ‚ÌTick‚ğæ“¾
     int GetTotalTick() const
     {

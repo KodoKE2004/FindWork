@@ -24,7 +24,9 @@ void GameSceneExe::Initialize()
 
     // リズムの定義
     RhythmBeatConst beatConfig{};
-    beatConfig.Setup(120.0f, 4, 1); // 120 BPM, 4/4 拍子
+    const float bgmBpm = Game::GetBgmBpm();
+    const float beatBpm = (bgmBpm > 0.0f) ? bgmBpm : 120.0f;
+    beatConfig.Setup(Game::GetBgmBpm(), 4, 1); // 120 BPM, 4/4 拍子
     m_RelationData.rhythmBeat.Initialize(beatConfig);
     m_BeatTimer.Initialize(m_BaseBeats);
 

@@ -90,6 +90,8 @@ public:
 	std::shared_ptr<Scene>	GetCurrentScene() const;
 	Camera&					GetCamera();
 	static uint64_t			GetDrawFrameCounter() { return m_DrawFrameCounter; }
+	static void				SetBgmBpm(float bpm);
+	static float			GetBgmBpm();
 	
     //================================
 	//		  マネージャーの取得

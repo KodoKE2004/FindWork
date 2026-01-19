@@ -108,3 +108,10 @@ void Audio::SetPan(float pan)
 {
 	applyPan(pan); 
 }
+
+void Audio::SetBpm(float bpm)
+{
+	if (bpm > 0.0f) {
+		m_Bpm = bpm;
+	}
+}
