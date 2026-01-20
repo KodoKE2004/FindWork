@@ -34,6 +34,22 @@ namespace
     };
 }
 
+void GameSceneText::ShuffleSlotTextureUV()
+{
+    m_UvXOffset = 4.0f <= m_UvXOffset ?
+                  1.0f :  m_UvXOffset + 1.0f;
+
+    // 止まっていないスロットではUVをループ
+    for (size_t i = 0; i < MESSAGE_SLOT::SLOT_SIZE; ++i)
+    {
+        if (!m_Clicked[i])
+        {
+            auto textObject = m_MessageSlot[i]->GetTextObject();
+            textObject->SetUV(m_UvXOffset, textObject->GetUV().y, textObject->GetSplit().x, textObject->GetSplit().y);
+        }
+    }
+}
+
 void GameSceneText::Initialize()
 {
 #ifdef _DEBUG
@@ -75,7 +91,7 @@ void GameSceneText::Initialize()
     m_MySceneObjects.emplace_back(m_Boy);
 
     m_Number = ShuffleButtonIndices();
-    for (size_t i = 0; i < 3; ++i)
+    for (int i = 0; i < MESSAGE_SLOT::SLOT_SIZE; ++i)
     {
         float uvY = static_cast<float>(i + 1);
         m_GameRhythm [i] = kGameRhythm[m_Number[0]][i] * GetOneBeat();
@@ -95,7 +111,7 @@ void GameSceneText::Initialize()
     m_InputIndex = 0;
     m_CurrentRhythmIndex = 0;
     m_isEntry = true;
-    m_isInput = false;
+    m_isInputSlot = false;
     m_UvXOffset = 1.0f;
     m_Elapsed = 0.0f;
     std::fill(std::begin(m_Clicked), std::end(m_Clicked), false);
@@ -147,16 +163,20 @@ void GameSceneText::Initialize()
 void GameSceneText::Update(float tick)
 {
     GameSceneExe::Update(tick);
-    AudioManager* audioMgr = Game::GetInstance();
-
+    AudioManager*   audioMgr   = Game::GetInstance();
+    TextureManager* textureMgr = Game::GetInstance();
     m_Elapsed += tick;
+
+    // 入力処理
     if (Input::GetKeyTrigger(VK_RETURN) || Input::GetMouseTrriger(vkLEFT))
     {
         // 一定の時間が来るまでは音声のみ再生
         PlaySE("clap", 0.5f);
         size_t index = m_InputIndex;
-        if (index < 3)
+        // SLOTの数分入力の受付
+        if (index < MESSAGE_SLOT::SLOT_SIZE)
         {
+            // 入力許容の時間
             const float tolerance = 0.4f;
             bool justTiming = (m_GameRhythm[index] - tolerance) <= m_Elapsed && 
                                m_Elapsed <= (m_GameRhythm[index] + tolerance);
@@ -164,35 +184,57 @@ void GameSceneText::Update(float tick)
             auto textObject = m_MessageSlot[index]->GetTextObject();
 
             // 正しいタイミングで押された場合
-            if (m_isInput && justTiming) 
+            if (m_isInputSlot && justTiming) 
             {
                 textObject->SetUV( 1.0f,                     textObject->GetUV().y, 
                                    textObject->GetSplit().x, textObject->GetSplit().y);
             }
             // 間違ったタイミングで押された場合
-            else if (m_isInput && !justTiming) {
-                std::array<float, 2> falseUV_X = {2.0f,3.0f};
+            else if (m_isInputSlot && !justTiming) {
+                std::array<float, 2> falseUV_X = {2.0f, 3.0f};
                 falseUV_X = ShuffleButtonIndices(falseUV_X);
                 textObject->SetUV( falseUV_X[0]            , textObject->GetUV().y,
                                    textObject->GetSplit().x, textObject->GetSplit().y);
             }
-            if (m_isInput)
+            if (m_isInputSlot)
             {
                 m_Clicked[index] = true;
                 ++m_InputIndex ;
             }
+            if (m_InputIndex == MESSAGE_SLOT::SLOT_SIZE) {
+                m_isInputAll = true;
+            }
         }
-    }
+    } // 入力処理
 
-    m_UvXOffset = 4.0f <= m_UvXOffset ? 
-                  1.0f :  m_UvXOffset + 1.0f;
-    for (size_t i = 0; i < 3; ++i)
+
+    if (m_isInputAll)
     {
-        if (!m_Clicked[i])
+        // 女の子の反応のtextureを用意
+        // 言葉次第で反応が変化
+        int msgSlotAdjective = static_cast<int> (m_MessageSlot[MESSAGE_SLOT::ADJECTIVE_A]->GetUV().x 
+                                               + m_MessageSlot[MESSAGE_SLOT::ADJECTIVE_B]->GetUV().x);
+
+        float msgSlotAdverb    = m_MessageSlot[MESSAGE_SLOT::ADVERB]->GetUV().x;
+        
+        switch (msgSlotAdjective)
         {
-            auto textObject = m_MessageSlot[i]->GetTextObject();
-            textObject->SetUV(m_UvXOffset, textObject->GetUV().y, textObject->GetSplit().x, textObject->GetSplit().y);
+        case 2  : 
+            if (msgSlotAdverb < 3.0f){
+                m_Girl->SetTexture(textureMgr->GetTexture("Girl/LoveLatterGirlHigh.png"));   
+            }
+            else {
+                m_Girl->SetTexture(textureMgr->GetTexture("Girl/LoveLatterGirlGlad.png"));   
+            }
+        break;
+        case 4  : m_Girl->SetTexture(textureMgr->GetTexture("Girl/LoveLatterGirlSad.png") );   break;
+        default : m_Girl->SetTexture(textureMgr->GetTexture("Girl/LoveLatterGirlWhy.png"));    break;
         }
+
+    }
+    else 
+    {
+        ShuffleSlotTextureUV();
     }
 
     // リズムに合わせて効果音を鳴らす
@@ -200,28 +242,29 @@ void GameSceneText::Update(float tick)
     {
         PlaySE("whistle", 0.5f);
         
-        // 次のリズムをセット
+        // 次の小節に使いまわしする 4拍1小節
         float nextBeat = 4.0f + kGameRhythm[m_Number[0]][m_CurrentRhythmIndex];
 
         // 入力受付フラグを立てる
         // 指定された3拍目以降から受付開始
-        if(m_CurrentRhythmIndex == 2) {
-            m_isInput = true;
+        if(m_CurrentRhythmIndex == MESSAGE_SLOT::ADJECTIVE_B) {
+            m_isInputSlot = true;
         }
-
+        
+        // 次の小節のTickを算出
         m_GameRhythm[m_CurrentRhythmIndex] = nextBeat * GetOneBeat();
         m_CurrentRhythmIndex++;
 
         // 最後のリズムがが経過したらエントリーフラグを立てる
-        if (m_Elapsed >= m_GameRhythm[2]) {
+        if (m_Elapsed >= m_GameRhythm[MESSAGE_SLOT::ADJECTIVE_B]) {
             m_isEntry = false;
         }
 
-        if(m_CurrentRhythmIndex >= 3) {
+        if(m_CurrentRhythmIndex >= MESSAGE_SLOT::SLOT_SIZE) {
             m_CurrentRhythmIndex = 0;
         }
 
-    }
+    } // リズムに合わせて効果音を鳴らす
 
 
     if (IsChange())
@@ -235,22 +278,4 @@ void GameSceneText::Update(float tick)
 void GameSceneText::Finalize()
 {
     GameSceneExe::Finalize();
-}
-
-void GameSceneText::InsideButton(LAST_DRAG& lastDrag, std::weak_ptr<Button> button, const LAST_DRAG comparison)
-{   
-    auto temp = button.lock();
-    if (lastDrag != comparison)
-    {
-        temp->SetScale(BUTTTON_BASE_SCALE);
-    }
-    if (temp->IsInside())
-    {
-        if (lastDrag != comparison)
-        {
-            lastDrag = comparison;
-            PlaySE("rhythm", 0.5f);
-            temp->SetScale(BUTTTON_BASE_SCALE * 1.1f);
-        }
-    }
 }

@@ -149,7 +149,7 @@ public:
 	}
 
 	float GetOneBeat() const {
-        return m_RelationData.rhythmBeat.GetBeatConst().secondsPerBeat;
+		return m_RelationData.rhythmBeat.GetBeatConst().secondsPerBeat;
 	}
 
     // Œø‰Ê‰¹Ä¶ŠÖ”

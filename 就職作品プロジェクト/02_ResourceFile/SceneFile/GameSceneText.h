@@ -9,27 +9,21 @@ class GameSceneText : public GameSceneExe
 private:
     const NVector3 BUTTTON_BASE_SCALE = NVector3(240.0f, 100.0f, 1.0f);
 
-    enum LAST_DRAG
+    enum MESSAGE_SLOT
     {
-        NONE,
-        BUTTON_TRUE,
-        BUTTON_FALSE_A,
-        BUTTON_FALSE_B,
+        ADVERB,
+        ADJECTIVE_A,
+        ADJECTIVE_B,
+        SLOT_SIZE
     };
 
     std::shared_ptr<Square> m_Boy;
     std::shared_ptr<Square> m_Girl;
 
-    std::array<std::shared_ptr<Button>, 3> m_MessageSlot;
-
-    NVector3 m_TrueTargetPos{};
-    NVector3 m_FalseATargetPos{};
-    NVector3 m_FalseBTargetPos{};
-
-    std::array<size_t, 3> m_Number;
-
-    std::array<float,3> m_GameRhythm = { 0.0f, 0.0f, 0.0f };    // リズムを格納する配列
-    std::array<bool, 3> m_Clicked    = { false, false, false }; // クリックされたかどうかの配列
+    std::array<std::shared_ptr<Button>, MESSAGE_SLOT::SLOT_SIZE> m_MessageSlot {nullptr, nullptr, nullptr};
+    std::array<size_t, MESSAGE_SLOT::SLOT_SIZE> m_Number     = { 0, 0, 0};
+    std::array<float,  MESSAGE_SLOT::SLOT_SIZE> m_GameRhythm = { 0.0f, 0.0f, 0.0f };    // リズムを格納する配列
+    std::array<bool ,  MESSAGE_SLOT::SLOT_SIZE> m_Clicked    = { false, false, false }; // クリックされたかどうかの配列
 
     float m_Elapsed = 0.0f;
     size_t m_CurrentRhythmIndex = 0;
@@ -38,8 +32,11 @@ private:
     float m_UvXOffset = 0.0f;
 
     bool m_isEntry = false;
-    bool m_isInput = false;     // 入力受付フラグ
+    bool m_isInputSlot = false; // slotの入力受付フラグ
+    bool m_isInputAll = false;  // すべてのslotの入力が終わったか
 
+private:
+    void ShuffleSlotTextureUV();
 
 public:
     GameSceneText() = default;
@@ -53,5 +50,4 @@ public:
         return SCENE_NO::GAME_TEXT;
     }
 
-    void InsideButton(LAST_DRAG& lastDrag, std::weak_ptr<Button> button, const LAST_DRAG comparison);
 };
