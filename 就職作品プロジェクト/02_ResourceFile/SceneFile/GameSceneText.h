@@ -36,8 +36,9 @@ private:
     bool m_isInputAll = false;  // ‚·‚×‚Ä‚Ìslot‚Ì“ü—Í‚ªI‚í‚Á‚½‚©
 
 private:
+    void RhythmJudge(float );
     void ShuffleSlotTextureUV();
-
+    void GirlReaction();
 public:
     GameSceneText() = default;
     ~GameSceneText() = default;

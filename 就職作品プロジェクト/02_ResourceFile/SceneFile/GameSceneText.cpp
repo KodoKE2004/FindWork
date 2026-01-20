@@ -6,9 +6,9 @@
 namespace
 {
     NVector3 kButtonPos[3] = {
-        NVector3(- 375.0f,0.0f,0.0f),
-        NVector3(    0.0f,0.0f,0.0f),
-        NVector3(  375.0f,0.0f,0.0f),
+        NVector3(- 375.0f, - 200.0f,0.0f),
+        NVector3(    0.0f, - 200.0f,0.0f),
+        NVector3(  375.0f, - 200.0f,0.0f),
     };
 
     std::array<size_t, 3> ShuffleButtonIndices()
@@ -34,6 +34,38 @@ namespace
     };
 }
 
+void GameSceneText::RhythmJudge(float tolerance)
+{
+    size_t index = m_InputIndex;
+    // 入力許容の時間
+    bool justTiming = (m_GameRhythm[index] - tolerance) <= m_Elapsed &&
+                      (m_GameRhythm[index] + tolerance) >= m_Elapsed  ;
+
+    auto textObject = m_MessageSlot[index]->GetTextObject();
+
+    // 正しいタイミングで押された場合
+    if (m_isInputSlot && justTiming)
+    {
+        textObject->SetUV(1.0f, textObject->GetUV().y,
+            textObject->GetSplit().x, textObject->GetSplit().y);
+    }
+    // 間違ったタイミングで押された場合
+    else if (m_isInputSlot && !justTiming) {
+        std::array<float, 2> falseUV_X = { 2.0f, 3.0f };
+        falseUV_X = ShuffleButtonIndices(falseUV_X);
+        textObject->SetUV(falseUV_X[0]            , textObject->GetUV().y,
+                          textObject->GetSplit().x, textObject->GetSplit().y);
+    }
+    if (m_isInputSlot)
+    {
+        m_Clicked[index] = true;
+        ++m_InputIndex;
+    }
+    if (m_InputIndex == MESSAGE_SLOT::SLOT_SIZE) {
+        m_isInputAll = true;
+    }
+}
+
 void GameSceneText::ShuffleSlotTextureUV()
 {
     m_UvXOffset = 4.0f <= m_UvXOffset ?
@@ -48,6 +80,30 @@ void GameSceneText::ShuffleSlotTextureUV()
             textObject->SetUV(m_UvXOffset, textObject->GetUV().y, textObject->GetSplit().x, textObject->GetSplit().y);
         }
     }
+}
+
+void GameSceneText::GirlReaction()
+{
+    size_t index = m_InputIndex;
+
+    float uvX = 1.0f;
+    // 女の子の反応をuvXで変化させる
+    const float adjectiveUvX_A    = m_MessageSlot[MESSAGE_SLOT::ADJECTIVE_A]->GetUV().x;
+    const float adjectiveUvX_B    = m_MessageSlot[MESSAGE_SLOT::ADJECTIVE_B]->GetUV().x;
+    const float adjectiveUvAdverb = m_MessageSlot[MESSAGE_SLOT::ADVERB]->GetUV().x;
+    
+    bool high = adjectiveUvX_A    == 1.0f &&
+                adjectiveUvX_B    == 1.0f &&
+                adjectiveUvAdverb <= 2.0f;
+
+    bool sad  = adjectiveUvX_A == 2.0f &&
+                adjectiveUvX_B == 2.0f;
+
+    if      (high) { uvX = 2.0f; }
+    else if (sad)  { uvX = 3.0f; }
+    else           { uvX = 5.0f; }
+
+    m_Girl->SetUV(uvX, 1.0f, 5.0f, 1.0f);
 }
 
 void GameSceneText::Initialize()
@@ -172,65 +228,18 @@ void GameSceneText::Update(float tick)
     {
         // 一定の時間が来るまでは音声のみ再生
         PlaySE("clap", 0.5f);
-        size_t index = m_InputIndex;
         // SLOTの数分入力の受付
-        if (index < MESSAGE_SLOT::SLOT_SIZE)
+        if (m_InputIndex < MESSAGE_SLOT::SLOT_SIZE)
         {
-            // 入力許容の時間
-            const float tolerance = 0.4f;
-            bool justTiming = (m_GameRhythm[index] - tolerance) <= m_Elapsed && 
-                               m_Elapsed <= (m_GameRhythm[index] + tolerance);
-
-            auto textObject = m_MessageSlot[index]->GetTextObject();
-
-            // 正しいタイミングで押された場合
-            if (m_isInputSlot && justTiming) 
-            {
-                textObject->SetUV( 1.0f,                     textObject->GetUV().y, 
-                                   textObject->GetSplit().x, textObject->GetSplit().y);
-            }
-            // 間違ったタイミングで押された場合
-            else if (m_isInputSlot && !justTiming) {
-                std::array<float, 2> falseUV_X = {2.0f, 3.0f};
-                falseUV_X = ShuffleButtonIndices(falseUV_X);
-                textObject->SetUV( falseUV_X[0]            , textObject->GetUV().y,
-                                   textObject->GetSplit().x, textObject->GetSplit().y);
-            }
-            if (m_isInputSlot)
-            {
-                m_Clicked[index] = true;
-                ++m_InputIndex ;
-            }
-            if (m_InputIndex == MESSAGE_SLOT::SLOT_SIZE) {
-                m_isInputAll = true;
-            }
+            float tolerance = 0.25f * GetOneBeat();
+            RhythmJudge(tolerance);
         }
     } // 入力処理
 
 
     if (m_isInputAll)
     {
-        // 女の子の反応のtextureを用意
-        // 言葉次第で反応が変化
-        int msgSlotAdjective = static_cast<int> (m_MessageSlot[MESSAGE_SLOT::ADJECTIVE_A]->GetUV().x 
-                                               + m_MessageSlot[MESSAGE_SLOT::ADJECTIVE_B]->GetUV().x);
-
-        float msgSlotAdverb    = m_MessageSlot[MESSAGE_SLOT::ADVERB]->GetUV().x;
-        
-        switch (msgSlotAdjective)
-        {
-        case 2  : 
-            if (msgSlotAdverb < 3.0f){
-                m_Girl->SetTexture(textureMgr->GetTexture("Girl/LoveLatterGirlHigh.png"));   
-            }
-            else {
-                m_Girl->SetTexture(textureMgr->GetTexture("Girl/LoveLatterGirlGlad.png"));   
-            }
-        break;
-        case 4  : m_Girl->SetTexture(textureMgr->GetTexture("Girl/LoveLatterGirlSad.png") );   break;
-        default : m_Girl->SetTexture(textureMgr->GetTexture("Girl/LoveLatterGirlWhy.png"));    break;
-        }
-
+        GirlReaction();
     }
     else 
     {
