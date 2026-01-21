@@ -92,9 +92,8 @@ void GameSceneText::GirlReaction()
     const float adjectiveUvX_B    = m_MessageSlot[MESSAGE_SLOT::ADJECTIVE_B]->GetUV().x;
     const float adjectiveUvAdverb = m_MessageSlot[MESSAGE_SLOT::ADVERB]->GetUV().x;
     
-    bool high = adjectiveUvX_A    == 1.0f &&
-                adjectiveUvX_B    == 1.0f &&
-                adjectiveUvAdverb <= 2.0f;
+    bool high = adjectiveUvX_A == 1.0f &&
+                adjectiveUvX_B == 1.0f ;
 
     bool sad  = adjectiveUvX_A == 2.0f &&
                 adjectiveUvX_B == 2.0f;
