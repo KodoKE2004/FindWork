@@ -129,7 +129,7 @@ bool Input::GetMousePress(MOUSE_BUTTON mouseButton)
 	return m_MouseButtons[mouseButton];
 }
 
-bool Input::GetMouseTrriger(MOUSE_BUTTON mouseButton)
+bool Input::GetMouseTrigger(MOUSE_BUTTON mouseButton)
 {
 	return m_MouseButtons[mouseButton] && !m_MouseButtonsOld[mouseButton];
 }

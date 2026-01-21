@@ -24,6 +24,7 @@ private:
     std::array<size_t, MESSAGE_SLOT::SLOT_SIZE> m_Number     = { 0, 0, 0};
     std::array<float,  MESSAGE_SLOT::SLOT_SIZE> m_GameRhythm = { 0.0f, 0.0f, 0.0f };    // リズムを格納する配列
     std::array<bool ,  MESSAGE_SLOT::SLOT_SIZE> m_Clicked    = { false, false, false }; // クリックされたかどうかの配列
+    MESSAGE_SLOT m_SelectedSlot = SLOT_SIZE;
 
     float m_Elapsed = 0.0f;
     size_t m_CurrentRhythmIndex = 0;
@@ -50,5 +51,5 @@ public:
     SCENE_NO GetSceneNo() {
         return SCENE_NO::GAME_TEXT;
     }
-
+    void InsideButton(int i, std::weak_ptr<Button> button, const MESSAGE_SLOT comparison);
 };

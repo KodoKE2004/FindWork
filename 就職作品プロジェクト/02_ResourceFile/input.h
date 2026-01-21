@@ -99,7 +99,7 @@ public:
 
     //ƒ}ƒEƒX“ü—Í
 	static bool GetMousePress  (MOUSE_BUTTON mouseButton);
-	static bool GetMouseTrriger(MOUSE_BUTTON mouseButton);
+	static bool GetMouseTrigger(MOUSE_BUTTON mouseButton);
 	static bool GetMouseRelease(MOUSE_BUTTON mouseButton);
 
 	static DirectX::SimpleMath::Vector2 GetMousePos  ();

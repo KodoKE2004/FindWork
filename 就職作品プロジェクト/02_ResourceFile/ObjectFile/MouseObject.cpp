@@ -23,7 +23,7 @@ void MouseObject::Update()
     m_isInside = std::abs(mousePos.x - pos.x) <= halfWidth &&
                  std::abs(mousePos.y - pos.y) <= halfHeight;
     
-    if (Input::GetMouseTrriger(vkLEFT))
+    if (Input::GetMouseTrigger(vkLEFT))
     {
         if (m_isInside)
         {
