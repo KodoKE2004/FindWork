@@ -36,7 +36,7 @@ namespace
 
 void GameSceneText::ShuffleSlotTextureUV()
 {
-    float uvX = 0.5f;
+    float uvX = 0.7f;
     m_UvXOffset = (4.0f <= m_UvXOffset) ? 1.0f : m_UvXOffset + uvX;
     float temp = fmodf(m_UvXOffset,1.0f);
     if (temp == 0.0f)
@@ -270,6 +270,11 @@ void GameSceneText::InsideButton(int i, std::shared_ptr<Button> button, const ME
         }
         if (Input::GetKeyTrigger(VK_RETURN) || Input::GetMouseTrigger(vkLEFT))
         {
+            float temp = fmodf(m_UvXOffset, 1.0f);
+            if (temp != 0.0f)
+            {
+                m_UvXOffset = m_UvXOffset - temp;
+            }
             auto textObject = button->GetTextObject();
             textObject->SetUV(m_UvXOffset             , textObject->GetUV().y,
                               textObject->GetSplit().x, textObject->GetSplit().y);
