@@ -387,10 +387,10 @@ void TransitionBase::DrawDebugFullscreenSolid()
 	if (m_Texture) {
 		m_Texture->SetGPU();
 	}
-	if (m_Materiale) {
-		m_Materiale->SetDiffuse(DirectX::XMFLOAT4(m_Color.x, m_Color.y, m_Color.z, m_Color.w));
-		m_Materiale->Update();
-		m_Materiale->SetGPU();
+	if (m_Material) {
+		m_Material->SetDiffuse(DirectX::XMFLOAT4(m_Color.x, m_Color.y, m_Color.z, m_Color.w));
+		m_Material->Update();
+		m_Material->SetGPU();
 	}
 
 	float u = (m_NumU - 1.0f) / m_SplitX;

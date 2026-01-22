@@ -78,7 +78,7 @@ protected:
 
     // 描画の為の情報（見た目に関わる部分）
     std::shared_ptr<Texture>  m_Texture;	// テクスチャ
-    std::unique_ptr<Material> m_Materiale;	//マテリアル
+    std::unique_ptr<Material> m_Material;	//マテリアル
 
     Microsoft::WRL::ComPtr<ID3D11ShaderResourceView> m_InputSRV;
     TRANS_PHASE m_Phase;

@@ -48,12 +48,12 @@ void Wipe::Initialize()
 
     SetShader("VS_Alpha", "PS_Alpha");
 
-    m_Materiale = std::make_unique<Material>();
+    m_Material = std::make_unique<Material>();
     MATERIAL mtrl{};
     mtrl.Diffuse = Color(1, 1, 1, 1);
     mtrl.Shiness = 1;
     mtrl.TextureEnable = true;
-    m_Materiale->Create(mtrl);
+    m_Material->Create(mtrl);
 }
 
 
@@ -110,11 +110,11 @@ void Wipe::Draw()
         m_Texture->SetGPU();
     }
 
-    if (m_Materiale)
+    if (m_Material)
     {
-        m_Materiale->SetDiffuse(DirectX::XMFLOAT4(m_Color.x, m_Color.y, m_Color.z, m_Color.w));
-        m_Materiale->Update();
-        m_Materiale->SetGPU();
+        m_Material->SetDiffuse(DirectX::XMFLOAT4(m_Color.x, m_Color.y, m_Color.z, m_Color.w));
+        m_Material->Update();
+        m_Material->SetGPU();
     }
 
     float u = (m_NumU - 1.0f) / m_SplitX;

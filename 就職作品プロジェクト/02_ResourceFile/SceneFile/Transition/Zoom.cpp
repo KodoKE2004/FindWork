@@ -32,12 +32,12 @@ void Zoom::Initialize()
 
     SetShader("VS_Alpha", "PS_CenterFade");
 
-    m_Materiale = std::make_unique<Material>();
+    m_Material = std::make_unique<Material>();
     MATERIAL mtrl{};
     mtrl.Diffuse = Color(1, 1, 1, 1);
     mtrl.Shiness = 1;
     mtrl.TextureEnable = true;
-    m_Materiale->Create(mtrl);
+    m_Material->Create(mtrl);
 
     m_CenterFade = std::make_unique<CenterFade>();
     FADE_BUFFER fadeBuffer{};
@@ -84,9 +84,9 @@ void Zoom::Draw()
     ID3D11DeviceContext* dc = Renderer::GetDeviceContext();
     m_Texture->SetGPU();
 
-    m_Materiale->SetDiffuse(DirectX::XMFLOAT4(m_Color.x, m_Color.y, m_Color.z, m_Color.w));
+    m_Material->SetDiffuse(DirectX::XMFLOAT4(m_Color.x, m_Color.y, m_Color.z, m_Color.w));
 
-    m_Materiale->Update();
+    m_Material ->Update();
     m_CenterFade->Update();
 
     float u = (m_NumU - 1.0f) / m_SplitX;
