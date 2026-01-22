@@ -33,7 +33,7 @@ enum class SCENE_NO
 // stageCount    : 何ステージクリアしているか
 // previousScene : 現在のシーン
 // oldScene      : 一つ前のシーン
-// nextScen      : 次のシーン
+// nextScene     : 次のシーン
 struct SceneRelationData
 {
 	uint32_t gameLife = 4;
@@ -42,14 +42,19 @@ struct SceneRelationData
 	SCENE_NO previousScene = SCENE_NO::NONE;
     SCENE_NO oldScene	   = SCENE_NO::NONE;
 	SCENE_NO nextScene     = SCENE_NO::NONE;
-    std::shared_ptr<Texture> texture = nullptr;
+    std::shared_ptr<Square> square = nullptr;
 	bool isClear      = true;
     bool pad[3]		  = { false,false,false };
 
-	void SetTransitionTexture(std::shared_ptr<Texture> transition)
+	void SetTransitionTexture(std::shared_ptr<Square> transition)
 	{
-        if (transition == nullptr) return;
-        this->texture = transition;
+		if (transition == nullptr) return;
+		this->square = transition;
+	}
+
+	void ClearTransitionTexture()
+	{
+		square = nullptr;
 	}
 };
 

@@ -35,7 +35,21 @@ void TransScene::Initialize()
 	m_Step = STEP::DOING;
 	m_AlphaValue = 1.0f / m_Duration;
 
-	
+	const auto& relationData = m_SceneOld->GetRelationData();
+	auto applyTransitionTexture = [&](const std::shared_ptr<TransitionBase>& transition)
+	{
+		if (!transition) {
+			return;
+		}
+		if (relationData.square) 
+		{
+            auto temp = relationData.square;
+            transition->SetTransform(temp->GetTransform());
+            transition->SetColor	(temp->GetColor());
+            transition->SetTexture	(temp->GetTexture());
+			transition->SetUV( temp->GetUV().x, temp->GetUV().y, temp->GetSplit().x, temp->GetSplit().y);
+		}
+	};
 	
 	switch (m_TransMode)
 	{
@@ -45,11 +59,7 @@ void TransScene::Initialize()
         m_TransitionTexture->SetTransitionParams(m_transParam);
 		m_TransitionTexture->Initialize();
         m_TransitionTexture->SetTransMode(m_TransMode);
-		
-		auto texture = m_SceneOld->GetRelationData().texture;
-		if (texture) {
-			m_TransitionTexture->SetTexture(texture);
-		}
+        applyTransitionTexture(m_TransitionTexture);
 		instance.SetTransitionTexture(m_TransitionTexture);
 	}
 	break;
@@ -64,6 +74,7 @@ void TransScene::Initialize()
 		m_TransitionTexture->Initialize();
         m_TransitionTexture->SetTransMode(m_TransMode);
 
+		applyTransitionTexture(m_TransitionTexture);
 		instance.SetTransitionTexture(m_TransitionTexture);
 	}
 	break;
@@ -75,6 +86,7 @@ void TransScene::Initialize()
 		m_TransitionTexture->Initialize();
 		m_TransitionTexture->SetTransMode(m_TransMode);
 
+		applyTransitionTexture(m_TransitionTexture);
 		instance.SetTransitionTexture(m_TransitionTexture);
 	}
 	break;

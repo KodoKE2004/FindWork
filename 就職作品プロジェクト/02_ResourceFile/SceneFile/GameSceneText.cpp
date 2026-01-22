@@ -79,7 +79,9 @@ void GameSceneText::GirlReaction()
     else           { uvX = 5.0f; }
 
     m_Girl->SetUV(uvX, 1.0f, 5.0f, 1.0f);
-    m_RelationData.SetTransitionTexture(m_Girl->GetTexture());
+    const auto uv = m_Girl->GetUV();
+    const auto split = m_Girl->GetSplit();
+    m_RelationData.SetTransitionTexture(m_Girl);
 }
 
 void GameSceneText::Initialize()
@@ -92,8 +94,8 @@ void GameSceneText::Initialize()
 
     // ƒV[ƒ“‚ÉŒq‚®î•ñ‚ÍŠî’ê‰Šú‰»Œã‚Ìˆê”ÔÅ‰‚Éİ’è
     m_RelationData.previousScene = SCENE_NO::GAME_TEXT;
-    m_RelationData.oldScene = SCENE_NO::GAME_WAIT;
-    m_RelationData.isClear = false;
+    m_RelationData.oldScene      = SCENE_NO::GAME_WAIT;
+    m_RelationData.isClear       = false;
 
     auto& instance = Game::GetInstance();
     TextureManager* textureMgr = instance; 
@@ -118,8 +120,8 @@ void GameSceneText::Initialize()
     m_Boy = instance.AddObject<Square>();
     m_Boy->SetName("m_Boy");
     m_Boy->SetTexture(textureMgr->GetTexture("LoveLatterOffer.png"));
-    m_Boy->SetScale(600.0f,400.0f,1.0f);
-    m_Boy->SetPos  (0.0f, -200.0f, 0.0f);
+    m_Boy->SetScale(600.0f,   400.0f, 1.0f);
+    m_Boy->SetPos  (  0.0f, - 200.0f, 0.0f);
     m_MySceneObjects.emplace_back(m_Boy);
 
     m_Number = ShuffleButtonIndices();
@@ -142,10 +144,10 @@ void GameSceneText::Initialize()
 
     m_InputIndex = 0;
     m_CurrentRhythmIndex = 0;
-    m_isEntry = true;
+    m_isEntry     = true;
     m_isInputSlot = false;
     m_UvXOffset = 1.0f;
-    m_Elapsed = 0.0f;
+    m_Elapsed   = 0.0f;
     std::fill(std::begin(m_Clicked), std::end(m_Clicked), false);
 
     m_TimerUI = instance.AddObject<Timer>();

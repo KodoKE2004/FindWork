@@ -110,7 +110,7 @@ void GameSceneWait::Initialize()
     // 引き渡しデータのシーンの整理
     m_RelationData.oldScene      = m_RelationData.previousScene;
     m_RelationData.previousScene = SCENE_NO::GAME_WAIT;    
-    m_RelationData.texture       = nullptr;
+    m_RelationData.ClearTransitionTexture();
 
     if (m_RelationData.isClear) {
         Debug::Log("=====  ステージ成功  =====");
