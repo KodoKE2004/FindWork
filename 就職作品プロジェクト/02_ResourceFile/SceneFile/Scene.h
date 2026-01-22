@@ -46,7 +46,7 @@ struct SceneRelationData
 	bool isClear      = true;
     bool pad[3]		  = { false,false,false };
 
-	void SetTransitionTexture(std::shared_ptr<Square> transition)
+	void SetTransitionTarget(std::shared_ptr<Square> transition)
 	{
 		if (transition == nullptr) return;
 		this->square = transition;

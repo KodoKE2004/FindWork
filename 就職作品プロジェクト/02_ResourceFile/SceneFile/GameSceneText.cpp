@@ -81,7 +81,7 @@ void GameSceneText::GirlReaction()
     m_Girl->SetUV(uvX, 1.0f, 5.0f, 1.0f);
     const auto uv = m_Girl->GetUV();
     const auto split = m_Girl->GetSplit();
-    m_RelationData.SetTransitionTexture(m_Girl);
+    m_RelationData.SetTransitionTarget(m_Girl);
 }
 
 void GameSceneText::Initialize()
