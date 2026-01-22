@@ -34,39 +34,10 @@ namespace
     };
 }
 
-void GameSceneText::RhythmJudge(float tolerance)
-{
-    size_t index = m_InputIndex;
-    // 入力許容の時間
-    bool justTiming = (m_GameRhythm[index] - tolerance) <= m_Elapsed &&
-                      (m_GameRhythm[index] + tolerance) >= m_Elapsed  ;
-
-    auto textObject = m_MessageSlot[index]->GetTextObject();
-
-    // 正しいタイミングで押された場合
-    if (m_isInputSlot && justTiming)
-    {
-        textObject->SetUV(1.0f, textObject->GetUV().y,
-        textObject->GetSplit().x, textObject->GetSplit().y);
-    }
-    // 間違ったタイミングで押された場合
-    else if (m_isInputSlot && !justTiming) {
-       
-    }
-    if (m_isInputSlot)
-    {
-        m_Clicked[index] = true;
-        ++m_InputIndex;
-    }
-    if (m_InputIndex == MESSAGE_SLOT::SLOT_SIZE) {
-        m_isInputAll = true;
-    }
-}
-
 void GameSceneText::ShuffleSlotTextureUV()
 {
     float uvX = 0.5f;
-    m_UvXOffset = 4.0f <= m_UvXOffset ? 1.0f : m_UvXOffset + uvX;
+    m_UvXOffset = (4.0f <= m_UvXOffset) ? 1.0f : m_UvXOffset + uvX;
     float temp = fmodf(m_UvXOffset,1.0f);
     if (temp == 0.0f)
     {
@@ -81,8 +52,7 @@ void GameSceneText::ShuffleSlotTextureUV()
     {
         if (!m_Clicked[i])
         {
-            
-            auto textObject = m_MessageSlot[i]->GetTextObject();
+            std::shared_ptr<Square> textObject = m_MessageSlot[i]->GetTextObject();
             textObject->SetUV(uvX, textObject->GetUV().y, textObject->GetSplit().x, textObject->GetSplit().y);
         }
     }
@@ -94,9 +64,9 @@ void GameSceneText::GirlReaction()
 
     float uvX = 1.0f;
     // 女の子の反応をuvXで変化させる
-    const float adjectiveUvX_A    = m_MessageSlot[MESSAGE_SLOT::ADJECTIVE_A]->GetUV().x;
-    const float adjectiveUvX_B    = m_MessageSlot[MESSAGE_SLOT::ADJECTIVE_B]->GetUV().x;
-    const float adjectiveUvAdverb = m_MessageSlot[MESSAGE_SLOT::ADVERB]->GetUV().x;
+    const float adjectiveUvX_A    = m_MessageSlot[MESSAGE_SLOT::ADJECTIVE_A]->GetTextObject()->GetUV().x;
+    const float adjectiveUvX_B    = m_MessageSlot[MESSAGE_SLOT::ADJECTIVE_B]->GetTextObject()->GetUV().x;
+    const float adjectiveUvAdverb = m_MessageSlot[MESSAGE_SLOT::ADVERB]->GetTextObject()->GetUV().x;
     
     bool high = adjectiveUvX_A == 1.0f &&
                 adjectiveUvX_B == 1.0f ;
@@ -109,6 +79,7 @@ void GameSceneText::GirlReaction()
     else           { uvX = 5.0f; }
 
     m_Girl->SetUV(uvX, 1.0f, 5.0f, 1.0f);
+    m_RelationData.SetTransitionTexture(m_Girl->GetTexture());
 }
 
 void GameSceneText::Initialize()
@@ -282,24 +253,22 @@ void GameSceneText::Finalize()
     GameSceneExe::Finalize();
 }
 
-void GameSceneText::InsideButton(int i, std::weak_ptr<Button> button, const MESSAGE_SLOT comparison)
+void GameSceneText::InsideButton(int i, std::shared_ptr<Button> button, const MESSAGE_SLOT comparison)
 {
-    auto temp = button.lock();
     if (m_SelectedSlot != comparison)
     {
-        temp->SetScale(BUTTTON_BASE_SCALE);
+        button->SetScale(BUTTTON_BASE_SCALE);
     }
-    if (temp->IsInside())
+    if (button->IsInside())
     {
         if (m_SelectedSlot != comparison)
         {
             m_SelectedSlot = comparison;
-            PlaySE("rhythm", 0.5f);
-            temp->SetScale(BUTTTON_BASE_SCALE * 1.1f);
+            button->SetScale(BUTTTON_BASE_SCALE * 1.1f);
         }
         if (Input::GetKeyTrigger(VK_RETURN) || Input::GetMouseTrigger(vkLEFT))
         {
-            auto textObject = temp->GetTextObject();
+            auto textObject = button->GetTextObject();
             textObject->SetUV(m_UvXOffset             , textObject->GetUV().y,
                               textObject->GetSplit().x, textObject->GetSplit().y);
             

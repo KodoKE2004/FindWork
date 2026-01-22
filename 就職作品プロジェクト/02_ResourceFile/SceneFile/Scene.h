@@ -42,8 +42,15 @@ struct SceneRelationData
 	SCENE_NO previousScene = SCENE_NO::NONE;
     SCENE_NO oldScene	   = SCENE_NO::NONE;
 	SCENE_NO nextScene     = SCENE_NO::NONE;
+    std::shared_ptr<Texture> texture = nullptr;
 	bool isClear      = true;
     bool pad[3]		  = { false,false,false };
+
+	void SetTransitionTexture(std::shared_ptr<Texture> transition)
+	{
+        if (transition == nullptr) return;
+        this->texture = transition;
+	}
 };
 
 // ƒŠƒYƒ€‚É‡‚í‚¹‚ÄƒV[ƒ“‘JˆÚŠÔ‚ğ’²®‚·‚éŠÖ”

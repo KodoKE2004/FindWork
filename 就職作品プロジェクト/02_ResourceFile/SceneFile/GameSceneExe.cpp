@@ -28,6 +28,7 @@ void GameSceneExe::Initialize()
     const float beatBpm = (bgmBpm > 0.0f) ? bgmBpm : 120.0f;
     beatConfig.Setup(Game::GetBgmBpm(), 4, 1); // 120 BPM, 4/4 ”q
     m_RelationData.rhythmBeat.Initialize(beatConfig);
+    m_RelationData.texture = nullptr;
     m_BeatTimer.Initialize(m_BaseBeats);
 
     // ’l‚Ì”½‰f

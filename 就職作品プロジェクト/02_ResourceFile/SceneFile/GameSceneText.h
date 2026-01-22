@@ -31,13 +31,12 @@ private:
     size_t m_InputIndex = 0;
     float m_JudgeWindow = 0.1f;
     float m_UvXOffset = 0.0f;
-
+    float m_UvXCount  = 3.0f;
     bool m_isEntry = false;
     bool m_isInputSlot = false; // slotの入力受付フラグ
     bool m_isInputAll = false;  // すべてのslotの入力が終わったか
 
 private:
-    void RhythmJudge(float );
     void ShuffleSlotTextureUV();
     void GirlReaction();
 public:
@@ -51,5 +50,5 @@ public:
     SCENE_NO GetSceneNo() {
         return SCENE_NO::GAME_TEXT;
     }
-    void InsideButton(int i, std::weak_ptr<Button> button, const MESSAGE_SLOT comparison);
+    void InsideButton(int i, std::shared_ptr<Button> button, const MESSAGE_SLOT comparison);
 };

@@ -12,7 +12,7 @@ private:
 
 	std::shared_ptr<Square> m_ButtonGamePlay ;
 	std::shared_ptr<Square> m_ButtonPractice ;
-    std::shared_ptr<Square> m_Corsor		 ;
+    std::shared_ptr<Square> m_Cursor		 ;
 
 public:
 	//================================

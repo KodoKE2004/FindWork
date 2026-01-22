@@ -36,24 +36,24 @@ void SelectScene::Initialize()
     m_ButtonPractice->SetTexture(textureMgr->GetTexture("ButtonPractice.png"));
     m_MySceneObjects.emplace_back(m_ButtonPractice);
 
-    m_Corsor = instance.AddObject<Square>();
-    m_Corsor->SetName("m_Corsor");
-    m_Corsor->SetPos(m_ButtonGamePlay->GetPos());
-    m_Corsor->SetScale(450.0f, 100.0f, 1.0f);
-    m_Corsor->SetShader("VS_Alpha", "PS_Alpha");
-    m_Corsor->SetTexture(textureMgr->GetTexture("Black.png"));
-	m_Corsor->SetColor(0.0f, 0.0f, 0.0f, 0.3f);
-    m_MySceneObjects.emplace_back(m_Corsor);
+    m_Cursor = instance.AddObject<Square>();
+    m_Cursor->SetName("m_Corsor");
+    m_Cursor->SetPos(m_ButtonGamePlay->GetPos());
+    m_Cursor->SetScale(450.0f, 100.0f, 1.0f);
+    m_Cursor->SetShader("VS_Alpha", "PS_Alpha");
+    m_Cursor->SetTexture(textureMgr->GetTexture("Black.png"));
+	m_Cursor->SetColor(0.0f, 0.0f, 0.0f, 0.3f);
+    m_MySceneObjects.emplace_back(m_Cursor);
 
 }
 
 void SelectScene::Update(float tick)
 {
 	if (Input::GetKeyTrigger(VK_W)) {
-        m_Corsor->SetPos(m_ButtonGamePlay->GetPos());
+        m_Cursor->SetPos(m_ButtonGamePlay->GetPos());
 	}
 	if (Input::GetKeyTrigger(VK_S)) {
-        m_Corsor->SetPos(m_ButtonPractice->GetPos());
+        m_Cursor->SetPos(m_ButtonPractice->GetPos());
 	}
 
 	if (Input::GetKeyTrigger(VK_RETURN)) 

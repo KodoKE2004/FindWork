@@ -45,7 +45,11 @@ void TransScene::Initialize()
         m_TransitionTexture->SetTransitionParams(m_transParam);
 		m_TransitionTexture->Initialize();
         m_TransitionTexture->SetTransMode(m_TransMode);
-
+		
+		auto texture = m_SceneOld->GetRelationData().texture;
+		if (texture) {
+			m_TransitionTexture->SetTexture(texture);
+		}
 		instance.SetTransitionTexture(m_TransitionTexture);
 	}
 	break;

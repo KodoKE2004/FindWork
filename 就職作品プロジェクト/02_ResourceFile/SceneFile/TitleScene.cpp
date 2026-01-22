@@ -25,8 +25,9 @@ void TitleScene::Initialize()
 	m_RelationData.stageCount = 0;
 	m_RelationData.isClear = true;
 	m_RelationData.nextScene = SCENE_NO::GAME_WAIT;
-	m_RelationData.oldScene  = SCENE_NO::NONE;
 	m_RelationData.previousScene = SCENE_NO::TITLE;
+	m_RelationData.oldScene  = SCENE_NO::NONE;
+	m_RelationData.texture = nullptr;
     m_RelationData.gameLife = 4;
 
 	// タイマー初期化
