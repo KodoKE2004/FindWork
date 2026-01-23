@@ -240,16 +240,6 @@ void Cart::SetSpeedFactor(float factor)
     m_SpeedFactor = factor;
 }
 
-void Cart::SetFaint()
-{
-    
-}
-
-void Cart::Faint(float duration)
-{
-
-}
-
 void Cart::UpdateTargetFromConfig()
 {
     const float sign = (m_Direction == CarDirection::RightBottom) ? 1.0f : -1.0f;

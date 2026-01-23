@@ -26,7 +26,6 @@ public:
 		assert(device != nullptr);											  // デバイスが有効であることを確認
 		unsigned int stride    = sizeof(T);									  // １頂点当たりのバイト数
 		unsigned int vertexnum = static_cast<unsigned int>(vertices.size());  // 頂点数
-		void* vertexdata       = (void*)vertices.data();					  // 頂点データのポインタ
 
 		// 頂点バッファを作成
 		if (!CreateVertexBufferWrite(

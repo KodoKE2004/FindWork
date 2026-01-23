@@ -764,7 +764,7 @@ namespace
 
 
 // SRV をバックバッファへフルスクリーン合成（αブレンドON/深度OFF）
-void Renderer::BlitSRVToBackbuffer(ID3D11ShaderResourceView* srv, float alpha)
+void Renderer::BlitSRVToBackbuffer(ID3D11ShaderResourceView* srv)
 {
 	if (!srv) return;
 

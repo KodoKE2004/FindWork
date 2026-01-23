@@ -21,7 +21,7 @@ public:
     void Draw() override
     {
         if (m_SRV) {
-            Renderer::BlitSRVToBackbuffer(m_SRV.Get(), m_Alpha);
+            Renderer::BlitSRVToBackbuffer(m_SRV.Get());
         }
     }
     void Finalize() override {}

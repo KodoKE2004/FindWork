@@ -235,7 +235,7 @@ void Game::Draw()
 		auto srvTex = Renderer::BlitSRVToTexture(gameSrv, 1.0f);
 	#endif
 
-		Renderer::BlitSRVToBackbuffer(gameSrv, 1.0f);
+		Renderer::BlitSRVToBackbuffer(gameSrv);
 		
 	#ifdef _DEBUG
 		DebugUI::Render(srvTex, ImVec2(width, height));

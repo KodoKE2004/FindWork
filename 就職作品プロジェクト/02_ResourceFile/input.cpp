@@ -52,7 +52,6 @@ void Input::Update(HWND hWnd)
 	POINT prevPos = m_MousePos;
 	POINT currentPos{};
 
-	bool usedImGuiPos = false;
 	bool ignoreMouseInput = false;
 
 	Vector2 windowSize = {static_cast<float>(Application::GetWidth() ),

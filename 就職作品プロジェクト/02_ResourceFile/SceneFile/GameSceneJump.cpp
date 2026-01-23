@@ -34,7 +34,6 @@ void GameSceneJump::Initialize()
     m_RelationData.isClear = true;
 
     auto& instance = Game::GetInstance();
-    TextureManager* textureMgr = instance;
 
     m_Bomber = instance.AddObject<Bomber>();
     m_Bomber->SetName("m_TimeGauge");

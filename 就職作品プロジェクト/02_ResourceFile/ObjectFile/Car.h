@@ -126,10 +126,6 @@ public:
     // スピード倍率の設定
     void SetSpeedFactor(float factor);
 
-    // フェイント動作の設定
-    void SetFaint();
-
-    void Faint(float duration);
     bool IsActive() const { return m_isActive; }
 
 

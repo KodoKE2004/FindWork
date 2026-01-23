@@ -8,8 +8,6 @@ BaseShader::~BaseShader() = default;
 BaseShader* BaseShader::TryCreateShaderFromName()
 {
 
-	BaseShader* shader = nullptr;
-
 	// 命名規則を遵守していたら、対応するシェーダークラスを生成
     switch (m_ShaderStage) { //  |              if               |  |     true         |  | false |
     case ShaderStage::VS: return (m_HlslName.rfind("VS_", 0) == 0) ? new VertexShader()  : nullptr;

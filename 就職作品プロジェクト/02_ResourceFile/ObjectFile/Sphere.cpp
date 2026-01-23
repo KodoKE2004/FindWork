@@ -65,7 +65,6 @@ void Sphere::Initialize()
     m_VertexBuffer.Create(vertices);
     m_IndexBuffer.Create(indices);
 
-    ShaderManager*  shaderMgr  = Game::GetInstance();
     TextureManager* textureMgr = Game::GetInstance();
 
     SetShader("VS_Default", "PS_Default");

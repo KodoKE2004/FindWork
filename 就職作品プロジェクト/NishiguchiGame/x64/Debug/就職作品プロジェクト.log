@@ -1,2 +1,9 @@
-﻿  GameSceneText.cpp
-  就職作品プロジェクト.vcxproj -> C:\Users\kodokeの世界\Desktop\HAL\VisualSutdio\就職作品\個人製作\FindWork\就職作品プロジェクト\x64\Debug\NishiguchiGame.exe
+﻿  GameSceneExe.cpp
+  input.cpp
+C:\Users\dorae\Desktop\HAL\class3\FindWork\就職作品プロジェクト\02_ResourceFile\input.cpp(41,25): warning C4100: 'hWnd': 参照されないパラメーター
+  (ソース ファイル '/02_ResourceFile/input.cpp' をコンパイルしています)
+  
+C:\Users\dorae\Desktop\HAL\class3\FindWork\就職作品プロジェクト\02_ResourceFile\input.cpp(50,7): warning C4189: 'hr': ローカル変数が初期化されましたが、参照されていません
+  (ソース ファイル '/02_ResourceFile/input.cpp' をコンパイルしています)
+  
+  就職作品プロジェクト.vcxproj -> C:\Users\dorae\Desktop\HAL\class3\FindWork\就職作品プロジェクト\x64\Debug\NishiguchiGame.exe

@@ -182,7 +182,6 @@ void Cube::Initialize()
 	m_IndexBuffer.Create(indices);
 
 	// シェーダオブジェクト生成
-	ShaderManager* shaderMgr = Game::GetInstance();
 	SetShader("VS_Default", "PS_Default");
 
 	//テクスチャロード

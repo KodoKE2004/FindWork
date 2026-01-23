@@ -92,7 +92,6 @@ HRESULT CompileShader(const char* szFileName, LPCSTR szEntryPoint, LPCSTR szShad
 //--------------------------------------------------------------------------------------
 HRESULT CompileShaderFromFile(const char* szFileName, LPCSTR szEntryPoint, LPCSTR szShaderModel, ID3DBlob** ppBlobOut)
 {
-	ID3DBlob* p1 = nullptr;
 
 	HRESULT hr = S_OK;
 

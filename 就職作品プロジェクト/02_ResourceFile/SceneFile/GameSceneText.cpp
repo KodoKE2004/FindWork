@@ -60,13 +60,10 @@ void GameSceneText::ShuffleSlotTextureUV()
 
 void GameSceneText::GirlReaction()
 {
-    size_t index = m_InputIndex;
-
     float uvX = 1.0f;
     // —‚ÌŽq‚Ì”½‰ž‚ðuvX‚Å•Ï‰»‚³‚¹‚é
     const float adjectiveUvX_A    = m_MessageSlot[MESSAGE_SLOT::ADJECTIVE_A]->GetTextObject()->GetUV().x;
     const float adjectiveUvX_B    = m_MessageSlot[MESSAGE_SLOT::ADJECTIVE_B]->GetTextObject()->GetUV().x;
-    const float adjectiveUvAdverb = m_MessageSlot[MESSAGE_SLOT::ADVERB]->GetTextObject()->GetUV().x;
     
     bool high = adjectiveUvX_A == 1.0f &&
                 adjectiveUvX_B == 1.0f ;
@@ -197,7 +194,6 @@ void GameSceneText::Initialize()
 void GameSceneText::Update(float tick)
 {
     GameSceneExe::Update(tick);
-    AudioManager*   audioMgr   = Game::GetInstance();
     TextureManager* textureMgr = Game::GetInstance();
     m_Elapsed += tick;
 

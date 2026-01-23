@@ -155,7 +155,7 @@ public:
         m_transParam = param;
     }
 
-    float GetDurationForPhase(TRANS_PHASE phase) const
+    float GetDurationForPhase() const
     {
         return max(m_transParam.duration, 0.0001f);
     }

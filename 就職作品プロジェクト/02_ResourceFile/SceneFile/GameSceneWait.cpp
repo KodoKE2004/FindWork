@@ -220,7 +220,6 @@ void GameSceneWait::Initialize()
 
 void GameSceneWait::Update(float tick)
 {   
-    auto& instance = Game::GetInstance();
 
     // リズムを取る
     // ライフをリズムに合わせて回転させる

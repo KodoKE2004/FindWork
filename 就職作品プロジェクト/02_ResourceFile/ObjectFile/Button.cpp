@@ -9,7 +9,6 @@ void Button::Initialize()
 {
     MouseObject::Initialize();
     auto& instance = Game::GetInstance();
-    TextureManager* textureMgr = instance;
 
     m_Text = instance.AddObject<Square>();
     m_Text->SetScale( 51.2f, 43.8f, 1.0f);

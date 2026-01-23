@@ -147,7 +147,7 @@ public:
 	static ID3D11RenderTargetView* GetBackBufferRTV();
 	static ID3D11ShaderResourceView* GetGameRenderSRV();
 	
-	static void BlitSRVToBackbuffer(ID3D11ShaderResourceView* srv, float alpha = 1.0f);
+	static void BlitSRVToBackbuffer(ID3D11ShaderResourceView* srv);
 	static ID3D11ShaderResourceView* BlitSRVToTexture(ID3D11ShaderResourceView* srv,float alpha = 1.0f);
 	static void CreateVertexShader(ID3D11VertexShader** VertexShader, ID3D11InputLayout** VertexLayout, const char* FileName);
 	static void CreatePixelShader (ID3D11PixelShader** PixelShader, const char* FileName);

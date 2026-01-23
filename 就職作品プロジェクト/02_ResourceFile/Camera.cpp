@@ -76,8 +76,6 @@ void Camera::SetCamera(CAMERA_MODE mode)
 
 		float aspectRatio = static_cast<float>(Application::GetWidth()) / 
 							static_cast<float>(Application::GetHeight());	// アスペクト比	
-		float nearPlane   = 1.0f;         // ニアクリップ
-		float farPlane    = 1000.0f;      // ファークリップ
 
 		//プロジェクション行列の生成
 		m_ProjectionMatrix = DirectX::XMMatrixPerspectiveFovLH(fieldOfView, aspectRatio, m_NearPlane, m_FarPlane);

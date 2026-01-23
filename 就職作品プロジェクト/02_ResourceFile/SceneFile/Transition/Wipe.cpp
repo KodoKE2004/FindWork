@@ -89,7 +89,7 @@ void Wipe::Draw()
         {
             Renderer::SetDepthEnable(false);
             Renderer::SetBlendState(BS_ALPHABLEND);
-            Renderer::BlitSRVToBackbuffer(srv, 1.0f);
+            Renderer::BlitSRVToBackbuffer(srv);
             Renderer::SetDepthEnable(true);
             return;
         }
@@ -166,8 +166,6 @@ float Wipe::CalculateWipeEasing(const SceneTransitionParam& param, float t)
     else {
         return t;
     }
-
-    return 0.0f;
 }
 
 
@@ -178,7 +176,7 @@ void Wipe::WIPE_IN(float tick)
     m_Elapsed += tick;
 
     const auto& param = m_transParam;
-    const float duration = GetDurationForPhase(m_Phase);
+    const float duration = GetDurationForPhase();
     const float t = std::clamp(m_Elapsed / max(duration * 0.5f, 0.0001f), 0.0f, 1.0f);
     float eased = CalculateWipeEasing(param, t);
 
@@ -200,7 +198,7 @@ void Wipe::WIPE_OUT(float tick)
     m_Elapsed += tick;
 
     const auto& param = m_transParam;
-    const float duration = GetDurationForPhase(m_Phase);
+    const float duration = GetDurationForPhase();
     const float t = std::clamp(m_Elapsed / max(duration * 0.5f, 0.0001f), 0.0f, 1.0f);
     float eased = CalculateWipeEasing(param, t);
 

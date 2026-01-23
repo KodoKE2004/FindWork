@@ -21,8 +21,6 @@ void Enemy::Update()
 {
     if (IsDeath()) { return; }
 
-    auto& instance = Game::GetInstance();
-
 }
 
 void Enemy::Draw()

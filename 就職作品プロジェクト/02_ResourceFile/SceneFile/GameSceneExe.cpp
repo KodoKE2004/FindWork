@@ -14,7 +14,6 @@
 void GameSceneExe::Initialize()
 {
     auto& instance = Game::GetInstance();
-    TextureManager* textureMgr = instance;
 
     //-------------------------------
     //          メンバ初期化
@@ -25,8 +24,8 @@ void GameSceneExe::Initialize()
     // リズムの定義
     RhythmBeatConst beatConfig{};
     const float bgmBpm = Game::GetBgmBpm();
-    const float beatBpm = (bgmBpm > 0.0f) ? bgmBpm : 120.0f;
-    beatConfig.Setup(Game::GetBgmBpm(), 4, 1); // 120 BPM, 4/4 拍子
+
+    beatConfig.Setup(bgmBpm, 4, 1); // 120 BPM, 4/4 拍子
     m_RelationData.rhythmBeat.Initialize(beatConfig);
     m_RelationData.square = nullptr;
     m_RelationData.ClearTransitionTexture();
