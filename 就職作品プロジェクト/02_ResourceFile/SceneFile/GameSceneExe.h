@@ -64,8 +64,6 @@ public:
 	virtual void Update(float tick) ;
 	virtual void Finalize()			;
 
-    void TimerUIUpdate(float tick);
-
     /// <summary>
 	/// ƒV[ƒ“‚Ì‘¶İ‚·‚é””‚ğİ’è
     /// </summary>

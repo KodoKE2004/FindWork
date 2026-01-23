@@ -47,8 +47,6 @@ void Input::Update(HWND hWnd)
 		m_MouseButtonsOld[i] = m_MouseButtons[i];
 	}
 
-	BOOL hr = GetKeyboardState(keyState);
-
 	POINT prevPos = m_MousePos;
 	POINT currentPos{};
 

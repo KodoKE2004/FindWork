@@ -16,8 +16,7 @@ private:
     int m_Beat;
     size_t m_CurrentCartPatternIndex = 0;
 
-    float GenerateActivationDelay();
-public:
+    public:
     GameSceneJump()  = default;
     ~GameSceneJump() = default;
 
