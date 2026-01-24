@@ -3,7 +3,6 @@
 ///  ゲームで動くScene.hをインクルード
 ///  
 #include "TitleScene.h"
-#include "SelectScene.h"
 #include "GameSceneExe.h"
 #include "GameSceneWait.h"
 #include "GameSceneSlice.h"

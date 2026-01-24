@@ -33,7 +33,6 @@ void TransScene::Initialize()
 	m_Duration = max(m_transParam.duration, 0.0001f);
 	m_TransMode = m_transParam.mode;
 	m_Step = STEP::DOING;
-	m_AlphaValue = 1.0f / m_Duration;
 
 	const auto& relationData = m_SceneOld->GetRelationData();
 	auto applyTransitionTexture = [&](const std::shared_ptr<TransitionBase>& transition)
@@ -41,9 +40,9 @@ void TransScene::Initialize()
 		if (!transition) {
 			return;
 		}
-		if (relationData.square) 
+		if (relationData.transTexture) 
 		{
-            auto temp = relationData.square;
+            auto temp = relationData.transTexture;
             transition->SetTransform(temp->GetTransform());
             transition->SetColor	(temp->GetColor());
             transition->SetTexture	(temp->GetTexture());
@@ -79,7 +78,6 @@ void TransScene::Initialize()
 	}
 	break;
     case TRANS_MODE::ZOOM_IN:
-	case TRANS_MODE::ZOOM_OUT:
 	{
 		m_TransitionTexture = std::make_shared<Zoom>(instance.GetCamera());
 		m_TransitionTexture->SetDuration(m_Duration);
@@ -89,6 +87,16 @@ void TransScene::Initialize()
 		applyTransitionTexture(m_TransitionTexture);
 		instance.SetTransitionTexture(m_TransitionTexture);
 	}
+    break;
+	case TRANS_MODE::ZOOM_OUT:
+	{
+		m_TransitionTexture = std::make_shared<Zoom>(instance.GetCamera());
+		m_TransitionTexture->SetDuration(m_Duration);
+		m_TransitionTexture->Initialize();
+		m_TransitionTexture->SetTransMode(m_TransMode);
+		applyTransitionTexture(m_TransitionTexture);
+		instance.SetTransitionTexture(m_TransitionTexture);
+    }
 	break;
 	}
 

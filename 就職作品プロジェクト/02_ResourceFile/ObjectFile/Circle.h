@@ -17,7 +17,7 @@ protected:
     VertexBuffer<VERTEX_3D>   m_VertexBuffer; // 頂点バッファ
     IndexBuffer               m_IndexBuffer;  // インデックスバッファ
     std::shared_ptr<Texture>  m_Texture;	  // テクスチャ
-    std::unique_ptr<Material> m_Materiale;	  //マテリアル
+    std::unique_ptr<Material> m_Material;	  //マテリアル
 
 public:
     Circle(Camera& cam);

@@ -6,7 +6,6 @@ class Fade : public TransitionBase
 private:
 
     float m_Alpha = 0.0f;     
-    float m_Elapsed = 0.0f;  
 
 public:
     explicit Fade(Camera& cam);

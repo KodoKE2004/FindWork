@@ -18,8 +18,6 @@ private:
 
     WIPE_MODE m_Mode = WIPE_MODE::LEFT_TO_RIGHT;
 
-    float m_Elapsed = 0.0f; // Œo‰ßŽžŠÔ
-
     NVector3 m_StartPos;
     NVector3 m_EndPos;
     NVector3 m_CheckPoint = NVector3(0.0f,0.0f,0.0f);

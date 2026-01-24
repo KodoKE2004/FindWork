@@ -109,7 +109,7 @@ void GameSceneWait::Initialize()
 
     // 引き渡しデータのシーンの整理
     m_RelationData.oldScene      = m_RelationData.previousScene;
-    m_RelationData.previousScene = SCENE_NO::GAME_WAIT;    
+    m_RelationData.previousScene = SCENE_NO::GAME_WAIT;
     m_RelationData.ClearTransitionTexture();
 
     if (m_RelationData.isClear) {
@@ -155,7 +155,6 @@ void GameSceneWait::Initialize()
     m_LifeParticleEmitter = std::make_shared<ParticleEmitter>(instance.GetCamera());
 
     // スカイドーム初期化
-    // Skydome初期化 
     m_Skydome = instance.AddObject<Skydome>();
     m_Skydome->SetName("m_Skydome");
     m_Skydome->SetSkyDomeMode(true);
@@ -163,6 +162,12 @@ void GameSceneWait::Initialize()
     m_Skydome->SetRadius(500.0f);
     m_MySceneObjects.emplace_back(m_Skydome);
 
+    // Exeゲート初期化
+    m_ExeGate = instance.AddObject<Square>();
+    m_ExeGate->SetName("m_ExeGate");
+    m_ExeGate->SetTexture(textureMgr->GetTexture("ExeGate.png"));
+    m_MySceneObjects.emplace_back(m_ExeGate);
+    
 
     // ライフの数だけハートの生成
     const float lifePosX = - 200.0f;
@@ -220,6 +225,7 @@ void GameSceneWait::Initialize()
 
 void GameSceneWait::Update(float tick)
 {   
+    return ;
 
     // リズムを取る
     // ライフをリズムに合わせて回転させる

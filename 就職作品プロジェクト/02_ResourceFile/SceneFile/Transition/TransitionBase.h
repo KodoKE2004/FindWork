@@ -29,12 +29,12 @@ enum class TRANS_PHASE
 enum class TRANS_MODE
 {
     FADE,
+    ZOOM_IN,
+    ZOOM_OUT,
     WIPE_LEFT_TO_RIGHT,
     WIPE_RIGHT_TO_LEFT,
     WIPE_TOP_TO_BOTTOM,
     WIPE_BOTTOM_TO_TOP,
-    ZOOM_IN,
-    ZOOM_OUT,
     NUM
 };
 
@@ -96,6 +96,7 @@ protected:
     float m_SplitY = 1.0f;
 
     float m_Duration = 1.0f;    // 遷移の所要時間
+    float m_Elapsed = 0.0f;     // 経過時間
 
     // デバッグ用: 単色フルスクリーンを描けるようにする
     bool m_DebugSolidDraw = false;
@@ -148,7 +149,9 @@ public:
     }
      
     // タイマー関連
-    void SetDuration(const float& duration) { m_Duration = duration; }
+    void SetDuration(const float& duration) { 
+        m_Duration = duration; 
+    }
     
     void SetTransitionParams(SceneTransitionParam param)
     {

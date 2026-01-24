@@ -1,9 +1,21 @@
-﻿  GameSceneExe.cpp
-  input.cpp
-C:\Users\dorae\Desktop\HAL\class3\FindWork\就職作品プロジェクト\02_ResourceFile\input.cpp(41,25): warning C4100: 'hWnd': 参照されないパラメーター
-  (ソース ファイル '/02_ResourceFile/input.cpp' をコンパイルしています)
-  
-C:\Users\dorae\Desktop\HAL\class3\FindWork\就職作品プロジェクト\02_ResourceFile\input.cpp(50,7): warning C4189: 'hr': ローカル変数が初期化されましたが、参照されていません
-  (ソース ファイル '/02_ResourceFile/input.cpp' をコンパイルしています)
-  
-  就職作品プロジェクト.vcxproj -> C:\Users\dorae\Desktop\HAL\class3\FindWork\就職作品プロジェクト\x64\Debug\NishiguchiGame.exe
+﻿  GameSceneWait.cpp
+C:\Users\kodokeの世界\Desktop\HAL\VisualSutdio\就職作品\個人製作\FindWork\就職作品プロジェクト\02_ResourceFile\SceneFile\GameSceneWait.cpp(232): warning C4702: 制御が渡らないコードです。
+C:\Users\kodokeの世界\Desktop\HAL\VisualSutdio\就職作品\個人製作\FindWork\就職作品プロジェクト\02_ResourceFile\SceneFile\GameSceneWait.cpp(235): warning C4702: 制御が渡らないコードです。
+C:\Users\kodokeの世界\Desktop\HAL\VisualSutdio\就職作品\個人製作\FindWork\就職作品プロジェクト\02_ResourceFile\SceneFile\GameSceneWait.cpp(240): warning C4702: 制御が渡らないコードです。
+C:\Users\kodokeの世界\Desktop\HAL\VisualSutdio\就職作品\個人製作\FindWork\就職作品プロジェクト\02_ResourceFile\SceneFile\GameSceneWait.cpp(243): warning C4702: 制御が渡らないコードです。
+C:\Users\kodokeの世界\Desktop\HAL\VisualSutdio\就職作品\個人製作\FindWork\就職作品プロジェクト\02_ResourceFile\SceneFile\GameSceneWait.cpp(245): warning C4702: 制御が渡らないコードです。
+C:\Users\kodokeの世界\Desktop\HAL\VisualSutdio\就職作品\個人製作\FindWork\就職作品プロジェクト\02_ResourceFile\SceneFile\GameSceneWait.cpp(247): warning C4702: 制御が渡らないコードです。
+C:\Users\kodokeの世界\Desktop\HAL\VisualSutdio\就職作品\個人製作\FindWork\就職作品プロジェクト\02_ResourceFile\SceneFile\GameSceneWait.cpp(249): warning C4702: 制御が渡らないコードです。
+C:\Users\kodokeの世界\Desktop\HAL\VisualSutdio\就職作品\個人製作\FindWork\就職作品プロジェクト\02_ResourceFile\SceneFile\GameSceneWait.cpp(251): warning C4702: 制御が渡らないコードです。
+C:\Users\kodokeの世界\Desktop\HAL\VisualSutdio\就職作品\個人製作\FindWork\就職作品プロジェクト\02_ResourceFile\SceneFile\GameSceneWait.cpp(252): warning C4702: 制御が渡らないコードです。
+C:\Users\kodokeの世界\Desktop\HAL\VisualSutdio\就職作品\個人製作\FindWork\就職作品プロジェクト\02_ResourceFile\SceneFile\GameSceneWait.cpp(254): warning C4702: 制御が渡らないコードです。
+C:\Users\kodokeの世界\Desktop\HAL\VisualSutdio\就職作品\個人製作\FindWork\就職作品プロジェクト\02_ResourceFile\SceneFile\GameSceneWait.cpp(256): warning C4702: 制御が渡らないコードです。
+C:\Users\kodokeの世界\Desktop\HAL\VisualSutdio\就職作品\個人製作\FindWork\就職作品プロジェクト\02_ResourceFile\SceneFile\GameSceneWait.cpp(261): warning C4702: 制御が渡らないコードです。
+C:\Users\kodokeの世界\Desktop\HAL\VisualSutdio\就職作品\個人製作\FindWork\就職作品プロジェクト\02_ResourceFile\SceneFile\GameSceneWait.cpp(263): warning C4702: 制御が渡らないコードです。
+C:\Users\kodokeの世界\Desktop\HAL\VisualSutdio\就職作品\個人製作\FindWork\就職作品プロジェクト\02_ResourceFile\SceneFile\GameSceneWait.cpp(269): warning C4702: 制御が渡らないコードです。
+C:\Users\kodokeの世界\Desktop\HAL\VisualSutdio\就職作品\個人製作\FindWork\就職作品プロジェクト\02_ResourceFile\SceneFile\GameSceneWait.cpp(276): warning C4702: 制御が渡らないコードです。
+C:\Users\kodokeの世界\Desktop\HAL\VisualSutdio\就職作品\個人製作\FindWork\就職作品プロジェクト\02_ResourceFile\SceneFile\GameSceneWait.cpp(281): warning C4702: 制御が渡らないコードです。
+C:\Users\kodokeの世界\Desktop\HAL\VisualSutdio\就職作品\個人製作\FindWork\就職作品プロジェクト\02_ResourceFile\SceneFile\GameSceneWait.cpp(283): warning C4702: 制御が渡らないコードです。
+C:\Users\kodokeの世界\Desktop\HAL\VisualSutdio\就職作品\個人製作\FindWork\就職作品プロジェクト\02_ResourceFile\SceneFile\GameSceneWait.cpp(286): warning C4702: 制御が渡らないコードです。
+C:\Users\kodokeの世界\Desktop\HAL\VisualSutdio\就職作品\個人製作\FindWork\就職作品プロジェクト\02_ResourceFile\SceneFile\GameSceneWait.cpp(293): warning C4702: 制御が渡らないコードです。
+  就職作品プロジェクト.vcxproj -> C:\Users\kodokeの世界\Desktop\HAL\VisualSutdio\就職作品\個人製作\FindWork\就職作品プロジェクト\x64\Debug\NishiguchiGame.exe

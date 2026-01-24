@@ -1,5 +1,6 @@
 ﻿#include "Zoom.h"
 #include "Game.h"
+#include "Calculator.h"
 #include "Debug.hpp"
 
 Zoom::Zoom(Camera& cam) : TransitionBase(cam)
@@ -38,17 +39,7 @@ void Zoom::Initialize()
     mtrl.Shiness = 1;
     mtrl.TextureEnable = true;
     m_Material->Create(mtrl);
-
-    m_CenterFade = std::make_unique<CenterFade>();
-    FADE_BUFFER fadeBuffer{};
-    fadeBuffer.centerUV = XMFLOAT2(0.5f,0.5f);
-    fadeBuffer.fadeProgress = 0.0f;
-    fadeBuffer.maxInnerRadius = 0.5f;
-    fadeBuffer.edgeWidth = 0.2f;
-    m_CenterFade->Create(fadeBuffer);
     
-    SetPos(0.0f,0.0f,0.0f);
-
 }
 
 void Zoom::Update(float tick)
@@ -87,7 +78,6 @@ void Zoom::Draw()
     m_Material->SetDiffuse(DirectX::XMFLOAT4(m_Color.x, m_Color.y, m_Color.z, m_Color.w));
 
     m_Material ->Update();
-    m_CenterFade->Update();
 
     float u = (m_NumU - 1.0f) / m_SplitX;
     float v = (m_NumV - 1.0f) / m_SplitY;
@@ -105,10 +95,22 @@ void Zoom::Finalize()
 
 void Zoom::ZOOM_IN(float tick)
 {
+    m_Elapsed += tick;
+
+    const auto& param = m_transParam.easing;
+    const float duration = GetDurationForPhase();
+    const float t = std::clamp(m_Elapsed / max(duration * 0.5f, 0.0001f), 0.0f, 1.0f);
+    float eased = Math::Easing::EvaluateEasing(param, t);
 }
 
 void Zoom::ZOOM_OUT(float tick)
 {
+    m_Elapsed += tick;
+
+    const auto& param = m_transParam.easing;
+    const float duration = GetDurationForPhase();
+    const float t = std::clamp(m_Elapsed / max(duration * 0.5f, 0.0001f), 0.0f, 1.0f);
+    float eased = Math::Easing::EvaluateEasing(param, t);
 }
 
 void Zoom::SetTransMode(TRANS_MODE transMode)

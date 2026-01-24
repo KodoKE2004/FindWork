@@ -27,7 +27,7 @@ void GameSceneExe::Initialize()
 
     beatConfig.Setup(bgmBpm, 4, 1); // 120 BPM, 4/4 îèéq
     m_RelationData.rhythmBeat.Initialize(beatConfig);
-    m_RelationData.square = nullptr;
+    m_RelationData.transTexture = nullptr;
     m_RelationData.ClearTransitionTexture();
     m_BeatTimer.Initialize(m_BaseBeats);
 

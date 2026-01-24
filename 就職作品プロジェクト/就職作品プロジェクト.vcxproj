@@ -68,7 +68,6 @@
     <ClCompile Include="02_ResourceFile\Renderer.cpp" />
     <ClCompile Include="02_ResourceFile\RenderTarget.cpp" />
     <ClCompile Include="02_ResourceFile\SceneFile\GameSceneExe.cpp" />
-    <ClCompile Include="02_ResourceFile\SceneFile\SelectScene.cpp" />
     <ClCompile Include="02_ResourceFile\SceneFile\TitleScene.cpp" />
     <ClCompile Include="02_ResourceFile\SceneFile\Transition\Fade.cpp" />
     <ClCompile Include="02_ResourceFile\SceneFile\Transition\SnapshotOverlay.cpp" />
@@ -149,7 +148,6 @@
     <ClInclude Include="02_ResourceFile\SceneFile\GameSceneExe.h" />
     <ClInclude Include="02_ResourceFile\SceneFile\Scene.h" />
     <ClInclude Include="02_ResourceFile\SceneFile\SceneList.h" />
-    <ClInclude Include="02_ResourceFile\SceneFile\SelectScene.h" />
     <ClInclude Include="02_ResourceFile\SceneFile\TitleScene.h" />
     <ClInclude Include="02_ResourceFile\SceneFile\Transition\Fade.h" />
     <ClInclude Include="02_ResourceFile\SceneFile\Transition\SnapshotOverlay.h" />

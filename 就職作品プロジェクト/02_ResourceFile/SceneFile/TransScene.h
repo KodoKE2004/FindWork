@@ -46,7 +46,6 @@ private:
 
     // トランジション関連
 	float m_Alpha	   = 0.0f;
-	float m_AlphaValue = 0.0f;
 
 	bool m_isChange		    = false;
     bool m_RequestNextSceneDraw = false;

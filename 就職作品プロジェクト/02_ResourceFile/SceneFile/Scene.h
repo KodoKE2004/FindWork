@@ -13,18 +13,16 @@ class Theme;
 
 enum class SCENE_NO
 {
-	NONE = - 6,
-	TITLE,
-	SELECT,
-	RESULT,
-	GAME_WAIT,
+    NONE = -1,
     GAME_SLICE = 0,
 	GAME_JUMP ,
 	GAME_CRUSH,
 	GAME_TEXT,
 	EXE_NUM,
+	TITLE,
+	RESULT,
 	TRANSITION,
-	NUM = TRANSITION - NONE + 1
+	GAME_WAIT,
 };
 
 // Sceneクラス間の受け渡しデータ
@@ -42,19 +40,19 @@ struct SceneRelationData
 	SCENE_NO previousScene = SCENE_NO::NONE;
     SCENE_NO oldScene	   = SCENE_NO::NONE;
 	SCENE_NO nextScene     = SCENE_NO::NONE;
-    std::shared_ptr<Square> square = nullptr;
+    std::shared_ptr<Square> transTexture = nullptr;
 	bool isClear      = true;
     bool pad[3]		  = { false,false,false };
 
 	void SetTransitionTarget(std::shared_ptr<Square> transition)
 	{
 		if (transition == nullptr) return;
-		this->square = transition;
+		this->transTexture = transition;
 	}
 
 	void ClearTransitionTexture()
 	{
-		square = nullptr;
+		transTexture = nullptr;
 	}
 };
 
