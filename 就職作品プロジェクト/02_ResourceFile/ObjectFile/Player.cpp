@@ -53,7 +53,6 @@ void Player::Initialize()
 void Player::Update()
 {
     const float deltaTime = Application::GetDeltaTime();
-    int horizontalInput = 0;
     
     const bool jumpTriggered = m_IsGround && Input::GetKeyTrigger(VK_RETURN);
     if (jumpTriggered)

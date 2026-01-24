@@ -194,7 +194,7 @@ void GameSceneText::Initialize()
 void GameSceneText::Update(float tick)
 {
     GameSceneExe::Update(tick);
-    TextureManager* textureMgr = Game::GetInstance();
+
     m_Elapsed += tick;
 
     // “ü—Íˆ—

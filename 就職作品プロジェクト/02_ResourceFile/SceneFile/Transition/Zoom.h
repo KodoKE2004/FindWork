@@ -10,7 +10,8 @@ using namespace Microsoft::WRL;
 class Zoom : public TransitionBase
 {
 private:
-    
+    NVector3 m_BaseScale;
+    NVector3 m_TargetScale;
 public:
     Zoom(Camera& cam);
     void Initialize()       override;  
@@ -22,5 +23,7 @@ public:
     void ZOOM_OUT(float tick);
     
     void SetTransMode(TRANS_MODE transMode) override;
+    void SetBaseScale(const NVector3& scale);
+    void SetTargetScale(const NVector3& scale);
 };
 

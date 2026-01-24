@@ -20,7 +20,6 @@ void GameSceneCrush::Initialize()
     m_RelationData.isClear = false;
 
     auto& instance  = Game::GetInstance();
-    TextureManager* textureMgr = instance;
 
     m_Bomber = instance.AddObject<Bomber>();
     m_Bomber->SetName("m_Bomber");

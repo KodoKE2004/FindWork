@@ -95,7 +95,6 @@ void TransScene::Initialize()
 		m_TransitionTexture->Initialize();
 		m_TransitionTexture->SetTransMode(m_TransMode);
 		applyTransitionTexture(m_TransitionTexture);
-		instance.SetTransitionTexture(m_TransitionTexture);
     }
 	break;
 	}

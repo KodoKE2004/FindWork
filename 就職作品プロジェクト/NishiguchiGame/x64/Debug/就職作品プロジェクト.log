@@ -1,4 +1,49 @@
-﻿  GameSceneWait.cpp
+﻿  Application.cpp
+  Calculator.cpp
+  Camera.cpp
+  DebugGridLine.cpp
+  DebugUI.cpp
+  Game.cpp
+  Bird.cpp
+  Bomber.cpp
+  Bullet.cpp
+  Button.cpp
+  Car.cpp
+  Circle.cpp
+  Cube.cpp
+  Enemy.cpp
+  Model.cpp
+  Object.cpp
+  Player.cpp
+  Skydome.cpp
+  Sphere.cpp
+  Stone.cpp
+  Theme.cpp
+  Timer.cpp
+  GameSceneCrush.cpp
+  GameSceneExe.cpp
+  GameSceneJump.cpp
+  GameSceneSlice.cpp
+  GameSceneText.cpp
+  GameSceneWait.cpp
+  ResultScene.cpp
+  Scene.cpp
+  TitleScene.cpp
+C:\Users\kodokeの世界\Desktop\HAL\VisualSutdio\就職作品\個人製作\FindWork\就職作品プロジェクト\02_ResourceFile\ObjectFile\Player.cpp(56,9): warning C4189: 'horizontalInput': ローカル変数が初期化されましたが、参照されていません
+  TransScene.cpp
+  (ソース ファイル '/02_ResourceFile/ObjectFile/Player.cpp' をコンパイルしています)
+  
+  Fade.cpp
+  TransitionBase.cpp
+  Wipe.cpp
+C:\Users\kodokeの世界\Desktop\HAL\VisualSutdio\就職作品\個人製作\FindWork\就職作品プロジェクト\02_ResourceFile\SceneFile\GameSceneCrush.cpp(23,21): warning C4189: 'textureMgr': ローカル変数が初期化されましたが、参照されていません
+  Zoom.cpp
+  (ソース ファイル '/02_ResourceFile/SceneFile/GameSceneCrush.cpp' をコンパイルしています)
+  
+  Square.cpp
+C:\Users\kodokeの世界\Desktop\HAL\VisualSutdio\就職作品\個人製作\FindWork\就職作品プロジェクト\02_ResourceFile\SceneFile\GameSceneText.cpp(197,21): warning C4189: 'textureMgr': ローカル変数が初期化されましたが、参照されていません
+  (ソース ファイル '/02_ResourceFile/SceneFile/GameSceneText.cpp' をコンパイルしています)
+  
 C:\Users\kodokeの世界\Desktop\HAL\VisualSutdio\就職作品\個人製作\FindWork\就職作品プロジェクト\02_ResourceFile\SceneFile\GameSceneWait.cpp(232): warning C4702: 制御が渡らないコードです。
 C:\Users\kodokeの世界\Desktop\HAL\VisualSutdio\就職作品\個人製作\FindWork\就職作品プロジェクト\02_ResourceFile\SceneFile\GameSceneWait.cpp(235): warning C4702: 制御が渡らないコードです。
 C:\Users\kodokeの世界\Desktop\HAL\VisualSutdio\就職作品\個人製作\FindWork\就職作品プロジェクト\02_ResourceFile\SceneFile\GameSceneWait.cpp(240): warning C4702: 制御が渡らないコードです。
@@ -18,4 +63,13 @@ C:\Users\kodokeの世界\Desktop\HAL\VisualSutdio\就職作品\個人製作\Find
 C:\Users\kodokeの世界\Desktop\HAL\VisualSutdio\就職作品\個人製作\FindWork\就職作品プロジェクト\02_ResourceFile\SceneFile\GameSceneWait.cpp(283): warning C4702: 制御が渡らないコードです。
 C:\Users\kodokeの世界\Desktop\HAL\VisualSutdio\就職作品\個人製作\FindWork\就職作品プロジェクト\02_ResourceFile\SceneFile\GameSceneWait.cpp(286): warning C4702: 制御が渡らないコードです。
 C:\Users\kodokeの世界\Desktop\HAL\VisualSutdio\就職作品\個人製作\FindWork\就職作品プロジェクト\02_ResourceFile\SceneFile\GameSceneWait.cpp(293): warning C4702: 制御が渡らないコードです。
+C:\Users\kodokeの世界\Desktop\HAL\VisualSutdio\就職作品\個人製作\FindWork\就職作品プロジェクト\02_ResourceFile\SceneFile\Transition\Zoom.cpp(45,25): warning C4100: 'tick': 引数は関数の本体部で 1 度も参照されません。
+  (ソース ファイル '/02_ResourceFile/SceneFile/Transition/Zoom.cpp' をコンパイルしています)
+  
+C:\Users\kodokeの世界\Desktop\HAL\VisualSutdio\就職作品\個人製作\FindWork\就職作品プロジェクト\02_ResourceFile\SceneFile\Transition\Zoom.cpp(103,11): warning C4189: 'eased': ローカル変数が初期化されましたが、参照されていません
+  (ソース ファイル '/02_ResourceFile/SceneFile/Transition/Zoom.cpp' をコンパイルしています)
+  
+C:\Users\kodokeの世界\Desktop\HAL\VisualSutdio\就職作品\個人製作\FindWork\就職作品プロジェクト\02_ResourceFile\SceneFile\Transition\Zoom.cpp(113,11): warning C4189: 'eased': ローカル変数が初期化されましたが、参照されていません
+  (ソース ファイル '/02_ResourceFile/SceneFile/Transition/Zoom.cpp' をコンパイルしています)
+  
   就職作品プロジェクト.vcxproj -> C:\Users\kodokeの世界\Desktop\HAL\VisualSutdio\就職作品\個人製作\FindWork\就職作品プロジェクト\x64\Debug\NishiguchiGame.exe
