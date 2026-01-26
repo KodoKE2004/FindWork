@@ -219,13 +219,14 @@ void GameSceneWait::Initialize()
         m_Theme->SetScaleBase(kThemeScale[path]);
         m_Theme->SetPos(0.0f,0.0f,0.0f);
     }
+    m_RelationData.SetTransitionTarget(m_ExeGate);
 
     Debug::Log("===== クリアステージ数 : " + std::to_string(m_RelationData.stageCount) + " =====");
+        
 }
 
 void GameSceneWait::Update(float tick)
 {   
-    return ;
 
     // リズムを取る
     // ライフをリズムに合わせて回転させる

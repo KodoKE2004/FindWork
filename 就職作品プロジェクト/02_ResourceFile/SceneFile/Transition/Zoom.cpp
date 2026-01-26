@@ -12,7 +12,16 @@ void Zoom::Initialize()
 {   
     auto& instance = Game::GetInstance();
     TextureManager* textureMgr = instance;
-    m_Texture = textureMgr->GetTexture("Black.png");
+    SetTexture(textureMgr->GetTexture("Black.png"));
+
+    m_Elapsed = 0.0f;
+    m_isChange = false;
+
+    if (m_Duration <= 0.0f) {
+        m_Duration = 1.0f;
+    }
+
+    ApplyPhaseSetting(TRANS_PHASE::TRANS_OUT);
 
     std::vector<VERTEX_3D> vertices(4);
     vertices[0].position = NVector3(-0.5f,  0.5f, 0.0f);
@@ -44,7 +53,22 @@ void Zoom::Initialize()
 
 void Zoom::Update(float tick)
 {
-    
+    if (!m_HasBaseScale) {
+        m_BaseScale = GetScale();
+        m_HasBaseScale = true;
+    }
+
+    if (!m_HasTargetScale) {
+        m_TargetScale = m_BaseScale;
+        m_HasTargetScale = true;
+    }
+
+    switch (m_Phase)
+    {
+    case TRANS_PHASE::TRANS_OUT: ZOOM_OUT(tick); break;
+    case TRANS_PHASE::TRANS_IN:  ZOOM_IN(tick); break;
+    default: break;
+    }
 }
 
 void Zoom::Draw()
@@ -95,32 +119,49 @@ void Zoom::Finalize()
 
 void Zoom::ZOOM_IN(float tick)
 {
+    if (m_Phase != TRANS_PHASE::TRANS_IN) return;
     m_Elapsed += tick;
 
     const auto& param = m_transParam.easing;
     const float duration = GetDurationForPhase();
-    const float t = std::clamp(m_Elapsed / max(duration * 0.5f, 0.0001f), 0.0f, 1.0f);
+    const float t = std::clamp(m_Elapsed / max(duration, 0.0001f), 0.0f, 1.0f);
     float eased = Math::Easing::EvaluateEasing(param, t);
 
-    if (eased == 1.0f)
+    const bool reverse = (m_TransMode == TRANS_MODE::ZOOM_IN);
+    const NVector3 start = reverse ? m_TargetScale : m_BaseScale;
+    const NVector3 end = reverse ? m_BaseScale : m_TargetScale;
+    SetScale(start + (end - start) * eased);
+
+    if (t >= 1.0f)
     {
+        SetScale(end);
         m_Phase = TRANS_PHASE::FINISH;
+        m_isChange = true;        
         m_Elapsed = 0.0f;
     }
 }
 
 void Zoom::ZOOM_OUT(float tick)
 {
+    if (m_Phase != TRANS_PHASE::TRANS_OUT) return;
+
     m_Elapsed += tick;
 
     const auto& param = m_transParam.easing;
     const float duration = GetDurationForPhase();
-    const float t = std::clamp(m_Elapsed / max(duration , 0.0001f), 0.0f, 1.0f);
+    const float t = std::clamp(m_Elapsed / max(duration, 0.0001f), 0.0f, 1.0f);
     float eased = Math::Easing::EvaluateEasing(param, t);
 
-    if (eased == 1.0f)
+    const bool reverse = (m_TransMode == TRANS_MODE::ZOOM_OUT);
+    const NVector3 start = reverse ? m_BaseScale : m_TargetScale;
+    const NVector3 end = reverse ? m_TargetScale : m_BaseScale;
+    SetScale(start + (end - start) * eased);
+
+    if (t >= 1.0f)
     {
+        SetScale(end);
         m_Phase = TRANS_PHASE::FINISH;
+        m_isChange = true;
         m_Elapsed = 0.0f;
     }
 }

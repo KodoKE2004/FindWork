@@ -9,11 +9,11 @@ void RhythmBeat::Initialize(const RhythmBeatConst& config)
 
 int RhythmBeat::Update(float deltaTime)
 {
-    // 1秒あたり ticksPerSecond 進むので、deltaSecondsを掛けて進行
+    // 経過秒数をTickに変換してカウントアップ
     m_TickCounter += m_Beat.ticksPerSecond * deltaTime;
-
-    m_Advance = 0; // このフレームで何Tick進んだか
-
+    // このフレームで何Tick進んだか
+    m_Advance = 0; 
+    // 1Tick以上進んでいたらTick数を進める
     while (m_TickCounter >= 1.0f)
     {
         m_TickCounter -= 1.0f;

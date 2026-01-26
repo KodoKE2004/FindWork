@@ -71,6 +71,7 @@ void Input::Update(HWND hWnd)
 	m_MousePos.y = static_cast<LONG>(guiMouse.leftHandedNormalized.y * windowSize.y);
 
 #else
+	bool usedImGuiPos = false;
 	if (!usedImGuiPos) {
 		if (GetCursorPos(&currentPos)) {
 			if (hWnd != nullptr) {

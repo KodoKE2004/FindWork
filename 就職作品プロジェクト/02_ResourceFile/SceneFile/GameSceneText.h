@@ -26,15 +26,15 @@ private:
     std::array<bool ,  MESSAGE_SLOT::SLOT_SIZE> m_Clicked    = { false, false, false }; // クリックされたかどうかの配列
     MESSAGE_SLOT m_SelectedSlot = SLOT_SIZE;
 
-    float m_Elapsed = 0.0f;
-    size_t m_CurrentRhythmIndex = 0;
-    size_t m_InputIndex = 0;
-    float m_JudgeWindow = 0.1f;
-    float m_UvXOffset = 0.0f;
-    float m_UvXCount  = 3.0f;
-    bool m_isEntry = false;
-    bool m_isInputSlot = false; // slotの入力受付フラグ
-    bool m_isInputAll = false;  // すべてのslotの入力が終わったか
+    float m_Elapsed = 0.0f;             // 経過時間
+    size_t m_CurrentRhythmIndex = 0;    // 現在のリズムインデックス
+    size_t m_InputIndex = 0;            // 入力されたインデックス
+    float m_JudgeWindow = 0.1f;         // ジャッジウィンドウの許容範囲
+    float m_UvXOffset = 0.0f;           // UVのX座標オフセット
+    float m_UvXCount = 3.0f;            // UVのX座標カウント
+    bool m_isEntry = false;             // slotへの入力開始フラグ
+    bool m_isInputSlot = false;         // slotの入力受付フラグ
+    bool m_isInputAll = false;          // すべてのslotの入力が終わったか
 
 private:
     void ShuffleSlotTextureUV();

@@ -176,8 +176,8 @@ void Wipe::WIPE_IN(float tick)
     m_Elapsed += tick;
 
     const auto& param = m_transParam;
-    const float duration = GetDurationForPhase();
-    const float t = std::clamp(m_Elapsed / max(duration * 0.5f, 0.0001f), 0.0f, 1.0f);
+    const float duration = GetDurationForPhase() * 0.5f;
+    const float t = std::clamp(m_Elapsed / max(duration , 0.0001f), 0.0f, 1.0f);
     float eased = CalculateWipeEasing(param, t);
 
     ApplyWipeAmount(eased);

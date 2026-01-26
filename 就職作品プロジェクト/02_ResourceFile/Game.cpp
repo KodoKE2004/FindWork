@@ -64,7 +64,7 @@ void Game::Initialize()
 	instance.m_Input			 = std::make_unique<Input>();	
 	instance.m_Camera			 = std::make_unique<Camera>();	
 	//instance.m_Camera->Initialize();							
-    instance.m_TransitionTexture = nullptr;						
+    instance.m_TransitionTexture.clear();						
     instance.m_Theme             = nullptr;						
 	//		シーンをタイトルシーンに設定
 	Renderer::Initialize();
@@ -129,7 +129,7 @@ void Game::Initialize()
     instance.m_BgmAudio = instance.m_AudioManager->Create(bgmConfig);
     instance.m_BgmPlayParams = bgmConfig.params;
 
-	instance.m_SceneCurrent = std::make_shared<GameSceneWait>();		// タイトルシーンのインスタンスを生成
+	instance.m_SceneCurrent = std::make_shared<GameSceneText>();		// タイトルシーンのインスタンスを生成
 	instance.m_SceneCurrent->Initialize();
 }
 
@@ -199,6 +199,10 @@ void Game::Update(float tick)
 	GetAudioHelperTickDebugger().Tick(tick);
 #endif
 
+	if (instance.m_Input->GetKeyTrigger(VK_Z)) {
+        instance.Finalize();
+        instance.Initialize();
+	}
 }
 
 void Game::Draw()
@@ -214,8 +218,11 @@ void Game::Draw()
 		o->Draw();
 	}
 
-	if (instance.m_TransitionTexture != nullptr) {
-		instance.m_TransitionTexture->Draw();
+	if (!instance.m_TransitionTexture.empty()) {
+		for (auto it : instance.m_TransitionTexture)
+		{
+			it->Draw();
+		}
 	}
 	if (instance.m_Theme)
 	{
@@ -252,8 +259,11 @@ void Game::Finalize()
 
 	DebugUI::DisposeUI();		// デバッグUIの終了処理
 	instance.DeleteAllObject();	//オブジェクトを全て削除
-	if (instance.m_TransitionTexture) {
-		instance.m_TransitionTexture->Finalize();
+	if (!instance.m_TransitionTexture.empty()) {
+		for (auto it : instance.m_TransitionTexture) {
+            if (!it) { continue; }
+			it->Finalize();
+		}
 	}
 	if(instance.m_Theme){
 		instance.m_Theme->Finalize();
@@ -264,7 +274,7 @@ void Game::Finalize()
 		instance.m_BgmAudio.reset();
 	}
 	Renderer::Finalize();			// レンダラーの終了処理
-
+    instance.m_SceneCurrent->Finalize();
 	instance.m_SceneCurrent.reset();
 	instance.m_SceneStack.clear();
 }

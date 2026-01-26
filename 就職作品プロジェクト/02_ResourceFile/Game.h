@@ -22,21 +22,21 @@
 class Game
 {
 private:
-	static std::unique_ptr<Game>		 m_pInstance;		  // ゲームのインスタンス
-	static uint64_t						 m_DrawFrameCounter;  // Draw 呼び出しのフレーム番号
-	std::shared_ptr<Scene>				 m_SceneCurrent;	  // 現在のシーン
-    std::shared_ptr<Scene>				 m_SceneNext;		  // 次のシーン
-	std::unique_ptr<Input>				 m_Input;			  // 入力管理
-	std::unique_ptr<Camera>				 m_Camera;			  // カメラ
-	std::vector<std::shared_ptr<Object>> m_GameObjects;		  // オブジェクト
+	static std::unique_ptr<Game>		 m_pInstance;					// ゲームのインスタンス
+	static uint64_t						 m_DrawFrameCounter;			// Draw 呼び出しのフレーム番号
+	std::shared_ptr<Scene>				 m_SceneCurrent;				// 現在のシーン
+    std::shared_ptr<Scene>				 m_SceneNext;					// 次のシーン
+	std::unique_ptr<Input>				 m_Input;						// 入力管理
+	std::unique_ptr<Camera>				 m_Camera;						// カメラ
+	std::vector<std::shared_ptr<Object>> m_GameObjects;					// オブジェクト
 
-    std::shared_ptr<Audio>				 m_BgmAudio;		  // BGM再生用オーディオ
-	PlayParams							 m_BgmPlayParams{};	  // BGM再生用パラメータ
-    std::shared_ptr<TransitionBase>		 m_TransitionTexture; // トランジション用テクスチャ
-    std::shared_ptr<Theme>				 m_Theme;			  // テーマ管理
-    std::vector<std::shared_ptr<Scene>>	 m_SceneStack;		  // シーンスタック
+    std::shared_ptr<Audio>				 m_BgmAudio;					// BGM再生用オーディオ
+	PlayParams							 m_BgmPlayParams{};				// BGM再生用パラメータ
+    std::vector<std::shared_ptr<TransitionBase>> m_TransitionTexture;	// トランジション用テクスチャ
+    std::shared_ptr<Theme>				 m_Theme;						// テーマ管理
+    std::vector<std::shared_ptr<Scene>>	 m_SceneStack;					// シーンスタック
 
-    DirectX::SimpleMath::Vector2 m_PreviewMousePos;  // デバッグ用ビュー行列
+    DirectX::SimpleMath::Vector2 m_PreviewMousePos;						// デバッグ用ビュー行列
 #ifdef _DEBUG
 #endif
 
@@ -70,13 +70,20 @@ public:
     static void SetSceneCurrent(std::shared_ptr<Scene> newScene);
     static void SetSceneNext(std::shared_ptr<Scene> newScene);
 
-    // TranstionTextureをTransSceneと連携
-	void SetTransitionTexture(std::shared_ptr<TransitionBase> tex) {
-		m_TransitionTexture = tex;
-    }
 	void SetTheme(const std::shared_ptr<Theme>& theme);
 
-	std::shared_ptr<TransitionBase> GetTransitionTexture() const;
+    // TransitionTextureをTransSceneと連携
+	void SetTransitionTexture(std::vector<std::shared_ptr<TransitionBase>> tex) {
+		m_TransitionTexture = tex;
+    }
+	void AddTransitionTexture(const std::shared_ptr<TransitionBase>& tex) {
+		m_TransitionTexture.emplace_back(tex);
+    }
+	void ClearTransitionTexture() {
+		m_TransitionTexture.clear();
+    }
+
+	std::vector<std::shared_ptr<TransitionBase>> GetTransitionTexture() const;
 	std::shared_ptr<Theme>			GetTheme() ; 
 
     //===============================
@@ -226,20 +233,21 @@ inline void ChangeScenePop(SceneTransitionParam& state)
     instance.SetSceneCurrent(scene);
 }
 
-inline std::shared_ptr<TransitionBase> Game::GetTransitionTexture() const
+inline std::vector<std::shared_ptr<TransitionBase>> Game::GetTransitionTexture() const
 {
 	return m_TransitionTexture;
 }
 
 inline void Game::ScenePush(std::shared_ptr<Scene> newScene)
 {
-    // 遷移前のシーンをスタックに保存
-    if (newScene) m_SceneStack.push_back(newScene);
+    if (newScene){
+		m_SceneStack.push_back(newScene);
+	}
 }
 
 inline std::shared_ptr<Scene> Game::ScenePop()
 {
-	if(m_SceneStack.empty())	return nullptr;
+	if(m_SceneStack.empty()) return nullptr;
 	
     auto scene = m_SceneStack.back();
     m_SceneStack.pop_back();

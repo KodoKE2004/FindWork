@@ -410,7 +410,7 @@ void Renderer::Finish()
 #ifndef _DEBUG
     if (m_GameRenderTarget)
     {
-        BlitSRVToBackbuffer(m_GameRenderTarget->GetSRV(), 1.0f);
+        BlitSRVToBackbuffer(m_GameRenderTarget->GetSRV());
     }
 #endif
 	// フレームの表示
@@ -785,7 +785,7 @@ void Renderer::BlitSRVToBackbuffer(ID3D11ShaderResourceView* srv)
 #ifdef _DEBUG
 
 #else
-	DrawFullscreenBlit(m_DeviceContext, srv, alpha);
+	DrawFullscreenBlit(m_DeviceContext, srv, 1.0f);
 #endif
 }
 

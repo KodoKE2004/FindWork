@@ -58,8 +58,7 @@ void TransScene::Initialize()
         m_TransitionTexture->SetTransitionParams(m_transParam);
 		m_TransitionTexture->Initialize();
         m_TransitionTexture->SetTransMode(m_TransMode);
-        applyTransitionTexture(m_TransitionTexture);
-		instance.SetTransitionTexture(m_TransitionTexture);
+		instance.AddTransitionTexture(m_TransitionTexture);
 	}
 	break;
 	case TRANS_MODE::WIPE_BOTTOM_TO_TOP:
@@ -74,7 +73,7 @@ void TransScene::Initialize()
         m_TransitionTexture->SetTransMode(m_TransMode);
 
 		applyTransitionTexture(m_TransitionTexture);
-		instance.SetTransitionTexture(m_TransitionTexture);
+		instance.AddTransitionTexture(m_TransitionTexture);
 	}
 	break;
     case TRANS_MODE::ZOOM_IN:
@@ -83,9 +82,9 @@ void TransScene::Initialize()
 		m_TransitionTexture->SetDuration(m_Duration);
 		m_TransitionTexture->Initialize();
 		m_TransitionTexture->SetTransMode(m_TransMode);
-
+        m_TransitionTexture->SetPhase(TRANS_PHASE::TRANS_IN);
 		applyTransitionTexture(m_TransitionTexture);
-		instance.SetTransitionTexture(m_TransitionTexture);
+		instance.AddTransitionTexture(m_TransitionTexture);
 	}
     break;
 	case TRANS_MODE::ZOOM_OUT:
@@ -94,6 +93,7 @@ void TransScene::Initialize()
 		m_TransitionTexture->SetDuration(m_Duration);
 		m_TransitionTexture->Initialize();
 		m_TransitionTexture->SetTransMode(m_TransMode);
+		m_TransitionTexture->SetPhase(TRANS_PHASE::TRANS_OUT);
 		applyTransitionTexture(m_TransitionTexture);
     }
 	break;
@@ -114,6 +114,7 @@ void TransScene::Update(float tick)
     
 	if (!m_SceneOld) {
         m_Step = STEP::FINISH;
+		instance.SetSceneCurrent(m_SceneNext);
 		return;
 	}
 
@@ -157,7 +158,7 @@ void TransScene::Finalize()
 
 	m_OverlayNext.reset();
 	m_TransitionTexture = nullptr ;
-	instance.SetTransitionTexture(nullptr);
+    instance.ClearTransitionTexture();
 	m_NextSceneSRV.Reset();
 	m_RenderTarget.reset();
 	m_RequestNextSceneDraw = false;

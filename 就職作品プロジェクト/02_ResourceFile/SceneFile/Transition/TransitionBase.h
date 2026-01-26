@@ -29,12 +29,12 @@ enum class TRANS_PHASE
 enum class TRANS_MODE
 {
     FADE,
-    ZOOM_IN,
-    ZOOM_OUT,
     WIPE_LEFT_TO_RIGHT,
     WIPE_RIGHT_TO_LEFT,
     WIPE_TOP_TO_BOTTOM,
     WIPE_BOTTOM_TO_TOP,
+    ZOOM_IN,
+    ZOOM_OUT,
     NUM
 };
 
@@ -44,7 +44,6 @@ struct SceneTransitionParam
     TRANS_MODE  mode     = TRANS_MODE::FADE;
     float       duration = 1.0f;
     EASING_TYPE easing   = EASING_TYPE::NONE;
-    std::shared_ptr<Texture> texture = nullptr;
 
     int ModeAsIndex()   const { return static_cast<int>(mode);   }
     int EasingAsIndex() const { return static_cast<int>(easing); }
@@ -99,7 +98,7 @@ protected:
     float m_Elapsed = 0.0f;     // 経過時間
 
     // デバッグ用: 単色フルスクリーンを描けるようにする
-    bool m_DebugSolidDraw = false;
+    bool  m_DebugSolidDraw = false;
     Color m_DebugSolidColor = Color(1.0f, 0.0f, 1.0f, 1.0f);
 
     // 描画パイプラインの既定化（他の描画で状態が変わっても影響を受けないようにする）

@@ -37,7 +37,7 @@ namespace
 void GameSceneText::ShuffleSlotTextureUV()
 {
     float uvX = 0.7f;
-    m_UvXOffset = (4.0f <= m_UvXOffset) ? 1.0f : m_UvXOffset + uvX;
+    m_UvXOffset = (3.0f < m_UvXOffset) ? 1.0f : m_UvXOffset + uvX;
     float temp = fmodf(m_UvXOffset,1.0f);
     if (temp == 0.0f)
     {
@@ -66,7 +66,7 @@ void GameSceneText::GirlReaction()
     const float adjectiveUvX_B    = m_MessageSlot[MESSAGE_SLOT::ADJECTIVE_B]->GetTextObject()->GetUV().x;
     
     bool high = adjectiveUvX_A == 1.0f &&
-                adjectiveUvX_B == 1.0f ;
+                adjectiveUvX_B == 1.0f;
 
     bool sad  = adjectiveUvX_A == 2.0f &&
                 adjectiveUvX_B == 2.0f;
@@ -146,12 +146,6 @@ void GameSceneText::Initialize()
     m_UvXOffset = 1.0f;
     m_Elapsed   = 0.0f;
     std::fill(std::begin(m_Clicked), std::end(m_Clicked), false);
-
-    m_TimerUI = instance.AddObject<Timer>();
-    m_TimerUI->SetName("m_TimerUI");
-    m_TimerUI->SetPos(500.0f, 300.0f, 0.0f);
-    m_TimerUI->SetTexture(textureMgr->GetTexture("Clock.png"));
-    m_MySceneObjects.emplace_back(m_TimerUI);
 
     m_Bomber = instance.AddObject<Bomber>();
     m_Bomber->SetName("m_TimeGauge");
