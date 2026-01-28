@@ -1,7 +1,7 @@
 ﻿from,to,mode,duration,easing
 Title,Wait,Wipe Left -> Right,1.2,InOut Sine
-Wait,Game,Zoom In,1.2,InOut Sine
-Game,Wait,Wipe Top -> Bottom,1.2,InOut Sine
+Wait,Game,Fade,1.09091,InOut Sine
+Game,Wait,Wipe Top -> Bottom,1.09091,InOut Sine
 Wait,Result,Wipe Bottom -> Top,1,InOut Sine
 Result,Title,Fade,1,InOut Sine
 Result,Game,Fade,1,InOut Sine

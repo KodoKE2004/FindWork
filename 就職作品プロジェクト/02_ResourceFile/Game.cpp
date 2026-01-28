@@ -129,7 +129,7 @@ void Game::Initialize()
     instance.m_BgmAudio = instance.m_AudioManager->Create(bgmConfig);
     instance.m_BgmPlayParams = bgmConfig.params;
 
-	instance.m_SceneCurrent = std::make_shared<GameSceneText>();		// タイトルシーンのインスタンスを生成
+	instance.m_SceneCurrent = std::make_shared<GameSceneWait>();		// タイトルシーンのインスタンスを生成
 	instance.m_SceneCurrent->Initialize();
 }
 
