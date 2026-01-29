@@ -129,7 +129,7 @@ void Game::Initialize()
     instance.m_BgmAudio = instance.m_AudioManager->Create(bgmConfig);
     instance.m_BgmPlayParams = bgmConfig.params;
 
-	instance.m_SceneCurrent = std::make_shared<GameSceneWait>();		// タイトルシーンのインスタンスを生成
+	instance.m_SceneCurrent = std::make_shared<TitleScene>();		// タイトルシーンのインスタンスを生成
 	instance.m_SceneCurrent->Initialize();
 }
 
@@ -137,16 +137,6 @@ void Game::Update(float tick)
 {	
 	auto& instance = GetInstance();
 	instance.m_Input->Update(Application::GetWindow());
-
-//#ifdef _DEBUG
-//	DirectX::SimpleMath::Vector2 mousePos = Input::GetMousePos();
-//    float mouseDiffX = mousePos.x - instance.m_PreviewMousePos.x;
-//    float mouseDiffY = mousePos.y - instance.m_PreviewMousePos.y;
-//	if (mouseDiffX != 0 || mouseDiffY != 0) {
-//		std::cout << "Mouse X:" << mousePos.x << "\t Y:" << mousePos.y << std::endl;
-//	}
-//	instance.m_PreviewMousePos = mousePos;
-//#endif
 
 	if (instance.m_BgmAudio)
 	{

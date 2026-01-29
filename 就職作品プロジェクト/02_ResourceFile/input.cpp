@@ -40,7 +40,9 @@ Input::~Input()
 
 void Input::Update(HWND hWnd)
 {
-	for (int i = 0; i < 256; i++) { keyState_old[i] = keyState[i]; }
+	for (int i = 0; i < 256; i++) {
+		keyState_old[i] = keyState[i]; 
+	}
 	controllerState_old = controllerState;							
 
 	for (int i = 0; i < 5; ++i) {
