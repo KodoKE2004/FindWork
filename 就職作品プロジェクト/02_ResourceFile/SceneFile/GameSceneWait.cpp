@@ -162,13 +162,6 @@ void GameSceneWait::Initialize()
     m_Skydome->SetRadius(500.0f);
     m_MySceneObjects.emplace_back(m_Skydome);
 
-    // Exeゲート初期化
-    m_ExeGate = instance.AddObject<Square>();
-    m_ExeGate->SetName("m_ExeGate");
-    m_ExeGate->SetTexture(textureMgr->GetTexture("ExeGate.png"));
-    m_MySceneObjects.emplace_back(m_ExeGate);
-    
-
     // ライフの数だけハートの生成
     const float lifePosX = - 200.0f;
     const float lifePosY = - 100.0f;
@@ -219,10 +212,9 @@ void GameSceneWait::Initialize()
         m_Theme->SetScaleBase(kThemeScale[path]);
         m_Theme->SetPos(0.0f,0.0f,0.0f);
     }
-    m_RelationData.SetTransitionTarget(m_ExeGate);
 
     Debug::Log("===== クリアステージ数 : " + std::to_string(m_RelationData.stageCount) + " =====");
-        
+    
 }
 
 void GameSceneWait::Update(float tick)

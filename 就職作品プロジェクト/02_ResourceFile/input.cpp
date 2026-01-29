@@ -43,7 +43,11 @@ void Input::Update(HWND hWnd)
 	for (int i = 0; i < 256; i++) {
 		keyState_old[i] = keyState[i]; 
 	}
-	controllerState_old = controllerState;							
+	controllerState_old = controllerState;	
+	
+	if (!GetKeyboardState(keyState)) {
+		ZeroMemory(keyState, sizeof(keyState));
+	}
 
 	for (int i = 0; i < 5; ++i) {
 		m_MouseButtonsOld[i] = m_MouseButtons[i];
