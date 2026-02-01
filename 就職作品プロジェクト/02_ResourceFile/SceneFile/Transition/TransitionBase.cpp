@@ -455,6 +455,29 @@ void DrawInGameStateGUI()
 			Game::SetBgmBpm(bpm);
 		}
 
+		ImGui::Separator();
+		ImGui::TextUnformatted("Difficulty/Speed Settings");
+		int difficultyStageInterval = Game::GetDifficultyStageInterval();
+		if (ImGui::DragInt("Difficulty Stage Interval", &difficultyStageInterval, 1.0f, 1, 100))
+		{
+			Game::SetDifficultyStageInterval(difficultyStageInterval);
+		}
+		float baseBpmIncreasePerDifficulty = Game::GetBaseBpmIncreasePerDifficulty();
+		if (ImGui::DragFloat("Base BPM Increase / Difficulty", &baseBpmIncreasePerDifficulty, 0.1f, 0.0f, 100.0f, "%.1f"))
+		{
+			Game::SetBaseBpmIncreasePerDifficulty(baseBpmIncreasePerDifficulty);
+		}
+		int speedUpStageInterval = Game::GetSpeedUpStageInterval();
+		if (ImGui::DragInt("Speed Up Stage Interval", &speedUpStageInterval, 1.0f, 1, 100))
+		{
+			Game::SetSpeedUpStageInterval(speedUpStageInterval);
+		}
+		float speedUpBpmIncrease = Game::GetSpeedUpBpmIncrease();
+		if (ImGui::DragFloat("Speed Up BPM Increase", &speedUpBpmIncrease, 0.1f, 0.0f, 200.0f, "%.1f"))
+		{
+			Game::SetSpeedUpBpmIncrease(speedUpBpmIncrease);
+		}
+
         // Transition Settings
         //------------------------------
         //			CSV入出力

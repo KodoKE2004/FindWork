@@ -97,11 +97,6 @@ namespace
     constexpr uint32_t kLifeParticleCount = 12u;
     constexpr float    kLifeParticleSpeed = 400.0f;
     constexpr float    kLifeParticleLifeSec = 0.8f;
-
-    constexpr int kDifficultyStageInterval = 8;
-    constexpr float kBaseBpmIncreasePerDifficulty = 5.0f;
-    constexpr int kSpeedUpStageInterval = 4;
-    constexpr float kSpeedUpBpmIncrease = 10.0f;
 }
 
 void GameSceneWait::Initialize()
@@ -129,15 +124,27 @@ void GameSceneWait::Initialize()
 
     // 難易度アップ処理 
     ++m_RelationData.stageCount;
+
+    const int difficultyStageInterval = Game::GetDifficultyStageInterval();
+    const float baseBpmIncreasePerDifficulty = Game::GetBaseBpmIncreasePerDifficulty();
+    const int speedUpStageInterval = Game::GetSpeedUpStageInterval();
+    const float speedUpBpmIncrease = Game::GetSpeedUpBpmIncrease();
+
+
     // 難易度 0 ~
-    if (m_RelationData.stageCount % kDifficultyStageInterval == 0) {
-        int difficulty = m_RelationData.stageCount / kDifficultyStageInterval;
-        m_Difficulty = difficulty;
+    if (m_RelationData.stageCount % difficultyStageInterval == 0) {
+        int difficulty = m_RelationData.stageCount / difficultyStageInterval;
+
+        const float upBpm = difficulty * baseBpmIncreasePerDifficulty;
+        if (upBpm > 0.0f)
+        {
+            beatConfig.Setup(Game::GetBgmBpm() + upBpm, 4, 1);
+        }
         Debug::Log("[[検出]] 難易度アップ");
     }
     // スピード
-    else if (m_RelationData.stageCount % kSpeedUpStageInterval == 0) {
-        float upBpm = (m_RelationData.stageCount / kSpeedUpStageInterval) * kSpeedUpBpmIncrease;
+    else if (m_RelationData.stageCount % speedUpStageInterval == 0) {
+        float upBpm = (m_RelationData.stageCount / speedUpStageInterval) * speedUpBpmIncrease;
         beatConfig.Setup(Game::GetBgmBpm() + upBpm, 4, 1);
         Debug::Log("[[検出]] スピードアップ");
 

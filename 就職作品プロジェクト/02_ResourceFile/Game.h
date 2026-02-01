@@ -50,6 +50,10 @@ private:
 
     static void InitializeTransitionCSV();					// トランジションCSVの初期化
     static void FinalizeTransitionCSV();					// トランジションCSVの終了処理
+	static int	 m_DifficultyStageInterval;
+	static float m_BaseBpmIncreasePerDifficulty;
+	static int	 m_SpeedUpStageInterval;
+	static float m_SpeedUpBpmIncrease;
 public:
 	//================================
 	//		コンストラクタとデストラクタ
@@ -101,6 +105,14 @@ public:
 	static float			GetBgmBpm();
 	static void				SetBgmBaseBpm(float bpm);
 	static float			GetBgmBaseBpm();
+	static void				SetDifficultyStageInterval(int interval);
+	static int				GetDifficultyStageInterval();
+	static void				SetBaseBpmIncreasePerDifficulty(float bpmIncrease);
+	static float			GetBaseBpmIncreasePerDifficulty();
+	static void				SetSpeedUpStageInterval(int interval);
+	static int				GetSpeedUpStageInterval();
+	static void				SetSpeedUpBpmIncrease(float bpmIncrease);
+	static float			GetSpeedUpBpmIncrease();
 
     //================================
 	//		  マネージャーの取得

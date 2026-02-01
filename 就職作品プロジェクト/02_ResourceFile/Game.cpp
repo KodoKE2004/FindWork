@@ -20,6 +20,10 @@ using namespace Math::Easing;
 
 std::unique_ptr<Game> Game::m_pInstance  = nullptr; // ゲームのインスタンス初期化
 uint64_t Game::m_DrawFrameCounter = 0;
+int	  Game::m_DifficultyStageInterval = 8;
+float Game::m_BaseBpmIncreasePerDifficulty = 5.0f;
+int   Game::m_SpeedUpStageInterval = 4;
+float Game::m_SpeedUpBpmIncrease = 10.0f;
 
 void Game::InitializeTransitionCSV()
 {
@@ -375,6 +379,46 @@ float Game::GetBgmBaseBpm()
 	}
 
 	return instance.m_BgmAudio->GetBaseBpm();
+}
+
+void Game::SetDifficultyStageInterval(int interval)
+{
+	m_DifficultyStageInterval = max(interval, 1);
+}
+
+int Game::GetDifficultyStageInterval()
+{
+	return m_DifficultyStageInterval;
+}
+
+void Game::SetBaseBpmIncreasePerDifficulty(float bpmIncrease)
+{
+	m_BaseBpmIncreasePerDifficulty = max(bpmIncrease, 0.0f);
+}
+
+float Game::GetBaseBpmIncreasePerDifficulty()
+{
+	return m_BaseBpmIncreasePerDifficulty;
+}
+
+void Game::SetSpeedUpStageInterval(int interval)
+{
+	m_SpeedUpStageInterval = max(interval, 1);
+}
+
+int Game::GetSpeedUpStageInterval()
+{
+	return m_SpeedUpStageInterval;
+}
+
+void Game::SetSpeedUpBpmIncrease(float bpmIncrease)
+{
+	m_SpeedUpBpmIncrease = max(bpmIncrease, 0.0f);
+}
+
+float Game::GetSpeedUpBpmIncrease()
+{
+	return m_SpeedUpBpmIncrease;
 }
 
 void Game::RegistDebugObject()
