@@ -1,6 +1,6 @@
 ﻿from,to,mode,duration,easing
 Title,Wait,Fade,1.2,InOut Sine
-Wait,Game,Fade,0.56926,InOut Sine
+Wait,Game,Fade,0.808625,InOut Sine
 Game,Wait,Fade,0.56926,InOut Sine
 Wait,Result,Fade,1,InOut Sine
 Result,Title,Fade,1,InOut Sine

@@ -354,6 +354,29 @@ float Game::GetBgmBpm()
 	return instance.m_BgmAudio->GetBpm();
 }
 
+void Game::SetBgmBaseBpm(float bpm)
+{
+	auto& instance = GetInstance();
+	if (!instance.m_BgmAudio)
+	{
+		return;
+	}
+	instance.m_BgmAudio->SetBaseBpm(bpm);
+	instance.m_BgmAudio->SetBpm(instance.m_BgmAudio->GetBpm());
+	Scene::m_RelationData.rhythmBeat.SyncBpm(instance.m_BgmAudio->GetBpm());
+}
+
+float Game::GetBgmBaseBpm()
+{
+	auto& instance = GetInstance();
+	if (!instance.m_BgmAudio)
+	{
+		return 0.0f;
+	}
+
+	return instance.m_BgmAudio->GetBaseBpm();
+}
+
 void Game::RegistDebugObject()
 {
 #ifdef _DEBUG

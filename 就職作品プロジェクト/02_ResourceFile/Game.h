@@ -99,7 +99,9 @@ public:
 	static uint64_t			GetDrawFrameCounter() { return m_DrawFrameCounter; }
 	static void				SetBgmBpm(float bpm);
 	static float			GetBgmBpm();
-	
+	static void				SetBgmBaseBpm(float bpm);
+	static float			GetBgmBaseBpm();
+
     //================================
 	//		  マネージャーの取得
     //================================

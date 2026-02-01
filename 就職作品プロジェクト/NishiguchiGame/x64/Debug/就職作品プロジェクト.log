@@ -1,6 +1,4 @@
 ﻿  Application.cpp
-  Audio.cpp
-  AudioManager.cpp
   Camera.cpp
   DebugGridLine.cpp
   DebugUI.cpp
