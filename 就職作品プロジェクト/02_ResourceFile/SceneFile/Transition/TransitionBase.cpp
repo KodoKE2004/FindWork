@@ -443,10 +443,22 @@ void TransitionBase::ApplyPhaseSetting(TRANS_PHASE phase)
 }
 
 
-void DrawTransitionStateGUI()
+void DrawInGameStateGUI()
 {
-	if (ImGui::Begin("Scene Transition Settings"))
+	if (ImGui::Begin("InGame State Settings"))
 	{
+        // BGM関連設定
+		ImGui::Separator();
+		float bpm = Game::GetBgmBpm();
+		if (ImGui::DragFloat("Bpm", &bpm, 0.1f, 30.0f, 300.0f, "%.1f"))
+		{
+			Game::SetBgmBpm(bpm);
+		}
+
+        // Transition Settings
+        //------------------------------
+        //			CSV入出力
+        //------------------------------
 		static char csvPath[260] = "AssetFile/Csv/TransitionData.csv";
 		static std::string csvStatus;
 
@@ -482,13 +494,6 @@ void DrawTransitionStateGUI()
 			ImGui::TextWrapped("%s", csvStatus.c_str());
 		}
 
-		ImGui::Separator();
-
-		float bpm = Game::GetBgmBpm();
-		if (ImGui::DragFloat("Bpm", &bpm, 0.1f, 30.0f, 300.0f, "%.1f"))
-		{
-			Game::SetBgmBpm(bpm);
-		}
 		TransGui::DrawTransitionStateUI("Title  -> Wait",   TitleToWait);
 		TransGui::DrawTransitionStateUI("Wait   -> Game",   WaitToGame);
 		TransGui::DrawTransitionStateUI("Game   -> Wait",   GameToWait);

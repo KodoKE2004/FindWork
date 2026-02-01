@@ -59,7 +59,7 @@ extern SceneTransitionParam ResultToGame;
 bool SaveTransitionSettingsToCsv  (const std::string& filePath, std::string& errorMessage);
 bool LoadTransitionSettingsFromCsv(const std::string& filePath, std::string& errorMessage);
 
-void DrawTransitionStateGUI();
+void DrawInGameStateGUI();
 
 /// @brief トランジションの基底クラス
 /// @param トランジションエフェクトを実装するための基底クラスです。

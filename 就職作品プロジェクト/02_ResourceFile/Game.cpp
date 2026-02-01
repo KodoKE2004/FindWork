@@ -88,7 +88,7 @@ void Game::Initialize()
 	ResultToGame  = initParam;
 
 	DebugUI::RedistDebugFunction([]() {
-		DrawTransitionStateGUI();
+		DrawInGameStateGUI();
 	});
 
 #endif
