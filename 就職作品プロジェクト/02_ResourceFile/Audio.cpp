@@ -78,6 +78,8 @@ void Audio::SetVolume(float v) {
 
 void Audio::SetPitch(float ratio) {
 	if (!m_voice) return;
+	ratio = std::clamp(ratio, XAUDIO2_MIN_FREQ_RATIO, XAUDIO2_MAX_FREQ_RATIO);
+	m_voice->SetFrequencyRatio(ratio);
 }
 
 void Audio::applyPan(float pan) {
@@ -111,7 +113,11 @@ void Audio::SetPan(float pan)
 
 void Audio::SetBpm(float bpm)
 {
-	if (bpm > 0.0f) {
-		m_Bpm = bpm;
+	if (bpm <= 0.0f) {
+		return;
+	}
+	m_Bpm = bpm;
+	if (m_BaseBpm > 0.0f) {
+		SetPitch(m_Bpm / m_BaseBpm);
 	}
 }

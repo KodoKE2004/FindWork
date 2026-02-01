@@ -76,6 +76,8 @@ namespace TransGui
 		ImGui::PushID(label);
 		if (ImGui::TreeNode(label))
 		{
+			
+
 			int modeIndex = param.ModeAsIndex();
 			if (ImGui::Combo("Mode", &modeIndex, kTransModeLabels, kTransModeCount))
 			{
@@ -482,6 +484,11 @@ void DrawTransitionStateGUI()
 
 		ImGui::Separator();
 
+		float bpm = Game::GetBgmBpm();
+		if (ImGui::DragFloat("Bpm", &bpm, 0.1f, 30.0f, 300.0f, "%.1f"))
+		{
+			Game::SetBgmBpm(bpm);
+		}
 		TransGui::DrawTransitionStateUI("Title  -> Wait",   TitleToWait);
 		TransGui::DrawTransitionStateUI("Wait   -> Game",   WaitToGame);
 		TransGui::DrawTransitionStateUI("Game   -> Wait",   GameToWait);

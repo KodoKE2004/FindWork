@@ -160,6 +160,7 @@ public:
 	void SetBpm(float bpm);
 	float GetBpm() const { return m_Bpm; }
     float GetBaseBpm() const{return m_BaseBpm;};
+	void SetBaseBpm(float bpm) { m_BaseBpm = bpm; }
 };
 
 

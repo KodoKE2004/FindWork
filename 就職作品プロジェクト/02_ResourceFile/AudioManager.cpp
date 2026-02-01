@@ -419,6 +419,7 @@ std::shared_ptr<Audio> AudioManager::Create(const AudioConfig& cfg)
 
     auto clip = LoadWavClip(cfg.filePath);
     auto audio = std::make_shared<Audio>(m_xa.Get(), m_master, std::move(clip), m_nextId++);
+    audio->SetBaseBpm(cfg.baseBpm);
     audio->SetBpm(cfg.bpm);
 
     PlayParams params = cfg.params;
