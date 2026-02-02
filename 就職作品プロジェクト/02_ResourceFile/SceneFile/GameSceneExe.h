@@ -39,7 +39,7 @@ protected:
 	int   m_SpecialRest   = -1;       
 	bool  m_SpecialActive = false;  
 
-	float m_FillRatio	  = 0.0f;
+	float m_FillRatio	  = 0.0f;		// 
 	float m_SegmentFrom	  = 0.0f;
 	float m_SegmentTo	  = 0.0f;
 

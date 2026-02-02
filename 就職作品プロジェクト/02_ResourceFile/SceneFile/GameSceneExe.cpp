@@ -61,16 +61,6 @@ void GameSceneExe::Update(float tick)
     CountTimer(tick);
     int rest = m_BeatTimer.GetRestBeats();
 
-    // 速くクリアしてた場合の処理
-    if (m_isFastChange)
-    {
-        // 残りの拍が4の倍数になった瞬間終了
-        if (rest % 4 == 0)
-        {
-            rest = 0;
-        }
-    }
-
     // 進んだTick(拍数)を取得
     int advancedTick = m_RelationData.rhythmBeat.Update(tick);
     // 拍が進んでいたらBeatTimerを進める
@@ -120,9 +110,26 @@ void GameSceneExe::Update(float tick)
         }
     }
 
- 
+    // 速くクリアしてた場合の処理
+    if (m_isFastChange)
+    {
+        // 残りの拍が4の倍数になった瞬間終了
+        if (rest % 4 == 0)
+        {
+            rest = 0;
+            m_SegmentFrom = m_FillRatio;
+            PlaySE("explosion", std::nullopt);
+            m_isChange = true;
+            m_BomberElapsed = 0.0f;
+        }
+        const float t = std::clamp(m_BomberElapsed / GetOneBeat(), 0.0f, 1.0f);
+        const float e = Math::Easing::EaseOutQuart(t);
+
+        m_FillRatio = m_SegmentFrom + (1.0f - m_SegmentFrom) * e;
+        m_Bomber->SetFillRatio(1.0f - m_FillRatio);
+    }
     // ボンバーの更新
-    if (m_Bomber && GetOneBeat() > 0.0f)
+    else if(m_Bomber && GetOneBeat() > 0.0f)
     {
         const float t = std::clamp(m_BomberElapsed / GetOneBeat(), 0.0f, 1.0f);
         const float e = Math::Easing::EaseOutQuart(t);
