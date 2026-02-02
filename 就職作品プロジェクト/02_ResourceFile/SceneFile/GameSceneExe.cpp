@@ -58,9 +58,18 @@ void GameSceneExe::Initialize()
 void GameSceneExe::Update(float tick)
 {
     //return;
-
     CountTimer(tick);
-    const int rest = m_BeatTimer.GetRestBeats();
+    int rest = m_BeatTimer.GetRestBeats();
+
+    // 速くクリアしてた場合の処理
+    if (m_isFastChange)
+    {
+        // 残りの拍が4の倍数になった瞬間終了
+        if (rest % 4 == 0)
+        {
+            rest = 0;
+        }
+    }
 
     // 進んだTick(拍数)を取得
     int advancedTick = m_RelationData.rhythmBeat.Update(tick);
@@ -111,6 +120,7 @@ void GameSceneExe::Update(float tick)
         }
     }
 
+ 
     // ボンバーの更新
     if (m_Bomber && GetOneBeat() > 0.0f)
     {

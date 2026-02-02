@@ -74,11 +74,11 @@ public:
 	void StageFail() {
         m_RelationData.isClear = false;
 	}
-    void StageClear() { 
+    void SetStageClear() { 
         m_RelationData.isClear = true;
 	}
 	// æsƒNƒŠƒA‚Ìˆ—
-    void StageChangeFast() {
+    void SetFastChange() {
 		m_isFastChange = true;
 	}
 	

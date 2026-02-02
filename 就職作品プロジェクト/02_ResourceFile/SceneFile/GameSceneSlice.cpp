@@ -47,8 +47,8 @@ void GameSceneSlice::Update(float tick)
     std::vector<std::shared_ptr<Enemy>> enemys = instance.GetObjects<Enemy>();
     if (IsAllDeathEnemy(enemys)) {
         // SceneExe‚Å‘‚ß‚ÉƒNƒŠƒA‚ğ‚µ‚½ê‡‚à‘z’è
-        StageClear();
-        StageChangeFast();
+        SetStageClear();
+        SetFastChange();
     }
     else
     {

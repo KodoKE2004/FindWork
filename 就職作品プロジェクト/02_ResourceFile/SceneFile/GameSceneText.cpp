@@ -224,6 +224,7 @@ void GameSceneText::Update(float tick)
     }
     if (m_isInputAll)
     {
+        SetFastChange();
         GirlReaction();
     }
     else 

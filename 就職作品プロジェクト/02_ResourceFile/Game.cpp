@@ -149,7 +149,6 @@ void Game::Update(float tick)
 		const bool shouldPlayBgm = previousScene == SCENE_NO::GAME_WAIT || 
 								   oldScene		 == SCENE_NO::GAME_WAIT;
 								   
-
 		if (shouldPlayBgm)
 		{
 			if (!instance.m_BgmAudio->IsPlaying())
