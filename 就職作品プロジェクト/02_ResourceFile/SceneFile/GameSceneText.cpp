@@ -224,8 +224,11 @@ void GameSceneText::Update(float tick)
     }
     if (m_isInputAll)
     {
-        SetFastChange();
         GirlReaction();
+        if (m_BeatTimer.GetRestBeats() % 4 == 0)
+        {
+            SetFastChange();
+        }
     }
     else 
     {

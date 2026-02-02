@@ -58,7 +58,8 @@ protected:
     bool  m_isFastChange = false;					// 速攻シーン変更フラグ
 	FastChangeState m_FastChangeState = FastChangeState::Filling;
 	float m_FastChangeFill = 0.0f;
-	int   m_PreviousBarIndex = 0;
+	float m_FastChangeStartFill = 0.0f;
+	float m_FastChangeElapsed = 0.0f;
 public:
 	//================================
 	// コンストラクタとデストラクタ
@@ -95,6 +96,7 @@ public:
 		m_isFastChange = true;
 
 		m_FastChangeState = FastChangeState::Filling;
+		m_FastChangeElapsed = 0.0f;
 		if (m_Bomber)
 		{
 			m_FastChangeFill = m_Bomber->GetFillRatio();
@@ -103,6 +105,7 @@ public:
 		{
 			m_FastChangeFill = 0.0f;
 		}
+		m_FastChangeStartFill = m_FastChangeFill;
 	}
 	
 

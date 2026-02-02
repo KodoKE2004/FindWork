@@ -22,7 +22,8 @@ void GameSceneExe::Initialize()
     m_isFastChange = false;
     m_FastChangeState = FastChangeState::Filling;
     m_FastChangeFill = 0.0f;
-    m_PreviousBarIndex = 0;
+    m_FastChangeStartFill = 0.0f;
+    m_FastChangeElapsed   = 0.0f;
 
     // ƒŠƒYƒ€‚Ì’è‹`
     RhythmBeatConst beatConfig{};
@@ -63,19 +64,20 @@ void GameSceneExe::Update(float tick)
     //return;
     CountTimer(tick);
     
-    const int beatsPerBar max(1, m_RelationData.rhythmBeat.GetBeatConst().m_BeatUnit);
     // i‚ñ‚¾Tick(””)‚ðŽæ“¾
     int advancedTick = m_RelationData.rhythmBeat.Update(tick);
     const int currentBeatIndex = m_RelationData.rhythmBeat.GetBeatIndex();
-    const int currentBarIndex = currentBeatIndex / beatsPerBar;
-    const bool isBarChanged = currentBarIndex != m_PreviousBarIndex;
-    m_PreviousBarIndex = currentBarIndex;
 
     if (m_isFastChange)
     {
         if (m_FastChangeState == FastChangeState::Filling)
         {
-            m_FastChangeFill = max(0.0f, m_FastChangeFill - tick);
+            m_FastChangeElapsed += tick;
+            const float oneBeat = GetOneBeat();
+            const float progress = (oneBeat > 0.0f)
+                ? std::clamp(m_FastChangeElapsed / oneBeat, 0.0f, 1.0f)
+                : 1.0f;
+            m_FastChangeFill = max(0.0f, m_FastChangeStartFill * (1.0f - progress));    
             if (m_Bomber)
             {
                 m_Bomber->SetFillRatio(m_FastChangeFill);
@@ -85,7 +87,8 @@ void GameSceneExe::Update(float tick)
                 m_FastChangeState = FastChangeState::ReadyToExplode;
             }
         }
-        if (isBarChanged && m_FastChangeState == FastChangeState::ReadyToExplode)
+
+        if (m_FastChangeState == FastChangeState::ReadyToExplode) 
         {
             Explode();
         }
