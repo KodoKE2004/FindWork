@@ -117,7 +117,7 @@ void Game::Initialize()
 
     AudioConfig bgmConfig{};
     bgmConfig.filePath = L"BGM/GameMelody.wav";
-	bgmConfig.autoPlay = true;
+	bgmConfig.autoPlay = false;
 
 	bgmConfig.loop = true;
     bgmConfig.params.loop.loopCount = XAUDIO2_LOOP_INFINITE;
@@ -149,16 +149,9 @@ void Game::Update(float tick)
 		const bool shouldPlayBgm = previousScene == SCENE_NO::GAME_WAIT || 
 								   oldScene		 == SCENE_NO::GAME_WAIT;
 								   
-		if (shouldPlayBgm)
+		if (!shouldPlayBgm)
 		{
-			if (!instance.m_BgmAudio->IsPlaying())
-			{
-				instance.m_BgmAudio->Play(instance.m_BgmPlayParams);
-			}
-		}
-		else if (instance.m_BgmAudio->IsPlaying())
-		{
-			instance.m_BgmAudio->Stop();
+			instance.StopBgm();
 		}
 
 		const float bgmBpm = instance.m_BgmAudio->GetBpm();
@@ -418,6 +411,27 @@ void Game::SetSpeedUpBpmIncrease(float bpmIncrease)
 float Game::GetSpeedUpBpmIncrease()
 {
 	return m_SpeedUpBpmIncrease;
+}
+
+void Game::PlayBgmIfStopped()
+{
+	if (m_BgmAudio && !m_BgmAudio->IsPlaying())
+	{
+		m_BgmAudio->Play(m_BgmPlayParams);
+	}
+}
+
+void Game::StopBgm()
+{
+	if (m_BgmAudio && m_BgmAudio->IsPlaying())
+	{
+		m_BgmAudio->Stop();
+	}
+}
+
+bool Game::IsBgmPlaying() const
+{
+	return m_BgmAudio && m_BgmAudio->IsPlaying();
 }
 
 void Game::RegistDebugObject()

@@ -157,6 +157,8 @@ void GameSceneWait::Initialize()
     SetTimer(&m_DecrementLife.timer);
 
     m_RelationData.rhythmBeat.Initialize(beatConfig);
+    m_WasPlayBGM = false;
+    m_PreviousBeatIndex = m_RelationData.rhythmBeat.GetBeatIndex();
 
     m_BeatTimer.Initialize(8);
 
@@ -236,9 +238,17 @@ void GameSceneWait::Update(float tick)
     // リズムを取る
     // ライフをリズムに合わせて回転させる
     int advancedTicks = m_RelationData.rhythmBeat.Update(tick);
+    const int currentBeatIndex = m_RelationData.rhythmBeat.GetBeatIndex();
+
+    if (!m_WasPlayBGM && currentBeatIndex != m_PreviousBeatIndex)
+    {
+        Game::GetInstance().PlayBgmIfStopped();
+        m_WasPlayBGM = true;
+    }
+    m_PreviousBeatIndex = currentBeatIndex;
+
     if (advancedTicks > 0)
     {
-        const int currentBeatIndex = m_RelationData.rhythmBeat.GetBeatIndex();
 
         m_BeatTimer.Advance(currentBeatIndex);
         if (m_BeatTimer.IsBeatZero())

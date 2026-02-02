@@ -114,6 +114,10 @@ public:
 	static void				SetSpeedUpBpmIncrease(float bpmIncrease);
 	static float			GetSpeedUpBpmIncrease();
 
+	void PlayBgmIfStopped();
+	void StopBgm();
+	bool IsBgmPlaying() const;
+
     //================================
 	//		  マネージャーの取得
     //================================

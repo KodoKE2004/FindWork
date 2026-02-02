@@ -18,6 +18,14 @@ enum class GAME_MODE
 	NUM
 };
 
+// 先行クリア用列挙
+enum class FastChangeState
+{
+	Filling,
+	ReadyToExplode,
+	Exploded
+};
+
 class GameSceneExe : public Scene
 {
 
@@ -48,7 +56,9 @@ protected:
 
 	// 先行クリア時の早回し用フラグ
     bool  m_isFastChange = false;					// 速攻シーン変更フラグ
-
+	FastChangeState m_FastChangeState = FastChangeState::Filling;
+	float m_FastChangeFill = 0.0f;
+	int   m_PreviousBarIndex = 0;
 public:
 	//================================
 	// コンストラクタとデストラクタ
@@ -79,7 +89,20 @@ public:
 	}
 	// 先行クリアの処理
     void SetFastChange() {
+		if (m_isFastChange) {
+			return;
+		}
 		m_isFastChange = true;
+
+		m_FastChangeState = FastChangeState::Filling;
+		if (m_Bomber)
+		{
+			m_FastChangeFill = m_Bomber->GetFillRatio();
+		}
+		else
+		{
+			m_FastChangeFill = 0.0f;
+		}
 	}
 	
 
@@ -90,6 +113,7 @@ public:
 	SCENE_NO GetSceneNo() const override {
 		return SCENE_NO::NONE;
 	}    
-
+protected:
+	void Explode();
 };
 

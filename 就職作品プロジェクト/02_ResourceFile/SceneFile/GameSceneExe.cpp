@@ -20,6 +20,9 @@ void GameSceneExe::Initialize()
     //-------------------------------
     m_isChange     = false;
     m_isFastChange = false;
+    m_FastChangeState = FastChangeState::Filling;
+    m_FastChangeFill = 0.0f;
+    m_PreviousBarIndex = 0;
 
     // リズムの定義
     RhythmBeatConst beatConfig{};
@@ -59,10 +62,38 @@ void GameSceneExe::Update(float tick)
 {
     //return;
     CountTimer(tick);
-    int rest = m_BeatTimer.GetRestBeats();
-
+    
+    const int beatsPerBar max(1, m_RelationData.rhythmBeat.GetBeatConst().m_BeatUnit);
     // 進んだTick(拍数)を取得
     int advancedTick = m_RelationData.rhythmBeat.Update(tick);
+    const int currentBeatIndex = m_RelationData.rhythmBeat.GetBeatIndex();
+    const int currentBarIndex = currentBeatIndex / beatsPerBar;
+    const bool isBarChanged = currentBarIndex != m_PreviousBarIndex;
+    m_PreviousBarIndex = currentBarIndex;
+
+    if (m_isFastChange)
+    {
+        if (m_FastChangeState == FastChangeState::Filling)
+        {
+            m_FastChangeFill = max(0.0f, m_FastChangeFill - tick);
+            if (m_Bomber)
+            {
+                m_Bomber->SetFillRatio(m_FastChangeFill);
+            }
+            if (m_FastChangeFill <= 0.0f)
+            {
+                m_FastChangeState = FastChangeState::ReadyToExplode;
+            }
+        }
+        if (isBarChanged && m_FastChangeState == FastChangeState::ReadyToExplode)
+        {
+            Explode();
+        }
+        return;
+    }
+
+    int rest = m_BeatTimer.GetRestBeats();
+
     // 拍が進んでいたらBeatTimerを進める
     for (int i = 0; i < advancedTick; ++i)
     {
@@ -110,27 +141,6 @@ void GameSceneExe::Update(float tick)
         }
     }
 
-    // 速くクリアしてた場合の処理
-    //if (m_isFastChange)
-    //{
-    //    // 残りの拍が4の倍数になった瞬間終了
-    //    if (rest % 4 == 0)
-    //    {
-    //        rest = 0;
-    //        m_SegmentFrom = m_FillRatio;
-    //        PlaySE("explosion", std::nullopt);
-    //        m_isChange = true;
-    //        m_BomberElapsed = 0.0f;
-    //    }
-    //    if (m_isChange) 
-    //    {
-    //        const float t = std::clamp(m_BomberElapsed / GetOneBeat(), 0.0f, 1.0f);
-    //        const float e = Math::Easing::EaseOutQuart(t);
-
-    //        m_FillRatio = m_SegmentFrom + (1.0f - m_SegmentFrom) * e;
-    //        m_Bomber->SetFillRatio(1.0f - m_FillRatio);
-    //    }
-    //}
     // ボンバーの更新
     if(m_Bomber && GetOneBeat() > 0.0f)
     {
@@ -150,6 +160,26 @@ void GameSceneExe::Update(float tick)
         m_Bomber->SetFillRatio(1.0f - m_FillRatio);
     }
 }
+
+void GameSceneExe::Explode()
+{
+    if (m_FastChangeState == FastChangeState::Exploded)
+    {
+        return;
+    }
+
+    auto& instance = Game::GetInstance();
+    TextureManager* textureMgr = instance;
+    if (m_Bomber && textureMgr)
+    {
+        m_Bomber->SetTexture(textureMgr->GetTexture("Bomber/Explosion.png"));
+    }
+
+    PlaySE("explosion", std::nullopt);
+    m_isChange = true;
+    m_FastChangeState = FastChangeState::Exploded;
+}
+
 
 void GameSceneExe::Finalize()
 {
