@@ -4,15 +4,12 @@
 #include <type_traits>
 #include <cstdint>
 #include <Debug.hpp>
-#include "DebugGridLine.h"
 
 #include "Scene.h"
 #include "TransScene.h"
 #include "TransitionBase.h"
-#include "Object.h"
 #include "Theme.h"
 #include "input.h"
-#include "GameSceneExe.h"
 
 #include "MeshManager.h"
 #include "TextureManager.h"
@@ -34,7 +31,7 @@ private:
 	PlayParams							 m_BgmPlayParams{};				// BGM再生用パラメータ
     std::vector<std::shared_ptr<TransitionBase>> m_TransitionTexture;	// トランジション用テクスチャ
     std::shared_ptr<Theme>				 m_Theme;						// テーマ管理
-    std::vector<std::shared_ptr<Scene>>	 m_SceneStack;					// シーンスタック
+    std::vector<std::shared_ptr<Scene>>	 m_SceneList;					// シーンスタック
 
     DirectX::SimpleMath::Vector2 m_PreviewMousePos;						// デバッグ用ビュー行列
 #ifdef _DEBUG
@@ -226,7 +223,7 @@ inline void ChangeScenePop(SceneTransitionParam& state)
 	if (instance.GetSceneStackSize() == 0) {
 		std::string_view msg = "[[警告]] シーンスタックが空です";
 		Debug::Log(msg, MessageColor::Yellow);
-		return ;
+		return;
 	}
 
 	Debug::Log("[[検出]] シーンのPop");
@@ -259,21 +256,21 @@ inline std::vector<std::shared_ptr<TransitionBase>> Game::GetTransitionTexture()
 inline void Game::ScenePush(std::shared_ptr<Scene> newScene)
 {
     if (newScene){
-		m_SceneStack.push_back(newScene);
+		m_SceneList.push_back(newScene);
 	}
 }
 
 inline std::shared_ptr<Scene> Game::ScenePop()
 {
-	if(m_SceneStack.empty()) return nullptr;
+	if(m_SceneList.empty()) return nullptr;
 	
-    auto scene = m_SceneStack.back();
-    m_SceneStack.pop_back();
+    auto scene = m_SceneList.back();
+    m_SceneList.pop_back();
 
 	return scene;
 }
 
 inline size_t Game::GetSceneStackSize() const
 {
-	return m_SceneStack.size();
+	return m_SceneList.size();
 }

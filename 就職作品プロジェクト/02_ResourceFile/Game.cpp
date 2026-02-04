@@ -262,7 +262,7 @@ void Game::Finalize()
 	Renderer::Finalize();			// レンダラーの終了処理
     instance.m_SceneCurrent->Finalize();
 	instance.m_SceneCurrent.reset();
-	instance.m_SceneStack.clear();
+	instance.m_SceneList.clear();
 }
 
 void Game::SetSceneCurrent(std::shared_ptr<Scene> newScene)
