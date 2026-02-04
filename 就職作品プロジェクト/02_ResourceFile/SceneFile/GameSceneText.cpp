@@ -36,7 +36,7 @@ namespace
 
 void GameSceneText::ShuffleSlotTextureUV()
 {
-    float uvX = 0.7f;
+    float uvX = 0.5f;
     m_UvXOffset = (3.0f < m_UvXOffset) ? 1.0f : m_UvXOffset + uvX;
     float temp = fmodf(m_UvXOffset,1.0f);
     if (temp == 0.0f)
