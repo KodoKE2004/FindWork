@@ -82,4 +82,7 @@ public:
 	void SetTransMode(TRANS_MODE mode)     { m_TransMode = mode;	  }
 	void SetStep(STEP step)				   { m_Step		 = step;	  }
 	void SetTimer(float timer)			   { m_Timer	 = timer;	  }
+
+	SCENE_NO GetOldSceneNo()  const { return m_SceneOld ? m_SceneOld->GetSceneNo() : SCENE_NO::NONE; }
+	SCENE_NO GetNextSceneNo() const { return m_SceneNext ? m_SceneNext->GetSceneNo() : SCENE_NO::NONE; }
 };

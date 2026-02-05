@@ -133,7 +133,7 @@ void Game::Initialize()
     instance.m_BgmAudio = instance.m_AudioManager->Create(bgmConfig);
     instance.m_BgmPlayParams = bgmConfig.params;
 
-	instance.m_SceneCurrent = std::make_shared<GameSceneText>();		// タイトルシーンのインスタンスを生成
+	instance.m_SceneCurrent = std::make_shared<TitleScene>();		// タイトルシーンのインスタンスを生成
 	instance.m_SceneCurrent->Initialize();
 }
 
@@ -144,11 +144,24 @@ void Game::Update(float tick)
 
 	if (instance.m_BgmAudio)
 	{
-		const SCENE_NO previousScene = instance.m_SceneCurrent->GetRelationData().previousScene;
-        const SCENE_NO oldScene		 = instance.m_SceneCurrent->GetRelationData().oldScene;
-		const bool shouldPlayBgm = previousScene == SCENE_NO::GAME_WAIT || 
-								   oldScene		 == SCENE_NO::GAME_WAIT;
-								   
+		
+        bool shouldPlayBgm = false;
+		const auto currentScene = instance.m_SceneCurrent;
+        const SCENE_NO currentSceneNo = currentScene ? currentScene->GetSceneNo() : SCENE_NO::NONE;
+
+		if (currentSceneNo == SCENE_NO::GAME_WAIT)
+		{
+			shouldPlayBgm = true;
+		}
+		else if (currentSceneNo == SCENE_NO::TRANSITION)
+		{
+			if (const auto transScene = std::dynamic_pointer_cast<TransScene>(currentScene))
+			{
+				shouldPlayBgm = transScene->GetOldSceneNo() == SCENE_NO::GAME_WAIT
+					|| transScene->GetNextSceneNo() == SCENE_NO::GAME_WAIT;
+			}
+		}
+
 		if (!shouldPlayBgm)
 		{
 			instance.StopBgm();

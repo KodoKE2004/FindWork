@@ -66,8 +66,8 @@ void GameSceneExe::Update(float tick)
     
     // i‚ñ‚¾Tick(””)‚ğæ“¾
     int advancedTick = m_RelationData.rhythmBeat.Update(tick);
-    const int currentBeatIndex = m_RelationData.rhythmBeat.GetBeatIndex();
 
+    // ‘‰ñ‚µˆ—
     if (m_isFastChange)
     {
         if (m_FastChangeState == FastChangeState::Filling)
