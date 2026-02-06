@@ -142,36 +142,20 @@ void Game::Update(float tick)
 	auto& instance = GetInstance();
 	instance.m_Input->Update(Application::GetWindow());
 
+    // BGMの更新
 	if (instance.m_BgmAudio)
 	{
-		
-        bool shouldPlayBgm = false;
-		const auto currentScene = instance.m_SceneCurrent;
-        const SCENE_NO currentSceneNo = currentScene ? currentScene->GetSceneNo() : SCENE_NO::NONE;
+        SCENE_NO currentSceneNo = instance.GetCurrentScene()->GetSceneNo();
+        const auto transScene = std::dynamic_pointer_cast<TransScene>(instance.GetCurrentScene());
+        // Exe -> Wait への遷移完了時にBGM再生開始
+		bool isReadyPlay = transScene->GetNextSceneNo() == SCENE_NO::GAME_WAIT  &&
+						   (transScene->GetOldSceneNo() >= SCENE_NO::GAME_SLICE &&
+						    transScene->GetOldSceneNo() <  SCENE_NO::EXE_NUM);
+        
+		if (isReadyPlay) {
 
-		if (currentSceneNo == SCENE_NO::GAME_WAIT)
-		{
-			shouldPlayBgm = true;
-		}
-		else if (currentSceneNo == SCENE_NO::TRANSITION)
-		{
-			if (const auto transScene = std::dynamic_pointer_cast<TransScene>(currentScene))
-			{
-				shouldPlayBgm = transScene->GetOldSceneNo() == SCENE_NO::GAME_WAIT
-					|| transScene->GetNextSceneNo() == SCENE_NO::GAME_WAIT;
-			}
 		}
 
-		if (!shouldPlayBgm)
-		{
-			instance.StopBgm();
-		}
-
-		const float bgmBpm = instance.m_BgmAudio->GetBpm();
-		if (bgmBpm > 0.0f && Scene::m_RelationData.rhythmBeat.GetBeatConst().m_Bpm != bgmBpm)
-		{
-			Scene::m_RelationData.rhythmBeat.SyncBpm(bgmBpm);
-		}
 	}
 
 	// 現在のシーンの更新
