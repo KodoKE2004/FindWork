@@ -34,6 +34,19 @@ void TransScene::Initialize()
 	m_TransMode = m_transParam.mode;
 	m_Step = STEP::DOING;
 
+	const SCENE_NO oldSceneNo = GetOldSceneNo();
+	const SCENE_NO nextSceneNo = GetNextSceneNo();
+	const bool isOldGameScene  = oldSceneNo  >= SCENE_NO::GAME_SLICE && oldSceneNo  < SCENE_NO::EXE_NUM;
+	const bool isNextGameScene = nextSceneNo >= SCENE_NO::GAME_SLICE && nextSceneNo < SCENE_NO::EXE_NUM;
+	if (oldSceneNo == SCENE_NO::GAME_WAIT && isNextGameScene)
+	{
+		instance.StartBgmFadeOut(m_Duration);
+	}
+	else if (isOldGameScene && nextSceneNo == SCENE_NO::GAME_WAIT)
+	{
+		instance.StartBgmFadeIn(m_Duration);
+	}
+
 	const auto& relationData = m_SceneOld->GetRelationData();
 	auto applyTransitionTexture = [&](const std::shared_ptr<TransitionBase>& transition)
 	{

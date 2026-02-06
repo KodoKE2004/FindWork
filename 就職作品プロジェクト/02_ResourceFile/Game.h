@@ -29,6 +29,11 @@ private:
 
     std::shared_ptr<Audio>				 m_BgmAudio;					// BGM再生用オーディオ
 	PlayParams							 m_BgmPlayParams{};				// BGM再生用パラメータ
+	float								 m_BgmCurrentVolume = 0.0f;		// BGM現在音量
+	float								 m_BgmFadeTargetVolume = 0.0f;	// BGMフェード目標音量
+	float								 m_BgmFadeSpeed = 0.0f;			// BGMフェード速度
+	bool								 m_BgmFadeActive = false;		// BGMフェード中か
+	bool								 m_BgmStopAfterFade = false;	// フェード完了後停止するか
     std::vector<std::shared_ptr<TransitionBase>> m_TransitionTexture;	// トランジション用テクスチャ
     std::shared_ptr<Theme>				 m_Theme;						// テーマ管理
     std::vector<std::shared_ptr<Scene>>	 m_SceneList;					// シーンスタック
@@ -114,7 +119,8 @@ public:
 	void PlayBgmIfStopped();
 	void StopBgm();
 	bool IsBgmPlaying() const;
-
+	void StartBgmFadeOut(float durationSec);
+	void StartBgmFadeIn (float durationSec);
     //================================
 	//		  マネージャーの取得
     //================================
