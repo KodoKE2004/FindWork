@@ -40,7 +40,7 @@ void GameSceneJump::Initialize()
     m_MySceneObjects.emplace_back(m_Bomber);
 
     m_Bird = instance.AddObject<Bird>();
-    m_Bird->SetScale(90.0f,90.0f,1.0f);
+    m_Bird->SetScale(50.0f,50.0f,1.0f);
     m_MySceneObjects.emplace_back(m_Bird);
 
     m_Beat = m_BeatTimer.GetRestBeats();

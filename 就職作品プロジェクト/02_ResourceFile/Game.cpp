@@ -133,7 +133,7 @@ void Game::Initialize()
     instance.m_BgmPlayParams = bgmConfig.params;
 	instance.m_BgmCurrentVolume = bgmConfig.params.volume;
 
-	instance.m_SceneCurrent = std::make_shared<TitleScene>();		// タイトルシーンのインスタンスを生成
+	instance.m_SceneCurrent = std::make_shared<GameSceneJump>();		// タイトルシーンのインスタンスを生成
 	instance.m_SceneCurrent->Initialize();
 }
 
@@ -181,10 +181,6 @@ void Game::Update(float tick)
 	}
 	// オーディオマネージャーの更新
 	instance.m_AudioManager->Update();
-
-#ifdef _DEBUG
-	GetAudioHelperTickDebugger().Tick(tick);
-#endif
 
 	if (instance.m_Input->GetKeyTrigger(VK_Z)) {
         instance.Finalize();

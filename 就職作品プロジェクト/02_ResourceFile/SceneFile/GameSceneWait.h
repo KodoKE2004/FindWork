@@ -54,7 +54,7 @@ private:
     bool m_wasDecrementLife		   = false;	// ライフが減ったかどうかのフラグ
 
     bool m_WasPlayBGM = false;				// BGMを再生したかどうかのフラグ
-	int  m_PreviousBeatIndex = 0;			// 
+    int  m_PreviousBeatIndex = 0;			// 前回のビートインデックス
     bool m_IsLifeTiltPositive = true;		// ライフの傾きが正かどうかのフラグ
 
 private:

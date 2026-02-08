@@ -285,9 +285,6 @@ void GameSceneWait::Update(float tick)
         !m_wasDecrementLife         &&
         !m_RelationData.isClear)
     {
-        // ライフが減る演出
-        
-
         // ライフを減らす
         m_RelationData.gameLife -= 1u;
         DecrementLife();

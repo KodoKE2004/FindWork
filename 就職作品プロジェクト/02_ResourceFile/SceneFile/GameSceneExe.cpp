@@ -61,7 +61,6 @@ void GameSceneExe::Initialize()
 
 void GameSceneExe::Update(float tick)
 {
-    //return;
     CountTimer(tick);
     
     // i‚ñ‚¾Tick(””)‚ğæ“¾
