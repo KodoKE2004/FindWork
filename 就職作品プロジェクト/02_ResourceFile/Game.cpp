@@ -550,7 +550,6 @@ void Game::RegistDebugObject()
 				ImGui::Text("No selection");
 			}
 			ImGui::EndGroup();
-
 			ImGui::End();
 		});
 #endif // _DEBUG
