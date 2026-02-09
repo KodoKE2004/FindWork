@@ -71,9 +71,9 @@ void GameSceneText::GirlReaction()
     bool sad  = adjectiveUvX_A == 2.0f &&
                 adjectiveUvX_B == 2.0f;
 
-    if      (high) { uvX = 2.0f; }
-    else if (sad)  { uvX = 3.0f; }
-    else           { uvX = 5.0f; }
+    if      (high) { uvX = 2.0f; PlaySE("fanfare",0.4f); }
+    else if (sad)  { uvX = 3.0f; PlaySE("failed" ,0.4f); }
+    else           { uvX = 5.0f; PlaySE("question",0.4f); }
 
     m_Girl->SetUV(uvX, 1.0f, 5.0f, 1.0f);
     const auto uv = m_Girl->GetUV();
@@ -168,6 +168,14 @@ void GameSceneText::Initialize()
     PlayParams whistleParam{};
     m_AudioList.emplace("whistle", AudioConfig(L"SE/Whistle.wav"  , whistleParam, false, false));
 
+    PlayParams fanfareParam{};
+    m_AudioList.emplace("fanfare", AudioConfig(L"SE/True3.wav", fanfareParam, false, false));
+
+    PlayParams failedParam{};
+    m_AudioList.emplace("failed", AudioConfig(L"SE/Failed.wav", failedParam, false, false));
+
+    PlayParams QuestionParam{};
+    m_AudioList.emplace("question", AudioConfig(L"SE/Question.wav", QuestionParam, false, false));
     if (AudioManager* audioMgr = instance)
     {
         for (const auto& [key, config] : m_AudioList)

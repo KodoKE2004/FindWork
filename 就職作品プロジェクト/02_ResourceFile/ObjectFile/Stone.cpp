@@ -15,7 +15,8 @@ namespace
         float screenWidthHalf = static_cast<float>(Application::GetWidth()) * 0.5f;
         float kMinX = - screenWidthHalf;
         float kMaxX =   screenWidthHalf;
-        constexpr float kCenterSafeHalfWidth = 150.0f;        std::uniform_real_distribution<float> distY(600.0f, 800.0f);
+        constexpr float kCenterSafeHalfWidth = 150.0f;       
+        std::uniform_real_distribution<float> distY(600.0f, 1200.0f);
         std::uniform_int_distribution<int> distSide(0, 1);
         float posX = 0.0f;
         if (distSide(engine) == 0)

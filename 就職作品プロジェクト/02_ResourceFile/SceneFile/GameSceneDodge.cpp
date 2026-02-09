@@ -13,7 +13,6 @@ namespace
         200.0f,
         400.0f,
         };
-
     std::array<size_t, 3> ShuffleButtonIndices()
     {
         static std::mt19937 engine{ std::random_device{}() };
@@ -37,36 +36,56 @@ void GameSceneDodge::Initialize()
     m_RelationData.isClear = true;
 
     auto& instance = Game::GetInstance();
+    TextureManager* textureMar = instance; 
+    m_Background = instance.AddObject<Square>();
+    m_Background->SetName("m_Background");
+    m_Background->SetScale(1280.0f, 720.0f, 1.0f);
+    m_Background->SetTexture(textureMar->GetTexture("Plane.png"));
+    m_MySceneObjects.emplace_back(m_Background);
 
     m_Bomber = instance.AddObject<Bomber>();
     m_Bomber->SetName("m_TimeGauge");
     m_MySceneObjects.emplace_back(m_Bomber);
 
     m_Bird = instance.AddObject<Bird>();
-    m_Bird->SetRadius(0.3f);
+    m_Bird->SetScale(50.0f,50.0f,1.0f);
     m_MySceneObjects.emplace_back(m_Bird);
 
-    TextureManager* textureMgr = instance;
-    std::shared_ptr<Circle> circle = instance.AddObject<Circle>();
-    circle->SetRadius(0.1f);
-    circle->SetPos(0.0f, 0.0f, 0.0f);
-    circle->SetScale(1.0f,1.0f,1.0f);
-    circle->SetTexture(textureMgr->GetTexture("Plane.png"));
-    m_MySceneObjects.emplace_back(circle);
+    AudioManager* audioMgr = instance;
+    PlayParams fallParams;
+    m_AudioList.emplace("fall", AudioConfig(L"SE/RockFall.wav", fallParams, false, false));
+
+    if (AudioManager* audioMgr = instance)
+    {
+        for (const auto& [key, config] : m_AudioList)
+        {
+            if (!audioMgr->Add(key, config.filePath)) {
+                continue;
+            }
+            if (config.autoPlay)
+            {
+                auto params = config.params;
+                if (config.loop)
+                {
+                    params.loop.loopCount = XAUDIO2_LOOP_INFINITE;
+                }
+            }
+        }
+    }
 
 }
 
 void GameSceneDodge::Update(float tick)
 {
     GameSceneExe::Update(tick);
-    auto& instance = Game::GetInstance();
-
     // 拍が更新された場合
     m_StoneSpawnElapsed += tick;
     while (m_StoneSpawnElapsed >= kStoneSpawnInterval)
     {
         m_StoneSpawnElapsed -= kStoneSpawnInterval;
+        auto& instance = Game::GetInstance();
         int createNum = 8 * (m_RelationData.stageCount / 6 + 1);
+        PlaySE("fall", 0.5f);
         for (int i = 0; i < createNum; ++i)
         {
             std::shared_ptr<Stone> stone = instance.AddObject<Stone>();
@@ -75,24 +94,18 @@ void GameSceneDodge::Update(float tick)
         }
     }
 
-    // 非アクティブな石を削除
-    auto stoneList = instance.GetObjects<Stone>();
-    for (auto stone : stoneList)
+    for (auto stone = m_StoneList.begin(); stone != m_StoneList.end(); )
     {
-        //Circle stoneCircle;
-        //
-        //stoneCircle.center = {stone->GetPos().x, stone->GetPos().y},
-        //stoneCircle.radius = stone->GetScale().x * 0.5f,
-        //
-        //if (Calculator::Collider2D::isHitCircleCircle)
-
-        if (stone->IsActive())
+        if (stone->get()->IsActive())
         {
-            instance.DeleteObject(stone);
+            stone = m_StoneList.erase(stone);
         }
+        else 
+        {
+            ++stone;
+        }
+
     }
-
-
 
 
     if (IsChange()) 

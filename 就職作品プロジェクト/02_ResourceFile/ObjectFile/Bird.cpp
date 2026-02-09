@@ -6,13 +6,13 @@ namespace
     
 }
 
-Bird::Bird(Camera& cam) : Circle(cam)
+Bird::Bird(Camera& cam) : Square(cam)
 {
 }
 
 void Bird::Initialize()
 {
-    Circle::Initialize();
+    Square::Initialize();
     auto& instance = Game::GetInstance();
     TextureManager* textureMgr = instance;
     SetTexture(textureMgr->GetTexture("Sparrow.png"));
@@ -39,10 +39,10 @@ void Bird::Update()
 
 void Bird::Draw()
 {
-    Circle::Draw();
+    Square::Draw();
 }
 
 void Bird::Finalize()
 {
-    Circle::Finalize();
+    Square::Finalize();
 }

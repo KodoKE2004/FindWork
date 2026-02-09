@@ -9,7 +9,7 @@
 class GameSceneDodge : public GameSceneExe
 {
 private:
-    
+    std::shared_ptr<Square> m_Background;
     std::shared_ptr<Bird>  m_Bird;
     std::vector<std::shared_ptr<Stone>> m_StoneList;
 

@@ -76,7 +76,7 @@ void Circle::Initialize()
     SetTexture(nullptr);
     m_Material->Create(mtrl);
 
-    m_Camera.SetCamera(CAMERA_3D);
+    m_Camera.SetCamera(CAMERA_2D);
 
 }
 
@@ -86,9 +86,10 @@ void Circle::Update()
 
 void Circle::Draw()
 {
+    m_Camera.SetCamera(CAMERA_2D);
     SetScale(m_Radius);
     // ワールド行列の構築
-    Matrix r = Matrix::CreateFromYawPitchRoll(m_Rotation.y, m_Rotation.x, m_Rotation.z);
+    Matrix r = Matrix::CreateFromYawPitchRoll(m_Rotation.y, m_Rotation.x, 0.0f);
     Matrix t = Matrix::CreateTranslation(m_Position.x, m_Position.y, m_Position.z);
     Matrix s = Matrix::CreateScale(m_Scale.x, m_Scale.y, m_Scale.z);
     Matrix world = s * r * t;
