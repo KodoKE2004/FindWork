@@ -1,6 +1,7 @@
 #pragma once
-#include "Square.h"
-class Bird : public Square
+#include "Circle.h"
+
+class Bird : public Circle
 {
 private:
     bool m_IsActive = true;

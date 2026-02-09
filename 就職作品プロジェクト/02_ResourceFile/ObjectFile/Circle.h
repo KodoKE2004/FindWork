@@ -21,10 +21,10 @@ protected:
 
 public:
     Circle(Camera& cam);
-    void Initialize() override;
-    void Update()     override;
-    void Draw()       override;
-    void Finalize()   override;
+    virtual void Initialize() ;
+    virtual void Update()     ;
+    virtual void Draw()       ;
+    virtual void Finalize()   ;
 
     void  SetRadius(float radius);
     void  SetFillRatio(float ratio);

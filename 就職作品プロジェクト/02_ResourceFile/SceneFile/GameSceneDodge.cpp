@@ -43,13 +43,15 @@ void GameSceneDodge::Initialize()
     m_MySceneObjects.emplace_back(m_Bomber);
 
     m_Bird = instance.AddObject<Bird>();
-    m_Bird->SetScale(50.0f,50.0f,1.0f);
+    m_Bird->SetRadius(0.3f);
     m_MySceneObjects.emplace_back(m_Bird);
 
+    TextureManager* textureMgr = instance;
     std::shared_ptr<Circle> circle = instance.AddObject<Circle>();
-    circle->SetRadius(1.0f);
+    circle->SetRadius(0.1f);
     circle->SetPos(0.0f, 0.0f, 0.0f);
     circle->SetScale(1.0f,1.0f,1.0f);
+    circle->SetTexture(textureMgr->GetTexture("Plane.png"));
     m_MySceneObjects.emplace_back(circle);
 
 }

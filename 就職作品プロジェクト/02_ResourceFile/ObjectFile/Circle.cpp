@@ -86,10 +86,11 @@ void Circle::Update()
 
 void Circle::Draw()
 {
+    SetScale(m_Radius);
     // ワールド行列の構築
     Matrix r = Matrix::CreateFromYawPitchRoll(m_Rotation.y, m_Rotation.x, m_Rotation.z);
     Matrix t = Matrix::CreateTranslation(m_Position.x, m_Position.y, m_Position.z);
-    Matrix s = Matrix::CreateScale(m_Radius, m_Radius, m_Scale.z);
+    Matrix s = Matrix::CreateScale(m_Scale.x, m_Scale.y, m_Scale.z);
     Matrix world = s * r * t;
     Renderer::SetWorldMatrix(&world);
 
