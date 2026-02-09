@@ -47,8 +47,9 @@ void GameSceneDodge::Initialize()
     m_MySceneObjects.emplace_back(m_Bird);
 
     std::shared_ptr<Circle> circle = instance.AddObject<Circle>();
-    circle->SetRadius(30.0f);
+    circle->SetRadius(1.0f);
     circle->SetPos(0.0f, 0.0f, 0.0f);
+    circle->SetScale(1.0f,1.0f,1.0f);
     m_MySceneObjects.emplace_back(circle);
 
 }

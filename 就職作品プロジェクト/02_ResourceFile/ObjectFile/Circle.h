@@ -16,7 +16,7 @@ protected:
     float m_DrawRatio = 1.0f;          // 描画する割合 (0.0 - 1.0)
     VertexBuffer<VERTEX_3D>   m_VertexBuffer; // 頂点バッファ
     IndexBuffer               m_IndexBuffer;  // インデックスバッファ
-    std::shared_ptr<Texture>  m_Texture;	  // テクスチャ
+
     std::unique_ptr<Material> m_Material;	  //マテリアル
 
 public:

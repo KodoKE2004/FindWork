@@ -11,7 +11,7 @@ void Circle::Initialize()
 {
     // 最低限のチェック
     if (m_Segments < 3) m_Segments = 3;
-    if (m_Radius <= 0.0f) m_Radius = 50.0f;
+    if (m_Radius <= 0.0f) m_Radius = 1.0f;
 
     // 頂点（中心 + 円周）を作成
     std::vector<VERTEX_3D> vertices;
@@ -55,6 +55,7 @@ void Circle::Initialize()
     }
 
     m_IndexCount = static_cast<unsigned int>(indices.size());
+    m_DrawIndexCount = m_IndexCount;
 
     // バッファ作成
     m_VertexBuffer.Create(vertices);
@@ -65,17 +66,18 @@ void Circle::Initialize()
 
     // マテリアル準備
     m_Material = std::make_unique<Material>();
+    m_Color = Color(1, 1, 1, 1);
+
     MATERIAL mtrl{};
-    mtrl.Diffuse = Color(1, 1, 1, 1);
+    TextureManager* textureMgr = Game::GetInstance();
+    mtrl.Diffuse = m_Color;
     mtrl.Shiness = 1;
-    mtrl.TextureEnable = true;
+    mtrl.TextureEnable = false;
+    SetTexture(nullptr);
     m_Material->Create(mtrl);
 
-    // デフォルト：2Dモードのカメラ（必要なら変更）
-    m_Camera.SetCamera(CAMERA_2D);
+    m_Camera.SetCamera(CAMERA_3D);
 
-    TextureManager* textureMgr = Game::GetInstance();
-    SetTexture(textureMgr->GetTexture("Plane.png"));
 }
 
 void Circle::Update()
