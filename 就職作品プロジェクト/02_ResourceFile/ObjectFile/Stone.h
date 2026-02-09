@@ -5,7 +5,7 @@ class Stone : public Square
 {
 private:
     bool m_isActive;
-    Math::Physics::VerticalMotionState m_VerticalMotion{};
+    Calculator::Physics::VerticalMotionState m_VerticalMotion{};
 
 public:
     Stone(Camera& cam);

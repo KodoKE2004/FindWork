@@ -147,7 +147,7 @@ void GameSceneExe::Update(float tick)
     if(m_Bomber && GetOneBeat() > 0.0f)
     {
         const float t = std::clamp(m_BomberElapsed / GetOneBeat(), 0.0f, 1.0f);
-        const float e = Math::Easing::EaseOutQuart(t);
+        const float e = Calculator::Easing::EaseOutQuart(t);
 
         m_FillRatio = m_SegmentFrom + (m_SegmentTo - m_SegmentFrom) * e;
 

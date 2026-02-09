@@ -38,15 +38,15 @@ float MoveInfo::ApplyEasing(CarEasingType type, float t)
 {
     switch (type)
     {
-    case CarEasingType::EaseInSine:     return Math::Easing::EaseInSine(t);
-    case CarEasingType::EaseOutSine:    return Math::Easing::EaseOutSine(t);
-    case CarEasingType::EaseInOutSine:  return Math::Easing::EaseInOutSine(t);
-    case CarEasingType::EaseInQuad:     return Math::Easing::EaseInQuad(t);
-    case CarEasingType::EaseOutQuad:    return Math::Easing::EaseOutQuad(t);
-    case CarEasingType::EaseInOutQuad:  return Math::Easing::EaseInOutQuad(t);
-    case CarEasingType::EaseInCubic:    return Math::Easing::EaseInCubic(t);
-    case CarEasingType::EaseOutCubic:   return Math::Easing::EaseOutCubic(t);
-    case CarEasingType::EaseInOutCubic: return Math::Easing::EaseInOutCubic(t);
+    case CarEasingType::EaseInSine:     return Calculator::Easing::EaseInSine(t);
+    case CarEasingType::EaseOutSine:    return Calculator::Easing::EaseOutSine(t);
+    case CarEasingType::EaseInOutSine:  return Calculator::Easing::EaseInOutSine(t);
+    case CarEasingType::EaseInQuad:     return Calculator::Easing::EaseInQuad(t);
+    case CarEasingType::EaseOutQuad:    return Calculator::Easing::EaseOutQuad(t);
+    case CarEasingType::EaseInOutQuad:  return Calculator::Easing::EaseInOutQuad(t);
+    case CarEasingType::EaseInCubic:    return Calculator::Easing::EaseInCubic(t);
+    case CarEasingType::EaseOutCubic:   return Calculator::Easing::EaseOutCubic(t);
+    case CarEasingType::EaseInOutCubic: return Calculator::Easing::EaseInOutCubic(t);
     default:                            return t;
     }
 }

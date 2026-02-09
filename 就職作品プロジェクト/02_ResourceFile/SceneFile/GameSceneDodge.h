@@ -6,19 +6,19 @@
 
 #include <vector>
 
-class GameSceneJump : public GameSceneExe
+class GameSceneDodge : public GameSceneExe
 {
 private:
     
     std::shared_ptr<Bird>  m_Bird;
     std::vector<std::shared_ptr<Stone>> m_StoneList;
 
-    int m_Beat;
+    float m_StoneSpawnElapsed = 0.0f;
     size_t m_CurrentCartPatternIndex = 0;
 
     public:
-    GameSceneJump()  = default;
-    ~GameSceneJump() = default;
+    GameSceneDodge()  = default;
+    ~GameSceneDodge() = default;
 
     void Initialize()       override;
     void Update(float tick) override;
@@ -26,7 +26,7 @@ private:
 
 
     SCENE_NO GetSceneNo(){
-        return SCENE_NO::GAME_JUMP;
+        return SCENE_NO::GAME_DODGE;
     }
 };
 

@@ -40,7 +40,7 @@ void GameSceneSlice::Initialize()
 
 void GameSceneSlice::Update(float tick)
 {
-    using namespace Math::Collider2D; 
+    using namespace Calculator::Collider2D; 
 
     auto& instance = Game::GetInstance();
 

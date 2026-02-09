@@ -6,7 +6,7 @@
 #include "Debug.hpp"
 #include <algorithm>
 
-using namespace Math::Easing;
+using namespace Calculator::Easing;
 
 Theme::Theme(Camera& cam):Square(cam)
 {

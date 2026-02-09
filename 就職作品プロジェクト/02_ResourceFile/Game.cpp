@@ -16,7 +16,7 @@
 #include <string>
 #include <typeinfo>
 
-using namespace Math::Easing;
+using namespace Calculator::Easing;
 
 std::unique_ptr<Game> Game::m_pInstance  = nullptr; // ゲームのインスタンス初期化
 uint64_t Game::m_DrawFrameCounter = 0;
@@ -133,7 +133,7 @@ void Game::Initialize()
     instance.m_BgmPlayParams = bgmConfig.params;
 	instance.m_BgmCurrentVolume = bgmConfig.params.volume;
 
-	instance.m_SceneCurrent = std::make_shared<GameSceneJump>();		// タイトルシーンのインスタンスを生成
+	instance.m_SceneCurrent = std::make_shared<GameSceneDodge>();		// タイトルシーンのインスタンスを生成
 	instance.m_SceneCurrent->Initialize();
 }
 

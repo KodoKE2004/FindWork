@@ -141,7 +141,7 @@ void Fade::FADE_IN(float tick)
     const auto& param = m_transParam;
     const float duration = param.duration * 0.5f;
     const float t = std::clamp(m_Elapsed /max(duration, 0.0001f), 0.0f, 1.0f);
-    const float eased = Math::Easing::EvaluateEasing(param.easing, t);
+    const float eased = Calculator::Easing::EvaluateEasing(param.easing, t);
 
     m_Alpha = 1.0f - eased;
 
@@ -162,7 +162,7 @@ void Fade::FADE_OUT(float tick)
     const auto& param = m_transParam;
     const float duration = param.duration * 0.5f;
     const float t = std::clamp(m_Elapsed / max(duration, 0.0001f), 0.0f, 1.0f);
-    const float eased = Math::Easing::EvaluateEasing(param.easing, t);
+    const float eased = Calculator::Easing::EvaluateEasing(param.easing, t);
 
     m_Alpha = eased;
     if (t >= 1.0f)

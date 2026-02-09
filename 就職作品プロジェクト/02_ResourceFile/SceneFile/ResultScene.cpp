@@ -3,7 +3,7 @@
 #include "Game.h"
 #include "DebugUI.h"
 
-using namespace Math::Easing;
+using namespace Calculator::Easing;
 
 void ResultScene::Initialize()
 {

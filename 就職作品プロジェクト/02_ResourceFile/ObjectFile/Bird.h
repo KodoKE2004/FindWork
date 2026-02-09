@@ -3,7 +3,7 @@
 class Bird : public Square
 {
 private:
-
+    bool m_IsActive = true;
 public:
     Bird(Camera& cam);
     void Initialize() override;
@@ -11,5 +11,6 @@ public:
     void Draw()       override;
     void Finalize()   override;
 
+    bool IsActive() const { return m_IsActive; }
 };
 

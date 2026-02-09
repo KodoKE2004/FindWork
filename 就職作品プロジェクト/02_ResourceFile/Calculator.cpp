@@ -4,7 +4,7 @@
 #include <SimpleMath.h>
 #include <algorithm>
 
-namespace Math
+namespace Calculator
 {
     namespace Collider2D
     {
@@ -562,36 +562,36 @@ namespace Math
             switch (type)
             {
             default:							return p;
-            case EASING_TYPE::IN_SINE:			return Math::Easing::EaseInSine(p);
-            case EASING_TYPE::IN_QUAD:			return Math::Easing::EaseInQuad(p);
-            case EASING_TYPE::IN_CUBIC:			return Math::Easing::EaseInCubic(p);
-            case EASING_TYPE::IN_QUINT:			return Math::Easing::EaseInQuint(p);
-            case EASING_TYPE::IN_QUART:			return Math::Easing::EaseInQuart(p);
-            case EASING_TYPE::IN_EXPO:			return Math::Easing::EaseInExpo(p);
-            case EASING_TYPE::IN_CIRC:			return Math::Easing::EaseInCirc(p);
-            case EASING_TYPE::IN_BACK:			return Math::Easing::EaseInBack(p);
-            case EASING_TYPE::IN_BOUNCE:		return Math::Easing::EaseInBounce(p);
-            case EASING_TYPE::IN_ELASTIC:		return Math::Easing::EaseInElastic(p);
-            case EASING_TYPE::OUT_SINE:			return Math::Easing::EaseOutSine(p);
-            case EASING_TYPE::OUT_QUAD:			return Math::Easing::EaseOutQuad(p);
-            case EASING_TYPE::OUT_CUBIC:		return Math::Easing::EaseOutCubic(p);
-            case EASING_TYPE::OUT_QUINT:		return Math::Easing::EaseOutQuint(p);
-            case EASING_TYPE::OUT_QUART:		return Math::Easing::EaseOutQuart(p);
-            case EASING_TYPE::OUT_CIRC:			return Math::Easing::EaseOutCirc(p);
-            case EASING_TYPE::OUT_BACK:			return Math::Easing::EaseOutBack(p);
-            case EASING_TYPE::OUT_ElASTIC:		return Math::Easing::EaseOutElastic(p);
-            case EASING_TYPE::OUT_BOUNCE:		return Math::Easing::EaseOutBounce(p);
-            case EASING_TYPE::OUT_EXPO:			return Math::Easing::EaseOutExpo(p);
-            case EASING_TYPE::IN_OUT_SINE:		return Math::Easing::EaseInOutSine(p);
-            case EASING_TYPE::IN_OUT_QUAD:		return Math::Easing::EaseInOutQuad(p);
-            case EASING_TYPE::IN_OUT_CUBIC:		return Math::Easing::EaseInOutCubic(p);
-            case EASING_TYPE::IN_OUT_QUINT:		return Math::Easing::EaseInOutQuint(p);
-            case EASING_TYPE::IN_OUT_QUART:		return Math::Easing::EaseInOutQuart(p);
-            case EASING_TYPE::IN_OUT_CIRC:		return Math::Easing::EaseInOutCirc(p);
-            case EASING_TYPE::IN_OUT_BACK:		return Math::Easing::EaseInOutBack(p);
-            case EASING_TYPE::IN_OUT_ELASTIC:	return Math::Easing::EaseInOutElastic(p);
-            case EASING_TYPE::IN_OUT_BOUNCE:	return Math::Easing::EaseInOutBounce(p);
-            case EASING_TYPE::IN_OUT_EXPO:		return Math::Easing::EaseInOutExpo(p);
+            case EASING_TYPE::IN_SINE:			return Calculator::Easing::EaseInSine(p);
+            case EASING_TYPE::IN_QUAD:			return Calculator::Easing::EaseInQuad(p);
+            case EASING_TYPE::IN_CUBIC:			return Calculator::Easing::EaseInCubic(p);
+            case EASING_TYPE::IN_QUINT:			return Calculator::Easing::EaseInQuint(p);
+            case EASING_TYPE::IN_QUART:			return Calculator::Easing::EaseInQuart(p);
+            case EASING_TYPE::IN_EXPO:			return Calculator::Easing::EaseInExpo(p);
+            case EASING_TYPE::IN_CIRC:			return Calculator::Easing::EaseInCirc(p);
+            case EASING_TYPE::IN_BACK:			return Calculator::Easing::EaseInBack(p);
+            case EASING_TYPE::IN_BOUNCE:		return Calculator::Easing::EaseInBounce(p);
+            case EASING_TYPE::IN_ELASTIC:		return Calculator::Easing::EaseInElastic(p);
+            case EASING_TYPE::OUT_SINE:			return Calculator::Easing::EaseOutSine(p);
+            case EASING_TYPE::OUT_QUAD:			return Calculator::Easing::EaseOutQuad(p);
+            case EASING_TYPE::OUT_CUBIC:		return Calculator::Easing::EaseOutCubic(p);
+            case EASING_TYPE::OUT_QUINT:		return Calculator::Easing::EaseOutQuint(p);
+            case EASING_TYPE::OUT_QUART:		return Calculator::Easing::EaseOutQuart(p);
+            case EASING_TYPE::OUT_CIRC:			return Calculator::Easing::EaseOutCirc(p);
+            case EASING_TYPE::OUT_BACK:			return Calculator::Easing::EaseOutBack(p);
+            case EASING_TYPE::OUT_ElASTIC:		return Calculator::Easing::EaseOutElastic(p);
+            case EASING_TYPE::OUT_BOUNCE:		return Calculator::Easing::EaseOutBounce(p);
+            case EASING_TYPE::OUT_EXPO:			return Calculator::Easing::EaseOutExpo(p);
+            case EASING_TYPE::IN_OUT_SINE:		return Calculator::Easing::EaseInOutSine(p);
+            case EASING_TYPE::IN_OUT_QUAD:		return Calculator::Easing::EaseInOutQuad(p);
+            case EASING_TYPE::IN_OUT_CUBIC:		return Calculator::Easing::EaseInOutCubic(p);
+            case EASING_TYPE::IN_OUT_QUINT:		return Calculator::Easing::EaseInOutQuint(p);
+            case EASING_TYPE::IN_OUT_QUART:		return Calculator::Easing::EaseInOutQuart(p);
+            case EASING_TYPE::IN_OUT_CIRC:		return Calculator::Easing::EaseInOutCirc(p);
+            case EASING_TYPE::IN_OUT_BACK:		return Calculator::Easing::EaseInOutBack(p);
+            case EASING_TYPE::IN_OUT_ELASTIC:	return Calculator::Easing::EaseInOutElastic(p);
+            case EASING_TYPE::IN_OUT_BOUNCE:	return Calculator::Easing::EaseInOutBounce(p);
+            case EASING_TYPE::IN_OUT_EXPO:		return Calculator::Easing::EaseInOutExpo(p);
             }
         }
     }

@@ -12,7 +12,7 @@
 #include "Material.h"
 #include "Calculator.h"
 
-using namespace Math::Easing;
+using namespace Calculator::Easing;
 
 // トランジションのフェーズ
 // 遷移の進行状況を示す列挙型

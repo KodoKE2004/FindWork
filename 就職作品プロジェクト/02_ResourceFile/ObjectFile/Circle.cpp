@@ -1,4 +1,5 @@
 #include "Circle.h"
+#include "Game.h"
 #include <algorithm>
 #include <cmath>
 
@@ -72,6 +73,9 @@ void Circle::Initialize()
 
     // デフォルト：2Dモードのカメラ（必要なら変更）
     m_Camera.SetCamera(CAMERA_2D);
+
+    TextureManager* textureMgr = Game::GetInstance();
+    SetTexture(textureMgr->GetTexture("Plane.png"));
 }
 
 void Circle::Update()
@@ -110,6 +114,7 @@ void Circle::Draw()
         return;
     }
     dc->DrawIndexed(m_DrawIndexCount, 0, 0);
+
 }
 
 void Circle::SetRadius(float radius)
@@ -127,7 +132,7 @@ void Circle::SetFillRatio(float ratio)
     }
 
     const int segmentCount = max(1, static_cast<int>(std::round(static_cast<float>(m_Segments) * m_DrawRatio)));
-    const int clamped = min(segmentCount, m_Segments);
+    const int clamped = std::min(segmentCount, m_Segments);
     m_DrawIndexCount = static_cast<unsigned int>(clamped * 3);
 }
 

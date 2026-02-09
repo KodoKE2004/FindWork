@@ -199,7 +199,7 @@
     <ClCompile Include="02_ResourceFile\SceneFile\GameSceneCrush.cpp">
       <Filter>SourceFile\Scene\GameScene</Filter>
     </ClCompile>
-    <ClCompile Include="02_ResourceFile\SceneFile\GameSceneJump.cpp">
+    <ClCompile Include="02_ResourceFile\SceneFile\GameSceneDodge.cpp">
       <Filter>SourceFile\Scene\GameScene</Filter>
     </ClCompile>
     <ClCompile Include="02_ResourceFile\ObjectFile\Enemy.cpp">
@@ -436,7 +436,7 @@
     <ClInclude Include="02_ResourceFile\SceneFile\GameSceneCrush.h">
       <Filter>SourceFile\Scene\GameScene</Filter>
     </ClInclude>
-    <ClInclude Include="02_ResourceFile\SceneFile\GameSceneJump.h">
+    <ClInclude Include="02_ResourceFile\SceneFile\GameSceneDodge.h">
       <Filter>SourceFile\Scene\GameScene</Filter>
     </ClInclude>
     <ClInclude Include="02_ResourceFile\ObjectFile\Enemy.h">

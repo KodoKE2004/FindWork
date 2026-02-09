@@ -61,7 +61,7 @@ void Player::Update()
         m_IsGround = false;
     }
 
-    const float updatedY = Math::Physics::UpdateVerticalPosition(m_VerticalMotion, m_Position.y, deltaTime);
+    const float updatedY = Calculator::Physics::UpdateVerticalPosition(m_VerticalMotion, m_Position.y, deltaTime);
     m_Position.y = updatedY;
 
     if (std::fabs(m_Position.y - m_VerticalMotion.groundY) <= 0.001f) {

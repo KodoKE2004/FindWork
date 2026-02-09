@@ -29,7 +29,7 @@ namespace
 
     const std::array<StageEntry, GAME_EXE_NUM> kStageEntries = { {
         { SCENE_NO::GAME_SLICE, &PushGameStage<GameSceneSlice> },
-        { SCENE_NO::GAME_JUMP , &PushGameStage<GameSceneJump>  },
+        { SCENE_NO::GAME_DODGE , &PushGameStage<GameSceneDodge>  },
         { SCENE_NO::GAME_CRUSH, &PushGameStage<GameSceneCrush> },
         { SCENE_NO::GAME_TEXT , &PushGameStage<GameSceneText> },
 
@@ -335,7 +335,7 @@ void GameSceneWait::StartNextStageTransition()
     switch (m_RelationData.nextScene)
     {
     case SCENE_NO::GAME_SLICE: ChangeScenePush<GameSceneSlice>(WaitToGame); break;
-    case SCENE_NO::GAME_JUMP : ChangeScenePush<GameSceneJump> (WaitToGame); break;
+    case SCENE_NO::GAME_DODGE : ChangeScenePush<GameSceneDodge> (WaitToGame); break;
     case SCENE_NO::GAME_CRUSH: ChangeScenePush<GameSceneCrush>(WaitToGame); break;
     case SCENE_NO::GAME_TEXT : ChangeScenePush<GameSceneText> (WaitToGame); break;
     default: return;

@@ -125,7 +125,7 @@ void Zoom::ZOOM_IN(float tick)
     const auto& param = m_transParam.easing;
     const float duration = GetDurationForPhase();
     const float t = std::clamp(m_Elapsed / max(duration, 0.0001f), 0.0f, 1.0f);
-    float eased = Math::Easing::EvaluateEasing(param, t);
+    float eased = Calculator::Easing::EvaluateEasing(param, t);
 
     const bool reverse = (m_TransMode == TRANS_MODE::ZOOM_IN);
     const NVector3 start = reverse ? m_TargetScale : m_BaseScale;
@@ -150,7 +150,7 @@ void Zoom::ZOOM_OUT(float tick)
     const auto& param = m_transParam.easing;
     const float duration = GetDurationForPhase();
     const float t = std::clamp(m_Elapsed / max(duration, 0.0001f), 0.0f, 1.0f);
-    float eased = Math::Easing::EvaluateEasing(param, t);
+    float eased = Calculator::Easing::EvaluateEasing(param, t);
 
     const bool reverse = (m_TransMode == TRANS_MODE::ZOOM_OUT);
     const NVector3 start = reverse ? m_BaseScale : m_TargetScale;

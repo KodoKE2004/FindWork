@@ -15,7 +15,7 @@ enum class SCENE_NO
 {
     NONE = -1,
     GAME_SLICE = 0,
-	GAME_JUMP ,
+	GAME_DODGE ,
 	GAME_CRUSH,
 	GAME_TEXT,
 	EXE_NUM,

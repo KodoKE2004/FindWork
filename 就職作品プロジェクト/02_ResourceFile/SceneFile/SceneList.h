@@ -7,7 +7,7 @@
 #include "GameSceneWait.h"
 #include "GameSceneSlice.h"
 #include "GameSceneCrush.h"
-#include "GameSceneJump.h"
+#include "GameSceneDodge.h"
 #include "GameSceneText.h"
 #include "ResultScene.h"
 

@@ -7,7 +7,7 @@
 #include <algorithm>
 #include "Debug.hpp"
 
-using namespace Math::Easing;
+using namespace Calculator::Easing;
 
 Wipe::Wipe(Camera& cam) : TransitionBase(cam)
 {
@@ -161,7 +161,7 @@ void Wipe::ApplyWipeAmount(float amount)
 float Wipe::CalculateWipeEasing(const SceneTransitionParam& param, float t)
 {
     if (param.easing != EASING_TYPE::NONE) {
-        return Math::Easing::EvaluateEasing(param.easing, t);
+        return Calculator::Easing::EvaluateEasing(param.easing, t);
     }
     else {
         return t;

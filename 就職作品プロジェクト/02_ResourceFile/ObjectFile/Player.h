@@ -22,8 +22,8 @@ struct PlayerTuningState
 class Player : public Square
 {
 private:
-    Math::Physics::VerticalMotionState   m_VerticalMotion;
-    Math::Physics::HorizontalMotionState m_HorizontalMotion;
+    Calculator::Physics::VerticalMotionState   m_VerticalMotion;
+    Calculator::Physics::HorizontalMotionState m_HorizontalMotion;
     PlayerTuningState                    m_TuningParameters;
     PlayerAieControlState                m_AirControl;
 
