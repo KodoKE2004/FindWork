@@ -122,7 +122,7 @@ void GameSceneWait::Initialize()
     auto& rhythmBeat = Game::GetRhythmBeat();
 
     beatConfig.Setup(Game::GetBgmBpm(), 4, 1);
-    rhythmBeat.Initialize(beatConfig, 8);
+    rhythmBeat.Initialize(beatConfig, true, 8);
 
     // 難易度アップ処理 
     ++m_RelationData.stageCount;

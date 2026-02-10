@@ -122,10 +122,10 @@ void TransScene::Initialize()
 void TransScene::Update(float tick)
 {
     auto& instance = Game::GetInstance();
-
+    auto& rhythmBeat = instance.GetRhythmBeat();
 	if (m_isGamePlaying) {
         // ゲームシーン間の遷移なら拍のタイマーも更新
-
+        rhythmBeat.Update(tick);
 	}
 
 	if (m_TransitionTexture == nullptr) {

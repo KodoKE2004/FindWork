@@ -32,6 +32,7 @@ void GameSceneExe::Initialize()
     m_TimerList.clear();
     SetTimer(&m_BomberElapsed);
 
+
     //-------------------------------
     //      音源の取得・生成
     //-------------------------------
@@ -111,17 +112,18 @@ void GameSceneExe::Update(float tick)
         const int currentIndex = rhythmBeat.GetBeatElapsed();
 
         m_SegmentFrom = m_FillRatio;
-
+        const float baseBeats = rhythmBeat.GetBeatTotal();
         float targetProgressNormal = 
-            std::clamp((static_cast<float>(currentIndex) + 1.0f) / static_cast<float>(-1),
-            0.0f, 1.0f);
+            std::clamp((static_cast<float>(currentIndex) + 1.0f) /
+                        static_cast<float>(baseBeats),
+                        0.0f, 1.0f);
 
         float targetProgress = targetProgressNormal;
         bool  useSpecial     = false;
 
         float scaleMass = 1.0f;
-        if ( 1 != BASE_BEATS) {
-            scaleMass = static_cast<float>(BASE_BEATS) / static_cast<float>(1) ;
+        if (baseBeats != BASE_BEATS) {
+            scaleMass = static_cast<float>(BASE_BEATS) / static_cast<float>(baseBeats) ;
         }
 
         // 特殊処理：最後の4拍は指定数値で減るようにする
@@ -152,7 +154,7 @@ void GameSceneExe::Update(float tick)
     }
 
     // ボンバーの更新
-    const float oneBeat = 1;
+    const float oneBeat = rhythmBeat.GetOneBeat();
     if(m_Bomber && oneBeat > 0.0f)
     {
         const float t = std::clamp(m_BomberElapsed / oneBeat, 0.0f, 1.0f);

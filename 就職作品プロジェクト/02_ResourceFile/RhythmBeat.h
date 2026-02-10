@@ -50,8 +50,8 @@ private:
 public:
     RhythmBeat() = default;
     // ‰Šú‰»
-    void Initialize(const RhythmBeatConst& config);
-    void Initialize(const RhythmBeatConst& config,int limit);
+    void Initialize(const RhythmBeatConst& config, bool isTimeReset);
+    void Initialize(const RhythmBeatConst& config, bool isTimeReset, int limit);
     // Œo‰ß””‚Ìæ“¾‚ğs‚¤
     int Update(float tick);
 

@@ -1,18 +1,24 @@
 #include "RhythmBeat.h"
 
-void RhythmBeat::Initialize(const RhythmBeatConst& config)
+void RhythmBeat::Initialize(const RhythmBeatConst& config, bool isTimeReset)
 {
     m_Beat = config;
-    m_TickCounter = 0.0f;
     m_TickIndex = 0;
+    m_BeatElapsed = 0;
+    if (isTimeReset) {
+        m_TickCounter = 0.0f;
+    }
 }
 
-void RhythmBeat::Initialize(const RhythmBeatConst& config, int limit)
+void RhythmBeat::Initialize(const RhythmBeatConst& config, bool isTimeReset, int limit)
 {
     m_Beat = config;
-    m_TickCounter = 0.0f;
     m_TickIndex = 0;
     m_BeatTotal = limit;
+    m_BeatElapsed = 0;
+    if(isTimeReset) {
+        m_TickCounter = 0.0f;
+    }
 }
 
 

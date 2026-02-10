@@ -108,7 +108,7 @@ void GameSceneText::Initialize()
     RhythmBeatConst beatConfig{};
     auto& rhythmBeat = Game::GetRhythmBeat();
     beatConfig.Setup(Game::GetBgmBpm(), 4, 16);
-    rhythmBeat.Initialize(beatConfig,BASE_BEATS + 4);
+    rhythmBeat.Initialize(beatConfig, true, BASE_BEATS + 4);
 
     auto& instance = Game::GetInstance();
     TextureManager* textureMgr = instance; 
