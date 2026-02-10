@@ -8,7 +8,7 @@ void GameSceneSlice::Initialize()
 #ifdef _DEBUG
     DebugUI::TEXT_CurrentScene = "GameSceneSlice";
 #endif
-    GameSceneExe::SetBaseBeatCount(BASE_BEATS);
+    m_BaseBeats = BASE_BEATS;
     GameSceneExe::Initialize();
 
     // シーンに繋ぐ情報は基底初期化後の一番最初に設定
@@ -47,7 +47,7 @@ void GameSceneSlice::Update(float tick)
     std::vector<std::shared_ptr<Enemy>> enemys = instance.GetObjects<Enemy>();
     if (IsAllDeathEnemy(enemys)) {
         // SceneExeで早めにクリアをした場合も想定
-        SetStageClear();
+        StageClear();
         SetFastChange();
     }
     else

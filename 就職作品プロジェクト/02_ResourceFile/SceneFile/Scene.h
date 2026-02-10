@@ -3,7 +3,6 @@
 #include "TransitionBase.h"
 #include "Skydome.h"
 #include "../Audio.h"
-#include "RhythmBeat.h"
 
 #include <optional>
 #include <unordered_map>
@@ -36,7 +35,6 @@ struct SceneRelationData
 {
 	uint32_t gameLife = 4;
 	int  stageCount   = 0;
-	RhythmBeat rhythmBeat;
 	SCENE_NO previousScene = SCENE_NO::NONE;
     SCENE_NO oldScene	   = SCENE_NO::NONE;
 	SCENE_NO nextScene     = SCENE_NO::NONE;
@@ -55,20 +53,6 @@ struct SceneRelationData
 		transTexture = nullptr;
 	}
 };
-
-// ƒŠƒYƒ€‚É‡‚í‚¹‚ÄƒV[ƒ“‘JˆÚŠÔ‚ğ’²®‚·‚éŠÖ”
-namespace
-{
-	void ApplyBeatDuration(SceneTransitionParam&    transition,
-						   const SceneRelationData& relationData)
-	{
-		const float secondsPerBeat = relationData.rhythmBeat.GetBeatConst().secondsPerBeat;
-		if (secondsPerBeat > 0.0f)
-		{
-			transition.duration = secondsPerBeat;
-		}
-	}
-}
 
 class Scene
 {
@@ -156,10 +140,6 @@ public:
 	}
 	bool IsTimeUp(const float time ,const float limit) const {
 		return time >= limit; 
-	}
-
-	float GetOneBeat() const {
-		return m_RelationData.rhythmBeat.GetBeatConst().secondsPerBeat;
 	}
 
     // Œø‰Ê‰¹Ä¶ŠÖ”

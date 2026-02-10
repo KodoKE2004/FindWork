@@ -1,2 +1,163 @@
-﻿  Game.cpp
-  就職作品プロジェクト.vcxproj -> C:\Users\dorae\Desktop\HAL\class3\FindWork\就職作品プロジェクト\x64\Debug\NishiguchiGame.exe
+﻿  Application.cpp
+  Bird.cpp
+  Bomber.cpp
+  Button.cpp
+  Stone.cpp
+  Theme.cpp
+  RhythmBeat.cpp
+  Camera.cpp
+  DebugGridLine.cpp
+  DebugUI.cpp
+  Game.cpp
+  Circle.cpp
+  Enemy.cpp
+  GameSceneCrush.cpp
+  GameSceneDodge.cpp
+  GameSceneSlice.cpp
+  GameSceneText.cpp
+C:\Users\dorae\Desktop\HAL\class3\FindWork\就職作品プロジェクト\02_ResourceFile\SceneFile\GameSceneSlice.cpp(67,9): error C3861: 'ApplyBeatDuration': 識別子が見つかりませんでした
+  (ソース ファイル '/02_ResourceFile/SceneFile/GameSceneSlice.cpp' をコンパイルしています)
+  
+C:\Users\dorae\Desktop\HAL\class3\FindWork\就職作品プロジェクト\02_ResourceFile\ObjectFile\Theme.cpp(19,80): error C2039: 'rhythmBeat': 'SceneRelationData' のメンバーではありません
+  (ソース ファイル '/02_ResourceFile/ObjectFile/Theme.cpp' をコンパイルしています)
+      C:\Users\dorae\Desktop\HAL\class3\FindWork\就職作品プロジェクト\02_ResourceFile\SceneFile\Scene.h(34,8):
+      'SceneRelationData' の宣言を確認してください
+  
+  GameSceneWait.cpp
+C:\Users\dorae\Desktop\HAL\class3\FindWork\就職作品プロジェクト\02_ResourceFile\SceneFile\GameSceneCrush.cpp(54,9): error C3861: 'ApplyBeatDuration': 識別子が見つかりませんでした
+  (ソース ファイル '/02_ResourceFile/SceneFile/GameSceneCrush.cpp' をコンパイルしています)
+  
+  ResultScene.cpp
+  Scene.cpp
+C:\Users\dorae\Desktop\HAL\class3\FindWork\就職作品プロジェクト\02_ResourceFile\SceneFile\GameSceneText.cpp(141,58): error C3861: 'GetOneBeat': 識別子が見つかりませんでした
+  (ソース ファイル '/02_ResourceFile/SceneFile/GameSceneText.cpp' をコンパイルしています)
+  
+C:\Users\dorae\Desktop\HAL\class3\FindWork\就職作品プロジェクト\02_ResourceFile\SceneFile\GameSceneText.cpp(257,9): error C3861: 'ApplyBeatDuration': 識別子が見つかりませんでした
+  (ソース ファイル '/02_ResourceFile/SceneFile/GameSceneText.cpp' をコンパイルしています)
+  
+C:\Users\dorae\Desktop\HAL\class3\FindWork\就職作品プロジェクト\02_ResourceFile\SceneFile\GameSceneDodge.cpp(58,23): warning C4456: 'audioMgr' を宣言すると、以前のローカル宣言が隠蔽されます
+  (ソース ファイル '/02_ResourceFile/SceneFile/GameSceneDodge.cpp' をコンパイルしています)
+      C:\Users\dorae\Desktop\HAL\class3\FindWork\就職作品プロジェクト\02_ResourceFile\SceneFile\GameSceneDodge.cpp(54,19):
+      'audioMgr' の宣言を確認してください
+  
+  TransitionBase.cpp
+C:\Users\dorae\Desktop\HAL\class3\FindWork\就職作品プロジェクト\02_ResourceFile\SceneFile\GameSceneDodge.cpp(54,19): warning C4189: 'audioMgr': ローカル変数が初期化されましたが、参照されていません
+  (ソース ファイル '/02_ResourceFile/SceneFile/GameSceneDodge.cpp' をコンパイルしています)
+  
+  Wipe.cpp
+  Zoom.cpp
+  Bullet.cpp
+  Cube.cpp
+  Model.cpp
+  Object.cpp
+  Sphere.cpp
+  Skydome.cpp
+  GameSceneExe.cpp
+  TitleScene.cpp
+  Fade.cpp
+  TransScene.cpp
+C:\Users\dorae\Desktop\HAL\class3\FindWork\就職作品プロジェクト\02_ResourceFile\SceneFile\GameSceneWait.cpp(159,20): error C2039: 'rhythmBeat': 'SceneRelationData' のメンバーではありません
+  (ソース ファイル '/02_ResourceFile/SceneFile/GameSceneWait.cpp' をコンパイルしています)
+      C:\Users\dorae\Desktop\HAL\class3\FindWork\就職作品プロジェクト\02_ResourceFile\SceneFile\Scene.h(34,8):
+      'SceneRelationData' の宣言を確認してください
+  
+C:\Users\dorae\Desktop\HAL\class3\FindWork\就職作品プロジェクト\02_ResourceFile\SceneFile\GameSceneWait.cpp(161,42): error C2039: 'rhythmBeat': 'SceneRelationData' のメンバーではありません
+  (ソース ファイル '/02_ResourceFile/SceneFile/GameSceneWait.cpp' をコンパイルしています)
+      C:\Users\dorae\Desktop\HAL\class3\FindWork\就職作品プロジェクト\02_ResourceFile\SceneFile\Scene.h(34,8):
+      'SceneRelationData' の宣言を確認してください
+  
+C:\Users\dorae\Desktop\HAL\class3\FindWork\就職作品プロジェクト\02_ResourceFile\SceneFile\GameSceneWait.cpp(163,5): error C2065: 'm_BeatTimer': 定義されていない識別子です。
+  (ソース ファイル '/02_ResourceFile/SceneFile/GameSceneWait.cpp' をコンパイルしています)
+  
+C:\Users\dorae\Desktop\HAL\class3\FindWork\就職作品プロジェクト\02_ResourceFile\SceneFile\GameSceneWait.cpp(240,40): error C2039: 'rhythmBeat': 'SceneRelationData' のメンバーではありません
+  (ソース ファイル '/02_ResourceFile/SceneFile/GameSceneWait.cpp' をコンパイルしています)
+      C:\Users\dorae\Desktop\HAL\class3\FindWork\就職作品プロジェクト\02_ResourceFile\SceneFile\Scene.h(34,8):
+      'SceneRelationData' の宣言を確認してください
+  
+C:\Users\dorae\Desktop\HAL\class3\FindWork\就職作品プロジェクト\02_ResourceFile\SceneFile\GameSceneWait.cpp(241,49): error C2039: 'rhythmBeat': 'SceneRelationData' のメンバーではありません
+  (ソース ファイル '/02_ResourceFile/SceneFile/GameSceneWait.cpp' をコンパイルしています)
+      C:\Users\dorae\Desktop\HAL\class3\FindWork\就職作品プロジェクト\02_ResourceFile\SceneFile\Scene.h(34,8):
+      'SceneRelationData' の宣言を確認してください
+  
+C:\Users\dorae\Desktop\HAL\class3\FindWork\就職作品プロジェクト\02_ResourceFile\SceneFile\GameSceneWait.cpp(241,15): error C2737: 'currentBeatIndex': const オブジェクトを初期化する必要があります
+  (ソース ファイル '/02_ResourceFile/SceneFile/GameSceneWait.cpp' をコンパイルしています)
+  
+C:\Users\dorae\Desktop\HAL\class3\FindWork\就職作品プロジェクト\02_ResourceFile\SceneFile\GameSceneWait.cpp(245,29): error C2039: 'PlayBgmIfStopped': 'Game' のメンバーではありません
+  (ソース ファイル '/02_ResourceFile/SceneFile/GameSceneWait.cpp' をコンパイルしています)
+      C:\Users\dorae\Desktop\HAL\class3\FindWork\就職作品プロジェクト\02_ResourceFile\Game.h(20,7):
+      'Game' の宣言を確認してください
+  
+C:\Users\dorae\Desktop\HAL\class3\FindWork\就職作品プロジェクト\02_ResourceFile\SceneFile\GameSceneWait.cpp(253,9): error C2065: 'm_BeatTimer': 定義されていない識別子です。
+  (ソース ファイル '/02_ResourceFile/SceneFile/GameSceneWait.cpp' をコンパイルしています)
+  
+C:\Users\dorae\Desktop\HAL\class3\FindWork\就職作品プロジェクト\02_ResourceFile\SceneFile\GameSceneWait.cpp(254,13): error C2065: 'm_BeatTimer': 定義されていない識別子です。
+  (ソース ファイル '/02_ResourceFile/SceneFile/GameSceneWait.cpp' をコンパイルしています)
+  
+C:\Users\dorae\Desktop\HAL\class3\FindWork\就職作品プロジェクト\02_ResourceFile\SceneFile\GameSceneWait.cpp(259,18): error C2065: 'm_BeatTimer': 定義されていない識別子です。
+  (ソース ファイル '/02_ResourceFile/SceneFile/GameSceneWait.cpp' をコンパイルしています)
+  
+C:\Users\dorae\Desktop\HAL\class3\FindWork\就職作品プロジェクト\02_ResourceFile\SceneFile\GameSceneWait.cpp(332,5): error C3861: 'ApplyBeatDuration': 識別子が見つかりませんでした
+  (ソース ファイル '/02_ResourceFile/SceneFile/GameSceneWait.cpp' をコンパイルしています)
+  
+  Square.cpp
+C:\Users\dorae\Desktop\HAL\class3\FindWork\就職作品プロジェクト\02_ResourceFile\SceneFile\GameSceneExe.cpp(33,20): error C2039: 'rhythmBeat': 'SceneRelationData' のメンバーではありません
+  (ソース ファイル '/02_ResourceFile/SceneFile/GameSceneExe.cpp' をコンパイルしています)
+      C:\Users\dorae\Desktop\HAL\class3\FindWork\就職作品プロジェクト\02_ResourceFile\SceneFile\Scene.h(34,8):
+      'SceneRelationData' の宣言を確認してください
+  
+C:\Users\dorae\Desktop\HAL\class3\FindWork\就職作品プロジェクト\02_ResourceFile\SceneFile\GameSceneExe.cpp(66,39): error C2039: 'rhythmBeat': 'SceneRelationData' のメンバーではありません
+  (ソース ファイル '/02_ResourceFile/SceneFile/GameSceneExe.cpp' をコンパイルしています)
+      C:\Users\dorae\Desktop\HAL\class3\FindWork\就職作品プロジェクト\02_ResourceFile\SceneFile\Scene.h(34,8):
+      'SceneRelationData' の宣言を確認してください
+  
+C:\Users\dorae\Desktop\HAL\class3\FindWork\就職作品プロジェクト\02_ResourceFile\SceneFile\GameSceneExe.cpp(67,24): error C2065: 'm_BeatTimer': 定義されていない識別子です。
+  (ソース ファイル '/02_ResourceFile/SceneFile/GameSceneExe.cpp' をコンパイルしています)
+  
+C:\Users\dorae\Desktop\HAL\class3\FindWork\就職作品プロジェクト\02_ResourceFile\SceneFile\GameSceneExe.cpp(76,32): error C3861: 'GetOneBeat': 識別子が見つかりませんでした
+  (ソース ファイル '/02_ResourceFile/SceneFile/GameSceneExe.cpp' をコンパイルしています)
+  
+C:\Users\dorae\Desktop\HAL\class3\FindWork\就職作品プロジェクト\02_ResourceFile\SceneFile\GameSceneExe.cpp(76,25): error C2737: 'beat': const オブジェクトを初期化する必要があります
+  (ソース ファイル '/02_ResourceFile/SceneFile/GameSceneExe.cpp' をコンパイルしています)
+  
+C:\Users\dorae\Desktop\HAL\class3\FindWork\就職作品プロジェクト\02_ResourceFile\SceneFile\GameSceneExe.cpp(101,16): error C2065: 'm_BeatTimer': 定義されていない識別子です。
+  (ソース ファイル '/02_ResourceFile/SceneFile/GameSceneExe.cpp' をコンパイルしています)
+  
+C:\Users\dorae\Desktop\HAL\class3\FindWork\就職作品プロジェクト\02_ResourceFile\SceneFile\GameSceneExe.cpp(111,49): error C2039: 'rhythmBeat': 'SceneRelationData' のメンバーではありません
+  (ソース ファイル '/02_ResourceFile/SceneFile/GameSceneExe.cpp' をコンパイルしています)
+      C:\Users\dorae\Desktop\HAL\class3\FindWork\就職作品プロジェクト\02_ResourceFile\SceneFile\Scene.h(34,8):
+      'SceneRelationData' の宣言を確認してください
+  
+C:\Users\dorae\Desktop\HAL\class3\FindWork\就職作品プロジェクト\02_ResourceFile\SceneFile\GameSceneExe.cpp(111,19): error C2737: 'currentIndex': const オブジェクトを初期化する必要があります
+  (ソース ファイル '/02_ResourceFile/SceneFile/GameSceneExe.cpp' をコンパイルしています)
+  
+C:\Users\dorae\Desktop\HAL\class3\FindWork\就職作品プロジェクト\02_ResourceFile\SceneFile\GameSceneExe.cpp(112,9): error C2065: 'm_BeatTimer': 定義されていない識別子です。
+  (ソース ファイル '/02_ResourceFile/SceneFile/GameSceneExe.cpp' をコンパイルしています)
+  
+C:\Users\dorae\Desktop\HAL\class3\FindWork\就職作品プロジェクト\02_ResourceFile\SceneFile\GameSceneExe.cpp(156,20): error C3861: 'GetOneBeat': 識別子が見つかりませんでした
+  (ソース ファイル '/02_ResourceFile/SceneFile/GameSceneExe.cpp' をコンパイルしています)
+  
+C:\Users\dorae\Desktop\HAL\class3\FindWork\就職作品プロジェクト\02_ResourceFile\SceneFile\GameSceneExe.cpp(158,54): error C3861: 'GetOneBeat': 識別子が見つかりませんでした
+  (ソース ファイル '/02_ResourceFile/SceneFile/GameSceneExe.cpp' をコンパイルしています)
+  
+C:\Users\dorae\Desktop\HAL\class3\FindWork\就職作品プロジェクト\02_ResourceFile\SceneFile\GameSceneExe.cpp(158,30): error C2672: 'std::clamp': 一致するオーバーロードされた関数が見つかりませんでした。
+  (ソース ファイル '/02_ResourceFile/SceneFile/GameSceneExe.cpp' をコンパイルしています)
+      C:\Program Files\Microsoft Visual Studio\2022\Community\VC\Tools\MSVC\14.44.35207\include\algorithm(10958,33):
+      'const _Ty &std::clamp(const _Ty &,const _Ty &,const _Ty &)' の可能性があります
+      C:\Program Files\Microsoft Visual Studio\2022\Community\VC\Tools\MSVC\14.44.35207\include\algorithm(10930,33):
+      または 'const _Ty &std::clamp(const _Ty &,const _Ty &,const _Ty &,_Pr)'
+          C:\Users\dorae\Desktop\HAL\class3\FindWork\就職作品プロジェクト\02_ResourceFile\SceneFile\GameSceneExe.cpp(158,30):
+          'const _Ty &std::clamp(const _Ty &,const _Ty &,const _Ty &,_Pr)': 4 引数が必要です - 3 が指定されました
+  
+C:\Users\dorae\Desktop\HAL\class3\FindWork\就職作品プロジェクト\02_ResourceFile\SceneFile\GameSceneExe.cpp(158,21): error C2737: 't': const オブジェクトを初期化する必要があります
+  (ソース ファイル '/02_ResourceFile/SceneFile/GameSceneExe.cpp' をコンパイルしています)
+  
+C:\Users\dorae\Desktop\HAL\class3\FindWork\就職作品プロジェクト\02_ResourceFile\SceneFile\TransScene.cpp(43,12): error C2039: 'StartBgmFadeOut': 'Game' のメンバーではありません
+  (ソース ファイル '/02_ResourceFile/SceneFile/TransScene.cpp' をコンパイルしています)
+      C:\Users\dorae\Desktop\HAL\class3\FindWork\就職作品プロジェクト\02_ResourceFile\Game.h(20,7):
+      'Game' の宣言を確認してください
+  
+C:\Users\dorae\Desktop\HAL\class3\FindWork\就職作品プロジェクト\02_ResourceFile\SceneFile\TransScene.cpp(47,12): error C2039: 'StartBgmFadeIn': 'Game' のメンバーではありません
+  (ソース ファイル '/02_ResourceFile/SceneFile/TransScene.cpp' をコンパイルしています)
+      C:\Users\dorae\Desktop\HAL\class3\FindWork\就職作品プロジェクト\02_ResourceFile\Game.h(20,7):
+      'Game' の宣言を確認してください
+  

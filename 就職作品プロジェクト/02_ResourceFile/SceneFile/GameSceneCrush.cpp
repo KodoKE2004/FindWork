@@ -12,7 +12,7 @@ void GameSceneCrush::Initialize()
 #endif 
 
     // 基底クラスの初期化
-    GameSceneExe::SetBaseBeatCount(BASE_BEATS);
+    m_BaseBeats = BASE_BEATS;
     GameSceneExe::Initialize();
     // シーンに繋ぐ情報は基底初期化後の一番最初に設定
     m_RelationData.previousScene = SCENE_NO::GAME_CRUSH;

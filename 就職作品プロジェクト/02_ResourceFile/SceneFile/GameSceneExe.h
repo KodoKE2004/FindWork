@@ -3,10 +3,10 @@
 #include "Square.h"
 #include "Bomber.h"
 #include "Timer.h"
-#include "RhythmBeat.h"
 
 namespace
 {
+    // 基本の拍数 0 ~ 11 [12] 
 	constexpr int BASE_BEATS   = 11;
 }
 
@@ -34,11 +34,10 @@ protected:
 	// 	共通オブジェクト
 	std::shared_ptr<Bomber> m_Bomber ;		// スピードゲージ背景
 	std::shared_ptr<Timer>  m_TimerUI;		// スピードゲージ背景
-
-    // カウントダウン関連
-	BeatTimer m_BeatTimer;
     
     int m_BaseBeats;
+	int m_PreciousMeasure = 0;
+    int m_CurrentMeasure  = 0;
 
 	float m_BomberElapsed = 0.0f;		// 経過時間
 
@@ -60,6 +59,8 @@ protected:
 	float m_FastChangeFill = 0.0f;
 	float m_FastChangeStartFill = 0.0f;
 	float m_FastChangeElapsed = 0.0f;
+
+
 public:
 	//================================
 	// コンストラクタとデストラクタ
@@ -75,17 +76,10 @@ public:
 	virtual void Update(float tick) ;
 	virtual void Finalize()			;
 
-    /// <summary>
-	/// シーンの存在する拍数を設定
-    /// </summary>
-    /// <param name="count"></param>
-    void SetBaseBeatCount(const int count) {
-		m_BaseBeats = count; 
-	}
 	void StageFail() {
         m_RelationData.isClear = false;
 	}
-    void SetStageClear() { 
+    void StageClear() { 
         m_RelationData.isClear = true;
 	}
 	// 先行クリアの処理
@@ -113,6 +107,9 @@ public:
 
 	bool IsChange()		const { return m_isChange; }
     bool IsFastChange() const { return m_isFastChange; }
+	
+    // 小節が切り替わった瞬間を検知する関数
+	bool IsChangeMeasure();
 
 	SCENE_NO GetSceneNo() const override {
 		return SCENE_NO::NONE;

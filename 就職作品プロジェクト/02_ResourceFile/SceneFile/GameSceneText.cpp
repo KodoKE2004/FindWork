@@ -76,9 +76,9 @@ void GameSceneText::GirlReaction()
                 adjectiveUvX_B == 2.0f;
 
 
-    if      (high) { uvX = 2.0f; ReactionSE(0,"fanfare") ;}
-    else if (sad)  { uvX = 3.0f; ReactionSE(1,"failed")  ;}
-    else           { uvX = 5.0f; ReactionSE(2,"question");}
+    if      (high) { uvX = 2.0f; ReactionSE(0,"fanfare") ; StageClear();}
+    else if (sad)  { uvX = 3.0f; ReactionSE(1,"failed")  ; StageFail();}
+    else           { uvX = 5.0f; ReactionSE(2,"question"); StageFail();}
 
     m_Girl->SetUV(uvX, 1.0f, 5.0f, 1.0f);
     const auto uv = m_Girl->GetUV();
@@ -99,7 +99,7 @@ void GameSceneText::Initialize()
 #ifdef _DEBUG
     DebugUI::TEXT_CurrentScene = "GameSceneText";
 #endif
-    GameSceneExe::SetBaseBeatCount(BASE_BEATS + 4);
+    m_BaseBeats = BASE_BEATS + 4;
     GameSceneExe::Initialize();
 
     // シーンに繋ぐ情報は基底初期化後の一番最初に設定
@@ -241,7 +241,7 @@ void GameSceneText::Update(float tick)
             isFinished = m_ReactionActive->IsFinished();
         }
         // 小節が切り替わったタイミングでシーン遷移
-        if (isFinished && m_BeatTimer.GetRestBeats() % 4 == 0)
+        if (isFinished && IsChangeMeasure())
         {
             SetFastChange();
         }
@@ -262,6 +262,16 @@ void GameSceneText::Update(float tick)
 
 void GameSceneText::Finalize()
 {
+    for (auto& reactionAudio : m_ReactionAudio)
+    {
+        if (!reactionAudio) {
+            continue;
+        }
+
+        reactionAudio->Stop(true);
+        reactionAudio.reset();
+    }
+    m_ReactionActive.reset();
     GameSceneExe::Finalize();
 }
 

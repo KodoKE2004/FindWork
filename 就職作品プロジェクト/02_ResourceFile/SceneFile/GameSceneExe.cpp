@@ -33,7 +33,6 @@ void GameSceneExe::Initialize()
     m_RelationData.rhythmBeat.Initialize(beatConfig);
     m_RelationData.transTexture = nullptr;
     m_RelationData.ClearTransitionTexture();
-    m_BeatTimer.Initialize(m_BaseBeats);
 
     // 値の反映
     m_TimerList.clear();
@@ -62,9 +61,10 @@ void GameSceneExe::Initialize()
 void GameSceneExe::Update(float tick)
 {
     CountTimer(tick);
-    
+    m_PreciousMeasure = m_CurrentMeasure;
     // 進んだTick(拍数)を取得
     int advancedTick = m_RelationData.rhythmBeat.Update(tick);
+    m_CurrentMeasure = m_BeatTimer.GetCurrentBeat() / 4;
 
     // 早回し処理
     if (m_isFastChange)
@@ -100,12 +100,17 @@ void GameSceneExe::Update(float tick)
 
     int rest = m_BeatTimer.GetRestBeats();
 
+    //-------------------------------
     // 拍が進んでいたらBeatTimerを進める
+    //-------------------------------
     for (int i = 0; i < advancedTick; ++i)
     {
         m_BomberElapsed = 0.0f;
+        
+        // 経過拍数の更新
         const int currentIndex = m_RelationData.rhythmBeat.GetBeatIndex();
         m_BeatTimer.Advance(currentIndex);
+
         m_SegmentFrom = m_FillRatio;
 
         float targetProgressNormal = 
@@ -137,7 +142,7 @@ void GameSceneExe::Update(float tick)
         m_SpecialFrom   = m_FillRatio;
         m_SpecialTo     = targetProgress;
 
-        std::cout << "Beat Index : " << rest << std::endl;
+        std::cout << "Beat Index : " << currentIndex << std::endl;
         if (m_SpecialRest < 4)
         {
             m_Bomber->SetCount(m_SpecialRest);
@@ -165,6 +170,16 @@ void GameSceneExe::Update(float tick)
         
         m_Bomber->SetFillRatio(1.0f - m_FillRatio);
     }
+
+    if (IsChangeMeasure())
+    {
+        Debug::Log("Measure Changed : " + std::to_string(m_CurrentMeasure));
+    }
+}
+
+bool GameSceneExe::IsChangeMeasure()
+{
+    return m_PreciousMeasure != m_CurrentMeasure;
 }
 
 void GameSceneExe::Explode()

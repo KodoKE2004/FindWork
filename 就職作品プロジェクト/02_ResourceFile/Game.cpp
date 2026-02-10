@@ -129,10 +129,6 @@ void Game::Initialize()
 	bgmConfig.baseBpm		= 100.0f;
     bgmConfig.bpm			= bgmConfig.baseBpm;
 
-    instance.m_BgmAudio = instance.m_AudioManager->Create(bgmConfig);
-    instance.m_BgmPlayParams = bgmConfig.params;
-	instance.m_BgmCurrentVolume = bgmConfig.params.volume;
-
 	instance.m_SceneCurrent = std::make_shared<GameSceneWait>();		// タイトルシーンのインスタンスを生成
 	instance.m_SceneCurrent->Initialize();
 }
@@ -141,26 +137,6 @@ void Game::Update(float tick)
 {	
 	auto& instance = GetInstance();
 	instance.m_Input->Update(Application::GetWindow());
-
-    // BGMの更新
-	if (instance.m_BgmAudio)
-	{
-		instance.m_BgmCurrentVolume += instance.m_BgmFadeSpeed * tick;
-		if ((instance.m_BgmFadeSpeed >= 0.0f && instance.m_BgmCurrentVolume >= instance.m_BgmFadeTargetVolume) ||
-			(instance.m_BgmFadeSpeed <  0.0f && instance.m_BgmCurrentVolume <= instance.m_BgmFadeTargetVolume))
-		{
-			instance.m_BgmCurrentVolume = instance.m_BgmFadeTargetVolume;
-			instance.m_BgmFadeActive = false;
-			instance.m_BgmFadeSpeed = 0.0f;
-			if (instance.m_BgmStopAfterFade)
-			{
-				instance.m_BgmStopAfterFade = false;
-				instance.StopBgm();
-				instance.m_BgmCurrentVolume = instance.m_BgmPlayParams.volume;
-			}
-		}
-		instance.m_BgmAudio->SetVolume(instance.m_BgmCurrentVolume);
-	}
 
 	// 現在のシーンの更新
 	instance.m_SceneCurrent->Update(tick);
@@ -251,15 +227,14 @@ void Game::Finalize()
 	if(instance.m_Theme){
 		instance.m_Theme->Finalize();
 	}
-	if (instance.m_BgmAudio)
+	if (instance.m_SceneCurrent)
 	{
-		instance.m_BgmAudio->Stop(true);
-		instance.m_BgmAudio.reset();
+		instance.m_SceneCurrent->Finalize();
 	}
-	Renderer::Finalize();			// レンダラーの終了処理
-    instance.m_SceneCurrent->Finalize();
 	instance.m_SceneCurrent.reset();
 	instance.m_SceneList.clear();
+
+	Renderer::Finalize();
 }
 
 void Game::SetSceneCurrent(std::shared_ptr<Scene> newScene)
@@ -326,49 +301,6 @@ Camera& Game::GetCamera()
 	return *m_Camera.get();
 }
 
-void Game::SetBgmBpm(float bpm)
-{
-	auto& instance = GetInstance();
-	if (!instance.m_BgmAudio)
-	{
-		return;
-	}
-	instance.m_BgmAudio->SetBpm(bpm);
-	Scene::m_RelationData.rhythmBeat.SyncBpm(instance.m_BgmAudio->GetBpm());
-}
-
-float Game::GetBgmBpm()
-{
-	auto& instance = GetInstance();
-	if (!instance.m_BgmAudio)
-	{
-		return 0.0f;
-	}
-	return instance.m_BgmAudio->GetBpm();
-}
-
-void Game::SetBgmBaseBpm(float bpm)
-{
-	auto& instance = GetInstance();
-	if (!instance.m_BgmAudio)
-	{
-		return;
-	}
-	instance.m_BgmAudio->SetBaseBpm(bpm);
-	instance.m_BgmAudio->SetBpm(instance.m_BgmAudio->GetBpm());
-	Scene::m_RelationData.rhythmBeat.SyncBpm(instance.m_BgmAudio->GetBpm());
-}
-
-float Game::GetBgmBaseBpm()
-{
-	auto& instance = GetInstance();
-	if (!instance.m_BgmAudio)
-	{
-		return 0.0f;
-	}
-
-	return instance.m_BgmAudio->GetBaseBpm();
-}
 
 void Game::SetDifficultyStageInterval(int interval)
 {
@@ -410,80 +342,6 @@ float Game::GetSpeedUpBpmIncrease()
 	return m_SpeedUpBpmIncrease;
 }
 
-void Game::PlayBgmIfStopped()
-{
-	if (m_BgmAudio && !m_BgmAudio->IsPlaying())
-	{
-		m_BgmCurrentVolume = m_BgmPlayParams.volume;
-		m_BgmFadeActive = false;
-		m_BgmFadeSpeed = 0.0f;
-		m_BgmStopAfterFade = false;
-		m_BgmAudio->SetVolume(m_BgmCurrentVolume);
-		m_BgmAudio->Play(m_BgmPlayParams);
-	}
-}
-
-void Game::StopBgm()
-{
-	if (m_BgmAudio && m_BgmAudio->IsPlaying())
-	{
-		m_BgmFadeActive = false;
-		m_BgmFadeSpeed = 0.0f;
-		m_BgmStopAfterFade = false;
-		m_BgmAudio->Stop();
-	}
-}
-
-bool Game::IsBgmPlaying() const
-{
-	return m_BgmAudio && m_BgmAudio->IsPlaying();
-}
-
-void Game::StartBgmFadeOut(float durationSec)
-{
-	if (!m_BgmAudio || !m_BgmAudio->IsPlaying())
-	{
-		return;
-	}
-	if (durationSec <= 0.0f)
-	{
-		StopBgm();
-		return;
-	}
-	m_BgmFadeTargetVolume = 0.0f;
-	m_BgmFadeSpeed = (m_BgmFadeTargetVolume - m_BgmCurrentVolume) / durationSec;
-	m_BgmFadeActive = true;
-	m_BgmStopAfterFade = true;
-}
-
-void Game::StartBgmFadeIn(float durationSec)
-{
-	if (!m_BgmAudio)
-	{
-		return;
-	}
-	const float targetVolume = m_BgmPlayParams.volume;
-	if (durationSec <= 0.0f)
-	{
-		m_BgmCurrentVolume = targetVolume;
-		m_BgmAudio->SetVolume(m_BgmCurrentVolume);
-		if (!m_BgmAudio->IsPlaying())
-		{
-			m_BgmAudio->Play(m_BgmPlayParams);
-		}
-		return;
-	}
-	m_BgmCurrentVolume = 0.0f;
-	m_BgmAudio->SetVolume(m_BgmCurrentVolume);
-	if (!m_BgmAudio->IsPlaying())
-	{
-		m_BgmAudio->Play(m_BgmPlayParams);
-	}
-	m_BgmFadeTargetVolume = targetVolume;
-	m_BgmFadeSpeed = (m_BgmFadeTargetVolume - m_BgmCurrentVolume) / durationSec;
-	m_BgmFadeActive = true;
-	m_BgmStopAfterFade = false;
-}
 
 void Game::RegistDebugObject()
 {

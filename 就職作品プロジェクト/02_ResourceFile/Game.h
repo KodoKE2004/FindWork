@@ -10,6 +10,7 @@
 #include "TransitionBase.h"
 #include "Theme.h"
 #include "input.h"
+#include "RhythmBeat.h"
 
 #include "MeshManager.h"
 #include "TextureManager.h"
@@ -26,19 +27,12 @@ private:
 	std::unique_ptr<Input>				 m_Input;						// 入力管理
 	std::unique_ptr<Camera>				 m_Camera;						// カメラ
 	std::vector<std::shared_ptr<Object>> m_GameObjects;					// オブジェクト
-
-    std::shared_ptr<Audio>				 m_BgmAudio;					// BGM再生用オーディオ
-	PlayParams							 m_BgmPlayParams{};				// BGM再生用パラメータ
-	float								 m_BgmCurrentVolume = 0.0f;		// BGM現在音量
-	float								 m_BgmFadeTargetVolume = 0.0f;	// BGMフェード目標音量
-	float								 m_BgmFadeSpeed = 0.0f;			// BGMフェード速度
-	bool								 m_BgmFadeActive = false;		// BGMフェード中か
-	bool								 m_BgmStopAfterFade = false;	// フェード完了後停止するか
     std::vector<std::shared_ptr<TransitionBase>> m_TransitionTexture;	// トランジション用テクスチャ
     std::shared_ptr<Theme>				 m_Theme;						// テーマ管理
     std::vector<std::shared_ptr<Scene>>	 m_SceneList;					// シーンスタック
-
     DirectX::SimpleMath::Vector2 m_PreviewMousePos;						// デバッグ用ビュー行列
+
+
 #ifdef _DEBUG
 #endif
 
@@ -56,6 +50,11 @@ private:
 	static float m_BaseBpmIncreasePerDifficulty;
 	static int	 m_SpeedUpStageInterval;
 	static float m_SpeedUpBpmIncrease;
+
+	// テンポ制御
+	static RhythmBeat m_RhythmBeat;
+	static BeatTimer  m_BeatTimer;
+
 public:
 	//================================
 	//		コンストラクタとデストラクタ
@@ -102,11 +101,10 @@ public:
 	static Game&			GetInstance();	
 	std::shared_ptr<Scene>	GetCurrentScene() const;
 	Camera&					GetCamera();
+
+    static void				SetBgmBpm(float bpm) { m_RhythmBeat.SetBpm(bpm); }
+    static float			GetBgmBpm()	  { return m_RhythmBeat.GetBpm(); }
 	static uint64_t			GetDrawFrameCounter() { return m_DrawFrameCounter; }
-	static void				SetBgmBpm(float bpm);
-	static float			GetBgmBpm();
-	static void				SetBgmBaseBpm(float bpm);
-	static float			GetBgmBaseBpm();
 	static void				SetDifficultyStageInterval(int interval);
 	static int				GetDifficultyStageInterval();
 	static void				SetBaseBpmIncreasePerDifficulty(float bpmIncrease);
@@ -116,11 +114,6 @@ public:
 	static void				SetSpeedUpBpmIncrease(float bpmIncrease);
 	static float			GetSpeedUpBpmIncrease();
 
-	void PlayBgmIfStopped();
-	void StopBgm();
-	bool IsBgmPlaying() const;
-	void StartBgmFadeOut(float durationSec);
-	void StartBgmFadeIn (float durationSec);
     //================================
 	//		  マネージャーの取得
     //================================

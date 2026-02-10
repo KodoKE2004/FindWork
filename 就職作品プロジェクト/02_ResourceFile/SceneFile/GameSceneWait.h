@@ -45,8 +45,6 @@ private:
     static bool s_HasFirstGameSceneWaitInitialized;	
 	static GAME_PHASE s_CurrentGamePhase;	// 現在のゲームフェーズを管理する変数
 
-	BeatTimer m_BeatTimer;
-
 	int m_Difficulty = 0;
 
 	bool m_ShouldTransitionToStage = false;	// 次のステージを設定できたか判断するフラグ

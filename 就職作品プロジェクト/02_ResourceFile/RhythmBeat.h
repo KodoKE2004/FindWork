@@ -51,15 +51,19 @@ public:
     void Initialize(const RhythmBeatConst& config);
     // 更新
     int Update(float deltaTime);
-    // BPM同期
-    void SyncBpm(float bpm)
+
+    void SetBpm(float bpm)
     {
-        if (bpm <= 0.0f || m_Beat.m_Bpm == bpm)
-        {
-            return;
-        }
-        m_Beat.Setup(bpm, m_Beat.m_BeatUnit, m_Beat.m_TicksPerBeat);
+        m_Beat.m_Bpm = bpm;
+        // BPM変更に伴い、関連する時間計算を更新
+        m_Beat.Setup(m_Beat.m_Bpm, m_Beat.m_BeatUnit, m_Beat.m_TicksPerBeat);
     }
+
+    float GetBpm() const
+    {
+        return m_Beat.m_Bpm;
+    }
+
     // 現在のTickを取得
     int GetTotalTick() const
     {
@@ -90,7 +94,9 @@ public:
     }
 };
 
-// あらかじめ設定したビート数分更新をしていく。
+// 拍を数えるタイマー
+// ゲーム内で何拍とるかを管理する
+// 残拍・経過拍数の取得が可能
 class BeatTimer
 {
 private:
@@ -113,8 +119,8 @@ public:
     /// @param 経過拍数
     void Advance(const int beatIndex)
     {
-        m_BeatRest     -= beatIndex - m_BeatPrevious;
-        m_BeatPrevious  = beatIndex;
+        m_BeatRest     -= beatIndex - m_BeatPrevious;   // 残拍更新
+        m_BeatPrevious  = beatIndex;                    // 経過拍数更新
     }
 
     // 残りのビート数を取得
