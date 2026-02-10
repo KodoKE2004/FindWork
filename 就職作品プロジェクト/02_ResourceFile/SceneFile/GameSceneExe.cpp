@@ -121,7 +121,7 @@ void GameSceneExe::Update(float tick)
         float targetProgress = targetProgressNormal;
         bool  useSpecial     = false;
 
-        float scaleMass = 1.0f;
+        float scaleMass = 0.9f;
         if (baseBeats != BASE_BEATS) {
             scaleMass = static_cast<float>(BASE_BEATS) / static_cast<float>(baseBeats) ;
         }

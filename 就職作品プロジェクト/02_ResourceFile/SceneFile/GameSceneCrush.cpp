@@ -17,8 +17,13 @@ void GameSceneCrush::Initialize()
     // シーンに繋ぐ情報は基底初期化後の一番最初に設定
     m_RelationData.isClear = false;
 
-    auto& instance  = Game::GetInstance();
+    // リズムの定義
+    RhythmBeatConst beatConfig{};
+    auto& rhythmBeat = Game::GetRhythmBeat();
+    beatConfig.Setup(Game::GetBgmBpm(), 4, 16);
+    rhythmBeat.Initialize(beatConfig, false, BASE_BEATS);
 
+    auto& instance  = Game::GetInstance();
     m_Bomber = instance.AddObject<Bomber>();
     m_Bomber->SetName("m_Bomber");
     m_MySceneObjects.emplace_back(m_Bomber);

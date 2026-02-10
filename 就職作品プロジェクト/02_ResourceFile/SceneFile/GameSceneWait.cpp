@@ -347,7 +347,6 @@ void GameSceneWait::PrepareNextStage()
 {
     // ステージのインデックスを格納
     SCENE_NO nextScene = StageSelectAllRandom();
-    nextScene = SCENE_NO::GAME_TEXT;
     // 次のシーンRelationDataに格納
     m_RelationData.nextScene = nextScene;
 }

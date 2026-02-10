@@ -14,6 +14,12 @@ void GameSceneSlice::Initialize()
     // シーンに繋ぐ情報は基底初期化後の一番最初に設定
     m_RelationData.isClear = false;
 
+    // リズムの定義
+    RhythmBeatConst beatConfig{};
+    auto& rhythmBeat = Game::GetRhythmBeat();
+    beatConfig.Setup(Game::GetBgmBpm(), 4, 16);
+    rhythmBeat.Initialize(beatConfig, false, BASE_BEATS);
+
     auto& instance = Game::GetInstance();
     TextureManager* textureMgr = instance;
 
