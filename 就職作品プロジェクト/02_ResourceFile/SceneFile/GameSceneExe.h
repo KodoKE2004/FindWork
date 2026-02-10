@@ -6,8 +6,8 @@
 
 namespace
 {
-    // Šî–{‚Ì”” 0 ~ 11 [12] 
-	constexpr int BASE_BEATS   = 11;
+    // Šî–{‚Ì””
+	constexpr int BASE_BEATS   = 12;
 }
 
 enum class GAME_MODE

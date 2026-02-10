@@ -112,7 +112,7 @@ void GameSceneExe::Update(float tick)
         const int currentIndex = rhythmBeat.GetBeatElapsed();
 
         m_SegmentFrom = m_FillRatio;
-        const float baseBeats = rhythmBeat.GetBeatTotal();
+        const int baseBeats = rhythmBeat.GetBeatTotal();
         float targetProgressNormal = 
             std::clamp((static_cast<float>(currentIndex) + 1.0f) /
                         static_cast<float>(baseBeats),

@@ -125,7 +125,7 @@ void TransScene::Update(float tick)
     auto& rhythmBeat = instance.GetRhythmBeat();
 	if (m_isGamePlaying) {
         // ゲームシーン間の遷移なら拍のタイマーも更新
-        rhythmBeat.Update(tick);
+        rhythmBeat.TickCount(tick);
 	}
 
 	if (m_TransitionTexture == nullptr) {

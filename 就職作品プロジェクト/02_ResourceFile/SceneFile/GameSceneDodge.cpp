@@ -49,11 +49,11 @@ void GameSceneDodge::Initialize()
     m_Bird->SetScale(50.0f,50.0f,1.0f);
     m_MySceneObjects.emplace_back(m_Bird);
 
-    AudioManager* audioMgr = instance;
     PlayParams fallParams;
     m_AudioList.emplace("fall", AudioConfig(L"SE/RockFall.wav", fallParams, false, false));
 
-    if (AudioManager* audioMgr = instance)
+    AudioManager* audioMgr = instance;
+    if (audioMgr)
     {
         for (const auto& [key, config] : m_AudioList)
         {

@@ -60,6 +60,10 @@ public:
         m_TickCounter = count;
     }
 
+    void TickCount(float tick) {
+        m_TickCounter += (GetOneBeat() * tick);
+    }
+
     void SetBpm(float bpm)
     {
         m_Beat.m_Bpm = bpm;

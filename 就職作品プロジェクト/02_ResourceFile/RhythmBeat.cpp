@@ -32,8 +32,12 @@ int RhythmBeat::Update(float tick)
     {
         m_TickCounter -= 1.0f;
         ++m_TickIndex;
-        ++m_Advance;
-        ++m_BeatElapsed;
+
+        if ((m_TickIndex % m_Beat.m_TicksPerBeat) == 0)
+        {
+            ++m_Advance;
+            ++m_BeatElapsed;
+        }
     }
 
     return m_Advance;

@@ -30,7 +30,7 @@ namespace
 
     const std::array<StageEntry, GAME_EXE_NUM> kStageEntries = { {
         { SCENE_NO::GAME_SLICE, &PushGameStage<GameSceneSlice> },
-        { SCENE_NO::GAME_DODGE , &PushGameStage<GameSceneDodge>  },
+        { SCENE_NO::GAME_DODGE, &PushGameStage<GameSceneDodge>  },
         { SCENE_NO::GAME_CRUSH, &PushGameStage<GameSceneCrush> },
         { SCENE_NO::GAME_TEXT , &PushGameStage<GameSceneText> },
 
@@ -122,7 +122,7 @@ void GameSceneWait::Initialize()
     auto& rhythmBeat = Game::GetRhythmBeat();
 
     beatConfig.Setup(Game::GetBgmBpm(), 4, 1);
-    rhythmBeat.Initialize(beatConfig, true, 8);
+    rhythmBeat.Initialize(beatConfig, false, 8);
 
     // 難易度アップ処理 
     ++m_RelationData.stageCount;
@@ -320,7 +320,7 @@ void GameSceneWait::Finalize()
 void GameSceneWait::StartNextStageTransition()
 {
     RhythmBeat& rhythmBeat = Game::GetRhythmBeat();
-    WaitToGame.duration = rhythmBeat.GetOneBeat();
+    WaitToGame.duration = rhythmBeat.GetOneBeat() * 0.5f;
 
     // シーン遷移処理
     switch (m_RelationData.nextScene)
