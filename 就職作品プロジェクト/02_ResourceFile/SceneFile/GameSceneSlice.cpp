@@ -8,12 +8,10 @@ void GameSceneSlice::Initialize()
 #ifdef _DEBUG
     DebugUI::TEXT_CurrentScene = "GameSceneSlice";
 #endif
-    m_BaseBeats = BASE_BEATS;
+
     GameSceneExe::Initialize();
 
     // ƒV[ƒ“‚ÉŒq‚®î•ñ‚ÍŠî’ê‰Šú‰»Œã‚Ìˆê”ÔÅ‰‚Éİ’è
-    m_RelationData.previousScene = SCENE_NO::GAME_SLICE;
-    m_RelationData.oldScene = SCENE_NO::GAME_WAIT;
     m_RelationData.isClear = false;
 
     auto& instance = Game::GetInstance();
@@ -64,7 +62,6 @@ void GameSceneSlice::Update(float tick)
 
     if (IsChange()) 
     {
-        ApplyBeatDuration(GameToWait, m_RelationData);
         ChangeScenePop(GameToWait);
     }
 

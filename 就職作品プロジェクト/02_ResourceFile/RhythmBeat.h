@@ -41,16 +41,24 @@ class RhythmBeat
 {
 private:
     RhythmBeatConst m_Beat{};
-    float           m_TickCounter = 0.0f;       // 経過時間の蓄積
-    int             m_TickIndex   = 0;          // 現在のTick数
-    int             m_Advance     = 0;          // 現在の拍子インデックス
+    float           m_TickCounter = 0.0f;   // 経過時間の蓄積
+    int             m_TickIndex   = 0;      // 現在のTick数
+    int             m_Advance     = 0;      // 現在の拍子インデックス
+    int             m_BeatElapsed = 0;      // 経過拍数
+    int             m_BeatTotal   = 0;      // 総Tick数
 
 public:
     RhythmBeat() = default;
     // 初期化
     void Initialize(const RhythmBeatConst& config);
-    // 更新
-    int Update(float deltaTime);
+    void Initialize(const RhythmBeatConst& config,int limit);
+    // 経過拍数の取得を行う
+    int Update(float tick);
+
+    void SetTickCounter(float count)
+    {
+        m_TickCounter = count;
+    }
 
     void SetBpm(float bpm)
     {
@@ -84,6 +92,30 @@ public:
         return m_TickIndex % m_Beat.m_TicksPerBeat;
     }
 
+    // 経過拍数を取得
+    int GetBeatElapsed() const
+    {
+        return m_BeatElapsed;
+    }
+
+    // 総拍数を取得
+    int GetBeatTotal() const
+    {
+        return m_BeatTotal;
+    }
+
+    // 残拍数を取得
+    int GetBeatRest() const
+    {
+        return m_BeatTotal - m_BeatElapsed;
+    }
+
+    // 一拍の長さを取得
+    float GetOneBeat() const 
+    {
+        return m_Beat.secondsPerBeat;
+    }
+
     const RhythmBeatConst& GetBeatConst()const
     {
         return m_Beat;
@@ -91,52 +123,5 @@ public:
 
     int GetAdvance() const {
         return m_Advance;
-    }
-};
-
-// 拍を数えるタイマー
-// ゲーム内で何拍とるかを管理する
-// 残拍・経過拍数の取得が可能
-class BeatTimer
-{
-private:
-    int m_GameBeats     = 1;			// ゲーム内でとるビート数
-    int m_BeatRest      = 0;			// 現在のビート数 GameBeats - m_BeatPrevious の差分を引く
-    int	m_BeatPrevious  = 0;			// ビート数更新用カウンター
-public:
-    BeatTimer() = default;
-
-    /// BeatTimer初期化
-    /// @param 何拍とるか
-    void Initialize(int gameBeats)
-    {
-        m_GameBeats = gameBeats;
-        m_BeatRest = m_GameBeats;
-        m_BeatPrevious = 0;
-    }
-
-    // 更新
-    /// @param 経過拍数
-    void Advance(const int beatIndex)
-    {
-        m_BeatRest     -= beatIndex - m_BeatPrevious;   // 残拍更新
-        m_BeatPrevious  = beatIndex;                    // 経過拍数更新
-    }
-
-    // 残りのビート数を取得
-    int GetRestBeats()
-    {   
-        return m_BeatRest; 
-    }
-
-    // 経過したビート数を取得
-    int GetCurrentBeat()
-    {
-        return m_GameBeats - m_BeatRest ;
-    }
-
-    bool IsBeatZero()
-    {
-        return m_BeatRest <= 0;
     }
 };

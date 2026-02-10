@@ -16,10 +16,9 @@ void Theme::Initialize()
 {
     auto& instance = Game::GetInstance();
     TextureManager* textureManager = instance;
-    RhythmBeat      rhythmBeat = instance.GetCurrentScene()->GetRelationData().rhythmBeat;
     Square::Initialize();
     
-    m_SecondPerBeat = rhythmBeat.GetBeatConst().secondsPerBeat;
+    m_SecondPerBeat = Game::GetRhythmBeat().GetOneBeat();
     m_Duration  = 1.5f * m_SecondPerBeat;
     m_ScaleMass = 5.0f;
     m_Elapsed   = 0.0f;

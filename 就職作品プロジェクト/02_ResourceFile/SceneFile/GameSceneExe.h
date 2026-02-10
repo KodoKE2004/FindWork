@@ -35,7 +35,6 @@ protected:
 	std::shared_ptr<Bomber> m_Bomber ;		// スピードゲージ背景
 	std::shared_ptr<Timer>  m_TimerUI;		// スピードゲージ背景
     
-    int m_BaseBeats;
 	int m_PreciousMeasure = 0;
     int m_CurrentMeasure  = 0;
 

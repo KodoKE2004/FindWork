@@ -12,11 +12,9 @@ void GameSceneCrush::Initialize()
 #endif 
 
     // 基底クラスの初期化
-    m_BaseBeats = BASE_BEATS;
+
     GameSceneExe::Initialize();
     // シーンに繋ぐ情報は基底初期化後の一番最初に設定
-    m_RelationData.previousScene = SCENE_NO::GAME_CRUSH;
-    m_RelationData.oldScene      = SCENE_NO::GAME_WAIT;
     m_RelationData.isClear = false;
 
     auto& instance  = Game::GetInstance();
@@ -51,7 +49,6 @@ void GameSceneCrush::Update(float tick)
 
     if (IsChange()) 
     {
-        ApplyBeatDuration(GameToWait, m_RelationData);
         ChangeScenePop(GameToWait);
     }
 }

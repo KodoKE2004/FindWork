@@ -27,12 +27,10 @@ void GameSceneDodge::Initialize()
     DebugUI::TEXT_CurrentScene = "GameSceneJump";
 
     // 基底クラスの初期化
-    m_BaseBeats = BASE_BEATS;
+
     GameSceneExe::Initialize();
 
     // シーンに繋ぐ情報は基底初期化後の一番最初に設定
-    m_RelationData.previousScene = SCENE_NO::GAME_DODGE;
-    m_RelationData.oldScene = SCENE_NO::GAME_WAIT;
     m_RelationData.isClear = true;
 
     auto& instance = Game::GetInstance();

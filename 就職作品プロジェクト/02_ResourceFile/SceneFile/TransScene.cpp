@@ -34,17 +34,22 @@ void TransScene::Initialize()
 	m_TransMode = m_transParam.mode;
 	m_Step = STEP::DOING;
 
-	const SCENE_NO oldSceneNo = GetOldSceneNo();
+	const SCENE_NO oldSceneNo  = GetOldSceneNo();
 	const SCENE_NO nextSceneNo = GetNextSceneNo();
-	const bool isOldGameScene  = oldSceneNo  >= SCENE_NO::GAME_SLICE && oldSceneNo  < SCENE_NO::EXE_NUM;
-	const bool isNextGameScene = nextSceneNo >= SCENE_NO::GAME_SLICE && nextSceneNo < SCENE_NO::EXE_NUM;
-	if (oldSceneNo == SCENE_NO::GAME_WAIT && isNextGameScene)
-	{
-		instance.StartBgmFadeOut(m_Duration);
+
+	const bool isOldGameScene  = oldSceneNo == SCENE_NO::GAME_WAIT  ||
+								(oldSceneNo >= SCENE_NO::GAME_SLICE &&
+								 oldSceneNo  < SCENE_NO::EXE_NUM);
+
+	const bool isNextGameScene = nextSceneNo == SCENE_NO::GAME_WAIT  ||
+								(nextSceneNo >= SCENE_NO::GAME_SLICE &&
+								 nextSceneNo < SCENE_NO::EXE_NUM);
+
+	if (isOldGameScene && isNextGameScene) {
+        m_isGamePlaying = true;
 	}
-	else if (isOldGameScene && nextSceneNo == SCENE_NO::GAME_WAIT)
-	{
-		instance.StartBgmFadeIn(m_Duration);
+	else {
+        m_isGamePlaying = false;
 	}
 
 	const auto& relationData = m_SceneOld->GetRelationData();
@@ -117,6 +122,11 @@ void TransScene::Initialize()
 void TransScene::Update(float tick)
 {
     auto& instance = Game::GetInstance();
+
+	if (m_isGamePlaying) {
+        // ゲームシーン間の遷移なら拍のタイマーも更新
+
+	}
 
 	if (m_TransitionTexture == nullptr) {
 		return;

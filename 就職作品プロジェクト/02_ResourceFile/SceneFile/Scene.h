@@ -3,6 +3,7 @@
 #include "TransitionBase.h"
 #include "Skydome.h"
 #include "../Audio.h"
+#include "RhythmBeat.h"
 
 #include <optional>
 #include <unordered_map>
@@ -75,6 +76,9 @@ protected:
 	float m_TimerGameExe = 0.0f;				// 経過時間
     static std::vector<float*>	m_TimerList;	// タイマー格納用
 
+	bool m_WasPlayBGM = false;
+	int  m_PreviousBeatIndex = 0;
+
 public:
 	static SceneRelationData m_RelationData;
 	// コンストラクタとデストラクタ
@@ -146,6 +150,7 @@ public:
     // seName : AudioConfigに登録した名前
     // Game.hのAudioManagerを通じて再生する
 	void PlaySE(std::string seName, std::optional<float> overrideVolume);
+
 };
 
 

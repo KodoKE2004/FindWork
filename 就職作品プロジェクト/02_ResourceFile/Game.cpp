@@ -24,6 +24,7 @@ int	  Game::m_DifficultyStageInterval = 8;
 float Game::m_BaseBpmIncreasePerDifficulty = 5.0f;
 int   Game::m_SpeedUpStageInterval = 4;
 float Game::m_SpeedUpBpmIncrease = 10.0f;
+RhythmBeat Game::m_RhythmBeat;
 
 void Game::InitializeTransitionCSV()
 {
@@ -341,7 +342,6 @@ float Game::GetSpeedUpBpmIncrease()
 {
 	return m_SpeedUpBpmIncrease;
 }
-
 
 void Game::RegistDebugObject()
 {

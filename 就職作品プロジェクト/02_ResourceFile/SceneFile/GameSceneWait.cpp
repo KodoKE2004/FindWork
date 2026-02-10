@@ -2,6 +2,7 @@
 #include "Game.h"
 #include "DebugUI.h"
 #include "SceneList.h"
+#include "TransitionBase.h"
 
 #include <array>
 #include <vector>
@@ -108,8 +109,6 @@ void GameSceneWait::Initialize()
     s_HasFirstGameSceneWaitInitialized = true;
 
     // 引き渡しデータのシーンの整理
-    m_RelationData.oldScene      = m_RelationData.previousScene;
-    m_RelationData.previousScene = SCENE_NO::GAME_WAIT;
     m_RelationData.ClearTransitionTexture();
 
     if (m_RelationData.isClear) {
@@ -120,7 +119,10 @@ void GameSceneWait::Initialize()
     }
 
     RhythmBeatConst beatConfig{};
+    auto& rhythmBeat = Game::GetRhythmBeat();
+
     beatConfig.Setup(Game::GetBgmBpm(), 4, 1);
+    rhythmBeat.Initialize(beatConfig, 8);
 
     // 難易度アップ処理 
     ++m_RelationData.stageCount;
@@ -155,12 +157,6 @@ void GameSceneWait::Initialize()
     m_TimerList.clear();
     SetTimer(&m_Tick);
     SetTimer(&m_DecrementLife.timer);
-
-    m_RelationData.rhythmBeat.Initialize(beatConfig);
-    m_WasPlayBGM = false;
-    m_PreviousBeatIndex = m_RelationData.rhythmBeat.GetBeatIndex();
-
-    m_BeatTimer.Initialize(8);
 
     m_IsFirstInitialized = true;
 
@@ -234,29 +230,23 @@ void GameSceneWait::Initialize()
 
 void GameSceneWait::Update(float tick)
 {   
+    auto& rhythmBeat = Game::GetRhythmBeat();
+    // リズムを取る    
+    int advancedTicks = rhythmBeat.Update(tick);
 
-    // リズムを取る
     // ライフをリズムに合わせて回転させる
-    int advancedTicks = m_RelationData.rhythmBeat.Update(tick);
-    const int currentBeatIndex = m_RelationData.rhythmBeat.GetBeatIndex();
-
-    if (!m_WasPlayBGM && currentBeatIndex != m_PreviousBeatIndex)
-    {
-        Game::GetInstance().PlayBgmIfStopped();
-        m_WasPlayBGM = true;
-    }
-    m_PreviousBeatIndex = currentBeatIndex;
-
     if (advancedTicks > 0)
     {
+        
+        // 経過拍数の更新
 
-        m_BeatTimer.Advance(currentBeatIndex);
-        if (m_BeatTimer.IsBeatZero())
+        // 残り一拍のタイミングでステージ遷移フラグを立てる
+        if (rhythmBeat.GetBeatRest() == 0)
         {
             m_ShouldTransitionToStage = true;
         }
-        // 残り一拍のタイミングでお題提示処理開始
-        else if (m_BeatTimer.GetRestBeats() == 1)
+        // フラグの一拍前のタイミングでお題提示処理開始
+        else if (rhythmBeat.GetBeatRest() == 1)
         {
             m_Theme->SetActive(true);
         }
@@ -329,7 +319,8 @@ void GameSceneWait::Finalize()
 // 次のステージ選択とシーン遷移処理
 void GameSceneWait::StartNextStageTransition()
 {
-    ApplyBeatDuration(WaitToGame, m_RelationData);
+    RhythmBeat& rhythmBeat = Game::GetRhythmBeat();
+    WaitToGame.duration = rhythmBeat.GetOneBeat();
 
     // シーン遷移処理
     switch (m_RelationData.nextScene)

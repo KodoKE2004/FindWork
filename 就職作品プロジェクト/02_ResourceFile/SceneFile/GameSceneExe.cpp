@@ -7,7 +7,7 @@
 #include "Skydome.h"
 #include "Calculator.h"
 #include <algorithm>
-
+#include "TransitionBase.h"
 
 
 
@@ -23,14 +23,8 @@ void GameSceneExe::Initialize()
     m_FastChangeState = FastChangeState::Filling;
     m_FastChangeFill = 0.0f;
     m_FastChangeStartFill = 0.0f;
-    m_FastChangeElapsed   = 0.0f;
+    m_FastChangeElapsed   = 0.0f;    
 
-    // リズムの定義
-    RhythmBeatConst beatConfig{};
-    const float bgmBpm = Game::GetBgmBpm();
-
-    beatConfig.Setup(bgmBpm, 4, 1); // 120 BPM, 4/4 拍子
-    m_RelationData.rhythmBeat.Initialize(beatConfig);
     m_RelationData.transTexture = nullptr;
     m_RelationData.ClearTransitionTexture();
 
@@ -62,9 +56,14 @@ void GameSceneExe::Update(float tick)
 {
     CountTimer(tick);
     m_PreciousMeasure = m_CurrentMeasure;
+
+    RhythmBeat& rhythmBeat = Game::GetInstance().GetRhythmBeat();
+
     // 進んだTick(拍数)を取得
-    int advancedTick = m_RelationData.rhythmBeat.Update(tick);
-    m_CurrentMeasure = m_BeatTimer.GetCurrentBeat() / 4;
+    int advancedTick = rhythmBeat.Update(tick);
+
+    // 1小節更新の検知
+    m_CurrentMeasure = rhythmBeat.GetBeatElapsed() / 4;
 
     // 早回し処理
     if (m_isFastChange)
@@ -73,7 +72,7 @@ void GameSceneExe::Update(float tick)
         {
             m_FastChangeElapsed += tick;
 
-            const float beat = GetOneBeat() * 0.25f;
+            const float beat = 1 * 0.25f;
             const float progress = (beat > 0.0f)
                 ? std::clamp(m_FastChangeElapsed / beat, 0.0f, 1.0f)
                 : 1.0f;
@@ -98,7 +97,8 @@ void GameSceneExe::Update(float tick)
         return;
     }
 
-    int rest = m_BeatTimer.GetRestBeats();
+    // 現在の残り拍数を取得
+    int rest = rhythmBeat.GetBeatRest();
 
     //-------------------------------
     // 拍が進んでいたらBeatTimerを進める
@@ -108,21 +108,20 @@ void GameSceneExe::Update(float tick)
         m_BomberElapsed = 0.0f;
         
         // 経過拍数の更新
-        const int currentIndex = m_RelationData.rhythmBeat.GetBeatIndex();
-        m_BeatTimer.Advance(currentIndex);
+        const int currentIndex = rhythmBeat.GetBeatElapsed();
 
         m_SegmentFrom = m_FillRatio;
 
         float targetProgressNormal = 
-            std::clamp((static_cast<float>(currentIndex) + 1.0f) / static_cast<float>(m_BaseBeats),
+            std::clamp((static_cast<float>(currentIndex) + 1.0f) / static_cast<float>(-1),
             0.0f, 1.0f);
 
         float targetProgress = targetProgressNormal;
         bool  useSpecial     = false;
 
         float scaleMass = 1.0f;
-        if (m_BaseBeats != BASE_BEATS) {
-            scaleMass = static_cast<float>(BASE_BEATS) / static_cast<float>(m_BaseBeats) ;
+        if ( 1 != BASE_BEATS) {
+            scaleMass = static_cast<float>(BASE_BEATS) / static_cast<float>(1) ;
         }
 
         // 特殊処理：最後の4拍は指定数値で減るようにする
@@ -153,9 +152,10 @@ void GameSceneExe::Update(float tick)
     }
 
     // ボンバーの更新
-    if(m_Bomber && GetOneBeat() > 0.0f)
+    const float oneBeat = 1;
+    if(m_Bomber && oneBeat > 0.0f)
     {
-        const float t = std::clamp(m_BomberElapsed / GetOneBeat(), 0.0f, 1.0f);
+        const float t = std::clamp(m_BomberElapsed / oneBeat, 0.0f, 1.0f);
         const float e = Calculator::Easing::EaseOutQuart(t);
 
         m_FillRatio = m_SegmentFrom + (m_SegmentTo - m_SegmentFrom) * e;

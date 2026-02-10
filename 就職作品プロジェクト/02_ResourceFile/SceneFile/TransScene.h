@@ -50,6 +50,8 @@ private:
 	bool m_isChange		    = false;
     bool m_RequestNextSceneDraw = false;
 
+	bool m_isGamePlaying = false;
+
 	STEP m_Step;
 
 	TRANS_MODE m_TransMode;

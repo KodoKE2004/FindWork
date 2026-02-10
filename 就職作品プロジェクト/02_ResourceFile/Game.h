@@ -53,7 +53,6 @@ private:
 
 	// テンポ制御
 	static RhythmBeat m_RhythmBeat;
-	static BeatTimer  m_BeatTimer;
 
 public:
 	//================================
@@ -101,9 +100,9 @@ public:
 	static Game&			GetInstance();	
 	std::shared_ptr<Scene>	GetCurrentScene() const;
 	Camera&					GetCamera();
-
     static void				SetBgmBpm(float bpm) { m_RhythmBeat.SetBpm(bpm); }
-    static float			GetBgmBpm()	  { return m_RhythmBeat.GetBpm(); }
+    static float			GetBgmBpm()	  {  return m_RhythmBeat.GetBpm(); }
+	static RhythmBeat&		GetRhythmBeat(){ return m_RhythmBeat; }
 	static uint64_t			GetDrawFrameCounter() { return m_DrawFrameCounter; }
 	static void				SetDifficultyStageInterval(int interval);
 	static int				GetDifficultyStageInterval();

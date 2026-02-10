@@ -99,13 +99,16 @@ void GameSceneText::Initialize()
 #ifdef _DEBUG
     DebugUI::TEXT_CurrentScene = "GameSceneText";
 #endif
-    m_BaseBeats = BASE_BEATS + 4;
     GameSceneExe::Initialize();
 
     // シーンに繋ぐ情報は基底初期化後の一番最初に設定
-    m_RelationData.previousScene = SCENE_NO::GAME_TEXT;
-    m_RelationData.oldScene      = SCENE_NO::GAME_WAIT;
     m_RelationData.isClear       = false;
+
+    // リズムの定義
+    RhythmBeatConst beatConfig{};
+    auto& rhythmBeat = Game::GetRhythmBeat();
+    beatConfig.Setup(Game::GetBgmBpm(), 4, 16);
+    rhythmBeat.Initialize(beatConfig,BASE_BEATS + 4);
 
     auto& instance = Game::GetInstance();
     TextureManager* textureMgr = instance; 
@@ -138,7 +141,7 @@ void GameSceneText::Initialize()
     for (int i = 0; i < MESSAGE_SLOT::SLOT_SIZE; ++i)
     {
         float uvY = static_cast<float>(i + 1);
-        m_GameRhythm [i] = kGameRhythm[m_Number[0]][i] * GetOneBeat();
+        m_GameRhythm [i] = kGameRhythm[m_Number[0]][i] * 0;
 
         m_MessageSlot[i] = instance.AddObject<Button>();
         m_MessageSlot[i]->SetName("MessageSlot " + std::to_string(i));
@@ -254,7 +257,6 @@ void GameSceneText::Update(float tick)
 
     if (IsChange())
     {
-        ApplyBeatDuration(GameToWait, m_RelationData);
         ChangeScenePop(GameToWait);
     }
 
