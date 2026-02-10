@@ -21,14 +21,16 @@ namespace
         float posX = 0.0f;
         if (distSide(engine) == 0)
         {
-            std::uniform_real_distribution<float> distX(kMinX, -kCenterSafeHalfWidth);
+            std::uniform_real_distribution<float> distX(kMinX, - kCenterSafeHalfWidth);
             posX = distX(engine);
         }
         else
         {
             std::uniform_real_distribution<float> distX(kCenterSafeHalfWidth, kMaxX);
             posX = distX(engine);
-        }        float posY = distY(engine);
+        }        
+        
+        float posY = distY(engine);
         stone.SetPos(posX, posY, 0.0f);
     }
 }

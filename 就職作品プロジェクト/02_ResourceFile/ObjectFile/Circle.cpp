@@ -69,7 +69,7 @@ void Circle::Initialize()
     m_Color = Color(1, 1, 1, 1);
 
     MATERIAL mtrl{};
-    TextureManager* textureMgr = Game::GetInstance();
+
     mtrl.Diffuse = m_Color;
     mtrl.Shiness = 1;
     mtrl.TextureEnable = false;

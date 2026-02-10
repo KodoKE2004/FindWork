@@ -72,11 +72,13 @@ void GameSceneExe::Update(float tick)
         if (m_FastChangeState == FastChangeState::Filling)
         {
             m_FastChangeElapsed += tick;
-            const float oneBeat = GetOneBeat();
-            const float progress = (oneBeat > 0.0f)
-                ? std::clamp(m_FastChangeElapsed / oneBeat, 0.0f, 1.0f)
+
+            const float beat = GetOneBeat() * 0.25f;
+            const float progress = (beat > 0.0f)
+                ? std::clamp(m_FastChangeElapsed / beat, 0.0f, 1.0f)
                 : 1.0f;
-            m_FastChangeFill = max(0.0f, m_FastChangeStartFill * (1.0f - progress));    
+            m_FastChangeFill = max(0.0f, m_FastChangeStartFill * (1.0f - progress));
+
             if (m_Bomber)
             {
                 m_Bomber->SetFillRatio(m_FastChangeFill);
@@ -84,7 +86,9 @@ void GameSceneExe::Update(float tick)
             if (m_FastChangeFill <= 0.0f)
             {
                 m_FastChangeState = FastChangeState::ReadyToExplode;
+                m_Bomber->SetFillRatio(0.0f);
             }
+            
         }
 
         if (m_FastChangeState == FastChangeState::ReadyToExplode) 

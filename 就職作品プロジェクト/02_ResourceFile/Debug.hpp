@@ -9,12 +9,12 @@
 #include <string>
 #include <string_view>
 
-enum class MessageColor
+enum class MESSAGE_COLOR
 {
-    Red,
-    Green,
-    Yellow,
-    White
+    RED,
+    GREEN,
+    YELLOW,
+    WHITE
 };
 
 
@@ -26,6 +26,37 @@ namespace Debug
         OutputDebugStringA(msg.c_str());
         OutputDebugStringA("\n");
         std::cerr << msg << std::endl;
+    }
+
+    inline static void LogAlways(std::string_view message, MESSAGE_COLOR color)
+    {
+        HANDLE hConsole = GetStdHandle(STD_OUTPUT_HANDLE);
+
+        const WORD green = FOREGROUND_GREEN | FOREGROUND_INTENSITY;
+        const WORD red = FOREGROUND_RED | FOREGROUND_INTENSITY;
+        const WORD yellow = FOREGROUND_RED | FOREGROUND_GREEN | FOREGROUND_INTENSITY;
+        const WORD white = FOREGROUND_RED | FOREGROUND_GREEN | FOREGROUND_BLUE;
+
+        WORD originalAttrs = white;
+        switch (color)
+        {
+        case MESSAGE_COLOR::RED:     originalAttrs = red;     break;
+        case MESSAGE_COLOR::GREEN:   originalAttrs = green;   break;
+        case MESSAGE_COLOR::YELLOW:  originalAttrs = yellow;  break;
+        case MESSAGE_COLOR::WHITE:   originalAttrs = white;   break;
+        default: break;
+        }
+
+        SetConsoleTextAttribute(hConsole, originalAttrs);
+
+        const std::string msg(message);
+
+        OutputDebugStringA(msg.c_str());
+        OutputDebugStringA("\n");
+        std::cerr << msg << std::endl;
+
+        SetConsoleTextAttribute(hConsole, white);
+
     }
 
     inline static std::string FormatHResult(HRESULT hr)
@@ -166,7 +197,7 @@ namespace Debug
         std::cout << message << std::endl;
     #endif
     }
-    static void Log(std::string_view message, MessageColor color)
+    static void Log(std::string_view message, MESSAGE_COLOR color)
     {
     #ifdef _DEBUG
         HANDLE hConsole = GetStdHandle(STD_OUTPUT_HANDLE);
@@ -179,10 +210,10 @@ namespace Debug
         WORD originalAttrs = white;
         switch (color)
         {
-        case MessageColor::Red   : originalAttrs = red;     break;
-        case MessageColor::Green : originalAttrs = green;   break;
-        case MessageColor::Yellow: originalAttrs = yellow;  break;
-        case MessageColor::White : originalAttrs = white;   break;
+        case MESSAGE_COLOR::RED   : originalAttrs = red;     break;
+        case MESSAGE_COLOR::GREEN : originalAttrs = green;   break;
+        case MESSAGE_COLOR::YELLOW: originalAttrs = yellow;  break;
+        case MESSAGE_COLOR::WHITE : originalAttrs = white;   break;
         default: break;
         }
 

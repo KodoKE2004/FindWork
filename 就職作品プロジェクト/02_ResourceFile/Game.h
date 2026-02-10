@@ -228,7 +228,7 @@ inline void ChangeScenePop(SceneTransitionParam& state)
 
 	if (instance.GetSceneStackSize() == 0) {
 		std::string_view msg = "[[警告]] シーンスタックが空です";
-		Debug::Log(msg, MessageColor::Yellow);
+		Debug::Log(msg, MESSAGE_COLOR::YELLOW);
 		return;
 	}
 

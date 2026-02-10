@@ -60,6 +60,10 @@ void GameSceneText::ShuffleSlotTextureUV()
 
 void GameSceneText::GirlReaction()
 {
+    if (m_isReaction) {
+        return;
+    }
+
     float uvX = 1.0f;
     // 女の子の反応をuvXで変化させる
     const float adjectiveUvX_A    = m_MessageSlot[MESSAGE_SLOT::ADJECTIVE_A]->GetTextObject()->GetUV().x;
@@ -71,16 +75,23 @@ void GameSceneText::GirlReaction()
     bool sad  = adjectiveUvX_A == 2.0f &&
                 adjectiveUvX_B == 2.0f;
 
-    if      (high) { uvX = 2.0f; PlaySE("fanfare",0.4f); }
-    else if (sad)  { uvX = 3.0f; PlaySE("failed" ,0.4f); }
-    else           { uvX = 5.0f; PlaySE("question",0.4f); }
+
+    if      (high) { uvX = 2.0f; ReactionSE(0,"fanfare") ;}
+    else if (sad)  { uvX = 3.0f; ReactionSE(1,"failed")  ;}
+    else           { uvX = 5.0f; ReactionSE(2,"question");}
 
     m_Girl->SetUV(uvX, 1.0f, 5.0f, 1.0f);
     const auto uv = m_Girl->GetUV();
     const auto split = m_Girl->GetSplit();
     m_RelationData.SetTransitionTarget(m_Girl);
 
+    m_isReaction = true;
+}
 
+void GameSceneText::ReactionSE(int i, std::string audioName)
+{   
+    m_ReactionActive = m_ReactionAudio[i];
+    m_ReactionActive->Play(m_AudioList.at(audioName).params);
 }
 
 void GameSceneText::Initialize()
@@ -143,10 +154,8 @@ void GameSceneText::Initialize()
 
     m_InputIndex = 0;
     m_CurrentRhythmIndex = 0;
-    m_isEntry     = true;
-    m_isInputSlot = false;
+    m_isReaction = false;
     m_UvXOffset = 1.0f;
-    m_Elapsed   = 0.0f;
     std::fill(std::begin(m_Clicked), std::end(m_Clicked), false);
 
     m_Bomber = instance.AddObject<Bomber>();
@@ -156,27 +165,20 @@ void GameSceneText::Initialize()
     PlayParams insideParam{};
     m_AudioList.emplace("rhythm", AudioConfig(L"SE/Rhythm.wav", insideParam, false, false));
 
-    PlayParams trueParam{};
-    m_AudioList.emplace("true", AudioConfig(L"SE/ExeTrue.wav", trueParam, false, false));
-
-    PlayParams falseParam{};
-    m_AudioList.emplace("false", AudioConfig(L"SE/ExeFalse.wav", falseParam, false, false));
-
     PlayParams clapParam{};
     m_AudioList.emplace("clap", AudioConfig(L"SE/HandClap.wav" , clapParam, false, false));
     
-    PlayParams whistleParam{};
-    m_AudioList.emplace("whistle", AudioConfig(L"SE/Whistle.wav"  , whistleParam, false, false));
-
     PlayParams fanfareParam{};
-    m_AudioList.emplace("fanfare", AudioConfig(L"SE/True3.wav", fanfareParam, false, false));
+    m_AudioList.emplace("fanfare", AudioConfig(L"SE/GameReaction/True3.wav", fanfareParam, false, false));
 
     PlayParams failedParam{};
-    m_AudioList.emplace("failed", AudioConfig(L"SE/Failed.wav", failedParam, false, false));
+    m_AudioList.emplace("failed", AudioConfig(L"SE/GameReaction/Failed.wav", failedParam, false, false));
 
     PlayParams QuestionParam{};
-    m_AudioList.emplace("question", AudioConfig(L"SE/Question.wav", QuestionParam, false, false));
-    if (AudioManager* audioMgr = instance)
+    m_AudioList.emplace("question", AudioConfig(L"SE/GameReaction/Question.wav", QuestionParam, false, false));
+
+    AudioManager* audioMgr = instance;
+    if (audioMgr)
     {
         for (const auto& [key, config] : m_AudioList)
         {
@@ -193,22 +195,21 @@ void GameSceneText::Initialize()
             }
         }
     }
+    m_ReactionAudio[0] = audioMgr->Create(m_AudioList.at("fanfare"));
+    m_ReactionAudio[1] = audioMgr->Create(m_AudioList.at("failed"));
+    m_ReactionAudio[2] = audioMgr->Create(m_AudioList.at("question"));
 }
 
 void GameSceneText::Update(float tick)
 {
     GameSceneExe::Update(tick);
 
-    m_Elapsed += tick;
-
     // 入力処理
     if (Input::GetKeyTrigger(VK_RETURN) || Input::GetMouseTrigger(vkLEFT))
     {
         // 一定の時間が来るまでは音声のみ再生
         PlaySE("clap", 0.5f);
-        
-        
-    } // 入力処理
+    }
 
     for (int i = 0; i < MESSAGE_SLOT::SLOT_SIZE; ++i)
     {
@@ -232,10 +233,15 @@ void GameSceneText::Update(float tick)
             break;
         }
     }
-    if (m_isInputAll)
+    if (m_isInputAll && !m_isFastChange)
     {
         GirlReaction();
-        if (m_BeatTimer.GetRestBeats() % 4 == 0)
+        bool isFinished = false; 
+        if (m_ReactionActive) {
+            isFinished = m_ReactionActive->IsFinished();
+        }
+        // 小節が切り替わったタイミングでシーン遷移
+        if (isFinished && m_BeatTimer.GetRestBeats() % 4 == 0)
         {
             SetFastChange();
         }

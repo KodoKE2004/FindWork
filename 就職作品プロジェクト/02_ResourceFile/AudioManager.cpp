@@ -278,7 +278,7 @@ bool AudioManager::Add(std::string key, std::wstring relativePath)
 
     if (!clip) 
     {
-        Debug::LogAlways(std::string("[[Ž¸”s]] AudioManager::Add : ") + std::filesystem::absolute(full).string() + " reason=" + err);
+        Debug::LogAlways(std::string("[[Ž¸”s]] AudioManager::Add : ") + std::filesystem::absolute(full).string() + " reason=" + err, MESSAGE_COLOR::RED);
         return false;
     }
 

@@ -97,6 +97,7 @@ public:
 
 		m_FastChangeState = FastChangeState::Filling;
 		m_FastChangeElapsed = 0.0f;
+		
 		if (m_Bomber)
 		{
 			m_FastChangeFill = m_Bomber->GetFillRatio();

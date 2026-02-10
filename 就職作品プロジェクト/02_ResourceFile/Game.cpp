@@ -32,11 +32,11 @@ void Game::InitializeTransitionCSV()
 	std::string loadError;
 	if (!LoadTransitionSettingsFromCsv(kTransitionCsvPath, loadError))
 	{
-        Debug::Log(loadError, MessageColor::Red);
+        Debug::Log(loadError, MESSAGE_COLOR::RED);
 	}
 	else
 	{
-        Debug::Log("[[成功]] LoadTransitionSettingFromCsv : " + std::string(kTransitionCsvPath),MessageColor::Green);
+        Debug::Log("[[成功]] LoadTransitionSettingFromCsv : " + std::string(kTransitionCsvPath),MESSAGE_COLOR::GREEN);
 	}
 }
 
@@ -47,11 +47,11 @@ void Game::FinalizeTransitionCSV()
 
 	if (!SaveTransitionSettingsToCsv(savePath.string(), saveError))
 	{
-		Debug::Log(saveError, MessageColor::Red);
+		Debug::Log(saveError, MESSAGE_COLOR::RED);
 	}
 	else
 	{
-		Debug::Log("[[成功]] SaveTransitionSettingFromCsv : " + savePath.string(), MessageColor::Green);
+		Debug::Log("[[成功]] SaveTransitionSettingFromCsv : " + savePath.string(), MESSAGE_COLOR::GREEN);
 	}
 }
 
@@ -133,7 +133,7 @@ void Game::Initialize()
     instance.m_BgmPlayParams = bgmConfig.params;
 	instance.m_BgmCurrentVolume = bgmConfig.params.volume;
 
-	instance.m_SceneCurrent = std::make_shared<GameSceneDodge>();		// タイトルシーンのインスタンスを生成
+	instance.m_SceneCurrent = std::make_shared<GameSceneWait>();		// タイトルシーンのインスタンスを生成
 	instance.m_SceneCurrent->Initialize();
 }
 

@@ -52,13 +52,13 @@ void ShaderManager::Add(const std::string& name, ShaderStage stage)
 
     if (!shader->Create(shader->GetHlslName())) {
         delete shader; // é∏îséûÇÕâï˙
-        Debug::Log("[[é∏îs]] AddShader'" + name + "'.", MessageColor::Red);
+        Debug::Log("[[é∏îs]] AddShader'" + name + "'.", MESSAGE_COLOR::RED);
         return;
     }
 
     // ìoò^
     m_ShaderList[name] = shader;
-    Debug::Log("[[ê¨å˜]] AddShader '" + name + "'.", MessageColor::Green);
+    Debug::Log("[[ê¨å˜]] AddShader '" + name + "'.", MESSAGE_COLOR::GREEN);
 }
 
 bool ShaderManager::HasShader(const std::string& shaderName) const
@@ -125,12 +125,12 @@ bool ShaderManager::ReloadAll()
 
         if (!shader->Create(shader->GetHlslName()))
         {
-            Debug::Log("[[é∏îs]] ShaderManagerReload '" + name + "'.\n", MessageColor::Red);
+            Debug::Log("[[é∏îs]] ShaderManagerReload '" + name + "'.\n", MESSAGE_COLOR::RED);
             allSuccess = false;
         }
         else
         {
-            Debug::Log("[[ê¨å˜]] ShaderManagerReloaded '" + name + "'.\n", MessageColor::Green);
+            Debug::Log("[[ê¨å˜]] ShaderManagerReloaded '" + name + "'.\n", MESSAGE_COLOR::GREEN);
         }
     }
 

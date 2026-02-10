@@ -105,6 +105,6 @@ bool StaticMesh::Load(const std::string& modelFile, const std::string& texDirect
         }
     }
 
-    Debug::Log("[[ê¨å˜]] ModelLoad : " + modelFile, MessageColor::Green);
+    Debug::Log("[[ê¨å˜]] ModelLoad : " + modelFile, MESSAGE_COLOR::GREEN);
     return true;
 }
