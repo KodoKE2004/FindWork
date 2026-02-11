@@ -147,7 +147,7 @@ void Square::Draw()
 //==========================
 void Square::Finalize()
 {
-
+	
 }
 
 // テクスチャを指定

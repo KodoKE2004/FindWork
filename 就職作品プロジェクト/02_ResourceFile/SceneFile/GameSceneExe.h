@@ -102,7 +102,7 @@ public:
 		m_FastChangeStartFill = m_FastChangeFill;
 	}
 	
-
+	void ChangeScene();
 
 	bool IsChange()		const { return m_isChange; }
     bool IsFastChange() const { return m_isFastChange; }

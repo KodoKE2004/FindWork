@@ -129,6 +129,9 @@ void Game::Initialize()
     bgmConfig.params.pan	= 0.0f;
 	bgmConfig.baseBpm		= 100.0f;
     bgmConfig.bpm			= bgmConfig.baseBpm;
+	
+	instance.m_BgmAudio = std::make_unique<Audio>();
+	instance.m_BgmAudio;
 
 	instance.m_SceneCurrent = std::make_shared<GameSceneWait>();		// タイトルシーンのインスタンスを生成
 	instance.m_SceneCurrent->Initialize();

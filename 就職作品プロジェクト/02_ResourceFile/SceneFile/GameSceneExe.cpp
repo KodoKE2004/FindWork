@@ -13,7 +13,13 @@
 
 void GameSceneExe::Initialize()
 {
-    auto& instance = Game::GetInstance();
+    auto& instance   = Game::GetInstance();
+    auto& rhythmBeat = Game::GetRhythmBeat();
+
+    if (m_Bomber)
+    {
+        m_Bomber->AdjustScaleByBeatTotal(rhythmBeat.GetBeatTotal(), 16);
+    }
 
     //-------------------------------
     //          ƒƒ“ƒo‰Šú‰»
@@ -59,6 +65,8 @@ void GameSceneExe::Update(float tick)
     m_PreciousMeasure = m_CurrentMeasure;
 
     RhythmBeat& rhythmBeat = Game::GetInstance().GetRhythmBeat();
+
+    
 
     // i‚ñ‚¾Tick(””)‚ğæ“¾
     int advancedTick = rhythmBeat.Update(tick);
@@ -177,6 +185,12 @@ void GameSceneExe::Update(float tick)
     {
         Debug::Log("Measure Changed : " + std::to_string(m_CurrentMeasure));
     }
+}
+
+void GameSceneExe::ChangeScene()
+{
+    GameToWait.duration = Game::GetRhythmBeat().GetOneBeat() * 0.5f;
+    ChangeScenePop(GameToWait);
 }
 
 bool GameSceneExe::IsChangeMeasure()

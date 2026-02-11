@@ -26,10 +26,6 @@ void GameSceneDodge::Initialize()
 {
     DebugUI::TEXT_CurrentScene = "GameSceneJump";
 
-    // 基底クラスの初期化
-
-    GameSceneExe::Initialize();
-
     // シーンに繋ぐ情報は基底初期化後の一番最初に設定
     m_RelationData.isClear = true;
 
@@ -38,6 +34,9 @@ void GameSceneDodge::Initialize()
     auto& rhythmBeat = Game::GetRhythmBeat();
     beatConfig.Setup(Game::GetBgmBpm(), 4, 16);
     rhythmBeat.Initialize(beatConfig, false, BASE_BEATS);
+
+    // ゲーム内の総拍数を参照するためリズム定義より後
+    GameSceneExe::Initialize();
 
     auto& instance = Game::GetInstance();
     TextureManager* textureMar = instance; 
@@ -82,12 +81,14 @@ void GameSceneDodge::Initialize()
 void GameSceneDodge::Update(float tick)
 {
     GameSceneExe::Update(tick);
+
+    auto& instance = Game::GetInstance();
+    
     // 拍が更新された場合
     m_StoneSpawnElapsed += tick;
     while (m_StoneSpawnElapsed >= kStoneSpawnInterval)
     {
         m_StoneSpawnElapsed -= kStoneSpawnInterval;
-        auto& instance = Game::GetInstance();
         int createNum = 8 * (m_RelationData.stageCount / 6 + 1);
         PlaySE("fall", 0.5f);
         for (int i = 0; i < createNum; ++i)
@@ -98,24 +99,19 @@ void GameSceneDodge::Update(float tick)
         }
     }
 
-    for (auto stone = m_StoneList.begin(); stone != m_StoneList.end(); )
+    for (auto stone : m_StoneList)
     {
-        if (stone->get()->IsActive())
-        {
-            stone = m_StoneList.erase(stone);
+        if (!stone->IsActive()) {
+            instance.DeleteObject(stone);
         }
-        else 
-        {
-            ++stone;
-        }
-
     }
 
 
-    if (IsChange()) 
+    if (IsChange())
     {
-        ChangeScenePop(GameToWait);
+        ChangeScene();
     }
+
 
 
 

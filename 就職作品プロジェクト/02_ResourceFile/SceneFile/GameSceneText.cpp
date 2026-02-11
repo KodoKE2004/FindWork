@@ -99,7 +99,6 @@ void GameSceneText::Initialize()
 #ifdef _DEBUG
     DebugUI::TEXT_CurrentScene = "GameSceneText";
 #endif
-    GameSceneExe::Initialize();
 
     // シーンに繋ぐ情報は基底初期化後の一番最初に設定
     m_RelationData.isClear       = false;
@@ -109,6 +108,9 @@ void GameSceneText::Initialize()
     auto& rhythmBeat = Game::GetRhythmBeat();
     beatConfig.Setup(Game::GetBgmBpm(), 4, 16);
     rhythmBeat.Initialize(beatConfig, false, BASE_BEATS + 4);
+    
+    // リズムの拍を参照するためリズム定義より後
+    GameSceneExe::Initialize();
 
     auto& instance = Game::GetInstance();
     TextureManager* textureMgr = instance; 
@@ -257,8 +259,7 @@ void GameSceneText::Update(float tick)
 
     if (IsChange())
     {
-        GameToWait.duration = Game::GetRhythmBeat().GetOneBeat() * 0.5f;
-        ChangeScenePop(GameToWait);
+        ChangeScene();
     }
 
 }

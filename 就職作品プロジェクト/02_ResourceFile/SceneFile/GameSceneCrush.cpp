@@ -11,9 +11,7 @@ void GameSceneCrush::Initialize()
     DebugUI::TEXT_CurrentScene = "GameSceneCrush";
 #endif 
 
-    // 基底クラスの初期化
 
-    GameSceneExe::Initialize();
     // シーンに繋ぐ情報は基底初期化後の一番最初に設定
     m_RelationData.isClear = false;
 
@@ -22,6 +20,9 @@ void GameSceneCrush::Initialize()
     auto& rhythmBeat = Game::GetRhythmBeat();
     beatConfig.Setup(Game::GetBgmBpm(), 4, 16);
     rhythmBeat.Initialize(beatConfig, false, BASE_BEATS);
+    
+    // ゲーム内の総拍数を参照するためリズム定義より後
+    GameSceneExe::Initialize();
 
     auto& instance  = Game::GetInstance();
     m_Bomber = instance.AddObject<Bomber>();
@@ -52,10 +53,11 @@ void GameSceneCrush::Update(float tick)
 
     GameSceneExe::Update(tick);
 
-    if (IsChange()) 
+    if (IsChange())
     {
-        ChangeScenePop(GameToWait);
+        ChangeScene();
     }
+
 }
 
 void GameSceneCrush::Finalize()

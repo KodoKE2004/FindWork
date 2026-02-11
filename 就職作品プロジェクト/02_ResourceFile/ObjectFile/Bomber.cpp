@@ -4,6 +4,11 @@
 #include <cmath>
 
 
+namespace
+{
+    const NVector3 kDefaultPos   = NVector3(-110.0f, -285.0f, 0.0f);
+    const NVector3 kDefaultScale = NVector3( 900.0f,  100.0f, 1.0f);
+}
 
 Bomber::Bomber(Camera& cam) : Square(cam)
 {
@@ -16,13 +21,12 @@ void Bomber::Initialize()
 
     Square::Initialize();
     SetTexture(textureMgr->GetTexture("Bomber/Body.png"));
-    SetPos   (-560.0f,-296.0f, 0.0f);
-    SetRotate( 0.0f  ,   0.0f,-0.1f);
-    SetScale ( 100.0f, 100.0f, 1.0f);
+    SetPos   (- 560.0f,- 296.0f,  0.0f);
+    SetRotate(  0.0f  ,    0.0f,- 0.1f);
+    SetScale (  100.0f,  100.0f,  1.0f);
     SetShader("VS_Alpha", "PS_Alpha");
 
     m_Count = 3;
-
 
     m_Rope = instance.AddObject<Square>();
     m_Rope->SetTexture(textureMgr->GetTexture("Bomber/Rope.png"));
@@ -35,14 +39,12 @@ void Bomber::Initialize()
     m_Number->SetName("m_Number");
     instance.GetCurrentScene()->GetSceneObjects().emplace_back(m_Number);
 
-    const NVector3 basePos   = NVector3(-110.0f, -285.0f, 0.0f);
-    const NVector3 baseScale = NVector3( 900.0f,  100.0f, 1.0f);
 
-    m_Rope->SetPos  (basePos  );
-    m_Rope->SetScale(baseScale);
+    m_Rope->SetPos  (kDefaultPos  );
+    m_Rope->SetScale(kDefaultScale);
 
-    m_BasePos     = basePos;
-    m_BaseScale   = baseScale;
+    m_BasePos     = kDefaultPos;
+    m_BaseScale   = kDefaultScale;
     m_HasBase     = true;
     m_isReadyExpo = false;
     
@@ -63,6 +65,19 @@ void Bomber::Draw()
 
 void Bomber::Finalize()
 {
+    auto& instance = Game::GetInstance();
+
+    if (m_Rope) {
+        instance.DeleteObject(m_Rope);
+    }
+    
+    if (m_Number) {
+        instance.DeleteObject(m_Number);
+    }
+    
+    m_Rope.reset();
+    m_Number.reset();
+    
     Square::Finalize();
 }
 
@@ -95,6 +110,23 @@ void Bomber::SetFillRatio(float ratio)
     m_FillRatio = clamped;
     
     UpdateUV();
+    ApplyFillTransform();
+}
+
+void Bomber::AdjustScaleByBeatTotal(int beatTotal, int maxBeat)
+{
+    if (!m_HasBase || maxBeat <= 0) {
+        return;
+    }
+
+    const float clampedBeat = std::clamp(static_cast<float>(beatTotal), 0.0f, static_cast<float>(maxBeat));
+    const float scaleRate = clampedBeat / static_cast<float>(maxBeat);
+
+    m_BaseScale   = kDefaultScale;
+    m_BaseScale.x = kDefaultScale.x * scaleRate;
+
+    m_BasePos   = kDefaultPos;
+    m_BasePos.x = m_BaseLeftX + (m_BaseScale.x * 0.5f);
     ApplyFillTransform();
 }
 

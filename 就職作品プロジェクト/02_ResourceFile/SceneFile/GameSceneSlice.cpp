@@ -8,9 +8,6 @@ void GameSceneSlice::Initialize()
 #ifdef _DEBUG
     DebugUI::TEXT_CurrentScene = "GameSceneSlice";
 #endif
-
-    GameSceneExe::Initialize();
-
     // シーンに繋ぐ情報は基底初期化後の一番最初に設定
     m_RelationData.isClear = false;
 
@@ -19,6 +16,9 @@ void GameSceneSlice::Initialize()
     auto& rhythmBeat = Game::GetRhythmBeat();
     beatConfig.Setup(Game::GetBgmBpm(), 4, 16);
     rhythmBeat.Initialize(beatConfig, false, BASE_BEATS);
+
+    // ゲーム内の総拍数を参照するためリズム定義より後
+    GameSceneExe::Initialize();
 
     auto& instance = Game::GetInstance();
     TextureManager* textureMgr = instance;
@@ -66,9 +66,9 @@ void GameSceneSlice::Update(float tick)
 
     GameSceneExe::Update(tick);
 
-    if (IsChange()) 
+    if (IsChange())
     {
-        ChangeScenePop(GameToWait);
+        ChangeScene();
     }
 
 }

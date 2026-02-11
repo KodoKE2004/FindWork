@@ -13,6 +13,7 @@ private:
     NVector3 m_BasePos{};
     NVector3 m_BaseScale{};
 
+    float    m_BaseLeftX = 0.0f;
     bool     m_HasBase = false;
     bool     m_isReadyExpo = false;
 
@@ -30,6 +31,9 @@ public:
     void SetCount(const int count) { m_Count = count; }
     void  SetFillRatio(float ratio);
     float GetFillRatio() const { return m_FillRatio; }
+    
+    // ƒQ[ƒ€Scene‚ÌBeat—Ê‚É‰‚¶‚ÄRope‚ÌÅ‘å‚Ì’·‚³‚ğ’²®
+    void AdjustScaleByBeatTotal(int beatTotal, int maxBeat = 16);
 
     void ReadyExpo() { m_isReadyExpo = true; }
     bool IsReadyExpo() const { return m_isReadyExpo; }
