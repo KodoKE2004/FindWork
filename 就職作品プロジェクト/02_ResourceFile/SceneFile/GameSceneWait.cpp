@@ -225,7 +225,9 @@ void GameSceneWait::Initialize()
     }
 
     Debug::Log("===== クリアステージ数 : " + std::to_string(m_RelationData.stageCount) + " =====");
-    
+
+    // 初期化の終わったタイミングでBGM再生
+    instance.PlayBgm();
 }
 
 void GameSceneWait::Update(float tick)
@@ -295,6 +297,8 @@ void GameSceneWait::Update(float tick)
         // ライフが0になったらリザルトシーンへ
         ChangeScenePush<ResultScene>(WaitToResult);
     }
+
+    
 }
 
 void GameSceneWait::Finalize()

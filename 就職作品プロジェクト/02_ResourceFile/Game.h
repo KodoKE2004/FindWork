@@ -31,7 +31,8 @@ private:
     std::shared_ptr<Theme>				 m_Theme;						// テーマ管理
     std::vector<std::shared_ptr<Scene>>	 m_SceneList;					// シーンスタック
     DirectX::SimpleMath::Vector2		 m_PreviewMousePos;				// デバッグ用ビュー行列
-	std::unique_ptr<Audio>				 m_BgmAudio;					// BGM
+	std::shared_ptr<Audio>				 m_BgmAudio;					// BGM
+	PlayParams							 m_BgmParams;
 
 #ifdef _DEBUG
 #endif
@@ -112,7 +113,7 @@ public:
 	static int				GetSpeedUpStageInterval();
 	static void				SetSpeedUpBpmIncrease(float bpmIncrease);
 	static float			GetSpeedUpBpmIncrease();
-
+	static void				PlayBgm();
     //================================
 	//		  マネージャーの取得
     //================================

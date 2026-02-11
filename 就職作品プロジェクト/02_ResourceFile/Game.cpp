@@ -130,8 +130,14 @@ void Game::Initialize()
 	bgmConfig.baseBpm		= 100.0f;
     bgmConfig.bpm			= bgmConfig.baseBpm;
 	
-	instance.m_BgmAudio = std::make_unique<Audio>();
-	instance.m_BgmAudio;
+	instance.m_BgmAudio = instance.m_AudioManager->Create(bgmConfig);
+
+	if (instance.m_BgmAudio)
+	{
+		instance.m_BgmParams = bgmConfig.params;
+
+		instance.m_BgmAudio->Play(instance.m_BgmParams);
+	}
 
 	instance.m_SceneCurrent = std::make_shared<GameSceneWait>();		// タイトルシーンのインスタンスを生成
 	instance.m_SceneCurrent->Initialize();
@@ -235,6 +241,7 @@ void Game::Finalize()
 	{
 		instance.m_SceneCurrent->Finalize();
 	}
+	instance.m_BgmAudio.reset();
 	instance.m_SceneCurrent.reset();
 	instance.m_SceneList.clear();
 
@@ -344,6 +351,14 @@ void Game::SetSpeedUpBpmIncrease(float bpmIncrease)
 float Game::GetSpeedUpBpmIncrease()
 {
 	return m_SpeedUpBpmIncrease;
+}
+
+void Game::PlayBgm()
+{
+	auto& instance = Game::GetInstance();
+	if (instance.m_BgmAudio) {
+		instance.m_BgmAudio->Play(instance.m_BgmParams);
+	}
 }
 
 void Game::RegistDebugObject()
