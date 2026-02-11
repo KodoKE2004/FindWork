@@ -135,8 +135,6 @@ void Game::Initialize()
 	if (instance.m_BgmAudio)
 	{
 		instance.m_BgmParams = bgmConfig.params;
-
-		instance.m_BgmAudio->Play(instance.m_BgmParams);
 	}
 
 	instance.m_SceneCurrent = std::make_shared<GameSceneWait>();		// タイトルシーンのインスタンスを生成
