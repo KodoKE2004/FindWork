@@ -398,8 +398,7 @@ void Game::StopBgm()
 
 	if (instance.m_BgmAudio)
 	{
-		instance.m_BgmParams.loop = false;   // ★ループ解除
-		instance.m_BgmAudio->App(instance.m_BgmParams);
+		instance.m_BgmAudio->RequestStopGracefully();
 	}
 }
 

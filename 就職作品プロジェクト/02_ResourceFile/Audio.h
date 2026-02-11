@@ -124,6 +124,8 @@ private:
     std::shared_ptr<AudioClip> m_clip;			// 所有
     VoiceCallback m_cb{};						// 所有
     std::atomic<bool> m_finished{ false };		// 再生終了検知用
+	std::atomic<bool> m_stopRequested{ false }; // graceful stop requested
+	LoopConfig m_loopConfig{};                  // current loop configuration
     bool m_autoRelease = true;					// 再生終了後に自動回収
     uint32_t m_id = 0;							// 識別用
     float m_Bpm   = 120.0f;						// 曲のBPM（必要なら）
@@ -143,6 +145,7 @@ public:
 	void Play(const PlayParams& params);
     // 停止
 	void Stop(bool immediate = true);
+	void RequestStopGracefully();
     // パラメータ設定
 	void SetVolume(float v);
     // ピッチ設定

@@ -58,6 +58,8 @@ void GameSceneExe::Initialize()
             audioMgr->Add(key, config.filePath);
         }
     }
+
+    instance.StopBgm();
 }
 
 void GameSceneExe::Update(float tick)
@@ -189,7 +191,7 @@ void GameSceneExe::Update(float tick)
 void GameSceneExe::ChangeScene()
 {
     Game::SetIsTickCount(true);
-    GameToWait.duration = Game::GetRhythmBeat().GetOneBeat();
+    GameToWait.duration = Game::GetRhythmBeat().GetOneBeat() * 0.5f;
     ChangeScenePop(GameToWait);
 }
 

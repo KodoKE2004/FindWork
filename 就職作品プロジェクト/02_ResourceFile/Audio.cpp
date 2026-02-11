@@ -39,6 +39,8 @@ void Audio::submitBuffer(const LoopConfig& loop) {
 
 void Audio::Play(const PlayParams& params) {
 	m_autoRelease = params.autoRelease;
+	m_loopConfig = params.loop;
+	m_stopRequested.store(false, std::memory_order_release);
 	m_voice->Stop(0);
     m_voice->FlushSourceBuffers();	// ”O‚Ì‚½‚ß
     submitBuffer(params.loop);		// ƒ‹[ƒvÝ’è‚à‚±‚±‚Å
@@ -59,9 +61,27 @@ void Audio::Stop(bool immediate) {
 	}
 	else {
 		// Ž©‘R’âŽ~: ‰½‚à‚µ‚È‚¢
+		RequestStopGracefully();
 	}
 }
 
+
+void Audio::RequestStopGracefully() {
+	if (!m_voice) return;
+	if (m_finished.load(std::memory_order_acquire)) return;
+
+	XAUDIO2_VOICE_STATE st{};
+	m_voice->GetState(&st);
+	if (st.BuffersQueued == 0) return;
+
+	if (m_stopRequested.exchange(true, std::memory_order_acq_rel)) {
+		return;
+	}
+
+	if (m_loopConfig.loopCount == XAUDIO2_LOOP_INFINITE) {
+		m_voice->ExitLoop(0);
+	}
+}
 
 bool Audio::IsPlaying() const {
 	if (!m_voice) return false;
