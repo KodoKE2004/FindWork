@@ -37,13 +37,14 @@ void TransScene::Initialize()
 	const SCENE_NO oldSceneNo  = GetOldSceneNo();
 	const SCENE_NO nextSceneNo = GetNextSceneNo();
 
+	
 	const bool isOldGameScene  = oldSceneNo == SCENE_NO::GAME_WAIT  ||
 								(oldSceneNo >= SCENE_NO::GAME_SLICE &&
 								 oldSceneNo  < SCENE_NO::EXE_NUM);
 
 	const bool isNextGameScene = nextSceneNo == SCENE_NO::GAME_WAIT  ||
 								(nextSceneNo >= SCENE_NO::GAME_SLICE &&
-								 nextSceneNo < SCENE_NO::EXE_NUM);
+								 nextSceneNo <  SCENE_NO::EXE_NUM);
 
 	if (isOldGameScene && isNextGameScene) {
         m_isGamePlaying = true;
@@ -123,7 +124,7 @@ void TransScene::Update(float tick)
 {
     auto& instance = Game::GetInstance();
     auto& rhythmBeat = instance.GetRhythmBeat();
-	if (m_isGamePlaying) {
+	if (instance.IsTickCount()) {
         // ゲームシーン間の遷移なら拍のタイマーも更新
         rhythmBeat.TickCount(tick);
 	}
@@ -146,13 +147,9 @@ void TransScene::Update(float tick)
 	if (!m_isChange && m_TransitionTexture->IsChange())
 	{
 		m_SceneOld->Finalize();
-
 		if (m_SceneNext) {
-            m_SceneNext->Initialize();
-            Debug::Log("[[検出]] NextScene Initialize");
-			// Update中のDrawを避けてDrawパス側でオフスクリーン描画する
+			m_SceneNext->Initialize();
 			m_RequestNextSceneDraw = true;
-
 		}
 		m_isChange = true;
 	}

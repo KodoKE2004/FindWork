@@ -25,6 +25,7 @@ float Game::m_BaseBpmIncreasePerDifficulty = 5.0f;
 int   Game::m_SpeedUpStageInterval = 4;
 float Game::m_SpeedUpBpmIncrease = 10.0f;
 RhythmBeat Game::m_RhythmBeat;
+bool  Game::m_isTickCount = false;
 
 void Game::InitializeTransitionCSV()
 {
@@ -135,6 +136,7 @@ void Game::Initialize()
 	if (instance.m_BgmAudio)
 	{
 		instance.m_BgmParams = bgmConfig.params;
+		SetBgmBpm(bgmConfig.bpm);
 	}
 
 	instance.m_SceneCurrent = std::make_shared<GameSceneWait>();		// タイトルシーンのインスタンスを生成
@@ -310,6 +312,37 @@ Camera& Game::GetCamera()
 	return *m_Camera.get();
 }
 
+void Game::SetBgmBpm(float bpm)
+{
+	if (bpm <= 0.0f) {
+		return;
+	}
+
+	m_RhythmBeat.SetBpm(bpm);
+
+	auto& instance = Game::GetInstance();
+	if (!instance.m_BgmAudio) {
+		return;
+	}
+
+	instance.m_BgmAudio->SetBpm(bpm);
+
+	const float baseBpm = instance.m_BgmAudio->GetBaseBpm();
+	if (baseBpm > 0.0f) {
+		instance.m_BgmParams.pitch = bpm / baseBpm;
+	}
+}
+
+float Game::GetBgmBpm()
+{
+	auto& instance = Game::GetInstance();
+	if (instance.m_BgmAudio) {
+		return instance.m_BgmAudio->GetBpm();
+	}
+
+	return m_RhythmBeat.GetBpm();
+}
+
 
 void Game::SetDifficultyStageInterval(int interval)
 {
@@ -356,6 +389,17 @@ void Game::PlayBgm()
 	auto& instance = Game::GetInstance();
 	if (instance.m_BgmAudio) {
 		instance.m_BgmAudio->Play(instance.m_BgmParams);
+	}
+}
+
+void Game::StopBgm()
+{
+	auto& instance = Game::GetInstance();
+
+	if (instance.m_BgmAudio)
+	{
+		instance.m_BgmParams.loop = false;   // ★ループ解除
+		instance.m_BgmAudio->App(instance.m_BgmParams);
 	}
 }
 

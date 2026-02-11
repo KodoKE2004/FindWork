@@ -32,7 +32,7 @@ void GameSceneDodge::Initialize()
     // リズムの定義
     RhythmBeatConst beatConfig{};
     auto& rhythmBeat = Game::GetRhythmBeat();
-    beatConfig.Setup(Game::GetBgmBpm(), 4, 16);
+    beatConfig.Setup(Game::GetBgmBpm(), 8, 4, 16, 4);
     rhythmBeat.Initialize(beatConfig, false, BASE_BEATS);
 
     // ゲーム内の総拍数を参照するためリズム定義より後

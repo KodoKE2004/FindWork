@@ -132,6 +132,7 @@ void TitleScene::Update(float tick)
 	{
 		// SE‚ÌÄ¶
 		PlaySE("enter", 0.7f);
+		Game::SetIsTickCount(false);
 		ChangeScenePush<GameSceneWait>(TitleToWait);
 		return;
 	}

@@ -106,7 +106,7 @@ void GameSceneText::Initialize()
     // リズムの定義
     RhythmBeatConst beatConfig{};
     auto& rhythmBeat = Game::GetRhythmBeat();
-    beatConfig.Setup(Game::GetBgmBpm(), 4, 16);
+    beatConfig.Setup(Game::GetBgmBpm(), 8, 4, 16, 4);
     rhythmBeat.Initialize(beatConfig, false, BASE_BEATS + 4);
     
     // リズムの拍を参照するためリズム定義より後

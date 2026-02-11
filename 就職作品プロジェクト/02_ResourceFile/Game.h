@@ -54,6 +54,7 @@ private:
 
 	// テンポ制御
 	static RhythmBeat m_RhythmBeat;
+	static bool		  m_isTickCount;
 
 public:
 	//================================
@@ -101,10 +102,14 @@ public:
 	static Game&			GetInstance();	
 	std::shared_ptr<Scene>	GetCurrentScene() const;
 	Camera&					GetCamera();
-    static void				SetBgmBpm(float bpm) { m_RhythmBeat.SetBpm(bpm); }
-    static float			GetBgmBpm()	  {  return m_RhythmBeat.GetBpm(); }
-	static RhythmBeat&		GetRhythmBeat(){ return m_RhythmBeat; }
-	static uint64_t			GetDrawFrameCounter() { return m_DrawFrameCounter; }
+	static void				SetBgmBpm(float bpm);
+	static float			GetBgmBpm();
+	static RhythmBeat&		GetRhythmBeat() {
+		return m_RhythmBeat; 
+	}
+	static uint64_t			GetDrawFrameCounter() {
+		return m_DrawFrameCounter;
+	}
 	static void				SetDifficultyStageInterval(int interval);
 	static int				GetDifficultyStageInterval();
 	static void				SetBaseBpmIncreasePerDifficulty(float bpmIncrease);
@@ -114,6 +119,12 @@ public:
 	static void				SetSpeedUpBpmIncrease(float bpmIncrease);
 	static float			GetSpeedUpBpmIncrease();
 	static void				PlayBgm();
+	static void				StopBgm();
+	static void				SetIsTickCount(bool isTick) {m_isTickCount = isTick; }
+	static bool				IsTickCount()			{
+		return m_isTickCount;
+	}
+
     //================================
 	//		  マネージャーの取得
     //================================

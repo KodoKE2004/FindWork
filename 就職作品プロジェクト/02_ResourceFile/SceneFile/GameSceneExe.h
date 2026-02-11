@@ -46,11 +46,12 @@ protected:
 	bool  m_SpecialActive = false;  
 
 	float m_FillRatio	  = 0.0f;		// 
-	float m_SegmentFrom	  = 0.0f;
-	float m_SegmentTo	  = 0.0f;
+	float m_SegmentFrom	  = 0.0f;		//
+	float m_SegmentTo	  = 0.0f;		//
 
 	// シーン遷移フラグ
-    bool  m_isChange	  = false;				// シーン変更フラグ
+    bool  m_isChange	  = false;		// シーン変更フラグ
+
 
 	// 先行クリア時の早回し用フラグ
     bool  m_isFastChange = false;					// 速攻シーン変更フラグ

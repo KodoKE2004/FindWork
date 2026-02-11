@@ -1,42 +1,54 @@
 #pragma once
 
 // リズムの変数
-// 
 struct RhythmBeatConst
 {
-    // 入力値
-    float m_Bpm = 120.0f;        // BPM (Beats Per Minute)
-    int   m_BeatUnit = 4;        // 拍子の分母 (4 = 4分音符, 8 = 8分音符, etc.)
-    int   m_TicksPerBeat = 16;   // 1拍を何分割するか
+    // 入力
+    float m_Bpm = 120.0f;          // 四分音符基準のBPM
+    int   m_BeatsPerBar = 4;       // 分子：小節の拍数
+    int   m_BeatUnit = 4;          // 分母：4=四分, 8=八分...
+    int   m_TicksPerBeat = 16;     // 1拍を何分割するか
+    int   m_HitsPerBar = 4;        // ★1小節に何回叩く(イベント)か（変則OK）
 
     // 計算結果
-    float secondsPerBeat = 0.0f; // 1拍の長さ（秒）
-    float secondsPerBar  = 0.0f; // 1小節の長さ（秒）
-    float secondsPerTick = 0.0f; // 1Tickの長さ（秒）
-    float ticksPerSecond = 0.0f; // 1秒あたりに進むTick数
+    float secondsPerBeat = 0.0f;   // 1拍（分母の音符）の秒
+    float secondsPerBar = 0.0f;   // 1小節の秒
+    float secondsPerTick = 0.0f;   // 1Tickの秒
+    float ticksPerSecond = 0.0f;   // 1秒あたりTick
 
-    // Setup（セットアップ）:
-    //     設定をまとめて反映する関数名によく使われる
-    void Setup(float bpm, int beatsPerBar = 4, int ticksPerBeat = 16)
+    float secondsPerHit = 0.0f;   // ★1回叩く間隔（小節を hitsPerBar で割る）
+    float hitsPerSecond = 0.0f;   // ★1秒あたり叩く回数
+
+    void Setup(float bpm,
+        int beatsPerBar = 4,
+        int beatUnit = 4,
+        int ticksPerBeat = 16,
+        int hitsPerBar = 4)
     {
         m_Bpm = bpm;
-        m_BeatUnit = beatsPerBar;
-        m_TicksPerBeat = ticksPerBeat;
+        m_BeatsPerBar   = beatsPerBar;
+        m_BeatUnit      = beatUnit;
+        m_TicksPerBeat  = ticksPerBeat;
+        m_HitsPerBar    = (hitsPerBar <= 0) ? 1 : hitsPerBar; // 0除算防止
 
-        // 1拍の長さ（秒） = 60 / BPM
-        secondsPerBeat = 60.0f / m_Bpm;
+        // 四分音符の秒
+        const float secondsPerQuarter = 60.0f / m_Bpm;
 
-        // 1小節の長さ（秒） = 1拍 * 拍数
-        secondsPerBar = secondsPerBeat * static_cast<float>(m_BeatUnit);
+        // 1拍（分母音符）の秒：4→8なら半分
+        secondsPerBeat = secondsPerQuarter * (4.0f / static_cast<float>(m_BeatUnit));
 
-        // 1Tickの長さ（秒） = 1拍 / Tick数
+        // 小節秒：拍数（分子）×1拍秒
+        secondsPerBar = secondsPerBeat * static_cast<float>(m_BeatsPerBar);
+
+        // Tick秒
         secondsPerTick = secondsPerBeat / static_cast<float>(m_TicksPerBeat);
-
-        // 1秒あたりのTick数 = 1 / secondsPerTick
         ticksPerSecond = 1.0f / secondsPerTick;
+
+        // ★叩く間隔（小節を hits で割る）
+        secondsPerHit = secondsPerBar / static_cast<float>(m_HitsPerBar);
+        hitsPerSecond = 1.0f / secondsPerHit;
     }
 };
-
 class RhythmBeat
 {
 private:

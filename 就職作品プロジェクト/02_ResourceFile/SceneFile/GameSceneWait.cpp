@@ -121,8 +121,8 @@ void GameSceneWait::Initialize()
     RhythmBeatConst beatConfig{};
     auto& rhythmBeat = Game::GetRhythmBeat();
 
-    beatConfig.Setup(Game::GetBgmBpm(), 4, 1);
-    rhythmBeat.Initialize(beatConfig, false, 8);
+    beatConfig.Setup(Game::GetBgmBpm(), 8, 4, 16, 4);
+    rhythmBeat.Initialize(beatConfig, false, 32);
 
     // 難易度アップ処理 
     ++m_RelationData.stageCount;
@@ -140,7 +140,7 @@ void GameSceneWait::Initialize()
         const float upBpm = difficulty * baseBpmIncreasePerDifficulty;
         if (upBpm > 0.0f)
         {
-            beatConfig.Setup(Game::GetBgmBpm() + upBpm, 4, 1);
+            beatConfig.Setup(Game::GetBgmBpm(), 8, 4, 16, 4);
         }
         Debug::Log("[[検出]] 難易度アップ");
     }
@@ -159,6 +159,7 @@ void GameSceneWait::Initialize()
     SetTimer(&m_DecrementLife.timer);
 
     m_IsFirstInitialized = true;
+    m_WasPlayBGM         = false;
 
     auto& instance = Game::GetInstance();
     TextureManager* textureMgr = instance.GetInstance();
@@ -226,33 +227,35 @@ void GameSceneWait::Initialize()
 
     Debug::Log("===== クリアステージ数 : " + std::to_string(m_RelationData.stageCount) + " =====");
 
-    // 初期化の終わったタイミングでBGM再生
-    instance.PlayBgm();
 }
 
 void GameSceneWait::Update(float tick)
 {   
     auto& rhythmBeat = Game::GetRhythmBeat();
     // リズムを取る    
-    int advancedTicks = rhythmBeat.Update(tick);
+    int oldElapsedBeat = rhythmBeat.GetBeatElapsed();
+    int advancedTicks  = rhythmBeat.Update(tick);
+    int elapsedBeat    = rhythmBeat.GetBeatElapsed();
 
     // ライフをリズムに合わせて回転させる
-    if (advancedTicks > 0)
+    if (oldElapsedBeat  != elapsedBeat &&
+       (elapsedBeat % 2 == 0))
     {
+        // 1拍目のタイミングでBGM再生
+        if (!m_WasPlayBGM)
+        {
+            Game::PlayBgm();
+            m_WasPlayBGM = true;
+        }
         
-        // 経過拍数の更新
-
-        // 残り一拍のタイミングでステージ遷移フラグを立てる
-        if (rhythmBeat.GetBeatRest() == 0)
+        // フラグの一拍前のタイミングでお題提示処理開始
+        else if (elapsedBeat == rhythmBeat.GetBeatTotal())
         {
             m_ShouldTransitionToStage = true;
         }
-        // フラグの一拍前のタイミングでお題提示処理開始
-        else if (rhythmBeat.GetBeatRest() == 1)
-        {
-            m_Theme->SetActive(true);
-        }
-        if (advancedTicks % 2 == 1)
+
+        int bulletTempo = elapsedBeat / 2;
+        if (bulletTempo % 2 == 1)
         {
             m_IsLifeTiltPositive = !m_IsLifeTiltPositive;
         }
@@ -265,12 +268,15 @@ void GameSceneWait::Update(float tick)
             }
         }
     }
-
     if (m_ShouldTransitionToStage)
     {
         StartNextStageTransition();
     }
-
+    // 残り一拍のタイミングでステージ遷移フラグを立てる
+    if (elapsedBeat == rhythmBeat.GetBeatTotal() - 1)
+    {
+        m_Theme->SetActive(true);
+    }
 
     // ライフ減少処理
     if ( m_DecrementLife.IsTimeUp() &&
@@ -295,6 +301,7 @@ void GameSceneWait::Update(float tick)
     if (m_RelationData.gameLife == 0u)
     {
         // ライフが0になったらリザルトシーンへ
+        Game::SetIsTickCount(false);
         ChangeScenePush<ResultScene>(WaitToResult);
     }
 
@@ -323,14 +330,16 @@ void GameSceneWait::Finalize()
 // 次のステージ選択とシーン遷移処理
 void GameSceneWait::StartNextStageTransition()
 {
+    Game::SetIsTickCount(true);
+
     RhythmBeat& rhythmBeat = Game::GetRhythmBeat();
-    WaitToGame.duration = rhythmBeat.GetOneBeat() * 0.5f;
+    WaitToGame.duration = rhythmBeat.GetOneBeat();
 
     // シーン遷移処理
     switch (m_RelationData.nextScene)
     {
     case SCENE_NO::GAME_SLICE: ChangeScenePush<GameSceneSlice>(WaitToGame); break;
-    case SCENE_NO::GAME_DODGE : ChangeScenePush<GameSceneDodge> (WaitToGame); break;
+    case SCENE_NO::GAME_DODGE: ChangeScenePush<GameSceneDodge>(WaitToGame); break;
     case SCENE_NO::GAME_CRUSH: ChangeScenePush<GameSceneCrush>(WaitToGame); break;
     case SCENE_NO::GAME_TEXT : ChangeScenePush<GameSceneText> (WaitToGame); break;
     default: return;

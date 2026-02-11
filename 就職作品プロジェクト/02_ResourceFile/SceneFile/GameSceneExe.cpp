@@ -26,6 +26,7 @@ void GameSceneExe::Initialize()
     //-------------------------------
     m_isChange     = false;
     m_isFastChange = false;
+    m_WasPlayBGM   = false;
     m_FastChangeState = FastChangeState::Filling;
     m_FastChangeFill = 0.0f;
     m_FastChangeStartFill = 0.0f;
@@ -65,8 +66,6 @@ void GameSceneExe::Update(float tick)
     m_PreciousMeasure = m_CurrentMeasure;
 
     RhythmBeat& rhythmBeat = Game::GetInstance().GetRhythmBeat();
-
-    
 
     // i‚ñ‚¾Tick(””)‚ğæ“¾
     int advancedTick = rhythmBeat.Update(tick);
@@ -189,7 +188,8 @@ void GameSceneExe::Update(float tick)
 
 void GameSceneExe::ChangeScene()
 {
-    GameToWait.duration = Game::GetRhythmBeat().GetOneBeat() * 0.5f;
+    Game::SetIsTickCount(true);
+    GameToWait.duration = Game::GetRhythmBeat().GetOneBeat();
     ChangeScenePop(GameToWait);
 }
 

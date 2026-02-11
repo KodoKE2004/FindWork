@@ -19,7 +19,7 @@ void Theme::Initialize()
     Square::Initialize();
     
     m_SecondPerBeat = Game::GetRhythmBeat().GetOneBeat();
-    m_Duration  = 1.5f * m_SecondPerBeat;
+    m_Duration  = 2.0f * m_SecondPerBeat;
     m_ScaleMass = 5.0f;
     m_Elapsed   = 0.0f;
 
@@ -84,6 +84,10 @@ void Theme::SetActive()
 
 void Theme::SetActive(const bool isActive)
 {
+    if (m_isActive) {
+        return;
+    }
+
     m_isActive = isActive;
     if (m_isActive)
     {
