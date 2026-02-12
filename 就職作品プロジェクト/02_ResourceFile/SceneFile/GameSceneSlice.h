@@ -11,6 +11,7 @@ private:
 
 public:
     GameSceneSlice() = default;
+    GameSceneSlice(std::shared_ptr<Camera> cam);
     ~GameSceneSlice()       override = default;
 
     void Initialize()       override ;

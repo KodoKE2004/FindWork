@@ -145,7 +145,7 @@ void GameSceneWait::Initialize()
     }
     // スピード
     else if (m_RelationData.stageCount % speedUpStageInterval == 0) {
-        float upBpm = (m_RelationData.stageCount / speedUpStageInterval) * speedUpBpmIncrease;
+        float upBpm = (static_cast<float>(m_RelationData.stageCount) / speedUpStageInterval) * speedUpBpmIncrease;
         beatConfig.Setup(Game::GetBgmBpm() + upBpm, 4, 1);
         Debug::Log("[[検出]] スピードアップ");
 
@@ -372,4 +372,8 @@ void GameSceneWait::PrepareNextStage()
 SCENE_NO GameSceneWait::StageSelectAllRandom()
 {
     return SelectRandomStage(m_RandomEngine, m_RelationData.oldScene);
+}
+
+GameSceneWait::GameSceneWait(std::shared_ptr<Camera> cam) : Scene(cam)
+{
 }

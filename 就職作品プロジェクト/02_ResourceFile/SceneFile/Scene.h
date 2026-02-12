@@ -4,6 +4,7 @@
 #include "Skydome.h"
 #include "../Audio.h"
 #include "RhythmBeat.h"
+#include "Camera.h"
 
 #include <optional>
 #include <unordered_map>
@@ -64,7 +65,7 @@ protected:
 	
 	std::vector<std::shared_ptr<Object>>		 m_MySceneObjects;
 	std::unordered_map<std::string, AudioConfig> m_AudioList;
-	
+	std::shared_ptr<Camera>  m_Camera  = nullptr;
 	std::shared_ptr<Skydome> m_Skydome = nullptr;
 	std::shared_ptr<Theme>	 m_Theme   = nullptr;
 
@@ -89,7 +90,6 @@ protected:
 		*timer = 0.0f;
 		m_TimerList.emplace_back(timer);
 	}
-
 
 	// それぞれが作成したTimer変数をカウント
 	void CountTimer(const float tick)
@@ -116,7 +116,8 @@ protected:
 public:
 	static SceneRelationData m_RelationData;
 	// コンストラクタとデストラクタ
-	Scene()  = default;
+	Scene() = default;
+	Scene(std::shared_ptr<Camera> cam);
 	virtual ~Scene() = default;
 
 	//---------------------------------

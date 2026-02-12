@@ -41,7 +41,7 @@ public:
 	// コンストラクタとデストラクタ
 	//================================
 	TitleScene()  = default;
-	TitleScene(bool entryFlg);
+	TitleScene(std::shared_ptr<Camera> cam);
 	~TitleScene() = default;
 
 

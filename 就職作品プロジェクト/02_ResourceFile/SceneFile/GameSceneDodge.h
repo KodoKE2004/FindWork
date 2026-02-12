@@ -18,6 +18,7 @@ private:
 
     public:
     GameSceneDodge()  = default;
+    GameSceneDodge(std::shared_ptr<Camera> cam);
     ~GameSceneDodge() = default;
 
     void Initialize()       override;

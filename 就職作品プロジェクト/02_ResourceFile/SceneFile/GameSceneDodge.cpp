@@ -22,6 +22,10 @@ namespace
     }
 }
 
+GameSceneDodge::GameSceneDodge(std::shared_ptr<Camera> cam) : GameSceneExe(cam)
+{
+}
+
 void GameSceneDodge::Initialize()
 {
     DebugUI::TEXT_CurrentScene = "GameSceneJump";

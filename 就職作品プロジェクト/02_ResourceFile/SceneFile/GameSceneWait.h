@@ -65,6 +65,7 @@ public:
 	//================================
 
 	GameSceneWait()  = default;
+	GameSceneWait(std::shared_ptr<Camera> cam);
 	~GameSceneWait() = default;
 
 	//================================

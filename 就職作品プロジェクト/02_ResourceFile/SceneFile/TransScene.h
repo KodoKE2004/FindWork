@@ -62,6 +62,7 @@ public:
     // コンストラクタとデストラクタ
 
 	TransScene();
+	TransScene(std::shared_ptr<Camera> cam);
     ~TransScene();
 
 	void Initialize()		override;

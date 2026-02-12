@@ -5,6 +5,10 @@
 
 using namespace Calculator::Collider2D;
 
+GameSceneCrush::GameSceneCrush(std::shared_ptr<Camera> cam) : GameSceneExe(cam)
+{
+}
+
 void GameSceneCrush::Initialize()
 {
 #ifdef _DEBUG

@@ -6,9 +6,8 @@
 #include "Square.h"
 #include "ObjectFile/Model.h"
 
-TitleScene::TitleScene(bool entryFlg)
+TitleScene::TitleScene(std::shared_ptr<Camera> cam) : Scene(cam)
 {
-	m_EntryFlg = entryFlg;
 }
 
 void TitleScene::Initialize()

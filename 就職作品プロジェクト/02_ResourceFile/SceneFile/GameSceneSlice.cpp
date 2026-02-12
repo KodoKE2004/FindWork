@@ -3,6 +3,10 @@
 #include "Calculator.h"
 #include "Debug.hpp"
 
+GameSceneSlice::GameSceneSlice(std::shared_ptr<Camera> cam) : GameSceneExe(cam)
+{
+}
+
 void GameSceneSlice::Initialize()
 {
 #ifdef _DEBUG

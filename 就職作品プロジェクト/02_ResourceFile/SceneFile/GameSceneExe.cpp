@@ -11,6 +11,10 @@
 
 
 
+GameSceneExe::GameSceneExe(std::shared_ptr<Camera> cam) : Scene(cam)
+{
+}
+
 void GameSceneExe::Initialize()
 {
     auto& instance   = Game::GetInstance();

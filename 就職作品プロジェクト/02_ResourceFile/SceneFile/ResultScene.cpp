@@ -5,6 +5,10 @@
 
 using namespace Calculator::Easing;
 
+ResultScene::ResultScene(std::shared_ptr<Camera> cam) : Scene(cam)
+{
+}
+
 void ResultScene::Initialize()
 {
     auto& instance = Game::GetInstance();

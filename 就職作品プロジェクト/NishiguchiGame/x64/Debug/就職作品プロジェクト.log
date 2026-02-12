@@ -1,89 +1,1881 @@
-﻿  compilation object save succeeded; see C:\Users\dorae\Desktop\HAL\class3\FindWork\就職作品プロジェクト\x64\Debug\PS_Alpha.cso
-  compilation object save succeeded; see C:\Users\dorae\Desktop\HAL\class3\FindWork\就職作品プロジェクト\x64\Debug\PS_Default.cso
-  compilation object save succeeded; see C:\Users\dorae\Desktop\HAL\class3\FindWork\就職作品プロジェクト\x64\Debug\PS_Skydome.cso
-  compilation object save succeeded; see C:\Users\dorae\Desktop\HAL\class3\FindWork\就職作品プロジェクト\x64\Debug\PS_Sprite.cso
-  compilation object save succeeded; see C:\Users\dorae\Desktop\HAL\class3\FindWork\就職作品プロジェクト\x64\Debug\PS_Unlit.cso
-  compilation object save succeeded; see C:\Users\dorae\Desktop\HAL\class3\FindWork\就職作品プロジェクト\x64\Debug\VS_Alpha.cso
-  compilation object save succeeded; see C:\Users\dorae\Desktop\HAL\class3\FindWork\就職作品プロジェクト\x64\Debug\VS_DebugGrid.cso
-  compilation object save succeeded; see C:\Users\dorae\Desktop\HAL\class3\FindWork\就職作品プロジェクト\x64\Debug\VS_Default.cso
-  compilation object save succeeded; see C:\Users\dorae\Desktop\HAL\class3\FindWork\就職作品プロジェクト\x64\Debug\VS_Instansing2D.cso
-  compilation object save succeeded; see C:\Users\dorae\Desktop\HAL\class3\FindWork\就職作品プロジェクト\x64\Debug\VS_Skydome.cso
-  compilation object save succeeded; see C:\Users\dorae\Desktop\HAL\class3\FindWork\就職作品プロジェクト\x64\Debug\VS_Unlit.cso
-  pch.cpp
-C:\Users\dorae\Desktop\HAL\class3\FindWork\就職作品プロジェクト\02_ResourceFile\Debug.hpp(194,17): warning C4505: 'Debug::Log': 内部リンケージ含む参照されていない関数が削除されました
-  (ソース ファイル 'pch.cpp' をコンパイルしています)
-  
-C:\Users\dorae\Desktop\HAL\class3\FindWork\就職作品プロジェクト\02_ResourceFile\Debug.hpp(200,17): warning C4505: 'Debug::Log': 内部リンケージ含む参照されていない関数が削除されました
-  (ソース ファイル 'pch.cpp' をコンパイルしています)
-  
-  Application.cpp
-  Audio.cpp
-  ImGuiUtil.cpp
+﻿  Application.cpp
   Bird.cpp
   Bomber.cpp
   Button.cpp
-  DragController.cpp
-  MouseObject.cpp
   Stone.cpp
   Theme.cpp
-  Timer.cpp
-  Particle.cpp
-  RhythmBeat.cpp
-  AudioManager.cpp
   Camera.cpp
-  Calculator.cpp
   DebugGridLine.cpp
   DebugUI.cpp
-  Dx11helper.cpp
   Game.cpp
-  input.cpp
-  main.cpp
-  Car.cpp
-  CartWarning.cpp
   Circle.cpp
-  Player.cpp
   Enemy.cpp
   GameSceneCrush.cpp
   GameSceneDodge.cpp
   GameSceneSlice.cpp
   GameSceneText.cpp
+C:\Program Files\Microsoft Visual Studio\2022\Community\VC\Tools\MSVC\14.44.35207\include\xutility(472,14): error C2672: 'std::construct_at': 一致するオーバーロードされた関数が見つかりませんでした。
+  (ソース ファイル '/02_ResourceFile/ObjectFile/Button.cpp' をコンパイルしています)
+      C:\Program Files\Microsoft Visual Studio\2022\Community\VC\Tools\MSVC\14.44.35207\include\xutility(461,16):
+      '_Ty *std::construct_at(_Ty *const ,_Types ...) noexcept(<expr>)' の可能性があります
+          C:\Program Files\Microsoft Visual Studio\2022\Community\VC\Tools\MSVC\14.44.35207\include\xutility(472,14):
+          関連する制約が満たされていません
+              C:\Program Files\Microsoft Visual Studio\2022\Community\VC\Tools\MSVC\14.44.35207\include\xutility(459,50):
+              'TransScene::TransScene': オーバーロードされた関数ですべての引数の型を変換できませんでした
+                  C:\Users\dorae\Desktop\HAL\class3\FindWork\就職作品プロジェクト\02_ResourceFile\SceneFile\TransScene.h(92,1):
+                  'TransScene::TransScene(const TransScene &)' の可能性があります
+                      C:\Program Files\Microsoft Visual Studio\2022\Community\VC\Tools\MSVC\14.44.35207\include\xutility(459,50):
+                      'TransScene::TransScene(const TransScene &)': 引数 1 を 'Camera' から 'const TransScene &' へ変換できません。
+                          C:\Program Files\Microsoft Visual Studio\2022\Community\VC\Tools\MSVC\14.44.35207\include\xutility(459,71):
+                          理由: 'Camera' から 'const TransScene' へは変換できません。
+                          C:\Program Files\Microsoft Visual Studio\2022\Community\VC\Tools\MSVC\14.44.35207\include\xutility(459,71):
+                          この変換を実行可能なユーザー定義変換演算子がないか、または演算子を呼び出せません。
+                  C:\Users\dorae\Desktop\HAL\class3\FindWork\就職作品プロジェクト\02_ResourceFile\SceneFile\TransScene.h(65,2):
+                  または 'TransScene::TransScene(std::shared_ptr<Camera>)'
+                      C:\Program Files\Microsoft Visual Studio\2022\Community\VC\Tools\MSVC\14.44.35207\include\xutility(459,50):
+                      'TransScene::TransScene(std::shared_ptr<Camera>)': 引数 1 を 'Camera' から 'std::shared_ptr<Camera>' へ変換できません。
+                          C:\Program Files\Microsoft Visual Studio\2022\Community\VC\Tools\MSVC\14.44.35207\include\xutility(459,71):
+                          この変換を実行可能なユーザー定義変換演算子がないか、または演算子を呼び出せません。
+                  C:\Program Files\Microsoft Visual Studio\2022\Community\VC\Tools\MSVC\14.44.35207\include\xutility(459,50):
+                  引数リスト '(Camera)' を一致させようとしているとき
+      C:\Program Files\Microsoft Visual Studio\2022\Community\VC\Tools\MSVC\14.44.35207\include\xutility(472,14):
+      テンプレートインスタンス化コンテキスト (最初に最も古いもの) は
+          C:\Users\dorae\Desktop\HAL\class3\FindWork\就職作品プロジェクト\02_ResourceFile\Game.h(163,24):
+          コンパイル対象の関数 テンプレート インスタンス化 'std::shared_ptr<TransScene> std::make_shared<TransScene,Camera&>(Camera &)' のリファレンスを確認してください
+          C:\Program Files\Microsoft Visual Studio\2022\Community\VC\Tools\MSVC\14.44.35207\include\memory(2913,46):
+          コンパイル対象の関数 テンプレート インスタンス化 'std::_Ref_count_obj2<TransScene>::_Ref_count_obj2<Camera&>(Camera &)' のリファレンスを確認してください
+          C:\Program Files\Microsoft Visual Studio\2022\Community\VC\Tools\MSVC\14.44.35207\include\memory(2100,18):
+          コンパイル対象の関数 テンプレート インスタンス化 'void std::_Construct_in_place<_Ty,Camera&>(_Ty &,Camera &) noexcept(false)' のリファレンスを確認してください
+          with
+          [
+              _Ty=TransScene
+          ]
+  
+C:\Program Files\Microsoft Visual Studio\2022\Community\VC\Tools\MSVC\14.44.35207\include\xutility(476,61): error C2665: 'TransScene::TransScene': オーバーロードされた関数ですべての引数の型を変換できませんでした
+  (ソース ファイル '/02_ResourceFile/ObjectFile/Button.cpp' をコンパイルしています)
+      C:\Users\dorae\Desktop\HAL\class3\FindWork\就職作品プロジェクト\02_ResourceFile\SceneFile\TransScene.h(92,1):
+      'TransScene::TransScene(const TransScene &)' の可能性があります
+          C:\Program Files\Microsoft Visual Studio\2022\Community\VC\Tools\MSVC\14.44.35207\include\xutility(476,61):
+          'TransScene::TransScene(const TransScene &)': 引数 1 を 'Camera' から 'const TransScene &' へ変換できません。
+              C:\Program Files\Microsoft Visual Studio\2022\Community\VC\Tools\MSVC\14.44.35207\include\xutility(476,82):
+              理由: 'Camera' から 'const TransScene' へは変換できません。
+              C:\Program Files\Microsoft Visual Studio\2022\Community\VC\Tools\MSVC\14.44.35207\include\xutility(476,82):
+              この変換を実行可能なユーザー定義変換演算子がないか、または演算子を呼び出せません。
+      C:\Users\dorae\Desktop\HAL\class3\FindWork\就職作品プロジェクト\02_ResourceFile\SceneFile\TransScene.h(65,2):
+      または 'TransScene::TransScene(std::shared_ptr<Camera>)'
+          C:\Program Files\Microsoft Visual Studio\2022\Community\VC\Tools\MSVC\14.44.35207\include\xutility(476,61):
+          'TransScene::TransScene(std::shared_ptr<Camera>)': 引数 1 を 'Camera' から 'std::shared_ptr<Camera>' へ変換できません。
+              C:\Program Files\Microsoft Visual Studio\2022\Community\VC\Tools\MSVC\14.44.35207\include\xutility(476,82):
+              この変換を実行可能なユーザー定義変換演算子がないか、または演算子を呼び出せません。
+      C:\Program Files\Microsoft Visual Studio\2022\Community\VC\Tools\MSVC\14.44.35207\include\xutility(476,61):
+      引数リスト '(Camera)' を一致させようとしているとき
+  
+C:\Program Files\Microsoft Visual Studio\2022\Community\VC\Tools\MSVC\14.44.35207\include\xutility(472,14): error C2672: 'std::construct_at': 一致するオーバーロードされた関数が見つかりませんでした。
+  (ソース ファイル '/02_ResourceFile/SceneFile/GameSceneSlice.cpp' をコンパイルしています)
+      C:\Program Files\Microsoft Visual Studio\2022\Community\VC\Tools\MSVC\14.44.35207\include\xutility(461,16):
+      '_Ty *std::construct_at(_Ty *const ,_Types ...) noexcept(<expr>)' の可能性があります
+          C:\Program Files\Microsoft Visual Studio\2022\Community\VC\Tools\MSVC\14.44.35207\include\xutility(472,14):
+          関連する制約が満たされていません
+              C:\Program Files\Microsoft Visual Studio\2022\Community\VC\Tools\MSVC\14.44.35207\include\xutility(459,50):
+              'TransScene::TransScene': オーバーロードされた関数ですべての引数の型を変換できませんでした
+                  C:\Users\dorae\Desktop\HAL\class3\FindWork\就職作品プロジェクト\02_ResourceFile\SceneFile\TransScene.h(92,1):
+                  'TransScene::TransScene(const TransScene &)' の可能性があります
+                      C:\Program Files\Microsoft Visual Studio\2022\Community\VC\Tools\MSVC\14.44.35207\include\xutility(459,50):
+                      'TransScene::TransScene(const TransScene &)': 引数 1 を 'Camera' から 'const TransScene &' へ変換できません。
+                          C:\Program Files\Microsoft Visual Studio\2022\Community\VC\Tools\MSVC\14.44.35207\include\xutility(459,71):
+                          理由: 'Camera' から 'const TransScene' へは変換できません。
+                          C:\Program Files\Microsoft Visual Studio\2022\Community\VC\Tools\MSVC\14.44.35207\include\xutility(459,71):
+                          この変換を実行可能なユーザー定義変換演算子がないか、または演算子を呼び出せません。
+                  C:\Users\dorae\Desktop\HAL\class3\FindWork\就職作品プロジェクト\02_ResourceFile\SceneFile\TransScene.h(65,2):
+                  または 'TransScene::TransScene(std::shared_ptr<Camera>)'
+                      C:\Program Files\Microsoft Visual Studio\2022\Community\VC\Tools\MSVC\14.44.35207\include\xutility(459,50):
+                      'TransScene::TransScene(std::shared_ptr<Camera>)': 引数 1 を 'Camera' から 'std::shared_ptr<Camera>' へ変換できません。
+                          C:\Program Files\Microsoft Visual Studio\2022\Community\VC\Tools\MSVC\14.44.35207\include\xutility(459,71):
+                          この変換を実行可能なユーザー定義変換演算子がないか、または演算子を呼び出せません。
+                  C:\Program Files\Microsoft Visual Studio\2022\Community\VC\Tools\MSVC\14.44.35207\include\xutility(459,50):
+                  引数リスト '(Camera)' を一致させようとしているとき
+      C:\Program Files\Microsoft Visual Studio\2022\Community\VC\Tools\MSVC\14.44.35207\include\xutility(472,14):
+      テンプレートインスタンス化コンテキスト (最初に最も古いもの) は
+          C:\Users\dorae\Desktop\HAL\class3\FindWork\就職作品プロジェクト\02_ResourceFile\Game.h(163,24):
+          コンパイル対象の関数 テンプレート インスタンス化 'std::shared_ptr<TransScene> std::make_shared<TransScene,Camera&>(Camera &)' のリファレンスを確認してください
+          C:\Program Files\Microsoft Visual Studio\2022\Community\VC\Tools\MSVC\14.44.35207\include\memory(2913,46):
+          コンパイル対象の関数 テンプレート インスタンス化 'std::_Ref_count_obj2<TransScene>::_Ref_count_obj2<Camera&>(Camera &)' のリファレンスを確認してください
+          C:\Program Files\Microsoft Visual Studio\2022\Community\VC\Tools\MSVC\14.44.35207\include\memory(2100,18):
+          コンパイル対象の関数 テンプレート インスタンス化 'void std::_Construct_in_place<_Ty,Camera&>(_Ty &,Camera &) noexcept(false)' のリファレンスを確認してください
+          with
+          [
+              _Ty=TransScene
+          ]
+  
+C:\Program Files\Microsoft Visual Studio\2022\Community\VC\Tools\MSVC\14.44.35207\include\xutility(476,61): error C2665: 'TransScene::TransScene': オーバーロードされた関数ですべての引数の型を変換できませんでした
+  (ソース ファイル '/02_ResourceFile/SceneFile/GameSceneSlice.cpp' をコンパイルしています)
+      C:\Users\dorae\Desktop\HAL\class3\FindWork\就職作品プロジェクト\02_ResourceFile\SceneFile\TransScene.h(92,1):
+      'TransScene::TransScene(const TransScene &)' の可能性があります
+          C:\Program Files\Microsoft Visual Studio\2022\Community\VC\Tools\MSVC\14.44.35207\include\xutility(476,61):
+          'TransScene::TransScene(const TransScene &)': 引数 1 を 'Camera' から 'const TransScene &' へ変換できません。
+              C:\Program Files\Microsoft Visual Studio\2022\Community\VC\Tools\MSVC\14.44.35207\include\xutility(476,82):
+              理由: 'Camera' から 'const TransScene' へは変換できません。
+              C:\Program Files\Microsoft Visual Studio\2022\Community\VC\Tools\MSVC\14.44.35207\include\xutility(476,82):
+              この変換を実行可能なユーザー定義変換演算子がないか、または演算子を呼び出せません。
+      C:\Users\dorae\Desktop\HAL\class3\FindWork\就職作品プロジェクト\02_ResourceFile\SceneFile\TransScene.h(65,2):
+      または 'TransScene::TransScene(std::shared_ptr<Camera>)'
+          C:\Program Files\Microsoft Visual Studio\2022\Community\VC\Tools\MSVC\14.44.35207\include\xutility(476,61):
+          'TransScene::TransScene(std::shared_ptr<Camera>)': 引数 1 を 'Camera' から 'std::shared_ptr<Camera>' へ変換できません。
+              C:\Program Files\Microsoft Visual Studio\2022\Community\VC\Tools\MSVC\14.44.35207\include\xutility(476,82):
+              この変換を実行可能なユーザー定義変換演算子がないか、または演算子を呼び出せません。
+      C:\Program Files\Microsoft Visual Studio\2022\Community\VC\Tools\MSVC\14.44.35207\include\xutility(476,61):
+      引数リスト '(Camera)' を一致させようとしているとき
+  
+C:\Program Files\Microsoft Visual Studio\2022\Community\VC\Tools\MSVC\14.44.35207\include\xutility(472,14): error C2672: 'std::construct_at': 一致するオーバーロードされた関数が見つかりませんでした。
+  (ソース ファイル '/02_ResourceFile/ObjectFile/Enemy.cpp' をコンパイルしています)
+      C:\Program Files\Microsoft Visual Studio\2022\Community\VC\Tools\MSVC\14.44.35207\include\xutility(461,16):
+      '_Ty *std::construct_at(_Ty *const ,_Types ...) noexcept(<expr>)' の可能性があります
+          C:\Program Files\Microsoft Visual Studio\2022\Community\VC\Tools\MSVC\14.44.35207\include\xutility(472,14):
+          関連する制約が満たされていません
+              C:\Program Files\Microsoft Visual Studio\2022\Community\VC\Tools\MSVC\14.44.35207\include\xutility(459,50):
+              'TransScene::TransScene': オーバーロードされた関数ですべての引数の型を変換できませんでした
+                  C:\Users\dorae\Desktop\HAL\class3\FindWork\就職作品プロジェクト\02_ResourceFile\SceneFile\TransScene.h(92,1):
+                  'TransScene::TransScene(const TransScene &)' の可能性があります
+                      C:\Program Files\Microsoft Visual Studio\2022\Community\VC\Tools\MSVC\14.44.35207\include\xutility(459,50):
+                      'TransScene::TransScene(const TransScene &)': 引数 1 を 'Camera' から 'const TransScene &' へ変換できません。
+                          C:\Program Files\Microsoft Visual Studio\2022\Community\VC\Tools\MSVC\14.44.35207\include\xutility(459,71):
+                          理由: 'Camera' から 'const TransScene' へは変換できません。
+                          C:\Program Files\Microsoft Visual Studio\2022\Community\VC\Tools\MSVC\14.44.35207\include\xutility(459,71):
+                          この変換を実行可能なユーザー定義変換演算子がないか、または演算子を呼び出せません。
+                  C:\Users\dorae\Desktop\HAL\class3\FindWork\就職作品プロジェクト\02_ResourceFile\SceneFile\TransScene.h(65,2):
+                  または 'TransScene::TransScene(std::shared_ptr<Camera>)'
+                      C:\Program Files\Microsoft Visual Studio\2022\Community\VC\Tools\MSVC\14.44.35207\include\xutility(459,50):
+                      'TransScene::TransScene(std::shared_ptr<Camera>)': 引数 1 を 'Camera' から 'std::shared_ptr<Camera>' へ変換できません。
+                          C:\Program Files\Microsoft Visual Studio\2022\Community\VC\Tools\MSVC\14.44.35207\include\xutility(459,71):
+                          この変換を実行可能なユーザー定義変換演算子がないか、または演算子を呼び出せません。
+                  C:\Program Files\Microsoft Visual Studio\2022\Community\VC\Tools\MSVC\14.44.35207\include\xutility(459,50):
+                  引数リスト '(Camera)' を一致させようとしているとき
+      C:\Program Files\Microsoft Visual Studio\2022\Community\VC\Tools\MSVC\14.44.35207\include\xutility(472,14):
+      テンプレートインスタンス化コンテキスト (最初に最も古いもの) は
+          C:\Users\dorae\Desktop\HAL\class3\FindWork\就職作品プロジェクト\02_ResourceFile\Game.h(163,24):
+          コンパイル対象の関数 テンプレート インスタンス化 'std::shared_ptr<TransScene> std::make_shared<TransScene,Camera&>(Camera &)' のリファレンスを確認してください
+          C:\Program Files\Microsoft Visual Studio\2022\Community\VC\Tools\MSVC\14.44.35207\include\memory(2913,46):
+          コンパイル対象の関数 テンプレート インスタンス化 'std::_Ref_count_obj2<TransScene>::_Ref_count_obj2<Camera&>(Camera &)' のリファレンスを確認してください
+          C:\Program Files\Microsoft Visual Studio\2022\Community\VC\Tools\MSVC\14.44.35207\include\memory(2100,18):
+          コンパイル対象の関数 テンプレート インスタンス化 'void std::_Construct_in_place<_Ty,Camera&>(_Ty &,Camera &) noexcept(false)' のリファレンスを確認してください
+          with
+          [
+              _Ty=TransScene
+          ]
+  
+C:\Program Files\Microsoft Visual Studio\2022\Community\VC\Tools\MSVC\14.44.35207\include\xutility(476,61): error C2665: 'TransScene::TransScene': オーバーロードされた関数ですべての引数の型を変換できませんでした
+  (ソース ファイル '/02_ResourceFile/ObjectFile/Enemy.cpp' をコンパイルしています)
+      C:\Users\dorae\Desktop\HAL\class3\FindWork\就職作品プロジェクト\02_ResourceFile\SceneFile\TransScene.h(92,1):
+      'TransScene::TransScene(const TransScene &)' の可能性があります
+          C:\Program Files\Microsoft Visual Studio\2022\Community\VC\Tools\MSVC\14.44.35207\include\xutility(476,61):
+          'TransScene::TransScene(const TransScene &)': 引数 1 を 'Camera' から 'const TransScene &' へ変換できません。
+              C:\Program Files\Microsoft Visual Studio\2022\Community\VC\Tools\MSVC\14.44.35207\include\xutility(476,82):
+              理由: 'Camera' から 'const TransScene' へは変換できません。
+              C:\Program Files\Microsoft Visual Studio\2022\Community\VC\Tools\MSVC\14.44.35207\include\xutility(476,82):
+              この変換を実行可能なユーザー定義変換演算子がないか、または演算子を呼び出せません。
+      C:\Users\dorae\Desktop\HAL\class3\FindWork\就職作品プロジェクト\02_ResourceFile\SceneFile\TransScene.h(65,2):
+      または 'TransScene::TransScene(std::shared_ptr<Camera>)'
+          C:\Program Files\Microsoft Visual Studio\2022\Community\VC\Tools\MSVC\14.44.35207\include\xutility(476,61):
+          'TransScene::TransScene(std::shared_ptr<Camera>)': 引数 1 を 'Camera' から 'std::shared_ptr<Camera>' へ変換できません。
+              C:\Program Files\Microsoft Visual Studio\2022\Community\VC\Tools\MSVC\14.44.35207\include\xutility(476,82):
+              この変換を実行可能なユーザー定義変換演算子がないか、または演算子を呼び出せません。
+      C:\Program Files\Microsoft Visual Studio\2022\Community\VC\Tools\MSVC\14.44.35207\include\xutility(476,61):
+      引数リスト '(Camera)' を一致させようとしているとき
+  
+C:\Program Files\Microsoft Visual Studio\2022\Community\VC\Tools\MSVC\14.44.35207\include\xutility(472,14): error C2672: 'std::construct_at': 一致するオーバーロードされた関数が見つかりませんでした。
+  (ソース ファイル '/02_ResourceFile/Camera.cpp' をコンパイルしています)
+      C:\Program Files\Microsoft Visual Studio\2022\Community\VC\Tools\MSVC\14.44.35207\include\xutility(461,16):
+      '_Ty *std::construct_at(_Ty *const ,_Types ...) noexcept(<expr>)' の可能性があります
+          C:\Program Files\Microsoft Visual Studio\2022\Community\VC\Tools\MSVC\14.44.35207\include\xutility(472,14):
+          関連する制約が満たされていません
+              C:\Program Files\Microsoft Visual Studio\2022\Community\VC\Tools\MSVC\14.44.35207\include\xutility(459,50):
+              'TransScene::TransScene': オーバーロードされた関数ですべての引数の型を変換できませんでした
+                  C:\Users\dorae\Desktop\HAL\class3\FindWork\就職作品プロジェクト\02_ResourceFile\SceneFile\TransScene.h(92,1):
+                  'TransScene::TransScene(const TransScene &)' の可能性があります
+                      C:\Program Files\Microsoft Visual Studio\2022\Community\VC\Tools\MSVC\14.44.35207\include\xutility(459,50):
+                      'TransScene::TransScene(const TransScene &)': 引数 1 を 'Camera' から 'const TransScene &' へ変換できません。
+                          C:\Program Files\Microsoft Visual Studio\2022\Community\VC\Tools\MSVC\14.44.35207\include\xutility(459,71):
+                          理由: 'Camera' から 'const TransScene' へは変換できません。
+                          C:\Program Files\Microsoft Visual Studio\2022\Community\VC\Tools\MSVC\14.44.35207\include\xutility(459,71):
+                          この変換を実行可能なユーザー定義変換演算子がないか、または演算子を呼び出せません。
+                  C:\Users\dorae\Desktop\HAL\class3\FindWork\就職作品プロジェクト\02_ResourceFile\SceneFile\TransScene.h(65,2):
+                  または 'TransScene::TransScene(std::shared_ptr<Camera>)'
+                      C:\Program Files\Microsoft Visual Studio\2022\Community\VC\Tools\MSVC\14.44.35207\include\xutility(459,50):
+                      'TransScene::TransScene(std::shared_ptr<Camera>)': 引数 1 を 'Camera' から 'std::shared_ptr<Camera>' へ変換できません。
+                          C:\Program Files\Microsoft Visual Studio\2022\Community\VC\Tools\MSVC\14.44.35207\include\xutility(459,71):
+                          この変換を実行可能なユーザー定義変換演算子がないか、または演算子を呼び出せません。
+                  C:\Program Files\Microsoft Visual Studio\2022\Community\VC\Tools\MSVC\14.44.35207\include\xutility(459,50):
+                  引数リスト '(Camera)' を一致させようとしているとき
+      C:\Program Files\Microsoft Visual Studio\2022\Community\VC\Tools\MSVC\14.44.35207\include\xutility(472,14):
+      テンプレートインスタンス化コンテキスト (最初に最も古いもの) は
+          C:\Users\dorae\Desktop\HAL\class3\FindWork\就職作品プロジェクト\02_ResourceFile\Game.h(163,24):
+          コンパイル対象の関数 テンプレート インスタンス化 'std::shared_ptr<TransScene> std::make_shared<TransScene,Camera&>(Camera &)' のリファレンスを確認してください
+          C:\Program Files\Microsoft Visual Studio\2022\Community\VC\Tools\MSVC\14.44.35207\include\memory(2913,46):
+          コンパイル対象の関数 テンプレート インスタンス化 'std::_Ref_count_obj2<TransScene>::_Ref_count_obj2<Camera&>(Camera &)' のリファレンスを確認してください
+          C:\Program Files\Microsoft Visual Studio\2022\Community\VC\Tools\MSVC\14.44.35207\include\memory(2100,18):
+          コンパイル対象の関数 テンプレート インスタンス化 'void std::_Construct_in_place<_Ty,Camera&>(_Ty &,Camera &) noexcept(false)' のリファレンスを確認してください
+          with
+          [
+              _Ty=TransScene
+          ]
+  
+C:\Program Files\Microsoft Visual Studio\2022\Community\VC\Tools\MSVC\14.44.35207\include\xutility(476,61): error C2665: 'TransScene::TransScene': オーバーロードされた関数ですべての引数の型を変換できませんでした
+  (ソース ファイル '/02_ResourceFile/Camera.cpp' をコンパイルしています)
+      C:\Users\dorae\Desktop\HAL\class3\FindWork\就職作品プロジェクト\02_ResourceFile\SceneFile\TransScene.h(92,1):
+      'TransScene::TransScene(const TransScene &)' の可能性があります
+          C:\Program Files\Microsoft Visual Studio\2022\Community\VC\Tools\MSVC\14.44.35207\include\xutility(476,61):
+          'TransScene::TransScene(const TransScene &)': 引数 1 を 'Camera' から 'const TransScene &' へ変換できません。
+              C:\Program Files\Microsoft Visual Studio\2022\Community\VC\Tools\MSVC\14.44.35207\include\xutility(476,82):
+              理由: 'Camera' から 'const TransScene' へは変換できません。
+              C:\Program Files\Microsoft Visual Studio\2022\Community\VC\Tools\MSVC\14.44.35207\include\xutility(476,82):
+              この変換を実行可能なユーザー定義変換演算子がないか、または演算子を呼び出せません。
+      C:\Users\dorae\Desktop\HAL\class3\FindWork\就職作品プロジェクト\02_ResourceFile\SceneFile\TransScene.h(65,2):
+      または 'TransScene::TransScene(std::shared_ptr<Camera>)'
+          C:\Program Files\Microsoft Visual Studio\2022\Community\VC\Tools\MSVC\14.44.35207\include\xutility(476,61):
+          'TransScene::TransScene(std::shared_ptr<Camera>)': 引数 1 を 'Camera' から 'std::shared_ptr<Camera>' へ変換できません。
+              C:\Program Files\Microsoft Visual Studio\2022\Community\VC\Tools\MSVC\14.44.35207\include\xutility(476,82):
+              この変換を実行可能なユーザー定義変換演算子がないか、または演算子を呼び出せません。
+      C:\Program Files\Microsoft Visual Studio\2022\Community\VC\Tools\MSVC\14.44.35207\include\xutility(476,61):
+      引数リスト '(Camera)' を一致させようとしているとき
+  
+C:\Program Files\Microsoft Visual Studio\2022\Community\VC\Tools\MSVC\14.44.35207\include\xutility(472,14): error C2672: 'std::construct_at': 一致するオーバーロードされた関数が見つかりませんでした。
+  (ソース ファイル '/02_ResourceFile/ObjectFile/Bird.cpp' をコンパイルしています)
+      C:\Program Files\Microsoft Visual Studio\2022\Community\VC\Tools\MSVC\14.44.35207\include\xutility(461,16):
+      '_Ty *std::construct_at(_Ty *const ,_Types ...) noexcept(<expr>)' の可能性があります
+          C:\Program Files\Microsoft Visual Studio\2022\Community\VC\Tools\MSVC\14.44.35207\include\xutility(472,14):
+          関連する制約が満たされていません
+              C:\Program Files\Microsoft Visual Studio\2022\Community\VC\Tools\MSVC\14.44.35207\include\xutility(459,50):
+              'TransScene::TransScene': オーバーロードされた関数ですべての引数の型を変換できませんでした
+                  C:\Users\dorae\Desktop\HAL\class3\FindWork\就職作品プロジェクト\02_ResourceFile\SceneFile\TransScene.h(92,1):
+                  'TransScene::TransScene(const TransScene &)' の可能性があります
+                      C:\Program Files\Microsoft Visual Studio\2022\Community\VC\Tools\MSVC\14.44.35207\include\xutility(459,50):
+                      'TransScene::TransScene(const TransScene &)': 引数 1 を 'Camera' から 'const TransScene &' へ変換できません。
+                          C:\Program Files\Microsoft Visual Studio\2022\Community\VC\Tools\MSVC\14.44.35207\include\xutility(459,71):
+                          理由: 'Camera' から 'const TransScene' へは変換できません。
+                          C:\Program Files\Microsoft Visual Studio\2022\Community\VC\Tools\MSVC\14.44.35207\include\xutility(459,71):
+                          この変換を実行可能なユーザー定義変換演算子がないか、または演算子を呼び出せません。
+                  C:\Users\dorae\Desktop\HAL\class3\FindWork\就職作品プロジェクト\02_ResourceFile\SceneFile\TransScene.h(65,2):
+                  または 'TransScene::TransScene(std::shared_ptr<Camera>)'
+                      C:\Program Files\Microsoft Visual Studio\2022\Community\VC\Tools\MSVC\14.44.35207\include\xutility(459,50):
+                      'TransScene::TransScene(std::shared_ptr<Camera>)': 引数 1 を 'Camera' から 'std::shared_ptr<Camera>' へ変換できません。
+                          C:\Program Files\Microsoft Visual Studio\2022\Community\VC\Tools\MSVC\14.44.35207\include\xutility(459,71):
+                          この変換を実行可能なユーザー定義変換演算子がないか、または演算子を呼び出せません。
+                  C:\Program Files\Microsoft Visual Studio\2022\Community\VC\Tools\MSVC\14.44.35207\include\xutility(459,50):
+                  引数リスト '(Camera)' を一致させようとしているとき
+      C:\Program Files\Microsoft Visual Studio\2022\Community\VC\Tools\MSVC\14.44.35207\include\xutility(472,14):
+      テンプレートインスタンス化コンテキスト (最初に最も古いもの) は
+          C:\Users\dorae\Desktop\HAL\class3\FindWork\就職作品プロジェクト\02_ResourceFile\Game.h(163,24):
+          コンパイル対象の関数 テンプレート インスタンス化 'std::shared_ptr<TransScene> std::make_shared<TransScene,Camera&>(Camera &)' のリファレンスを確認してください
+          C:\Program Files\Microsoft Visual Studio\2022\Community\VC\Tools\MSVC\14.44.35207\include\memory(2913,46):
+          コンパイル対象の関数 テンプレート インスタンス化 'std::_Ref_count_obj2<TransScene>::_Ref_count_obj2<Camera&>(Camera &)' のリファレンスを確認してください
+          C:\Program Files\Microsoft Visual Studio\2022\Community\VC\Tools\MSVC\14.44.35207\include\memory(2100,18):
+          コンパイル対象の関数 テンプレート インスタンス化 'void std::_Construct_in_place<_Ty,Camera&>(_Ty &,Camera &) noexcept(false)' のリファレンスを確認してください
+          with
+          [
+              _Ty=TransScene
+          ]
+  
+C:\Program Files\Microsoft Visual Studio\2022\Community\VC\Tools\MSVC\14.44.35207\include\xutility(476,61): error C2665: 'TransScene::TransScene': オーバーロードされた関数ですべての引数の型を変換できませんでした
+  (ソース ファイル '/02_ResourceFile/ObjectFile/Bird.cpp' をコンパイルしています)
+      C:\Users\dorae\Desktop\HAL\class3\FindWork\就職作品プロジェクト\02_ResourceFile\SceneFile\TransScene.h(92,1):
+      'TransScene::TransScene(const TransScene &)' の可能性があります
+          C:\Program Files\Microsoft Visual Studio\2022\Community\VC\Tools\MSVC\14.44.35207\include\xutility(476,61):
+          'TransScene::TransScene(const TransScene &)': 引数 1 を 'Camera' から 'const TransScene &' へ変換できません。
+              C:\Program Files\Microsoft Visual Studio\2022\Community\VC\Tools\MSVC\14.44.35207\include\xutility(476,82):
+              理由: 'Camera' から 'const TransScene' へは変換できません。
+              C:\Program Files\Microsoft Visual Studio\2022\Community\VC\Tools\MSVC\14.44.35207\include\xutility(476,82):
+              この変換を実行可能なユーザー定義変換演算子がないか、または演算子を呼び出せません。
+      C:\Users\dorae\Desktop\HAL\class3\FindWork\就職作品プロジェクト\02_ResourceFile\SceneFile\TransScene.h(65,2):
+      または 'TransScene::TransScene(std::shared_ptr<Camera>)'
+          C:\Program Files\Microsoft Visual Studio\2022\Community\VC\Tools\MSVC\14.44.35207\include\xutility(476,61):
+          'TransScene::TransScene(std::shared_ptr<Camera>)': 引数 1 を 'Camera' から 'std::shared_ptr<Camera>' へ変換できません。
+              C:\Program Files\Microsoft Visual Studio\2022\Community\VC\Tools\MSVC\14.44.35207\include\xutility(476,82):
+              この変換を実行可能なユーザー定義変換演算子がないか、または演算子を呼び出せません。
+      C:\Program Files\Microsoft Visual Studio\2022\Community\VC\Tools\MSVC\14.44.35207\include\xutility(476,61):
+      引数リスト '(Camera)' を一致させようとしているとき
+  
   GameSceneWait.cpp
+C:\Program Files\Microsoft Visual Studio\2022\Community\VC\Tools\MSVC\14.44.35207\include\xutility(472,14): error C2672: 'std::construct_at': 一致するオーバーロードされた関数が見つかりませんでした。
+  (ソース ファイル '/02_ResourceFile/ObjectFile/Theme.cpp' をコンパイルしています)
+      C:\Program Files\Microsoft Visual Studio\2022\Community\VC\Tools\MSVC\14.44.35207\include\xutility(461,16):
+      '_Ty *std::construct_at(_Ty *const ,_Types ...) noexcept(<expr>)' の可能性があります
+          C:\Program Files\Microsoft Visual Studio\2022\Community\VC\Tools\MSVC\14.44.35207\include\xutility(472,14):
+          関連する制約が満たされていません
+              C:\Program Files\Microsoft Visual Studio\2022\Community\VC\Tools\MSVC\14.44.35207\include\xutility(459,50):
+              'TransScene::TransScene': オーバーロードされた関数ですべての引数の型を変換できませんでした
+                  C:\Users\dorae\Desktop\HAL\class3\FindWork\就職作品プロジェクト\02_ResourceFile\SceneFile\TransScene.h(92,1):
+                  'TransScene::TransScene(const TransScene &)' の可能性があります
+                      C:\Program Files\Microsoft Visual Studio\2022\Community\VC\Tools\MSVC\14.44.35207\include\xutility(459,50):
+                      'TransScene::TransScene(const TransScene &)': 引数 1 を 'Camera' から 'const TransScene &' へ変換できません。
+                          C:\Program Files\Microsoft Visual Studio\2022\Community\VC\Tools\MSVC\14.44.35207\include\xutility(459,71):
+                          理由: 'Camera' から 'const TransScene' へは変換できません。
+                          C:\Program Files\Microsoft Visual Studio\2022\Community\VC\Tools\MSVC\14.44.35207\include\xutility(459,71):
+                          この変換を実行可能なユーザー定義変換演算子がないか、または演算子を呼び出せません。
+                  C:\Users\dorae\Desktop\HAL\class3\FindWork\就職作品プロジェクト\02_ResourceFile\SceneFile\TransScene.h(65,2):
+                  または 'TransScene::TransScene(std::shared_ptr<Camera>)'
+                      C:\Program Files\Microsoft Visual Studio\2022\Community\VC\Tools\MSVC\14.44.35207\include\xutility(459,50):
+                      'TransScene::TransScene(std::shared_ptr<Camera>)': 引数 1 を 'Camera' から 'std::shared_ptr<Camera>' へ変換できません。
+                          C:\Program Files\Microsoft Visual Studio\2022\Community\VC\Tools\MSVC\14.44.35207\include\xutility(459,71):
+                          この変換を実行可能なユーザー定義変換演算子がないか、または演算子を呼び出せません。
+                  C:\Program Files\Microsoft Visual Studio\2022\Community\VC\Tools\MSVC\14.44.35207\include\xutility(459,50):
+                  引数リスト '(Camera)' を一致させようとしているとき
+      C:\Program Files\Microsoft Visual Studio\2022\Community\VC\Tools\MSVC\14.44.35207\include\xutility(472,14):
+      テンプレートインスタンス化コンテキスト (最初に最も古いもの) は
+          C:\Users\dorae\Desktop\HAL\class3\FindWork\就職作品プロジェクト\02_ResourceFile\Game.h(163,24):
+          コンパイル対象の関数 テンプレート インスタンス化 'std::shared_ptr<TransScene> std::make_shared<TransScene,Camera&>(Camera &)' のリファレンスを確認してください
+          C:\Program Files\Microsoft Visual Studio\2022\Community\VC\Tools\MSVC\14.44.35207\include\memory(2913,46):
+          コンパイル対象の関数 テンプレート インスタンス化 'std::_Ref_count_obj2<TransScene>::_Ref_count_obj2<Camera&>(Camera &)' のリファレンスを確認してください
+          C:\Program Files\Microsoft Visual Studio\2022\Community\VC\Tools\MSVC\14.44.35207\include\memory(2100,18):
+          コンパイル対象の関数 テンプレート インスタンス化 'void std::_Construct_in_place<_Ty,Camera&>(_Ty &,Camera &) noexcept(false)' のリファレンスを確認してください
+          with
+          [
+              _Ty=TransScene
+          ]
+  
+C:\Program Files\Microsoft Visual Studio\2022\Community\VC\Tools\MSVC\14.44.35207\include\xutility(476,61): error C2665: 'TransScene::TransScene': オーバーロードされた関数ですべての引数の型を変換できませんでした
+  (ソース ファイル '/02_ResourceFile/ObjectFile/Theme.cpp' をコンパイルしています)
+      C:\Users\dorae\Desktop\HAL\class3\FindWork\就職作品プロジェクト\02_ResourceFile\SceneFile\TransScene.h(92,1):
+      'TransScene::TransScene(const TransScene &)' の可能性があります
+          C:\Program Files\Microsoft Visual Studio\2022\Community\VC\Tools\MSVC\14.44.35207\include\xutility(476,61):
+          'TransScene::TransScene(const TransScene &)': 引数 1 を 'Camera' から 'const TransScene &' へ変換できません。
+              C:\Program Files\Microsoft Visual Studio\2022\Community\VC\Tools\MSVC\14.44.35207\include\xutility(476,82):
+              理由: 'Camera' から 'const TransScene' へは変換できません。
+              C:\Program Files\Microsoft Visual Studio\2022\Community\VC\Tools\MSVC\14.44.35207\include\xutility(476,82):
+              この変換を実行可能なユーザー定義変換演算子がないか、または演算子を呼び出せません。
+      C:\Users\dorae\Desktop\HAL\class3\FindWork\就職作品プロジェクト\02_ResourceFile\SceneFile\TransScene.h(65,2):
+      または 'TransScene::TransScene(std::shared_ptr<Camera>)'
+          C:\Program Files\Microsoft Visual Studio\2022\Community\VC\Tools\MSVC\14.44.35207\include\xutility(476,61):
+          'TransScene::TransScene(std::shared_ptr<Camera>)': 引数 1 を 'Camera' から 'std::shared_ptr<Camera>' へ変換できません。
+              C:\Program Files\Microsoft Visual Studio\2022\Community\VC\Tools\MSVC\14.44.35207\include\xutility(476,82):
+              この変換を実行可能なユーザー定義変換演算子がないか、または演算子を呼び出せません。
+      C:\Program Files\Microsoft Visual Studio\2022\Community\VC\Tools\MSVC\14.44.35207\include\xutility(476,61):
+      引数リスト '(Camera)' を一致させようとしているとき
+  
   ResultScene.cpp
-C:\Users\dorae\Desktop\HAL\class3\FindWork\就職作品プロジェクト\02_ResourceFile\input.cpp(41,25): warning C4100: 'hWnd': 参照されないパラメーター
-  (ソース ファイル '/02_ResourceFile/input.cpp' をコンパイルしています)
+C:\Program Files\Microsoft Visual Studio\2022\Community\VC\Tools\MSVC\14.44.35207\include\xutility(472,14): error C2672: 'std::construct_at': 一致するオーバーロードされた関数が見つかりませんでした。
+  (ソース ファイル '/02_ResourceFile/Application.cpp' をコンパイルしています)
+      C:\Program Files\Microsoft Visual Studio\2022\Community\VC\Tools\MSVC\14.44.35207\include\xutility(461,16):
+      '_Ty *std::construct_at(_Ty *const ,_Types ...) noexcept(<expr>)' の可能性があります
+          C:\Program Files\Microsoft Visual Studio\2022\Community\VC\Tools\MSVC\14.44.35207\include\xutility(472,14):
+          関連する制約が満たされていません
+              C:\Program Files\Microsoft Visual Studio\2022\Community\VC\Tools\MSVC\14.44.35207\include\xutility(459,50):
+              'TransScene::TransScene': オーバーロードされた関数ですべての引数の型を変換できませんでした
+                  C:\Users\dorae\Desktop\HAL\class3\FindWork\就職作品プロジェクト\02_ResourceFile\SceneFile\TransScene.h(92,1):
+                  'TransScene::TransScene(const TransScene &)' の可能性があります
+                      C:\Program Files\Microsoft Visual Studio\2022\Community\VC\Tools\MSVC\14.44.35207\include\xutility(459,50):
+                      'TransScene::TransScene(const TransScene &)': 引数 1 を 'Camera' から 'const TransScene &' へ変換できません。
+                          C:\Program Files\Microsoft Visual Studio\2022\Community\VC\Tools\MSVC\14.44.35207\include\xutility(459,71):
+                          理由: 'Camera' から 'const TransScene' へは変換できません。
+                          C:\Program Files\Microsoft Visual Studio\2022\Community\VC\Tools\MSVC\14.44.35207\include\xutility(459,71):
+                          この変換を実行可能なユーザー定義変換演算子がないか、または演算子を呼び出せません。
+                  C:\Users\dorae\Desktop\HAL\class3\FindWork\就職作品プロジェクト\02_ResourceFile\SceneFile\TransScene.h(65,2):
+                  または 'TransScene::TransScene(std::shared_ptr<Camera>)'
+                      C:\Program Files\Microsoft Visual Studio\2022\Community\VC\Tools\MSVC\14.44.35207\include\xutility(459,50):
+                      'TransScene::TransScene(std::shared_ptr<Camera>)': 引数 1 を 'Camera' から 'std::shared_ptr<Camera>' へ変換できません。
+                          C:\Program Files\Microsoft Visual Studio\2022\Community\VC\Tools\MSVC\14.44.35207\include\xutility(459,71):
+                          この変換を実行可能なユーザー定義変換演算子がないか、または演算子を呼び出せません。
+                  C:\Program Files\Microsoft Visual Studio\2022\Community\VC\Tools\MSVC\14.44.35207\include\xutility(459,50):
+                  引数リスト '(Camera)' を一致させようとしているとき
+      C:\Program Files\Microsoft Visual Studio\2022\Community\VC\Tools\MSVC\14.44.35207\include\xutility(472,14):
+      テンプレートインスタンス化コンテキスト (最初に最も古いもの) は
+          C:\Users\dorae\Desktop\HAL\class3\FindWork\就職作品プロジェクト\02_ResourceFile\Game.h(163,24):
+          コンパイル対象の関数 テンプレート インスタンス化 'std::shared_ptr<TransScene> std::make_shared<TransScene,Camera&>(Camera &)' のリファレンスを確認してください
+          C:\Program Files\Microsoft Visual Studio\2022\Community\VC\Tools\MSVC\14.44.35207\include\memory(2913,46):
+          コンパイル対象の関数 テンプレート インスタンス化 'std::_Ref_count_obj2<TransScene>::_Ref_count_obj2<Camera&>(Camera &)' のリファレンスを確認してください
+          C:\Program Files\Microsoft Visual Studio\2022\Community\VC\Tools\MSVC\14.44.35207\include\memory(2100,18):
+          コンパイル対象の関数 テンプレート インスタンス化 'void std::_Construct_in_place<_Ty,Camera&>(_Ty &,Camera &) noexcept(false)' のリファレンスを確認してください
+          with
+          [
+              _Ty=TransScene
+          ]
+  
+C:\Program Files\Microsoft Visual Studio\2022\Community\VC\Tools\MSVC\14.44.35207\include\xutility(476,61): error C2665: 'TransScene::TransScene': オーバーロードされた関数ですべての引数の型を変換できませんでした
+  (ソース ファイル '/02_ResourceFile/Application.cpp' をコンパイルしています)
+      C:\Users\dorae\Desktop\HAL\class3\FindWork\就職作品プロジェクト\02_ResourceFile\SceneFile\TransScene.h(92,1):
+      'TransScene::TransScene(const TransScene &)' の可能性があります
+          C:\Program Files\Microsoft Visual Studio\2022\Community\VC\Tools\MSVC\14.44.35207\include\xutility(476,61):
+          'TransScene::TransScene(const TransScene &)': 引数 1 を 'Camera' から 'const TransScene &' へ変換できません。
+              C:\Program Files\Microsoft Visual Studio\2022\Community\VC\Tools\MSVC\14.44.35207\include\xutility(476,82):
+              理由: 'Camera' から 'const TransScene' へは変換できません。
+              C:\Program Files\Microsoft Visual Studio\2022\Community\VC\Tools\MSVC\14.44.35207\include\xutility(476,82):
+              この変換を実行可能なユーザー定義変換演算子がないか、または演算子を呼び出せません。
+      C:\Users\dorae\Desktop\HAL\class3\FindWork\就職作品プロジェクト\02_ResourceFile\SceneFile\TransScene.h(65,2):
+      または 'TransScene::TransScene(std::shared_ptr<Camera>)'
+          C:\Program Files\Microsoft Visual Studio\2022\Community\VC\Tools\MSVC\14.44.35207\include\xutility(476,61):
+          'TransScene::TransScene(std::shared_ptr<Camera>)': 引数 1 を 'Camera' から 'std::shared_ptr<Camera>' へ変換できません。
+              C:\Program Files\Microsoft Visual Studio\2022\Community\VC\Tools\MSVC\14.44.35207\include\xutility(476,82):
+              この変換を実行可能なユーザー定義変換演算子がないか、または演算子を呼び出せません。
+      C:\Program Files\Microsoft Visual Studio\2022\Community\VC\Tools\MSVC\14.44.35207\include\xutility(476,61):
+      引数リスト '(Camera)' を一致させようとしているとき
+  
+C:\Program Files\Microsoft Visual Studio\2022\Community\VC\Tools\MSVC\14.44.35207\include\xutility(472,14): error C2672: 'std::construct_at': 一致するオーバーロードされた関数が見つかりませんでした。
+  (ソース ファイル '/02_ResourceFile/DebugGridLine.cpp' をコンパイルしています)
+      C:\Program Files\Microsoft Visual Studio\2022\Community\VC\Tools\MSVC\14.44.35207\include\xutility(461,16):
+      '_Ty *std::construct_at(_Ty *const ,_Types ...) noexcept(<expr>)' の可能性があります
+          C:\Program Files\Microsoft Visual Studio\2022\Community\VC\Tools\MSVC\14.44.35207\include\xutility(472,14):
+          関連する制約が満たされていません
+              C:\Program Files\Microsoft Visual Studio\2022\Community\VC\Tools\MSVC\14.44.35207\include\xutility(459,50):
+              'TransScene::TransScene': オーバーロードされた関数ですべての引数の型を変換できませんでした
+                  C:\Users\dorae\Desktop\HAL\class3\FindWork\就職作品プロジェクト\02_ResourceFile\SceneFile\TransScene.h(92,1):
+                  'TransScene::TransScene(const TransScene &)' の可能性があります
+                      C:\Program Files\Microsoft Visual Studio\2022\Community\VC\Tools\MSVC\14.44.35207\include\xutility(459,50):
+                      'TransScene::TransScene(const TransScene &)': 引数 1 を 'Camera' から 'const TransScene &' へ変換できません。
+                          C:\Program Files\Microsoft Visual Studio\2022\Community\VC\Tools\MSVC\14.44.35207\include\xutility(459,71):
+                          理由: 'Camera' から 'const TransScene' へは変換できません。
+                          C:\Program Files\Microsoft Visual Studio\2022\Community\VC\Tools\MSVC\14.44.35207\include\xutility(459,71):
+                          この変換を実行可能なユーザー定義変換演算子がないか、または演算子を呼び出せません。
+                  C:\Users\dorae\Desktop\HAL\class3\FindWork\就職作品プロジェクト\02_ResourceFile\SceneFile\TransScene.h(65,2):
+                  または 'TransScene::TransScene(std::shared_ptr<Camera>)'
+                      C:\Program Files\Microsoft Visual Studio\2022\Community\VC\Tools\MSVC\14.44.35207\include\xutility(459,50):
+                      'TransScene::TransScene(std::shared_ptr<Camera>)': 引数 1 を 'Camera' から 'std::shared_ptr<Camera>' へ変換できません。
+                          C:\Program Files\Microsoft Visual Studio\2022\Community\VC\Tools\MSVC\14.44.35207\include\xutility(459,71):
+                          この変換を実行可能なユーザー定義変換演算子がないか、または演算子を呼び出せません。
+                  C:\Program Files\Microsoft Visual Studio\2022\Community\VC\Tools\MSVC\14.44.35207\include\xutility(459,50):
+                  引数リスト '(Camera)' を一致させようとしているとき
+      C:\Program Files\Microsoft Visual Studio\2022\Community\VC\Tools\MSVC\14.44.35207\include\xutility(472,14):
+      テンプレートインスタンス化コンテキスト (最初に最も古いもの) は
+          C:\Users\dorae\Desktop\HAL\class3\FindWork\就職作品プロジェクト\02_ResourceFile\Game.h(163,24):
+          コンパイル対象の関数 テンプレート インスタンス化 'std::shared_ptr<TransScene> std::make_shared<TransScene,Camera&>(Camera &)' のリファレンスを確認してください
+          C:\Program Files\Microsoft Visual Studio\2022\Community\VC\Tools\MSVC\14.44.35207\include\memory(2913,46):
+          コンパイル対象の関数 テンプレート インスタンス化 'std::_Ref_count_obj2<TransScene>::_Ref_count_obj2<Camera&>(Camera &)' のリファレンスを確認してください
+          C:\Program Files\Microsoft Visual Studio\2022\Community\VC\Tools\MSVC\14.44.35207\include\memory(2100,18):
+          コンパイル対象の関数 テンプレート インスタンス化 'void std::_Construct_in_place<_Ty,Camera&>(_Ty &,Camera &) noexcept(false)' のリファレンスを確認してください
+          with
+          [
+              _Ty=TransScene
+          ]
+  
+C:\Program Files\Microsoft Visual Studio\2022\Community\VC\Tools\MSVC\14.44.35207\include\xutility(476,61): error C2665: 'TransScene::TransScene': オーバーロードされた関数ですべての引数の型を変換できませんでした
+  (ソース ファイル '/02_ResourceFile/DebugGridLine.cpp' をコンパイルしています)
+      C:\Users\dorae\Desktop\HAL\class3\FindWork\就職作品プロジェクト\02_ResourceFile\SceneFile\TransScene.h(92,1):
+      'TransScene::TransScene(const TransScene &)' の可能性があります
+          C:\Program Files\Microsoft Visual Studio\2022\Community\VC\Tools\MSVC\14.44.35207\include\xutility(476,61):
+          'TransScene::TransScene(const TransScene &)': 引数 1 を 'Camera' から 'const TransScene &' へ変換できません。
+              C:\Program Files\Microsoft Visual Studio\2022\Community\VC\Tools\MSVC\14.44.35207\include\xutility(476,82):
+              理由: 'Camera' から 'const TransScene' へは変換できません。
+              C:\Program Files\Microsoft Visual Studio\2022\Community\VC\Tools\MSVC\14.44.35207\include\xutility(476,82):
+              この変換を実行可能なユーザー定義変換演算子がないか、または演算子を呼び出せません。
+      C:\Users\dorae\Desktop\HAL\class3\FindWork\就職作品プロジェクト\02_ResourceFile\SceneFile\TransScene.h(65,2):
+      または 'TransScene::TransScene(std::shared_ptr<Camera>)'
+          C:\Program Files\Microsoft Visual Studio\2022\Community\VC\Tools\MSVC\14.44.35207\include\xutility(476,61):
+          'TransScene::TransScene(std::shared_ptr<Camera>)': 引数 1 を 'Camera' から 'std::shared_ptr<Camera>' へ変換できません。
+              C:\Program Files\Microsoft Visual Studio\2022\Community\VC\Tools\MSVC\14.44.35207\include\xutility(476,82):
+              この変換を実行可能なユーザー定義変換演算子がないか、または演算子を呼び出せません。
+      C:\Program Files\Microsoft Visual Studio\2022\Community\VC\Tools\MSVC\14.44.35207\include\xutility(476,61):
+      引数リスト '(Camera)' を一致させようとしているとき
+  
+C:\Program Files\Microsoft Visual Studio\2022\Community\VC\Tools\MSVC\14.44.35207\include\xutility(472,14): error C2672: 'std::construct_at': 一致するオーバーロードされた関数が見つかりませんでした。
+  (ソース ファイル '/02_ResourceFile/ObjectFile/Circle.cpp' をコンパイルしています)
+      C:\Program Files\Microsoft Visual Studio\2022\Community\VC\Tools\MSVC\14.44.35207\include\xutility(461,16):
+      '_Ty *std::construct_at(_Ty *const ,_Types ...) noexcept(<expr>)' の可能性があります
+          C:\Program Files\Microsoft Visual Studio\2022\Community\VC\Tools\MSVC\14.44.35207\include\xutility(472,14):
+          関連する制約が満たされていません
+              C:\Program Files\Microsoft Visual Studio\2022\Community\VC\Tools\MSVC\14.44.35207\include\xutility(459,50):
+              'TransScene::TransScene': オーバーロードされた関数ですべての引数の型を変換できませんでした
+                  C:\Users\dorae\Desktop\HAL\class3\FindWork\就職作品プロジェクト\02_ResourceFile\SceneFile\TransScene.h(92,1):
+                  'TransScene::TransScene(const TransScene &)' の可能性があります
+                      C:\Program Files\Microsoft Visual Studio\2022\Community\VC\Tools\MSVC\14.44.35207\include\xutility(459,50):
+                      'TransScene::TransScene(const TransScene &)': 引数 1 を 'Camera' から 'const TransScene &' へ変換できません。
+                          C:\Program Files\Microsoft Visual Studio\2022\Community\VC\Tools\MSVC\14.44.35207\include\xutility(459,71):
+                          理由: 'Camera' から 'const TransScene' へは変換できません。
+                          C:\Program Files\Microsoft Visual Studio\2022\Community\VC\Tools\MSVC\14.44.35207\include\xutility(459,71):
+                          この変換を実行可能なユーザー定義変換演算子がないか、または演算子を呼び出せません。
+                  C:\Users\dorae\Desktop\HAL\class3\FindWork\就職作品プロジェクト\02_ResourceFile\SceneFile\TransScene.h(65,2):
+                  または 'TransScene::TransScene(std::shared_ptr<Camera>)'
+                      C:\Program Files\Microsoft Visual Studio\2022\Community\VC\Tools\MSVC\14.44.35207\include\xutility(459,50):
+                      'TransScene::TransScene(std::shared_ptr<Camera>)': 引数 1 を 'Camera' から 'std::shared_ptr<Camera>' へ変換できません。
+                          C:\Program Files\Microsoft Visual Studio\2022\Community\VC\Tools\MSVC\14.44.35207\include\xutility(459,71):
+                          この変換を実行可能なユーザー定義変換演算子がないか、または演算子を呼び出せません。
+                  C:\Program Files\Microsoft Visual Studio\2022\Community\VC\Tools\MSVC\14.44.35207\include\xutility(459,50):
+                  引数リスト '(Camera)' を一致させようとしているとき
+      C:\Program Files\Microsoft Visual Studio\2022\Community\VC\Tools\MSVC\14.44.35207\include\xutility(472,14):
+      テンプレートインスタンス化コンテキスト (最初に最も古いもの) は
+          C:\Users\dorae\Desktop\HAL\class3\FindWork\就職作品プロジェクト\02_ResourceFile\Game.h(163,24):
+          コンパイル対象の関数 テンプレート インスタンス化 'std::shared_ptr<TransScene> std::make_shared<TransScene,Camera&>(Camera &)' のリファレンスを確認してください
+          C:\Program Files\Microsoft Visual Studio\2022\Community\VC\Tools\MSVC\14.44.35207\include\memory(2913,46):
+          コンパイル対象の関数 テンプレート インスタンス化 'std::_Ref_count_obj2<TransScene>::_Ref_count_obj2<Camera&>(Camera &)' のリファレンスを確認してください
+          C:\Program Files\Microsoft Visual Studio\2022\Community\VC\Tools\MSVC\14.44.35207\include\memory(2100,18):
+          コンパイル対象の関数 テンプレート インスタンス化 'void std::_Construct_in_place<_Ty,Camera&>(_Ty &,Camera &) noexcept(false)' のリファレンスを確認してください
+          with
+          [
+              _Ty=TransScene
+          ]
+  
+C:\Program Files\Microsoft Visual Studio\2022\Community\VC\Tools\MSVC\14.44.35207\include\xutility(476,61): error C2665: 'TransScene::TransScene': オーバーロードされた関数ですべての引数の型を変換できませんでした
+  (ソース ファイル '/02_ResourceFile/ObjectFile/Circle.cpp' をコンパイルしています)
+      C:\Users\dorae\Desktop\HAL\class3\FindWork\就職作品プロジェクト\02_ResourceFile\SceneFile\TransScene.h(92,1):
+      'TransScene::TransScene(const TransScene &)' の可能性があります
+          C:\Program Files\Microsoft Visual Studio\2022\Community\VC\Tools\MSVC\14.44.35207\include\xutility(476,61):
+          'TransScene::TransScene(const TransScene &)': 引数 1 を 'Camera' から 'const TransScene &' へ変換できません。
+              C:\Program Files\Microsoft Visual Studio\2022\Community\VC\Tools\MSVC\14.44.35207\include\xutility(476,82):
+              理由: 'Camera' から 'const TransScene' へは変換できません。
+              C:\Program Files\Microsoft Visual Studio\2022\Community\VC\Tools\MSVC\14.44.35207\include\xutility(476,82):
+              この変換を実行可能なユーザー定義変換演算子がないか、または演算子を呼び出せません。
+      C:\Users\dorae\Desktop\HAL\class3\FindWork\就職作品プロジェクト\02_ResourceFile\SceneFile\TransScene.h(65,2):
+      または 'TransScene::TransScene(std::shared_ptr<Camera>)'
+          C:\Program Files\Microsoft Visual Studio\2022\Community\VC\Tools\MSVC\14.44.35207\include\xutility(476,61):
+          'TransScene::TransScene(std::shared_ptr<Camera>)': 引数 1 を 'Camera' から 'std::shared_ptr<Camera>' へ変換できません。
+              C:\Program Files\Microsoft Visual Studio\2022\Community\VC\Tools\MSVC\14.44.35207\include\xutility(476,82):
+              この変換を実行可能なユーザー定義変換演算子がないか、または演算子を呼び出せません。
+      C:\Program Files\Microsoft Visual Studio\2022\Community\VC\Tools\MSVC\14.44.35207\include\xutility(476,61):
+      引数リスト '(Camera)' を一致させようとしているとき
   
   Scene.cpp
   TransitionBase.cpp
   Wipe.cpp
   Zoom.cpp
-  StaticMesh.cpp
-  MeshManager.cpp
   Bullet.cpp
+C:\Program Files\Microsoft Visual Studio\2022\Community\VC\Tools\MSVC\14.44.35207\include\xutility(472,14): error C2672: 'std::construct_at': 一致するオーバーロードされた関数が見つかりませんでした。
+  (ソース ファイル '/02_ResourceFile/SceneFile/GameSceneCrush.cpp' をコンパイルしています)
+      C:\Program Files\Microsoft Visual Studio\2022\Community\VC\Tools\MSVC\14.44.35207\include\xutility(461,16):
+      '_Ty *std::construct_at(_Ty *const ,_Types ...) noexcept(<expr>)' の可能性があります
+          C:\Program Files\Microsoft Visual Studio\2022\Community\VC\Tools\MSVC\14.44.35207\include\xutility(472,14):
+          関連する制約が満たされていません
+              C:\Program Files\Microsoft Visual Studio\2022\Community\VC\Tools\MSVC\14.44.35207\include\xutility(459,50):
+              'TransScene::TransScene': オーバーロードされた関数ですべての引数の型を変換できませんでした
+                  C:\Users\dorae\Desktop\HAL\class3\FindWork\就職作品プロジェクト\02_ResourceFile\SceneFile\TransScene.h(92,1):
+                  'TransScene::TransScene(const TransScene &)' の可能性があります
+                      C:\Program Files\Microsoft Visual Studio\2022\Community\VC\Tools\MSVC\14.44.35207\include\xutility(459,50):
+                      'TransScene::TransScene(const TransScene &)': 引数 1 を 'Camera' から 'const TransScene &' へ変換できません。
+                          C:\Program Files\Microsoft Visual Studio\2022\Community\VC\Tools\MSVC\14.44.35207\include\xutility(459,71):
+                          理由: 'Camera' から 'const TransScene' へは変換できません。
+                          C:\Program Files\Microsoft Visual Studio\2022\Community\VC\Tools\MSVC\14.44.35207\include\xutility(459,71):
+                          この変換を実行可能なユーザー定義変換演算子がないか、または演算子を呼び出せません。
+                  C:\Users\dorae\Desktop\HAL\class3\FindWork\就職作品プロジェクト\02_ResourceFile\SceneFile\TransScene.h(65,2):
+                  または 'TransScene::TransScene(std::shared_ptr<Camera>)'
+                      C:\Program Files\Microsoft Visual Studio\2022\Community\VC\Tools\MSVC\14.44.35207\include\xutility(459,50):
+                      'TransScene::TransScene(std::shared_ptr<Camera>)': 引数 1 を 'Camera' から 'std::shared_ptr<Camera>' へ変換できません。
+                          C:\Program Files\Microsoft Visual Studio\2022\Community\VC\Tools\MSVC\14.44.35207\include\xutility(459,71):
+                          この変換を実行可能なユーザー定義変換演算子がないか、または演算子を呼び出せません。
+                  C:\Program Files\Microsoft Visual Studio\2022\Community\VC\Tools\MSVC\14.44.35207\include\xutility(459,50):
+                  引数リスト '(Camera)' を一致させようとしているとき
+      C:\Program Files\Microsoft Visual Studio\2022\Community\VC\Tools\MSVC\14.44.35207\include\xutility(472,14):
+      テンプレートインスタンス化コンテキスト (最初に最も古いもの) は
+          C:\Users\dorae\Desktop\HAL\class3\FindWork\就職作品プロジェクト\02_ResourceFile\Game.h(163,24):
+          コンパイル対象の関数 テンプレート インスタンス化 'std::shared_ptr<TransScene> std::make_shared<TransScene,Camera&>(Camera &)' のリファレンスを確認してください
+          C:\Program Files\Microsoft Visual Studio\2022\Community\VC\Tools\MSVC\14.44.35207\include\memory(2913,46):
+          コンパイル対象の関数 テンプレート インスタンス化 'std::_Ref_count_obj2<TransScene>::_Ref_count_obj2<Camera&>(Camera &)' のリファレンスを確認してください
+          C:\Program Files\Microsoft Visual Studio\2022\Community\VC\Tools\MSVC\14.44.35207\include\memory(2100,18):
+          コンパイル対象の関数 テンプレート インスタンス化 'void std::_Construct_in_place<_Ty,Camera&>(_Ty &,Camera &) noexcept(false)' のリファレンスを確認してください
+          with
+          [
+              _Ty=TransScene
+          ]
+  
+C:\Program Files\Microsoft Visual Studio\2022\Community\VC\Tools\MSVC\14.44.35207\include\xutility(476,61): error C2665: 'TransScene::TransScene': オーバーロードされた関数ですべての引数の型を変換できませんでした
+  (ソース ファイル '/02_ResourceFile/SceneFile/GameSceneCrush.cpp' をコンパイルしています)
+      C:\Users\dorae\Desktop\HAL\class3\FindWork\就職作品プロジェクト\02_ResourceFile\SceneFile\TransScene.h(92,1):
+      'TransScene::TransScene(const TransScene &)' の可能性があります
+          C:\Program Files\Microsoft Visual Studio\2022\Community\VC\Tools\MSVC\14.44.35207\include\xutility(476,61):
+          'TransScene::TransScene(const TransScene &)': 引数 1 を 'Camera' から 'const TransScene &' へ変換できません。
+              C:\Program Files\Microsoft Visual Studio\2022\Community\VC\Tools\MSVC\14.44.35207\include\xutility(476,82):
+              理由: 'Camera' から 'const TransScene' へは変換できません。
+              C:\Program Files\Microsoft Visual Studio\2022\Community\VC\Tools\MSVC\14.44.35207\include\xutility(476,82):
+              この変換を実行可能なユーザー定義変換演算子がないか、または演算子を呼び出せません。
+      C:\Users\dorae\Desktop\HAL\class3\FindWork\就職作品プロジェクト\02_ResourceFile\SceneFile\TransScene.h(65,2):
+      または 'TransScene::TransScene(std::shared_ptr<Camera>)'
+          C:\Program Files\Microsoft Visual Studio\2022\Community\VC\Tools\MSVC\14.44.35207\include\xutility(476,61):
+          'TransScene::TransScene(std::shared_ptr<Camera>)': 引数 1 を 'Camera' から 'std::shared_ptr<Camera>' へ変換できません。
+              C:\Program Files\Microsoft Visual Studio\2022\Community\VC\Tools\MSVC\14.44.35207\include\xutility(476,82):
+              この変換を実行可能なユーザー定義変換演算子がないか、または演算子を呼び出せません。
+      C:\Program Files\Microsoft Visual Studio\2022\Community\VC\Tools\MSVC\14.44.35207\include\xutility(476,61):
+      引数リスト '(Camera)' を一致させようとしているとき
+  
+C:\Program Files\Microsoft Visual Studio\2022\Community\VC\Tools\MSVC\14.44.35207\include\xutility(472,14): error C2672: 'std::construct_at': 一致するオーバーロードされた関数が見つかりませんでした。
+  (ソース ファイル '/02_ResourceFile/DebugUI.cpp' をコンパイルしています)
+      C:\Program Files\Microsoft Visual Studio\2022\Community\VC\Tools\MSVC\14.44.35207\include\xutility(461,16):
+      '_Ty *std::construct_at(_Ty *const ,_Types ...) noexcept(<expr>)' の可能性があります
+          C:\Program Files\Microsoft Visual Studio\2022\Community\VC\Tools\MSVC\14.44.35207\include\xutility(472,14):
+          関連する制約が満たされていません
+              C:\Program Files\Microsoft Visual Studio\2022\Community\VC\Tools\MSVC\14.44.35207\include\xutility(459,50):
+              'TransScene::TransScene': オーバーロードされた関数ですべての引数の型を変換できませんでした
+                  C:\Users\dorae\Desktop\HAL\class3\FindWork\就職作品プロジェクト\02_ResourceFile\SceneFile\TransScene.h(92,1):
+                  'TransScene::TransScene(const TransScene &)' の可能性があります
+                      C:\Program Files\Microsoft Visual Studio\2022\Community\VC\Tools\MSVC\14.44.35207\include\xutility(459,50):
+                      'TransScene::TransScene(const TransScene &)': 引数 1 を 'Camera' から 'const TransScene &' へ変換できません。
+                          C:\Program Files\Microsoft Visual Studio\2022\Community\VC\Tools\MSVC\14.44.35207\include\xutility(459,71):
+                          理由: 'Camera' から 'const TransScene' へは変換できません。
+                          C:\Program Files\Microsoft Visual Studio\2022\Community\VC\Tools\MSVC\14.44.35207\include\xutility(459,71):
+                          この変換を実行可能なユーザー定義変換演算子がないか、または演算子を呼び出せません。
+                  C:\Users\dorae\Desktop\HAL\class3\FindWork\就職作品プロジェクト\02_ResourceFile\SceneFile\TransScene.h(65,2):
+                  または 'TransScene::TransScene(std::shared_ptr<Camera>)'
+                      C:\Program Files\Microsoft Visual Studio\2022\Community\VC\Tools\MSVC\14.44.35207\include\xutility(459,50):
+                      'TransScene::TransScene(std::shared_ptr<Camera>)': 引数 1 を 'Camera' から 'std::shared_ptr<Camera>' へ変換できません。
+                          C:\Program Files\Microsoft Visual Studio\2022\Community\VC\Tools\MSVC\14.44.35207\include\xutility(459,71):
+                          この変換を実行可能なユーザー定義変換演算子がないか、または演算子を呼び出せません。
+                  C:\Program Files\Microsoft Visual Studio\2022\Community\VC\Tools\MSVC\14.44.35207\include\xutility(459,50):
+                  引数リスト '(Camera)' を一致させようとしているとき
+      C:\Program Files\Microsoft Visual Studio\2022\Community\VC\Tools\MSVC\14.44.35207\include\xutility(472,14):
+      テンプレートインスタンス化コンテキスト (最初に最も古いもの) は
+          C:\Users\dorae\Desktop\HAL\class3\FindWork\就職作品プロジェクト\02_ResourceFile\Game.h(163,24):
+          コンパイル対象の関数 テンプレート インスタンス化 'std::shared_ptr<TransScene> std::make_shared<TransScene,Camera&>(Camera &)' のリファレンスを確認してください
+          C:\Program Files\Microsoft Visual Studio\2022\Community\VC\Tools\MSVC\14.44.35207\include\memory(2913,46):
+          コンパイル対象の関数 テンプレート インスタンス化 'std::_Ref_count_obj2<TransScene>::_Ref_count_obj2<Camera&>(Camera &)' のリファレンスを確認してください
+          C:\Program Files\Microsoft Visual Studio\2022\Community\VC\Tools\MSVC\14.44.35207\include\memory(2100,18):
+          コンパイル対象の関数 テンプレート インスタンス化 'void std::_Construct_in_place<_Ty,Camera&>(_Ty &,Camera &) noexcept(false)' のリファレンスを確認してください
+          with
+          [
+              _Ty=TransScene
+          ]
+  
+C:\Program Files\Microsoft Visual Studio\2022\Community\VC\Tools\MSVC\14.44.35207\include\xutility(476,61): error C2665: 'TransScene::TransScene': オーバーロードされた関数ですべての引数の型を変換できませんでした
+  (ソース ファイル '/02_ResourceFile/DebugUI.cpp' をコンパイルしています)
+      C:\Users\dorae\Desktop\HAL\class3\FindWork\就職作品プロジェクト\02_ResourceFile\SceneFile\TransScene.h(92,1):
+      'TransScene::TransScene(const TransScene &)' の可能性があります
+          C:\Program Files\Microsoft Visual Studio\2022\Community\VC\Tools\MSVC\14.44.35207\include\xutility(476,61):
+          'TransScene::TransScene(const TransScene &)': 引数 1 を 'Camera' から 'const TransScene &' へ変換できません。
+              C:\Program Files\Microsoft Visual Studio\2022\Community\VC\Tools\MSVC\14.44.35207\include\xutility(476,82):
+              理由: 'Camera' から 'const TransScene' へは変換できません。
+              C:\Program Files\Microsoft Visual Studio\2022\Community\VC\Tools\MSVC\14.44.35207\include\xutility(476,82):
+              この変換を実行可能なユーザー定義変換演算子がないか、または演算子を呼び出せません。
+      C:\Users\dorae\Desktop\HAL\class3\FindWork\就職作品プロジェクト\02_ResourceFile\SceneFile\TransScene.h(65,2):
+      または 'TransScene::TransScene(std::shared_ptr<Camera>)'
+          C:\Program Files\Microsoft Visual Studio\2022\Community\VC\Tools\MSVC\14.44.35207\include\xutility(476,61):
+          'TransScene::TransScene(std::shared_ptr<Camera>)': 引数 1 を 'Camera' から 'std::shared_ptr<Camera>' へ変換できません。
+              C:\Program Files\Microsoft Visual Studio\2022\Community\VC\Tools\MSVC\14.44.35207\include\xutility(476,82):
+              この変換を実行可能なユーザー定義変換演算子がないか、または演算子を呼び出せません。
+      C:\Program Files\Microsoft Visual Studio\2022\Community\VC\Tools\MSVC\14.44.35207\include\xutility(476,61):
+      引数リスト '(Camera)' を一致させようとしているとき
+  
   Cube.cpp
-  Light.cpp
+C:\Program Files\Microsoft Visual Studio\2022\Community\VC\Tools\MSVC\14.44.35207\include\xutility(472,14): error C2672: 'std::construct_at': 一致するオーバーロードされた関数が見つかりませんでした。
+  (ソース ファイル '/02_ResourceFile/ObjectFile/Stone.cpp' をコンパイルしています)
+      C:\Program Files\Microsoft Visual Studio\2022\Community\VC\Tools\MSVC\14.44.35207\include\xutility(461,16):
+      '_Ty *std::construct_at(_Ty *const ,_Types ...) noexcept(<expr>)' の可能性があります
+          C:\Program Files\Microsoft Visual Studio\2022\Community\VC\Tools\MSVC\14.44.35207\include\xutility(472,14):
+          関連する制約が満たされていません
+              C:\Program Files\Microsoft Visual Studio\2022\Community\VC\Tools\MSVC\14.44.35207\include\xutility(459,50):
+              'TransScene::TransScene': オーバーロードされた関数ですべての引数の型を変換できませんでした
+                  C:\Users\dorae\Desktop\HAL\class3\FindWork\就職作品プロジェクト\02_ResourceFile\SceneFile\TransScene.h(92,1):
+                  'TransScene::TransScene(const TransScene &)' の可能性があります
+                      C:\Program Files\Microsoft Visual Studio\2022\Community\VC\Tools\MSVC\14.44.35207\include\xutility(459,50):
+                      'TransScene::TransScene(const TransScene &)': 引数 1 を 'Camera' から 'const TransScene &' へ変換できません。
+                          C:\Program Files\Microsoft Visual Studio\2022\Community\VC\Tools\MSVC\14.44.35207\include\xutility(459,71):
+                          理由: 'Camera' から 'const TransScene' へは変換できません。
+                          C:\Program Files\Microsoft Visual Studio\2022\Community\VC\Tools\MSVC\14.44.35207\include\xutility(459,71):
+                          この変換を実行可能なユーザー定義変換演算子がないか、または演算子を呼び出せません。
+                  C:\Users\dorae\Desktop\HAL\class3\FindWork\就職作品プロジェクト\02_ResourceFile\SceneFile\TransScene.h(65,2):
+                  または 'TransScene::TransScene(std::shared_ptr<Camera>)'
+                      C:\Program Files\Microsoft Visual Studio\2022\Community\VC\Tools\MSVC\14.44.35207\include\xutility(459,50):
+                      'TransScene::TransScene(std::shared_ptr<Camera>)': 引数 1 を 'Camera' から 'std::shared_ptr<Camera>' へ変換できません。
+                          C:\Program Files\Microsoft Visual Studio\2022\Community\VC\Tools\MSVC\14.44.35207\include\xutility(459,71):
+                          この変換を実行可能なユーザー定義変換演算子がないか、または演算子を呼び出せません。
+                  C:\Program Files\Microsoft Visual Studio\2022\Community\VC\Tools\MSVC\14.44.35207\include\xutility(459,50):
+                  引数リスト '(Camera)' を一致させようとしているとき
+      C:\Program Files\Microsoft Visual Studio\2022\Community\VC\Tools\MSVC\14.44.35207\include\xutility(472,14):
+      テンプレートインスタンス化コンテキスト (最初に最も古いもの) は
+          C:\Users\dorae\Desktop\HAL\class3\FindWork\就職作品プロジェクト\02_ResourceFile\Game.h(163,24):
+          コンパイル対象の関数 テンプレート インスタンス化 'std::shared_ptr<TransScene> std::make_shared<TransScene,Camera&>(Camera &)' のリファレンスを確認してください
+          C:\Program Files\Microsoft Visual Studio\2022\Community\VC\Tools\MSVC\14.44.35207\include\memory(2913,46):
+          コンパイル対象の関数 テンプレート インスタンス化 'std::_Ref_count_obj2<TransScene>::_Ref_count_obj2<Camera&>(Camera &)' のリファレンスを確認してください
+          C:\Program Files\Microsoft Visual Studio\2022\Community\VC\Tools\MSVC\14.44.35207\include\memory(2100,18):
+          コンパイル対象の関数 テンプレート インスタンス化 'void std::_Construct_in_place<_Ty,Camera&>(_Ty &,Camera &) noexcept(false)' のリファレンスを確認してください
+          with
+          [
+              _Ty=TransScene
+          ]
+  
+C:\Program Files\Microsoft Visual Studio\2022\Community\VC\Tools\MSVC\14.44.35207\include\xutility(476,61): error C2665: 'TransScene::TransScene': オーバーロードされた関数ですべての引数の型を変換できませんでした
+  (ソース ファイル '/02_ResourceFile/ObjectFile/Stone.cpp' をコンパイルしています)
+      C:\Users\dorae\Desktop\HAL\class3\FindWork\就職作品プロジェクト\02_ResourceFile\SceneFile\TransScene.h(92,1):
+      'TransScene::TransScene(const TransScene &)' の可能性があります
+          C:\Program Files\Microsoft Visual Studio\2022\Community\VC\Tools\MSVC\14.44.35207\include\xutility(476,61):
+          'TransScene::TransScene(const TransScene &)': 引数 1 を 'Camera' から 'const TransScene &' へ変換できません。
+              C:\Program Files\Microsoft Visual Studio\2022\Community\VC\Tools\MSVC\14.44.35207\include\xutility(476,82):
+              理由: 'Camera' から 'const TransScene' へは変換できません。
+              C:\Program Files\Microsoft Visual Studio\2022\Community\VC\Tools\MSVC\14.44.35207\include\xutility(476,82):
+              この変換を実行可能なユーザー定義変換演算子がないか、または演算子を呼び出せません。
+      C:\Users\dorae\Desktop\HAL\class3\FindWork\就職作品プロジェクト\02_ResourceFile\SceneFile\TransScene.h(65,2):
+      または 'TransScene::TransScene(std::shared_ptr<Camera>)'
+          C:\Program Files\Microsoft Visual Studio\2022\Community\VC\Tools\MSVC\14.44.35207\include\xutility(476,61):
+          'TransScene::TransScene(std::shared_ptr<Camera>)': 引数 1 を 'Camera' から 'std::shared_ptr<Camera>' へ変換できません。
+              C:\Program Files\Microsoft Visual Studio\2022\Community\VC\Tools\MSVC\14.44.35207\include\xutility(476,82):
+              この変換を実行可能なユーザー定義変換演算子がないか、または演算子を呼び出せません。
+      C:\Program Files\Microsoft Visual Studio\2022\Community\VC\Tools\MSVC\14.44.35207\include\xutility(476,61):
+      引数リスト '(Camera)' を一致させようとしているとき
+  
   Model.cpp
   Object.cpp
   Sphere.cpp
   Skydome.cpp
-  Renderer.cpp
-  RenderTarget.cpp
+C:\Program Files\Microsoft Visual Studio\2022\Community\VC\Tools\MSVC\14.44.35207\include\xutility(472,14): error C2672: 'std::construct_at': 一致するオーバーロードされた関数が見つかりませんでした。
+  (ソース ファイル '/02_ResourceFile/ObjectFile/Bomber.cpp' をコンパイルしています)
+      C:\Program Files\Microsoft Visual Studio\2022\Community\VC\Tools\MSVC\14.44.35207\include\xutility(461,16):
+      '_Ty *std::construct_at(_Ty *const ,_Types ...) noexcept(<expr>)' の可能性があります
+          C:\Program Files\Microsoft Visual Studio\2022\Community\VC\Tools\MSVC\14.44.35207\include\xutility(472,14):
+          関連する制約が満たされていません
+              C:\Program Files\Microsoft Visual Studio\2022\Community\VC\Tools\MSVC\14.44.35207\include\xutility(459,50):
+              'TransScene::TransScene': オーバーロードされた関数ですべての引数の型を変換できませんでした
+                  C:\Users\dorae\Desktop\HAL\class3\FindWork\就職作品プロジェクト\02_ResourceFile\SceneFile\TransScene.h(92,1):
+                  'TransScene::TransScene(const TransScene &)' の可能性があります
+                      C:\Program Files\Microsoft Visual Studio\2022\Community\VC\Tools\MSVC\14.44.35207\include\xutility(459,50):
+                      'TransScene::TransScene(const TransScene &)': 引数 1 を 'Camera' から 'const TransScene &' へ変換できません。
+                          C:\Program Files\Microsoft Visual Studio\2022\Community\VC\Tools\MSVC\14.44.35207\include\xutility(459,71):
+                          理由: 'Camera' から 'const TransScene' へは変換できません。
+                          C:\Program Files\Microsoft Visual Studio\2022\Community\VC\Tools\MSVC\14.44.35207\include\xutility(459,71):
+                          この変換を実行可能なユーザー定義変換演算子がないか、または演算子を呼び出せません。
+                  C:\Users\dorae\Desktop\HAL\class3\FindWork\就職作品プロジェクト\02_ResourceFile\SceneFile\TransScene.h(65,2):
+                  または 'TransScene::TransScene(std::shared_ptr<Camera>)'
+                      C:\Program Files\Microsoft Visual Studio\2022\Community\VC\Tools\MSVC\14.44.35207\include\xutility(459,50):
+                      'TransScene::TransScene(std::shared_ptr<Camera>)': 引数 1 を 'Camera' から 'std::shared_ptr<Camera>' へ変換できません。
+                          C:\Program Files\Microsoft Visual Studio\2022\Community\VC\Tools\MSVC\14.44.35207\include\xutility(459,71):
+                          この変換を実行可能なユーザー定義変換演算子がないか、または演算子を呼び出せません。
+                  C:\Program Files\Microsoft Visual Studio\2022\Community\VC\Tools\MSVC\14.44.35207\include\xutility(459,50):
+                  引数リスト '(Camera)' を一致させようとしているとき
+      C:\Program Files\Microsoft Visual Studio\2022\Community\VC\Tools\MSVC\14.44.35207\include\xutility(472,14):
+      テンプレートインスタンス化コンテキスト (最初に最も古いもの) は
+          C:\Users\dorae\Desktop\HAL\class3\FindWork\就職作品プロジェクト\02_ResourceFile\Game.h(163,24):
+          コンパイル対象の関数 テンプレート インスタンス化 'std::shared_ptr<TransScene> std::make_shared<TransScene,Camera&>(Camera &)' のリファレンスを確認してください
+          C:\Program Files\Microsoft Visual Studio\2022\Community\VC\Tools\MSVC\14.44.35207\include\memory(2913,46):
+          コンパイル対象の関数 テンプレート インスタンス化 'std::_Ref_count_obj2<TransScene>::_Ref_count_obj2<Camera&>(Camera &)' のリファレンスを確認してください
+          C:\Program Files\Microsoft Visual Studio\2022\Community\VC\Tools\MSVC\14.44.35207\include\memory(2100,18):
+          コンパイル対象の関数 テンプレート インスタンス化 'void std::_Construct_in_place<_Ty,Camera&>(_Ty &,Camera &) noexcept(false)' のリファレンスを確認してください
+          with
+          [
+              _Ty=TransScene
+          ]
+  
+C:\Program Files\Microsoft Visual Studio\2022\Community\VC\Tools\MSVC\14.44.35207\include\xutility(476,61): error C2665: 'TransScene::TransScene': オーバーロードされた関数ですべての引数の型を変換できませんでした
+  (ソース ファイル '/02_ResourceFile/ObjectFile/Bomber.cpp' をコンパイルしています)
+      C:\Users\dorae\Desktop\HAL\class3\FindWork\就職作品プロジェクト\02_ResourceFile\SceneFile\TransScene.h(92,1):
+      'TransScene::TransScene(const TransScene &)' の可能性があります
+          C:\Program Files\Microsoft Visual Studio\2022\Community\VC\Tools\MSVC\14.44.35207\include\xutility(476,61):
+          'TransScene::TransScene(const TransScene &)': 引数 1 を 'Camera' から 'const TransScene &' へ変換できません。
+              C:\Program Files\Microsoft Visual Studio\2022\Community\VC\Tools\MSVC\14.44.35207\include\xutility(476,82):
+              理由: 'Camera' から 'const TransScene' へは変換できません。
+              C:\Program Files\Microsoft Visual Studio\2022\Community\VC\Tools\MSVC\14.44.35207\include\xutility(476,82):
+              この変換を実行可能なユーザー定義変換演算子がないか、または演算子を呼び出せません。
+      C:\Users\dorae\Desktop\HAL\class3\FindWork\就職作品プロジェクト\02_ResourceFile\SceneFile\TransScene.h(65,2):
+      または 'TransScene::TransScene(std::shared_ptr<Camera>)'
+          C:\Program Files\Microsoft Visual Studio\2022\Community\VC\Tools\MSVC\14.44.35207\include\xutility(476,61):
+          'TransScene::TransScene(std::shared_ptr<Camera>)': 引数 1 を 'Camera' から 'std::shared_ptr<Camera>' へ変換できません。
+              C:\Program Files\Microsoft Visual Studio\2022\Community\VC\Tools\MSVC\14.44.35207\include\xutility(476,82):
+              この変換を実行可能なユーザー定義変換演算子がないか、または演算子を呼び出せません。
+      C:\Program Files\Microsoft Visual Studio\2022\Community\VC\Tools\MSVC\14.44.35207\include\xutility(476,61):
+      引数リスト '(Camera)' を一致させようとしているとき
+  
   GameSceneExe.cpp
+C:\Program Files\Microsoft Visual Studio\2022\Community\VC\Tools\MSVC\14.44.35207\include\xutility(472,14): error C2672: 'std::construct_at': 一致するオーバーロードされた関数が見つかりませんでした。
+  (ソース ファイル '/02_ResourceFile/SceneFile/GameSceneDodge.cpp' をコンパイルしています)
+      C:\Program Files\Microsoft Visual Studio\2022\Community\VC\Tools\MSVC\14.44.35207\include\xutility(461,16):
+      '_Ty *std::construct_at(_Ty *const ,_Types ...) noexcept(<expr>)' の可能性があります
+          C:\Program Files\Microsoft Visual Studio\2022\Community\VC\Tools\MSVC\14.44.35207\include\xutility(472,14):
+          関連する制約が満たされていません
+              C:\Program Files\Microsoft Visual Studio\2022\Community\VC\Tools\MSVC\14.44.35207\include\xutility(459,50):
+              'TransScene::TransScene': オーバーロードされた関数ですべての引数の型を変換できませんでした
+                  C:\Users\dorae\Desktop\HAL\class3\FindWork\就職作品プロジェクト\02_ResourceFile\SceneFile\TransScene.h(92,1):
+                  'TransScene::TransScene(const TransScene &)' の可能性があります
+                      C:\Program Files\Microsoft Visual Studio\2022\Community\VC\Tools\MSVC\14.44.35207\include\xutility(459,50):
+                      'TransScene::TransScene(const TransScene &)': 引数 1 を 'Camera' から 'const TransScene &' へ変換できません。
+                          C:\Program Files\Microsoft Visual Studio\2022\Community\VC\Tools\MSVC\14.44.35207\include\xutility(459,71):
+                          理由: 'Camera' から 'const TransScene' へは変換できません。
+                          C:\Program Files\Microsoft Visual Studio\2022\Community\VC\Tools\MSVC\14.44.35207\include\xutility(459,71):
+                          この変換を実行可能なユーザー定義変換演算子がないか、または演算子を呼び出せません。
+                  C:\Users\dorae\Desktop\HAL\class3\FindWork\就職作品プロジェクト\02_ResourceFile\SceneFile\TransScene.h(65,2):
+                  または 'TransScene::TransScene(std::shared_ptr<Camera>)'
+                      C:\Program Files\Microsoft Visual Studio\2022\Community\VC\Tools\MSVC\14.44.35207\include\xutility(459,50):
+                      'TransScene::TransScene(std::shared_ptr<Camera>)': 引数 1 を 'Camera' から 'std::shared_ptr<Camera>' へ変換できません。
+                          C:\Program Files\Microsoft Visual Studio\2022\Community\VC\Tools\MSVC\14.44.35207\include\xutility(459,71):
+                          この変換を実行可能なユーザー定義変換演算子がないか、または演算子を呼び出せません。
+                  C:\Program Files\Microsoft Visual Studio\2022\Community\VC\Tools\MSVC\14.44.35207\include\xutility(459,50):
+                  引数リスト '(Camera)' を一致させようとしているとき
+      C:\Program Files\Microsoft Visual Studio\2022\Community\VC\Tools\MSVC\14.44.35207\include\xutility(472,14):
+      テンプレートインスタンス化コンテキスト (最初に最も古いもの) は
+          C:\Users\dorae\Desktop\HAL\class3\FindWork\就職作品プロジェクト\02_ResourceFile\Game.h(163,24):
+          コンパイル対象の関数 テンプレート インスタンス化 'std::shared_ptr<TransScene> std::make_shared<TransScene,Camera&>(Camera &)' のリファレンスを確認してください
+          C:\Program Files\Microsoft Visual Studio\2022\Community\VC\Tools\MSVC\14.44.35207\include\memory(2913,46):
+          コンパイル対象の関数 テンプレート インスタンス化 'std::_Ref_count_obj2<TransScene>::_Ref_count_obj2<Camera&>(Camera &)' のリファレンスを確認してください
+          C:\Program Files\Microsoft Visual Studio\2022\Community\VC\Tools\MSVC\14.44.35207\include\memory(2100,18):
+          コンパイル対象の関数 テンプレート インスタンス化 'void std::_Construct_in_place<_Ty,Camera&>(_Ty &,Camera &) noexcept(false)' のリファレンスを確認してください
+          with
+          [
+              _Ty=TransScene
+          ]
+  
+C:\Program Files\Microsoft Visual Studio\2022\Community\VC\Tools\MSVC\14.44.35207\include\xutility(476,61): error C2665: 'TransScene::TransScene': オーバーロードされた関数ですべての引数の型を変換できませんでした
+  (ソース ファイル '/02_ResourceFile/SceneFile/GameSceneDodge.cpp' をコンパイルしています)
+      C:\Users\dorae\Desktop\HAL\class3\FindWork\就職作品プロジェクト\02_ResourceFile\SceneFile\TransScene.h(92,1):
+      'TransScene::TransScene(const TransScene &)' の可能性があります
+          C:\Program Files\Microsoft Visual Studio\2022\Community\VC\Tools\MSVC\14.44.35207\include\xutility(476,61):
+          'TransScene::TransScene(const TransScene &)': 引数 1 を 'Camera' から 'const TransScene &' へ変換できません。
+              C:\Program Files\Microsoft Visual Studio\2022\Community\VC\Tools\MSVC\14.44.35207\include\xutility(476,82):
+              理由: 'Camera' から 'const TransScene' へは変換できません。
+              C:\Program Files\Microsoft Visual Studio\2022\Community\VC\Tools\MSVC\14.44.35207\include\xutility(476,82):
+              この変換を実行可能なユーザー定義変換演算子がないか、または演算子を呼び出せません。
+      C:\Users\dorae\Desktop\HAL\class3\FindWork\就職作品プロジェクト\02_ResourceFile\SceneFile\TransScene.h(65,2):
+      または 'TransScene::TransScene(std::shared_ptr<Camera>)'
+          C:\Program Files\Microsoft Visual Studio\2022\Community\VC\Tools\MSVC\14.44.35207\include\xutility(476,61):
+          'TransScene::TransScene(std::shared_ptr<Camera>)': 引数 1 を 'Camera' から 'std::shared_ptr<Camera>' へ変換できません。
+              C:\Program Files\Microsoft Visual Studio\2022\Community\VC\Tools\MSVC\14.44.35207\include\xutility(476,82):
+              この変換を実行可能なユーザー定義変換演算子がないか、または演算子を呼び出せません。
+      C:\Program Files\Microsoft Visual Studio\2022\Community\VC\Tools\MSVC\14.44.35207\include\xutility(476,61):
+      引数リスト '(Camera)' を一致させようとしているとき
+  
+C:\Program Files\Microsoft Visual Studio\2022\Community\VC\Tools\MSVC\14.44.35207\include\xutility(472,14): error C2672: 'std::construct_at': 一致するオーバーロードされた関数が見つかりませんでした。
+  (ソース ファイル '/02_ResourceFile/SceneFile/GameSceneText.cpp' をコンパイルしています)
+      C:\Program Files\Microsoft Visual Studio\2022\Community\VC\Tools\MSVC\14.44.35207\include\xutility(461,16):
+      '_Ty *std::construct_at(_Ty *const ,_Types ...) noexcept(<expr>)' の可能性があります
+          C:\Program Files\Microsoft Visual Studio\2022\Community\VC\Tools\MSVC\14.44.35207\include\xutility(472,14):
+          関連する制約が満たされていません
+              C:\Program Files\Microsoft Visual Studio\2022\Community\VC\Tools\MSVC\14.44.35207\include\xutility(459,50):
+              'TransScene::TransScene': オーバーロードされた関数ですべての引数の型を変換できませんでした
+                  C:\Users\dorae\Desktop\HAL\class3\FindWork\就職作品プロジェクト\02_ResourceFile\SceneFile\TransScene.h(92,1):
+                  'TransScene::TransScene(const TransScene &)' の可能性があります
+                      C:\Program Files\Microsoft Visual Studio\2022\Community\VC\Tools\MSVC\14.44.35207\include\xutility(459,50):
+                      'TransScene::TransScene(const TransScene &)': 引数 1 を 'Camera' から 'const TransScene &' へ変換できません。
+                          C:\Program Files\Microsoft Visual Studio\2022\Community\VC\Tools\MSVC\14.44.35207\include\xutility(459,71):
+                          理由: 'Camera' から 'const TransScene' へは変換できません。
+                          C:\Program Files\Microsoft Visual Studio\2022\Community\VC\Tools\MSVC\14.44.35207\include\xutility(459,71):
+                          この変換を実行可能なユーザー定義変換演算子がないか、または演算子を呼び出せません。
+                  C:\Users\dorae\Desktop\HAL\class3\FindWork\就職作品プロジェクト\02_ResourceFile\SceneFile\TransScene.h(65,2):
+                  または 'TransScene::TransScene(std::shared_ptr<Camera>)'
+                      C:\Program Files\Microsoft Visual Studio\2022\Community\VC\Tools\MSVC\14.44.35207\include\xutility(459,50):
+                      'TransScene::TransScene(std::shared_ptr<Camera>)': 引数 1 を 'Camera' から 'std::shared_ptr<Camera>' へ変換できません。
+                          C:\Program Files\Microsoft Visual Studio\2022\Community\VC\Tools\MSVC\14.44.35207\include\xutility(459,71):
+                          この変換を実行可能なユーザー定義変換演算子がないか、または演算子を呼び出せません。
+                  C:\Program Files\Microsoft Visual Studio\2022\Community\VC\Tools\MSVC\14.44.35207\include\xutility(459,50):
+                  引数リスト '(Camera)' を一致させようとしているとき
+      C:\Program Files\Microsoft Visual Studio\2022\Community\VC\Tools\MSVC\14.44.35207\include\xutility(472,14):
+      テンプレートインスタンス化コンテキスト (最初に最も古いもの) は
+          C:\Users\dorae\Desktop\HAL\class3\FindWork\就職作品プロジェクト\02_ResourceFile\Game.h(163,24):
+          コンパイル対象の関数 テンプレート インスタンス化 'std::shared_ptr<TransScene> std::make_shared<TransScene,Camera&>(Camera &)' のリファレンスを確認してください
+          C:\Program Files\Microsoft Visual Studio\2022\Community\VC\Tools\MSVC\14.44.35207\include\memory(2913,46):
+          コンパイル対象の関数 テンプレート インスタンス化 'std::_Ref_count_obj2<TransScene>::_Ref_count_obj2<Camera&>(Camera &)' のリファレンスを確認してください
+          C:\Program Files\Microsoft Visual Studio\2022\Community\VC\Tools\MSVC\14.44.35207\include\memory(2100,18):
+          コンパイル対象の関数 テンプレート インスタンス化 'void std::_Construct_in_place<_Ty,Camera&>(_Ty &,Camera &) noexcept(false)' のリファレンスを確認してください
+          with
+          [
+              _Ty=TransScene
+          ]
+  
+C:\Program Files\Microsoft Visual Studio\2022\Community\VC\Tools\MSVC\14.44.35207\include\xutility(476,61): error C2665: 'TransScene::TransScene': オーバーロードされた関数ですべての引数の型を変換できませんでした
+  (ソース ファイル '/02_ResourceFile/SceneFile/GameSceneText.cpp' をコンパイルしています)
+      C:\Users\dorae\Desktop\HAL\class3\FindWork\就職作品プロジェクト\02_ResourceFile\SceneFile\TransScene.h(92,1):
+      'TransScene::TransScene(const TransScene &)' の可能性があります
+          C:\Program Files\Microsoft Visual Studio\2022\Community\VC\Tools\MSVC\14.44.35207\include\xutility(476,61):
+          'TransScene::TransScene(const TransScene &)': 引数 1 を 'Camera' から 'const TransScene &' へ変換できません。
+              C:\Program Files\Microsoft Visual Studio\2022\Community\VC\Tools\MSVC\14.44.35207\include\xutility(476,82):
+              理由: 'Camera' から 'const TransScene' へは変換できません。
+              C:\Program Files\Microsoft Visual Studio\2022\Community\VC\Tools\MSVC\14.44.35207\include\xutility(476,82):
+              この変換を実行可能なユーザー定義変換演算子がないか、または演算子を呼び出せません。
+      C:\Users\dorae\Desktop\HAL\class3\FindWork\就職作品プロジェクト\02_ResourceFile\SceneFile\TransScene.h(65,2):
+      または 'TransScene::TransScene(std::shared_ptr<Camera>)'
+          C:\Program Files\Microsoft Visual Studio\2022\Community\VC\Tools\MSVC\14.44.35207\include\xutility(476,61):
+          'TransScene::TransScene(std::shared_ptr<Camera>)': 引数 1 を 'Camera' から 'std::shared_ptr<Camera>' へ変換できません。
+              C:\Program Files\Microsoft Visual Studio\2022\Community\VC\Tools\MSVC\14.44.35207\include\xutility(476,82):
+              この変換を実行可能なユーザー定義変換演算子がないか、または演算子を呼び出せません。
+      C:\Program Files\Microsoft Visual Studio\2022\Community\VC\Tools\MSVC\14.44.35207\include\xutility(476,61):
+      引数リスト '(Camera)' を一致させようとしているとき
+  
   TitleScene.cpp
+C:\Program Files\Microsoft Visual Studio\2022\Community\VC\Tools\MSVC\14.44.35207\include\xutility(472,14): error C2672: 'std::construct_at': 一致するオーバーロードされた関数が見つかりませんでした。
+  (ソース ファイル '/02_ResourceFile/Game.cpp' をコンパイルしています)
+      C:\Program Files\Microsoft Visual Studio\2022\Community\VC\Tools\MSVC\14.44.35207\include\xutility(461,16):
+      '_Ty *std::construct_at(_Ty *const ,_Types ...) noexcept(<expr>)' の可能性があります
+          C:\Program Files\Microsoft Visual Studio\2022\Community\VC\Tools\MSVC\14.44.35207\include\xutility(472,14):
+          関連する制約が満たされていません
+              C:\Program Files\Microsoft Visual Studio\2022\Community\VC\Tools\MSVC\14.44.35207\include\xutility(459,50):
+              'TransScene::TransScene': オーバーロードされた関数ですべての引数の型を変換できませんでした
+                  C:\Users\dorae\Desktop\HAL\class3\FindWork\就職作品プロジェクト\02_ResourceFile\SceneFile\TransScene.h(92,1):
+                  'TransScene::TransScene(const TransScene &)' の可能性があります
+                      C:\Program Files\Microsoft Visual Studio\2022\Community\VC\Tools\MSVC\14.44.35207\include\xutility(459,50):
+                      'TransScene::TransScene(const TransScene &)': 引数 1 を 'Camera' から 'const TransScene &' へ変換できません。
+                          C:\Program Files\Microsoft Visual Studio\2022\Community\VC\Tools\MSVC\14.44.35207\include\xutility(459,71):
+                          理由: 'Camera' から 'const TransScene' へは変換できません。
+                          C:\Program Files\Microsoft Visual Studio\2022\Community\VC\Tools\MSVC\14.44.35207\include\xutility(459,71):
+                          この変換を実行可能なユーザー定義変換演算子がないか、または演算子を呼び出せません。
+                  C:\Users\dorae\Desktop\HAL\class3\FindWork\就職作品プロジェクト\02_ResourceFile\SceneFile\TransScene.h(65,2):
+                  または 'TransScene::TransScene(std::shared_ptr<Camera>)'
+                      C:\Program Files\Microsoft Visual Studio\2022\Community\VC\Tools\MSVC\14.44.35207\include\xutility(459,50):
+                      'TransScene::TransScene(std::shared_ptr<Camera>)': 引数 1 を 'Camera' から 'std::shared_ptr<Camera>' へ変換できません。
+                          C:\Program Files\Microsoft Visual Studio\2022\Community\VC\Tools\MSVC\14.44.35207\include\xutility(459,71):
+                          この変換を実行可能なユーザー定義変換演算子がないか、または演算子を呼び出せません。
+                  C:\Program Files\Microsoft Visual Studio\2022\Community\VC\Tools\MSVC\14.44.35207\include\xutility(459,50):
+                  引数リスト '(Camera)' を一致させようとしているとき
+      C:\Program Files\Microsoft Visual Studio\2022\Community\VC\Tools\MSVC\14.44.35207\include\xutility(472,14):
+      テンプレートインスタンス化コンテキスト (最初に最も古いもの) は
+          C:\Users\dorae\Desktop\HAL\class3\FindWork\就職作品プロジェクト\02_ResourceFile\Game.h(163,24):
+          コンパイル対象の関数 テンプレート インスタンス化 'std::shared_ptr<TransScene> std::make_shared<TransScene,Camera&>(Camera &)' のリファレンスを確認してください
+          C:\Program Files\Microsoft Visual Studio\2022\Community\VC\Tools\MSVC\14.44.35207\include\memory(2913,46):
+          コンパイル対象の関数 テンプレート インスタンス化 'std::_Ref_count_obj2<TransScene>::_Ref_count_obj2<Camera&>(Camera &)' のリファレンスを確認してください
+          C:\Program Files\Microsoft Visual Studio\2022\Community\VC\Tools\MSVC\14.44.35207\include\memory(2100,18):
+          コンパイル対象の関数 テンプレート インスタンス化 'void std::_Construct_in_place<_Ty,Camera&>(_Ty &,Camera &) noexcept(false)' のリファレンスを確認してください
+          with
+          [
+              _Ty=TransScene
+          ]
+  
+C:\Program Files\Microsoft Visual Studio\2022\Community\VC\Tools\MSVC\14.44.35207\include\xutility(476,61): error C2665: 'TransScene::TransScene': オーバーロードされた関数ですべての引数の型を変換できませんでした
+  (ソース ファイル '/02_ResourceFile/Game.cpp' をコンパイルしています)
+      C:\Users\dorae\Desktop\HAL\class3\FindWork\就職作品プロジェクト\02_ResourceFile\SceneFile\TransScene.h(92,1):
+      'TransScene::TransScene(const TransScene &)' の可能性があります
+          C:\Program Files\Microsoft Visual Studio\2022\Community\VC\Tools\MSVC\14.44.35207\include\xutility(476,61):
+          'TransScene::TransScene(const TransScene &)': 引数 1 を 'Camera' から 'const TransScene &' へ変換できません。
+              C:\Program Files\Microsoft Visual Studio\2022\Community\VC\Tools\MSVC\14.44.35207\include\xutility(476,82):
+              理由: 'Camera' から 'const TransScene' へは変換できません。
+              C:\Program Files\Microsoft Visual Studio\2022\Community\VC\Tools\MSVC\14.44.35207\include\xutility(476,82):
+              この変換を実行可能なユーザー定義変換演算子がないか、または演算子を呼び出せません。
+      C:\Users\dorae\Desktop\HAL\class3\FindWork\就職作品プロジェクト\02_ResourceFile\SceneFile\TransScene.h(65,2):
+      または 'TransScene::TransScene(std::shared_ptr<Camera>)'
+          C:\Program Files\Microsoft Visual Studio\2022\Community\VC\Tools\MSVC\14.44.35207\include\xutility(476,61):
+          'TransScene::TransScene(std::shared_ptr<Camera>)': 引数 1 を 'Camera' から 'std::shared_ptr<Camera>' へ変換できません。
+              C:\Program Files\Microsoft Visual Studio\2022\Community\VC\Tools\MSVC\14.44.35207\include\xutility(476,82):
+              この変換を実行可能なユーザー定義変換演算子がないか、または演算子を呼び出せません。
+      C:\Program Files\Microsoft Visual Studio\2022\Community\VC\Tools\MSVC\14.44.35207\include\xutility(476,61):
+      引数リスト '(Camera)' を一致させようとしているとき
+  
   Fade.cpp
-  SnapshotOverlay.cpp
   TransScene.cpp
-  Shader.cpp
-  ShaderManager.cpp
+C:\Program Files\Microsoft Visual Studio\2022\Community\VC\Tools\MSVC\14.44.35207\include\xutility(472,14): error C2672: 'std::construct_at': 一致するオーバーロードされた関数が見つかりませんでした。
+  (ソース ファイル '/02_ResourceFile/ObjectFile/Bullet.cpp' をコンパイルしています)
+      C:\Program Files\Microsoft Visual Studio\2022\Community\VC\Tools\MSVC\14.44.35207\include\xutility(461,16):
+      '_Ty *std::construct_at(_Ty *const ,_Types ...) noexcept(<expr>)' の可能性があります
+          C:\Program Files\Microsoft Visual Studio\2022\Community\VC\Tools\MSVC\14.44.35207\include\xutility(472,14):
+          関連する制約が満たされていません
+              C:\Program Files\Microsoft Visual Studio\2022\Community\VC\Tools\MSVC\14.44.35207\include\xutility(459,50):
+              'TransScene::TransScene': オーバーロードされた関数ですべての引数の型を変換できませんでした
+                  C:\Users\dorae\Desktop\HAL\class3\FindWork\就職作品プロジェクト\02_ResourceFile\SceneFile\TransScene.h(92,1):
+                  'TransScene::TransScene(const TransScene &)' の可能性があります
+                      C:\Program Files\Microsoft Visual Studio\2022\Community\VC\Tools\MSVC\14.44.35207\include\xutility(459,50):
+                      'TransScene::TransScene(const TransScene &)': 引数 1 を 'Camera' から 'const TransScene &' へ変換できません。
+                          C:\Program Files\Microsoft Visual Studio\2022\Community\VC\Tools\MSVC\14.44.35207\include\xutility(459,71):
+                          理由: 'Camera' から 'const TransScene' へは変換できません。
+                          C:\Program Files\Microsoft Visual Studio\2022\Community\VC\Tools\MSVC\14.44.35207\include\xutility(459,71):
+                          この変換を実行可能なユーザー定義変換演算子がないか、または演算子を呼び出せません。
+                  C:\Users\dorae\Desktop\HAL\class3\FindWork\就職作品プロジェクト\02_ResourceFile\SceneFile\TransScene.h(65,2):
+                  または 'TransScene::TransScene(std::shared_ptr<Camera>)'
+                      C:\Program Files\Microsoft Visual Studio\2022\Community\VC\Tools\MSVC\14.44.35207\include\xutility(459,50):
+                      'TransScene::TransScene(std::shared_ptr<Camera>)': 引数 1 を 'Camera' から 'std::shared_ptr<Camera>' へ変換できません。
+                          C:\Program Files\Microsoft Visual Studio\2022\Community\VC\Tools\MSVC\14.44.35207\include\xutility(459,71):
+                          この変換を実行可能なユーザー定義変換演算子がないか、または演算子を呼び出せません。
+                  C:\Program Files\Microsoft Visual Studio\2022\Community\VC\Tools\MSVC\14.44.35207\include\xutility(459,50):
+                  引数リスト '(Camera)' を一致させようとしているとき
+      C:\Program Files\Microsoft Visual Studio\2022\Community\VC\Tools\MSVC\14.44.35207\include\xutility(472,14):
+      テンプレートインスタンス化コンテキスト (最初に最も古いもの) は
+          C:\Users\dorae\Desktop\HAL\class3\FindWork\就職作品プロジェクト\02_ResourceFile\Game.h(163,24):
+          コンパイル対象の関数 テンプレート インスタンス化 'std::shared_ptr<TransScene> std::make_shared<TransScene,Camera&>(Camera &)' のリファレンスを確認してください
+          C:\Program Files\Microsoft Visual Studio\2022\Community\VC\Tools\MSVC\14.44.35207\include\memory(2913,46):
+          コンパイル対象の関数 テンプレート インスタンス化 'std::_Ref_count_obj2<TransScene>::_Ref_count_obj2<Camera&>(Camera &)' のリファレンスを確認してください
+          C:\Program Files\Microsoft Visual Studio\2022\Community\VC\Tools\MSVC\14.44.35207\include\memory(2100,18):
+          コンパイル対象の関数 テンプレート インスタンス化 'void std::_Construct_in_place<_Ty,Camera&>(_Ty &,Camera &) noexcept(false)' のリファレンスを確認してください
+          with
+          [
+              _Ty=TransScene
+          ]
+  
+C:\Program Files\Microsoft Visual Studio\2022\Community\VC\Tools\MSVC\14.44.35207\include\xutility(476,61): error C2665: 'TransScene::TransScene': オーバーロードされた関数ですべての引数の型を変換できませんでした
+  (ソース ファイル '/02_ResourceFile/ObjectFile/Bullet.cpp' をコンパイルしています)
+      C:\Users\dorae\Desktop\HAL\class3\FindWork\就職作品プロジェクト\02_ResourceFile\SceneFile\TransScene.h(92,1):
+      'TransScene::TransScene(const TransScene &)' の可能性があります
+          C:\Program Files\Microsoft Visual Studio\2022\Community\VC\Tools\MSVC\14.44.35207\include\xutility(476,61):
+          'TransScene::TransScene(const TransScene &)': 引数 1 を 'Camera' から 'const TransScene &' へ変換できません。
+              C:\Program Files\Microsoft Visual Studio\2022\Community\VC\Tools\MSVC\14.44.35207\include\xutility(476,82):
+              理由: 'Camera' から 'const TransScene' へは変換できません。
+              C:\Program Files\Microsoft Visual Studio\2022\Community\VC\Tools\MSVC\14.44.35207\include\xutility(476,82):
+              この変換を実行可能なユーザー定義変換演算子がないか、または演算子を呼び出せません。
+      C:\Users\dorae\Desktop\HAL\class3\FindWork\就職作品プロジェクト\02_ResourceFile\SceneFile\TransScene.h(65,2):
+      または 'TransScene::TransScene(std::shared_ptr<Camera>)'
+          C:\Program Files\Microsoft Visual Studio\2022\Community\VC\Tools\MSVC\14.44.35207\include\xutility(476,61):
+          'TransScene::TransScene(std::shared_ptr<Camera>)': 引数 1 を 'Camera' から 'std::shared_ptr<Camera>' へ変換できません。
+              C:\Program Files\Microsoft Visual Studio\2022\Community\VC\Tools\MSVC\14.44.35207\include\xutility(476,82):
+              この変換を実行可能なユーザー定義変換演算子がないか、または演算子を呼び出せません。
+      C:\Program Files\Microsoft Visual Studio\2022\Community\VC\Tools\MSVC\14.44.35207\include\xutility(476,61):
+      引数リスト '(Camera)' を一致させようとしているとき
+  
+C:\Program Files\Microsoft Visual Studio\2022\Community\VC\Tools\MSVC\14.44.35207\include\xutility(472,14): error C2672: 'std::construct_at': 一致するオーバーロードされた関数が見つかりませんでした。
+  (ソース ファイル '/02_ResourceFile/ObjectFile/Cube.cpp' をコンパイルしています)
+      C:\Program Files\Microsoft Visual Studio\2022\Community\VC\Tools\MSVC\14.44.35207\include\xutility(461,16):
+      '_Ty *std::construct_at(_Ty *const ,_Types ...) noexcept(<expr>)' の可能性があります
+          C:\Program Files\Microsoft Visual Studio\2022\Community\VC\Tools\MSVC\14.44.35207\include\xutility(472,14):
+          関連する制約が満たされていません
+              C:\Program Files\Microsoft Visual Studio\2022\Community\VC\Tools\MSVC\14.44.35207\include\xutility(459,50):
+              'TransScene::TransScene': オーバーロードされた関数ですべての引数の型を変換できませんでした
+                  C:\Users\dorae\Desktop\HAL\class3\FindWork\就職作品プロジェクト\02_ResourceFile\SceneFile\TransScene.h(92,1):
+                  'TransScene::TransScene(const TransScene &)' の可能性があります
+                      C:\Program Files\Microsoft Visual Studio\2022\Community\VC\Tools\MSVC\14.44.35207\include\xutility(459,50):
+                      'TransScene::TransScene(const TransScene &)': 引数 1 を 'Camera' から 'const TransScene &' へ変換できません。
+                          C:\Program Files\Microsoft Visual Studio\2022\Community\VC\Tools\MSVC\14.44.35207\include\xutility(459,71):
+                          理由: 'Camera' から 'const TransScene' へは変換できません。
+                          C:\Program Files\Microsoft Visual Studio\2022\Community\VC\Tools\MSVC\14.44.35207\include\xutility(459,71):
+                          この変換を実行可能なユーザー定義変換演算子がないか、または演算子を呼び出せません。
+                  C:\Users\dorae\Desktop\HAL\class3\FindWork\就職作品プロジェクト\02_ResourceFile\SceneFile\TransScene.h(65,2):
+                  または 'TransScene::TransScene(std::shared_ptr<Camera>)'
+                      C:\Program Files\Microsoft Visual Studio\2022\Community\VC\Tools\MSVC\14.44.35207\include\xutility(459,50):
+                      'TransScene::TransScene(std::shared_ptr<Camera>)': 引数 1 を 'Camera' から 'std::shared_ptr<Camera>' へ変換できません。
+                          C:\Program Files\Microsoft Visual Studio\2022\Community\VC\Tools\MSVC\14.44.35207\include\xutility(459,71):
+                          この変換を実行可能なユーザー定義変換演算子がないか、または演算子を呼び出せません。
+                  C:\Program Files\Microsoft Visual Studio\2022\Community\VC\Tools\MSVC\14.44.35207\include\xutility(459,50):
+                  引数リスト '(Camera)' を一致させようとしているとき
+      C:\Program Files\Microsoft Visual Studio\2022\Community\VC\Tools\MSVC\14.44.35207\include\xutility(472,14):
+      テンプレートインスタンス化コンテキスト (最初に最も古いもの) は
+          C:\Users\dorae\Desktop\HAL\class3\FindWork\就職作品プロジェクト\02_ResourceFile\Game.h(163,24):
+          コンパイル対象の関数 テンプレート インスタンス化 'std::shared_ptr<TransScene> std::make_shared<TransScene,Camera&>(Camera &)' のリファレンスを確認してください
+          C:\Program Files\Microsoft Visual Studio\2022\Community\VC\Tools\MSVC\14.44.35207\include\memory(2913,46):
+          コンパイル対象の関数 テンプレート インスタンス化 'std::_Ref_count_obj2<TransScene>::_Ref_count_obj2<Camera&>(Camera &)' のリファレンスを確認してください
+          C:\Program Files\Microsoft Visual Studio\2022\Community\VC\Tools\MSVC\14.44.35207\include\memory(2100,18):
+          コンパイル対象の関数 テンプレート インスタンス化 'void std::_Construct_in_place<_Ty,Camera&>(_Ty &,Camera &) noexcept(false)' のリファレンスを確認してください
+          with
+          [
+              _Ty=TransScene
+          ]
+  
+C:\Program Files\Microsoft Visual Studio\2022\Community\VC\Tools\MSVC\14.44.35207\include\xutility(476,61): error C2665: 'TransScene::TransScene': オーバーロードされた関数ですべての引数の型を変換できませんでした
+  (ソース ファイル '/02_ResourceFile/ObjectFile/Cube.cpp' をコンパイルしています)
+      C:\Users\dorae\Desktop\HAL\class3\FindWork\就職作品プロジェクト\02_ResourceFile\SceneFile\TransScene.h(92,1):
+      'TransScene::TransScene(const TransScene &)' の可能性があります
+          C:\Program Files\Microsoft Visual Studio\2022\Community\VC\Tools\MSVC\14.44.35207\include\xutility(476,61):
+          'TransScene::TransScene(const TransScene &)': 引数 1 を 'Camera' から 'const TransScene &' へ変換できません。
+              C:\Program Files\Microsoft Visual Studio\2022\Community\VC\Tools\MSVC\14.44.35207\include\xutility(476,82):
+              理由: 'Camera' から 'const TransScene' へは変換できません。
+              C:\Program Files\Microsoft Visual Studio\2022\Community\VC\Tools\MSVC\14.44.35207\include\xutility(476,82):
+              この変換を実行可能なユーザー定義変換演算子がないか、または演算子を呼び出せません。
+      C:\Users\dorae\Desktop\HAL\class3\FindWork\就職作品プロジェクト\02_ResourceFile\SceneFile\TransScene.h(65,2):
+      または 'TransScene::TransScene(std::shared_ptr<Camera>)'
+          C:\Program Files\Microsoft Visual Studio\2022\Community\VC\Tools\MSVC\14.44.35207\include\xutility(476,61):
+          'TransScene::TransScene(std::shared_ptr<Camera>)': 引数 1 を 'Camera' から 'std::shared_ptr<Camera>' へ変換できません。
+              C:\Program Files\Microsoft Visual Studio\2022\Community\VC\Tools\MSVC\14.44.35207\include\xutility(476,82):
+              この変換を実行可能なユーザー定義変換演算子がないか、または演算子を呼び出せません。
+      C:\Program Files\Microsoft Visual Studio\2022\Community\VC\Tools\MSVC\14.44.35207\include\xutility(476,61):
+      引数リスト '(Camera)' を一致させようとしているとき
+  
   Square.cpp
-  Texture.cpp
-  TextureManager.cpp
-  Transform.cpp
-  utility.cpp
-  imgui.cpp
-  imgui_demo.cpp
-  imgui_draw.cpp
-  imgui_impl_dx11.cpp
-  imgui_impl_win32.cpp
-  imgui_tables.cpp
-  imgui_widgets.cpp
-  就職作品プロジェクト.vcxproj -> C:\Users\dorae\Desktop\HAL\class3\FindWork\就職作品プロジェクト\x64\Debug\NishiguchiGame.exe
+C:\Program Files\Microsoft Visual Studio\2022\Community\VC\Tools\MSVC\14.44.35207\include\xutility(472,14): error C2672: 'std::construct_at': 一致するオーバーロードされた関数が見つかりませんでした。
+  (ソース ファイル '/02_ResourceFile/ObjectFile/Model.cpp' をコンパイルしています)
+      C:\Program Files\Microsoft Visual Studio\2022\Community\VC\Tools\MSVC\14.44.35207\include\xutility(461,16):
+      '_Ty *std::construct_at(_Ty *const ,_Types ...) noexcept(<expr>)' の可能性があります
+          C:\Program Files\Microsoft Visual Studio\2022\Community\VC\Tools\MSVC\14.44.35207\include\xutility(472,14):
+          関連する制約が満たされていません
+              C:\Program Files\Microsoft Visual Studio\2022\Community\VC\Tools\MSVC\14.44.35207\include\xutility(459,50):
+              'TransScene::TransScene': オーバーロードされた関数ですべての引数の型を変換できませんでした
+                  C:\Users\dorae\Desktop\HAL\class3\FindWork\就職作品プロジェクト\02_ResourceFile\SceneFile\TransScene.h(92,1):
+                  'TransScene::TransScene(const TransScene &)' の可能性があります
+                      C:\Program Files\Microsoft Visual Studio\2022\Community\VC\Tools\MSVC\14.44.35207\include\xutility(459,50):
+                      'TransScene::TransScene(const TransScene &)': 引数 1 を 'Camera' から 'const TransScene &' へ変換できません。
+                          C:\Program Files\Microsoft Visual Studio\2022\Community\VC\Tools\MSVC\14.44.35207\include\xutility(459,71):
+                          理由: 'Camera' から 'const TransScene' へは変換できません。
+                          C:\Program Files\Microsoft Visual Studio\2022\Community\VC\Tools\MSVC\14.44.35207\include\xutility(459,71):
+                          この変換を実行可能なユーザー定義変換演算子がないか、または演算子を呼び出せません。
+                  C:\Users\dorae\Desktop\HAL\class3\FindWork\就職作品プロジェクト\02_ResourceFile\SceneFile\TransScene.h(65,2):
+                  または 'TransScene::TransScene(std::shared_ptr<Camera>)'
+                      C:\Program Files\Microsoft Visual Studio\2022\Community\VC\Tools\MSVC\14.44.35207\include\xutility(459,50):
+                      'TransScene::TransScene(std::shared_ptr<Camera>)': 引数 1 を 'Camera' から 'std::shared_ptr<Camera>' へ変換できません。
+                          C:\Program Files\Microsoft Visual Studio\2022\Community\VC\Tools\MSVC\14.44.35207\include\xutility(459,71):
+                          この変換を実行可能なユーザー定義変換演算子がないか、または演算子を呼び出せません。
+                  C:\Program Files\Microsoft Visual Studio\2022\Community\VC\Tools\MSVC\14.44.35207\include\xutility(459,50):
+                  引数リスト '(Camera)' を一致させようとしているとき
+      C:\Program Files\Microsoft Visual Studio\2022\Community\VC\Tools\MSVC\14.44.35207\include\xutility(472,14):
+      テンプレートインスタンス化コンテキスト (最初に最も古いもの) は
+          C:\Users\dorae\Desktop\HAL\class3\FindWork\就職作品プロジェクト\02_ResourceFile\Game.h(163,24):
+          コンパイル対象の関数 テンプレート インスタンス化 'std::shared_ptr<TransScene> std::make_shared<TransScene,Camera&>(Camera &)' のリファレンスを確認してください
+          C:\Program Files\Microsoft Visual Studio\2022\Community\VC\Tools\MSVC\14.44.35207\include\memory(2913,46):
+          コンパイル対象の関数 テンプレート インスタンス化 'std::_Ref_count_obj2<TransScene>::_Ref_count_obj2<Camera&>(Camera &)' のリファレンスを確認してください
+          C:\Program Files\Microsoft Visual Studio\2022\Community\VC\Tools\MSVC\14.44.35207\include\memory(2100,18):
+          コンパイル対象の関数 テンプレート インスタンス化 'void std::_Construct_in_place<_Ty,Camera&>(_Ty &,Camera &) noexcept(false)' のリファレンスを確認してください
+          with
+          [
+              _Ty=TransScene
+          ]
+  
+C:\Program Files\Microsoft Visual Studio\2022\Community\VC\Tools\MSVC\14.44.35207\include\xutility(476,61): error C2665: 'TransScene::TransScene': オーバーロードされた関数ですべての引数の型を変換できませんでした
+  (ソース ファイル '/02_ResourceFile/ObjectFile/Model.cpp' をコンパイルしています)
+      C:\Users\dorae\Desktop\HAL\class3\FindWork\就職作品プロジェクト\02_ResourceFile\SceneFile\TransScene.h(92,1):
+      'TransScene::TransScene(const TransScene &)' の可能性があります
+          C:\Program Files\Microsoft Visual Studio\2022\Community\VC\Tools\MSVC\14.44.35207\include\xutility(476,61):
+          'TransScene::TransScene(const TransScene &)': 引数 1 を 'Camera' から 'const TransScene &' へ変換できません。
+              C:\Program Files\Microsoft Visual Studio\2022\Community\VC\Tools\MSVC\14.44.35207\include\xutility(476,82):
+              理由: 'Camera' から 'const TransScene' へは変換できません。
+              C:\Program Files\Microsoft Visual Studio\2022\Community\VC\Tools\MSVC\14.44.35207\include\xutility(476,82):
+              この変換を実行可能なユーザー定義変換演算子がないか、または演算子を呼び出せません。
+      C:\Users\dorae\Desktop\HAL\class3\FindWork\就職作品プロジェクト\02_ResourceFile\SceneFile\TransScene.h(65,2):
+      または 'TransScene::TransScene(std::shared_ptr<Camera>)'
+          C:\Program Files\Microsoft Visual Studio\2022\Community\VC\Tools\MSVC\14.44.35207\include\xutility(476,61):
+          'TransScene::TransScene(std::shared_ptr<Camera>)': 引数 1 を 'Camera' から 'std::shared_ptr<Camera>' へ変換できません。
+              C:\Program Files\Microsoft Visual Studio\2022\Community\VC\Tools\MSVC\14.44.35207\include\xutility(476,82):
+              この変換を実行可能なユーザー定義変換演算子がないか、または演算子を呼び出せません。
+      C:\Program Files\Microsoft Visual Studio\2022\Community\VC\Tools\MSVC\14.44.35207\include\xutility(476,61):
+      引数リスト '(Camera)' を一致させようとしているとき
+  
+C:\Program Files\Microsoft Visual Studio\2022\Community\VC\Tools\MSVC\14.44.35207\include\xutility(472,14): error C2672: 'std::construct_at': 一致するオーバーロードされた関数が見つかりませんでした。
+  (ソース ファイル '/02_ResourceFile/ObjectFile/Skydome.cpp' をコンパイルしています)
+      C:\Program Files\Microsoft Visual Studio\2022\Community\VC\Tools\MSVC\14.44.35207\include\xutility(461,16):
+      '_Ty *std::construct_at(_Ty *const ,_Types ...) noexcept(<expr>)' の可能性があります
+          C:\Program Files\Microsoft Visual Studio\2022\Community\VC\Tools\MSVC\14.44.35207\include\xutility(472,14):
+          関連する制約が満たされていません
+              C:\Program Files\Microsoft Visual Studio\2022\Community\VC\Tools\MSVC\14.44.35207\include\xutility(459,50):
+              'TransScene::TransScene': オーバーロードされた関数ですべての引数の型を変換できませんでした
+                  C:\Users\dorae\Desktop\HAL\class3\FindWork\就職作品プロジェクト\02_ResourceFile\SceneFile\TransScene.h(92,1):
+                  'TransScene::TransScene(const TransScene &)' の可能性があります
+                      C:\Program Files\Microsoft Visual Studio\2022\Community\VC\Tools\MSVC\14.44.35207\include\xutility(459,50):
+                      'TransScene::TransScene(const TransScene &)': 引数 1 を 'Camera' から 'const TransScene &' へ変換できません。
+                          C:\Program Files\Microsoft Visual Studio\2022\Community\VC\Tools\MSVC\14.44.35207\include\xutility(459,71):
+                          理由: 'Camera' から 'const TransScene' へは変換できません。
+                          C:\Program Files\Microsoft Visual Studio\2022\Community\VC\Tools\MSVC\14.44.35207\include\xutility(459,71):
+                          この変換を実行可能なユーザー定義変換演算子がないか、または演算子を呼び出せません。
+                  C:\Users\dorae\Desktop\HAL\class3\FindWork\就職作品プロジェクト\02_ResourceFile\SceneFile\TransScene.h(65,2):
+                  または 'TransScene::TransScene(std::shared_ptr<Camera>)'
+                      C:\Program Files\Microsoft Visual Studio\2022\Community\VC\Tools\MSVC\14.44.35207\include\xutility(459,50):
+                      'TransScene::TransScene(std::shared_ptr<Camera>)': 引数 1 を 'Camera' から 'std::shared_ptr<Camera>' へ変換できません。
+                          C:\Program Files\Microsoft Visual Studio\2022\Community\VC\Tools\MSVC\14.44.35207\include\xutility(459,71):
+                          この変換を実行可能なユーザー定義変換演算子がないか、または演算子を呼び出せません。
+                  C:\Program Files\Microsoft Visual Studio\2022\Community\VC\Tools\MSVC\14.44.35207\include\xutility(459,50):
+                  引数リスト '(Camera)' を一致させようとしているとき
+      C:\Program Files\Microsoft Visual Studio\2022\Community\VC\Tools\MSVC\14.44.35207\include\xutility(472,14):
+      テンプレートインスタンス化コンテキスト (最初に最も古いもの) は
+          C:\Users\dorae\Desktop\HAL\class3\FindWork\就職作品プロジェクト\02_ResourceFile\Game.h(163,24):
+          コンパイル対象の関数 テンプレート インスタンス化 'std::shared_ptr<TransScene> std::make_shared<TransScene,Camera&>(Camera &)' のリファレンスを確認してください
+          C:\Program Files\Microsoft Visual Studio\2022\Community\VC\Tools\MSVC\14.44.35207\include\memory(2913,46):
+          コンパイル対象の関数 テンプレート インスタンス化 'std::_Ref_count_obj2<TransScene>::_Ref_count_obj2<Camera&>(Camera &)' のリファレンスを確認してください
+          C:\Program Files\Microsoft Visual Studio\2022\Community\VC\Tools\MSVC\14.44.35207\include\memory(2100,18):
+          コンパイル対象の関数 テンプレート インスタンス化 'void std::_Construct_in_place<_Ty,Camera&>(_Ty &,Camera &) noexcept(false)' のリファレンスを確認してください
+          with
+          [
+              _Ty=TransScene
+          ]
+  
+C:\Program Files\Microsoft Visual Studio\2022\Community\VC\Tools\MSVC\14.44.35207\include\xutility(476,61): error C2665: 'TransScene::TransScene': オーバーロードされた関数ですべての引数の型を変換できませんでした
+  (ソース ファイル '/02_ResourceFile/ObjectFile/Skydome.cpp' をコンパイルしています)
+      C:\Users\dorae\Desktop\HAL\class3\FindWork\就職作品プロジェクト\02_ResourceFile\SceneFile\TransScene.h(92,1):
+      'TransScene::TransScene(const TransScene &)' の可能性があります
+          C:\Program Files\Microsoft Visual Studio\2022\Community\VC\Tools\MSVC\14.44.35207\include\xutility(476,61):
+          'TransScene::TransScene(const TransScene &)': 引数 1 を 'Camera' から 'const TransScene &' へ変換できません。
+              C:\Program Files\Microsoft Visual Studio\2022\Community\VC\Tools\MSVC\14.44.35207\include\xutility(476,82):
+              理由: 'Camera' から 'const TransScene' へは変換できません。
+              C:\Program Files\Microsoft Visual Studio\2022\Community\VC\Tools\MSVC\14.44.35207\include\xutility(476,82):
+              この変換を実行可能なユーザー定義変換演算子がないか、または演算子を呼び出せません。
+      C:\Users\dorae\Desktop\HAL\class3\FindWork\就職作品プロジェクト\02_ResourceFile\SceneFile\TransScene.h(65,2):
+      または 'TransScene::TransScene(std::shared_ptr<Camera>)'
+          C:\Program Files\Microsoft Visual Studio\2022\Community\VC\Tools\MSVC\14.44.35207\include\xutility(476,61):
+          'TransScene::TransScene(std::shared_ptr<Camera>)': 引数 1 を 'Camera' から 'std::shared_ptr<Camera>' へ変換できません。
+              C:\Program Files\Microsoft Visual Studio\2022\Community\VC\Tools\MSVC\14.44.35207\include\xutility(476,82):
+              この変換を実行可能なユーザー定義変換演算子がないか、または演算子を呼び出せません。
+      C:\Program Files\Microsoft Visual Studio\2022\Community\VC\Tools\MSVC\14.44.35207\include\xutility(476,61):
+      引数リスト '(Camera)' を一致させようとしているとき
+  
+C:\Program Files\Microsoft Visual Studio\2022\Community\VC\Tools\MSVC\14.44.35207\include\xutility(472,14): error C2672: 'std::construct_at': 一致するオーバーロードされた関数が見つかりませんでした。
+  (ソース ファイル '/02_ResourceFile/ObjectFile/Object.cpp' をコンパイルしています)
+      C:\Program Files\Microsoft Visual Studio\2022\Community\VC\Tools\MSVC\14.44.35207\include\xutility(461,16):
+      '_Ty *std::construct_at(_Ty *const ,_Types ...) noexcept(<expr>)' の可能性があります
+          C:\Program Files\Microsoft Visual Studio\2022\Community\VC\Tools\MSVC\14.44.35207\include\xutility(472,14):
+          関連する制約が満たされていません
+              C:\Program Files\Microsoft Visual Studio\2022\Community\VC\Tools\MSVC\14.44.35207\include\xutility(459,50):
+              'TransScene::TransScene': オーバーロードされた関数ですべての引数の型を変換できませんでした
+                  C:\Users\dorae\Desktop\HAL\class3\FindWork\就職作品プロジェクト\02_ResourceFile\SceneFile\TransScene.h(92,1):
+                  'TransScene::TransScene(const TransScene &)' の可能性があります
+                      C:\Program Files\Microsoft Visual Studio\2022\Community\VC\Tools\MSVC\14.44.35207\include\xutility(459,50):
+                      'TransScene::TransScene(const TransScene &)': 引数 1 を 'Camera' から 'const TransScene &' へ変換できません。
+                          C:\Program Files\Microsoft Visual Studio\2022\Community\VC\Tools\MSVC\14.44.35207\include\xutility(459,71):
+                          理由: 'Camera' から 'const TransScene' へは変換できません。
+                          C:\Program Files\Microsoft Visual Studio\2022\Community\VC\Tools\MSVC\14.44.35207\include\xutility(459,71):
+                          この変換を実行可能なユーザー定義変換演算子がないか、または演算子を呼び出せません。
+                  C:\Users\dorae\Desktop\HAL\class3\FindWork\就職作品プロジェクト\02_ResourceFile\SceneFile\TransScene.h(65,2):
+                  または 'TransScene::TransScene(std::shared_ptr<Camera>)'
+                      C:\Program Files\Microsoft Visual Studio\2022\Community\VC\Tools\MSVC\14.44.35207\include\xutility(459,50):
+                      'TransScene::TransScene(std::shared_ptr<Camera>)': 引数 1 を 'Camera' から 'std::shared_ptr<Camera>' へ変換できません。
+                          C:\Program Files\Microsoft Visual Studio\2022\Community\VC\Tools\MSVC\14.44.35207\include\xutility(459,71):
+                          この変換を実行可能なユーザー定義変換演算子がないか、または演算子を呼び出せません。
+                  C:\Program Files\Microsoft Visual Studio\2022\Community\VC\Tools\MSVC\14.44.35207\include\xutility(459,50):
+                  引数リスト '(Camera)' を一致させようとしているとき
+      C:\Program Files\Microsoft Visual Studio\2022\Community\VC\Tools\MSVC\14.44.35207\include\xutility(472,14):
+      テンプレートインスタンス化コンテキスト (最初に最も古いもの) は
+          C:\Users\dorae\Desktop\HAL\class3\FindWork\就職作品プロジェクト\02_ResourceFile\Game.h(163,24):
+          コンパイル対象の関数 テンプレート インスタンス化 'std::shared_ptr<TransScene> std::make_shared<TransScene,Camera&>(Camera &)' のリファレンスを確認してください
+          C:\Program Files\Microsoft Visual Studio\2022\Community\VC\Tools\MSVC\14.44.35207\include\memory(2913,46):
+          コンパイル対象の関数 テンプレート インスタンス化 'std::_Ref_count_obj2<TransScene>::_Ref_count_obj2<Camera&>(Camera &)' のリファレンスを確認してください
+          C:\Program Files\Microsoft Visual Studio\2022\Community\VC\Tools\MSVC\14.44.35207\include\memory(2100,18):
+          コンパイル対象の関数 テンプレート インスタンス化 'void std::_Construct_in_place<_Ty,Camera&>(_Ty &,Camera &) noexcept(false)' のリファレンスを確認してください
+          with
+          [
+              _Ty=TransScene
+          ]
+  
+C:\Program Files\Microsoft Visual Studio\2022\Community\VC\Tools\MSVC\14.44.35207\include\xutility(476,61): error C2665: 'TransScene::TransScene': オーバーロードされた関数ですべての引数の型を変換できませんでした
+  (ソース ファイル '/02_ResourceFile/ObjectFile/Object.cpp' をコンパイルしています)
+      C:\Users\dorae\Desktop\HAL\class3\FindWork\就職作品プロジェクト\02_ResourceFile\SceneFile\TransScene.h(92,1):
+      'TransScene::TransScene(const TransScene &)' の可能性があります
+          C:\Program Files\Microsoft Visual Studio\2022\Community\VC\Tools\MSVC\14.44.35207\include\xutility(476,61):
+          'TransScene::TransScene(const TransScene &)': 引数 1 を 'Camera' から 'const TransScene &' へ変換できません。
+              C:\Program Files\Microsoft Visual Studio\2022\Community\VC\Tools\MSVC\14.44.35207\include\xutility(476,82):
+              理由: 'Camera' から 'const TransScene' へは変換できません。
+              C:\Program Files\Microsoft Visual Studio\2022\Community\VC\Tools\MSVC\14.44.35207\include\xutility(476,82):
+              この変換を実行可能なユーザー定義変換演算子がないか、または演算子を呼び出せません。
+      C:\Users\dorae\Desktop\HAL\class3\FindWork\就職作品プロジェクト\02_ResourceFile\SceneFile\TransScene.h(65,2):
+      または 'TransScene::TransScene(std::shared_ptr<Camera>)'
+          C:\Program Files\Microsoft Visual Studio\2022\Community\VC\Tools\MSVC\14.44.35207\include\xutility(476,61):
+          'TransScene::TransScene(std::shared_ptr<Camera>)': 引数 1 を 'Camera' から 'std::shared_ptr<Camera>' へ変換できません。
+              C:\Program Files\Microsoft Visual Studio\2022\Community\VC\Tools\MSVC\14.44.35207\include\xutility(476,82):
+              この変換を実行可能なユーザー定義変換演算子がないか、または演算子を呼び出せません。
+      C:\Program Files\Microsoft Visual Studio\2022\Community\VC\Tools\MSVC\14.44.35207\include\xutility(476,61):
+      引数リスト '(Camera)' を一致させようとしているとき
+  
+C:\Program Files\Microsoft Visual Studio\2022\Community\VC\Tools\MSVC\14.44.35207\include\xutility(472,14): error C2672: 'std::construct_at': 一致するオーバーロードされた関数が見つかりませんでした。
+  (ソース ファイル '/02_ResourceFile/SceneFile/Scene.cpp' をコンパイルしています)
+      C:\Program Files\Microsoft Visual Studio\2022\Community\VC\Tools\MSVC\14.44.35207\include\xutility(461,16):
+      '_Ty *std::construct_at(_Ty *const ,_Types ...) noexcept(<expr>)' の可能性があります
+          C:\Program Files\Microsoft Visual Studio\2022\Community\VC\Tools\MSVC\14.44.35207\include\xutility(472,14):
+          関連する制約が満たされていません
+              C:\Program Files\Microsoft Visual Studio\2022\Community\VC\Tools\MSVC\14.44.35207\include\xutility(459,50):
+              'TransScene::TransScene': オーバーロードされた関数ですべての引数の型を変換できませんでした
+                  C:\Users\dorae\Desktop\HAL\class3\FindWork\就職作品プロジェクト\02_ResourceFile\SceneFile\TransScene.h(92,1):
+                  'TransScene::TransScene(const TransScene &)' の可能性があります
+                      C:\Program Files\Microsoft Visual Studio\2022\Community\VC\Tools\MSVC\14.44.35207\include\xutility(459,50):
+                      'TransScene::TransScene(const TransScene &)': 引数 1 を 'Camera' から 'const TransScene &' へ変換できません。
+                          C:\Program Files\Microsoft Visual Studio\2022\Community\VC\Tools\MSVC\14.44.35207\include\xutility(459,71):
+                          理由: 'Camera' から 'const TransScene' へは変換できません。
+                          C:\Program Files\Microsoft Visual Studio\2022\Community\VC\Tools\MSVC\14.44.35207\include\xutility(459,71):
+                          この変換を実行可能なユーザー定義変換演算子がないか、または演算子を呼び出せません。
+                  C:\Users\dorae\Desktop\HAL\class3\FindWork\就職作品プロジェクト\02_ResourceFile\SceneFile\TransScene.h(65,2):
+                  または 'TransScene::TransScene(std::shared_ptr<Camera>)'
+                      C:\Program Files\Microsoft Visual Studio\2022\Community\VC\Tools\MSVC\14.44.35207\include\xutility(459,50):
+                      'TransScene::TransScene(std::shared_ptr<Camera>)': 引数 1 を 'Camera' から 'std::shared_ptr<Camera>' へ変換できません。
+                          C:\Program Files\Microsoft Visual Studio\2022\Community\VC\Tools\MSVC\14.44.35207\include\xutility(459,71):
+                          この変換を実行可能なユーザー定義変換演算子がないか、または演算子を呼び出せません。
+                  C:\Program Files\Microsoft Visual Studio\2022\Community\VC\Tools\MSVC\14.44.35207\include\xutility(459,50):
+                  引数リスト '(Camera)' を一致させようとしているとき
+      C:\Program Files\Microsoft Visual Studio\2022\Community\VC\Tools\MSVC\14.44.35207\include\xutility(472,14):
+      テンプレートインスタンス化コンテキスト (最初に最も古いもの) は
+          C:\Users\dorae\Desktop\HAL\class3\FindWork\就職作品プロジェクト\02_ResourceFile\Game.h(163,24):
+          コンパイル対象の関数 テンプレート インスタンス化 'std::shared_ptr<TransScene> std::make_shared<TransScene,Camera&>(Camera &)' のリファレンスを確認してください
+          C:\Program Files\Microsoft Visual Studio\2022\Community\VC\Tools\MSVC\14.44.35207\include\memory(2913,46):
+          コンパイル対象の関数 テンプレート インスタンス化 'std::_Ref_count_obj2<TransScene>::_Ref_count_obj2<Camera&>(Camera &)' のリファレンスを確認してください
+          C:\Program Files\Microsoft Visual Studio\2022\Community\VC\Tools\MSVC\14.44.35207\include\memory(2100,18):
+          コンパイル対象の関数 テンプレート インスタンス化 'void std::_Construct_in_place<_Ty,Camera&>(_Ty &,Camera &) noexcept(false)' のリファレンスを確認してください
+          with
+          [
+              _Ty=TransScene
+          ]
+  
+C:\Program Files\Microsoft Visual Studio\2022\Community\VC\Tools\MSVC\14.44.35207\include\xutility(476,61): error C2665: 'TransScene::TransScene': オーバーロードされた関数ですべての引数の型を変換できませんでした
+  (ソース ファイル '/02_ResourceFile/SceneFile/Scene.cpp' をコンパイルしています)
+      C:\Users\dorae\Desktop\HAL\class3\FindWork\就職作品プロジェクト\02_ResourceFile\SceneFile\TransScene.h(92,1):
+      'TransScene::TransScene(const TransScene &)' の可能性があります
+          C:\Program Files\Microsoft Visual Studio\2022\Community\VC\Tools\MSVC\14.44.35207\include\xutility(476,61):
+          'TransScene::TransScene(const TransScene &)': 引数 1 を 'Camera' から 'const TransScene &' へ変換できません。
+              C:\Program Files\Microsoft Visual Studio\2022\Community\VC\Tools\MSVC\14.44.35207\include\xutility(476,82):
+              理由: 'Camera' から 'const TransScene' へは変換できません。
+              C:\Program Files\Microsoft Visual Studio\2022\Community\VC\Tools\MSVC\14.44.35207\include\xutility(476,82):
+              この変換を実行可能なユーザー定義変換演算子がないか、または演算子を呼び出せません。
+      C:\Users\dorae\Desktop\HAL\class3\FindWork\就職作品プロジェクト\02_ResourceFile\SceneFile\TransScene.h(65,2):
+      または 'TransScene::TransScene(std::shared_ptr<Camera>)'
+          C:\Program Files\Microsoft Visual Studio\2022\Community\VC\Tools\MSVC\14.44.35207\include\xutility(476,61):
+          'TransScene::TransScene(std::shared_ptr<Camera>)': 引数 1 を 'Camera' から 'std::shared_ptr<Camera>' へ変換できません。
+              C:\Program Files\Microsoft Visual Studio\2022\Community\VC\Tools\MSVC\14.44.35207\include\xutility(476,82):
+              この変換を実行可能なユーザー定義変換演算子がないか、または演算子を呼び出せません。
+      C:\Program Files\Microsoft Visual Studio\2022\Community\VC\Tools\MSVC\14.44.35207\include\xutility(476,61):
+      引数リスト '(Camera)' を一致させようとしているとき
+  
+C:\Program Files\Microsoft Visual Studio\2022\Community\VC\Tools\MSVC\14.44.35207\include\xutility(472,14): error C2672: 'std::construct_at': 一致するオーバーロードされた関数が見つかりませんでした。
+  (ソース ファイル '/02_ResourceFile/SceneFile/Transition/Wipe.cpp' をコンパイルしています)
+      C:\Program Files\Microsoft Visual Studio\2022\Community\VC\Tools\MSVC\14.44.35207\include\xutility(461,16):
+      '_Ty *std::construct_at(_Ty *const ,_Types ...) noexcept(<expr>)' の可能性があります
+          C:\Program Files\Microsoft Visual Studio\2022\Community\VC\Tools\MSVC\14.44.35207\include\xutility(472,14):
+          関連する制約が満たされていません
+              C:\Program Files\Microsoft Visual Studio\2022\Community\VC\Tools\MSVC\14.44.35207\include\xutility(459,50):
+              'TransScene::TransScene': オーバーロードされた関数ですべての引数の型を変換できませんでした
+                  C:\Users\dorae\Desktop\HAL\class3\FindWork\就職作品プロジェクト\02_ResourceFile\SceneFile\TransScene.h(92,1):
+                  'TransScene::TransScene(const TransScene &)' の可能性があります
+                      C:\Program Files\Microsoft Visual Studio\2022\Community\VC\Tools\MSVC\14.44.35207\include\xutility(459,50):
+                      'TransScene::TransScene(const TransScene &)': 引数 1 を 'Camera' から 'const TransScene &' へ変換できません。
+                          C:\Program Files\Microsoft Visual Studio\2022\Community\VC\Tools\MSVC\14.44.35207\include\xutility(459,71):
+                          理由: 'Camera' から 'const TransScene' へは変換できません。
+                          C:\Program Files\Microsoft Visual Studio\2022\Community\VC\Tools\MSVC\14.44.35207\include\xutility(459,71):
+                          この変換を実行可能なユーザー定義変換演算子がないか、または演算子を呼び出せません。
+                  C:\Users\dorae\Desktop\HAL\class3\FindWork\就職作品プロジェクト\02_ResourceFile\SceneFile\TransScene.h(65,2):
+                  または 'TransScene::TransScene(std::shared_ptr<Camera>)'
+                      C:\Program Files\Microsoft Visual Studio\2022\Community\VC\Tools\MSVC\14.44.35207\include\xutility(459,50):
+                      'TransScene::TransScene(std::shared_ptr<Camera>)': 引数 1 を 'Camera' から 'std::shared_ptr<Camera>' へ変換できません。
+                          C:\Program Files\Microsoft Visual Studio\2022\Community\VC\Tools\MSVC\14.44.35207\include\xutility(459,71):
+                          この変換を実行可能なユーザー定義変換演算子がないか、または演算子を呼び出せません。
+                  C:\Program Files\Microsoft Visual Studio\2022\Community\VC\Tools\MSVC\14.44.35207\include\xutility(459,50):
+                  引数リスト '(Camera)' を一致させようとしているとき
+      C:\Program Files\Microsoft Visual Studio\2022\Community\VC\Tools\MSVC\14.44.35207\include\xutility(472,14):
+      テンプレートインスタンス化コンテキスト (最初に最も古いもの) は
+          C:\Users\dorae\Desktop\HAL\class3\FindWork\就職作品プロジェクト\02_ResourceFile\Game.h(163,24):
+          コンパイル対象の関数 テンプレート インスタンス化 'std::shared_ptr<TransScene> std::make_shared<TransScene,Camera&>(Camera &)' のリファレンスを確認してください
+          C:\Program Files\Microsoft Visual Studio\2022\Community\VC\Tools\MSVC\14.44.35207\include\memory(2913,46):
+          コンパイル対象の関数 テンプレート インスタンス化 'std::_Ref_count_obj2<TransScene>::_Ref_count_obj2<Camera&>(Camera &)' のリファレンスを確認してください
+          C:\Program Files\Microsoft Visual Studio\2022\Community\VC\Tools\MSVC\14.44.35207\include\memory(2100,18):
+          コンパイル対象の関数 テンプレート インスタンス化 'void std::_Construct_in_place<_Ty,Camera&>(_Ty &,Camera &) noexcept(false)' のリファレンスを確認してください
+          with
+          [
+              _Ty=TransScene
+          ]
+  
+C:\Program Files\Microsoft Visual Studio\2022\Community\VC\Tools\MSVC\14.44.35207\include\xutility(476,61): error C2665: 'TransScene::TransScene': オーバーロードされた関数ですべての引数の型を変換できませんでした
+  (ソース ファイル '/02_ResourceFile/SceneFile/Transition/Wipe.cpp' をコンパイルしています)
+      C:\Users\dorae\Desktop\HAL\class3\FindWork\就職作品プロジェクト\02_ResourceFile\SceneFile\TransScene.h(92,1):
+      'TransScene::TransScene(const TransScene &)' の可能性があります
+          C:\Program Files\Microsoft Visual Studio\2022\Community\VC\Tools\MSVC\14.44.35207\include\xutility(476,61):
+          'TransScene::TransScene(const TransScene &)': 引数 1 を 'Camera' から 'const TransScene &' へ変換できません。
+              C:\Program Files\Microsoft Visual Studio\2022\Community\VC\Tools\MSVC\14.44.35207\include\xutility(476,82):
+              理由: 'Camera' から 'const TransScene' へは変換できません。
+              C:\Program Files\Microsoft Visual Studio\2022\Community\VC\Tools\MSVC\14.44.35207\include\xutility(476,82):
+              この変換を実行可能なユーザー定義変換演算子がないか、または演算子を呼び出せません。
+      C:\Users\dorae\Desktop\HAL\class3\FindWork\就職作品プロジェクト\02_ResourceFile\SceneFile\TransScene.h(65,2):
+      または 'TransScene::TransScene(std::shared_ptr<Camera>)'
+          C:\Program Files\Microsoft Visual Studio\2022\Community\VC\Tools\MSVC\14.44.35207\include\xutility(476,61):
+          'TransScene::TransScene(std::shared_ptr<Camera>)': 引数 1 を 'Camera' から 'std::shared_ptr<Camera>' へ変換できません。
+              C:\Program Files\Microsoft Visual Studio\2022\Community\VC\Tools\MSVC\14.44.35207\include\xutility(476,82):
+              この変換を実行可能なユーザー定義変換演算子がないか、または演算子を呼び出せません。
+      C:\Program Files\Microsoft Visual Studio\2022\Community\VC\Tools\MSVC\14.44.35207\include\xutility(476,61):
+      引数リスト '(Camera)' を一致させようとしているとき
+  
+C:\Program Files\Microsoft Visual Studio\2022\Community\VC\Tools\MSVC\14.44.35207\include\xutility(472,14): error C2672: 'std::construct_at': 一致するオーバーロードされた関数が見つかりませんでした。
+  (ソース ファイル '/02_ResourceFile/ObjectFile/Sphere.cpp' をコンパイルしています)
+      C:\Program Files\Microsoft Visual Studio\2022\Community\VC\Tools\MSVC\14.44.35207\include\xutility(461,16):
+      '_Ty *std::construct_at(_Ty *const ,_Types ...) noexcept(<expr>)' の可能性があります
+          C:\Program Files\Microsoft Visual Studio\2022\Community\VC\Tools\MSVC\14.44.35207\include\xutility(472,14):
+          関連する制約が満たされていません
+              C:\Program Files\Microsoft Visual Studio\2022\Community\VC\Tools\MSVC\14.44.35207\include\xutility(459,50):
+              'TransScene::TransScene': オーバーロードされた関数ですべての引数の型を変換できませんでした
+                  C:\Users\dorae\Desktop\HAL\class3\FindWork\就職作品プロジェクト\02_ResourceFile\SceneFile\TransScene.h(92,1):
+                  'TransScene::TransScene(const TransScene &)' の可能性があります
+                      C:\Program Files\Microsoft Visual Studio\2022\Community\VC\Tools\MSVC\14.44.35207\include\xutility(459,50):
+                      'TransScene::TransScene(const TransScene &)': 引数 1 を 'Camera' から 'const TransScene &' へ変換できません。
+                          C:\Program Files\Microsoft Visual Studio\2022\Community\VC\Tools\MSVC\14.44.35207\include\xutility(459,71):
+                          理由: 'Camera' から 'const TransScene' へは変換できません。
+                          C:\Program Files\Microsoft Visual Studio\2022\Community\VC\Tools\MSVC\14.44.35207\include\xutility(459,71):
+                          この変換を実行可能なユーザー定義変換演算子がないか、または演算子を呼び出せません。
+                  C:\Users\dorae\Desktop\HAL\class3\FindWork\就職作品プロジェクト\02_ResourceFile\SceneFile\TransScene.h(65,2):
+                  または 'TransScene::TransScene(std::shared_ptr<Camera>)'
+                      C:\Program Files\Microsoft Visual Studio\2022\Community\VC\Tools\MSVC\14.44.35207\include\xutility(459,50):
+                      'TransScene::TransScene(std::shared_ptr<Camera>)': 引数 1 を 'Camera' から 'std::shared_ptr<Camera>' へ変換できません。
+                          C:\Program Files\Microsoft Visual Studio\2022\Community\VC\Tools\MSVC\14.44.35207\include\xutility(459,71):
+                          この変換を実行可能なユーザー定義変換演算子がないか、または演算子を呼び出せません。
+                  C:\Program Files\Microsoft Visual Studio\2022\Community\VC\Tools\MSVC\14.44.35207\include\xutility(459,50):
+                  引数リスト '(Camera)' を一致させようとしているとき
+      C:\Program Files\Microsoft Visual Studio\2022\Community\VC\Tools\MSVC\14.44.35207\include\xutility(472,14):
+      テンプレートインスタンス化コンテキスト (最初に最も古いもの) は
+          C:\Users\dorae\Desktop\HAL\class3\FindWork\就職作品プロジェクト\02_ResourceFile\Game.h(163,24):
+          コンパイル対象の関数 テンプレート インスタンス化 'std::shared_ptr<TransScene> std::make_shared<TransScene,Camera&>(Camera &)' のリファレンスを確認してください
+          C:\Program Files\Microsoft Visual Studio\2022\Community\VC\Tools\MSVC\14.44.35207\include\memory(2913,46):
+          コンパイル対象の関数 テンプレート インスタンス化 'std::_Ref_count_obj2<TransScene>::_Ref_count_obj2<Camera&>(Camera &)' のリファレンスを確認してください
+          C:\Program Files\Microsoft Visual Studio\2022\Community\VC\Tools\MSVC\14.44.35207\include\memory(2100,18):
+          コンパイル対象の関数 テンプレート インスタンス化 'void std::_Construct_in_place<_Ty,Camera&>(_Ty &,Camera &) noexcept(false)' のリファレンスを確認してください
+          with
+          [
+              _Ty=TransScene
+          ]
+  
+C:\Program Files\Microsoft Visual Studio\2022\Community\VC\Tools\MSVC\14.44.35207\include\xutility(476,61): error C2665: 'TransScene::TransScene': オーバーロードされた関数ですべての引数の型を変換できませんでした
+  (ソース ファイル '/02_ResourceFile/ObjectFile/Sphere.cpp' をコンパイルしています)
+      C:\Users\dorae\Desktop\HAL\class3\FindWork\就職作品プロジェクト\02_ResourceFile\SceneFile\TransScene.h(92,1):
+      'TransScene::TransScene(const TransScene &)' の可能性があります
+          C:\Program Files\Microsoft Visual Studio\2022\Community\VC\Tools\MSVC\14.44.35207\include\xutility(476,61):
+          'TransScene::TransScene(const TransScene &)': 引数 1 を 'Camera' から 'const TransScene &' へ変換できません。
+              C:\Program Files\Microsoft Visual Studio\2022\Community\VC\Tools\MSVC\14.44.35207\include\xutility(476,82):
+              理由: 'Camera' から 'const TransScene' へは変換できません。
+              C:\Program Files\Microsoft Visual Studio\2022\Community\VC\Tools\MSVC\14.44.35207\include\xutility(476,82):
+              この変換を実行可能なユーザー定義変換演算子がないか、または演算子を呼び出せません。
+      C:\Users\dorae\Desktop\HAL\class3\FindWork\就職作品プロジェクト\02_ResourceFile\SceneFile\TransScene.h(65,2):
+      または 'TransScene::TransScene(std::shared_ptr<Camera>)'
+          C:\Program Files\Microsoft Visual Studio\2022\Community\VC\Tools\MSVC\14.44.35207\include\xutility(476,61):
+          'TransScene::TransScene(std::shared_ptr<Camera>)': 引数 1 を 'Camera' から 'std::shared_ptr<Camera>' へ変換できません。
+              C:\Program Files\Microsoft Visual Studio\2022\Community\VC\Tools\MSVC\14.44.35207\include\xutility(476,82):
+              この変換を実行可能なユーザー定義変換演算子がないか、または演算子を呼び出せません。
+      C:\Program Files\Microsoft Visual Studio\2022\Community\VC\Tools\MSVC\14.44.35207\include\xutility(476,61):
+      引数リスト '(Camera)' を一致させようとしているとき
+  
+C:\Program Files\Microsoft Visual Studio\2022\Community\VC\Tools\MSVC\14.44.35207\include\xutility(472,14): error C2672: 'std::construct_at': 一致するオーバーロードされた関数が見つかりませんでした。
+  (ソース ファイル '/02_ResourceFile/SceneFile/Transition/Zoom.cpp' をコンパイルしています)
+      C:\Program Files\Microsoft Visual Studio\2022\Community\VC\Tools\MSVC\14.44.35207\include\xutility(461,16):
+      '_Ty *std::construct_at(_Ty *const ,_Types ...) noexcept(<expr>)' の可能性があります
+          C:\Program Files\Microsoft Visual Studio\2022\Community\VC\Tools\MSVC\14.44.35207\include\xutility(472,14):
+          関連する制約が満たされていません
+              C:\Program Files\Microsoft Visual Studio\2022\Community\VC\Tools\MSVC\14.44.35207\include\xutility(459,50):
+              'TransScene::TransScene': オーバーロードされた関数ですべての引数の型を変換できませんでした
+                  C:\Users\dorae\Desktop\HAL\class3\FindWork\就職作品プロジェクト\02_ResourceFile\SceneFile\TransScene.h(92,1):
+                  'TransScene::TransScene(const TransScene &)' の可能性があります
+                      C:\Program Files\Microsoft Visual Studio\2022\Community\VC\Tools\MSVC\14.44.35207\include\xutility(459,50):
+                      'TransScene::TransScene(const TransScene &)': 引数 1 を 'Camera' から 'const TransScene &' へ変換できません。
+                          C:\Program Files\Microsoft Visual Studio\2022\Community\VC\Tools\MSVC\14.44.35207\include\xutility(459,71):
+                          理由: 'Camera' から 'const TransScene' へは変換できません。
+                          C:\Program Files\Microsoft Visual Studio\2022\Community\VC\Tools\MSVC\14.44.35207\include\xutility(459,71):
+                          この変換を実行可能なユーザー定義変換演算子がないか、または演算子を呼び出せません。
+                  C:\Users\dorae\Desktop\HAL\class3\FindWork\就職作品プロジェクト\02_ResourceFile\SceneFile\TransScene.h(65,2):
+                  または 'TransScene::TransScene(std::shared_ptr<Camera>)'
+                      C:\Program Files\Microsoft Visual Studio\2022\Community\VC\Tools\MSVC\14.44.35207\include\xutility(459,50):
+                      'TransScene::TransScene(std::shared_ptr<Camera>)': 引数 1 を 'Camera' から 'std::shared_ptr<Camera>' へ変換できません。
+                          C:\Program Files\Microsoft Visual Studio\2022\Community\VC\Tools\MSVC\14.44.35207\include\xutility(459,71):
+                          この変換を実行可能なユーザー定義変換演算子がないか、または演算子を呼び出せません。
+                  C:\Program Files\Microsoft Visual Studio\2022\Community\VC\Tools\MSVC\14.44.35207\include\xutility(459,50):
+                  引数リスト '(Camera)' を一致させようとしているとき
+      C:\Program Files\Microsoft Visual Studio\2022\Community\VC\Tools\MSVC\14.44.35207\include\xutility(472,14):
+      テンプレートインスタンス化コンテキスト (最初に最も古いもの) は
+          C:\Users\dorae\Desktop\HAL\class3\FindWork\就職作品プロジェクト\02_ResourceFile\Game.h(163,24):
+          コンパイル対象の関数 テンプレート インスタンス化 'std::shared_ptr<TransScene> std::make_shared<TransScene,Camera&>(Camera &)' のリファレンスを確認してください
+          C:\Program Files\Microsoft Visual Studio\2022\Community\VC\Tools\MSVC\14.44.35207\include\memory(2913,46):
+          コンパイル対象の関数 テンプレート インスタンス化 'std::_Ref_count_obj2<TransScene>::_Ref_count_obj2<Camera&>(Camera &)' のリファレンスを確認してください
+          C:\Program Files\Microsoft Visual Studio\2022\Community\VC\Tools\MSVC\14.44.35207\include\memory(2100,18):
+          コンパイル対象の関数 テンプレート インスタンス化 'void std::_Construct_in_place<_Ty,Camera&>(_Ty &,Camera &) noexcept(false)' のリファレンスを確認してください
+          with
+          [
+              _Ty=TransScene
+          ]
+  
+C:\Program Files\Microsoft Visual Studio\2022\Community\VC\Tools\MSVC\14.44.35207\include\xutility(476,61): error C2665: 'TransScene::TransScene': オーバーロードされた関数ですべての引数の型を変換できませんでした
+  (ソース ファイル '/02_ResourceFile/SceneFile/Transition/Zoom.cpp' をコンパイルしています)
+      C:\Users\dorae\Desktop\HAL\class3\FindWork\就職作品プロジェクト\02_ResourceFile\SceneFile\TransScene.h(92,1):
+      'TransScene::TransScene(const TransScene &)' の可能性があります
+          C:\Program Files\Microsoft Visual Studio\2022\Community\VC\Tools\MSVC\14.44.35207\include\xutility(476,61):
+          'TransScene::TransScene(const TransScene &)': 引数 1 を 'Camera' から 'const TransScene &' へ変換できません。
+              C:\Program Files\Microsoft Visual Studio\2022\Community\VC\Tools\MSVC\14.44.35207\include\xutility(476,82):
+              理由: 'Camera' から 'const TransScene' へは変換できません。
+              C:\Program Files\Microsoft Visual Studio\2022\Community\VC\Tools\MSVC\14.44.35207\include\xutility(476,82):
+              この変換を実行可能なユーザー定義変換演算子がないか、または演算子を呼び出せません。
+      C:\Users\dorae\Desktop\HAL\class3\FindWork\就職作品プロジェクト\02_ResourceFile\SceneFile\TransScene.h(65,2):
+      または 'TransScene::TransScene(std::shared_ptr<Camera>)'
+          C:\Program Files\Microsoft Visual Studio\2022\Community\VC\Tools\MSVC\14.44.35207\include\xutility(476,61):
+          'TransScene::TransScene(std::shared_ptr<Camera>)': 引数 1 を 'Camera' から 'std::shared_ptr<Camera>' へ変換できません。
+              C:\Program Files\Microsoft Visual Studio\2022\Community\VC\Tools\MSVC\14.44.35207\include\xutility(476,82):
+              この変換を実行可能なユーザー定義変換演算子がないか、または演算子を呼び出せません。
+      C:\Program Files\Microsoft Visual Studio\2022\Community\VC\Tools\MSVC\14.44.35207\include\xutility(476,61):
+      引数リスト '(Camera)' を一致させようとしているとき
+  
+C:\Program Files\Microsoft Visual Studio\2022\Community\VC\Tools\MSVC\14.44.35207\include\xutility(472,14): error C2672: 'std::construct_at': 一致するオーバーロードされた関数が見つかりませんでした。
+  (ソース ファイル '/02_ResourceFile/SceneFile/ResultScene.cpp' をコンパイルしています)
+      C:\Program Files\Microsoft Visual Studio\2022\Community\VC\Tools\MSVC\14.44.35207\include\xutility(461,16):
+      '_Ty *std::construct_at(_Ty *const ,_Types ...) noexcept(<expr>)' の可能性があります
+          C:\Program Files\Microsoft Visual Studio\2022\Community\VC\Tools\MSVC\14.44.35207\include\xutility(472,14):
+          関連する制約が満たされていません
+              C:\Program Files\Microsoft Visual Studio\2022\Community\VC\Tools\MSVC\14.44.35207\include\xutility(459,50):
+              'TransScene::TransScene': オーバーロードされた関数ですべての引数の型を変換できませんでした
+                  C:\Users\dorae\Desktop\HAL\class3\FindWork\就職作品プロジェクト\02_ResourceFile\SceneFile\TransScene.h(92,1):
+                  'TransScene::TransScene(const TransScene &)' の可能性があります
+                      C:\Program Files\Microsoft Visual Studio\2022\Community\VC\Tools\MSVC\14.44.35207\include\xutility(459,50):
+                      'TransScene::TransScene(const TransScene &)': 引数 1 を 'Camera' から 'const TransScene &' へ変換できません。
+                          C:\Program Files\Microsoft Visual Studio\2022\Community\VC\Tools\MSVC\14.44.35207\include\xutility(459,71):
+                          理由: 'Camera' から 'const TransScene' へは変換できません。
+                          C:\Program Files\Microsoft Visual Studio\2022\Community\VC\Tools\MSVC\14.44.35207\include\xutility(459,71):
+                          この変換を実行可能なユーザー定義変換演算子がないか、または演算子を呼び出せません。
+                  C:\Users\dorae\Desktop\HAL\class3\FindWork\就職作品プロジェクト\02_ResourceFile\SceneFile\TransScene.h(65,2):
+                  または 'TransScene::TransScene(std::shared_ptr<Camera>)'
+                      C:\Program Files\Microsoft Visual Studio\2022\Community\VC\Tools\MSVC\14.44.35207\include\xutility(459,50):
+                      'TransScene::TransScene(std::shared_ptr<Camera>)': 引数 1 を 'Camera' から 'std::shared_ptr<Camera>' へ変換できません。
+                          C:\Program Files\Microsoft Visual Studio\2022\Community\VC\Tools\MSVC\14.44.35207\include\xutility(459,71):
+                          この変換を実行可能なユーザー定義変換演算子がないか、または演算子を呼び出せません。
+                  C:\Program Files\Microsoft Visual Studio\2022\Community\VC\Tools\MSVC\14.44.35207\include\xutility(459,50):
+                  引数リスト '(Camera)' を一致させようとしているとき
+      C:\Program Files\Microsoft Visual Studio\2022\Community\VC\Tools\MSVC\14.44.35207\include\xutility(472,14):
+      テンプレートインスタンス化コンテキスト (最初に最も古いもの) は
+          C:\Users\dorae\Desktop\HAL\class3\FindWork\就職作品プロジェクト\02_ResourceFile\Game.h(163,24):
+          コンパイル対象の関数 テンプレート インスタンス化 'std::shared_ptr<TransScene> std::make_shared<TransScene,Camera&>(Camera &)' のリファレンスを確認してください
+          C:\Program Files\Microsoft Visual Studio\2022\Community\VC\Tools\MSVC\14.44.35207\include\memory(2913,46):
+          コンパイル対象の関数 テンプレート インスタンス化 'std::_Ref_count_obj2<TransScene>::_Ref_count_obj2<Camera&>(Camera &)' のリファレンスを確認してください
+          C:\Program Files\Microsoft Visual Studio\2022\Community\VC\Tools\MSVC\14.44.35207\include\memory(2100,18):
+          コンパイル対象の関数 テンプレート インスタンス化 'void std::_Construct_in_place<_Ty,Camera&>(_Ty &,Camera &) noexcept(false)' のリファレンスを確認してください
+          with
+          [
+              _Ty=TransScene
+          ]
+  
+C:\Program Files\Microsoft Visual Studio\2022\Community\VC\Tools\MSVC\14.44.35207\include\xutility(476,61): error C2665: 'TransScene::TransScene': オーバーロードされた関数ですべての引数の型を変換できませんでした
+  (ソース ファイル '/02_ResourceFile/SceneFile/ResultScene.cpp' をコンパイルしています)
+      C:\Users\dorae\Desktop\HAL\class3\FindWork\就職作品プロジェクト\02_ResourceFile\SceneFile\TransScene.h(92,1):
+      'TransScene::TransScene(const TransScene &)' の可能性があります
+          C:\Program Files\Microsoft Visual Studio\2022\Community\VC\Tools\MSVC\14.44.35207\include\xutility(476,61):
+          'TransScene::TransScene(const TransScene &)': 引数 1 を 'Camera' から 'const TransScene &' へ変換できません。
+              C:\Program Files\Microsoft Visual Studio\2022\Community\VC\Tools\MSVC\14.44.35207\include\xutility(476,82):
+              理由: 'Camera' から 'const TransScene' へは変換できません。
+              C:\Program Files\Microsoft Visual Studio\2022\Community\VC\Tools\MSVC\14.44.35207\include\xutility(476,82):
+              この変換を実行可能なユーザー定義変換演算子がないか、または演算子を呼び出せません。
+      C:\Users\dorae\Desktop\HAL\class3\FindWork\就職作品プロジェクト\02_ResourceFile\SceneFile\TransScene.h(65,2):
+      または 'TransScene::TransScene(std::shared_ptr<Camera>)'
+          C:\Program Files\Microsoft Visual Studio\2022\Community\VC\Tools\MSVC\14.44.35207\include\xutility(476,61):
+          'TransScene::TransScene(std::shared_ptr<Camera>)': 引数 1 を 'Camera' から 'std::shared_ptr<Camera>' へ変換できません。
+              C:\Program Files\Microsoft Visual Studio\2022\Community\VC\Tools\MSVC\14.44.35207\include\xutility(476,82):
+              この変換を実行可能なユーザー定義変換演算子がないか、または演算子を呼び出せません。
+      C:\Program Files\Microsoft Visual Studio\2022\Community\VC\Tools\MSVC\14.44.35207\include\xutility(476,61):
+      引数リスト '(Camera)' を一致させようとしているとき
+  
+C:\Program Files\Microsoft Visual Studio\2022\Community\VC\Tools\MSVC\14.44.35207\include\xutility(472,14): error C2672: 'std::construct_at': 一致するオーバーロードされた関数が見つかりませんでした。
+  (ソース ファイル '/02_ResourceFile/SceneFile/Transition/TransitionBase.cpp' をコンパイルしています)
+      C:\Program Files\Microsoft Visual Studio\2022\Community\VC\Tools\MSVC\14.44.35207\include\xutility(461,16):
+      '_Ty *std::construct_at(_Ty *const ,_Types ...) noexcept(<expr>)' の可能性があります
+          C:\Program Files\Microsoft Visual Studio\2022\Community\VC\Tools\MSVC\14.44.35207\include\xutility(472,14):
+          関連する制約が満たされていません
+              C:\Program Files\Microsoft Visual Studio\2022\Community\VC\Tools\MSVC\14.44.35207\include\xutility(459,50):
+              'TransScene::TransScene': オーバーロードされた関数ですべての引数の型を変換できませんでした
+                  C:\Users\dorae\Desktop\HAL\class3\FindWork\就職作品プロジェクト\02_ResourceFile\SceneFile\TransScene.h(92,1):
+                  'TransScene::TransScene(const TransScene &)' の可能性があります
+                      C:\Program Files\Microsoft Visual Studio\2022\Community\VC\Tools\MSVC\14.44.35207\include\xutility(459,50):
+                      'TransScene::TransScene(const TransScene &)': 引数 1 を 'Camera' から 'const TransScene &' へ変換できません。
+                          C:\Program Files\Microsoft Visual Studio\2022\Community\VC\Tools\MSVC\14.44.35207\include\xutility(459,71):
+                          理由: 'Camera' から 'const TransScene' へは変換できません。
+                          C:\Program Files\Microsoft Visual Studio\2022\Community\VC\Tools\MSVC\14.44.35207\include\xutility(459,71):
+                          この変換を実行可能なユーザー定義変換演算子がないか、または演算子を呼び出せません。
+                  C:\Users\dorae\Desktop\HAL\class3\FindWork\就職作品プロジェクト\02_ResourceFile\SceneFile\TransScene.h(65,2):
+                  または 'TransScene::TransScene(std::shared_ptr<Camera>)'
+                      C:\Program Files\Microsoft Visual Studio\2022\Community\VC\Tools\MSVC\14.44.35207\include\xutility(459,50):
+                      'TransScene::TransScene(std::shared_ptr<Camera>)': 引数 1 を 'Camera' から 'std::shared_ptr<Camera>' へ変換できません。
+                          C:\Program Files\Microsoft Visual Studio\2022\Community\VC\Tools\MSVC\14.44.35207\include\xutility(459,71):
+                          この変換を実行可能なユーザー定義変換演算子がないか、または演算子を呼び出せません。
+                  C:\Program Files\Microsoft Visual Studio\2022\Community\VC\Tools\MSVC\14.44.35207\include\xutility(459,50):
+                  引数リスト '(Camera)' を一致させようとしているとき
+      C:\Program Files\Microsoft Visual Studio\2022\Community\VC\Tools\MSVC\14.44.35207\include\xutility(472,14):
+      テンプレートインスタンス化コンテキスト (最初に最も古いもの) は
+          C:\Users\dorae\Desktop\HAL\class3\FindWork\就職作品プロジェクト\02_ResourceFile\Game.h(163,24):
+          コンパイル対象の関数 テンプレート インスタンス化 'std::shared_ptr<TransScene> std::make_shared<TransScene,Camera&>(Camera &)' のリファレンスを確認してください
+          C:\Program Files\Microsoft Visual Studio\2022\Community\VC\Tools\MSVC\14.44.35207\include\memory(2913,46):
+          コンパイル対象の関数 テンプレート インスタンス化 'std::_Ref_count_obj2<TransScene>::_Ref_count_obj2<Camera&>(Camera &)' のリファレンスを確認してください
+          C:\Program Files\Microsoft Visual Studio\2022\Community\VC\Tools\MSVC\14.44.35207\include\memory(2100,18):
+          コンパイル対象の関数 テンプレート インスタンス化 'void std::_Construct_in_place<_Ty,Camera&>(_Ty &,Camera &) noexcept(false)' のリファレンスを確認してください
+          with
+          [
+              _Ty=TransScene
+          ]
+  
+C:\Program Files\Microsoft Visual Studio\2022\Community\VC\Tools\MSVC\14.44.35207\include\xutility(476,61): error C2665: 'TransScene::TransScene': オーバーロードされた関数ですべての引数の型を変換できませんでした
+  (ソース ファイル '/02_ResourceFile/SceneFile/Transition/TransitionBase.cpp' をコンパイルしています)
+      C:\Users\dorae\Desktop\HAL\class3\FindWork\就職作品プロジェクト\02_ResourceFile\SceneFile\TransScene.h(92,1):
+      'TransScene::TransScene(const TransScene &)' の可能性があります
+          C:\Program Files\Microsoft Visual Studio\2022\Community\VC\Tools\MSVC\14.44.35207\include\xutility(476,61):
+          'TransScene::TransScene(const TransScene &)': 引数 1 を 'Camera' から 'const TransScene &' へ変換できません。
+              C:\Program Files\Microsoft Visual Studio\2022\Community\VC\Tools\MSVC\14.44.35207\include\xutility(476,82):
+              理由: 'Camera' から 'const TransScene' へは変換できません。
+              C:\Program Files\Microsoft Visual Studio\2022\Community\VC\Tools\MSVC\14.44.35207\include\xutility(476,82):
+              この変換を実行可能なユーザー定義変換演算子がないか、または演算子を呼び出せません。
+      C:\Users\dorae\Desktop\HAL\class3\FindWork\就職作品プロジェクト\02_ResourceFile\SceneFile\TransScene.h(65,2):
+      または 'TransScene::TransScene(std::shared_ptr<Camera>)'
+          C:\Program Files\Microsoft Visual Studio\2022\Community\VC\Tools\MSVC\14.44.35207\include\xutility(476,61):
+          'TransScene::TransScene(std::shared_ptr<Camera>)': 引数 1 を 'Camera' から 'std::shared_ptr<Camera>' へ変換できません。
+              C:\Program Files\Microsoft Visual Studio\2022\Community\VC\Tools\MSVC\14.44.35207\include\xutility(476,82):
+              この変換を実行可能なユーザー定義変換演算子がないか、または演算子を呼び出せません。
+      C:\Program Files\Microsoft Visual Studio\2022\Community\VC\Tools\MSVC\14.44.35207\include\xutility(476,61):
+      引数リスト '(Camera)' を一致させようとしているとき
+  
+C:\Program Files\Microsoft Visual Studio\2022\Community\VC\Tools\MSVC\14.44.35207\include\xutility(472,14): error C2672: 'std::construct_at': 一致するオーバーロードされた関数が見つかりませんでした。
+  (ソース ファイル '/02_ResourceFile/SceneFile/GameSceneWait.cpp' をコンパイルしています)
+      C:\Program Files\Microsoft Visual Studio\2022\Community\VC\Tools\MSVC\14.44.35207\include\xutility(461,16):
+      '_Ty *std::construct_at(_Ty *const ,_Types ...) noexcept(<expr>)' の可能性があります
+          C:\Program Files\Microsoft Visual Studio\2022\Community\VC\Tools\MSVC\14.44.35207\include\xutility(472,14):
+          関連する制約が満たされていません
+              C:\Program Files\Microsoft Visual Studio\2022\Community\VC\Tools\MSVC\14.44.35207\include\xutility(459,50):
+              'TransScene::TransScene': オーバーロードされた関数ですべての引数の型を変換できませんでした
+                  C:\Users\dorae\Desktop\HAL\class3\FindWork\就職作品プロジェクト\02_ResourceFile\SceneFile\TransScene.h(92,1):
+                  'TransScene::TransScene(const TransScene &)' の可能性があります
+                      C:\Program Files\Microsoft Visual Studio\2022\Community\VC\Tools\MSVC\14.44.35207\include\xutility(459,50):
+                      'TransScene::TransScene(const TransScene &)': 引数 1 を 'Camera' から 'const TransScene &' へ変換できません。
+                          C:\Program Files\Microsoft Visual Studio\2022\Community\VC\Tools\MSVC\14.44.35207\include\xutility(459,71):
+                          理由: 'Camera' から 'const TransScene' へは変換できません。
+                          C:\Program Files\Microsoft Visual Studio\2022\Community\VC\Tools\MSVC\14.44.35207\include\xutility(459,71):
+                          この変換を実行可能なユーザー定義変換演算子がないか、または演算子を呼び出せません。
+                  C:\Users\dorae\Desktop\HAL\class3\FindWork\就職作品プロジェクト\02_ResourceFile\SceneFile\TransScene.h(65,2):
+                  または 'TransScene::TransScene(std::shared_ptr<Camera>)'
+                      C:\Program Files\Microsoft Visual Studio\2022\Community\VC\Tools\MSVC\14.44.35207\include\xutility(459,50):
+                      'TransScene::TransScene(std::shared_ptr<Camera>)': 引数 1 を 'Camera' から 'std::shared_ptr<Camera>' へ変換できません。
+                          C:\Program Files\Microsoft Visual Studio\2022\Community\VC\Tools\MSVC\14.44.35207\include\xutility(459,71):
+                          この変換を実行可能なユーザー定義変換演算子がないか、または演算子を呼び出せません。
+                  C:\Program Files\Microsoft Visual Studio\2022\Community\VC\Tools\MSVC\14.44.35207\include\xutility(459,50):
+                  引数リスト '(Camera)' を一致させようとしているとき
+      C:\Program Files\Microsoft Visual Studio\2022\Community\VC\Tools\MSVC\14.44.35207\include\xutility(472,14):
+      テンプレートインスタンス化コンテキスト (最初に最も古いもの) は
+          C:\Users\dorae\Desktop\HAL\class3\FindWork\就職作品プロジェクト\02_ResourceFile\Game.h(163,24):
+          コンパイル対象の関数 テンプレート インスタンス化 'std::shared_ptr<TransScene> std::make_shared<TransScene,Camera&>(Camera &)' のリファレンスを確認してください
+          C:\Program Files\Microsoft Visual Studio\2022\Community\VC\Tools\MSVC\14.44.35207\include\memory(2913,46):
+          コンパイル対象の関数 テンプレート インスタンス化 'std::_Ref_count_obj2<TransScene>::_Ref_count_obj2<Camera&>(Camera &)' のリファレンスを確認してください
+          C:\Program Files\Microsoft Visual Studio\2022\Community\VC\Tools\MSVC\14.44.35207\include\memory(2100,18):
+          コンパイル対象の関数 テンプレート インスタンス化 'void std::_Construct_in_place<_Ty,Camera&>(_Ty &,Camera &) noexcept(false)' のリファレンスを確認してください
+          with
+          [
+              _Ty=TransScene
+          ]
+  
+C:\Program Files\Microsoft Visual Studio\2022\Community\VC\Tools\MSVC\14.44.35207\include\xutility(476,61): error C2665: 'TransScene::TransScene': オーバーロードされた関数ですべての引数の型を変換できませんでした
+  (ソース ファイル '/02_ResourceFile/SceneFile/GameSceneWait.cpp' をコンパイルしています)
+      C:\Users\dorae\Desktop\HAL\class3\FindWork\就職作品プロジェクト\02_ResourceFile\SceneFile\TransScene.h(92,1):
+      'TransScene::TransScene(const TransScene &)' の可能性があります
+          C:\Program Files\Microsoft Visual Studio\2022\Community\VC\Tools\MSVC\14.44.35207\include\xutility(476,61):
+          'TransScene::TransScene(const TransScene &)': 引数 1 を 'Camera' から 'const TransScene &' へ変換できません。
+              C:\Program Files\Microsoft Visual Studio\2022\Community\VC\Tools\MSVC\14.44.35207\include\xutility(476,82):
+              理由: 'Camera' から 'const TransScene' へは変換できません。
+              C:\Program Files\Microsoft Visual Studio\2022\Community\VC\Tools\MSVC\14.44.35207\include\xutility(476,82):
+              この変換を実行可能なユーザー定義変換演算子がないか、または演算子を呼び出せません。
+      C:\Users\dorae\Desktop\HAL\class3\FindWork\就職作品プロジェクト\02_ResourceFile\SceneFile\TransScene.h(65,2):
+      または 'TransScene::TransScene(std::shared_ptr<Camera>)'
+          C:\Program Files\Microsoft Visual Studio\2022\Community\VC\Tools\MSVC\14.44.35207\include\xutility(476,61):
+          'TransScene::TransScene(std::shared_ptr<Camera>)': 引数 1 を 'Camera' から 'std::shared_ptr<Camera>' へ変換できません。
+              C:\Program Files\Microsoft Visual Studio\2022\Community\VC\Tools\MSVC\14.44.35207\include\xutility(476,82):
+              この変換を実行可能なユーザー定義変換演算子がないか、または演算子を呼び出せません。
+      C:\Program Files\Microsoft Visual Studio\2022\Community\VC\Tools\MSVC\14.44.35207\include\xutility(476,61):
+      引数リスト '(Camera)' を一致させようとしているとき
+  
+C:\Program Files\Microsoft Visual Studio\2022\Community\VC\Tools\MSVC\14.44.35207\include\xutility(472,14): error C2672: 'std::construct_at': 一致するオーバーロードされた関数が見つかりませんでした。
+  (ソース ファイル '/02_ResourceFile/SceneFile/Transition/Fade.cpp' をコンパイルしています)
+      C:\Program Files\Microsoft Visual Studio\2022\Community\VC\Tools\MSVC\14.44.35207\include\xutility(461,16):
+      '_Ty *std::construct_at(_Ty *const ,_Types ...) noexcept(<expr>)' の可能性があります
+          C:\Program Files\Microsoft Visual Studio\2022\Community\VC\Tools\MSVC\14.44.35207\include\xutility(472,14):
+          関連する制約が満たされていません
+              C:\Program Files\Microsoft Visual Studio\2022\Community\VC\Tools\MSVC\14.44.35207\include\xutility(459,50):
+              'TransScene::TransScene': オーバーロードされた関数ですべての引数の型を変換できませんでした
+                  C:\Users\dorae\Desktop\HAL\class3\FindWork\就職作品プロジェクト\02_ResourceFile\SceneFile\TransScene.h(92,1):
+                  'TransScene::TransScene(const TransScene &)' の可能性があります
+                      C:\Program Files\Microsoft Visual Studio\2022\Community\VC\Tools\MSVC\14.44.35207\include\xutility(459,50):
+                      'TransScene::TransScene(const TransScene &)': 引数 1 を 'Camera' から 'const TransScene &' へ変換できません。
+                          C:\Program Files\Microsoft Visual Studio\2022\Community\VC\Tools\MSVC\14.44.35207\include\xutility(459,71):
+                          理由: 'Camera' から 'const TransScene' へは変換できません。
+                          C:\Program Files\Microsoft Visual Studio\2022\Community\VC\Tools\MSVC\14.44.35207\include\xutility(459,71):
+                          この変換を実行可能なユーザー定義変換演算子がないか、または演算子を呼び出せません。
+                  C:\Users\dorae\Desktop\HAL\class3\FindWork\就職作品プロジェクト\02_ResourceFile\SceneFile\TransScene.h(65,2):
+                  または 'TransScene::TransScene(std::shared_ptr<Camera>)'
+                      C:\Program Files\Microsoft Visual Studio\2022\Community\VC\Tools\MSVC\14.44.35207\include\xutility(459,50):
+                      'TransScene::TransScene(std::shared_ptr<Camera>)': 引数 1 を 'Camera' から 'std::shared_ptr<Camera>' へ変換できません。
+                          C:\Program Files\Microsoft Visual Studio\2022\Community\VC\Tools\MSVC\14.44.35207\include\xutility(459,71):
+                          この変換を実行可能なユーザー定義変換演算子がないか、または演算子を呼び出せません。
+                  C:\Program Files\Microsoft Visual Studio\2022\Community\VC\Tools\MSVC\14.44.35207\include\xutility(459,50):
+                  引数リスト '(Camera)' を一致させようとしているとき
+      C:\Program Files\Microsoft Visual Studio\2022\Community\VC\Tools\MSVC\14.44.35207\include\xutility(472,14):
+      テンプレートインスタンス化コンテキスト (最初に最も古いもの) は
+          C:\Users\dorae\Desktop\HAL\class3\FindWork\就職作品プロジェクト\02_ResourceFile\Game.h(163,24):
+          コンパイル対象の関数 テンプレート インスタンス化 'std::shared_ptr<TransScene> std::make_shared<TransScene,Camera&>(Camera &)' のリファレンスを確認してください
+          C:\Program Files\Microsoft Visual Studio\2022\Community\VC\Tools\MSVC\14.44.35207\include\memory(2913,46):
+          コンパイル対象の関数 テンプレート インスタンス化 'std::_Ref_count_obj2<TransScene>::_Ref_count_obj2<Camera&>(Camera &)' のリファレンスを確認してください
+          C:\Program Files\Microsoft Visual Studio\2022\Community\VC\Tools\MSVC\14.44.35207\include\memory(2100,18):
+          コンパイル対象の関数 テンプレート インスタンス化 'void std::_Construct_in_place<_Ty,Camera&>(_Ty &,Camera &) noexcept(false)' のリファレンスを確認してください
+          with
+          [
+              _Ty=TransScene
+          ]
+  
+C:\Program Files\Microsoft Visual Studio\2022\Community\VC\Tools\MSVC\14.44.35207\include\xutility(476,61): error C2665: 'TransScene::TransScene': オーバーロードされた関数ですべての引数の型を変換できませんでした
+  (ソース ファイル '/02_ResourceFile/SceneFile/Transition/Fade.cpp' をコンパイルしています)
+      C:\Users\dorae\Desktop\HAL\class3\FindWork\就職作品プロジェクト\02_ResourceFile\SceneFile\TransScene.h(92,1):
+      'TransScene::TransScene(const TransScene &)' の可能性があります
+          C:\Program Files\Microsoft Visual Studio\2022\Community\VC\Tools\MSVC\14.44.35207\include\xutility(476,61):
+          'TransScene::TransScene(const TransScene &)': 引数 1 を 'Camera' から 'const TransScene &' へ変換できません。
+              C:\Program Files\Microsoft Visual Studio\2022\Community\VC\Tools\MSVC\14.44.35207\include\xutility(476,82):
+              理由: 'Camera' から 'const TransScene' へは変換できません。
+              C:\Program Files\Microsoft Visual Studio\2022\Community\VC\Tools\MSVC\14.44.35207\include\xutility(476,82):
+              この変換を実行可能なユーザー定義変換演算子がないか、または演算子を呼び出せません。
+      C:\Users\dorae\Desktop\HAL\class3\FindWork\就職作品プロジェクト\02_ResourceFile\SceneFile\TransScene.h(65,2):
+      または 'TransScene::TransScene(std::shared_ptr<Camera>)'
+          C:\Program Files\Microsoft Visual Studio\2022\Community\VC\Tools\MSVC\14.44.35207\include\xutility(476,61):
+          'TransScene::TransScene(std::shared_ptr<Camera>)': 引数 1 を 'Camera' から 'std::shared_ptr<Camera>' へ変換できません。
+              C:\Program Files\Microsoft Visual Studio\2022\Community\VC\Tools\MSVC\14.44.35207\include\xutility(476,82):
+              この変換を実行可能なユーザー定義変換演算子がないか、または演算子を呼び出せません。
+      C:\Program Files\Microsoft Visual Studio\2022\Community\VC\Tools\MSVC\14.44.35207\include\xutility(476,61):
+      引数リスト '(Camera)' を一致させようとしているとき
+  
+C:\Program Files\Microsoft Visual Studio\2022\Community\VC\Tools\MSVC\14.44.35207\include\xutility(472,14): error C2672: 'std::construct_at': 一致するオーバーロードされた関数が見つかりませんでした。
+  (ソース ファイル '/02_ResourceFile/SceneFile/GameSceneExe.cpp' をコンパイルしています)
+      C:\Program Files\Microsoft Visual Studio\2022\Community\VC\Tools\MSVC\14.44.35207\include\xutility(461,16):
+      '_Ty *std::construct_at(_Ty *const ,_Types ...) noexcept(<expr>)' の可能性があります
+          C:\Program Files\Microsoft Visual Studio\2022\Community\VC\Tools\MSVC\14.44.35207\include\xutility(472,14):
+          関連する制約が満たされていません
+              C:\Program Files\Microsoft Visual Studio\2022\Community\VC\Tools\MSVC\14.44.35207\include\xutility(459,50):
+              'TransScene::TransScene': オーバーロードされた関数ですべての引数の型を変換できませんでした
+                  C:\Users\dorae\Desktop\HAL\class3\FindWork\就職作品プロジェクト\02_ResourceFile\SceneFile\TransScene.h(92,1):
+                  'TransScene::TransScene(const TransScene &)' の可能性があります
+                      C:\Program Files\Microsoft Visual Studio\2022\Community\VC\Tools\MSVC\14.44.35207\include\xutility(459,50):
+                      'TransScene::TransScene(const TransScene &)': 引数 1 を 'Camera' から 'const TransScene &' へ変換できません。
+                          C:\Program Files\Microsoft Visual Studio\2022\Community\VC\Tools\MSVC\14.44.35207\include\xutility(459,71):
+                          理由: 'Camera' から 'const TransScene' へは変換できません。
+                          C:\Program Files\Microsoft Visual Studio\2022\Community\VC\Tools\MSVC\14.44.35207\include\xutility(459,71):
+                          この変換を実行可能なユーザー定義変換演算子がないか、または演算子を呼び出せません。
+                  C:\Users\dorae\Desktop\HAL\class3\FindWork\就職作品プロジェクト\02_ResourceFile\SceneFile\TransScene.h(65,2):
+                  または 'TransScene::TransScene(std::shared_ptr<Camera>)'
+                      C:\Program Files\Microsoft Visual Studio\2022\Community\VC\Tools\MSVC\14.44.35207\include\xutility(459,50):
+                      'TransScene::TransScene(std::shared_ptr<Camera>)': 引数 1 を 'Camera' から 'std::shared_ptr<Camera>' へ変換できません。
+                          C:\Program Files\Microsoft Visual Studio\2022\Community\VC\Tools\MSVC\14.44.35207\include\xutility(459,71):
+                          この変換を実行可能なユーザー定義変換演算子がないか、または演算子を呼び出せません。
+                  C:\Program Files\Microsoft Visual Studio\2022\Community\VC\Tools\MSVC\14.44.35207\include\xutility(459,50):
+                  引数リスト '(Camera)' を一致させようとしているとき
+      C:\Program Files\Microsoft Visual Studio\2022\Community\VC\Tools\MSVC\14.44.35207\include\xutility(472,14):
+      テンプレートインスタンス化コンテキスト (最初に最も古いもの) は
+          C:\Users\dorae\Desktop\HAL\class3\FindWork\就職作品プロジェクト\02_ResourceFile\Game.h(163,24):
+          コンパイル対象の関数 テンプレート インスタンス化 'std::shared_ptr<TransScene> std::make_shared<TransScene,Camera&>(Camera &)' のリファレンスを確認してください
+          C:\Program Files\Microsoft Visual Studio\2022\Community\VC\Tools\MSVC\14.44.35207\include\memory(2913,46):
+          コンパイル対象の関数 テンプレート インスタンス化 'std::_Ref_count_obj2<TransScene>::_Ref_count_obj2<Camera&>(Camera &)' のリファレンスを確認してください
+          C:\Program Files\Microsoft Visual Studio\2022\Community\VC\Tools\MSVC\14.44.35207\include\memory(2100,18):
+          コンパイル対象の関数 テンプレート インスタンス化 'void std::_Construct_in_place<_Ty,Camera&>(_Ty &,Camera &) noexcept(false)' のリファレンスを確認してください
+          with
+          [
+              _Ty=TransScene
+          ]
+  
+C:\Program Files\Microsoft Visual Studio\2022\Community\VC\Tools\MSVC\14.44.35207\include\xutility(476,61): error C2665: 'TransScene::TransScene': オーバーロードされた関数ですべての引数の型を変換できませんでした
+  (ソース ファイル '/02_ResourceFile/SceneFile/GameSceneExe.cpp' をコンパイルしています)
+      C:\Users\dorae\Desktop\HAL\class3\FindWork\就職作品プロジェクト\02_ResourceFile\SceneFile\TransScene.h(92,1):
+      'TransScene::TransScene(const TransScene &)' の可能性があります
+          C:\Program Files\Microsoft Visual Studio\2022\Community\VC\Tools\MSVC\14.44.35207\include\xutility(476,61):
+          'TransScene::TransScene(const TransScene &)': 引数 1 を 'Camera' から 'const TransScene &' へ変換できません。
+              C:\Program Files\Microsoft Visual Studio\2022\Community\VC\Tools\MSVC\14.44.35207\include\xutility(476,82):
+              理由: 'Camera' から 'const TransScene' へは変換できません。
+              C:\Program Files\Microsoft Visual Studio\2022\Community\VC\Tools\MSVC\14.44.35207\include\xutility(476,82):
+              この変換を実行可能なユーザー定義変換演算子がないか、または演算子を呼び出せません。
+      C:\Users\dorae\Desktop\HAL\class3\FindWork\就職作品プロジェクト\02_ResourceFile\SceneFile\TransScene.h(65,2):
+      または 'TransScene::TransScene(std::shared_ptr<Camera>)'
+          C:\Program Files\Microsoft Visual Studio\2022\Community\VC\Tools\MSVC\14.44.35207\include\xutility(476,61):
+          'TransScene::TransScene(std::shared_ptr<Camera>)': 引数 1 を 'Camera' から 'std::shared_ptr<Camera>' へ変換できません。
+              C:\Program Files\Microsoft Visual Studio\2022\Community\VC\Tools\MSVC\14.44.35207\include\xutility(476,82):
+              この変換を実行可能なユーザー定義変換演算子がないか、または演算子を呼び出せません。
+      C:\Program Files\Microsoft Visual Studio\2022\Community\VC\Tools\MSVC\14.44.35207\include\xutility(476,61):
+      引数リスト '(Camera)' を一致させようとしているとき
+  
+C:\Program Files\Microsoft Visual Studio\2022\Community\VC\Tools\MSVC\14.44.35207\include\xutility(472,14): error C2672: 'std::construct_at': 一致するオーバーロードされた関数が見つかりませんでした。
+  (ソース ファイル '/02_ResourceFile/SceneFile/TitleScene.cpp' をコンパイルしています)
+      C:\Program Files\Microsoft Visual Studio\2022\Community\VC\Tools\MSVC\14.44.35207\include\xutility(461,16):
+      '_Ty *std::construct_at(_Ty *const ,_Types ...) noexcept(<expr>)' の可能性があります
+          C:\Program Files\Microsoft Visual Studio\2022\Community\VC\Tools\MSVC\14.44.35207\include\xutility(472,14):
+          関連する制約が満たされていません
+              C:\Program Files\Microsoft Visual Studio\2022\Community\VC\Tools\MSVC\14.44.35207\include\xutility(459,50):
+              'TransScene::TransScene': オーバーロードされた関数ですべての引数の型を変換できませんでした
+                  C:\Users\dorae\Desktop\HAL\class3\FindWork\就職作品プロジェクト\02_ResourceFile\SceneFile\TransScene.h(92,1):
+                  'TransScene::TransScene(const TransScene &)' の可能性があります
+                      C:\Program Files\Microsoft Visual Studio\2022\Community\VC\Tools\MSVC\14.44.35207\include\xutility(459,50):
+                      'TransScene::TransScene(const TransScene &)': 引数 1 を 'Camera' から 'const TransScene &' へ変換できません。
+                          C:\Program Files\Microsoft Visual Studio\2022\Community\VC\Tools\MSVC\14.44.35207\include\xutility(459,71):
+                          理由: 'Camera' から 'const TransScene' へは変換できません。
+                          C:\Program Files\Microsoft Visual Studio\2022\Community\VC\Tools\MSVC\14.44.35207\include\xutility(459,71):
+                          この変換を実行可能なユーザー定義変換演算子がないか、または演算子を呼び出せません。
+                  C:\Users\dorae\Desktop\HAL\class3\FindWork\就職作品プロジェクト\02_ResourceFile\SceneFile\TransScene.h(65,2):
+                  または 'TransScene::TransScene(std::shared_ptr<Camera>)'
+                      C:\Program Files\Microsoft Visual Studio\2022\Community\VC\Tools\MSVC\14.44.35207\include\xutility(459,50):
+                      'TransScene::TransScene(std::shared_ptr<Camera>)': 引数 1 を 'Camera' から 'std::shared_ptr<Camera>' へ変換できません。
+                          C:\Program Files\Microsoft Visual Studio\2022\Community\VC\Tools\MSVC\14.44.35207\include\xutility(459,71):
+                          この変換を実行可能なユーザー定義変換演算子がないか、または演算子を呼び出せません。
+                  C:\Program Files\Microsoft Visual Studio\2022\Community\VC\Tools\MSVC\14.44.35207\include\xutility(459,50):
+                  引数リスト '(Camera)' を一致させようとしているとき
+      C:\Program Files\Microsoft Visual Studio\2022\Community\VC\Tools\MSVC\14.44.35207\include\xutility(472,14):
+      テンプレートインスタンス化コンテキスト (最初に最も古いもの) は
+          C:\Users\dorae\Desktop\HAL\class3\FindWork\就職作品プロジェクト\02_ResourceFile\Game.h(163,24):
+          コンパイル対象の関数 テンプレート インスタンス化 'std::shared_ptr<TransScene> std::make_shared<TransScene,Camera&>(Camera &)' のリファレンスを確認してください
+          C:\Program Files\Microsoft Visual Studio\2022\Community\VC\Tools\MSVC\14.44.35207\include\memory(2913,46):
+          コンパイル対象の関数 テンプレート インスタンス化 'std::_Ref_count_obj2<TransScene>::_Ref_count_obj2<Camera&>(Camera &)' のリファレンスを確認してください
+          C:\Program Files\Microsoft Visual Studio\2022\Community\VC\Tools\MSVC\14.44.35207\include\memory(2100,18):
+          コンパイル対象の関数 テンプレート インスタンス化 'void std::_Construct_in_place<_Ty,Camera&>(_Ty &,Camera &) noexcept(false)' のリファレンスを確認してください
+          with
+          [
+              _Ty=TransScene
+          ]
+  
+C:\Program Files\Microsoft Visual Studio\2022\Community\VC\Tools\MSVC\14.44.35207\include\xutility(476,61): error C2665: 'TransScene::TransScene': オーバーロードされた関数ですべての引数の型を変換できませんでした
+  (ソース ファイル '/02_ResourceFile/SceneFile/TitleScene.cpp' をコンパイルしています)
+      C:\Users\dorae\Desktop\HAL\class3\FindWork\就職作品プロジェクト\02_ResourceFile\SceneFile\TransScene.h(92,1):
+      'TransScene::TransScene(const TransScene &)' の可能性があります
+          C:\Program Files\Microsoft Visual Studio\2022\Community\VC\Tools\MSVC\14.44.35207\include\xutility(476,61):
+          'TransScene::TransScene(const TransScene &)': 引数 1 を 'Camera' から 'const TransScene &' へ変換できません。
+              C:\Program Files\Microsoft Visual Studio\2022\Community\VC\Tools\MSVC\14.44.35207\include\xutility(476,82):
+              理由: 'Camera' から 'const TransScene' へは変換できません。
+              C:\Program Files\Microsoft Visual Studio\2022\Community\VC\Tools\MSVC\14.44.35207\include\xutility(476,82):
+              この変換を実行可能なユーザー定義変換演算子がないか、または演算子を呼び出せません。
+      C:\Users\dorae\Desktop\HAL\class3\FindWork\就職作品プロジェクト\02_ResourceFile\SceneFile\TransScene.h(65,2):
+      または 'TransScene::TransScene(std::shared_ptr<Camera>)'
+          C:\Program Files\Microsoft Visual Studio\2022\Community\VC\Tools\MSVC\14.44.35207\include\xutility(476,61):
+          'TransScene::TransScene(std::shared_ptr<Camera>)': 引数 1 を 'Camera' から 'std::shared_ptr<Camera>' へ変換できません。
+              C:\Program Files\Microsoft Visual Studio\2022\Community\VC\Tools\MSVC\14.44.35207\include\xutility(476,82):
+              この変換を実行可能なユーザー定義変換演算子がないか、または演算子を呼び出せません。
+      C:\Program Files\Microsoft Visual Studio\2022\Community\VC\Tools\MSVC\14.44.35207\include\xutility(476,61):
+      引数リスト '(Camera)' を一致させようとしているとき
+  
+C:\Program Files\Microsoft Visual Studio\2022\Community\VC\Tools\MSVC\14.44.35207\include\xutility(472,14): error C2672: 'std::construct_at': 一致するオーバーロードされた関数が見つかりませんでした。
+  (ソース ファイル '/02_ResourceFile/SceneFile/TransScene.cpp' をコンパイルしています)
+      C:\Program Files\Microsoft Visual Studio\2022\Community\VC\Tools\MSVC\14.44.35207\include\xutility(461,16):
+      '_Ty *std::construct_at(_Ty *const ,_Types ...) noexcept(<expr>)' の可能性があります
+          C:\Program Files\Microsoft Visual Studio\2022\Community\VC\Tools\MSVC\14.44.35207\include\xutility(472,14):
+          関連する制約が満たされていません
+              C:\Program Files\Microsoft Visual Studio\2022\Community\VC\Tools\MSVC\14.44.35207\include\xutility(459,50):
+              'TransScene::TransScene': オーバーロードされた関数ですべての引数の型を変換できませんでした
+                  C:\Users\dorae\Desktop\HAL\class3\FindWork\就職作品プロジェクト\02_ResourceFile\SceneFile\TransScene.h(92,1):
+                  'TransScene::TransScene(const TransScene &)' の可能性があります
+                      C:\Program Files\Microsoft Visual Studio\2022\Community\VC\Tools\MSVC\14.44.35207\include\xutility(459,50):
+                      'TransScene::TransScene(const TransScene &)': 引数 1 を 'Camera' から 'const TransScene &' へ変換できません。
+                          C:\Program Files\Microsoft Visual Studio\2022\Community\VC\Tools\MSVC\14.44.35207\include\xutility(459,71):
+                          理由: 'Camera' から 'const TransScene' へは変換できません。
+                          C:\Program Files\Microsoft Visual Studio\2022\Community\VC\Tools\MSVC\14.44.35207\include\xutility(459,71):
+                          この変換を実行可能なユーザー定義変換演算子がないか、または演算子を呼び出せません。
+                  C:\Users\dorae\Desktop\HAL\class3\FindWork\就職作品プロジェクト\02_ResourceFile\SceneFile\TransScene.cpp(20,13):
+                  または 'TransScene::TransScene(std::shared_ptr<Camera>)'
+                      C:\Program Files\Microsoft Visual Studio\2022\Community\VC\Tools\MSVC\14.44.35207\include\xutility(459,50):
+                      'TransScene::TransScene(std::shared_ptr<Camera>)': 引数 1 を 'Camera' から 'std::shared_ptr<Camera>' へ変換できません。
+                          C:\Program Files\Microsoft Visual Studio\2022\Community\VC\Tools\MSVC\14.44.35207\include\xutility(459,71):
+                          この変換を実行可能なユーザー定義変換演算子がないか、または演算子を呼び出せません。
+                  C:\Program Files\Microsoft Visual Studio\2022\Community\VC\Tools\MSVC\14.44.35207\include\xutility(459,50):
+                  引数リスト '(Camera)' を一致させようとしているとき
+      C:\Program Files\Microsoft Visual Studio\2022\Community\VC\Tools\MSVC\14.44.35207\include\xutility(472,14):
+      テンプレートインスタンス化コンテキスト (最初に最も古いもの) は
+          C:\Users\dorae\Desktop\HAL\class3\FindWork\就職作品プロジェクト\02_ResourceFile\Game.h(163,24):
+          コンパイル対象の関数 テンプレート インスタンス化 'std::shared_ptr<TransScene> std::make_shared<TransScene,Camera&>(Camera &)' のリファレンスを確認してください
+          C:\Program Files\Microsoft Visual Studio\2022\Community\VC\Tools\MSVC\14.44.35207\include\memory(2913,46):
+          コンパイル対象の関数 テンプレート インスタンス化 'std::_Ref_count_obj2<TransScene>::_Ref_count_obj2<Camera&>(Camera &)' のリファレンスを確認してください
+          C:\Program Files\Microsoft Visual Studio\2022\Community\VC\Tools\MSVC\14.44.35207\include\memory(2100,18):
+          コンパイル対象の関数 テンプレート インスタンス化 'void std::_Construct_in_place<_Ty,Camera&>(_Ty &,Camera &) noexcept(false)' のリファレンスを確認してください
+          with
+          [
+              _Ty=TransScene
+          ]
+  
+C:\Program Files\Microsoft Visual Studio\2022\Community\VC\Tools\MSVC\14.44.35207\include\xutility(476,61): error C2665: 'TransScene::TransScene': オーバーロードされた関数ですべての引数の型を変換できませんでした
+  (ソース ファイル '/02_ResourceFile/SceneFile/TransScene.cpp' をコンパイルしています)
+      C:\Users\dorae\Desktop\HAL\class3\FindWork\就職作品プロジェクト\02_ResourceFile\SceneFile\TransScene.h(92,1):
+      'TransScene::TransScene(const TransScene &)' の可能性があります
+          C:\Program Files\Microsoft Visual Studio\2022\Community\VC\Tools\MSVC\14.44.35207\include\xutility(476,61):
+          'TransScene::TransScene(const TransScene &)': 引数 1 を 'Camera' から 'const TransScene &' へ変換できません。
+              C:\Program Files\Microsoft Visual Studio\2022\Community\VC\Tools\MSVC\14.44.35207\include\xutility(476,82):
+              理由: 'Camera' から 'const TransScene' へは変換できません。
+              C:\Program Files\Microsoft Visual Studio\2022\Community\VC\Tools\MSVC\14.44.35207\include\xutility(476,82):
+              この変換を実行可能なユーザー定義変換演算子がないか、または演算子を呼び出せません。
+      C:\Users\dorae\Desktop\HAL\class3\FindWork\就職作品プロジェクト\02_ResourceFile\SceneFile\TransScene.cpp(20,13):
+      または 'TransScene::TransScene(std::shared_ptr<Camera>)'
+          C:\Program Files\Microsoft Visual Studio\2022\Community\VC\Tools\MSVC\14.44.35207\include\xutility(476,61):
+          'TransScene::TransScene(std::shared_ptr<Camera>)': 引数 1 を 'Camera' から 'std::shared_ptr<Camera>' へ変換できません。
+              C:\Program Files\Microsoft Visual Studio\2022\Community\VC\Tools\MSVC\14.44.35207\include\xutility(476,82):
+              この変換を実行可能なユーザー定義変換演算子がないか、または演算子を呼び出せません。
+      C:\Program Files\Microsoft Visual Studio\2022\Community\VC\Tools\MSVC\14.44.35207\include\xutility(476,61):
+      引数リスト '(Camera)' を一致させようとしているとき
+  
+C:\Program Files\Microsoft Visual Studio\2022\Community\VC\Tools\MSVC\14.44.35207\include\xutility(472,14): error C2672: 'std::construct_at': 一致するオーバーロードされた関数が見つかりませんでした。
+  (ソース ファイル '/02_ResourceFile/Square.cpp' をコンパイルしています)
+      C:\Program Files\Microsoft Visual Studio\2022\Community\VC\Tools\MSVC\14.44.35207\include\xutility(461,16):
+      '_Ty *std::construct_at(_Ty *const ,_Types ...) noexcept(<expr>)' の可能性があります
+          C:\Program Files\Microsoft Visual Studio\2022\Community\VC\Tools\MSVC\14.44.35207\include\xutility(472,14):
+          関連する制約が満たされていません
+              C:\Program Files\Microsoft Visual Studio\2022\Community\VC\Tools\MSVC\14.44.35207\include\xutility(459,50):
+              'TransScene::TransScene': オーバーロードされた関数ですべての引数の型を変換できませんでした
+                  C:\Users\dorae\Desktop\HAL\class3\FindWork\就職作品プロジェクト\02_ResourceFile\SceneFile\TransScene.h(92,1):
+                  'TransScene::TransScene(const TransScene &)' の可能性があります
+                      C:\Program Files\Microsoft Visual Studio\2022\Community\VC\Tools\MSVC\14.44.35207\include\xutility(459,50):
+                      'TransScene::TransScene(const TransScene &)': 引数 1 を 'Camera' から 'const TransScene &' へ変換できません。
+                          C:\Program Files\Microsoft Visual Studio\2022\Community\VC\Tools\MSVC\14.44.35207\include\xutility(459,71):
+                          理由: 'Camera' から 'const TransScene' へは変換できません。
+                          C:\Program Files\Microsoft Visual Studio\2022\Community\VC\Tools\MSVC\14.44.35207\include\xutility(459,71):
+                          この変換を実行可能なユーザー定義変換演算子がないか、または演算子を呼び出せません。
+                  C:\Users\dorae\Desktop\HAL\class3\FindWork\就職作品プロジェクト\02_ResourceFile\SceneFile\TransScene.h(65,2):
+                  または 'TransScene::TransScene(std::shared_ptr<Camera>)'
+                      C:\Program Files\Microsoft Visual Studio\2022\Community\VC\Tools\MSVC\14.44.35207\include\xutility(459,50):
+                      'TransScene::TransScene(std::shared_ptr<Camera>)': 引数 1 を 'Camera' から 'std::shared_ptr<Camera>' へ変換できません。
+                          C:\Program Files\Microsoft Visual Studio\2022\Community\VC\Tools\MSVC\14.44.35207\include\xutility(459,71):
+                          この変換を実行可能なユーザー定義変換演算子がないか、または演算子を呼び出せません。
+                  C:\Program Files\Microsoft Visual Studio\2022\Community\VC\Tools\MSVC\14.44.35207\include\xutility(459,50):
+                  引数リスト '(Camera)' を一致させようとしているとき
+      C:\Program Files\Microsoft Visual Studio\2022\Community\VC\Tools\MSVC\14.44.35207\include\xutility(472,14):
+      テンプレートインスタンス化コンテキスト (最初に最も古いもの) は
+          C:\Users\dorae\Desktop\HAL\class3\FindWork\就職作品プロジェクト\02_ResourceFile\Game.h(163,24):
+          コンパイル対象の関数 テンプレート インスタンス化 'std::shared_ptr<TransScene> std::make_shared<TransScene,Camera&>(Camera &)' のリファレンスを確認してください
+          C:\Program Files\Microsoft Visual Studio\2022\Community\VC\Tools\MSVC\14.44.35207\include\memory(2913,46):
+          コンパイル対象の関数 テンプレート インスタンス化 'std::_Ref_count_obj2<TransScene>::_Ref_count_obj2<Camera&>(Camera &)' のリファレンスを確認してください
+          C:\Program Files\Microsoft Visual Studio\2022\Community\VC\Tools\MSVC\14.44.35207\include\memory(2100,18):
+          コンパイル対象の関数 テンプレート インスタンス化 'void std::_Construct_in_place<_Ty,Camera&>(_Ty &,Camera &) noexcept(false)' のリファレンスを確認してください
+          with
+          [
+              _Ty=TransScene
+          ]
+  
+C:\Program Files\Microsoft Visual Studio\2022\Community\VC\Tools\MSVC\14.44.35207\include\xutility(476,61): error C2665: 'TransScene::TransScene': オーバーロードされた関数ですべての引数の型を変換できませんでした
+  (ソース ファイル '/02_ResourceFile/Square.cpp' をコンパイルしています)
+      C:\Users\dorae\Desktop\HAL\class3\FindWork\就職作品プロジェクト\02_ResourceFile\SceneFile\TransScene.h(92,1):
+      'TransScene::TransScene(const TransScene &)' の可能性があります
+          C:\Program Files\Microsoft Visual Studio\2022\Community\VC\Tools\MSVC\14.44.35207\include\xutility(476,61):
+          'TransScene::TransScene(const TransScene &)': 引数 1 を 'Camera' から 'const TransScene &' へ変換できません。
+              C:\Program Files\Microsoft Visual Studio\2022\Community\VC\Tools\MSVC\14.44.35207\include\xutility(476,82):
+              理由: 'Camera' から 'const TransScene' へは変換できません。
+              C:\Program Files\Microsoft Visual Studio\2022\Community\VC\Tools\MSVC\14.44.35207\include\xutility(476,82):
+              この変換を実行可能なユーザー定義変換演算子がないか、または演算子を呼び出せません。
+      C:\Users\dorae\Desktop\HAL\class3\FindWork\就職作品プロジェクト\02_ResourceFile\SceneFile\TransScene.h(65,2):
+      または 'TransScene::TransScene(std::shared_ptr<Camera>)'
+          C:\Program Files\Microsoft Visual Studio\2022\Community\VC\Tools\MSVC\14.44.35207\include\xutility(476,61):
+          'TransScene::TransScene(std::shared_ptr<Camera>)': 引数 1 を 'Camera' から 'std::shared_ptr<Camera>' へ変換できません。
+              C:\Program Files\Microsoft Visual Studio\2022\Community\VC\Tools\MSVC\14.44.35207\include\xutility(476,82):
+              この変換を実行可能なユーザー定義変換演算子がないか、または演算子を呼び出せません。
+      C:\Program Files\Microsoft Visual Studio\2022\Community\VC\Tools\MSVC\14.44.35207\include\xutility(476,61):
+      引数リスト '(Camera)' を一致させようとしているとき
+  

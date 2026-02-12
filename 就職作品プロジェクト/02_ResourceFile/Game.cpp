@@ -68,7 +68,7 @@ void Game::Initialize()
 	auto& instance = GetInstance();
 	
 	instance.m_Input			 = std::make_unique<Input>();	
-	instance.m_Camera			 = std::make_unique<Camera>();	
+	instance.m_Camera			 = std::make_shared<Camera>();	
 	//instance.m_Camera->Initialize();							
     instance.m_TransitionTexture.clear();						
     instance.m_Theme             = nullptr;						
@@ -140,7 +140,7 @@ void Game::Initialize()
 		SetBgmBpm(bgmConfig.bpm);
 	}
 
-	instance.m_SceneCurrent = std::make_shared<GameSceneWait>();		// タイトルシーンのインスタンスを生成
+	instance.m_SceneCurrent = std::make_shared<GameSceneWait>(instance.m_Camera);		// タイトルシーンのインスタンスを生成
 	instance.m_SceneCurrent->Initialize();
 }
 

@@ -25,7 +25,7 @@ private:
 	std::shared_ptr<Scene>				 m_SceneCurrent;				// 現在のシーン
     std::shared_ptr<Scene>				 m_SceneNext;					// 次のシーン
 	std::unique_ptr<Input>				 m_Input;						// 入力管理
-	std::unique_ptr<Camera>				 m_Camera;						// カメラ
+	std::shared_ptr<Camera>				 m_Camera;						// カメラ
     std::vector<std::shared_ptr<TransitionBase>> m_TransitionTexture;	// トランジション用テクスチャ
     std::shared_ptr<Theme>				 m_Theme;						// テーマ管理
     std::vector<std::shared_ptr<Scene>>	 m_SceneList;					// シーンスタック
@@ -160,8 +160,8 @@ void ChangeScenePush(SceneTransitionParam& state)
 
 	Scene::ClearTimerList();
 
-	auto scene     = std::make_shared<TransScene>();
-	auto sceneNext = std::make_shared<T>();
+	auto scene     = std::make_shared<TransScene>(instance.GetCamera());
+	auto sceneNext = std::make_shared<T>(instance.GetCamera());
     auto sceneCurrent = instance.GetCurrentScene();
 
     instance.ScenePush(sceneCurrent);
@@ -193,7 +193,7 @@ inline void ChangeScenePop(SceneTransitionParam& state)
 	Scene::ClearTimerList();
 
     // 現在のシーン
-    auto scene = std::make_shared<TransScene>();
+    auto scene = std::make_shared<TransScene>(instance.GetCamera());
     auto sceneNext = instance.ScenePop();
 
 	if (!sceneNext) {

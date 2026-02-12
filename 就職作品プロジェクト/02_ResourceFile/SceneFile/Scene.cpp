@@ -69,6 +69,10 @@ void Scene::PlaySE(std::string seName, std::optional<float> overrideVolume)
 	}
 }
 
+Scene::Scene(std::shared_ptr<Camera> cam) : m_Camera(cam)
+{
+}
+
 void Scene::DeleteObject(const std::shared_ptr<Object>& pt)
 {
 	if (pt == nullptr) return;

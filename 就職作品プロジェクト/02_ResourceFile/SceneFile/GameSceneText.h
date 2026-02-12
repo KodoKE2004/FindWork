@@ -43,6 +43,7 @@ private:
     void ReactionSE(int i,std::string audioName);
 public:
     GameSceneText() = default;
+    GameSceneText(std::shared_ptr<Camera> cam);
     ~GameSceneText() = default;
 
     void Initialize()       override;

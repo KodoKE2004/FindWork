@@ -66,6 +66,7 @@ public:
 	// コンストラクタとデストラクタ
 	//================================
 	GameSceneExe()  = default;
+	GameSceneExe(std::shared_ptr<Camera> cam);
 	~GameSceneExe() = default;
 
 	//================================

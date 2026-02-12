@@ -17,6 +17,10 @@ TransScene::TransScene()
 {
 }
 
+TransScene::TransScene(std::shared_ptr<Camera> cam) : Scene(cam)
+{
+}
+
 TransScene::~TransScene()
 {
 }
