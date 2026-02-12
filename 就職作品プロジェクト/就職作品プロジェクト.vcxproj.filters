@@ -532,5 +532,8 @@
     <FxCompile Include="ShaderFile\PS_Sprite.hlsl">
       <Filter>HLSL\PixelShader</Filter>
     </FxCompile>
+    <FxCompile Include="ShaderFile\VS_Instansing2D.hlsl">
+      <Filter>HLSL\VertexShader</Filter>
+    </FxCompile>
   </ItemGroup>
 </Project>

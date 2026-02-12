@@ -248,8 +248,14 @@ void GameSceneWait::Update(float tick)
             m_WasPlayBGM = true;
         }
         
+
+        // 残り一拍のタイミングでステージ遷移フラグを立てる
+        if (elapsedBeat >= rhythmBeat.GetBeatTotal() - 1)
+        {
+            m_Theme->SetActive(true);
+        }
         // フラグの一拍前のタイミングでお題提示処理開始
-        else if (elapsedBeat == rhythmBeat.GetBeatTotal())
+        if (elapsedBeat >= rhythmBeat.GetBeatTotal())
         {
             m_ShouldTransitionToStage = true;
         }
@@ -271,11 +277,6 @@ void GameSceneWait::Update(float tick)
     if (m_ShouldTransitionToStage)
     {
         StartNextStageTransition();
-    }
-    // 残り一拍のタイミングでステージ遷移フラグを立てる
-    if (elapsedBeat == rhythmBeat.GetBeatTotal() - 1)
-    {
-        m_Theme->SetActive(true);
     }
 
     // ライフ減少処理

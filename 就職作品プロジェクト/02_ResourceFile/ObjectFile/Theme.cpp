@@ -19,7 +19,7 @@ void Theme::Initialize()
     Square::Initialize();
     
     m_SecondPerBeat = Game::GetRhythmBeat().GetOneBeat();
-    m_Duration  = 2.0f * m_SecondPerBeat;
+    m_Duration  = m_SecondPerBeat;
     m_ScaleMass = 5.0f;
     m_Elapsed   = 0.0f;
 
