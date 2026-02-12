@@ -78,44 +78,10 @@ protected:
 
 	bool m_WasPlayBGM = false;
 	int  m_PreviousBeatIndex = 0;
+    
+private:
 
-public:
-	static SceneRelationData m_RelationData;
-	// コンストラクタとデストラクタ
-	Scene()  = default;
-	virtual ~Scene() = default;
-
-	//---------------------------------
-	// 			ループ内の処理
-	//		 純粋仮想関数として定義
-	//---------------------------------
-
-	virtual void Initialize()		= 0;	// 初期化処理
-	virtual void Update(float tick) = 0;	// 更新処理
-	virtual void Finalize()			= 0;	// 解放処理
-
-	// そのシーンのオブジェクトを定義
-	std::vector<std::shared_ptr<Object>> GetSceneObjects();
-	void SetTheme(const std::shared_ptr<Theme>& theme) {
-		m_Theme = theme;
-	}
-	std::shared_ptr<Theme> GetTheme() const {
-		return m_Theme;
-	}
-
-	virtual SCENE_NO GetSceneNo() const = 0;
-
-    //--------------------------------
-	//	  シーン間の受け渡しの値をする関数
-    //--------------------------------
-	void SetRelationData(const SceneRelationData relationData) {
-		m_RelationData = relationData; 
-	}
-	const SceneRelationData GetRelationData() {
-		return m_RelationData;
-	}
-
-    //--------------------------------
+	//--------------------------------
     // タイマー関連の関数群
     //--------------------------------
 	static void SetTimer(float* timer) 
@@ -150,6 +116,100 @@ public:
     // seName : AudioConfigに登録した名前
     // Game.hのAudioManagerを通じて再生する
 	void PlaySE(std::string seName, std::optional<float> overrideVolume);
+
+public:
+	static SceneRelationData m_RelationData;
+	// コンストラクタとデストラクタ
+	Scene()  = default;
+	virtual ~Scene() = default;
+
+	//---------------------------------
+	// 			ループ内の処理
+	//		 純粋仮想関数として定義
+	//---------------------------------
+
+	virtual void Initialize()		= 0;	// 初期化処理
+	virtual void Update(float tick) = 0;	// 更新処理
+	virtual void Draw()				= 0;	// 描画処理
+	virtual void Finalize()			= 0;	// 解放処理
+
+	// そのシーンのオブジェクトを定義
+	std::vector<std::shared_ptr<Object>> GetSceneObjects();
+	void SetTheme(const std::shared_ptr<Theme>& theme) {
+		m_Theme = theme;
+	}
+	std::shared_ptr<Theme> GetTheme() const {
+		return m_Theme;
+	}
+
+	virtual SCENE_NO GetSceneNo() const = 0;
+
+    //--------------------------------
+	//	  シーン間の受け渡しの値をする関数
+    //--------------------------------
+	void SetRelationData(const SceneRelationData relationData) {
+		m_RelationData = relationData; 
+	}
+	const SceneRelationData GetRelationData() {
+		return m_RelationData;
+	}
+
+
+	//================================
+	// オブジェクト管理
+	//================================
+	void DeleteObject(const std::shared_ptr<Object>& pt); // オブジェクトを削除する
+	void DeleteAllObject(); // オブジェクトをすべて削除する
+
+	// オブジェクトを追加する
+	template<class T, class... Args>
+	std::shared_ptr<T> AddObject(Args&&... args)
+	{
+		static_assert(std::is_base_of_v<Object, T>, "TがObjectを継承していない");
+		static_assert(!std::is_abstract_v<T>, "Tが抽象クラスだった");
+
+		auto& camera  = Game::GetCamera();
+		auto& objects = m_MySceneObjects;
+
+		// コンストラクタ引数を完全転送して unique_ptrを作成
+		std::shared_ptr<T> up;
+		if constexpr (sizeof...(Args) == 0) {
+			up = std::make_shared<T>(camera);
+		}
+		else {
+			up = std::make_shared<T>(std::forward<Args>(args)...);
+		}
+
+		objects.emplace_back(up);
+		up->Initialize(); // 初期化
+		return up;
+	}
+
+	// オブジェクトを取得する
+	template<class T>
+	std::vector<std::shared_ptr<T>> GetObjects()
+	{
+		static_assert(std::is_base_of_v<Object, T>, L"TがObjectを継承していない");
+
+		std::vector<std::shared_ptr<T>> res;
+		for (const auto& o : m_MySceneObjects) {
+			// dynamic_castで型をチェック
+			if (!o) {
+				continue;
+			}
+			if (auto derivedObj = std::dynamic_pointer_cast<T>(o)) {
+				res.emplace_back(std::move(derivedObj));
+			}
+		}
+		return res;
+	}
+
+	std::vector<std::shared_ptr<Object>> GetSceneObjects()
+	{
+		if (!m_MySceneObjects.empty()) {
+			return m_MySceneObjects;
+		}
+	}
 
 };
 

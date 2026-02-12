@@ -145,6 +145,10 @@ void ResultScene::Update(float tick)
     
 }
 
+void ResultScene::Draw()
+{
+}
+
 void ResultScene::Finalize()
 {
     auto& instance = Game::GetInstance();

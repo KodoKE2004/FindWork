@@ -117,6 +117,10 @@ void GameSceneDodge::Update(float tick)
 
 }
 
+void GameSceneDodge::Draw()
+{
+}
+
 void GameSceneDodge::Finalize()
 {
     GameSceneExe::Finalize();

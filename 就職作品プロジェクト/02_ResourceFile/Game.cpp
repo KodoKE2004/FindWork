@@ -157,7 +157,7 @@ void Game::Update(float tick)
 
 	// 入力の更新
 	// オブジェクトの更新
-	for (auto& o : instance.m_GameObjects)
+	for (auto& o : instance.m_SceneCurrent->GetSceneObjects())
 	{
 		if(o == nullptr){ continue; }
 		o->Update(); // オブジェクトの更新
@@ -182,10 +182,10 @@ void Game::Draw()
 	++m_DrawFrameCounter;
 	Renderer::Start();
 
-	for (auto& o : instance.m_GameObjects)
+	auto& currentScene = instance.m_SceneCurrent;
+	if(currentScene != nullptr)
 	{
-		if (!o) continue;
-		o->Draw();
+		currentScene->Draw();
 	}
 
 	if (!instance.m_TransitionTexture.empty()) {
@@ -228,7 +228,6 @@ void Game::Finalize()
 	FinalizeTransitionCSV();
 
 	DebugUI::DisposeUI();		// デバッグUIの終了処理
-	instance.DeleteAllObject();	//オブジェクトを全て削除
 	if (!instance.m_TransitionTexture.empty()) {
 		for (auto it : instance.m_TransitionTexture) {
             if (!it) { continue; }
@@ -303,9 +302,9 @@ Game& Game::GetInstance()
 	return *m_pInstance.get();
 }
 
-std::shared_ptr<Scene> Game::GetCurrentScene() const
+std::shared_ptr<Scene&> Game::GetCurrentScene()
 {
-	return m_SceneCurrent;
+	return m_pInstance->m_SceneCurrent;
 }
 
 Camera& Game::GetCamera()
@@ -409,19 +408,19 @@ void Game::RegistDebugObject()
 	// ImGui 描画処理を登録
 	DebugUI::RedistDebugFunction([]()
 		{
-			auto& instance = Game::GetInstance();
-
+			std::vector<std::shared_ptr<Object>> obects = GetInstance().GetCurrentScene()->GetSceneObjects();
+			
 			ImGui::Begin("Game Objects");
 
-			ImGui::Text("Object Count: %zu", instance.m_GameObjects.size());
+			ImGui::Text("Object Count: %zu", objects.size());
 			ImGui::Separator();
 
 			static int selectedIndex = -1;
 
 			ImGui::BeginChild("ObjList", ImVec2(220, 0), true);
-			for (int i = 0; i < (int)instance.m_GameObjects.size(); ++i)
+			for (int i = 0; i < (int)objects.size(); ++i)
 			{
-				auto& up = instance.m_GameObjects[i];
+				auto& up = objects[i];
 				std::string label = up ? up->GetName() : std::string("null");
 				if (label.empty()) label = std::string("Object ") + std::to_string(i);
 				if (ImGui::Selectable(label.c_str(), selectedIndex == i))
@@ -434,9 +433,9 @@ void Game::RegistDebugObject()
 			ImGui::SameLine();
 
 			ImGui::BeginGroup();
-			if (selectedIndex >= 0 && selectedIndex < (int)instance.m_GameObjects.size() && instance.m_GameObjects[selectedIndex])
+			if (selectedIndex >= 0 && selectedIndex < (int)objects.size() && objects[selectedIndex])
 			{
-				Object* obj = instance.m_GameObjects[selectedIndex].get();
+				Object* obj = objects[selectedIndex].get();
 				ImGui::Text("Name: %s", obj->GetName().c_str());
 
 				// Position
@@ -471,39 +470,4 @@ void Game::RegistDebugObject()
 			ImGui::End();
 		});
 #endif // _DEBUG
-}
-
-void Game::DeleteObject(const std::shared_ptr<Object>& pt)
-{
-	auto& instance = GetInstance();
-	if (pt == nullptr) return;
-
-	auto& objs = instance.m_GameObjects;
-	const auto raw = pt.get();
-    auto it = std::find_if(objs.begin(), objs.end(),
-		[raw](const std::shared_ptr<Object>& up) {
-			return up.get() == raw;
-		});
-
-	if (it != objs.end())
-	{
-		(*it)->Finalize();
-		objs.erase(it);
-	}
-
-}
-
-void Game::DeleteAllObject()
-{
-	auto& instance = GetInstance();
-	// オブジェクト終了処理
-	for (auto& o : m_pInstance->m_GameObjects)
-	{
-		if (!o) {
-			o->Finalize();
-		}
-	}
-
-	instance.m_GameObjects.clear();
-	instance.m_GameObjects.shrink_to_fit();
 }

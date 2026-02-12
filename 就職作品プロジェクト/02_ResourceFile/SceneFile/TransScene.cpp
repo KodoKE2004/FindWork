@@ -165,6 +165,10 @@ void TransScene::Update(float tick)
 
 }
 
+void TransScene::Draw()
+{
+}
+
 void TransScene::Finalize()
 {
     auto& instance = Game::GetInstance();

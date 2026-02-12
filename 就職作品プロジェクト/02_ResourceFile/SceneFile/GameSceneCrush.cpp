@@ -60,6 +60,10 @@ void GameSceneCrush::Update(float tick)
 
 }
 
+void GameSceneCrush::Draw()
+{
+}
+
 void GameSceneCrush::Finalize()
 {
     GameSceneExe::Finalize();

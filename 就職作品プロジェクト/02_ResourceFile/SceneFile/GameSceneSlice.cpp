@@ -73,6 +73,10 @@ void GameSceneSlice::Update(float tick)
 
 }
 
+void GameSceneSlice::Draw()
+{
+}
+
 void GameSceneSlice::Finalize()
 {
     GameSceneExe::Finalize();

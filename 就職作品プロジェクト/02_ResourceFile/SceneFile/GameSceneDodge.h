@@ -22,6 +22,7 @@ private:
 
     void Initialize()       override;
     void Update(float tick) override;
+    void Draw() 			override;
     void Finalize()         override;
 
 

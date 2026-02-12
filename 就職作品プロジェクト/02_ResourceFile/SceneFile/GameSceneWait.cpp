@@ -309,6 +309,10 @@ void GameSceneWait::Update(float tick)
     
 }
 
+void GameSceneWait::Draw()
+{
+}
+
 void GameSceneWait::Finalize()
 {
     auto& instance = Game::GetInstance();

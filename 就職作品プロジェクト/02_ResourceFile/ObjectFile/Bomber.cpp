@@ -17,6 +17,7 @@ Bomber::Bomber(Camera& cam) : Square(cam)
 void Bomber::Initialize()
 {
     auto& instance = Game::GetInstance();
+    auto  scene    = instance.GetCurrentScene();
     TextureManager* textureMgr = instance;
 
     Square::Initialize();
@@ -28,12 +29,12 @@ void Bomber::Initialize()
 
     m_Count = 3;
 
-    m_Rope = instance.AddObject<Square>();
+    m_Rope = scene->AddObject<Square>();
     m_Rope->SetTexture(textureMgr->GetTexture("Bomber/Rope.png"));
     m_Rope->SetName("m_Rope");
     instance.GetCurrentScene()->GetSceneObjects().emplace_back(m_Rope);
 
-    m_Number = instance.AddObject<Square>();
+    m_Number = scene->AddObject<Square>();
     m_Number->SetTexture(textureMgr->GetTexture("Bomber/CountThree.png"));
     m_Number->SetPos(1000.0f,0.0f,0.0f);
     m_Number->SetName("m_Number");

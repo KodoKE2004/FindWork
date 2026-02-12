@@ -264,6 +264,10 @@ void GameSceneText::Update(float tick)
 
 }
 
+void GameSceneText::Draw()
+{
+}
+
 void GameSceneText::Finalize()
 {
     for (auto& reactionAudio : m_ReactionAudio)

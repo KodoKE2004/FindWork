@@ -58,3 +58,36 @@ void Scene::PlaySE(std::string seName, std::optional<float> overrideVolume)
 		audioMgr->Play(seName, params);
 	}
 }
+
+void Scene::DeleteObject(const std::shared_ptr<Object>& pt)
+{
+	if (pt == nullptr) return;
+
+	auto& objs = m_MySceneObjects;
+	const auto raw = pt.get();
+	auto it = std::find_if(objs.begin(), objs.end(),
+		[raw](const std::shared_ptr<Object>& up) {
+			return up.get() == raw;
+		});
+
+	if (it != objs.end())
+	{
+		(*it)->Finalize();
+		objs.erase(it);
+	}
+
+}
+
+void Scene::DeleteAllObject()
+{
+	// オブジェクト終了処理
+	for (auto& o : m_MySceneObjects)
+	{
+		if (!o) {
+			o->Finalize();
+		}
+	}
+
+	m_MySceneObjects.clear();
+	m_MySceneObjects.shrink_to_fit();
+}

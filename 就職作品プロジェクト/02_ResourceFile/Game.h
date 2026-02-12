@@ -26,7 +26,6 @@ private:
     std::shared_ptr<Scene>				 m_SceneNext;					// 次のシーン
 	std::unique_ptr<Input>				 m_Input;						// 入力管理
 	std::unique_ptr<Camera>				 m_Camera;						// カメラ
-	std::vector<std::shared_ptr<Object>> m_GameObjects;					// オブジェクト
     std::vector<std::shared_ptr<TransitionBase>> m_TransitionTexture;	// トランジション用テクスチャ
     std::shared_ptr<Theme>				 m_Theme;						// テーマ管理
     std::vector<std::shared_ptr<Scene>>	 m_SceneList;					// シーンスタック
@@ -99,12 +98,12 @@ public:
 	std::shared_ptr<Scene>	ScenePop();
 	size_t					GetSceneStackSize() const;
 	
-	static Game&			GetInstance();	
-	std::shared_ptr<Scene>	GetCurrentScene() const;
-	Camera&					GetCamera();
-	static void				SetBgmBpm(float bpm);
-	static float			GetBgmBpm();
-	static RhythmBeat&		GetRhythmBeat() {
+	static Game&				   GetInstance();	
+	static std::shared_ptr<Scene&> GetCurrentScene();
+	Camera&						   GetCamera();
+	static void					   SetBgmBpm(float bpm);
+	static float				   GetBgmBpm();
+	static RhythmBeat&			   GetRhythmBeat() {
 		return m_RhythmBeat; 
 	}
 	static uint64_t			GetDrawFrameCounter() {
@@ -136,53 +135,6 @@ public:
 	static void RegistDebugObject();
 	static void RegistDebugFunction(){}
 
-	//================================
-	// オブジェクト管理
-	//================================
-	void DeleteObject(const std::shared_ptr<Object>& pt); // オブジェクトを削除する
-	void DeleteAllObject(); // オブジェクトをすべて削除する
-
-	// オブジェクトを追加する
-	template<class T, class... Args>
-	std::shared_ptr<T> AddObject(Args&&... args)
-	{
-		static_assert(std::is_base_of_v<Object, T>, "TがObjectを継承していない");
-		static_assert(!std::is_abstract_v<T>	  , "Tが抽象クラスだった");
-
-		auto& instance = *m_pInstance;
-
-		// コンストラクタ引数を完全転送して unique_ptrを作成
-		std::shared_ptr<T> up;
-		if constexpr (sizeof...(Args) == 0) {
-			up = std::make_shared<T>(*instance.m_Camera.get());
-		}
-		else {
-			up = std::make_shared<T>(std::forward<Args>(args)...);
-		}
-
-		instance.m_GameObjects.emplace_back(up);
-		up->Initialize(); // 初期化
-		return up;
-	}
-
-	// オブジェクトを取得する
-	template<class T> 
-	std::vector<std::shared_ptr<T>> GetObjects()
-	{
-        static_assert(std::is_base_of_v<Object, T>, L"TがObjectを継承していない");
-
-		std::vector<std::shared_ptr<T>> res;
-		for (const auto& o : m_pInstance->m_GameObjects) {
-			// dynamic_castで型をチェック
-			if (!o) {
-				continue;
-			}
-			if (auto derivedObj = std::dynamic_pointer_cast<T>(o)) {
-				res.emplace_back(std::move(derivedObj));
-			}
-		}
-		return res;
-	}
 };
 
 //================================

@@ -51,6 +51,7 @@ public:
 	
 	void Initialize()		override;	// シーンの初期化
 	void Update(float tick) override;	// シーンの更新
+	void Draw() 			override;
 	void Finalize()			override;	// シーンの終了処理
 
 	SCENE_NO GetSceneNo() const override {

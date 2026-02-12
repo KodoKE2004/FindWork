@@ -151,6 +151,10 @@ void TitleScene::Update(float tick)
 
 }
 
+void TitleScene::Draw()
+{
+}
+
 void TitleScene::Finalize()
 {
 	auto& instance = Game::GetInstance();
