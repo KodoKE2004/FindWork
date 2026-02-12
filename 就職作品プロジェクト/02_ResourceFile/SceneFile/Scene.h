@@ -65,9 +65,9 @@ protected:
 	
 	std::vector<std::shared_ptr<Object>>		 m_MySceneObjects;
 	std::unordered_map<std::string, AudioConfig> m_AudioList;
-	std::shared_ptr<Camera>  m_Camera  = nullptr;
 	std::shared_ptr<Skydome> m_Skydome = nullptr;
 	std::shared_ptr<Theme>	 m_Theme   = nullptr;
+	Camera&					 m_Camera;
 
 	const int stageCountMax = 5;
 
@@ -117,7 +117,7 @@ public:
 	static SceneRelationData m_RelationData;
 	// コンストラクタとデストラクタ
 	Scene() = default;
-	Scene(std::shared_ptr<Camera> cam);
+	Scene(Camera& cam);
 	virtual ~Scene() = default;
 
 	//---------------------------------

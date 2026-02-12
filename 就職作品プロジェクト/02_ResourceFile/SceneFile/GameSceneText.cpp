@@ -94,7 +94,7 @@ void GameSceneText::ReactionSE(int i, std::string audioName)
     m_ReactionActive->Play(m_AudioList.at(audioName).params);
 }
 
-GameSceneText::GameSceneText(std::shared_ptr<Camera> cam) : GameSceneExe(cam)
+GameSceneText::GameSceneText(Camera& cam) : GameSceneExe(cam)
 {
 }
 

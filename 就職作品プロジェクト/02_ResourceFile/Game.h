@@ -145,8 +145,8 @@ public:
 //================================
 //	  シーンを遷移するテンプレート関数
 //================================
-template<class T>
-void ChangeScenePush(SceneTransitionParam& state)
+template<class T,class... Args>
+void ChangeScenePush(SceneTransitionParam& state, Args&&... args)
 {
     auto& instance = Game::GetInstance();
 
@@ -155,13 +155,14 @@ void ChangeScenePush(SceneTransitionParam& state)
 	// T が Scene を継承していること、かつ抽象クラスでないことをチェック
 	static_assert(std::is_base_of_v<Scene, T>, L"T は Scene を継承している必要があります");
 	static_assert(!std::is_abstract_v<T>, L"T は抽象クラスではいけません");
+	static_assert(std::is_constructible_v<T, Camera&, Args...>,L"T は (Camera&, Args...) で構築できる必要があります");
 
 	Debug::Log("[[検出]] シーンのPush");
 
 	Scene::ClearTimerList();
 
 	auto scene     = std::make_shared<TransScene>(instance.GetCamera());
-	auto sceneNext = std::make_shared<T>(instance.GetCamera());
+	auto sceneNext = std::make_shared<T>(instance.GetCamera(), std::forward<Args>(args)...);
     auto sceneCurrent = instance.GetCurrentScene();
 
     instance.ScenePush(sceneCurrent);

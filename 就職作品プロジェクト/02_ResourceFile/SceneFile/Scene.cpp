@@ -69,7 +69,7 @@ void Scene::PlaySE(std::string seName, std::optional<float> overrideVolume)
 	}
 }
 
-Scene::Scene(std::shared_ptr<Camera> cam) : m_Camera(cam)
+Scene::Scene(Camera& cam) : m_Camera(cam)
 {
 }
 

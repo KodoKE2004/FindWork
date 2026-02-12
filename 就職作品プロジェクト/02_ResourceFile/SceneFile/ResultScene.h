@@ -19,8 +19,8 @@ public:
     //================================
     // コンストラクタとデストラクタ
     //================================
-    ResultScene()  = default;
-    ResultScene(std::shared_ptr<Camera> cam);
+    ResultScene()  = delete;
+    ResultScene(Camera& cam);
     ~ResultScene() = default;
 
     void Initialize()		override;	// シーンの初期化

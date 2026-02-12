@@ -22,7 +22,7 @@ namespace
     }
 }
 
-GameSceneDodge::GameSceneDodge(std::shared_ptr<Camera> cam) : GameSceneExe(cam)
+GameSceneDodge::GameSceneDodge(Camera& cam) : GameSceneExe(cam)
 {
 }
 

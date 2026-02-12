@@ -11,7 +11,7 @@
 
 
 
-GameSceneExe::GameSceneExe(std::shared_ptr<Camera> cam) : Scene(cam)
+GameSceneExe::GameSceneExe(Camera& cam) : Scene(cam)
 {
 }
 

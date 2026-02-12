@@ -11,13 +11,10 @@
 #include "Zoom.h"
 
 
-TransScene::TransScene()
-	: m_Step(STEP::OFF)
+TransScene::TransScene(Camera& cam)
+	: Scene(cam)
+	, m_Step(STEP::OFF)
 	, m_TransMode(TRANS_MODE::FADE)
-{
-}
-
-TransScene::TransScene(std::shared_ptr<Camera> cam) : Scene(cam)
 {
 }
 

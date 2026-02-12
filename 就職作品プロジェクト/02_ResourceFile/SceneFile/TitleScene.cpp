@@ -6,7 +6,7 @@
 #include "Square.h"
 #include "ObjectFile/Model.h"
 
-TitleScene::TitleScene(std::shared_ptr<Camera> cam) : Scene(cam)
+TitleScene::TitleScene(Camera& cam) : Scene(cam)
 {
 }
 

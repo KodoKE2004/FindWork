@@ -9,8 +9,8 @@ private:
     
 public:
 
-   GameSceneCrush() = default;
-   GameSceneCrush(std::shared_ptr<Camera> cam);
+   GameSceneCrush() = delete;
+   GameSceneCrush(Camera& cam);
     ~GameSceneCrush()         override = default;
     void Initialize()       override;
     void Update(float tick) override;

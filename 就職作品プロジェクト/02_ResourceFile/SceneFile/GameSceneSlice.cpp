@@ -3,7 +3,7 @@
 #include "Calculator.h"
 #include "Debug.hpp"
 
-GameSceneSlice::GameSceneSlice(std::shared_ptr<Camera> cam) : GameSceneExe(cam)
+GameSceneSlice::GameSceneSlice(Camera& cam) : GameSceneExe(cam)
 {
 }
 

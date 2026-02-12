@@ -40,8 +40,8 @@ public:
 	//================================
 	// コンストラクタとデストラクタ
 	//================================
-	TitleScene()  = default;
-	TitleScene(std::shared_ptr<Camera> cam);
+	TitleScene()  = delete;
+	TitleScene(Camera& cam);
 	~TitleScene() = default;
 
 

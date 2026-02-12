@@ -17,8 +17,8 @@ private:
     size_t m_CurrentCartPatternIndex = 0;
 
     public:
-    GameSceneDodge()  = default;
-    GameSceneDodge(std::shared_ptr<Camera> cam);
+    GameSceneDodge()  = delete;
+    GameSceneDodge(Camera& cam);
     ~GameSceneDodge() = default;
 
     void Initialize()       override;

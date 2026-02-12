@@ -5,7 +5,7 @@
 
 using namespace Calculator::Easing;
 
-ResultScene::ResultScene(std::shared_ptr<Camera> cam) : Scene(cam)
+ResultScene::ResultScene(Camera& cam) : Scene(cam)
 {
 }
 

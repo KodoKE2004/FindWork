@@ -368,12 +368,11 @@ void GameSceneWait::PrepareNextStage()
 }
 
 // 全ステージから選ぶ時の乱数を取得する関数
-
 SCENE_NO GameSceneWait::StageSelectAllRandom()
 {
     return SelectRandomStage(m_RandomEngine, m_RelationData.oldScene);
 }
 
-GameSceneWait::GameSceneWait(std::shared_ptr<Camera> cam) : Scene(cam)
+GameSceneWait::GameSceneWait(Camera& cam) : Scene(cam)
 {
 }

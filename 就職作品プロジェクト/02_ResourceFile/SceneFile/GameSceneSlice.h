@@ -10,8 +10,8 @@ private:
     std::shared_ptr<Enemy> m_Enemy   = nullptr;
 
 public:
-    GameSceneSlice() = default;
-    GameSceneSlice(std::shared_ptr<Camera> cam);
+    GameSceneSlice() = delete;
+    GameSceneSlice(Camera& cam);
     ~GameSceneSlice()       override = default;
 
     void Initialize()       override ;
