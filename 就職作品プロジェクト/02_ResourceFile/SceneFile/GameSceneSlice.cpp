@@ -21,24 +21,23 @@ void GameSceneSlice::Initialize()
     GameSceneExe::Initialize();
 
     auto& instance = Game::GetInstance();
+    auto  camera   = instance.GetCamera();
     TextureManager* textureMgr = instance;
 
     //===============================
     //      シーン内オブジェクト生成
     //===============================
-    m_Bomber = instance.AddObject<Bomber>();
+    m_Bomber = AddObject<Bomber>(camera);
     m_Bomber->SetName("m_TimeGauge");
-    m_MySceneObjects.emplace_back(m_Bomber);
-
+    
     int difficult = m_RelationData.stageCount / 4;
     for (int i = 0; i <= difficult; ++i)
     {
-        auto enemy = instance.AddObject<Enemy>();
+        auto enemy = AddObject<Enemy>(camera);
         enemy->SetName("m_Enemy");
         enemy->SetTexture(textureMgr->GetTexture("EnemyNormal.png"));
         enemy->SetPos(200.0f, -100.0f, 0.0f);
         enemy->SetScale(100.0f, 100.0f, 1.0f);
-        m_MySceneObjects.emplace_back(enemy);
     }
 }
 
@@ -46,9 +45,7 @@ void GameSceneSlice::Update(float tick)
 {
     using namespace Calculator::Collider2D; 
 
-    auto& instance = Game::GetInstance();
-
-    std::vector<std::shared_ptr<Enemy>> enemys = instance.GetObjects<Enemy>();
+    std::vector<std::shared_ptr<Enemy>> enemys = GetObjects<Enemy>();
     if (IsAllDeathEnemy(enemys)) {
         // SceneExeで早めにクリアをした場合も想定
         StageClear();
@@ -75,6 +72,7 @@ void GameSceneSlice::Update(float tick)
 
 void GameSceneSlice::Draw()
 {
+    Scene::Draw();
 }
 
 void GameSceneSlice::Finalize()

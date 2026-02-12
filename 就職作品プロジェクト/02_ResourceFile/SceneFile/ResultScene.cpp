@@ -8,34 +8,32 @@ using namespace Calculator::Easing;
 void ResultScene::Initialize()
 {
     auto& instance = Game::GetInstance();
+    auto  camera   = instance.GetCamera();
     DebugUI::TEXT_CurrentScene = "ResultScene";
 
     TextureManager* textureMgr = instance;
     // Skydome初期化 
-    m_Skydome = instance.AddObject<Skydome>();
+    m_Skydome = AddObject<Skydome>(camera);
     m_Skydome->SetName("m_Skydome");
     m_Skydome->SetSkyDomeMode(true);
     m_Skydome->SetTexture(textureMgr->GetTexture("SkydomeSpace.png"));
     m_Skydome->SetRadius(500.0f);
-    m_MySceneObjects.emplace_back(m_Skydome);
 
-    m_ButtonToTitle = instance.AddObject<Square>();
+    m_ButtonToTitle = AddObject<Square>(camera);
     m_ButtonToTitle->SetName("m_ButtonToTitle");
     m_ButtonToTitle->SetTexture(textureMgr->GetTexture("Button/Text/ToTitle.png"));
     m_ButtonToTitle->SetPos(0.0f, -100.0f, 0.0f);
     m_ButtonToTitle->SetScale(940.0f, 100.0f, 1.0f);
     m_ButtonToTitle->SetShader("VS_Alpha", "PS_Alpha");
     m_ButtonToTitle->SetColor(0.0f, 0.0f, 0.0f, 1.0f);
-    m_MySceneObjects.emplace_back(m_ButtonToTitle);
 
-    m_ButtonRetry = instance.AddObject<Square>();
+    m_ButtonRetry = AddObject<Square>(camera);
     m_ButtonRetry->SetName("m_ButtonToRetry");
     m_ButtonRetry->SetTexture(textureMgr->GetTexture("Button/Text/Retry.png"));
     m_ButtonRetry->SetPos(0.0f, -200.0f, 0.0f);
     m_ButtonRetry->SetScale(940.0f, 100.0f, 1.0f);
     m_ButtonRetry->SetShader("VS_Alpha", "PS_Alpha");
     m_ButtonRetry->SetColor(0.0f, 0.0f, 0.0f, 1.0f);
-    m_MySceneObjects.emplace_back(m_ButtonRetry);
 
     PlayParams corsorParam{};
     corsorParam.volume = DEFAULT_VOLUME;
@@ -138,15 +136,12 @@ void ResultScene::Update(float tick)
             m_RelationData.gameLife   = 4;
             ChangeScenePop(ResultToGame);
         }
-
-
     }
-    
-    
 }
 
 void ResultScene::Draw()
 {
+    Scene::Draw();
 }
 
 void ResultScene::Finalize()
@@ -154,7 +149,7 @@ void ResultScene::Finalize()
     auto& instance = Game::GetInstance();
     // このシーンのオブジェクトを削除する
     for (auto o : m_MySceneObjects) {
-        instance.DeleteObject(o);
+        DeleteObject(o);
     }
     m_MySceneObjects.clear();
     // オーディオの停止

@@ -24,6 +24,16 @@ std::vector<std::shared_ptr<Object>> Scene::GetSceneObjects()
 	return objects;
 }
 
+void Scene::Draw()
+{
+	for (auto object : m_MySceneObjects)
+	{
+		if (object) {
+			object->Draw();
+		}
+	}
+}
+
 void Scene::PlaySE(std::string seName, std::optional<float> overrideVolume)
 {
 	// SE‚ÌÄ¶

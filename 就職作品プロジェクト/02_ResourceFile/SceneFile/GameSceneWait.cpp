@@ -132,7 +132,6 @@ void GameSceneWait::Initialize()
     const int speedUpStageInterval = Game::GetSpeedUpStageInterval();
     const float speedUpBpmIncrease = Game::GetSpeedUpBpmIncrease();
 
-
     // 難易度 0 ~
     if (m_RelationData.stageCount % difficultyStageInterval == 0) {
         int difficulty = m_RelationData.stageCount / difficultyStageInterval;
@@ -162,17 +161,17 @@ void GameSceneWait::Initialize()
     m_WasPlayBGM         = false;
 
     auto& instance = Game::GetInstance();
+    auto  camera   = instance.GetCamera();
     TextureManager* textureMgr = instance.GetInstance();
 
-    m_LifeParticleEmitter = std::make_shared<ParticleEmitter>(instance.GetCamera());
+    m_LifeParticleEmitter = std::make_shared<ParticleEmitter>(camera);
 
     // スカイドーム初期化
-    m_Skydome = instance.AddObject<Skydome>();
+    m_Skydome = AddObject<Skydome>(camera);
     m_Skydome->SetName("m_Skydome");
     m_Skydome->SetSkyDomeMode(true);
     m_Skydome->SetTexture(textureMgr->GetTexture("SkydomeSpace.png"));
     m_Skydome->SetRadius(500.0f);
-    m_MySceneObjects.emplace_back(m_Skydome);
 
     // ライフの数だけハートの生成
     const float lifePosX = - 200.0f;
@@ -188,7 +187,7 @@ void GameSceneWait::Initialize()
     {
         const float distance = 130.0f;
 
-        std::shared_ptr<Square> life = instance.AddObject<Square>(instance.GetCamera());
+        std::shared_ptr<Square> life = AddObject<Square>(instance.GetCamera());
         life->SetTexture(textureMgr->GetTexture("DestroyBullet.png"));
         life->SetPos(lifePosX + ( i * distance), lifePosY, 1.0f);
         life->SetName("m_life");
@@ -196,7 +195,6 @@ void GameSceneWait::Initialize()
         life->SetShader("VS_Alpha","PS_Alpha");
         life->SetColor(1.0f, 1.0f, 1.0f, 1.0f);
 
-        m_MySceneObjects.emplace_back(life);
         m_LifeGame.emplace_back(life);
     }
 
@@ -234,7 +232,7 @@ void GameSceneWait::Update(float tick)
     auto& rhythmBeat = Game::GetRhythmBeat();
     // リズムを取る    
     int oldElapsedBeat = rhythmBeat.GetBeatElapsed();
-    int advancedTicks  = rhythmBeat.Update(tick);
+    rhythmBeat.Update(tick);
     int elapsedBeat    = rhythmBeat.GetBeatElapsed();
 
     // ライフをリズムに合わせて回転させる
@@ -311,6 +309,7 @@ void GameSceneWait::Update(float tick)
 
 void GameSceneWait::Draw()
 {
+    Scene::Draw();
 }
 
 void GameSceneWait::Finalize()
@@ -319,7 +318,7 @@ void GameSceneWait::Finalize()
 
     // このシーンのオブジェクトを削除する
     for (auto o : m_MySceneObjects) {
-        instance.DeleteObject(o);
+        DeleteObject(o);
     }
     m_MySceneObjects.clear();
     // オーディオの停止
@@ -353,9 +352,8 @@ void GameSceneWait::StartNextStageTransition()
 
 void GameSceneWait::DecrementLife()
 {
-    auto& instance = Game::GetInstance();
     if (!m_LifeGame.empty())
-    instance.DeleteObject(m_LifeGame.back());
+    DeleteObject(m_LifeGame.back());
     m_LifeGame.pop_back();
     --m_LifeCount;
 }

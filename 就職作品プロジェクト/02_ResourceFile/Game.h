@@ -99,7 +99,7 @@ public:
 	size_t					GetSceneStackSize() const;
 	
 	static Game&				   GetInstance();	
-	static std::shared_ptr<Scene&> GetCurrentScene();
+	static std::shared_ptr<Scene>  GetCurrentScene();
 	Camera&						   GetCamera();
 	static void					   SetBgmBpm(float bpm);
 	static float				   GetBgmBpm();
@@ -120,7 +120,7 @@ public:
 	static void				PlayBgm();
 	static void				StopBgm();
 	static void				SetIsTickCount(bool isTick) {m_isTickCount = isTick; }
-	static bool				IsTickCount()			{
+	static bool				IsTickCount() {
 		return m_isTickCount;
 	}
 

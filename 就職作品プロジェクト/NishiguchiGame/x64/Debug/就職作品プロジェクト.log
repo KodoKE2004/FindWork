@@ -1,665 +1,89 @@
-﻿  compilation object save succeeded; see C:\Users\dorae\Desktop\HAL\class3\FindWork\就職作品プロジェクト\x64\Debug\VS_Instansing2D.cso
+﻿  compilation object save succeeded; see C:\Users\dorae\Desktop\HAL\class3\FindWork\就職作品プロジェクト\x64\Debug\PS_Alpha.cso
+  compilation object save succeeded; see C:\Users\dorae\Desktop\HAL\class3\FindWork\就職作品プロジェクト\x64\Debug\PS_Default.cso
+  compilation object save succeeded; see C:\Users\dorae\Desktop\HAL\class3\FindWork\就職作品プロジェクト\x64\Debug\PS_Skydome.cso
+  compilation object save succeeded; see C:\Users\dorae\Desktop\HAL\class3\FindWork\就職作品プロジェクト\x64\Debug\PS_Sprite.cso
+  compilation object save succeeded; see C:\Users\dorae\Desktop\HAL\class3\FindWork\就職作品プロジェクト\x64\Debug\PS_Unlit.cso
+  compilation object save succeeded; see C:\Users\dorae\Desktop\HAL\class3\FindWork\就職作品プロジェクト\x64\Debug\VS_Alpha.cso
+  compilation object save succeeded; see C:\Users\dorae\Desktop\HAL\class3\FindWork\就職作品プロジェクト\x64\Debug\VS_DebugGrid.cso
+  compilation object save succeeded; see C:\Users\dorae\Desktop\HAL\class3\FindWork\就職作品プロジェクト\x64\Debug\VS_Default.cso
+  compilation object save succeeded; see C:\Users\dorae\Desktop\HAL\class3\FindWork\就職作品プロジェクト\x64\Debug\VS_Instansing2D.cso
+  compilation object save succeeded; see C:\Users\dorae\Desktop\HAL\class3\FindWork\就職作品プロジェクト\x64\Debug\VS_Skydome.cso
+  compilation object save succeeded; see C:\Users\dorae\Desktop\HAL\class3\FindWork\就職作品プロジェクト\x64\Debug\VS_Unlit.cso
+  pch.cpp
+C:\Users\dorae\Desktop\HAL\class3\FindWork\就職作品プロジェクト\02_ResourceFile\Debug.hpp(194,17): warning C4505: 'Debug::Log': 内部リンケージ含む参照されていない関数が削除されました
+  (ソース ファイル 'pch.cpp' をコンパイルしています)
+  
+C:\Users\dorae\Desktop\HAL\class3\FindWork\就職作品プロジェクト\02_ResourceFile\Debug.hpp(200,17): warning C4505: 'Debug::Log': 内部リンケージ含む参照されていない関数が削除されました
+  (ソース ファイル 'pch.cpp' をコンパイルしています)
+  
   Application.cpp
-  Calculator.cpp
-  Camera.cpp
-  DebugGridLine.cpp
-  DebugUI.cpp
-  Game.cpp
-  MeshManager.cpp
+  Audio.cpp
+  ImGuiUtil.cpp
   Bird.cpp
   Bomber.cpp
-  Bullet.cpp
   Button.cpp
-  Car.cpp
-  CartWarning.cpp
-  Circle.cpp
-  Cube.cpp
   DragController.cpp
-C:\Users\dorae\Desktop\HAL\class3\FindWork\就職作品プロジェクト\02_ResourceFile\SceneFile\Scene.h(168,19): error C3861: 'Game': 識別子が見つかりませんでした
-  (ソース ファイル '/02_ResourceFile/Game.cpp' をコンパイルしています)
-      C:\Users\dorae\Desktop\HAL\class3\FindWork\就職作品プロジェクト\02_ResourceFile\SceneFile\Scene.h(163,21):
-      コンパイラでのこの診断により関数 'std::shared_ptr<_Ty> Scene::AddObject(Args ...)' が生成されました。
-  
-C:\Users\dorae\Desktop\HAL\class3\FindWork\就職作品プロジェクト\02_ResourceFile\SceneFile\Scene.h(168,19): error C3861: 'Game': 識別子が見つかりませんでした
-  (ソース ファイル '/02_ResourceFile/ObjectFile/Bomber.cpp' をコンパイルしています)
-      C:\Users\dorae\Desktop\HAL\class3\FindWork\就職作品プロジェクト\02_ResourceFile\SceneFile\Scene.h(163,21):
-      コンパイラでのこの診断により関数 'std::shared_ptr<_Ty> Scene::AddObject(Args ...)' が生成されました。
-  
-C:\Users\dorae\Desktop\HAL\class3\FindWork\就職作品プロジェクト\02_ResourceFile\SceneFile\Scene.h(168,19): error C3861: 'Game': 識別子が見つかりませんでした
-  (ソース ファイル '/02_ResourceFile/Camera.cpp' をコンパイルしています)
-      C:\Users\dorae\Desktop\HAL\class3\FindWork\就職作品プロジェクト\02_ResourceFile\SceneFile\Scene.h(163,21):
-      コンパイラでのこの診断により関数 'std::shared_ptr<_Ty> Scene::AddObject(Args ...)' が生成されました。
-  
-C:\Users\dorae\Desktop\HAL\class3\FindWork\就職作品プロジェクト\02_ResourceFile\SceneFile\Scene.h(168,19): error C3861: 'Game': 識別子が見つかりませんでした
-  (ソース ファイル '/02_ResourceFile/ObjectFile/Bullet.cpp' をコンパイルしています)
-      C:\Users\dorae\Desktop\HAL\class3\FindWork\就職作品プロジェクト\02_ResourceFile\SceneFile\Scene.h(163,21):
-      コンパイラでのこの診断により関数 'std::shared_ptr<_Ty> Scene::AddObject(Args ...)' が生成されました。
-  
-C:\Users\dorae\Desktop\HAL\class3\FindWork\就職作品プロジェクト\02_ResourceFile\SceneFile\Scene.h(168,19): error C2065: 'Game': 定義されていない識別子です。
-  (ソース ファイル '/02_ResourceFile/Game.cpp' をコンパイルしています)
-      C:\Users\dorae\Desktop\HAL\class3\FindWork\就職作品プロジェクト\02_ResourceFile\SceneFile\Scene.h(163,21):
-      コンパイラでのこの診断により関数 'std::shared_ptr<_Ty> Scene::AddObject(Args ...)' が生成されました。
-  
-C:\Users\dorae\Desktop\HAL\class3\FindWork\就職作品プロジェクト\02_ResourceFile\SceneFile\Scene.h(168,19): error C2065: 'Game': 定義されていない識別子です。
-  (ソース ファイル '/02_ResourceFile/ObjectFile/Bomber.cpp' をコンパイルしています)
-      C:\Users\dorae\Desktop\HAL\class3\FindWork\就職作品プロジェクト\02_ResourceFile\SceneFile\Scene.h(163,21):
-      コンパイラでのこの診断により関数 'std::shared_ptr<_Ty> Scene::AddObject(Args ...)' が生成されました。
-  
-C:\Users\dorae\Desktop\HAL\class3\FindWork\就職作品プロジェクト\02_ResourceFile\SceneFile\Scene.h(168,19): error C2065: 'Game': 定義されていない識別子です。
-  (ソース ファイル '/02_ResourceFile/ObjectFile/Bullet.cpp' をコンパイルしています)
-      C:\Users\dorae\Desktop\HAL\class3\FindWork\就職作品プロジェクト\02_ResourceFile\SceneFile\Scene.h(163,21):
-      コンパイラでのこの診断により関数 'std::shared_ptr<_Ty> Scene::AddObject(Args ...)' が生成されました。
-  
-C:\Users\dorae\Desktop\HAL\class3\FindWork\就職作品プロジェクト\02_ResourceFile\SceneFile\Scene.h(168,19): error C2065: 'Game': 定義されていない識別子です。
-  (ソース ファイル '/02_ResourceFile/Camera.cpp' をコンパイルしています)
-      C:\Users\dorae\Desktop\HAL\class3\FindWork\就職作品プロジェクト\02_ResourceFile\SceneFile\Scene.h(163,21):
-      コンパイラでのこの診断により関数 'std::shared_ptr<_Ty> Scene::AddObject(Args ...)' が生成されました。
-  
-C:\Users\dorae\Desktop\HAL\class3\FindWork\就職作品プロジェクト\02_ResourceFile\SceneFile\Scene.h(168,19): error C3861: 'Game': 識別子が見つかりませんでした
-  (ソース ファイル '/02_ResourceFile/ObjectFile/Bird.cpp' をコンパイルしています)
-      C:\Users\dorae\Desktop\HAL\class3\FindWork\就職作品プロジェクト\02_ResourceFile\SceneFile\Scene.h(163,21):
-      コンパイラでのこの診断により関数 'std::shared_ptr<_Ty> Scene::AddObject(Args ...)' が生成されました。
-  
-C:\Users\dorae\Desktop\HAL\class3\FindWork\就職作品プロジェクト\02_ResourceFile\SceneFile\Scene.h(168,19): error C2065: 'Game': 定義されていない識別子です。
-  (ソース ファイル '/02_ResourceFile/ObjectFile/Bird.cpp' をコンパイルしています)
-      C:\Users\dorae\Desktop\HAL\class3\FindWork\就職作品プロジェクト\02_ResourceFile\SceneFile\Scene.h(163,21):
-      コンパイラでのこの診断により関数 'std::shared_ptr<_Ty> Scene::AddObject(Args ...)' が生成されました。
-  
-C:\Users\dorae\Desktop\HAL\class3\FindWork\就職作品プロジェクト\02_ResourceFile\SceneFile\Scene.h(168,19): error C3861: 'Game': 識別子が見つかりませんでした
-  (ソース ファイル '/02_ResourceFile/DebugGridLine.cpp' をコンパイルしています)
-      C:\Users\dorae\Desktop\HAL\class3\FindWork\就職作品プロジェクト\02_ResourceFile\SceneFile\Scene.h(163,21):
-      コンパイラでのこの診断により関数 'std::shared_ptr<_Ty> Scene::AddObject(Args ...)' が生成されました。
-  
-C:\Users\dorae\Desktop\HAL\class3\FindWork\就職作品プロジェクト\02_ResourceFile\SceneFile\Scene.h(168,19): error C3861: 'Game': 識別子が見つかりませんでした
-  (ソース ファイル '/02_ResourceFile/ObjectFile/Button.cpp' をコンパイルしています)
-      C:\Users\dorae\Desktop\HAL\class3\FindWork\就職作品プロジェクト\02_ResourceFile\SceneFile\Scene.h(163,21):
-      コンパイラでのこの診断により関数 'std::shared_ptr<_Ty> Scene::AddObject(Args ...)' が生成されました。
-  
-C:\Users\dorae\Desktop\HAL\class3\FindWork\就職作品プロジェクト\02_ResourceFile\SceneFile\Scene.h(168,19): error C3861: 'Game': 識別子が見つかりませんでした
-  (ソース ファイル '/02_ResourceFile/DebugUI.cpp' をコンパイルしています)
-      C:\Users\dorae\Desktop\HAL\class3\FindWork\就職作品プロジェクト\02_ResourceFile\SceneFile\Scene.h(163,21):
-      コンパイラでのこの診断により関数 'std::shared_ptr<_Ty> Scene::AddObject(Args ...)' が生成されました。
-  
-C:\Users\dorae\Desktop\HAL\class3\FindWork\就職作品プロジェクト\02_ResourceFile\SceneFile\Scene.h(168,19): error C3861: 'Game': 識別子が見つかりませんでした
-  (ソース ファイル '/02_ResourceFile/Application.cpp' をコンパイルしています)
-      C:\Users\dorae\Desktop\HAL\class3\FindWork\就職作品プロジェクト\02_ResourceFile\SceneFile\Scene.h(163,21):
-      コンパイラでのこの診断により関数 'std::shared_ptr<_Ty> Scene::AddObject(Args ...)' が生成されました。
-  
-C:\Users\dorae\Desktop\HAL\class3\FindWork\就職作品プロジェクト\02_ResourceFile\SceneFile\Scene.h(168,19): error C3861: 'Game': 識別子が見つかりませんでした
-  (ソース ファイル '/02_ResourceFile/ObjectFile/Cube.cpp' をコンパイルしています)
-      C:\Users\dorae\Desktop\HAL\class3\FindWork\就職作品プロジェクト\02_ResourceFile\SceneFile\Scene.h(163,21):
-      コンパイラでのこの診断により関数 'std::shared_ptr<_Ty> Scene::AddObject(Args ...)' が生成されました。
-  
-C:\Users\dorae\Desktop\HAL\class3\FindWork\就職作品プロジェクト\02_ResourceFile\SceneFile\Scene.h(168,19): error C2065: 'Game': 定義されていない識別子です。
-  (ソース ファイル '/02_ResourceFile/ObjectFile/Cube.cpp' をコンパイルしています)
-      C:\Users\dorae\Desktop\HAL\class3\FindWork\就職作品プロジェクト\02_ResourceFile\SceneFile\Scene.h(163,21):
-      コンパイラでのこの診断により関数 'std::shared_ptr<_Ty> Scene::AddObject(Args ...)' が生成されました。
-  
-C:\Users\dorae\Desktop\HAL\class3\FindWork\就職作品プロジェクト\02_ResourceFile\SceneFile\Scene.h(168,19): error C2065: 'Game': 定義されていない識別子です。
-  (ソース ファイル '/02_ResourceFile/ObjectFile/Button.cpp' をコンパイルしています)
-      C:\Users\dorae\Desktop\HAL\class3\FindWork\就職作品プロジェクト\02_ResourceFile\SceneFile\Scene.h(163,21):
-      コンパイラでのこの診断により関数 'std::shared_ptr<_Ty> Scene::AddObject(Args ...)' が生成されました。
-  
-C:\Users\dorae\Desktop\HAL\class3\FindWork\就職作品プロジェクト\02_ResourceFile\SceneFile\Scene.h(168,19): error C2065: 'Game': 定義されていない識別子です。
-  (ソース ファイル '/02_ResourceFile/DebugGridLine.cpp' をコンパイルしています)
-      C:\Users\dorae\Desktop\HAL\class3\FindWork\就職作品プロジェクト\02_ResourceFile\SceneFile\Scene.h(163,21):
-      コンパイラでのこの診断により関数 'std::shared_ptr<_Ty> Scene::AddObject(Args ...)' が生成されました。
-  
-C:\Users\dorae\Desktop\HAL\class3\FindWork\就職作品プロジェクト\02_ResourceFile\SceneFile\Scene.h(168,19): error C2065: 'Game': 定義されていない識別子です。
-  (ソース ファイル '/02_ResourceFile/Application.cpp' をコンパイルしています)
-      C:\Users\dorae\Desktop\HAL\class3\FindWork\就職作品プロジェクト\02_ResourceFile\SceneFile\Scene.h(163,21):
-      コンパイラでのこの診断により関数 'std::shared_ptr<_Ty> Scene::AddObject(Args ...)' が生成されました。
-  
-C:\Users\dorae\Desktop\HAL\class3\FindWork\就職作品プロジェクト\02_ResourceFile\SceneFile\Scene.h(168,19): error C2065: 'Game': 定義されていない識別子です。
-  (ソース ファイル '/02_ResourceFile/DebugUI.cpp' をコンパイルしています)
-      C:\Users\dorae\Desktop\HAL\class3\FindWork\就職作品プロジェクト\02_ResourceFile\SceneFile\Scene.h(163,21):
-      コンパイラでのこの診断により関数 'std::shared_ptr<_Ty> Scene::AddObject(Args ...)' が生成されました。
-  
-C:\Users\dorae\Desktop\HAL\class3\FindWork\就職作品プロジェクト\02_ResourceFile\SceneFile\Scene.h(168,19): error C3861: 'Game': 識別子が見つかりませんでした
-  (ソース ファイル '/02_ResourceFile/ObjectFile/Circle.cpp' をコンパイルしています)
-      C:\Users\dorae\Desktop\HAL\class3\FindWork\就職作品プロジェクト\02_ResourceFile\SceneFile\Scene.h(163,21):
-      コンパイラでのこの診断により関数 'std::shared_ptr<_Ty> Scene::AddObject(Args ...)' が生成されました。
-  
-C:\Users\dorae\Desktop\HAL\class3\FindWork\就職作品プロジェクト\02_ResourceFile\SceneFile\Scene.h(168,19): error C2065: 'Game': 定義されていない識別子です。
-  (ソース ファイル '/02_ResourceFile/ObjectFile/Circle.cpp' をコンパイルしています)
-      C:\Users\dorae\Desktop\HAL\class3\FindWork\就職作品プロジェクト\02_ResourceFile\SceneFile\Scene.h(163,21):
-      コンパイラでのこの診断により関数 'std::shared_ptr<_Ty> Scene::AddObject(Args ...)' が生成されました。
-  
-  Enemy.cpp
-  Light.cpp
-  Model.cpp
   MouseObject.cpp
-  Object.cpp
-C:\Users\dorae\Desktop\HAL\class3\FindWork\就職作品プロジェクト\02_ResourceFile\ObjectFile\Bomber.cpp(31,23): error C2039: 'AddObject': 'Game' のメンバーではありません
-  (ソース ファイル '/02_ResourceFile/ObjectFile/Bomber.cpp' をコンパイルしています)
-      C:\Users\dorae\Desktop\HAL\class3\FindWork\就職作品プロジェクト\02_ResourceFile\Game.h(20,7):
-      'Game' の宣言を確認してください
-  
-C:\Users\dorae\Desktop\HAL\class3\FindWork\就職作品プロジェクト\02_ResourceFile\ObjectFile\Bomber.cpp(31,41): error C2059: 構文エラー: ')'
-  (ソース ファイル '/02_ResourceFile/ObjectFile/Bomber.cpp' をコンパイルしています)
-  
-C:\Users\dorae\Desktop\HAL\class3\FindWork\就職作品プロジェクト\02_ResourceFile\ObjectFile\Bomber.cpp(36,25): error C2039: 'AddObject': 'Game' のメンバーではありません
-  (ソース ファイル '/02_ResourceFile/ObjectFile/Bomber.cpp' をコンパイルしています)
-      C:\Users\dorae\Desktop\HAL\class3\FindWork\就職作品プロジェクト\02_ResourceFile\Game.h(20,7):
-      'Game' の宣言を確認してください
-  
-C:\Users\dorae\Desktop\HAL\class3\FindWork\就職作品プロジェクト\02_ResourceFile\ObjectFile\Bomber.cpp(36,43): error C2059: 構文エラー: ')'
-  (ソース ファイル '/02_ResourceFile/ObjectFile/Bomber.cpp' をコンパイルしています)
-  
-C:\Users\dorae\Desktop\HAL\class3\FindWork\就職作品プロジェクト\02_ResourceFile\ObjectFile\Bomber.cpp(71,18): error C2039: 'DeleteObject': 'Game' のメンバーではありません
-  (ソース ファイル '/02_ResourceFile/ObjectFile/Bomber.cpp' をコンパイルしています)
-      C:\Users\dorae\Desktop\HAL\class3\FindWork\就職作品プロジェクト\02_ResourceFile\Game.h(20,7):
-      'Game' の宣言を確認してください
-  
-C:\Users\dorae\Desktop\HAL\class3\FindWork\就職作品プロジェクト\02_ResourceFile\ObjectFile\Bomber.cpp(75,18): error C2039: 'DeleteObject': 'Game' のメンバーではありません
-  (ソース ファイル '/02_ResourceFile/ObjectFile/Bomber.cpp' をコンパイルしています)
-      C:\Users\dorae\Desktop\HAL\class3\FindWork\就職作品プロジェクト\02_ResourceFile\Game.h(20,7):
-      'Game' の宣言を確認してください
-  
-  Player.cpp
-  Skydome.cpp
-  Sphere.cpp
   Stone.cpp
-C:\Users\dorae\Desktop\HAL\class3\FindWork\就職作品プロジェクト\02_ResourceFile\ObjectFile\Button.cpp(13,23): error C2039: 'AddObject': 'Game' のメンバーではありません
-  (ソース ファイル '/02_ResourceFile/ObjectFile/Button.cpp' をコンパイルしています)
-      C:\Users\dorae\Desktop\HAL\class3\FindWork\就職作品プロジェクト\02_ResourceFile\Game.h(20,7):
-      'Game' の宣言を確認してください
-  
-C:\Users\dorae\Desktop\HAL\class3\FindWork\就職作品プロジェクト\02_ResourceFile\ObjectFile\Button.cpp(13,41): error C2059: 構文エラー: ')'
-  (ソース ファイル '/02_ResourceFile/ObjectFile/Button.cpp' をコンパイルしています)
-  
   Theme.cpp
   Timer.cpp
   Particle.cpp
-  Renderer.cpp
+  RhythmBeat.cpp
+  AudioManager.cpp
+  Camera.cpp
+  Calculator.cpp
+  DebugGridLine.cpp
+  DebugUI.cpp
+  Dx11helper.cpp
+  Game.cpp
+  input.cpp
+  main.cpp
+  Car.cpp
+  CartWarning.cpp
+  Circle.cpp
+  Player.cpp
+  Enemy.cpp
   GameSceneCrush.cpp
   GameSceneDodge.cpp
-  GameSceneExe.cpp
-C:\Users\dorae\Desktop\HAL\class3\FindWork\就職作品プロジェクト\02_ResourceFile\SceneFile\Scene.h(168,19): error C3861: 'Game': 識別子が見つかりませんでした
-  (ソース ファイル '/02_ResourceFile/ObjectFile/Enemy.cpp' をコンパイルしています)
-      C:\Users\dorae\Desktop\HAL\class3\FindWork\就職作品プロジェクト\02_ResourceFile\SceneFile\Scene.h(163,21):
-      コンパイラでのこの診断により関数 'std::shared_ptr<_Ty> Scene::AddObject(Args ...)' が生成されました。
-  
-C:\Users\dorae\Desktop\HAL\class3\FindWork\就職作品プロジェクト\02_ResourceFile\SceneFile\Scene.h(168,19): error C2065: 'Game': 定義されていない識別子です。
-  (ソース ファイル '/02_ResourceFile/ObjectFile/Enemy.cpp' をコンパイルしています)
-      C:\Users\dorae\Desktop\HAL\class3\FindWork\就職作品プロジェクト\02_ResourceFile\SceneFile\Scene.h(163,21):
-      コンパイラでのこの診断により関数 'std::shared_ptr<_Ty> Scene::AddObject(Args ...)' が生成されました。
-  
   GameSceneSlice.cpp
   GameSceneText.cpp
-C:\Users\dorae\Desktop\HAL\class3\FindWork\就職作品プロジェクト\02_ResourceFile\SceneFile\Scene.h(168,19): error C3861: 'Game': 識別子が見つかりませんでした
-  (ソース ファイル '/02_ResourceFile/ObjectFile/Model.cpp' をコンパイルしています)
-      C:\Users\dorae\Desktop\HAL\class3\FindWork\就職作品プロジェクト\02_ResourceFile\SceneFile\Scene.h(163,21):
-      コンパイラでのこの診断により関数 'std::shared_ptr<_Ty> Scene::AddObject(Args ...)' が生成されました。
-  
-C:\Users\dorae\Desktop\HAL\class3\FindWork\就職作品プロジェクト\02_ResourceFile\SceneFile\Scene.h(168,19): error C2065: 'Game': 定義されていない識別子です。
-  (ソース ファイル '/02_ResourceFile/ObjectFile/Model.cpp' をコンパイルしています)
-      C:\Users\dorae\Desktop\HAL\class3\FindWork\就職作品プロジェクト\02_ResourceFile\SceneFile\Scene.h(163,21):
-      コンパイラでのこの診断により関数 'std::shared_ptr<_Ty> Scene::AddObject(Args ...)' が生成されました。
-  
-C:\Users\dorae\Desktop\HAL\class3\FindWork\就職作品プロジェクト\02_ResourceFile\SceneFile\Scene.h(168,19): error C3861: 'Game': 識別子が見つかりませんでした
-  (ソース ファイル '/02_ResourceFile/ObjectFile/Skydome.cpp' をコンパイルしています)
-      C:\Users\dorae\Desktop\HAL\class3\FindWork\就職作品プロジェクト\02_ResourceFile\SceneFile\Scene.h(163,21):
-      コンパイラでのこの診断により関数 'std::shared_ptr<_Ty> Scene::AddObject(Args ...)' が生成されました。
-  
-C:\Users\dorae\Desktop\HAL\class3\FindWork\就職作品プロジェクト\02_ResourceFile\SceneFile\Scene.h(168,19): error C2065: 'Game': 定義されていない識別子です。
-  (ソース ファイル '/02_ResourceFile/ObjectFile/Skydome.cpp' をコンパイルしています)
-      C:\Users\dorae\Desktop\HAL\class3\FindWork\就職作品プロジェクト\02_ResourceFile\SceneFile\Scene.h(163,21):
-      コンパイラでのこの診断により関数 'std::shared_ptr<_Ty> Scene::AddObject(Args ...)' が生成されました。
-  
-C:\Users\dorae\Desktop\HAL\class3\FindWork\就職作品プロジェクト\02_ResourceFile\SceneFile\Scene.h(168,19): error C3861: 'Game': 識別子が見つかりませんでした
-  (ソース ファイル '/02_ResourceFile/ObjectFile/Theme.cpp' をコンパイルしています)
-      C:\Users\dorae\Desktop\HAL\class3\FindWork\就職作品プロジェクト\02_ResourceFile\SceneFile\Scene.h(163,21):
-      コンパイラでのこの診断により関数 'std::shared_ptr<_Ty> Scene::AddObject(Args ...)' が生成されました。
-  
-C:\Users\dorae\Desktop\HAL\class3\FindWork\就職作品プロジェクト\02_ResourceFile\SceneFile\Scene.h(168,19): error C2065: 'Game': 定義されていない識別子です。
-  (ソース ファイル '/02_ResourceFile/ObjectFile/Theme.cpp' をコンパイルしています)
-      C:\Users\dorae\Desktop\HAL\class3\FindWork\就職作品プロジェクト\02_ResourceFile\SceneFile\Scene.h(163,21):
-      コンパイラでのこの診断により関数 'std::shared_ptr<_Ty> Scene::AddObject(Args ...)' が生成されました。
-  
-C:\Users\dorae\Desktop\HAL\class3\FindWork\就職作品プロジェクト\02_ResourceFile\SceneFile\Scene.h(168,19): error C3861: 'Game': 識別子が見つかりませんでした
-  (ソース ファイル '/02_ResourceFile/ObjectFile/Sphere.cpp' をコンパイルしています)
-      C:\Users\dorae\Desktop\HAL\class3\FindWork\就職作品プロジェクト\02_ResourceFile\SceneFile\Scene.h(163,21):
-      コンパイラでのこの診断により関数 'std::shared_ptr<_Ty> Scene::AddObject(Args ...)' が生成されました。
-  
-C:\Users\dorae\Desktop\HAL\class3\FindWork\就職作品プロジェクト\02_ResourceFile\SceneFile\Scene.h(168,19): error C2065: 'Game': 定義されていない識別子です。
-  (ソース ファイル '/02_ResourceFile/ObjectFile/Sphere.cpp' をコンパイルしています)
-      C:\Users\dorae\Desktop\HAL\class3\FindWork\就職作品プロジェクト\02_ResourceFile\SceneFile\Scene.h(163,21):
-      コンパイラでのこの診断により関数 'std::shared_ptr<_Ty> Scene::AddObject(Args ...)' が生成されました。
-  
-C:\Users\dorae\Desktop\HAL\class3\FindWork\就職作品プロジェクト\02_ResourceFile\SceneFile\Scene.h(168,19): error C3861: 'Game': 識別子が見つかりませんでした
-  (ソース ファイル '/02_ResourceFile/ObjectFile/Object.cpp' をコンパイルしています)
-      C:\Users\dorae\Desktop\HAL\class3\FindWork\就職作品プロジェクト\02_ResourceFile\SceneFile\Scene.h(163,21):
-      コンパイラでのこの診断により関数 'std::shared_ptr<_Ty> Scene::AddObject(Args ...)' が生成されました。
-  
-C:\Users\dorae\Desktop\HAL\class3\FindWork\就職作品プロジェクト\02_ResourceFile\SceneFile\Scene.h(168,19): error C2065: 'Game': 定義されていない識別子です。
-  (ソース ファイル '/02_ResourceFile/ObjectFile/Object.cpp' をコンパイルしています)
-      C:\Users\dorae\Desktop\HAL\class3\FindWork\就職作品プロジェクト\02_ResourceFile\SceneFile\Scene.h(163,21):
-      コンパイラでのこの診断により関数 'std::shared_ptr<_Ty> Scene::AddObject(Args ...)' が生成されました。
-  
   GameSceneWait.cpp
   ResultScene.cpp
-C:\Users\dorae\Desktop\HAL\class3\FindWork\就職作品プロジェクト\02_ResourceFile\SceneFile\Scene.h(168,19): error C3861: 'Game': 識別子が見つかりませんでした
-  (ソース ファイル '/02_ResourceFile/SceneFile/GameSceneDodge.cpp' をコンパイルしています)
-      C:\Users\dorae\Desktop\HAL\class3\FindWork\就職作品プロジェクト\02_ResourceFile\SceneFile\Scene.h(163,21):
-      コンパイラでのこの診断により関数 'std::shared_ptr<_Ty> Scene::AddObject(Args ...)' が生成されました。
-  
-C:\Users\dorae\Desktop\HAL\class3\FindWork\就職作品プロジェクト\02_ResourceFile\SceneFile\Scene.h(168,19): error C2065: 'Game': 定義されていない識別子です。
-  (ソース ファイル '/02_ResourceFile/SceneFile/GameSceneDodge.cpp' をコンパイルしています)
-      C:\Users\dorae\Desktop\HAL\class3\FindWork\就職作品プロジェクト\02_ResourceFile\SceneFile\Scene.h(163,21):
-      コンパイラでのこの診断により関数 'std::shared_ptr<_Ty> Scene::AddObject(Args ...)' が生成されました。
-  
-C:\Users\dorae\Desktop\HAL\class3\FindWork\就職作品プロジェクト\02_ResourceFile\SceneFile\Scene.h(168,19): error C3861: 'Game': 識別子が見つかりませんでした
-  (ソース ファイル '/02_ResourceFile/ObjectFile/Stone.cpp' をコンパイルしています)
-      C:\Users\dorae\Desktop\HAL\class3\FindWork\就職作品プロジェクト\02_ResourceFile\SceneFile\Scene.h(163,21):
-      コンパイラでのこの診断により関数 'std::shared_ptr<_Ty> Scene::AddObject(Args ...)' が生成されました。
-  
-C:\Users\dorae\Desktop\HAL\class3\FindWork\就職作品プロジェクト\02_ResourceFile\SceneFile\Scene.h(168,19): error C2065: 'Game': 定義されていない識別子です。
-  (ソース ファイル '/02_ResourceFile/ObjectFile/Stone.cpp' をコンパイルしています)
-      C:\Users\dorae\Desktop\HAL\class3\FindWork\就職作品プロジェクト\02_ResourceFile\SceneFile\Scene.h(163,21):
-      コンパイラでのこの診断により関数 'std::shared_ptr<_Ty> Scene::AddObject(Args ...)' が生成されました。
-  
   Scene.cpp
-  TitleScene.cpp
-  TransScene.cpp
-C:\Users\dorae\Desktop\HAL\class3\FindWork\就職作品プロジェクト\02_ResourceFile\SceneFile\Scene.h(168,19): error C3861: 'Game': 識別子が見つかりませんでした
-  (ソース ファイル '/02_ResourceFile/SceneFile/GameSceneCrush.cpp' をコンパイルしています)
-      C:\Users\dorae\Desktop\HAL\class3\FindWork\就職作品プロジェクト\02_ResourceFile\SceneFile\Scene.h(163,21):
-      コンパイラでのこの診断により関数 'std::shared_ptr<_Ty> Scene::AddObject(Args ...)' が生成されました。
-  
-C:\Users\dorae\Desktop\HAL\class3\FindWork\就職作品プロジェクト\02_ResourceFile\SceneFile\Scene.h(168,19): error C2065: 'Game': 定義されていない識別子です。
-  (ソース ファイル '/02_ResourceFile/SceneFile/GameSceneCrush.cpp' をコンパイルしています)
-      C:\Users\dorae\Desktop\HAL\class3\FindWork\就職作品プロジェクト\02_ResourceFile\SceneFile\Scene.h(163,21):
-      コンパイラでのこの診断により関数 'std::shared_ptr<_Ty> Scene::AddObject(Args ...)' が生成されました。
-  
-C:\Users\dorae\Desktop\HAL\class3\FindWork\就職作品プロジェクト\02_ResourceFile\SceneFile\Scene.h(168,19): error C3861: 'Game': 識別子が見つかりませんでした
-  (ソース ファイル '/02_ResourceFile/SceneFile/GameSceneExe.cpp' をコンパイルしています)
-      C:\Users\dorae\Desktop\HAL\class3\FindWork\就職作品プロジェクト\02_ResourceFile\SceneFile\Scene.h(163,21):
-      コンパイラでのこの診断により関数 'std::shared_ptr<_Ty> Scene::AddObject(Args ...)' が生成されました。
-  
-C:\Users\dorae\Desktop\HAL\class3\FindWork\就職作品プロジェクト\02_ResourceFile\SceneFile\Scene.h(168,19): error C2065: 'Game': 定義されていない識別子です。
-  (ソース ファイル '/02_ResourceFile/SceneFile/GameSceneExe.cpp' をコンパイルしています)
-      C:\Users\dorae\Desktop\HAL\class3\FindWork\就職作品プロジェクト\02_ResourceFile\SceneFile\Scene.h(163,21):
-      コンパイラでのこの診断により関数 'std::shared_ptr<_Ty> Scene::AddObject(Args ...)' が生成されました。
-  
-  Fade.cpp
-  SnapshotOverlay.cpp
   TransitionBase.cpp
-  Wipe.cpp
-  Zoom.cpp
-C:\Users\dorae\Desktop\HAL\class3\FindWork\就職作品プロジェクト\02_ResourceFile\SceneFile\GameSceneCrush.cpp(28,25): error C2039: 'AddObject': 'Game' のメンバーではありません
-  (ソース ファイル '/02_ResourceFile/SceneFile/GameSceneCrush.cpp' をコンパイルしています)
-      C:\Users\dorae\Desktop\HAL\class3\FindWork\就職作品プロジェクト\02_ResourceFile\Game.h(20,7):
-      'Game' の宣言を確認してください
-  
-C:\Users\dorae\Desktop\HAL\class3\FindWork\就職作品プロジェクト\02_ResourceFile\SceneFile\GameSceneCrush.cpp(28,43): error C2059: 構文エラー: ')'
-  (ソース ファイル '/02_ResourceFile/SceneFile/GameSceneCrush.cpp' をコンパイルしています)
-  
-C:\Users\dorae\Desktop\HAL\class3\FindWork\就職作品プロジェクト\02_ResourceFile\SceneFile\GameSceneCrush.cpp(36,31): error C2039: 'AddObject': 'Game' のメンバーではありません
-  (ソース ファイル '/02_ResourceFile/SceneFile/GameSceneCrush.cpp' をコンパイルしています)
-      C:\Users\dorae\Desktop\HAL\class3\FindWork\就職作品プロジェクト\02_ResourceFile\Game.h(20,7):
-      'Game' の宣言を確認してください
-  
-C:\Users\dorae\Desktop\HAL\class3\FindWork\就職作品プロジェクト\02_ResourceFile\SceneFile\GameSceneCrush.cpp(36,48): error C2059: 構文エラー: ')'
-  (ソース ファイル '/02_ResourceFile/SceneFile/GameSceneCrush.cpp' をコンパイルしています)
-  
-C:\Users\dorae\Desktop\HAL\class3\FindWork\就職作品プロジェクト\02_ResourceFile\SceneFile\GameSceneCrush.cpp(37,9): error C3536: 'enemy': 初期化前に使用することはできません
-  (ソース ファイル '/02_ResourceFile/SceneFile/GameSceneCrush.cpp' をコンパイルしています)
-  
-C:\Users\dorae\Desktop\HAL\class3\FindWork\就職作品プロジェクト\02_ResourceFile\SceneFile\GameSceneCrush.cpp(47,28): error C2039: 'GetObjects': 'Game' のメンバーではありません
-  (ソース ファイル '/02_ResourceFile/SceneFile/GameSceneCrush.cpp' をコンパイルしています)
-      C:\Users\dorae\Desktop\HAL\class3\FindWork\就職作品プロジェクト\02_ResourceFile\Game.h(20,7):
-      'Game' の宣言を確認してください
-  
-C:\Users\dorae\Desktop\HAL\class3\FindWork\就職作品プロジェクト\02_ResourceFile\SceneFile\GameSceneCrush.cpp(47,46): error C2059: 構文エラー: ')'
-  (ソース ファイル '/02_ResourceFile/SceneFile/GameSceneCrush.cpp' をコンパイルしています)
-  
-C:\Users\dorae\Desktop\HAL\class3\FindWork\就職作品プロジェクト\02_ResourceFile\SceneFile\GameSceneCrush.cpp(48,25): error C3536: 'enemys': 初期化前に使用することはできません
-  (ソース ファイル '/02_ResourceFile/SceneFile/GameSceneCrush.cpp' をコンパイルしています)
-  
-  Shader.cpp
-C:\Users\dorae\Desktop\HAL\class3\FindWork\就職作品プロジェクト\02_ResourceFile\SceneFile\GameSceneDodge.cpp(43,29): error C2039: 'AddObject': 'Game' のメンバーではありません
-  (ソース ファイル '/02_ResourceFile/SceneFile/GameSceneDodge.cpp' をコンパイルしています)
-      C:\Users\dorae\Desktop\HAL\class3\FindWork\就職作品プロジェクト\02_ResourceFile\Game.h(20,7):
-      'Game' の宣言を確認してください
-  
-C:\Users\dorae\Desktop\HAL\class3\FindWork\就職作品プロジェクト\02_ResourceFile\SceneFile\GameSceneDodge.cpp(43,47): error C2059: 構文エラー: ')'
-  (ソース ファイル '/02_ResourceFile/SceneFile/GameSceneDodge.cpp' をコンパイルしています)
-  
-C:\Users\dorae\Desktop\HAL\class3\FindWork\就職作品プロジェクト\02_ResourceFile\SceneFile\GameSceneDodge.cpp(49,25): error C2039: 'AddObject': 'Game' のメンバーではありません
-  (ソース ファイル '/02_ResourceFile/SceneFile/GameSceneDodge.cpp' をコンパイルしています)
-      C:\Users\dorae\Desktop\HAL\class3\FindWork\就職作品プロジェクト\02_ResourceFile\Game.h(20,7):
-      'Game' の宣言を確認してください
-  
-C:\Users\dorae\Desktop\HAL\class3\FindWork\就職作品プロジェクト\02_ResourceFile\SceneFile\GameSceneDodge.cpp(49,43): error C2059: 構文エラー: ')'
-  (ソース ファイル '/02_ResourceFile/SceneFile/GameSceneDodge.cpp' をコンパイルしています)
-  
-C:\Users\dorae\Desktop\HAL\class3\FindWork\就職作品プロジェクト\02_ResourceFile\SceneFile\GameSceneDodge.cpp(53,23): error C2039: 'AddObject': 'Game' のメンバーではありません
-  (ソース ファイル '/02_ResourceFile/SceneFile/GameSceneDodge.cpp' をコンパイルしています)
-      C:\Users\dorae\Desktop\HAL\class3\FindWork\就職作品プロジェクト\02_ResourceFile\Game.h(20,7):
-      'Game' の宣言を確認してください
-  
-C:\Users\dorae\Desktop\HAL\class3\FindWork\就職作品プロジェクト\02_ResourceFile\SceneFile\GameSceneDodge.cpp(53,39): error C2059: 構文エラー: ')'
-  (ソース ファイル '/02_ResourceFile/SceneFile/GameSceneDodge.cpp' をコンパイルしています)
-  
-  ShaderManager.cpp
-C:\Users\dorae\Desktop\HAL\class3\FindWork\就職作品プロジェクト\02_ResourceFile\SceneFile\GameSceneDodge.cpp(96,53): error C2039: 'AddObject': 'Game' のメンバーではありません
-  (ソース ファイル '/02_ResourceFile/SceneFile/GameSceneDodge.cpp' をコンパイルしています)
-      C:\Users\dorae\Desktop\HAL\class3\FindWork\就職作品プロジェクト\02_ResourceFile\Game.h(20,7):
-      'Game' の宣言を確認してください
-  
-C:\Users\dorae\Desktop\HAL\class3\FindWork\就職作品プロジェクト\02_ResourceFile\SceneFile\GameSceneDodge.cpp(96,70): error C2059: 構文エラー: ')'
-  (ソース ファイル '/02_ResourceFile/SceneFile/GameSceneDodge.cpp' をコンパイルしています)
-  
-C:\Users\dorae\Desktop\HAL\class3\FindWork\就職作品プロジェクト\02_ResourceFile\SceneFile\GameSceneDodge.cpp(105,22): error C2039: 'DeleteObject': 'Game' のメンバーではありません
-  (ソース ファイル '/02_ResourceFile/SceneFile/GameSceneDodge.cpp' をコンパイルしています)
-      C:\Users\dorae\Desktop\HAL\class3\FindWork\就職作品プロジェクト\02_ResourceFile\Game.h(20,7):
-      'Game' の宣言を確認してください
-  
-  Square.cpp
-C:\Users\dorae\Desktop\HAL\class3\FindWork\就職作品プロジェクト\02_ResourceFile\SceneFile\GameSceneExe.cpp(229,18): error C2039: 'DeleteObject': 'Game' のメンバーではありません
-  (ソース ファイル '/02_ResourceFile/SceneFile/GameSceneExe.cpp' をコンパイルしています)
-      C:\Users\dorae\Desktop\HAL\class3\FindWork\就職作品プロジェクト\02_ResourceFile\Game.h(20,7):
-      'Game' の宣言を確認してください
-  
-  StaticMesh.cpp
-C:\Users\dorae\Desktop\HAL\class3\FindWork\就職作品プロジェクト\02_ResourceFile\SceneFile\Scene.h(168,19): error C3861: 'Game': 識別子が見つかりませんでした
-  (ソース ファイル '/02_ResourceFile/SceneFile/GameSceneText.cpp' をコンパイルしています)
-      C:\Users\dorae\Desktop\HAL\class3\FindWork\就職作品プロジェクト\02_ResourceFile\SceneFile\Scene.h(163,21):
-      コンパイラでのこの診断により関数 'std::shared_ptr<_Ty> Scene::AddObject(Args ...)' が生成されました。
-  
-C:\Users\dorae\Desktop\HAL\class3\FindWork\就職作品プロジェクト\02_ResourceFile\SceneFile\Scene.h(168,19): error C2065: 'Game': 定義されていない識別子です。
-  (ソース ファイル '/02_ResourceFile/SceneFile/GameSceneText.cpp' をコンパイルしています)
-      C:\Users\dorae\Desktop\HAL\class3\FindWork\就職作品プロジェクト\02_ResourceFile\SceneFile\Scene.h(163,21):
-      コンパイラでのこの診断により関数 'std::shared_ptr<_Ty> Scene::AddObject(Args ...)' が生成されました。
-  
-C:\Users\dorae\Desktop\HAL\class3\FindWork\就職作品プロジェクト\02_ResourceFile\SceneFile\Scene.h(168,19): error C3861: 'Game': 識別子が見つかりませんでした
-  (ソース ファイル '/02_ResourceFile/SceneFile/GameSceneSlice.cpp' をコンパイルしています)
-      C:\Users\dorae\Desktop\HAL\class3\FindWork\就職作品プロジェクト\02_ResourceFile\SceneFile\Scene.h(163,21):
-      コンパイラでのこの診断により関数 'std::shared_ptr<_Ty> Scene::AddObject(Args ...)' が生成されました。
-  
-C:\Users\dorae\Desktop\HAL\class3\FindWork\就職作品プロジェクト\02_ResourceFile\SceneFile\Scene.h(168,19): error C2065: 'Game': 定義されていない識別子です。
-  (ソース ファイル '/02_ResourceFile/SceneFile/GameSceneSlice.cpp' をコンパイルしています)
-      C:\Users\dorae\Desktop\HAL\class3\FindWork\就職作品プロジェクト\02_ResourceFile\SceneFile\Scene.h(163,21):
-      コンパイラでのこの診断により関数 'std::shared_ptr<_Ty> Scene::AddObject(Args ...)' が生成されました。
-  
-C:\Users\dorae\Desktop\HAL\class3\FindWork\就職作品プロジェクト\02_ResourceFile\SceneFile\Scene.h(168,19): error C3861: 'Game': 識別子が見つかりませんでした
-  (ソース ファイル '/02_ResourceFile/SceneFile/Scene.cpp' をコンパイルしています)
-      C:\Users\dorae\Desktop\HAL\class3\FindWork\就職作品プロジェクト\02_ResourceFile\SceneFile\Scene.h(163,21):
-      コンパイラでのこの診断により関数 'std::shared_ptr<_Ty> Scene::AddObject(Args ...)' が生成されました。
-  
-C:\Users\dorae\Desktop\HAL\class3\FindWork\就職作品プロジェクト\02_ResourceFile\SceneFile\Scene.h(168,19): error C2065: 'Game': 定義されていない識別子です。
-  (ソース ファイル '/02_ResourceFile/SceneFile/Scene.cpp' をコンパイルしています)
-      C:\Users\dorae\Desktop\HAL\class3\FindWork\就職作品プロジェクト\02_ResourceFile\SceneFile\Scene.h(163,21):
-      コンパイラでのこの診断により関数 'std::shared_ptr<_Ty> Scene::AddObject(Args ...)' が生成されました。
-  
-C:\Users\dorae\Desktop\HAL\class3\FindWork\就職作品プロジェクト\02_ResourceFile\SceneFile\Scene.h(168,19): error C3861: 'Game': 識別子が見つかりませんでした
-  (ソース ファイル '/02_ResourceFile/SceneFile/GameSceneWait.cpp' をコンパイルしています)
-      C:\Users\dorae\Desktop\HAL\class3\FindWork\就職作品プロジェクト\02_ResourceFile\SceneFile\Scene.h(163,21):
-      コンパイラでのこの診断により関数 'std::shared_ptr<_Ty> Scene::AddObject(Args ...)' が生成されました。
-  
-C:\Users\dorae\Desktop\HAL\class3\FindWork\就職作品プロジェクト\02_ResourceFile\SceneFile\Scene.h(168,19): error C2065: 'Game': 定義されていない識別子です。
-  (ソース ファイル '/02_ResourceFile/SceneFile/GameSceneWait.cpp' をコンパイルしています)
-      C:\Users\dorae\Desktop\HAL\class3\FindWork\就職作品プロジェクト\02_ResourceFile\SceneFile\Scene.h(163,21):
-      コンパイラでのこの診断により関数 'std::shared_ptr<_Ty> Scene::AddObject(Args ...)' が生成されました。
-  
-C:\Users\dorae\Desktop\HAL\class3\FindWork\就職作品プロジェクト\02_ResourceFile\SceneFile\Scene.h(168,19): error C3861: 'Game': 識別子が見つかりませんでした
-  (ソース ファイル '/02_ResourceFile/SceneFile/TransScene.cpp' をコンパイルしています)
-      C:\Users\dorae\Desktop\HAL\class3\FindWork\就職作品プロジェクト\02_ResourceFile\SceneFile\Scene.h(163,21):
-      コンパイラでのこの診断により関数 'std::shared_ptr<_Ty> Scene::AddObject(Args ...)' が生成されました。
-  
-C:\Users\dorae\Desktop\HAL\class3\FindWork\就職作品プロジェクト\02_ResourceFile\SceneFile\Scene.h(168,19): error C2065: 'Game': 定義されていない識別子です。
-  (ソース ファイル '/02_ResourceFile/SceneFile/TransScene.cpp' をコンパイルしています)
-      C:\Users\dorae\Desktop\HAL\class3\FindWork\就職作品プロジェクト\02_ResourceFile\SceneFile\Scene.h(163,21):
-      コンパイラでのこの診断により関数 'std::shared_ptr<_Ty> Scene::AddObject(Args ...)' が生成されました。
-  
-C:\Users\dorae\Desktop\HAL\class3\FindWork\就職作品プロジェクト\02_ResourceFile\SceneFile\Scene.h(168,19): error C3861: 'Game': 識別子が見つかりませんでした
-  (ソース ファイル '/02_ResourceFile/SceneFile/TitleScene.cpp' をコンパイルしています)
-      C:\Users\dorae\Desktop\HAL\class3\FindWork\就職作品プロジェクト\02_ResourceFile\SceneFile\Scene.h(163,21):
-      コンパイラでのこの診断により関数 'std::shared_ptr<_Ty> Scene::AddObject(Args ...)' が生成されました。
-  
-C:\Users\dorae\Desktop\HAL\class3\FindWork\就職作品プロジェクト\02_ResourceFile\SceneFile\Scene.h(168,19): error C3861: 'Game': 識別子が見つかりませんでした
-  (ソース ファイル '/02_ResourceFile/SceneFile/ResultScene.cpp' をコンパイルしています)
-      C:\Users\dorae\Desktop\HAL\class3\FindWork\就職作品プロジェクト\02_ResourceFile\SceneFile\Scene.h(163,21):
-      コンパイラでのこの診断により関数 'std::shared_ptr<_Ty> Scene::AddObject(Args ...)' が生成されました。
-  
-C:\Users\dorae\Desktop\HAL\class3\FindWork\就職作品プロジェクト\02_ResourceFile\SceneFile\Scene.h(168,19): error C2065: 'Game': 定義されていない識別子です。
-  (ソース ファイル '/02_ResourceFile/SceneFile/TitleScene.cpp' をコンパイルしています)
-      C:\Users\dorae\Desktop\HAL\class3\FindWork\就職作品プロジェクト\02_ResourceFile\SceneFile\Scene.h(163,21):
-      コンパイラでのこの診断により関数 'std::shared_ptr<_Ty> Scene::AddObject(Args ...)' が生成されました。
-  
-C:\Users\dorae\Desktop\HAL\class3\FindWork\就職作品プロジェクト\02_ResourceFile\SceneFile\Scene.h(168,19): error C2065: 'Game': 定義されていない識別子です。
-  (ソース ファイル '/02_ResourceFile/SceneFile/ResultScene.cpp' をコンパイルしています)
-      C:\Users\dorae\Desktop\HAL\class3\FindWork\就職作品プロジェクト\02_ResourceFile\SceneFile\Scene.h(163,21):
-      コンパイラでのこの診断により関数 'std::shared_ptr<_Ty> Scene::AddObject(Args ...)' が生成されました。
-  
-C:\Users\dorae\Desktop\HAL\class3\FindWork\就職作品プロジェクト\02_ResourceFile\SceneFile\GameSceneSlice.cpp(29,25): error C2039: 'AddObject': 'Game' のメンバーではありません
-  (ソース ファイル '/02_ResourceFile/SceneFile/GameSceneSlice.cpp' をコンパイルしています)
-      C:\Users\dorae\Desktop\HAL\class3\FindWork\就職作品プロジェクト\02_ResourceFile\Game.h(20,7):
-      'Game' の宣言を確認してください
-  
-C:\Users\dorae\Desktop\HAL\class3\FindWork\就職作品プロジェクト\02_ResourceFile\SceneFile\GameSceneSlice.cpp(29,43): error C2059: 構文エラー: ')'
-  (ソース ファイル '/02_ResourceFile/SceneFile/GameSceneSlice.cpp' をコンパイルしています)
-  
-C:\Users\dorae\Desktop\HAL\class3\FindWork\就職作品プロジェクト\02_ResourceFile\SceneFile\GameSceneSlice.cpp(36,31): error C2039: 'AddObject': 'Game' のメンバーではありません
-  (ソース ファイル '/02_ResourceFile/SceneFile/GameSceneSlice.cpp' をコンパイルしています)
-      C:\Users\dorae\Desktop\HAL\class3\FindWork\就職作品プロジェクト\02_ResourceFile\Game.h(20,7):
-      'Game' の宣言を確認してください
-  
-C:\Users\dorae\Desktop\HAL\class3\FindWork\就職作品プロジェクト\02_ResourceFile\SceneFile\GameSceneSlice.cpp(36,48): error C2059: 構文エラー: ')'
-  (ソース ファイル '/02_ResourceFile/SceneFile/GameSceneSlice.cpp' をコンパイルしています)
-  
-C:\Users\dorae\Desktop\HAL\class3\FindWork\就職作品プロジェクト\02_ResourceFile\SceneFile\GameSceneSlice.cpp(37,9): error C3536: 'enemy': 初期化前に使用することはできません
-  (ソース ファイル '/02_ResourceFile/SceneFile/GameSceneSlice.cpp' をコンパイルしています)
-  
-C:\Users\dorae\Desktop\HAL\class3\FindWork\就職作品プロジェクト\02_ResourceFile\SceneFile\GameSceneSlice.cpp(51,59): error C2039: 'GetObjects': 'Game' のメンバーではありません
-  (ソース ファイル '/02_ResourceFile/SceneFile/GameSceneSlice.cpp' をコンパイルしています)
-      C:\Users\dorae\Desktop\HAL\class3\FindWork\就職作品プロジェクト\02_ResourceFile\Game.h(20,7):
-      'Game' の宣言を確認してください
-  
-C:\Users\dorae\Desktop\HAL\class3\FindWork\就職作品プロジェクト\02_ResourceFile\SceneFile\GameSceneSlice.cpp(51,77): error C2059: 構文エラー: ')'
-  (ソース ファイル '/02_ResourceFile/SceneFile/GameSceneSlice.cpp' をコンパイルしています)
-  
-  Texture.cpp
-C:\Users\dorae\Desktop\HAL\class3\FindWork\就職作品プロジェクト\02_ResourceFile\SceneFile\GameSceneText.cpp(121,51): error C2039: 'AddObject': 'Game' のメンバーではありません
-  (ソース ファイル '/02_ResourceFile/SceneFile/GameSceneText.cpp' をコンパイルしています)
-      C:\Users\dorae\Desktop\HAL\class3\FindWork\就職作品プロジェクト\02_ResourceFile\Game.h(20,7):
-      'Game' の宣言を確認してください
-  
-C:\Users\dorae\Desktop\HAL\class3\FindWork\就職作品プロジェクト\02_ResourceFile\SceneFile\GameSceneText.cpp(121,69): error C2059: 構文エラー: ')'
-  (ソース ファイル '/02_ResourceFile/SceneFile/GameSceneText.cpp' をコンパイルしています)
-  
-C:\Users\dorae\Desktop\HAL\class3\FindWork\就職作品プロジェクト\02_ResourceFile\SceneFile\GameSceneText.cpp(127,23): error C2039: 'AddObject': 'Game' のメンバーではありません
-  (ソース ファイル '/02_ResourceFile/SceneFile/GameSceneText.cpp' をコンパイルしています)
-      C:\Users\dorae\Desktop\HAL\class3\FindWork\就職作品プロジェクト\02_ResourceFile\Game.h(20,7):
-      'Game' の宣言を確認してください
-  
-C:\Users\dorae\Desktop\HAL\class3\FindWork\就職作品プロジェクト\02_ResourceFile\SceneFile\GameSceneText.cpp(127,41): error C2059: 構文エラー: ')'
-  (ソース ファイル '/02_ResourceFile/SceneFile/GameSceneText.cpp' をコンパイルしています)
-  
-C:\Users\dorae\Desktop\HAL\class3\FindWork\就職作品プロジェクト\02_ResourceFile\SceneFile\GameSceneText.cpp(135,22): error C2039: 'AddObject': 'Game' のメンバーではありません
-  (ソース ファイル '/02_ResourceFile/SceneFile/GameSceneText.cpp' をコンパイルしています)
-      C:\Users\dorae\Desktop\HAL\class3\FindWork\就職作品プロジェクト\02_ResourceFile\Game.h(20,7):
-      'Game' の宣言を確認してください
-  
-C:\Users\dorae\Desktop\HAL\class3\FindWork\就職作品プロジェクト\02_ResourceFile\SceneFile\GameSceneText.cpp(135,40): error C2059: 構文エラー: ')'
-  (ソース ファイル '/02_ResourceFile/SceneFile/GameSceneText.cpp' をコンパイルしています)
-  
-C:\Users\dorae\Desktop\HAL\class3\FindWork\就職作品プロジェクト\02_ResourceFile\SceneFile\GameSceneText.cpp(148,37): error C2039: 'AddObject': 'Game' のメンバーではありません
-  (ソース ファイル '/02_ResourceFile/SceneFile/GameSceneText.cpp' をコンパイルしています)
-      C:\Users\dorae\Desktop\HAL\class3\FindWork\就職作品プロジェクト\02_ResourceFile\Game.h(20,7):
-      'Game' の宣言を確認してください
-  
-C:\Users\dorae\Desktop\HAL\class3\FindWork\就職作品プロジェクト\02_ResourceFile\SceneFile\GameSceneText.cpp(148,55): error C2059: 構文エラー: ')'
-  (ソース ファイル '/02_ResourceFile/SceneFile/GameSceneText.cpp' をコンパイルしています)
-  
-C:\Users\dorae\Desktop\HAL\class3\FindWork\就職作品プロジェクト\02_ResourceFile\SceneFile\GameSceneText.cpp(166,25): error C2039: 'AddObject': 'Game' のメンバーではありません
-  (ソース ファイル '/02_ResourceFile/SceneFile/GameSceneText.cpp' をコンパイルしています)
-      C:\Users\dorae\Desktop\HAL\class3\FindWork\就職作品プロジェクト\02_ResourceFile\Game.h(20,7):
-      'Game' の宣言を確認してください
-  
-C:\Users\dorae\Desktop\HAL\class3\FindWork\就職作品プロジェクト\02_ResourceFile\SceneFile\GameSceneText.cpp(166,43): error C2059: 構文エラー: ')'
-  (ソース ファイル '/02_ResourceFile/SceneFile/GameSceneText.cpp' をコンパイルしています)
-  
-C:\Users\dorae\Desktop\HAL\class3\FindWork\就職作品プロジェクト\02_ResourceFile\SceneFile\Scene.h(168,19): error C3861: 'Game': 識別子が見つかりませんでした
-  (ソース ファイル '/02_ResourceFile/SceneFile/Transition/Wipe.cpp' をコンパイルしています)
-      C:\Users\dorae\Desktop\HAL\class3\FindWork\就職作品プロジェクト\02_ResourceFile\SceneFile\Scene.h(163,21):
-      コンパイラでのこの診断により関数 'std::shared_ptr<_Ty> Scene::AddObject(Args ...)' が生成されました。
-  
-C:\Users\dorae\Desktop\HAL\class3\FindWork\就職作品プロジェクト\02_ResourceFile\SceneFile\Scene.h(168,19): error C3861: 'Game': 識別子が見つかりませんでした
-  (ソース ファイル '/02_ResourceFile/SceneFile/Transition/Fade.cpp' をコンパイルしています)
-      C:\Users\dorae\Desktop\HAL\class3\FindWork\就職作品プロジェクト\02_ResourceFile\SceneFile\Scene.h(163,21):
-      コンパイラでのこの診断により関数 'std::shared_ptr<_Ty> Scene::AddObject(Args ...)' が生成されました。
-  
-C:\Users\dorae\Desktop\HAL\class3\FindWork\就職作品プロジェクト\02_ResourceFile\SceneFile\Scene.h(168,19): error C2065: 'Game': 定義されていない識別子です。
-  (ソース ファイル '/02_ResourceFile/SceneFile/Transition/Fade.cpp' をコンパイルしています)
-      C:\Users\dorae\Desktop\HAL\class3\FindWork\就職作品プロジェクト\02_ResourceFile\SceneFile\Scene.h(163,21):
-      コンパイラでのこの診断により関数 'std::shared_ptr<_Ty> Scene::AddObject(Args ...)' が生成されました。
-  
-C:\Users\dorae\Desktop\HAL\class3\FindWork\就職作品プロジェクト\02_ResourceFile\SceneFile\Scene.h(168,19): error C2065: 'Game': 定義されていない識別子です。
-  (ソース ファイル '/02_ResourceFile/SceneFile/Transition/Wipe.cpp' をコンパイルしています)
-      C:\Users\dorae\Desktop\HAL\class3\FindWork\就職作品プロジェクト\02_ResourceFile\SceneFile\Scene.h(163,21):
-      コンパイラでのこの診断により関数 'std::shared_ptr<_Ty> Scene::AddObject(Args ...)' が生成されました。
-  
-  TextureManager.cpp
-  input.cpp
-C:\Users\dorae\Desktop\HAL\class3\FindWork\就職作品プロジェクト\02_ResourceFile\SceneFile\Scene.h(168,19): error C3861: 'Game': 識別子が見つかりませんでした
-  (ソース ファイル '/02_ResourceFile/SceneFile/Transition/TransitionBase.cpp' をコンパイルしています)
-      C:\Users\dorae\Desktop\HAL\class3\FindWork\就職作品プロジェクト\02_ResourceFile\SceneFile\Scene.h(163,21):
-      コンパイラでのこの診断により関数 'std::shared_ptr<_Ty> Scene::AddObject(Args ...)' が生成されました。
-  
-C:\Users\dorae\Desktop\HAL\class3\FindWork\就職作品プロジェクト\02_ResourceFile\SceneFile\Scene.h(168,19): error C2065: 'Game': 定義されていない識別子です。
-  (ソース ファイル '/02_ResourceFile/SceneFile/Transition/TransitionBase.cpp' をコンパイルしています)
-      C:\Users\dorae\Desktop\HAL\class3\FindWork\就職作品プロジェクト\02_ResourceFile\SceneFile\Scene.h(163,21):
-      コンパイラでのこの診断により関数 'std::shared_ptr<_Ty> Scene::AddObject(Args ...)' が生成されました。
-  
-C:\Users\dorae\Desktop\HAL\class3\FindWork\就職作品プロジェクト\02_ResourceFile\SceneFile\Scene.h(168,19): error C3861: 'Game': 識別子が見つかりませんでした
-  (ソース ファイル '/02_ResourceFile/SceneFile/Transition/Zoom.cpp' をコンパイルしています)
-      C:\Users\dorae\Desktop\HAL\class3\FindWork\就職作品プロジェクト\02_ResourceFile\SceneFile\Scene.h(163,21):
-      コンパイラでのこの診断により関数 'std::shared_ptr<_Ty> Scene::AddObject(Args ...)' が生成されました。
-  
-C:\Users\dorae\Desktop\HAL\class3\FindWork\就職作品プロジェクト\02_ResourceFile\SceneFile\Scene.h(168,19): error C2065: 'Game': 定義されていない識別子です。
-  (ソース ファイル '/02_ResourceFile/SceneFile/Transition/Zoom.cpp' をコンパイルしています)
-      C:\Users\dorae\Desktop\HAL\class3\FindWork\就職作品プロジェクト\02_ResourceFile\SceneFile\Scene.h(163,21):
-      コンパイラでのこの診断により関数 'std::shared_ptr<_Ty> Scene::AddObject(Args ...)' が生成されました。
-  
-C:\Users\dorae\Desktop\HAL\class3\FindWork\就職作品プロジェクト\02_ResourceFile\SceneFile\TitleScene.cpp(37,23): error C2039: 'AddObject': 'Game' のメンバーではありません
-  (ソース ファイル '/02_ResourceFile/SceneFile/TitleScene.cpp' をコンパイルしています)
-      C:\Users\dorae\Desktop\HAL\class3\FindWork\就職作品プロジェクト\02_ResourceFile\Game.h(20,7):
-      'Game' の宣言を確認してください
-  
-C:\Users\dorae\Desktop\HAL\class3\FindWork\就職作品プロジェクト\02_ResourceFile\SceneFile\TitleScene.cpp(37,42): error C2059: 構文エラー: ')'
-  (ソース ファイル '/02_ResourceFile/SceneFile/TitleScene.cpp' をコンパイルしています)
-  
-C:\Users\dorae\Desktop\HAL\class3\FindWork\就職作品プロジェクト\02_ResourceFile\SceneFile\TitleScene.cpp(44,25): error C2039: 'AddObject': 'Game' のメンバーではありません
-  (ソース ファイル '/02_ResourceFile/SceneFile/TitleScene.cpp' をコンパイルしています)
-      C:\Users\dorae\Desktop\HAL\class3\FindWork\就職作品プロジェクト\02_ResourceFile\Game.h(20,7):
-      'Game' の宣言を確認してください
-  
-C:\Users\dorae\Desktop\HAL\class3\FindWork\就職作品プロジェクト\02_ResourceFile\SceneFile\TitleScene.cpp(44,43): error C2059: 構文エラー: ')'
-  (ソース ファイル '/02_ResourceFile/SceneFile/TitleScene.cpp' をコンパイルしています)
-  
-C:\Users\dorae\Desktop\HAL\class3\FindWork\就職作品プロジェクト\02_ResourceFile\SceneFile\TitleScene.cpp(52,30): error C2039: 'AddObject': 'Game' のメンバーではありません
-  (ソース ファイル '/02_ResourceFile/SceneFile/TitleScene.cpp' をコンパイルしています)
-      C:\Users\dorae\Desktop\HAL\class3\FindWork\就職作品プロジェクト\02_ResourceFile\Game.h(20,7):
-      'Game' の宣言を確認してください
-  
-C:\Users\dorae\Desktop\HAL\class3\FindWork\就職作品プロジェクト\02_ResourceFile\SceneFile\TitleScene.cpp(52,48): error C2059: 構文エラー: ')'
-  (ソース ファイル '/02_ResourceFile/SceneFile/TitleScene.cpp' をコンパイルしています)
-  
-C:\Users\dorae\Desktop\HAL\class3\FindWork\就職作品プロジェクト\02_ResourceFile\SceneFile\TitleScene.cpp(60,26): error C2039: 'AddObject': 'Game' のメンバーではありません
-  (ソース ファイル '/02_ResourceFile/SceneFile/TitleScene.cpp' をコンパイルしています)
-      C:\Users\dorae\Desktop\HAL\class3\FindWork\就職作品プロジェクト\02_ResourceFile\Game.h(20,7):
-      'Game' の宣言を確認してください
-  
-C:\Users\dorae\Desktop\HAL\class3\FindWork\就職作品プロジェクト\02_ResourceFile\SceneFile\TitleScene.cpp(60,44): error C2059: 構文エラー: ')'
-  (ソース ファイル '/02_ResourceFile/SceneFile/TitleScene.cpp' をコンパイルしています)
-  
-C:\Users\dorae\Desktop\HAL\class3\FindWork\就職作品プロジェクト\02_ResourceFile\SceneFile\TitleScene.cpp(70,25): error C2039: 'AddObject': 'Game' のメンバーではありません
-  (ソース ファイル '/02_ResourceFile/SceneFile/TitleScene.cpp' をコンパイルしています)
-      C:\Users\dorae\Desktop\HAL\class3\FindWork\就職作品プロジェクト\02_ResourceFile\Game.h(20,7):
-      'Game' の宣言を確認してください
-  
-C:\Users\dorae\Desktop\HAL\class3\FindWork\就職作品プロジェクト\02_ResourceFile\SceneFile\ResultScene.cpp(15,26): error C2039: 'AddObject': 'Game' のメンバーではありません
-  (ソース ファイル '/02_ResourceFile/SceneFile/ResultScene.cpp' をコンパイルしています)
-      C:\Users\dorae\Desktop\HAL\class3\FindWork\就職作品プロジェクト\02_ResourceFile\Game.h(20,7):
-      'Game' の宣言を確認してください
-  
-C:\Users\dorae\Desktop\HAL\class3\FindWork\就職作品プロジェクト\02_ResourceFile\SceneFile\ResultScene.cpp(15,45): error C2059: 構文エラー: ')'
-  (ソース ファイル '/02_ResourceFile/SceneFile/ResultScene.cpp' をコンパイルしています)
-  
-C:\Users\dorae\Desktop\HAL\class3\FindWork\就職作品プロジェクト\02_ResourceFile\SceneFile\Scene.h(168,19): error C3861: 'Game': 識別子が見つかりませんでした
-  (ソース ファイル '/02_ResourceFile/Square.cpp' をコンパイルしています)
-      C:\Users\dorae\Desktop\HAL\class3\FindWork\就職作品プロジェクト\02_ResourceFile\SceneFile\Scene.h(163,21):
-      コンパイラでのこの診断により関数 'std::shared_ptr<_Ty> Scene::AddObject(Args ...)' が生成されました。
-  
-C:\Users\dorae\Desktop\HAL\class3\FindWork\就職作品プロジェクト\02_ResourceFile\SceneFile\ResultScene.cpp(22,32): error C2039: 'AddObject': 'Game' のメンバーではありません
-  (ソース ファイル '/02_ResourceFile/SceneFile/ResultScene.cpp' をコンパイルしています)
-      C:\Users\dorae\Desktop\HAL\class3\FindWork\就職作品プロジェクト\02_ResourceFile\Game.h(20,7):
-      'Game' の宣言を確認してください
-  
-C:\Users\dorae\Desktop\HAL\class3\FindWork\就職作品プロジェクト\02_ResourceFile\SceneFile\ResultScene.cpp(22,50): error C2059: 構文エラー: ')'
-  (ソース ファイル '/02_ResourceFile/SceneFile/ResultScene.cpp' をコンパイルしています)
-  
-C:\Users\dorae\Desktop\HAL\class3\FindWork\就職作品プロジェクト\02_ResourceFile\SceneFile\Scene.h(168,19): error C2065: 'Game': 定義されていない識別子です。
-  (ソース ファイル '/02_ResourceFile/Square.cpp' をコンパイルしています)
-      C:\Users\dorae\Desktop\HAL\class3\FindWork\就職作品プロジェクト\02_ResourceFile\SceneFile\Scene.h(163,21):
-      コンパイラでのこの診断により関数 'std::shared_ptr<_Ty> Scene::AddObject(Args ...)' が生成されました。
-  
-C:\Users\dorae\Desktop\HAL\class3\FindWork\就職作品プロジェクト\02_ResourceFile\SceneFile\ResultScene.cpp(31,30): error C2039: 'AddObject': 'Game' のメンバーではありません
-  (ソース ファイル '/02_ResourceFile/SceneFile/ResultScene.cpp' をコンパイルしています)
-      C:\Users\dorae\Desktop\HAL\class3\FindWork\就職作品プロジェクト\02_ResourceFile\Game.h(20,7):
-      'Game' の宣言を確認してください
-  
-C:\Users\dorae\Desktop\HAL\class3\FindWork\就職作品プロジェクト\02_ResourceFile\SceneFile\ResultScene.cpp(31,48): error C2059: 構文エラー: ')'
-  (ソース ファイル '/02_ResourceFile/SceneFile/ResultScene.cpp' をコンパイルしています)
-  
-C:\Users\dorae\Desktop\HAL\class3\FindWork\就職作品プロジェクト\02_ResourceFile\SceneFile\TitleScene.cpp(164,12): error C2039: 'DeleteObject': 'Game' のメンバーではありません
-  (ソース ファイル '/02_ResourceFile/SceneFile/TitleScene.cpp' をコンパイルしています)
-      C:\Users\dorae\Desktop\HAL\class3\FindWork\就職作品プロジェクト\02_ResourceFile\Game.h(20,7):
-      'Game' の宣言を確認してください
-  
-C:\Users\dorae\Desktop\HAL\class3\FindWork\就職作品プロジェクト\02_ResourceFile\SceneFile\ResultScene.cpp(157,18): error C2039: 'DeleteObject': 'Game' のメンバーではありません
-  (ソース ファイル '/02_ResourceFile/SceneFile/ResultScene.cpp' をコンパイルしています)
-      C:\Users\dorae\Desktop\HAL\class3\FindWork\就職作品プロジェクト\02_ResourceFile\Game.h(20,7):
-      'Game' の宣言を確認してください
-  
-C:\Users\dorae\Desktop\HAL\class3\FindWork\就職作品プロジェクト\02_ResourceFile\SceneFile\GameSceneWait.cpp(170,26): error C2039: 'AddObject': 'Game' のメンバーではありません
-  (ソース ファイル '/02_ResourceFile/SceneFile/GameSceneWait.cpp' をコンパイルしています)
-      C:\Users\dorae\Desktop\HAL\class3\FindWork\就職作品プロジェクト\02_ResourceFile\Game.h(20,7):
-      'Game' の宣言を確認してください
-  
-C:\Users\dorae\Desktop\HAL\class3\FindWork\就職作品プロジェクト\02_ResourceFile\SceneFile\GameSceneWait.cpp(170,45): error C2059: 構文エラー: ')'
-  (ソース ファイル '/02_ResourceFile/SceneFile/GameSceneWait.cpp' をコンパイルしています)
-  
-C:\Users\dorae\Desktop\HAL\class3\FindWork\就職作品プロジェクト\02_ResourceFile\SceneFile\GameSceneWait.cpp(191,49): error C2039: 'AddObject': 'Game' のメンバーではありません
-  (ソース ファイル '/02_ResourceFile/SceneFile/GameSceneWait.cpp' をコンパイルしています)
-      C:\Users\dorae\Desktop\HAL\class3\FindWork\就職作品プロジェクト\02_ResourceFile\Game.h(20,7):
-      'Game' の宣言を確認してください
-  
-C:\Users\dorae\Desktop\HAL\class3\FindWork\就職作品プロジェクト\02_ResourceFile\SceneFile\GameSceneWait.cpp(322,18): error C2039: 'DeleteObject': 'Game' のメンバーではありません
-  (ソース ファイル '/02_ResourceFile/SceneFile/GameSceneWait.cpp' をコンパイルしています)
-      C:\Users\dorae\Desktop\HAL\class3\FindWork\就職作品プロジェクト\02_ResourceFile\Game.h(20,7):
-      'Game' の宣言を確認してください
-  
-C:\Users\dorae\Desktop\HAL\class3\FindWork\就職作品プロジェクト\02_ResourceFile\SceneFile\GameSceneWait.cpp(358,14): error C2039: 'DeleteObject': 'Game' のメンバーではありません
-  (ソース ファイル '/02_ResourceFile/SceneFile/GameSceneWait.cpp' をコンパイルしています)
-      C:\Users\dorae\Desktop\HAL\class3\FindWork\就職作品プロジェクト\02_ResourceFile\Game.h(20,7):
-      'Game' の宣言を確認してください
-  
-C:\Users\dorae\Desktop\HAL\class3\FindWork\就職作品プロジェクト\02_ResourceFile\SceneFile\TransScene.cpp(179,12): error C2039: 'DeleteObject': 'Game' のメンバーではありません
-  (ソース ファイル '/02_ResourceFile/SceneFile/TransScene.cpp' をコンパイルしています)
-      C:\Users\dorae\Desktop\HAL\class3\FindWork\就職作品プロジェクト\02_ResourceFile\Game.h(20,7):
-      'Game' の宣言を確認してください
-  
-C:\Users\dorae\Desktop\HAL\class3\FindWork\就職作品プロジェクト\02_ResourceFile\SceneFile\TransScene.cpp(236,27): error C2039: 'AddObject': 'Game' のメンバーではありません
-  (ソース ファイル '/02_ResourceFile/SceneFile/TransScene.cpp' をコンパイルしています)
-      C:\Users\dorae\Desktop\HAL\class3\FindWork\就職作品プロジェクト\02_ResourceFile\Game.h(20,7):
-      'Game' の宣言を確認してください
-  
-C:\Users\dorae\Desktop\HAL\class3\FindWork\就職作品プロジェクト\02_ResourceFile\SceneFile\TransScene.cpp(236,54): error C2059: 構文エラー: ')'
-  (ソース ファイル '/02_ResourceFile/SceneFile/TransScene.cpp' をコンパイルしています)
-  
 C:\Users\dorae\Desktop\HAL\class3\FindWork\就職作品プロジェクト\02_ResourceFile\input.cpp(41,25): warning C4100: 'hWnd': 参照されないパラメーター
   (ソース ファイル '/02_ResourceFile/input.cpp' をコンパイルしています)
   
+  Wipe.cpp
+  Zoom.cpp
+  StaticMesh.cpp
+  MeshManager.cpp
+  Bullet.cpp
+  Cube.cpp
+  Light.cpp
+  Model.cpp
+  Object.cpp
+  Sphere.cpp
+  Skydome.cpp
+  Renderer.cpp
+  RenderTarget.cpp
+  GameSceneExe.cpp
+  TitleScene.cpp
+  Fade.cpp
+  SnapshotOverlay.cpp
+  TransScene.cpp
+  Shader.cpp
+  ShaderManager.cpp
+  Square.cpp
+  Texture.cpp
+  TextureManager.cpp
+  Transform.cpp
+  utility.cpp
+  imgui.cpp
+  imgui_demo.cpp
+  imgui_draw.cpp
+  imgui_impl_dx11.cpp
+  imgui_impl_win32.cpp
+  imgui_tables.cpp
+  imgui_widgets.cpp
+  就職作品プロジェクト.vcxproj -> C:\Users\dorae\Desktop\HAL\class3\FindWork\就職作品プロジェクト\x64\Debug\NishiguchiGame.exe

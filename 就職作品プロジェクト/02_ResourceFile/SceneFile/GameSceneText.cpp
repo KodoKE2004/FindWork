@@ -113,31 +113,29 @@ void GameSceneText::Initialize()
     GameSceneExe::Initialize();
 
     auto& instance = Game::GetInstance();
+    auto  camera   = instance.GetCamera();
     TextureManager* textureMgr = instance; 
     //===============================
     //      シーン内オブジェクト生成
     //===============================
 
-    std::shared_ptr<Square> backGround = instance.AddObject<Square>();
+    std::shared_ptr<Square> backGround = AddObject<Square>(instance.GetCamera());
     backGround->SetName("backGround");
     backGround->SetTexture(textureMgr->GetTexture("BackGround/School.png"));
     backGround->SetScale(1280.0f,720.0f,1.0f);
-    m_MySceneObjects.emplace_back(backGround);
 
-    m_Girl = instance.AddObject<Square>();
+    m_Girl = AddObject<Square>(camera);
     m_Girl->SetName("m_Girl");
     m_Girl->SetTexture(textureMgr->GetTexture("Girl.png"));
     m_Girl->SetUV(1.0f,1.0f,5.0f,1.0f);
     m_Girl->SetScale(400.0f,600.0f,1.0f);
     m_Girl->SetPos  (  0.0f, 50.0f,0.0f);
-    m_MySceneObjects.emplace_back(m_Girl);
 
-    m_Boy = instance.AddObject<Square>();
+    m_Boy = AddObject<Square>(camera);
     m_Boy->SetName("m_Boy");
     m_Boy->SetTexture(textureMgr->GetTexture("LoveLatterOffer.png"));
     m_Boy->SetScale(600.0f,   400.0f, 1.0f);
     m_Boy->SetPos  (  0.0f, - 200.0f, 0.0f);
-    m_MySceneObjects.emplace_back(m_Boy);
 
     m_Number = ShuffleButtonIndices();
     for (int i = 0; i < MESSAGE_SLOT::SLOT_SIZE; ++i)
@@ -145,16 +143,13 @@ void GameSceneText::Initialize()
         float uvY = static_cast<float>(i + 1);
         m_GameRhythm [i] = kGameRhythm[m_Number[0]][i] * 0;
 
-        m_MessageSlot[i] = instance.AddObject<Button>();
+        m_MessageSlot[i] = AddObject<Button>(camera);
         m_MessageSlot[i]->SetName("MessageSlot " + std::to_string(i));
         m_MessageSlot[i]->SetTexture(textureMgr->GetTexture("Button/Frame.png"));
         m_MessageSlot[i]->SetBaseScale(NVector3(240.0f, 80.0f, 1.0f));
         m_MessageSlot[i]->SetTextTexture(textureMgr->GetTexture("Button/Text/MessageSlot.png"));
         m_MessageSlot[i]->GetTextObject()->SetUV(2.0f, uvY, 3.0f, 3.0f);
         m_MessageSlot[i]->SetPos(kButtonPos[i]);
-        
-        m_MySceneObjects.emplace_back(m_MessageSlot[i]);
-        m_MySceneObjects.emplace_back(m_MessageSlot[i]->GetTextObject());
     }
 
     m_InputIndex = 0;
@@ -163,9 +158,8 @@ void GameSceneText::Initialize()
     m_UvXOffset = 1.0f;
     std::fill(std::begin(m_Clicked), std::end(m_Clicked), false);
 
-    m_Bomber = instance.AddObject<Bomber>();
+    m_Bomber = AddObject<Bomber>(camera);
     m_Bomber->SetName("m_TimeGauge");
-    m_MySceneObjects.emplace_back(m_Bomber);
 
     PlayParams insideParam{};
     m_AudioList.emplace("rhythm", AudioConfig(L"SE/Rhythm.wav", insideParam, false, false));
@@ -266,6 +260,7 @@ void GameSceneText::Update(float tick)
 
 void GameSceneText::Draw()
 {
+    Scene::Draw();
 }
 
 void GameSceneText::Finalize()

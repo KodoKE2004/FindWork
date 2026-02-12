@@ -39,20 +39,19 @@ void GameSceneDodge::Initialize()
     GameSceneExe::Initialize();
 
     auto& instance = Game::GetInstance();
+    auto  camera   = instance.GetCamera();
     TextureManager* textureMar = instance; 
-    m_Background = instance.AddObject<Square>();
+
+    m_Background = AddObject<Square>(camera);
     m_Background->SetName("m_Background");
     m_Background->SetScale(1280.0f, 720.0f, 1.0f);
     m_Background->SetTexture(textureMar->GetTexture("Plane.png"));
-    m_MySceneObjects.emplace_back(m_Background);
 
-    m_Bomber = instance.AddObject<Bomber>();
+    m_Bomber = AddObject<Bomber>(camera);
     m_Bomber->SetName("m_TimeGauge");
-    m_MySceneObjects.emplace_back(m_Bomber);
 
-    m_Bird = instance.AddObject<Bird>();
+    m_Bird = AddObject<Bird>(camera);
     m_Bird->SetScale(50.0f,50.0f,1.0f);
-    m_MySceneObjects.emplace_back(m_Bird);
 
     PlayParams fallParams;
     m_AudioList.emplace("fall", AudioConfig(L"SE/RockFall.wav", fallParams, false, false));
@@ -93,16 +92,16 @@ void GameSceneDodge::Update(float tick)
         PlaySE("fall", 0.5f);
         for (int i = 0; i < createNum; ++i)
         {
-            std::shared_ptr<Stone> stone = instance.AddObject<Stone>();
+            std::shared_ptr<Stone> stone = std::make_shared<Stone>(instance.GetCamera());
+            stone->Initialize();
             m_StoneList.emplace_back(stone);
-            m_MySceneObjects.emplace_back(stone);
         }
     }
 
     for (auto stone : m_StoneList)
     {
         if (!stone->IsActive()) {
-            instance.DeleteObject(stone);
+            DeleteObject(stone);
         }
     }
 
@@ -119,6 +118,7 @@ void GameSceneDodge::Update(float tick)
 
 void GameSceneDodge::Draw()
 {
+    Scene::Draw();
 }
 
 void GameSceneDodge::Finalize()

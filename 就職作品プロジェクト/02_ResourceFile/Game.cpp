@@ -302,7 +302,7 @@ Game& Game::GetInstance()
 	return *m_pInstance.get();
 }
 
-std::shared_ptr<Scene&> Game::GetCurrentScene()
+std::shared_ptr<Scene> Game::GetCurrentScene()
 {
 	return m_pInstance->m_SceneCurrent;
 }
@@ -408,7 +408,7 @@ void Game::RegistDebugObject()
 	// ImGui 描画処理を登録
 	DebugUI::RedistDebugFunction([]()
 		{
-			std::vector<std::shared_ptr<Object>> obects = GetInstance().GetCurrentScene()->GetSceneObjects();
+			std::vector<std::shared_ptr<Object>> objects = GetInstance().GetCurrentScene()->GetSceneObjects();
 			
 			ImGui::Begin("Game Objects");
 

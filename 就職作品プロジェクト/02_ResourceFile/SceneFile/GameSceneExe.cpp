@@ -219,16 +219,13 @@ void GameSceneExe::Explode()
     m_FastChangeState = FastChangeState::Exploded;
 }
 
-
 void GameSceneExe::Finalize()
 {
     auto& instance = Game::GetInstance();
 
     // このシーンのオブジェクトを削除する
-    for (auto o : m_MySceneObjects) {
-        instance.DeleteObject(o);
-    }
     m_MySceneObjects.clear();
+
     // オーディオの停止
     if (AudioManager* audioManager = instance)
     {

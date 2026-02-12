@@ -74,7 +74,7 @@ public:
 
 	virtual void Initialize()		;
 	virtual void Update(float tick) ;
-	virtual void Draw();
+	virtual void Draw()	= 0;
 	virtual void Finalize()			;
 
 	void StageFail() {

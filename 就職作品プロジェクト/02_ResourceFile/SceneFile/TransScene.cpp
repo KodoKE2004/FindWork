@@ -133,7 +133,6 @@ void TransScene::Update(float tick)
 		return;
 	}
 
-
 	const auto phase = m_TransitionTexture->GetPhase();
     
 	if (!m_SceneOld) {
@@ -167,6 +166,7 @@ void TransScene::Update(float tick)
 
 void TransScene::Draw()
 {
+	Scene::Draw();
 }
 
 void TransScene::Finalize()
@@ -175,8 +175,7 @@ void TransScene::Finalize()
 	m_Step = STEP::OFF;
 	for (auto obj : m_MySceneObjects)
 	{
-		obj->SetTexture(nullptr);
-		instance.DeleteObject(obj);
+		DeleteObject(obj);
 	}
 	m_MySceneObjects.clear();
 
@@ -233,9 +232,7 @@ void TransScene::DrawNextScene()
 
 	m_NextSceneSRV = m_RenderTarget->GetSRV();
 
-	m_OverlayNext = instance.AddObject<SnapshotOverlay>();
+	m_OverlayNext = AddObject<SnapshotOverlay>(instance.GetCamera());
 	m_OverlayNext->SetSRV(m_NextSceneSRV.Get());
 	m_OverlayNext->SetAlpha(0.0f);
-	m_MySceneObjects.emplace_back(m_OverlayNext);
-
 }

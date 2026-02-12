@@ -9,8 +9,10 @@ void Button::Initialize()
 {
     MouseObject::Initialize();
     auto& instance = Game::GetInstance();
+    auto  scene    = instance.GetCurrentScene();
+    auto  camera   = instance.GetCamera();
 
-    m_Text = instance.AddObject<Square>();
+    m_Text = scene->AddObject<Square>(camera);
     m_Text->SetScale( 51.2f, 43.8f, 1.0f);
 }
 

@@ -18,6 +18,7 @@ void Bomber::Initialize()
 {
     auto& instance = Game::GetInstance();
     auto  scene    = instance.GetCurrentScene();
+    auto  camera   = instance.GetCamera();
     TextureManager* textureMgr = instance;
 
     Square::Initialize();
@@ -29,12 +30,12 @@ void Bomber::Initialize()
 
     m_Count = 3;
 
-    m_Rope = scene->AddObject<Square>();
+    m_Rope = scene->AddObject<Square>(camera);
     m_Rope->SetTexture(textureMgr->GetTexture("Bomber/Rope.png"));
     m_Rope->SetName("m_Rope");
     instance.GetCurrentScene()->GetSceneObjects().emplace_back(m_Rope);
 
-    m_Number = scene->AddObject<Square>();
+    m_Number = scene->AddObject<Square>(camera);
     m_Number->SetTexture(textureMgr->GetTexture("Bomber/CountThree.png"));
     m_Number->SetPos(1000.0f,0.0f,0.0f);
     m_Number->SetName("m_Number");
@@ -66,14 +67,14 @@ void Bomber::Draw()
 
 void Bomber::Finalize()
 {
-    auto& instance = Game::GetInstance();
-
+    auto scene = Game::GetInstance().GetCurrentScene();
+    
     if (m_Rope) {
-        instance.DeleteObject(m_Rope);
+        scene->DeleteObject(m_Rope);
     }
     
     if (m_Number) {
-        instance.DeleteObject(m_Number);
+        scene->DeleteObject(m_Number);
     }
     
     m_Rope.reset();

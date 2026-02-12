@@ -79,7 +79,7 @@ protected:
 	bool m_WasPlayBGM = false;
 	int  m_PreviousBeatIndex = 0;
     
-private:
+protected:
 
 	//--------------------------------
     // タイマー関連の関数群
@@ -90,10 +90,6 @@ private:
 		m_TimerList.emplace_back(timer);
 	}
 
-	static void ClearTimerList()
-	{
-        m_TimerList.clear();
-	}
 
 	// それぞれが作成したTimer変数をカウント
 	void CountTimer(const float tick)
@@ -130,7 +126,7 @@ public:
 
 	virtual void Initialize()		= 0;	// 初期化処理
 	virtual void Update(float tick) = 0;	// 更新処理
-	virtual void Draw()				= 0;	// 描画処理
+	virtual void Draw();					// 描画処理
 	virtual void Finalize()			= 0;	// 解放処理
 
 	// そのシーンのオブジェクトを定義
@@ -154,6 +150,10 @@ public:
 		return m_RelationData;
 	}
 
+	static void ClearTimerList()
+	{
+        m_TimerList.clear();
+	}
 
 	//================================
 	// オブジェクト管理
@@ -168,13 +168,12 @@ public:
 		static_assert(std::is_base_of_v<Object, T>, "TがObjectを継承していない");
 		static_assert(!std::is_abstract_v<T>, "Tが抽象クラスだった");
 
-		auto& camera  = Game::GetCamera();
 		auto& objects = m_MySceneObjects;
 
 		// コンストラクタ引数を完全転送して unique_ptrを作成
 		std::shared_ptr<T> up;
 		if constexpr (sizeof...(Args) == 0) {
-			up = std::make_shared<T>(camera);
+			up = std::make_shared<T>();
 		}
 		else {
 			up = std::make_shared<T>(std::forward<Args>(args)...);
@@ -203,14 +202,6 @@ public:
 		}
 		return res;
 	}
-
-	std::vector<std::shared_ptr<Object>> GetSceneObjects()
-	{
-		if (!m_MySceneObjects.empty()) {
-			return m_MySceneObjects;
-		}
-	}
-
 };
 
 
