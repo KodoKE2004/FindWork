@@ -111,6 +111,9 @@ void Square::SetPipeline()
 //======================
 void Square::Draw()
 {
+	// 描画の処理
+	ID3D11DeviceContext* devicecontext = Renderer::GetDeviceContext();
+
 	// State破壊の影響を受けないよう、パイプラインを先頭で再設定する
 	SetPipeline();
 	Renderer::SetBlendState(BS_ALPHABLEND);
@@ -123,9 +126,6 @@ void Square::Draw()
 	Matrix worldmtx;
 	worldmtx = s * r * t;
 	Renderer::SetWorldMatrix(&worldmtx); // GPUにセット
-
-	// 描画の処理
-	ID3D11DeviceContext* devicecontext = Renderer::GetDeviceContext();
 
 	m_Texture->SetGPU();
 
@@ -142,6 +142,7 @@ void Square::Draw()
 	Renderer::SetUV(u0, v0, u1, v1);
 
 	Camera::ScopedMode scepedMode(m_Camera, CAMERA_2D);
+
 
 	if (m_UseInstancing && m_InstanceCount > 0 && m_InstanceIDVB && m_InstanceTransformCB)
 	{

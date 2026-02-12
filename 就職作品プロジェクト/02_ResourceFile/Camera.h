@@ -25,13 +25,13 @@ private:
 	//-------------------------------
 	// 		   内部的に扱うメンバ変数
 	//-------------------------------
-	DirectX::SimpleMath::Vector3    m_Eye{};							// カメラの位置
-	DirectX::SimpleMath::Vector3    m_LookAt{ 0.0f, 0.0f, 0.0f };	// 注視点
-	DirectX::SimpleMath::Vector3    m_Up    { 0.0f, 1.0f, 0.0f };	// 上方向ベクトル
-	DirectX::SimpleMath::Vector3    m_Forward;						// 前方向ベクトル
+	DirectX::SimpleMath::Vector3    m_Eye{};						// カメラの位置
+	DirectX::SimpleMath::Vector3    m_LookAt { 0.0f, 0.0f, 0.0f };	// 注視点
+	DirectX::SimpleMath::Vector3    m_Up     { 0.0f, 1.0f, 0.0f };	// 上方向ベクトル
+	DirectX::SimpleMath::Vector3    m_Forward{ 0.0f, 0.0f, 1.0f };	// 前方向ベクトル
 	DirectX::SimpleMath::Vector3    m_eularRad;						// 注視点　弧度
 
-	DirectX::SimpleMath::Quaternion m_RotateQ{};						// 上方向ベクトルのクォータニオン
+	DirectX::SimpleMath::Quaternion m_RotateQ{};					// 上方向ベクトルのクォータニオン
 	DirectX::SimpleMath::Matrix	   m_ViewMatrix{};					// ビュー行列
 	DirectX::SimpleMath::Matrix	   m_ProjectionMatrix{};			// プロジェクション行列
 

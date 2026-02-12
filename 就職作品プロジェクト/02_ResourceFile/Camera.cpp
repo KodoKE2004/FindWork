@@ -4,9 +4,69 @@
 #include "Input.h"
 #include "Game.h"
 #include "DebugUI.h"
+#include <algorithm>
+#include <cmath>
 
 using namespace DirectX::SimpleMath;
 
+namespace
+{
+	constexpr float kMinFovDeg = 10.0f;
+	constexpr float kMaxFovDeg = 90.0f;
+	constexpr float kMinNearPlane = 0.01f;
+	constexpr float kMaxFarPlane = 100000.0f;
+
+	inline bool IsFinite(float value)
+	{
+		return std::isfinite(value) != 0;
+	}
+
+	inline float SanitizeFov(float fovDeg)
+	{
+		if (!IsFinite(fovDeg))
+		{
+			return 45.0f;
+		}
+		return std::clamp(fovDeg, kMinFovDeg, kMaxFovDeg);
+	}
+
+	inline float SanitizeNearPlane(float nearPlane)
+	{
+		if (!IsFinite(nearPlane))
+		{
+			return 0.1f;
+		}
+		return max(nearPlane, kMinNearPlane);
+	}
+
+	inline float SanitizeFarPlane(float farPlane, float nearPlane)
+	{
+		if (!IsFinite(farPlane))
+		{
+			return (nearPlane + 1000.0f, 1000.0f);
+		}
+
+		const float clampedFar = std::min(farPlane, kMaxFarPlane);
+		return max(clampedFar, nearPlane + 0.01f);
+	}
+
+	inline float SafeAspectRatio()
+	{
+		const uint32_t width = Application::GetWidth();
+		const uint32_t height = Application::GetHeight();
+		if (height == 0)
+		{
+			return 1.0f;
+		}
+
+		const float aspect = static_cast<float>(width) / static_cast<float>(height);
+		if (!IsFinite(aspect) || aspect <= 0.0f)
+		{
+			return 1.0f;
+		}
+		return aspect;
+	}
+}
 
 Camera::Camera()
 {
@@ -72,10 +132,12 @@ void Camera::SetCamera(CAMERA_MODE mode)
 		Renderer::SetViewMatrix(&m_ViewMatrix);
 
 		//プロジェクション行列の生成
-		float fieldOfView = DirectX::XMConvertToRadians(m_Fov);    // 視野角
+		m_Fov = SanitizeFov(m_Fov);
+		m_NearPlane = SanitizeNearPlane(m_NearPlane);
+		m_FarPlane = SanitizeFarPlane(m_FarPlane, m_NearPlane);
 
-		float aspectRatio = static_cast<float>(Application::GetWidth()) / 
-							static_cast<float>(Application::GetHeight());	// アスペクト比	
+		const float fieldOfView = DirectX::XMConvertToRadians(m_Fov);
+		const float aspectRatio = SafeAspectRatio();
 
 		//プロジェクション行列の生成
 		m_ProjectionMatrix = DirectX::XMMatrixPerspectiveFovLH(fieldOfView, aspectRatio, m_NearPlane, m_FarPlane);
@@ -142,7 +204,7 @@ void Camera::Pan(float yawDelta, float pitchDelta)
 
 void Camera::Zoom(float fovDelta)
 {
-	m_Fov = std::clamp(m_Fov + fovDelta, 10.0f, 90.0f);
+	m_Fov = SanitizeFov(m_Fov + fovDelta);
 }
 
 void Camera::Roll(float rollDelta)

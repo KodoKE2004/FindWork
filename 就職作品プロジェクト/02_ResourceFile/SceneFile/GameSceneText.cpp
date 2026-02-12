@@ -124,6 +124,9 @@ void GameSceneText::Initialize()
     backGround->SetTexture(textureMgr->GetTexture("BackGround/School.png"));
     backGround->SetScale(1280.0f,720.0f,1.0f);
 
+    m_Bomber = AddObject<Bomber>(camera);
+    m_Bomber->SetName("m_TimeGauge");
+
     m_Girl = AddObject<Square>(camera);
     m_Girl->SetName("m_Girl");
     m_Girl->SetTexture(textureMgr->GetTexture("Girl.png"));
@@ -158,8 +161,6 @@ void GameSceneText::Initialize()
     m_UvXOffset = 1.0f;
     std::fill(std::begin(m_Clicked), std::end(m_Clicked), false);
 
-    m_Bomber = AddObject<Bomber>(camera);
-    m_Bomber->SetName("m_TimeGauge");
 
     PlayParams insideParam{};
     m_AudioList.emplace("rhythm", AudioConfig(L"SE/Rhythm.wav", insideParam, false, false));

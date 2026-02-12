@@ -42,13 +42,13 @@ void GameSceneDodge::Initialize()
     auto  camera   = instance.GetCamera();
     TextureManager* textureMar = instance; 
 
+    m_Bomber = AddObject<Bomber>(camera);
+    m_Bomber->SetName("m_TimeGauge");
+
     m_Background = AddObject<Square>(camera);
     m_Background->SetName("m_Background");
     m_Background->SetScale(1280.0f, 720.0f, 1.0f);
     m_Background->SetTexture(textureMar->GetTexture("Plane.png"));
-
-    m_Bomber = AddObject<Bomber>(camera);
-    m_Bomber->SetName("m_TimeGauge");
 
     m_Bird = AddObject<Bird>(camera);
     m_Bird->SetScale(50.0f,50.0f,1.0f);
