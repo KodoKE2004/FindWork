@@ -309,6 +309,11 @@ std::shared_ptr<Scene> Game::GetCurrentScene()
 
 Camera& Game::GetCamera()
 {
+	if (!m_Camera)
+	{
+		Debug::Log("[[警告]] Cameraが未生成のため、遅延生成します", MESSAGE_COLOR::YELLOW);
+		m_Camera = std::make_unique<Camera>();
+	}
 	return *m_Camera.get();
 }
 

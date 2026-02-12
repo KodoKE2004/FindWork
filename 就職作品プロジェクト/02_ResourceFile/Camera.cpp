@@ -287,7 +287,7 @@ void Camera::DebugCameraParamUI()
 Camera::ScopedMode::ScopedMode(Camera& camera, CAMERA_MODE mode) : m_Camera(camera)
 {
 
-	m_PreviousMode = m_Camera.GetMode();
+	m_PreviousMode = camera.GetMode();
 	if (m_PreviousMode != mode)
 	{
 		m_Camera.SetCamera(mode);
