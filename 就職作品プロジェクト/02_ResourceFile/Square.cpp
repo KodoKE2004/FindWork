@@ -1,7 +1,14 @@
 ﻿#include "Square.h"
 #include "Game.h"
 #include <memory>
-#include "Game.h"
+
+#include "Renderer.h"
+#include <algorithm>
+
+namespace
+{
+	constexpr UINT kMaxInstanceTransforms = 512u;
+}
 
 using namespace std;
 using namespace DirectX::SimpleMath;
@@ -136,6 +143,16 @@ void Square::Draw()
 
 	Camera::ScopedMode scepedMode(m_Camera, CAMERA_2D);
 
+	if (m_UseInstancing && m_InstanceCount > 0 && m_InstanceIDVB && m_InstanceTransformCB)
+	{
+		Renderer::BindInstanceIDs(m_InstanceIDVB.Get(), 1);
+		ID3D11Buffer* instanceCB = m_InstanceTransformCB.Get();
+		devicecontext->VSSetConstantBuffers(6, 1, &instanceCB);
+		devicecontext->DrawIndexedInstanced(4, m_InstanceCount, 0, 0, 0);
+		return;
+	}
+
+
 	devicecontext->DrawIndexed(
 		4, // 描画するインデックス数（四角形なんで４）
 		0, // 最初のインデックスバッファの位置
@@ -148,6 +165,59 @@ void Square::Draw()
 void Square::Finalize()
 {
 	
+}
+
+
+void Square::UpdateInstanceBuffers()
+{
+	if (m_InstanceCount == 0)
+	{
+		m_InstanceIDVB.Reset();
+		m_InstanceTransformCB.Reset();
+		return;
+	}
+
+	auto ids = Renderer::MakeInstanceIDs(m_InstanceCount);
+	if (FAILED(Renderer::CreateInstanceIDBuffer(ids, m_InstanceIDVB.ReleaseAndGetAddressOf())))
+	{
+		m_InstanceIDVB.Reset();
+	}
+
+	D3D11_BUFFER_DESC desc{};
+	desc.ByteWidth = static_cast<UINT>(sizeof(Vector4) * m_InstancePositionScale.size());
+	desc.Usage = D3D11_USAGE_DYNAMIC;
+	desc.BindFlags = D3D11_BIND_CONSTANT_BUFFER;
+	desc.CPUAccessFlags = D3D11_CPU_ACCESS_WRITE;
+
+	D3D11_SUBRESOURCE_DATA init{};
+	init.pSysMem = m_InstancePositionScale.data();
+
+	if (FAILED(Renderer::GetDevice()->CreateBuffer(&desc, &init, m_InstanceTransformCB.ReleaseAndGetAddressOf())))
+	{
+		m_InstanceTransformCB.Reset();
+	}
+}
+
+
+void Square::SetInstancingEnabled(bool enabled)
+{
+	m_UseInstancing = enabled;
+}
+
+void Square::SetInstanceTransforms(const std::vector<InstanceTransform2D>& transforms)
+{
+	m_InstancePositionScale.clear();
+	m_InstanceCount = min(static_cast<UINT>(transforms.size()), kMaxInstanceTransforms);
+	m_InstancePositionScale.reserve(static_cast<size_t>(m_InstanceCount) * 2);
+
+	for (UINT i = 0; i < m_InstanceCount; ++i)
+	{
+		const auto& transform = transforms[i];
+		m_InstancePositionScale.emplace_back(transform.position.x, transform.position.y, transform.position.z, 1.0f);
+		m_InstancePositionScale.emplace_back(transform.scale.x, transform.scale.y, transform.scale.z, 1.0f);
+	}
+
+	UpdateInstanceBuffers();
 }
 
 // テクスチャを指定

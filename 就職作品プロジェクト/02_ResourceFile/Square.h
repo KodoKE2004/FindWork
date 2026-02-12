@@ -5,6 +5,9 @@
 #include "Texture.h"
 #include "Material.h"
 
+#include <vector>
+#include <wrl/client.h>
+
 //----------------------------------------
 //		2D	当たり判定の結果を受け取るクラス
 //----------------------------------------
@@ -43,9 +46,21 @@ struct isHitResult
 class Square : public Object
 {
 protected:
+	struct InstanceTransform2D
+	{
+		Vector3 position;
+		Vector3 scale;
+	};
+
 	// 描画の為の情報（メッシュに関わる情報）
 	IndexBuffer m_IndexBuffer; // インデックスバッファ
 	VertexBuffer<VERTEX_3D> m_VertexBuffer; // 頂点バッファ
+
+	Microsoft::WRL::ComPtr<ID3D11Buffer> m_InstanceIDVB;
+	Microsoft::WRL::ComPtr<ID3D11Buffer> m_InstanceTransformCB;
+	std::vector<DirectX::SimpleMath::Vector4> m_InstancePositionScale;
+	UINT m_InstanceCount = 0;
+	bool m_UseInstancing = false;
 
 	// 描画の為の情報（見た目に関わる部分）
 	std::shared_ptr<Texture>  m_Texture;	// テクスチャ
@@ -73,6 +88,10 @@ public:
 	void Update()	  override;
 	void Draw()		  override;
 	void Finalize()	  override;
+
+	void UpdateInstanceBuffers();
+	void SetInstancingEnabled(bool enabled);
+	void SetInstanceTransforms(const std::vector<InstanceTransform2D>& transforms);
 
 	// テクスチャを指定
 	void SetTexture(const char* imgname);

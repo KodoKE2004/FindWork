@@ -115,6 +115,7 @@ void Game::Initialize()
 	instance.m_ShaderManager->Add("PS_Unlit"  ,ShaderStage::PS);
 	instance.m_ShaderManager->Add("VS_Alpha"  ,ShaderStage::VS);
 	instance.m_ShaderManager->Add("PS_Alpha"  ,ShaderStage::PS);
+	instance.m_ShaderManager->Add("VS_Instansing2D"  ,ShaderStage::VS);
 
     AudioConfig bgmConfig{};
     bgmConfig.filePath = L"BGM/GameMelody.wav";

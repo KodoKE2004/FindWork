@@ -186,20 +186,21 @@ private:
 	static UINT m_BlitRenderWidth;
 	static UINT m_BlitRenderHeight;
 
-	inline std::vector<UINT> MakeInstanceIDs(UINT count);
 	static void EnsureGameRenderTarget();
 	static void EnsureBlitRenderTarget();
-	inline HRESULT CreateInstanceIDBuffer(const std::vector<UINT>& ids,
-										  ID3D11Buffer** outVB,
-										  D3D11_USAGE usage = D3D11_USAGE_IMMUTABLE,
-										  UINT cpuAccess = 0);
-	inline void BindInstanceIDs(ID3D11Buffer* vb, UINT slot = 1);
 	inline D3D11_INPUT_ELEMENT_DESC MakeInstancneIDElement(UINT semanticIndex = 1,
 														  UINT slot = 1,
 														  UINT alignedByteOffset = 0,
 														  UINT stepRate = 1);
 
 public:
+	static inline std::vector<UINT> MakeInstanceIDs(UINT count);
+	static inline void BindInstanceIDs(ID3D11Buffer* vb, UINT slot = 1);
+	static inline HRESULT CreateInstanceIDBuffer(const std::vector<UINT>& ids,
+												 ID3D11Buffer** outVB,
+												 D3D11_USAGE usage = D3D11_USAGE_IMMUTABLE,
+												 UINT cpuAccess = 0);
+
 	static ID3D11Device*		GetDevice	    (void)	{ return m_Device; }
 	static ID3D11DeviceContext* GetDeviceContext(void)	{ return m_DeviceContext; }
 
