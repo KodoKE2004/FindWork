@@ -147,15 +147,17 @@ void GameSceneText::Initialize()
         m_GameRhythm [i] = kGameRhythm[m_Number[0]][i] * 0;
 
         m_MessageSlot[i] = AddObject<Button>(instance.GetCamera());
+
         m_MessageSlot[i]->SetName("MessageSlot " + std::to_string(i));
         m_MessageSlot[i]->SetTexture(textureMgr->GetTexture("Button/Frame.png"));
         m_MessageSlot[i]->SetBaseScale(NVector3(240.0f, 80.0f, 1.0f));
         m_MessageSlot[i]->SetTextTexture(textureMgr->GetTexture("Button/Text/MessageSlot.png"));
-        m_MessageSlot[i]->GetTextObject()->SetUV(2.0f, uvY, 3.0f, 3.0f);
+        m_MessageSlot[i]->GetTextObject()->SetUV(2.0f, uvY, 2.0f, 3.0f);
         m_MessageSlot[i]->SetPos(kButtonPos[i]);
         m_MySceneObjects.emplace_back(m_MessageSlot[i]->GetTextObject());
     }
 
+    
     m_Bomber = AddObject<Bomber>(instance.GetCamera());
     m_Bomber->SetName("m_TimeGauge");
     m_MySceneObjects.emplace_back(m_Bomber->GetRope());

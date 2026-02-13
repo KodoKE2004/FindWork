@@ -32,8 +32,8 @@ private:
     size_t m_InputIndex = 0;            // 入力されたインデックス
     float m_JudgeWindow = 0.1f;         // ジャッジウィンドウの許容範囲
     float m_UvXOffset = 0.0f;           // UVのX座標オフセット
-    float m_UvXCount = 3.0f;            // UVのX座標カウント
-    bool m_isReaction = false;             // slotへの入力開始フラグ
+    float m_UvXCount = 2.0f;            // UVのX座標カウント
+    bool m_isReaction = false;          // slotへの入力開始フラグ
     bool m_isInputAll = false;          // すべてのslotの入力が終わったか
 
 
