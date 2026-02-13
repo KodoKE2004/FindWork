@@ -18,7 +18,7 @@ void GameSceneSlice::Initialize()
     // リズムの定義
     RhythmBeatConst beatConfig{};
     auto& rhythmBeat = Game::GetRhythmBeat();
-    beatConfig.Setup(Game::GetBgmBpm(), 8, 4, 16, 4);
+    beatConfig.Setup(Game::GetBgmBpm());
     rhythmBeat.Initialize(beatConfig, false, BASE_BEATS);
 
     // ゲーム内の総拍数を参照するためリズム定義より後

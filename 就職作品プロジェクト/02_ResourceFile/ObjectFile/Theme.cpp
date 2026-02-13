@@ -37,9 +37,13 @@ void Theme::Update()
     NVector3 scale = m_ScaleBase;
     m_Elapsed += Application::GetDeltaTime();
     
+    // お題表示時間時間：5/4小節 ※現在8/8小節計算のため2倍
+    const float activeBeat = 5.0f * 2.0f;
+
     // 一定の拍が経ったらactiveをfalseにする
-    float activeBeat = 5.0f * m_SecondPerBeat;
-    if (activeBeat < m_Elapsed) 
+    float activeTime = activeBeat * m_SecondPerBeat * 2.0f;
+
+    if (activeTime < m_Elapsed) 
     {
         m_isActive = false;
         return;

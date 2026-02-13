@@ -110,8 +110,8 @@ void GameSceneText::Initialize()
     // リズムの定義
     RhythmBeatConst beatConfig{};
     auto& rhythmBeat = Game::GetRhythmBeat();
-    beatConfig.Setup(Game::GetBgmBpm(), 8, 4, 16, 4);
-    rhythmBeat.Initialize(beatConfig, false, BASE_BEATS + 4);
+    beatConfig.Setup(Game::GetBgmBpm(), 8, 8, 16, 8);
+    rhythmBeat.Initialize(beatConfig, false, BASE_BEATS + 8);
     
     // リズムの拍を参照するためリズム定義より後
     GameSceneExe::Initialize();
@@ -204,6 +204,7 @@ void GameSceneText::Initialize()
             }
         }
     }
+
     m_ReactionAudio[0] = audioMgr->Create(m_AudioList.at("fanfare"));
     m_ReactionAudio[1] = audioMgr->Create(m_AudioList.at("failed"));
     m_ReactionAudio[2] = audioMgr->Create(m_AudioList.at("question"));

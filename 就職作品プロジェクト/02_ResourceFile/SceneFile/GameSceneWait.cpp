@@ -121,8 +121,8 @@ void GameSceneWait::Initialize()
     RhythmBeatConst beatConfig{};
     auto& rhythmBeat = Game::GetRhythmBeat();
 
-    beatConfig.Setup(Game::GetBgmBpm(), 8, 4, 16, 4);
-    rhythmBeat.Initialize(beatConfig, false, 32);
+    beatConfig.Setup(Game::GetBgmBpm());
+    rhythmBeat.Initialize(beatConfig, false, 16);
 
     // 難易度アップ処理 
     ++m_RelationData.stageCount;
@@ -139,14 +139,14 @@ void GameSceneWait::Initialize()
         const float upBpm = difficulty * baseBpmIncreasePerDifficulty;
         if (upBpm > 0.0f)
         {
-            beatConfig.Setup(Game::GetBgmBpm(), 8, 4, 16, 4);
+            beatConfig.Setup(Game::GetBgmBpm());
         }
         Debug::Log("[[検出]] 難易度アップ");
     }
     // スピード
     else if (m_RelationData.stageCount % speedUpStageInterval == 0) {
         float upBpm = (static_cast<float>(m_RelationData.stageCount) / speedUpStageInterval) * speedUpBpmIncrease;
-        beatConfig.Setup(Game::GetBgmBpm() + upBpm, 4, 1);
+        beatConfig.Setup(Game::GetBgmBpm() + upBpm);
         Debug::Log("[[検出]] スピードアップ");
 
     }

@@ -11,6 +11,7 @@ class GameSceneDodge : public GameSceneExe
 private:
     std::shared_ptr<Square> m_Background;
     std::shared_ptr<Bird>  m_Bird;
+    std::shared_ptr<Stone> m_Stone;                  // インスタンシング描画の参照元
     std::vector<std::shared_ptr<Stone>> m_StoneList;
 
     float m_StoneSpawnElapsed = 0.0f;

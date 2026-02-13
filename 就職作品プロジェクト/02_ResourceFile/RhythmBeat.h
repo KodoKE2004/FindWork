@@ -12,18 +12,18 @@ struct RhythmBeatConst
 
     // ŒvZŒ‹‰Ê
     float secondsPerBeat = 0.0f;   // 1”i•ª•ê‚Ì‰¹•„j‚Ì•b
-    float secondsPerBar = 0.0f;   // 1¬ß‚Ì•b
+    float secondsPerBar  = 0.0f;   // 1¬ß‚Ì•b
     float secondsPerTick = 0.0f;   // 1Tick‚Ì•b
     float ticksPerSecond = 0.0f;   // 1•b‚ ‚½‚èTick
 
     float secondsPerHit = 0.0f;   // š1‰ñ’@‚­ŠÔŠui¬ß‚ğ hitsPerBar ‚ÅŠ„‚éj
     float hitsPerSecond = 0.0f;   // š1•b‚ ‚½‚è’@‚­‰ñ”
 
-    void Setup(float bpm,
-        int beatsPerBar = 4,
-        int beatUnit = 4,
+    void Setup(float bpm = 120.0f,
+        int beatsPerBar  = 8,
+        int beatUnit     = 8,
         int ticksPerBeat = 16,
-        int hitsPerBar = 4)
+        int hitsPerBar   = 8)
     {
         m_Bpm = bpm;
         m_BeatsPerBar   = beatsPerBar;
