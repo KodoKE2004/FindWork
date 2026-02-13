@@ -153,9 +153,9 @@ void ChangeScenePush(SceneTransitionParam& state, Args&&... args)
 	// テンプレートなので
 	// 既定がSceneでなければエラー
 	// T が Scene を継承していること、かつ抽象クラスでないことをチェック
-	static_assert(std::is_base_of_v<Scene, T>, L"T は Scene を継承している必要があります");
-	static_assert(!std::is_abstract_v<T>, L"T は抽象クラスではいけません");
-	static_assert(std::is_constructible_v<T, Camera&, Args...>,L"T は (Camera&, Args...) で構築できる必要があります");
+	static_assert(std::is_base_of_v<Scene, T>, "T は Scene を継承している必要があります");
+	static_assert(!std::is_abstract_v<T>, "T は抽象クラスではいけません");
+	static_assert(std::is_constructible_v<T, Camera&, Args...>, "T は (Camera&, Args...) で構築できる必要があります");
 
 	Debug::Log("[[検出]] シーンのPush");
 

@@ -130,6 +130,11 @@ public:
 	virtual void Draw();					// 描画処理
 	virtual void Finalize()			= 0;	// 解放処理
 
+	
+	Camera& GetCamera() {
+		return m_Camera;
+	}
+
 	// そのシーンのオブジェクトを定義
 	std::vector<std::shared_ptr<Object>> GetSceneObjects();
 	void SetTheme(const std::shared_ptr<Theme>& theme) {
@@ -169,8 +174,6 @@ public:
 		static_assert(std::is_base_of_v<Object, T>, "TがObjectを継承していない");
 		static_assert(!std::is_abstract_v<T>, "Tが抽象クラスだった");
 
-		auto& objects = m_MySceneObjects;
-
 		// コンストラクタ引数を完全転送して unique_ptrを作成
 		std::shared_ptr<T> up;
 		if constexpr (sizeof...(Args) == 0) {
@@ -180,7 +183,7 @@ public:
 			up = std::make_shared<T>(std::forward<Args>(args)...);
 		}
 
-		objects.emplace_back(up);
+		m_MySceneObjects.emplace_back(up);
 		up->Initialize(); // 初期化
 		return up;
 	}

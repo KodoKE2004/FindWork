@@ -117,7 +117,6 @@ void GameSceneText::Initialize()
     GameSceneExe::Initialize();
 
     auto& instance = Game::GetInstance();
-    auto  camera   = instance.GetCamera();
     TextureManager* textureMgr = instance; 
     //===============================
     //      シーン内オブジェクト生成
@@ -128,17 +127,14 @@ void GameSceneText::Initialize()
     backGround->SetTexture(textureMgr->GetTexture("BackGround/School.png"));
     backGround->SetScale(1280.0f,720.0f,1.0f);
 
-    m_Bomber = AddObject<Bomber>(camera);
-    m_Bomber->SetName("m_TimeGauge");
-
-    m_Girl = AddObject<Square>(camera);
+    m_Girl = AddObject<Square>(instance.GetCamera());
     m_Girl->SetName("m_Girl");
     m_Girl->SetTexture(textureMgr->GetTexture("Girl.png"));
     m_Girl->SetUV(1.0f,1.0f,5.0f,1.0f);
     m_Girl->SetScale(400.0f,600.0f,1.0f);
     m_Girl->SetPos  (  0.0f, 50.0f,0.0f);
 
-    m_Boy = AddObject<Square>(camera);
+    m_Boy = AddObject<Square>(instance.GetCamera());
     m_Boy->SetName("m_Boy");
     m_Boy->SetTexture(textureMgr->GetTexture("LoveLatterOffer.png"));
     m_Boy->SetScale(600.0f,   400.0f, 1.0f);
@@ -150,7 +146,7 @@ void GameSceneText::Initialize()
         float uvY = static_cast<float>(i + 1);
         m_GameRhythm [i] = kGameRhythm[m_Number[0]][i] * 0;
 
-        m_MessageSlot[i] = AddObject<Button>(camera);
+        m_MessageSlot[i] = AddObject<Button>(instance.GetCamera());
         m_MessageSlot[i]->SetName("MessageSlot " + std::to_string(i));
         m_MessageSlot[i]->SetTexture(textureMgr->GetTexture("Button/Frame.png"));
         m_MessageSlot[i]->SetBaseScale(NVector3(240.0f, 80.0f, 1.0f));
@@ -159,6 +155,9 @@ void GameSceneText::Initialize()
         m_MessageSlot[i]->SetPos(kButtonPos[i]);
     }
 
+    m_Bomber = AddObject<Bomber>(instance.GetCamera());
+    m_Bomber->SetName("m_TimeGauge");
+
     m_InputIndex = 0;
     m_CurrentRhythmIndex = 0;
     m_isReaction = false;
@@ -166,6 +165,7 @@ void GameSceneText::Initialize()
     std::fill(std::begin(m_Clicked), std::end(m_Clicked), false);
 
 
+    // 音源の追加
     PlayParams insideParam{};
     m_AudioList.emplace("rhythm", AudioConfig(L"SE/Rhythm.wav", insideParam, false, false));
 

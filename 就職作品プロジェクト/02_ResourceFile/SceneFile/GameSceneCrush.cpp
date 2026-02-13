@@ -15,7 +15,6 @@ void GameSceneCrush::Initialize()
     DebugUI::TEXT_CurrentScene = "GameSceneCrush";
 #endif 
     auto& instance = Game::GetInstance();
-    auto  camera   = instance.GetCamera();
 
     // シーンに繋ぐ情報は基底初期化後の一番最初に設定
     m_RelationData.isClear = false;
@@ -29,17 +28,18 @@ void GameSceneCrush::Initialize()
     // ゲーム内の総拍数を参照するためリズム定義より後
     GameSceneExe::Initialize();
 
-    m_Bomber = AddObject<Bomber>(camera);
-    m_Bomber->SetName("m_Bomber");
     
     int difficult = m_RelationData.stageCount / 4;
     if (difficult >= 4){ difficult = 3; }
     for (int i = 0; i <= difficult; ++i)
     {
-        auto enemy = AddObject<Enemy>(camera);
+        auto enemy = AddObject<Enemy>(instance.GetCamera());
         enemy->SetName("m_Enemy");
         enemy->SetPos  ( 0.0f, - 180.0f, 1.0f);
     }
+
+    m_Bomber = AddObject<Bomber>(instance.GetCamera());
+    m_Bomber->SetName("m_Bomber");
 }
 
 void GameSceneCrush::Update(float tick)

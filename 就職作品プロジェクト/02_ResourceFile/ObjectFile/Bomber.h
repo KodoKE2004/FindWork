@@ -38,6 +38,20 @@ public:
     void ReadyExpo() { m_isReadyExpo = true; }
     bool IsReadyExpo() const { return m_isReadyExpo; }
 
+    std::shared_ptr<Square> GetRope() {
+        if (m_Rope) {
+            return m_Rope;
+        }
+        return nullptr; 
+    }
+    
+    std::shared_ptr<Square> GetNumber() {
+        if (m_Number) {
+            return m_Number;
+        }
+        return nullptr; 
+    }
+
 private:
     void UpdateUV();
 
@@ -47,5 +61,6 @@ private:
 
     // 
     void CountDownTexture();
+
 };
 

@@ -30,10 +30,6 @@ private:
 	std::shared_ptr<Scene> m_SceneOld ;
 	std::shared_ptr<Scene> m_SceneNext;
 
-	// オフスクリーン用
-	std::unique_ptr<RenderTarget> m_RenderTarget;
-	Microsoft::WRL::ComPtr<ID3D11ShaderResourceView> m_NextSceneSRV;
-
 	std::shared_ptr<SnapshotOverlay> m_OverlayOld ;
 	std::shared_ptr<SnapshotOverlay> m_OverlayNext;
 
@@ -71,10 +67,6 @@ public:
 	void Finalize()			override;
 
 	SCENE_NO GetSceneNo() const override { return SCENE_NO::TRANSITION; }
-	/// <summary>
-	/// 次のシーンの一フレーム目を描画する
-	/// </summary>
-	void DrawNextScene();
 
 	void SetTransitionParam(SceneTransitionParam param) 
 	{	

@@ -25,24 +25,24 @@ void GameSceneSlice::Initialize()
     GameSceneExe::Initialize();
 
     auto& instance = Game::GetInstance();
-    auto  camera   = instance.GetCamera();
     TextureManager* textureMgr = instance;
 
     //===============================
     //      シーン内オブジェクト生成
     //===============================
-    m_Bomber = AddObject<Bomber>(camera);
-    m_Bomber->SetName("m_TimeGauge");
     
     int difficult = m_RelationData.stageCount / 4;
     for (int i = 0; i <= difficult; ++i)
     {
-        auto enemy = AddObject<Enemy>(camera);
+        auto enemy = AddObject<Enemy>(instance.GetCamera());
         enemy->SetName("m_Enemy");
         enemy->SetTexture(textureMgr->GetTexture("EnemyNormal.png"));
         enemy->SetPos(200.0f, -100.0f, 0.0f);
         enemy->SetScale(100.0f, 100.0f, 1.0f);
     }
+
+    m_Bomber = AddObject<Bomber>(instance.GetCamera());
+    m_Bomber->SetName("m_TimeGauge");
 }
 
 void GameSceneSlice::Update(float tick)

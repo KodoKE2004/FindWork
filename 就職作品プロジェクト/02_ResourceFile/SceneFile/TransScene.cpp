@@ -167,7 +167,18 @@ void TransScene::Update(float tick)
 
 void TransScene::Draw()
 {
-	Scene::Draw();
+	if (m_RequestNextSceneDraw) {
+		if (m_SceneNext) {
+			m_SceneNext->Draw();
+		}
+	}
+	else
+	{
+		if (m_SceneOld) {
+			m_SceneOld->Draw();
+		}
+	}
+
 }
 
 void TransScene::Finalize()
@@ -183,57 +194,7 @@ void TransScene::Finalize()
 	m_OverlayNext.reset();
 	m_TransitionTexture = nullptr ;
     instance.ClearTransitionTexture();
-	m_NextSceneSRV.Reset();
-	m_RenderTarget.reset();
 	m_RequestNextSceneDraw = false;
 
 }
 
-void TransScene::DrawNextScene()
-{
-
-	auto& instance  = Game::GetInstance();
-	if (!m_SceneNext) {
-		return;
-	}
-
-	auto* device   = Renderer::GetDevice();
-	auto* context  = Renderer::GetDeviceContext();
-	auto  viewport = Renderer::GetViewport();
-
-	// 退避
-	Microsoft::WRL::ComPtr<ID3D11RenderTargetView> oldRTV;
-	Microsoft::WRL::ComPtr<ID3D11DepthStencilView> oldDSV;
-	context->OMGetRenderTargets(1, oldRTV.GetAddressOf(), oldDSV.GetAddressOf());
-
-	D3D11_VIEWPORT oldVP{};
-	UINT vpCount = 1;
-	context->RSGetViewports(&vpCount, &oldVP);
-
-	const float clear[4] = { 0.0f, 0.0f, 0.0f, 1.0f };
-
-	if (!m_RenderTarget) {
-		m_RenderTarget = std::make_unique<RenderTarget>();
-	}
-
-	// オフスクリーン描画
-	m_RenderTarget->Begin(context, clear);
-	for (auto obj : m_SceneNext->GetSceneObjects()) {
-		if (obj) obj->Draw();
-	}
-	// 必要なら Theme もここで描く
-	// instance.GetTheme()->Draw();
-	m_RenderTarget->End(context);
-
-	context->OMSetRenderTargets(1, oldRTV.GetAddressOf(), oldDSV.Get());
-	context->RSSetViewports(1, &oldVP);
-	m_RenderTarget = std::make_unique<RenderTarget>();
-
-	m_RenderTarget->Create(device, (UINT)viewport.Width, (UINT)viewport.Height, true);
-
-	m_NextSceneSRV = m_RenderTarget->GetSRV();
-
-	m_OverlayNext = AddObject<SnapshotOverlay>(instance.GetCamera());
-	m_OverlayNext->SetSRV(m_NextSceneSRV.Get());
-	m_OverlayNext->SetAlpha(0.0f);
-}

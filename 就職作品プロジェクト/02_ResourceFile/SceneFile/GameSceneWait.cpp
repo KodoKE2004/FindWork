@@ -161,13 +161,12 @@ void GameSceneWait::Initialize()
     m_WasPlayBGM         = false;
 
     auto& instance = Game::GetInstance();
-    auto  camera   = instance.GetCamera();
     TextureManager* textureMgr = instance.GetInstance();
 
-    m_LifeParticleEmitter = std::make_shared<ParticleEmitter>(camera);
+    m_LifeParticleEmitter = std::make_shared<ParticleEmitter>(instance.GetCamera());
 
     // スカイドーム初期化
-    m_Skydome = AddObject<Skydome>(camera);
+    m_Skydome = AddObject<Skydome>(instance.GetCamera());
     m_Skydome->SetName("m_Skydome");
     m_Skydome->SetSkyDomeMode(true);
     m_Skydome->SetTexture(textureMgr->GetTexture("SkydomeSpace.png"));
