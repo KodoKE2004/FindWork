@@ -12,7 +12,8 @@ void Button::Initialize()
     auto  scene    = instance.GetCurrentScene();
     auto  camera   = instance.GetCamera();
 
-    m_Text = scene->AddObject<Square>(camera);
+    m_Text = std::make_shared<Square>(camera);
+    m_Text->Initialize();
     m_Text->SetScale( 51.2f, 43.8f, 1.0f);
 }
 

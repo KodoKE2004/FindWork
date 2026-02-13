@@ -43,6 +43,8 @@ void GameSceneSlice::Initialize()
 
     m_Bomber = AddObject<Bomber>(instance.GetCamera());
     m_Bomber->SetName("m_TimeGauge");
+    m_MySceneObjects.emplace_back(m_Bomber->GetRope());
+    m_MySceneObjects.emplace_back(m_Bomber->GetNumber());
 }
 
 void GameSceneSlice::Update(float tick)

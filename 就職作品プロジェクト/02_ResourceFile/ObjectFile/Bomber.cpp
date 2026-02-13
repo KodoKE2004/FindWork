@@ -29,11 +29,13 @@ void Bomber::Initialize()
 
     m_Count = 3;
 
-    m_Rope = scene.AddObject<Square>(scene.GetCamera());
+    m_Rope = std::make_shared<Square>(scene.GetCamera());
+    m_Rope->Initialize();
     m_Rope->SetTexture(textureMgr->GetTexture("Bomber/Rope.png"));
     m_Rope->SetName("m_Rope");
 
-    m_Number = scene.AddObject<Square>(scene.GetCamera());
+    m_Number = std::make_shared<Square>(scene.GetCamera());
+    m_Number->Initialize();
     m_Number->SetTexture(textureMgr->GetTexture("Bomber/CountThree.png"));
     m_Number->SetPos(1000.0f,0.0f,0.0f);
     m_Number->SetName("m_Number");
