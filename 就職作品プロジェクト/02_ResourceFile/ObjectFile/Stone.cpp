@@ -51,6 +51,7 @@ void Stone::Initialize()
     m_VerticalMotion.terminalVelocity = -9000.0f;
     m_VerticalMotion.groundY = -10000.0f;
 
+    SetShader("VS_Instansing2D","PS_Alpha");
 }
 
 void Stone::Update()
@@ -73,7 +74,7 @@ void Stone::Draw()
 
 void Stone::DrawInstanced(const std::vector<std::shared_ptr<Stone>>& stones)
 {
-     std::vector<InstanceTransform2D> transforms;
+    std::vector<InstanceTransform2D> transforms;
     transforms.reserve(stones.size());
 
     for (const auto& stone : stones)
@@ -98,8 +99,7 @@ void Stone::DrawInstanced(const std::vector<std::shared_ptr<Stone>>& stones)
 
     SetInstancingEnabled(true);
     SetInstanceTransforms(transforms);
-    Stone::Draw();
-    SetInstancingEnabled(false);
+    Square::Draw();
 }
 
 void Stone::Finalize()
