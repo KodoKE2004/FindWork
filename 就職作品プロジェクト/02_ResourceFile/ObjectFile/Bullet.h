@@ -16,6 +16,14 @@ public:
 
     bool IsAlive() const { return m_IsAlive; }
 
+    void Alive() {
+        m_IsAlive = true;
+    }
+
+    void DeAlive() {
+        m_IsAlive = false;
+    }
+
 private:
     DirectX::SimpleMath::Vector3 m_Direction; // movement direction
     float m_Speed;                            // movement speed

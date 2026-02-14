@@ -56,14 +56,14 @@ protected:
 	IndexBuffer m_IndexBuffer; // インデックスバッファ
 	VertexBuffer<VERTEX_3D> m_VertexBuffer; // 頂点バッファ
 
-	Microsoft::WRL::ComPtr<ID3D11Buffer> m_InstanceTransformCB;
-	std::vector<DirectX::SimpleMath::Vector4> m_InstancePositionScale;
+	Microsoft::WRL::ComPtr<ID3D11Buffer>		m_InstanceTransformCB;
+	std::vector<DirectX::SimpleMath::Vector4>	m_InstancePositionScale;
 	UINT m_InstanceCount = 0;
 	bool m_UseInstancing = false;
 
 	// 描画の為の情報（見た目に関わる部分）
 	pShared<Texture>  m_Texture;	// テクスチャ
-	pUnique<Material> m_Materiale;	//マテリアル
+	pUnique<Material> m_Material;	//マテリアル
 
 	// UV座標の情報
 

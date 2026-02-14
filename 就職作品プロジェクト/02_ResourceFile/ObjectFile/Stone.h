@@ -18,6 +18,13 @@ public:
     bool IsActive() const {
         return m_isActive;
     }
+
+    void Active() {
+        m_isActive = true;
+    }
+    void DeActive() {
+        m_isActive = false;
+    }
 };
 
 

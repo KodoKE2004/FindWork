@@ -9,9 +9,10 @@ Stone::Stone(Camera& cam) : Square(cam)
 
 namespace 
 {
+    static std::mt19937 engine{ std::random_device{}() };
+
     void SpawnPos(Stone& stone)
     {
-        static std::mt19937 engine{ std::random_device{}() };
         float screenWidthHalf = static_cast<float>(Application::GetWidth()) * 0.5f;
         float kMinX = - screenWidthHalf;
         float kMaxX =   screenWidthHalf;
@@ -40,8 +41,9 @@ void Stone::Initialize()
     Square::Initialize();
     auto& instance = Game::GetInstance();
     TextureManager* textureMgr = instance;
-    SetTexture(textureMgr->GetTexture("Stone.png"));
+    SetTexture(textureMgr->GetTexture("GameScene/Stone.png"));
     SpawnPos(*this);
+    SetScale(100.0f, 100.0f, 1.0f);
 
     m_isActive = true;
 
@@ -62,6 +64,10 @@ void Stone::Update()
 
     const float deltaTime = Application::GetDeltaTime();
     m_Position.y = Calculator::Physics::UpdateVerticalPosition(m_VerticalMotion, m_Position.y, deltaTime);
+
+    if (GetPos().y <= -750.0f) {
+        DeActive();
+    }
 }
 
 void Stone::Draw()
@@ -86,7 +92,7 @@ void Stone::DrawInstanced(const vector<pShared<Stone>>& stones)
         const auto stonePos = stone->GetPos();
         const auto stoneScale = stone->GetScale();
         transforms.push_back({
-            DirectX::SimpleMath::Vector3(stonePos.x, stonePos.y, stonePos.z),
+            DirectX::SimpleMath::Vector3(stonePos.x,   stonePos.y,   stonePos.z),
             DirectX::SimpleMath::Vector3(stoneScale.x, stoneScale.y, stoneScale.z)
             });
     }

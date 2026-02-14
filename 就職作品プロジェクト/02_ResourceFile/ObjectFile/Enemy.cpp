@@ -12,7 +12,7 @@ void Enemy::Initialize()
 {   
     TextureManager* textureMgr = Game::GetInstance();
     Square::Initialize();
-    SetTexture(textureMgr->GetTexture("EnemyNormal.png"));
+    SetTexture(textureMgr->GetTexture("GameScene/EnemyNormal.png"));
 
     m_isDeath = false;
 }
@@ -40,7 +40,7 @@ void Enemy::Death()
     }
 
     TextureManager* textureMgr = Game::GetInstance();
-    SetTexture(textureMgr->GetTexture("EnemyDeath.png"));
+    SetTexture(textureMgr->GetTexture("GameScene/EnemyDeath.png"));
     m_isDeath = true;
 }
 

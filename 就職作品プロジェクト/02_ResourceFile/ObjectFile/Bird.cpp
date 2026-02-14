@@ -15,7 +15,7 @@ void Bird::Initialize()
     Square::Initialize();
     auto& instance = Game::GetInstance();
     TextureManager* textureMgr = instance;
-    SetTexture(textureMgr->GetTexture("Sparrow.png"));
+    SetTexture(textureMgr->GetTexture("GameScene/Sparrow.png"));
 
     SetPos  (   0.0f,   0.0f, 0.0f);
     SetScale( 100.0f, 100.0f, 1.0f);

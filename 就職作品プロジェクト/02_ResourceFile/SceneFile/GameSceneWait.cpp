@@ -187,7 +187,7 @@ void GameSceneWait::Initialize()
         const float distance = 130.0f;
 
         pShared<Square> life = AddObject<Square>(instance.GetCamera());
-        life->SetTexture(textureMgr->GetTexture("DestroyBullet.png"));
+        life->SetTexture(textureMgr->GetTexture("GameScene/DestroyBullet.png"));
         life->SetPos(lifePosX + ( i * distance), lifePosY, 1.0f);
         life->SetName("m_life");
         life->SetScale(100.0f, 100.0f, 1.0f);

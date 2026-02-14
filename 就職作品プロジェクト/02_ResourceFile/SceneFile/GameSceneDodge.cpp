@@ -46,17 +46,16 @@ void GameSceneDodge::Initialize()
     auto& instance = Game::GetInstance();
     TextureManager* textureMar = instance; 
 
-    m_Background = AddObject<Square>(instance.GetCamera());
+    /*m_Background = AddObject<Square>(instance.GetCamera());
     m_Background->SetName("m_Background");
     m_Background->SetScale(1280.0f, 720.0f, 1.0f);
-    m_Background->SetTexture(textureMar->GetTexture("Plane.png"));
+    m_Background->SetTexture(textureMar->GetTexture("Plane.png"));*/
 
     m_Bird = AddObject<Bird>(instance.GetCamera());
     m_Bird->SetScale(50.0f,50.0f,1.0f);
 
-    m_Stone = std::make_shared<Stone>(instance.GetCamera());
-    m_Stone->Initialize();
-
+    m_Stone = AddObject<Stone>(instance.GetCamera());
+    
     PlayParams fallParams;
     m_AudioList.emplace("fall", AudioConfig(L"SE/RockFall.wav", fallParams, false, false));
 
@@ -98,11 +97,12 @@ void GameSceneDodge::Update(float tick)
     {
         m_StoneSpawnElapsed -= kStoneSpawnInterval;
         int createNum = 8 * (m_RelationData.stageCount / 6 + 1);
-        PlaySE("fall", 0.5f);
+        
         for (int i = 0; i < createNum; ++i)
         {
             pShared<Stone> stone = std::make_shared<Stone>(instance.GetCamera());
             stone->Initialize();
+            stone->SetScale(m_Stone->GetScale());
             m_StoneList.emplace_back(stone);
         }
     }
@@ -128,10 +128,6 @@ void GameSceneDodge::Update(float tick)
     {
         ChangeScene();
     }
-
-
-
-
 }
 
 void GameSceneDodge::Draw()

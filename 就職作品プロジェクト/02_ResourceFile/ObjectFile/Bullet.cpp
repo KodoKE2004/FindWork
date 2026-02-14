@@ -42,7 +42,7 @@ void Bullet::Update() {
     m_Rotation.y = pitch; // pitch
     m_Rotation.z = 0.0f;
 
-    if (toCam.Length() > 10000.0f) {
+    if (toCam.Length() > 20000.0f) {
         m_IsAlive = false;
     }
 }

@@ -1,17 +1,14 @@
 #pragma once
 #include <vector>
 #include "GameSceneExe.h"
-#include "Bullet.h"
+#include "Player.h"
 
 class GameSceneCrush : public GameSceneExe
 {
 private:
     
     pShared<Square> m_Plane;
-    pShared<Square> m_BackGround;
-    pShared<Bullet> m_Bullet;
-    vector<pShared<Bullet>> m_BulletList;
-
+    pShared<Player> m_Player; 
 public:
 
    GameSceneCrush() = delete;

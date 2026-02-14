@@ -1,6 +1,7 @@
 #include "Player.h"
 #include "Car.h"
 #include "Application.h"
+#include "Game.h"
 
 #include <cmath>
 #include <algorithm>
@@ -18,95 +19,76 @@ namespace
 
         return std::sqrt(2.0f * safeGravity * safeHeight);
     }
-
-    PlayerTuningState CalculateDefaultTuningParameters()
-    {
-        PlayerTuningState params{};
-        params.jumpHeight         =  400.0f;
-        params.gravity            = 1800.0f;
-        params.jumpInitialVelocity = CalculateJumpInitialVelocity(params.gravity, params.jumpHeight);
-        params.groundMoveSpeed         = 12.0f;
-        params.airControl.acceleration = 3600.0f;
-        params.airControl.maxSpeed     =  700.0f;
-        params.airControl.airFriction  = 3200.0f;
-        return params;
-    }
 }
 
 Player::Player(Camera& cam) : Square(cam)
 {
-    m_TuningParameters = CalculateDefaultTuningParameters();
-    m_AirControl = m_TuningParameters.airControl;
-    ApplyJumpState();
-    ApplyAirControlState();
+
 }
 
 void Player::Initialize()
 {
     Square::Initialize();
     SetPos(0.0f, -200.0f, 0.0f);
-    m_VerticalMotion.groundY = m_Position.y;
-    m_VerticalMotion.velocity = 0.0f;
-    m_HorizontalMotion.velocity = 0.0f;
+
+    auto& instance = Game::GetInstance();
+    m_Bullet = std::make_shared<Bullet>(instance.GetCamera());
+    m_Bullet->Initialize();
+    
 }
 
 void Player::Update()
 {
-    const float deltaTime = Application::GetDeltaTime();
-    
-    const bool jumpTriggered = m_IsGround && Input::GetKeyTrigger(VK_RETURN);
-    if (jumpTriggered)
+    const float tick = Application::GetDeltaTime();
+    m_CreateBulletElapsed += tick;
+    if (m_CreateBulletTime <= m_CreateBulletTime)
     {
-        m_VerticalMotion.velocity = m_JumpInitialVelocity;
-        m_IsGround = false;
+        m_CreateBulletElapsed = 0.0f;
+        auto& instance = Game::GetInstance();
+        TextureManager* textureMgr = instance;
+
+        auto bullet = std::make_shared<Bullet>(instance.GetCamera());
+
+        NVector3 pos     = GetPos();
+        float scaleHalfY = GetScale().y * 0.5f;
+        float baseScale = 100.0f;
+        DirectX::SimpleMath::Vector2 scaleBullet{
+            12.0f   * baseScale,
+            13.717f * baseScale
+        };
+        
+        bullet->Initialize();
+        bullet->SetTexture(textureMgr->GetTexture("Bullet.png"));
+        bullet->SetPos  (pos.x, pos.y + scaleHalfY, 0.0f);
+        bullet->SetScale(scaleBullet.x, scaleBullet.y, 0.0f);
+        bullet->Alive();
+        m_BulletList.emplace_back(bullet);
+    }
+    
+    for (auto bullet : m_BulletList)
+    {
+        bullet->Update();
     }
 
-    const float updatedY = Calculator::Physics::UpdateVerticalPosition(m_VerticalMotion, m_Position.y, deltaTime);
-    m_Position.y = updatedY;
-
-    if (std::fabs(m_Position.y - m_VerticalMotion.groundY) <= 0.001f) {
-        m_IsGround = true;
-        m_HorizontalMotion.velocity = 0.0f;
-    }
+    m_BulletList.erase(
+        std::remove_if(m_BulletList.begin(), m_BulletList.end(),
+            [](const pShared<Bullet>& bullet)
+            {
+                return !bullet || !bullet->IsAlive();
+            }),
+        m_BulletList.end()
+    );
 
 }
 
 void Player::Draw()
 {
     Square::Draw();
+
 }
 
 void Player::Finalize()
 {
     Square::Finalize();
-}
-
-void Player::SetAirControlState(const PlayerAieControlState& state)
-{
-    m_AirControl = state;
-    m_TuningParameters.airControl = state;
-    ApplyAirControlState();
-}
-
-void Player::ApplyAirControlState()
-{
-    m_HorizontalMotion.acceleration = m_AirControl.acceleration;
-    m_HorizontalMotion.maxSpeed     = m_AirControl.maxSpeed;
-    m_HorizontalMotion.airFriction  = m_AirControl.airFriction;
-}
-
-void Player::ApplyJumpState()
-{
-    m_JumpInitialVelocity = m_TuningParameters.jumpInitialVelocity;
-    if (m_JumpInitialVelocity <= 0.0f)
-    {
-        m_JumpInitialVelocity = CalculateJumpInitialVelocity(
-            m_TuningParameters.gravity,
-            m_TuningParameters.jumpHeight);
-    }
-
-    m_VerticalMotion.gravity = m_TuningParameters.gravity;
-    m_VerticalMotion.weight  = 1.0f;
-    m_VerticalMotion.terminalVelocity = - max(m_TuningParameters.gravity, 0.0f) * 5.0f;
 }
 
