@@ -5,11 +5,11 @@ cbuffer InstanceBuffer : register(b6)
 	float4 gPositionScale[1024];
 }
 
-PS_IN main(in VS_IN input)
+PS_IN main(in VS_IN input, uint instanceId : SV_InstanceID)
 {
 	PS_IN output = (PS_IN) 0;
 
-	uint indexBase = input.instanceID * 2;
+	uint indexBase = instanceId * 2;
 	float4 instancePos = gPositionScale[indexBase + 0];
 	float4 instanceScale = gPositionScale[indexBase + 1];
 

@@ -56,7 +56,6 @@ protected:
 	IndexBuffer m_IndexBuffer; // インデックスバッファ
 	VertexBuffer<VERTEX_3D> m_VertexBuffer; // 頂点バッファ
 
-	Microsoft::WRL::ComPtr<ID3D11Buffer> m_InstanceIDVB;
 	Microsoft::WRL::ComPtr<ID3D11Buffer> m_InstanceTransformCB;
 	std::vector<DirectX::SimpleMath::Vector4> m_InstancePositionScale;
 	UINT m_InstanceCount = 0;

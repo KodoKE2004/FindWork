@@ -144,9 +144,8 @@ void Square::Draw()
 	Camera::ScopedMode scepedMode(m_Camera, CAMERA_2D);
 
 
-	if (m_UseInstancing && m_InstanceCount > 0 && m_InstanceIDVB && m_InstanceTransformCB)
+	if (m_UseInstancing && m_InstanceCount > 0 && m_InstanceTransformCB) 
 	{
-		Renderer::BindInstanceIDs(m_InstanceIDVB.Get(), 1);
 		ID3D11Buffer* instanceCB = m_InstanceTransformCB.Get();
 		devicecontext->VSSetConstantBuffers(6, 1, &instanceCB);
 		devicecontext->DrawIndexedInstanced(4, m_InstanceCount, 0, 0, 0);
@@ -173,15 +172,8 @@ void Square::UpdateInstanceBuffers()
 {
 	if (m_InstanceCount == 0)
 	{
-		m_InstanceIDVB.Reset();
 		m_InstanceTransformCB.Reset();
 		return;
-	}
-
-	auto ids = Renderer::MakeInstanceIDs(m_InstanceCount);
-	if (FAILED(Renderer::CreateInstanceIDBuffer(ids, m_InstanceIDVB.ReleaseAndGetAddressOf())))
-	{
-		m_InstanceIDVB.Reset();
 	}
 
 	D3D11_BUFFER_DESC desc{};
