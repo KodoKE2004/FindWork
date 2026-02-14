@@ -2,6 +2,7 @@
 #include "Game.h"
 #include "Calculator.h"
 #include "DebugUI.h"
+#include <algorithm>
 #include <random>
 #include <array>
 namespace
@@ -53,6 +54,9 @@ void GameSceneDodge::Initialize()
     m_Bird = AddObject<Bird>(instance.GetCamera());
     m_Bird->SetScale(50.0f,50.0f,1.0f);
 
+    m_Stone = std::make_shared<Stone>(instance.GetCamera());
+    m_Stone->Initialize();
+
     PlayParams fallParams;
     m_AudioList.emplace("fall", AudioConfig(L"SE/RockFall.wav", fallParams, false, false));
 
@@ -103,13 +107,22 @@ void GameSceneDodge::Update(float tick)
         }
     }
 
-    for (auto stone : m_StoneList)
+    for (const auto& stone : m_StoneList)
     {
-        if (!stone->IsActive()) {
-            DeleteObject(stone);
+        if (!stone) {
+            continue;
         }
+        stone->Update();
     }
 
+    m_StoneList.erase(
+        std::remove_if(m_StoneList.begin(), m_StoneList.end(),
+            [](const std::shared_ptr<Stone>& stone)
+            {
+                return !stone || !stone->IsActive();
+            }),
+            m_StoneList.end()
+        );
 
     if (IsChange())
     {
@@ -124,11 +137,21 @@ void GameSceneDodge::Update(float tick)
 void GameSceneDodge::Draw()
 {
     Scene::Draw();
-    
+    if (m_Stone)
+    {
+        m_Stone->DrawInstanced(m_StoneList);
+    }
 }
 
 void GameSceneDodge::Finalize()
 {
+    if (m_Stone)
+    {
+        m_Stone->Finalize();
+        m_Stone.reset();
+    }
+    m_StoneList.clear();
+
     GameSceneExe::Finalize();
 }
 
