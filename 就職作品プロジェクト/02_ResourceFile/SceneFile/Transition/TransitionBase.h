@@ -76,8 +76,8 @@ protected:
     VertexBuffer<VERTEX_3D> m_VertexBuffer; // 頂点バッファ
 
     // 描画の為の情報（見た目に関わる部分）
-    std::shared_ptr<Texture>  m_Texture;	// テクスチャ
-    std::unique_ptr<Material> m_Material;	//マテリアル
+    pShared<Texture>  m_Texture;	// テクスチャ
+    pUnique<Material> m_Material;	//マテリアル
 
     Microsoft::WRL::ComPtr<ID3D11ShaderResourceView> m_InputSRV;
     TRANS_PHASE m_Phase;
@@ -135,7 +135,7 @@ public:
     
     // テクスチャ
     void SetTexture(const char* imgname);
-    void SetTexture(std::shared_ptr<Texture> texture);
+    void SetTexture(pShared<Texture> texture);
 
     // UV座標
     void SetUV(const float& nu, const float& nv, const float& sx, const float& sy);

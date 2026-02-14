@@ -17,8 +17,8 @@ void Sphere::Initialize()
     m_Rotation = NVector3(0.0f,0.0f,0.0f);
     m_Scale    = NVector3(1.0f,1.0f,1.0f);
 
-    std::vector<VERTEX_3D> vertices;
-    std::vector<unsigned int> indices;
+    vector<VERTEX_3D> vertices;
+    vector<unsigned int> indices;
 
     for (int stack = 0; stack <= m_Stack; ++stack)
     {

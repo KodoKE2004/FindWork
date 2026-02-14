@@ -29,7 +29,7 @@ void Wipe::Initialize()
 
     if (m_Duration <= 0.0f) m_Duration = 1.0f;
 
-    std::vector<VERTEX_3D> vertices(4);
+    vector<VERTEX_3D> vertices(4);
     vertices[0].position = NVector3(-0.5f,  0.5f, 0.0f);
     vertices[1].position = NVector3( 0.5f,  0.5f, 0.0f);
     vertices[2].position = NVector3(-0.5f, -0.5f, 0.0f);
@@ -43,7 +43,7 @@ void Wipe::Initialize()
     vertices[3].uv = Vector2(1, 1);
 
     m_VertexBuffer.Create(vertices);
-    std::vector<unsigned int> indices{ 0,1,2,3 };
+    vector<unsigned int> indices{ 0,1,2,3 };
     m_IndexBuffer.Create(indices);
 
     SetShader("VS_Alpha", "PS_Alpha");

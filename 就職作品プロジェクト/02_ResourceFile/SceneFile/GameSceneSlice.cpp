@@ -51,7 +51,7 @@ void GameSceneSlice::Update(float tick)
 {
     using namespace Calculator::Collider2D; 
 
-    std::vector<std::shared_ptr<Enemy>> enemys = GetObjects<Enemy>();
+    vector<pShared<Enemy>> enemys = GetObjects<Enemy>();
     if (IsAllDeathEnemy(enemys)) {
         // SceneExe‚Å‘‚ß‚ÉƒNƒŠƒA‚ğ‚µ‚½ê‡‚à‘z’è
         StageClear();

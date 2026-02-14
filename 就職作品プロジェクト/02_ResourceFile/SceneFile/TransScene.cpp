@@ -55,7 +55,7 @@ void TransScene::Initialize()
 	}
 
 	const auto& relationData = m_SceneOld->GetRelationData();
-	auto applyTransitionTexture = [&](const std::shared_ptr<TransitionBase>& transition)
+	auto applyTransitionTexture = [&](const pShared<TransitionBase>& transition)
 	{
 		if (!transition) {
 			return;

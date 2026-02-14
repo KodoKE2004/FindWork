@@ -11,7 +11,7 @@
 #include <wrl/client.h>
 
 struct MeshInfo {
-    std::shared_ptr<StaticMesh> mesh;
+    pShared<StaticMesh> mesh;
     std::string filePath;
     std::string texDirectory;
 };
@@ -23,11 +23,11 @@ protected:
     MeshInfo     m_MeshModel;
     MeshRenderer m_MeshRenderer;
 
-    VertexBuffer<VERTEX_3D> m_VertexBuffer;
-    IndexBuffer             m_IndexBuffer;
-    std::vector<SUBSET>     m_Subsets;
-    std::vector<std::shared_ptr<Texture>> m_Textures;
-    std::vector<std::unique_ptr<Material>> m_Materials;
+    VertexBuffer<VERTEX_3D>   m_VertexBuffer;
+    IndexBuffer               m_IndexBuffer;
+    vector<SUBSET>            m_Subsets;
+    vector<pShared<Texture>>  m_Textures;
+    vector<pUnique<Material>> m_Materials;
     bool m_IsSky = false;
     float m_SkyRadius = 1.0f;
     Microsoft::WRL::ComPtr<ID3D11RasterizerState> m_RS_CullFront;

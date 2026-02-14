@@ -358,7 +358,7 @@ void TransitionBase::SetPipeline()
 void TransitionBase::DrawDebugFullscreenSolid()
 {
 	// 呼ばれているが描けていない場合の切り分け: 単色フルスクリーン描画
-	static std::shared_ptr<Texture> s_DebugTexture;
+	static pShared<Texture> s_DebugTexture;
 	if (!s_DebugTexture) {
 		TextureManager* textureMgr = Game::GetInstance();
 		s_DebugTexture = textureMgr->GetTexture("Plane.png");
@@ -421,7 +421,7 @@ void TransitionBase::SetTexture(const char* imgname)
 	assert(sts == true);
 }
 
-void TransitionBase::SetTexture(std::shared_ptr<Texture> texture)
+void TransitionBase::SetTexture(pShared<Texture> texture)
 {
 	m_Texture = texture;
 }

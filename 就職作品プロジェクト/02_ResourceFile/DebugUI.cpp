@@ -1,7 +1,7 @@
 ﻿#include "DebugUI.h"
 #include "Game.h"
 
-std::vector<std::function<void(void)>> DebugUI::m_debugfunction;
+vector<std::function<void(void)>> DebugUI::m_debugfunction;
 std::string DebugUI::TEXT_CurrentScene = "TitleScene" ;
 
 namespace {

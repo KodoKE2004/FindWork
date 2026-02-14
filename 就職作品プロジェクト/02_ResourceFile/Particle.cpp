@@ -1,6 +1,6 @@
 #include "Particle.h"
 
-void ParticleEmitter::Emit(std::shared_ptr<Texture> tex,
+void ParticleEmitter::Emit(pShared<Texture> tex,
     const NVector3& pos,
     uint32_t count)
 {

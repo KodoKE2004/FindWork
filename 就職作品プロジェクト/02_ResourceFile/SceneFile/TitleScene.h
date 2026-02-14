@@ -10,10 +10,10 @@
 class TitleScene : public Scene
 {
 private:
-	std::shared_ptr<Square>	m_TitleLogo		 ;
-	std::shared_ptr<Square> m_PressEnter	 ;
-	std::shared_ptr<Square> m_FadeMask		 ;
-	std::shared_ptr<Square> m_PressEnterBack ;
+	pShared<Square>	m_TitleLogo;
+	pShared<Square> m_PressEnter;
+	pShared<Square> m_FadeMask;
+	pShared<Square> m_PressEnterBack ;
 
 	static constexpr float AlphaChangeTimer = 0.5f;
 

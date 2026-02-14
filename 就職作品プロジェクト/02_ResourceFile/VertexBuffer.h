@@ -20,7 +20,7 @@ public:
 	//=========================
 	// VertexBufferの作成
 	//=========================
-	void Create(const std::vector<T>& vertices)
+	void Create(const vector<T>& vertices)
 	{
 		ID3D11Device* device = Renderer::GetDevice();
 		assert(device != nullptr);											  // デバイスが有効であることを確認
@@ -58,7 +58,7 @@ public:
 	//=========================
 	// VertexBufferの変更
 	//=========================
-	void Modify(const std::vector<T>& vertices)
+	void Modify(const vector<T>& vertices)
 	{
 		// 頂点データの書き換え
 		D3D11_MAPPED_SUBRESOURCE mappedResource;

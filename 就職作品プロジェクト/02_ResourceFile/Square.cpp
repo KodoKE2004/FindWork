@@ -227,7 +227,7 @@ void Square::SetTexture(const char* imgname)
     Object::SetTexture(m_Texture);
 }
 
-void Square::SetTexture(std::shared_ptr<Texture> texture)
+void Square::SetTexture(pShared<Texture> texture)
 {
 	m_Texture = texture;
 

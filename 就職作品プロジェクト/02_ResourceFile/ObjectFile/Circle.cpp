@@ -14,7 +14,7 @@ void Circle::Initialize()
     if (m_Radius <= 0.0f) m_Radius = 1.0f;
 
     // 頂点（中心 + 円周）を作成
-    std::vector<VERTEX_3D> vertices;
+    vector<VERTEX_3D> vertices;
     vertices.reserve(m_Segments + 1);
 
     VERTEX_3D center{};
@@ -42,7 +42,7 @@ void Circle::Initialize()
     }
 
     // インデックス（中心を0として扇状に三角形を作る）
-    std::vector<unsigned int> indices;
+    vector<unsigned int> indices;
     indices.reserve(m_Segments * 3);
     for (int i = 1; i <= m_Segments; ++i)
     {

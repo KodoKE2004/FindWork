@@ -19,7 +19,7 @@ void Cube::Initialize()
 	m_Scale    = NVector3(1.0f, 1.0f, 1.0f);
 
 	// 頂点データ
-	std::vector<VERTEX_3D>	vertices;
+	vector<VERTEX_3D>	vertices;
 
 	vertices.resize(24);
 
@@ -153,7 +153,7 @@ void Cube::Initialize()
 	m_VertexBuffer.Create(vertices);
 
 	// インデックスバッファ生成
-	std::vector<unsigned int> indices;
+	vector<unsigned int> indices;
 	indices.resize(36);
 
 

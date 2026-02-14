@@ -27,11 +27,11 @@ class TransScene : public Scene
 {
 private:
 	// シーンの前後 
-	std::shared_ptr<Scene> m_SceneOld ;
-	std::shared_ptr<Scene> m_SceneNext;
+	pShared<Scene> m_SceneOld;
+	pShared<Scene> m_SceneNext;
 
-	std::shared_ptr<SnapshotOverlay> m_OverlayOld ;
-	std::shared_ptr<SnapshotOverlay> m_OverlayNext;
+	pShared<SnapshotOverlay> m_OverlayOld;
+	pShared<SnapshotOverlay> m_OverlayNext;
 
     // タイマー関連
 	float m_Timer	 = 0.0f;
@@ -52,7 +52,7 @@ private:
 
 	TRANS_MODE m_TransMode;
 
-	std::shared_ptr<TransitionBase> m_TransitionTexture;
+	pShared<TransitionBase> m_TransitionTexture;
 
 public:
     // コンストラクタとデストラクタ
@@ -73,12 +73,12 @@ public:
 		m_transParam  = param;  
 	}
 
-	void SetOldScene (const std::shared_ptr<Scene>& sceneOld)     { m_SceneOld  = sceneOld;  }
-	void SetNextScene(const std::shared_ptr<Scene>& sceneNext)    { m_SceneNext = sceneNext; }
+	void SetOldScene (const pShared<Scene>& sceneOld) { m_SceneOld = sceneOld; }
+	void SetNextScene(const pShared<Scene>& sceneNext){ m_SceneNext = sceneNext; }
 	void SetTransMode(TRANS_MODE mode)     { m_TransMode = mode;	  }
 	void SetStep(STEP step)				   { m_Step		 = step;	  }
 	void SetTimer(float timer)			   { m_Timer	 = timer;	  }
 
-	SCENE_NO GetOldSceneNo()  const { return m_SceneOld ? m_SceneOld->GetSceneNo() : SCENE_NO::NONE; }
+	SCENE_NO GetOldSceneNo()  const { return m_SceneOld  ? m_SceneOld->GetSceneNo() : SCENE_NO::NONE; }
 	SCENE_NO GetNextSceneNo() const { return m_SceneNext ? m_SceneNext->GetSceneNo() : SCENE_NO::NONE; }
 };

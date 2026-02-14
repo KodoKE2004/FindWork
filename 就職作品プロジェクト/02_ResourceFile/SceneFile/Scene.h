@@ -40,11 +40,11 @@ struct SceneRelationData
 	SCENE_NO previousScene = SCENE_NO::NONE;
     SCENE_NO oldScene	   = SCENE_NO::NONE;
 	SCENE_NO nextScene     = SCENE_NO::NONE;
-    std::shared_ptr<Square> transTexture = nullptr;
+	pShared<Square> transTexture = nullptr;
 	bool isClear      = true;
     bool pad[3]		  = { false,false,false };
 
-	void SetTransitionTarget(std::shared_ptr<Square> transition)
+	void SetTransitionTarget(pShared<Square> transition)
 	{
 		if (transition == nullptr) return;
 		this->transTexture = transition;
@@ -59,14 +59,16 @@ struct SceneRelationData
 class Scene
 {
 protected:
+
+
 	// PressEnterの点滅タイマー間隔
     static constexpr float DEFAULT_VOLUME = 0.2f; 
 protected:
 	
-	std::vector<std::shared_ptr<Object>>		 m_MySceneObjects;
+	vector<pShared<Object>>		 m_MySceneObjects;
 	std::unordered_map<std::string, AudioConfig> m_AudioList;
-	std::shared_ptr<Skydome> m_Skydome = nullptr;
-	std::shared_ptr<Theme>	 m_Theme   = nullptr;
+	pShared<Skydome> m_Skydome = nullptr;
+	pShared<Theme>	 m_Theme   = nullptr;
 	Camera&					 m_Camera;
 
 	const int stageCountMax = 5;
@@ -75,7 +77,7 @@ protected:
 
 	// ExeSceneで使う変数
 	float m_TimerGameExe = 0.0f;				// 経過時間
-    static std::vector<float*>	m_TimerList;	// タイマー格納用
+    static vector<float*>	m_TimerList;	// タイマー格納用
 
 	bool m_WasPlayBGM = false;
 	int  m_PreviousBeatIndex = 0;
@@ -136,11 +138,11 @@ public:
 	}
 
 	// そのシーンのオブジェクトを定義
-	std::vector<std::shared_ptr<Object>> GetSceneObjects();
-	void SetTheme(const std::shared_ptr<Theme>& theme) {
+	vector<pShared<Object>> GetSceneObjects();
+	void SetTheme(const pShared<Theme>& theme) {
 		m_Theme = theme;
 	}
-	std::shared_ptr<Theme> GetTheme() const {
+	pShared<Theme> GetTheme() const {
 		return m_Theme;
 	}
 
@@ -164,18 +166,18 @@ public:
 	//================================
 	// オブジェクト管理
 	//================================
-	void DeleteObject(const std::shared_ptr<Object>& pt); // オブジェクトを削除する
+	void DeleteObject(const pShared<Object>& pt); // オブジェクトを削除する
 	void DeleteAllObject(); // オブジェクトをすべて削除する
 
 	// オブジェクトを追加する
 	template<class T, class... Args>
-	std::shared_ptr<T> AddObject(Args&&... args)
+	pShared<T> AddObject(Args&&... args)
 	{
 		static_assert(std::is_base_of_v<Object, T>, "TがObjectを継承していない");
 		static_assert(!std::is_abstract_v<T>, "Tが抽象クラスだった");
 
 		// コンストラクタ引数を完全転送して unique_ptrを作成
-		std::shared_ptr<T> up;
+		pShared<T> up;
 		if constexpr (sizeof...(Args) == 0) {
 			up = std::make_shared<T>();
 		}
@@ -190,11 +192,11 @@ public:
 
 	// オブジェクトを取得する
 	template<class T>
-	std::vector<std::shared_ptr<T>> GetObjects()
+	vector<pShared<T>> GetObjects()
 	{
 		static_assert(std::is_base_of_v<Object, T>, L"TがObjectを継承していない");
 
-		std::vector<std::shared_ptr<T>> res;
+		vector<pShared<T>> res;
 		for (const auto& o : m_MySceneObjects) {
 			// dynamic_castで型をチェック
 			if (!o) {

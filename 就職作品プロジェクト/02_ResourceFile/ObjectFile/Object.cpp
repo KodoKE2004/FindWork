@@ -66,7 +66,7 @@ void Object::SetColor(const float r, const float g, const float b, const float a
 	m_Color = color;
 }
 
-void Object::SetTexture(std::shared_ptr<Texture> setTexture)
+void Object::SetTexture(pShared<Texture> setTexture)
 {
 	m_Texture = setTexture;
 }

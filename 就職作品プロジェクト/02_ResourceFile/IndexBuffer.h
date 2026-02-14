@@ -18,7 +18,7 @@ public:
 	IndexBuffer() = default;
 	~IndexBuffer() = default;
 
-	void Create(const std::vector<unsigned int>& indices) {
+	void Create(const vector<unsigned int>& indices) {
 		// デバイスの取得
 		ID3D11Device* device = nullptr;
 		device = Renderer::GetDevice();

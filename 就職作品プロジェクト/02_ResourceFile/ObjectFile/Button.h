@@ -3,7 +3,7 @@
 class Button : public MouseObject
 {
 private:
-    std::shared_ptr<Square> m_Text;
+    pShared<Square> m_Text;
     NVector3 m_BaseScale;
 public:
     Button(Camera& cam);
@@ -19,7 +19,7 @@ public:
     void SetTextScale(NVector3 scale) {
         m_Text->SetScale(scale);
     }
-    void SetTextTexture(std::shared_ptr<Texture> m_Tex);
+    void SetTextTexture(pShared<Texture> m_Tex);
 
     void SetTextColor(const Color color);
     void SetTextColor(const float r, const float g, const float b, const float a);
@@ -28,7 +28,7 @@ public:
         return m_BaseScale;
     }
 
-    std::shared_ptr<Square> GetTextObject() const {
+    pShared<Square> GetTextObject() const {
         return m_Text;
     }
 };

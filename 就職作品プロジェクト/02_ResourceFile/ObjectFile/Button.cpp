@@ -33,7 +33,7 @@ void Button::Finalize()
     MouseObject::Finalize();
 }
 
-void Button::SetTextTexture(std::shared_ptr<Texture> m_Tex)
+void Button::SetTextTexture(pShared<Texture> m_Tex)
 {
     m_Text->SetTexture(m_Tex);
 }

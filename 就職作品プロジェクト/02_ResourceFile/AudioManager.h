@@ -52,13 +52,13 @@ public:
 	// 便利系
 	void StopAll(bool immediate = true);
 	// クリップ取得（必要なら）
-	std::shared_ptr<AudioClip> GetClip(std::string_view key);
-	std::shared_ptr<Audio>	   Create(const AudioConfig& cfg);
+	pShared<AudioClip> GetClip(std::string_view key);
+	pShared<Audio>	   Create(const AudioConfig& cfg);
 
 private:
 	// 低レベルI/O
-	std::shared_ptr<AudioClip> loadWavFull(const std::wstring& fullPath, std::string* err = nullptr);
-    std::shared_ptr<AudioClip> LoadWavClip(const std::wstring& path);
+	pShared<AudioClip> loadWavFull(const std::wstring& fullPath, std::string* err = nullptr);
+	pShared<AudioClip> LoadWavClip(const std::wstring& path);
 
 	// パス結合
 	std::wstring joinPath(const std::wstring& base, const std::wstring& rel) const;
@@ -74,13 +74,13 @@ private:
 
 	// 登録
 	std::wstring m_baseDir; // 共通基準パス
-	std::unordered_map<std::string, std::shared_ptr<AudioClip>> m_key2clip;	 // name -> clip
+	std::unordered_map<std::string, pShared<AudioClip>> m_key2clip;			 // name -> clip
 	std::unordered_map<int, std::string> m_id2key;							 // id -> name
     std::unordered_map<std::wstring, std::weak_ptr<AudioClip>>  m_PathCache; // path -> clip（重複読み込み防止）
 
 	// 実行中インスタンス
 	std::mutex mtx_;
-	std::vector<std::unique_ptr<Audio>> m_instances;
+	vector<pUnique<Audio>> m_instances;
 	uint32_t m_nextId = 1;
 };
 

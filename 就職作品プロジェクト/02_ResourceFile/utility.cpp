@@ -30,7 +30,7 @@ namespace utility {
 			0,
 			nullptr,
 			nullptr);
-		std::vector<char> dest(dest_size, '\0');
+		vector<char> dest(dest_size, '\0');
 		if (::WideCharToMultiByte(
 			CP_ACP,
 			0U,
@@ -57,7 +57,7 @@ namespace utility {
 			-1,
 			nullptr,
 			0U);
-		std::vector<wchar_t> dest(dest_size, L'\0');
+		vector<wchar_t> dest(dest_size, L'\0');
 		if (::MultiByteToWideChar(CP_UTF8, 0U, src.data(), -1, dest.data(), static_cast<int>(dest.size())) == 0) {
 			throw std::system_error{ static_cast<int>(::GetLastError()), std::system_category() };
 		}

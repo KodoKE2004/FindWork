@@ -17,17 +17,17 @@ private:
         SLOT_SIZE
     };
 
-    std::shared_ptr<Square> m_Boy;
-    std::shared_ptr<Square> m_Girl;
+    pShared<Square> m_Boy;
+    pShared<Square> m_Girl;
 
-    std::array<std::shared_ptr<Button>, MESSAGE_SLOT::SLOT_SIZE> m_MessageSlot {nullptr, nullptr, nullptr};
+    std::array<pShared<Button>, MESSAGE_SLOT::SLOT_SIZE> m_MessageSlot {nullptr, nullptr, nullptr};
     std::array<size_t, MESSAGE_SLOT::SLOT_SIZE> m_Number     = { 0, 0, 0};
     std::array<float,  MESSAGE_SLOT::SLOT_SIZE> m_GameRhythm = { 0.0f, 0.0f, 0.0f };    // リズムを格納する配列
     std::array<bool ,  MESSAGE_SLOT::SLOT_SIZE> m_Clicked    = { false, false, false }; // クリックされたかどうかの配列
     MESSAGE_SLOT m_SelectedSlot = SLOT_SIZE;
 
-    std::array<std::shared_ptr<Audio>, 3> m_ReactionAudio;
-    std::shared_ptr<Audio> m_ReactionActive;
+    std::array<pShared<Audio>, 3> m_ReactionAudio;
+    pShared<Audio> m_ReactionActive;
     size_t m_CurrentRhythmIndex = 0;    // 現在のリズムインデックス
     size_t m_InputIndex = 0;            // 入力されたインデックス
     float m_JudgeWindow = 0.1f;         // ジャッジウィンドウの許容範囲
@@ -54,5 +54,5 @@ public:
     SCENE_NO GetSceneNo() {
         return SCENE_NO::GAME_TEXT;
     }
-    void InsideButton(int i, std::shared_ptr<Button> button, const MESSAGE_SLOT comparison);
+    void InsideButton(int i, pShared<Button> button, const MESSAGE_SLOT comparison);
 };

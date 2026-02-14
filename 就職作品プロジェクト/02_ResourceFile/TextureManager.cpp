@@ -31,7 +31,7 @@ bool TextureManager::AddTexture(const std::string& relativePath) {
     return true;
 }
 
-std::shared_ptr<Texture> TextureManager::GetTexture(const std::string& relativePath) {
+pShared<Texture> TextureManager::GetTexture(const std::string& relativePath) {
 
     auto it = m_TextureList.find(relativePath);
     if (it != m_TextureList.end()) {

@@ -36,9 +36,9 @@ namespace
 
     } };
 
-    std::vector<SCENE_NO> BuildStageCandidates(SCENE_NO excludeScene)
+    vector<SCENE_NO> BuildStageCandidates(SCENE_NO excludeScene)
     {
-        std::vector<SCENE_NO> candidates;
+        vector<SCENE_NO> candidates;
         candidates.reserve(kStageEntries.size());
 
         for (const auto& entry : kStageEntries)
@@ -62,7 +62,7 @@ namespace
 
     SCENE_NO SelectRandomStage(std::mt19937_64& randomEngine, SCENE_NO excludeScene)
     {
-        const std::vector<SCENE_NO> candidates = BuildStageCandidates(excludeScene);
+        const vector<SCENE_NO> candidates = BuildStageCandidates(excludeScene);
         std::uniform_int_distribution<std::size_t> dist(0, candidates.size() - 1);
         return candidates[dist(randomEngine)];
     }
@@ -186,7 +186,7 @@ void GameSceneWait::Initialize()
     {
         const float distance = 130.0f;
 
-        std::shared_ptr<Square> life = AddObject<Square>(instance.GetCamera());
+        pShared<Square> life = AddObject<Square>(instance.GetCamera());
         life->SetTexture(textureMgr->GetTexture("DestroyBullet.png"));
         life->SetPos(lifePosX + ( i * distance), lifePosY, 1.0f);
         life->SetName("m_life");

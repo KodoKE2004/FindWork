@@ -6,8 +6,8 @@ class ResultScene : public Scene
 {
 private:
 
-    std::shared_ptr<Square> m_ButtonToTitle; 
-    std::shared_ptr<Square> m_ButtonRetry  ;
+    pShared<Square> m_ButtonToTitle; 
+    pShared<Square> m_ButtonRetry  ;
 
     bool m_isCorsorButtonToTitle = true;
 

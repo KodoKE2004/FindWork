@@ -53,7 +53,7 @@ bool MeshManager::Add(const std::string& modelName,
     return true;
 }
 
-std::shared_ptr<StaticMesh> MeshManager::GetStaticMesh(const std::string& modelName) {
+pShared<StaticMesh> MeshManager::GetStaticMesh(const std::string& modelName) {
     auto it = m_MeshMap.find(modelName);
     if (it != m_MeshMap.end()) {
         Debug::Log("[[¬Œ÷]] StaticMeshæ“¾ " + modelName, MESSAGE_COLOR::GREEN);

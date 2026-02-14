@@ -62,8 +62,8 @@ protected:
 	bool m_UseInstancing = false;
 
 	// 描画の為の情報（見た目に関わる部分）
-	std::shared_ptr<Texture>  m_Texture;	// テクスチャ
-	std::unique_ptr<Material> m_Materiale;	//マテリアル
+	pShared<Texture>  m_Texture;	// テクスチャ
+	pUnique<Material> m_Materiale;	//マテリアル
 
 	// UV座標の情報
 
@@ -94,7 +94,7 @@ public:
 
 	// テクスチャを指定
 	void SetTexture(const char* imgname);
-	void SetTexture(std::shared_ptr<Texture> texture);
+	void SetTexture(pShared<Texture> texture);
 	// UV座標を指定
 	void SetUV(const float& nu, const float& nv, const float& sx, const float& sy);
 

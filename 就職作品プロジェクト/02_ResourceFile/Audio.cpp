@@ -2,7 +2,7 @@
 #include "Debug.hpp"
 
 Audio::Audio(IXAudio2* xa, IXAudio2MasteringVoice* master,
-	std::shared_ptr<AudioClip> clip, uint32_t id)
+	pShared<AudioClip> clip, uint32_t id)
 	: m_xa(xa), m_master(master), m_clip(std::move(clip)), m_id(id)
 {
 	m_cb.finished = &m_finished;

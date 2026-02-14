@@ -47,8 +47,8 @@ void DebugGridLine::Initialize()
         VERTEX_3D{ NVector3(0.0f, 0.0f, max), kNormal, kBaseColor, Vector2::Zero }
     };
 
-    m_LineX.Create(std::vector<VERTEX_3D>(lineX.begin(), lineX.end()));
-    m_LineZ.Create(std::vector<VERTEX_3D>(lineZ.begin(), lineZ.end()));
+    m_LineX.Create(vector<VERTEX_3D>(lineX.begin(), lineX.end()));
+    m_LineZ.Create(vector<VERTEX_3D>(lineZ.begin(), lineZ.end()));
 
     if (!CreateConstantBuffer(Renderer::GetDevice(), sizeof(GridParams), m_GridParamBuffer.GetAddressOf()))
     {
@@ -60,7 +60,7 @@ void DebugGridLine::Initialize()
     const float steps = total / m_Spacing;
     m_InstanceCount = max(1u, static_cast<unsigned int>(std::floor(steps)) + 1u);
 
-    std::vector<UINT> ids(m_InstanceCount);
+    vector<UINT> ids(m_InstanceCount);
     for (UINT i = 0; i < m_InstanceCount; ++i) {
         ids[i] = i;
     }
@@ -73,7 +73,7 @@ void DebugGridLine::Initialize()
     D3D11_SUBRESOURCE_DATA init{ ids.data(),0, 0};
     Renderer::GetDevice()->CreateBuffer(&bd, &init, m_InstanceIDVB.GetAddressOf());
     
-    std::vector<D3D11_INPUT_ELEMENT_DESC> elems = {
+    vector<D3D11_INPUT_ELEMENT_DESC> elems = {
         { "POSITION", 0, DXGI_FORMAT_R32G32B32_FLOAT,      0,  0, D3D11_INPUT_PER_VERTEX_DATA,   0 },
         { "NORMAL",   0, DXGI_FORMAT_R32G32B32_FLOAT,      0, 12, D3D11_INPUT_PER_VERTEX_DATA,   0 },
         { "COLOR",    0, DXGI_FORMAT_R32G32B32A32_FLOAT,   0, 24, D3D11_INPUT_PER_VERTEX_DATA,   0 },

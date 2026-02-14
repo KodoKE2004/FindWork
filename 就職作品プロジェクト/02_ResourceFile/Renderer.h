@@ -194,9 +194,9 @@ private:
 														  UINT stepRate = 1);
 
 public:
-	static inline std::vector<UINT> MakeInstanceIDs(UINT count);
+	static inline vector<UINT> MakeInstanceIDs(UINT count);
 	static inline void BindInstanceIDs(ID3D11Buffer* vb, UINT slot = 1);
-	static inline HRESULT CreateInstanceIDBuffer(const std::vector<UINT>& ids,
+	static inline HRESULT CreateInstanceIDBuffer(const vector<UINT>& ids,
 												 ID3D11Buffer** outVB,
 												 D3D11_USAGE usage = D3D11_USAGE_IMMUTABLE,
 												 UINT cpuAccess = 0);
@@ -208,14 +208,14 @@ public:
     static float GetScreenHeight();
 };
 
-inline std::vector<UINT> Renderer::MakeInstanceIDs(UINT count)
+inline vector<UINT> Renderer::MakeInstanceIDs(UINT count)
 {
-	std::vector<UINT> v(count);
+	vector<UINT> v(count);
 	for (UINT i = 0; i < count; ++i) v[i] = i;
 	return v;
 }
 
-inline HRESULT Renderer::CreateInstanceIDBuffer(const std::vector<UINT>& ids,
+inline HRESULT Renderer::CreateInstanceIDBuffer(const vector<UINT>& ids,
 	ID3D11Buffer** outVB,
 	D3D11_USAGE usage,
 	UINT cpuAccess)

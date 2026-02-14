@@ -72,9 +72,9 @@ void Stone::Draw()
     Square::Draw();
 }
 
-void Stone::DrawInstanced(const std::vector<std::shared_ptr<Stone>>& stones)
+void Stone::DrawInstanced(const vector<pShared<Stone>>& stones)
 {
-    std::vector<InstanceTransform2D> transforms;
+    vector<InstanceTransform2D> transforms;
     transforms.reserve(stones.size());
 
     for (const auto& stone : stones)

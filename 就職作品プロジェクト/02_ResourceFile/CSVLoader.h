@@ -18,7 +18,7 @@ struct SaveSnapShot {
     int version = 1;
     int sceneId = 0;
     int rngSeed = 0;
-    std::vector<TransformRow> rows;
+    vector<TransformRow> rows;
 };
 
 // ← ここは "struct" を付けない（ヘッダ配置なら inline 推奨）

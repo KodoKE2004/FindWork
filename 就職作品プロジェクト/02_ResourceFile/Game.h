@@ -20,18 +20,18 @@
 class Game
 {
 private:
-	static std::unique_ptr<Game>		 m_pInstance;					// ゲームのインスタンス
-	static uint64_t						 m_DrawFrameCounter;			// Draw 呼び出しのフレーム番号
-	std::shared_ptr<Scene>				 m_SceneCurrent;				// 現在のシーン
-    std::shared_ptr<Scene>				 m_SceneNext;					// 次のシーン
-	std::unique_ptr<Input>				 m_Input;						// 入力管理
-	std::shared_ptr<Camera>				 m_Camera;						// カメラ
-    std::vector<std::shared_ptr<TransitionBase>> m_TransitionTexture;	// トランジション用テクスチャ
-    std::shared_ptr<Theme>				 m_Theme;						// テーマ管理
-    std::vector<std::shared_ptr<Scene>>	 m_SceneList;					// シーンスタック
-    DirectX::SimpleMath::Vector2		 m_PreviewMousePos;				// デバッグ用ビュー行列
-	std::shared_ptr<Audio>				 m_BgmAudio;					// BGM
-	PlayParams							 m_BgmParams;
+	static pUnique<Game>			m_pInstance;				// ゲームのインスタンス
+	static uint64_t					m_DrawFrameCounter;			// Draw 呼び出しのフレーム番号
+	pShared<Scene>					m_SceneCurrent;				// 現在のシーン
+	pShared<Scene>					m_SceneNext;				// 次のシーン
+	pUnique<Input>					m_Input;					// 入力管理
+	pShared<Camera>					m_Camera;					// カメラ
+    vector<pShared<TransitionBase>> m_TransitionTexture;		// トランジション用テクスチャ
+	pShared<Theme>					m_Theme;					// テーマ管理
+    vector<pShared<Scene>>			m_SceneList;				// シーンスタック
+    DirectX::SimpleMath::Vector2	m_PreviewMousePos;			// デバッグ用ビュー行列
+	pShared<Audio>					m_BgmAudio;					// BGM
+	PlayParams						m_BgmParams;
 
 #ifdef _DEBUG
 #endif
@@ -39,10 +39,10 @@ private:
 	//================================
 	//	   ゲームを支えるマネージャー達
 	//================================
-	std::shared_ptr<MeshManager>		 m_MeshManager;		// シーンで扱うメッシュ
-	std::shared_ptr<TextureManager>		 m_TextureManager;	// ゲームで扱う画像
-	std::shared_ptr<ShaderManager>		 m_ShaderManager;	// シェーダーをまとめたもの
-	std::shared_ptr<AudioManager>		 m_AudioManager;	// オーディオマネージャー
+	pShared<MeshManager>		 m_MeshManager;		// シーンで扱うメッシュ
+	pShared<TextureManager>		 m_TextureManager;	// ゲームで扱う画像
+	pShared<ShaderManager>		 m_ShaderManager;	// シェーダーをまとめたもの
+	pShared<AudioManager>		 m_AudioManager;	// オーディオマネージャー
 
     static void InitializeTransitionCSV();					// トランジションCSVの初期化
     static void FinalizeTransitionCSV();					// トランジションCSVの終了処理
@@ -72,38 +72,38 @@ public:
 	static void Finalize();			// ゲームの終了処理
 
 	// 現在のシーンを設定
-    static void SetSceneCurrent(std::shared_ptr<Scene> newScene);
-    static void SetSceneNext(std::shared_ptr<Scene> newScene);
+    static void SetSceneCurrent(pShared<Scene> newScene);
+    static void SetSceneNext(pShared<Scene> newScene);
 
-	void SetTheme(const std::shared_ptr<Theme>& theme);
+	void SetTheme(const pShared<Theme>& theme);
 
     // TransitionTextureをTransSceneと連携
-	void SetTransitionTexture(std::vector<std::shared_ptr<TransitionBase>> tex) {
+	void SetTransitionTexture(vector<pShared<TransitionBase>> tex) {
 		m_TransitionTexture = tex;
     }
-	void AddTransitionTexture(const std::shared_ptr<TransitionBase>& tex) {
+	void AddTransitionTexture(const pShared<TransitionBase>& tex) {
 		m_TransitionTexture.emplace_back(tex);
     }
 	void ClearTransitionTexture() {
 		m_TransitionTexture.clear();
     }
 
-	std::vector<std::shared_ptr<TransitionBase>> GetTransitionTexture() const;
-	std::shared_ptr<Theme>			GetTheme() ; 
+	vector<pShared<TransitionBase>> GetTransitionTexture() const;
+	pShared<Theme>			GetTheme() ;
 
     //===============================
 	//			シーンの関連群
 	//===============================
-	void					ScenePush(std::shared_ptr<Scene> newScene);
-	std::shared_ptr<Scene>	ScenePop();
+	void					ScenePush(pShared<Scene> newScene);
+	pShared<Scene>	ScenePop();
 	size_t					GetSceneStackSize() const;
 	
-	static Game&				   GetInstance();	
-	static std::shared_ptr<Scene>  GetCurrentScene();
-	Camera&						   GetCamera();
-	static void					   SetBgmBpm(float bpm);
-	static float				   GetBgmBpm();
-	static RhythmBeat&			   GetRhythmBeat() {
+	static Game&			GetInstance();	
+	static pShared<Scene>	GetCurrentScene();
+	Camera&					GetCamera();
+	static void				SetBgmBpm(float bpm);
+	static float			GetBgmBpm();
+	static RhythmBeat&		GetRhythmBeat() {
 		return m_RhythmBeat; 
 	}
 	static uint64_t			GetDrawFrameCounter() {
@@ -211,19 +211,19 @@ inline void ChangeScenePop(SceneTransitionParam& state)
     instance.SetSceneCurrent(scene);
 }
 
-inline std::vector<std::shared_ptr<TransitionBase>> Game::GetTransitionTexture() const
+inline vector<pShared<TransitionBase>> Game::GetTransitionTexture() const
 {
 	return m_TransitionTexture;
 }
 
-inline void Game::ScenePush(std::shared_ptr<Scene> newScene)
+inline void Game::ScenePush(pShared<Scene> newScene)
 {
     if (newScene){
 		m_SceneList.push_back(newScene);
 	}
 }
 
-inline std::shared_ptr<Scene> Game::ScenePop()
+inline pShared<Scene> Game::ScenePop()
 {
 	if(m_SceneList.empty()) return nullptr;
 	

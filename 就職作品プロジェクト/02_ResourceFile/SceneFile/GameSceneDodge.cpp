@@ -101,7 +101,7 @@ void GameSceneDodge::Update(float tick)
         PlaySE("fall", 0.5f);
         for (int i = 0; i < createNum; ++i)
         {
-            std::shared_ptr<Stone> stone = std::make_shared<Stone>(instance.GetCamera());
+            pShared<Stone> stone = std::make_shared<Stone>(instance.GetCamera());
             stone->Initialize();
             m_StoneList.emplace_back(stone);
         }
@@ -117,7 +117,7 @@ void GameSceneDodge::Update(float tick)
 
     m_StoneList.erase(
         std::remove_if(m_StoneList.begin(), m_StoneList.end(),
-            [](const std::shared_ptr<Stone>& stone)
+            [](const pShared<Stone>& stone)
             {
                 return !stone || !stone->IsActive();
             }),

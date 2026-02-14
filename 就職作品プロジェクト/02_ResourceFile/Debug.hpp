@@ -191,13 +191,14 @@ namespace Debug
     #endif
     }
 
-    static void Log(std::string_view message)
+    inline static void Log(std::string_view message)
     {
     #ifdef _DEBUG
         std::cout << message << std::endl;
     #endif
     }
-    static void Log(std::string_view message, MESSAGE_COLOR color)
+
+    inline static void Log(std::string_view message, MESSAGE_COLOR color)
     {
     #ifdef _DEBUG
         HANDLE hConsole = GetStdHandle(STD_OUTPUT_HANDLE);

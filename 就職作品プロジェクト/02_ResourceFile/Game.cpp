@@ -248,7 +248,7 @@ void Game::Finalize()
 	Renderer::Finalize();
 }
 
-void Game::SetSceneCurrent(std::shared_ptr<Scene> newScene)
+void Game::SetSceneCurrent(pShared<Scene> newScene)
 {
 	auto& instance = GetInstance();
 	instance.m_SceneCurrent = std::move(newScene);
@@ -258,7 +258,7 @@ void Game::SetSceneCurrent(std::shared_ptr<Scene> newScene)
 	}
 }
 
-void Game::SetSceneNext(std::shared_ptr<Scene> newScene)
+void Game::SetSceneNext(pShared<Scene> newScene)
 {
 	auto& instance = GetInstance();
 	instance.m_SceneNext = std::move(newScene);
@@ -268,7 +268,7 @@ void Game::SetSceneNext(std::shared_ptr<Scene> newScene)
 	}
 }
 
-void Game::SetTheme(const std::shared_ptr<Theme>& theme)
+void Game::SetTheme(const pShared<Theme>& theme)
 {
 	auto& instance = GetInstance();
 	instance.m_Theme = theme;
@@ -280,7 +280,7 @@ void Game::SetTheme(const std::shared_ptr<Theme>& theme)
 	}
 }
 
-std::shared_ptr<Theme> Game::GetTheme()
+pShared<Theme> Game::GetTheme()
 {
 	auto& instance = GetInstance();
 	
@@ -302,7 +302,7 @@ Game& Game::GetInstance()
 	return *m_pInstance.get();
 }
 
-std::shared_ptr<Scene> Game::GetCurrentScene()
+pShared<Scene> Game::GetCurrentScene()
 {
 	return m_pInstance->m_SceneCurrent;
 }
@@ -413,7 +413,7 @@ void Game::RegistDebugObject()
 	// ImGui 描画処理を登録
 	DebugUI::RedistDebugFunction([]()
 		{
-			std::vector<std::shared_ptr<Object>> objects = GetInstance().GetCurrentScene()->GetSceneObjects();
+			vector<pShared<Object>> objects = GetInstance().GetCurrentScene()->GetSceneObjects();
 			
 			ImGui::Begin("Game Objects");
 

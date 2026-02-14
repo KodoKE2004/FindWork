@@ -52,7 +52,7 @@ void GameSceneText::ShuffleSlotTextureUV()
     {
         if (!m_Clicked[i])
         {
-            std::shared_ptr<Square> textObject = m_MessageSlot[i]->GetTextObject();
+            pShared<Square> textObject = m_MessageSlot[i]->GetTextObject();
             textObject->SetUV(uvX, textObject->GetUV().y, textObject->GetSplit().x, textObject->GetSplit().y);
         }
     }
@@ -122,7 +122,7 @@ void GameSceneText::Initialize()
     //      シーン内オブジェクト生成
     //===============================
 
-    std::shared_ptr<Square> backGround = AddObject<Square>(instance.GetCamera());
+    pShared<Square> backGround = AddObject<Square>(instance.GetCamera());
     backGround->SetName("backGround");
     backGround->SetTexture(textureMgr->GetTexture("BackGround/School.png"));
     backGround->SetScale(1280.0f,720.0f,1.0f);
@@ -289,7 +289,7 @@ void GameSceneText::Finalize()
     GameSceneExe::Finalize();
 }
 
-void GameSceneText::InsideButton(int i, std::shared_ptr<Button> button, const MESSAGE_SLOT comparison)
+void GameSceneText::InsideButton(int i, pShared<Button> button, const MESSAGE_SLOT comparison)
 {
     if (m_SelectedSlot != comparison)
     {

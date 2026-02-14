@@ -24,7 +24,7 @@ private:
     float m_Scale = 50.0f;      
 
     Camera& m_Camera;
-    std::vector<Particle> m_Particles;
+    vector<Particle> m_Particles;
 
     std::mt19937 m_RandomEngine;
     std::uniform_real_distribution<float> m_AngleDist;
@@ -45,7 +45,7 @@ public :
         m_Scale = scale;
     }
 
-    void Emit(std::shared_ptr<Texture> tex, const NVector3& pos, uint32_t count);
+    void Emit(pShared<Texture> tex, const NVector3& pos, uint32_t count);
 
     void Update(float dt);
     void Draw();

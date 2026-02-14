@@ -32,7 +32,7 @@ protected:
 	BaseShader* m_ComputeShader   = nullptr;
 	BaseShader* m_GeometoryShader = nullptr;
 
-	std::shared_ptr<Texture> m_Texture = nullptr;
+	pShared<Texture> m_Texture = nullptr;
 
 public:
 
@@ -54,8 +54,8 @@ public:
 
 	void SetName(std::string name);
 
-	void SetTexture(std::shared_ptr<Texture> setTexture);
-	std::shared_ptr<Texture> GetTexture() const { 
+	void SetTexture(pShared<Texture> setTexture);
+	pShared<Texture> GetTexture() const {
 		return m_Texture; 
 	}
 

@@ -7,7 +7,7 @@
 class GameSceneSlice : public GameSceneExe
 {
 private:
-    std::shared_ptr<Enemy> m_Enemy   = nullptr;
+    pShared<Enemy> m_Enemy   = nullptr;
 
 public:
     GameSceneSlice() = delete;

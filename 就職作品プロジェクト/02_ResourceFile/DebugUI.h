@@ -13,7 +13,7 @@
 constexpr float SCREEN_CORRECT_VALUE = - 7.5f;
 
 class DebugUI {
-    static std::vector<std::function<void(void)>> m_debugfunction;
+    static vector<std::function<void(void)>> m_debugfunction;
 public:
     static std::string TEXT_CurrentScene;
     static void Init(ID3D11Device* device, ID3D11DeviceContext* context);

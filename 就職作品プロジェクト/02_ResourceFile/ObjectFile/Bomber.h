@@ -5,8 +5,8 @@ class Bomber : public Square
 {
 private:
 
-    std::shared_ptr<Square> m_Rope   = nullptr;  
-    std::shared_ptr<Square> m_Number = nullptr;
+    pShared<Square> m_Rope   = nullptr;
+    pShared<Square> m_Number = nullptr;
     
     float m_FillRatio = 1.0f;  // U�̔䗦(0.0f ~ 1.0f)
 
@@ -38,14 +38,14 @@ public:
     void ReadyExpo() { m_isReadyExpo = true; }
     bool IsReadyExpo() const { return m_isReadyExpo; }
 
-    std::shared_ptr<Square> GetRope() {
+    pShared<Square> GetRope() {
         if (m_Rope) {
             return m_Rope;
         }
         return nullptr; 
     }
     
-    std::shared_ptr<Square> GetNumber() {
+    pShared<Square> GetNumber() {
         if (m_Number) {
             return m_Number;
         }

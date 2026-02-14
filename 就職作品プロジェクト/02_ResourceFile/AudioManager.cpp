@@ -71,7 +71,7 @@ struct RiffHeader { char id[4]; uint32_t size; char wave[4]; };
 struct ChunkHeader { char id[4]; uint32_t size; };
 #pragma pack(pop)
 
-static bool readAllFile(const std::wstring& path, std::vector<uint8_t>& out) 
+static bool readAllFile(const std::wstring& path, vector<uint8_t>& out) 
 {
     std::filesystem::path p(path);
     if (!std::filesystem::exists(p)) {
@@ -92,9 +92,9 @@ static bool readAllFile(const std::wstring& path, std::vector<uint8_t>& out)
     return ifs.good();
 }
 
-std::shared_ptr<AudioClip> AudioManager::loadWavFull(const std::wstring& fullPath, std::string* err) 
+pShared<AudioClip> AudioManager::loadWavFull(const std::wstring& fullPath, std::string* err)
 {
-    std::vector<uint8_t> bin;
+    vector<uint8_t> bin;
     if (!readAllFile(fullPath, bin)) 
     { 
         if (err) {
@@ -158,7 +158,7 @@ std::shared_ptr<AudioClip> AudioManager::loadWavFull(const std::wstring& fullPat
     return clip;
 }
 
-std::shared_ptr<AudioClip> AudioManager::LoadWavClip(const std::wstring& path) 
+pShared<AudioClip> AudioManager::LoadWavClip(const std::wstring& path)
 {
     {
         std::lock_guard<std::mutex> lk(mtx_);
@@ -171,7 +171,7 @@ std::shared_ptr<AudioClip> AudioManager::LoadWavClip(const std::wstring& path)
         }
     }
 
-    std::vector<uint8_t> bin;
+    vector<uint8_t> bin;
     std::wstring fullPath = joinPath(m_baseDir, path);
     if (!readAllFile(fullPath, bin)) {
         throw std::runtime_error("Audio load failed");
@@ -315,7 +315,7 @@ bool AudioManager::Alias(int id, std::string existingKey)
 
 uint32_t AudioManager::Play(std::string key, const PlayParams& p) 
 {
-    std::shared_ptr<AudioClip> clip;
+    pShared<AudioClip> clip;
     {
         std::lock_guard<std::mutex> lk(mtx_);
         auto it = m_key2clip.find(key);
@@ -363,7 +363,7 @@ void AudioManager::StopAll(bool immediate)
 
 void AudioManager::StopAllByName(std::string key, bool immediate) 
 {
-    std::shared_ptr<AudioClip> clip;
+    pShared<AudioClip> clip;
     {
         std::lock_guard<std::mutex> lk(mtx_);
         auto it = m_key2clip.find(key);
@@ -404,14 +404,14 @@ void AudioManager::SetPan(uint32_t handle, float pan)
     if (auto* p = find(handle)) p->SetPan(pan);
 }
 
-std::shared_ptr<AudioClip> AudioManager::GetClip(std::string_view key) 
+pShared<AudioClip> AudioManager::GetClip(std::string_view key)
 {
     std::lock_guard<std::mutex> lk(mtx_);
     auto it = m_key2clip.find(std::string(key));
     return (it == m_key2clip.end()) ? nullptr : it->second;
 }
 
-std::shared_ptr<Audio> AudioManager::Create(const AudioConfig& cfg)
+pShared<Audio> AudioManager::Create(const AudioConfig& cfg)
 {
     if (!m_xa || !m_master) {
         throw std::runtime_error("AudioManager not initialized");

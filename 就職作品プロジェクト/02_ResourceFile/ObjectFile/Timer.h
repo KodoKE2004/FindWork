@@ -7,7 +7,7 @@ class Timer : public Square
 {
 private:
     
-    std::shared_ptr<Circle> m_Meter = nullptr;
+    pShared<Circle> m_Meter = nullptr;
     float m_Progress = 1.0f;
 
 public:

@@ -34,7 +34,7 @@ std::string GetFileExt(const char* filename) {
 //--------------------------------------------------------------------------------------
 // コンパイル済みシェーダーファイルを読み込む
 //--------------------------------------------------------------------------------------
-bool readShader(const char* csoName, std::vector<unsigned char>& byteArray)
+bool readShader(const char* csoName, vector<unsigned char>& byteArray)
 {
 	FILE* fp;
 	int ret = fopen_s(&fp, csoName, "rb");
@@ -60,7 +60,7 @@ bool readShader(const char* csoName, std::vector<unsigned char>& byteArray)
 HRESULT CompileShader(const char* szFileName, LPCSTR szEntryPoint, LPCSTR szShaderModel, void** ShaderObject, size_t& ShaderObjectSize, ID3DBlob** ppBlobOut) {
 
 	HRESULT hr;
-	static std::vector<unsigned char> byteArray;
+	static vector<unsigned char> byteArray;
 	*ppBlobOut = nullptr;
 
 	std::string extname = GetFileExt(szFileName);

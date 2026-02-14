@@ -19,7 +19,7 @@
 // ------------------- WAV clip -------------------
 struct AudioClip {
 	WAVEFORMATEX* wfex = nullptr;	// 所有
-	std::vector<uint8_t> pcm;		// 生データ
+	vector<uint8_t> pcm;		// 生データ
 	~AudioClip() { delete[] reinterpret_cast<uint8_t*>(wfex); }
 };
 
@@ -121,7 +121,7 @@ private:
     IXAudio2* m_xa = nullptr;					// 借用
 	IXAudio2MasteringVoice* m_master = nullptr; // 借用
 	IXAudio2SourceVoice* m_voice = nullptr;		// 所有
-    std::shared_ptr<AudioClip> m_clip;			// 所有
+	pShared<AudioClip> m_clip;					// 所有
     VoiceCallback m_cb{};						// 所有
     std::atomic<bool> m_finished{ false };		// 再生終了検知用
 	std::atomic<bool> m_stopRequested{ false }; // graceful stop requested
@@ -132,7 +132,7 @@ private:
     float m_BaseBpm = 120.0f;					// 基準BPM（必要なら）
 public:
 	Audio() = default;
-	Audio(IXAudio2* xa, IXAudio2MasteringVoice* master, std::shared_ptr<AudioClip> clip, uint32_t id);
+	Audio(IXAudio2* xa, IXAudio2MasteringVoice* master, pShared<AudioClip> clip, uint32_t id);
 	~Audio();
 
     // コピー禁止 
@@ -155,7 +155,7 @@ public:
     // 生データの長さ(サンプル数)
 	IXAudio2SourceVoice* Raw() const { return m_voice; }
     // クリップ情報
-	const std::shared_ptr<AudioClip>& Clip() const { return m_clip; }
+	const pShared<AudioClip>& Clip() const { return m_clip; }
     // 自動回収設定
 	bool AutoRelease() const { return m_autoRelease; }
     // 再生終了後に自動回収

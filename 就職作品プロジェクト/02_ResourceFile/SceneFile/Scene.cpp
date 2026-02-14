@@ -3,16 +3,16 @@
 #include <algorithm>
 
 SceneRelationData Scene::m_RelationData;
-std::vector<float*> Scene::m_TimerList;
+vector<float*>	  Scene::m_TimerList;
 
-std::vector<std::shared_ptr<Object>> Scene::GetSceneObjects()
+vector<pShared<Object>> Scene::GetSceneObjects()
 {
-	std::vector<std::shared_ptr<Object>> objects = m_MySceneObjects;
+	vector<pShared<Object>> objects = m_MySceneObjects;
 	if (m_Theme)
 	{
 		const auto themePtr = m_Theme.get();
 		const bool alreadyAdded = std::any_of(objects.begin(), objects.end(),
-			[themePtr](const std::shared_ptr<Object>& obj)
+			[themePtr](const pShared<Object>& obj)
 			{
 				return obj.get() == themePtr;
 			});
@@ -73,14 +73,14 @@ Scene::Scene(Camera& cam) : m_Camera(cam)
 {
 }
 
-void Scene::DeleteObject(const std::shared_ptr<Object>& pt)
+void Scene::DeleteObject(const pShared<Object>& pt)
 {
 	if (pt == nullptr) return;
 
 	auto& objs = m_MySceneObjects;
 	const auto raw = pt.get();
 	auto it = std::find_if(objs.begin(), objs.end(),
-		[raw](const std::shared_ptr<Object>& up) {
+		[raw](const pShared<Object>& up) {
 			return up.get() == raw;
 		});
 
