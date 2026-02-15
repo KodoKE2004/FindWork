@@ -12,18 +12,17 @@ ResultScene::ResultScene(Camera& cam) : Scene(cam)
 void ResultScene::Initialize()
 {
     auto& instance = Game::GetInstance();
-    auto  camera   = instance.GetCamera();
     DebugUI::TEXT_CurrentScene = "ResultScene";
 
     TextureManager* textureMgr = instance;
     // Skydomeèâä˙âª 
-    m_Skydome = AddObject<Skydome>(camera);
+    m_Skydome = AddObject<Skydome>(instance.GetCamera());
     m_Skydome->SetName("m_Skydome");
     m_Skydome->SetSkyDomeMode(true);
     m_Skydome->SetTexture(textureMgr->GetTexture("SkydomeSpace.png"));
     m_Skydome->SetRadius(500.0f);
 
-    m_ButtonToTitle = AddObject<Square>(camera);
+    m_ButtonToTitle = AddObject<Square>(instance.GetCamera());
     m_ButtonToTitle->SetName("m_ButtonToTitle");
     m_ButtonToTitle->SetTexture(textureMgr->GetTexture("Button/Text/ToTitle.png"));
     m_ButtonToTitle->SetPos(0.0f, -100.0f, 0.0f);
@@ -31,7 +30,7 @@ void ResultScene::Initialize()
     m_ButtonToTitle->SetShader("VS_Alpha", "PS_Alpha");
     m_ButtonToTitle->SetColor(0.0f, 0.0f, 0.0f, 1.0f);
 
-    m_ButtonRetry = AddObject<Square>(camera);
+    m_ButtonRetry = AddObject<Square>(instance.GetCamera());
     m_ButtonRetry->SetName("m_ButtonToRetry");
     m_ButtonRetry->SetTexture(textureMgr->GetTexture("Button/Text/Retry.png"));
     m_ButtonRetry->SetPos(0.0f, -200.0f, 0.0f);

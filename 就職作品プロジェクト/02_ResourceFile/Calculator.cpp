@@ -246,28 +246,171 @@ namespace Calculator
 
     namespace Physics
     {
-        float UpdateVerticalPosition(VerticalMotionState& state, float currentPosY, float deltaTime)
+        namespace
         {
-            if (deltaTime <= 0.0f)
+            constexpr float kPi = 3.14159265358979323846f;
+            constexpr float g = 9.81f;
+            constexpr float restitution = 0.6f;
+        }
+
+        float NormalizeDegree(float degree)
+        {
+            degree = std::fmod(degree, 360.0f);
+            if (degree < 0.0f)
             {
-                return currentPosY;
+                degree += 360.0f;
+            }
+            return degree;
+        }
+
+        float NormalizeRadian(float radian)
+        {
+            const float twoPi = kPi * 2.0f;
+            radian = std::fmod(radian, twoPi);
+            if (radian < 0.0f)
+            {
+                radian += twoPi;
+            }
+            return radian;
+        }
+
+        float ConvertToDegree(float radian)
+        {
+            return radian * (180.0f / kPi);
+        }
+
+        float ConvertToRadian(float degree)
+        {
+            return degree * (kPi / 180.0f);
+        }
+
+        float CalcRefrectAngle(float myAngleD, float nrmAngleD)
+        {
+            return NormalizeDegree(2.0f * nrmAngleD - myAngleD);
+        }
+
+        void AddForce(VerticalMotionState& state, const Vector2& force)
+        {
+            state.velocity.x += force.x;
+            state.velocity.y += force.y;
+        }
+
+        void FreeFall(VerticalMotionState& state)
+        {
+            state.velocity.y += -0.5f * g * state.dt * state.mag;
+        }
+
+        void CalcFinalNormalAngle(VerticalMotionState& state, const CollisionInfo& collision)
+        {
+            if (!collision.isHit)
+            {
+                return;
             }
 
-            const float gravityForce = state.gravity * state.weight * deltaTime;
-            state.velocity -= gravityForce;
-
-            state.terminalVelocity = - abs(state.terminalVelocity);
-            const float minVelocity = state.terminalVelocity;
-            state.velocity = max(state.velocity, minVelocity);
-
-            float nextPosition = currentPosY + state.velocity * deltaTime;
-            if (nextPosition < state.groundY)
+            if (collision.shape == CollisionShape::COLLISION)
             {
-                nextPosition = state.groundY;
-                state.velocity = 0.0f;
+                state.finalNormalAngle = NormalizeRadian(ConvertToRadian(collision.closspoint.normalAngle));
+                return;
+            }
+
+            Vector2 normal = collision.circlePos - collision.closspoint.pos;
+            float nrmAngleR = NormalizeRadian(std::atan2(normal.y, normal.x));
+            float nrmAngleD = ConvertToDegree(nrmAngleR);
+            const float blockAngle = collision.blockAngle;
+
+            switch (collision.quadrant)
+            {
+            case CollisionQuadrant::LEFTUP:
+                nrmAngleD = std::clamp(nrmAngleD, 90.0f + blockAngle, 180.0f + blockAngle);
+                break;
+            case CollisionQuadrant::LEFTDOWN:
+                nrmAngleD = std::clamp(nrmAngleD, 180.0f + blockAngle, 270.0f + blockAngle);
+                break;
+            case CollisionQuadrant::RIGHTUP:
+                nrmAngleD = std::clamp(nrmAngleD, 0.0f + blockAngle, 90.0f + blockAngle);
+                break;
+            case CollisionQuadrant::RIGHTDOWN:
+                nrmAngleD = std::clamp(nrmAngleD, 270.0f + blockAngle, 360.0f + blockAngle);
+                break;
+            default:
+                break;
+            }
+
+            state.finalNormalAngle = NormalizeRadian(ConvertToRadian(nrmAngleD));
+        }
+
+        void Repulsion(VerticalMotionState& state)
+        {
+            const float myAngleD = ConvertToDegree(std::atan2(state.velocity.y, state.velocity.x));
+            const float nrmAngleD = ConvertToDegree(state.finalNormalAngle);
+            float refrectAngleD = CalcRefrectAngle(myAngleD, nrmAngleD);
+            if (nrmAngleD > 180.0f)
+            {
+                refrectAngleD += 180.0f;
+            }
+
+            state.vectorNum = std::sqrt(state.velocity.x * state.velocity.x + state.velocity.y * state.velocity.y);
+            const float refrectAngleR = ConvertToRadian(refrectAngleD);
+            Vector2 refrected(state.vectorNum * std::cos(refrectAngleR), state.vectorNum * std::sin(refrectAngleR));
+            state.velocity = refrected * (1.0f - restitution);
+        }
+
+        void HorizonUpdate(VerticalMotionState& state, float speed, float friction)
+        {
+            const float vx = std::cos(-state.finalNormalAngle) * speed * (1.0f - friction);
+            const float vy = std::sin(-state.finalNormalAngle) * speed * (1.0f - friction);
+            state.velocity = Vector2(vx, vy);
+        }
+
+        void DampingVector(VerticalMotionState& state, DampingMode mode, float damping)
+        {
+            if (mode == DampingMode::STAND)
+            {
+                state.velocity.x -= state.velocity.x * damping;
+                return;
+            }
+
+            state.velocity.x -= state.velocity.x * (1.0f - damping);
+        }
+
+        Vector2 UpdateRigidBodyPosition(VerticalMotionState& state, const Vector2& currentPosition, const CollisionInfo* collision)
+        {
+            FreeFall(state);
+
+            if (collision && collision->isHit)
+            {
+                CalcFinalNormalAngle(state, *collision);
+                Repulsion(state);
+
+                if (collision->useHorizonUpdate)
+                {
+                    HorizonUpdate(state, collision->horizonSpeed, collision->friction);
+                }
+
+                if (collision->useDamping)
+                {
+                    DampingVector(state, collision->dampingMode, collision->damping);
+                }
+            }
+
+            Vector2 nextPosition = currentPosition + state.velocity * state.dt;
+            if (state.clampToGround && nextPosition.y < state.groundY)
+            {
+                nextPosition.y = state.groundY;
+                if (state.velocity.y < 0.0f)
+                {
+                    state.velocity.y = 0.0f;
+                }
             }
 
             return nextPosition;
+        }
+
+        float UpdateVerticalPosition(VerticalMotionState& state, float currentPosY, float deltaTime)
+        {
+            (void)deltaTime;
+            const Vector2 next = UpdateRigidBodyPosition(state, Vector2(0.0f, currentPosY), nullptr);
+            return next.y;
         }
     }
 

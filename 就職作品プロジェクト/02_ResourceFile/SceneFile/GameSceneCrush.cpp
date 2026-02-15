@@ -117,5 +117,11 @@ void GameSceneCrush::CreateBullet()
 
     pShared<Bullet> bullet = AddObject<Bullet>(instance.GetCamera());
     bullet->SetTexture(textureMgr->GetTexture("GameScene/Bullet.png"));
+    NVector3 pos = {
+        m_Player->GetPos().x,
+        m_Player->GetPos().y + m_Player->GetScale().y * 0.5f,
+        m_Player->GetPos().z,
+    };
+    bullet->SetPos(pos);
 
 }

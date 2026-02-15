@@ -3,7 +3,21 @@
 #include "Application.h"
 namespace
 {
-    
+    Calculator::Physics::MotionState CreateMotionState()
+    {
+        Calculator::Physics::MotionState state{};
+        state.velocity = NVector3(0.0f, 0.0f, 0.0f);
+        state.constantAcceleration = NVector3(0.0f, -980.0f, 0.0f);
+        state.terminalVelocity = NVector3(1200.0f, 9000.0f, 0.0f);
+        state.mass = 1.0f;
+        state.groundY = -700.0f;
+        state.useGroundClamp = true;
+        return state;
+    }
+
+    const NVector3 kBirdForce = {
+        -10.0f, 5.0f, 0.0f
+    };
 }
 
 Bird::Bird(Camera& cam) : Square(cam)
@@ -13,17 +27,19 @@ Bird::Bird(Camera& cam) : Square(cam)
 void Bird::Initialize()
 {
     Square::Initialize();
-    auto& instance = Game::GetInstance();
-    TextureManager* textureMgr = instance;
+    TextureManager* textureMgr = Game::GetInstance();
+    
+    m_Motion = CreateMotionState();
     SetTexture(textureMgr->GetTexture("GameScene/Sparrow.png"));
 
     SetPos  (   0.0f,   0.0f, 0.0f);
     SetScale( 100.0f, 100.0f, 1.0f);
+
 }
 
 void Bird::Update()
 {
-    if (IsActive)
+    if (IsAlive())
     {
         Vector2 pos = Input::GetMousePos();
         const float WIDTH = static_cast<float>(Application::GetWidth());
@@ -40,7 +56,7 @@ void Bird::Update()
     }
     else
     {
-        
+
     }
 }
 

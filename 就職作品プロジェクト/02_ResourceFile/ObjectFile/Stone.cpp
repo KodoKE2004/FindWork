@@ -56,10 +56,10 @@ void Stone::Update()
         return;
     }
 
-    const float deltaTime = Application::GetDeltaTime();
-    m_Position.y = Calculator::Physics::UpdateVerticalPosition(m_VerticalMotion, m_Position.y, deltaTime);
+    // const float deltaTime = Application::GetDeltaTime();
 
-    if (GetPos().y <= m_VerticalMotion.groundY) {
+
+    if (GetPos().y <= m_Motion.groundY) {
         DeActive();
     }
 }

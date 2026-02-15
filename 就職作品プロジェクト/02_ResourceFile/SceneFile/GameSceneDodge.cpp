@@ -22,9 +22,20 @@ namespace
         return indices;
     }
 
-    const Calculator::Physics::VerticalMotionState kStoneVerticalMotion = {
-        0.0f, 980.0f, 1.0f, -9000.0f, - 700.0f
+    const Calculator::Physics::VerticalMotionState kStoneVerticalMotion = []
+        {
+            Calculator::Physics::VerticalMotionState state{};
+            state.mag = 120.0f;
+            state.dt = 1.0f / 60.0f;
+            state.groundY = -700.0f;
+            return state;
+        }();
+
+    const NVector3 kBirdForce = {
+        -10.0f, 5.0f, 0.0f
     };
+
+
 }
 
 GameSceneDodge::GameSceneDodge(Camera& cam) : GameSceneExe(cam)
@@ -105,7 +116,7 @@ void GameSceneDodge::Update(float tick)
             pShared<Stone> stone = AddObject<Stone>(instance.GetCamera());
             stone->Initialize();
             stone->SetScale(100.0f,100.0f,1.0f);
-            stone->SetVMState(kStoneVerticalMotion);
+
         }
     }
 
@@ -122,19 +133,19 @@ void GameSceneDodge::Update(float tick)
             DeleteObject(stone);
         }
 
-        // 当たり判定
-        // 修正前
-        // Calculator::Collider2D::isHitCircleCircle(m_Bird->GetTransform(), stone->GetTransform());
+        if(!m_Bird->IsAlive()) {
+            continue;
+        }
 
-        // 修正後
-        // GetTransform() の戻り値が一時オブジェクト（rvalue）の場合、非const参照には渡せません。
-        // 一時変数に格納してから参照で渡すことでエラーを回避します。
+        // 当たり判定
         auto birdTransform  = m_Bird->GetTransform();
         auto stoneTransform = stone->GetTransform();
         bool isHit = Calculator::Collider2D::isHitCircleCircle(birdTransform, stoneTransform);
         if (isHit)
         {
             Debug::Log("[[衝突]] Bird - Stone");
+            m_Bird->DeAlive();
+
         }
     }
 

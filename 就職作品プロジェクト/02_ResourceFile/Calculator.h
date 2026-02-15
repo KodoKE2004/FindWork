@@ -114,14 +114,74 @@ namespace Calculator
 
     namespace Physics
     {
+        enum class CollisionQuadrant
+        {
+            NONE,
+            LEFTUP,
+            LEFTDOWN,
+            RIGHTUP,
+            RIGHTDOWN,
+        };
+
+        enum class CollisionShape
+        {
+            NONE,
+            POINT,
+            COLLISION,
+        };
+
+        enum class DampingMode
+        {
+            STAND,
+            CIRCLE,
+        };
+
+        struct ContactPointInfo
+        {
+            Vector2 pos = Vector2::Zero;
+            float normalAngle = 0.0f;
+        };
+
+        struct CollisionInfo
+        {
+            bool isHit = false;
+            CollisionShape shape = CollisionShape::NONE;
+            ContactPointInfo closspoint{};
+            Vector2 circlePos = Vector2::Zero;
+            CollisionQuadrant quadrant = CollisionQuadrant::NONE;
+            float blockAngle = 0.0f;
+            bool  useHorizonUpdate = false;
+            float horizonSpeed = 0.0f;
+            float friction = 0.0f;
+            bool  useDamping = false;
+            float damping = 0.0f;
+            DampingMode dampingMode = DampingMode::STAND;
+        };
+
         struct VerticalMotionState
         {
-            float velocity = 0.0f;              // 現在の垂直速度 (単位: px/s 等)。正は上方向、負は下方向として扱う運用が多い。
-            float gravity = 980.0f;             // 重力加速度 (単位: px/s^2 等)。値はゲーム調整用で、980 は地球重力の概念を模した定数。
-            float weight = 1.0f;                // 重み/質量に相当する係数。速度や重力への影響をスケールするために使用する。
-            float terminalVelocity = -2500.0f;  // 終端速度 (下方向への最大速度)。負値で下方向の速度制限を表す。
-            float groundY = 0.0f;               // 地面の Y 座標。これに達したら着地判定などに使う。
+            Vector2 velocity = Vector2::Zero;
+            float mass = 1.0f;
+            float mag = 1.0f;
+            float finalNormalAngle = 0.0f;
+            float vectorNum = 0.0f;
+            float dt = 1.0f / 60.0f;
+            float groundY = 0.0f;
+            bool  clampToGround = true;
         };
+
+        float NormalizeDegree(float degree);
+        float NormalizeRadian(float radian);
+        float ConvertToDegree(float radian);
+        float ConvertToRadian(float degree);
+        float CalcRefrectAngle(float myAngleD, float nrmAngleD);
+        void AddForce(VerticalMotionState& state, const Vector2& force);
+        void FreeFall(VerticalMotionState& state);
+        void CalcFinalNormalAngle(VerticalMotionState& state, const CollisionInfo& collision);
+        void Repulsion(VerticalMotionState& state);
+        void HorizonUpdate(VerticalMotionState& state, float speed, float friction);
+        void DampingVector(VerticalMotionState& state, DampingMode mode, float damping);
+        Vector2 UpdateRigidBodyPosition(VerticalMotionState& state, const Vector2& currentPosition, const CollisionInfo* collision = nullptr);
 
         float UpdateVerticalPosition(VerticalMotionState& state, float currentPosY, float deltaTime);
 
