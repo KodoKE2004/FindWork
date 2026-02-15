@@ -55,7 +55,7 @@ void GameSceneSlice::Update(float tick)
     if (IsAllDeathEnemy(enemys)) {
         // SceneExe‚Å‘‚ß‚ÉƒNƒŠƒA‚ğ‚µ‚½ê‡‚à‘z’è
         StageClear();
-        SetFastChange();
+        FastChange();
     }
     else
     {

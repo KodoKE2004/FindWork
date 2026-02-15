@@ -1,4 +1,4 @@
-#include "Calculator.h"
+Ôªø#include "Calculator.h"
 #include <cmath>
 #include <DirectXMath.h>
 #include <SimpleMath.h>
@@ -10,7 +10,7 @@ namespace Calculator
     {
         bool OverlapOnAxis(NVector3& axis, std::array<NVector3, 4>& vertsA, std::array<NVector3, 4>& vertsB)
         {
-            // ñ≥å¯é≤ÇÕÉXÉLÉbÉvàµÇ¢
+            // ÁÑ°ÂäπËª∏„ÅØ„Çπ„Ç≠„ÉÉ„ÉóÊâ±„ÅÑ
             if (axis.x == 0.0f && axis.y == 0.0f && axis.z == 0.0f)
             {
                 return true;
@@ -36,17 +36,17 @@ namespace Calculator
                 if (p > maxB) maxB = p;
             }
 
-            // ãÊä‘Ç™ó£ÇÍÇƒÇ¢Ç»ÇØÇÍÇŒèdÇ»Ç¡ÇƒÇ¢ÇÈ
+            // Âå∫Èñì„ÅåÈõ¢„Çå„Å¶„ÅÑ„Å™„Åë„Çå„Å∞Èáç„Å™„Å£„Å¶„ÅÑ„Çã
             return !(maxA < minB || maxB < minA);
         }
 
         bool IsHitPoint(NVector3& pt, SquareInfo sq)
         {
-            // íÜêS Å® ì_
+            // ‰∏≠ÂøÉ ‚Üí ÁÇπ
             const float dx = pt.x - sq.pos.x;
             const float dy = pt.y - sq.pos.y;
 
-            // ÉçÅ[ÉJÉãé≤ï˚å¸ÇÃãóó£
+            // „É≠„Éº„Ç´„É´Ëª∏ÊñπÂêë„ÅÆË∑ùÈõ¢
             const float distX = dx * sq.axisX.x + dy * sq.axisX.y;
             const float distY = dx * sq.axisY.x + dy * sq.axisY.y;
 
@@ -64,20 +64,20 @@ namespace Calculator
             const Transform  ct = circle.GetTransform();
             const NVector3   cp = ct.GetPos();
 
-            const float r = ct.GetScale().x * 0.5f; // îºåaÇÃåàÇﬂï˚ÇÕïKóvÇ…âûÇ∂Çƒí≤êÆ
+            const float r = ct.GetScale().x * 0.5f; // ÂçäÂæÑ„ÅÆÊ±∫„ÇÅÊñπ„ÅØÂøÖË¶Å„Å´Âøú„Åò„Å¶Ë™øÊï¥
 
-            // CircleíÜêS Å® SquareíÜêS ÇÉçÅ[ÉJÉãç¿ïWÇ÷
+            // Circle‰∏≠ÂøÉ ‚Üí Square‰∏≠ÂøÉ „Çí„É≠„Éº„Ç´„É´Â∫ßÊ®ô„Å∏
             const float dx = cp.x - sq.pos.x;
             const float dy = cp.y - sq.pos.y;
 
             const float localX = dx * sq.axisX.x + dy * sq.axisX.y;
             const float localY = dx * sq.axisY.x + dy * sq.axisY.y;
 
-            // éläpå`ì‡Ç…ClampÇ≥ÇÍÇΩç≈ãﬂê⁄ì_
+            // ÂõõËßíÂΩ¢ÂÜÖ„Å´Clamp„Åï„Çå„ÅüÊúÄËøëÊé•ÁÇπ
             const float clampedX = max(-sq.halfW, min(localX, sq.halfW));
             const float clampedY = max(-sq.halfH, min(localY, sq.halfH));
 
-            // ç≈ãﬂê⁄ì_Ç∆ÇÃãóó£
+            // ÊúÄËøëÊé•ÁÇπ„Å®„ÅÆË∑ùÈõ¢
             const float vx = localX - clampedX;
             const float vy = localY - clampedY;
             const float distSq = vx * vx + vy * vy;
@@ -97,11 +97,11 @@ namespace Calculator
             const float dy = posA.y - posB.y;
             const float disttance = dx * dx + dy * dy;
 
-            // îºåaÇÕ scale.x ÇÃîºï™ÇóòópÅiïKóvÇ»ÇÁ Circle ë§ÇÃ Getter Ç…ïœçXÅj
+            // ÂçäÂæÑ„ÅØ scale.x „ÅÆÂçäÂàÜ„ÇíÂà©Áî®ÔºàÂøÖË¶Å„Å™„Çâ Circle ÂÅ¥„ÅÆ Getter „Å´Â§âÊõ¥Ôºâ
             const float radiusA = traA.GetScale().x * 0.5f;
             const float radiusB = traB.GetScale().x * 0.5f;
 
-            // è’ìÀîªíËópÇÃãóó£
+            // Ë°ùÁ™ÅÂà§ÂÆöÁî®„ÅÆË∑ùÈõ¢
             const float distanceMax = radiusA + radiusB;
 
             return disttance <= (distanceMax * distanceMax);
@@ -109,21 +109,21 @@ namespace Calculator
 
         bool Calculator::Collider2D::isHitSquareSquare(Transform& squareA, Transform& squareB)
         {
-            // ëeîªíËÅFëŒäpê¸ãóó£
+            // Á≤óÂà§ÂÆöÔºöÂØæËßíÁ∑öË∑ùÈõ¢
             if (!ColliderMore(squareA.GetTransform(), squareB.GetTransform()))
             {
                 return false;
             }
 
-            // í∏ì_
+            // È†ÇÁÇπ
             auto vertsA = SettingVertex(squareA.GetTransform());
             auto vertsB = SettingVertex(squareB.GetTransform());
 
-            // åyó èÓïÒ
+            // ËªΩÈáèÊÉÖÂ†±
             const SquareInfo infoA = SettingVertexInfo(squareA.GetTransform());
             const SquareInfo infoB = SettingVertexInfo(squareB.GetTransform());
 
-            // 1) A ÇÃí∏ì_Ç™ B ÇÃì‡ë§ÅH
+            // 1) A „ÅÆÈ†ÇÁÇπ„Åå B „ÅÆÂÜÖÂÅ¥Ôºü
             for (int i = 0; i < 4; ++i)
             {
                 if (IsHitPoint(vertsA[i], infoB))
@@ -132,7 +132,7 @@ namespace Calculator
                 }
             }
 
-            // 2) B ÇÃí∏ì_Ç™ A ÇÃì‡ë§ÅH
+            // 2) B „ÅÆÈ†ÇÁÇπ„Åå A „ÅÆÂÜÖÂÅ¥Ôºü
             for (int i = 0; i < 4; ++i)
             {
                 if (IsHitPoint(vertsB[i], infoA))
@@ -141,25 +141,25 @@ namespace Calculator
                 }
             }
 
-            // 3) í∏ì_Ç™å›Ç¢Ç…ì‡ë§Ç≈Ç»Ç¢èÍçá:
-            //    ï”ìØémÉNÉçÉXÇÃâ¬î\ê´Ç SAT Ç≈É`ÉFÉbÉN
+            // 3) È†ÇÁÇπ„Åå‰∫í„ÅÑ„Å´ÂÜÖÂÅ¥„Åß„Å™„ÅÑÂ†¥Âêà:
+            //    Ëæ∫ÂêåÂ£´„ÇØ„É≠„Çπ„ÅÆÂèØËÉΩÊÄß„Çí SAT „Åß„ÉÅ„Çß„ÉÉ„ÇØ
             NVector3 axes[4] = {
-                vertsA[1] - vertsA[0], // A ÇÃàÍï”
-                vertsA[3] - vertsA[0], // A ÇÃÇ‡Ç§àÍï”
-                vertsB[1] - vertsB[0], // B ÇÃàÍï”
-                vertsB[3] - vertsB[0]  // B ÇÃÇ‡Ç§àÍï”
+                vertsA[1] - vertsA[0], // A „ÅÆ‰∏ÄËæ∫
+                vertsA[3] - vertsA[0], // A „ÅÆ„ÇÇ„ÅÜ‰∏ÄËæ∫
+                vertsB[1] - vertsB[0], // B „ÅÆ‰∏ÄËæ∫
+                vertsB[3] - vertsB[0]  // B „ÅÆ„ÇÇ„ÅÜ‰∏ÄËæ∫
             };
 
             for (int i = 0; i < 4; ++i)
             {
                 if (!OverlapOnAxis(axes[i], vertsA, vertsB))
                 {
-                    // Ç±ÇÃé≤Ç≈ï™ó£ Å® è’ìÀÇ»Çµ
+                    // „Åì„ÅÆËª∏„ÅßÂàÜÈõ¢ ‚Üí Ë°ùÁ™Å„Å™„Åó
                     return false;
                 }
             }
 
-            // Ç«ÇÃé≤Ç≈Ç‡ï™ó£ÇµÇƒÇ¢Ç»Ç¢ Å® è’ìÀ
+            // „Å©„ÅÆËª∏„Åß„ÇÇÂàÜÈõ¢„Åó„Å¶„ÅÑ„Å™„ÅÑ ‚Üí Ë°ùÁ™Å
             return true;
         }
 
@@ -172,14 +172,14 @@ namespace Calculator
             info.halfW = sca.x * 0.5f;
             info.halfH = sca.y * 0.5f;
         
-            // rot.z ÇÉâÉWÉAÉìëzíË
+            // rot.z „Çí„É©„Ç∏„Ç¢„É≥ÊÉ≥ÂÆö
             const NVector3 rot = transform.GetRotate();
             const float c = std::cos(rot.z);
             const float s = std::sin(rot.z);
         
-            // âÒì]éläpå`ÇÃÉçÅ[ÉJÉãé≤
-            info.axisX = NVector3( c, s, 0.0f);      // âE
-            info.axisY = NVector3(-s, c, 0.0f);     // è„
+            // ÂõûËª¢ÂõõËßíÂΩ¢„ÅÆ„É≠„Éº„Ç´„É´Ëª∏
+            info.axisX = NVector3( c, s, 0.0f);      // Âè≥
+            info.axisY = NVector3(-s, c, 0.0f);     // ‰∏ä
         
             return info;
         }
@@ -219,10 +219,10 @@ namespace Calculator
             const float halfH = sca.y * 0.5f;
         
             std::array<NVector3, 4> local = {
-                NVector3(-halfW,  halfH, 0.0f), // ç∂è„
-                NVector3(halfW,  halfH, 0.0f), // âEè„
-                NVector3(-halfW, -halfH, 0.0f), // ç∂â∫
-                NVector3(halfW, -halfH, 0.0f)  // âEâ∫
+                NVector3(-halfW,  halfH, 0.0f), // Â∑¶‰∏ä
+                NVector3(halfW,  halfH, 0.0f), // Âè≥‰∏ä
+                NVector3(-halfW, -halfH, 0.0f), // Â∑¶‰∏ã
+                NVector3(halfW, -halfH, 0.0f)  // Âè≥‰∏ã
             };
         
             const float c = std::cos(rot.z);
@@ -289,10 +289,10 @@ namespace Calculator
             return NormalizeDegree(2.0f * nrmAngleD - myAngleD);
         }
 
-        void AddForce(VerticalMotionState& state, const Vector2& force)
+        void AddForce(Vector2& velocity, const Vector2& force)
         {
-            state.velocity.x += force.x;
-            state.velocity.y += force.y;
+            velocity.x += force.x;
+            velocity.y += force.y;
         }
 
         void FreeFall(VerticalMotionState& state)
@@ -394,6 +394,67 @@ namespace Calculator
             }
 
             Vector2 nextPosition = currentPosition + state.velocity * state.dt;
+            if (state.clampToGround && nextPosition.y < state.groundY)
+            {
+                nextPosition.y = state.groundY;
+                if (state.velocity.y < 0.0f)
+                {
+                    state.velocity.y = 0.0f;
+                }
+            }
+
+            return nextPosition;
+        }
+
+        Vector2 StepRigidBody(MotionState& state, const Vector2& currentPosition, float deltaTime, const CollisionInfo* collision)
+        {
+            // PhysicsÕâ^Ãñ@ÃÇ›ÇSAƒÇ—èoÕÅu«ÇvﬂÇB
+            if (state.enableGravity)
+            {
+                state.velocity.y += -0.5f * g * deltaTime * state.mag;
+            }
+
+            if (collision && collision->isHit)
+            {
+                VerticalMotionState collisionState{};
+                collisionState.velocity = state.velocity;
+                collisionState.mass = state.mass;
+                collisionState.mag = state.mag;
+                collisionState.finalNormalAngle = state.finalNormalAngle;
+                collisionState.vectorNum = state.vectorNum;
+                collisionState.dt = deltaTime;
+                collisionState.groundY = state.groundY;
+                collisionState.clampToGround = state.clampToGround;
+
+                CalcFinalNormalAngle(collisionState, *collision);
+                Repulsion(collisionState);
+
+                if (collision->useHorizonUpdate)
+                {
+                    HorizonUpdate(collisionState, collision->horizonSpeed, collision->friction);
+                }
+
+                if (collision->useDamping)
+                {
+                    DampingVector(collisionState, collision->dampingMode, collision->damping);
+                }
+
+                state.velocity = collisionState.velocity;
+                state.finalNormalAngle = collisionState.finalNormalAngle;
+                state.vectorNum = collisionState.vectorNum;
+            }
+
+            Vector2 nextPosition = currentPosition;
+            // ∆ÇÃêœïON/OFFStone/Bird/Square÷ìStepƒóp≈Ç\…ÇB
+            if (state.integrateX)
+            {
+                nextPosition.x += state.velocity.x * deltaTime;
+            }
+            if (state.integrateY)
+            {
+                nextPosition.y += state.velocity.y * deltaTime;
+            }
+
             if (state.clampToGround && nextPosition.y < state.groundY)
             {
                 nextPosition.y = state.groundY;

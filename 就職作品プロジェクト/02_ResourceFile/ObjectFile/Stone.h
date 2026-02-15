@@ -4,9 +4,9 @@
 class Stone : public Square
 {
 private:
-    using MotionState = Calculator::Physics::MotionState;
+    using Motion = Calculator::Physics::MotionState;
     bool m_isActive;
-    MotionState m_Motion{};
+    Motion m_Motion{};
 
 public:
     Stone(Camera& cam);
@@ -27,7 +27,7 @@ public:
         m_isActive = false;
     }
 
-    void SetMotionState(MotionState state) {
+    void SetMotionState(Motion state) {
         m_Motion = state;
     }
 };

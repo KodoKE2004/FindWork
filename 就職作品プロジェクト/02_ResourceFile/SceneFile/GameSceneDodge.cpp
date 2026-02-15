@@ -31,8 +31,8 @@ namespace
             return state;
         }();
 
-    const NVector3 kBirdForce = {
-        -10.0f, 5.0f, 0.0f
+    const Vector2 kBirdForce = {
+        -1900.0f, 300.0f
     };
 
 
@@ -64,13 +64,19 @@ void GameSceneDodge::Initialize()
     m_Background = AddObject<Square>(instance.GetCamera());
     m_Background->SetName("m_Background");
     m_Background->SetScale(1280.0f, 720.0f, 1.0f);
-    m_Background->SetTexture(textureMar->GetTexture("Plane.png"));
+    m_Background->SetTexture(textureMar->GetTexture("BackGround/GameSky.png"));
 
     m_Bird = AddObject<Bird>(instance.GetCamera());
     m_Bird->SetScale(50.0f,50.0f,1.0f);
 
     PlayParams fallParams;
     m_AudioList.emplace("fall", AudioConfig(L"SE/RockFall.wav", fallParams, false, false));
+
+    PlayParams hitParams;
+    m_AudioList.emplace("hit", AudioConfig(L"SE/GameReaction/StoneCollision.wav", hitParams, false, false));
+
+    PlayParams bgmParams;
+    m_AudioList.emplace("bgmDodge", AudioConfig(L"BGM/GameSceneMelody/Bird.wav", bgmParams, true, true));
 
     AudioManager* audioMgr = instance;
     if (audioMgr)
@@ -97,6 +103,7 @@ void GameSceneDodge::Initialize()
     m_MySceneObjects.emplace_back(m_Bomber->GetRope());
     m_MySceneObjects.emplace_back(m_Bomber->GetNumber());
 
+    PlaySE("bgmDodge", 0.2f);
 }
 
 void GameSceneDodge::Update(float tick)
@@ -106,17 +113,24 @@ void GameSceneDodge::Update(float tick)
     auto& instance = Game::GetInstance();
     
     m_StoneSpawnElapsed += tick;
+    // while“ü‚éê‡ˆê“x‚¾‚¯
+    int first = 0;
     while (m_StoneSpawnElapsed >= kStoneSpawnInterval)
     {
+        if (first == 0)
+        {
+            
+            first++;
+        }
+        
         m_StoneSpawnElapsed -= kStoneSpawnInterval;
-        int createNum = 8 * (m_RelationData.stageCount / 6 + 1);
+        int createNum = 4 * (m_RelationData.stageCount / 6 + 1);
         
         for (int i = 0; i < createNum; ++i)
         {
             pShared<Stone> stone = AddObject<Stone>(instance.GetCamera());
             stone->Initialize();
             stone->SetScale(100.0f,100.0f,1.0f);
-
         }
     }
 
@@ -133,23 +147,30 @@ void GameSceneDodge::Update(float tick)
             DeleteObject(stone);
         }
 
-        if(!m_Bird->IsAlive()) {
-            continue;
-        }
+        if(m_Bird->IsAlive()) {
 
-        // “–‚½‚è”»’è
-        auto birdTransform  = m_Bird->GetTransform();
-        auto stoneTransform = stone->GetTransform();
-        bool isHit = Calculator::Collider2D::isHitCircleCircle(birdTransform, stoneTransform);
-        if (isHit)
-        {
-            Debug::Log("[[Õ“Ë]] Bird - Stone");
-            m_Bird->DeAlive();
-
+            // “–‚½‚è”»’è
+            auto birdTransform  = m_Bird->GetTransform();
+            auto stoneTransform = stone->GetTransform();
+            bool isHit = Calculator::Collider2D::isHitCircleCircle(birdTransform, stoneTransform);
+            if (isHit)
+            {
+                AudioManager* audioMgr = instance;
+                Debug::Log("[[Õ“Ë]] Bird - Stone");
+                m_Bird->DeAlive();
+                Calculator::Physics::AddForce(m_Bird->GetMotionState().velocity, kBirdForce);
+                m_ReactionActive = audioMgr->Create(m_AudioList.at("hit"));
+                m_ReactionActive->Play(m_AudioList.at("hit").params);
+            }
         }
     }
 
-
+    if (m_ReactionActive) {
+        if (m_ReactionActive->IsFinished() &&
+            IsChangeMeasure()) {
+            FastChange();
+        }
+    }
 
     if (IsChange())
     {

@@ -1,25 +1,29 @@
 #include "Bird.h"
 #include "Game.h"
 #include "Application.h"
+#include <algorithm>
+#include <cmath>
+
 namespace
 {
     Calculator::Physics::MotionState CreateMotionState()
     {
         Calculator::Physics::MotionState state{};
-        state.velocity = NVector3(0.0f, 0.0f, 0.0f);
-        state.constantAcceleration = NVector3(0.0f, -980.0f, 0.0f);
-        state.terminalVelocity = NVector3(1200.0f, 9000.0f, 0.0f);
+        state.velocity = Vector2::Zero;
         state.mass = 1.0f;
+        state.mag = 120.0f;
+        state.enableGravity = true;
+        state.integrateX = true;
+        state.integrateY = true;
         state.groundY = -700.0f;
-        state.useGroundClamp = true;
+        state.clampToGround = true;
         return state;
     }
 
-    const NVector3 kBirdForce = {
-        -10.0f, 5.0f, 0.0f
-    };
+    constexpr float kMoveAccel = 2400.0f;
+    constexpr float kMaxSpeedX = 600.0f;
+    constexpr float kNoInputDamping = 8.0f;
 }
-
 Bird::Bird(Camera& cam) : Square(cam)
 {
 }
@@ -56,7 +60,34 @@ void Bird::Update()
     }
     else
     {
+        const float dt = Application::GetDeltaTime();
+        if (dt <= 0.0f)
+        {
+            return;
+        }
 
+        float inputX = 0.0f;
+        if (Input::GetKeyPress(VK_A) || Input::GetKeyPress(VK_LEFT))
+        {
+            inputX -= 1.0f;
+        }
+        if (Input::GetKeyPress(VK_D) || Input::GetKeyPress(VK_RIGHT))
+        {
+            inputX += 1.0f;
+        }
+
+        m_Motion.velocity.x += inputX * kMoveAccel * dt;
+        m_Motion.velocity.x = std::clamp(m_Motion.velocity.x, -kMaxSpeedX, kMaxSpeedX);
+
+        if (std::abs(inputX) < 0.001f)
+        {
+            const float damping = std::clamp(kNoInputDamping * dt, 0.0f, 1.0f);
+            m_Motion.velocity.x -= m_Motion.velocity.x * damping;
+        }
+
+        const NVector3 currentPos = GetPos();
+        const Vector2 nextPos = Calculator::Physics::StepRigidBody(m_Motion, Vector2(currentPos.x, currentPos.y), dt);
+        SetPos(nextPos.x, nextPos.y, currentPos.z);
     }
 }
 

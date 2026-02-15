@@ -70,7 +70,7 @@ void GameSceneText::GirlReaction()
     const float adjectiveUvX_B    = m_MessageSlot[MESSAGE_SLOT::ADJECTIVE_B]->GetTextObject()->GetUV().x;
     
     bool high = adjectiveUvX_A == 1.0f &&
-                adjectiveUvX_B == 1.0f;
+                adjectiveUvX_B == 3.0f;
 
     bool sad  = adjectiveUvX_A == 2.0f &&
                 adjectiveUvX_B == 2.0f;
@@ -152,6 +152,9 @@ void GameSceneText::Initialize()
         m_MessageSlot[i]->SetTexture(textureMgr->GetTexture("Button/Frame.png"));
         m_MessageSlot[i]->SetBaseScale(NVector3(240.0f, 80.0f, 1.0f));
         m_MessageSlot[i]->SetTextTexture(textureMgr->GetTexture("Button/Text/MessageSlot.png"));
+        if (i == 1) {
+            m_MessageSlot[i]->SetColor(1.0f, 1.0f, 1.0f, 0.5f);
+        }
         m_MessageSlot[i]->GetTextObject()->SetUV(2.0f, uvY, 2.0f, 3.0f);
         m_MessageSlot[i]->SetPos(kButtonPos[i]);
         m_MySceneObjects.emplace_back(m_MessageSlot[i]->GetTextObject());
@@ -186,6 +189,9 @@ void GameSceneText::Initialize()
     PlayParams QuestionParam{};
     m_AudioList.emplace("question", AudioConfig(L"SE/GameReaction/Question.wav", QuestionParam, false, false));
 
+    PlayParams bgmParam{};
+    m_AudioList.emplace("bgmText", AudioConfig(L"BGM/GameSceneMelody/Text.wav", QuestionParam, false, false));
+
     AudioManager* audioMgr = instance;
     if (audioMgr)
     {
@@ -208,6 +214,8 @@ void GameSceneText::Initialize()
     m_ReactionAudio[0] = audioMgr->Create(m_AudioList.at("fanfare"));
     m_ReactionAudio[1] = audioMgr->Create(m_AudioList.at("failed"));
     m_ReactionAudio[2] = audioMgr->Create(m_AudioList.at("question"));
+
+    PlaySE("bgmText", 0.6f);
 }
 
 void GameSceneText::Update(float tick)
@@ -253,7 +261,7 @@ void GameSceneText::Update(float tick)
         // 小節が切り替わったタイミングでシーン遷移
         if (isFinished && IsChangeMeasure())
         {
-            SetFastChange();
+            FastChange();
         }
     }
     else 

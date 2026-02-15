@@ -170,18 +170,33 @@ namespace Calculator
             bool  clampToGround = true;
         };
 
+        struct MotionState
+        {
+            Vector2 velocity = Vector2::Zero;
+            float mass = 1.0f;
+            float mag = 1.0f;
+            bool enableGravity = true;
+            bool integrateX = true;
+            bool integrateY = true;
+            float finalNormalAngle = 0.0f;
+            float vectorNum = 0.0f;
+            float groundY = 0.0f;
+            bool  clampToGround = false;
+        };
+
         float NormalizeDegree(float degree);
         float NormalizeRadian(float radian);
         float ConvertToDegree(float radian);
         float ConvertToRadian(float degree);
         float CalcRefrectAngle(float myAngleD, float nrmAngleD);
-        void AddForce(VerticalMotionState& state, const Vector2& force);
+        void AddForce(Vector2& state, const Vector2& force);
         void FreeFall(VerticalMotionState& state);
         void CalcFinalNormalAngle(VerticalMotionState& state, const CollisionInfo& collision);
         void Repulsion(VerticalMotionState& state);
         void HorizonUpdate(VerticalMotionState& state, float speed, float friction);
         void DampingVector(VerticalMotionState& state, DampingMode mode, float damping);
         Vector2 UpdateRigidBodyPosition(VerticalMotionState& state, const Vector2& currentPosition, const CollisionInfo* collision = nullptr);
+        Vector2 StepRigidBody(MotionState& state, const Vector2& currentPosition, float deltaTime, const CollisionInfo* collision = nullptr);
 
         float UpdateVerticalPosition(VerticalMotionState& state, float currentPosY, float deltaTime);
 

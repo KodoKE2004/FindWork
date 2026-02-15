@@ -60,7 +60,6 @@ class Scene
 {
 protected:
 
-
 	// PressEnterの点滅タイマー間隔
     static constexpr float DEFAULT_VOLUME = 0.2f; 
 protected:

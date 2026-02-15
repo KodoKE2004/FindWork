@@ -47,6 +47,15 @@ void Stone::Initialize()
 
     m_isActive = true;
 
+    m_Motion.velocity = Vector2::Zero;
+    m_Motion.mass = 1.0f;
+    m_Motion.mag  = 10.0f;
+    m_Motion.enableGravity = true;
+    m_Motion.integrateX = false;
+    m_Motion.integrateY = true;
+    m_Motion.groundY = -700.0f;
+    m_Motion.clampToGround = false;
+
     SetShader("VS_Alpha","PS_Alpha");
 }
 
@@ -56,8 +65,16 @@ void Stone::Update()
         return;
     }
 
-    // const float deltaTime = Application::GetDeltaTime();
+    const float dt = Application::GetDeltaTime();
+    if (dt <= 0.0f)
+    {
+        return;
+    }
 
+    const NVector3 currentPos = GetPos();
+    m_Motion.velocity.x = 0.0f;
+    const Vector2 nextPos = Calculator::Physics::StepRigidBody(m_Motion, Vector2(currentPos.x, currentPos.y), dt);
+    SetPos(currentPos.x, nextPos.y, currentPos.z);
 
     if (GetPos().y <= m_Motion.groundY) {
         DeActive();

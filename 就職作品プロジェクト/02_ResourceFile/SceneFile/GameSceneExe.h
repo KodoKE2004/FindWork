@@ -50,7 +50,8 @@ protected:
 
 	// シーン遷移フラグ
     bool  m_isChange	  = false;		// シーン変更フラグ
-
+	
+    pShared<Audio> m_ReactionAudio;		// 反応音
 
 	// 先行クリア時の早回し用フラグ
     bool  m_isFastChange = false;					// 速攻シーン変更フラグ
@@ -84,7 +85,7 @@ public:
         m_RelationData.isClear = true;
 	}
 	// 先行クリアの処理
-    void SetFastChange() {
+    void FastChange() {
 		if (m_isFastChange) {
 			return;
 		}

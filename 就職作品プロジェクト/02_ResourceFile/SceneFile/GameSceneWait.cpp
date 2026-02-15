@@ -234,7 +234,7 @@ void GameSceneWait::Update(float tick)
     m_QuarterAdvance = rhythmBeat.GetBeatElapsed() / 2;
     rhythmBeat.Update(tick);
     int elapsedBeat  = rhythmBeat.GetBeatElapsed() / 2;
-
+    int restBeat     = rhythmBeat.GetBeatRest();
     // ライフをリズムに合わせて回転させる
     for (int i = m_QuarterAdvance; i < elapsedBeat; ++i)
     {
@@ -246,7 +246,7 @@ void GameSceneWait::Update(float tick)
         }
         
         // 残り一拍のタイミングでステージ遷移フラグを立てる
-        if (elapsedBeat >= rhythmBeat.GetBeatTotal() - 1)
+        if (restBeat >=  1)
         {
             m_Theme->SetActive(true);
         }
