@@ -23,17 +23,24 @@ void Bird::Initialize()
 
 void Bird::Update()
 {
-    Vector2 pos = Input::GetMousePos();
-    const float WIDTH = static_cast<float>(Application::GetWidth());
-    const float HEIGHT = static_cast<float>(Application::GetHeight());
+    if (IsActive)
+    {
+        Vector2 pos = Input::GetMousePos();
+        const float WIDTH = static_cast<float>(Application::GetWidth());
+        const float HEIGHT = static_cast<float>(Application::GetHeight());
 
-    const float WIDTH_HALF = WIDTH * 0.5f;
-    const float HEIGHT_HALF = HEIGHT * 0.5f;
-    bool isScreenOut = (pos.x < - WIDTH_HALF  || pos.x > WIDTH_HALF ) ||
-                       (pos.y < - HEIGHT_HALF || pos.y > HEIGHT_HALF);
-    if (!isScreenOut)
-    { 
-        SetPos(pos.x,pos.y,0.0f);
+        const float WIDTH_HALF = WIDTH * 0.5f;
+        const float HEIGHT_HALF = HEIGHT * 0.5f;
+        bool isScreenOut = (pos.x < - WIDTH_HALF  || pos.x > WIDTH_HALF ) ||
+                           (pos.y < - HEIGHT_HALF || pos.y > HEIGHT_HALF);
+        if (!isScreenOut)
+        { 
+            SetPos(pos.x,pos.y,0.0f);
+        }
+    }
+    else
+    {
+        
     }
 }
 

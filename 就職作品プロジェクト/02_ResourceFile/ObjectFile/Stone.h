@@ -4,8 +4,9 @@
 class Stone : public Square
 {
 private:
+    using VMState = Calculator::Physics::VerticalMotionState;
     bool m_isActive;
-    Calculator::Physics::VerticalMotionState m_VerticalMotion{};
+    VMState m_VerticalMotion{};
 
 public:
     Stone(Camera& cam);
@@ -24,6 +25,10 @@ public:
     }
     void DeActive() {
         m_isActive = false;
+    }
+
+    void SetVMState(VMState state) {
+        m_VerticalMotion = state;
     }
 };
 

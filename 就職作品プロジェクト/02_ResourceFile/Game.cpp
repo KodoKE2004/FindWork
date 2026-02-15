@@ -140,7 +140,7 @@ void Game::Initialize()
 		SetBgmBpm(bgmConfig.bpm);
 	}
 
-	instance.m_SceneCurrent = std::make_shared<GameSceneDodge>(instance.GetCamera());		// タイトルシーンのインスタンスを生成
+	instance.m_SceneCurrent = std::make_shared<GameSceneWait>(instance.GetCamera());		// タイトルシーンのインスタンスを生成
 	instance.m_SceneCurrent->Initialize();
 }
 

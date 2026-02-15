@@ -47,13 +47,7 @@ void Stone::Initialize()
 
     m_isActive = true;
 
-    m_VerticalMotion.velocity = 0.0f;
-    m_VerticalMotion.gravity = 1200.0f;
-    m_VerticalMotion.weight = 0.5f;
-    m_VerticalMotion.terminalVelocity = -9000.0f;
-    m_VerticalMotion.groundY = -10000.0f;
-
-    SetShader("VS_Instansing2D","PS_Alpha");
+    SetShader("VS_Alpha","PS_Alpha");
 }
 
 void Stone::Update()
@@ -65,7 +59,7 @@ void Stone::Update()
     const float deltaTime = Application::GetDeltaTime();
     m_Position.y = Calculator::Physics::UpdateVerticalPosition(m_VerticalMotion, m_Position.y, deltaTime);
 
-    if (GetPos().y <= -750.0f) {
+    if (GetPos().y <= m_VerticalMotion.groundY) {
         DeActive();
     }
 }

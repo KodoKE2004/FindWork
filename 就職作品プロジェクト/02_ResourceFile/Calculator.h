@@ -22,11 +22,11 @@ namespace Calculator
     {
         static bool OverlapOnAxis(NVector3 & axis, std::array<NVector3,4>& vertsA, std::array<NVector3,4>& vertsB);
         static bool IsHitPoint(NVector3& pt, SquareInfo sq);
-        bool isHitSquareCircle(Square& square , Circle& circle );
-        bool isHitCircleCircle(Circle& circleA, Circle& circleB);
-        bool isHitSquareSquare(Square& squareA, Square& squareB);
+        bool isHitSquareCircle(Transform& square,  Transform& circle);
+        bool isHitCircleCircle(Transform& circleA, Transform& circleB);
+        bool isHitSquareSquare(Transform& squareA, Transform& squareB);
 
-        // Tranformから当たり判定用の情報を取得
+        // Transformから当たり判定用の情報を取得
         SquareInfo SettingVertexInfo(Transform transform);
 
         // 対角線の長さを取得
@@ -116,11 +116,11 @@ namespace Calculator
     {
         struct VerticalMotionState
         {
-            float velocity = 0.0f;
-            float gravity  = 980.0f;
-            float weight   = 1.0f;
-            float terminalVelocity = -2500.0f;
-            float groundY = 0.0f;
+            float velocity = 0.0f;              // 現在の垂直速度 (単位: px/s 等)。正は上方向、負は下方向として扱う運用が多い。
+            float gravity = 980.0f;             // 重力加速度 (単位: px/s^2 等)。値はゲーム調整用で、980 は地球重力の概念を模した定数。
+            float weight = 1.0f;                // 重み/質量に相当する係数。速度や重力への影響をスケールするために使用する。
+            float terminalVelocity = -2500.0f;  // 終端速度 (下方向への最大速度)。負値で下方向の速度制限を表す。
+            float groundY = 0.0f;               // 地面の Y 座標。これに達したら着地判定などに使う。
         };
 
         float UpdateVerticalPosition(VerticalMotionState& state, float currentPosY, float deltaTime);

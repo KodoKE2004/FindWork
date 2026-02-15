@@ -73,11 +73,19 @@ void GameSceneExe::Update(float tick)
 
     RhythmBeat& rhythmBeat = Game::GetInstance().GetRhythmBeat();
 
+    m_QuarterAdvance = rhythmBeat.GetBeatElapsed() / 2;
+
     // 進んだTick(拍数)を取得
     int advancedTick = rhythmBeat.Update(tick);
 
+    // 四分音符でリズムの計算をする
+    int quarterPreviewBeat = rhythmBeat.GetBeatElapsed() / 2;
+
     // 1小節更新の検知
-    m_CurrentMeasure = rhythmBeat.GetBeatElapsed() / 4;
+    m_CurrentMeasure = rhythmBeat.GetBeatElapsed() / rhythmBeat.GetBeatConst().m_BeatUnit;
+
+    //四分音符基準の残拍数を取得
+    int rest = rhythmBeat.GetBeatRest() / 2;
 
     // 早回し処理
     if (m_isFastChange)
@@ -101,23 +109,20 @@ void GameSceneExe::Update(float tick)
                 m_FastChangeState = FastChangeState::ReadyToExplode;
                 m_Bomber->SetFillRatio(0.0f);
             }
-            
+
         }
 
-        if (m_FastChangeState == FastChangeState::ReadyToExplode) 
+        if (m_FastChangeState == FastChangeState::ReadyToExplode)
         {
             Explode();
         }
         return;
     }
 
-    // 現在の残り拍数を取得
-    int rest = rhythmBeat.GetBeatRest();
-
     //-------------------------------
     // 拍が進んでいたらBeatTimerを進める
     //-------------------------------
-    for (int i = 0; i < advancedTick; ++i)
+    for (int i = m_QuarterAdvance; i < quarterPreviewBeat; ++i)
     {
         m_BomberElapsed = 0.0f;
         
@@ -151,18 +156,19 @@ void GameSceneExe::Update(float tick)
         }
         m_SegmentTo = std::clamp(targetProgress, 0.0f, 1.0f);
 
-        m_SpecialRest   = rest;
-        m_SpecialActive = useSpecial;
-        m_SpecialFrom   = m_FillRatio;
-        m_SpecialTo     = targetProgress;
-
         std::cout << "Beat Index : " << currentIndex << std::endl;
-        if (m_SpecialRest < 4)
+        if (rest < 4)
         {
-            m_Bomber->SetCount(m_SpecialRest);
+            m_Bomber->SetCount(rest);
             m_Bomber->CountDown();
-            if (rest == 0)    { PlaySE("explosion", std::nullopt); }
-            else if(rest > 0) { PlaySE("clock"    , std::nullopt); }
+            if (rest == 0)    { 
+                TextureManager* textureMgr = Game::GetInstance();
+
+                PlaySE("explosion", std::nullopt); 
+                m_Bomber->SetTexture(textureMgr->GetTexture("Bomber/Explosion.png"));
+            }
+            else if(rest < 4 &&
+                    rest > 0) { PlaySE("clock"    , std::nullopt); }
         }
     }
 
@@ -186,16 +192,15 @@ void GameSceneExe::Update(float tick)
         m_Bomber->SetFillRatio(1.0f - m_FillRatio);
     }
 
-    if (IsChangeMeasure())
-    {
-        Debug::Log("Measure Changed : " + std::to_string(m_CurrentMeasure));
-    }
+
 }
 
 void GameSceneExe::ChangeScene()
 {
     Game::SetIsTickCount(true);
-    GameToWait.duration = Game::GetRhythmBeat().GetOneBeat() * 0.5f;
+    auto& rhythmBeat = Game::GetRhythmBeat();
+    GameToWait.duration = rhythmBeat.GetOneBeat();
+    rhythmBeat.TickCount(GameToWait.duration);
     ChangeScenePop(GameToWait);
 }
 

@@ -122,7 +122,7 @@ void GameSceneWait::Initialize()
     auto& rhythmBeat = Game::GetRhythmBeat();
 
     beatConfig.Setup(Game::GetBgmBpm());
-    rhythmBeat.Initialize(beatConfig, false, 16);
+    rhythmBeat.Initialize(beatConfig, false, 32);
 
     // 難易度アップ処理 
     ++m_RelationData.stageCount;
@@ -159,6 +159,7 @@ void GameSceneWait::Initialize()
 
     m_IsFirstInitialized = true;
     m_WasPlayBGM         = false;
+    m_QuarterAdvance     = 0;
 
     auto& instance = Game::GetInstance();
     TextureManager* textureMgr = instance.GetInstance();
@@ -230,13 +231,12 @@ void GameSceneWait::Update(float tick)
 {   
     auto& rhythmBeat = Game::GetRhythmBeat();
     // リズムを取る    
-    int oldElapsedBeat = rhythmBeat.GetBeatElapsed();
+    m_QuarterAdvance = rhythmBeat.GetBeatElapsed() / 2;
     rhythmBeat.Update(tick);
-    int elapsedBeat    = rhythmBeat.GetBeatElapsed();
+    int elapsedBeat  = rhythmBeat.GetBeatElapsed() / 2;
 
     // ライフをリズムに合わせて回転させる
-    if (oldElapsedBeat  != elapsedBeat &&
-       (elapsedBeat % 2 == 0))
+    for (int i = m_QuarterAdvance; i < elapsedBeat; ++i)
     {
         // 1拍目のタイミングでBGM再生
         if (!m_WasPlayBGM)
@@ -245,20 +245,14 @@ void GameSceneWait::Update(float tick)
             m_WasPlayBGM = true;
         }
         
-
         // 残り一拍のタイミングでステージ遷移フラグを立てる
         if (elapsedBeat >= rhythmBeat.GetBeatTotal() - 1)
         {
             m_Theme->SetActive(true);
         }
-        // フラグの一拍前のタイミングでお題提示処理開始
-        if (elapsedBeat >= rhythmBeat.GetBeatTotal())
-        {
-            m_ShouldTransitionToStage = true;
-        }
 
-        int bulletTempo = elapsedBeat / 2;
-        if (bulletTempo % 2 == 1)
+        elapsedBeat;
+        if (elapsedBeat % 2 == 1)
         {
             m_IsLifeTiltPositive = !m_IsLifeTiltPositive;
         }
@@ -270,6 +264,12 @@ void GameSceneWait::Update(float tick)
                 life->SetRotate(0.0f, 0.0f, tiltAngle);
             }
         }
+    }
+
+    // フラグの一拍前のタイミングでお題提示処理開始
+    if (rhythmBeat.GetBeatElapsed() >= rhythmBeat.GetBeatTotal() - 1)
+    {
+        m_ShouldTransitionToStage = true;
     }
     if (m_ShouldTransitionToStage)
     {
@@ -287,6 +287,7 @@ void GameSceneWait::Update(float tick)
 
         m_wasDecrementLife = true;
     }
+
     if (m_LifeParticleEmitter)
     {
         m_LifeParticleEmitter->Update(tick);
@@ -295,15 +296,12 @@ void GameSceneWait::Update(float tick)
     CountTimer(tick);
 
     // デバッグ用　終わったら消す予定のreturn
-    // return ;
     if (m_RelationData.gameLife == 0u)
     {
         // ライフが0になったらリザルトシーンへ
         Game::SetIsTickCount(false);
         ChangeScenePush<ResultScene>(WaitToResult);
     }
-
-    
 }
 
 void GameSceneWait::Draw()
@@ -334,9 +332,9 @@ void GameSceneWait::Finalize()
 void GameSceneWait::StartNextStageTransition()
 {
     Game::SetIsTickCount(true);
-
     RhythmBeat& rhythmBeat = Game::GetRhythmBeat();
     WaitToGame.duration = rhythmBeat.GetOneBeat();
+    rhythmBeat.TickCount(WaitToGame.duration);
 
     // シーン遷移処理
     switch (m_RelationData.nextScene)

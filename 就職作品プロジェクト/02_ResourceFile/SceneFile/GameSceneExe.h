@@ -40,10 +40,9 @@ protected:
 
 	float m_BomberElapsed = 0.0f;		// Œo‰ßŠÔ
 
-	float m_SpecialFrom   = 0.0f;     
-	float m_SpecialTo	  = 0.0f;       
+	int	 m_QuarterAdvance = 0;
+
 	int   m_SpecialRest   = -1;       
-	bool  m_SpecialActive = false;  
 
 	float m_FillRatio	  = 0.0f;		// 
 	float m_SegmentFrom	  = 0.0f;		//
@@ -110,7 +109,8 @@ public:
 	bool IsChange()		const { return m_isChange; }
     bool IsFastChange() const { return m_isFastChange; }
 	
-    // ¬ß‚ªØ‚è‘Ö‚í‚Á‚½uŠÔ‚ğŒŸ’m‚·‚éŠÖ”
+
+	// ¬ß‚ªØ‚è‘Ö‚í‚Á‚½uŠÔ‚ğŒŸ’m‚·‚éŠÖ”
 	bool IsChangeMeasure();
 
 	SCENE_NO GetSceneNo() const override {

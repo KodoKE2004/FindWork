@@ -11,8 +11,6 @@ class GameSceneDodge : public GameSceneExe
 private:
     pShared<Square>        m_Background;
     pShared<Bird>          m_Bird;
-    pShared<Stone>         m_Stone;         // インスタンシング描画の参照元
-    vector<pShared<Stone>> m_StoneList;
 
     float m_StoneSpawnElapsed = 0.0f;
     size_t m_CurrentCartPatternIndex = 0;

@@ -73,7 +73,7 @@ public:
     }
 
     void TickCount(float tick) {
-        m_TickCounter += (GetOneBeat() * tick);
+        m_TickCounter += tick;
     }
 
     void SetBpm(float bpm)

@@ -36,7 +36,7 @@ void GameSceneSlice::Initialize()
     {
         auto enemy = AddObject<Enemy>(instance.GetCamera());
         enemy->SetName("m_Enemy");
-        enemy->SetTexture(textureMgr->GetTexture("EnemyNormal.png"));
+        enemy->SetTexture(textureMgr->GetTexture("GameScene/EnemyNormal.png"));
         enemy->SetPos(200.0f, -100.0f, 0.0f);
         enemy->SetScale(100.0f, 100.0f, 1.0f);
     }

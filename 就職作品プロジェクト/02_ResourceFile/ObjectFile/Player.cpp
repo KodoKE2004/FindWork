@@ -32,52 +32,14 @@ void Player::Initialize()
     SetPos(0.0f, -200.0f, 0.0f);
 
     auto& instance = Game::GetInstance();
-    m_Bullet = std::make_shared<Bullet>(instance.GetCamera());
-    m_Bullet->Initialize();
     
 }
 
 void Player::Update()
 {
     const float tick = Application::GetDeltaTime();
-    m_CreateBulletElapsed += tick;
-    if (m_CreateBulletTime <= m_CreateBulletTime)
-    {
-        m_CreateBulletElapsed = 0.0f;
-        auto& instance = Game::GetInstance();
-        TextureManager* textureMgr = instance;
-
-        auto bullet = std::make_shared<Bullet>(instance.GetCamera());
-
-        NVector3 pos     = GetPos();
-        float scaleHalfY = GetScale().y * 0.5f;
-        float baseScale = 100.0f;
-        DirectX::SimpleMath::Vector2 scaleBullet{
-            12.0f   * baseScale,
-            13.717f * baseScale
-        };
-        
-        bullet->Initialize();
-        bullet->SetTexture(textureMgr->GetTexture("Bullet.png"));
-        bullet->SetPos  (pos.x, pos.y + scaleHalfY, 0.0f);
-        bullet->SetScale(scaleBullet.x, scaleBullet.y, 0.0f);
-        bullet->Alive();
-        m_BulletList.emplace_back(bullet);
-    }
     
-    for (auto bullet : m_BulletList)
-    {
-        bullet->Update();
-    }
-
-    m_BulletList.erase(
-        std::remove_if(m_BulletList.begin(), m_BulletList.end(),
-            [](const pShared<Bullet>& bullet)
-            {
-                return !bullet || !bullet->IsAlive();
-            }),
-        m_BulletList.end()
-    );
+    
 
 }
 

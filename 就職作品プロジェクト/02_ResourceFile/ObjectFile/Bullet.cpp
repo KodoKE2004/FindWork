@@ -12,11 +12,6 @@ Bullet::Bullet(Camera& cam) : Square(cam), m_Direction(Vector3::Zero), m_Speed(1
 void Bullet::Initialize() {
     TextureManager* textureMgr = Game::GetInstance();
     Square::Initialize();
-    
-    auto placeHolder = textureMgr->GetTexture("placeholder.png");
-    if(placeHolder){
-        SetTexture(placeHolder);
-    }
 
     m_Scale = NVector3(100.0f, 100.0f, 100.0f);
 }

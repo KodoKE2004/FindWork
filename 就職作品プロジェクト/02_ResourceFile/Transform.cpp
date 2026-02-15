@@ -86,13 +86,13 @@ void Transform::SetScale(const float _Scale)
 	m_Scale.z = _Scale;
 }
 
-Transform Transform::GetTransform() const
+Transform Transform::GetTransform()
 {
     Transform result;
 
-    result.SetPos(GetPos());
+    result.SetPos   (GetPos());
     result.SetRotate(GetRotate());
-    result.SetScale(GetScale());
+    result.SetScale (GetScale());
 
     return result;
 }

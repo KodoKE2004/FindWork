@@ -36,6 +36,7 @@ void GameSceneCrush::Initialize()
     m_Skydome->SetRadius(5.0f);
     
     m_Player = AddObject<Player>(instance.GetCamera());
+    m_Player->SetTexture(textureMgr->GetTexture("GameScene/GamePlane.png"));
     //m_Player->SetPos();
     //m_Player->SetScale();
     int difficult = m_RelationData.stageCount / 4;
@@ -55,6 +56,9 @@ void GameSceneCrush::Initialize()
 
 void GameSceneCrush::Update(float tick)
 {
+    // Skydome‚Ì‰ñ“]
+    m_Skydome->Spin(0.0f, -4.0f, 0.0f);
+
     auto enemys = GetObjects<Enemy>();
     if (IsAllDeathEnemy(enemys)) {
         // SceneExe‚Å‘‚ß‚ÉƒNƒŠƒA‚ð‚µ‚½ê‡‚à‘z’è
@@ -63,21 +67,37 @@ void GameSceneCrush::Update(float tick)
     }
     GameSceneExe::Update(tick);
     
-    // Skydome‚Ì‰ñ“]
-    m_Skydome->Spin(0.0f, -4.0f, 0.0f);
+    m_CreateBulletElapsed += tick;
+    if (m_CreateBulletTime <= m_CreateBulletTime)
+    {
+        CreateBullet();
+    }
+
+    for (auto bullet : m_BulletList)
+    {
+        bullet->Update();
+    }
+
+    m_BulletList.erase(
+        std::remove_if(m_BulletList.begin(), m_BulletList.end(),
+            [](const pShared<Bullet>& bullet)
+            {
+                return !bullet || !bullet->IsAlive();
+            }),
+        m_BulletList.end()
+    );
+
+
 
     if (!m_RelationData.isClear) 
     {
 
     }
 
-
-
     if (IsChange())
     {
         ChangeScene();
     }
-
 }
 
 void GameSceneCrush::Draw()
@@ -88,4 +108,14 @@ void GameSceneCrush::Draw()
 void GameSceneCrush::Finalize()
 {
     GameSceneExe::Finalize();
+}
+
+void GameSceneCrush::CreateBullet()
+{
+    auto& instance = Game::GetInstance();
+    TextureManager* textureMgr = instance;
+
+    pShared<Bullet> bullet = AddObject<Bullet>(instance.GetCamera());
+    bullet->SetTexture(textureMgr->GetTexture("GameScene/Bullet.png"));
+
 }

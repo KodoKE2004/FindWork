@@ -28,18 +28,15 @@ private:
 	pShared<ParticleEmitter>	 m_LifeParticleEmitter; // ライフ減少時のパーティクルエミッター
 
     float m_Tick = 0.0f;
-    
+	int	 m_QuarterAdvance = 0;
+
 	std::mt19937_64 m_RandomEngine{ std::random_device{}() };
 
-	//================================
-    // 	  シーン内で使う時間関連変数
-	//	  (スピード倍率によって変化)
-	//================================
+    // シーン内で使う時間関連変数
+	//(スピード倍率によって変化)
     TimerData m_DecrementLife = { 0.0f,0.5f };	// ライフが減るまでのタイマー管理用構造体
 
-    //================================
-    //		 ステージ遷移用フラグ
-    //================================ 
+    // ステージ遷移用フラグ
 	// 初期化済みかどうかのフラグ
     // また、乱数選択のリセット用にstaticで持つ
     static bool s_HasFirstGameSceneWaitInitialized;	

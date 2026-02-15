@@ -54,9 +54,9 @@ namespace Calculator
                 (std::fabs(distY) <= sq.halfH);
         }
 
-        bool isHitSquareCircle(Square& square, Circle& circle)
+        bool Calculator::Collider2D::isHitSquareCircle(Transform& square, Transform& circle)
         {
-            if (!ColliderMore(square.GetTransform(), circle.GetTransform())){
+            if (!ColliderMore(square.GetTransform(), circle.GetTransform())) {
                 return false;
             }
 
@@ -85,7 +85,7 @@ namespace Calculator
             return distSq <= (r * r);
         }
 
-        bool isHitCircleCircle(Circle& circleA, Circle& circleB)
+        bool Calculator::Collider2D::isHitCircleCircle(Transform& circleA, Transform& circleB)
         {
             const Transform traA = circleA.GetTransform();
             const Transform traB = circleB.GetTransform();
@@ -107,7 +107,7 @@ namespace Calculator
             return disttance <= (distanceMax * distanceMax);
         }
 
-        bool isHitSquareSquare(Square& squareA, Square& squareB)
+        bool Calculator::Collider2D::isHitSquareSquare(Transform& squareA, Transform& squareB)
         {
             // ‘e”»’èF‘ÎŠpü‹——£
             if (!ColliderMore(squareA.GetTransform(), squareB.GetTransform()))

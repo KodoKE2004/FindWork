@@ -9,6 +9,13 @@ private:
     
     pShared<Square> m_Plane;
     pShared<Player> m_Player; 
+
+    pShared<Bullet>         m_Bullet;
+    vector<pShared<Bullet>> m_BulletList;
+
+    float m_CreateBulletTime = 0.0f;
+    float m_CreateBulletElapsed = 0.0f;
+
 public:
 
    GameSceneCrush() = delete;
@@ -24,5 +31,6 @@ public:
         return SCENE_NO::GAME_CRUSH;
     }
 
+    void CreateBullet();
 };
 

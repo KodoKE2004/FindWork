@@ -141,7 +141,7 @@ void Square::Draw()
 
 	Renderer::SetUV(u0, v0, u1, v1);
 
-	Camera::ScopedMode scepedMode(m_Camera, CAMERA_2D);
+	Camera::ScopedMode scopedMode(m_Camera, CAMERA_2D);
 
 
 	if (m_UseInstancing && m_InstanceCount > 0 && m_InstanceTransformCB) 
@@ -176,9 +176,9 @@ void Square::UpdateInstanceBuffers()
 	}
 
 	D3D11_BUFFER_DESC desc{};
-	desc.ByteWidth = static_cast<UINT>(sizeof(Vector4) * m_InstancePositionScale.size());
-	desc.Usage = D3D11_USAGE_DYNAMIC;
-	desc.BindFlags = D3D11_BIND_CONSTANT_BUFFER;
+	desc.ByteWidth		= static_cast<UINT>(sizeof(Vector4) * m_InstancePositionScale.size());
+	desc.Usage			= D3D11_USAGE_DYNAMIC;
+	desc.BindFlags		= D3D11_BIND_CONSTANT_BUFFER;
 	desc.CPUAccessFlags = D3D11_CPU_ACCESS_WRITE;
 
 	D3D11_SUBRESOURCE_DATA init{};
@@ -221,7 +221,7 @@ void Square::SetTexture(const char* imgname)
 	}
 
 	bool sts = m_Texture->LoadFromFile(imgname);
-	assert(sts != true);
+	assert(sts == true);
 
     Object::SetTexture(m_Texture);
 }

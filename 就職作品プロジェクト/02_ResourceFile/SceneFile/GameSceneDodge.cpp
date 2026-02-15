@@ -21,6 +21,10 @@ namespace
         std::shuffle(indices.begin(), indices.end(), engine);
         return indices;
     }
+
+    const Calculator::Physics::VerticalMotionState kStoneVerticalMotion = {
+        0.0f, 980.0f, 1.0f, -9000.0f, - 700.0f
+    };
 }
 
 GameSceneDodge::GameSceneDodge(Camera& cam) : GameSceneExe(cam)
@@ -46,16 +50,14 @@ void GameSceneDodge::Initialize()
     auto& instance = Game::GetInstance();
     TextureManager* textureMar = instance; 
 
-    /*m_Background = AddObject<Square>(instance.GetCamera());
+    m_Background = AddObject<Square>(instance.GetCamera());
     m_Background->SetName("m_Background");
     m_Background->SetScale(1280.0f, 720.0f, 1.0f);
-    m_Background->SetTexture(textureMar->GetTexture("Plane.png"));*/
+    m_Background->SetTexture(textureMar->GetTexture("Plane.png"));
 
     m_Bird = AddObject<Bird>(instance.GetCamera());
     m_Bird->SetScale(50.0f,50.0f,1.0f);
 
-    m_Stone = AddObject<Stone>(instance.GetCamera());
-    
     PlayParams fallParams;
     m_AudioList.emplace("fall", AudioConfig(L"SE/RockFall.wav", fallParams, false, false));
 
@@ -80,6 +82,7 @@ void GameSceneDodge::Initialize()
 
     m_Bomber = AddObject<Bomber>(instance.GetCamera());
     m_Bomber->SetName("m_TimeGauge");
+
     m_MySceneObjects.emplace_back(m_Bomber->GetRope());
     m_MySceneObjects.emplace_back(m_Bomber->GetNumber());
 
@@ -91,7 +94,6 @@ void GameSceneDodge::Update(float tick)
 
     auto& instance = Game::GetInstance();
     
-    // 拍が更新された場合
     m_StoneSpawnElapsed += tick;
     while (m_StoneSpawnElapsed >= kStoneSpawnInterval)
     {
@@ -100,29 +102,43 @@ void GameSceneDodge::Update(float tick)
         
         for (int i = 0; i < createNum; ++i)
         {
-            pShared<Stone> stone = std::make_shared<Stone>(instance.GetCamera());
+            pShared<Stone> stone = AddObject<Stone>(instance.GetCamera());
             stone->Initialize();
-            stone->SetScale(m_Stone->GetScale());
-            m_StoneList.emplace_back(stone);
+            stone->SetScale(100.0f,100.0f,1.0f);
+            stone->SetVMState(kStoneVerticalMotion);
         }
     }
 
-    for (const auto& stone : m_StoneList)
+    auto stoneList = GetObjects<Stone>();
+    
+
+    for (const auto& stone : stoneList)
     {
         if (!stone) {
             continue;
         }
         stone->Update();
+        if (!stone->IsActive()) {
+            DeleteObject(stone);
+        }
+
+        // 当たり判定
+        // 修正前
+        // Calculator::Collider2D::isHitCircleCircle(m_Bird->GetTransform(), stone->GetTransform());
+
+        // 修正後
+        // GetTransform() の戻り値が一時オブジェクト（rvalue）の場合、非const参照には渡せません。
+        // 一時変数に格納してから参照で渡すことでエラーを回避します。
+        auto birdTransform  = m_Bird->GetTransform();
+        auto stoneTransform = stone->GetTransform();
+        bool isHit = Calculator::Collider2D::isHitCircleCircle(birdTransform, stoneTransform);
+        if (isHit)
+        {
+            Debug::Log("[[衝突]] Bird - Stone");
+        }
     }
 
-    m_StoneList.erase(
-        std::remove_if(m_StoneList.begin(), m_StoneList.end(),
-            [](const pShared<Stone>& stone)
-            {
-                return !stone || !stone->IsActive();
-            }),
-            m_StoneList.end()
-        );
+
 
     if (IsChange())
     {
@@ -133,21 +149,10 @@ void GameSceneDodge::Update(float tick)
 void GameSceneDodge::Draw()
 {
     Scene::Draw();
-    if (m_Stone)
-    {
-        m_Stone->DrawInstanced(m_StoneList);
-    }
 }
 
 void GameSceneDodge::Finalize()
 {
-    if (m_Stone)
-    {
-        m_Stone->Finalize();
-        m_Stone.reset();
-    }
-    m_StoneList.clear();
-
     GameSceneExe::Finalize();
 }
 
