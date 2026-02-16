@@ -23,9 +23,9 @@ class GameSceneWait : public Scene
 {
 private:
 
-    uint32_t							 m_LifeCount = 4;		// 自分のライフ数
-    vector<pShared<Square>> m_LifeGame;			// ライフのオブジェクト格納用
-	pShared<ParticleEmitter>	 m_LifeParticleEmitter; // ライフ減少時のパーティクルエミッター
+    uint32_t				 m_LifeCount = 4;		// 自分のライフ数
+    vector<pShared<Square>>  m_LifeGame;			// ライフのオブジェクト格納用
+	pShared<ParticleEmitter> m_LifeParticleEmitter; // ライフ減少時のパーティクルエミッター
 
     float m_Tick = 0.0f;
 	int	 m_QuarterAdvance = 0;

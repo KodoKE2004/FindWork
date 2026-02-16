@@ -51,7 +51,7 @@ protected:
 	// シーン遷移フラグ
     bool  m_isChange	  = false;		// シーン変更フラグ
 	
-    pShared<Audio> m_ReactionAudio;		// 反応音
+    pShared<Audio> m_ReactionActive;		// 反応音
 
 	// 先行クリア時の早回し用フラグ
     bool  m_isFastChange = false;					// 速攻シーン変更フラグ
@@ -119,5 +119,6 @@ public:
 	}    
 protected:
 	void Explode();
+    void RegesterReactionSE(std::string seName);
 };
 

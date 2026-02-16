@@ -5,6 +5,15 @@
 
 using namespace Calculator::Collider2D;
 
+namespace
+{
+    NVector3 spawnPos[] = {
+        NVector3(-200.0f, 180.0f, 1.0f),
+        NVector3(   0.0f, 180.0f, 1.0f),
+        NVector3( 200.0f, 180.0f, 1.0f)
+    };
+}
+
 GameSceneShot::GameSceneShot(Camera& cam) : GameSceneExe(cam)
 {
 }
@@ -20,7 +29,7 @@ void GameSceneShot::Initialize()
     // シーンに繋ぐ情報は基底初期化後の一番最初に設定
     m_RelationData.isClear = false;
 
-    m_CreateBulletTime = 0.1f;
+    m_CreateBulletTime = 0.05f;
 
     // リズムの定義
     RhythmBeatConst beatConfig{};
@@ -40,7 +49,7 @@ void GameSceneShot::Initialize()
     m_Player = AddObject<Player>(instance.GetCamera());
     m_Player->SetName("m_Player");
     m_Player->SetTexture(textureMgr->GetTexture("GameScene/GamePlane.png"));
-    m_Player->SetPos  (  0.0f,   0.0f, 0.0f);
+    m_Player->SetPos  (  0.0f,-200.0f, 0.0f);
     m_Player->SetScale(300.0f, 200.0f, 0.0f);
 
     m_OperatorBar = AddObject<Square>(instance.GetCamera());
@@ -57,44 +66,73 @@ void GameSceneShot::Initialize()
     m_PlaneHandle->SetScale(50.0f,   50.0f, 1.0f);
     m_PlaneHandle->SetLimitRange({ m_DragLimitLine, 1000.0f, 1000.0f});
 
-    ////m_Player->SetScale();
-    //int difficult = m_RelationData.stageCount / 4;
-    //if (difficult >= 4){ difficult = 3; }
-    //for (int i = 0; i <= difficult; ++i)
-    //{
-    //    auto enemy = AddObject<Enemy>(instance.GetCamera());
-    //    enemy->SetName("m_Enemy");
-    //    enemy->SetPos  ( 0.0f, - 180.0f, 1.0f);
-    //}
+    //m_Player->SetScale();
+    int difficult = m_RelationData.stageCount / 4;
+    if (difficult >= 4){ difficult = 3; }
+    for (int i = 0; i <= difficult; ++i)
+    {
+        auto enemy = AddObject<Enemy>(instance.GetCamera());
+        enemy->SetName("m_Enemy");
+        enemy->SetPos  ( 0.0f, 180.0f, 1.0f);
+
+    }
 
     m_Bomber = AddObject<Bomber>(instance.GetCamera());
     m_Bomber->SetName("m_TimeGauge");
     m_MySceneObjects.emplace_back(m_Bomber->GetRope());
     m_MySceneObjects.emplace_back(m_Bomber->GetNumber());
+    
+    PlayParams shotParams;
+    m_AudioList.emplace("shot", AudioConfig(L"SE/BulletShot.wav", shotParams, false, false));
+
+    PlayParams hitParams;
+    m_AudioList.emplace("hit", AudioConfig(L"SE/BulletHit.wav" , hitParams, false, false));
+   
+    PlayParams bgmParams;
+    m_AudioList.emplace("bgm", AudioConfig(L"BGM/GameSceneMelody/Shooting.wav" , bgmParams, false, false));
+
+    PlayParams exploParams;
+    m_AudioList.emplace("explosion", AudioConfig(L"SE/GameReaction/Explosion.wav" , exploParams, false, false));
+
+    AudioManager* audioMgr = instance;
+    if (audioMgr)
+    {
+        for (const auto& [key, config] : m_AudioList)
+        {
+            if (!audioMgr->Add(key, config.filePath)) {
+                continue;
+            }
+            if (config.autoPlay)
+            {
+                auto params = config.params;
+                if (config.loop)
+                {
+                    params.loop.loopCount = XAUDIO2_LOOP_INFINITE;
+                }
+            }
+        }
+    }
+
+
+    RegesterReactionSE("explosion");
+    PlaySE("bgm", 0.4f);
 }
 
 void GameSceneShot::Update(float tick)
 {
-    return;
-
     // Skydomeの回転
     m_Skydome->Spin(0.0f, -4.0f, 0.0f);
 
-    auto enemys = GetObjects<Enemy>();
-    if (IsAllDeathEnemy(enemys)) {
-        // SceneExeで早めにクリアをした場合も想定
-        m_isFastChange = true;
-        m_RelationData.isClear = true;
-    }
+
     GameSceneExe::Update(tick);
     
     // ハンドルの位置に合わせて、プレイヤーも移動させる
     NVector3 planePos = {
-        m_PlaneHandle->GetPos().x,
-        m_Plane->GetPos().y,
-        m_Plane->GetPos().z,
+        m_PlaneHandle->GetPos().x - 7.0f,
+        m_Player->GetPos().y,
+        m_Player->GetPos().z,
     };
-    m_Plane->SetPos(planePos);
+    m_Player->SetPos(planePos);
 
     m_CreateBulletElapsed += tick;
     if (m_CreateBulletTime <= m_CreateBulletElapsed)
@@ -103,13 +141,55 @@ void GameSceneShot::Update(float tick)
         m_CreateBulletElapsed = 0.0f;
     }
 
+    // 弾と敵の当たり判定
     auto bullets = GetObjects<Bullet>();
-    for (auto bullet : bullets) {
-        if (!bullet->IsAlive()) {
-            DeleteObject(bullet);
+    auto enemys = GetObjects<Enemy>();
+    for (auto enemy : enemys)
+    {
+        if (enemy->IsDeath()) {
+            if (enemy->IsLifeSpan()) {
+                DeleteObject(enemy);
+            }
+            continue;
+        }
+        for (auto bullet : bullets)
+        {
+            if (!bullet->IsAlive()) {
+                continue;
+            }
+            auto enemyTransform  = enemy->GetTransform();
+            auto bulletTransform = bullet->GetTransform();
+            bool isCollision = Calculator::Collider2D::isHitCircleCircle(enemyTransform, bulletTransform);
+
+            if (bullet->IsAlive() && isCollision)
+            {
+                PlaySE("hit", 0.5f);
+                bullet->DeAlive();
+                enemy->Damage(1);
+                if (enemy->IsDeath()) {
+                    m_ReactionActive->Play(m_AudioList.at("explosion").params);
+                }
+                break;
+            }
+        }   
+    }
+    if (IsAllDeathEnemy(enemys)) {
+        // SceneExeで早めにクリアをした場合も想定
+        StageClear();
+        bool isFinished = false;
+        if (m_ReactionActive) {
+            isFinished = m_ReactionActive->IsFinished();
+        }
+        if (isFinished && IsChangeMeasure()) {
+            FastChange();
         }
     }
-
+    auto scene = Game::GetInstance().GetCurrentScene();
+    for (auto bullet : bullets) {
+        if (!bullet->IsAlive()) {
+            scene->DeleteObject(bullet);
+        }
+    }
 
     if (!m_RelationData.isClear) 
     {
@@ -140,8 +220,8 @@ void GameSceneShot::CreateBullet()
     pShared<Bullet> bullet = AddObject<Bullet>(instance.GetCamera());
     bullet->SetTexture(textureMgr->GetTexture("GameScene/Bullet.png"));
     Vector3 pos = {
-        m_Player->GetPos().x,
-        m_Player->GetPos().y + m_Player->GetScale().y * 0.5f,
+        m_Player->GetPos().x +  8.5f,
+        m_Player->GetPos().y + 40.0f,
         m_Player->GetPos().z,
     };
     bullet->SetName("m_Bullet");
@@ -149,4 +229,5 @@ void GameSceneShot::CreateBullet()
     bullet->SetPos(pos);
     bullet->SetScale(25.0f,50.0f,0.0f);
     bullet->Shoot (pos, Vector3(0.0f,1.0f,0.0f));
+    PlaySE("shot", 0.2f);
 }

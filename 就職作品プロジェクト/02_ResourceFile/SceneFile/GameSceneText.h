@@ -27,7 +27,6 @@ private:
     MESSAGE_SLOT m_SelectedSlot = SLOT_SIZE;
 
     std::array<pShared<Audio>, 3> m_ReactionAudio;
-    pShared<Audio> m_ReactionActive;
     size_t m_CurrentRhythmIndex = 0;    // 現在のリズムインデックス
     size_t m_InputIndex = 0;            // 入力されたインデックス
     float m_JudgeWindow = 0.1f;         // ジャッジウィンドウの許容範囲

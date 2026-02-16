@@ -56,8 +56,10 @@ void DragController::Update()
 
     if (m_isLimit)
     {    
-        std::clamp(pos.x, - m_LimitRange.x, m_LimitRange.x);
-        std::clamp(pos.y, - m_LimitRange.y, m_LimitRange.y);
+        const float limitX = std::abs(m_LimitRange.x);
+        const float limitY = std::abs(m_LimitRange.y);
+        pos.x = std::clamp(pos.x, -limitX, limitX);
+        pos.y = std::clamp(pos.y, -limitY, limitY);
     }
 
     SetPos(pos.x,pos.y, 0.0f);

@@ -47,7 +47,7 @@ void GameSceneDodge::Initialize()
     DebugUI::TEXT_CurrentScene = "GameSceneDodge";
 
     // シーンに繋ぐ情報は基底初期化後の一番最初に設定
-    m_RelationData.isClear = true;
+    StageClear();
 
     // リズムの定義
     RhythmBeatConst beatConfig{};
@@ -104,6 +104,8 @@ void GameSceneDodge::Initialize()
     m_MySceneObjects.emplace_back(m_Bomber->GetNumber());
 
     PlaySE("bgmDodge", 0.2f);
+
+    RegesterReactionSE("fall");
 }
 
 void GameSceneDodge::Update(float tick)
@@ -119,8 +121,8 @@ void GameSceneDodge::Update(float tick)
     {
         if (first == 0)
         {
-            
             first++;
+            PlaySE("fall",0.2f);
         }
         
         m_StoneSpawnElapsed -= kStoneSpawnInterval;
@@ -161,6 +163,8 @@ void GameSceneDodge::Update(float tick)
                 Calculator::Physics::AddForce(m_Bird->GetMotionState().velocity, kBirdForce);
                 m_ReactionActive = audioMgr->Create(m_AudioList.at("hit"));
                 m_ReactionActive->Play(m_AudioList.at("hit").params);
+
+                StageFail();
             }
         }
     }

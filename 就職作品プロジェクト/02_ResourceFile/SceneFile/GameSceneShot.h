@@ -8,7 +8,6 @@ class GameSceneShot : public GameSceneExe
 {
 private:
     
-    pShared<Square> m_Plane;
     pShared<Player> m_Player; 
     pShared<Square> m_OperatorBar;
     pShared<DragController> m_PlaneHandle;

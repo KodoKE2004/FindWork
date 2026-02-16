@@ -29,13 +29,11 @@ Player::Player(Camera& cam) : Square(cam)
 void Player::Initialize()
 {
     Square::Initialize();
-    SetPos(0.0f, -200.0f, 0.0f);
-    
 }
 
 void Player::Update()
 {
-
+    
 }
 
 void Player::Draw()

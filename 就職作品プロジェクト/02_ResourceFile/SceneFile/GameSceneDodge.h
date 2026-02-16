@@ -11,7 +11,6 @@ class GameSceneDodge : public GameSceneExe
 private:
     pShared<Square>        m_Background;
     pShared<Bird>          m_Bird;
-    pShared<Audio>         m_ReactionActive;
     float m_StoneSpawnElapsed = 0.0f;
     size_t m_CurrentCartPatternIndex = 0;
 

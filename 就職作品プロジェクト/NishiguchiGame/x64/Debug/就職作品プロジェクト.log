@@ -1,8 +1,11 @@
-﻿  DragController.cpp
-C:\Users\kodokeの世界\Desktop\HAL\VisualSutdio\就職作品\個人製作\FindWork\就職作品プロジェクト\02_ResourceFile\ObjectFile\DragController.cpp(59,14): warning C4834: [[nodiscard]] 属性を持つ関数の戻り値を破棄しています
-  (ソース ファイル '/02_ResourceFile/ObjectFile/DragController.cpp' をコンパイルしています)
-  
-C:\Users\kodokeの世界\Desktop\HAL\VisualSutdio\就職作品\個人製作\FindWork\就職作品プロジェクト\02_ResourceFile\ObjectFile\DragController.cpp(60,14): warning C4834: [[nodiscard]] 属性を持つ関数の戻り値を破棄しています
-  (ソース ファイル '/02_ResourceFile/ObjectFile/DragController.cpp' をコンパイルしています)
-  
+﻿  Game.cpp
+  GameSceneDodge.cpp
+  GameSceneExe.cpp
+  GameSceneShot.cpp
+  GameSceneSlice.cpp
+  GameSceneText.cpp
+  GameSceneWait.cpp
+  ResultScene.cpp
+  TitleScene.cpp
+  TransScene.cpp
   就職作品プロジェクト.vcxproj -> C:\Users\kodokeの世界\Desktop\HAL\VisualSutdio\就職作品\個人製作\FindWork\就職作品プロジェクト\x64\Debug\NishiguchiGame.exe

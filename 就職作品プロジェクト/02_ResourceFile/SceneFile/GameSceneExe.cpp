@@ -228,6 +228,12 @@ void GameSceneExe::Explode()
     m_FastChangeState = FastChangeState::Exploded;
 }
 
+void GameSceneExe::RegesterReactionSE(std::string seName)
+{
+    AudioManager* audioMgr = Game::GetInstance();
+    m_ReactionActive = audioMgr->Create(m_AudioList.at(seName));
+}
+
 void GameSceneExe::Finalize()
 {
     auto& instance = Game::GetInstance();

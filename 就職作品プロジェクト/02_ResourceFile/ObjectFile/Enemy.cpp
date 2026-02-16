@@ -12,14 +12,21 @@ void Enemy::Initialize()
 {   
     TextureManager* textureMgr = Game::GetInstance();
     Square::Initialize();
-    SetTexture(textureMgr->GetTexture("GameScene/EnemyNormal.png"));
-
+    SetTexture(textureMgr->GetTexture("GameScene/GameEnemy.png"));
+    m_DeathDuration = 2.0f; // 死亡アニメーションの継続時間を設定
     m_isDeath = false;
 }
 
 void Enemy::Update()
 {
-    if (IsDeath()) { return; }
+    if (IsDeath()) {
+        m_Rotation.z += 0.1f; // 死亡後は回転させる
+        m_DeathElapsed += static_cast<float>(Application::GetDeltaTime());
+        if (m_DeathElapsed >= m_DeathDuration) {
+            SetLifeSpan(true);  // 寿命フラグを立てる
+        }
+        return; 
+    }
 
 }
 
@@ -40,7 +47,7 @@ void Enemy::Death()
     }
 
     TextureManager* textureMgr = Game::GetInstance();
-    SetTexture(textureMgr->GetTexture("GameScene/EnemyDeath.png"));
+    SetTexture(textureMgr->GetTexture("Bomber/Explosion.png"));
     m_isDeath = true;
 }
 
