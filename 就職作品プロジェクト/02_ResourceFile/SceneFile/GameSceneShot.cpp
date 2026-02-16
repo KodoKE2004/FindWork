@@ -20,7 +20,7 @@ void GameSceneShot::Initialize()
     // シーンに繋ぐ情報は基底初期化後の一番最初に設定
     m_RelationData.isClear = false;
 
-    m_CreateBulletTime = 0.5f;
+    m_CreateBulletTime = 0.1f;
 
     // リズムの定義
     RhythmBeatConst beatConfig{};
@@ -38,17 +38,34 @@ void GameSceneShot::Initialize()
     m_Skydome->SetRadius(5.0f);
     
     m_Player = AddObject<Player>(instance.GetCamera());
+    m_Player->SetName("m_Player");
     m_Player->SetTexture(textureMgr->GetTexture("GameScene/GamePlane.png"));
-    //m_Player->SetPos();
-    //m_Player->SetScale();
-    int difficult = m_RelationData.stageCount / 4;
-    if (difficult >= 4){ difficult = 3; }
-    for (int i = 0; i <= difficult; ++i)
-    {
-        auto enemy = AddObject<Enemy>(instance.GetCamera());
-        enemy->SetName("m_Enemy");
-        enemy->SetPos  ( 0.0f, - 180.0f, 1.0f);
-    }
+    m_Player->SetPos  (  0.0f,   0.0f, 0.0f);
+    m_Player->SetScale(300.0f, 200.0f, 0.0f);
+
+    m_OperatorBar = AddObject<Square>(instance.GetCamera());
+    m_OperatorBar->SetName("m_OperatorBar");
+    m_OperatorBar->SetTexture(textureMgr->GetTexture("GameScene/OperationBar.png"));
+    m_OperatorBar->SetPos  (  0.0f, - 270.0f, 0.0f);
+    m_OperatorBar->SetScale(900.0f,   100.0f, 1.0f);
+
+    m_PlaneHandle = AddObject<DragController>(instance.GetCamera());
+    m_PlaneHandle->SetName("m_PlaneHandle");
+    m_PlaneHandle->SetDirection(MOVE_RIGHT);
+    m_PlaneHandle->SetTexture(textureMgr->GetTexture("GameScene/PlaneHandle.png"));
+    m_PlaneHandle->SetPos  ( 0.0f, -270.0f, 1.0f);
+    m_PlaneHandle->SetScale(50.0f,   50.0f, 1.0f);
+
+
+    ////m_Player->SetScale();
+    //int difficult = m_RelationData.stageCount / 4;
+    //if (difficult >= 4){ difficult = 3; }
+    //for (int i = 0; i <= difficult; ++i)
+    //{
+    //    auto enemy = AddObject<Enemy>(instance.GetCamera());
+    //    enemy->SetName("m_Enemy");
+    //    enemy->SetPos  ( 0.0f, - 180.0f, 1.0f);
+    //}
 
     m_Bomber = AddObject<Bomber>(instance.GetCamera());
     m_Bomber->SetName("m_TimeGauge");
@@ -58,6 +75,8 @@ void GameSceneShot::Initialize()
 
 void GameSceneShot::Update(float tick)
 {
+    return;
+
     // Skydomeの回転
     m_Skydome->Spin(0.0f, -4.0f, 0.0f);
 
@@ -69,13 +88,27 @@ void GameSceneShot::Update(float tick)
     }
     GameSceneExe::Update(tick);
     
+    // ハンドルの位置に合わせて、プレイヤーも移動させる
+    NVector3 planePos = {
+        m_PlaneHandle->GetPos().x,
+        m_Plane->GetPos().y,
+        m_Plane->GetPos().z,
+    };
+    m_Plane->SetPos(planePos);
+
     m_CreateBulletElapsed += tick;
-    if (m_CreateBulletTime <= m_CreateBulletTime)
+    if (m_CreateBulletTime <= m_CreateBulletElapsed)
     {
         CreateBullet();
         m_CreateBulletElapsed = 0.0f;
     }
 
+    auto bullets = GetObjects<Bullet>();
+    for (auto bullet : bullets) {
+        if (!bullet->IsAlive()) {
+            DeleteObject(bullet);
+        }
+    }
 
 
     if (!m_RelationData.isClear) 
@@ -111,6 +144,9 @@ void GameSceneShot::CreateBullet()
         m_Player->GetPos().y + m_Player->GetScale().y * 0.5f,
         m_Player->GetPos().z,
     };
+    bullet->SetName("m_Bullet");
+    bullet->Alive();
     bullet->SetPos(pos);
+    bullet->SetScale(25.0f,50.0f,0.0f);
     bullet->Shoot (pos, Vector3(0.0f,1.0f,0.0f));
 }

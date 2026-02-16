@@ -14,7 +14,7 @@ void Bullet::Initialize() {
 
     m_Scale = NVector3(100.0f, 100.0f, 100.0f);
     m_Direction = Vector3(0.0f,1.0f,0.0f);
-    m_Speed = 10.0f;
+    m_Speed = 20.0f;
 }
 
 void Bullet::Shoot(const Vector3& pos, const Vector3& dir) {
@@ -29,7 +29,7 @@ void Bullet::Update() {
     // ¡‰ñ‚Í’Pƒ‚Éã•ûŒü‚ÉˆÚ“®‚³‚¹‚é
     m_Position.y += m_Direction.y * m_Speed;
 
-    if (m_Position.y > 700.0f) {
+    if (m_Position.y >= 700.0f) {
         m_IsAlive = false;
     }
 }

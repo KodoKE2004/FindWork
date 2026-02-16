@@ -2,6 +2,7 @@
 #include <vector>
 #include "GameSceneExe.h"
 #include "Player.h"
+#include "DragController.h"
 
 class GameSceneShot : public GameSceneExe
 {
@@ -9,6 +10,8 @@ private:
     
     pShared<Square> m_Plane;
     pShared<Player> m_Player; 
+    pShared<Square> m_OperatorBar;
+    pShared<DragController> m_PlaneHandle;
 
     float m_CreateBulletTime = 0.0f;
     float m_CreateBulletElapsed = 0.0f;
