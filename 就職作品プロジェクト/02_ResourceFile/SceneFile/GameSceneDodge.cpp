@@ -5,21 +5,113 @@
 #include <algorithm>
 #include <random>
 #include <array>
+#include <cmath>
 namespace
 {
     constexpr float kStoneSpawnInterval = 0.5f;
-
-    float StartPosX[10] = {
-          0.0f,
+    constexpr int kStoneSpawnMaxRetry = 32;
+    constexpr float kStoneMinPosY = 600.0f;
+    constexpr std::array<float, 13> StartPosX = {
+       -600.0f,
+       -500.0f,
+       -400.0f,
+       -300.0f,
+       -200.0f,
+       -100.0f,
+        0.0f,
+        100.0f,
         200.0f,
+        300.0f,
         400.0f,
-        };
-    std::array<size_t, 3> ShuffleButtonIndices()
+        500.0f,
+        600.0f
+    };
+
+    std::array<size_t, StartPosX.size()> ShuffleLaneIndices()
     {
         static std::mt19937 engine{ std::random_device{}() };
-        std::array<size_t, 3> indices{ 0, 1, 2 };
+        std::array<size_t, StartPosX.size()> indices{};
+        for (size_t i = 0; i < StartPosX.size(); ++i)
+        {
+            indices[i] = i;
+        }
         std::shuffle(indices.begin(), indices.end(), engine);
         return indices;
+    }
+
+    bool IsOverlappedAABB(const NVector3& candidate,
+        float candidateHalfW,
+        float candidateHalfH,
+        const vector<pShared<Stone>>& existingStones)
+    {
+        for (const auto& otherStone : existingStones)
+        {
+            if (!otherStone || !otherStone->IsActive())
+            {
+                continue;
+            }
+
+            const auto otherPos = otherStone->GetPos();
+            const auto otherScale = otherStone->GetScale();
+            const float otherHalfW = std::abs(otherScale.x) * 0.5f;
+            const float otherHalfH = std::abs(otherScale.y) * 0.5f;
+
+            const float dx = std::abs(candidate.x - otherPos.x);
+            const float dy = std::abs(candidate.y - otherPos.y);
+
+            if (dx < (candidateHalfW + otherHalfW) &&
+                dy < (candidateHalfH + otherHalfH))
+            {
+                return true;
+            }
+        }
+
+        return false;
+    }
+
+    NVector3 ResolveStoneSpawnPos(const vector<pShared<Stone>>& existingStones,
+        float stoneHalfW,
+        float stoneHalfH)
+    {
+        static std::mt19937 engine{ std::random_device{}() };
+
+        const float screenHalfW = static_cast<float>(Application::GetWidth())  * 0.5f;
+        const float screenHalfH = static_cast<float>(Application::GetHeight()) * 0.5f + 300.0f;
+
+        const float screenLeft = -screenHalfW;
+        const float screenRight = screenHalfW;
+        const float screenBottom = -screenHalfH;
+        const float screenTop = screenHalfH;
+
+        const float minX = screenLeft + stoneHalfW;
+        const float maxX = screenRight - stoneHalfW;
+        const float minY = max(kStoneMinPosY, screenBottom + stoneHalfH);
+        const float maxY = screenTop - stoneHalfH;
+
+        const float spawnY = (minY <= maxY) ? maxY : minY;
+        NVector3 fallbackCandidate(0.0f, spawnY, 0.0f);
+
+        for (int attempt = 0; attempt < kStoneSpawnMaxRetry; ++attempt)
+        {
+            const auto laneIndices = ShuffleLaneIndices();
+
+            for (const auto laneIndex : laneIndices)
+            {
+                const float laneX = std::clamp(StartPosX[laneIndex], minX, maxX);
+                const float laneY = (minY <= maxY)
+                    ? std::uniform_real_distribution<float>(minY, maxY)(engine)
+                    : spawnY;
+                const NVector3 candidate(laneX, laneY, 0.0f);
+                fallbackCandidate = candidate;
+
+                if (!IsOverlappedAABB(candidate, stoneHalfW, stoneHalfH, existingStones))
+                {
+                    return candidate;
+                }
+            }
+        }
+
+        return fallbackCandidate;
     }
 
     const Calculator::Physics::VerticalMotionState kStoneVerticalMotion = []
@@ -126,19 +218,28 @@ void GameSceneDodge::Update(float tick)
         }
         
         m_StoneSpawnElapsed -= kStoneSpawnInterval;
-        int createNum = 4 * (m_RelationData.stageCount / 6 + 1);
-        
+        int createNum = 4 * (m_RelationData.stageCount / 8 + 1);
+        if (createNum >= 12) {
+            createNum = 12;
+        }
         for (int i = 0; i < createNum; ++i)
         {
+            auto existingStones = GetObjects<Stone>();
+
             pShared<Stone> stone = AddObject<Stone>(instance.GetCamera());
             stone->Initialize();
-            stone->SetScale(100.0f,100.0f,1.0f);
+            stone->SetScale(100.0f, 100.0f, 1.0f);
+
+            const auto stoneScale = stone->GetScale();
+            const float stoneHalfW = std::abs(stoneScale.x) * 0.5f;
+            const float stoneHalfH = std::abs(stoneScale.y) * 0.5f;
+            const auto spawnPos = ResolveStoneSpawnPos(existingStones, stoneHalfW, stoneHalfH);
+            stone->SetPos(spawnPos.x, spawnPos.y, spawnPos.z);
+
         }
     }
 
     auto stoneList = GetObjects<Stone>();
-    
-
     for (const auto& stone : stoneList)
     {
         if (!stone) {

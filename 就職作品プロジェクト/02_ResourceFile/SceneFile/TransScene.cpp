@@ -40,11 +40,11 @@ void TransScene::Initialize()
 
 	
 	const bool isOldGameScene  = oldSceneNo == SCENE_NO::GAME_WAIT  ||
-								(oldSceneNo >= SCENE_NO::GAME_SLICE &&
+								(oldSceneNo >= SCENE_NO::GAME_DODGE &&
 								 oldSceneNo  < SCENE_NO::EXE_NUM);
 
 	const bool isNextGameScene = nextSceneNo == SCENE_NO::GAME_WAIT  ||
-								(nextSceneNo >= SCENE_NO::GAME_SLICE &&
+								(nextSceneNo >= SCENE_NO::GAME_DODGE &&
 								 nextSceneNo <  SCENE_NO::EXE_NUM);
 
 	if (isOldGameScene && isNextGameScene) {

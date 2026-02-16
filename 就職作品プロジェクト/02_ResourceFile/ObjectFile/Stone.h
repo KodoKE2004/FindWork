@@ -30,6 +30,9 @@ public:
     void SetMotionState(Motion state) {
         m_Motion = state;
     }
+    Motion GetMotionState() const {
+        return m_Motion;
+    }
 };
 
 

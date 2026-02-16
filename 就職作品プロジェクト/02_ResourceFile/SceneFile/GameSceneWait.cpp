@@ -29,67 +29,70 @@ namespace
     const size_t GAME_EXE_NUM = static_cast<size_t>(SCENE_NO::EXE_NUM);
 
     const std::array<StageEntry, GAME_EXE_NUM> kStageEntries = { {
-        { SCENE_NO::GAME_SLICE, &PushGameStage<GameSceneSlice> },
         { SCENE_NO::GAME_DODGE, &PushGameStage<GameSceneDodge>  },
-        { SCENE_NO::GAME_SHOT, &PushGameStage<GameSceneShot> },
+        { SCENE_NO::GAME_SHOT , &PushGameStage<GameSceneShot> },
         { SCENE_NO::GAME_TEXT , &PushGameStage<GameSceneText> },
-
     } };
 
-    vector<SCENE_NO> BuildStageCandidates(SCENE_NO excludeScene)
+    using StageList = std::vector<SCENE_NO>;
+
+    StageList BuildStageCandidates_Exclude(SCENE_NO excludeScene)
     {
-        vector<SCENE_NO> candidates;
+        StageList candidates;
         candidates.reserve(kStageEntries.size());
 
         for (const auto& entry : kStageEntries)
         {
             if (entry.scene != excludeScene)
-            {
                 candidates.emplace_back(entry.scene);
-            }
         }
 
+        // 保険：全部除外されてしまったら全候補に戻す
         if (candidates.empty())
         {
             for (const auto& entry : kStageEntries)
-            {
                 candidates.emplace_back(entry.scene);
-            }
         }
 
         return candidates;
     }
 
-    SCENE_NO SelectRandomStage(std::mt19937_64& randomEngine, SCENE_NO excludeScene)
+    StageList BuildStageCandidates_All()
     {
-        const vector<SCENE_NO> candidates = BuildStageCandidates(excludeScene);
-        std::uniform_int_distribution<std::size_t> dist(0, candidates.size() - 1);
-        return candidates[dist(randomEngine)];
+        StageList candidates;
+        candidates.reserve(kStageEntries.size());
+        for (const auto& entry : kStageEntries)
+            candidates.emplace_back(entry.scene);
+        return candidates;
     }
 
-    const StageEntry* FindStageEntry(SCENE_NO scene)
+    SCENE_NO SelectRandomFrom(std::mt19937_64& eng, const StageList& candidates)
     {
-        for (const auto& entry : kStageEntries)
-        {
-            if (entry.scene == scene)
-            {
-                return &entry;
-            }
-        }
-        return nullptr;
+        std::uniform_int_distribution<std::size_t> dist(0, candidates.size() - 1);
+        return candidates[dist(eng)];
+    }
+
+    SCENE_NO SelectRandomStage_All(std::mt19937_64& eng)
+    {
+        const StageList candidates = BuildStageCandidates_All();
+        return SelectRandomFrom(eng, candidates);
+    }
+
+    SCENE_NO SelectRandomStage_Exclude(std::mt19937_64& eng, SCENE_NO excludeScene)
+    {
+        const StageList candidates = BuildStageCandidates_Exclude(excludeScene);
+        return SelectRandomFrom(eng, candidates);
     }
 
     const char* kStageTheme[GAME_EXE_NUM] = {
         "Theme/Avoid.png",
-        "Theme/Hit.png",
-        "Theme/Slice.png",
+        "Theme/KO.png",
         "Theme/Convey.png"
     };
 
     const NVector3 kThemeScale[GAME_EXE_NUM] = {
-        NVector3( 550.0f, 200.0f, 1.0f),
         NVector3( 546.0f, 223.0f, 1.0f),
-        NVector3( 417.0f, 217.0f, 1.0f),
+        NVector3( 557.0f, 217.0f, 1.0f),
         NVector3( 554.0f, 198.0f, 1.0f),
     };
 
@@ -100,13 +103,16 @@ namespace
     constexpr float    kLifeParticleLifeSec = 0.8f;
 }
 
+GameSceneWait::GameSceneWait(Camera& cam) : Scene(cam)
+{
+}
+
 void GameSceneWait::Initialize()
 {
     DebugUI::TEXT_CurrentScene = "GameSceneWait";
 
     // 最初の一度だけ or 指定したタイミングのみフラグを立てる
     m_IsFirstInitialized = !s_HasFirstGameSceneWaitInitialized;
-    s_HasFirstGameSceneWaitInitialized = true;
 
     // 引き渡しデータのシーンの整理
     m_RelationData.ClearTransitionTexture();
@@ -246,7 +252,7 @@ void GameSceneWait::Update(float tick)
         }
         
         // 残り一拍のタイミングでステージ遷移フラグを立てる
-        if (restBeat >=  1)
+        if (restBeat <=  5)
         {
             m_Theme->SetActive(true);
         }
@@ -300,6 +306,7 @@ void GameSceneWait::Update(float tick)
     {
         // ライフが0になったらリザルトシーンへ
         Game::SetIsTickCount(false);
+        
         ChangeScenePush<ResultScene>(WaitToResult);
     }
 }
@@ -339,9 +346,8 @@ void GameSceneWait::StartNextStageTransition()
     // シーン遷移処理
     switch (m_RelationData.nextScene)
     {
-    case SCENE_NO::GAME_SLICE: ChangeScenePush<GameSceneSlice>(WaitToGame); break;
     case SCENE_NO::GAME_DODGE: ChangeScenePush<GameSceneDodge>(WaitToGame); break;
-    case SCENE_NO::GAME_SHOT: ChangeScenePush<GameSceneShot>(WaitToGame); break;
+    case SCENE_NO::GAME_SHOT : ChangeScenePush<GameSceneShot> (WaitToGame); break;
     case SCENE_NO::GAME_TEXT : ChangeScenePush<GameSceneText> (WaitToGame); break;
     default: return;
     }
@@ -358,18 +364,19 @@ void GameSceneWait::DecrementLife()
 
 void GameSceneWait::PrepareNextStage()
 {
-    // ステージのインデックスを格納
-    SCENE_NO nextScene = StageSelectAllRandom();
-    // 次のシーンRelationDataに格納
+    // 初期値は保険（何でも良いが未初期化禁止）
+    SCENE_NO nextScene = SCENE_NO::GAME_DODGE;
+
+    if (m_IsFirstInitialized)
+    {
+        // 初回：全候補から
+        nextScene = SelectRandomStage_All(m_RandomEngine);
+    }
+    else
+    {
+        // 2回目以降：直前と同じステージを除外して2択に
+        nextScene = SelectRandomStage_Exclude(m_RandomEngine, m_RelationData.oldScene);
+    }
+
     m_RelationData.nextScene = nextScene;
-}
-
-// 全ステージから選ぶ時の乱数を取得する関数
-SCENE_NO GameSceneWait::StageSelectAllRandom()
-{
-    return SelectRandomStage(m_RandomEngine, m_RelationData.oldScene);
-}
-
-GameSceneWait::GameSceneWait(Camera& cam) : Scene(cam)
-{
 }

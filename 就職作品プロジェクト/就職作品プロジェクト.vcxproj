@@ -48,7 +48,6 @@
     <ClCompile Include="02_ResourceFile\ObjectFile\Enemy.cpp" />
     <ClCompile Include="02_ResourceFile\SceneFile\GameSceneShot.cpp" />
     <ClCompile Include="02_ResourceFile\SceneFile\GameSceneDodge.cpp" />
-    <ClCompile Include="02_ResourceFile\SceneFile\GameSceneSlice.cpp" />
     <ClCompile Include="02_ResourceFile\SceneFile\GameSceneText.cpp" />
     <ClCompile Include="02_ResourceFile\SceneFile\GameSceneWait.cpp" />
     <ClCompile Include="02_ResourceFile\SceneFile\ResultScene.cpp" />
@@ -127,7 +126,6 @@
     <ClInclude Include="02_ResourceFile\ObjectFile\Enemy.h" />
     <ClInclude Include="02_ResourceFile\SceneFile\GameSceneShot.h" />
     <ClInclude Include="02_ResourceFile\SceneFile\GameSceneDodge.h" />
-    <ClInclude Include="02_ResourceFile\SceneFile\GameSceneSlice.h" />
     <ClInclude Include="02_ResourceFile\SceneFile\GameSceneText.h" />
     <ClInclude Include="02_ResourceFile\SceneFile\GameSceneWait.h" />
     <ClInclude Include="02_ResourceFile\SceneFile\ResultScene.h" />

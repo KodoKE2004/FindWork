@@ -40,6 +40,7 @@ void Stone::Initialize()
 {
     Square::Initialize();
     auto& instance = Game::GetInstance();
+    auto& rhythmBeat = Game::GetRhythmBeat();
     TextureManager* textureMgr = instance;
     SetTexture(textureMgr->GetTexture("GameScene/Stone.png"));
     SpawnPos(*this);
@@ -48,8 +49,8 @@ void Stone::Initialize()
     m_isActive = true;
 
     m_Motion.velocity = Vector2::Zero;
-    m_Motion.mass = 1.0f;
-    m_Motion.mag  = 10.0f;
+    m_Motion.mass = 1.0f ;
+    m_Motion.mag  = 10.0f + (rhythmBeat.GetBpm() * 0.01f);
     m_Motion.enableGravity = true;
     m_Motion.integrateX = false;
     m_Motion.integrateY = true;

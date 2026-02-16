@@ -15,8 +15,7 @@ class Theme;
 enum class SCENE_NO
 {
     NONE = -1,
-    GAME_SLICE = 0,
-	GAME_DODGE ,
+	GAME_DODGE = 0,
 	GAME_SHOT,
 	GAME_TEXT,
 	EXE_NUM,

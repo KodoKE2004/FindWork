@@ -22,7 +22,7 @@ void GameSceneExe::Initialize()
 
     if (m_Bomber)
     {
-        m_Bomber->AdjustScaleByBeatTotal(rhythmBeat.GetBeatTotal(), 16);
+        m_Bomber->AdjustScaleByBeatTotal(rhythmBeat.GetBeatTotal(), BASE_BEATS + 16);
     }
 
     //-------------------------------
@@ -139,7 +139,7 @@ void GameSceneExe::Update(float tick)
         float targetProgress = targetProgressNormal;
         bool  useSpecial     = false;
 
-        float scaleMass = 0.9f;
+        float scaleMass = 0.95f;
         if (baseBeats != BASE_BEATS) {
             scaleMass = static_cast<float>(BASE_BEATS) / static_cast<float>(baseBeats) ;
         }
@@ -240,6 +240,8 @@ void GameSceneExe::Finalize()
 
     // このシーンのオブジェクトを削除する
     m_MySceneObjects.clear();
+
+    m_ReactionActive.reset();
 
     // オーディオの停止
     if (AudioManager* audioManager = instance)

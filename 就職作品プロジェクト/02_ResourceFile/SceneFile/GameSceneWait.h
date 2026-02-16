@@ -55,7 +55,7 @@ private:
 	// 二回連続で同じステージが来るようにならないようにする 
 	// 要素の削除の仕方は考える。
 	void PrepareNextStage();
-	SCENE_NO StageSelectAllRandom();
+
 public:
 	//================================
 	//		コンストラクタとデストラクタ

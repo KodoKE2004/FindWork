@@ -3,15 +3,85 @@
 #include "Calculator.h"
 #include "Enemy.h"
 
+#include <random>
+
 using namespace Calculator::Collider2D;
 
 namespace
 {
-    NVector3 spawnPos[] = {
-        NVector3(-200.0f, 180.0f, 1.0f),
-        NVector3(   0.0f, 180.0f, 1.0f),
-        NVector3( 200.0f, 180.0f, 1.0f)
+    constexpr int kSpawnRetryMax = 32;
+    constexpr float kCenterAvoidHalfWidth = 100.0f;
+    constexpr float kMinSpawnY = 50.0f;
+
+    struct SpawnRange
+    {
+        float minX = 0.0f;
+        float maxX = 0.0f;
+        float minY = 0.0f;
+        float maxY = 0.0f;
     };
+
+    bool IsFarEnoughFromOthers(const NVector3& candidate, const std::vector<NVector3>& spawnedPositions, float minSpacing)
+    {
+        const float minSpacingSquared = minSpacing * minSpacing;
+        for (const auto& spawned : spawnedPositions)
+        {
+            const float dx = candidate.x - spawned.x;
+            const float dy = candidate.y - spawned.y;
+            const float distanceSquared = (dx * dx) + (dy * dy);
+            if (distanceSquared < minSpacingSquared)
+            {
+                return false;
+            }
+        }
+        return true;
+    }
+
+    SpawnRange BuildSpawnRange(const NVector3& enemyScale)
+    {
+        // 画面の中心を避けるため、敵の半分の幅を考慮してスポーン範囲を計算
+        // 画面内に完全に収まるように、敵の半分の幅と高さを考慮して範囲を設定
+        // ただし仕様上当たらない箇所が存在するため幅はさらに狭める
+        const float halfScreenWidth  = static_cast<float>(Application::GetWidth())  * 0.5f - 200.0f;
+        const float halfScreenHeight = static_cast<float>(Application::GetHeight()) * 0.5f;
+        const float halfW = enemyScale.x * 0.5f;
+        const float halfH = enemyScale.y * 0.5f;
+
+        SpawnRange range;
+        range.minX = -halfScreenWidth + halfW;
+        range.maxX =  halfScreenWidth - halfW;
+        range.minY = max(-halfScreenHeight + halfH, kMinSpawnY);
+        range.maxY = halfScreenHeight - halfH;
+        return range;
+    }
+
+    NVector3 GenerateSpawnCandidate(std::mt19937& engine, const SpawnRange& range, bool avoidCenter)
+    {
+        std::uniform_real_distribution<float> distY(range.minY, range.maxY);
+        float posX = 0.0f;
+
+        if (avoidCenter)
+        {
+            std::uniform_int_distribution<int> distSide(0, 1);
+            if (distSide(engine) == 0)
+            {
+                std::uniform_real_distribution<float> distX(range.minX, -kCenterAvoidHalfWidth);
+                posX = distX(engine);
+            }
+            else
+            {
+                std::uniform_real_distribution<float> distX(kCenterAvoidHalfWidth, range.maxX);
+                posX = distX(engine);
+            }
+        }
+        else
+        {
+            std::uniform_real_distribution<float> distX(range.minX, range.maxX);
+            posX = distX(engine);
+        }
+
+        return NVector3(posX, distY(engine), 1.0f);
+    }
 }
 
 GameSceneShot::GameSceneShot(Camera& cam) : GameSceneExe(cam)
@@ -68,15 +138,36 @@ void GameSceneShot::Initialize()
 
     //m_Player->SetScale();
     int difficult = m_RelationData.stageCount / 4;
-    if (difficult >= 4){ difficult = 3; }
-    for (int i = 0; i <= difficult; ++i)
+    if (difficult >= 4) { difficult = 3; }
+
+    const int spawnCount = difficult + 1;
+    std::vector<NVector3> spawnedEnemyPositions;
+    spawnedEnemyPositions.reserve(spawnCount);
+    static std::mt19937 spawnEngine{ std::random_device{}() };
+
+    for (int i = 0; i < spawnCount; ++i)
     {
         auto enemy = AddObject<Enemy>(instance.GetCamera());
         enemy->SetName("m_Enemy");
-        enemy->SetPos  ( 0.0f, 180.0f, 1.0f);
+
+        const SpawnRange spawnRange = BuildSpawnRange(enemy->GetScale());
+        const float minSpacing = enemy->GetScale().x;
+        const bool avoidCenter = (i == 0);
+
+        NVector3 spawnPos = GenerateSpawnCandidate(spawnEngine, spawnRange, avoidCenter);
+        for (int retry = 0; retry < kSpawnRetryMax; ++retry)
+        {
+            spawnPos = GenerateSpawnCandidate(spawnEngine, spawnRange, avoidCenter);
+            if (IsFarEnoughFromOthers(spawnPos, spawnedEnemyPositions, minSpacing))
+            {
+                break;
+            }
+        }
+
+        enemy->SetPos(spawnPos);
+        spawnedEnemyPositions.emplace_back(spawnPos);
 
     }
-
     m_Bomber = AddObject<Bomber>(instance.GetCamera());
     m_Bomber->SetName("m_TimeGauge");
     m_MySceneObjects.emplace_back(m_Bomber->GetRope());
@@ -89,7 +180,7 @@ void GameSceneShot::Initialize()
     m_AudioList.emplace("hit", AudioConfig(L"SE/BulletHit.wav" , hitParams, false, false));
    
     PlayParams bgmParams;
-    m_AudioList.emplace("bgm", AudioConfig(L"BGM/GameSceneMelody/Shooting.wav" , bgmParams, false, false));
+    m_AudioList.emplace("bgmShot", AudioConfig(L"BGM/GameSceneMelody/Shooting.wav" , bgmParams, false, false));
 
     PlayParams exploParams;
     m_AudioList.emplace("explosion", AudioConfig(L"SE/GameReaction/Explosion.wav" , exploParams, false, false));
@@ -115,7 +206,7 @@ void GameSceneShot::Initialize()
 
 
     RegesterReactionSE("explosion");
-    PlaySE("bgm", 0.4f);
+    PlaySE("bgmShot", 0.4f);
 }
 
 void GameSceneShot::Update(float tick)
