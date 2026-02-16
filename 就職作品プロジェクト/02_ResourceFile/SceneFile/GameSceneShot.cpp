@@ -1,24 +1,26 @@
-#include "GameSceneCrush.h"
+#include "GameSceneShot.h"
 #include "Game.h"
 #include "Calculator.h"
 #include "Enemy.h"
 
 using namespace Calculator::Collider2D;
 
-GameSceneCrush::GameSceneCrush(Camera& cam) : GameSceneExe(cam)
+GameSceneShot::GameSceneShot(Camera& cam) : GameSceneExe(cam)
 {
 }
 
-void GameSceneCrush::Initialize()
+void GameSceneShot::Initialize()
 {
 #ifdef _DEBUG
-    DebugUI::TEXT_CurrentScene = "GameSceneCrush";
+    DebugUI::TEXT_CurrentScene = "GameSceneShot";
 #endif 
     auto& instance = Game::GetInstance();
     TextureManager* textureMgr = instance;
 
     // ƒV[ƒ“‚ÉŒq‚®î•ñ‚ÍŠî’ê‰Šú‰»Œã‚Ìˆê”ÔÅ‰‚ÉÝ’è
     m_RelationData.isClear = false;
+
+    m_CreateBulletTime = 0.5f;
 
     // ƒŠƒYƒ€‚Ì’è‹`
     RhythmBeatConst beatConfig{};
@@ -54,7 +56,7 @@ void GameSceneCrush::Initialize()
     m_MySceneObjects.emplace_back(m_Bomber->GetNumber());
 }
 
-void GameSceneCrush::Update(float tick)
+void GameSceneShot::Update(float tick)
 {
     // Skydome‚Ì‰ñ“]
     m_Skydome->Spin(0.0f, -4.0f, 0.0f);
@@ -71,21 +73,8 @@ void GameSceneCrush::Update(float tick)
     if (m_CreateBulletTime <= m_CreateBulletTime)
     {
         CreateBullet();
+        m_CreateBulletElapsed = 0.0f;
     }
-
-    for (auto bullet : m_BulletList)
-    {
-        bullet->Update();
-    }
-
-    m_BulletList.erase(
-        std::remove_if(m_BulletList.begin(), m_BulletList.end(),
-            [](const pShared<Bullet>& bullet)
-            {
-                return !bullet || !bullet->IsAlive();
-            }),
-        m_BulletList.end()
-    );
 
 
 
@@ -100,28 +89,28 @@ void GameSceneCrush::Update(float tick)
     }
 }
 
-void GameSceneCrush::Draw()
+void GameSceneShot::Draw()
 {
     Scene::Draw();
 }
 
-void GameSceneCrush::Finalize()
+void GameSceneShot::Finalize()
 {
     GameSceneExe::Finalize();
 }
 
-void GameSceneCrush::CreateBullet()
+void GameSceneShot::CreateBullet()
 {
     auto& instance = Game::GetInstance();
     TextureManager* textureMgr = instance;
 
     pShared<Bullet> bullet = AddObject<Bullet>(instance.GetCamera());
     bullet->SetTexture(textureMgr->GetTexture("GameScene/Bullet.png"));
-    NVector3 pos = {
+    Vector3 pos = {
         m_Player->GetPos().x,
         m_Player->GetPos().y + m_Player->GetScale().y * 0.5f,
         m_Player->GetPos().z,
     };
     bullet->SetPos(pos);
-
+    bullet->Shoot (pos, Vector3(0.0f,1.0f,0.0f));
 }

@@ -124,7 +124,6 @@ void TransScene::Initialize()
 void TransScene::Update(float tick)
 {
     auto& instance = Game::GetInstance();
-    auto& rhythmBeat = instance.GetRhythmBeat();
 
 	if (m_TransitionTexture == nullptr) {
 		return;

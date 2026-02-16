@@ -30,16 +30,11 @@ void Player::Initialize()
 {
     Square::Initialize();
     SetPos(0.0f, -200.0f, 0.0f);
-
-    auto& instance = Game::GetInstance();
     
 }
 
 void Player::Update()
 {
-    const float tick = Application::GetDeltaTime();
-    
-    
 
 }
 

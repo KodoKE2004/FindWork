@@ -44,7 +44,7 @@ GameSceneDodge::GameSceneDodge(Camera& cam) : GameSceneExe(cam)
 
 void GameSceneDodge::Initialize()
 {
-    DebugUI::TEXT_CurrentScene = "GameSceneJump";
+    DebugUI::TEXT_CurrentScene = "GameSceneDodge";
 
     // シーンに繋ぐ情報は基底初期化後の一番最初に設定
     m_RelationData.isClear = true;
@@ -53,7 +53,7 @@ void GameSceneDodge::Initialize()
     RhythmBeatConst beatConfig{};
     auto& rhythmBeat = Game::GetRhythmBeat();
     beatConfig.Setup(Game::GetBgmBpm());
-    rhythmBeat.Initialize(beatConfig, false, BASE_BEATS);
+    rhythmBeat.Initialize(beatConfig, false, BASE_BEATS + 8);
 
     // ゲーム内の総拍数を参照するためリズム定義より後
     GameSceneExe::Initialize();

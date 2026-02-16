@@ -3,6 +3,10 @@
 
 class Bullet : public Square
 {
+private:
+    DirectX::SimpleMath::Vector3 m_Direction; // •ûŒü (³‹K‰»)
+    float m_Speed;                            // ’e‚Ì‘¬“x
+    bool m_IsAlive;                           // ’e‚Ì¶‘¶ŠÔ
 public:
     Bullet(Camera & cam);
 
@@ -24,9 +28,5 @@ public:
         m_IsAlive = false;
     }
 
-private:
-    DirectX::SimpleMath::Vector3 m_Direction; // movement direction
-    float m_Speed;                            // movement speed
-    bool m_IsAlive;                           // active flag
 
 };

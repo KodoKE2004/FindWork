@@ -10,34 +10,26 @@ Bullet::Bullet(Camera& cam) : Square(cam), m_Direction(Vector3::Zero), m_Speed(1
 }
 
 void Bullet::Initialize() {
-    TextureManager* textureMgr = Game::GetInstance();
     Square::Initialize();
 
     m_Scale = NVector3(100.0f, 100.0f, 100.0f);
+    m_Direction = Vector3(0.0f,1.0f,0.0f);
+    m_Speed = 10.0f;
 }
 
 void Bullet::Shoot(const Vector3& pos, const Vector3& dir) {
     m_Position = NVector3(pos.x, pos.y, pos.z);
     m_Direction = dir;
-    m_Direction.Normalize();
     m_IsAlive = true;
 }
 
 void Bullet::Update() {
     if (!m_IsAlive) return;
 
-    m_Position.x += m_Direction.x * m_Speed;
+    // ¡‰ñ‚Í’Pƒ‚Éã•ûŒü‚ÉˆÚ“®‚³‚¹‚é
     m_Position.y += m_Direction.y * m_Speed;
-    m_Position.z += m_Direction.z * m_Speed;
 
-    Vector3 toCam = m_Camera.GetPosition() - Vector3(m_Position.x, m_Position.y, m_Position.z);
-    float yaw = std::atan2(toCam.x, toCam.z);
-    float pitch = std::atan2(toCam.y, std::sqrt(toCam.x * toCam.x + toCam.z * toCam.z));
-    m_Rotation.x = yaw;   // yaw
-    m_Rotation.y = pitch; // pitch
-    m_Rotation.z = 0.0f;
-
-    if (toCam.Length() > 20000.0f) {
+    if (m_Position.y > 700.0f) {
         m_IsAlive = false;
     }
 }

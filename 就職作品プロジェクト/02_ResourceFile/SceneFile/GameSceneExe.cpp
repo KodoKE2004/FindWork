@@ -75,8 +75,8 @@ void GameSceneExe::Update(float tick)
 
     m_QuarterAdvance = rhythmBeat.GetBeatElapsed() / 2;
 
-    // 進んだTick(拍数)を取得
-    int advancedTick = rhythmBeat.Update(tick);
+    // 進んだTick(拍数)を更新
+    rhythmBeat.Update(tick);
 
     // 四分音符でリズムの計算をする
     int quarterPreviewBeat = rhythmBeat.GetBeatElapsed() / 2;
