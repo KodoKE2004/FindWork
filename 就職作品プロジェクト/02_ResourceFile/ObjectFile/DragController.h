@@ -37,6 +37,9 @@ protected:
     DirectX::SimpleMath::Vector2 m_ObjectDownPos{};
     DirectX::SimpleMath::Vector2 m_Dir{};
     MOVE_DIR m_MoveDir = MOVE_NONE;
+
+    bool m_isLimit = false;
+    NVector3 m_LimitRange{};
 public:
     DragController(Camera& cam);
     ~DragController();
@@ -49,6 +52,10 @@ public:
         m_MoveDir    = dir;
         m_Dir        = MOVE_DIR_VEC[dir];
         m_Rotation.z = MOVE_ANGLE[dir];
+    }
+    void SetLimitRange(const NVector3 limitRange) {
+        m_isLimit = true;
+        m_LimitRange = limitRange;
     }
 
     bool IsDragging() const {

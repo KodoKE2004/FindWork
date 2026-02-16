@@ -1,19 +1,8 @@
-﻿  Game.cpp
-  GameSceneExe.cpp
-  GameSceneShot.cpp
-  GameSceneWait.cpp
-  ResultScene.cpp
-  TitleScene.cpp
-  TransScene.cpp
-C:\Users\kodokeの世界\Desktop\HAL\VisualSutdio\就職作品\個人製作\FindWork\就職作品プロジェクト\02_ResourceFile\SceneFile\GameSceneShot.cpp(81): warning C4702: 制御が渡らないコードです。
-C:\Users\kodokeの世界\Desktop\HAL\VisualSutdio\就職作品\個人製作\FindWork\就職作品プロジェクト\02_ResourceFile\SceneFile\GameSceneShot.cpp(86): warning C4702: 制御が渡らないコードです。
-C:\Users\kodokeの世界\Desktop\HAL\VisualSutdio\就職作品\個人製作\FindWork\就職作品プロジェクト\02_ResourceFile\SceneFile\GameSceneShot.cpp(89): warning C4702: 制御が渡らないコードです。
-C:\Users\kodokeの世界\Desktop\HAL\VisualSutdio\就職作品\個人製作\FindWork\就職作品プロジェクト\02_ResourceFile\SceneFile\GameSceneShot.cpp(102): warning C4702: 制御が渡らないコードです。
-C:\Users\kodokeの世界\Desktop\HAL\VisualSutdio\就職作品\個人製作\FindWork\就職作品プロジェクト\02_ResourceFile\SceneFile\GameSceneShot.cpp(106): warning C4702: 制御が渡らないコードです。
-C:\Users\kodokeの世界\Desktop\HAL\VisualSutdio\就職作品\個人製作\FindWork\就職作品プロジェクト\02_ResourceFile\SceneFile\GameSceneShot.cpp(107): warning C4702: 制御が渡らないコードです。
-C:\Users\kodokeの世界\Desktop\HAL\VisualSutdio\就職作品\個人製作\FindWork\就職作品プロジェクト\02_ResourceFile\SceneFile\GameSceneShot.cpp(108): warning C4702: 制御が渡らないコードです。
-C:\Users\kodokeの世界\Desktop\HAL\VisualSutdio\就職作品\個人製作\FindWork\就職作品プロジェクト\02_ResourceFile\SceneFile\GameSceneShot.cpp(109): warning C4702: 制御が渡らないコードです。
-C:\Users\kodokeの世界\Desktop\HAL\VisualSutdio\就職作品\個人製作\FindWork\就職作品プロジェクト\02_ResourceFile\SceneFile\GameSceneShot.cpp(114): warning C4702: 制御が渡らないコードです。
-C:\Users\kodokeの世界\Desktop\HAL\VisualSutdio\就職作品\個人製作\FindWork\就職作品プロジェクト\02_ResourceFile\SceneFile\GameSceneShot.cpp(119): warning C4702: 制御が渡らないコードです。
-C:\Users\kodokeの世界\Desktop\HAL\VisualSutdio\就職作品\個人製作\FindWork\就職作品プロジェクト\02_ResourceFile\SceneFile\GameSceneShot.cpp(121): warning C4702: 制御が渡らないコードです。
+﻿  DragController.cpp
+C:\Users\kodokeの世界\Desktop\HAL\VisualSutdio\就職作品\個人製作\FindWork\就職作品プロジェクト\02_ResourceFile\ObjectFile\DragController.cpp(59,14): warning C4834: [[nodiscard]] 属性を持つ関数の戻り値を破棄しています
+  (ソース ファイル '/02_ResourceFile/ObjectFile/DragController.cpp' をコンパイルしています)
+  
+C:\Users\kodokeの世界\Desktop\HAL\VisualSutdio\就職作品\個人製作\FindWork\就職作品プロジェクト\02_ResourceFile\ObjectFile\DragController.cpp(60,14): warning C4834: [[nodiscard]] 属性を持つ関数の戻り値を破棄しています
+  (ソース ファイル '/02_ResourceFile/ObjectFile/DragController.cpp' をコンパイルしています)
+  
   就職作品プロジェクト.vcxproj -> C:\Users\kodokeの世界\Desktop\HAL\VisualSutdio\就職作品\個人製作\FindWork\就職作品プロジェクト\x64\Debug\NishiguchiGame.exe

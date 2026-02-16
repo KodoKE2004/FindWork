@@ -55,7 +55,7 @@ void GameSceneShot::Initialize()
     m_PlaneHandle->SetTexture(textureMgr->GetTexture("GameScene/PlaneHandle.png"));
     m_PlaneHandle->SetPos  ( 0.0f, -270.0f, 1.0f);
     m_PlaneHandle->SetScale(50.0f,   50.0f, 1.0f);
-
+    m_PlaneHandle->SetLimitRange({ m_DragLimitLine, 1000.0f, 1000.0f});
 
     ////m_Player->SetScale();
     //int difficult = m_RelationData.stageCount / 4;

@@ -15,6 +15,7 @@ private:
 
     float m_CreateBulletTime = 0.0f;
     float m_CreateBulletElapsed = 0.0f;
+    float m_DragLimitLine = 435.0f;
 
 public:
 
