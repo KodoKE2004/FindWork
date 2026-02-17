@@ -44,9 +44,6 @@
     <Filter Include="SourceFile\Core\Manager">
       <UniqueIdentifier>{4e737cfb-490c-409d-809b-cddb0af0f435}</UniqueIdentifier>
     </Filter>
-    <Filter Include="SourceFile\Scene\Transition">
-      <UniqueIdentifier>{552df999-efdd-4f0e-a91a-0e6d5bae89d1}</UniqueIdentifier>
-    </Filter>
     <Filter Include="HLSL">
       <UniqueIdentifier>{aa63484b-4a3a-4f3c-8eb8-43883440aeb1}</UniqueIdentifier>
     </Filter>
@@ -61,6 +58,9 @@
     </Filter>
     <Filter Include="SourceFile\Object\2D\DragObject">
       <UniqueIdentifier>{02cd06c0-f01c-460f-bceb-318b1d452d0b}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="SourceFile\Object\2D\Transition">
+      <UniqueIdentifier>{552df999-efdd-4f0e-a91a-0e6d5bae89d1}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
   <ItemGroup>
@@ -140,7 +140,7 @@
       <Filter>SourceFile\Core\Manager</Filter>
     </ClCompile>
     <ClCompile Include="02_ResourceFile\SceneFile\Transition\Fade.cpp">
-      <Filter>SourceFile\Scene\Transition</Filter>
+      <Filter>SourceFile\Object\2D\Transition</Filter>
     </ClCompile>
     <ClCompile Include="02_ResourceFile\ShaderManager.cpp">
       <Filter>SourceFile\Core\Manager</Filter>
@@ -173,16 +173,16 @@
       <Filter>SourceFile\Core</Filter>
     </ClCompile>
     <ClCompile Include="02_ResourceFile\SceneFile\Transition\TransitionBase.cpp">
-      <Filter>SourceFile\Scene\Transition</Filter>
+      <Filter>SourceFile\Object\2D\Transition</Filter>
     </ClCompile>
     <ClCompile Include="02_ResourceFile\SceneFile\TransScene.cpp">
       <Filter>SourceFile\Scene</Filter>
     </ClCompile>
     <ClCompile Include="02_ResourceFile\SceneFile\Transition\Wipe.cpp">
-      <Filter>SourceFile\Scene\Transition</Filter>
+      <Filter>SourceFile\Object\2D\Transition</Filter>
     </ClCompile>
     <ClCompile Include="02_ResourceFile\SceneFile\Transition\SnapshotOverlay.cpp">
-      <Filter>SourceFile\Scene\Transition</Filter>
+      <Filter>SourceFile\Object\2D\Transition</Filter>
     </ClCompile>
     <ClCompile Include="02_ResourceFile\SceneFile\GameSceneExe.cpp">
       <Filter>SourceFile\Scene\GameScene</Filter>
@@ -224,7 +224,7 @@
       <Filter>SourceFile\Core</Filter>
     </ClCompile>
     <ClCompile Include="02_ResourceFile\SceneFile\Transition\Zoom.cpp">
-      <Filter>SourceFile\Scene\Transition</Filter>
+      <Filter>SourceFile\Object\2D\Transition</Filter>
     </ClCompile>
     <ClCompile Include="02_ResourceFile\ObjectFile\Bomber.cpp">
       <Filter>SourceFile\Object\2D</Filter>
@@ -262,6 +262,9 @@
     </ClCompile>
     <ClCompile Include="02_ResourceFile\ObjectFile\Button.cpp">
       <Filter>SourceFile\Object\2D</Filter>
+    </ClCompile>
+    <ClCompile Include="02_ResourceFile\SceneFile\GameSceneRocket.cpp">
+      <Filter>SourceFile\Scene\GameScene</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -368,7 +371,7 @@
       <Filter>SourceFile\Core\Manager</Filter>
     </ClInclude>
     <ClInclude Include="02_ResourceFile\SceneFile\Transition\Fade.h">
-      <Filter>SourceFile\Scene\Transition</Filter>
+      <Filter>SourceFile\Object\2D\Transition</Filter>
     </ClInclude>
     <ClInclude Include="02_ResourceFile\ShaderManager.h">
       <Filter>SourceFile\Core\Manager</Filter>
@@ -404,16 +407,16 @@
       <Filter>SourceFile\Core</Filter>
     </ClInclude>
     <ClInclude Include="02_ResourceFile\SceneFile\Transition\TransitionBase.h">
-      <Filter>SourceFile\Scene\Transition</Filter>
+      <Filter>SourceFile\Object\2D\Transition</Filter>
     </ClInclude>
     <ClInclude Include="02_ResourceFile\SceneFile\TransScene.h">
       <Filter>SourceFile\Scene</Filter>
     </ClInclude>
     <ClInclude Include="02_ResourceFile\SceneFile\Transition\Wipe.h">
-      <Filter>SourceFile\Scene\Transition</Filter>
+      <Filter>SourceFile\Object\2D\Transition</Filter>
     </ClInclude>
     <ClInclude Include="02_ResourceFile\SceneFile\Transition\SnapshotOverlay.h">
-      <Filter>SourceFile\Scene\Transition</Filter>
+      <Filter>SourceFile\Object\2D\Transition</Filter>
     </ClInclude>
     <ClInclude Include="02_ResourceFile\SceneFile\GameSceneExe.h">
       <Filter>SourceFile\Scene\GameScene</Filter>
@@ -452,7 +455,7 @@
       <Filter>SourceFile\Core</Filter>
     </ClInclude>
     <ClInclude Include="02_ResourceFile\SceneFile\Transition\Zoom.h">
-      <Filter>SourceFile\Scene\Transition</Filter>
+      <Filter>SourceFile\Object\2D\Transition</Filter>
     </ClInclude>
     <ClInclude Include="02_ResourceFile\ObjectFile\Bomber.h">
       <Filter>SourceFile\Object\2D</Filter>
@@ -490,6 +493,9 @@
     </ClInclude>
     <ClInclude Include="02_ResourceFile\ObjectFile\Button.h">
       <Filter>SourceFile\Object\2D</Filter>
+    </ClInclude>
+    <ClInclude Include="02_ResourceFile\SceneFile\GameSceneRocket.h">
+      <Filter>SourceFile\Scene\GameScene</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>

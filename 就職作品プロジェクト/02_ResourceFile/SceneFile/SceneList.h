@@ -8,5 +8,6 @@
 #include "GameSceneShot.h"
 #include "GameSceneDodge.h"
 #include "GameSceneText.h"
+#include "GameSceneRocket.h"
 #include "ResultScene.h"
 

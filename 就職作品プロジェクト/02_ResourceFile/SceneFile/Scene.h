@@ -18,6 +18,7 @@ enum class SCENE_NO
 	GAME_DODGE = 0,
 	GAME_SHOT,
 	GAME_TEXT,
+	GAME_ROCKET,
 	EXE_NUM,
 	TITLE,
 	RESULT,
@@ -107,11 +108,11 @@ protected:
 		return time >= limit; 
 	}
 
+	void RegisterAudio();
     // 効果音再生関数
     // seName : AudioConfigに登録した名前
     // Game.hのAudioManagerを通じて再生する
 	void PlaySE(std::string seName, std::optional<float> overrideVolume);
-
 public:
 	static SceneRelationData m_RelationData;
 	// コンストラクタとデストラクタ

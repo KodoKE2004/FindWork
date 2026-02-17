@@ -8,9 +8,8 @@ class GameSceneShot : public GameSceneExe
 {
 private:
     
-    pShared<Player> m_Player; 
     pShared<Square> m_OperatorBar;
-    pShared<DragController> m_PlaneHandle;
+    pShared<DragController> m_Plane;
 
     float m_CreateBulletTime = 0.0f;
     float m_CreateBulletElapsed = 0.0f;

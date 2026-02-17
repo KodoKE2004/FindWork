@@ -170,24 +170,7 @@ void GameSceneDodge::Initialize()
     PlayParams bgmParams;
     m_AudioList.emplace("bgmDodge", AudioConfig(L"BGM/GameSceneMelody/Bird.wav", bgmParams, true, true));
 
-    AudioManager* audioMgr = instance;
-    if (audioMgr)
-    {
-        for (const auto& [key, config] : m_AudioList)
-        {
-            if (!audioMgr->Add(key, config.filePath)) {
-                continue;
-            }
-            if (config.autoPlay)
-            {
-                auto params = config.params;
-                if (config.loop)
-                {
-                    params.loop.loopCount = XAUDIO2_LOOP_INFINITE;
-                }
-            }
-        }
-    }
+    RegisterAudio();
 
     m_Bomber = AddObject<Bomber>(instance.GetCamera());
     m_Bomber->SetName("m_TimeGauge");

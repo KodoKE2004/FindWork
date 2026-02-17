@@ -14,7 +14,7 @@ private:
     float m_StoneSpawnElapsed = 0.0f;
     size_t m_CurrentCartPatternIndex = 0;
 
-    public:
+public:
     GameSceneDodge()  = delete;
     GameSceneDodge(Camera& cam);
     ~GameSceneDodge() = default;

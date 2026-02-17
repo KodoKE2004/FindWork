@@ -46,6 +46,7 @@
     <ClCompile Include="02_ResourceFile\ObjectFile\Circle.cpp" />
     <ClCompile Include="02_ResourceFile\ObjectFile\Player.cpp" />
     <ClCompile Include="02_ResourceFile\ObjectFile\Enemy.cpp" />
+    <ClCompile Include="02_ResourceFile\SceneFile\GameSceneRocket.cpp" />
     <ClCompile Include="02_ResourceFile\SceneFile\GameSceneShot.cpp" />
     <ClCompile Include="02_ResourceFile\SceneFile\GameSceneDodge.cpp" />
     <ClCompile Include="02_ResourceFile\SceneFile\GameSceneText.cpp" />
@@ -124,6 +125,7 @@
     <ClInclude Include="02_ResourceFile\ObjectFile\Circle.h" />
     <ClInclude Include="02_ResourceFile\ObjectFile\Player.h" />
     <ClInclude Include="02_ResourceFile\ObjectFile\Enemy.h" />
+    <ClInclude Include="02_ResourceFile\SceneFile\GameSceneRocket.h" />
     <ClInclude Include="02_ResourceFile\SceneFile\GameSceneShot.h" />
     <ClInclude Include="02_ResourceFile\SceneFile\GameSceneDodge.h" />
     <ClInclude Include="02_ResourceFile\SceneFile\GameSceneText.h" />

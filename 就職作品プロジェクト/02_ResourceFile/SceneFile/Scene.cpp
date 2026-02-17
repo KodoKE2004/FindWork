@@ -34,6 +34,28 @@ void Scene::Draw()
 	}
 }
 
+void Scene::RegisterAudio()
+{
+	AudioManager* audioMgr = Game::GetInstance();
+	if (audioMgr)
+	{
+		for (const auto& [key, config] : m_AudioList)
+		{
+			if (!audioMgr->Add(key, config.filePath)) {
+				continue;
+			}
+			if (config.autoPlay)
+			{
+				auto params = config.params;
+				if (config.loop)
+				{
+					params.loop.loopCount = XAUDIO2_LOOP_INFINITE;
+				}
+			}
+		}
+	}
+}
+
 void Scene::PlaySE(std::string seName, std::optional<float> overrideVolume)
 {
 	// SEÇÃçƒê∂

@@ -198,25 +198,9 @@ void GameSceneText::Initialize()
     PlayParams bgmParam{};
     m_AudioList.emplace("bgmText", AudioConfig(L"BGM/GameSceneMelody/Text.wav", QuestionParam, false, false));
 
-    AudioManager* audioMgr = instance;
-    if (audioMgr)
-    {
-        for (const auto& [key, config] : m_AudioList)
-        {
-            if (!audioMgr->Add(key, config.filePath)) {
-                continue;
-            }
-            if (config.autoPlay)
-            {
-                auto params = config.params;
-                if (config.loop)
-                {
-                    params.loop.loopCount = XAUDIO2_LOOP_INFINITE;
-                }
-            }
-        }
-    }
+    RegisterAudio();
 
+    AudioManager* audioMgr = instance;
     m_ReactionAudio[0] = audioMgr->Create(m_AudioList.at("fanfare"));
     m_ReactionAudio[1] = audioMgr->Create(m_AudioList.at("failed"));
     m_ReactionAudio[2] = audioMgr->Create(m_AudioList.at("question"));

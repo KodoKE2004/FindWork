@@ -242,13 +242,14 @@ void GameSceneExe::Finalize()
 
     m_ReactionActive.reset();
 
-    // オーディオの停止
+    // オーディオの停止と登録のクリア
     if (AudioManager* audioManager = instance)
     {
         for (const auto& [key, config] : m_AudioList)
         {
             audioManager->StopAllByName(key);
         }
+        m_AudioList.clear();
     }
 }
 

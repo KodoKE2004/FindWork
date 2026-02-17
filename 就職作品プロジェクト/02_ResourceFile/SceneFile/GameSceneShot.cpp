@@ -116,30 +116,26 @@ void GameSceneShot::Initialize()
     m_Skydome->SetTexture(textureMgr->GetTexture("SkydomeSpace.png"));
     m_Skydome->SetRadius(5.0f);
     
-    m_Player = AddObject<Player>(instance.GetCamera());
-    m_Player->SetName("m_Player");
-    m_Player->SetTexture(textureMgr->GetTexture("GameScene/GamePlane.png"));
-    m_Player->SetPos  (  0.0f,-200.0f, 0.0f);
-    m_Player->SetScale(300.0f, 200.0f, 0.0f);
-
     m_OperatorBar = AddObject<Square>(instance.GetCamera());
     m_OperatorBar->SetName("m_OperatorBar");
     m_OperatorBar->SetTexture(textureMgr->GetTexture("GameScene/OperationBar.png"));
     m_OperatorBar->SetPos  (  0.0f, - 270.0f, 0.0f);
     m_OperatorBar->SetScale(900.0f,   100.0f, 1.0f);
 
-    m_PlaneHandle = AddObject<DragController>(instance.GetCamera());
-    m_PlaneHandle->SetName("m_PlaneHandle");
-    m_PlaneHandle->SetDirection(MOVE_RIGHT);
-    m_PlaneHandle->SetTexture(textureMgr->GetTexture("GameScene/PlaneHandle.png"));
-    m_PlaneHandle->SetPos  ( 0.0f, -270.0f, 1.0f);
-    m_PlaneHandle->SetScale(50.0f,   50.0f, 1.0f);
-    m_PlaneHandle->SetLimitRange({ m_DragLimitLine, 1000.0f, 1000.0f});
+    m_Plane = AddObject<DragController>(instance.GetCamera());
+    m_Plane->SetName("m_Plane");
+    m_Plane->SetDirection(MOVE_RIGHT);
+    m_Plane->SetTexture(textureMgr->GetTexture("GameScene/GamePlane.png"));
+    m_Plane->SetPos  ( 0.0f, -250.0f, 1.0f);
+    m_Plane->SetScale(200.0f, 250.0f, 1.0f);
+    m_Plane->SetLimitRange({ m_DragLimitLine, 1000.0f, 1000.0f});
 
     //m_Player->SetScale();
     int difficult = m_RelationData.stageCount / 4;
-    if (difficult >= 4) { difficult = 3; }
+    if (difficult >= 3) { difficult = 2; }
 
+    // スポーン数は難易度に応じて増加させる
+    // ＋1は最初のスポーンを確実にするため
     const int spawnCount = difficult + 1;
     std::vector<NVector3> spawnedEnemyPositions;
     spawnedEnemyPositions.reserve(spawnCount);
@@ -185,25 +181,7 @@ void GameSceneShot::Initialize()
     PlayParams exploParams;
     m_AudioList.emplace("explosion", AudioConfig(L"SE/GameReaction/Explosion.wav" , exploParams, false, false));
 
-    AudioManager* audioMgr = instance;
-    if (audioMgr)
-    {
-        for (const auto& [key, config] : m_AudioList)
-        {
-            if (!audioMgr->Add(key, config.filePath)) {
-                continue;
-            }
-            if (config.autoPlay)
-            {
-                auto params = config.params;
-                if (config.loop)
-                {
-                    params.loop.loopCount = XAUDIO2_LOOP_INFINITE;
-                }
-            }
-        }
-    }
-
+    RegisterAudio();
 
     RegesterReactionSE("explosion");
     PlaySE("bgmShot", 0.4f);
@@ -217,13 +195,6 @@ void GameSceneShot::Update(float tick)
 
     GameSceneExe::Update(tick);
     
-    // ハンドルの位置に合わせて、プレイヤーも移動させる
-    NVector3 planePos = {
-        m_PlaneHandle->GetPos().x - 7.0f,
-        m_Player->GetPos().y,
-        m_Player->GetPos().z,
-    };
-    m_Player->SetPos(planePos);
 
     m_CreateBulletElapsed += tick;
     if (m_CreateBulletTime <= m_CreateBulletElapsed)
@@ -311,9 +282,9 @@ void GameSceneShot::CreateBullet()
     pShared<Bullet> bullet = AddObject<Bullet>(instance.GetCamera());
     bullet->SetTexture(textureMgr->GetTexture("GameScene/Bullet.png"));
     Vector3 pos = {
-        m_Player->GetPos().x +  8.5f,
-        m_Player->GetPos().y + 40.0f,
-        m_Player->GetPos().z,
+        m_Plane->GetPos().x +  8.5f,
+        m_Plane->GetPos().y + 40.0f,
+        m_Plane->GetPos().z,
     };
     bullet->SetName("m_Bullet");
     bullet->Alive();

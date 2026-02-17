@@ -28,9 +28,10 @@ namespace
     const size_t GAME_EXE_NUM = static_cast<size_t>(SCENE_NO::EXE_NUM);
 
     const std::array<StageEntry, GAME_EXE_NUM> kStageEntries = { {
-        { SCENE_NO::GAME_DODGE, &PushGameStage<GameSceneDodge>  },
-        { SCENE_NO::GAME_SHOT , &PushGameStage<GameSceneShot> },
-        { SCENE_NO::GAME_TEXT , &PushGameStage<GameSceneText> },
+        { SCENE_NO::GAME_DODGE  , &PushGameStage<GameSceneDodge>  },
+        { SCENE_NO::GAME_SHOT   , &PushGameStage<GameSceneShot>   },
+        { SCENE_NO::GAME_TEXT   , &PushGameStage<GameSceneText>   },
+        { SCENE_NO::GAME_ROCKET , &PushGameStage<GameSceneRocket> },
     } };
 
     using StageList = std::vector<SCENE_NO>;
@@ -87,12 +88,14 @@ namespace
     const char* kStageTheme[GAME_EXE_NUM] = {
         "Theme/Avoid.png",
         "Theme/KO.png",
-        "Theme/Convey.png"
+        "Theme/Convey.png",
+        "Theme/Board.png",
     };
 
     const NVector3 kThemeScale[GAME_EXE_NUM] = {
         NVector3( 546.0f, 223.0f, 1.0f),
         NVector3( 557.0f, 217.0f, 1.0f),
+        NVector3( 554.0f, 198.0f, 1.0f),
         NVector3( 554.0f, 198.0f, 1.0f),
     };
 
@@ -115,7 +118,7 @@ void GameSceneWait::Initialize()
     TextureManager* textureMgr = instance.GetInstance();
 
     // 最初の一度だけ or 指定したタイミングのみフラグを立てる
-    m_IsFirstInitialized != instance.HasFirstGameSceneWaitInitialized();
+    m_IsFirstInitialized = !instance.HasFirstGameSceneWaitInitialized();
     instance.SetHasFirstGameSceneWaitInitialized(true);
 
     // 引き渡しデータのシーンの整理
@@ -324,13 +327,14 @@ void GameSceneWait::Finalize()
         DeleteObject(o);
     }
     m_MySceneObjects.clear();
-    // オーディオの停止
+    // オーディオの停止と登録のクリア
     if (AudioManager* audioManager = instance)
     {
         for (const auto& [key, config] : m_AudioList)
         {
             audioManager->StopAllByName(key);
         }
+        m_AudioList.clear();
     }
 }
 
@@ -345,9 +349,10 @@ void GameSceneWait::StartNextStageTransition()
     // シーン遷移処理
     switch (m_RelationData.nextScene)
     {
-    case SCENE_NO::GAME_DODGE: ChangeScenePush<GameSceneDodge>(WaitToGame); break;
-    case SCENE_NO::GAME_SHOT : ChangeScenePush<GameSceneShot> (WaitToGame); break;
-    case SCENE_NO::GAME_TEXT : ChangeScenePush<GameSceneText> (WaitToGame); break;
+    case SCENE_NO::GAME_DODGE: ChangeScenePush<GameSceneDodge>  (WaitToGame); break;
+    case SCENE_NO::GAME_SHOT : ChangeScenePush<GameSceneShot>   (WaitToGame); break;
+    case SCENE_NO::GAME_TEXT : ChangeScenePush<GameSceneText>   (WaitToGame); break;
+    case SCENE_NO::GAME_ROCKET: ChangeScenePush<GameSceneRocket>(WaitToGame); break;
     default: return;
     }
 }
@@ -377,5 +382,6 @@ void GameSceneWait::PrepareNextStage()
         nextScene = SelectRandomStage_Exclude(m_RandomEngine, m_RelationData.oldScene);
     }
 
+    nextScene = SCENE_NO::GAME_ROCKET;
     m_RelationData.nextScene = nextScene;
 }
