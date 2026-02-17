@@ -120,9 +120,13 @@ void TitleScene::Update(float tick)
 		m_DurationPressEnter = 0.0f;
 	}
 
-	bool isInsideScreenEnter = (Input::GetMousePos().x > 0 && Input::GetMousePos().x < 1920  &&
-								Input::GetMousePos().y > 0 && Input::GetMousePos().y < 1080) &&
-								Input::GetMouseTrigger(vkLEFT);
+	bool isMouseEnterTrigger = Input::GetMouseTrigger(vkLEFT);
+#ifdef _DEBUG
+	isMouseEnterTrigger		 = isMouseEnterTrigger && Input::IsMouseInGameView();
+#endif
+	bool isInsideScreenEnter = (Input::GetMousePos().x > - 640.0f && Input::GetMousePos().x < 640.0f  &&
+								Input::GetMousePos().y > - 360.0f && Input::GetMousePos().y < 360.0f) &&
+								isMouseEnterTrigger;
 
 	// Enter‚Ìˆ—
 	if (Input::GetKeyTrigger(VK_RETURN) ||

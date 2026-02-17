@@ -54,6 +54,10 @@ GuiMousePos GetMousePosInGameView()
     const ImVec2 mouse = ImGui::GetMousePos();
     r.size = ImVec2(viewMax.x - viewMin.x, viewMax.y - viewMin.y);
     
+    r.inside =
+        mouse.x >= viewMin.x && mouse.x < viewMax.x &&
+        mouse.y >= viewMin.y && mouse.y < viewMax.y;
+    
     // GuiÀ•W‚ð”÷’²®‚Å‰ÁŽZ‚³‚ê‚½’l•ª‰ÁŽZ
     r.local = ImVec2(
         (mouse.x + SCREEN_CORRECT_VALUE) - viewMin.x,

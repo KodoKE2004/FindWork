@@ -80,6 +80,7 @@ private:
 	static bool m_MouseButtons   [vkMAX];
 	static bool m_MouseButtonsOld[vkMAX];
 	static int m_MouseWheel;
+    static bool m_isMouseInGameView; //マウスがゲーム画面内にあるかどうか
 
 	//キー入力情報を保存する変数
 	static BYTE keyState[256];
@@ -105,6 +106,7 @@ public:
 	static DirectX::SimpleMath::Vector2 GetMousePos  ();
 	static DirectX::SimpleMath::Vector2 GetMouseDelta();
 	static DirectX::SimpleMath::Vector2 GetMousePosNormalizedLH();
+	static bool IsMouseInGameView();
 
 	static int GetWheel();
 	//キー入力

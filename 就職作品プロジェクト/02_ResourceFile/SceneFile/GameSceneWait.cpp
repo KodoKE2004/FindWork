@@ -42,8 +42,9 @@ namespace
 
         for (const auto& entry : kStageEntries)
         {
-            if (entry.scene != excludeScene)
+            if (entry.scene != excludeScene) {
                 candidates.emplace_back(entry.scene);
+            }
         }
 
         // 保険：全部除外されてしまったら全候補に戻す

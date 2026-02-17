@@ -13,6 +13,7 @@ DirectX::SimpleMath::Vector2 Input::m_MousePosNormalizedLH = {};
 bool Input::m_MouseButtons[5] = {};
 bool Input::m_MouseButtonsOld[5] = {};
 int Input::m_MouseWheel = 0;
+bool Input::m_isMouseInGameView = false;
 
 BYTE Input::keyState[256] = {};
 BYTE Input::keyState_old[256] = {};
@@ -71,12 +72,18 @@ void Input::Update(HWND hWnd)
 			guiMouse.leftHandedNormalized.x,
 			guiMouse.leftHandedNormalized.y
 		);
+        m_isMouseInGameView = true;
+	}
+	else 
+	{
+        m_isMouseInGameView = false;
 	}
 
 	m_MousePos.x = static_cast<LONG>(guiMouse.leftHandedNormalized.x * windowSize.x);
 	m_MousePos.y = static_cast<LONG>(guiMouse.leftHandedNormalized.y * windowSize.y);
 
 #else
+    m_isMouseInGameView = true;
 	bool usedImGuiPos = false;
 	if (!usedImGuiPos) {
 		if (GetCursorPos(&currentPos)) {
@@ -156,6 +163,11 @@ DirectX::SimpleMath::Vector2 Input::GetMouseDelta()
 DirectX::SimpleMath::Vector2 Input::GetMousePosNormalizedLH()
 {
 	return m_MousePosNormalizedLH;
+}
+
+bool Input::IsMouseInGameView()
+{
+	return m_isMouseInGameView;
 }
 
 int Input::GetWheel()
