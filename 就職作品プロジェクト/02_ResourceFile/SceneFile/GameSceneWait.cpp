@@ -9,7 +9,6 @@
 #include <random>
 #include <cmath>
 
-bool GameSceneWait::s_HasFirstGameSceneWaitInitialized = false;
 GAME_PHASE GameSceneWait::s_CurrentGamePhase = GAME_PHASE::START;
 
 namespace
@@ -111,8 +110,12 @@ void GameSceneWait::Initialize()
 {
     DebugUI::TEXT_CurrentScene = "GameSceneWait";
 
+    auto& instance = Game::GetInstance();
+    TextureManager* textureMgr = instance.GetInstance();
+
     // 最初の一度だけ or 指定したタイミングのみフラグを立てる
-    m_IsFirstInitialized = !s_HasFirstGameSceneWaitInitialized;
+    m_IsFirstInitialized != instance.HasFirstGameSceneWaitInitialized();
+    instance.SetHasFirstGameSceneWaitInitialized(true);
 
     // 引き渡しデータのシーンの整理
     m_RelationData.ClearTransitionTexture();
@@ -162,13 +165,9 @@ void GameSceneWait::Initialize()
     m_TimerList.clear();
     SetTimer(&m_Tick);
     SetTimer(&m_DecrementLife.timer);
-
-    m_IsFirstInitialized = true;
     m_WasPlayBGM         = false;
     m_QuarterAdvance     = 0;
 
-    auto& instance = Game::GetInstance();
-    TextureManager* textureMgr = instance.GetInstance();
 
     m_LifeParticleEmitter = std::make_shared<ParticleEmitter>(instance.GetCamera());
 
@@ -272,8 +271,7 @@ void GameSceneWait::Update(float tick)
         }
     }
 
-    // フラグの一拍前のタイミングでお題提示処理開始
-    if (rhythmBeat.GetBeatElapsed() >= rhythmBeat.GetBeatTotal() - 1)
+    if (rhythmBeat.GetBeatElapsed() >= rhythmBeat.GetBeatTotal() - 3)
     {
         m_ShouldTransitionToStage = true;
     }

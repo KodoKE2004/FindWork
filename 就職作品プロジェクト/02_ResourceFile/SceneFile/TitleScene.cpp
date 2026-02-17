@@ -18,15 +18,13 @@ void TitleScene::Initialize()
 #ifndef _DEBUG
     DebugUI::TEXT_CurrentScene = "TitleScene";
 #endif // !_DEBUG
-
-
+	// シーンスタックをクリア
+    instance.SceneStackClear();
+	
 	// シーンを取りつなぐデータの作成
-	// 失敗判定でWiatシーンに失敗処理をさせないためにtrue
+	// 失敗判定でWaitシーンに失敗処理をさせないためにtrue
 	m_RelationData.stageCount = 0;
 	m_RelationData.isClear = true;
-	m_RelationData.nextScene = SCENE_NO::GAME_WAIT;
-	m_RelationData.previousScene = SCENE_NO::TITLE;
-	m_RelationData.oldScene  = SCENE_NO::NONE;
 	m_RelationData.ClearTransitionTexture();
 	m_RelationData.gameLife = 4;
 
@@ -122,8 +120,13 @@ void TitleScene::Update(float tick)
 		m_DurationPressEnter = 0.0f;
 	}
 
+	bool isInsideScreenEnter = (Input::GetMousePos().x > 0 && Input::GetMousePos().x < 1920  &&
+								Input::GetMousePos().y > 0 && Input::GetMousePos().y < 1080) &&
+								Input::GetMouseTrigger(vkLEFT);
+
 	// Enterの処理
-	if (Input::GetKeyTrigger(VK_RETURN))
+	if (Input::GetKeyTrigger(VK_RETURN) ||
+		isInsideScreenEnter)
 	{
 		// SEの再生
 		PlaySE("enter", 0.7f);

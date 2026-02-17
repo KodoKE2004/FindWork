@@ -251,9 +251,6 @@
     <ClCompile Include="02_ResourceFile\SceneFile\GameSceneText.cpp">
       <Filter>SourceFile\Scene\GameScene</Filter>
     </ClCompile>
-    <ClCompile Include="02_ResourceFile\ObjectFile\Button.cpp">
-      <Filter>SourceFile\Object\2D\DragObject</Filter>
-    </ClCompile>
     <ClCompile Include="02_ResourceFile\ObjectFile\Bird.cpp">
       <Filter>SourceFile\Object\2D</Filter>
     </ClCompile>
@@ -261,6 +258,9 @@
       <Filter>SourceFile\Object\2D</Filter>
     </ClCompile>
     <ClCompile Include="02_ResourceFile\ObjectFile\Timer.cpp">
+      <Filter>SourceFile\Object\2D</Filter>
+    </ClCompile>
+    <ClCompile Include="02_ResourceFile\ObjectFile\Button.cpp">
       <Filter>SourceFile\Object\2D</Filter>
     </ClCompile>
   </ItemGroup>
@@ -479,9 +479,6 @@
     <ClInclude Include="02_ResourceFile\SceneFile\GameSceneText.h">
       <Filter>SourceFile\Scene\GameScene</Filter>
     </ClInclude>
-    <ClInclude Include="02_ResourceFile\ObjectFile\Button.h">
-      <Filter>SourceFile\Object\2D\DragObject</Filter>
-    </ClInclude>
     <ClInclude Include="02_ResourceFile\ObjectFile\Bird.h">
       <Filter>SourceFile\Object\2D</Filter>
     </ClInclude>
@@ -489,6 +486,9 @@
       <Filter>SourceFile\Object\2D</Filter>
     </ClInclude>
     <ClInclude Include="02_ResourceFile\ObjectFile\Timer.h">
+      <Filter>SourceFile\Object\2D</Filter>
+    </ClInclude>
+    <ClInclude Include="02_ResourceFile\ObjectFile\Button.h">
       <Filter>SourceFile\Object\2D</Filter>
     </ClInclude>
   </ItemGroup>

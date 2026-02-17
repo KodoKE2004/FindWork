@@ -26,6 +26,7 @@ int   Game::m_SpeedUpStageInterval = 4;
 float Game::m_SpeedUpBpmIncrease = 10.0f;
 RhythmBeat Game::m_RhythmBeat;
 bool  Game::m_isTickCount = false;
+bool  Game::s_HasFirstGameSceneWaitInitialized = false;
 
 void Game::InitializeTransitionCSV()
 {
@@ -266,6 +267,15 @@ void Game::SetSceneNext(pShared<Scene> newScene)
 	{
 		instance.m_SceneNext->SetTheme(instance.m_Theme);
 	}
+}
+
+void Game::SceneStackClear()
+{
+	auto& instance = GetInstance();
+    auto& sceneStack = instance.m_SceneList;
+	
+    if (sceneStack.size() <= 1) { return; }
+	sceneStack.erase(sceneStack.begin(), sceneStack.end() - 1);
 }
 
 void Game::SetTheme(const pShared<Theme>& theme)

@@ -54,6 +54,7 @@ private:
 	// テンポ制御
 	static RhythmBeat m_RhythmBeat;
 	static bool		  m_isTickCount;
+    static bool       s_HasFirstGameSceneWaitInitialized;
 
 public:
 	//================================
@@ -74,7 +75,7 @@ public:
 	// 現在のシーンを設定
     static void SetSceneCurrent(pShared<Scene> newScene);
     static void SetSceneNext(pShared<Scene> newScene);
-
+	static void SceneStackClear();
 	void SetTheme(const pShared<Theme>& theme);
 
     // TransitionTextureをTransSceneと連携
@@ -109,21 +110,26 @@ public:
 	static uint64_t			GetDrawFrameCounter() {
 		return m_DrawFrameCounter;
 	}
-	static void				SetDifficultyStageInterval(int interval);
-	static int				GetDifficultyStageInterval();
-	static void				SetBaseBpmIncreasePerDifficulty(float bpmIncrease);
-	static float			GetBaseBpmIncreasePerDifficulty();
-	static void				SetSpeedUpStageInterval(int interval);
-	static int				GetSpeedUpStageInterval();
-	static void				SetSpeedUpBpmIncrease(float bpmIncrease);
-	static float			GetSpeedUpBpmIncrease();
-	static void				PlayBgm();
-	static void				StopBgm();
-	static void				SetIsTickCount(bool isTick) {m_isTickCount = isTick; }
-	static bool				IsTickCount() {
+	static void	 SetDifficultyStageInterval(int interval);
+	static int	 GetDifficultyStageInterval();
+	static void	 SetBaseBpmIncreasePerDifficulty(float bpmIncrease);
+	static float GetBaseBpmIncreasePerDifficulty();
+	static void	 SetSpeedUpStageInterval(int interval);
+	static int	 GetSpeedUpStageInterval();
+	static void	 SetSpeedUpBpmIncrease(float bpmIncrease);
+	static float GetSpeedUpBpmIncrease();
+	static void	 PlayBgm();
+	static void	 StopBgm();
+	static void	 SetIsTickCount(bool isTick) {m_isTickCount = isTick; }
+	static bool	 IsTickCount() {
 		return m_isTickCount;
 	}
-
+	static bool  HasFirstGameSceneWaitInitialized() {
+        return s_HasFirstGameSceneWaitInitialized;
+	}
+	static void  SetHasFirstGameSceneWaitInitialized(bool initialized) {
+        s_HasFirstGameSceneWaitInitialized = initialized;
+	}
     //================================
 	//		  マネージャーの取得
     //================================
@@ -165,6 +171,8 @@ void ChangeScenePush(SceneTransitionParam& state, Args&&... args)
 	auto sceneNext = std::make_shared<T>(instance.GetCamera(), std::forward<Args>(args)...);
     auto sceneCurrent = instance.GetCurrentScene();
 
+    scene->m_RelationData.oldScene  = sceneCurrent->GetSceneNo();
+    scene->m_RelationData.nextScene = sceneNext->GetSceneNo();
     instance.ScenePush(sceneCurrent);
     instance.SetSceneNext(sceneNext);
 
@@ -200,7 +208,8 @@ inline void ChangeScenePop(SceneTransitionParam& state)
 	if (!sceneNext) {
 		return;
 	}
-
+	scene->m_RelationData.oldScene  = instance.GetCurrentScene()->GetSceneNo();
+    scene->m_RelationData.nextScene = sceneNext->GetSceneNo();
 	scene->SetOldScene(instance.GetCurrentScene());
     scene->SetRelationData(instance.GetCurrentScene()->GetRelationData());
     scene->SetNextScene(sceneNext);

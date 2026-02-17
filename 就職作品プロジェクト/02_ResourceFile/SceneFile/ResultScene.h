@@ -1,20 +1,18 @@
 #pragma once
 #include "Scene.h"
 #include "Square.h"
-
+#include "MouseObject.h"
 class ResultScene : public Scene
 {
 private:
 
-    pShared<Square> m_ButtonToTitle; 
-    pShared<Square> m_ButtonRetry  ;
+    pShared<MouseObject> m_ButtonToTitle; 
+    pShared<MouseObject> m_ButtonRetry  ;
 
     bool m_isCorsorButtonToTitle = true;
 
     static constexpr float AlphaChangeTimer = 0.5f; 
     float m_DurationCuror = 0.0f;
-
-
 public:
     //================================
     // コンストラクタとデストラクタ

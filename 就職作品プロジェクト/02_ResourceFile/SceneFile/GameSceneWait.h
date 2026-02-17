@@ -39,7 +39,6 @@ private:
     // ステージ遷移用フラグ
 	// 初期化済みかどうかのフラグ
     // また、乱数選択のリセット用にstaticで持つ
-    static bool s_HasFirstGameSceneWaitInitialized;	
 	static GAME_PHASE s_CurrentGamePhase;	// 現在のゲームフェーズを管理する変数
 
 	int m_Difficulty = 0;
@@ -80,16 +79,6 @@ public:
 
 	SCENE_NO GetSceneNo() const override {
 		return SCENE_NO::GAME_WAIT;
-	}
-
-
-    //--------------------------------
-    //	  ステージ乱数選択リセット要求関数
-    //--------------------------------
-
-	void RequestFullStageRandom()
-	{
-		s_HasFirstGameSceneWaitInitialized = false;
 	}
 
 	// 選択されたランダムなシーンへ遷移

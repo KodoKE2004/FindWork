@@ -36,7 +36,6 @@ struct SceneRelationData
 {
 	uint32_t gameLife = 4;
 	int  stageCount   = 0;
-	SCENE_NO previousScene = SCENE_NO::NONE;
     SCENE_NO oldScene	   = SCENE_NO::NONE;
 	SCENE_NO nextScene     = SCENE_NO::NONE;
 	pShared<Square> transTexture = nullptr;

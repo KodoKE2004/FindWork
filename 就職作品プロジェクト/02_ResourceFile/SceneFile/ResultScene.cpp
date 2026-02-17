@@ -22,7 +22,7 @@ void ResultScene::Initialize()
     m_Skydome->SetTexture(textureMgr->GetTexture("SkydomeSpace.png"));
     m_Skydome->SetRadius(500.0f);
 
-    m_ButtonToTitle = AddObject<Square>(instance.GetCamera());
+    m_ButtonToTitle = AddObject<MouseObject>(instance.GetCamera());
     m_ButtonToTitle->SetName("m_ButtonToTitle");
     m_ButtonToTitle->SetTexture(textureMgr->GetTexture("Button/Text/ToTitle.png"));
     m_ButtonToTitle->SetPos(0.0f, -100.0f, 0.0f);
@@ -30,7 +30,7 @@ void ResultScene::Initialize()
     m_ButtonToTitle->SetShader("VS_Alpha", "PS_Alpha");
     m_ButtonToTitle->SetColor(0.0f, 0.0f, 0.0f, 1.0f);
 
-    m_ButtonRetry = AddObject<Square>(instance.GetCamera());
+    m_ButtonRetry = AddObject<MouseObject>(instance.GetCamera());
     m_ButtonRetry->SetName("m_ButtonToRetry");
     m_ButtonRetry->SetTexture(textureMgr->GetTexture("Button/Text/Retry.png"));
     m_ButtonRetry->SetPos(0.0f, -200.0f, 0.0f);
@@ -59,27 +59,25 @@ void ResultScene::Update(float tick)
     m_DurationCuror += tick;
 
     if (Input::GetKeyTrigger(VK_UP) || Input::GetKeyTrigger(VK_DOWN) ||
-        Input::GetKeyTrigger(VK_W)  || Input::GetKeyTrigger(VK_S)){
+        Input::GetKeyTrigger(VK_W)  || Input::GetKeyTrigger(VK_S))
+    {
         m_isCorsorButtonToTitle ^= true;
-        // SEの再生
-        if (AudioManager* audioMgr = Game::GetInstance())
-        {
-            if (auto it = m_AudioList.find("moveCorsor"); it != m_AudioList.end())
-            {
-                auto params = it->second.params;
-                if (it->second.loop)
-                {
-                    params.loop.loopCount = XAUDIO2_LOOP_INFINITE;
-                }
-                audioMgr->Play("moveCorsor", params);
-            }
-            else
-            {
-                audioMgr->Play("moveCorsor");
-            }
-        }
+        PlaySE("moveCorsor", DEFAULT_VOLUME);
     }
     
+    if (m_ButtonToTitle->IsInside()) {
+        if (!m_isCorsorButtonToTitle) {
+            PlaySE("moveCorsor", DEFAULT_VOLUME);
+        }
+        m_isCorsorButtonToTitle = true;
+    }
+    if (m_ButtonRetry->IsInside()) {
+        if (m_isCorsorButtonToTitle) {
+            PlaySE("moveCorsor", DEFAULT_VOLUME);
+        }
+        m_isCorsorButtonToTitle = false;
+    }
+
     // PressEnterをチカチカさせる
     // 一定時間経過でアルファ値をいじる
     if (m_DurationCuror >= AlphaChangeTimer)
@@ -99,33 +97,17 @@ void ResultScene::Update(float tick)
         }
         m_DurationCuror = 0.0f;
     }
-
-    if (Input::GetKeyTrigger(VK_RETURN))
+    
+    bool isMouseLeftTrigger = m_ButtonToTitle->IsDrag() || m_ButtonRetry->IsDrag();
+    if (Input::GetKeyTrigger(VK_RETURN) || isMouseLeftTrigger)
     {
         // SEの再生
-        if (AudioManager* audioMgr = Game::GetInstance())
-        {
-            if (auto it = m_AudioList.find("enter"); it != m_AudioList.end())
-            {
-                auto params = it->second.params;
-                if (it->second.loop)
-                {
-                    params.loop.loopCount = XAUDIO2_LOOP_INFINITE;
-                }
-                audioMgr->Play("enter", params);
-            }
-            else
-            {
-                audioMgr->Play("enter");
-            }
-
-            audioMgr->StopAllByName("bgm", false);
-        }
-        if (m_isCorsorButtonToTitle)
+        PlaySE("enter", DEFAULT_VOLUME);
+        Game::SetBgmBpm(100.0f);
+        
+        if (m_isCorsorButtonToTitle || m_ButtonToTitle->IsDrag())
         {
             // タイトルへ戻る
-            m_RelationData.previousScene = SCENE_NO::RESULT;
-            m_RelationData.nextScene     = SCENE_NO::TITLE;
             SceneTransitionParam transition{ TRANS_MODE::FADE, 0.3f, EASING_TYPE::NONE };
             ChangeScenePush<TitleScene>(ResultToTitle);
         }
@@ -133,13 +115,20 @@ void ResultScene::Update(float tick)
         {
             // ゲームを最初から始める
             // シーンに繋ぐ情報は基底初期化後の一番最初に設定
-            m_RelationData.previousScene = SCENE_NO::RESULT;
-            m_RelationData.nextScene     = SCENE_NO::GAME_WAIT;
             m_RelationData.isClear = true;
             m_RelationData.stageCount = 0;
             m_RelationData.gameLife   = 4;
             ChangeScenePop(ResultToGame);
         }
+    }
+
+    if (m_ButtonToTitle->IsDrag())
+    {
+        m_isCorsorButtonToTitle = true;
+    }
+    else if (m_ButtonRetry->IsDrag())
+    {
+        m_isCorsorButtonToTitle = false;
     }
 }
 
