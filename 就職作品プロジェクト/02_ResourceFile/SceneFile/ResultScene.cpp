@@ -50,6 +50,7 @@ void ResultScene::Initialize()
         }
     }
 
+    instance.StopBgm();
     Debug::Log("===== クリアステージ数 : " + std::to_string(m_RelationData.stageCount) + " =====");
 }
 

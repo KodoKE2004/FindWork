@@ -156,7 +156,6 @@ void GameSceneExe::Update(float tick)
         }
         m_SegmentTo = std::clamp(targetProgress, 0.0f, 1.0f);
 
-        std::cout << "Beat Index : " << currentIndex << std::endl;
         if (rest < 4)
         {
             m_Bomber->SetCount(rest);
