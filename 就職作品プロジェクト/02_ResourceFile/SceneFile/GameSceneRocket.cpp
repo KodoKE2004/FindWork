@@ -37,8 +37,13 @@ void GameSceneRocket::Initialize()
     m_MySceneObjects.emplace_back(m_Bomber->GetRope());
     m_MySceneObjects.emplace_back(m_Bomber->GetNumber());
 
+    PlayParams bgmParams;
+    m_AudioList.emplace("bgmRocket", AudioConfig(L"BGM/GameSceneMelody/Rocket.wav", bgmParams, true, true));
 
+    PlayParams clearParams;
+    m_AudioList.emplace("clear", AudioConfig(L"SE/GameReaction/True2.wav", clearParams, false, false));
 
+    RegesterReactionSE("clear");
     RegisterAudio();
 }
 
