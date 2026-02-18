@@ -1,4 +1,4 @@
-#include "GameSceneWait.h"
+ï»¿#include "GameSceneWait.h"
 #include "Game.h"
 #include "DebugUI.h"
 #include "SceneList.h"
@@ -14,7 +14,7 @@ GAME_PHASE GameSceneWait::m_CurrentGamePhase = GAME_PHASE::START;
 
 namespace
 {
-    // “ñ¬ß‚Ì””‚ğŠî€‚É‚µ‚Ä‚¢‚é‚½‚ßAMeasureTwo = 32.0f
+    // äºŒå°ç¯€ã®æ‹æ•°ã‚’åŸºæº–ã«ã—ã¦ã„ã‚‹ãŸã‚ã€MeasureTwo = 32.0f
     constexpr int MeasureOne = 16;
     constexpr int MeasureTwo = 32;
     float kGameUIStartPos  =   1024.0f;
@@ -57,7 +57,7 @@ namespace
             }
         }
 
-        // •ÛŒ¯F‘S•”œŠO‚³‚ê‚Ä‚µ‚Ü‚Á‚½‚ç‘SŒó•â‚É–ß‚·
+        // ä¿é™ºï¼šå…¨éƒ¨é™¤å¤–ã•ã‚Œã¦ã—ã¾ã£ãŸã‚‰å…¨å€™è£œã«æˆ»ã™
         if (candidates.empty())
         {
             for (const auto& entry : kStageEntries)
@@ -116,7 +116,7 @@ namespace
     constexpr float    kLifeParticleSpeed = 400.0f;
     constexpr float    kLifeParticleLifeSec = 0.8f;
 
-    constexpr float kLifeScaleUpAmount = 0.2f;
+    constexpr float kLifeScaleUpAmount = 0.5f;
 }
 
 GameSceneWait::GameSceneWait(Camera& cam) : Scene(cam)
@@ -132,23 +132,23 @@ void GameSceneWait::Initialize()
 
     m_CurrentGamePhase = GAME_PHASE::DO;
 
-    // Å‰‚Ìˆê“x‚¾‚¯ or w’è‚µ‚½ƒ^ƒCƒ~ƒ“ƒO‚Ì‚İƒtƒ‰ƒO‚ğ—§‚Ä‚é
+    // æœ€åˆã®ä¸€åº¦ã ã‘ or æŒ‡å®šã—ãŸã‚¿ã‚¤ãƒŸãƒ³ã‚°ã®ã¿ãƒ•ãƒ©ã‚°ã‚’ç«‹ã¦ã‚‹
     m_IsFirstInitialized = !instance.HasFirstGameSceneWaitInitialized();
     instance.SetHasFirstGameSceneWaitInitialized(true);
 
-    // ˆø‚«“n‚µƒf[ƒ^‚ÌƒV[ƒ“‚Ì®—
+    // å¼•ãæ¸¡ã—ãƒ‡ãƒ¼ã‚¿ã®ã‚·ãƒ¼ãƒ³ã®æ•´ç†
     m_RelationData.ClearTransitionTexture();
 
 
 
-    // ƒXƒJƒCƒh[ƒ€‰Šú‰»
+    // ã‚¹ã‚«ã‚¤ãƒ‰ãƒ¼ãƒ åˆæœŸåŒ–
     m_Skydome = AddObject<Skydome>(instance.GetCamera());
     m_Skydome->SetName("m_Skydome");
     m_Skydome->SetSkyDomeMode(true);
     m_Skydome->SetTexture(textureMgr->GetTexture("SkydomeSpace.png"));
     m_Skydome->SetRadius(500.0f);
 
-    // “ïˆÕ“xƒAƒbƒvˆ— 
+    // é›£æ˜“åº¦ã‚¢ãƒƒãƒ—å‡¦ç† 
     ++m_RelationData.stageCount;
 
 
@@ -161,7 +161,7 @@ void GameSceneWait::Initialize()
 
     
 
-    // ƒ‰ƒCƒt‚Ì”‚¾‚¯ƒn[ƒg‚Ì¶¬
+    // ãƒ©ã‚¤ãƒ•ã®æ•°ã ã‘ãƒãƒ¼ãƒˆã®ç”Ÿæˆ
     const float lifePosX = - 200.0f;
     const float lifePosY = - 100.0f;
 
@@ -171,7 +171,7 @@ void GameSceneWait::Initialize()
 
     m_LifeGame.clear();
     m_LifeCount = m_RelationData.gameLife;
-    // ƒ‰ƒCƒtƒIƒuƒWƒFƒNƒg‚Ì¶¬
+    // ãƒ©ã‚¤ãƒ•ã‚ªãƒ–ã‚¸ã‚§ã‚¯ãƒˆã®ç”Ÿæˆ
     for(uint32_t i = 0; i < m_LifeCount; ++i)
     {
         const float distance = 130.0f;
@@ -196,10 +196,10 @@ void GameSceneWait::Initialize()
         }
     }
 
-    // ƒXƒe[ƒW—”‘I‘ğˆ—   
+    // ã‚¹ãƒ†ãƒ¼ã‚¸ä¹±æ•°é¸æŠå‡¦ç†   
     PrepareNextStage();
 
-    // ƒXƒe[ƒW—p‚Ì‚¨‘è‚ğì¬
+    // ã‚¹ãƒ†ãƒ¼ã‚¸ç”¨ã®ãŠé¡Œã‚’ä½œæˆ
     m_Theme = instance.GetTheme();
     if (m_Theme)
     {
@@ -220,22 +220,22 @@ void GameSceneWait::Initialize()
     RegisterAudio();
 
     //--------------------------------------------------------------------
-    //                          ƒŠƒYƒ€‚Ì‰Šú‰»
+    //                          ãƒªã‚ºãƒ ã®åˆæœŸåŒ–
     //--------------------------------------------------------------------
     RhythmBeatConst beatConfig{};
     beatConfig.Setup(Game::GetBgmBpm());
     m_isBootGameUI = false;
 
-    // ƒQ[ƒ€‚ÌƒŠƒYƒ€‚Ì‰Šú‰»
+    // ã‚²ãƒ¼ãƒ ã®ãƒªã‚ºãƒ ã®åˆæœŸåŒ–
     int gameBeats = MeasureTwo;
     if (m_RelationData.isClear) {
-        Debug::Log("[[’èŠú]]=====  ƒXƒe[ƒW¬Œ÷  =====");
+        Debug::Log("[[å®šæœŸ]]=====  ã‚¹ãƒ†ãƒ¼ã‚¸æˆåŠŸ  =====");
     }
     else {
-        Debug::Log("[[’èŠú]]=====  ƒXƒe[ƒW¸”s  =====");
+        Debug::Log("[[å®šæœŸ]]=====  ã‚¹ãƒ†ãƒ¼ã‚¸å¤±æ•—  =====");
         if (m_RelationData.gameLife == 1)
         {
-            Debug::Log("=====  ƒQ[ƒ€ƒI[ƒo[  =====");
+            Debug::Log("=====  ã‚²ãƒ¼ãƒ ã‚ªãƒ¼ãƒãƒ¼  =====");
             gameBeats += MeasureOne;
             m_CurrentGamePhase = GAME_PHASE::FINISH;
             m_isBootGameUI = true;
@@ -245,7 +245,7 @@ void GameSceneWait::Initialize()
 
     if (m_IsFirstInitialized)
     {
-        Debug::Log("[[’èŠú]]=====  ƒQ[ƒ€ŠJn  =====");
+        Debug::Log("[[å®šæœŸ]]=====  ã‚²ãƒ¼ãƒ é–‹å§‹  =====");
         gameBeats += MeasureTwo / 2; 
         m_CurrentGamePhase = GAME_PHASE::START;
         m_isBootGameUI = true;
@@ -254,29 +254,29 @@ void GameSceneWait::Initialize()
 
 
     //-------------------------------------------------------------------   
-    //   “ïˆÕ“xƒAƒbƒv‚Ìƒ^ƒCƒ~ƒ“ƒO‚ÅBPM‚ğ‰º‚°‚é or ƒXƒs[ƒhƒAƒbƒv‚Ìƒ^ƒCƒ~ƒ“ƒO‚ÅBPM‚ğã‚°‚é
+    //   é›£æ˜“åº¦ã‚¢ãƒƒãƒ—ã®ã‚¿ã‚¤ãƒŸãƒ³ã‚°ã§BPMã‚’ä¸‹ã’ã‚‹ or ã‚¹ãƒ”ãƒ¼ãƒ‰ã‚¢ãƒƒãƒ—ã®ã‚¿ã‚¤ãƒŸãƒ³ã‚°ã§BPMã‚’ä¸Šã’ã‚‹
     //-------------------------------------------------------------------   
     const int difficultyStageInterval = Game::GetDifficultyStageInterval();
     const int speedUpStageInterval = Game::GetSpeedUpStageInterval();
     const float speedUpBpmIncrease = Game::GetSpeedUpBpmIncrease();
 
-    // ƒŒƒxƒ‹•Ï‰»‚ÍBeats‚ğ‘‚â‚·
-    // “ïˆÕ“xƒAƒbƒv‚ÍBPM‚ğ‰º‚°‚é
+    // ãƒ¬ãƒ™ãƒ«å¤‰åŒ–æ™‚ã¯Beatsã‚’å¢—ã‚„ã™
+    // é›£æ˜“åº¦ã‚¢ãƒƒãƒ—æ™‚ã¯BPMã‚’ä¸‹ã’ã‚‹
     if (m_RelationData.stageCount % difficultyStageInterval == 0) {
 
         beatConfig.Setup(Game::GetBgmBpm() - speedUpBpmIncrease);
-        // “ïˆÕ“xƒAƒbƒv‚Ì‚Æ‚«‚Í’·‚ß‚É‘Ò‚Â
+        // é›£æ˜“åº¦ã‚¢ãƒƒãƒ—ã®ã¨ãã¯é•·ã‚ã«å¾…ã¤
         gameBeats += MeasureTwo;
         m_CurrentGamePhase = GAME_PHASE::DO_UP_DIFFICULTY;
         m_isBootGameUI = true;
         RegisterGameUI(textureMgr->GetTexture("GameGuidance.png"), 1.0f, 2.0f);
-        Debug::Log("[[’èŠú]] “ïˆÕ“xƒAƒbƒv");
+        Debug::Log("[[å®šæœŸ]] é›£æ˜“åº¦ã‚¢ãƒƒãƒ—");
 
     }
-    // ƒXƒs[ƒhƒAƒbƒv‚ÍBPM‚ğã‚°‚é
+    // ã‚¹ãƒ”ãƒ¼ãƒ‰ã‚¢ãƒƒãƒ—æ™‚ã¯BPMã‚’ä¸Šã’ã‚‹
     else if (m_RelationData.stageCount % speedUpStageInterval == 0) {
 
-        Debug::Log("[[’èŠú]] ƒXƒs[ƒhƒAƒbƒv");
+        Debug::Log("[[å®šæœŸ]] ã‚¹ãƒ”ãƒ¼ãƒ‰ã‚¢ãƒƒãƒ—");
         beatConfig.Setup(Game::GetBgmBpm() + speedUpBpmIncrease);
         gameBeats += MeasureTwo;
         m_CurrentGamePhase = GAME_PHASE::DO_UP_SPEED;
@@ -291,14 +291,14 @@ void GameSceneWait::Initialize()
 
     Game::SetBgmBpm(beatConfig.m_Bpm);
 
-    Debug::Log("===== ƒNƒŠƒAƒXƒe[ƒW” : " + std::to_string(m_RelationData.stageCount) + " =====");
+    Debug::Log("===== ã‚¯ãƒªã‚¢ã‚¹ãƒ†ãƒ¼ã‚¸æ•° : " + std::to_string(m_RelationData.stageCount) + " =====");
 
 }
 
 void GameSceneWait::Update(float tick)
 {   
     auto& rhythmBeat = Game::GetRhythmBeat();
-    // ƒŠƒYƒ€‚ğæ‚é    
+    // ãƒªã‚ºãƒ ã‚’å–ã‚‹    
     m_QuarterAdvance = rhythmBeat.GetBeatElapsed() / 2;
     rhythmBeat.Update(tick);
     int elapsedBeat      = rhythmBeat.GetBeatElapsed();
@@ -307,33 +307,36 @@ void GameSceneWait::Update(float tick)
 
     GameUIMovement(elapsedBeat);
 
-    // ƒ‰ƒCƒt‚ğƒŠƒYƒ€‚É‡‚í‚¹‚Ä‰ñ“]‚³‚¹‚é
+    // ãƒ©ã‚¤ãƒ•ã‚’ãƒªã‚ºãƒ ã«åˆã‚ã›ã¦å›è»¢ã•ã›ã‚‹
     for (int i = m_QuarterAdvance; i < elapsedFourBeat; ++i)
     {
-        // 1”–Ú‚Ìƒ^ƒCƒ~ƒ“ƒO‚ÅBGMÄ¶
+        // 1æ‹ç›®ã®ã‚¿ã‚¤ãƒŸãƒ³ã‚°ã§BGMå†ç”Ÿ
         if (!m_WasPlayBGM)
         {
             Game::PlayBgm();
             m_WasPlayBGM = true;
         }
         
-        // c‚èˆê”‚Ìƒ^ƒCƒ~ƒ“ƒO‚ÅƒXƒe[ƒW‘JˆÚƒtƒ‰ƒO‚ğ—§‚Ä‚é
+        // æ®‹ã‚Šä¸€æ‹ã®ã‚¿ã‚¤ãƒŸãƒ³ã‚°ã§ã‚¹ãƒ†ãƒ¼ã‚¸é·ç§»ãƒ•ãƒ©ã‚°ã‚’ç«‹ã¦ã‚‹
         if (restBeat <=  5 && m_RelationData.gameLife > 0)
         {
             m_Theme->SetActive(true);
         }
 
-        if (restBeat % 2 == 1)
+        const bool shouldScaleLife =
+            ((i + 1) % 2 == 1) &&
+            !m_isLifeScaleUp &&
+            !m_isLifeScaleDown;
+
+        if (shouldScaleLife)
         {
             m_isLifeScaleUp = true;
-            
-            // 2”•ª‚ÌŠÔ‚ÅƒXƒP[ƒŠƒ“ƒO
-            m_ScalingLifeDuration = rhythmBeat.GetBeatConst().secondsPerBeat * 2; 
+            m_ScalingLifeDuration = rhythmBeat.GetBeatConst().secondsPerBeat * 0.25f;
         }
         
     }
 
-    // ƒ‰ƒCƒt‚ÌƒXƒP[ƒŠƒ“ƒO‰‰o
+    // ãƒ©ã‚¤ãƒ•ã®ã‚¹ã‚±ãƒ¼ãƒªãƒ³ã‚°æ¼”å‡º
     if (m_isLifeScaleUp || m_isLifeScaleDown)
     {
         ScalingLife();
@@ -344,24 +347,24 @@ void GameSceneWait::Update(float tick)
         m_ShouldTransitionToStage = true;
     }
 
-    // ƒ‰ƒCƒtŒ¸­ˆ—
+    // ãƒ©ã‚¤ãƒ•æ¸›å°‘å‡¦ç†
     if ( m_DecrementLife.IsTimeUp() &&
         !m_wasDecrementLife         &&
         !m_RelationData.isClear)
     {
-        // ƒ‰ƒCƒt‚ğŒ¸‚ç‚·
+        // ãƒ©ã‚¤ãƒ•ã‚’æ¸›ã‚‰ã™
         m_RelationData.gameLife -= 1u;
         DecrementLife();
         m_wasDecrementLife = true;
     }
 
-    // ƒ^ƒCƒ}[XVˆ—
+    // ã‚¿ã‚¤ãƒãƒ¼æ›´æ–°å‡¦ç†
     CountTimer(tick);
 
-    // ƒfƒoƒbƒO—p@I‚í‚Á‚½‚çÁ‚·—\’è‚Ìreturn
+    // ãƒ‡ãƒãƒƒã‚°ç”¨ã€€çµ‚ã‚ã£ãŸã‚‰æ¶ˆã™äºˆå®šã®return
     if (m_RelationData.gameLife == 0u && m_ShouldTransitionToStage)
     {
-        // ƒ‰ƒCƒt‚ª0‚É‚È‚Á‚½‚çƒŠƒUƒ‹ƒgƒV[ƒ“‚Ö
+        // ãƒ©ã‚¤ãƒ•ãŒ0ã«ãªã£ãŸã‚‰ãƒªã‚¶ãƒ«ãƒˆã‚·ãƒ¼ãƒ³ã¸
         Game::SetIsTickCount(false);
         ChangeScenePush<ResultScene>(WaitToResult);
     }
@@ -380,12 +383,12 @@ void GameSceneWait::Finalize()
 {
     auto& instance = Game::GetInstance();
 
-    // ‚±‚ÌƒV[ƒ“‚ÌƒIƒuƒWƒFƒNƒg‚ğíœ‚·‚é
+    // ã“ã®ã‚·ãƒ¼ãƒ³ã®ã‚ªãƒ–ã‚¸ã‚§ã‚¯ãƒˆã‚’å‰Šé™¤ã™ã‚‹
     for (auto o : m_MySceneObjects) {
         DeleteObject(o);
     }
     m_MySceneObjects.clear();
-    // ƒI[ƒfƒBƒI‚Ì’â~‚Æ“o˜^‚ÌƒNƒŠƒA
+    // ã‚ªãƒ¼ãƒ‡ã‚£ã‚ªã®åœæ­¢ã¨ç™»éŒ²ã®ã‚¯ãƒªã‚¢
     if (AudioManager* audioManager = instance)
     {
         for (const auto& [key, config] : m_AudioList)
@@ -409,7 +412,7 @@ void GameSceneWait::RegisterGameUI(pShared<Texture> texture, float u, float v)
 
     auto& rhythmBeat = Game::GetRhythmBeat();
 
-    // ˆÚ“®‚É‚©‚©‚éŠÔ‚ğƒr[ƒg”‚©‚çŒvZ
+    // ç§»å‹•ã«ã‹ã‹ã‚‹æ™‚é–“ã‚’ãƒ“ãƒ¼ãƒˆæ•°ã‹ã‚‰è¨ˆç®—
     m_GameUIMovementTime = rhythmBeat.GetBeatConst().secondsPerBeat * 6;
     
 }
@@ -420,10 +423,10 @@ void GameSceneWait::GameUIMovement(int elapsedBeat)
         return;
     }
 
-    // ƒQ[ƒ€‚ÌƒtƒF[ƒY‚Å‡˜‚ğ‘Ö‚¦‚é
+    // ã‚²ãƒ¼ãƒ ã®ãƒ•ã‚§ãƒ¼ã‚ºã§é †åºã‚’æ›¿ãˆã‚‹
     int phaseBeats = 0;
     if (m_CurrentGamePhase > GAME_PHASE::START) {
-        phaseBeats += 16; // ƒ‰ƒCƒt‚ÌŠÇ—‚ÍÅ‰‚Ìˆê¬ß‚ÅŠ®Œ‹‚³‚¹‚é‚½‚ß‚»‚Ì•ª‚ğ‰ÁZ
+        phaseBeats += 16; // ãƒ©ã‚¤ãƒ•ã®ç®¡ç†ã¯æœ€åˆã®ä¸€å°ç¯€ã§å®Œçµã•ã›ã‚‹ãŸã‚ãã®åˆ†ã‚’åŠ ç®—
     }
 
     int kStartWaitBeat      = 2  + phaseBeats;
@@ -489,7 +492,7 @@ void GameSceneWait::GameUIMovement(int elapsedBeat)
     m_GameUI->SetPos(elapsedX, 50.0f, 0.0f);
 }
 
-// Ÿ‚ÌƒXƒe[ƒW‘I‘ğ‚ÆƒV[ƒ“‘JˆÚˆ—
+// æ¬¡ã®ã‚¹ãƒ†ãƒ¼ã‚¸é¸æŠã¨ã‚·ãƒ¼ãƒ³é·ç§»å‡¦ç†
 void GameSceneWait::StartNextStageTransition()
 {
     Game::SetIsTickCount(true);
@@ -497,7 +500,7 @@ void GameSceneWait::StartNextStageTransition()
     WaitToGame.duration = rhythmBeat.GetOneBeat();
     rhythmBeat.TickCount(WaitToGame.duration);
 
-    // ƒV[ƒ“‘JˆÚˆ—
+    // ã‚·ãƒ¼ãƒ³é·ç§»å‡¦ç†
     switch (m_RelationData.nextScene)
     {
     case SCENE_NO::GAME_DODGE : ChangeScenePush<GameSceneDodge>  (WaitToGame); break;
@@ -519,30 +522,32 @@ void GameSceneWait::DecrementLife()
 
 void GameSceneWait::ScalingLife()
 {
-    m_GameUIMovementElapsed += Application::GetDeltaTime();
+    m_ScalingLifeElapsed += Application::GetDeltaTime();
     float t = 0.0f;
     if (m_isLifeScaleUp) {
-        t = m_GameUIMovementElapsed / m_ScalingLifeDuration;
+        t = m_ScalingLifeElapsed / m_ScalingLifeDuration;
     }
     else {
-        t = 1.0f - (m_GameUIMovementElapsed / m_ScalingLifeDuration);
+        t = 1.0f - (m_ScalingLifeElapsed / m_ScalingLifeDuration);
     }
     float elapsedScale = Calculator::Easing::EaseOutQuad(t);
-    NVector3 targetScale = NVector3(m_LifeBaseScale.x + (m_LifeBaseScale.x * kLifeScaleUpAmount * elapsedScale),
-                                    m_LifeBaseScale.y + (m_LifeBaseScale.y * kLifeScaleUpAmount * elapsedScale),
+    NVector3 targetScale = NVector3(m_LifeBaseScale.x + (m_LifeBaseScale.x * (kLifeScaleUpAmount * elapsedScale)),
+                                    m_LifeBaseScale.y + (m_LifeBaseScale.y * (kLifeScaleUpAmount * elapsedScale)),
                                     1.0f);
 
     if(t >= 1.0f && m_isLifeScaleUp)
     {
         m_isLifeScaleUp   = false;
         m_isLifeScaleDown = true;
-        targetScale = m_LifeBaseScale;
+        targetScale = m_LifeBaseScale + m_LifeBaseScale * kLifeScaleUpAmount;
+        m_ScalingLifeElapsed = 0.0f;
     }
     if (t <= 0.0f && m_isLifeScaleDown)
     {
         m_isLifeScaleUp   = false;
         m_isLifeScaleDown = false;
         targetScale = m_LifeBaseScale;
+        m_ScalingLifeElapsed = 0.0f;
     }
 
     for (auto life : m_LifeGame)
@@ -557,17 +562,17 @@ void GameSceneWait::ScalingLife()
 
 void GameSceneWait::PrepareNextStage()
 {
-    // ‰Šú’l‚Í•ÛŒ¯i‰½‚Å‚à—Ç‚¢‚ª–¢‰Šú‰»‹Ö~j
+    // åˆæœŸå€¤ã¯ä¿é™ºï¼ˆä½•ã§ã‚‚è‰¯ã„ãŒæœªåˆæœŸåŒ–ç¦æ­¢ï¼‰
     SCENE_NO nextScene = SCENE_NO::GAME_DODGE;
 
     if (m_IsFirstInitialized)
     {
-        // ‰‰ñF‘SŒó•â‚©‚ç
+        // åˆå›ï¼šå…¨å€™è£œã‹ã‚‰
         nextScene = SelectRandomStage_All(m_RandomEngine);
     }
     else
     {
-        // 2‰ñ–ÚˆÈ~F’¼‘O‚Æ“¯‚¶ƒXƒe[ƒW‚ğœŠO‚µ‚Ä2‘ğ‚É
+        // 2å›ç›®ä»¥é™ï¼šç›´å‰ã¨åŒã˜ã‚¹ãƒ†ãƒ¼ã‚¸ã‚’é™¤å¤–ã—ã¦2æŠã«
         nextScene = SelectRandomStage_Exclude(m_RandomEngine, m_RelationData.oldScene);
     }
 
