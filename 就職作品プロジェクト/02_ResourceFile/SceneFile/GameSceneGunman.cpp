@@ -123,7 +123,7 @@ void GameSceneGunman::Update(float tick)
 
 void GameSceneGunman::Draw()
 {
-    for (auto object : m_MySceneObjects)
+    for (auto& object : m_MySceneObjects)
     {
         object->Draw();
     }
@@ -132,7 +132,7 @@ void GameSceneGunman::Draw()
 void GameSceneGunman::Finalize()
 {
     // このシーンのオブジェクトを削除する
-    for (auto o : m_MySceneObjects) {
+    for (auto& o : m_MySceneObjects) {
         DeleteObject(o);
     }
     m_MySceneObjects.clear();

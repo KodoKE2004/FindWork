@@ -68,6 +68,8 @@ void Square::Initialize()
 
 	m_IndexBuffer.Create(indices);
 
+    TextureManager* textureMgr = Game::GetInstance();
+    SetTexture(textureMgr->GetTexture("Plane.png"));
 	SetShader("VS_Alpha", "PS_Alpha");
 
 	m_Material = std::make_unique<Material>();

@@ -11,9 +11,9 @@
 // 演出も含める
 enum class GAME_PHASE
 {
-    START = 0,			// ゲーム開始演出 初期化時に使用	
-    FINISH,				// ゲーム終了演出 ResulyScene 遷移時に使用
     DO,					// ゲーム中 GameSceneExe 遷移時に使用	
+    START ,				// ゲーム開始演出 初期化時に使用	
+    FINISH,				// ゲーム終了演出 ResulyScene 遷移時に使用
 	DO_UP_SPEED,		// スピードアップ演出
     DO_UP_DIFFICULTY,	// レベルアップ演出
 	NUM

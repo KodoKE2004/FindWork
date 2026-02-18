@@ -8,12 +8,14 @@
 #include <vector>
 #include <random>
 #include <cmath>
+#include <algorithm>
 
 GAME_PHASE GameSceneWait::m_CurrentGamePhase = GAME_PHASE::START;
 
 namespace
 {
     // 二小節の拍数を基準にしているため、MeasureTwo = 32.0f
+    constexpr int MeasureOne = 16;
     constexpr int MeasureTwo = 32;
     float kGameUIStartPos  =   1024.0f;
     float kGameUIFinishPos = - 1024.0f;
@@ -207,6 +209,13 @@ void GameSceneWait::Initialize()
         m_Theme->SetPos(0.0f,0.0f,0.0f);
     }
 
+    PlayParams startParams;
+    m_AudioList.emplace("start", AudioConfig(L"SE/GameReaction/Start.wav)", startParams, false, false));
+
+
+
+    RegisterAudio();
+
     //--------------------------------------------------------------------
     //                          リズムの初期化
     //--------------------------------------------------------------------
@@ -224,17 +233,17 @@ void GameSceneWait::Initialize()
         if (m_RelationData.gameLife == 1)
         {
             Debug::Log("=====  ゲームオーバー  =====");
-            gameBeats += MeasureTwo; // ゲームオーバーのときは長めに待つ
+            gameBeats += MeasureOne;
             m_CurrentGamePhase = GAME_PHASE::FINISH;
             m_isBootGameUI = true;
-            RegisterGameUI(textureMgr->GetTexture("GameOver.png"), 2.0f, 2.0f);
+            RegisterGameUI(textureMgr->GetTexture("GameGuidance.png"), 2.0f, 2.0f);
         }
     }
 
     if (m_IsFirstInitialized)
     {
         Debug::Log("[[定期]]=====  ゲーム開始  =====");
-        gameBeats += MeasureTwo; // 最初の一度だけ長めに待つ
+        gameBeats += MeasureTwo / 2; 
         m_CurrentGamePhase = GAME_PHASE::START;
         m_isBootGameUI = true;
         RegisterGameUI(textureMgr->GetTexture("GameGuidance.png"), 1.0f, 1.0f);
@@ -307,7 +316,7 @@ void GameSceneWait::Update(float tick)
         }
         
         // 残り一拍のタイミングでステージ遷移フラグを立てる
-        if (restBeat <=  5)
+        if (restBeat <=  5 && m_RelationData.gameLife > 0)
         {
             m_Theme->SetActive(true);
         }
@@ -331,10 +340,6 @@ void GameSceneWait::Update(float tick)
     {
         m_ShouldTransitionToStage = true;
     }
-    if (m_ShouldTransitionToStage)
-    {
-        StartNextStageTransition();
-    }
 
     // ライフ減少処理
     if ( m_DecrementLife.IsTimeUp() &&
@@ -352,12 +357,16 @@ void GameSceneWait::Update(float tick)
     CountTimer(tick);
 
     // デバッグ用　終わったら消す予定のreturn
-    if (m_RelationData.gameLife == 0u)
+    if (m_RelationData.gameLife == 0u && m_ShouldTransitionToStage)
     {
         // ライフが0になったらリザルトシーンへ
         Game::SetIsTickCount(false);
         
         ChangeScenePush<ResultScene>(WaitToResult);
+    }
+    if (m_ShouldTransitionToStage)
+    {
+        StartNextStageTransition();
     }
 }
 
@@ -392,80 +401,91 @@ void GameSceneWait::RegisterGameUI(pShared<Texture> texture, float u, float v)
     m_GameUI = AddObject<Square>(instance.GetCamera());
     m_GameUI->SetTexture(texture);
     m_GameUI->SetName("m_GameUI");
-    m_GameUI->SetScale( 768.0f, 512.0f, 1.0f);
-    
-    float screenHalfW = Application::GetWidth() * 0.5f;
-    float posX = screenHalfW + m_GameUI->GetScale().x * 0.5f;
-    m_GameUI->SetPos(posX, 100.0f, 0.0f);
-    m_GameUI->SetUV(u,v,2.0f,2.0f);
+    m_GameUI->SetScale(768.0f, 512.0f, 1.0f);
+    m_GameUI->SetPos(kGameUIStartPos, 50.0f, 0.0f);
+    m_GameUI->SetUV(u, v, 2.0f, 2.0f);
     m_CurrentUIPhase = UI_PHASE::NONE;
-    
+
     auto& rhythmBeat = Game::GetRhythmBeat();
 
-    // UIの移動タイマーをリセット
-    m_GameUIMovementTime    = rhythmBeat.GetBeatConst().secondsPerBeat * 8; // 1拍分の時間を基準にする
+    // 移動にかかる時間をビート数から計算
+    m_GameUIMovementTime = rhythmBeat.GetBeatConst().secondsPerBeat * 6;
     
 }
 
 void GameSceneWait::GameUIMovement(int elapsedBeat)
 {
-    if (!m_isBootGameUI) {
+    if (!m_isBootGameUI || !m_GameUI) {
         return;
     }
 
-    // UIの移動処理
-    // SLIDE_INフェーズ：右から中央へ移動
-    if (elapsedBeat >=  4 && m_CurrentUIPhase < UI_PHASE::SLIDE_IN)
-    {
-        m_CurrentUIPhase = UI_PHASE::SLIDE_IN;
-        m_GameUIMoveValueX = kGameUICenterPos - kGameUIStartPos; // 開始位置から終了位置へのベクトル
-        m_GameUIMovementElapsed = 0.0f;
+    // ゲームのフェーズで順序を替える
+    int phaseBeats = 0;
+    if (m_CurrentGamePhase > GAME_PHASE::START) {
+        phaseBeats += 16; // ライフの管理は最初の一小節で完結させるためその分を加算
     }
-    // WAITフェーズ：中央で待機
-    if (elapsedBeat >= 12 && m_CurrentUIPhase < UI_PHASE::WAIT)
+
+    int kStartWaitBeat      = 2  + phaseBeats;
+    int kSlideInEndBeat     = 8  + phaseBeats;    // 2 wait + 6 move
+    int kCenterWaitEndBeat  = 24 + phaseBeats;   // +16 wait
+    int kSlideOutEndBeat    = 30 + phaseBeats;   // +6 move
+    int kSequenceEndBeat    = 32 + phaseBeats;   // +2 wait
+
+    if (elapsedBeat < kStartWaitBeat)
+    {
+        m_CurrentUIPhase = UI_PHASE::NONE;
+        m_GameUI->SetPos(kGameUIStartPos, 50.0f, 0.0f);
+        return;
+    }
+
+    if (elapsedBeat >= kSequenceEndBeat)
+    {
+        m_CurrentUIPhase = UI_PHASE::NONE;
+        m_GameUI->SetPos(kGameUIFinishPos, 50.0f, 0.0f);
+        m_isBootGameUI = false;
+        return;
+    }
+
+    if (elapsedBeat < kSlideInEndBeat)
+    {
+        if (m_CurrentUIPhase != UI_PHASE::SLIDE_IN)
+        {
+            m_CurrentUIPhase = UI_PHASE::SLIDE_IN;
+            m_GameUIMoveValueX = kGameUICenterPos - kGameUIStartPos;
+            m_GameUIMovementElapsed = 0.0f;
+            m_GameUI->SetPos(kGameUIStartPos, 50.0f, 0.0f);
+        }
+    }
+    else if (elapsedBeat < kCenterWaitEndBeat)
     {
         m_CurrentUIPhase = UI_PHASE::WAIT;
-    }
-    // SLIDE_OUTフェーズ：中央から左へ移動
-    if (elapsedBeat >= 20 && m_CurrentUIPhase < UI_PHASE::SLIDE_OUT)
-    {
-        m_CurrentUIPhase = UI_PHASE::SLIDE_OUT;
-        m_GameUIMoveValueX = kGameUIFinishPos - kGameUICenterPos; // 中央から終了位置へのベクトル
-        m_GameUIMovementElapsed = 0.0f;
-    }
-
-    if (!m_GameUI) {
+        m_GameUI->SetPos(kGameUICenterPos, 50.0f, 0.0f);
         return;
     }
-    
-    switch (m_CurrentUIPhase)
+    else if (elapsedBeat < kSlideOutEndBeat)
     {
-    // 待機中は弾ませる処理
-    case UI_PHASE::WAIT:
-    break;
-    // NONEフェーズ：移動なし
-    case UI_PHASE::NONE:
-    break;
-    default:
-        m_GameUIMovementElapsed += Application::GetDeltaTime();
-        float t = m_GameUIMovementElapsed / m_GameUIMovementTime;
-        t = std::min(t, 1.0f); // tが1を超えないようにする
-        // 線形補間で位置を計算
-        float elapsedX = m_GameUIMoveValueX * Calculator::Easing::EaseInQuad(t);
-        NVector3 pos(elapsedX, 100.0f, 0.0f);
-        m_GameUI->SetPos(pos);
-        if (t <= 1.0f) {
-            if (m_CurrentUIPhase == UI_PHASE::SLIDE_IN) {
-                m_CurrentUIPhase = UI_PHASE::WAIT;
-            }
-            if (m_CurrentUIPhase == UI_PHASE::SLIDE_OUT) {
-                m_CurrentUIPhase = UI_PHASE::NONE;
-            }
+        if (m_CurrentUIPhase != UI_PHASE::SLIDE_OUT)
+        {
+            m_CurrentUIPhase = UI_PHASE::SLIDE_OUT;
+            m_GameUIMoveValueX = kGameUIFinishPos - kGameUICenterPos;
+            m_GameUIMovementElapsed = 0.0f;
+            m_GameUI->SetPos(kGameUICenterPos, 50.0f, 0.0f);
         }
-    break;
-    
     }
-    
+    else
+    {
+        m_CurrentUIPhase = UI_PHASE::NONE;
+        m_GameUI->SetPos(kGameUIFinishPos, 50.0f, 0.0f);
+        return;
+    }
+
+    m_GameUIMovementElapsed += Application::GetDeltaTime();
+    float t = m_GameUIMovementElapsed / m_GameUIMovementTime;
+    t = std::min(t, 1.0f);
+
+    float baseX = (m_CurrentUIPhase == UI_PHASE::SLIDE_IN) ? kGameUIStartPos : kGameUICenterPos;
+    float elapsedX = baseX + (m_GameUIMoveValueX * Calculator::Easing::EaseInQuad(t));
+    m_GameUI->SetPos(elapsedX, 50.0f, 0.0f);
 }
 
 // 次のステージ選択とシーン遷移処理
