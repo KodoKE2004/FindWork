@@ -37,7 +37,7 @@ private:
 	pShared<Square>			 m_GameUI;			// ライフ減少時のパーティクルエミッター
 
     float m_Tick = 0.0f;
-	int	 m_QuarterAdvance = 0;
+	int	  m_QuarterAdvance = 0;
 
 	std::mt19937_64 m_RandomEngine{ std::random_device{}() };
 
@@ -55,13 +55,15 @@ private:
     float m_GameUIMovementElapsed = 0.0f;			// 現在のビートの経過時間
 	bool  m_isBootGameUI		  = false;
 
-	int m_Difficulty = 0;
+    float m_ScalingLifeElapsed  = 0.0f;				// ライフのスケーリング演出のタイマー
+    float m_ScalingLifeDuration = 0.0f;				// ライフのスケーリング演出の時間
+    NVector3 m_LifeBaseScale;				// ライフのスケーリング演出の開始時のスケール
 
 	bool m_ShouldTransitionToStage = false;	// 次のステージを設定できたか判断するフラグ
     bool m_IsFirstInitialized	   = false;	// シーンが最初に初期化されたかどうかのフラグ
     bool m_wasDecrementLife		   = false;	// ライフが減ったかどうかのフラグ
-
-    bool m_IsLifeTiltPositive = true;		// ライフの傾きが正かどうかのフラグ
+    bool m_isLifeScaleUp		   = false;	// ライフ減少の演出でハートが大きくなっているかどうかのフラグ
+    bool m_isLifeScaleDown		   = false;	// ライフ減少の演出でハートが小さくなっているかどうかのフラグ
 
 private:
 	// Exeシーンの乱数選択を行う。
@@ -69,6 +71,16 @@ private:
 	// 要素の削除の仕方は考える。
 	void PrepareNextStage();
 
+    // ゲームUIの登録
+	void RegisterGameUI(pShared<Texture> texture, float u, float v);
+    // ゲームUIの移動処理
+    void GameUIMovement(int elapsedBeat);
+	// 選択されたランダムなシーンへ遷移
+	void StartNextStageTransition();
+    // ライフを減らす処理
+	void DecrementLife();
+	// ライフのスケーリング演出
+	void ScalingLife();
 public:
 	//================================
 	//		コンストラクタとデストラクタ
@@ -87,10 +99,6 @@ public:
 	void Draw() 			override;
 	void Finalize()         override;	// シーンの終了処理
 
-    // ゲームUIの登録
-	void RegisterGameUI(pShared<Texture> texture, float u, float v);
-    // ゲームUIの移動処理
-    void GameUIMovement(int elapsedBeat);
 
 	bool IsFirstInitialized() const {
 		return m_IsFirstInitialized;
@@ -100,9 +108,6 @@ public:
 		return SCENE_NO::GAME_WAIT;
 	}
 
-	// 選択されたランダムなシーンへ遷移
-	void StartNextStageTransition();
 
-	void DecrementLife();
 };
 

@@ -115,6 +115,8 @@ namespace
     constexpr uint32_t kLifeParticleCount = 12u;
     constexpr float    kLifeParticleSpeed = 400.0f;
     constexpr float    kLifeParticleLifeSec = 0.8f;
+
+    constexpr float kLifeScaleUpAmount = 0.2f;
 }
 
 GameSceneWait::GameSceneWait(Camera& cam) : Scene(cam)
@@ -163,6 +165,7 @@ void GameSceneWait::Initialize()
     const float lifePosX = - 200.0f;
     const float lifePosY = - 100.0f;
 
+    m_LifeBaseScale = NVector3(100.0f, 100.0f, 1.0f);
     m_ShouldTransitionToStage = false;
     m_wasDecrementLife        = false;
 
@@ -184,12 +187,12 @@ void GameSceneWait::Initialize()
         m_LifeGame.emplace_back(life);
     }
 
-    const float initialTilt = m_IsLifeTiltPositive ? 30.0f : -30.0f;
+    m_isLifeScaleUp = false;
     for (auto life : m_LifeGame)
     {
         if (life)
         {
-            life->SetRotate(life->GetRotate().x, life->GetRotate().y, initialTilt);
+            life->SetRotate(life->GetRotate().x, life->GetRotate().y, 30.0f);
         }
     }
 
@@ -304,7 +307,6 @@ void GameSceneWait::Update(float tick)
 
     GameUIMovement(elapsedBeat);
 
-
     // ライフをリズムに合わせて回転させる
     for (int i = m_QuarterAdvance; i < elapsedFourBeat; ++i)
     {
@@ -321,19 +323,20 @@ void GameSceneWait::Update(float tick)
             m_Theme->SetActive(true);
         }
 
-        elapsedFourBeat;
-        if (elapsedFourBeat % 2 == 1)
+        if (restBeat % 2 == 1)
         {
-            m_IsLifeTiltPositive = !m_IsLifeTiltPositive;
+            m_isLifeScaleUp = true;
+            
+            // 2拍分の時間でスケーリング
+            m_ScalingLifeDuration = rhythmBeat.GetBeatConst().secondsPerBeat * 2; 
         }
-        const float tiltAngle = m_IsLifeTiltPositive ? 30.0f : -30.0f;
-        for (auto life : m_LifeGame)
-        {
-            if (life)
-            {
-                life->SetRotate(0.0f, 0.0f, tiltAngle);
-            }
-        }
+        
+    }
+
+    // ライフのスケーリング演出
+    if (m_isLifeScaleUp || m_isLifeScaleDown)
+    {
+        ScalingLife();
     }
 
     if (rhythmBeat.GetBeatElapsed() >= rhythmBeat.GetBeatTotal() - 3)
@@ -349,7 +352,6 @@ void GameSceneWait::Update(float tick)
         // ライフを減らす
         m_RelationData.gameLife -= 1u;
         DecrementLife();
-
         m_wasDecrementLife = true;
     }
 
@@ -361,7 +363,6 @@ void GameSceneWait::Update(float tick)
     {
         // ライフが0になったらリザルトシーンへ
         Game::SetIsTickCount(false);
-        
         ChangeScenePush<ResultScene>(WaitToResult);
     }
     if (m_ShouldTransitionToStage)
@@ -514,6 +515,43 @@ void GameSceneWait::DecrementLife()
     DeleteObject(m_LifeGame.back());
     m_LifeGame.pop_back();
     --m_LifeCount;
+}
+
+void GameSceneWait::ScalingLife()
+{
+    m_GameUIMovementElapsed += Application::GetDeltaTime();
+    float t = 0.0f;
+    if (m_isLifeScaleUp) {
+        t = m_GameUIMovementElapsed / m_ScalingLifeDuration;
+    }
+    else {
+        t = 1.0f - (m_GameUIMovementElapsed / m_ScalingLifeDuration);
+    }
+    float elapsedScale = Calculator::Easing::EaseOutQuad(t);
+    NVector3 targetScale = NVector3(m_LifeBaseScale.x + (m_LifeBaseScale.x * kLifeScaleUpAmount * elapsedScale),
+                                    m_LifeBaseScale.y + (m_LifeBaseScale.y * kLifeScaleUpAmount * elapsedScale),
+                                    1.0f);
+
+    if(t >= 1.0f && m_isLifeScaleUp)
+    {
+        m_isLifeScaleUp   = false;
+        m_isLifeScaleDown = true;
+        targetScale = m_LifeBaseScale;
+    }
+    if (t <= 0.0f && m_isLifeScaleDown)
+    {
+        m_isLifeScaleUp   = false;
+        m_isLifeScaleDown = false;
+        targetScale = m_LifeBaseScale;
+    }
+
+    for (auto life : m_LifeGame)
+    {
+        if (life)
+        {
+            life->SetScale(targetScale);
+        }
+    }
 }
 
 
