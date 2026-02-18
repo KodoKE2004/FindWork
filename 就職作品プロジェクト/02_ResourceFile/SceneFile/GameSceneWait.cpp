@@ -15,6 +15,9 @@ namespace
 {
     // 二小節の拍数を基準にしているため、MeasureTwo = 32.0f
     constexpr int MeasureTwo = 32;
+    float kGameUIStartPos  =   1024.0f;
+    float kGameUIFinishPos = - 1024.0f;
+    float kGameUICenterPos =      0.0f;
 
     struct StageEntry
     {
@@ -132,81 +135,7 @@ void GameSceneWait::Initialize()
     // 引き渡しデータのシーンの整理
     m_RelationData.ClearTransitionTexture();
 
-    // ゲームのリズムの初期化
-    int gameBeats = MeasureTwo;
-    if (m_RelationData.isClear) {
-        Debug::Log("[[定期]]=====  ステージ成功  =====");
-    }
-    else {
-        Debug::Log("[[定期]]=====  ステージ失敗  =====");
-        if (m_RelationData.gameLife == 1)
-        {
-            Debug::Log("=====  ゲームオーバー  =====");
-            gameBeats += MeasureTwo; // ゲームオーバーのときは長めに待つ
-            m_CurrentGamePhase = GAME_PHASE::FINISH;
-            RegisterGameUI(textureMgr->GetTexture("GameOver.png"), 2.0f, 2.0f);
-        }
-    }
 
-    if (m_IsFirstInitialized)
-    {
-        Debug::Log("[[定期]]=====  ゲーム開始  =====");
-        m_CurrentGamePhase = GAME_PHASE::START;
-        gameBeats += MeasureTwo; // 最初の一度だけ長めに待つ
-        RegisterGameUI(textureMgr->GetTexture("GameGuidance.png"), 1.0f, 1.0f);
-    }
-
-
-    RhythmBeatConst beatConfig{};
-    beatConfig.Setup(Game::GetBgmBpm());
-
-
-    // 難易度アップ処理 
-    ++m_RelationData.stageCount;
-
-
-    //-------------------------------------------------------------------   
-    //   難易度アップのタイミングでBPMを下げる or スピードアップのタイミングでBPMを上げる
-    //-------------------------------------------------------------------   
-    const int difficultyStageInterval        = Game::GetDifficultyStageInterval();
-    const float baseBpmIncreasePerDifficulty = Game::GetBaseBpmIncreasePerDifficulty();
-    const int speedUpStageInterval           = Game::GetSpeedUpStageInterval();
-    const float speedUpBpmIncrease           = Game::GetSpeedUpBpmIncrease();
-
-    // レベル変化時はBeatsを増やす
-    // 難易度アップ時はBPMを下げる
-    if (m_RelationData.stageCount % difficultyStageInterval == 0) {
-    
-        beatConfig.Setup(Game::GetBgmBpm() - speedUpBpmIncrease);
-        // 難易度アップのときは長めに待つ
-        gameBeats += 32; 
-        m_CurrentGamePhase = GAME_PHASE::DO_UP_DIFFICULTY;
-        RegisterGameUI(textureMgr->GetTexture("GameGuidance.png"), 1.0f, 2.0f);
-        Debug::Log("[[定期]] 難易度アップ");
-
-    }
-    // スピードアップ時はBPMを上げる
-    else if (m_RelationData.stageCount % speedUpStageInterval == 0) {
-
-        beatConfig.Setup(Game::GetBgmBpm() + speedUpBpmIncrease);
-        gameBeats += 32; 
-        m_CurrentGamePhase = GAME_PHASE::DO_UP_SPEED;
-        RegisterGameUI(textureMgr->GetTexture("GameGuidance.png"), 2.0f, 1.0f);
-
-        Debug::Log("[[定期]] スピードアップ");
-    }
-
-
-    auto& rhythmBeat = Game::GetRhythmBeat();
-    rhythmBeat.Initialize(beatConfig, false, gameBeats);
-
-    Game::SetBgmBpm(beatConfig.m_Bpm);
-
-    m_TimerList.clear();
-    SetTimer(&m_Tick);
-    SetTimer(&m_DecrementLife.timer);
-    m_WasPlayBGM         = false;
-    m_QuarterAdvance     = 0;
 
     // スカイドーム初期化
     m_Skydome = AddObject<Skydome>(instance.GetCamera());
@@ -214,6 +143,19 @@ void GameSceneWait::Initialize()
     m_Skydome->SetSkyDomeMode(true);
     m_Skydome->SetTexture(textureMgr->GetTexture("SkydomeSpace.png"));
     m_Skydome->SetRadius(500.0f);
+
+    // 難易度アップ処理 
+    ++m_RelationData.stageCount;
+
+
+
+    m_TimerList.clear();
+    SetTimer(&m_Tick);
+    SetTimer(&m_DecrementLife.timer);
+    m_WasPlayBGM         = false;
+    m_QuarterAdvance     = 0;
+
+    
 
     // ライフの数だけハートの生成
     const float lifePosX = - 200.0f;
@@ -265,6 +207,78 @@ void GameSceneWait::Initialize()
         m_Theme->SetPos(0.0f,0.0f,0.0f);
     }
 
+    //--------------------------------------------------------------------
+    //                          リズムの初期化
+    //--------------------------------------------------------------------
+    RhythmBeatConst beatConfig{};
+    beatConfig.Setup(Game::GetBgmBpm());
+    m_isBootGameUI = false;
+
+    // ゲームのリズムの初期化
+    int gameBeats = MeasureTwo;
+    if (m_RelationData.isClear) {
+        Debug::Log("[[定期]]=====  ステージ成功  =====");
+    }
+    else {
+        Debug::Log("[[定期]]=====  ステージ失敗  =====");
+        if (m_RelationData.gameLife == 1)
+        {
+            Debug::Log("=====  ゲームオーバー  =====");
+            gameBeats += MeasureTwo; // ゲームオーバーのときは長めに待つ
+            m_CurrentGamePhase = GAME_PHASE::FINISH;
+            m_isBootGameUI = true;
+            RegisterGameUI(textureMgr->GetTexture("GameOver.png"), 2.0f, 2.0f);
+        }
+    }
+
+    if (m_IsFirstInitialized)
+    {
+        Debug::Log("[[定期]]=====  ゲーム開始  =====");
+        gameBeats += MeasureTwo; // 最初の一度だけ長めに待つ
+        m_CurrentGamePhase = GAME_PHASE::START;
+        m_isBootGameUI = true;
+        RegisterGameUI(textureMgr->GetTexture("GameGuidance.png"), 1.0f, 1.0f);
+    }
+
+
+    //-------------------------------------------------------------------   
+    //   難易度アップのタイミングでBPMを下げる or スピードアップのタイミングでBPMを上げる
+    //-------------------------------------------------------------------   
+    const int difficultyStageInterval = Game::GetDifficultyStageInterval();
+    const int speedUpStageInterval = Game::GetSpeedUpStageInterval();
+    const float speedUpBpmIncrease = Game::GetSpeedUpBpmIncrease();
+
+    // レベル変化時はBeatsを増やす
+    // 難易度アップ時はBPMを下げる
+    if (m_RelationData.stageCount % difficultyStageInterval == 0) {
+
+        beatConfig.Setup(Game::GetBgmBpm() - speedUpBpmIncrease);
+        // 難易度アップのときは長めに待つ
+        gameBeats += MeasureTwo;
+        m_CurrentGamePhase = GAME_PHASE::DO_UP_DIFFICULTY;
+        m_isBootGameUI = true;
+        RegisterGameUI(textureMgr->GetTexture("GameGuidance.png"), 1.0f, 2.0f);
+        Debug::Log("[[定期]] 難易度アップ");
+
+    }
+    // スピードアップ時はBPMを上げる
+    else if (m_RelationData.stageCount % speedUpStageInterval == 0) {
+
+        Debug::Log("[[定期]] スピードアップ");
+        beatConfig.Setup(Game::GetBgmBpm() + speedUpBpmIncrease);
+        gameBeats += MeasureTwo;
+        m_CurrentGamePhase = GAME_PHASE::DO_UP_SPEED;
+        m_isBootGameUI = true;
+        RegisterGameUI(textureMgr->GetTexture("GameGuidance.png"), 2.0f, 1.0f);
+
+    }
+
+
+    auto& rhythmBeat = Game::GetRhythmBeat();
+    rhythmBeat.Initialize(beatConfig, false, gameBeats);
+
+    Game::SetBgmBpm(beatConfig.m_Bpm);
+
     Debug::Log("===== クリアステージ数 : " + std::to_string(m_RelationData.stageCount) + " =====");
 
 }
@@ -275,10 +289,15 @@ void GameSceneWait::Update(float tick)
     // リズムを取る    
     m_QuarterAdvance = rhythmBeat.GetBeatElapsed() / 2;
     rhythmBeat.Update(tick);
-    int elapsedBeat  = rhythmBeat.GetBeatElapsed() / 2;
+    int elapsedBeat      = rhythmBeat.GetBeatElapsed();
+    int elapsedFourBeat  = elapsedBeat / 2;
     int restBeat     = rhythmBeat.GetBeatRest();
+
+    GameUIMovement(elapsedBeat);
+
+
     // ライフをリズムに合わせて回転させる
-    for (int i = m_QuarterAdvance; i < elapsedBeat; ++i)
+    for (int i = m_QuarterAdvance; i < elapsedFourBeat; ++i)
     {
         // 1拍目のタイミングでBGM再生
         if (!m_WasPlayBGM)
@@ -293,8 +312,8 @@ void GameSceneWait::Update(float tick)
             m_Theme->SetActive(true);
         }
 
-        elapsedBeat;
-        if (elapsedBeat % 2 == 1)
+        elapsedFourBeat;
+        if (elapsedFourBeat % 2 == 1)
         {
             m_IsLifeTiltPositive = !m_IsLifeTiltPositive;
         }
@@ -373,9 +392,80 @@ void GameSceneWait::RegisterGameUI(pShared<Texture> texture, float u, float v)
     m_GameUI = AddObject<Square>(instance.GetCamera());
     m_GameUI->SetTexture(texture);
     m_GameUI->SetName("m_GameUI");
-    m_GameUI->SetPos(0.0f, 0.0f, 0.0f);
     m_GameUI->SetScale( 768.0f, 512.0f, 1.0f);
+    
+    float screenHalfW = Application::GetWidth() * 0.5f;
+    float posX = screenHalfW + m_GameUI->GetScale().x * 0.5f;
+    m_GameUI->SetPos(posX, 100.0f, 0.0f);
     m_GameUI->SetUV(u,v,2.0f,2.0f);
+    m_CurrentUIPhase = UI_PHASE::NONE;
+    
+    auto& rhythmBeat = Game::GetRhythmBeat();
+
+    // UIの移動タイマーをリセット
+    m_GameUIMovementTime    = rhythmBeat.GetBeatConst().secondsPerBeat * 8; // 1拍分の時間を基準にする
+    
+}
+
+void GameSceneWait::GameUIMovement(int elapsedBeat)
+{
+    if (!m_isBootGameUI) {
+        return;
+    }
+
+    // UIの移動処理
+    // SLIDE_INフェーズ：右から中央へ移動
+    if (elapsedBeat >=  4 && m_CurrentUIPhase < UI_PHASE::SLIDE_IN)
+    {
+        m_CurrentUIPhase = UI_PHASE::SLIDE_IN;
+        m_GameUIMoveValueX = kGameUICenterPos - kGameUIStartPos; // 開始位置から終了位置へのベクトル
+        m_GameUIMovementElapsed = 0.0f;
+    }
+    // WAITフェーズ：中央で待機
+    if (elapsedBeat >= 12 && m_CurrentUIPhase < UI_PHASE::WAIT)
+    {
+        m_CurrentUIPhase = UI_PHASE::WAIT;
+    }
+    // SLIDE_OUTフェーズ：中央から左へ移動
+    if (elapsedBeat >= 20 && m_CurrentUIPhase < UI_PHASE::SLIDE_OUT)
+    {
+        m_CurrentUIPhase = UI_PHASE::SLIDE_OUT;
+        m_GameUIMoveValueX = kGameUIFinishPos - kGameUICenterPos; // 中央から終了位置へのベクトル
+        m_GameUIMovementElapsed = 0.0f;
+    }
+
+    if (!m_GameUI) {
+        return;
+    }
+    
+    switch (m_CurrentUIPhase)
+    {
+    // 待機中は弾ませる処理
+    case UI_PHASE::WAIT:
+    break;
+    // NONEフェーズ：移動なし
+    case UI_PHASE::NONE:
+    break;
+    default:
+        m_GameUIMovementElapsed += Application::GetDeltaTime();
+        float t = m_GameUIMovementElapsed / m_GameUIMovementTime;
+        t = std::min(t, 1.0f); // tが1を超えないようにする
+        // 線形補間で位置を計算
+        float elapsedX = m_GameUIMoveValueX * Calculator::Easing::EaseInQuad(t);
+        NVector3 pos(elapsedX, 100.0f, 0.0f);
+        m_GameUI->SetPos(pos);
+        if (t <= 1.0f) {
+            if (m_CurrentUIPhase == UI_PHASE::SLIDE_IN) {
+                m_CurrentUIPhase = UI_PHASE::WAIT;
+            }
+            if (m_CurrentUIPhase == UI_PHASE::SLIDE_OUT) {
+                m_CurrentUIPhase = UI_PHASE::NONE;
+            }
+        }
+    break;
+    
+    }
+    
 }
 
 // 次のステージ選択とシーン遷移処理

@@ -19,6 +19,15 @@ enum class GAME_PHASE
 	NUM
 };
 
+enum class UI_PHASE
+{
+    NONE = -1,
+	SLIDE_IN,	// ゲームUIが入ってくるフェーズ
+	WAIT,		// ゲームUIが中央で待機しているフェーズ
+	SLIDE_OUT,	// ゲームUIが出ていくフェーズ
+    NUM
+};
+
 class GameSceneWait : public Scene
 {
 private:
@@ -39,7 +48,12 @@ private:
     // ステージ遷移用フラグ
 	// 初期化済みかどうかのフラグ
     // また、乱数選択のリセット用にstaticで持つ
-	static GAME_PHASE m_CurrentGamePhase;	// 現在のゲームフェーズを管理する変数
+	static GAME_PHASE m_CurrentGamePhase;			// 現在のゲームフェーズを管理する変数
+    UI_PHASE m_CurrentUIPhase  = UI_PHASE::NONE;	// 現在のゲームUIフェーズを管理する変数
+    float m_GameUIMoveValueX	  = 0.0f;			// ゲームUIの移動量
+    float m_GameUIMovementTime	  = 0.0f;			// ゲームUIの移動タイマー
+    float m_GameUIMovementElapsed = 0.0f;			// 現在のビートの経過時間
+	bool  m_isBootGameUI		  = false;
 
 	int m_Difficulty = 0;
 
@@ -73,7 +87,10 @@ public:
 	void Draw() 			override;
 	void Finalize()         override;	// シーンの終了処理
 
+    // ゲームUIの登録
 	void RegisterGameUI(pShared<Texture> texture, float u, float v);
+    // ゲームUIの移動処理
+    void GameUIMovement(int elapsedBeat);
 
 	bool IsFirstInitialized() const {
 		return m_IsFirstInitialized;

@@ -1,5 +1,2 @@
 ﻿  GameSceneWait.cpp
-C:\Users\dorae\Desktop\HAL\class3\FindWork\就職作品プロジェクト\02_ResourceFile\SceneFile\GameSceneWait.cpp(172,17): warning C4189: 'baseBpmIncreasePerDifficulty': ローカル変数が初期化されましたが、参照されていません
-  (ソース ファイル '/02_ResourceFile/SceneFile/GameSceneWait.cpp' をコンパイルしています)
-  
   就職作品プロジェクト.vcxproj -> C:\Users\dorae\Desktop\HAL\class3\FindWork\就職作品プロジェクト\x64\Debug\NishiguchiGame.exe
