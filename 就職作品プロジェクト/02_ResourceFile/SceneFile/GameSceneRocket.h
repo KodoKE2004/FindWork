@@ -5,8 +5,6 @@ class GameSceneRocket : public GameSceneExe
 private:
     pShared<Square>        m_Background;
 
-
-
 public:
     GameSceneRocket() = delete;
     GameSceneRocket(Camera& cam);
@@ -19,7 +17,7 @@ public:
 
 
     SCENE_NO GetSceneNo() {
-        return SCENE_NO::GAME_ROCKET;
+        return SCENE_NO::NONE;
     }
 };
 

@@ -266,6 +266,9 @@
     <ClCompile Include="02_ResourceFile\SceneFile\GameSceneRocket.cpp">
       <Filter>SourceFile\Scene\GameScene</Filter>
     </ClCompile>
+    <ClCompile Include="02_ResourceFile\SceneFile\GameSceneGunman.cpp">
+      <Filter>SourceFile\Scene\GameScene</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="02_ResourceFile\SceneFile\Scene.h">
@@ -495,6 +498,9 @@
       <Filter>SourceFile\Object\2D</Filter>
     </ClInclude>
     <ClInclude Include="02_ResourceFile\SceneFile\GameSceneRocket.h">
+      <Filter>SourceFile\Scene\GameScene</Filter>
+    </ClInclude>
+    <ClInclude Include="02_ResourceFile\SceneFile\GameSceneGunman.h">
       <Filter>SourceFile\Scene\GameScene</Filter>
     </ClInclude>
   </ItemGroup>

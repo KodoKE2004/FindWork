@@ -23,9 +23,9 @@ class GameSceneWait : public Scene
 {
 private:
 
-    uint32_t				 m_LifeCount = 4;		// 自分のライフ数
-    vector<pShared<Square>>  m_LifeGame;			// ライフのオブジェクト格納用
-	pShared<ParticleEmitter> m_LifeParticleEmitter; // ライフ減少時のパーティクルエミッター
+    uint32_t				 m_LifeCount = 4;	// 自分のライフ数
+    vector<pShared<Square>>  m_LifeGame;		// ライフのオブジェクト格納用
+	pShared<Square>			 m_GameUI;			// ライフ減少時のパーティクルエミッター
 
     float m_Tick = 0.0f;
 	int	 m_QuarterAdvance = 0;
@@ -39,7 +39,7 @@ private:
     // ステージ遷移用フラグ
 	// 初期化済みかどうかのフラグ
     // また、乱数選択のリセット用にstaticで持つ
-	static GAME_PHASE s_CurrentGamePhase;	// 現在のゲームフェーズを管理する変数
+	static GAME_PHASE m_CurrentGamePhase;	// 現在のゲームフェーズを管理する変数
 
 	int m_Difficulty = 0;
 
@@ -72,6 +72,8 @@ public:
 	void Update(float tick) override;	// シーンの更新
 	void Draw() 			override;
 	void Finalize()         override;	// シーンの終了処理
+
+	void RegisterGameUI(pShared<Texture> texture, float u, float v);
 
 	bool IsFirstInitialized() const {
 		return m_IsFirstInitialized;

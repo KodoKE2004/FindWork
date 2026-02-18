@@ -273,6 +273,11 @@ void GameSceneDodge::Draw()
 
 void GameSceneDodge::Finalize()
 {
+    // このシーンのオブジェクトを削除する
+    for (auto o : m_MySceneObjects) {
+        DeleteObject(o);
+    }
+    m_MySceneObjects.clear();
     GameSceneExe::Finalize();
 }
 

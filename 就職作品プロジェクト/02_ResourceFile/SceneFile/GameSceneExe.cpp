@@ -237,9 +237,6 @@ void GameSceneExe::Finalize()
 {
     auto& instance = Game::GetInstance();
 
-    // このシーンのオブジェクトを削除する
-    m_MySceneObjects.clear();
-
     m_ReactionActive.reset();
 
     // オーディオの停止と登録のクリア

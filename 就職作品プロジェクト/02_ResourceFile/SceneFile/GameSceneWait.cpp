@@ -9,10 +9,13 @@
 #include <random>
 #include <cmath>
 
-GAME_PHASE GameSceneWait::s_CurrentGamePhase = GAME_PHASE::START;
+GAME_PHASE GameSceneWait::m_CurrentGamePhase = GAME_PHASE::START;
 
 namespace
 {
+    // 二小節の拍数を基準にしているため、MeasureTwo = 32.0f
+    constexpr int MeasureTwo = 32;
+
     struct StageEntry
     {
         SCENE_NO scene;
@@ -31,7 +34,8 @@ namespace
         { SCENE_NO::GAME_DODGE  , &PushGameStage<GameSceneDodge>  },
         { SCENE_NO::GAME_SHOT   , &PushGameStage<GameSceneShot>   },
         { SCENE_NO::GAME_TEXT   , &PushGameStage<GameSceneText>   },
-        { SCENE_NO::GAME_ROCKET , &PushGameStage<GameSceneRocket> },
+        // { SCENE_NO::GAME_ROCKET , &PushGameStage<GameSceneRocket> },
+        // { SCENE_NO::GAME_GUNMAN , &PushGameStage<GameSceneGunman> },
     } };
 
     using StageList = std::vector<SCENE_NO>;
@@ -89,14 +93,16 @@ namespace
         "Theme/Avoid.png",
         "Theme/KO.png",
         "Theme/Convey.png",
-        "Theme/Board.png",
+        // "Theme/Board.png",
+        // "Theme/Board.png",
     };
 
     const NVector3 kThemeScale[GAME_EXE_NUM] = {
         NVector3( 546.0f, 223.0f, 1.0f),
         NVector3( 557.0f, 217.0f, 1.0f),
         NVector3( 554.0f, 198.0f, 1.0f),
-        NVector3( 554.0f, 198.0f, 1.0f),
+        // NVector3( 554.0f, 198.0f, 1.0f),
+        // NVector3( 554.0f, 198.0f, 1.0f),
     };
 
     constexpr float kStageTransitionDelay = 1.0f;
@@ -117,6 +123,8 @@ void GameSceneWait::Initialize()
     auto& instance = Game::GetInstance();
     TextureManager* textureMgr = instance.GetInstance();
 
+    m_CurrentGamePhase = GAME_PHASE::DO;
+
     // 最初の一度だけ or 指定したタイミングのみフラグを立てる
     m_IsFirstInitialized = !instance.HasFirstGameSceneWaitInitialized();
     instance.SetHasFirstGameSceneWaitInitialized(true);
@@ -124,45 +132,73 @@ void GameSceneWait::Initialize()
     // 引き渡しデータのシーンの整理
     m_RelationData.ClearTransitionTexture();
 
+    // ゲームのリズムの初期化
+    int gameBeats = MeasureTwo;
     if (m_RelationData.isClear) {
-        Debug::Log("=====  ステージ成功  =====");
+        Debug::Log("[[定期]]=====  ステージ成功  =====");
     }
     else {
-        Debug::Log("=====  ステージ失敗  =====");
+        Debug::Log("[[定期]]=====  ステージ失敗  =====");
+        if (m_RelationData.gameLife == 1)
+        {
+            Debug::Log("=====  ゲームオーバー  =====");
+            gameBeats += MeasureTwo; // ゲームオーバーのときは長めに待つ
+            m_CurrentGamePhase = GAME_PHASE::FINISH;
+            RegisterGameUI(textureMgr->GetTexture("GameOver.png"), 2.0f, 2.0f);
+        }
     }
 
-    RhythmBeatConst beatConfig{};
-    auto& rhythmBeat = Game::GetRhythmBeat();
+    if (m_IsFirstInitialized)
+    {
+        Debug::Log("[[定期]]=====  ゲーム開始  =====");
+        m_CurrentGamePhase = GAME_PHASE::START;
+        gameBeats += MeasureTwo; // 最初の一度だけ長めに待つ
+        RegisterGameUI(textureMgr->GetTexture("GameGuidance.png"), 1.0f, 1.0f);
+    }
 
+
+    RhythmBeatConst beatConfig{};
     beatConfig.Setup(Game::GetBgmBpm());
-    rhythmBeat.Initialize(beatConfig, false, 32);
+
 
     // 難易度アップ処理 
     ++m_RelationData.stageCount;
 
-    const int difficultyStageInterval = Game::GetDifficultyStageInterval();
+
+    //-------------------------------------------------------------------   
+    //   難易度アップのタイミングでBPMを下げる or スピードアップのタイミングでBPMを上げる
+    //-------------------------------------------------------------------   
+    const int difficultyStageInterval        = Game::GetDifficultyStageInterval();
     const float baseBpmIncreasePerDifficulty = Game::GetBaseBpmIncreasePerDifficulty();
-    const int speedUpStageInterval = Game::GetSpeedUpStageInterval();
-    const float speedUpBpmIncrease = Game::GetSpeedUpBpmIncrease();
+    const int speedUpStageInterval           = Game::GetSpeedUpStageInterval();
+    const float speedUpBpmIncrease           = Game::GetSpeedUpBpmIncrease();
 
-    // 難易度 0 ~
+    // レベル変化時はBeatsを増やす
+    // 難易度アップ時はBPMを下げる
     if (m_RelationData.stageCount % difficultyStageInterval == 0) {
-        int difficulty = m_RelationData.stageCount / difficultyStageInterval;
+    
+        beatConfig.Setup(Game::GetBgmBpm() - speedUpBpmIncrease);
+        // 難易度アップのときは長めに待つ
+        gameBeats += 32; 
+        m_CurrentGamePhase = GAME_PHASE::DO_UP_DIFFICULTY;
+        RegisterGameUI(textureMgr->GetTexture("GameGuidance.png"), 1.0f, 2.0f);
+        Debug::Log("[[定期]] 難易度アップ");
 
-        const float upBpm = difficulty * baseBpmIncreasePerDifficulty;
-        if (upBpm > 0.0f)
-        {
-            beatConfig.Setup(Game::GetBgmBpm());
-        }
-        Debug::Log("[[検出]] 難易度アップ");
     }
-    // スピード
+    // スピードアップ時はBPMを上げる
     else if (m_RelationData.stageCount % speedUpStageInterval == 0) {
-        float upBpm = (static_cast<float>(m_RelationData.stageCount) / speedUpStageInterval) * speedUpBpmIncrease;
-        beatConfig.Setup(Game::GetBgmBpm() + upBpm);
-        Debug::Log("[[検出]] スピードアップ");
 
+        beatConfig.Setup(Game::GetBgmBpm() + speedUpBpmIncrease);
+        gameBeats += 32; 
+        m_CurrentGamePhase = GAME_PHASE::DO_UP_SPEED;
+        RegisterGameUI(textureMgr->GetTexture("GameGuidance.png"), 2.0f, 1.0f);
+
+        Debug::Log("[[定期]] スピードアップ");
     }
+
+
+    auto& rhythmBeat = Game::GetRhythmBeat();
+    rhythmBeat.Initialize(beatConfig, false, gameBeats);
 
     Game::SetBgmBpm(beatConfig.m_Bpm);
 
@@ -171,9 +207,6 @@ void GameSceneWait::Initialize()
     SetTimer(&m_DecrementLife.timer);
     m_WasPlayBGM         = false;
     m_QuarterAdvance     = 0;
-
-
-    m_LifeParticleEmitter = std::make_shared<ParticleEmitter>(instance.GetCamera());
 
     // スカイドーム初期化
     m_Skydome = AddObject<Skydome>(instance.GetCamera());
@@ -296,10 +329,6 @@ void GameSceneWait::Update(float tick)
         m_wasDecrementLife = true;
     }
 
-    if (m_LifeParticleEmitter)
-    {
-        m_LifeParticleEmitter->Update(tick);
-    }
     // タイマー更新処理
     CountTimer(tick);
 
@@ -338,6 +367,17 @@ void GameSceneWait::Finalize()
     }
 }
 
+void GameSceneWait::RegisterGameUI(pShared<Texture> texture, float u, float v)
+{
+    auto& instance = Game::GetInstance();
+    m_GameUI = AddObject<Square>(instance.GetCamera());
+    m_GameUI->SetTexture(texture);
+    m_GameUI->SetName("m_GameUI");
+    m_GameUI->SetPos(0.0f, 0.0f, 0.0f);
+    m_GameUI->SetScale( 768.0f, 512.0f, 1.0f);
+    m_GameUI->SetUV(u,v,2.0f,2.0f);
+}
+
 // 次のステージ選択とシーン遷移処理
 void GameSceneWait::StartNextStageTransition()
 {
@@ -349,10 +389,11 @@ void GameSceneWait::StartNextStageTransition()
     // シーン遷移処理
     switch (m_RelationData.nextScene)
     {
-    case SCENE_NO::GAME_DODGE: ChangeScenePush<GameSceneDodge>  (WaitToGame); break;
-    case SCENE_NO::GAME_SHOT : ChangeScenePush<GameSceneShot>   (WaitToGame); break;
-    case SCENE_NO::GAME_TEXT : ChangeScenePush<GameSceneText>   (WaitToGame); break;
-    case SCENE_NO::GAME_ROCKET: ChangeScenePush<GameSceneRocket>(WaitToGame); break;
+    case SCENE_NO::GAME_DODGE : ChangeScenePush<GameSceneDodge>  (WaitToGame); break;
+    case SCENE_NO::GAME_SHOT  : ChangeScenePush<GameSceneShot>   (WaitToGame); break;
+    case SCENE_NO::GAME_TEXT  : ChangeScenePush<GameSceneText>   (WaitToGame); break;
+    // case SCENE_NO::GAME_ROCKET: ChangeScenePush<GameSceneRocket>(WaitToGame); break;
+    // case SCENE_NO::GAME_GUNMAN: ChangeScenePush<GameSceneRocket>(WaitToGame); break;
     default: return;
     }
 }
@@ -382,6 +423,5 @@ void GameSceneWait::PrepareNextStage()
         nextScene = SelectRandomStage_Exclude(m_RandomEngine, m_RelationData.oldScene);
     }
 
-    nextScene = SCENE_NO::GAME_ROCKET;
     m_RelationData.nextScene = nextScene;
 }

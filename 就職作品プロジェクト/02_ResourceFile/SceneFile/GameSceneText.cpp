@@ -1,7 +1,6 @@
 #include "GameSceneText.h"
 #include "Game.h"
 #include <algorithm>
-#include <random>
 
 namespace
 {
@@ -10,21 +9,6 @@ namespace
         NVector3(    0.0f, - 200.0f,0.0f),
         NVector3(  375.0f, - 200.0f,0.0f),
     };
-
-    std::array<size_t, 3> ShuffleButtonIndices()
-    {
-        static std::mt19937 engine{ std::random_device{}() };
-        std::array<size_t, 3> indices{ 0, 1, 2 };
-        std::shuffle(indices.begin(), indices.end(), engine);
-        return indices;
-    }
-
-    std::array<float, 2> ShuffleButtonIndices(std::array<float, 2> indices)
-    {
-        static std::mt19937 engine{ std::random_device{}() };
-        std::shuffle(indices.begin(), indices.end(), engine);
-        return indices;
-    }
 
     // 4パターンのリズム配置 
     float kGameRhythm[3][3] = {
@@ -146,11 +130,9 @@ void GameSceneText::Initialize()
     m_Boy->SetScale(600.0f,   400.0f, 1.0f);
     m_Boy->SetPos  (  0.0f, - 200.0f, 0.0f);
 
-    m_Number = ShuffleButtonIndices();
     for (int i = 0; i < MESSAGE_SLOT::SLOT_SIZE; ++i)
     {
         float uvY = static_cast<float>(i + 1);
-        m_GameRhythm [i] = kGameRhythm[m_Number[0]][i] * 0;
 
         m_MessageSlot[i] = AddObject<Button>(instance.GetCamera());
 
@@ -190,7 +172,7 @@ void GameSceneText::Initialize()
     m_AudioList.emplace("fanfare", AudioConfig(L"SE/GameReaction/True3.wav", fanfareParam, false, false));
 
     PlayParams failedParam{};
-    m_AudioList.emplace("failed", AudioConfig(L"SE/GameReaction/Failed.wav", failedParam, false, false));
+    m_AudioList.emplace("failed", AudioConfig(L"SE/GameReaction/False1.wav", failedParam, false, false));
 
     PlayParams QuestionParam{};
     m_AudioList.emplace("question", AudioConfig(L"SE/GameReaction/Question.wav", QuestionParam, false, false));
@@ -274,6 +256,11 @@ void GameSceneText::Draw()
 
 void GameSceneText::Finalize()
 {
+    // このシーンのオブジェクトを削除する
+    for (auto o : m_MySceneObjects) {
+        DeleteObject(o);
+    }
+    m_MySceneObjects.clear();
     for (auto& reactionAudio : m_ReactionAudio)
     {
         if (!reactionAudio) {
@@ -293,7 +280,7 @@ void GameSceneText::InsideButton(int i, pShared<Button> button, const MESSAGE_SL
     {
         button->SetScale(BUTTTON_BASE_SCALE);
     }
-    if (button->IsInside())
+    if (button->IsInside() && !m_Clicked[i])
     {
         if (m_SelectedSlot != comparison)
         {

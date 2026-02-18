@@ -127,7 +127,7 @@ void GameSceneShot::Initialize()
     m_Plane->SetDirection(MOVE_RIGHT);
     m_Plane->SetTexture(textureMgr->GetTexture("GameScene/GamePlane.png"));
     m_Plane->SetPos  ( 0.0f, -250.0f, 1.0f);
-    m_Plane->SetScale(200.0f, 250.0f, 1.0f);
+    m_Plane->SetScale( 80.0f, 100.0f, 1.0f);
     m_Plane->SetLimitRange({ m_DragLimitLine, 1000.0f, 1000.0f});
 
     //m_Player->SetScale();
@@ -253,11 +253,6 @@ void GameSceneShot::Update(float tick)
         }
     }
 
-    if (!m_RelationData.isClear) 
-    {
-
-    }
-
     if (IsChange())
     {
         ChangeScene();
@@ -271,6 +266,11 @@ void GameSceneShot::Draw()
 
 void GameSceneShot::Finalize()
 {
+    // このシーンのオブジェクトを削除する
+    for (auto o : m_MySceneObjects) {
+        DeleteObject(o);
+    }
+    m_MySceneObjects.clear();
     GameSceneExe::Finalize();
 }
 
@@ -282,7 +282,7 @@ void GameSceneShot::CreateBullet()
     pShared<Bullet> bullet = AddObject<Bullet>(instance.GetCamera());
     bullet->SetTexture(textureMgr->GetTexture("GameScene/Bullet.png"));
     Vector3 pos = {
-        m_Plane->GetPos().x +  8.5f,
+        m_Plane->GetPos().x,
         m_Plane->GetPos().y + 40.0f,
         m_Plane->GetPos().z,
     };

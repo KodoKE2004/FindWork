@@ -1,5 +1,7 @@
 #include "GameSceneRocket.h"
 #include "Game.h"
+#include <algorithm>
+#include <random>
 
 GameSceneRocket::GameSceneRocket(Camera& cam) : GameSceneExe(cam)
 {
@@ -7,10 +9,11 @@ GameSceneRocket::GameSceneRocket(Camera& cam) : GameSceneExe(cam)
 
 void GameSceneRocket::Initialize()
 {   
-    DebugUI::TEXT_CurrentScene = "GameSceneDodge";
-
+#ifdef _DEBUG
+    DebugUI::TEXT_CurrentScene = "GameSceneRocket";
+#endif
     // シーンに繋ぐ情報は基底初期化後の一番最初に設定
-    StageClear();
+    StageFail();
 
     // リズムの定義
     RhythmBeatConst beatConfig{};
@@ -28,8 +31,6 @@ void GameSceneRocket::Initialize()
     m_Background->SetName("m_Background");
     m_Background->SetScale(1280.0f, 720.0f, 1.0f);
     m_Background->SetTexture(textureMar->GetTexture("BackGround/Rocket.png"));
-
-
 
     m_Bomber = AddObject<Bomber>(instance.GetCamera());
     m_Bomber->SetName("m_TimeGauge");
@@ -64,6 +65,10 @@ void GameSceneRocket::Draw()
 
 void GameSceneRocket::Finalize()
 {
-
+    // このシーンのオブジェクトを削除する
+    for (auto o : m_MySceneObjects) {
+        DeleteObject(o);
+    }
+    m_MySceneObjects.clear();
     GameSceneExe::Finalize();
 }

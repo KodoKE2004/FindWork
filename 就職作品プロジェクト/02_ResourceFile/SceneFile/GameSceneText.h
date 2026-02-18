@@ -21,8 +21,6 @@ private:
     pShared<Square> m_Girl;
 
     std::array<pShared<Button>, MESSAGE_SLOT::SLOT_SIZE> m_MessageSlot {nullptr, nullptr, nullptr};
-    std::array<size_t, MESSAGE_SLOT::SLOT_SIZE> m_Number     = { 0, 0, 0};
-    std::array<float,  MESSAGE_SLOT::SLOT_SIZE> m_GameRhythm = { 0.0f, 0.0f, 0.0f };    // リズムを格納する配列
     std::array<bool ,  MESSAGE_SLOT::SLOT_SIZE> m_Clicked    = { false, false, false }; // クリックされたかどうかの配列
     MESSAGE_SLOT m_SelectedSlot = SLOT_SIZE;
 
