@@ -76,6 +76,11 @@ public:
         m_TickCounter += tick;
     }
 
+    void SetElapsedBeat(int beats)
+    {
+        m_BeatElapsed = beats;
+    }
+
     void SetBpm(float bpm)
     {
         m_Beat.m_Bpm = bpm;

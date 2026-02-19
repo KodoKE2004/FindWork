@@ -98,7 +98,7 @@ void GameSceneShot::Initialize()
 
     // シーンに繋ぐ情報は基底初期化後の一番最初に設定
     m_RelationData.isClear = false;
-
+    m_WasPlaySE = false;
     m_CreateBulletTime = 0.05f;
 
     // リズムの定義
@@ -180,6 +180,9 @@ void GameSceneShot::Initialize()
 
     PlayParams exploParams;
     m_AudioList.emplace("explosion", AudioConfig(L"SE/GameReaction/Explosion.wav" , exploParams, false, false));
+    
+    PlayParams clearParams;
+    m_AudioList.emplace("clearShot", AudioConfig(L"SE/GameReaction/True2.wav" , exploParams, false, false));
 
     RegisterAudio();
 
@@ -235,7 +238,13 @@ void GameSceneShot::Update(float tick)
             }
         }   
     }
-    if (IsAllDeathEnemy(enemys)) {
+    if (IsAllDeathEnemy(enemys)) 
+    {
+        if (!m_WasPlaySE) {
+            RegesterReactionSE("clearShot");
+            m_ReactionActive->Play(m_AudioList.at("clearShot").params);
+            m_WasPlaySE = true;
+        }
         // SceneExeで早めにクリアをした場合も想定
         StageClear();
         bool isFinished = false;

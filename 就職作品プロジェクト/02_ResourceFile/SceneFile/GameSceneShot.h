@@ -15,6 +15,8 @@ private:
     float m_CreateBulletElapsed = 0.0f;
     float m_DragLimitLine = 435.0f;
 
+    bool m_WasPlaySE = false;
+
 public:
 
    GameSceneShot() = delete;

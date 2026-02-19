@@ -208,7 +208,7 @@ inline void ChangeScenePop(SceneTransitionParam& state)
 	if (!sceneNext) {
 		return;
 	}
-	scene->m_RelationData.oldScene  = instance.GetCurrentScene()->GetSceneNo();
+	scene->m_RelationData.oldScene  = scene->m_RelationData.nextScene;
     scene->m_RelationData.nextScene = sceneNext->GetSceneNo();
 	scene->SetOldScene(instance.GetCurrentScene());
     scene->SetRelationData(instance.GetCurrentScene()->GetRelationData());
