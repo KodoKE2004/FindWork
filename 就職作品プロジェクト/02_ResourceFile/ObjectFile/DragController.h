@@ -51,7 +51,7 @@ public:
 
         m_MoveDir    = dir;
         m_Dir        = MOVE_DIR_VEC[dir];
-        m_Rotate.z = MOVE_ANGLE[dir];
+        m_Rotation.z = MOVE_ANGLE[dir];
     }
     void SetLimitRange(const NVector3 limitRange) {
         m_isLimit = true;

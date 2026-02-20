@@ -1,0 +1,119 @@
+{
+  "audio": {
+    "bgmBpm": 100.0,
+    "bgmPan": 0.0,
+    "bgmVolume": 0.6000000238418579
+  },
+  "objects": [
+    {
+      "id": "m_Background",
+      "prefab": "class Square",
+      "transform": {
+        "pos": [
+          0.0,
+          0.0,
+          0.0
+        ],
+        "rot": [
+          0.0,
+          0.0,
+          0.0
+        ],
+        "scale": [
+          1280.0,
+          720.0,
+          1.0
+        ]
+      }
+    },
+    {
+      "id": "Object",
+      "prefab": "class Bird",
+      "transform": {
+        "pos": [
+          0.0,
+          0.0,
+          0.0
+        ],
+        "rot": [
+          0.0,
+          0.0,
+          0.0
+        ],
+        "scale": [
+          50.0,
+          50.0,
+          1.0
+        ]
+      }
+    },
+    {
+      "id": "m_TimeGauge",
+      "prefab": "class Bomber",
+      "transform": {
+        "pos": [
+          -560.0,
+          -296.0,
+          0.0
+        ],
+        "rot": [
+          0.0,
+          0.0,
+          -0.10000000149011612
+        ],
+        "scale": [
+          100.0,
+          100.0,
+          1.0
+        ]
+      }
+    },
+    {
+      "id": "m_Rope",
+      "prefab": "class Square",
+      "transform": {
+        "pos": [
+          -110.0,
+          -285.0,
+          0.0
+        ],
+        "rot": [
+          0.0,
+          0.0,
+          0.0
+        ],
+        "scale": [
+          900.0,
+          100.0,
+          1.0
+        ]
+      }
+    },
+    {
+      "id": "m_Number",
+      "prefab": "class Square",
+      "transform": {
+        "pos": [
+          1000.0,
+          0.0,
+          0.0
+        ],
+        "rot": [
+          0.0,
+          0.0,
+          0.0
+        ],
+        "scale": [
+          100.0,
+          100.0,
+          1.0
+        ]
+      }
+    }
+  ],
+  "window": {
+    "fullscreen": false,
+    "height": 720,
+    "width": 1280
+  }
+}

@@ -116,6 +116,21 @@ void Square::Draw()
 	// 描画の処理
 	ID3D11DeviceContext* devicecontext = Renderer::GetDeviceContext();
 
+	if (!devicecontext)
+	{
+		return;
+	}
+
+	const bool useInstancingPass = (m_UseInstancing && m_InstanceCount > 0 && m_InstanceTransformCB);
+	if (useInstancingPass)
+	{
+		SetShader("VS_Instansing2D");
+	}
+	else
+	{
+		SetShader("VS_Alpha");
+	}
+
 	// State破壊の影響を受けないよう、パイプラインを先頭で再設定する
 	SetPipeline();
 	Renderer::SetBlendState(BS_ALPHABLEND);
@@ -143,10 +158,9 @@ void Square::Draw()
 
 	Renderer::SetUV(u0, v0, u1, v1);
 
-	Camera::ScopedMode scopedMode(m_Camera, CAMERA_2D);
+	Camera::ScopedMode scopedMode(m_Camera, m_DrawCameraMode);
 
-
-	if (m_UseInstancing && m_InstanceCount > 0 && m_InstanceTransformCB) 
+	if (useInstancingPass)
 	{
 		ID3D11Buffer* instanceCB = m_InstanceTransformCB.Get();
 		devicecontext->VSSetConstantBuffers(6, 1, &instanceCB);
@@ -212,6 +226,11 @@ void Square::SetInstanceTransforms(const std::vector<InstanceTransform2D>& trans
 	}
 
 	UpdateInstanceBuffers();
+}
+
+void Square::SetDrawCameraMode(CAMERA_MODE mode)
+{
+	m_DrawCameraMode = mode;
 }
 
 // テクスチャを指定

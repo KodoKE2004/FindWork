@@ -45,12 +45,13 @@ struct isHitResult
 //-----------------------------------------------------------------------------
 class Square : public Object
 {
-protected:
+public:
 	struct InstanceTransform2D
 	{
 		Vector3 position;
 		Vector3 scale;
 	};
+protected:
 
 	// 描画の為の情報（メッシュに関わる情報）
 	IndexBuffer m_IndexBuffer; // インデックスバッファ
@@ -60,6 +61,7 @@ protected:
 	std::vector<DirectX::SimpleMath::Vector4>	m_InstancePositionScale;
 	UINT m_InstanceCount = 0;
 	bool m_UseInstancing = false;
+	CAMERA_MODE m_DrawCameraMode = CAMERA_2D;
 
 	// 描画の為の情報（見た目に関わる部分）
 	pShared<Texture>  m_Texture;	// テクスチャ
@@ -91,6 +93,7 @@ public:
 	void UpdateInstanceBuffers();
 	void SetInstancingEnabled(bool enabled);
 	void SetInstanceTransforms(const std::vector<InstanceTransform2D>& transforms);
+	void SetDrawCameraMode(CAMERA_MODE mode);
 
 	// テクスチャを指定
 	void SetTexture(const char* imgname);

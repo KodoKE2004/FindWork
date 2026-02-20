@@ -6,6 +6,7 @@
 #include "Audio.h" 
 #include "Fade.h"
 #include "CSVLoader.h"
+#include "JsonLoder.hpp"
 
 #include <fstream>
 #include <memory>
@@ -141,7 +142,7 @@ void Game::Initialize()
 		SetBgmBpm(bgmConfig.bpm);
 	}
 
-	instance.m_SceneCurrent = std::make_shared<TitleScene>(instance.GetCamera());		// タイトルシーンのインスタンスを生成
+	instance.m_SceneCurrent = std::make_shared<GameSceneDodge>(instance.GetCamera());		// タイトルシーンのインスタンスを生成
 	instance.m_SceneCurrent->Initialize();
 }
 
@@ -399,6 +400,38 @@ float Game::GetSpeedUpBpmIncrease()
 	return m_SpeedUpBpmIncrease;
 }
 
+void Game::SetBgmVolume(float volume)
+{
+	auto& instance = Game::GetInstance();
+	instance.m_BgmParams.volume = std::clamp(volume, 0.0f, 1.0f);
+	if (instance.m_BgmAudio)
+	{
+		instance.m_BgmAudio->SetVolume(instance.m_BgmParams.volume);
+	}
+}
+
+float Game::GetBgmVolume()
+{
+	auto& instance = Game::GetInstance();
+	return instance.m_BgmParams.volume;
+}
+
+void Game::SetBgmPan(float pan)
+{
+	auto& instance = Game::GetInstance();
+	instance.m_BgmParams.pan = std::clamp(pan, -1.0f, 1.0f);
+	if (instance.m_BgmAudio)
+	{
+		instance.m_BgmAudio->SetPan(instance.m_BgmParams.pan);
+	}
+}
+
+float Game::GetBgmPan()
+{
+	auto& instance = Game::GetInstance();
+	return instance.m_BgmParams.pan;
+}
+
 void Game::PlayBgm()
 {
 	auto& instance = Game::GetInstance();
@@ -420,17 +453,49 @@ void Game::StopBgm()
 void Game::RegistDebugObject()
 {
 #ifdef _DEBUG
-	// ImGui 描画処理を登録
 	DebugUI::RedistDebugFunction([]()
 		{
-			vector<pShared<Object>> objects = GetInstance().GetCurrentScene()->GetSceneObjects();
-			
-			ImGui::Begin("Game Objects");
+			auto currentScene = GetInstance().GetCurrentScene();
+			if (!currentScene) {
+				return;
+			}
 
+			vector<pShared<Object>> objects = currentScene->GetSceneObjects();
+			static LiveEditSession editSession{};
+			static bool initialized = false;
+			static std::filesystem::path configPath = SaveDir() / "AssetFile/Json/DebugConfig.json";
+			static int selectedIndex = -1;
+
+			auto applyConfigToRuntime = [&]() {
+				Application::ApplyWindowConfig(
+					static_cast<uint32_t>(max(editSession.config.window.width, 320)),
+					static_cast<uint32_t>(max(editSession.config.window.height, 240)),
+					editSession.config.window.fullscreen);
+				SetBgmBpm(editSession.config.audio.bgmBpm);
+				SetBgmVolume(editSession.config.audio.bgmVolume);
+				SetBgmPan(editSession.config.audio.bgmPan);
+				};
+
+			if (!initialized)
+			{
+				initialized = true;
+				if (!ConfigIO::Load(configPath, editSession.config))
+				{
+					editSession.config.window.width = static_cast<int>(Application::GetWidth());
+					editSession.config.window.height = static_cast<int>(Application::GetHeight());
+					editSession.config.audio.bgmBpm = GetBgmBpm();
+					editSession.config.audio.bgmVolume = GetBgmVolume();
+					editSession.config.audio.bgmPan = GetBgmPan();
+				}
+			}
+
+			applyConfigToRuntime();
+
+			ImGui::Begin("Game Objects");
+			DrawConfigEditor(editSession, configPath);
+			ImGui::Separator();
 			ImGui::Text("Object Count: %zu", objects.size());
 			ImGui::Separator();
-
-			static int selectedIndex = -1;
 
 			ImGui::BeginChild("ObjList", ImVec2(220, 0), true);
 			for (int i = 0; i < (int)objects.size(); ++i)
@@ -453,28 +518,37 @@ void Game::RegistDebugObject()
 				Object* obj = objects[selectedIndex].get();
 				ImGui::Text("Name: %s", obj->GetName().c_str());
 
-				// Position
 				NVector3 pos = obj->GetPos();
 				float posf[3] = { pos.x, pos.y, pos.z };
 				if (ImGui::InputFloat3("Position", posf))
 				{
 					obj->SetPos(posf[0], posf[1], posf[2]);
+					if (Transform* t = editSession.FindTransformById(obj->GetName())) {
+						t->m_Position = obj->GetPos();
+						editSession.dirty = true;
+					}
 				}
 
-				// Rotation
 				NVector3 rot = obj->GetRotate();
 				float rotf[3] = { rot.x, rot.y, rot.z };
 				if (ImGui::InputFloat3("Rotation", rotf))
 				{
 					obj->SetRotate(rotf[0], rotf[1], rotf[2]);
+					if (Transform* t = editSession.FindTransformById(obj->GetName())) {
+						t->m_Rotation = obj->GetRotate();
+						editSession.dirty = true;
+					}
 				}
 
-				// Scale
 				NVector3 scl = obj->GetScale();
 				float sclf[3] = { scl.x, scl.y, scl.z };
 				if (ImGui::InputFloat3("Scale", sclf))
 				{
 					obj->SetScale(sclf[0], sclf[1], sclf[2]);
+					if (Transform* t = editSession.FindTransformById(obj->GetName())) {
+						t->m_Scale = obj->GetScale();
+						editSession.dirty = true;
+					}
 				}
 			}
 			else
