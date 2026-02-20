@@ -99,7 +99,7 @@ struct NVector3
 
 class Transform
 {
-protected:
+public:
 
 	NVector3 m_Position;		// ç¿ïW
 	NVector3 m_Rotation;		// äpìx

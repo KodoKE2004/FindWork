@@ -503,6 +503,9 @@
     <ClInclude Include="02_ResourceFile\SceneFile\GameSceneGunman.h">
       <Filter>SourceFile\Scene\GameScene</Filter>
     </ClInclude>
+    <ClInclude Include="02_ResourceFile\JsonLoder.hpp">
+      <Filter>SourceFile\Core</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <FxCompile Include="ShaderFile\Common.hlsl">

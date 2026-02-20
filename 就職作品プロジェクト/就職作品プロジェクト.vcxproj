@@ -100,6 +100,7 @@
     <ClInclude Include="02_ResourceFile\Application.h" />
     <ClInclude Include="02_ResourceFile\Audio.h" />
     <ClInclude Include="02_ResourceFile\ImGuiUtil.h" />
+    <ClInclude Include="02_ResourceFile\JsonLoder.hpp" />
     <ClInclude Include="02_ResourceFile\ObjectFile\Bird.h" />
     <ClInclude Include="02_ResourceFile\ObjectFile\Bomber.h" />
     <ClInclude Include="02_ResourceFile\ObjectFile\Button.h" />
@@ -339,7 +340,7 @@
       <PreprocessorDefinitions>_DEBUG;_CONSOLE;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <ConformanceMode>true</ConformanceMode>
       <LanguageStandard>stdcpp20</LanguageStandard>
-      <AdditionalIncludeDirectories>$(ProjectDir)02_ResourceFile;$(ProjectDir)02_ResourceFile\ObjectFile;$(ProjectDir)02_ResourceFile\SceneFile;$(ProjectDir)02_ResourceFile\SceneFile\Transition;$(ProjectDir)03_ExternalFile;$(ProjectDir)03_ExternalFile\DirectXTex\include;$(ProjectDir)03_ExternalFile\DirectXTK\include;$(ProjectDir)03_ExternalFile\imgui;$(ProjectDir)03_ExternalFile\magic_enum-master\include;$(ProjectDir)03_ExternalFile\assimp\5.2.5\include</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>$(ProjectDir)02_ResourceFile;$(ProjectDir)02_ResourceFile\ObjectFile;$(ProjectDir)02_ResourceFile\SceneFile;$(ProjectDir)02_ResourceFile\SceneFile\Transition;$(ProjectDir)03_ExternalFile;$(ProjectDir)03_ExternalFile\DirectXTex\include;$(ProjectDir)03_ExternalFile\DirectXTK\include;$(ProjectDir)03_ExternalFile\imgui;$(ProjectDir)03_ExternalFile\magic_enum-master\include;$(ProjectDir)03_ExternalFile\assimp\5.2.5\include;$(ProjectDir)03_ExternalFile\json\include</AdditionalIncludeDirectories>
       <RuntimeLibrary>MultiThreadedDebugDLL</RuntimeLibrary>
       <BasicRuntimeChecks>Default</BasicRuntimeChecks>
       <MultiProcessorCompilation>true</MultiProcessorCompilation>
@@ -367,7 +368,7 @@
       <PreprocessorDefinitions>NDEBUG;_CONSOLE;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <ConformanceMode>true</ConformanceMode>
       <RuntimeLibrary>MultiThreadedDLL</RuntimeLibrary>
-      <AdditionalIncludeDirectories>$(ProjectDir)02_ResourceFile;$(ProjectDir)02_ResourceFile\ObjectFile;$(ProjectDir)02_ResourceFile\SceneFile;$(ProjectDir)02_ResourceFile\SceneFile\Transition;$(ProjectDir)03_ExternalFile;$(ProjectDir)03_ExternalFile\DirectXTex\include;$(ProjectDir)03_ExternalFile\DirectXTK\include;$(ProjectDir)03_ExternalFile\imgui;$(ProjectDir)03_ExternalFile\magic_enum-master\include;$(ProjectDir)03_ExternalFile\assimp\5.2.5\include</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>$(ProjectDir)02_ResourceFile;$(ProjectDir)02_ResourceFile\ObjectFile;$(ProjectDir)02_ResourceFile\SceneFile;$(ProjectDir)02_ResourceFile\SceneFile\Transition;$(ProjectDir)03_ExternalFile;$(ProjectDir)03_ExternalFile\DirectXTex\include;$(ProjectDir)03_ExternalFile\DirectXTK\include;$(ProjectDir)03_ExternalFile\imgui;$(ProjectDir)03_ExternalFile\magic_enum-master\include;$(ProjectDir)03_ExternalFile\assimp\5.2.5\include;$(ProjectDir)03_ExternalFile\json\include</AdditionalIncludeDirectories>
       <LanguageStandard>stdcpp20</LanguageStandard>
       <MultiProcessorCompilation>true</MultiProcessorCompilation>
       <PrecompiledHeader>Use</PrecompiledHeader>
