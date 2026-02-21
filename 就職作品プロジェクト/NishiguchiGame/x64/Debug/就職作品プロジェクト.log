@@ -1,5 +1,35 @@
-﻿  GameSceneWait.cpp
-C:\Users\kodokeの世界\Desktop\HAL\VisualSutdio\就職作品\個人製作\FindWork\就職作品プロジェクト\02_ResourceFile\SceneFile\GameSceneWait.cpp(302,25): warning C4244: '初期化中': 'float' から 'int' への変換です。データが失われる可能性があります。
-  (ソース ファイル '/02_ResourceFile/SceneFile/GameSceneWait.cpp' をコンパイルしています)
-  
+﻿  Application.cpp
+  Camera.cpp
+  DebugGridLine.cpp
+  DebugUI.cpp
+  Game.cpp
+  Bird.cpp
+  Bomber.cpp
+  Bullet.cpp
+  Button.cpp
+  Circle.cpp
+  Cube.cpp
+  Enemy.cpp
+  Model.cpp
+  Object.cpp
+  Player.cpp
+  Skydome.cpp
+  Sphere.cpp
+  Stone.cpp
+  Theme.cpp
+  RhythmBeat.cpp
+  GameSceneDodge.cpp
+  GameSceneExe.cpp
+  GameSceneShot.cpp
+  GameSceneText.cpp
+  GameSceneWait.cpp
+  ResultScene.cpp
+  Scene.cpp
+  TitleScene.cpp
+  TransScene.cpp
+  Fade.cpp
+  TransitionBase.cpp
+  Wipe.cpp
+  Zoom.cpp
+  Square.cpp
   就職作品プロジェクト.vcxproj -> C:\Users\kodokeの世界\Desktop\HAL\VisualSutdio\就職作品\個人製作\FindWork\就職作品プロジェクト\x64\Debug\NishiguchiGame.exe

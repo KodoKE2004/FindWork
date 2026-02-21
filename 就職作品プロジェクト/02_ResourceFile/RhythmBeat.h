@@ -7,10 +7,10 @@ struct RhythmBeatConst
 {
     // input
     float m_Bpm = 120.0f;
-    int   m_BeatsPerBar = 4;      // MainBeat per bar
-    int   m_BeatUnit = 4;
+    int   m_BeatsPerBar = 8;      // MainBeat per bar
+    int   m_BeatUnit = 8;
     int   m_TicksPerBeat = 16;    // Tick split for 1 MainBeat
-    int   m_HitsPerBar = 4;
+    int   m_HitsPerBar = 8;
     int   m_SubBeatsPerBar = 8;   // SubBeat per bar (loop base)
 
     // derived
@@ -28,18 +28,18 @@ struct RhythmBeatConst
     float subToMain = 0.0f;
     int   subBeatsPerMainBeat = 1;
 
-    void Setup(float bpm = 120.0f,
-        int beatsPerBar = 4,
-        int beatUnit = 4,
-        int ticksPerBeat = 16,
-        int hitsPerBar = 4,
+    void Setup(float bpm   = 120.0f,
+        int beatsPerBar    = 8,
+        int beatUnit       = 8,
+        int ticksPerBeat   = 16,
+        int hitsPerBar     = 8,
         int subBeatsPerBar = 8)
     {
         m_Bpm = bpm;
-        m_BeatsPerBar = (beatsPerBar <= 0) ? 1 : beatsPerBar;
-        m_BeatUnit = (beatUnit <= 0) ? 4 : beatUnit;
-        m_TicksPerBeat = (ticksPerBeat <= 0) ? 1 : ticksPerBeat;
-        m_HitsPerBar = (hitsPerBar <= 0) ? 1 : hitsPerBar;
+        m_BeatsPerBar    = (beatsPerBar    <= 0) ? 1 : beatsPerBar;
+        m_BeatUnit       = (beatUnit       <= 0) ? 4 : beatUnit;
+        m_TicksPerBeat   = (ticksPerBeat   <= 0) ? 1 : ticksPerBeat;
+        m_HitsPerBar     = (hitsPerBar     <= 0) ? 1 : hitsPerBar;
         m_SubBeatsPerBar = (subBeatsPerBar <= 0) ? 1 : subBeatsPerBar;
 
         const float secondsPerQuarter = 60.0f / m_Bpm;
@@ -93,7 +93,8 @@ public:
 
     void SetElapsedBeat(int beats)
     {
-        m_SubBeatElapsed = beats;
+        m_SubBeatElapsed = beats * m_Beat.subBeatsPerMainBeat;
+        m_PrevSubBeat = m_SubBeatElapsed;
     }
 
     void SetBpm(float bpm)
@@ -114,7 +115,7 @@ public:
 
     int GetTotalTick() const
     {
-        return m_SubBeatElapsed * m_Beat.m_TicksPerBeat;
+        return GetMainBeatElapsed() * m_Beat.m_TicksPerBeat;
     }
 
     int GetBeatIndex() const
@@ -129,7 +130,7 @@ public:
 
     int GetBeatElapsed() const
     {
-        return m_SubBeatElapsed;
+        return GetMainBeatElapsed();
     }
 
     int GetMainBeatElapsed() const
@@ -139,7 +140,7 @@ public:
 
     int GetBeatTotal() const
     {
-        return m_BeatTotal;
+        return GetMainBeatTotal();
     }
 
     int GetMainBeatTotal() const
@@ -149,7 +150,7 @@ public:
 
     int GetBeatRest() const
     {
-        return m_BeatTotal - m_SubBeatElapsed;
+        return GetMainBeatRest();
     }
 
     int GetMainBeatRest() const
