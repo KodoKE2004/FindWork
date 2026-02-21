@@ -15,8 +15,8 @@ GAME_PHASE GameSceneWait::m_CurrentGamePhase = GAME_PHASE::START;
 namespace
 {
     // 二小節の拍数を基準にしているため、MeasureTwo = 32.0f
-    constexpr int MeasureOne = 16;
-    constexpr int MeasureTwo = 32;
+    constexpr int MeasureOne = 8;
+    constexpr int MeasureTwo = 16;
     float kGameUIStartPos  =   1024.0f;
     float kGameUIFinishPos = - 1024.0f;
     float kGameUICenterPos =      0.0f;
@@ -296,16 +296,16 @@ void GameSceneWait::Update(float tick)
 {   
     auto& rhythmBeat = Game::GetRhythmBeat();
     // リズムを取る    
-    m_QuarterAdvance = rhythmBeat.GetBeatElapsed() / 2;
+    m_QuarterAdvance    = rhythmBeat.GetMainBeatElapsed();
     rhythmBeat.Update(tick);
-    int elapsedBeat      = rhythmBeat.GetBeatElapsed();
-    int elapsedFourBeat  = elapsedBeat / 2;
-    int restBeat     = rhythmBeat.GetBeatRest();
+    int elapsedBeat     = rhythmBeat.GetBeatElapsed();
+    int elapsedFourBeat = rhythmBeat.GetMainBeatElapsed() * 2;
+    int restBeat        = rhythmBeat.GetBeatRest();
 
     GameUIMovement(elapsedBeat);
 
-    // ライフをリズムに合わせて回転させる
-    for (int i = m_QuarterAdvance; i < elapsedFourBeat; ++i)
+    // ライフをリズムに合わせてスケール
+    for (int i = 0; i < elapsedFourBeat; ++i)
     {
         // 1拍目のタイミングでBGM再生
         if (!m_WasPlayBGM)

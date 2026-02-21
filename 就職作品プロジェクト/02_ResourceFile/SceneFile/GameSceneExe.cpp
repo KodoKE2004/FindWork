@@ -73,19 +73,19 @@ void GameSceneExe::Update(float tick)
 
     RhythmBeat& rhythmBeat = Game::GetInstance().GetRhythmBeat();
 
-    m_QuarterAdvance = rhythmBeat.GetBeatElapsed() / 2;
+    m_QuarterAdvance = rhythmBeat.GetMainBeatElapsed();
 
     // 進んだTick(拍数)を更新
     rhythmBeat.Update(tick);
 
     // 四分音符でリズムの計算をする
-    int quarterPreviewBeat = rhythmBeat.GetBeatElapsed() / 2;
+    int quarterPreviewBeat = rhythmBeat.GetMainBeatElapsed();
 
     // 1小節更新の検知
-    m_CurrentMeasure = rhythmBeat.GetBeatElapsed() / rhythmBeat.GetBeatConst().m_BeatUnit;
+    m_CurrentMeasure = rhythmBeat.GetMainBeatElapsed() / rhythmBeat.GetBeatConst().m_BeatsPerBar;
 
     //四分音符基準の残拍数を取得
-    int rest = rhythmBeat.GetBeatRest() / 2;
+    int rest = rhythmBeat.GetMainBeatRest();
 
     // 早回し処理
     if (m_isFastChange)
@@ -127,10 +127,11 @@ void GameSceneExe::Update(float tick)
         m_BomberElapsed = 0.0f;
         
         // 経過拍数の更新
-        const int currentIndex = rhythmBeat.GetBeatElapsed();
+        const int currentIndex = rhythmBeat.GetMainBeatElapsed();
 
         m_SegmentFrom = m_FillRatio;
-        const int baseBeats = rhythmBeat.GetBeatTotal();
+        const int baseBeats = rhythmBeat.GetMainBeatTotal();
+
         float targetProgressNormal = 
             std::clamp((static_cast<float>(currentIndex) + 1.0f) /
                         static_cast<float>(baseBeats),

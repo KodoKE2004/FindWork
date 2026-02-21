@@ -1,2 +1,5 @@
-﻿  Game.cpp
-  就職作品プロジェクト.vcxproj -> C:\Users\dorae\Desktop\HAL\class3\FindWork\就職作品プロジェクト\x64\Debug\NishiguchiGame.exe
+﻿  GameSceneWait.cpp
+C:\Users\kodokeの世界\Desktop\HAL\VisualSutdio\就職作品\個人製作\FindWork\就職作品プロジェクト\02_ResourceFile\SceneFile\GameSceneWait.cpp(302,25): warning C4244: '初期化中': 'float' から 'int' への変換です。データが失われる可能性があります。
+  (ソース ファイル '/02_ResourceFile/SceneFile/GameSceneWait.cpp' をコンパイルしています)
+  
+  就職作品プロジェクト.vcxproj -> C:\Users\kodokeの世界\Desktop\HAL\VisualSutdio\就職作品\個人製作\FindWork\就職作品プロジェクト\x64\Debug\NishiguchiGame.exe
