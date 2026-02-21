@@ -26,7 +26,7 @@ void GameSceneExe::Initialize()
     }
 
     //-------------------------------
-    //          ƒƒ“ƒo‰Šú‰»
+    //          ƒƒ“ƒo‰Šú‰» 
     //-------------------------------
     m_isChange     = false;
     m_isFastChange = false;

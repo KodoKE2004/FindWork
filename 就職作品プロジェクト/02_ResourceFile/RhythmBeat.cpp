@@ -24,7 +24,7 @@ void RhythmBeat::Initialize(const RhythmBeatConst& config, bool isTimeReset, int
 
 int RhythmBeat::Update(float tick)
 {
-    // 経過秒数をTickに変換してカウントアップ
+    // 経過秒数をTickに変換してカウントアップ  
     m_TickCounter += m_Beat.ticksPerSecond * tick;
     m_Advance = 0;
     // 1Tick以上進んでいたらTick数を進める

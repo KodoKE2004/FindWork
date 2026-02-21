@@ -1,14 +1,24 @@
 #pragma once
 
-// ƒŠƒYƒ€‚Ì•Ï”
+// ƒŠƒYƒ€‚Ì•Ï”  
 struct RhythmBeatConst
 {
+<<<<<<< HEAD
+    // input
+    float m_Bpm = 120.0f;
+    int   m_BeatsPerBar = 8;      // MainBeat per bar
+    int   m_BeatUnit = 8;
+    int   m_TicksPerBeat = 16;    // Tick split for 1 MainBeat
+    int   m_HitsPerBar = 8;
+    int   m_SubBeatsPerBar = 8;   // SubBeat per bar (loop base)
+=======
     // “ü—Í
     float m_Bpm = 120.0f;          // l•ª‰¹•„Šî€‚ÌBPM
     int   m_BeatsPerBar = 4;       // •ªqF¬ß‚Ì””
     int   m_BeatUnit = 4;          // •ª•êF4=l•ª, 8=”ª•ª...
     int   m_TicksPerBeat = 16;     // 1”‚ğ‰½•ªŠ„‚·‚é‚©
     int   m_HitsPerBar = 4;        // š1¬ß‚É‰½‰ñ’@‚­(ƒCƒxƒ“ƒg)‚©i•Ï‘¥OKj
+>>>>>>> parent of 6c38f02 (é€²æ—ãªã—)
 
     // ŒvZŒ‹‰Ê
     float secondsPerBeat = 0.0f;   // 1”i•ª•ê‚Ì‰¹•„j‚Ì•b
@@ -19,6 +29,21 @@ struct RhythmBeatConst
     float secondsPerHit = 0.0f;   // š1‰ñ’@‚­ŠÔŠui¬ß‚ğ hitsPerBar ‚ÅŠ„‚éj
     float hitsPerSecond = 0.0f;   // š1•b‚ ‚½‚è’@‚­‰ñ”
 
+<<<<<<< HEAD
+    void Setup(float bpm   = 120.0f,
+        int beatsPerBar    = 8,
+        int beatUnit       = 8,
+        int ticksPerBeat   = 16,
+        int hitsPerBar     = 8,
+        int subBeatsPerBar = 8)
+    {
+        m_Bpm = bpm;
+        m_BeatsPerBar    = (beatsPerBar    <= 0) ? 1 : beatsPerBar;
+        m_BeatUnit       = (beatUnit       <= 0) ? 4 : beatUnit;
+        m_TicksPerBeat   = (ticksPerBeat   <= 0) ? 1 : ticksPerBeat;
+        m_HitsPerBar     = (hitsPerBar     <= 0) ? 1 : hitsPerBar;
+        m_SubBeatsPerBar = (subBeatsPerBar <= 0) ? 1 : subBeatsPerBar;
+=======
     void Setup(float bpm = 120.0f,
         int beatsPerBar  = 8,
         int beatUnit     = 8,
@@ -30,6 +55,7 @@ struct RhythmBeatConst
         m_BeatUnit      = beatUnit;
         m_TicksPerBeat  = ticksPerBeat;
         m_HitsPerBar    = (hitsPerBar <= 0) ? 1 : hitsPerBar; // 0œZ–h~
+>>>>>>> parent of 6c38f02 (é€²æ—ãªã—)
 
         // l•ª‰¹•„‚Ì•b
         const float secondsPerQuarter = 60.0f / m_Bpm;
@@ -78,7 +104,12 @@ public:
 
     void SetElapsedBeat(int beats)
     {
+<<<<<<< HEAD
+        m_SubBeatElapsed = beats * m_Beat.subBeatsPerMainBeat;
+        m_PrevSubBeat = m_SubBeatElapsed;
+=======
         m_BeatElapsed = beats;
+>>>>>>> parent of 6c38f02 (é€²æ—ãªã—)
     }
 
     void SetBpm(float bpm)
@@ -96,7 +127,11 @@ public:
     // Œ»İ‚ÌTick‚ğæ“¾
     int GetTotalTick() const
     {
+<<<<<<< HEAD
+        return GetMainBeatElapsed() * m_Beat.m_TicksPerBeat;
+=======
         return m_TickIndex;
+>>>>>>> parent of 6c38f02 (é€²æ—ãªã—)
     }
 
     // Œ»İ‚Ì”qƒCƒ“ƒfƒbƒNƒX‚ğæ“¾
@@ -116,19 +151,32 @@ public:
     // Œo‰ß””‚ğæ“¾
     int GetBeatElapsed() const
     {
+<<<<<<< HEAD
+        return GetMainBeatElapsed();
+    }
+
+    int GetMainBeatElapsed() const
+    {
+        return m_SubBeatElapsed / m_Beat.subBeatsPerMainBeat;
+=======
         return m_BeatElapsed;
+>>>>>>> parent of 6c38f02 (é€²æ—ãªã—)
     }
 
     // ‘””‚ğæ“¾
     int GetBeatTotal() const
     {
-        return m_BeatTotal;
+        return GetMainBeatTotal();
     }
 
     // c””‚ğæ“¾
     int GetBeatRest() const
     {
+<<<<<<< HEAD
+        return GetMainBeatRest();
+=======
         return m_BeatTotal - m_BeatElapsed;
+>>>>>>> parent of 6c38f02 (é€²æ—ãªã—)
     }
 
     // ˆê”‚Ì’·‚³‚ğæ“¾
