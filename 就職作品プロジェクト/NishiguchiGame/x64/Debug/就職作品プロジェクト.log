@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 ﻿  Application.cpp
   Camera.cpp
   DebugGridLine.cpp
@@ -33,3 +34,7 @@
   Zoom.cpp
   Square.cpp
   就職作品プロジェクト.vcxproj -> C:\Users\kodokeの世界\Desktop\HAL\VisualSutdio\就職作品\個人製作\FindWork\就職作品プロジェクト\x64\Debug\NishiguchiGame.exe
+=======
+﻿  Game.cpp
+  就職作品プロジェクト.vcxproj -> C:\Users\dorae\Desktop\HAL\class3\FindWork\就職作品プロジェクト\x64\Debug\NishiguchiGame.exe
+>>>>>>> parent of 6c38f02 (進捗なし)
