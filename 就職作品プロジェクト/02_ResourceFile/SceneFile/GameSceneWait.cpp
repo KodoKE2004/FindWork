@@ -304,14 +304,8 @@ void GameSceneWait::Update(float tick)
 
     GameUIMovement(elapsedBeat);
 
-<<<<<<< HEAD
-    // ライフをリズムに合わせてスケール
-    // 4/4小節に合わせて、1拍目で大きく、2拍目で元に戻す
-    for (int i = 0; i < elapsedFourBeat; ++i)
-=======
     // ライフをリズムに合わせて回転させる
     for (int i = m_QuarterAdvance; i < elapsedFourBeat; ++i)
->>>>>>> parent of 6c38f02 (進捗なし)
     {
         // 1拍目のタイミングでBGM再生
         if (!m_WasPlayBGM)
@@ -334,7 +328,7 @@ void GameSceneWait::Update(float tick)
         if (shouldScaleLife)
         {
             m_isLifeScaleUp = true;
-            m_ScalingLifeDuration = rhythmBeat.GetBeatConst().secondsPerBeat;
+            m_ScalingLifeDuration = rhythmBeat.GetBeatConst().secondsPerBeat * 0.25f;
         }
         
     }
