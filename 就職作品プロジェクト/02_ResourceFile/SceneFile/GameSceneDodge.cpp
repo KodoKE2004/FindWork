@@ -161,8 +161,6 @@ void GameSceneDodge::Initialize()
     m_Bird = AddObject<Bird>(instance.GetCamera());
     m_Bird->SetScale(50.0f,50.0f,1.0f);
 
-    m_Stone = std::make_shared<Stone>(instance.GetCamera());
-    m_Stone->Initialize();
     PlayParams fallParams;
     m_AudioList.emplace("fall", AudioConfig(L"SE/RockFall.wav", fallParams, false, false));
 
@@ -211,7 +209,7 @@ void GameSceneDodge::Update(float tick)
         {
             auto existingStones = GetObjects<Stone>();
 
-            pShared<Stone> stone = std::make_shared<Stone>(instance.GetCamera());
+            pShared<Stone> stone = AddObject<Stone>(instance.GetCamera());
             stone->Initialize();
             stone->SetScale(100.0f, 100.0f, 1.0f);
 
@@ -220,7 +218,7 @@ void GameSceneDodge::Update(float tick)
             const float stoneHalfH = std::abs(stoneScale.y) * 0.5f;
             const auto spawnPos = ResolveStoneSpawnPos(existingStones, stoneHalfW, stoneHalfH);
             stone->SetPos(spawnPos.x, spawnPos.y, spawnPos.z);
-            m_StoneList.emplace_back(stone);
+
         }
     }
 
@@ -270,9 +268,7 @@ void GameSceneDodge::Update(float tick)
 
 void GameSceneDodge::Draw()
 {
-    
     Scene::Draw();
-    m_Stone->DrawInstanced(m_StoneList);
 }
 
 void GameSceneDodge::Finalize()

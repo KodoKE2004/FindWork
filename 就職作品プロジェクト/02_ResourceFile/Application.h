@@ -25,7 +25,6 @@ public:
         return m_hWnd;
     }
     static float GetDeltaTime();
-    static void ApplyWindowConfig(uint32_t width, uint32_t height, bool fullscreen);
 
 private:
     static HINSTANCE   m_hInst;     // インスタンスハンドル

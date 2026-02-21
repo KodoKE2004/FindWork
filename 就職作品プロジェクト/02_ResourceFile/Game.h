@@ -120,10 +120,6 @@ public:
 	static float GetSpeedUpBpmIncrease();
 	static void	 PlayBgm();
 	static void	 StopBgm();
-	static void	 SetBgmVolume(float volume);
-	static float GetBgmVolume();
-	static void	 SetBgmPan(float pan);
-	static float GetBgmPan();
 	static void	 SetIsTickCount(bool isTick) {m_isTickCount = isTick; }
 	static bool	 IsTickCount() {
 		return m_isTickCount;

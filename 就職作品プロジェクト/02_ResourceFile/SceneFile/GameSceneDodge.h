@@ -9,14 +9,10 @@
 class GameSceneDodge : public GameSceneExe
 {
 private:
-    pShared<Square> m_Background;
-    pShared<Bird>   m_Bird;
-    pShared<Stone>  m_Stone;
-
+    pShared<Square>        m_Background;
+    pShared<Bird>          m_Bird;
     float m_StoneSpawnElapsed = 0.0f;
     size_t m_CurrentCartPatternIndex = 0;
-
-    std::vector<pShared<Stone>> m_StoneList;
 
 public:
     GameSceneDodge()  = delete;
