@@ -21,6 +21,10 @@ private:
 
     bool m_isCreateReactionSE = false;
 
+private:
+    // â∫Ç©ÇÁè„Ç…èoåªÇ∑ÇÈ
+    void TargetUpPosition();
+
 public:
     GameSceneGunman() = delete;
     GameSceneGunman(Camera& cam);

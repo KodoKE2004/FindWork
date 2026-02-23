@@ -18,6 +18,8 @@ namespace Calculator
         float halfH;        // ”¼•ª‚Ì‚‚³
     };
 
+    NVector3 ScalingObject(float elapsed, float duration);
+
     namespace Collider2D
     {
         static bool OverlapOnAxis(NVector3 & axis, std::array<NVector3,4>& vertsA, std::array<NVector3,4>& vertsB);

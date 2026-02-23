@@ -6,9 +6,9 @@
 namespace
 {
     NVector3 kButtonPos[3] = {
-        NVector3(-375.0f, - 0.0f, 0.0f),
-        NVector3(   0.0f, - 0.0f, 0.0f),
-        NVector3( 375.0f, - 0.0f, 0.0f),
+        NVector3(-300.0f, - 900.0f, 0.0f),
+        NVector3(   0.0f, - 900.0f, 0.0f),
+        NVector3( 300.0f, - 900.0f, 0.0f),
     };
 
     std::array<size_t, 3> ShuffleButtonIndices()
@@ -29,6 +29,7 @@ namespace
 
 GameSceneGunman::GameSceneGunman(Camera& cam) : GameSceneExe(cam)
 {
+
 }
 
 void GameSceneGunman::Initialize()
@@ -80,7 +81,7 @@ void GameSceneGunman::Initialize()
             m_RedyList[i] = AddObject<MouseObject>(instance.GetCamera());
             m_RedyList[i]->SetName("m_Redy" + std::to_string(i));
             m_RedyList[i]->SetTexture(textureMar->GetTexture("GameScene/GunmanRedy.png"));
-            m_RedyList[i]->SetScale(100.0f, 100.0f, 1.0f);
+            m_RedyList[i]->SetScale(150.0f, 300.0f, 1.0f);
             m_RedyList[i]->SetPos(kButtonPos[buttonIndices[i]]);
         }
         // エネミーの登録
@@ -89,7 +90,7 @@ void GameSceneGunman::Initialize()
             m_Oldman = AddObject<MouseObject>(instance.GetCamera());
             m_Oldman->SetName("m_Oldman");
             m_Oldman->SetTexture(textureMar->GetTexture("GameScene/GunmanOldman.png"));
-            m_Oldman->SetScale(100.0f, 100.0f, 1.0f);
+            m_Oldman->SetScale(300.0f, 300.0f, 1.0f);
             m_Oldman->SetPos(kButtonPos[buttonIndices[i]]);
         }
     }
@@ -119,6 +120,10 @@ void GameSceneGunman::Update(float tick)
     // デバッグ中
     return;
     GameSceneExe::Update(tick);
+
+    // 指名手配役とエネミーの位置を合わせる
+
+    // リズムをとって指名手配の方の画像をスケールさせる
 }
 
 void GameSceneGunman::Draw()
