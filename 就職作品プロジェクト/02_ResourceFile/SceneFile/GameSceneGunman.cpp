@@ -21,10 +21,18 @@ namespace
         NVector3( 300.0f, - 100.0f, 0.0f),
     };
 
-    Transform kSmashTransform;
-    kSmashTransform.SetPos(NVector3(0.0f, 300.0f, 0.0f));
-    kSmashTransform.SetRotate(NVector3(0.0f, 0.0f, 0.0f));
-    kSmashTransform.SetScale(NVector3(300.0f, 300.0f, 1.0f));
+    NVector3 kSmashStartScale  = NVector3(300.0f,  300.0f, 1.0f);
+    NVector3 kSmashTargetPos   = NVector3(  0.0f,  300.0f, 0.0f);
+    NVector3 kSmashTargetScale = NVector3( 10.0f,   10.0f, 1.0f);
+
+    Transform kSmashTransform = []()
+    {
+        Transform transform;
+        transform.SetPos   (NVector3(0.0f, 0.0f, 0.0f));
+        transform.SetRotate(NVector3(0.0f, 0.0f, 0.0f));
+        transform.SetScale (kSmashStartScale);
+        return transform;
+    }();
 
     NVector3 kBaseScaleRedy = {
         NVector3(150.0f, 300.0f, 1.0f)
@@ -52,29 +60,72 @@ namespace
 
 };
 
-void GameSceneGunman::TargetMovePosition(bool isShot)
+void GameSceneGunman::TargetMovePosition()
 {
     float moveValueY = 0.0f;
     float moveValueX = 0.0f;
     float duration    = 0.0f;
     // 上から下
-    if (isShot)
+    if (m_isShot)
     {
-        moveValueX = kSmashTransform.GetPos().x - kTargetPos[0].x;
-        moveValueY = kSmashTransform.GetPos().y - kTargetPos[0].y;
+        // Y座標は同じなので、X座標の移動量だけ計算
         duration = Game::GetRhythmBeat().GetOneBeat();
 
         const float progress = std::clamp(m_MoveUpElapsed / duration, 0.0f, 1.0f);
 
         const float easedProgress = Calculator::Easing::EvaluateEasing(EASING_TYPE::OUT_QUAD, progress);
-        float currentX = kSmashTransform.GetPos().x + moveValueX * easedProgress;
-        float currentY = kSmashTransform.GetPos().y + moveValueY * easedProgress;
 
-        switch(m_ShotIndex)
+        // 開始時の位置とサイズを設定
+        auto startSetting = [](pShared<MouseObject> mouseObject)
         {
-        case 0: m_RedyList[0]->SetPos(currentX, currentY, 0.0f); break;
-        case 1: m_RedyList[1]->SetPos(currentX, currentY, 0.0f); break;
-        case 2: m_Oldman     ->SetPos(currentX, currentY, 0.0f); break;
+            kSmashTransform.SetScale(mouseObject->GetScale());
+            return mouseObject ? mouseObject->GetPos() : NVector3(0.0f, 0.0f, 1.0f);
+        };
+
+        NVector3 startPos{};
+        switch (m_ShotIndex)
+        {
+            case 0: startPos = startSetting(m_RedyList[0]); break;
+            case 1: startPos = startSetting(m_RedyList[1]); break;
+            case 2: startPos = startSetting(m_Oldman     ); break;
+        }
+
+        moveValueX = kSmashTargetPos.x - startPos.x;
+        moveValueY = kSmashTargetPos.y - startPos.y;
+
+        const float currentX = startPos.x + moveValueX * easedProgress;
+        const float currentY = startPos.y + moveValueY * easedProgress;
+        const float currentScaleX = kSmashStartScale.x + (kSmashTargetScale.x - kSmashStartScale.x) * easedProgress;
+        const float currentScaleY = kSmashStartScale.y + (kSmashTargetScale.y - kSmashStartScale.y) * easedProgress;
+
+        kSmashTransform.SetPos(NVector3(currentX, currentY, 0.0f));
+        kSmashTransform.SetScale(NVector3(currentScaleX, currentScaleY, 1.0f));
+        
+
+        bool isMax = progress >= 1.0f;
+        
+        auto transform = [](std::shared_ptr<MouseObject> mouseObject, bool isTimer)
+        {
+            if (mouseObject) 
+            {
+                float rotateZ = mouseObject->GetRotate().z + 3.0f; // 360度回転
+                mouseObject->SetPos  (kSmashTransform.GetPos()  );
+                mouseObject->SetScale(kSmashTransform.GetScale());
+                mouseObject->SetRotate(NVector3(0.0f, 0.0f, rotateZ));
+                if (isTimer)
+                {
+                    TextureManager* textureMar = Game::GetInstance();
+                    mouseObject->SetTexture(textureMar->GetTexture("GameScene/SmashStar.png"));
+                    mouseObject->SetScale (NVector3(100.0f, 100.0f, 1.0f));
+                }
+            }
+        };
+
+        switch (m_ShotIndex)
+        {
+        case 0: transform(m_RedyList[0], isMax); break;
+        case 1: transform(m_RedyList[1], isMax); break;
+        case 2: transform(m_Oldman     , isMax); break;
         }
     }
     // 下から上
@@ -99,8 +150,9 @@ void GameSceneGunman::TargetMovePosition(bool isShot)
 void GameSceneGunman::ShotReaction()
 {
    
-    AudioManager* audioMgr = Game::GetInstance();
+    if(m_isShot) return;
 
+    AudioManager* audioMgr = Game::GetInstance();
     if (m_Oldman->IsDrag())
     {
         m_ReactionActive = audioMgr->Create(m_AudioList.at("clear"));
@@ -108,6 +160,7 @@ void GameSceneGunman::ShotReaction()
         m_ShotIndex = 2;
         m_isCreateReactionSE   = true;
         m_RelationData.isClear = true;
+        m_isShot               = true;
         m_MoveUpElapsed = 0.0f;
         return;
     }
@@ -120,6 +173,7 @@ void GameSceneGunman::ShotReaction()
             m_ReactionActive = audioMgr->Create(m_AudioList.at("miss"));
             m_ReactionActive->Play(m_AudioList.at("miss").params);
             m_isCreateReactionSE = true;
+            m_isShot             = true;
             m_ShotIndex = i;
             m_MoveUpElapsed = 0.0f;
             break;
@@ -148,6 +202,7 @@ void GameSceneGunman::Initialize()
     // メンバ変数初期化
     m_MoveUpElapsed = 0.0f;
     m_ShotIndex     = 0;
+    m_isShot        = false;
 
     // リズムの定義
     RhythmBeatConst beatConfig{};
@@ -170,14 +225,14 @@ void GameSceneGunman::Initialize()
     // 指名手配役の登録
     m_Wanted = AddObject<Square>(instance.GetCamera());
     m_Wanted->SetName("m_Wanted");
-    m_Wanted->SetPos  (  0.0f, 150.0f, 0.0f);
-    m_Wanted->SetScale(180.0f, 240.0f, 1.0f);
+    m_Wanted->SetPos  (-400.0f, 150.0f, 0.0f);
+    m_Wanted->SetScale( 270.0f, 360.0f, 1.0f);
     m_Wanted->SetTexture(textureMar->GetTexture("GameScene/Wanted.png"));
     
     m_Subject = AddObject<Square>(instance.GetCamera());
     m_Subject->SetName("m_Subject");
-    m_Subject->SetPos(0.0f, 150.0f, 0.0f);
-    m_Subject->SetScale(120.0f, 150.0f, 1.0f);
+    m_Subject->SetPos  (-400.0f, 120.0f, 0.0f);
+    m_Subject->SetScale( 200.0f, 200.0f, 1.0f);
     m_Subject->SetTexture(textureMar->GetTexture("GameScene/GunmanOldman.png"));
 
     // 位置をシャッフルして配置
@@ -212,7 +267,7 @@ void GameSceneGunman::Initialize()
     m_MySceneObjects.emplace_back(m_Bomber->GetNumber());
 
     PlayParams bgmParams;
-    m_AudioList.emplace("bgmRocket", AudioConfig(L"BGM/GameSceneMelody/Rocket.wav", bgmParams, true, true));
+    m_AudioList.emplace("bgmGunman", AudioConfig(L"BGM/GameSceneMelody/Gunman.wav", bgmParams, true, true));
 
     PlayParams clearParams;
     m_AudioList.emplace("clear", AudioConfig(L"SE/GameReaction/True1.wav", clearParams, false, false));
@@ -224,6 +279,7 @@ void GameSceneGunman::Initialize()
     m_AudioList.emplace("shot", AudioConfig(L"SE/GameReaction/HandGun.wav", missParams, false, false));
 
     RegisterAudio();
+    PlaySE("bgmGunman", 0.3f);
 
 }
 
@@ -237,10 +293,14 @@ void GameSceneGunman::Update(float tick)
     if (elapsedBeat > 1) 
     {
         m_MoveUpElapsed += tick;
-        TargetMovePosition(m_isCreateReactionSE);
+        TargetMovePosition();
     }
 
+    if (Input::GetMouseTrigger(vkLEFT) || Input::GetKeyTrigger(VK_RETURN)) {
+        PlaySE("shot", 0.3f);
+    }
     ShotReaction();
+
     // リズムをとって指名手配の方の画像をスケールさせる
 
 }
@@ -262,5 +322,6 @@ void GameSceneGunman::Finalize()
     m_MySceneObjects.clear();
     GameSceneExe::Finalize();
 }
+
 
 

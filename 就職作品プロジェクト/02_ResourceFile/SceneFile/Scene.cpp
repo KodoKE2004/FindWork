@@ -56,7 +56,7 @@ void Scene::RegisterAudio()
 	}
 }
 
-void Scene::PlaySE(std::string seName, std::optional<float> overrideVolume)
+void Scene::PlaySE(std::string seName, std::optional<float> overrideVolume = 0.3f)
 {
 	// SEÇÃçƒê∂
 	if (AudioManager* audioMgr = Game::GetInstance())

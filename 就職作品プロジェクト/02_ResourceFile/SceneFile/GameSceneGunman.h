@@ -20,12 +20,12 @@ private:
     pShared<MouseObject> m_Oldman;
 
     bool m_isCreateReactionSE = false;
-    
+    bool m_isShot = false;
     float m_MoveUpElapsed = 0.0f;  // 上昇に時間をカウント
     size_t m_ShotIndex = 0;        // 撃ったスロットのインデックス
 private:
     // 下から上に出現する
-    void TargetMovePosition(bool isShot);
+    void TargetMovePosition();
     void ShotReaction();
 public:
     GameSceneGunman() = delete;
