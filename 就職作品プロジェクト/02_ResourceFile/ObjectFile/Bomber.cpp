@@ -9,7 +9,9 @@ namespace
     const NVector3 kDefaultPos   = NVector3(-  10.0f, -285.0f, 0.0f);
     const NVector3 kDefaultScale = NVector3( 1100.0f,  100.0f, 1.0f);
 
-    float kDefaultRopeV = 1.0f;
+    // 残り一小節のロープの長さの比率
+    constexpr float kDefaultRopeU    = 0.045f;
+    constexpr float kOneBeatFillRate = 0.0311f; // 1拍でFillRatioが0.311減る
 }
 
 Bomber::Bomber(Camera& cam) : Square(cam)
@@ -30,7 +32,8 @@ void Bomber::Initialize()
     SetShader("VS_Alpha", "PS_Alpha");
 
     m_Count     = 3;
-    m_BaseRopeV = 1.0f;
+    m_BaseRopeU = 1.0f;
+
 
     m_Rope = std::make_shared<Square>(scene.GetCamera());
     m_Rope->Initialize();
@@ -105,7 +108,7 @@ void Bomber::CountDown()
 void Bomber::SetFillRatio(float ratio)
 {
     float clamped = std::clamp(ratio, 0.0f, 1.0f);
-    if(std::abs(1.0f - clamped) < 0.001f)
+    if(std::abs(m_FillRatio - clamped) < 0.001f)
     {
         return;
     }
@@ -123,42 +126,40 @@ void Bomber::AdjustScaleByBeatTotal(int beatTotal, int baseBeat)
     }
 
     const float clampedBeat = std::clamp(static_cast<float>(beatTotal), 0.0f, static_cast<float>(baseBeat));
-    const float scaleRate = clampedBeat / static_cast<float>(baseBeat);
 
-    float _BeatTotal = static_cast<float>(beatTotal);
-    float _BaseBeat  = static_cast<float>(baseBeat);
+    // Objectの左端を基準にTextureのUVに合わせてPosとScaleを補正
+    m_BaseLeftX = m_BasePos.x - (m_BaseScale.x * 0.5f);
 
+   float _BeatTotal = static_cast<float>(beatTotal);
     // UVの全体比率の調整
-    m_BaseRopeV = _BeatTotal > _BaseBeat  ? 
-                  _BaseBeat  / _BeatTotal : 
-                  _BeatTotal / _BaseBeat  ;
+    m_OneBeatFillRate = kDefaultRopeU + (kOneBeatFillRate * _BeatTotal);
+    m_OneBeatFillRate = max(m_OneBeatFillRate, 0.001f);
 
+    // beatTotalに応じてRopeの最大の長さを調整
+    const float scaleRate = m_OneBeatFillRate / 1.0f;
     m_BaseScale   = kDefaultScale;
     m_BaseScale.x = kDefaultScale.x * scaleRate;
 
-    m_BasePos   = kDefaultPos;
-    m_BasePos.x = m_BaseLeftX + (m_BaseScale.x * 0.5f);
     ApplyFillTransform();
 }
 
 void Bomber::UpdateUV()
 {
-    constexpr float minRatio = 0.0f;
-    float width = max(m_FillRatio, minRatio);
-    float splitX = m_BaseRopeV / width;
+    constexpr float minRatio = 0.001f;
+    float width = max(m_OneBeatFillRate, minRatio);
+    float splitX = m_BaseRopeU / width;
 
-    m_Rope->SetUV(1.0f, 1.0f, splitX, 1.0f);
+    m_Rope->SetUV(m_BaseRopeU, 1.0f, splitX, 1.0f);
 }
 
 void Bomber::ApplyFillTransform()
 {
-
     if (!m_Rope || !m_HasBase) {
         return;
     }
 
-    constexpr float minRatio = 0.0f;
-    float widthRatio = max(m_FillRatio, minRatio);
+    constexpr float minRatio = 0.001f;
+    float widthRatio = max(m_OneBeatFillRate, minRatio);
 
     NVector3 newScale = m_BaseScale;
     newScale.x = m_BaseScale.x * widthRatio;

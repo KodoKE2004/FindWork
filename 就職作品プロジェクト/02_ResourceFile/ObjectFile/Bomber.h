@@ -8,11 +8,12 @@ private:
     pShared<Square> m_Rope   = nullptr;
     pShared<Square> m_Number = nullptr;
     
-    float m_FillRatio = 1.0f;  // UÇÃî‰ó¶(0.0f ~ 1.0f)
+    float m_FillRatio       = 1.0f; // UÇÃî‰ó¶(0.0f ~ 1.0f)
+    float m_OneBeatFillRate = 0.0f; // 1îèÇ≈Ç«ÇÍÇæÇØå∏ÇÈÇ©ÇÃî‰ó¶
 
     NVector3 m_BasePos{};
     NVector3 m_BaseScale{};
-    float    m_BaseRopeV = 1.0f;
+    float    m_BaseRopeU = 1.0f;
 
     float    m_BaseLeftX = 0.0f;
     bool     m_HasBase = false;

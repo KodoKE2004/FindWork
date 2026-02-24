@@ -20,7 +20,7 @@ void GameSceneExe::Initialize()
 
     if (m_Bomber)
     {
-        m_Bomber->AdjustScaleByBeatTotal(rhythmBeat.GetBeatTotal(), BASE_BEATS + 8);
+        m_Bomber->AdjustScaleByBeatTotal(rhythmBeat.GetBeatTotal(), ONE_MEASURE * 5);
     }
 
     //-------------------------------
