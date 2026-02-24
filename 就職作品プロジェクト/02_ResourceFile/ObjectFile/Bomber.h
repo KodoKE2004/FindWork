@@ -12,6 +12,7 @@ private:
 
     NVector3 m_BasePos{};
     NVector3 m_BaseScale{};
+    float    m_BaseRopeV = 1.0f;
 
     float    m_BaseLeftX = 0.0f;
     bool     m_HasBase = false;

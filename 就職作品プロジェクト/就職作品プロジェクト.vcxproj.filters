@@ -26,9 +26,6 @@
     <Filter Include="SourceFile\Scene">
       <UniqueIdentifier>{f78adc59-4616-4046-9b02-cf41e56ab265}</UniqueIdentifier>
     </Filter>
-    <Filter Include="SourceFile\Model\Subset">
-      <UniqueIdentifier>{141faefb-0bc1-455e-86cf-317d53ef6d27}</UniqueIdentifier>
-    </Filter>
     <Filter Include="SourceFile\Model\Mesh">
       <UniqueIdentifier>{09f868cc-4c43-4b19-98b9-e3f913e4aeaf}</UniqueIdentifier>
     </Filter>
@@ -129,9 +126,6 @@
     </ClCompile>
     <ClCompile Include="02_ResourceFile\Square.cpp">
       <Filter>SourceFile\Object\2D</Filter>
-    </ClCompile>
-    <ClCompile Include="02_ResourceFile\ObjectFile\Model.cpp">
-      <Filter>SourceFile\Model</Filter>
     </ClCompile>
     <ClCompile Include="02_ResourceFile\MeshManager.cpp">
       <Filter>SourceFile\Core\Manager</Filter>
@@ -269,6 +263,9 @@
     <ClCompile Include="02_ResourceFile\SceneFile\GameSceneGunman.cpp">
       <Filter>SourceFile\Scene\GameScene</Filter>
     </ClCompile>
+    <ClCompile Include="02_ResourceFile\ObjectFile\Model.cpp">
+      <Filter>SourceFile\Object\3D</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="02_ResourceFile\SceneFile\Scene.h">
@@ -285,12 +282,6 @@
     </ClInclude>
     <ClInclude Include="02_ResourceFile\Camera.h">
       <Filter>SourceFile\Object</Filter>
-    </ClInclude>
-    <ClInclude Include="02_ResourceFile\VertexBuffer.h">
-      <Filter>SourceFile\Model\Subset</Filter>
-    </ClInclude>
-    <ClInclude Include="02_ResourceFile\IndexBuffer.h">
-      <Filter>SourceFile\Model\Subset</Filter>
     </ClInclude>
     <ClInclude Include="03_ExternalFile\imgui\imconfig.h">
       <Filter>ImGui</Filter>
@@ -363,9 +354,6 @@
     </ClInclude>
     <ClInclude Include="02_ResourceFile\Square.h">
       <Filter>SourceFile\Object\2D</Filter>
-    </ClInclude>
-    <ClInclude Include="02_ResourceFile\ObjectFile\Model.h">
-      <Filter>SourceFile\Model</Filter>
     </ClInclude>
     <ClInclude Include="02_ResourceFile\MeshManager.h">
       <Filter>SourceFile\Core\Manager</Filter>
@@ -504,6 +492,15 @@
       <Filter>SourceFile\Scene\GameScene</Filter>
     </ClInclude>
     <ClInclude Include="02_ResourceFile\JsonLoder.hpp">
+      <Filter>SourceFile\Core</Filter>
+    </ClInclude>
+    <ClInclude Include="02_ResourceFile\ObjectFile\Model.h">
+      <Filter>SourceFile\Object\3D</Filter>
+    </ClInclude>
+    <ClInclude Include="02_ResourceFile\VertexBuffer.h">
+      <Filter>SourceFile\Core</Filter>
+    </ClInclude>
+    <ClInclude Include="02_ResourceFile\IndexBuffer.h">
       <Filter>SourceFile\Core</Filter>
     </ClInclude>
   </ItemGroup>

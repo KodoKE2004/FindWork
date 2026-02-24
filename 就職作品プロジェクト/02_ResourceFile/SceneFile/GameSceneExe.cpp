@@ -9,8 +9,6 @@
 #include <algorithm>
 #include "TransitionBase.h"
 
-
-
 GameSceneExe::GameSceneExe(Camera& cam) : Scene(cam)
 {
 }
@@ -22,7 +20,7 @@ void GameSceneExe::Initialize()
 
     if (m_Bomber)
     {
-        m_Bomber->AdjustScaleByBeatTotal(rhythmBeat.GetBeatTotal(), BASE_BEATS + 16);
+        m_Bomber->AdjustScaleByBeatTotal(rhythmBeat.GetBeatTotal(), BASE_BEATS + 8);
     }
 
     //-------------------------------
@@ -147,9 +145,9 @@ void GameSceneExe::Update(float tick)
         // “Áêˆ—FÅŒã‚Ì4”‚Íw’è”’l‚ÅŒ¸‚é‚æ‚¤‚É‚·‚é
         switch (rest)
         {
-        case 3: targetProgress = 1.0f - (0.10f * scaleMass); useSpecial = true; break;
-        case 2: targetProgress = 1.0f - (0.05f * scaleMass); useSpecial = true; break;
-        case 1: targetProgress = 1.0f;                       useSpecial = true; break;
+        case 3: targetProgress = 1.0f - (0.045f * scaleMass); useSpecial = true; break;
+        case 2: targetProgress = 1.0f - (0.025f * scaleMass); useSpecial = true; break;
+        case 1: targetProgress = 1.0f;                        useSpecial = true; break;
         }
         if (rest <= 0) {
             m_isChange = true;

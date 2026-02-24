@@ -145,7 +145,7 @@ void GameSceneDodge::Initialize()
     RhythmBeatConst beatConfig{};
     auto& rhythmBeat = Game::GetRhythmBeat();
     beatConfig.Setup(Game::GetBgmBpm());
-    rhythmBeat.Initialize(beatConfig, false, BASE_BEATS + 8);
+    rhythmBeat.Initialize(beatConfig, false, ONE_MEASURE * 4);
 
     // ゲーム内の総拍数を参照するためリズム定義より後
     GameSceneExe::Initialize();

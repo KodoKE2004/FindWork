@@ -105,7 +105,7 @@ void GameSceneShot::Initialize()
     RhythmBeatConst beatConfig{};
     auto& rhythmBeat = Game::GetRhythmBeat();
     beatConfig.Setup(Game::GetBgmBpm());
-    rhythmBeat.Initialize(beatConfig, false, BASE_BEATS);
+    rhythmBeat.Initialize(beatConfig, false, ONE_MEASURE * 3);
     
     // ゲーム内の総拍数を参照するためリズム定義より後
     GameSceneExe::Initialize();

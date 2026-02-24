@@ -6,8 +6,10 @@
 
 namespace
 {
-    const NVector3 kDefaultPos   = NVector3(-110.0f, -285.0f, 0.0f);
-    const NVector3 kDefaultScale = NVector3( 900.0f,  100.0f, 1.0f);
+    const NVector3 kDefaultPos   = NVector3(-  10.0f, -285.0f, 0.0f);
+    const NVector3 kDefaultScale = NVector3( 1100.0f,  100.0f, 1.0f);
+
+    float kDefaultRopeV = 1.0f;
 }
 
 Bomber::Bomber(Camera& cam) : Square(cam)
@@ -27,7 +29,8 @@ void Bomber::Initialize()
     SetScale (  100.0f,  100.0f,  1.0f);
     SetShader("VS_Alpha", "PS_Alpha");
 
-    m_Count = 3;
+    m_Count     = 3;
+    m_BaseRopeV = 1.0f;
 
     m_Rope = std::make_shared<Square>(scene.GetCamera());
     m_Rope->Initialize();
@@ -113,14 +116,22 @@ void Bomber::SetFillRatio(float ratio)
     ApplyFillTransform();
 }
 
-void Bomber::AdjustScaleByBeatTotal(int beatTotal, int maxBeat)
+void Bomber::AdjustScaleByBeatTotal(int beatTotal, int baseBeat)
 {
-    if (!m_HasBase || maxBeat <= 0) {
+    if (!m_HasBase || baseBeat <= 0) {
         return;
     }
 
-    const float clampedBeat = std::clamp(static_cast<float>(beatTotal), 0.0f, static_cast<float>(maxBeat));
-    const float scaleRate = clampedBeat / static_cast<float>(maxBeat);
+    const float clampedBeat = std::clamp(static_cast<float>(beatTotal), 0.0f, static_cast<float>(baseBeat));
+    const float scaleRate = clampedBeat / static_cast<float>(baseBeat);
+
+    float _BeatTotal = static_cast<float>(beatTotal);
+    float _BaseBeat  = static_cast<float>(baseBeat);
+
+    // UV‚Ì‘S‘Ì”ä—¦‚Ì’²®
+    m_BaseRopeV = _BeatTotal > _BaseBeat  ? 
+                  _BaseBeat  / _BeatTotal : 
+                  _BeatTotal / _BaseBeat  ;
 
     m_BaseScale   = kDefaultScale;
     m_BaseScale.x = kDefaultScale.x * scaleRate;
@@ -134,7 +145,7 @@ void Bomber::UpdateUV()
 {
     constexpr float minRatio = 0.0f;
     float width = max(m_FillRatio, minRatio);
-    float splitX = 1.0f / width;
+    float splitX = m_BaseRopeV / width;
 
     m_Rope->SetUV(1.0f, 1.0f, splitX, 1.0f);
 }

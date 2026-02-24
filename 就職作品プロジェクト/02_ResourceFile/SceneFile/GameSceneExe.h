@@ -7,7 +7,8 @@
 namespace
 {
     // äÓñ{ÇÃè¨êﬂ
-	constexpr int BASE_BEATS = 24;
+	constexpr int BASE_BEATS  = 24;
+    constexpr int ONE_MEASURE = 8;
 }
 
 enum class GAME_MODE

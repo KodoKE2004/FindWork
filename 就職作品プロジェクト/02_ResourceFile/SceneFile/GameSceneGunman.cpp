@@ -218,7 +218,7 @@ void GameSceneGunman::Initialize()
 #ifdef _DEBUG
     DebugUI::TEXT_CurrentScene = "GameSceneGunman";
 #endif
-
+    
     m_RelationData.isClear = false;
 
     // シーンに繋ぐ情報は基底初期化後の一番最初に設定
@@ -235,7 +235,7 @@ void GameSceneGunman::Initialize()
     RhythmBeatConst beatConfig{};
     auto& rhythmBeat = Game::GetRhythmBeat();
     beatConfig.Setup(Game::GetBgmBpm());
-    rhythmBeat.Initialize(beatConfig, false, BASE_BEATS - 8);
+    rhythmBeat.Initialize(beatConfig, false, ONE_MEASURE * 2);
 
     // ゲーム内の総拍数を参照するためリズム定義より後
     GameSceneExe::Initialize();
