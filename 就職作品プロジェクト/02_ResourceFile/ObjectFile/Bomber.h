@@ -9,7 +9,6 @@ private:
     pShared<Square> m_Number = nullptr;
     
     float m_FillRatio       = 1.0f; // U‚Ì”ä—¦(0.0f ~ 1.0f)
-    float m_OneBeatFillRate = 0.0f; // 1”‚Å‚Ç‚ê‚¾‚¯Œ¸‚é‚©‚Ì”ä—¦
 
     NVector3 m_BasePos{};
     NVector3 m_BaseScale{};
@@ -54,6 +53,12 @@ public:
         return nullptr; 
     }
 
+    float GetBomberU() const {
+        if (!m_HasBase || m_BaseRopeU <= 0.0f) {
+            return 0.0f;
+        }
+        return m_BaseRopeU;
+    }
 private:
     void UpdateUV();
 

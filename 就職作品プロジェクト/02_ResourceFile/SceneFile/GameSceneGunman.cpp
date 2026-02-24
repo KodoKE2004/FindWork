@@ -237,9 +237,6 @@ void GameSceneGunman::Initialize()
     beatConfig.Setup(Game::GetBgmBpm());
     rhythmBeat.Initialize(beatConfig, false, ONE_MEASURE * 2);
 
-    // ゲーム内の総拍数を参照するためリズム定義より後
-    GameSceneExe::Initialize();
-
     auto& instance = Game::GetInstance();
     TextureManager* textureMar = instance;
 
@@ -293,6 +290,9 @@ void GameSceneGunman::Initialize()
 
     m_MySceneObjects.emplace_back(m_Bomber->GetRope());
     m_MySceneObjects.emplace_back(m_Bomber->GetNumber());
+
+    // ゲーム内の総拍数を参照するためリズム定義より後
+    GameSceneExe::Initialize();
 
     PlayParams bgmParams;
     m_AudioList.emplace("bgmGunman", AudioConfig(L"BGM/GameSceneMelody/Gunman.wav", bgmParams, true, true));

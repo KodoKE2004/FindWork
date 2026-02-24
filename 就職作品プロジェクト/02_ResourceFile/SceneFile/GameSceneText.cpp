@@ -153,12 +153,14 @@ void GameSceneText::Initialize()
     m_MySceneObjects.emplace_back(m_Bomber->GetRope());
     m_MySceneObjects.emplace_back(m_Bomber->GetNumber());
 
+    // ゲーム内の総拍数を参照するためリズム定義より後
+    GameSceneExe::Initialize();
+
     m_InputIndex = 0;
     m_CurrentRhythmIndex = 0;
     m_isReaction = false;
     m_UvXOffset = 1.0f;
     std::fill(std::begin(m_Clicked), std::end(m_Clicked), false);
-
 
     // 音源の追加
     PlayParams insideParam{};

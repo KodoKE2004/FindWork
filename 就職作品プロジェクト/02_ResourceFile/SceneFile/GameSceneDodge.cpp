@@ -147,8 +147,6 @@ void GameSceneDodge::Initialize()
     beatConfig.Setup(Game::GetBgmBpm());
     rhythmBeat.Initialize(beatConfig, false, ONE_MEASURE * 4);
 
-    // ゲーム内の総拍数を参照するためリズム定義より後
-    GameSceneExe::Initialize();
 
     auto& instance = Game::GetInstance();
     TextureManager* textureMar = instance; 
@@ -160,6 +158,7 @@ void GameSceneDodge::Initialize()
 
     m_Bird = AddObject<Bird>(instance.GetCamera());
     m_Bird->SetScale(50.0f,50.0f,1.0f);
+
 
     PlayParams fallParams;
     m_AudioList.emplace("fall", AudioConfig(L"SE/RockFall.wav", fallParams, false, false));
@@ -177,6 +176,9 @@ void GameSceneDodge::Initialize()
 
     m_MySceneObjects.emplace_back(m_Bomber->GetRope());
     m_MySceneObjects.emplace_back(m_Bomber->GetNumber());
+
+    // ゲーム内の総拍数を参照するためリズム定義より後
+    GameSceneExe::Initialize();
 
     PlaySE("bgmDodge", 0.2f);
 

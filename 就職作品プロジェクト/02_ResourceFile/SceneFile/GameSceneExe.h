@@ -48,6 +48,7 @@ protected:
 	float m_FillRatio	  = 0.0f;		// 
 	float m_SegmentFrom	  = 0.0f;		//
 	float m_SegmentTo	  = 0.0f;		//
+    float m_GameBomU	  = 0.0f;		// ゲーム内の更新時間計測
 
 	// シーン遷移フラグ
     bool  m_isChange	  = false;		// シーン変更フラグ

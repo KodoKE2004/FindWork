@@ -21,9 +21,6 @@ void GameSceneRocket::Initialize()
     beatConfig.Setup(Game::GetBgmBpm());
     rhythmBeat.Initialize(beatConfig, false, BASE_BEATS - 8);
 
-    // ゲーム内の総拍数を参照するためリズム定義より後
-    GameSceneExe::Initialize();
-
     auto& instance = Game::GetInstance();
     TextureManager* textureMar = instance;
 
@@ -37,6 +34,9 @@ void GameSceneRocket::Initialize()
 
     m_MySceneObjects.emplace_back(m_Bomber->GetRope());
     m_MySceneObjects.emplace_back(m_Bomber->GetNumber());
+
+    // ゲーム内の総拍数を参照するためリズム定義より後
+    GameSceneExe::Initialize();
 
     PlayParams bgmParams;
     m_AudioList.emplace("bgmRocket", AudioConfig(L"BGM/GameSceneMelody/Rocket.wav", bgmParams, true, true));

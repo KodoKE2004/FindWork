@@ -107,9 +107,6 @@ void GameSceneShot::Initialize()
     beatConfig.Setup(Game::GetBgmBpm());
     rhythmBeat.Initialize(beatConfig, false, ONE_MEASURE * 3);
     
-    // ゲーム内の総拍数を参照するためリズム定義より後
-    GameSceneExe::Initialize();
-
     m_Skydome = AddObject<Skydome>(instance.GetCamera());
     m_Skydome->SetName("m_Skydome");
     m_Skydome->SetSkyDomeMode(true);
@@ -164,11 +161,15 @@ void GameSceneShot::Initialize()
         spawnedEnemyPositions.emplace_back(spawnPos);
 
     }
+
     m_Bomber = AddObject<Bomber>(instance.GetCamera());
     m_Bomber->SetName("m_TimeGauge");
     m_MySceneObjects.emplace_back(m_Bomber->GetRope());
     m_MySceneObjects.emplace_back(m_Bomber->GetNumber());
     
+    // ゲーム内の総拍数を参照するためリズム定義より後
+    GameSceneExe::Initialize();
+
     PlayParams shotParams;
     m_AudioList.emplace("shot", AudioConfig(L"SE/BulletShot.wav", shotParams, false, false));
 

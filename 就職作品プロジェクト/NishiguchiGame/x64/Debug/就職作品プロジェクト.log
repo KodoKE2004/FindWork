@@ -1,17 +1,8 @@
-﻿  Game.cpp
-  Bomber.cpp
-  GameSceneDodge.cpp
-  GameSceneExe.cpp
-  GameSceneGunman.cpp
-  GameSceneRocket.cpp
-  GameSceneShot.cpp
-  GameSceneText.cpp
-  GameSceneWait.cpp
-  ResultScene.cpp
-  TitleScene.cpp
-  TransScene.cpp
-C:\Users\kodokeの世界\Desktop\HAL\VisualSutdio\就職作品\個人製作\FindWork\就職作品プロジェクト\02_ResourceFile\ObjectFile\Bomber.cpp(128,17): warning C4189: 'clampedBeat': ローカル変数が初期化されましたが、参照されていません
+﻿  Bomber.cpp
+C:\Users\kodokeの世界\Desktop\HAL\VisualSutdio\就職作品\個人製作\FindWork\就職作品プロジェクト\02_ResourceFile\ObjectFile\Bomber.cpp(136,11): warning C4189: 'ropePosX': ローカル変数が初期化されましたが、参照されていません
   (ソース ファイル '/02_ResourceFile/ObjectFile/Bomber.cpp' をコンパイルしています)
   
-C:\Users\kodokeの世界\Desktop\HAL\VisualSutdio\就職作品\個人製作\FindWork\就職作品プロジェクト\02_ResourceFile\SceneFile\GameSceneRocket.cpp(55): warning C4702: 制御が渡らないコードです。
+C:\Users\kodokeの世界\Desktop\HAL\VisualSutdio\就職作品\個人製作\FindWork\就職作品プロジェクト\02_ResourceFile\ObjectFile\Bomber.cpp(157,11): warning C4189: 'widthRatio': ローカル変数が初期化されましたが、参照されていません
+  (ソース ファイル '/02_ResourceFile/ObjectFile/Bomber.cpp' をコンパイルしています)
+  
   就職作品プロジェクト.vcxproj -> C:\Users\kodokeの世界\Desktop\HAL\VisualSutdio\就職作品\個人製作\FindWork\就職作品プロジェクト\x64\Debug\NishiguchiGame.exe

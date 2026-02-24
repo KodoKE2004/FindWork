@@ -9,9 +9,8 @@ namespace
     const NVector3 kDefaultPos   = NVector3(-  10.0f, -285.0f, 0.0f);
     const NVector3 kDefaultScale = NVector3( 1100.0f,  100.0f, 1.0f);
 
-    // 残り一小節のロープの長さの比率
-    constexpr float kDefaultRopeU    = 0.045f;
-    constexpr float kOneBeatFillRate = 0.0311f; // 1拍でFillRatioが0.311減る
+    const float kDefaultRopeU    = 0.045f;
+    const float kOneBeatFillRate = 0.0311f; // 1拍でFillRatioが0.311減る（=4拍で0になる）ようにする
 }
 
 Bomber::Bomber(Camera& cam) : Square(cam)
@@ -33,7 +32,6 @@ void Bomber::Initialize()
 
     m_Count     = 3;
     m_BaseRopeU = 1.0f;
-
 
     m_Rope = std::make_shared<Square>(scene.GetCamera());
     m_Rope->Initialize();
@@ -126,51 +124,47 @@ void Bomber::AdjustScaleByBeatTotal(int beatTotal, int baseBeat)
     }
 
     const float clampedBeat = std::clamp(static_cast<float>(beatTotal), 0.0f, static_cast<float>(baseBeat));
+    m_BaseRopeU = kDefaultRopeU + (kOneBeatFillRate * clampedBeat);
+    m_FillRatio = m_BaseRopeU;
 
-    // Objectの左端を基準にTextureのUVに合わせてPosとScaleを補正
     m_BaseLeftX = m_BasePos.x - (m_BaseScale.x * 0.5f);
+    
+    m_BaseScale = kDefaultScale;
+    m_BasePos   = kDefaultPos;
 
-   float _BeatTotal = static_cast<float>(beatTotal);
-    // UVの全体比率の調整
-    m_OneBeatFillRate = kDefaultRopeU + (kOneBeatFillRate * _BeatTotal);
-    m_OneBeatFillRate = max(m_OneBeatFillRate, 0.001f);
 
-    // beatTotalに応じてRopeの最大の長さを調整
-    const float scaleRate = m_OneBeatFillRate / 1.0f;
-    m_BaseScale   = kDefaultScale;
-    m_BaseScale.x = kDefaultScale.x * scaleRate;
-
-    ApplyFillTransform();
+    float ropePosX = m_BaseLeftX + (m_BaseScale.x * m_BaseRopeU * 0.5f);
 }
 
 void Bomber::UpdateUV()
 {
     constexpr float minRatio = 0.001f;
-    float width = max(m_OneBeatFillRate, minRatio);
+    float width = max(m_FillRatio, minRatio);
     float splitX = m_BaseRopeU / width;
 
-    m_Rope->SetUV(m_BaseRopeU, 1.0f, splitX, 1.0f);
+    m_Rope->SetUV(1.0f, 1.0f, splitX, 1.0f);
 }
 
 void Bomber::ApplyFillTransform()
 {
+
     if (!m_Rope || !m_HasBase) {
         return;
     }
 
-    constexpr float minRatio = 0.001f;
-    float widthRatio = max(m_OneBeatFillRate, minRatio);
+    
+    constexpr float minRatio = 0.0f;
+    float widthRatio = max(m_FillRatio, minRatio);
 
-    NVector3 newScale = m_BaseScale;
-    newScale.x = m_BaseScale.x * widthRatio;
+    
+    NVector3 newScale = kDefaultScale;
+    newScale.x = kDefaultScale.x * (m_BaseRopeU);
     m_Rope->SetScale(newScale);
 
-    float baseHalfW = m_BaseScale.x * 0.5f;
-    float newHalfW  = newScale.x    * 0.5f;
-
-    float left = m_BasePos.x - baseHalfW;
-
-    NVector3 newPos = m_BasePos;
+    float halfW = kDefaultScale.x * 0.5f;
+    float newHalfW = newScale.x   * 0.5f;
+    float left  = kDefaultPos.x   - halfW;
+    NVector3 newPos = kDefaultPos;
     newPos.x = left + newHalfW;
 
     m_Rope->SetPos(newPos);

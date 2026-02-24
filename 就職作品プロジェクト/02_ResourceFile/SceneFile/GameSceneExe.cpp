@@ -34,6 +34,8 @@ void GameSceneExe::Initialize()
     m_FastChangeStartFill = 0.0f;
     m_FastChangeElapsed   = 0.0f;    
 
+    m_GameBomU = m_Bomber->GetBomberU();
+    
     m_RelationData.transTexture = nullptr;
     m_RelationData.ClearTransitionTexture();
 
