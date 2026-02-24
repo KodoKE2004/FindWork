@@ -798,6 +798,19 @@ namespace Calculator
             case EASING_TYPE::IN_OUT_EXPO:		return Calculator::Easing::EaseInOutExpo(p);
             }
         }
-    }
 
+        NVector3 ScalingObject(float elapsed, float duration, NVector3 base, NVector3 goal, EASING_TYPE easing)
+        { 
+            if (duration <= 0.0f)
+            {
+                return goal;
+            }
+
+            const float progress = std::clamp(elapsed / duration, 0.0f, 1.0f);
+            const float easedProgress = EvaluateEasing(easing, progress);
+
+            return base + ((goal - base) * easedProgress);   
+        }
+
+    }
 };

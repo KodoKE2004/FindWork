@@ -4,7 +4,7 @@
 
 namespace
 {
-    NVector3 kButtonPos[3] = {
+    NVector3 kStartPos[3] = {
         NVector3(- 375.0f, - 200.0f,0.0f),
         NVector3(    0.0f, - 200.0f,0.0f),
         NVector3(  375.0f, - 200.0f,0.0f),
@@ -94,7 +94,6 @@ void GameSceneText::Initialize()
     DebugUI::TEXT_CurrentScene = "GameSceneText";
 #endif
 
-    // シーンに繋ぐ情報は基底初期化後の一番最初に設定
     m_RelationData.isClear       = false;
 
     // リズムの定義
@@ -144,7 +143,7 @@ void GameSceneText::Initialize()
             m_MessageSlot[i]->SetColor(1.0f, 1.0f, 1.0f, 0.5f);
         }
         m_MessageSlot[i]->GetTextObject()->SetUV(2.0f, uvY, 2.0f, 3.0f);
-        m_MessageSlot[i]->SetPos(kButtonPos[i]);
+        m_MessageSlot[i]->SetPos(kStartPos[i]);
         m_MySceneObjects.emplace_back(m_MessageSlot[i]->GetTextObject());
     }
 

@@ -65,6 +65,7 @@ private:
     bool m_isLifeScaleUp		   = false;	// ライフ減少の演出でハートが大きくなっているかどうかのフラグ
     bool m_isLifeScaleDown		   = false;	// ライフ減少の演出でハートが小さくなっているかどうかのフラグ
 	bool m_isPendingBpmChange	   = false; // BPMの変更を行うフェーズか
+
 private:
 	// Exeシーンの乱数選択を行う。
 	// 二回連続で同じステージが来るようにならないようにする 

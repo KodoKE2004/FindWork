@@ -536,32 +536,46 @@ void GameSceneWait::DecrementLife()
 
 void GameSceneWait::ScalingLife()
 {
-    m_ScalingLifeElapsed += Application::GetDeltaTime();
-    float t = 0.0f;
-    if (m_isLifeScaleUp) {
-        t = m_ScalingLifeElapsed / m_ScalingLifeDuration;
-    }
-    else {
-        t = 1.0f - (m_ScalingLifeElapsed / m_ScalingLifeDuration);
-    }
-    float elapsedScale = Calculator::Easing::EaseOutQuad(t);
-    NVector3 targetScale = NVector3(m_LifeBaseScale.x + (m_LifeBaseScale.x * (kLifeScaleUpAmount * elapsedScale)),
-                                    m_LifeBaseScale.y + (m_LifeBaseScale.y * (kLifeScaleUpAmount * elapsedScale)),
-                                    1.0f);
+    namespace Calculator = Calculator::Easing;
 
-    if(t >= 1.0f && m_isLifeScaleUp)
+    m_ScalingLifeElapsed += Application::GetDeltaTime();
+
+    const NVector3 lifeScaleUp = m_LifeBaseScale + m_LifeBaseScale * kLifeScaleUpAmount;
+    NVector3 targetScale = m_LifeBaseScale;
+
+    if (m_isLifeScaleUp)
     {
-        m_isLifeScaleUp   = false;
-        m_isLifeScaleDown = true;
-        targetScale = m_LifeBaseScale + m_LifeBaseScale * kLifeScaleUpAmount;
-        m_ScalingLifeElapsed = 0.0f;
+        targetScale = Calculator::ScalingObject(
+            m_ScalingLifeElapsed,
+            m_ScalingLifeDuration,
+            m_LifeBaseScale,
+            lifeScaleUp,
+            EASING_TYPE::IN_QUAD);
+
+        if (m_ScalingLifeElapsed >= m_ScalingLifeDuration)
+        {
+            m_isLifeScaleUp = false;
+            m_isLifeScaleDown = true;
+            targetScale = lifeScaleUp;
+            m_ScalingLifeElapsed = 0.0f;
+        }
     }
-    if (t <= 0.0f && m_isLifeScaleDown)
+    else if (m_isLifeScaleDown)
     {
-        m_isLifeScaleUp   = false;
-        m_isLifeScaleDown = false;
-        targetScale = m_LifeBaseScale;
-        m_ScalingLifeElapsed = 0.0f;
+        targetScale = Calculator::ScalingObject(
+            m_ScalingLifeElapsed,
+            m_ScalingLifeDuration,
+            lifeScaleUp,
+            m_LifeBaseScale,
+            EASING_TYPE::IN_QUAD);
+
+        if (m_ScalingLifeElapsed >= m_ScalingLifeDuration)
+        {
+            m_isLifeScaleUp = false;
+            m_isLifeScaleDown = false;
+            targetScale = m_LifeBaseScale;
+            m_ScalingLifeElapsed = 0.0f;
+        }
     }
 
     for (auto life : m_LifeGame)

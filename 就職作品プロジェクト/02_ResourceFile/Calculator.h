@@ -18,8 +18,6 @@ namespace Calculator
         float halfH;        // îºï™ÇÃçÇÇ≥
     };
 
-    NVector3 ScalingObject(float elapsed, float duration);
-
     namespace Collider2D
     {
         static bool OverlapOnAxis(NVector3 & axis, std::array<NVector3,4>& vertsA, std::array<NVector3,4>& vertsB);
@@ -112,6 +110,8 @@ namespace Calculator
         float EaseInOutBounce(float p);
 
         float EvaluateEasing(EASING_TYPE type,float p);
+
+        NVector3 ScalingObject(float elapsed, float duration, NVector3 base, NVector3 goal, EASING_TYPE easing);
     };
 
     namespace Physics

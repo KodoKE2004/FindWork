@@ -1,3 +1,144 @@
-﻿  GameSceneGunman.cpp
-C:\Users\kodokeの世界\Desktop\HAL\VisualSutdio\就職作品\個人製作\FindWork\就職作品プロジェクト\02_ResourceFile\SceneFile\GameSceneGunman.cpp(122): warning C4702: 制御が渡らないコードです。
-  就職作品プロジェクト.vcxproj -> C:\Users\kodokeの世界\Desktop\HAL\VisualSutdio\就職作品\個人製作\FindWork\就職作品プロジェクト\x64\Debug\NishiguchiGame.exe
+﻿  compilation object save succeeded; see C:\Users\dorae\Desktop\HAL\class3\FindWork\就職作品プロジェクト\x64\Debug\PS_Alpha.cso
+  compilation object save succeeded; see C:\Users\dorae\Desktop\HAL\class3\FindWork\就職作品プロジェクト\x64\Debug\PS_Default.cso
+  compilation object save succeeded; see C:\Users\dorae\Desktop\HAL\class3\FindWork\就職作品プロジェクト\x64\Debug\PS_Skydome.cso
+  compilation object save succeeded; see C:\Users\dorae\Desktop\HAL\class3\FindWork\就職作品プロジェクト\x64\Debug\PS_Sprite.cso
+  compilation object save succeeded; see C:\Users\dorae\Desktop\HAL\class3\FindWork\就職作品プロジェクト\x64\Debug\PS_Unlit.cso
+  compilation object save succeeded; see C:\Users\dorae\Desktop\HAL\class3\FindWork\就職作品プロジェクト\x64\Debug\VS_Alpha.cso
+  compilation object save succeeded; see C:\Users\dorae\Desktop\HAL\class3\FindWork\就職作品プロジェクト\x64\Debug\VS_DebugGrid.cso
+  compilation object save succeeded; see C:\Users\dorae\Desktop\HAL\class3\FindWork\就職作品プロジェクト\x64\Debug\VS_Default.cso
+  compilation object save succeeded; see C:\Users\dorae\Desktop\HAL\class3\FindWork\就職作品プロジェクト\x64\Debug\VS_Instansing2D.cso
+  compilation object save succeeded; see C:\Users\dorae\Desktop\HAL\class3\FindWork\就職作品プロジェクト\x64\Debug\VS_Skydome.cso
+  compilation object save succeeded; see C:\Users\dorae\Desktop\HAL\class3\FindWork\就職作品プロジェクト\x64\Debug\VS_Unlit.cso
+  pch.cpp
+  Application.cpp
+  Audio.cpp
+  ImGuiUtil.cpp
+  Bird.cpp
+  Bomber.cpp
+  Button.cpp
+  DragController.cpp
+  MouseObject.cpp
+  Stone.cpp
+  Theme.cpp
+  Timer.cpp
+  Particle.cpp
+  RhythmBeat.cpp
+  AudioManager.cpp
+  Camera.cpp
+  Calculator.cpp
+  DebugGridLine.cpp
+  DebugUI.cpp
+  Dx11helper.cpp
+  Game.cpp
+  input.cpp
+  main.cpp
+  Car.cpp
+  CartWarning.cpp
+  Circle.cpp
+  Player.cpp
+  Enemy.cpp
+  GameSceneGunman.cpp
+  GameSceneRocket.cpp
+  GameSceneShot.cpp
+  GameSceneDodge.cpp
+  GameSceneText.cpp
+  GameSceneWait.cpp
+  ResultScene.cpp
+  Scene.cpp
+C:\Users\dorae\Desktop\HAL\class3\FindWork\就職作品プロジェクト\02_ResourceFile\input.cpp(42,25): warning C4100: 'hWnd': 参照されないパラメーター
+  (ソース ファイル '/02_ResourceFile/input.cpp' をコンパイルしています)
+  
+  TransitionBase.cpp
+  Wipe.cpp
+  Zoom.cpp
+  StaticMesh.cpp
+  MeshManager.cpp
+  Bullet.cpp
+C:\Users\dorae\Desktop\HAL\class3\FindWork\就職作品プロジェクト\02_ResourceFile\SceneFile\GameSceneGunman.cpp(25,5): error C3927: '->': 後続の戻り値の型は、関数以外の宣言子の後に許可されていません
+  (ソース ファイル '/02_ResourceFile/SceneFile/GameSceneGunman.cpp' をコンパイルしています)
+  
+C:\Users\dorae\Desktop\HAL\class3\FindWork\就職作品プロジェクト\02_ResourceFile\SceneFile\GameSceneGunman.cpp(25,20): error C3484: 構文エラー: 戻り値の型の前に '->' が必要です
+  (ソース ファイル '/02_ResourceFile/SceneFile/GameSceneGunman.cpp' をコンパイルしています)
+  
+C:\Users\dorae\Desktop\HAL\class3\FindWork\就職作品プロジェクト\02_ResourceFile\SceneFile\GameSceneGunman.cpp(25,21): error C3613: '->' の後に戻り型が指定されていません ('int' と見なされます)
+  (ソース ファイル '/02_ResourceFile/SceneFile/GameSceneGunman.cpp' をコンパイルしています)
+  
+C:\Users\dorae\Desktop\HAL\class3\FindWork\就職作品プロジェクト\02_ResourceFile\SceneFile\GameSceneGunman.cpp(25,5): error C4430: 型指定子がありません - int と仮定しました。メモ: C++ は int を既定値としてサポートしていません
+  (ソース ファイル '/02_ResourceFile/SceneFile/GameSceneGunman.cpp' をコンパイルしています)
+  
+C:\Users\dorae\Desktop\HAL\class3\FindWork\就職作品プロジェクト\02_ResourceFile\SceneFile\GameSceneGunman.cpp(25,5): error C2371: '`anonymous-namespace'::kSmashTransform': 再定義されています。異なる基本型です。
+  (ソース ファイル '/02_ResourceFile/SceneFile/GameSceneGunman.cpp' をコンパイルしています)
+      C:\Users\dorae\Desktop\HAL\class3\FindWork\就職作品プロジェクト\02_ResourceFile\SceneFile\GameSceneGunman.cpp(24,15):
+      '`anonymous-namespace'::kSmashTransform' の宣言を確認してください
+  
+C:\Users\dorae\Desktop\HAL\class3\FindWork\就職作品プロジェクト\02_ResourceFile\SceneFile\GameSceneGunman.cpp(25,21): error C2146: 構文エラー: ';' が、識別子 'SetPosition' の前に必要です。
+  (ソース ファイル '/02_ResourceFile/SceneFile/GameSceneGunman.cpp' をコンパイルしています)
+  
+C:\Users\dorae\Desktop\HAL\class3\FindWork\就職作品プロジェクト\02_ResourceFile\SceneFile\GameSceneGunman.cpp(26,5): error C3927: '->': 後続の戻り値の型は、関数以外の宣言子の後に許可されていません
+  (ソース ファイル '/02_ResourceFile/SceneFile/GameSceneGunman.cpp' をコンパイルしています)
+  
+C:\Users\dorae\Desktop\HAL\class3\FindWork\就職作品プロジェクト\02_ResourceFile\SceneFile\GameSceneGunman.cpp(26,20): error C3484: 構文エラー: 戻り値の型の前に '->' が必要です
+  (ソース ファイル '/02_ResourceFile/SceneFile/GameSceneGunman.cpp' をコンパイルしています)
+  
+C:\Users\dorae\Desktop\HAL\class3\FindWork\就職作品プロジェクト\02_ResourceFile\SceneFile\GameSceneGunman.cpp(26,21): error C3613: '->' の後に戻り型が指定されていません ('int' と見なされます)
+  (ソース ファイル '/02_ResourceFile/SceneFile/GameSceneGunman.cpp' をコンパイルしています)
+  
+C:\Users\dorae\Desktop\HAL\class3\FindWork\就職作品プロジェクト\02_ResourceFile\SceneFile\GameSceneGunman.cpp(26,5): error C4430: 型指定子がありません - int と仮定しました。メモ: C++ は int を既定値としてサポートしていません
+  (ソース ファイル '/02_ResourceFile/SceneFile/GameSceneGunman.cpp' をコンパイルしています)
+  
+C:\Users\dorae\Desktop\HAL\class3\FindWork\就職作品プロジェクト\02_ResourceFile\SceneFile\GameSceneGunman.cpp(26,5): error C2371: '`anonymous-namespace'::kSmashTransform': 再定義されています。異なる基本型です。
+  (ソース ファイル '/02_ResourceFile/SceneFile/GameSceneGunman.cpp' をコンパイルしています)
+      C:\Users\dorae\Desktop\HAL\class3\FindWork\就職作品プロジェクト\02_ResourceFile\SceneFile\GameSceneGunman.cpp(24,15):
+      '`anonymous-namespace'::kSmashTransform' の宣言を確認してください
+  
+C:\Users\dorae\Desktop\HAL\class3\FindWork\就職作品プロジェクト\02_ResourceFile\SceneFile\GameSceneGunman.cpp(26,21): error C2146: 構文エラー: ';' が、識別子 'SetRotation' の前に必要です。
+  (ソース ファイル '/02_ResourceFile/SceneFile/GameSceneGunman.cpp' をコンパイルしています)
+  
+C:\Users\dorae\Desktop\HAL\class3\FindWork\就職作品プロジェクト\02_ResourceFile\SceneFile\GameSceneGunman.cpp(27,5): error C3927: '->': 後続の戻り値の型は、関数以外の宣言子の後に許可されていません
+  (ソース ファイル '/02_ResourceFile/SceneFile/GameSceneGunman.cpp' をコンパイルしています)
+  
+C:\Users\dorae\Desktop\HAL\class3\FindWork\就職作品プロジェクト\02_ResourceFile\SceneFile\GameSceneGunman.cpp(27,20): error C3484: 構文エラー: 戻り値の型の前に '->' が必要です
+  (ソース ファイル '/02_ResourceFile/SceneFile/GameSceneGunman.cpp' をコンパイルしています)
+  
+C:\Users\dorae\Desktop\HAL\class3\FindWork\就職作品プロジェクト\02_ResourceFile\SceneFile\GameSceneGunman.cpp(27,21): error C3613: '->' の後に戻り型が指定されていません ('int' と見なされます)
+  (ソース ファイル '/02_ResourceFile/SceneFile/GameSceneGunman.cpp' をコンパイルしています)
+  
+C:\Users\dorae\Desktop\HAL\class3\FindWork\就職作品プロジェクト\02_ResourceFile\SceneFile\GameSceneGunman.cpp(27,5): error C4430: 型指定子がありません - int と仮定しました。メモ: C++ は int を既定値としてサポートしていません
+  (ソース ファイル '/02_ResourceFile/SceneFile/GameSceneGunman.cpp' をコンパイルしています)
+  
+C:\Users\dorae\Desktop\HAL\class3\FindWork\就職作品プロジェクト\02_ResourceFile\SceneFile\GameSceneGunman.cpp(27,5): error C2371: '`anonymous-namespace'::kSmashTransform': 再定義されています。異なる基本型です。
+  (ソース ファイル '/02_ResourceFile/SceneFile/GameSceneGunman.cpp' をコンパイルしています)
+      C:\Users\dorae\Desktop\HAL\class3\FindWork\就職作品プロジェクト\02_ResourceFile\SceneFile\GameSceneGunman.cpp(24,15):
+      '`anonymous-namespace'::kSmashTransform' の宣言を確認してください
+  
+C:\Users\dorae\Desktop\HAL\class3\FindWork\就職作品プロジェクト\02_ResourceFile\SceneFile\GameSceneGunman.cpp(27,21): error C2146: 構文エラー: ';' が、識別子 'SetScale' の前に必要です。
+  (ソース ファイル '/02_ResourceFile/SceneFile/GameSceneGunman.cpp' をコンパイルしています)
+  
+  Cube.cpp
+  Light.cpp
+  Model.cpp
+C:\Users\dorae\Desktop\HAL\class3\FindWork\就職作品プロジェクト\02_ResourceFile\SceneFile\GameSceneRocket.cpp(55,1): warning C4702: 制御が渡らないコードです。
+  Object.cpp
+  Sphere.cpp
+  Skydome.cpp
+  Renderer.cpp
+  RenderTarget.cpp
+  GameSceneExe.cpp
+  TitleScene.cpp
+  Fade.cpp
+  SnapshotOverlay.cpp
+  TransScene.cpp
+  Shader.cpp
+  ShaderManager.cpp
+  Square.cpp
+  Texture.cpp
+  TextureManager.cpp
+  Transform.cpp
+  utility.cpp
+  imgui.cpp
+  imgui_demo.cpp
+  imgui_draw.cpp
+  imgui_impl_dx11.cpp
+  imgui_impl_win32.cpp
+  imgui_tables.cpp
+  imgui_widgets.cpp
