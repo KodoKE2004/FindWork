@@ -119,52 +119,54 @@ void Bomber::SetFillRatio(float ratio)
 
 void Bomber::AdjustScaleByBeatTotal(int beatTotal, int baseBeat)
 {
-    if (!m_HasBase || baseBeat <= 0) {
-        return;
-    }
+    if (!m_Rope || baseBeat <= 0) return;
 
-    const float clampedBeat = std::clamp(static_cast<float>(beatTotal), 0.0f, static_cast<float>(baseBeat));
-    m_BaseRopeU = kDefaultRopeU + (kOneBeatFillRate * clampedBeat);
-    
+    float clamped = std::clamp(static_cast<float>(beatTotal), 0.0f, static_cast<float>(baseBeat));
+
+    // ここは「ベース表示率」として確定させる（0..1に収める）
+    float baseRatio = kDefaultRopeU + kOneBeatFillRate * clamped;
+    m_BaseRopeU = std::clamp(baseRatio, 0.0f, 1.0f);
+
     m_BaseScale = kDefaultScale;
-    m_BasePos   = kDefaultPos;
+    m_BasePos = kDefaultPos;
     m_BaseLeftX = m_BasePos.x - (m_BaseScale.x * 0.5f);
 
     m_FillRatio = 1.0f;
-    UpdateUV();
-    ApplyFillTransform();
+    ApplyFillTransform(); // UpdateUVは不要にする
 }
 
 void Bomber::UpdateUV()
 {
     constexpr float minRatio = 0.001f;
-    float width  = max(m_BaseRopeU, minRatio);
-    float splitX = m_BaseRopeU / width;
+    const float ratio  = max(m_BaseRopeU, minRatio);
+    const float splitX = 1.0f / ratio;
 
-    m_Rope->SetUV(splitX , 1.0f, 1.0f, 1.0f);
+    m_Rope->SetUV(1.0f, 1.0f, splitX, 1.0f);
 }
 
 void Bomber::ApplyFillTransform()
 {
+    if (!m_Rope || !m_HasBase) return;
 
-    if (!m_Rope || !m_HasBase) {
-        return;
-    }
+    float baseRatio = std::clamp(m_BaseRopeU, 0.0f, 1.0f);
+    float fill = std::clamp(m_FillRatio, 0.0f, 1.0f);
 
-    const float clampedFill = std::clamp(m_FillRatio, 0.0f, 1.0f);
-    const float removedU = m_BaseRopeU * (1.0f - clampedFill);
-    const float currentU = m_BaseRopeU - removedU;
+    // ★最終的に見せたい表示率（これ一本）
+    float visibleRatio = baseRatio * fill;
 
+    // UV：左固定で右を切る（SetUVの引数順はあなたのSquareに合わせて調整）
+    // 典型: SetUV(u0, v0, u1, v1)
+    m_Rope->SetUV(1.0f, 1.0f, visibleRatio, 1.0f);
+
+    // Scale：横幅だけ visibleRatio
     NVector3 newScale = m_BaseScale;
-    newScale.x = m_BaseScale.x * currentU;
+    newScale.x = m_BaseScale.x * visibleRatio;
     m_Rope->SetScale(newScale);
 
-    const float newHalfW = newScale.x * 0.5f;
-    const float left = m_BaseLeftX;
-
+    // Pos：左端固定（中心基準)
+    float newHalfW = newScale.x * 0.5f;
     NVector3 newPos = m_BasePos;
-    newPos.x = left + newHalfW;
-
+    newPos.x = m_BaseLeftX + newHalfW;
     m_Rope->SetPos(newPos);
 }
 
