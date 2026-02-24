@@ -34,12 +34,14 @@ namespace
         return transform;
     }();
 
-    NVector3 kBaseScaleRedy = {
-        NVector3(150.0f, 300.0f, 1.0f)
+    NVector3 kBaseScaleRedy[] = {
+        NVector3(150.0f, 300.0f, 1.0f),
+        NVector3(200.0f, 300.0f, 1.0f)
     };
 
-    NVector3 kBaseScaleWanted = {
-        NVector3(300.0f, 300.0f, 1.0f)
+    NVector3 kBaseScaleWanted[] = {
+        NVector3(300.0f, 300.0f, 1.0f),
+        NVector3(300.0f, 350.0f, 1.0f)
     };
     
     std::array<size_t, 3> ShuffleButtonIndices()
@@ -117,6 +119,7 @@ void GameSceneGunman::TargetMovePosition()
                     TextureManager* textureMar = Game::GetInstance();
                     mouseObject->SetTexture(textureMar->GetTexture("GameScene/SmashStar.png"));
                     mouseObject->SetScale (NVector3(100.0f, 100.0f, 1.0f));
+                    mouseObject->SetUV( 1.0f, 1.0f, 1.0f, 1.0f);
                 }
             }
         };
@@ -162,6 +165,23 @@ void GameSceneGunman::ShotReaction()
         m_RelationData.isClear = true;
         m_isShot               = true;
         m_MoveUpElapsed = 0.0f;
+
+        TextureManager* textureMgr = Game::GetInstance();
+        float u,v,splitX,splitY;
+        u = 1.0f;
+        v = 1.0f;
+        splitX = 2.0f;
+        splitY = 1.0f;
+
+        for (int i = 0; i < REDY_SLOT::SLOT_SIZE; ++i) {
+            m_RedyList[i]->SetTexture(textureMgr->GetTexture("GameScene/RedyReaction.png"));
+            m_RedyList[i]->SetUV( u, v, splitX, splitY);
+            m_RedyList[i]->SetScale(kBaseScaleRedy[1]);
+        }
+        m_Oldman->SetTexture(textureMgr->GetTexture("GameScene/OldmanReaction.png"));
+        m_Oldman->SetUV( u, v, splitX, splitY);
+        m_Oldman->SetScale(kBaseScaleWanted[1]);
+
         return;
     }
 
@@ -176,7 +196,21 @@ void GameSceneGunman::ShotReaction()
             m_isShot             = true;
             m_ShotIndex = i;
             m_MoveUpElapsed = 0.0f;
-            break;
+
+            TextureManager* textureMgr = Game::GetInstance();
+            float u, v, splitX, splitY;
+            u = 2.0f;
+            v = 1.0f;
+            splitX = 2.0f;
+            splitY = 1.0f;
+
+            m_RedyList[1 - i]->SetTexture(textureMgr->GetTexture("GameScene/RedyReaction.png"));
+            m_RedyList[1 - i]->SetUV(u, v, splitX, splitY);
+            m_RedyList[1 - i]->SetScale(kBaseScaleRedy[1]);
+
+            m_Oldman->SetTexture(textureMgr->GetTexture("GameScene/OldmanReaction.png"));
+            m_Oldman->SetUV(u, v, splitX, splitY);
+            m_Oldman->SetScale(kBaseScaleWanted[1]);
         }
     }
     
@@ -270,7 +304,7 @@ void GameSceneGunman::Initialize()
             m_RedyList[i] = AddObject<MouseObject>(instance.GetCamera());
             m_RedyList[i]->SetName("m_Redy" + std::to_string(i));
             m_RedyList[i]->SetTexture(textureMar->GetTexture("GameScene/GunmanRedy.png"));
-            m_RedyList[i]->SetScale(kBaseScaleRedy);
+            m_RedyList[i]->SetScale(kBaseScaleRedy[0]);
             m_RedyList[i]->SetPos(kStartPos[buttonIndices[i]]);
         }
         // ÉGÉlÉ~Å[ÇÃìoò^
@@ -279,7 +313,7 @@ void GameSceneGunman::Initialize()
             m_Oldman = AddObject<MouseObject>(instance.GetCamera());
             m_Oldman->SetName("m_Oldman");
             m_Oldman->SetTexture(textureMar->GetTexture("GameScene/GunmanOldman.png"));
-            m_Oldman->SetScale(kBaseScaleWanted);
+            m_Oldman->SetScale(kBaseScaleWanted[0]);
             m_Oldman->SetPos(kStartPos[buttonIndices[i]]);
         }
     }

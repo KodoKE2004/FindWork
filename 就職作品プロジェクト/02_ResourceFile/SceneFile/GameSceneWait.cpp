@@ -40,7 +40,7 @@ namespace
         { SCENE_NO::GAME_SHOT   , &PushGameStage<GameSceneShot>   },
         { SCENE_NO::GAME_TEXT   , &PushGameStage<GameSceneText>   },
         // { SCENE_NO::GAME_ROCKET , &PushGameStage<GameSceneRocket> },
-        // { SCENE_NO::GAME_GUNMAN , &PushGameStage<GameSceneGunman> },
+        { SCENE_NO::GAME_GUNMAN , &PushGameStage<GameSceneGunman> },
     } };
 
     using StageList = std::vector<SCENE_NO>;
@@ -99,7 +99,7 @@ namespace
         "Theme/KO.png",
         "Theme/Convey.png",
         // "Theme/Board.png",
-        // "Theme/Board.png",
+        "Theme/Defeat.png",
     };
 
     const NVector3 kThemeScale[GAME_EXE_NUM] = {
@@ -107,7 +107,7 @@ namespace
         NVector3( 557.0f, 217.0f, 1.0f),
         NVector3( 554.0f, 198.0f, 1.0f),
         // NVector3( 554.0f, 198.0f, 1.0f),
-        // NVector3( 554.0f, 198.0f, 1.0f),
+        NVector3( 554.0f, 198.0f, 1.0f),
     };
 
     constexpr float kStageTransitionDelay = 1.0f;
@@ -139,8 +139,6 @@ void GameSceneWait::Initialize()
     // 引き渡しデータのシーンの整理
     m_RelationData.ClearTransitionTexture();
 
-
-
     // スカイドーム初期化
     m_Skydome = AddObject<Skydome>(instance.GetCamera());
     m_Skydome->SetName("m_Skydome");
@@ -151,15 +149,11 @@ void GameSceneWait::Initialize()
     // 難易度アップ処理 
     ++m_RelationData.stageCount;
 
-
-
     m_TimerList.clear();
     SetTimer(&m_Tick);
     SetTimer(&m_DecrementLife.timer);
     m_WasPlayBGM         = false;
     m_QuarterAdvance     = 0;
-
-    
 
     // ライフの数だけハートの生成
     const float lifePosX = - 200.0f;
@@ -212,7 +206,6 @@ void GameSceneWait::Initialize()
         m_Theme->SetScaleBase(kThemeScale[path]);
         m_Theme->SetPos(0.0f,0.0f,0.0f);
     }
-
 
     RegisterAudio();
 
@@ -521,7 +514,7 @@ void GameSceneWait::StartNextStageTransition()
     case SCENE_NO::GAME_SHOT  : ChangeScenePush<GameSceneShot>   (WaitToGame); break;
     case SCENE_NO::GAME_TEXT  : ChangeScenePush<GameSceneText>   (WaitToGame); break;
     // case SCENE_NO::GAME_ROCKET: ChangeScenePush<GameSceneRocket>(WaitToGame); break;
-    // case SCENE_NO::GAME_GUNMAN: ChangeScenePush<GameSceneRocket>(WaitToGame); break;
+    case SCENE_NO::GAME_GUNMAN: ChangeScenePush<GameSceneGunman>(WaitToGame); break;
     default: return;
     }
 }
