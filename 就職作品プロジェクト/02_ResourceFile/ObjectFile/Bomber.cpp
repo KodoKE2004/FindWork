@@ -9,8 +9,8 @@ namespace
     const NVector3 kDefaultPos   = NVector3(-  10.0f, -285.0f, 0.0f);
     const NVector3 kDefaultScale = NVector3( 1100.0f,  100.0f, 1.0f);
 
-    const float kDefaultRopeU    = 0.045f;
-    const float kOneBeatFillRate = 0.0311f; // 1拍でFillRatioが0.311減る（=4拍で0になる）ようにする
+    static constexpr float kDefaultRopeU    = 0.045f;
+    static constexpr float kOneBeatFillRate = 0.0311f; // 1拍でFillRatioが0.311減る（=4拍で0になる）ようにする
 }
 
 Bomber::Bomber(Camera& cam) : Square(cam)
@@ -45,15 +45,14 @@ void Bomber::Initialize()
     m_Number->SetName("m_Number");
 
 
-    m_Rope->SetPos  (kDefaultPos  );
-    m_Rope->SetScale(kDefaultScale);
+    m_BasePos = kDefaultPos;
+    m_BaseScale = kDefaultScale;
+    m_BaseLeftX = m_BasePos.x - (m_BaseScale.x * 0.5f);
 
-    m_BasePos     = kDefaultPos;
-    m_BaseScale   = kDefaultScale;
-    m_HasBase     = true;
-    m_isReadyExpo = false;
+    m_BaseRopeU = 1.0f;   // baseRatio
+    m_FillRatio = 1.0f;   // fillRatio
+    m_HasBase = true;
     
-    UpdateUV();
     ApplyFillTransform();
 }
 
@@ -106,14 +105,9 @@ void Bomber::CountDown()
 void Bomber::SetFillRatio(float ratio)
 {
     float clamped = std::clamp(ratio, 0.0f, 1.0f);
-    if(std::abs(m_FillRatio - clamped) < 0.001f)
-    {
-        return;
-    }
+    if (std::abs(m_FillRatio - clamped) < 0.001f) return;
 
     m_FillRatio = clamped;
-    
-    UpdateUV();
     ApplyFillTransform();
 }
 
@@ -121,18 +115,19 @@ void Bomber::AdjustScaleByBeatTotal(int beatTotal, int baseBeat)
 {
     if (!m_Rope || baseBeat <= 0) return;
 
-    float clamped = std::clamp(static_cast<float>(beatTotal), 0.0f, static_cast<float>(baseBeat));
+    // 5小節=1.0 とした時の「最大表示率」
+    float baseRatio = std::clamp(static_cast<float>(beatTotal) / static_cast<float>(baseBeat),
+        0.0f, 1.0f);
 
-    // ここは「ベース表示率」として確定させる（0..1に収める）
-    float baseRatio = kDefaultRopeU + kOneBeatFillRate * clamped;
-    m_BaseRopeU = std::clamp(baseRatio, 0.0f, 1.0f);
+    m_BaseRopeU = baseRatio;
 
-    m_BaseScale = kDefaultScale;
+    // ベースは固定（5小節用のpos/scaleが基準）
     m_BasePos = kDefaultPos;
+    m_BaseScale = kDefaultScale;
     m_BaseLeftX = m_BasePos.x - (m_BaseScale.x * 0.5f);
+    m_HasBase = true;
 
-    m_FillRatio = 1.0f;
-    ApplyFillTransform(); // UpdateUVは不要にする
+    ApplyFillTransform();
 }
 
 void Bomber::UpdateUV()
@@ -158,16 +153,21 @@ void Bomber::ApplyFillTransform()
     // 典型: SetUV(u0, v0, u1, v1)
     m_Rope->SetUV(1.0f, 1.0f, visibleRatio, 1.0f);
 
-    // Scale：横幅だけ visibleRatio
-    NVector3 newScale = m_BaseScale;
-    newScale.x = m_BaseScale.x * visibleRatio;
-    m_Rope->SetScale(newScale);
+     // -----------------------------
+     //   Scale（横幅だけ visibleRatio）
+     // -----------------------------
+    NVector3 s = m_BaseScale;
+    s.x = m_BaseScale.x * visibleRatio;
+    // 太さも「実ロープ部分だけ」にしたいならこれもアリ（任意）
+    // s.y = m_BaseScale.y * (kRopeV1 - kRopeV0);
+    m_Rope->SetScale(s);
 
-    // Pos：左端固定（中心基準)
-    float newHalfW = newScale.x * 0.5f;
-    NVector3 newPos = m_BasePos;
-    newPos.x = m_BaseLeftX + newHalfW;
-    m_Rope->SetPos(newPos);
+    // -----------------------------
+    //   Pos（左端固定。中心座標前提）
+    // -----------------------------
+    NVector3 p = m_BasePos;
+    p.x = m_BaseLeftX + (s.x * 0.5f);
+    m_Rope->SetPos(p);
 }
 
 void Bomber::CountDownTexture()
