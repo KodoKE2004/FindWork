@@ -125,24 +125,23 @@ void Bomber::AdjustScaleByBeatTotal(int beatTotal, int baseBeat)
 
     const float clampedBeat = std::clamp(static_cast<float>(beatTotal), 0.0f, static_cast<float>(baseBeat));
     m_BaseRopeU = kDefaultRopeU + (kOneBeatFillRate * clampedBeat);
-    m_FillRatio = m_BaseRopeU;
-
-    m_BaseLeftX = m_BasePos.x - (m_BaseScale.x * 0.5f);
     
     m_BaseScale = kDefaultScale;
     m_BasePos   = kDefaultPos;
+    m_BaseLeftX = m_BasePos.x - (m_BaseScale.x * 0.5f);
 
-
-    float ropePosX = m_BaseLeftX + (m_BaseScale.x * m_BaseRopeU * 0.5f);
+    m_FillRatio = 1.0f;
+    UpdateUV();
+    ApplyFillTransform();
 }
 
 void Bomber::UpdateUV()
 {
     constexpr float minRatio = 0.001f;
-    float width = max(m_FillRatio, minRatio);
+    float width  = max(m_BaseRopeU, minRatio);
     float splitX = m_BaseRopeU / width;
 
-    m_Rope->SetUV(1.0f, 1.0f, splitX, 1.0f);
+    m_Rope->SetUV(splitX , 1.0f, 1.0f, 1.0f);
 }
 
 void Bomber::ApplyFillTransform()
@@ -152,23 +151,21 @@ void Bomber::ApplyFillTransform()
         return;
     }
 
-    
-    constexpr float minRatio = 0.0f;
-    float widthRatio = max(m_FillRatio, minRatio);
+    const float clampedFill = std::clamp(m_FillRatio, 0.0f, 1.0f);
+    const float removedU = m_BaseRopeU * (1.0f - clampedFill);
+    const float currentU = m_BaseRopeU - removedU;
 
-    
-    NVector3 newScale = kDefaultScale;
-    newScale.x = kDefaultScale.x * (m_BaseRopeU);
+    NVector3 newScale = m_BaseScale;
+    newScale.x = m_BaseScale.x * currentU;
     m_Rope->SetScale(newScale);
 
-    float halfW = kDefaultScale.x * 0.5f;
-    float newHalfW = newScale.x   * 0.5f;
-    float left  = kDefaultPos.x   - halfW;
-    NVector3 newPos = kDefaultPos;
+    const float newHalfW = newScale.x * 0.5f;
+    const float left = m_BaseLeftX;
+
+    NVector3 newPos = m_BasePos;
     newPos.x = left + newHalfW;
 
     m_Rope->SetPos(newPos);
-
 }
 
 void Bomber::CountDownTexture()

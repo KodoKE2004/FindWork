@@ -13,6 +13,7 @@ private:
     NVector3 m_BasePos{};
     NVector3 m_BaseScale{};
     float    m_BaseRopeU = 1.0f;
+    float    m_FillBomberU = 0.0311f;
 
     float    m_BaseLeftX = 0.0f;
     bool     m_HasBase = false;
@@ -54,11 +55,12 @@ public:
     }
 
     float GetBomberU() const {
-        if (!m_HasBase || m_BaseRopeU <= 0.0f) {
+        if (!m_HasBase || m_FillBomberU <= 0.0f) {
             return 0.0f;
         }
-        return m_BaseRopeU;
+        return m_FillBomberU;
     }
+
 private:
     void UpdateUV();
 
