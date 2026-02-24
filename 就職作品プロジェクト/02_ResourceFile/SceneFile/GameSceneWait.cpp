@@ -168,7 +168,7 @@ void GameSceneWait::Initialize()
     m_LifeBaseScale = NVector3(100.0f, 100.0f, 1.0f);
     m_ShouldTransitionToStage = false;
     m_wasDecrementLife        = false;
-    m_isPendingBpmChange = false;
+    m_isPendingBpmChange      = false;
 
     m_LifeGame.clear();
     m_LifeCount = m_RelationData.gameLife;
@@ -427,10 +427,10 @@ void GameSceneWait::GameUIMovement(int elapsedBeat)
     }
 
     int kStartWaitBeat      = 2  + phaseBeats;
-    int kSlideInEndBeat     = 8  + phaseBeats;    // 2 wait + 6 move
+    int kSlideInEndBeat     = 8  + phaseBeats;    //  2 wait + 6 move
     int kCenterWaitEndBeat  = 24 + phaseBeats;   // +16 wait
-    int kSlideOutEndBeat    = 30 + phaseBeats;   // +6 move
-    int kSequenceEndBeat    = 32 + phaseBeats;   // +2 wait
+    int kSlideOutEndBeat    = 30 + phaseBeats;   // + 6 move
+    int kSequenceEndBeat    = 32 + phaseBeats;   // + 2 wait
 
     if (elapsedBeat < kStartWaitBeat)
     {
@@ -449,26 +449,26 @@ void GameSceneWait::GameUIMovement(int elapsedBeat)
 
     if (elapsedBeat < kSlideInEndBeat)
     {
+        if (m_isPendingBpmChange) {
+            RhythmBeatConst beatConfig{};
+            const float speedUpBpmIncrease = Game::GetSpeedUpBpmIncrease();
+            if (m_CurrentGamePhase == GAME_PHASE::DO_UP_SPEED) {
+                beatConfig.Setup(Game::GetBgmBpm() + speedUpBpmIncrease);
+            }
+            else if (m_CurrentGamePhase == GAME_PHASE::DO_UP_DIFFICULTY) {
+                beatConfig.Setup(Game::GetBgmBpm() - speedUpBpmIncrease);
+            }
+
+            auto& rhythmBeat = Game::GetRhythmBeat();
+            rhythmBeat.Initialize(beatConfig, false);
+            rhythmBeat.SetElapsedBeat(MeasureOne);
+            Game::SetBgmBpm(beatConfig.m_Bpm);
+            m_isPendingBpmChange = false;
+            m_GameUIMovementTime = rhythmBeat.GetBeatConst().secondsPerBeat * 6;
+        }
         if (m_CurrentUIPhase != UI_PHASE::SLIDE_IN)
         {
             m_CurrentUIPhase = UI_PHASE::SLIDE_IN;
-            if (m_isPendingBpmChange) {
-                RhythmBeatConst beatConfig{};
-                const float speedUpBpmIncrease = Game::GetSpeedUpBpmIncrease();
-                if (m_CurrentGamePhase == GAME_PHASE::DO_UP_SPEED) {
-                    beatConfig.Setup(Game::GetBgmBpm() + speedUpBpmIncrease);
-                }
-                else if (m_CurrentGamePhase == GAME_PHASE::DO_UP_DIFFICULTY) {
-                    beatConfig.Setup(Game::GetBgmBpm() - speedUpBpmIncrease);
-                }
-
-                auto& rhythmBeat = Game::GetRhythmBeat();
-                rhythmBeat.Initialize(beatConfig, false);
-                rhythmBeat.SetElapsedBeat(MeasureOne);
-                Game::SetBgmBpm(beatConfig.m_Bpm);
-                m_isPendingBpmChange = false;
-
-            }
             m_GameUIMoveValueX = kGameUICenterPos - kGameUIStartPos;
             m_GameUIMovementElapsed = 0.0f;
             m_GameUI->SetPos(kGameUIStartPos, 50.0f, 0.0f);

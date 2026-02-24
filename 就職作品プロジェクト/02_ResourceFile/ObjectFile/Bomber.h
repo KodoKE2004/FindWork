@@ -62,7 +62,6 @@ public:
     }
 
 private:
-    void UpdateUV();
 
     // Object‚Ì¶’[‚ğŠî€‚ÉTexture‚ÌUV‚É‡‚í‚¹‚Ä
     // Pos‚ÆScale‚ğ•â³

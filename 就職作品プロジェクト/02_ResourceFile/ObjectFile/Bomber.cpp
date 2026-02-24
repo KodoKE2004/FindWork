@@ -130,15 +130,6 @@ void Bomber::AdjustScaleByBeatTotal(int beatTotal, int baseBeat)
     ApplyFillTransform();
 }
 
-void Bomber::UpdateUV()
-{
-    constexpr float minRatio = 0.001f;
-    const float ratio  = max(m_BaseRopeU, minRatio);
-    const float splitX = 1.0f / ratio;
-
-    m_Rope->SetUV(1.0f, 1.0f, splitX, 1.0f);
-}
-
 void Bomber::ApplyFillTransform()
 {
     if (!m_Rope || !m_HasBase) return;
@@ -151,7 +142,8 @@ void Bomber::ApplyFillTransform()
 
     // UV：左固定で右を切る（SetUVの引数順はあなたのSquareに合わせて調整）
     // 典型: SetUV(u0, v0, u1, v1)
-    m_Rope->SetUV(1.0f, 1.0f, visibleRatio, 1.0f);
+    m_Rope->SetUV(1.0f, 1.0f, 1.0f, 1.0f);
+    m_Rope->SetUVRect(0.0f, 0.0f, visibleRatio, 1.0f);
 
      // -----------------------------
      //   Scale（横幅だけ visibleRatio）

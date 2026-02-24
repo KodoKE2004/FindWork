@@ -37,26 +37,24 @@ void Square::Initialize()
 {
 
 	// 頂点データ
-	std::vector<VERTEX_3D> vertices;
+	m_Vertices.resize(4);
 
-	vertices.resize(4);
+	m_Vertices[0].position = NVector3(-0.5f,  0.5f, 0.0f);
+	m_Vertices[1].position = NVector3( 0.5f,  0.5f, 0.0f);
+	m_Vertices[2].position = NVector3(-0.5f, -0.5f, 0.0f);
+	m_Vertices[3].position = NVector3( 0.5f, -0.5f, 0.0f);
 
-	vertices[0].position = NVector3(-0.5f,  0.5f, 0.0f);
-	vertices[1].position = NVector3( 0.5f,  0.5f, 0.0f);
-	vertices[2].position = NVector3(-0.5f, -0.5f, 0.0f);
-	vertices[3].position = NVector3( 0.5f, -0.5f, 0.0f);
+	m_Vertices[0].color = Color(1.0f, 1.0f, 1.0f, 1.0f);
+	m_Vertices[1].color = Color(1.0f, 1.0f, 1.0f, 1.0f);
+	m_Vertices[2].color = Color(1.0f, 1.0f, 1.0f, 1.0f);
+	m_Vertices[3].color = Color(1.0f, 1.0f, 1.0f, 1.0f);
 
-	vertices[0].color = Color(1.0f, 1.0f, 1.0f, 1.0f);
-	vertices[1].color = Color(1.0f, 1.0f, 1.0f, 1.0f);
-	vertices[2].color = Color(1.0f, 1.0f, 1.0f, 1.0f);
-	vertices[3].color = Color(1.0f, 1.0f, 1.0f, 1.0f);
+	m_Vertices[0].uv = Vector2(0.0f, 0.0f);
+	m_Vertices[1].uv = Vector2(1.0f, 0.0f);
+	m_Vertices[2].uv = Vector2(0.0f, 1.0f);
+	m_Vertices[3].uv = Vector2(1.0f, 1.0f);
 
-	vertices[0].uv = Vector2(0.0f, 0.0f);
-	vertices[1].uv = Vector2(1.0f, 0.0f);
-	vertices[2].uv = Vector2(0.0f, 1.0f);
-	vertices[3].uv = Vector2(1.0f, 1.0f);
-
-	m_VertexBuffer.Create(vertices);
+	m_VertexBuffer.Create(m_Vertices);
 
 	std::vector<unsigned int> indices;
 	indices.resize(4);
@@ -247,4 +245,26 @@ void Square::SetUV(const float& nu = 1.0f, const float& nv = 1.0f, const float& 
 	m_NumV = nv;
 	m_SplitX = sx;
 	m_SplitY = sy;
+}
+
+void Square::SetUVRect(float u0, float v0, float u1, float v1)
+{
+	if (m_Vertices.size() < 4)
+	{
+		return;
+	}
+
+	u0 = std::clamp(u0, 0.0f, 1.0f);
+	v0 = std::clamp(v0, 0.0f, 1.0f);
+	u1 = std::clamp(u1, 0.0f, 1.0f);
+	v1 = std::clamp(v1, 0.0f, 1.0f);
+
+	// 頂点順:
+	// [0] 左上, [1] 右上, [2] 左下, [3] 右下
+	m_Vertices[0].uv = Vector2(u0, v0);
+	m_Vertices[1].uv = Vector2(u1, v0);
+	m_Vertices[2].uv = Vector2(u0, v1);
+	m_Vertices[3].uv = Vector2(u1, v1);
+
+	m_VertexBuffer.Modify(m_Vertices);
 }

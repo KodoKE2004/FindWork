@@ -101,9 +101,6 @@ void GameSceneText::Initialize()
     auto& rhythmBeat = Game::GetRhythmBeat();
     beatConfig.Setup(Game::GetBgmBpm(), 8, 8, 16, 8);
     rhythmBeat.Initialize(beatConfig, false, ONE_MEASURE * 4);
-    
-    // リズムの拍を参照するためリズム定義より後
-    GameSceneExe::Initialize();
 
     auto& instance = Game::GetInstance();
     TextureManager* textureMgr = instance; 

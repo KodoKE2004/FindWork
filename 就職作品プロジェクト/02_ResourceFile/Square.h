@@ -55,6 +55,7 @@ protected:
 	// 描画の為の情報（メッシュに関わる情報）
 	IndexBuffer m_IndexBuffer; // インデックスバッファ
 	VertexBuffer<VERTEX_3D> m_VertexBuffer; // 頂点バッファ
+	std::vector<VERTEX_3D>  m_Vertices;
 
 	Microsoft::WRL::ComPtr<ID3D11Buffer>		m_InstanceTransformCB;
 	std::vector<DirectX::SimpleMath::Vector4>	m_InstancePositionScale;
@@ -97,6 +98,7 @@ public:
 	void SetTexture(pShared<Texture> texture);
 	// UV座標を指定
 	void SetUV(const float& nu, const float& nv, const float& sx, const float& sy);
+	void SetUVRect(float u0, float v0, float u1, float v1);
 
 	Vector2 GetUV () const {
 		return Vector2(m_NumU, m_NumV);
