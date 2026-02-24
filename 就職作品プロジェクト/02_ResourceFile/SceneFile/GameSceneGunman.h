@@ -22,11 +22,15 @@ private:
     bool m_isCreateReactionSE = false;
     bool m_isShot = false;
     float m_MoveUpElapsed = 0.0f;  // 上昇に時間をカウント
+    float m_SubjectScaleElapsed = 0.0f;
+    bool m_isSubjectScaleUp = true;
+    NVector3 m_SubjectBaseScale = NVector3(1.0f, 1.0f, 1.0f);
     size_t m_ShotIndex = 0;        // 撃ったスロットのインデックス
 private:
     // 下から上に出現する
     void TargetMovePosition();
     void ShotReaction();
+    void UpdateSubjectScale(float tick);
 public:
     GameSceneGunman() = delete;
     GameSceneGunman(Camera& cam);

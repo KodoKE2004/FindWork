@@ -183,6 +183,31 @@ void GameSceneGunman::ShotReaction()
 
 }
 
+void GameSceneGunman::UpdateSubjectScale(float tick)
+{
+    if (!m_Subject) return;
+
+    const float duration = max(Game::GetRhythmBeat().GetOneBeat(), 0.01f);
+    m_SubjectScaleElapsed += tick;
+
+    if (m_SubjectScaleElapsed >= duration)
+    {
+        m_SubjectScaleElapsed -= duration;
+        m_isSubjectScaleUp = !m_isSubjectScaleUp;
+    }
+
+    const float progress = std::clamp(m_SubjectScaleElapsed / duration, 0.0f, 1.0f);
+    const float easedProgress = Calculator::Easing::EvaluateEasing(EASING_TYPE::IN_OUT_SINE, progress);
+
+    const float minScaleRatio = 1.0f;
+    const float maxScaleRatio = 1.3f;
+    const float scaleRatio = m_isSubjectScaleUp
+        ? (minScaleRatio + (maxScaleRatio - minScaleRatio) * easedProgress)
+        : (maxScaleRatio - (maxScaleRatio - minScaleRatio) * easedProgress);
+
+    m_Subject->SetScale(m_SubjectBaseScale * scaleRatio);
+}
+
 GameSceneGunman::GameSceneGunman(Camera& cam) : GameSceneExe(cam)
 {
 
@@ -203,6 +228,8 @@ void GameSceneGunman::Initialize()
     m_MoveUpElapsed = 0.0f;
     m_ShotIndex     = 0;
     m_isShot        = false;
+    m_SubjectScaleElapsed = 0.0f;
+    m_isSubjectScaleUp    = true;
 
     // リズムの定義
     RhythmBeatConst beatConfig{};
@@ -233,6 +260,7 @@ void GameSceneGunman::Initialize()
     m_Subject->SetName("m_Subject");
     m_Subject->SetPos  (-400.0f, 120.0f, 0.0f);
     m_Subject->SetScale( 200.0f, 200.0f, 1.0f);
+    m_SubjectBaseScale = m_Subject->GetScale();
     m_Subject->SetTexture(textureMar->GetTexture("GameScene/GunmanOldman.png"));
 
     // 位置をシャッフルして配置
@@ -302,7 +330,8 @@ void GameSceneGunman::Update(float tick)
     ShotReaction();
 
     // リズムをとって指名手配の方の画像をスケールさせる
-
+    UpdateSubjectScale(tick);
+    
 }
 
 void GameSceneGunman::Draw()
