@@ -307,6 +307,11 @@ void GameSceneWait::Update(float tick)
             m_WasPlayBGM = true;
         }
         
+        if (restBeat <= ONE_MEASURE)
+        {
+            m_isLastOneMeasure = true;
+        }
+
         // 残り一拍のタイミングでステージ遷移フラグを立てる
         if (restBeat <=  5 && m_RelationData.gameLife > 0)
         {
@@ -323,6 +328,11 @@ void GameSceneWait::Update(float tick)
             m_isLifeScaleUp = true;
             m_ScalingLifeDuration = rhythmBeat.GetBeatConst().secondsPerBeat * 0.25f;
         }
+        
+    }
+
+    if (m_isLastOneMeasure) 
+    {
         
     }
 
@@ -578,6 +588,11 @@ void GameSceneWait::ScalingLife()
             life->SetScale(targetScale);
         }
     }
+}
+
+void GameSceneWait::StageCountUIMovement()
+{
+    
 }
 
 

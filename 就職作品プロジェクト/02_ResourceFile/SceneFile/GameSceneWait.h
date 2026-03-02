@@ -32,9 +32,11 @@ class GameSceneWait : public Scene
 {
 private:
 
-    uint32_t				 m_LifeCount = 4;	// 自分のライフ数
-    vector<pShared<Square>>  m_LifeGame;		// ライフのオブジェクト格納用
-	pShared<Square>			 m_GameUI;			// ライフ減少時のパーティクルエミッター
+    uint32_t				 m_LifeCount = 4;	  // 自分のライフ数
+    vector<pShared<Square>>  m_LifeGame;		  // ライフのオブジェクト格納用
+	pShared<Square>			 m_GameUI;			  // ライフ減少時のパーティクルエミッター
+	std::array<pShared<Square>, 2> m_StageNumber; // ステージの進行カウント
+
 
     float m_Tick = 0.0f;
 	int	  m_QuarterAdvance = 0;
@@ -65,6 +67,7 @@ private:
     bool m_isLifeScaleUp		   = false;	// ライフ減少の演出でハートが大きくなっているかどうかのフラグ
     bool m_isLifeScaleDown		   = false;	// ライフ減少の演出でハートが小さくなっているかどうかのフラグ
 	bool m_isPendingBpmChange	   = false; // BPMの変更を行うフェーズか
+	bool m_isLastOneMeasure		   = false; // 残り一小節の検知
 
 private:
 	// Exeシーンの乱数選択を行う。
@@ -82,6 +85,9 @@ private:
 	void DecrementLife();
 	// ライフのスケーリング演出
 	void ScalingLife();
+	// ステージ数の更新演出
+	void StageCountUIMovement();
+
 public:
 	//================================
 	//		コンストラクタとデストラクタ
