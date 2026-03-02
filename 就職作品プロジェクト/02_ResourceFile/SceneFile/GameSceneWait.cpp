@@ -360,7 +360,7 @@ void GameSceneWait::Update(float tick)
     }
     if (m_ShouldTransitionToStage)
     {
-        StartNextStageTransition();
+        // StartNextStageTransition();
     }
 }
 

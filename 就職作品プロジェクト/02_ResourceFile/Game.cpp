@@ -141,7 +141,7 @@ void Game::Initialize()
 		SetBgmBpm(bgmConfig.bpm);
 	}
 
-	instance.m_SceneCurrent = std::make_shared<GameSceneGunman>(instance.GetCamera());		// タイトルシーンのインスタンスを生成
+	instance.m_SceneCurrent = std::make_shared<GameSceneWait>(instance.GetCamera());		// タイトルシーンのインスタンスを生成
 	instance.m_SceneCurrent->Initialize();
 }
 
@@ -357,7 +357,6 @@ float Game::GetBgmBpm()
 
 	return m_RhythmBeat.GetBpm();
 }
-
 
 void Game::SetDifficultyStageInterval(int interval)
 {
