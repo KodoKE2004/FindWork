@@ -12,6 +12,10 @@
 
 GAME_PHASE GameSceneWait::m_CurrentGamePhase = GAME_PHASE::START;
 
+//====================================
+//            定数定義
+//====================================
+
 namespace
 {
     // 二小節の拍数を基準にしているため、MeasureTwo = 32.0f 
@@ -123,6 +127,10 @@ GameSceneWait::GameSceneWait(Camera& cam) : Scene(cam)
 {
 }
 
+//====================================
+//              初期化処理
+//====================================
+
 void GameSceneWait::Initialize()
 {
     DebugUI::TEXT_CurrentScene = "GameSceneWait";
@@ -214,7 +222,7 @@ void GameSceneWait::Initialize()
     //--------------------------------------------------------------------
     RhythmBeatConst beatConfig{};
     beatConfig.Setup(Game::GetBgmBpm());
-    m_isBootGameUI = false;
+    m_UIGame.isBoot = false;
 
     // ゲームのリズムの初期化
     int gameBeats = MeasureTwo;
@@ -228,7 +236,7 @@ void GameSceneWait::Initialize()
             Debug::Log("=====  ゲームオーバー  =====");
             gameBeats += MeasureOne;
             m_CurrentGamePhase = GAME_PHASE::FINISH;
-            m_isBootGameUI = true;
+            m_UIGame.isBoot = true;
             RegisterGameUI(textureMgr->GetTexture("GameGuidance.png"), 2.0f, 2.0f);
         }
     }
@@ -238,7 +246,7 @@ void GameSceneWait::Initialize()
         Debug::Log("[[定期]]=====  ゲーム開始  =====");
         gameBeats += MeasureTwo / 2; 
         m_CurrentGamePhase = GAME_PHASE::START;
-        m_isBootGameUI = true;
+        m_UIGame.isBoot = true;
         RegisterGameUI(textureMgr->GetTexture("GameGuidance.png"), 1.0f, 1.0f);
     }
 
@@ -258,7 +266,7 @@ void GameSceneWait::Initialize()
         // 難易度アップのときは長めに待つ
         gameBeats += MeasureTwo;
         m_CurrentGamePhase = GAME_PHASE::DO_UP_DIFFICULTY;
-        m_isBootGameUI = true;
+        m_UIGame.isBoot = true;
         RegisterGameUI(textureMgr->GetTexture("GameGuidance.png"), 1.0f, 2.0f);
         Debug::Log("[[定期]] 難易度アップ");
 
@@ -270,7 +278,7 @@ void GameSceneWait::Initialize()
         m_isPendingBpmChange = true;
         gameBeats += MeasureTwo;
         m_CurrentGamePhase = GAME_PHASE::DO_UP_SPEED;
-        m_isBootGameUI = true;
+        m_UIGame.isBoot = true;
         RegisterGameUI(textureMgr->GetTexture("GameGuidance.png"), 2.0f, 1.0f);
 
     }
@@ -284,6 +292,10 @@ void GameSceneWait::Initialize()
     Debug::Log("===== クリアステージ数 : " + std::to_string(m_RelationData.stageCount) + " =====");
 
 }
+
+//====================================
+//              更新処理
+//====================================
 
 void GameSceneWait::Update(float tick)
 {   
@@ -309,7 +321,9 @@ void GameSceneWait::Update(float tick)
         
         if (restBeat <= ONE_MEASURE)
         {
-            m_isLastOneMeasure = true;
+            m_UIStage.isBoot       = true;
+            // 四拍の長さ
+            m_UIStage.movementTime = rhythmBeat.GetOneBeat() * 2.0f;
         }
 
         // 残り一拍のタイミングでステージ遷移フラグを立てる
@@ -331,7 +345,7 @@ void GameSceneWait::Update(float tick)
         
     }
 
-    if (m_isLastOneMeasure) 
+    if (m_UIGame.isBoot)
     {
         
     }
@@ -339,7 +353,7 @@ void GameSceneWait::Update(float tick)
     // ライフのスケーリング演出
     if (m_isLifeScaleUp || m_isLifeScaleDown)
     {
-        ScalingLife();
+        LifeScaling();
     }
 
     if (rhythmBeat.GetBeatElapsed() >= rhythmBeat.GetBeatTotal() - 3)
@@ -354,7 +368,7 @@ void GameSceneWait::Update(float tick)
     {
         // ライフを減らす
         m_RelationData.gameLife -= 1u;
-        DecrementLife();
+        LifeDecrement();
         m_wasDecrementLife = true;
     }
 
@@ -374,10 +388,18 @@ void GameSceneWait::Update(float tick)
     }
 }
 
+//====================================
+//              描画処理
+//====================================
+
 void GameSceneWait::Draw()
 {
     Scene::Draw();
 }
+
+//====================================
+//              解放処理
+//====================================
 
 void GameSceneWait::Finalize()
 {
@@ -399,6 +421,10 @@ void GameSceneWait::Finalize()
     }
 }
 
+//====================================
+//         GameUI登録
+//====================================
+
 void GameSceneWait::RegisterGameUI(pShared<Texture> texture, float u, float v)
 {
     auto& instance = Game::GetInstance();
@@ -408,18 +434,22 @@ void GameSceneWait::RegisterGameUI(pShared<Texture> texture, float u, float v)
     m_GameUI->SetScale(768.0f, 512.0f, 1.0f);
     m_GameUI->SetPos(kGameUIStartPos, 50.0f, 0.0f);
     m_GameUI->SetUV(u, v, 2.0f, 2.0f);
-    m_CurrentUIPhase = UI_PHASE::NONE;
+    m_UIGame.phase = UI_PHASE::NONE;
 
     auto& rhythmBeat = Game::GetRhythmBeat();
 
     // 移動にかかる時間をビート数から計算
-    m_GameUIMovementTime = rhythmBeat.GetBeatConst().secondsPerBeat * 6;
+    m_UIGame.movementTime = rhythmBeat.GetBeatConst().secondsPerBeat * 6;
     
 }
 
+//====================================
+//          　GameUI移動演出
+//====================================
+
 void GameSceneWait::GameUIMovement(int elapsedBeat)
 {
-    if (!m_isBootGameUI || !m_GameUI) {
+    if (!m_UIGame.isBoot || !m_GameUI) {
         return;
     }
 
@@ -437,16 +467,16 @@ void GameSceneWait::GameUIMovement(int elapsedBeat)
 
     if (elapsedBeat < kStartWaitBeat)
     {
-        m_CurrentUIPhase = UI_PHASE::NONE;
+        m_UIGame.phase = UI_PHASE::NONE;
         m_GameUI->SetPos(kGameUIStartPos, 50.0f, 0.0f);
         return;
     }
 
     if (elapsedBeat >= kSequenceEndBeat)
     {
-        m_CurrentUIPhase = UI_PHASE::NONE;
+        m_UIGame.phase = UI_PHASE::NONE;
         m_GameUI->SetPos(kGameUIFinishPos, 50.0f, 0.0f);
-        m_isBootGameUI = false;
+        m_UIGame.isBoot = false;
         return;
     }
 
@@ -467,49 +497,52 @@ void GameSceneWait::GameUIMovement(int elapsedBeat)
             rhythmBeat.SetElapsedBeat(MeasureOne);
             Game::SetBgmBpm(beatConfig.m_Bpm);
             m_isPendingBpmChange = false;
-            m_GameUIMovementTime = rhythmBeat.GetBeatConst().secondsPerBeat * 6;
+            m_UIGame.movementTime = rhythmBeat.GetBeatConst().secondsPerBeat * 6;
         }
-        if (m_CurrentUIPhase != UI_PHASE::SLIDE_IN)
+        if (m_UIGame.phase != UI_PHASE::SLIDE_IN)
         {
-            m_CurrentUIPhase = UI_PHASE::SLIDE_IN;
-            m_GameUIMoveValueX = kGameUICenterPos - kGameUIStartPos;
-            m_GameUIMovementElapsed = 0.0f;
+            m_UIGame.phase = UI_PHASE::SLIDE_IN;
+            m_UIGame.moveValueX = kGameUICenterPos - kGameUIStartPos;
+            m_UIGame.movementElapsed = 0.0f;
             m_GameUI->SetPos(kGameUIStartPos, 50.0f, 0.0f);
         }
     }
     else if (elapsedBeat < kCenterWaitEndBeat)
     {
-        m_CurrentUIPhase = UI_PHASE::WAIT;
+        m_UIGame.phase = UI_PHASE::WAIT;
         m_GameUI->SetPos(kGameUICenterPos, 50.0f, 0.0f);
         return;
     }
     else if (elapsedBeat < kSlideOutEndBeat)
     {
-        if (m_CurrentUIPhase != UI_PHASE::SLIDE_OUT)
+        if (m_UIGame.phase != UI_PHASE::SLIDE_OUT)
         {
-            m_CurrentUIPhase = UI_PHASE::SLIDE_OUT;
-            m_GameUIMoveValueX = kGameUIFinishPos - kGameUICenterPos;
-            m_GameUIMovementElapsed = 0.0f;
+            m_UIGame.phase = UI_PHASE::SLIDE_OUT;
+            m_UIGame.moveValueX = kGameUIFinishPos - kGameUICenterPos;
+            m_UIGame.movementElapsed = 0.0f;
             m_GameUI->SetPos(kGameUICenterPos, 50.0f, 0.0f);
         }
     }
     else
     {
-        m_CurrentUIPhase = UI_PHASE::NONE;
+        m_UIGame.phase = UI_PHASE::NONE;
         m_GameUI->SetPos(kGameUIFinishPos, 50.0f, 0.0f);
         return;
     }
 
-    m_GameUIMovementElapsed += Application::GetDeltaTime();
-    float t = m_GameUIMovementElapsed / m_GameUIMovementTime;
+    m_UIGame.movementElapsed += Application::GetDeltaTime();
+    float t = m_UIGame.movementElapsed / m_UIGame.movementTime;
     t = std::min(t, 1.0f);
 
-    float baseX = (m_CurrentUIPhase == UI_PHASE::SLIDE_IN) ? kGameUIStartPos : kGameUICenterPos;
-    float elapsedX = baseX + (m_GameUIMoveValueX * Calculator::Easing::EaseInQuad(t));
+    float baseX = (m_UIGame.phase == UI_PHASE::SLIDE_IN) ? kGameUIStartPos : kGameUICenterPos;
+    float elapsedX = baseX + (m_UIGame.moveValueX * Calculator::Easing::EaseInQuad(t));
     m_GameUI->SetPos(elapsedX, 50.0f, 0.0f);
 }
 
-// 次のステージ選択とシーン遷移処理
+//====================================
+//      次のステージ選択とシーン遷移処理
+//====================================
+
 void GameSceneWait::StartNextStageTransition()
 {
     Game::SetIsTickCount(true);
@@ -529,7 +562,11 @@ void GameSceneWait::StartNextStageTransition()
     }
 }
 
-void GameSceneWait::DecrementLife()
+//====================================
+//              ライフ減少処理
+//====================================
+
+void GameSceneWait::LifeDecrement()
 {
     if (!m_LifeGame.empty())
     DeleteObject(m_LifeGame.back());
@@ -537,7 +574,11 @@ void GameSceneWait::DecrementLife()
     --m_LifeCount;
 }
 
-void GameSceneWait::ScalingLife()
+//====================================
+//         ライフスケーリング演出
+//====================================
+
+void GameSceneWait::LifeScaling()
 {
     namespace Calculator = Calculator::Easing;
 
@@ -546,6 +587,7 @@ void GameSceneWait::ScalingLife()
     const NVector3 lifeScaleUp = m_LifeBaseScale + m_LifeBaseScale * kLifeScaleUpAmount;
     NVector3 targetScale = m_LifeBaseScale;
 
+    // 大きくなるフェーズ
     if (m_isLifeScaleUp)
     {
         targetScale = Calculator::ScalingObject(
@@ -563,6 +605,7 @@ void GameSceneWait::ScalingLife()
             m_ScalingLifeElapsed = 0.0f;
         }
     }
+    // 小さくなるフェーズ
     else if (m_isLifeScaleDown)
     {
         targetScale = Calculator::ScalingObject(
@@ -590,8 +633,18 @@ void GameSceneWait::ScalingLife()
     }
 }
 
-void GameSceneWait::StageCountUIMovement()
+//====================================
+//         　　StageUI移動変更
+//====================================
+
+void GameSceneWait::StageCountUIMovement(float tick)
 {
+    auto rhythmBeat     = Game::GetRhythmBeat();
+    const float OneBeat = rhythmBeat.GetOneBeat() * 2.0f;
+    m_UIStage.movementElapsed += tick;
+
+    bool isElapsedOneBeat = m_UIStage.movementElapsed >= OneBeat;
+    
     
 }
 

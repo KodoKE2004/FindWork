@@ -35,8 +35,9 @@ private:
     uint32_t				 m_LifeCount = 4;	  // 自分のライフ数
     vector<pShared<Square>>  m_LifeGame;		  // ライフのオブジェクト格納用
 	pShared<Square>			 m_GameUI;			  // ライフ減少時のパーティクルエミッター
-	std::array<pShared<Square>, 2> m_StageNumber; // ステージの進行カウント
 
+	std::array<pShared<Square>, 2> m_StageNumberPrevious; // ステージの進行カウント
+	std::array<pShared<Square>, 2> m_StageNumberNext	; // ステージの進行カウント
 
     float m_Tick = 0.0f;
 	int	  m_QuarterAdvance = 0;
@@ -51,15 +52,21 @@ private:
 	// 初期化済みかどうかのフラグ
     // また、乱数選択のリセット用にstaticで持つ
 	static GAME_PHASE m_CurrentGamePhase;			// 現在のゲームフェーズを管理する変数
-    UI_PHASE m_CurrentUIPhase  = UI_PHASE::NONE;	// 現在のゲームUIフェーズを管理する変数
-    float m_GameUIMoveValueX	  = 0.0f;			// ゲームUIの移動量
-    float m_GameUIMovementTime	  = 0.0f;			// ゲームUIの移動タイマー
-    float m_GameUIMovementElapsed = 0.0f;			// 現在のビートの経過時間
-	bool  m_isBootGameUI		  = false;
+
+	struct UIPhaseInfo {
+		UI_PHASE phase = UI_PHASE::NONE;		// 現在のゲームUIフェーズを管理する変数
+		float	 moveValueX			= 0.0f;		// ゲームUIの移動量
+		float	 movementTime		= 0.0f;		// ゲームUIの移動タイマー
+		float	 movementElapsed	= 0.0f;		// 現在のビートの経過時間
+		bool	 isBoot = false;
+	};
+
+    UIPhaseInfo m_UIGame;
+    UIPhaseInfo m_UIStage;
 
     float m_ScalingLifeElapsed  = 0.0f;				// ライフのスケーリング演出のタイマー
     float m_ScalingLifeDuration = 0.0f;				// ライフのスケーリング演出の時間
-    NVector3 m_LifeBaseScale;				// ライフのスケーリング演出の開始時のスケール
+    NVector3 m_LifeBaseScale;						// ライフのスケーリング演出の開始時のスケール
 
 	bool m_ShouldTransitionToStage = false;	// 次のステージを設定できたか判断するフラグ
     bool m_IsFirstInitialized	   = false;	// シーンが最初に初期化されたかどうかのフラグ
@@ -67,7 +74,6 @@ private:
     bool m_isLifeScaleUp		   = false;	// ライフ減少の演出でハートが大きくなっているかどうかのフラグ
     bool m_isLifeScaleDown		   = false;	// ライフ減少の演出でハートが小さくなっているかどうかのフラグ
 	bool m_isPendingBpmChange	   = false; // BPMの変更を行うフェーズか
-	bool m_isLastOneMeasure		   = false; // 残り一小節の検知
 
 private:
 	// Exeシーンの乱数選択を行う。
@@ -82,11 +88,11 @@ private:
 	// 選択されたランダムなシーンへ遷移
 	void StartNextStageTransition();
     // ライフを減らす処理
-	void DecrementLife();
+	void LifeDecrement();
 	// ライフのスケーリング演出
-	void ScalingLife();
+	void LifeScaling();
 	// ステージ数の更新演出
-	void StageCountUIMovement();
+	void StageCountUIMovement(float tick);
 
 public:
 	//================================
