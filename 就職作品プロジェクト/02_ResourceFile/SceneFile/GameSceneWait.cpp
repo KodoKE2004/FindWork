@@ -117,6 +117,20 @@ namespace
     constexpr float    kLifeParticleLifeSec = 0.8f;
 
     constexpr float kLifeScaleUpAmount = 0.5f;
+
+    std::array<Vector2, 10> stageNumberUI = 
+    {
+        Vector2 (0.0f, 0.0f),
+        Vector2 (0.2f, 0.0f),
+        Vector2 (0.4, 0.0f),
+        Vector2 (0.6, 0.0f),
+        Vector2 (0.8, 0.0f),
+        Vector2 (0.0f, 1.0f),
+        Vector2 (0.2f, 1.0f),
+        Vector2 (0.4f, 1.0f),
+        Vector2 (0.6f, 1.0f),
+        Vector2 (0.8f, 1.0f),
+    };
 }
 
 GameSceneWait::GameSceneWait(Camera& cam) : Scene(cam)
@@ -164,9 +178,11 @@ void GameSceneWait::Initialize()
     m_wasDecrementLife        = false;
     m_isPendingBpmChange      = false;
 
+   
+
+    // ライフオブジェクトの生成
     m_LifeGame.clear();
     m_LifeCount = m_RelationData.gameLife;
-    // ライフオブジェクトの生成
     for(uint32_t i = 0; i < m_LifeCount; ++i)
     {
         const float distance = 130.0f;
@@ -593,6 +609,23 @@ void GameSceneWait::ScalingLife()
 void GameSceneWait::StageCountUIMovement()
 {
     
+}
+
+void GameSceneWait::StageCountCreate()
+{
+    std::string str = std::to_string(m_RelationData.stageCount);
+
+    for (int i = 0; i < static_cast<int>(str.size()); ++i)
+    {
+        int number = str[i] - '0';
+
+        pShared<Square> stageNumber = AddObject<Square>();
+
+        // stageNumber->SetNumber(number);
+        // stageNumber->SetPos(startX + i * offsetX, y, 0.0f);
+
+        m_StageNumber.emplace_back(stageNumber);
+    }
 }
 
 
