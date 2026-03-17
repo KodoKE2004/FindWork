@@ -366,6 +366,10 @@ void GameSceneGunman::Update(float tick)
     // リズムをとって指名手配の方の画像をスケールさせる
     UpdateSubjectScale(tick);
     
+    if (IsChange())
+    {
+        ChangeScene();
+    }
 }
 
 void GameSceneGunman::Draw()

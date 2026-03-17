@@ -171,6 +171,9 @@ void GameSceneWait::Initialize()
     // 難易度アップ処理 
     ++m_RelationData.stageCount;
 
+    // ステージ数の生成
+    // StageCountCreate();
+
     m_TimerList.clear();
     SetTimer(&m_Tick);
     SetTimer(&m_DecrementLife.timer);
@@ -400,7 +403,7 @@ void GameSceneWait::Update(float tick)
     }
     if (m_ShouldTransitionToStage)
     {
-        // StartNextStageTransition();
+        StartNextStageTransition();
     }
 }
 
@@ -668,19 +671,26 @@ void GameSceneWait::StageCountCreate()
 {
     std::string str = std::to_string(m_RelationData.stageCount);
 
-    for (int i = 0; i < static_cast<int>(str.size()); ++i)
+    m_StageNumberNext.fill(nullptr);
+
+    const float uvWidth  = stageNumberUI[1].x - stageNumberUI[0].x;
+    const float uvHeight = stageNumberUI[5].y - stageNumberUI[0].y;
+
+    const int maxDigits = static_cast<int>(m_StageNumberNext.size());
+    const int digitCount = std::min(static_cast<int>(str.size()), maxDigits);
+
+    for (int i = 0; i < digitCount; ++i)
     {
         int number = str[i] - '0';
+        const Vector2& uv = stageNumberUI[number];
+        TextureManager* textureMgr = Game::GetInstance();
 
-        pShared<Square> stageNumber = AddObject<Square>();
-
-        // stageNumber->SetNumber(number);
-        // stageNumber->SetPos(startX + i * offsetX, y, 0.0f);
-
-        m_StageNumber.emplace_back(stageNumber);
+        pShared<Square> stageNumber = AddObject<Square>(Game::GetInstance().GetCamera());
+        stageNumber->SetTexture(textureMgr->GetTexture("Number.png"));
+        stageNumber->SetUVRect(uv.x + uvWidth, uv.y + (1.0f - uvHeight), 5.0f, 2.0f);
+        m_StageNumberNext[i] = stageNumber;
     }
 }
-
 
 void GameSceneWait::PrepareNextStage()
 {
