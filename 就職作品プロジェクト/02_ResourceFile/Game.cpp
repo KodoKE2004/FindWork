@@ -105,7 +105,7 @@ void Game::Initialize()
 
 	// Manager 群は Scene より長寿命で、各シーンが共通利用する。
 	// 初期化順を固定することで「Scene初期化時に取得できない」状態を防ぐ。
-	instance.m_ShaderManager  = std::make_shared<ShaderManager> ("ShaderFile/");
+	instance.m_ShaderManager  = std::make_shared<ShaderManager> ("04_ShaderFile/");
 	instance.m_TextureManager = std::make_shared<TextureManager>("01_AssetFile/Texture/");
 	instance.m_AudioManager   = std::make_shared<AudioManager>	(L"01_AssetFile/Sound/");
 	instance.m_AudioManager->Initialize();

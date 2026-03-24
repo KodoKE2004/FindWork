@@ -47,9 +47,6 @@
     <Filter Include="HLSL\PixelShader">
       <UniqueIdentifier>{17b6b3d6-4eab-48e5-a82b-6ef24442d079}</UniqueIdentifier>
     </Filter>
-    <Filter Include="HLSL\VertexShader">
-      <UniqueIdentifier>{4c01850f-ddde-49c1-8d65-e7a80dd5794e}</UniqueIdentifier>
-    </Filter>
     <Filter Include="SourceFile\Scene\GameScene">
       <UniqueIdentifier>{ee46045f-f61f-4173-98a7-81fce1c52fab}</UniqueIdentifier>
     </Filter>
@@ -58,6 +55,9 @@
     </Filter>
     <Filter Include="SourceFile\Object\2D\Transition">
       <UniqueIdentifier>{552df999-efdd-4f0e-a91a-0e6d5bae89d1}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="HLSL\VertexShader">
+      <UniqueIdentifier>{b50e73f5-bd1b-45d4-99d5-48c82104f0c3}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
   <ItemGroup>
@@ -496,41 +496,41 @@
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
-    <FxCompile Include="ShaderFile\Common.hlsl">
+    <FxCompile Include="04_ShaderFile\PS_Alpha.hlsl">
+      <Filter>HLSL\PixelShader</Filter>
+    </FxCompile>
+    <FxCompile Include="04_ShaderFile\PS_Default.hlsl">
+      <Filter>HLSL\PixelShader</Filter>
+    </FxCompile>
+    <FxCompile Include="04_ShaderFile\PS_Skydome.hlsl">
+      <Filter>HLSL\PixelShader</Filter>
+    </FxCompile>
+    <FxCompile Include="04_ShaderFile\PS_Sprite.hlsl">
+      <Filter>HLSL\PixelShader</Filter>
+    </FxCompile>
+    <FxCompile Include="04_ShaderFile\PS_Unlit.hlsl">
+      <Filter>HLSL\PixelShader</Filter>
+    </FxCompile>
+    <FxCompile Include="04_ShaderFile\VS_Alpha.hlsl">
+      <Filter>HLSL\VertexShader</Filter>
+    </FxCompile>
+    <FxCompile Include="04_ShaderFile\VS_DebugGrid.hlsl">
+      <Filter>HLSL\VertexShader</Filter>
+    </FxCompile>
+    <FxCompile Include="04_ShaderFile\VS_Default.hlsl">
+      <Filter>HLSL\VertexShader</Filter>
+    </FxCompile>
+    <FxCompile Include="04_ShaderFile\VS_Instansing2D.hlsl">
+      <Filter>HLSL\VertexShader</Filter>
+    </FxCompile>
+    <FxCompile Include="04_ShaderFile\VS_Skydome.hlsl">
+      <Filter>HLSL\VertexShader</Filter>
+    </FxCompile>
+    <FxCompile Include="04_ShaderFile\VS_Unlit.hlsl">
+      <Filter>HLSL\VertexShader</Filter>
+    </FxCompile>
+    <FxCompile Include="04_ShaderFile\Common.hlsl">
       <Filter>HLSL</Filter>
-    </FxCompile>
-    <FxCompile Include="ShaderFile\PS_Alpha.hlsl">
-      <Filter>HLSL\PixelShader</Filter>
-    </FxCompile>
-    <FxCompile Include="ShaderFile\PS_Default.hlsl">
-      <Filter>HLSL\PixelShader</Filter>
-    </FxCompile>
-    <FxCompile Include="ShaderFile\PS_Unlit.hlsl">
-      <Filter>HLSL\PixelShader</Filter>
-    </FxCompile>
-    <FxCompile Include="ShaderFile\VS_Alpha.hlsl">
-      <Filter>HLSL\VertexShader</Filter>
-    </FxCompile>
-    <FxCompile Include="ShaderFile\VS_Default.hlsl">
-      <Filter>HLSL\VertexShader</Filter>
-    </FxCompile>
-    <FxCompile Include="ShaderFile\VS_Skydome.hlsl">
-      <Filter>HLSL\VertexShader</Filter>
-    </FxCompile>
-    <FxCompile Include="ShaderFile\PS_Skydome.hlsl">
-      <Filter>HLSL\PixelShader</Filter>
-    </FxCompile>
-    <FxCompile Include="ShaderFile\VS_Unlit.hlsl">
-      <Filter>HLSL\VertexShader</Filter>
-    </FxCompile>
-    <FxCompile Include="ShaderFile\VS_DebugGrid.hlsl">
-      <Filter>HLSL\VertexShader</Filter>
-    </FxCompile>
-    <FxCompile Include="ShaderFile\PS_Sprite.hlsl">
-      <Filter>HLSL\PixelShader</Filter>
-    </FxCompile>
-    <FxCompile Include="ShaderFile\VS_Instansing2D.hlsl">
-      <Filter>HLSL\VertexShader</Filter>
     </FxCompile>
   </ItemGroup>
 </Project>
