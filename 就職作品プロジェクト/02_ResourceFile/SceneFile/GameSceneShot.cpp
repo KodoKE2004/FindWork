@@ -187,7 +187,7 @@ void GameSceneShot::Initialize()
 
     RegisterAudio();
 
-    RegesterReactionSE("explosion");
+    RegisterReactionSE("explosion");
     PlaySE("bgmShot", 0.4f);
 }
 
@@ -242,7 +242,7 @@ void GameSceneShot::Update(float tick)
     if (IsAllDeathEnemy(enemys)) 
     {
         if (!m_WasPlaySE) {
-            RegesterReactionSE("clearShot");
+            RegisterReactionSE("clearShot");
             m_ReactionActive->Play(m_AudioList.at("clearShot").params);
             m_WasPlaySE = true;
         }

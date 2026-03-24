@@ -16,8 +16,8 @@ struct RhythmBeatConst
     float secondsPerTick = 0.0f;   // 1Tick‚Ì•b
     float ticksPerSecond = 0.0f;   // 1•b‚ ‚½‚èTick
 
-    float secondsPerHit = 0.0f;   // š1‰ñ’@‚­ŠÔŠui¬ß‚ğ hitsPerBar ‚ÅŠ„‚éj
-    float hitsPerSecond = 0.0f;   // š1•b‚ ‚½‚è’@‚­‰ñ”
+    float secondsPerHit = 0.0f;    // 1‰ñ’@‚­ŠÔŠui¬ß‚ğ hitsPerBar ‚ÅŠ„‚éj
+    float hitsPerSecond = 0.0f;    // 1•b‚ ‚½‚è’@‚­‰ñ”
 
     void Setup(float bpm = 120.0f,
         int beatsPerBar  = 8,

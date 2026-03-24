@@ -36,34 +36,28 @@ protected:
 	pShared<Bomber> m_Bomber;		// スピードゲージ背景
 	pShared<Timer>  m_TimerUI;		// スピードゲージ背景
     
-	int m_PreciousMeasure = 0;
-    int m_CurrentMeasure  = 0;
+	int m_PreciousMeasure = 0;		// 前フレーム時点の小節
+    int m_CurrentMeasure  = 0;		// 今フレーム時点の小節
 
-	float m_BomberElapsed = 0.0f;		// 経過時間
+	float m_BomberElapsed = 0.0f;		 // 1区間内での経過時間
+	int	 m_QuarterAdvance = 0;			 // 更新前の「四分音符基準の進行位置」
 
-	int	 m_QuarterAdvance = 0;
+	float m_FillRatio	  = 0.0f;		 // 現在のゲージ充填率
+	float m_SegmentFrom	  = 0.0f;		 // 今回補完の開始値
+	float m_SegmentTo	  = 0.0f;		 // 今回補完の終了値
+    bool  m_isChange	  = false;		 // シーン遷移フラグ
 
-	int   m_SpecialRest   = -1;       
-
-	float m_FillRatio	  = 0.0f;		// 
-	float m_SegmentFrom	  = 0.0f;		//
-	float m_SegmentTo	  = 0.0f;		//
-    float m_GameBomU	  = 0.0f;		// ゲーム内の更新時間計測
-
-	// シーン遷移フラグ
-    bool  m_isChange	  = false;		// シーン変更フラグ
-	
-    pShared<Audio> m_ReactionActive;		// 反応音
+    pShared<Audio> m_ReactionActive;	 // 反応音
 
 	// 先行クリア時の早回し用フラグ
-    bool  m_isFastChange = false;					// 速攻シーン変更フラグ
+    bool  m_isFastChange		= false; // 速攻シーン変更フラグ
 	FastChangeState m_FastChangeState = FastChangeState::Filling;
-	float m_FastChangeFill = 0.0f;
-	float m_FastChangeStartFill = 0.0f;
-	float m_FastChangeElapsed = 0.0f;
-
+	float m_FastChangeFill		= 0.0f;	 // 早回し開始時点のゲージ量
+	float m_FastChangeStartFill = 0.0f;	 // 早回し補完の始点
+	float m_FastChangeElapsed	= 0.0f;	 // 早回し演出の経過時間
 
 public:
+
 	//================================
 	// コンストラクタとデストラクタ
 	//================================
@@ -86,41 +80,26 @@ public:
     void StageClear() { 
         m_RelationData.isClear = true;
 	}
-	// 先行クリアの処理
-    void FastChange() {
-		if (m_isFastChange) {
-			return;
-		}
-		m_isFastChange = true;
 
-		m_FastChangeState = FastChangeState::Filling;
-		m_FastChangeElapsed = 0.0f;
-		
-		if (m_Bomber)
-		{
-			m_FastChangeFill = m_Bomber->GetFillRatio();
-		}
-		else
-		{
-			m_FastChangeFill = 0.0f;
-		}
-		m_FastChangeStartFill = m_FastChangeFill;
-	}
-	
+    void FastChange();
 	void ChangeScene();
 
 	bool IsChange()		const { return m_isChange; }
     bool IsFastChange() const { return m_isFastChange; }
 	
-
-	// 小節が切り替わった瞬間を検知する関数
+	// 前フレームと今フレームの小節番号を比較し、
+	// 小節が切り替わった瞬間だけtrueを返す
 	bool IsChangeMeasure();
 
 	SCENE_NO GetSceneNo() const override {
 		return SCENE_NO::NONE;
-	}    
+	}
+
 protected:
+	// 爆弾の爆発処理
 	void Explode();
-    void RegesterReactionSE(std::string seName);
+	// SEの登録
+    void RegisterReactionSE(std::string seName);
+
 };
 

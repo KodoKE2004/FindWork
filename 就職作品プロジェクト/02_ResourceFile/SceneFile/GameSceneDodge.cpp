@@ -182,7 +182,7 @@ void GameSceneDodge::Initialize()
 
     PlaySE("bgmDodge", 0.2f);
 
-    RegesterReactionSE("fall");
+    RegisterReactionSE("fall");
 }
 
 void GameSceneDodge::Update(float tick)

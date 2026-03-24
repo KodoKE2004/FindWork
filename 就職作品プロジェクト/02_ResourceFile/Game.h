@@ -130,6 +130,7 @@ public:
 	static void  SetHasFirstGameSceneWaitInitialized(bool initialized) {
         s_HasFirstGameSceneWaitInitialized = initialized;
 	}
+
     //================================
 	//		  マネージャーの取得
     //================================
@@ -138,8 +139,8 @@ public:
 	[[nodiscard]] operator ShaderManager*  () const { return m_ShaderManager.get(); }
 	[[nodiscard]] operator AudioManager*   () const { return m_AudioManager.get();	}
 
-	static void RegistDebugObject();
-	static void RegistDebugFunction(){}
+	static void ResistDebugObject();
+	static void ResistDebugFunction(){}
 
 };
 

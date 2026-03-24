@@ -22,12 +22,9 @@ void GameSceneRocket::Initialize()
     rhythmBeat.Initialize(beatConfig, false, BASE_BEATS - 8);
 
     auto& instance = Game::GetInstance();
-    TextureManager* textureMar = instance;
 
-    m_Background = AddObject<Square>(instance.GetCamera());
-    m_Background->SetName("m_Background");
-    m_Background->SetScale(1280.0f, 720.0f, 1.0f);
-    m_Background->SetTexture(textureMar->GetTexture("BackGround/Rocket.png"));
+    m_Skydome = AddObject<Skydome>(instance.GetCamera());
+    auto cube = AddObject<Cube>(instance.GetCamera());
 
     m_Bomber = AddObject<Bomber>(instance.GetCamera());
     m_Bomber->SetName("m_TimeGauge");
@@ -44,7 +41,7 @@ void GameSceneRocket::Initialize()
     PlayParams clearParams;
     m_AudioList.emplace("clear", AudioConfig(L"SE/GameReaction/True2.wav", clearParams, false, false));
 
-    RegesterReactionSE("clear");
+    RegisterReactionSE("clear");
     RegisterAudio();
 }
 

@@ -79,7 +79,7 @@ void Game::Initialize()
 
 #ifdef _DEBUG
 
-	RegistDebugObject();
+	ResistDebugObject();
 
 	SceneTransitionParam initParam = {
         TRANS_MODE::FADE,
@@ -416,7 +416,7 @@ void Game::StopBgm()
 	}
 }
 
-void Game::RegistDebugObject()
+void Game::ResistDebugObject()
 {
 #ifdef _DEBUG
 	// ImGui 描画処理を登録

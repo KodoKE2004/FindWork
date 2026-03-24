@@ -28,12 +28,12 @@ enum class SCENE_NO
 };
 
 // Sceneクラス間の受け渡しデータ
-// isClear       : ミニゲームをクリアしたかのフラグ
-// requestRetry  : ゲームをもう一度するかのフラグ
-// stageCount    : 何ステージクリアしているか
-// previousScene : 現在のシーン
+// gameLife		 : ゲームのライフ数
+// stageCount	 : ステージのカウント
 // oldScene      : 一つ前のシーン
 // nextScene     : 次のシーン
+// transTexture  : 遷移画像
+// isClear       : ミニゲームをクリアしたかのフラグ
 struct SceneRelationData
 {
 	uint32_t gameLife = 4;
@@ -60,8 +60,8 @@ class Scene
 {
 protected:
 
-	// PressEnterの点滅タイマー間隔
-    static constexpr float DEFAULT_VOLUME = 0.2f; 
+    static constexpr float DEFAULT_VOLUME = 0.3f; // 音源のボリューム
+
 protected:
 	
 	vector<pShared<Object>>		 m_MySceneObjects;
@@ -74,12 +74,10 @@ protected:
 
 	TransitionBase* m_TransitionTexture = nullptr;
 
-	// ExeSceneで使う変数
-	float m_TimerGameExe = 0.0f;				// 経過時間
+	float m_TimerGameExe = 0.0f;			// 経過時間
     static vector<float*>	m_TimerList;	// タイマー格納用
-
+	int  m_PreviousBeatIndex = 0;			// 現在のビート数
 	bool m_WasPlayBGM = false;
-	int  m_PreviousBeatIndex = 0;
     
 protected:
 
@@ -168,7 +166,6 @@ public:
 	void DeleteObject(const pShared<Object>& pt); // オブジェクトを削除する
 	void DeleteAllObject(); // オブジェクトをすべて削除する
 
-	// オブジェクトを追加する
 	template<class T, class... Args>
 	pShared<T> AddObject(Args&&... args)
 	{
@@ -189,7 +186,6 @@ public:
 		return up;
 	}
 
-	// オブジェクトを取得する
 	template<class T>
 	vector<pShared<T>> GetObjects()
 	{
@@ -197,7 +193,6 @@ public:
 
 		vector<pShared<T>> res;
 		for (const auto& o : m_MySceneObjects) {
-			// dynamic_castで型をチェック
 			if (!o) {
 				continue;
 			}

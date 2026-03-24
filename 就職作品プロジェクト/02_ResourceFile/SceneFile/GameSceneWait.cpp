@@ -126,9 +126,9 @@ namespace
     {
         Vector2 (0.0f, 0.0f),
         Vector2 (0.2f, 0.0f),
-        Vector2 (0.4, 0.0f),
-        Vector2 (0.6, 0.0f),
-        Vector2 (0.8, 0.0f),
+        Vector2 (0.4f, 0.0f),
+        Vector2 (0.6f, 0.0f),
+        Vector2 (0.8f, 0.0f),
         Vector2 (0.0f, 1.0f),
         Vector2 (0.2f, 1.0f),
         Vector2 (0.4f, 1.0f),
@@ -649,46 +649,6 @@ void GameSceneWait::LifeScaling()
         {
             life->SetScale(targetScale);
         }
-    }
-}
-
-//====================================
-//         　　StageUI移動変更
-//====================================
-
-void GameSceneWait::StageCountUIMovement(float tick)
-{
-    auto rhythmBeat     = Game::GetRhythmBeat();
-    const float OneBeat = rhythmBeat.GetOneBeat() * 2.0f;
-    m_UIStage.movementElapsed += tick;
-
-    bool isElapsedOneBeat = m_UIStage.movementElapsed >= OneBeat;
-    
-    
-}
-
-void GameSceneWait::StageCountCreate()
-{
-    std::string str = std::to_string(m_RelationData.stageCount);
-
-    m_StageNumberNext.fill(nullptr);
-
-    const float uvWidth  = stageNumberUI[1].x - stageNumberUI[0].x;
-    const float uvHeight = stageNumberUI[5].y - stageNumberUI[0].y;
-
-    const int maxDigits = static_cast<int>(m_StageNumberNext.size());
-    const int digitCount = std::min(static_cast<int>(str.size()), maxDigits);
-
-    for (int i = 0; i < digitCount; ++i)
-    {
-        int number = str[i] - '0';
-        const Vector2& uv = stageNumberUI[number];
-        TextureManager* textureMgr = Game::GetInstance();
-
-        pShared<Square> stageNumber = AddObject<Square>(Game::GetInstance().GetCamera());
-        stageNumber->SetTexture(textureMgr->GetTexture("Number.png"));
-        stageNumber->SetUVRect(uv.x + uvWidth, uv.y + (1.0f - uvHeight), 5.0f, 2.0f);
-        m_StageNumberNext[i] = stageNumber;
     }
 }
 

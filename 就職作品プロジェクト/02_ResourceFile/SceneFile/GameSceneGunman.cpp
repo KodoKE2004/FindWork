@@ -87,8 +87,8 @@ void GameSceneGunman::TargetMovePosition()
         NVector3 startPos{};
         switch (m_ShotIndex)
         {
-            case 0: startPos = startSetting(m_RedyList[0]); break;
-            case 1: startPos = startSetting(m_RedyList[1]); break;
+            case 0: startPos = startSetting(m_ReedyList[0]); break;
+            case 1: startPos = startSetting(m_ReedyList[1]); break;
             case 2: startPos = startSetting(m_Oldman     ); break;
         }
 
@@ -126,8 +126,8 @@ void GameSceneGunman::TargetMovePosition()
 
         switch (m_ShotIndex)
         {
-        case 0: transform(m_RedyList[0], isMax); break;
-        case 1: transform(m_RedyList[1], isMax); break;
+        case 0: transform(m_ReedyList[0], isMax); break;
+        case 1: transform(m_ReedyList[1], isMax); break;
         case 2: transform(m_Oldman     , isMax); break;
         }
     }
@@ -143,7 +143,7 @@ void GameSceneGunman::TargetMovePosition()
         float currentY = kStartPos[0].y + moveValueY * easedProgress;
         for (int i = 0; i < 2; ++i)
         {
-            m_RedyList[i]->SetPos(m_RedyList[i]->GetPos().x, currentY, 0.0f);
+            m_ReedyList[i]->SetPos(m_ReedyList[i]->GetPos().x, currentY, 0.0f);
         }
         m_Oldman->SetPos(m_Oldman->GetPos().x, currentY, 0.0f);
     }
@@ -174,9 +174,9 @@ void GameSceneGunman::ShotReaction()
         splitY = 1.0f;
 
         for (int i = 0; i < REDY_SLOT::SLOT_SIZE; ++i) {
-            m_RedyList[i]->SetTexture(textureMgr->GetTexture("GameScene/RedyReaction.png"));
-            m_RedyList[i]->SetUV( u, v, splitX, splitY);
-            m_RedyList[i]->SetScale(kBaseScaleRedy[1]);
+            m_ReedyList[i]->SetTexture(textureMgr->GetTexture("GameScene/RedyReaction.png"));
+            m_ReedyList[i]->SetUV( u, v, splitX, splitY);
+            m_ReedyList[i]->SetScale(kBaseScaleRedy[1]);
         }
         m_Oldman->SetTexture(textureMgr->GetTexture("GameScene/OldmanReaction.png"));
         m_Oldman->SetUV( u, v, splitX, splitY);
@@ -185,9 +185,9 @@ void GameSceneGunman::ShotReaction()
         return;
     }
 
-    for (size_t i = 0; i < m_RedyList.size(); ++i)
+    for (size_t i = 0; i < m_ReedyList.size(); ++i)
     {
-        if (m_RedyList[i]->IsDrag())
+        if (m_ReedyList[i]->IsDrag())
         {
             
             m_ReactionActive = audioMgr->Create(m_AudioList.at("miss"));
@@ -204,9 +204,9 @@ void GameSceneGunman::ShotReaction()
             splitX = 2.0f;
             splitY = 1.0f;
 
-            m_RedyList[1 - i]->SetTexture(textureMgr->GetTexture("GameScene/RedyReaction.png"));
-            m_RedyList[1 - i]->SetUV(u, v, splitX, splitY);
-            m_RedyList[1 - i]->SetScale(kBaseScaleRedy[1]);
+            m_ReedyList[1 - i]->SetTexture(textureMgr->GetTexture("GameScene/RedyReaction.png"));
+            m_ReedyList[1 - i]->SetUV(u, v, splitX, splitY);
+            m_ReedyList[1 - i]->SetScale(kBaseScaleRedy[1]);
 
             m_Oldman->SetTexture(textureMgr->GetTexture("GameScene/OldmanReaction.png"));
             m_Oldman->SetUV(u, v, splitX, splitY);
@@ -301,11 +301,11 @@ void GameSceneGunman::Initialize()
         // èóê´ÇÃí«â¡ìoò^
         if (i != 2)
         {
-            m_RedyList[i] = AddObject<MouseObject>(instance.GetCamera());
-            m_RedyList[i]->SetName("m_Redy" + std::to_string(i));
-            m_RedyList[i]->SetTexture(textureMar->GetTexture("GameScene/GunmanRedy.png"));
-            m_RedyList[i]->SetScale(kBaseScaleRedy[0]);
-            m_RedyList[i]->SetPos(kStartPos[buttonIndices[i]]);
+            m_ReedyList[i] = AddObject<MouseObject>(instance.GetCamera());
+            m_ReedyList[i]->SetName("m_Redy" + std::to_string(i));
+            m_ReedyList[i]->SetTexture(textureMar->GetTexture("GameScene/GunmanRedy.png"));
+            m_ReedyList[i]->SetScale(kBaseScaleRedy[0]);
+            m_ReedyList[i]->SetPos(kStartPos[buttonIndices[i]]);
         }
         // ÉGÉlÉ~Å[ÇÃìoò^
         else

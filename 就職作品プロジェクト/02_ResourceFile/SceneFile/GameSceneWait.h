@@ -37,9 +37,6 @@ private:
 	pShared<Square>			 m_GameUI;			  // ライフ減少時のパーティクルエミッター
 	vector<pShared<Square>>  m_StageNumber;		  // ステージ数の作成
 
-	std::array<pShared<Square>, 2> m_StageNumberPrevious; // ステージの進行カウント
-	std::array<pShared<Square>, 2> m_StageNumberNext	; // ステージの進行カウント
-
     float m_Tick = 0.0f;
 	int	  m_QuarterAdvance = 0;
 
@@ -92,10 +89,6 @@ private:
 	void LifeDecrement();
 	// ライフのスケーリング演出
 	void LifeScaling();
-	// ステージ数の数字生成
-	void StageCountCreate();
-	// ステージ数の更新演出
-	void StageCountUIMovement(float tick);
 
 public:
 	//================================

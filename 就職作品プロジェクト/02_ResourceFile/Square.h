@@ -61,6 +61,7 @@ protected:
 	std::vector<DirectX::SimpleMath::Vector4>	m_InstancePositionScale;
 	UINT m_InstanceCount = 0;
 	bool m_UseInstancing = false;
+	CAMERA_MODE m_DrawCameraMode = CAMERA_2D; // Square描画時に使用するカメラモード
 
 	// 描画の為の情報（見た目に関わる部分）
 	pShared<Texture>  m_Texture;	// テクスチャ
@@ -92,6 +93,9 @@ public:
 	void UpdateInstanceBuffers();
 	void SetInstancingEnabled(bool enabled);
 	void SetInstanceTransforms(const std::vector<InstanceTransform2D>& transforms);
+
+	void SetDrawCameraMode(CAMERA_MODE mode) { m_DrawCameraMode = mode; }
+	CAMERA_MODE GetDrawCameraMode() const { return m_DrawCameraMode; }
 
 	// テクスチャを指定
 	void SetTexture(const char* imgname);

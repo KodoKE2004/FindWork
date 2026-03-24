@@ -141,8 +141,7 @@ void Square::Draw()
 
 	Renderer::SetUV(u0, v0, u1, v1);
 
-	Camera::ScopedMode scopedMode(m_Camera, CAMERA_2D);
-
+	Camera::ScopedMode scopedMode(m_Camera, m_DrawCameraMode);
 
 	if (m_UseInstancing && m_InstanceCount > 0 && m_InstanceTransformCB) 
 	{

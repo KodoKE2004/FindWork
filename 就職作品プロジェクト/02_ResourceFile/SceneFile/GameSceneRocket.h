@@ -1,5 +1,7 @@
 #pragma once
 #include "GameSceneExe.h"
+#include "Cube.h"
+
 class GameSceneRocket : public GameSceneExe
 {
 private:
