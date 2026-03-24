@@ -1,4 +1,4 @@
-#include "GameSceneExe.h"
+ï»¿#include "GameSceneExe.h"
 #include "SceneList.h"
 #include "input.h"
 #include "DebugUI.h"
@@ -15,42 +15,41 @@ GameSceneExe::GameSceneExe(Camera& cam) : Scene(cam)
 
 void GameSceneExe::Initialize()
 {
-    auto& instance   = Game::GetInstance();
+    auto& instance = Game::GetInstance();
     auto& rhythmBeat = Game::GetRhythmBeat();
 
     if (m_Bomber)
     {
-        // ‘””‚É‰‚¶‚Äƒ{ƒ“ƒo[UI‚ÌŒ©‚½–ÚƒTƒCƒY‚ğ•â³‚·‚é
-        // ONE_MEASURE * 5 ‚Íu5¬ß‚Ô‚ñv‚ğÅ‘åŠî€‚Æ‚µ‚Ä“n‚µ‚Ä‚¢‚é
+        // ã‚¹ãƒ†ãƒ¼ã‚¸æ‹æ•°ã«å¿œã˜ã¦ãƒœãƒ³ãƒãƒ¼UIã®è¦‹ãŸç›®ã‚µã‚¤ã‚ºã‚’è£œæ­£ã™ã‚‹ã€‚
+        // ONE_MEASURE * 5 ã¯ã€Œ5å°ç¯€ç›¸å½“ã€ã‚’åŸºæº–ã¨ã—ã¦æ¸¡ã—ã¦ã„ã‚‹ã€‚
         m_Bomber->AdjustScaleByBeatTotal(rhythmBeat.GetBeatTotal(), ONE_MEASURE * 5);
     }
 
     //-------------------------------
-    //          ƒƒ“ƒo‰Šú‰» 
+    // çŠ¶æ…‹ãƒ•ãƒ©ã‚°åˆæœŸåŒ–
     //-------------------------------
-    m_isChange     = false;
+    m_isChange = false;
     m_isFastChange = false;
-    m_WasPlayBGM   = false;
+    m_WasPlayBGM = false;
     m_FastChangeState = FastChangeState::Filling;
     m_FastChangeFill = 0.0f;
     m_FastChangeStartFill = 0.0f;
-    m_FastChangeElapsed   = 0.0f;    
-    
+    m_FastChangeElapsed = 0.0f;
+
     m_RelationData.transTexture = nullptr;
     m_RelationData.ClearTransitionTexture();
 
-    // Œo‰ßŠÔŒv‘ª—p‚Ìƒ^ƒCƒ}[“o˜^
+    // åŒºé–“è£œé–“ç”¨ã®çµŒéæ™‚é–“ã‚¿ã‚¤ãƒãƒ¼ã‚’ç™»éŒ²ã€‚
     m_TimerList.clear();
     SetTimer(&m_BomberElapsed);
 
-
     //-------------------------------
-    //      ‰¹Œ¹‚Ìæ“¾E¶¬
+    // SEç™»éŒ²
     //-------------------------------
     PlayParams clockParam{};
     clockParam.volume = DEFAULT_VOLUME;
     m_AudioList.emplace("clock", AudioConfig(L"SE/Clock.wav", clockParam, false, false));
-    
+
     PlayParams exploParam{};
     exploParam.volume = DEFAULT_VOLUME;
     m_AudioList.emplace("explosion", AudioConfig(L"SE/Explosion.wav", exploParam, false, false));
@@ -63,6 +62,7 @@ void GameSceneExe::Initialize()
         }
     }
 
+    // Exeä¸­ã¯å ´é¢ã”ã¨ã®ãƒ†ãƒ³ãƒæ„Ÿã‚’æ˜ç¢ºã«ã™ã‚‹ãŸã‚ã€é–‹å§‹æ™‚ã«BGMã‚’ä¸€æ—¦æ­¢ã‚ã‚‹ã€‚
     instance.StopBgm();
 }
 
@@ -70,44 +70,47 @@ void GameSceneExe::Update(float tick)
 {
     CountTimer(tick);
 
-    // ¬ß‚ÌØ‚è‘Ö‚í‚èŒŸ’m—p‚ÉA‘O‰ñ’l‚ğ‘Ş”ğ
+    //-------------------------------
+    // å°ç¯€åˆ‡ã‚Šæ›¿ãˆåˆ¤å®šç”¨ã®æ›´æ–°å‰æƒ…å ±ã‚’é€€é¿
+    //-------------------------------
     m_PreciousMeasure = m_CurrentMeasure;
 
     RhythmBeat& rhythmBeat = Game::GetInstance().GetRhythmBeat();
 
-    // XV‘O‚Ìul•ª‰¹•„’PˆÊ‚Å‚Ç‚±‚Ü‚Åi‚ñ‚Å‚¢‚½‚©v‚ğ•Û
-    // GetBeatElapsed()‚ª”ª•ª‚â“Æ©’PˆÊŠî€‚È‚ç / 2‚Ål•ª‰¹•„Š·Z‚µ‚Ä‚¢‚é
+    // æ›´æ–°å‰ã®å››åˆ†éŸ³ç¬¦åŸºæº–é€²è¡Œã‚’ä¿æŒã€‚
+    // GetBeatElapsed() ã¯å†…éƒ¨æ‹åŸºæº–ãªã®ã§ /2 ã§å››åˆ†éŸ³ç¬¦åŸºæº–ã«æƒãˆã‚‹ã€‚
     m_QuarterAdvance = rhythmBeat.GetBeatElapsed() / 2;
 
-    // ƒŠƒYƒ€–{‘Ì‚ği‚ß‚é
+    // ãƒªã‚ºãƒ æœ¬ä½“ã®é€²è¡Œæ›´æ–°ã€‚
     rhythmBeat.Update(tick);
 
-    // XVŒã‚ÌisˆÊ’u‚ğl•ª‰¹•„Šî€‚Åæ“¾
+    // æ›´æ–°å¾Œã®é€²è¡Œä½ç½®ï¼ˆå››åˆ†éŸ³ç¬¦åŸºæº–ï¼‰ã€‚
     int quarterPreviewBeat = rhythmBeat.GetBeatElapsed() / 2;
 
-    // Œ»İ‚ÌŒo‰ß””‚©‚ç¬ß”Ô†‚ğZo
-    // m_BeatUnit ‚ğ ˆê¬ß‚ ‚½‚è‚ÌŠî€’PˆÊ‚Æ‚µ‚Äg‚Á‚Ä‚¢‚é‘O’ñ
+    // ç¾åœ¨ã®çµŒéæ‹ã‹ã‚‰å°ç¯€ç•ªå·ã‚’ç®—å‡ºã€‚
     m_CurrentMeasure = rhythmBeat.GetBeatElapsed() / rhythmBeat.GetBeatConst().m_BeatUnit;
 
-    // c‚è‚Ì””‚ğl•ª‰¹•„Šî€‚É‘µ‚¦‚é
+    // æ®‹æ‹ã‚‚å››åˆ†éŸ³ç¬¦åŸºæº–ã«çµ±ä¸€ã—ã¦æ‰±ã†ã€‚
     int rest = rhythmBeat.GetBeatRest() / 2;
 
-    // ‘‰ñ‚µˆ—
+    //-------------------------------
+    // å…ˆè¡Œã‚¯ãƒªã‚¢ä¸­ã¯é€šå¸¸é€²è¡Œã‚’ã‚¹ã‚­ãƒƒãƒ—ã—å°‚ç”¨æ¼”å‡ºã®ã¿å®Ÿè¡Œ
+    //-------------------------------
     if (m_isFastChange)
     {
         if (m_FastChangeState == FastChangeState::Filling)
         {
             m_FastChangeElapsed += tick;
 
-            // 0.25”•ª‚Ì’ZŠÔ‚ÅƒQ[ƒW‚ğˆê‹C‚ÉŒ¸‚ç‚·‰‰o
-            const float beat = 0.25f;
+            // å…ˆè¡Œã‚¯ãƒªã‚¢æ™‚ã¯ 0.25 ç§’ã§ä¸€æ°—ã«æ¸›è¡°ã•ã›ã€ãƒ†ãƒ³ãƒæ„Ÿã‚’å´©ã•ãªã„ã€‚
+            const float fastChangeDuration = 0.25f;
 
-            // ‘‰ñ‚µŠJn‚©‚çI—¹‚Ü‚Å‚Ìis—¦[0, 1]
-            const float progress = (beat > 0.0f)
-                ? std::clamp(m_FastChangeElapsed / beat, 0.0f, 1.0f)
+            // æ—©å›ã—é–‹å§‹ã‹ã‚‰ã®é€²è¡Œç‡ [0,1]ã€‚
+            const float progress = (fastChangeDuration > 0.0f)
+                ? std::clamp(m_FastChangeElapsed / fastChangeDuration, 0.0f, 1.0f)
                 : 1.0f;
 
-            // ŠJn‚ÌƒQ[ƒW—Ê‚©‚ç0‚ÖŒü‚©‚Á‚ÄüŒ`‚ÉŒ¸­
+            // é–‹å§‹æ™‚ã®æ®‹é‡ã‹ã‚‰ 0 ã¸ç·šå½¢æ¸›è¡°ã€‚
             m_FastChangeFill = max(0.0f, m_FastChangeStartFill * (1.0f - progress));
 
             if (m_Bomber)
@@ -119,7 +122,6 @@ void GameSceneExe::Update(float tick)
                 m_FastChangeState = FastChangeState::ReadyToExplode;
                 m_Bomber->SetFillRatio(0.0f);
             }
-
         }
 
         if (m_FastChangeState == FastChangeState::ReadyToExplode)
@@ -130,23 +132,24 @@ void GameSceneExe::Update(float tick)
     }
 
     //-------------------------------
-    // l•ª‰¹•„‚ªi‚ñ‚¾‰ñ”‚¾‚¯‹æŠÔXV‚·‚é
+    // å››åˆ†éŸ³ç¬¦ãŒé€²ã‚“ã å›æ•°ã ã‘åŒºé–“æ›´æ–°
+    // ï¼ˆãƒ•ãƒ¬ãƒ¼ãƒ è½ã¡æ™‚ã®å–ã‚Šã“ã¼ã—é˜²æ­¢ï¼‰
     //-------------------------------
     for (int i = m_QuarterAdvance; i < quarterPreviewBeat; ++i)
     {
-        // V‚µ‚¢”‹æŠÔ‚É“ü‚Á‚½‚Ì‚ÅA‚»‚Ì‹æŠÔ“àŒo‰ßŠÔ‚ğƒŠƒZƒbƒg
+        // æ–°ã—ã„åŒºé–“ã«å…¥ã£ãŸã®ã§ã€åŒºé–“å†…çµŒéæ™‚é–“ã‚’ãƒªã‚»ãƒƒãƒˆã€‚
         m_BomberElapsed = 0.0f;
 
-        // Œ»İ‚Ì—İÏ”ˆÊ’u
+        // ç¾åœ¨ã®ç´¯ç©æ‹ä½ç½®ã€‚
         const int currentIndex = rhythmBeat.GetBeatElapsed();
 
-        // ‚Ğ‚Æ‚Â‘O‚Ì•âŠÔŒ‹‰Ê‚ğ¡‰ñ‚Ìn“_‚É‚·‚é
+        // ç›´å‰åŒºé–“ã®çµ‚äº†å€¤ã‚’æ¬¡åŒºé–“ã®å§‹ç‚¹ã«ã™ã‚‹ã€‚
         m_SegmentFrom = m_FillRatio;
 
         const int baseBeats = rhythmBeat.GetBeatTotal();
 
-        // ‘S‘Ì””‚É‘Î‚µ‚ÄuŸ‚Ì”‚Ü‚Åi‚ñ‚¾‚Æ‚«‚Ì“’BŠ„‡v‚ğo‚·
-        // +1.0f ‚ÍuŒ»İ”v‚Å‚Í‚È‚­uŸ‚Ì–Ú•W’n“_v‚Ü‚ÅŠÜ‚ß‚é‚½‚ß
+        // ç·æ‹ã«å¯¾ã—ã¦ã€Œæ¬¡ã®ç›®æ¨™æ‹ã¾ã§é€²ã‚“ã ã¨ãã®é€²è¡Œç‡ã€ã‚’æ±‚ã‚ã‚‹ã€‚
+        // +1.0f ã¯ç¾æ‹ã§ã¯ãªãã€Œæ¬¡ç›®æ¨™åœ°ç‚¹ã€ã¾ã§å«ã‚ã‚‹ãŸã‚ã€‚
         float targetProgressNormal =
             std::clamp((static_cast<float>(currentIndex) + 1.0f) /
                 static_cast<float>(baseBeats),
@@ -155,16 +158,15 @@ void GameSceneExe::Update(float tick)
         float targetProgress = targetProgressNormal;
         bool  useSpecial = false;
 
-        // BASE_BEATS(24”) ‚ğŠî€‚ÉA””‚ªˆÙ‚È‚éƒXƒe[ƒW‚Å‚à
-        // ÅŒã‚ÌŒ¸­—Ê‚ÌŒ©‚½–Úƒoƒ‰ƒ“ƒX‚ğ‘µ‚¦‚é‚½‚ß‚Ì•â³”{—¦
+        // BASE_BEATS(24æ‹)åŸºæº–ã¨ç•°ãªã‚‹ã‚¹ãƒ†ãƒ¼ã‚¸ã§ã¯ã€
+        // çµ‚ç›¤æ¼”å‡ºã®è¦‹ãŸç›®ãƒãƒ©ãƒ³ã‚¹ã‚’å´©ã•ãªã„ãŸã‚è£œæ­£ä¿‚æ•°ã‚’å…¥ã‚Œã‚‹ã€‚
         float scaleMass = 0.95f;
         if (baseBeats != BASE_BEATS) {
             scaleMass = static_cast<float>(BASE_BEATS) / static_cast<float>(baseBeats);
         }
 
-        // “Áêˆ—F
-        // c‚è3,2,1”‚Å‚Í’Êí‚ÌüŒ`is‚Å‚Í‚È‚­A
-        // w’è’l‚É‡‚í‚¹‚ÄƒQ[ƒWI’[‚ÌŒ©‚½–Ú‚ğ’²®‚·‚é
+        // çµ‚ç›¤ï¼ˆæ®‹ã‚Š3/2/1æ‹ï¼‰ã¯å˜ç´”ç·šå½¢ã§ã¯ãªãã€
+        // çˆ†ç™ºæ¼”å‡ºã¸ç·Šå¼µæ„Ÿã‚’ç¹‹ãçµ‚ç«¯ä½ç½®ã¸å¯„ã›ã‚‹ã€‚
         switch (rest)
         {
         case 3: targetProgress = 1.0f - (0.075f * scaleMass); useSpecial = true; break;
@@ -172,17 +174,16 @@ void GameSceneExe::Update(float tick)
         case 1: targetProgress = 1.0f;                        useSpecial = true; break;
         }
 
-        // c”‚ª 0 ˆÈ‰º‚È‚ç‚±‚ÌƒXƒe[ƒW‚ÍI—¹ˆµ‚¢
         if (rest <= 0) {
             m_isChange = true;
         }
 
-        // ¡‰ñ‹æŠÔ‚Ì•âŠÔI“_‚ğŠm’è
+        // ç¾åŒºé–“ã®çµ‚ç«¯å€¤ã‚’ç¢ºå®šã€‚
         m_SegmentTo = std::clamp(targetProgress, 0.0f, 1.0f);
 
         if (rest < 4)
         {
-            // c‚è3,2,1,0 ‚Ì‚Æ‚«‚¾‚¯ƒJƒEƒ“ƒgƒ_ƒEƒ“‰‰o‚ğo‚·
+            // æ®‹ã‚Š 3,2,1,0 ã§ã¯ã‚«ã‚¦ãƒ³ãƒˆãƒ€ã‚¦ãƒ³æ¼”å‡ºã‚’å‡ºã™ã€‚
             m_Bomber->SetCount(rest);
             m_Bomber->CountDown();
 
@@ -200,18 +201,19 @@ void GameSceneExe::Update(float tick)
         }
     }
 
-    // ƒ{ƒ“ƒo[‚ÌXV
+    //-------------------------------
+    // ãƒœãƒ³ãƒãƒ¼UIã®è£œé–“æ›´æ–°
+    //-------------------------------
     const float oneBeat = rhythmBeat.GetOneBeat();
     if (m_Bomber && oneBeat > 0.0f)
     {
-        // 1”‚Ì’†‚Å‚Ç‚±‚Ü‚Åi‚ñ‚¾‚©‚ğ 0`1 ‚É³‹K‰»
+        // 1æ‹å†…ã§ã©ã“ã¾ã§é€²ã‚“ã ã‹ã‚’ 0ã€œ1 ã«æ­£è¦åŒ–ã€‚
         const float t = std::clamp(m_BomberElapsed / oneBeat, 0.0f, 1.0f);
 
-        // •âŠÔ‚ğ‚È‚ß‚ç‚©‚É‚·‚é‚½‚ß‚Ì EaseOutQuart
-        // ŠJn’¼Œã‚Í‘¬‚­AI‚í‚èÛ‚Í‚ä‚Á‚­‚è•Ï‰»‚·‚é
+        // åŒºé–“ã®é ­ã‚’é€Ÿããƒ»æœ«å°¾ã‚’ã‚†ã£ãã‚Šã«ã—ã¦è¦–èªæ€§ã‚’ä¸Šã’ã‚‹ã€‚
         const float e = Calculator::Easing::EaseOutQuart(t);
 
-        // ¡‹æŠÔ‚ÌŠJn’l¨I—¹’l‚ğƒC[ƒWƒ“ƒO•t‚«‚Å•âŠÔ
+        // åŒºé–“å§‹ç‚¹â†’çµ‚ç‚¹ã‚’ã‚¤ãƒ¼ã‚¸ãƒ³ã‚°ã§è£œé–“ã€‚
         m_FillRatio = m_SegmentFrom + (m_SegmentTo - m_SegmentFrom) * e;
 
         if (t >= 1.0f)
@@ -222,8 +224,7 @@ void GameSceneExe::Update(float tick)
             }
         }
 
-        // “à•”‚Å‚Íuis—¦v‚ğ‚¿A
-        // •`‰æ‘¤‚É‚Íuc—Êv‚Æ‚µ‚Ä“n‚µ‚½‚¢‚Ì‚Å 1.0f ‚©‚ç”½“]
+        // å†…éƒ¨ã¯é€²è¡Œç‡ã€UIã¯æ®‹é‡è¡¨ç¤ºãªã®ã§åè»¢ã—ã¦æ¸¡ã™ã€‚
         m_Bomber->SetFillRatio(1.0f - m_FillRatio);
     }
 }
@@ -240,7 +241,7 @@ void GameSceneExe::FastChange()
 
     if (m_Bomber)
     {
-        // Œ»İ‚ÌcƒQ[ƒW—Ê‚©‚ç‘‰ñ‚µŒ¸­‚ğn‚ß‚é
+        // ç¾åœ¨ã®æ®‹é‡ã‹ã‚‰æ¸›è¡°æ¼”å‡ºã‚’é–‹å§‹ã™ã‚‹ã€‚
         m_FastChangeFill = m_Bomber->GetFillRatio();
     }
     else
@@ -255,10 +256,10 @@ void GameSceneExe::ChangeScene()
     Game::SetIsTickCount(true);
     auto& rhythmBeat = Game::GetRhythmBeat();
 
-    // ŸƒV[ƒ“ˆÚs‚Ü‚Å 1”‚Ô‚ñ‘Ò‚Â‚½‚ß‚ÌŠÔ‚ğƒZƒbƒg
+    // æ¬¡ã‚·ãƒ¼ãƒ³ç§»è¡Œã¾ã§ 1æ‹ã¶ã‚“å¾…ã¡ã€æ¼”å‡ºçµ‚ç«¯ã‚’è¦‹ã›åˆ‡ã‚‹ã€‚
     GameToWait.duration = rhythmBeat.GetOneBeat();
 
-    // ‚»‚Ì‘Ò‚¿ŠÔ‚Ô‚ñ Tick ‚ği‚ß‚Ä®‡‚ğæ‚é
+    // å¾…æ©Ÿæ™‚é–“ã¶ã‚“ã‚’ Rhythm å´ã«ã‚‚åŠ ç®—ã—ã€æ‹åŸºæº–ã®æ•´åˆã‚’ä¿ã¤ã€‚
     rhythmBeat.TickCount(GameToWait.duration);
 
     ChangeScenePop(GameToWait);
@@ -300,7 +301,7 @@ void GameSceneExe::Finalize()
 
     m_ReactionActive.reset();
 
-    // ƒI[ƒfƒBƒI‚Ì’â~‚Æ“o˜^‚ÌƒNƒŠƒA
+    // ã“ã®ã‚·ãƒ¼ãƒ³ã§ç™»éŒ²ã—ãŸSEã‚’åœæ­¢ã—ã¦è§£æ”¾ã€‚
     if (AudioManager* audioManager = instance)
     {
         for (const auto& [key, config] : m_AudioList)

@@ -7,116 +7,99 @@
 #include <vector>
 #include <random>
 
-// ゲームのフェーズ管理用列挙型
-// 演出も含める
+// ゲーム全体進行の待機/案内フェーズ。
+// Exeシーン間の橋渡しを行い、次ステージ準備・UI演出・難易度/BPM調整を担当する。
 enum class GAME_PHASE
 {
-    DO,					// ゲーム中 GameSceneExe 遷移時に使用	
-    START ,				// ゲーム開始演出 初期化時に使用	
-    FINISH,				// ゲーム終了演出 ResulyScene 遷移時に使用
-	DO_UP_SPEED,		// スピードアップ演出
-    DO_UP_DIFFICULTY,	// レベルアップ演出
+	DO,                 // 通常の次ステージ待機
+	START,              // ゲーム開始演出
+	FINISH,             // ゲーム終了演出（Result遷移前）
+	DO_UP_SPEED,        // スピードアップ告知
+	DO_UP_DIFFICULTY,   // 難易度アップ告知
 	NUM
 };
 
 enum class UI_PHASE
 {
-    NONE = -1,
-	SLIDE_IN,	// ゲームUIが入ってくるフェーズ
-	WAIT,		// ゲームUIが中央で待機しているフェーズ
-	SLIDE_OUT,	// ゲームUIが出ていくフェーズ
-    NUM
+	NONE = -1,
+	SLIDE_IN,
+	WAIT,
+	SLIDE_OUT,
+	NUM
 };
 
 class GameSceneWait : public Scene
 {
 private:
+	uint32_t			 m_LifeCount = 4;       // 現在保持しているライフ数
+	vector<pShared<Square>>  m_LifeGame;           // ライフUIの実体リスト
+	pShared<Square>		 m_GameUI;               // 案内UI（スライド表示）
+	vector<pShared<Square>>  m_StageNumber;         // ステージ番号表示用
 
-    uint32_t				 m_LifeCount = 4;	  // 自分のライフ数
-    vector<pShared<Square>>  m_LifeGame;		  // ライフのオブジェクト格納用
-	pShared<Square>			 m_GameUI;			  // ライフ減少時のパーティクルエミッター
-	vector<pShared<Square>>  m_StageNumber;		  // ステージ数の作成
-
-    float m_Tick = 0.0f;
-	int	  m_QuarterAdvance = 0;
+	float m_Tick = 0.0f;
+	int	  m_QuarterAdvance = 0;                      // 更新前の四分音符基準位置
 
 	std::mt19937_64 m_RandomEngine{ std::random_device{}() };
 
-    // シーン内で使う時間関連変数
-	//(スピード倍率によって変化)
-    TimerData m_DecrementLife = { 0.0f,0.5f };	// ライフが減るまでのタイマー管理用構造体
+	// ライフ減少を即時にしないための猶予タイマー。
+	TimerData m_DecrementLife = { 0.0f,0.5f };
 
-    // ステージ遷移用フラグ
-	// 初期化済みかどうかのフラグ
-    // また、乱数選択のリセット用にstaticで持つ
-	static GAME_PHASE m_CurrentGamePhase;			// 現在のゲームフェーズを管理する変数
+	// 待機シーンは複数回入るため、フェーズ状態を static で共有している。
+	static GAME_PHASE m_CurrentGamePhase;
 
 	struct UIPhaseInfo {
-		UI_PHASE phase = UI_PHASE::NONE;		// 現在のゲームUIフェーズを管理する変数
-		float	 moveValueX			= 0.0f;		// ゲームUIの移動量
-		float	 movementTime		= 0.0f;		// ゲームUIの移動タイマー
-		float	 movementElapsed	= 0.0f;		// 現在のビートの経過時間
-		bool	 isBoot = false;
+		UI_PHASE phase = UI_PHASE::NONE;
+		float	 moveValueX = 0.0f; // 目標までの移動量
+		float	 movementTime = 0.0f; // 移動にかける秒数
+		float	 movementElapsed = 0.0f; // 移動経過秒
+		bool	 isBoot = false;           // UI演出を有効化するトリガ
 	};
 
-    UIPhaseInfo m_UIGame;
-    UIPhaseInfo m_UIStage;
+	UIPhaseInfo m_UIGame;
+	UIPhaseInfo m_UIStage;
 
-    float m_ScalingLifeElapsed  = 0.0f;				// ライフのスケーリング演出のタイマー
-    float m_ScalingLifeDuration = 0.0f;				// ライフのスケーリング演出の時間
-    NVector3 m_LifeBaseScale;						// ライフのスケーリング演出の開始時のスケール
+	float m_ScalingLifeElapsed = 0.0f;          // ライフ拡縮演出の経過秒
+	float m_ScalingLifeDuration = 0.0f;         // ライフ拡縮演出の1フェーズ時間
+	NVector3 m_LifeBaseScale;                   // ライフ表示の基準スケール
 
-	bool m_ShouldTransitionToStage = false;	// 次のステージを設定できたか判断するフラグ
-    bool m_IsFirstInitialized	   = false;	// シーンが最初に初期化されたかどうかのフラグ
-    bool m_wasDecrementLife		   = false;	// ライフが減ったかどうかのフラグ
-    bool m_isLifeScaleUp		   = false;	// ライフ減少の演出でハートが大きくなっているかどうかのフラグ
-    bool m_isLifeScaleDown		   = false;	// ライフ減少の演出でハートが小さくなっているかどうかのフラグ
-	bool m_isPendingBpmChange	   = false; // BPMの変更を行うフェーズか
+	bool m_ShouldTransitionToStage = false;     // 次ステージへ遷移可能になったか
+	bool m_IsFirstInitialized = false;          // 最初の Wait 初期化かどうか
+	bool m_wasDecrementLife = false;			// 今回の待機でライフ減算済みか
+	bool m_isLifeScaleUp = false;
+	bool m_isLifeScaleDown = false;
+	bool m_isPendingBpmChange = false;          // UI演出タイミングでBPM更新待ちか
 
 private:
-	// Exeシーンの乱数選択を行う。
-	// 二回連続で同じステージが来るようにならないようにする 
-	// 要素の削除の仕方は考える。
+	// 次に遷移する Exe シーンを選択し、RelationData へ確定する。
 	void PrepareNextStage();
 
-    // ゲームUIの登録
+	// 案内UIを生成して表示シーケンスを開始する。
 	void RegisterGameUI(pShared<Texture> texture, float u, float v);
-    // ゲームUIの移動処理
-    void GameUIMovement(int elapsedBeat);
-	// 選択されたランダムなシーンへ遷移
+	// 案内UIのスライド演出を拍進行に合わせて更新する。
+	void GameUIMovement(int elapsedBeat);
+	// 次ステージへの遷移実行。
 	void StartNextStageTransition();
-    // ライフを減らす処理
+	// ライフを1つ減らす。
 	void LifeDecrement();
-	// ライフのスケーリング演出
+	// ライフの脈動演出。
 	void LifeScaling();
 
 public:
-	//================================
-	//		コンストラクタとデストラクタ
-	//================================
-
-	GameSceneWait()  = delete;
+	GameSceneWait() = delete;
 	GameSceneWait(Camera& cam);
 	~GameSceneWait() = default;
 
-	//================================
-	// 			ループ内の処理
-	//================================
-
-	void Initialize()		override;	// シーンの初期化
-	void Update(float tick) override;	// シーンの更新
-	void Draw() 			override;
-	void Finalize()         override;	// シーンの終了処理
-
+	void Initialize() override;
+	void Update(float tick) override;
+	void Draw() override;
+	void Finalize() override;
 
 	bool IsFirstInitialized() const {
 		return m_IsFirstInitialized;
-    }
+	}
 
 	SCENE_NO GetSceneNo() const override {
 		return SCENE_NO::GAME_WAIT;
 	}
-
-
 };
 

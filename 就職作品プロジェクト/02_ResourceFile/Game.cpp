@@ -30,7 +30,7 @@ bool  Game::s_HasFirstGameSceneWaitInitialized = false;
 
 void Game::InitializeTransitionCSV()
 {
-    constexpr char kTransitionCsvPath[] = "AssetFile/Csv/TransitionData.csv";
+    constexpr char kTransitionCsvPath[] = "01_AssetFile/Csv/TransitionData.csv";
 
 	std::string loadError;
 	if (!LoadTransitionSettingsFromCsv(kTransitionCsvPath, loadError))
@@ -45,7 +45,7 @@ void Game::InitializeTransitionCSV()
 
 void Game::FinalizeTransitionCSV()
 {
-	std::filesystem::path savePath = SaveDir() / "AssetFile/Csv/TransitionData.csv";
+	std::filesystem::path savePath = SaveDir() / "01_AssetFile/Csv/TransitionData.csv";
 	std::string saveError;
 
 	if (!SaveTransitionSettingsToCsv(savePath.string(), saveError))
@@ -68,6 +68,7 @@ void Game::Initialize()
 {	
 	auto& instance = GetInstance();
 	
+	// 入力/カメラは全シーンで使うため、シーン生成より先に用意する。
 	instance.m_Input			 = std::make_unique<Input>();	
 	instance.m_Camera			 = std::make_shared<Camera>();	
 	//instance.m_Camera->Initialize();							
@@ -102,11 +103,11 @@ void Game::Initialize()
 	
 	InitializeTransitionCSV();
 
-	// マネージャーの初期化
-	// モデル・テクスチャのパスを設定
+	// Manager 群は Scene より長寿命で、各シーンが共通利用する。
+	// 初期化順を固定することで「Scene初期化時に取得できない」状態を防ぐ。
 	instance.m_ShaderManager  = std::make_shared<ShaderManager> ("ShaderFile/");
-	instance.m_TextureManager = std::make_shared<TextureManager>("AssetFile/Texture/");
-	instance.m_AudioManager   = std::make_shared<AudioManager>	(L"AssetFile/Sound/");
+	instance.m_TextureManager = std::make_shared<TextureManager>("01_AssetFile/Texture/");
+	instance.m_AudioManager   = std::make_shared<AudioManager>	(L"01_AssetFile/Sound/");
 	instance.m_AudioManager->Initialize();
 
 	// シェーダー登録
@@ -118,6 +119,7 @@ void Game::Initialize()
 	instance.m_ShaderManager->Add("PS_Alpha"  ,ShaderStage::PS);
 	instance.m_ShaderManager->Add("VS_Instansing2D"  ,ShaderStage::VS);
 
+	// BGM は拍進行の基準にも使うため、Game 側で一元的に保持する。
     AudioConfig bgmConfig{};
     bgmConfig.filePath = L"BGM/GameMelody.wav";
 	bgmConfig.autoPlay = false;
@@ -150,29 +152,28 @@ void Game::Update(float tick)
 	auto& instance = GetInstance();
 	instance.m_Input->Update(Application::GetWindow());
 
-	// 現在のシーンの更新
+	// 1) Scene 本体更新（ゲーム進行の主処理）
 	instance.m_SceneCurrent->Update(tick);
 
-	// カメラの更新
+	// 2) カメラ更新（Sceneロジックの結果を反映）
 	instance.m_Camera->Update();
 
-	// 入力の更新
-	// オブジェクトの更新
+	// 3) Scene が所有する Object 更新（見た目/挙動の追従）
 	for (auto& o : instance.m_SceneCurrent->GetSceneObjects())
 	{
-		if(o == nullptr){ continue; }
+		if (o == nullptr) { continue; }
 		o->Update(); // オブジェクトの更新
 	}
 	if (instance.m_Theme)
 	{
 		instance.m_Theme->Update();
 	}
-	// オーディオマネージャーの更新
+	// 4) オーディオ反映（Play/Stop 指示を最終的に XAudio へ反映）
 	instance.m_AudioManager->Update();
 
 	if (instance.m_Input->GetKeyTrigger(VK_Z)) {
-        instance.Finalize();
-        instance.Initialize();
+		instance.Finalize();
+		instance.Initialize();
 	}
 }
 
@@ -183,6 +184,8 @@ void Game::Draw()
 	++m_DrawFrameCounter;
 	Renderer::Start();
 
+	// Draw 順は「Scene本体 → 遷移演出 → テーマUI」の順で固定。
+	// これにより遷移演出を常に最前へ重ねられる。
 	auto& currentScene = instance.m_SceneCurrent;
 	if(currentScene != nullptr)
 	{
@@ -228,6 +231,7 @@ void Game::Finalize()
 	auto& instance = GetInstance();
 	FinalizeTransitionCSV();
 
+	// 破棄は「利用側から順に」実施し、依存先を先に消さない。
 	DebugUI::DisposeUI();		// デバッグUIの終了処理
 	if (!instance.m_TransitionTexture.empty()) {
 		for (auto it : instance.m_TransitionTexture) {
@@ -273,7 +277,8 @@ void Game::SceneStackClear()
 {
 	auto& instance = GetInstance();
     auto& sceneStack = instance.m_SceneList;
-	
+
+	// 直前シーンへ戻る導線だけ残すため、末尾1件を残して破棄する。
     if (sceneStack.size() <= 1) { return; }
 	sceneStack.erase(sceneStack.begin(), sceneStack.end() - 1);
 }
@@ -294,6 +299,7 @@ pShared<Theme> Game::GetTheme()
 {
 	auto& instance = GetInstance();
 	
+	// Theme は必要になった瞬間に生成する（起動直後の初期化コストを抑える）。
 	if (!m_Theme) {
 		m_Theme = std::make_shared<Theme>(instance.GetCamera());
 		m_Theme->Initialize();

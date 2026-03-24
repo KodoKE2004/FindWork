@@ -168,7 +168,8 @@ void GameSceneWait::Initialize()
     m_Skydome->SetTexture(textureMgr->GetTexture("SkydomeSpace.png"));
     m_Skydome->SetRadius(500.0f);
 
-    // 難易度アップ処理 
+    // Waitに入るたびにステージ進行数を進める。
+    // ここを基準に難易度/BPMの変化タイミングを判定する。
     ++m_RelationData.stageCount;
 
     // ステージ数の生成
@@ -218,7 +219,7 @@ void GameSceneWait::Initialize()
         }
     }
 
-    // ステージ乱数選択処理   
+    // 前ステージ情報を踏まえて次ステージを確定
     PrepareNextStage();
 
     // ステージ用のお題を作成
@@ -271,7 +272,8 @@ void GameSceneWait::Initialize()
 
 
     //-------------------------------------------------------------------   
-    //   難易度アップのタイミングでBPMを下げる or スピードアップのタイミングでBPMを上げる
+    //   難易度アップのタイミングでBPMを下げる / スピードアップ時にBPMを上げる
+    //   どちらも「告知UI中に反映」するため、この段階では pending フラグだけ立てる。
     //-------------------------------------------------------------------   
     const int difficultyStageInterval = Game::GetDifficultyStageInterval();
     const int speedUpStageInterval = Game::GetSpeedUpStageInterval();
@@ -319,7 +321,9 @@ void GameSceneWait::Initialize()
 void GameSceneWait::Update(float tick)
 {   
     auto& rhythmBeat = Game::GetRhythmBeat();
-    // リズムを取る    
+    //-------------------------------
+    // リズム進行の更新前後を取得
+    //-------------------------------
     m_QuarterAdvance = rhythmBeat.GetBeatElapsed() / 2;
     rhythmBeat.Update(tick);
     int elapsedBeat      = rhythmBeat.GetBeatElapsed();
@@ -328,7 +332,8 @@ void GameSceneWait::Update(float tick)
 
     GameUIMovement(elapsedBeat);
 
-    // ライフをリズムに合わせて回転させる
+    // 四分音符単位で演出トリガを評価。
+    // for で回すことで、低fpsで複数拍進んだときもイベントを取りこぼさない。
     for (int i = m_QuarterAdvance; i < elapsedFourBeat; ++i)
     {
         // 1拍目のタイミングでBGM再生
@@ -341,11 +346,11 @@ void GameSceneWait::Update(float tick)
         if (restBeat <= ONE_MEASURE)
         {
             m_UIStage.isBoot       = true;
-            // 四拍の長さ
+            // 1小節（=四分音符4つ）ぶんの長さ。
             m_UIStage.movementTime = rhythmBeat.GetOneBeat() * 2.0f;
         }
 
-        // 残り一拍のタイミングでステージ遷移フラグを立てる
+        // 終盤でテーマ表示を有効化し、次ステージのお題を事前に認識させる。
         if (restBeat <=  5 && m_RelationData.gameLife > 0)
         {
             m_Theme->SetActive(true);
@@ -375,6 +380,7 @@ void GameSceneWait::Update(float tick)
         LifeScaling();
     }
 
+    // 遷移直前3拍で「次ステージへ進める」状態を確定。
     if (rhythmBeat.GetBeatElapsed() >= rhythmBeat.GetBeatTotal() - 3)
     {
         m_ShouldTransitionToStage = true;
@@ -391,10 +397,10 @@ void GameSceneWait::Update(float tick)
         m_wasDecrementLife = true;
     }
 
-    // タイマー更新処理
+    // タイマー更新は判定後に行い、今フレーム内での条件判定順を固定する。
     CountTimer(tick);
 
-    // デバッグ用　終わったら消す予定のreturn
+    // ゲームオーバー時は結果シーンへ。
     if (m_RelationData.gameLife == 0u && m_ShouldTransitionToStage)
     {
         // ライフが0になったらリザルトシーンへ
@@ -465,14 +471,14 @@ void GameSceneWait::RegisterGameUI(pShared<Texture> texture, float u, float v)
 //====================================
 //          　GameUI移動演出
 //====================================
-
 void GameSceneWait::GameUIMovement(int elapsedBeat)
 {
     if (!m_UIGame.isBoot || !m_GameUI) {
         return;
     }
 
-    // ゲームのフェーズで順序を替える
+    // ゲームフェーズでUIシーケンス開始位置を調整。
+    // START以外はライフ管理演出ぶん先送りする。
     int phaseBeats = 0;
     if (m_CurrentGamePhase > GAME_PHASE::START) {
         phaseBeats += 16; // ライフの管理は最初の一小節で完結させるためその分を加算
@@ -502,6 +508,7 @@ void GameSceneWait::GameUIMovement(int elapsedBeat)
     if (elapsedBeat < kSlideInEndBeat)
     {
         if (m_isPendingBpmChange) {
+            // 告知UIの入場タイミングで BPM を更新し、視覚と聴覚の切替点を一致させる。
             RhythmBeatConst beatConfig{};
             const float speedUpBpmIncrease = Game::GetSpeedUpBpmIncrease();
             if (m_CurrentGamePhase == GAME_PHASE::DO_UP_SPEED) {
@@ -566,6 +573,7 @@ void GameSceneWait::StartNextStageTransition()
 {
     Game::SetIsTickCount(true);
     RhythmBeat& rhythmBeat = Game::GetRhythmBeat();
+    // 遷移前に1拍待つ。見た目遷移と内部拍進行のズレ防止のため Tick 側も同量進める。
     WaitToGame.duration = rhythmBeat.GetOneBeat();
     rhythmBeat.TickCount(WaitToGame.duration);
 

@@ -20,16 +20,18 @@
 class Game
 {
 private:
-	static pUnique<Game>			m_pInstance;				// ゲームのインスタンス
-	static uint64_t					m_DrawFrameCounter;			// Draw 呼び出しのフレーム番号
-	pShared<Scene>					m_SceneCurrent;				// 現在のシーン
-	pShared<Scene>					m_SceneNext;				// 次のシーン
+	// Game は「シーン単体で持ちにくい共有資源」を束ねる中核クラス。
+	// ここではシーン本体のロジックではなく、進行の土台（Scene/各Manager/リズム）を管理する。
+	static pUnique<Game>			m_pInstance;				// シングルトン本体
+	static uint64_t					m_DrawFrameCounter;			// Draw 呼び出し回数（デバッグ表示や計測の基準）
+	pShared<Scene>					m_SceneCurrent;				// 現在進行中のシーン
+	pShared<Scene>					m_SceneNext;				// 遷移先シーン（トランジション中に保持）
 	pUnique<Input>					m_Input;					// 入力管理
 	pShared<Camera>					m_Camera;					// カメラ
-    vector<pShared<TransitionBase>> m_TransitionTexture;		// トランジション用テクスチャ
+	vector<pShared<TransitionBase>> m_TransitionTexture;		// トランジション描画を Scene 外から重ねるためのオーバーレイ群
 	pShared<Theme>					m_Theme;					// テーマ管理
-    vector<pShared<Scene>>			m_SceneList;				// シーンスタック
-    DirectX::SimpleMath::Vector2	m_PreviewMousePos;			// デバッグ用ビュー行列
+	vector<pShared<Scene>>			m_SceneList;				// シーンスタック（戻る遷移のために退避）
+	DirectX::SimpleMath::Vector2	m_PreviewMousePos;			// デバッグ用ビュー行列
 	pShared<Audio>					m_BgmAudio;					// BGM
 	PlayParams						m_BgmParams;
 
@@ -51,10 +53,12 @@ private:
 	static int	 m_SpeedUpStageInterval;
 	static float m_SpeedUpBpmIncrease;
 
-	// テンポ制御
+	// テンポ制御（Scene を跨いで同一基準の時間軸を使うため Game 側で保持）
 	static RhythmBeat m_RhythmBeat;
+	// 「Update を止める」のではなく「ゲーム進行時間(Tick)だけ止める」ためのフラグ。
+	// 演出や遷移UIを動かしながら、判定系の時間だけ止めたい場面で使う。
 	static bool		  m_isTickCount;
-    static bool       s_HasFirstGameSceneWaitInitialized;
+	static bool       s_HasFirstGameSceneWaitInitialized;
 
 public:
 	//================================
@@ -67,14 +71,18 @@ public:
 	//			ループ内の処理
 	//================================
 	
+	// アプリ起動時に一度だけ呼ばれ、各Manager・初期Scene・描画基盤を組み立てる。
 	static void Initialize();		// ゲームの初期化
+	// 1フレーム単位で Scene / Camera / Audio 等の全体更新を進める。
 	static void Update(float tick);	// ゲームの更新
+	// Scene 描画 + 遷移オーバーレイ + デバッグUI の合成を担当する。
 	static void Draw();				// ゲームの描画
+	// リソース解放順を管理し、Scene 側が握る共有資源もここで確実に終了させる。
 	static void Finalize();			// ゲームの終了処理
 
 	// 現在のシーンを設定
-    static void SetSceneCurrent(pShared<Scene> newScene);
-    static void SetSceneNext(pShared<Scene> newScene);
+	static void SetSceneCurrent(pShared<Scene> newScene);	// 実行中シーンを切り替える
+	static void SetSceneNext(pShared<Scene> newScene);		// 遷移先シーンを設定する
 	static void SceneStackClear();
 	void SetTheme(const pShared<Theme>& theme);
 
@@ -104,6 +112,7 @@ public:
 	Camera&					GetCamera();
 	static void				SetBgmBpm(float bpm);
 	static float			GetBgmBpm();
+	// Scene 共通の時間基準。待機シーン/ゲームシーンで同じ拍進行を参照する。
 	static RhythmBeat&		GetRhythmBeat() {
 		return m_RhythmBeat; 
 	}
@@ -166,8 +175,10 @@ void ChangeScenePush(SceneTransitionParam& state, Args&&... args)
 
 	Debug::Log("[[検出]] シーンのPush");
 
+	// Scene 遷移時に前シーン由来のタイマーが残ると誤作動するため、全体でクリアする。
 	Scene::ClearTimerList();
 
+	// 実際のシーン切り替え前に TransScene を挟み、old/new の橋渡しを行う。
 	auto scene     = std::make_shared<TransScene>(instance.GetCamera());
 	auto sceneNext = std::make_shared<T>(instance.GetCamera(), std::forward<Args>(args)...);
     auto sceneCurrent = instance.GetCurrentScene();
@@ -199,11 +210,11 @@ inline void ChangeScenePop(SceneTransitionParam& state)
 	}
 
 	Debug::Log("[[検出]] シーンのPop");
-
+	// Pop 遷移時も同様に、前シーンの残タイマーを持ち越さない。
 	Scene::ClearTimerList();
 
-    // 現在のシーン
-    auto scene = std::make_shared<TransScene>(instance.GetCamera());
+	// 現在のシーン
+	auto scene = std::make_shared<TransScene>(instance.GetCamera());	// 中継用シーン
     auto sceneNext = instance.ScenePop();
 
 	if (!sceneNext) {

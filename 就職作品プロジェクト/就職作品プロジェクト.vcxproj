@@ -30,7 +30,6 @@
     <ClCompile Include="02_ResourceFile\ObjectFile\Stone.cpp" />
     <ClCompile Include="02_ResourceFile\ObjectFile\Theme.cpp" />
     <ClCompile Include="02_ResourceFile\ObjectFile\Timer.cpp" />
-    <ClCompile Include="02_ResourceFile\Particle.cpp" />
     <ClCompile Include="02_ResourceFile\RhythmBeat.cpp" />
     <ClCompile Include="02_ResourceFile\AudioManager.cpp" />
     <ClCompile Include="02_ResourceFile\Camera.cpp" />
@@ -100,7 +99,6 @@
     <ClInclude Include="02_ResourceFile\Application.h" />
     <ClInclude Include="02_ResourceFile\Audio.h" />
     <ClInclude Include="02_ResourceFile\ImGuiUtil.h" />
-    <ClInclude Include="02_ResourceFile\JsonLoder.hpp" />
     <ClInclude Include="02_ResourceFile\ObjectFile\Bird.h" />
     <ClInclude Include="02_ResourceFile\ObjectFile\Bomber.h" />
     <ClInclude Include="02_ResourceFile\ObjectFile\Button.h" />
@@ -109,7 +107,6 @@
     <ClInclude Include="02_ResourceFile\ObjectFile\Stone.h" />
     <ClInclude Include="02_ResourceFile\ObjectFile\Theme.h" />
     <ClInclude Include="02_ResourceFile\ObjectFile\Timer.h" />
-    <ClInclude Include="02_ResourceFile\Particle.h" />
     <ClInclude Include="02_ResourceFile\RhythmBeat.h" />
     <ClInclude Include="02_ResourceFile\AudioManager.h" />
     <ClInclude Include="02_ResourceFile\Camera.h" />
