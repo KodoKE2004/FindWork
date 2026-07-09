@@ -35,9 +35,6 @@ private:
 	pShared<Audio>					m_BgmAudio;					// BGM
 	PlayParams						m_BgmParams;
 
-#ifdef _DEBUG
-#endif
-
 	//================================
 	//	   ゲームを支えるマネージャー達
 	//================================
@@ -55,6 +52,7 @@ private:
 
 	// テンポ制御（Scene を跨いで同一基準の時間軸を使うため Game 側で保持）
 	static RhythmBeat m_RhythmBeat;
+
 	// 「Update を止める」のではなく「ゲーム進行時間(Tick)だけ止める」ためのフラグ。
 	// 演出や遷移UIを動かしながら、判定系の時間だけ止めたい場面で使う。
 	static bool		  m_isTickCount;
@@ -72,13 +70,16 @@ public:
 	//================================
 	
 	// アプリ起動時に一度だけ呼ばれ、各Manager・初期Scene・描画基盤を組み立てる。
-	static void Initialize();		// ゲームの初期化
+	static void Initialize();
+
 	// 1フレーム単位で Scene / Camera / Audio 等の全体更新を進める。
-	static void Update(float tick);	// ゲームの更新
+	static void Update(float tick);
+
 	// Scene 描画 + 遷移オーバーレイ + デバッグUI の合成を担当する。
-	static void Draw();				// ゲームの描画
+	static void Draw();
+
 	// リソース解放順を管理し、Scene 側が握る共有資源もここで確実に終了させる。
-	static void Finalize();			// ゲームの終了処理
+	static void Finalize();
 
 	// 現在のシーンを設定
 	static void SetSceneCurrent(pShared<Scene> newScene);	// 実行中シーンを切り替える
@@ -98,7 +99,8 @@ public:
     }
 
 	vector<pShared<TransitionBase>> GetTransitionTexture() const;
-	pShared<Theme>			GetTheme() ;
+
+	pShared<Theme> GetTheme() ;
 
     //===============================
 	//			シーンの関連群
