@@ -182,10 +182,10 @@ void GameSceneWait::Initialize()
     m_QuarterAdvance     = 0;
 
     // ライフの数だけハートの生成
-    const float lifePosX = - 200.0f;
-    const float lifePosY = - 100.0f;
+    const float lifePosX = 80.0f;
+    const float lifePosY = 0.0f;
 
-    m_LifeBaseScale = NVector3(100.0f, 100.0f, 1.0f);
+    m_LifeBaseScale = NVector3(10.0f, 10.0f, 10.0f);
     m_ShouldTransitionToStage = false;
     m_wasDecrementLife        = false;
     m_isPendingBpmChange      = false;
@@ -197,13 +197,13 @@ void GameSceneWait::Initialize()
     m_LifeCount = m_RelationData.gameLife;
     for(uint32_t i = 0; i < m_LifeCount; ++i)
     {
-        const float distance = 130.0f;
+        const float distance = - 60.0f;
 
-        pShared<Square> life = AddObject<Square>(instance.GetCamera());
-        life->SetTexture(textureMgr->GetTexture("GameScene/DestroyBullet.png"));
+        pShared<Sphere> life = AddObject<Sphere>(instance.GetCamera());
+        life->SetTexture(textureMgr->GetTexture("GameScene/GameLife.png"));
         life->SetPos(lifePosX + ( i * distance), lifePosY, 1.0f);
         life->SetName("m_life");
-        life->SetScale(100.0f, 100.0f, 1.0f);
+        life->SetScale(10.0f, 10.0f, 10.0f);
         life->SetShader("VS_Alpha","PS_Alpha");
         life->SetColor(1.0f, 1.0f, 1.0f, 1.0f);
 
@@ -400,6 +400,7 @@ void GameSceneWait::Update(float tick)
     // タイマー更新は判定後に行い、今フレーム内での条件判定順を固定する。
     CountTimer(tick);
 
+    return;
     // ゲームオーバー時は結果シーンへ。
     if (m_RelationData.gameLife == 0u && m_ShouldTransitionToStage)
     {

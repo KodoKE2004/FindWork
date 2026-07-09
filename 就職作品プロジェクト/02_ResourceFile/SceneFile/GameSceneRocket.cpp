@@ -24,8 +24,11 @@ void GameSceneRocket::Initialize()
     auto& instance = Game::GetInstance();
 
     m_Skydome = AddObject<Skydome>(instance.GetCamera());
-    auto cube = AddObject<Cube>(instance.GetCamera());
 
+    auto cube = AddObject<Cube>(instance.GetCamera());
+    cube->SetName("Cube");
+    cube->SetColor(Color(0.5f, 0.5f, 0.5f, 1.0f));
+    
     m_Bomber = AddObject<Bomber>(instance.GetCamera());
     m_Bomber->SetName("m_TimeGauge");
 

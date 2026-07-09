@@ -123,7 +123,7 @@ void Wipe::Draw()
     float vh = 1.0f / m_SplitY;
     Renderer::SetUV(u, v, uw, vh);
 
-    Camera::ScopedMode scoped(m_Camera, CAMERA_2D);
+    Camera::ScopedMode scoped(m_Camera, CAMERA_UI);
     dc->DrawIndexed(4, 0, 0);
     Renderer::SetDepthEnable(true);
 }

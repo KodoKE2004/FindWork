@@ -7,8 +7,8 @@
 using namespace DirectX::SimpleMath;
 
 enum CAMERA_MODE {
-	CAMERA_2D, // 2Dモード
-	CAMERA_3D  // 3Dモード
+	CAMERA_UI, // 2Dモード
+	CAMERA_OBJECT  // 3Dモード
 };
 
 //----------------------------------
@@ -35,7 +35,7 @@ private:
 	DirectX::SimpleMath::Matrix	   m_ViewMatrix{};					// ビュー行列
 	DirectX::SimpleMath::Matrix	   m_ProjectionMatrix{};			// プロジェクション行列
 
-	CAMERA_MODE m_Mode = CAMERA_3D;
+	CAMERA_MODE m_Mode = CAMERA_OBJECT;
 
 	float m_CameraDirection = 0.0f;
 
@@ -63,7 +63,7 @@ public:
 
 	private:
 		Camera& m_Camera;
-		CAMERA_MODE m_PreviousMode = CAMERA_3D;
+		CAMERA_MODE m_PreviousMode = CAMERA_OBJECT;
 		bool        m_ShouldRestore = false;
 	};
 

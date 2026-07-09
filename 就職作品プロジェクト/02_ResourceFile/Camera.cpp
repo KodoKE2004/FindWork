@@ -115,7 +115,7 @@ void Camera::SetCamera(CAMERA_MODE mode)
 	m_Mode = mode;
 	
 	//3D
-	if (mode == CAMERA_3D) {
+	if (mode == CAMERA_OBJECT) {
 		m_Eye      = m_Position;									// カメラの位置
 		m_eularRad = Vector3(XMConvertToRadians(m_Rotation.x),
 							 XMConvertToRadians(m_Rotation.y),
@@ -147,7 +147,7 @@ void Camera::SetCamera(CAMERA_MODE mode)
 	//2D
 	// ビルボードのような
 	// 平面に張り付かせる
-	else if (mode == CAMERA_2D)
+	else if (mode == CAMERA_UI)
 	{
 		//ビュー変換行列
 		Vector3 pos = { 0.0f,  0.0f,-10.0f };

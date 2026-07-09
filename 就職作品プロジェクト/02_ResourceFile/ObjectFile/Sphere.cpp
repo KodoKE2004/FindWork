@@ -74,7 +74,7 @@ void Sphere::Initialize()
         m_Texture = textureMgr->GetTexture("Plane.png");
     }
 
-    m_Camera.SetCamera(CAMERA_3D);
+    m_Camera.SetCamera(CAMERA_OBJECT);
 }
 
 void Sphere::Update()
@@ -144,7 +144,7 @@ void Sphere::DrawAsSky()
     {
         m_Texture->SetGPU();
     }
-    m_Camera.SetCamera(CAMERA_3D);
+    m_Camera.SetCamera(CAMERA_OBJECT);
 
     devicecontext->DrawIndexed(m_IndexCount, 0, 0);
 
@@ -174,7 +174,7 @@ void Sphere::DrawAsMesh()
     {
         m_Texture->SetGPU();
     }
-    m_Camera.SetCamera(CAMERA_3D);
+    m_Camera.SetCamera(CAMERA_OBJECT);
 
     devicecontext->DrawIndexed(m_IndexCount, 0, 0);
 }

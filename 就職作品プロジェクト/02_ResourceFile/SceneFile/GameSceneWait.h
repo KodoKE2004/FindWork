@@ -32,7 +32,7 @@ class GameSceneWait : public Scene
 {
 private:
 	uint32_t			 m_LifeCount = 4;       // 現在保持しているライフ数
-	vector<pShared<Square>>  m_LifeGame;           // ライフUIの実体リスト
+	vector<pShared<Sphere>>  m_LifeGame;           // ライフUIの実体リスト
 	pShared<Square>		 m_GameUI;               // 案内UI（スライド表示）
 	vector<pShared<Square>>  m_StageNumber;         // ステージ番号表示用
 

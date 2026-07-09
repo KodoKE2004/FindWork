@@ -22,6 +22,7 @@ void Cube::Initialize()
 	vector<VERTEX_3D>	vertices;
 
 	vertices.resize(24);
+    Color color = DirectX::SimpleMath::Color(1.0f, 1.0f, 1.0f, 0.3f);
 
 	//上面
 	vertices[0].position = NVector3(-10.0f,10.0f, 10.0f);
@@ -29,10 +30,10 @@ void Cube::Initialize()
 	vertices[2].position = NVector3(-10.0f,10.0f,-10.0f);
 	vertices[3].position = NVector3( 10.0f,10.0f,-10.0f);
 
-	vertices[0].color = DirectX::SimpleMath::Color( 1.0f, 1.0f, 0.0f, 1.0f);
-	vertices[1].color = DirectX::SimpleMath::Color( 1.0f, 1.0f, 0.0f, 1.0f);
-	vertices[2].color = DirectX::SimpleMath::Color( 1.0f, 1.0f, 0.0f, 1.0f);
-	vertices[3].color = DirectX::SimpleMath::Color( 1.0f, 1.0f, 0.0f, 1.0f);
+	vertices[0].color = color;
+	vertices[1].color = color;
+	vertices[2].color = color;
+	vertices[3].color = color;
 
 	vertices[0].uv = DirectX::SimpleMath::Vector2(0.0f, 0.0f);
 	vertices[1].uv = DirectX::SimpleMath::Vector2(0.33f, 0.0f);
@@ -50,10 +51,10 @@ void Cube::Initialize()
 	vertices[6].position = NVector3(-10.0f,-10.0f, -10.0f);
 	vertices[7].position = NVector3( 10.0f,-10.0f, -10.0f);
 
-	vertices[4].color = DirectX::SimpleMath::Color(1.0f, 1.0f, 0.0f, 1.0f);
-	vertices[5].color = DirectX::SimpleMath::Color(1.0f, 1.0f, 0.0f, 1.0f);
-	vertices[6].color = DirectX::SimpleMath::Color(1.0f, 1.0f, 0.0f, 1.0f);
-	vertices[7].color = DirectX::SimpleMath::Color(1.0f, 1.0f, 0.0f, 1.0f);
+	vertices[4].color = color;
+	vertices[5].color = color;
+	vertices[6].color = color;
+	vertices[7].color = color;
 
 	vertices[4].uv = DirectX::SimpleMath::Vector2(0.33f, 0.5f);
 	vertices[5].uv = DirectX::SimpleMath::Vector2(0.66f, 0.5f);
@@ -71,10 +72,10 @@ void Cube::Initialize()
 	vertices[10].position = NVector3( 10.0f,-10.0f, -10.0f);
 	vertices[11].position = NVector3( 10.0f,-10.0f,  10.0f);
 
-	vertices[8]. color = DirectX::SimpleMath::Color(1.0f, 1.0f, 0.0f, 1.0f);
-	vertices[9].color = DirectX::SimpleMath::Color(1.0f, 1.0f, 0.0f, 1.0f);
-	vertices[10].color = DirectX::SimpleMath::Color(1.0f, 1.0f, 0.0f, 1.0f);
-	vertices[11].color = DirectX::SimpleMath::Color(1.0f, 1.0f, 0.0f, 1.0f);
+	vertices[8].color  = color;
+	vertices[9].color  = color;
+	vertices[10].color = color;
+	vertices[11].color = color;
 
 	vertices[8].uv  = DirectX::SimpleMath::Vector2(0.66f, 0.0f);
 	vertices[9].uv = DirectX::SimpleMath::Vector2(1.0f, 0.0f);
@@ -92,10 +93,10 @@ void Cube::Initialize()
 	vertices[14].position  = NVector3(-10.0f,-10.0f,  10.0f);
 	vertices[15].position  = NVector3( 10.0f,-10.0f,  10.0f);
 
-	vertices[12].color = DirectX::SimpleMath::Color(1.0f, 1.0f, 0.0f, 1.0f);
-	vertices[13].color = DirectX::SimpleMath::Color(1.0f, 1.0f, 0.0f, 1.0f);
-	vertices[14].color = DirectX::SimpleMath::Color(1.0f, 1.0f, 0.0f, 1.0f);
-	vertices[15].color = DirectX::SimpleMath::Color(1.0f, 1.0f, 0.0f, 1.0f);
+	vertices[12].color = color;
+	vertices[13].color = color;
+	vertices[14].color = color;
+	vertices[15].color = color;
 
 	vertices[12].uv = DirectX::SimpleMath::Vector2(0.33f, 0.0f);
 	vertices[13].uv = DirectX::SimpleMath::Vector2(0.66f, 0.0f);
@@ -113,10 +114,10 @@ void Cube::Initialize()
 	vertices[18].position  = NVector3(- 10.0f,- 10.0f, - 10.0f);
 	vertices[19].position  = NVector3(- 10.0f,- 10.0f,   10.0f);
 
-	vertices[16]. color = DirectX::SimpleMath::Color(1.0f, 1.0f, 0.0f, 1.0f);
-	vertices[17].color = DirectX::SimpleMath::Color(1.0f, 1.0f, 0.0f, 1.0f);
-	vertices[18].color = DirectX::SimpleMath::Color(1.0f, 1.0f, 0.0f, 1.0f);
-	vertices[19].color = DirectX::SimpleMath::Color(1.0f, 1.0f, 0.0f, 1.0f);
+	vertices[16].color = color;
+	vertices[17].color = color;
+	vertices[18].color = color;
+	vertices[19].color = color;
 
 	vertices[16].uv  = DirectX::SimpleMath::Vector2(0.0f, 0.5f);
 	vertices[17].uv = DirectX::SimpleMath::Vector2(0.33f, 0.5f);
@@ -134,10 +135,10 @@ void Cube::Initialize()
 	vertices[22].position  = NVector3( 10.0f,-10.0f, -10.0f);
 	vertices[23].position  = NVector3(-10.0f,-10.0f, -10.0f);
 
-	vertices[20].color = DirectX::SimpleMath::Color(1.0f, 1.0f, 0.0f, 1.0f);
-	vertices[21].color = DirectX::SimpleMath::Color(1.0f, 1.0f, 0.0f, 1.0f);
-	vertices[22].color = DirectX::SimpleMath::Color(1.0f, 1.0f, 0.0f, 1.0f);
-	vertices[23].color = DirectX::SimpleMath::Color(1.0f, 1.0f, 0.0f, 1.0f);
+	vertices[20].color = color;
+	vertices[21].color = color;
+	vertices[22].color = color;
+	vertices[23].color = color;
 
 	vertices[20].uv = DirectX::SimpleMath::Vector2(0.66f, 0.5f);
 	vertices[21].uv = DirectX::SimpleMath::Vector2(1.0f, 0.5f);
@@ -182,13 +183,9 @@ void Cube::Initialize()
 	m_IndexBuffer.Create(indices);
 
 	// シェーダオブジェクト生成
-	SetShader("VS_Default", "PS_Default");
+	SetShader("VS_Alpha", "PS_Alpha");
 
-	//テクスチャロード
-    TextureManager* textureMgr = Game::GetInstance();
-	m_Texture = textureMgr->GetTexture("black.png");
-
-	m_Camera.SetCamera(CAMERA_3D);
+	m_Camera.SetCamera(CAMERA_OBJECT);
 }
 
 
@@ -226,7 +223,7 @@ void Cube::Draw()
 	m_VertexBuffer.SetGPU();
 	m_IndexBuffer.SetGPU();
 	if (m_Texture != nullptr) {	m_Texture->SetGPU(); }
-	m_Camera.SetCamera(CAMERA_3D);
+	m_Camera.SetCamera(CAMERA_OBJECT);
 
 	devicecontext->DrawIndexed(
 		36,							// 描画するインデックス数（四角形なんで４）

@@ -14,7 +14,7 @@ void Model::Initialize()
 
     SetShader("VS_Default","PS_Default"),
 
-    m_Camera.SetCamera(CAMERA_3D);
+    m_Camera.SetCamera(CAMERA_OBJECT);
 
     for (const auto& mtrl : m_MeshModel.mesh->GetMaterials())
     {
