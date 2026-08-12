@@ -263,6 +263,9 @@
     <ClCompile Include="02_ResourceFile\ObjectFile\Model.cpp">
       <Filter>SourceFile\Object\3D</Filter>
     </ClCompile>
+    <ClCompile Include="02_ResourceFile\GameplaySession.cpp">
+      <Filter>SourceFile\Core</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="02_ResourceFile\SceneFile\Scene.h">
@@ -492,6 +495,9 @@
       <Filter>SourceFile\Core</Filter>
     </ClInclude>
     <ClInclude Include="02_ResourceFile\IndexBuffer.h">
+      <Filter>SourceFile\Core</Filter>
+    </ClInclude>
+    <ClInclude Include="02_ResourceFile\GameplaySession.h">
       <Filter>SourceFile\Core</Filter>
     </ClInclude>
   </ItemGroup>

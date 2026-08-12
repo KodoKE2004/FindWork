@@ -64,6 +64,9 @@ namespace
 
 void GameSceneGunman::TargetMovePosition()
 {
+    const GameplaySession& session = Game::GetGameplaySession();
+    const float oneBeat = session.GetRhythmBeat().GetOneBeat();
+
     float moveValueY = 0.0f;
     float moveValueX = 0.0f;
     float duration    = 0.0f;
@@ -71,10 +74,9 @@ void GameSceneGunman::TargetMovePosition()
     if (m_isShot)
     {
         // Y座標は同じなので、X座標の移動量だけ計算
-        duration = Game::GetRhythmBeat().GetOneBeat();
+        duration = oneBeat;
 
         const float progress = std::clamp(m_MoveUpElapsed / duration, 0.0f, 1.0f);
-
         const float easedProgress = Calculator::Easing::EvaluateEasing(EASING_TYPE::OUT_QUAD, progress);
 
         // 開始時の位置とサイズを設定
@@ -135,7 +137,7 @@ void GameSceneGunman::TargetMovePosition()
     else
     {
         moveValueY = kTargetPos[0].y - kStartPos[0].y;
-        duration = Game::GetRhythmBeat().GetOneBeat() / 2;
+        duration = oneBeat / 2;
 
         float progress   = std::clamp(m_MoveUpElapsed / duration,0.0f, 1.0f);
 
@@ -221,7 +223,10 @@ void GameSceneGunman::UpdateSubjectScale(float tick)
 {
     if (!m_Subject) return;
 
-    const float duration = max(Game::GetRhythmBeat().GetOneBeat(), 0.01f);
+    const GameplaySession& session = Game::GetGameplaySession();
+    const float oneBeat = session.GetRhythmBeat().GetOneBeat();
+
+    const float duration = max(oneBeat, 0.01f);
     m_SubjectScaleElapsed += tick;
 
     if (m_SubjectScaleElapsed >= duration)
@@ -267,9 +272,9 @@ void GameSceneGunman::Initialize()
 
     // リズムの定義
     RhythmBeatConst beatConfig{};
-    auto& rhythmBeat = Game::GetRhythmBeat();
     beatConfig.Setup(Game::GetBgmBpm());
-    rhythmBeat.Initialize(beatConfig, false, ONE_MEASURE * 2);
+    auto& session = Game::GetGameplaySession();
+    session.InitializeRhythm(beatConfig, false, ONE_MEASURE * 2);
 
     auto& instance = Game::GetInstance();
     TextureManager* textureMar = instance;
@@ -348,7 +353,8 @@ void GameSceneGunman::Initialize()
 void GameSceneGunman::Update(float tick)
 {
     GameSceneExe::Update(tick);
-    auto& rhythmBeat  = Game::GetRhythmBeat();
+    const GameplaySession& session = Game::GetGameplaySession();
+    const RhythmBeat& rhythmBeat  = session.GetRhythmBeat();
     // 経過拍数を取得(4拍基準)
     int   elapsedBeat = rhythmBeat.GetBeatElapsed() / 2;
 

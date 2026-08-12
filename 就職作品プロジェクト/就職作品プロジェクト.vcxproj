@@ -21,6 +21,7 @@
   <ItemGroup>
     <ClCompile Include="02_ResourceFile\Application.cpp" />
     <ClCompile Include="02_ResourceFile\Audio.cpp" />
+    <ClCompile Include="02_ResourceFile\GameplaySession.cpp" />
     <ClCompile Include="02_ResourceFile\ImGuiUtil.cpp" />
     <ClCompile Include="02_ResourceFile\ObjectFile\Bird.cpp" />
     <ClCompile Include="02_ResourceFile\ObjectFile\Bomber.cpp" />
@@ -99,6 +100,7 @@
   <ItemGroup>
     <ClInclude Include="02_ResourceFile\Application.h" />
     <ClInclude Include="02_ResourceFile\Audio.h" />
+    <ClInclude Include="02_ResourceFile\GameplaySession.h" />
     <ClInclude Include="02_ResourceFile\ImGuiUtil.h" />
     <ClInclude Include="02_ResourceFile\ObjectFile\Bird.h" />
     <ClInclude Include="02_ResourceFile\ObjectFile\Bomber.h" />

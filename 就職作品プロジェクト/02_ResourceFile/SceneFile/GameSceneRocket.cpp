@@ -17,9 +17,9 @@ void GameSceneRocket::Initialize()
 
     // リズムの定義
     RhythmBeatConst beatConfig{};
-    auto& rhythmBeat = Game::GetRhythmBeat();
     beatConfig.Setup(Game::GetBgmBpm());
-    rhythmBeat.Initialize(beatConfig, false, BASE_BEATS - 8);
+    auto& session = Game::GetGameplaySession();
+    session.InitializeRhythm(beatConfig, false, BASE_BEATS - 8);
 
     auto& instance = Game::GetInstance();
 
@@ -51,7 +51,6 @@ void GameSceneRocket::Initialize()
 void GameSceneRocket::Update(float tick)
 {
     // デバッグ中
-    return;
     GameSceneExe::Update(tick);
 }
 

@@ -7,10 +7,10 @@ struct RhythmBeatConst
 {
     // 譜面・拍構造の定義
     float m_Bpm = 120.0f;          // 四分音符基準の BPM
-    int   m_BeatsPerBar = 4;       // 1小節あたりの拍数（拍子の分子）
-    int   m_BeatUnit = 4;          // 1拍の音価（4=四分音符, 8=八分音符）
+    int   m_BeatsPerBar = 8;       // 1小節あたりの拍数（拍子の分子）
+    int   m_BeatUnit = 8;          // 1拍の音価（4=四分音符, 8=八分音符）
     int   m_TicksPerBeat = 16;     // 1拍を何 Tick に分割するか
-    int   m_HitsPerBar = 4;        // 1小節中のヒット基準数（演出/判定用）
+    int   m_HitsPerBar = 8;        // 1小節中のヒット基準数（演出/判定用）
 
     // 上記定義から導出されるキャッシュ値（秒系）
     float secondsPerBeat = 0.0f;    // 1拍の秒数
@@ -52,13 +52,30 @@ struct RhythmBeatConst
     }
 };
 
+struct RhythmBeatResult
+{
+    // Update前の経過拍数。
+    int previousBeat = 0;
+
+    // Update後の経過拍数。
+    int currentBeat = 0;
+
+    // このフレームで進んだ拍数。
+    int advancedBeatCount = 0;
+
+    bool HasAdvanced() const
+    {
+        return advancedBeatCount > 0;
+    }
+};
+
+
 class RhythmBeat
 {
 private:
     RhythmBeatConst m_Beat{};
     float           m_TickCounter = 0.0f;   // 小数Tickの繰り越し用。フレーム落ち時の取りこぼし防止に使う
     int             m_TickIndex = 0;        // 経過した総 Tick 数
-    int             m_Advance = 0;          // このフレームで進んだ「拍」数
     int             m_BeatElapsed = 0;      // 経過拍
     int             m_BeatTotal = 0;        // 目標拍（ステージ長）
 
@@ -70,7 +87,7 @@ public:
     void Initialize(const RhythmBeatConst& config, bool isTimeReset, int limit);
 
     // tick(秒)を受け取り、内部拍進行を更新して「進んだ拍数」を返す。
-    int Update(float tick);
+    RhythmBeatResult Update(float tick);
 
     void SetTickCounter(float count)
     {
@@ -89,9 +106,17 @@ public:
 
     void SetBpm(float bpm)
     {
-        m_Beat.m_Bpm = bpm;
+        if (bpm <= 0.0f) {
+            return;
+        }
+
         // BPM変更後は秒換算キャッシュを再計算する。
-        m_Beat.Setup(m_Beat.m_Bpm, m_Beat.m_BeatUnit, m_Beat.m_TicksPerBeat);
+        m_Beat.Setup(
+            bpm,
+            m_Beat.m_BeatsPerBar,
+            m_Beat.m_BeatUnit,
+            m_Beat.m_TicksPerBeat,
+            m_Beat.m_HitsPerBar);
     }
 
     float GetBpm() const
@@ -142,7 +167,4 @@ public:
         return m_Beat;
     }
 
-    int GetAdvance() const {
-        return m_Advance;
-    }
 };

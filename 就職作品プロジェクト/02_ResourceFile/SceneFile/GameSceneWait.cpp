@@ -179,7 +179,6 @@ void GameSceneWait::Initialize()
     SetTimer(&m_Tick);
     SetTimer(&m_DecrementLife.timer);
     m_WasPlayBGM         = false;
-    m_QuarterAdvance     = 0;
 
     // ライフの数だけハートの生成
     const float lifePosX = 80.0f;
@@ -189,8 +188,6 @@ void GameSceneWait::Initialize()
     m_ShouldTransitionToStage = false;
     m_wasDecrementLife        = false;
     m_isPendingBpmChange      = false;
-
-   
 
     // ライフオブジェクトの生成
     m_LifeGame.clear();
@@ -305,8 +302,9 @@ void GameSceneWait::Initialize()
     }
 
 
-    auto& rhythmBeat = Game::GetRhythmBeat();
-    rhythmBeat.Initialize(beatConfig, false, gameBeats);
+    auto& session = Game::GetGameplaySession();
+    session.InitializeRhythm(beatConfig, false, gameBeats);
+    session.Play();
 
     Game::SetBgmBpm(beatConfig.m_Bpm);
 
@@ -320,21 +318,23 @@ void GameSceneWait::Initialize()
 
 void GameSceneWait::Update(float tick)
 {   
-    auto& rhythmBeat = Game::GetRhythmBeat();
-    //-------------------------------
-    // リズム進行の更新前後を取得
-    //-------------------------------
-    m_QuarterAdvance = rhythmBeat.GetBeatElapsed() / 2;
-    rhythmBeat.Update(tick);
-    int elapsedBeat      = rhythmBeat.GetBeatElapsed();
-    int elapsedFourBeat  = elapsedBeat / 2;
-    int restBeat     = rhythmBeat.GetBeatRest();
+    auto& session = Game::GetGameplaySession();
+    const RhythmBeat& rhythmBeat = session.GetRhythmBeat(); 
+    const RhythmBeatResult rhythmResult = session.Update(tick);
+
+    // RhythmBeatの1拍は8分音符。
+    const int elapsedBeat = rhythmResult.currentBeat;
+
+    // 8分音符2拍を四分音符1拍へ変換する。
+    const int previousQuarterBeat = rhythmResult.previousBeat / 2;
+    const int currentQuarterBeat = rhythmResult.currentBeat / 2;
+    const int restBeat = rhythmBeat.GetBeatTotal() - rhythmResult.currentBeat;
 
     GameUIMovement(elapsedBeat);
 
     // 四分音符単位で演出トリガを評価。
     // for で回すことで、低fpsで複数拍進んだときもイベントを取りこぼさない。
-    for (int i = m_QuarterAdvance; i < elapsedFourBeat; ++i)
+    for (int i = previousQuarterBeat; i < currentQuarterBeat; ++i)
     {
         // 1拍目のタイミングでBGM再生
         if (!m_WasPlayBGM)
@@ -366,12 +366,6 @@ void GameSceneWait::Update(float tick)
             m_isLifeScaleUp = true;
             m_ScalingLifeDuration = rhythmBeat.GetBeatConst().secondsPerBeat * 0.25f;
         }
-        
-    }
-
-    if (m_UIGame.isBoot)
-    {
-        
     }
 
     // ライフのスケーリング演出
@@ -381,7 +375,7 @@ void GameSceneWait::Update(float tick)
     }
 
     // 遷移直前3拍で「次ステージへ進める」状態を確定。
-    if (rhythmBeat.GetBeatElapsed() >= rhythmBeat.GetBeatTotal() - 3)
+    if (rhythmResult.currentBeat >= rhythmBeat.GetBeatTotal() - 3)
     {
         m_ShouldTransitionToStage = true;
     }
@@ -400,18 +394,20 @@ void GameSceneWait::Update(float tick)
     // タイマー更新は判定後に行い、今フレーム内での条件判定順を固定する。
     CountTimer(tick);
 
-    return;
+    if (!m_ShouldTransitionToStage)
+    {
+        return;
+    }
+
     // ゲームオーバー時は結果シーンへ。
-    if (m_RelationData.gameLife == 0u && m_ShouldTransitionToStage)
+    if (m_RelationData.gameLife == 0u)
     {
         // ライフが0になったらリザルトシーンへ
         Game::SetIsTickCount(false);
         ChangeScenePush<ResultScene>(WaitToResult);
+        return;
     }
-    if (m_ShouldTransitionToStage)
-    {
-        StartNextStageTransition();
-    }
+    StartNextStageTransition();
 }
 
 //====================================
@@ -462,7 +458,8 @@ void GameSceneWait::RegisterGameUI(pShared<Texture> texture, float u, float v)
     m_GameUI->SetUV(u, v, 2.0f, 2.0f);
     m_UIGame.phase = UI_PHASE::NONE;
 
-    auto& rhythmBeat = Game::GetRhythmBeat();
+    const GameplaySession& session = Game::GetGameplaySession();
+    const RhythmBeat& rhythmBeat = session.GetRhythmBeat();
 
     // 移動にかかる時間をビート数から計算
     m_UIGame.movementTime = rhythmBeat.GetBeatConst().secondsPerBeat * 6;
@@ -508,23 +505,31 @@ void GameSceneWait::GameUIMovement(int elapsedBeat)
 
     if (elapsedBeat < kSlideInEndBeat)
     {
-        if (m_isPendingBpmChange) {
-            // 告知UIの入場タイミングで BPM を更新し、視覚と聴覚の切替点を一致させる。
+        if (m_isPendingBpmChange)
+        {
+            // 告知UIの入場タイミングでBPMを更新し、
+            // 視覚と聴覚の切替点を一致させる。
             RhythmBeatConst beatConfig{};
             const float speedUpBpmIncrease = Game::GetSpeedUpBpmIncrease();
-            if (m_CurrentGamePhase == GAME_PHASE::DO_UP_SPEED) {
+            if (m_CurrentGamePhase == GAME_PHASE::DO_UP_SPEED)
+            {
                 beatConfig.Setup(Game::GetBgmBpm() + speedUpBpmIncrease);
             }
-            else if (m_CurrentGamePhase == GAME_PHASE::DO_UP_DIFFICULTY) {
+            else if (m_CurrentGamePhase == GAME_PHASE::DO_UP_DIFFICULTY)
+            {
                 beatConfig.Setup(Game::GetBgmBpm() - speedUpBpmIncrease);
             }
+            auto& session = Game::GetGameplaySession();
+            session.InitializeRhythm(beatConfig, false);
+            session.SetElapsedBeat(MeasureOne);
 
-            auto& rhythmBeat = Game::GetRhythmBeat();
-            rhythmBeat.Initialize(beatConfig, false);
-            rhythmBeat.SetElapsedBeat(MeasureOne);
             Game::SetBgmBpm(beatConfig.m_Bpm);
             m_isPendingBpmChange = false;
-            m_UIGame.movementTime = rhythmBeat.GetBeatConst().secondsPerBeat * 6;
+
+            m_UIGame.movementTime =
+                session.GetRhythmBeat()
+                .GetBeatConst()
+                .secondsPerBeat * 6;
         }
         if (m_UIGame.phase != UI_PHASE::SLIDE_IN)
         {
@@ -573,10 +578,10 @@ void GameSceneWait::GameUIMovement(int elapsedBeat)
 void GameSceneWait::StartNextStageTransition()
 {
     Game::SetIsTickCount(true);
-    RhythmBeat& rhythmBeat = Game::GetRhythmBeat();
-    // 遷移前に1拍待つ。見た目遷移と内部拍進行のズレ防止のため Tick 側も同量進める。
+
+    const RhythmBeat& rhythmBeat = Game::GetGameplaySession().GetRhythmBeat();
+    // 遷移前に1拍待つ。
     WaitToGame.duration = rhythmBeat.GetOneBeat();
-    rhythmBeat.TickCount(WaitToGame.duration);
 
     // シーン遷移処理
     switch (m_RelationData.nextScene)
@@ -609,12 +614,12 @@ void GameSceneWait::LifeDecrement()
 void GameSceneWait::LifeScaling()
 {
     namespace Calculator = Calculator::Easing;
-
     m_ScalingLifeElapsed += Application::GetDeltaTime();
-
-    const NVector3 lifeScaleUp = m_LifeBaseScale + m_LifeBaseScale * kLifeScaleUpAmount;
+    const NVector3 lifeScaleUp =
+        m_LifeBaseScale +
+        m_LifeBaseScale *
+        kLifeScaleUpAmount;
     NVector3 targetScale = m_LifeBaseScale;
-
     // 大きくなるフェーズ
     if (m_isLifeScaleUp)
     {

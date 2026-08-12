@@ -39,8 +39,6 @@ protected:
 	int m_CurrentMeasure = 0;
 
 	float m_BomberElapsed = 0.0f;  // 現在区間（1拍相当）での経過秒
-	int	 m_QuarterAdvance = 0;     // 更新前の四分音符基準の進行位置
-
 	float m_FillRatio = 0.0f;   // 内部進行率（0→1）
 	float m_SegmentFrom = 0.0f; // 補間区間の始点
 	float m_SegmentTo = 0.0f;   // 補間区間の終点

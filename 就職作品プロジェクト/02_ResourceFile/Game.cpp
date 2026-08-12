@@ -9,6 +9,7 @@
 
 #include <fstream>
 #include <memory>
+#include <cassert>
 #include <cstdio>
 #include <algorithm>
 #include <cmath>
@@ -24,7 +25,6 @@ int	  Game::m_DifficultyStageInterval = 8;
 float Game::m_BaseBpmIncreasePerDifficulty = 5.0f;
 int   Game::m_SpeedUpStageInterval = 4;
 float Game::m_SpeedUpBpmIncrease = 10.0f;
-RhythmBeat Game::m_RhythmBeat;
 bool  Game::m_isTickCount = false;
 bool  Game::s_HasFirstGameSceneWaitInitialized = false;
 
@@ -69,9 +69,9 @@ void Game::Initialize()
 	auto& instance = GetInstance();
 	
 	// 入力/カメラは全シーンで使うため、シーン生成より先に用意する。
-	instance.m_Input			 = std::make_unique<Input>();	
-	instance.m_Camera			 = std::make_shared<Camera>();	
-	//instance.m_Camera->Initialize();							
+	instance.m_Input			 = std::make_unique<Input>();
+	instance.m_Camera			 = std::make_shared<Camera>();
+	instance.m_GameplaySession   = std::make_unique<GameplaySession>();
     instance.m_TransitionTexture.clear();						
     instance.m_Theme             = nullptr;						
 	//		シーンをタイトルシーンに設定
@@ -143,7 +143,7 @@ void Game::Initialize()
 		SetBgmBpm(bgmConfig.bpm);
 	}
 
-	instance.m_SceneCurrent = std::make_shared<GameSceneRocket>(instance.GetCamera());		// タイトルシーンのインスタンスを生成
+	instance.m_SceneCurrent = std::make_shared<TitleScene>(instance.GetCamera());		// タイトルシーンのインスタンスを生成
 	instance.m_SceneCurrent->Initialize();
 }
 
@@ -247,8 +247,14 @@ void Game::Finalize()
 		instance.m_SceneCurrent->Finalize();
 	}
 	instance.m_BgmAudio.reset();
+
+	// GameplaySessionを参照する可能性があるSceneを先に破棄。
 	instance.m_SceneCurrent.reset();
+	instance.m_SceneNext.reset();
 	instance.m_SceneList.clear();
+
+	// Sceneの後にSessionを破棄。
+	instance.m_GameplaySession.reset();
 
 	Renderer::Finalize();
 }
@@ -339,7 +345,7 @@ void Game::SetBgmBpm(float bpm)
 		return;
 	}
 
-	m_RhythmBeat.SetBpm(bpm);
+	GetGameplaySession().SetBpm(bpm);
 
 	auto& instance = Game::GetInstance();
 	if (!instance.m_BgmAudio) {
@@ -361,7 +367,14 @@ float Game::GetBgmBpm()
 		return instance.m_BgmAudio->GetBpm();
 	}
 
-	return m_RhythmBeat.GetBpm();
+	return GetGameplaySession().GetBpm();
+}
+
+GameplaySession& Game::GetGameplaySession()
+{
+    auto& instance = Game::GetInstance();
+    assert(instance.m_GameplaySession && "GameplaySession is not initialized.");
+	return *instance.m_GameplaySession;
 }
 
 void Game::SetDifficultyStageInterval(int interval)

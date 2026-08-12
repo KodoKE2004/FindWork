@@ -6,7 +6,6 @@ using namespace DirectX::SimpleMath;
 
 Cube::Cube(Camera& cam) : Object(cam)
 {
-	
 }
 
 //---------------------------------
