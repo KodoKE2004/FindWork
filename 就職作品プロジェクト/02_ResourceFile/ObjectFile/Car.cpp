@@ -3,6 +3,7 @@
 
 #include <algorithm>
 #include <random>
+#include "GamePlaySession.h"
 
 // —”¶¬Ší‚Ì‰Šú‰»
 std::random_device rd;

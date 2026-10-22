@@ -37,7 +37,6 @@ private:
 	vector<pShared<Square>>  m_StageNumber;         // ステージ番号表示用
 
 	float m_Tick = 0.0f;
-	int	  m_QuarterAdvance = 0;                      // 更新前の四分音符基準位置
 
 	std::mt19937_64 m_RandomEngine{ std::random_device{}() };
 
@@ -65,8 +64,8 @@ private:
 	bool m_ShouldTransitionToStage = false;     // 次ステージへ遷移可能になったか
 	bool m_IsFirstInitialized = false;          // 最初の Wait 初期化かどうか
 	bool m_wasDecrementLife = false;			// 今回の待機でライフ減算済みか
-	bool m_isLifeScaleUp = false;
-	bool m_isLifeScaleDown = false;
+    bool m_isLifeScaleUp = false;               // ライフ拡大演出中か
+    bool m_isLifeScaleDown = false;             // ライフ縮小演出中か
 	bool m_isPendingBpmChange = false;          // UI演出タイミングでBPM更新待ちか
 
 private:

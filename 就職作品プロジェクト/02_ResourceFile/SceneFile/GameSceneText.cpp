@@ -98,9 +98,9 @@ void GameSceneText::Initialize()
 
     // ƒŠƒYƒ€‚Ì’è‹`
     RhythmBeatConst beatConfig{};
-    auto& rhythmBeat = Game::GetRhythmBeat();
-    beatConfig.Setup(Game::GetBgmBpm(), 8, 8, 16, 8);
-    rhythmBeat.Initialize(beatConfig, false, ONE_MEASURE * 4);
+    beatConfig.Setup(Game::GetBgmBpm());
+    auto& session = Game::GetGameplaySession();
+    session.InitializeRhythm(beatConfig, false, ONE_MEASURE * 4);
 
     auto& instance = Game::GetInstance();
     TextureManager* textureMgr = instance; 

@@ -103,9 +103,9 @@ void GameSceneShot::Initialize()
 
     // ƒŠƒYƒ€‚Ì’è‹`
     RhythmBeatConst beatConfig{};
-    auto& rhythmBeat = Game::GetRhythmBeat();
     beatConfig.Setup(Game::GetBgmBpm());
-    rhythmBeat.Initialize(beatConfig, false, ONE_MEASURE * 3);
+    auto& session = Game::GetGameplaySession();
+    session.InitializeRhythm(beatConfig, false, ONE_MEASURE * 3);
     
     m_Skydome = AddObject<Skydome>(instance.GetCamera());
     m_Skydome->SetName("m_Skydome");

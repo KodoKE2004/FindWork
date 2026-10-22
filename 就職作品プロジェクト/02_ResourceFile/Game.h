@@ -11,6 +11,7 @@
 #include "Theme.h"
 #include "input.h"
 #include "RhythmBeat.h"
+#include "GameplaySession.h"
 
 #include "MeshManager.h"
 #include "TextureManager.h"
@@ -34,6 +35,7 @@ private:
 	DirectX::SimpleMath::Vector2	m_PreviewMousePos;			// デバッグ用ビュー行列
 	pShared<Audio>					m_BgmAudio;					// BGM
 	PlayParams						m_BgmParams;
+	pUnique<GameplaySession>		m_GameplaySession;			// ゲームプレイの進行状況を管理するクラス
 
 	//================================
 	//	   ゲームを支えるマネージャー達
@@ -49,9 +51,6 @@ private:
 	static float m_BaseBpmIncreasePerDifficulty;
 	static int	 m_SpeedUpStageInterval;
 	static float m_SpeedUpBpmIncrease;
-
-	// テンポ制御（Scene を跨いで同一基準の時間軸を使うため Game 側で保持）
-	static RhythmBeat m_RhythmBeat;
 
 	// 「Update を止める」のではなく「ゲーム進行時間(Tick)だけ止める」ためのフラグ。
 	// 演出や遷移UIを動かしながら、判定系の時間だけ止めたい場面で使う。
@@ -114,11 +113,13 @@ public:
 	Camera&					GetCamera();
 	static void				SetBgmBpm(float bpm);
 	static float			GetBgmBpm();
-	// Scene 共通の時間基準。待機シーン/ゲームシーンで同じ拍進行を参照する。
-	static RhythmBeat&		GetRhythmBeat() {
-		return m_RhythmBeat; 
-	}
-	static uint64_t			GetDrawFrameCounter() {
+    //=======================================
+    // ゲームプレイの進行状況を管理するクラスへのアクセス
+    //=======================================
+	// 新しいゲームプレイを開始するためSessionを新規作成する
+	static GameplaySession& GetGameplaySession();
+
+	static uint64_t GetDrawFrameCounter() {
 		return m_DrawFrameCounter;
 	}
 	static void	 SetDifficultyStageInterval(int interval);
@@ -131,14 +132,23 @@ public:
 	static float GetSpeedUpBpmIncrease();
 	static void	 PlayBgm();
 	static void	 StopBgm();
-	static void	 SetIsTickCount(bool isTick) {m_isTickCount = isTick; }
-	static bool	 IsTickCount() {
+	static void	 SetIsTickCount(bool isTick) 
+	{
+		m_isTickCount = isTick;
+	}
+	
+	static bool	 IsTickCount() 
+	{
 		return m_isTickCount;
 	}
-	static bool  HasFirstGameSceneWaitInitialized() {
+	
+	static bool  HasFirstGameSceneWaitInitialized() 
+	{
         return s_HasFirstGameSceneWaitInitialized;
 	}
-	static void  SetHasFirstGameSceneWaitInitialized(bool initialized) {
+
+	static void  SetHasFirstGameSceneWaitInitialized(bool initialized) 
+	{
         s_HasFirstGameSceneWaitInitialized = initialized;
 	}
 

@@ -40,7 +40,8 @@ void Stone::Initialize()
 {
     Square::Initialize();
     auto& instance = Game::GetInstance();
-    auto& rhythmBeat = Game::GetRhythmBeat();
+    const GameplaySession& session = Game::GetGameplaySession();
+    const RhythmBeat& rhythmBeat = session.GetRhythmBeat();
     TextureManager* textureMgr = instance;
     SetTexture(textureMgr->GetTexture("GameScene/Stone.png"));
     SpawnPos(*this);

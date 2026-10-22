@@ -18,7 +18,8 @@ void Theme::Initialize()
     TextureManager* textureManager = instance;
     Square::Initialize();
     
-    m_SecondPerBeat = Game::GetRhythmBeat().GetOneBeat();
+    const GameplaySession& session = Game::GetGameplaySession();
+    m_SecondPerBeat = session.GetRhythmBeat().GetOneBeat();
     m_Duration  = m_SecondPerBeat;
     m_ScaleMass = 5.0f;
     m_Elapsed   = 0.0f;

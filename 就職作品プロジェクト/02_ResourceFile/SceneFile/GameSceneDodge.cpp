@@ -143,9 +143,9 @@ void GameSceneDodge::Initialize()
 
     // ƒŠƒYƒ€‚Ì’è‹`
     RhythmBeatConst beatConfig{};
-    auto& rhythmBeat = Game::GetRhythmBeat();
     beatConfig.Setup(Game::GetBgmBpm());
-    rhythmBeat.Initialize(beatConfig, false, ONE_MEASURE * 4);
+    auto& session = Game::GetGameplaySession();
+    session.InitializeRhythm(beatConfig, false, ONE_MEASURE * 4);
 
 
     auto& instance = Game::GetInstance();

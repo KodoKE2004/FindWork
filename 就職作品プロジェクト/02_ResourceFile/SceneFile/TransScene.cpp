@@ -125,13 +125,19 @@ void TransScene::Update(float tick)
 {
     auto& instance = Game::GetInstance();
 
-	if (m_TransitionTexture == nullptr) {
+	if (m_TransitionTexture == nullptr) 
+	{
 		return;
 	}
 
+	if (Game::IsTickCount())
+	{
+		Game::GetGameplaySession().Update(tick);
+	}
+	
 	const auto phase = m_TransitionTexture->GetPhase();
-    
-	if (!m_SceneOld) {
+	if (!m_SceneOld) 
+	{
         m_Step = STEP::FINISH;
 		instance.SetSceneCurrent(m_SceneNext);
 		return;

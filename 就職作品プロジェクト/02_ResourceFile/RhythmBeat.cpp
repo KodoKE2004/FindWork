@@ -22,12 +22,12 @@ void RhythmBeat::Initialize(const RhythmBeatConst& config, bool isTimeReset, int
 }
 
 
-int RhythmBeat::Update(float tick)
+RhythmBeatResult RhythmBeat::Update(float tick)
 {
+    RhythmBeatResult result{};
+    result.previousBeat = m_BeatElapsed;
     // 秒を Tick に変換して蓄積する。小数分を残すことでフレーム依存の誤差を抑える。
     m_TickCounter += m_Beat.ticksPerSecond * tick;
-    m_Advance = 0;
-
     // 1フレームで複数 Tick 進む可能性があるため while で消化する。
     while (m_TickCounter >= 1.0f)
     {
@@ -37,10 +37,11 @@ int RhythmBeat::Update(float tick)
         // 1拍境界に到達したタイミングだけ拍進行として扱う。
         if ((m_TickIndex % m_Beat.m_TicksPerBeat) == 0)
         {
-            ++m_Advance;
             ++m_BeatElapsed;
         }
     }
+    result.currentBeat = m_BeatElapsed;
+    result.advancedBeatCount = result.currentBeat - result.previousBeat;
 
-    return m_Advance;
+    return result;
 }
