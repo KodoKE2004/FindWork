@@ -1,0 +1,32 @@
+Material cache: unchanged, rebind, change, override, recreate OK
+VS_Alpha: 0 instances OK
+VS_Alpha: 1 instances OK
+VS_Alpha: 512 instances OK
+VS_Alpha: 513 instances OK
+VS_Alpha: 1024 instances OK
+VS_Alpha: 1025 instances OK
+VS_Alpha: 2049 instances OK
+VS_Default: 0 instances OK
+VS_Default: 1 instances OK
+VS_Default: 512 instances OK
+VS_Default: 513 instances OK
+VS_Default: 1024 instances OK
+VS_Default: 1025 instances OK
+VS_Default: 2049 instances OK
+VS_Unlit: 0 instances OK
+VS_Unlit: 1 instances OK
+VS_Unlit: 512 instances OK
+VS_Unlit: 513 instances OK
+VS_Unlit: 1024 instances OK
+VS_Unlit: 1025 instances OK
+VS_Unlit: 2049 instances OK
+VS_Instansing2D: 0 instances OK
+VS_Instansing2D: 1 instances OK
+VS_Instansing2D: 512 instances OK
+VS_Instansing2D: 513 instances OK
+VS_Instansing2D: 1024 instances OK
+VS_Instansing2D: 1025 instances OK
+VS_Instansing2D: 2049 instances OK
+Normal center: 0.447214, 0.894427, 0
+Inverse-transpose normals OK
+PASS: production renderer, image comparison, counts, subsets, state restoration, reload, reinitialize

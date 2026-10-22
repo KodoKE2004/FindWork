@@ -1,5 +1,6 @@
 #pragma once
 #include	<Windows.h>
+#include <cstring>
 #include	<directxmath.h>
 #include	<d3d11.h>
 #include	<wrl/client.h>
@@ -13,6 +14,8 @@ class Material {
 	};
 
 	MATERIAL	m_Material{};
+	ConstantBufferMaterial m_Uploaded{};
+	bool m_HasUploaded = false;
 	Microsoft::WRL::ComPtr<ID3D11Buffer> m_pConstantBufferMaterial;
 
 public:
@@ -33,7 +36,7 @@ public:
 		bool sts = CreateConstantBuffer(
 			dev,								// デバイス
 			sizeof(ConstantBufferMaterial),		// サイズ
-			m_pConstantBufferMaterial.GetAddressOf());		// コンスタントバッファ４
+			m_pConstantBufferMaterial.ReleaseAndGetAddressOf());		// コンスタントバッファ４
 		if (!sts) {
 			MessageBox(NULL, L"CreateBuffer(constant buffer Material) error", L"Error", MB_OK);
 			return false;
@@ -46,6 +49,7 @@ public:
 		m_Material.Shiness = mtrl.Shiness;
 		m_Material.TextureEnable = mtrl.TextureEnable;
 
+		m_HasUploaded = false;
 		Update();
 
 		return true;
@@ -59,12 +63,17 @@ public:
 		ID3D11DeviceContext* devcontext;
 		devcontext = Renderer::GetDeviceContext();
 
-		devcontext->UpdateSubresource(
-			m_pConstantBufferMaterial.Get(),
-			0,
-			nullptr,
-			&cb,
-			0, 0);
+		if (!m_HasUploaded || std::memcmp(&m_Uploaded, &cb, sizeof(cb)) != 0)
+		{
+			devcontext->UpdateSubresource(
+				m_pConstantBufferMaterial.Get(),
+				0,
+				nullptr,
+				&cb,
+				0, 0);
+			m_Uploaded = cb;
+			m_HasUploaded = true;
+		}
 
 		// コンスタントバッファ4をｂ4レジスタへセット（頂点シェーダー用）
 		devcontext->VSSetConstantBuffers(4, 1, m_pConstantBufferMaterial.GetAddressOf());
@@ -87,6 +96,7 @@ public:
 	}
 
 	void SetMaterial(const MATERIAL& mtrl) {
+		m_HasUploaded = false;
 		ConstantBufferMaterial		cb{};
 
 		cb.Material = mtrl;

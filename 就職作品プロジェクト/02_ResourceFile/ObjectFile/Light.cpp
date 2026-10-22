@@ -77,7 +77,7 @@ void Light::Draw()
 	if (m_Texture != nullptr) { m_Texture->SetGPU(); }
 	m_Camera.SetCamera(CAMERA_OBJECT);
 
-	devicecontext->DrawIndexed(
+	Renderer::DrawIndexed(
 		36,							// 描画するインデックス数（四角形なんで４）
 		0,							// 最初のインデックスバッファの位置
 		0);

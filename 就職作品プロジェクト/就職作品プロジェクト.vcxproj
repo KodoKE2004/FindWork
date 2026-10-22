@@ -80,6 +80,7 @@
     <ClCompile Include="02_ResourceFile\Shader.cpp" />
     <ClCompile Include="02_ResourceFile\ShaderManager.cpp" />
     <ClCompile Include="02_ResourceFile\Square.cpp" />
+    <ClCompile Include="02_ResourceFile\Particle.cpp" />
     <ClCompile Include="02_ResourceFile\Texture.cpp" />
     <ClCompile Include="02_ResourceFile\TextureManager.cpp" />
     <ClCompile Include="02_ResourceFile\Transform.cpp" />
@@ -165,6 +166,7 @@
     <ClInclude Include="02_ResourceFile\Shader.h" />
     <ClInclude Include="02_ResourceFile\ShaderManager.h" />
     <ClInclude Include="02_ResourceFile\Square.h" />
+    <ClInclude Include="02_ResourceFile\Particle.h" />
     <ClInclude Include="02_ResourceFile\Texture.h" />
     <ClInclude Include="02_ResourceFile\TextureManager.h" />
     <ClInclude Include="02_ResourceFile\Transform.h" />

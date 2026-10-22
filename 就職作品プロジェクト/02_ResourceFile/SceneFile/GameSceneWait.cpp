@@ -400,7 +400,6 @@ void GameSceneWait::Update(float tick)
     // タイマー更新は判定後に行い、今フレーム内での条件判定順を固定する。
     CountTimer(tick);
 
-    return;
     // ゲームオーバー時は結果シーンへ。
     if (m_RelationData.gameLife == 0u && m_ShouldTransitionToStage)
     {

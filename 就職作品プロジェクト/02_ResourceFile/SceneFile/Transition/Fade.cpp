@@ -101,7 +101,6 @@ void Fade::Draw()
     Matrix world = s * r * t;
     Renderer::SetWorldMatrix(&world);
 
-    ID3D11DeviceContext* dc = Renderer::GetDeviceContext();
     m_Texture->SetGPU();
 
     m_Material->SetDiffuse(DirectX::XMFLOAT4(m_Color.x, m_Color.y, m_Color.z, m_Color.w));
@@ -114,7 +113,7 @@ void Fade::Draw()
     float vh = 1.0f / m_SplitY;
     Renderer::SetUV(u, v, uw, vh);
     Camera::ScopedMode scoped(m_Camera, CAMERA_UI);
-    dc->DrawIndexed(4, 0, 0);
+    Renderer::DrawIndexed(4, 0, 0);
     Renderer::SetDepthEnable(true);
 }
 

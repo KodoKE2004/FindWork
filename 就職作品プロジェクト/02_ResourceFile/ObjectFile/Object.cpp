@@ -1,4 +1,5 @@
 #include "Object.h"
+#include <stdexcept>
 #include "Game.h"
 #include "ShaderManager.h"
 
@@ -44,6 +45,8 @@ void Object::SetShader(std::string hlslName1, std::string hlslName2, std::string
 
 void Object::SetGPU()
 {
+    Renderer::BindDefaultConstantBuffers();
+    Renderer::BindDefaultSamplers();
 	if(m_VertexShader    != nullptr) { m_VertexShader   ->SetGPU(); }
 	if(m_PixelShader     != nullptr) { m_PixelShader    ->SetGPU(); }
 	if(m_ComputeShader   != nullptr) { m_ComputeShader  ->SetGPU(); }
@@ -69,4 +72,14 @@ void Object::SetColor(const float r, const float g, const float b, const float a
 void Object::SetTexture(pShared<Texture> setTexture)
 {
 	m_Texture = setTexture;
+}
+
+void Object::DrawInstances(const std::vector<InstanceData>& instances)
+{
+    if (instances.empty()) return;
+    auto* shader = dynamic_cast<VertexShader*>(m_VertexShader);
+    if (!shader || !shader->SupportsInstancing())
+        throw std::runtime_error("Object vertex shader does not support instancing");
+    Renderer::ScopedInstances scope(instances, *shader);
+    Draw();
 }

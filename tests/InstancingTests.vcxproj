@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="utf-8"?>
+<Project DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <ItemGroup Label="ProjectConfigurations">
+    <ProjectConfiguration Include="Release|x64"><Configuration>Release</Configuration><Platform>x64</Platform></ProjectConfiguration>
+  </ItemGroup>
+  <PropertyGroup Label="Globals"><WindowsTargetPlatformVersion>10.0</WindowsTargetPlatformVersion></PropertyGroup>
+  <Import Project="$(VCTargetsPath)\Microsoft.Cpp.Default.props" />
+  <PropertyGroup Label="Configuration"><ConfigurationType>Application</ConfigurationType><PlatformToolset>v143</PlatformToolset></PropertyGroup>
+  <Import Project="$(VCTargetsPath)\Microsoft.Cpp.props" />
+  <PropertyGroup>
+    <Engine>$(MSBuildThisFileDirectory)..\就職作品プロジェクト\</Engine>
+    <OutDir>$(MSBuildThisFileDirectory)x64\</OutDir><IntDir>$(MSBuildThisFileDirectory)x64\obj\</IntDir>
+  </PropertyGroup>
+  <ItemDefinitionGroup>
+    <ClCompile>
+      <LanguageStandard>stdcpp20</LanguageStandard><RuntimeLibrary>MultiThreadedDLL</RuntimeLibrary>
+      <DebugInformationFormat>OldStyle</DebugInformationFormat><PrecompiledHeader>NotUsing</PrecompiledHeader>
+      <ForcedIncludeFiles>$(Engine)pch.h</ForcedIncludeFiles>
+      <AdditionalIncludeDirectories>$(Engine);$(Engine)02_ResourceFile;$(Engine)03_ExternalFile\DirectXTK\include</AdditionalIncludeDirectories>
+      <PreprocessorDefinitions>NDEBUG;UNICODE;_UNICODE;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+    </ClCompile>
+    <Link><SubSystem>Console</SubSystem><GenerateDebugInformation>false</GenerateDebugInformation><AdditionalDependencies>$(Engine)03_ExternalFile\DirectXTK\lib\Release\DirectXTK.lib;d3d11.lib;d3dcompiler.lib;dxgi.lib;user32.lib;%(AdditionalDependencies)</AdditionalDependencies></Link>
+  </ItemDefinitionGroup>
+  <ItemGroup>
+    <ClCompile Include="InstancingTests.cpp" />
+    <ClCompile Include="$(Engine)02_ResourceFile\Renderer.cpp" />
+    <ClCompile Include="$(Engine)02_ResourceFile\Shader.cpp" />
+    <ClCompile Include="$(Engine)02_ResourceFile\RenderTarget.cpp" />
+    <ClCompile Include="$(Engine)02_ResourceFile\dx11helper.cpp" />
+  </ItemGroup>
+  <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
+</Project>

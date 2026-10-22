@@ -4,7 +4,18 @@ struct VS_IN
     float4 nrm : NORMAL0;
     float4 col : COLOR0;
     float2 tex : TEXCOORD0;
-	uint instanceID : TEXCOORD1;
+#ifdef USE_INSTANCING
+    float4 world0 : INSTANCEWORLD0;
+    float4 world1 : INSTANCEWORLD1;
+    float4 world2 : INSTANCEWORLD2;
+    float4 world3 : INSTANCEWORLD3;
+    float4 normal0 : INSTANCENORMAL0;
+    float4 normal1 : INSTANCENORMAL1;
+    float4 normal2 : INSTANCENORMAL2;
+    float4 normal3 : INSTANCENORMAL3;
+    float4 tint : INSTANCECOLOR0;
+    float4 uvRect : INSTANCEUV0;
+#endif
 };
 
 struct PS_IN
@@ -62,3 +73,38 @@ cbuffer TextureBuffer : register(b5)
     float4x4 matrixTex;
 };
 
+
+float4x4 GetWorld(VS_IN input)
+{
+#ifdef USE_INSTANCING
+    return float4x4(input.world0, input.world1, input.world2, input.world3);
+#else
+    return World;
+#endif
+}
+float4 GetColor(VS_IN input)
+{
+#ifdef USE_INSTANCING
+    return input.col * input.tint;
+#else
+    return input.col;
+#endif
+}
+float2 GetUV(VS_IN input)
+{
+#ifdef USE_INSTANCING
+    return input.tex * input.uvRect.zw + input.uvRect.xy;
+#else
+    return input.tex;
+#endif
+}
+float3 GetNormal(VS_IN input)
+{
+#ifdef USE_INSTANCING
+    float4x4 normalMatrix = float4x4(input.normal0, input.normal1, input.normal2, input.normal3);
+#else
+    float4x4 normalMatrix = World;
+#endif
+    float3 n = mul(float4(input.nrm.xyz, 0), normalMatrix).xyz;
+    return n * rsqrt(max(dot(n, n), 1e-20f));
+}

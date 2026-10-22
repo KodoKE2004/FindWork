@@ -104,7 +104,6 @@ void Wipe::Draw()
     Matrix world = s * r * t;
     Renderer::SetWorldMatrix(&world);
 
-    ID3D11DeviceContext* dc = Renderer::GetDeviceContext();
     if (m_Texture)
     {
         m_Texture->SetGPU();
@@ -124,7 +123,7 @@ void Wipe::Draw()
     Renderer::SetUV(u, v, uw, vh);
 
     Camera::ScopedMode scoped(m_Camera, CAMERA_UI);
-    dc->DrawIndexed(4, 0, 0);
+    Renderer::DrawIndexed(4, 0, 0);
     Renderer::SetDepthEnable(true);
 }
 void Wipe::Finalize() {}

@@ -207,12 +207,12 @@ void GameSceneDodge::Update(float tick)
         if (createNum >= 12) {
             createNum = 12;
         }
+        auto existingStones = GetObjects<Stone>();
+        existingStones.reserve(existingStones.size() + createNum);
         for (int i = 0; i < createNum; ++i)
         {
-            auto existingStones = GetObjects<Stone>();
 
             pShared<Stone> stone = AddObject<Stone>(instance.GetCamera());
-            stone->Initialize();
             stone->SetScale(100.0f, 100.0f, 1.0f);
 
             const auto stoneScale = stone->GetScale();
@@ -220,6 +220,7 @@ void GameSceneDodge::Update(float tick)
             const float stoneHalfH = std::abs(stoneScale.y) * 0.5f;
             const auto spawnPos = ResolveStoneSpawnPos(existingStones, stoneHalfW, stoneHalfH);
             stone->SetPos(spawnPos.x, spawnPos.y, spawnPos.z);
+            existingStones.push_back(stone);
 
         }
     }
@@ -270,7 +271,23 @@ void GameSceneDodge::Update(float tick)
 
 void GameSceneDodge::Draw()
 {
-    Scene::Draw();
+    Camera::ScopedMode sceneCamera(m_Camera, CAMERA_UI);
+    // Batch only adjacent stones so transparent/UI drawing order stays unchanged.
+    std::vector<Square*> stones;
+    auto flush = [&]() { Square::DrawBatch(stones); stones.clear(); };
+    for (const auto& object : m_MySceneObjects)
+    {
+        if (auto* stone = dynamic_cast<Stone*>(object.get()))
+        {
+            if (stone->IsActive()) stones.push_back(stone);
+        }
+        else
+        {
+            flush();
+            if (object) object->Draw();
+        }
+    }
+    flush();
 }
 
 void GameSceneDodge::Finalize()

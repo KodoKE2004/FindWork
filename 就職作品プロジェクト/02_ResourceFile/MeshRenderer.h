@@ -40,7 +40,7 @@ public:
 	// サブセット描画
 	virtual void DrawSubset(unsigned int indexnum,unsigned int baseindex,unsigned int basevertexindex ) 
 	{
-		Renderer::GetDeviceContext()->DrawIndexed(
+		Renderer::DrawIndexed(
 			indexnum,								// 描画するインデックス数（面数×３）
 			baseindex,								// 最初のインデックスバッファの位置
 			basevertexindex);						// 頂点バッファの最初から使う
@@ -51,9 +51,20 @@ public:
 	{
 		BeforeDraw();								// 描画前処理
 
-		Renderer::GetDeviceContext()->DrawIndexed(
+		Renderer::DrawIndexed(
 			m_IndexNum,								// 描画するインデックス数（面数×３）
 			0,										// 最初のインデックスバッファの位置
 			0);										// 頂点バッファの最初から使う
 	}
+    bool DrawSubsetInstanced(UINT count, UINT startIndex, INT baseVertex,
+        const std::vector<InstanceData>& instances, VertexShader& shader)
+    {
+        return Renderer::DrawIndexedInstanced(count, startIndex, baseVertex, instances, shader);
+    }
+    bool DrawInstanced(const std::vector<InstanceData>& instances, VertexShader& shader)
+    {
+        BeforeDraw();
+        return DrawSubsetInstanced(m_IndexNum, 0, 0, instances, shader);
+    }
+
 };

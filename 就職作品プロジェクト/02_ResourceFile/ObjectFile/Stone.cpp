@@ -92,32 +92,11 @@ void Stone::Draw()
 
 void Stone::DrawInstanced(const vector<pShared<Stone>>& stones)
 {
-    vector<InstanceTransform2D> transforms;
-    transforms.reserve(stones.size());
-
+    std::vector<Square*> active;
+    active.reserve(stones.size());
     for (const auto& stone : stones)
-    {
-        if (!stone || !stone->IsActive()) {
-            continue;
-        }
-
-        const auto stonePos = stone->GetPos();
-        const auto stoneScale = stone->GetScale();
-        transforms.push_back({
-            DirectX::SimpleMath::Vector3(stonePos.x,   stonePos.y,   stonePos.z),
-            DirectX::SimpleMath::Vector3(stoneScale.x, stoneScale.y, stoneScale.z)
-            });
-    }
-
-    if (transforms.empty())
-    {
-        SetInstancingEnabled(false);
-        return;
-    }
-
-    SetInstancingEnabled(true);
-    SetInstanceTransforms(transforms);
-    Square::Draw();
+        if (stone && stone->IsActive()) active.push_back(stone.get());
+    Square::DrawBatch(active);
 }
 
 void Stone::Finalize()

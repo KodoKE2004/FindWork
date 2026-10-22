@@ -60,34 +60,6 @@ void DebugGridLine::Initialize()
     const float steps = total / m_Spacing;
     m_InstanceCount = max(1u, static_cast<unsigned int>(std::floor(steps)) + 1u);
 
-    vector<UINT> ids(m_InstanceCount);
-    for (UINT i = 0; i < m_InstanceCount; ++i) {
-        ids[i] = i;
-    }
-
-    D3D11_BUFFER_DESC bd{};
-    bd.ByteWidth    = static_cast<UINT> (ids.size() * sizeof(UINT));
-    bd.Usage        = D3D11_USAGE_IMMUTABLE;
-    bd.BindFlags    = D3D11_BIND_VERTEX_BUFFER;
-
-    D3D11_SUBRESOURCE_DATA init{ ids.data(),0, 0};
-    Renderer::GetDevice()->CreateBuffer(&bd, &init, m_InstanceIDVB.GetAddressOf());
-    
-    vector<D3D11_INPUT_ELEMENT_DESC> elems = {
-        { "POSITION", 0, DXGI_FORMAT_R32G32B32_FLOAT,      0,  0, D3D11_INPUT_PER_VERTEX_DATA,   0 },
-        { "NORMAL",   0, DXGI_FORMAT_R32G32B32_FLOAT,      0, 12, D3D11_INPUT_PER_VERTEX_DATA,   0 },
-        { "COLOR",    0, DXGI_FORMAT_R32G32B32A32_FLOAT,   0, 24, D3D11_INPUT_PER_VERTEX_DATA,   0 },
-        { "TEXCOORD", 0, DXGI_FORMAT_R32G32_FLOAT,         0, 40, D3D11_INPUT_PER_VERTEX_DATA,   0 },
-        { "TEXCOORD", 1, DXGI_FORMAT_R32_UINT,             1,  0, D3D11_INPUT_PER_INSTANCE_DATA, 1 },
-    };
-    auto* vsBlob = m_VertexShader->GetBytecode();
-
-    Renderer::GetDevice()->CreateInputLayout(
-        elems.data(), (UINT)elems.size(),
-        vsBlob->GetBufferPointer(),
-        vsBlob->GetBufferSize(),
-        m_GridInputLayout.GetAddressOf());
-
     m_Initialized = true;
 }
 
@@ -123,11 +95,6 @@ void DebugGridLine::DrawAxis(VertexBuffer<VERTEX_3D>& buffer, float axisFlag)
     UpdateGridParams(axisFlag);
     buffer.SetGPU();
 
-    // 追加：インスタンス(slot1)も必ずセット
-    ID3D11Buffer* vbs[2] = { buffer.GetBuffer(),m_InstanceIDVB.Get() };
-    UINT vbStrides[2] = { sizeof(VERTEX_3D), sizeof(UINT) };
-    UINT offsets  [2] = { 0,0 };
-    Renderer::GetDeviceContext()->IASetVertexBuffers(0, 2, vbs, vbStrides, offsets);
     Renderer::GetDeviceContext()->DrawInstanced(2, m_InstanceCount, 0, 0);
 }
 
@@ -143,7 +110,7 @@ void DebugGridLine::Draw()
         return;
     }
 
-    context->IASetInputLayout(m_GridInputLayout.Get());
+    Renderer::BindDefaultConstantBuffers();
 
     m_VertexShader->SetGPU();
     m_PixelShader->SetGPU();

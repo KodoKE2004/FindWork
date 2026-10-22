@@ -2,6 +2,7 @@
 
 #include	"Transform.h"
 #include    <memory>
+#include <cstddef>
 #include	<d3d11.h>
 #include	<io.h>
 #include	<string>
@@ -78,13 +79,29 @@ struct LightBuffer
 	float Padding;									// パディング（アライメント調整用）
 };
 
-struct InstancePaked
+// Absolute world transforms; tint multiplies the shared material/vertex color.
+// UV = base UV * uvRect.zw + uvRect.xy, then the shared texture transform.
+struct InstanceData
 {
-	UINT instanceID;
-	UINT pad0;
-	UINT pad1;
-	BOOL isEnable;
+    Matrix world = Matrix::Identity;
+    Color color = Color(1, 1, 1, 1);
+    Vector4 uvRect = Vector4(0, 0, 1, 1);
 };
+
+// Slot 1 ABI, shared with Common.hlsl. Matrices are rows, NOT transposed.
+struct InstanceVertex
+{
+    Matrix world;
+    Matrix normal;
+    Color color;
+    Vector4 uvRect;
+};
+static_assert(sizeof(VERTEX_3D) == 48, "Vertex input layout mismatch");
+static_assert(sizeof(InstanceVertex) == 160, "Instance input layout mismatch");
+static_assert(offsetof(InstanceVertex, normal) == 64);
+static_assert(offsetof(InstanceVertex, color) == 128);
+static_assert(offsetof(InstanceVertex, uvRect) == 144);
+class VertexShader;
 
 class Renderer
 {
@@ -101,7 +118,7 @@ public:
 	//			ループ内の処理
 	//---------------------------------
 
-	static void Initialize();
+	static void Initialize(D3D_DRIVER_TYPE driverType = D3D_DRIVER_TYPE_HARDWARE);
 
 	static void Finalize();
 
@@ -133,11 +150,20 @@ public:
 	static void BindDefaultSamplers();
 	static void BindDefaultConstantBuffers();
 
-	// インスタンシング描画テンプレート
-	template<class T> static void SetInstanceID(T* method,InstancePaked iPaked)
-	{
-		
-	}
+    // Scoped submission preserves ordinary Draw() implementations and subsets.
+    class ScopedInstances
+    {
+        const std::vector<InstanceData>* previous;
+        VertexShader* previousShader;
+    public:
+        ScopedInstances(const std::vector<InstanceData>& instances, VertexShader& shader);
+        ~ScopedInstances();
+        ScopedInstances(const ScopedInstances&) = delete;
+        ScopedInstances& operator=(const ScopedInstances&) = delete;
+    };
+    static void DrawIndexed(UINT count, UINT startIndex = 0, INT baseVertex = 0);
+    static bool DrawIndexedInstanced(UINT count, UINT startIndex, INT baseVertex,
+        const std::vector<InstanceData>& instances, VertexShader& shader);
 
 	// ゲッター
 	static D3D11_VIEWPORT		   GetRenderTargetView(void);
@@ -188,71 +214,17 @@ private:
 
 	static void EnsureGameRenderTarget();
 	static void EnsureBlitRenderTarget();
-	inline D3D11_INPUT_ELEMENT_DESC MakeInstancneIDElement(UINT semanticIndex = 1,
-														  UINT slot = 1,
-														  UINT alignedByteOffset = 0,
-														  UINT stepRate = 1);
-
+    static ComPtr<ID3D11Buffer> m_InstanceBuffer;
+    static const std::vector<InstanceData>* m_Instances;
+    static VertexShader* m_InstanceShader;
+    static bool CreateInstanceBuffer();
 public:
-	static inline vector<UINT> MakeInstanceIDs(UINT count);
-	static inline void BindInstanceIDs(ID3D11Buffer* vb, UINT slot = 1);
-	static inline HRESULT CreateInstanceIDBuffer(const vector<UINT>& ids,
-												 ID3D11Buffer** outVB,
-												 D3D11_USAGE usage = D3D11_USAGE_IMMUTABLE,
-												 UINT cpuAccess = 0);
-
 	static ID3D11Device*		GetDevice	    (void)	{ return m_Device; }
 	static ID3D11DeviceContext* GetDeviceContext(void)	{ return m_DeviceContext; }
 
 	static float GetScreenWidth();
     static float GetScreenHeight();
 };
-
-inline vector<UINT> Renderer::MakeInstanceIDs(UINT count)
-{
-	vector<UINT> v(count);
-	for (UINT i = 0; i < count; ++i) v[i] = i;
-	return v;
-}
-
-inline HRESULT Renderer::CreateInstanceIDBuffer(const vector<UINT>& ids,
-	ID3D11Buffer** outVB,
-	D3D11_USAGE usage,
-	UINT cpuAccess)
-{
-	if (!m_Device || !outVB) return E_FAIL;
-
-	D3D11_BUFFER_DESC bd{};
-	bd.ByteWidth = static_cast<UINT>(ids.size() * sizeof(UINT));
-	bd.Usage = usage;
-	bd.BindFlags = D3D11_BIND_VERTEX_BUFFER;
-	bd.CPUAccessFlags = cpuAccess;
-
-	D3D11_SUBRESOURCE_DATA init{};
-	init.pSysMem = ids.empty() ? nullptr : ids.data();
-
-	return m_Device->CreateBuffer(&bd, ids.empty() ? nullptr : &init, outVB);
-}
-
-inline void Renderer::BindInstanceIDs(ID3D11Buffer* vb, UINT slot)
-{
-	UINT stride = sizeof(UINT);
-	UINT offset = 0;
-	m_DeviceContext->IASetVertexBuffers(slot, 1, &vb, &stride, &offset);
-}
-
-inline D3D11_INPUT_ELEMENT_DESC Renderer::MakeInstancneIDElement(UINT semanticIndex, UINT slot, UINT alignedByteOffset, UINT stepRate)
-{
-	D3D11_INPUT_ELEMENT_DESC e{};
-	e.SemanticName = "TEXCOORD";
-	e.SemanticIndex = semanticIndex;					// 既定: TEXCOORD1
-	e.Format = DXGI_FORMAT_R32_UINT;					// UINT 1個
-	e.InputSlot = slot;									// 既定: slot1
-	e.AlignedByteOffset = alignedByteOffset;            // 既定: 0
-	e.InputSlotClass = D3D11_INPUT_PER_INSTANCE_DATA;
-	e.InstanceDataStepRate = stepRate;                  // 既定: 1
-	return e;
-}
 
 inline float Renderer::GetScreenWidth()
 {

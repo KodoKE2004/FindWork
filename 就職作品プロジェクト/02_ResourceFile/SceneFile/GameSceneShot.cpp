@@ -271,7 +271,30 @@ void GameSceneShot::Update(float tick)
 
 void GameSceneShot::Draw()
 {
-    Scene::Draw();
+    Camera::ScopedMode sceneCamera(m_Camera, CAMERA_UI);
+    // Keep transparent draw order; only combine adjacent live bullets.
+    std::vector<Square*> bullets;
+    bullets.reserve(m_MySceneObjects.size());
+    auto flush = [&]() { Square::DrawBatch(bullets); bullets.clear(); };
+    for (const auto& object : m_MySceneObjects)
+    {
+        if (auto* bullet = dynamic_cast<Bullet*>(object.get()))
+        {
+            if (bullet->IsAlive()) bullets.push_back(bullet);
+        }
+        else
+        {
+            flush();
+            if (object)
+            {
+                // The sky changes the camera internally; restore the UI pass afterwards.
+                Camera::ScopedMode objectCamera(m_Camera,
+                    object == m_Skydome ? CAMERA_OBJECT : CAMERA_UI);
+                object->Draw();
+            }
+        }
+    }
+    flush();
 }
 
 void GameSceneShot::Finalize()

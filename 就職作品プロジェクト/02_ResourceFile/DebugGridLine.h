@@ -26,8 +26,6 @@ private:
         float axis;
         float padding;
     };
-    ComPtr<ID3D11Buffer>      m_InstanceIDVB;
-    ComPtr<ID3D11InputLayout> m_GridInputLayout;
 
     void UpdateGridParams(float axisFlag);
     void DrawAxis(VertexBuffer<VERTEX_3D>& buffer, float axisFlag);

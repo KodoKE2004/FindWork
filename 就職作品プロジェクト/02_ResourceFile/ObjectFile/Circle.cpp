@@ -117,7 +117,7 @@ void Circle::Draw()
     if (m_DrawIndexCount == 0) {
         return;
     }
-    dc->DrawIndexed(m_DrawIndexCount, 0, 0);
+    Renderer::DrawIndexed(m_DrawIndexCount, 0, 0);
 
 }
 

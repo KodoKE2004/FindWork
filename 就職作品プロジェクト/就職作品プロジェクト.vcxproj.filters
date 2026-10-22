@@ -124,6 +124,7 @@
     <ClCompile Include="02_ResourceFile\ObjectFile\Cube.cpp">
       <Filter>SourceFile\Object\3D</Filter>
     </ClCompile>
+    <ClCompile Include="02_ResourceFile\Particle.cpp"><Filter>SourceFile\Object\2D</Filter></ClCompile>
     <ClCompile Include="02_ResourceFile\Square.cpp">
       <Filter>SourceFile\Object\2D</Filter>
     </ClCompile>
@@ -349,6 +350,7 @@
     <ClInclude Include="02_ResourceFile\ObjectFile\Cube.h">
       <Filter>SourceFile\Object\3D</Filter>
     </ClInclude>
+    <ClInclude Include="02_ResourceFile\Particle.h"><Filter>SourceFile\Object\2D</Filter></ClInclude>
     <ClInclude Include="02_ResourceFile\Square.h">
       <Filter>SourceFile\Object\2D</Filter>
     </ClInclude>

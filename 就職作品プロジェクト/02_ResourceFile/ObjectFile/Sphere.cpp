@@ -146,7 +146,7 @@ void Sphere::DrawAsSky()
     }
     m_Camera.SetCamera(CAMERA_OBJECT);
 
-    devicecontext->DrawIndexed(m_IndexCount, 0, 0);
+    Renderer::DrawIndexed(m_IndexCount, 0, 0);
 
     // Restore previous states
     devicecontext->RSSetState(prevRS);
@@ -176,7 +176,7 @@ void Sphere::DrawAsMesh()
     }
     m_Camera.SetCamera(CAMERA_OBJECT);
 
-    devicecontext->DrawIndexed(m_IndexCount, 0, 0);
+    Renderer::DrawIndexed(m_IndexCount, 0, 0);
 }
 
 

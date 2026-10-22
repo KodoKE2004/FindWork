@@ -4,11 +4,7 @@
 
 #include "Renderer.h"
 #include <algorithm>
-
-namespace
-{
-	constexpr UINT kMaxInstanceTransforms = 512u;
-}
+#include <stdexcept>
 
 using namespace std;
 using namespace DirectX::SimpleMath;
@@ -102,8 +98,7 @@ void Square::SetPipeline()
 	m_VertexBuffer.SetGPU();
 	m_IndexBuffer.SetGPU();
 	devicecontext->IASetPrimitiveTopology(D3D11_PRIMITIVE_TOPOLOGY_TRIANGLESTRIP);
-	Renderer::BindDefaultSamplers();
-	Renderer::BindDefaultConstantBuffers();
+	// SetGPU already binds the default samplers and constant buffers.
 }
 
 //======================
@@ -111,8 +106,13 @@ void Square::SetPipeline()
 //======================
 void Square::Draw()
 {
+    DrawPrepared(m_UseInstancing ? &m_Instances : nullptr, false);
+}
+
+void Square::DrawPrepared(const std::vector<InstanceData>* instances, bool ownAppearance)
+{
+    if (instances && instances->empty()) return;
 	// 描画の処理
-	ID3D11DeviceContext* devicecontext = Renderer::GetDeviceContext();
 
 	// State破壊の影響を受けないよう、パイプラインを先頭で再設定する
 	SetPipeline();
@@ -129,7 +129,8 @@ void Square::Draw()
 
 	m_Texture->SetGPU();
 
-	m_Material->SetDiffuse(DirectX::XMFLOAT4(m_Color.x, m_Color.y, m_Color.z, m_Color.w));
+	const Color tint = ownAppearance ? Color(1, 1, 1, 1) : m_Color;
+    m_Material->SetDiffuse(tint);
 	m_Material->Update();
 	m_Material->SetGPU();
 
@@ -139,19 +140,20 @@ void Square::Draw()
 	float u1 = 1.0f / m_SplitX;
 	float v1 = 1.0f / m_SplitY;
 
-	Renderer::SetUV(u0, v0, u1, v1);
+	if (ownAppearance) Renderer::SetUV(0, 0, 1, 1);
+    else Renderer::SetUV(u0, v0, u1, v1);
 
 	Camera::ScopedMode scopedMode(m_Camera, m_DrawCameraMode);
 
-	if (m_UseInstancing && m_InstanceCount > 0 && m_InstanceTransformCB) 
-	{
-		ID3D11Buffer* instanceCB = m_InstanceTransformCB.Get();
-		devicecontext->VSSetConstantBuffers(6, 1, &instanceCB);
-		devicecontext->DrawIndexedInstanced(4, m_InstanceCount, 0, 0, 0);
-		return;
-	}
+    if (instances)
+    {
+        auto* shader = dynamic_cast<VertexShader*>(m_VertexShader);
+        if (!shader || !Renderer::DrawIndexedInstanced(4, 0, 0, *instances, *shader))
+            throw std::runtime_error("Square instanced draw failed");
+        return;
+    }
 
-	devicecontext->DrawIndexed(
+	Renderer::DrawIndexed(
 		4, // 描画するインデックス数（四角形なんで４）
 		0, // 最初のインデックスバッファの位置
 		0);
@@ -162,53 +164,89 @@ void Square::Draw()
 //==========================
 void Square::Finalize()
 {
-	
+    m_Instances.clear();
+    m_UseInstancing = false;
 }
 
 
 void Square::UpdateInstanceBuffers()
 {
-	if (m_InstanceCount == 0)
-	{
-		m_InstanceTransformCB.Reset();
-		return;
-	}
-
-	D3D11_BUFFER_DESC desc{};
-	desc.ByteWidth		= static_cast<UINT>(sizeof(Vector4) * m_InstancePositionScale.size());
-	desc.Usage			= D3D11_USAGE_DYNAMIC;
-	desc.BindFlags		= D3D11_BIND_CONSTANT_BUFFER;
-	desc.CPUAccessFlags = D3D11_CPU_ACCESS_WRITE;
-
-	D3D11_SUBRESOURCE_DATA init{};
-	init.pSysMem = m_InstancePositionScale.data();
-
-	if (FAILED(Renderer::GetDevice()->CreateBuffer(&desc, &init, m_InstanceTransformCB.ReleaseAndGetAddressOf())))
-	{
-		m_InstanceTransformCB.Reset();
-	}
+    // Renderer owns a reusable dynamic stream, updated once per draw chunk.
 }
-
 
 void Square::SetInstancingEnabled(bool enabled)
 {
-	m_UseInstancing = enabled;
+    m_UseInstancing = enabled;
 }
 
 void Square::SetInstanceTransforms(const std::vector<InstanceTransform2D>& transforms)
 {
-	m_InstancePositionScale.clear();
-	m_InstanceCount = min(static_cast<UINT>(transforms.size()), kMaxInstanceTransforms);
-	m_InstancePositionScale.reserve(static_cast<size_t>(m_InstanceCount) * 2);
+    m_Instances.clear();
+    m_Instances.reserve(transforms.size());
+    for (const auto& transform : transforms)
+    {
+        InstanceData instance;
+        instance.world = Matrix::CreateScale(transform.scale)
+            * Matrix::CreateFromYawPitchRoll(transform.rotation.x, transform.rotation.y, transform.rotation.z)
+            * Matrix::CreateTranslation(transform.position);
+        m_Instances.push_back(instance);
+    }
+}
 
-	for (UINT i = 0; i < m_InstanceCount; ++i)
-	{
-		const auto& transform = transforms[i];
-		m_InstancePositionScale.emplace_back(transform.position.x, transform.position.y, transform.position.z, 1.0f);
-		m_InstancePositionScale.emplace_back(transform.scale.x, transform.scale.y, transform.scale.z, 1.0f);
-	}
+InstanceData Square::GetInstanceData() const
+{
+    InstanceData instance;
+    instance.world = Matrix::CreateScale(m_Scale.x, m_Scale.y, m_Scale.z)
+        * Matrix::CreateFromYawPitchRoll(m_Rotation.x, m_Rotation.y, m_Rotation.z)
+        * Matrix::CreateTranslation(m_Position.x, m_Position.y, m_Position.z);
+    instance.color = m_Color;
+    instance.uvRect = Vector4((m_NumU - 1) / m_SplitX, (m_NumV - 1) / m_SplitY,
+        1 / m_SplitX, 1 / m_SplitY);
+    return instance;
+}
 
-	UpdateInstanceBuffers();
+bool Square::CanBatchWith(const Square& other) const
+{
+    if (&m_Camera != &other.m_Camera || m_DrawCameraMode != other.m_DrawCameraMode
+        || m_Texture != other.m_Texture || m_VertexShader != other.m_VertexShader
+        || m_PixelShader != other.m_PixelShader || m_GeometoryShader != other.m_GeometoryShader
+        || m_ComputeShader != other.m_ComputeShader || m_Vertices.size() != other.m_Vertices.size()) return false;
+    for (size_t i = 0; i < m_Vertices.size(); ++i)
+    {
+        const auto& a = m_Vertices[i];
+        const auto& b = other.m_Vertices[i];
+        if (a.position.x != b.position.x || a.position.y != b.position.y || a.position.z != b.position.z
+            || a.normal.x != b.normal.x || a.normal.y != b.normal.y || a.normal.z != b.normal.z
+            || a.color != b.color || a.uv != b.uv) return false;
+    }
+    return true;
+}
+
+void Square::DrawBatch(const std::vector<Square*>& squares)
+{
+    Square* representative = nullptr;
+    std::vector<InstanceData> instances;
+    auto flush = [&]() {
+        if (representative) representative->DrawPrepared(&instances, true);
+        instances.clear();
+        representative = nullptr;
+    };
+    for (auto* square : squares)
+    {
+        if (!square) continue;
+        auto* shader = dynamic_cast<VertexShader*>(square->m_VertexShader);
+        // Preserve custom rendering and explicitly configured instance lists.
+        if (!shader || !shader->SupportsInstancing() || square->m_UseInstancing)
+        {
+            flush();
+            square->Draw();
+            continue;
+        }
+        if (representative && !representative->CanBatchWith(*square)) flush();
+        if (!representative) representative = square;
+        instances.push_back(square->GetInstanceData());
+    }
+    flush();
 }
 
 // テクスチャを指定

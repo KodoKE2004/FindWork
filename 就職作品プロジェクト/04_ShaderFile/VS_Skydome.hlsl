@@ -1,28 +1,13 @@
-cbuffer CBScene : register(b0)
-{
-	float4x4 gWorld;
-	float4x4 gView;
-	float4x4 gProj;
-};
-
-struct VSIn
-{
-	float3 pos : POSITION;
-	float2 uv : TEXCOORD0;
-};
-
+#include "Common.hlsl"
 struct VSOut
 {
-	float4 svpos : SV_POSITION;
-	float2 uv : TEXCOORD0;
+    float4 svpos : SV_POSITION;
+    float2 uv : TEXCOORD0;
 };
-
-VSOut main(VSIn v)
+VSOut main(VS_IN input)
 {
-	VSOut o;
-	float4 wp = mul(float4(v.pos, 1), gWorld);
-	float4 vp = mul(wp, gView);
-	o.svpos = mul(vp, gProj);
-	o.uv = v.uv;
-	return o;
+    VSOut output;
+    output.svpos = mul(mul(mul(input.pos, GetWorld(input)), View), Projection);
+    output.uv = GetUV(input);
+    return output;
 }

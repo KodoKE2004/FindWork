@@ -53,9 +53,13 @@ class VertexShader : public BaseShader
 private:
 	ComPtr<ID3D11VertexShader> m_VertexShader;
 	ComPtr<ID3D11InputLayout>  m_InputLayout;
+    ComPtr<ID3D11VertexShader> m_InstancedShader;
+    ComPtr<ID3D11InputLayout> m_InstancedLayout;
 public:
 	bool Create(std::string hlslName) override;
 	void SetGPU();
+    bool SupportsInstancing() const { return m_InstancedShader && m_InstancedLayout; }
+    void SetInstancedGPU();
 };
 
 //=====

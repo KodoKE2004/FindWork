@@ -43,8 +43,10 @@ void ParticleEmitter::Update(float dt)
 
 void ParticleEmitter::Draw()
 {
-    for (auto& p : m_Particles)
-        p.quad->Draw();
+    std::vector<Square*> quads;
+    quads.reserve(m_Particles.size());
+    for (auto& p : m_Particles) quads.push_back(p.quad.get());
+    Square::DrawBatch(quads);
 }
 
 void ParticleEmitter::Clear()

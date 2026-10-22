@@ -1,5 +1,6 @@
 #pragma once
 #include "Transform.h"
+#include "Renderer.h"
 #include "Shader.h"
 #include "input.h"
 #include "Camera.h"
@@ -50,6 +51,9 @@ public:
 	void SetShader(std::string hlslName1,std::string hlslName2 ,std::string hlslName3);
 	void SetShader(std::string hlslName1,std::string hlslName2 ,std::string hlslName3,std::string hlslName4);
 
+    // Instances use absolute world matrices; material, texture, camera and topology are shared.
+    // Supported by the standard Alpha/Default/Unlit vertex shaders.
+    void DrawInstances(const std::vector<InstanceData>& instances);
 	void SetGPU();
 
 	void SetName(std::string name);

@@ -23,58 +23,77 @@ BaseShader* BaseShader::TryCreateShaderFromName()
 //---------------------------------
 bool VertexShader::Create(std::string hlslName)
 {
+    auto* device = Renderer::GetDevice();
+    if (!device) return false;
+    std::vector<D3D11_INPUT_ELEMENT_DESC> layout = {
+        { "POSITION", 0, DXGI_FORMAT_R32G32B32_FLOAT, 0, 0, D3D11_INPUT_PER_VERTEX_DATA, 0 },
+        { "NORMAL", 0, DXGI_FORMAT_R32G32B32_FLOAT, 0, 12, D3D11_INPUT_PER_VERTEX_DATA, 0 },
+        { "COLOR", 0, DXGI_FORMAT_R32G32B32A32_FLOAT, 0, 24, D3D11_INPUT_PER_VERTEX_DATA, 0 },
+        { "TEXCOORD", 0, DXGI_FORMAT_R32G32_FLOAT, 0, 40, D3D11_INPUT_PER_VERTEX_DATA, 0 }
+    };
+    UINT flags = D3DCOMPILE_ENABLE_STRICTNESS;
+#ifdef _DEBUG
+    flags |= D3DCOMPILE_DEBUG | D3DCOMPILE_SKIP_OPTIMIZATION;
+#else
+    flags |= D3DCOMPILE_OPTIMIZATION_LEVEL3;
+#endif
+    auto compile = [&](const D3D_SHADER_MACRO* defines, ComPtr<ID3DBlob>& blob) {
+        ComPtr<ID3DBlob> errors;
+        const HRESULT hr = D3DCompileFromFile(std::wstring(hlslName.begin(), hlslName.end()).c_str(),
+            defines, D3D_COMPILE_STANDARD_FILE_INCLUDE, "main", "vs_5_0", flags, 0,
+            blob.GetAddressOf(), errors.GetAddressOf());
+        if (errors) OutputDebugStringA(static_cast<const char*>(errors->GetBufferPointer()));
+        return SUCCEEDED(hr);
+    };
+    ComPtr<ID3DBlob> bytecode;
+    ComPtr<ID3D11VertexShader> normalVS, instanceVS;
+    ComPtr<ID3D11InputLayout> normalLayout, instanceLayout;
+    if (!compile(nullptr, bytecode)) return false;
+    if (FAILED(device->CreateVertexShader(bytecode->GetBufferPointer(), bytecode->GetBufferSize(),
+        nullptr, normalVS.GetAddressOf()))) return false;
+    if (FAILED(device->CreateInputLayout(layout.data(), static_cast<UINT>(layout.size()),
+        bytecode->GetBufferPointer(), bytecode->GetBufferSize(), normalLayout.GetAddressOf()))) return false;
+
+    const auto filename = hlslName.substr(hlslName.find_last_of("/\\") + 1);
+    const bool instanced = filename == "VS_Alpha.hlsl" || filename == "VS_Default.hlsl"
+        || filename == "VS_Unlit.hlsl" || filename == "VS_Instansing2D.hlsl"
+        || filename == "VS_Skydome.hlsl";
+    if (instanced)
+    {
+        for (UINT i = 0; i < 4; ++i)
+            layout.push_back({ "INSTANCEWORLD", i, DXGI_FORMAT_R32G32B32A32_FLOAT, 1,
+                i * 16, D3D11_INPUT_PER_INSTANCE_DATA, 1 });
+        for (UINT i = 0; i < 4; ++i)
+            layout.push_back({ "INSTANCENORMAL", i, DXGI_FORMAT_R32G32B32A32_FLOAT, 1,
+                64 + i * 16, D3D11_INPUT_PER_INSTANCE_DATA, 1 });
+        layout.push_back({ "INSTANCECOLOR", 0, DXGI_FORMAT_R32G32B32A32_FLOAT, 1,
+            128, D3D11_INPUT_PER_INSTANCE_DATA, 1 });
+        layout.push_back({ "INSTANCEUV", 0, DXGI_FORMAT_R32G32B32A32_FLOAT, 1,
+            144, D3D11_INPUT_PER_INSTANCE_DATA, 1 });
+        const D3D_SHADER_MACRO defines[] = { { "USE_INSTANCING", "1" }, { nullptr, nullptr } };
+        ComPtr<ID3DBlob> instanceBytecode;
+        if (!compile(defines, instanceBytecode)) return false;
+        if (FAILED(device->CreateVertexShader(instanceBytecode->GetBufferPointer(), instanceBytecode->GetBufferSize(),
+            nullptr, instanceVS.GetAddressOf()))) return false;
+        if (FAILED(device->CreateInputLayout(layout.data(), static_cast<UINT>(layout.size()),
+            instanceBytecode->GetBufferPointer(), instanceBytecode->GetBufferSize(), instanceLayout.GetAddressOf()))) return false;
+    }
+    // Commit only after BOTH variants succeed; a failed reload keeps working shaders.
     m_HlslName = std::move(hlslName);
     m_ShaderStage = ShaderStage::VS;
-
-    D3D11_INPUT_ELEMENT_DESC layout[] = {
-        { "POSITION",    0, DXGI_FORMAT_R32G32B32_FLOAT,     0,
-        D3D11_APPEND_ALIGNED_ELEMENT, D3D11_INPUT_PER_VERTEX_DATA, 0 },
-        { "NORMAL",      0, DXGI_FORMAT_R32G32B32_FLOAT,     0,
-        D3D11_APPEND_ALIGNED_ELEMENT, D3D11_INPUT_PER_VERTEX_DATA, 0 },
-        { "COLOR",       0, DXGI_FORMAT_R32G32B32A32_FLOAT,  0,
-        D3D11_APPEND_ALIGNED_ELEMENT, D3D11_INPUT_PER_VERTEX_DATA, 0 },
-        { "TEXCOORD",    0, DXGI_FORMAT_R32G32_FLOAT,        0,
-        D3D11_APPEND_ALIGNED_ELEMENT, D3D11_INPUT_PER_VERTEX_DATA, 0 },
-        { "TEXCOORD",    1, DXGI_FORMAT_R32_UINT,            1,
-        0,                          D3D11_INPUT_PER_INSTANCE_DATA, 1 },
-    };
-
-    auto* device = Renderer::GetDevice();
-    ComPtr<ID3DBlob> vsBlob, err;
-
-    // Blob作成
-    HRESULT hr = D3DCompileFromFile(
-        std::wstring(m_HlslName.begin(), m_HlslName.end()).c_str(),
-        nullptr, D3D_COMPILE_STANDARD_FILE_INCLUDE,
-        "main" , "vs_5_0",
-        D3DCOMPILE_DEBUG | D3DCOMPILE_SKIP_OPTIMIZATION,
-        0,
-        vsBlob.GetAddressOf(),
-        err.GetAddressOf());
-    if (FAILED(hr)) {
-        return false;
-    }
-    
-    // 頂点シェーダー生成
-    hr = device->CreateVertexShader(
-        vsBlob->GetBufferPointer(),
-        vsBlob->GetBufferSize(),
-        nullptr,
-        m_VertexShader.GetAddressOf());
-    if(FAILED(hr))  return false;
-
-    // 入力レイアウト生成
-    hr = device->CreateInputLayout(
-        layout,
-        static_cast<UINT>(std::size(layout)),
-        vsBlob->GetBufferPointer(),
-        vsBlob->GetBufferSize(),
-        m_InputLayout.GetAddressOf());
-    if(FAILED(hr))  return false;
-
-    m_Bytecode = vsBlob;
+    m_Bytecode = bytecode;
+    m_VertexShader = normalVS;
+    m_InputLayout = normalLayout;
+    m_InstancedShader = instanceVS;
+    m_InstancedLayout = instanceLayout;
     return true;
+}
 
+void VertexShader::SetInstancedGPU()
+{
+    auto* context = Renderer::GetDeviceContext();
+    context->VSSetShader(m_InstancedShader.Get(), nullptr, 0);
+    context->IASetInputLayout(m_InstancedLayout.Get());
 }
 
 void VertexShader::SetGPU()

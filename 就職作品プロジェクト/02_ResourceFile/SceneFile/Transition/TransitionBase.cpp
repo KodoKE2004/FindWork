@@ -402,7 +402,7 @@ void TransitionBase::DrawDebugFullscreenSolid()
 	Renderer::SetUV(u, v, uw, vh);
 
 	Camera::ScopedMode scoped(m_Camera, CAMERA_UI);
-	devicecontext->DrawIndexed(4, 0, 0);
+	Renderer::DrawIndexed(4, 0, 0);
 
 	m_Texture = prevTexture;
 	SetColor(prevColor);

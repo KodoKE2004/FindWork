@@ -3,6 +3,10 @@
 #include "Debug.hpp"
 #include <d3dcompiler.h>
 #include <algorithm>
+#include <array>
+#include <cmath>
+#include <stdexcept>
+#include "Shader.h"
 
 #pragma comment(lib, "d3dcompiler.lib")
 
@@ -42,7 +46,7 @@ UINT Renderer::m_BlitRenderWidth;
 UINT Renderer::m_BlitRenderHeight;
 
 
-void Renderer::Initialize()
+void Renderer::Initialize(D3D_DRIVER_TYPE driverType)
 {
 	HRESULT hr = S_OK;
 
@@ -60,7 +64,8 @@ void Renderer::Initialize()
 	swapChainDesc.SampleDesc.Quality = 0;							//同上
 	swapChainDesc.Windowed = TRUE;									// ウィンドウモード（フルスクリーンではなく、ウィンドウモードで実行）
 
-	hr = D3D11CreateDeviceAndSwapChain(NULL, D3D_DRIVER_TYPE_HARDWARE, NULL, 0, NULL, 0,
+	const D3D_FEATURE_LEVEL levels[] = { D3D_FEATURE_LEVEL_11_0 };
+    hr = D3D11CreateDeviceAndSwapChain(NULL, driverType, NULL, 0, levels, 1,
 		D3D11_SDK_VERSION, &swapChainDesc, &m_SwapChain, &m_Device, &m_FeatureLevel, &m_DeviceContext);
 	if (FAILED(hr)) return;
 
@@ -123,6 +128,7 @@ void Renderer::Initialize()
 	if (FAILED(hr)) return;
 
 	m_DeviceContext->RSSetState(rs);
+    rs->Release();
 
 	// ブレンド ステート生成
 	D3D11_BLEND_DESC BlendDesc = {};
@@ -234,9 +240,12 @@ void Renderer::Initialize()
 	hr = m_Device->CreateBuffer(&bufferDesc, nullptr, &m_LightBuffer);
 	if (FAILED(hr)) return;
 
-	bufferDesc.ByteWidth = sizeof(InstancePaked);
-	bufferDesc.Usage = D3D11_USAGE_DEFAULT;
-	bufferDesc.BindFlags = D3D11_BIND_VERTEX_BUFFER;
+    if (!CreateInstanceBuffer())
+        throw std::runtime_error("Failed to create instance vertex buffer");
+    Matrix identity = Matrix::Identity;
+    SetWorldMatrix(&identity);
+    SetViewMatrix(&identity);
+    SetProjectionMatrix(&identity);
 
 
 	// 既定値（下向き白色の平行光）
@@ -320,6 +329,9 @@ void Renderer::EnsureBlitRenderTarget()
 
 void Renderer::Finalize()
 {
+    m_InstanceBuffer.Reset();
+    m_Instances = nullptr;
+    m_InstanceShader = nullptr;
     m_GameRenderTarget.reset();
     m_GameRenderWidth = 0;
     m_GameRenderHeight = 0;
@@ -408,24 +420,11 @@ void Renderer::ClearBackBuffer(const float clearColor[4])
 void Renderer::Finish()
 {
 	if (!m_SwapChain || !m_DeviceContext) { return; }
-#ifndef _DEBUG
-    if (m_GameRenderTarget)
-    {
-        BlitSRVToBackbuffer(m_GameRenderTarget->GetSRV());
-    }
-#endif
 	// フレームの表示
 	m_SwapChain->Present(1, 0);
 
 
-#ifdef _DEBUG
-	// デバッグレイヤーで未解放オブジェクトをレポート
-	ID3D11Debug* debugDev = nullptr;
-	if (m_Device && SUCCEEDED(m_Device->QueryInterface(__uuidof(ID3D11Debug), (void**)&debugDev))) {
-		debugDev->ReportLiveDeviceObjects(D3D11_RLDO_DETAIL);
-		debugDev->Release();
-	}
-#endif
+// Live-object diagnostics must not run in the frame loop.
 }
 
 void Renderer::SetDepthEnable(bool Enable)
@@ -880,4 +879,94 @@ void Renderer::CreatePixelShader(ID3D11PixelShader** PixelShader, const char* Fi
 void Renderer::SetDrawState()
 {
 
+}
+
+namespace { constexpr size_t kInstanceBatchSize = 1024; }
+ComPtr<ID3D11Buffer> Renderer::m_InstanceBuffer;
+const std::vector<InstanceData>* Renderer::m_Instances = nullptr;
+VertexShader* Renderer::m_InstanceShader = nullptr;
+
+bool Renderer::CreateInstanceBuffer()
+{
+    if (m_InstanceBuffer) return true;
+    if (!m_Device) return false;
+    D3D11_BUFFER_DESC desc{};
+    desc.ByteWidth = static_cast<UINT>(sizeof(InstanceVertex) * kInstanceBatchSize);
+    desc.Usage = D3D11_USAGE_DYNAMIC;
+    desc.BindFlags = D3D11_BIND_VERTEX_BUFFER;
+    desc.CPUAccessFlags = D3D11_CPU_ACCESS_WRITE;
+    return SUCCEEDED(m_Device->CreateBuffer(&desc, nullptr, m_InstanceBuffer.GetAddressOf()));
+}
+
+Renderer::ScopedInstances::ScopedInstances(const std::vector<InstanceData>& instances, VertexShader& shader)
+    : previous(m_Instances), previousShader(m_InstanceShader)
+{
+    m_Instances = &instances;
+    m_InstanceShader = &shader;
+}
+
+Renderer::ScopedInstances::~ScopedInstances()
+{
+    m_Instances = previous;
+    m_InstanceShader = previousShader;
+}
+
+void Renderer::DrawIndexed(UINT count, UINT startIndex, INT baseVertex)
+{
+    if (!m_DeviceContext || count == 0) return;
+    if (m_Instances)
+    {
+        if (!m_InstanceShader || !DrawIndexedInstanced(count, startIndex, baseVertex, *m_Instances, *m_InstanceShader))
+            throw std::runtime_error("Instanced draw failed");
+        return;
+    }
+    m_DeviceContext->DrawIndexed(count, startIndex, baseVertex);
+}
+
+bool Renderer::DrawIndexedInstanced(UINT count, UINT startIndex, INT baseVertex,
+    const std::vector<InstanceData>& instances, VertexShader& shader)
+{
+    if (instances.empty() || count == 0) return true;
+    if (!m_DeviceContext || !shader.SupportsInstancing() || !CreateInstanceBuffer()) return false;
+
+    // Restore the exact shader, layout and slot 1, including after Map failure.
+    ComPtr<ID3D11VertexShader> previousVS;
+    ComPtr<ID3D11InputLayout> previousLayout;
+    ComPtr<ID3D11Buffer> previousVB;
+    UINT previousStride = 0, previousOffset = 0;
+    m_DeviceContext->VSGetShader(previousVS.GetAddressOf(), nullptr, nullptr);
+    m_DeviceContext->IAGetInputLayout(previousLayout.GetAddressOf());
+    m_DeviceContext->IAGetVertexBuffers(1, 1, previousVB.GetAddressOf(), &previousStride, &previousOffset);
+    shader.SetInstancedGPU();
+    // Keep the caller's material buffers, textures and samplers (including model subsets).
+    UINT stride = sizeof(InstanceVertex), offset = 0;
+    m_DeviceContext->IASetVertexBuffers(1, 1, m_InstanceBuffer.GetAddressOf(), &stride, &offset);
+    bool success = true;
+    for (size_t first = 0; first < instances.size(); first += kInstanceBatchSize)
+    {
+        const size_t batch = (std::min)(kInstanceBatchSize, instances.size() - first);
+        D3D11_MAPPED_SUBRESOURCE mapped{};
+        if (FAILED(m_DeviceContext->Map(m_InstanceBuffer.Get(), 0, D3D11_MAP_WRITE_DISCARD, 0, &mapped)))
+        {
+            success = false;
+            break;
+        }
+        auto* output = static_cast<InstanceVertex*>(mapped.pData);
+        for (size_t i = 0; i < batch; ++i)
+        {
+            const auto& instance = instances[first + i];
+            output[i].world = instance.world;
+            const float determinant = instance.world.Determinant();
+            output[i].normal = std::abs(determinant) > 1e-8f
+                ? instance.world.Invert().Transpose() : Matrix::Identity;
+            output[i].color = instance.color;
+            output[i].uvRect = instance.uvRect;
+        }
+        m_DeviceContext->Unmap(m_InstanceBuffer.Get(), 0);
+        m_DeviceContext->DrawIndexedInstanced(count, static_cast<UINT>(batch), startIndex, baseVertex, 0);
+    }
+    m_DeviceContext->VSSetShader(previousVS.Get(), nullptr, 0);
+    m_DeviceContext->IASetInputLayout(previousLayout.Get());
+    m_DeviceContext->IASetVertexBuffers(1, 1, previousVB.GetAddressOf(), &previousStride, &previousOffset);
+    return success;
 }

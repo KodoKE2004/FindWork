@@ -45,22 +45,22 @@ struct isHitResult
 //-----------------------------------------------------------------------------
 class Square : public Object
 {
-protected:
+public:
 	struct InstanceTransform2D
 	{
-		Vector3 position;
-		Vector3 scale;
+		Vector3 position = Vector3::Zero;
+		Vector3 scale = Vector3::One;
+        Vector3 rotation = Vector3::Zero;
 	};
 
+protected:
 	// 描画の為の情報（メッシュに関わる情報）
 	IndexBuffer m_IndexBuffer; // インデックスバッファ
 	VertexBuffer<VERTEX_3D> m_VertexBuffer; // 頂点バッファ
 	std::vector<VERTEX_3D>  m_Vertices;
 
-	Microsoft::WRL::ComPtr<ID3D11Buffer>		m_InstanceTransformCB;
-	std::vector<DirectX::SimpleMath::Vector4>	m_InstancePositionScale;
-	UINT m_InstanceCount = 0;
-	bool m_UseInstancing = false;
+    std::vector<InstanceData> m_Instances;
+    bool m_UseInstancing = false;
 	CAMERA_MODE m_DrawCameraMode = CAMERA_UI; // Square描画時に使用するカメラモード
 
 	// 描画の為の情報（見た目に関わる部分）
@@ -76,6 +76,8 @@ protected:
 
 	// 描画パイプラインの既定化（他の描画で状態が変わっても影響を受けないようにする）
 	void SetPipeline();
+    void DrawPrepared(const std::vector<InstanceData>* instances, bool ownAppearance);
+    bool CanBatchWith(const Square& other) const;
 
 public:
 	isHitResult m_HitResult;
@@ -90,7 +92,10 @@ public:
 	void Draw()		  override;
 	void Finalize()	  override;
 
-	void UpdateInstanceBuffers();
+    // Explicit batches preserve input order and split on texture/shader/camera/geometry changes.
+    static void DrawBatch(const std::vector<Square*>& squares);
+    InstanceData GetInstanceData() const;
+    void UpdateInstanceBuffers(); // Compatibility: upload is deferred until Draw().
 	void SetInstancingEnabled(bool enabled);
 	void SetInstanceTransforms(const std::vector<InstanceTransform2D>& transforms);
 

@@ -35,7 +35,6 @@ pShared<Texture> TextureManager::GetTexture(const std::string& relativePath) {
 
     auto it = m_TextureList.find(relativePath);
     if (it != m_TextureList.end()) {
-        Debug::Log("[[¬Œ÷]] GetTexture  : " + relativePath, MESSAGE_COLOR::GREEN);
         return it->second;
     }
 
